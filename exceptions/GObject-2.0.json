@@ -5,7 +5,14 @@
                 "get_property",
                 "get_valist",
                 "set_property",
-                "set_valist"
+                "set_valist",
+                "get",
+                "set",
+                "connect",
+                "disconnect"
+            ],
+            "TypeModule": [
+                "use"
             ]
         }
     }

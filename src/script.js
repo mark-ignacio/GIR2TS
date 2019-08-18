@@ -1,4 +1,5 @@
 'use strict';
+Object.defineProperty(exports, "__esModule", { value: true });
 var GIR2TS;
 (function (GIR2TS) {
     var js_reserved_words = "\n        abstract else instanceof super boolean enum int switch break export\n        arguments\n        eval\n        interface\n        constructor\n        synchronized\n        byte\n        extends\n        let\n        this\n        case\n        false\n        long\n        throw\n        catch\n        final\n        native\n        throws\n        char\n        finally\n        new\n        transient\n        class\n        float\n        null\n        true\n        const\n        for\n        package\n        try\n        continue\n        function\n        private\n        typeof\n        debugger\n        goto\n        protected\n        var\n        default\n        if\n        public\n        void\n        delete\n        implements\n        return\n        volatile\n        do\n        import\n        short\n        while\n        double\n        in\n        static\n        with\n    ";
@@ -25,6 +26,7 @@ var GIR2TS;
             case 'gudouble':
             case 'gsize':
             case 'gssize':
+            case 'long double':
                 return 'number';
             case 'utf8':
             case 'gchar':
@@ -52,12 +54,12 @@ var GIR2TS;
             type = convertToJSType(param_node.type[0].$.name);
             is_primitive = (type !== param_node.type[0].$.name);
         }
-        else if (param_node.array && param_node.array.type) {
+        else if (param_node.array && param_node.array[0].type) {
             type = convertToJSType(param_node.array[0].type[0].$.name) + '[]';
             is_primitive = (type !== (param_node.array[0].type[0].$.name + '[]'));
         }
         else {
-            return ['', false];
+            return ['any', false];
         }
         return [type, is_primitive];
     }
@@ -99,7 +101,7 @@ var GIR2TS;
     function renderFreeFunction(func_node, exclude_list) {
         if (exclude_list === void 0) { exclude_list = null; }
         var _a = getFunctionInfo(func_node), name = _a.name, return_type = _a.return_type, params = _a.params;
-        var str = "function " + name + " (" + params.map(function (p) { return (p.name + ": " + p.type); }).join(', ') + "): " + return_type + ";";
+        var str = "function " + name + " (" + params.map(function (p) { return p.name + ": " + p.type; }).join(', ') + "): " + return_type + ";";
         if (exclude_list && exclude_list.indexOf(name) !== -1) {
             str = '// ' + str;
         }
@@ -366,7 +368,7 @@ var GIR2TS;
         var props = [];
         var externIfaceMethods = [];
         if (class_node.implements) {
-            var _loop_1 = function(iface) {
+            var _loop_1 = function (iface) {
                 var iface_name = iface.$.name;
                 var iface_list = [];
                 var iface_ns = '';
@@ -539,7 +541,7 @@ var GIR2TS;
             }
             var xml2js = require('xml2js');
             var parser = new xml2js.Parser();
-            var _loop_2 = function(lib) {
+            var _loop_2 = function (lib) {
                 parser.parseString(lib.xml_str, function (err, res) {
                     _this.ns_list.push({
                         lib_name: lib.lib_name,
@@ -570,8 +572,8 @@ var GIR2TS;
     }());
     GIR2TS.Generator = Generator;
 })(GIR2TS || (GIR2TS = {}));
-var fs = require('fs');
-var path = require('path');
+var fs = require("fs");
+var path = require("path");
 function main() {
     console.log(__dirname);
     var argv = require('minimist')(process.argv.slice(2));
@@ -592,10 +594,10 @@ function main() {
     }
     if (argv.overridesdir) {
         console.log("Excludes directory: " + argv.overridesdir);
-        var dir = path.join(__dirname, argv.overridesdir);
+        var dir_1 = path.join(__dirname, argv.overridesdir);
         var json_files = [];
-        if (fs.statSync(dir).isDirectory()) {
-            json_files = fs.readdirSync(dir).map(function (file) { return path.join(dir, file); });
+        if (fs.statSync(dir_1).isDirectory()) {
+            json_files = fs.readdirSync(dir_1).map(function (file) { return path.join(dir_1, file); });
         }
         for (var _i = 0, json_files_1 = json_files; _i < json_files_1.length; _i++) {
             var json_file = json_files_1[_i];
@@ -606,9 +608,9 @@ function main() {
     }
     if (argv.girdir) {
         console.log("GIR directory: " + argv.girdir);
-        var dir = path.join(__dirname, argv.girdir);
-        if (fs.statSync(dir).isDirectory()) {
-            gir_files = fs.readdirSync(dir).map(function (file) { return path.join(dir, file); });
+        var dir_2 = path.join(__dirname, argv.girdir);
+        if (fs.statSync(dir_2).isDirectory()) {
+            gir_files = fs.readdirSync(dir_2).map(function (file) { return path.join(dir_2, file); });
         }
     }
     else {

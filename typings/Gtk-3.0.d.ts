@@ -1,12 +1,12 @@
 declare namespace imports.gi.Gtk {
 
 interface AboutDialog extends Dialog, Atk.ImplementorIface, Buildable {
-	add_credit_section (section_name: string, people: ) : void;
-	get_artists () : ;
-	get_authors () : ;
+	add_credit_section (section_name: string, people: string[]) : void;
+	get_artists () : string[];
+	get_authors () : string[];
 	get_comments () : string;
 	get_copyright () : string;
-	get_documenters () : ;
+	get_documenters () : string[];
 	get_license () : string;
 	get_license_type () : License;
 	get_logo () : GdkPixbuf.Pixbuf;
@@ -17,11 +17,11 @@ interface AboutDialog extends Dialog, Atk.ImplementorIface, Buildable {
 	get_website () : string;
 	get_website_label () : string;
 	get_wrap_license () : boolean;
-	set_artists (artists: ) : void;
-	set_authors (authors: ) : void;
+	set_artists (artists: string[]) : void;
+	set_authors (authors: string[]) : void;
 	set_comments (comments: string) : void;
 	set_copyright (copyright: string) : void;
-	set_documenters (documenters: ) : void;
+	set_documenters (documenters: string[]) : void;
 	set_license (license: string) : void;
 	set_license_type (license_type: License) : void;
 	set_logo (logo: GdkPixbuf.Pixbuf) : void;
@@ -52,7 +52,7 @@ interface AccelGroup extends GObject.Object {
 	get_is_locked () : boolean;
 	get_modifier_mask () : Gdk.ModifierType;
 	lock () : void;
-	query (accel_key: number, accel_mods: Gdk.ModifierType, n_entries: number) : ;
+	query (accel_key: number, accel_mods: Gdk.ModifierType, n_entries: number) : AccelGroupEntry[];
 	unlock () : void;
 }
 
@@ -191,12 +191,12 @@ var ActionBar: {
 interface ActionGroup extends GObject.Object, Buildable {
 	add_action (action: Action) : void;
 	add_action_with_accel (action: Action, accelerator: string) : void;
-	add_actions (entries: , n_entries: number, user_data: any) : void;
-	add_actions_full (entries: , n_entries: number, user_data: any, destroy: GLib.DestroyNotify) : void;
-	add_radio_actions (entries: , n_entries: number, value: number, on_change: GObject.Callback, user_data: any) : void;
-	add_radio_actions_full (entries: , n_entries: number, value: number, on_change: GObject.Callback, user_data: any, destroy: GLib.DestroyNotify) : void;
-	add_toggle_actions (entries: , n_entries: number, user_data: any) : void;
-	add_toggle_actions_full (entries: , n_entries: number, user_data: any, destroy: GLib.DestroyNotify) : void;
+	add_actions (entries: ActionEntry[], n_entries: number, user_data: any) : void;
+	add_actions_full (entries: ActionEntry[], n_entries: number, user_data: any, destroy: GLib.DestroyNotify) : void;
+	add_radio_actions (entries: RadioActionEntry[], n_entries: number, value: number, on_change: GObject.Callback, user_data: any) : void;
+	add_radio_actions_full (entries: RadioActionEntry[], n_entries: number, value: number, on_change: GObject.Callback, user_data: any, destroy: GLib.DestroyNotify) : void;
+	add_toggle_actions (entries: ToggleActionEntry[], n_entries: number, user_data: any) : void;
+	add_toggle_actions_full (entries: ToggleActionEntry[], n_entries: number, user_data: any, destroy: GLib.DestroyNotify) : void;
 	get_accel_group () : AccelGroup;
 	get_action (action_name: string) : Action;
 	get_name () : string;
@@ -323,8 +323,8 @@ var AppChooserWidget: {
 interface Application extends Gio.Application, Gio.ActionGroup, Gio.ActionMap {
 	add_accelerator (accelerator: string, action_name: string, parameter: GLib.Variant) : void;
 	add_window (window: Window) : void;
-	get_accels_for_action (detailed_action_name: string) : ;
-	get_actions_for_accel (accel: string) : ;
+	get_accels_for_action (detailed_action_name: string) : string[];
+	get_actions_for_accel (accel: string) : string[];
 	get_active_window () : Window;
 	get_app_menu () : Gio.MenuModel;
 	get_menu_by_id (_id: string) : Gio.Menu;
@@ -333,11 +333,11 @@ interface Application extends Gio.Application, Gio.ActionGroup, Gio.ActionMap {
 	get_windows () : GLib.List;
 	inhibit (window: Window, flags: ApplicationInhibitFlags, reason: string) : number;
 	is_inhibited (flags: ApplicationInhibitFlags) : boolean;
-	list_action_descriptions () : ;
+	list_action_descriptions () : string[];
 	prefers_app_menu () : boolean;
 	remove_accelerator (action_name: string, parameter: GLib.Variant) : void;
 	remove_window (window: Window) : void;
-	set_accels_for_action (detailed_action_name: string, accels: ) : void;
+	set_accels_for_action (detailed_action_name: string, accels: string[]) : void;
 	set_app_menu (app_menu: Gio.MenuModel) : void;
 	set_menubar (menubar: Gio.MenuModel) : void;
 	uninhibit (cookie: number) : void;
@@ -352,8 +352,10 @@ var Application: {
 
 
 interface ApplicationWindow extends Window, Atk.ImplementorIface, Gio.ActionGroup, Gio.ActionMap, Buildable {
+	get_help_overlay () : ShortcutsWindow;
 	get_id () : number;
 	get_show_menubar () : boolean;
+	set_help_overlay (help_overlay: ShortcutsWindow) : void;
 	set_show_menubar (show_menubar: boolean) : void;
 }
 
@@ -451,7 +453,7 @@ var Bin: {
 
 
 
-interface BooleanCellAccessible extends RendererCellAccessible, Atk.Action, Atk.Component {
+interface BooleanCellAccessible extends RendererCellAccessible, Atk.Action, Atk.Component, Atk.TableCell {
 	
 }
 
@@ -493,12 +495,13 @@ interface Builder extends GObject.Object {
 	add_from_file (filename: string) : number;
 	add_from_resource (resource_path: string) : number;
 	add_from_string (buffer: string, length: number) : number;
-	add_objects_from_file (filename: string, object_ids: ) : number;
-	add_objects_from_resource (resource_path: string, object_ids: ) : number;
-	add_objects_from_string (buffer: string, length: number, object_ids: ) : number;
+	add_objects_from_file (filename: string, object_ids: string[]) : number;
+	add_objects_from_resource (resource_path: string, object_ids: string[]) : number;
+	add_objects_from_string (buffer: string, length: number, object_ids: string[]) : number;
 	connect_signals (user_data: any) : void;
 	connect_signals_full (_func: BuilderConnectFunc, user_data: any) : void;
 	expose_object (name: string, object: GObject.Object) : void;
+	extend_with_template (widget: Widget, template_type: GObject.Type, buffer: string, length: number) : number;
 	get_application () : Application;
 	get_object (name: string) : GObject.Object;
 	get_objects () : GLib.SList;
@@ -615,7 +618,7 @@ var Calendar: {
 
 
 
-interface CellAccessible extends Accessible, Atk.Action, Atk.Component {
+interface CellAccessible extends Accessible, Atk.Action, Atk.Component, Atk.TableCell {
 	
 }
 
@@ -930,24 +933,25 @@ interface Clipboard extends GObject.Object {
 	clear () : void;
 	get_display () : Gdk.Display;
 	get_owner () : GObject.Object;
+	get_selection () : Gdk.Atom;
 	request_contents (target: Gdk.Atom, callback: ClipboardReceivedFunc, user_data: any) : void;
 	request_image (callback: ClipboardImageReceivedFunc, user_data: any) : void;
 	request_rich_text (buffer: TextBuffer, callback: ClipboardRichTextReceivedFunc, user_data: any) : void;
 	request_targets (callback: ClipboardTargetsReceivedFunc, user_data: any) : void;
 	request_text (callback: ClipboardTextReceivedFunc, user_data: any) : void;
 	request_uris (callback: ClipboardURIReceivedFunc, user_data: any) : void;
-	set_can_store (targets: , n_targets: number) : void;
+	set_can_store (targets: TargetEntry[], n_targets: number) : void;
 	set_image (pixbuf: GdkPixbuf.Pixbuf) : void;
 	set_text (text: string, len: number) : void;
-	set_with_data (targets: , n_targets: number, get_func: ClipboardGetFunc, clear_func: ClipboardClearFunc, user_data: any) : boolean;
-	set_with_owner (targets: , n_targets: number, get_func: ClipboardGetFunc, clear_func: ClipboardClearFunc, owner: GObject.Object) : boolean;
+	set_with_data (targets: TargetEntry[], n_targets: number, get_func: ClipboardGetFunc, clear_func: ClipboardClearFunc, user_data: any) : boolean;
+	set_with_owner (targets: TargetEntry[], n_targets: number, get_func: ClipboardGetFunc, clear_func: ClipboardClearFunc, owner: GObject.Object) : boolean;
 	store () : void;
 	wait_for_contents (target: Gdk.Atom) : SelectionData;
 	wait_for_image () : GdkPixbuf.Pixbuf;
-	wait_for_rich_text (buffer: TextBuffer, format: Gdk.Atom, length: number) : ;
-	wait_for_targets (targets: , n_targets: number) : boolean;
+	wait_for_rich_text (buffer: TextBuffer, format: Gdk.Atom, length: number) : number[];
+	wait_for_targets (targets: Gdk.Atom[], n_targets: number) : boolean;
 	wait_for_text () : string;
-	wait_for_uris () : ;
+	wait_for_uris () : string[];
 	wait_is_image_available () : boolean;
 	wait_is_rich_text_available (buffer: TextBuffer) : boolean;
 	wait_is_target_available (target: Gdk.Atom) : boolean;
@@ -1034,8 +1038,8 @@ interface ColorSelection extends Box, Atk.ImplementorIface, Buildable, Orientabl
 
 var ColorSelection: {
 	new () : Widget;
-	palette_from_string (_str: string, colors: , n_colors: number) : boolean;
-	palette_to_string (colors: , n_colors: number) : string;
+	palette_from_string (_str: string, colors: Gdk.Color[], n_colors: number) : boolean;
+	palette_to_string (colors: Gdk.Color[], n_colors: number) : string;
 	set_change_palette_with_screen_hook (_func: ColorSelectionChangePaletteWithScreenFunc) : ColorSelectionChangePaletteWithScreenFunc;
 }
 
@@ -1194,7 +1198,7 @@ var ContainerAccessible: {
 
 
 
-interface ContainerCellAccessible extends CellAccessible, Atk.Action, Atk.Component {
+interface ContainerCellAccessible extends CellAccessible, Atk.Action, Atk.Component, Atk.TableCell {
 	add_child (child: CellAccessible) : void;
 	get_children () : GLib.List;
 	remove_child (child: CellAccessible) : void;
@@ -1209,7 +1213,7 @@ var ContainerCellAccessible: {
 
 
 interface CssProvider extends GObject.Object, StyleProvider {
-	load_from_data (data: , length: number) : boolean;
+	load_from_data (data: number[], length: number) : boolean;
 	load_from_file (file: Gio.File) : boolean;
 	load_from_path (path: string) : boolean;
 	load_from_resource (resource_path: string) : void;
@@ -1237,7 +1241,7 @@ interface Dialog extends Window, Atk.ImplementorIface, Buildable {
 	response (response_id: number) : void;
 	run () : number;
 	set_alternative_button_order (first_response_id: number) : void;
-	set_alternative_button_order_from_array (n_params: number, new_order: ) : void;
+	set_alternative_button_order_from_array (n_params: number, new_order: number[]) : void;
 	set_default_response (response_id: number) : void;
 	set_response_sensitive (response_id: number, setting: boolean) : void;
 }
@@ -1462,6 +1466,46 @@ var EventController: {
 
 
 
+interface EventControllerKey extends EventController {
+	forward (widget: Widget) : boolean;
+	get_group () : number;
+	get_im_context () : IMContext;
+	set_im_context (im_context: IMContext) : void;
+}
+
+var EventControllerKey: {
+	new (widget: Widget) : EventController;
+	
+}
+
+
+
+
+interface EventControllerMotion extends EventController {
+	
+}
+
+var EventControllerMotion: {
+	new (widget: Widget) : EventController;
+	
+}
+
+
+
+
+interface EventControllerScroll extends EventController {
+	get_flags () : EventControllerScrollFlags;
+	set_flags (flags: EventControllerScrollFlags) : void;
+}
+
+var EventControllerScroll: {
+	new (widget: Widget, flags: EventControllerScrollFlags) : EventController;
+	
+}
+
+
+
+
 interface Expander extends Bin, Atk.ImplementorIface, Buildable {
 	get_expanded () : boolean;
 	get_label () : string;
@@ -1532,6 +1576,21 @@ var FileChooserDialog: {
 
 
 
+interface FileChooserNative extends NativeDialog, FileChooser {
+	get_accept_label () : string;
+	get_cancel_label () : string;
+	set_accept_label (accept_label: string) : void;
+	set_cancel_label (cancel_label: string) : void;
+}
+
+var FileChooserNative: {
+	new (title: string, parent: Window, action: FileChooserAction, accept_label: string, cancel_label: string) : FileChooserNative;
+	
+}
+
+
+
+
 interface FileChooserWidget extends Box, Atk.ImplementorIface, Buildable, FileChooser, Orientable {
 	
 }
@@ -1553,10 +1612,12 @@ interface FileFilter extends GObject.InitiallyUnowned, Buildable {
 	get_name () : string;
 	get_needed () : FileFilterFlags;
 	set_name (name: string) : void;
+	to_gvariant () : GLib.Variant;
 }
 
 var FileFilter: {
 	new () : FileFilter;
+	new_from_gvariant (variant: GLib.Variant) : FileFilter;
 	
 }
 
@@ -1580,6 +1641,7 @@ interface FlowBox extends Container, Atk.ImplementorIface, Buildable, Orientable
 	bind_model (model: Gio.ListModel, create_widget_func: FlowBoxCreateWidgetFunc, user_data: any, user_data_free_func: GLib.DestroyNotify) : void;
 	get_activate_on_single_click () : boolean;
 	get_child_at_index (idx: number) : FlowBoxChild;
+	get_child_at_pos (_x: number, _y: number) : FlowBoxChild;
 	get_column_spacing () : number;
 	get_homogeneous () : boolean;
 	get_max_children_per_line () : number;
@@ -1783,6 +1845,7 @@ interface GLArea extends Widget, Atk.ImplementorIface, Buildable {
 	get_has_depth_buffer () : boolean;
 	get_has_stencil_buffer () : boolean;
 	get_required_version (major: number, minor: number) : void;
+	get_use_es () : boolean;
 	make_current () : void;
 	queue_render () : void;
 	set_auto_render (auto_render: boolean) : void;
@@ -1791,6 +1854,7 @@ interface GLArea extends Widget, Atk.ImplementorIface, Buildable {
 	set_has_depth_buffer (has_depth_buffer: boolean) : void;
 	set_has_stencil_buffer (has_stencil_buffer: boolean) : void;
 	set_required_version (major: number, minor: number) : void;
+	set_use_es (use_es: boolean) : void;
 }
 
 var GLArea: {
@@ -1907,6 +1971,20 @@ interface GestureSingle extends Gesture {
 
 var GestureSingle: {
 	
+	
+}
+
+
+
+
+interface GestureStylus extends GestureSingle {
+	get_axes (axes: Gdk.AxisUse[], values: number[]) : boolean;
+	get_axis (axis: Gdk.AxisUse, value: number) : boolean;
+	get_device_tool () : Gdk.DeviceTool;
+}
+
+var GestureStylus: {
+	new (widget: Widget) : Gesture;
 	
 }
 
@@ -2123,7 +2201,8 @@ var IMContext: {
 
 
 interface IMContextSimple extends IMContext {
-	add_table (data: , max_seq_len: number, n_seqs: number) : void;
+	add_compose_file (compose_file: string) : void;
+	add_table (data: number[], max_seq_len: number, n_seqs: number) : void;
 }
 
 var IMContextSimple: {
@@ -2166,7 +2245,7 @@ var IconFactory: {
 interface IconInfo extends GObject.Object {
 	copy () : IconInfo;
 	free () : void;
-	get_attach_points (points: , n_points: number) : boolean;
+	get_attach_points (points: Gdk.Point[], n_points: number) : boolean;
 	get_base_scale () : number;
 	get_base_size () : number;
 	get_builtin_pixbuf () : GdkPixbuf.Pixbuf;
@@ -2199,11 +2278,11 @@ var IconInfo: {
 interface IconTheme extends GObject.Object {
 	add_resource_path (path: string) : void;
 	append_search_path (path: string) : void;
-	choose_icon (icon_names: , size: number, flags: IconLookupFlags) : IconInfo;
-	choose_icon_for_scale (icon_names: , size: number, scale: number, flags: IconLookupFlags) : IconInfo;
+	choose_icon (icon_names: string[], size: number, flags: IconLookupFlags) : IconInfo;
+	choose_icon_for_scale (icon_names: string[], size: number, scale: number, flags: IconLookupFlags) : IconInfo;
 	get_example_icon_name () : string;
-	get_icon_sizes (icon_name: string) : ;
-	get_search_path (path: , n_elements: number) : void;
+	get_icon_sizes (icon_name: string) : number[];
+	get_search_path (path: string[], n_elements: number) : void;
 	has_icon (icon_name: string) : boolean;
 	list_contexts () : GLib.List;
 	list_icons (context: string) : GLib.List;
@@ -2218,7 +2297,7 @@ interface IconTheme extends GObject.Object {
 	rescan_if_needed () : boolean;
 	set_custom_theme (theme_name: string) : void;
 	set_screen (screen: Gdk.Screen) : void;
-	set_search_path (path: , n_elements: number) : void;
+	set_search_path (path: string[], n_elements: number) : void;
 }
 
 var IconTheme: {
@@ -2234,8 +2313,8 @@ var IconTheme: {
 interface IconView extends Container, Atk.ImplementorIface, Buildable, CellLayout, Scrollable {
 	convert_widget_to_bin_window_coords (wx: number, wy: number, bx: number, _by: number) : void;
 	create_drag_icon (path: TreePath) : cairo.Surface;
-	enable_model_drag_dest (targets: , n_targets: number, actions: Gdk.DragAction) : void;
-	enable_model_drag_source (start_button_mask: Gdk.ModifierType, targets: , n_targets: number, actions: Gdk.DragAction) : void;
+	enable_model_drag_dest (targets: TargetEntry[], n_targets: number, actions: Gdk.DragAction) : void;
+	enable_model_drag_source (start_button_mask: Gdk.ModifierType, targets: TargetEntry[], n_targets: number, actions: Gdk.DragAction) : void;
 	get_activate_on_single_click () : boolean;
 	get_cell_rect (path: TreePath, cell: CellRenderer, rect: Gdk.Rectangle) : boolean;
 	get_column_spacing () : number;
@@ -2368,7 +2447,7 @@ var ImageAccessible: {
 
 
 
-interface ImageCellAccessible extends RendererCellAccessible, Atk.Action, Atk.Component, Atk.Image {
+interface ImageCellAccessible extends RendererCellAccessible, Atk.Action, Atk.Component, Atk.Image, Atk.TableCell {
 	
 }
 
@@ -2408,11 +2487,13 @@ interface InfoBar extends Box, Atk.ImplementorIface, Buildable, Orientable {
 	get_action_area () : Widget;
 	get_content_area () : Widget;
 	get_message_type () : MessageType;
+	get_revealed () : boolean;
 	get_show_close_button () : boolean;
 	response (response_id: number) : void;
 	set_default_response (response_id: number) : void;
 	set_message_type (message_type: MessageType) : void;
 	set_response_sensitive (response_id: number, setting: boolean) : void;
+	set_revealed (revealed: boolean) : void;
 	set_show_close_button (setting: boolean) : void;
 }
 
@@ -2646,7 +2727,7 @@ var ListBoxAccessible: {
 
 
 
-interface ListBoxRow extends Bin, Atk.ImplementorIface, Buildable {
+interface ListBoxRow extends Bin, Atk.ImplementorIface, Actionable, Buildable {
 	changed () : void;
 	get_activatable () : boolean;
 	get_header () : Widget;
@@ -2685,24 +2766,24 @@ interface ListStore extends GObject.Object, Buildable, TreeDragDest, TreeDragSou
 	insert_after (iter: TreeIter, sibling: TreeIter) : void;
 	insert_before (iter: TreeIter, sibling: TreeIter) : void;
 	insert_with_values (iter: TreeIter, position: number) : void;
-	insert_with_valuesv (iter: TreeIter, position: number, columns: , values: , n_values: number) : void;
+	insert_with_valuesv (iter: TreeIter, position: number, columns: number[], values: GObject.Value[], n_values: number) : void;
 	iter_is_valid (iter: TreeIter) : boolean;
 	move_after (iter: TreeIter, position: TreeIter) : void;
 	move_before (iter: TreeIter, position: TreeIter) : void;
 	prepend (iter: TreeIter) : void;
 	remove (iter: TreeIter) : boolean;
-	reorder (new_order: ) : void;
+	reorder (new_order: number[]) : void;
 	set (iter: TreeIter) : void;
-	set_column_types (n_columns: number, types: ) : void;
+	set_column_types (n_columns: number, types: GObject.Type[]) : void;
 	set_valist (iter: TreeIter, var_args: any[]) : void;
 	set_value (iter: TreeIter, column: number, value: GObject.Value) : void;
-	set_valuesv (iter: TreeIter, columns: , values: , n_values: number) : void;
+	set_valuesv (iter: TreeIter, columns: number[], values: GObject.Value[], n_values: number) : void;
 	swap (_a: TreeIter, _b: TreeIter) : void;
 }
 
 var ListStore: {
 	new (n_columns: number) : ListStore;
-	newv (n_columns: number, types: ) : ListStore;
+	newv (n_columns: number, types: GObject.Type[]) : ListStore;
 	
 }
 
@@ -2746,8 +2827,12 @@ interface Menu extends MenuShell, Atk.ImplementorIface, Buildable {
 	get_reserve_toggle_size () : boolean;
 	get_tearoff_state () : boolean;
 	get_title () : string;
+	place_on_monitor (monitor: Gdk.Monitor) : void;
 	popdown () : void;
 	popup (parent_menu_shell: Widget, parent_menu_item: Widget, _func: MenuPositionFunc, data: any, button: number, activate_time: number) : void;
+	popup_at_pointer (trigger_event: Gdk.Event) : void;
+	popup_at_rect (rect_window: Gdk.Window, rect: Gdk.Rectangle, rect_anchor: Gdk.Gravity, menu_anchor: Gdk.Gravity, trigger_event: Gdk.Event) : void;
+	popup_at_widget (widget: Widget, widget_anchor: Gdk.Gravity, menu_anchor: Gdk.Gravity, trigger_event: Gdk.Event) : void;
 	popup_for_device (device: Gdk.Device, parent_menu_shell: Widget, parent_menu_item: Widget, _func: MenuPositionFunc, data: any, destroy: GLib.DestroyNotify, button: number, activate_time: number) : void;
 	reorder_child (child: Widget, position: number) : void;
 	reposition () : void;
@@ -2989,6 +3074,28 @@ var MountOperation: {
 
 
 
+interface NativeDialog extends GObject.Object {
+	destroy () : void;
+	get_modal () : boolean;
+	get_title () : string;
+	get_transient_for () : Window;
+	get_visible () : boolean;
+	hide () : void;
+	run () : number;
+	set_modal (modal: boolean) : void;
+	set_title (title: string) : void;
+	set_transient_for (parent: Window) : void;
+	show () : void;
+}
+
+var NativeDialog: {
+	
+	
+}
+
+
+
+
 interface Notebook extends Container, Atk.ImplementorIface, Buildable {
 	append_page (child: Widget, tab_label: Widget) : number;
 	append_page_menu (child: Widget, tab_label: Widget, menu_label: Widget) : number;
@@ -3106,12 +3213,25 @@ var OffscreenWindow: {
 interface Overlay extends Bin, Atk.ImplementorIface, Buildable {
 	add_overlay (widget: Widget) : void;
 	get_overlay_pass_through (widget: Widget) : boolean;
-	reorder_overlay (child: Widget, position: number) : void;
+	reorder_overlay (child: Widget, index_: number) : void;
 	set_overlay_pass_through (widget: Widget, pass_through: boolean) : void;
 }
 
 var Overlay: {
 	new () : Widget;
+	
+}
+
+
+
+
+interface PadController extends EventController {
+	set_action (_type: PadActionType, index: number, mode: number, label: string, action_name: string) : void;
+	set_action_entries (entries: PadActionEntry[], n_entries: number) : void;
+}
+
+var PadController: {
+	new (window: Window, group: Gio.ActionGroup, pad: Gdk.Device) : PadController;
 	
 }
 
@@ -3140,12 +3260,14 @@ interface PageSetup extends GObject.Object {
 	set_right_margin (margin: number, unit: Unit) : void;
 	set_top_margin (margin: number, unit: Unit) : void;
 	to_file (file_name: string) : boolean;
+	to_gvariant () : GLib.Variant;
 	to_key_file (key_file: GLib.KeyFile, group_name: string) : void;
 }
 
 var PageSetup: {
 	new () : PageSetup;
 	new_from_file (file_name: string) : PageSetup;
+	new_from_gvariant (variant: GLib.Variant) : PageSetup;
 	new_from_key_file (key_file: GLib.KeyFile, group_name: string) : PageSetup;
 	
 }
@@ -3198,6 +3320,7 @@ interface PlacesSidebar extends ScrolledWindow, Atk.ImplementorIface, Buildable 
 	get_show_enter_location () : boolean;
 	get_show_other_locations () : boolean;
 	get_show_recent () : boolean;
+	get_show_starred_location () : boolean;
 	get_show_trash () : boolean;
 	list_shortcuts () : GLib.SList;
 	remove_shortcut (location: Gio.File) : void;
@@ -3210,6 +3333,7 @@ interface PlacesSidebar extends ScrolledWindow, Atk.ImplementorIface, Buildable 
 	set_show_enter_location (show_enter_location: boolean) : void;
 	set_show_other_locations (show_other_locations: boolean) : void;
 	set_show_recent (show_recent: boolean) : void;
+	set_show_starred_location (show_starred_location: boolean) : void;
 	set_show_trash (show_trash: boolean) : void;
 }
 
@@ -3240,12 +3364,16 @@ var Plug: {
 
 interface Popover extends Bin, Atk.ImplementorIface, Buildable {
 	bind_model (model: Gio.MenuModel, action_namespace: string) : void;
+	get_constrain_to () : PopoverConstraint;
 	get_default_widget () : Widget;
 	get_modal () : boolean;
 	get_pointing_to (rect: Gdk.Rectangle) : boolean;
 	get_position () : PositionType;
 	get_relative_to () : Widget;
 	get_transitions_enabled () : boolean;
+	popdown () : void;
+	popup () : void;
+	set_constrain_to (constraint: PopoverConstraint) : void;
 	set_default_widget (widget: Widget) : void;
 	set_modal (modal: boolean) : void;
 	set_pointing_to (rect: Gdk.Rectangle) : void;
@@ -3370,7 +3498,7 @@ interface PrintSettings extends GObject.Object {
 	get_number_up_layout () : NumberUpLayout;
 	get_orientation () : PageOrientation;
 	get_output_bin () : string;
-	get_page_ranges (num_ranges: number) : ;
+	get_page_ranges (num_ranges: number) : PageRange[];
 	get_page_set () : PageSet;
 	get_paper_height (unit: Unit) : number;
 	get_paper_size () : PaperSize;
@@ -3404,7 +3532,7 @@ interface PrintSettings extends GObject.Object {
 	set_number_up_layout (number_up_layout: NumberUpLayout) : void;
 	set_orientation (orientation: PageOrientation) : void;
 	set_output_bin (output_bin: string) : void;
-	set_page_ranges (page_ranges: , num_ranges: number) : void;
+	set_page_ranges (page_ranges: PageRange[], num_ranges: number) : void;
 	set_page_set (page_set: PageSet) : void;
 	set_paper_height (height: number, unit: Unit) : void;
 	set_paper_size (paper_size: PaperSize) : void;
@@ -3419,6 +3547,7 @@ interface PrintSettings extends GObject.Object {
 	set_scale (scale: number) : void;
 	set_use_color (use_color: boolean) : void;
 	to_file (file_name: string) : boolean;
+	to_gvariant () : GLib.Variant;
 	to_key_file (key_file: GLib.KeyFile, group_name: string) : void;
 	unset (key: string) : void;
 }
@@ -3426,6 +3555,7 @@ interface PrintSettings extends GObject.Object {
 var PrintSettings: {
 	new () : PrintSettings;
 	new_from_file (file_name: string) : PrintSettings;
+	new_from_gvariant (variant: GLib.Variant) : PrintSettings;
 	new_from_key_file (key_file: GLib.KeyFile, group_name: string) : PrintSettings;
 	
 }
@@ -3721,7 +3851,7 @@ var RecentManager: {
 
 
 
-interface RendererCellAccessible extends CellAccessible, Atk.Action, Atk.Component {
+interface RendererCellAccessible extends CellAccessible, Atk.Action, Atk.Component, Atk.TableCell {
 	
 }
 
@@ -3794,12 +3924,12 @@ interface ScaleButton extends Button, Atk.ImplementorIface, Actionable, Activata
 	get_popup () : Widget;
 	get_value () : number;
 	set_adjustment (adjustment: Adjustment) : void;
-	set_icons (icons: ) : void;
+	set_icons (icons: string[]) : void;
 	set_value (value: number) : void;
 }
 
 var ScaleButton: {
-	new (size: number, min: number, max: number, step: number, icons: ) : Widget;
+	new (size: number, min: number, max: number, step: number, icons: string[]) : Widget;
 	
 }
 
@@ -3836,22 +3966,30 @@ interface ScrolledWindow extends Bin, Atk.ImplementorIface, Buildable {
 	get_hadjustment () : Adjustment;
 	get_hscrollbar () : Widget;
 	get_kinetic_scrolling () : boolean;
+	get_max_content_height () : number;
+	get_max_content_width () : number;
 	get_min_content_height () : number;
 	get_min_content_width () : number;
 	get_overlay_scrolling () : boolean;
 	get_placement () : CornerType;
 	get_policy (hscrollbar_policy: PolicyType, vscrollbar_policy: PolicyType) : void;
+	get_propagate_natural_height () : boolean;
+	get_propagate_natural_width () : boolean;
 	get_shadow_type () : ShadowType;
 	get_vadjustment () : Adjustment;
 	get_vscrollbar () : Widget;
 	set_capture_button_press (capture_button_press: boolean) : void;
 	set_hadjustment (hadjustment: Adjustment) : void;
 	set_kinetic_scrolling (kinetic_scrolling: boolean) : void;
+	set_max_content_height (height: number) : void;
+	set_max_content_width (width: number) : void;
 	set_min_content_height (height: number) : void;
 	set_min_content_width (width: number) : void;
 	set_overlay_scrolling (overlay_scrolling: boolean) : void;
 	set_placement (window_placement: CornerType) : void;
 	set_policy (hscrollbar_policy: PolicyType, vscrollbar_policy: PolicyType) : void;
+	set_propagate_natural_height (propagate: boolean) : void;
+	set_propagate_natural_width (propagate: boolean) : void;
 	set_shadow_type (_type: ShadowType) : void;
 	set_vadjustment (vadjustment: Adjustment) : void;
 	unset_placement () : void;
@@ -3944,6 +4082,7 @@ var SeparatorToolItem: {
 
 
 interface Settings extends GObject.Object, StyleProvider {
+	reset_property (name: string) : void;
 	set_double_property (name: string, v_double: number, origin: string) : void;
 	set_long_property (name: string, v_long: number, origin: string) : void;
 	set_property_value (name: string, svalue: SettingsValue) : void;
@@ -3956,6 +4095,69 @@ var Settings: {
 	get_for_screen (screen: Gdk.Screen) : Settings;
 	install_property (pspec: GObject.ParamSpec) : void;
 	install_property_parser (pspec: GObject.ParamSpec, parser: RcPropertyParser) : void;
+}
+
+
+
+
+interface ShortcutLabel extends Box, Atk.ImplementorIface, Buildable, Orientable {
+	get_accelerator () : string;
+	get_disabled_text () : string;
+	set_accelerator (accelerator: string) : void;
+	set_disabled_text (disabled_text: string) : void;
+}
+
+var ShortcutLabel: {
+	new (accelerator: string) : Widget;
+	
+}
+
+
+
+
+interface ShortcutsGroup extends Box, Atk.ImplementorIface, Buildable, Orientable {
+	
+}
+
+var ShortcutsGroup: {
+	
+	
+}
+
+
+
+
+interface ShortcutsSection extends Box, Atk.ImplementorIface, Buildable, Orientable {
+	
+}
+
+var ShortcutsSection: {
+	
+	
+}
+
+
+
+
+interface ShortcutsShortcut extends Box, Atk.ImplementorIface, Buildable, Orientable {
+	
+}
+
+var ShortcutsShortcut: {
+	
+	
+}
+
+
+
+
+interface ShortcutsWindow extends Window, Atk.ImplementorIface, Buildable {
+	
+}
+
+var ShortcutsWindow: {
+	
+	
 }
 
 
@@ -4090,6 +4292,18 @@ interface Stack extends Container, Atk.ImplementorIface, Buildable {
 
 var Stack: {
 	new () : Widget;
+	
+}
+
+
+
+
+interface StackAccessible extends ContainerAccessible, Atk.Component {
+	
+}
+
+var StackAccessible: {
+	
 	
 }
 
@@ -4270,6 +4484,7 @@ interface StyleContext extends GObject.Object {
 	set_screen (screen: Gdk.Screen) : void;
 	set_state (flags: StateFlags) : void;
 	state_is_running (state: StateType, progress: number) : boolean;
+	to_string (flags: StyleContextPrintFlags) : string;
 }
 
 var StyleContext: {
@@ -4386,14 +4601,14 @@ interface TextBuffer extends GObject.Object {
 	delete_mark (mark: TextMark) : void;
 	delete_mark_by_name (name: string) : void;
 	delete_selection (interactive: boolean, default_editable: boolean) : boolean;
-	deserialize (content_buffer: TextBuffer, format: Gdk.Atom, iter: TextIter, data: , length: number) : boolean;
+	deserialize (content_buffer: TextBuffer, format: Gdk.Atom, iter: TextIter, data: number[], length: number) : boolean;
 	deserialize_get_can_create_tags (format: Gdk.Atom) : boolean;
 	deserialize_set_can_create_tags (format: Gdk.Atom, can_create_tags: boolean) : void;
 	end_user_action () : void;
 	get_bounds (start: TextIter, _end: TextIter) : void;
 	get_char_count () : number;
 	get_copy_target_list () : TargetList;
-	get_deserialize_formats (n_formats: number) : ;
+	get_deserialize_formats (n_formats: number) : Gdk.Atom[];
 	get_end_iter (iter: TextIter) : void;
 	get_has_selection () : boolean;
 	get_insert () : TextMark;
@@ -4409,7 +4624,7 @@ interface TextBuffer extends GObject.Object {
 	get_paste_target_list () : TargetList;
 	get_selection_bound () : TextMark;
 	get_selection_bounds (start: TextIter, _end: TextIter) : boolean;
-	get_serialize_formats (n_formats: number) : ;
+	get_serialize_formats (n_formats: number) : Gdk.Atom[];
 	get_slice (start: TextIter, _end: TextIter, include_hidden_chars: boolean) : string;
 	get_start_iter (iter: TextIter) : void;
 	get_tag_table () : TextTagTable;
@@ -4438,7 +4653,7 @@ interface TextBuffer extends GObject.Object {
 	remove_tag (tag: TextTag, start: TextIter, _end: TextIter) : void;
 	remove_tag_by_name (name: string, start: TextIter, _end: TextIter) : void;
 	select_range (_ins: TextIter, bound: TextIter) : void;
-	serialize (content_buffer: TextBuffer, format: Gdk.Atom, start: TextIter, _end: TextIter, length: number) : ;
+	serialize (content_buffer: TextBuffer, format: Gdk.Atom, start: TextIter, _end: TextIter, length: number) : number[];
 	set_modified (setting: boolean) : void;
 	set_text (text: string, len: number) : void;
 	unregister_deserialize_format (format: Gdk.Atom) : void;
@@ -4453,7 +4668,7 @@ var TextBuffer: {
 
 
 
-interface TextCellAccessible extends RendererCellAccessible, Atk.Action, Atk.Component, Atk.Text {
+interface TextCellAccessible extends RendererCellAccessible, Atk.Action, Atk.Component, Atk.TableCell, Atk.Text {
 	
 }
 
@@ -4496,6 +4711,7 @@ var TextMark: {
 
 
 interface TextTag extends GObject.Object {
+	changed (size_changed: boolean) : void;
 	event (event_object: GObject.Object, event: Gdk.Event, iter: TextIter) : boolean;
 	get_priority () : number;
 	set_priority (priority: number) : void;
@@ -4545,8 +4761,8 @@ interface TextView extends Container, Atk.ImplementorIface, Buildable, Scrollabl
 	get_indent () : number;
 	get_input_hints () : InputHints;
 	get_input_purpose () : InputPurpose;
-	get_iter_at_location (iter: TextIter, _x: number, _y: number) : void;
-	get_iter_at_position (iter: TextIter, trailing: number, _x: number, _y: number) : void;
+	get_iter_at_location (iter: TextIter, _x: number, _y: number) : boolean;
+	get_iter_at_position (iter: TextIter, trailing: number, _x: number, _y: number) : boolean;
 	get_iter_location (iter: TextIter, location: Gdk.Rectangle) : void;
 	get_justification () : Justification;
 	get_left_margin () : number;
@@ -4570,6 +4786,7 @@ interface TextView extends Container, Atk.ImplementorIface, Buildable, Scrollabl
 	move_mark_onscreen (mark: TextMark) : boolean;
 	move_visually (iter: TextIter, count: number) : boolean;
 	place_cursor_onscreen () : boolean;
+	reset_cursor_blink () : void;
 	reset_im_context () : void;
 	scroll_mark_onscreen (mark: TextMark) : void;
 	scroll_to_iter (iter: TextIter, within_margin: number, use_align: boolean, xalign: number, yalign: number) : boolean;
@@ -4900,7 +5117,7 @@ interface TreeModelFilter extends GObject.Object, TreeDragSource, TreeModel {
 	convert_path_to_child_path (filter_path: TreePath) : TreePath;
 	get_model () : TreeModel;
 	refilter () : void;
-	set_modify_func (n_columns: number, types: , _func: TreeModelFilterModifyFunc, data: any, destroy: GLib.DestroyNotify) : void;
+	set_modify_func (n_columns: number, types: GObject.Type[], _func: TreeModelFilterModifyFunc, data: any, destroy: GLib.DestroyNotify) : void;
 	set_visible_column (column: number) : void;
 	set_visible_func (_func: TreeModelFilterVisibleFunc, data: any, destroy: GLib.DestroyNotify) : void;
 }
@@ -4970,7 +5187,7 @@ interface TreeStore extends GObject.Object, Buildable, TreeDragDest, TreeDragSou
 	insert_after (iter: TreeIter, parent: TreeIter, sibling: TreeIter) : void;
 	insert_before (iter: TreeIter, parent: TreeIter, sibling: TreeIter) : void;
 	insert_with_values (iter: TreeIter, parent: TreeIter, position: number) : void;
-	insert_with_valuesv (iter: TreeIter, parent: TreeIter, position: number, columns: , values: , n_values: number) : void;
+	insert_with_valuesv (iter: TreeIter, parent: TreeIter, position: number, columns: number[], values: GObject.Value[], n_values: number) : void;
 	is_ancestor (iter: TreeIter, descendant: TreeIter) : boolean;
 	iter_depth (iter: TreeIter) : number;
 	iter_is_valid (iter: TreeIter) : boolean;
@@ -4978,18 +5195,18 @@ interface TreeStore extends GObject.Object, Buildable, TreeDragDest, TreeDragSou
 	move_before (iter: TreeIter, position: TreeIter) : void;
 	prepend (iter: TreeIter, parent: TreeIter) : void;
 	remove (iter: TreeIter) : boolean;
-	reorder (parent: TreeIter, new_order: ) : void;
+	reorder (parent: TreeIter, new_order: number[]) : void;
 	set (iter: TreeIter) : void;
-	set_column_types (n_columns: number, types: ) : void;
+	set_column_types (n_columns: number, types: GObject.Type[]) : void;
 	set_valist (iter: TreeIter, var_args: any[]) : void;
 	set_value (iter: TreeIter, column: number, value: GObject.Value) : void;
-	set_valuesv (iter: TreeIter, columns: , values: , n_values: number) : void;
+	set_valuesv (iter: TreeIter, columns: number[], values: GObject.Value[], n_values: number) : void;
 	swap (_a: TreeIter, _b: TreeIter) : void;
 }
 
 var TreeStore: {
 	new (n_columns: number) : TreeStore;
-	newv (n_columns: number, types: ) : TreeStore;
+	newv (n_columns: number, types: GObject.Type[]) : TreeStore;
 	
 }
 
@@ -5008,8 +5225,8 @@ interface TreeView extends Container, Atk.ImplementorIface, Buildable, Scrollabl
 	convert_widget_to_bin_window_coords (wx: number, wy: number, bx: number, _by: number) : void;
 	convert_widget_to_tree_coords (wx: number, wy: number, tx: number, _ty: number) : void;
 	create_row_drag_icon (path: TreePath) : cairo.Surface;
-	enable_model_drag_dest (targets: , n_targets: number, actions: Gdk.DragAction) : void;
-	enable_model_drag_source (start_button_mask: Gdk.ModifierType, targets: , n_targets: number, actions: Gdk.DragAction) : void;
+	enable_model_drag_dest (targets: TargetEntry[], n_targets: number, actions: Gdk.DragAction) : void;
+	enable_model_drag_source (start_button_mask: Gdk.ModifierType, targets: TargetEntry[], n_targets: number, actions: Gdk.DragAction) : void;
 	expand_all () : void;
 	expand_row (path: TreePath, open_all: boolean) : boolean;
 	expand_to_path (path: TreePath) : void;
@@ -5340,7 +5557,7 @@ interface Widget extends GObject.InitiallyUnowned, Atk.ImplementorIface, Buildab
 	drag_dest_find_target (context: Gdk.DragContext, target_list: TargetList) : Gdk.Atom;
 	drag_dest_get_target_list () : TargetList;
 	drag_dest_get_track_motion () : boolean;
-	drag_dest_set (flags: DestDefaults, targets: , n_targets: number, actions: Gdk.DragAction) : void;
+	drag_dest_set (flags: DestDefaults, targets: TargetEntry[], n_targets: number, actions: Gdk.DragAction) : void;
 	drag_dest_set_proxy (proxy_window: Gdk.Window, protocol: Gdk.DragProtocol, use_coordinates: boolean) : void;
 	drag_dest_set_target_list (target_list: TargetList) : void;
 	drag_dest_set_track_motion (track_motion: boolean) : void;
@@ -5351,7 +5568,7 @@ interface Widget extends GObject.InitiallyUnowned, Atk.ImplementorIface, Buildab
 	drag_source_add_text_targets () : void;
 	drag_source_add_uri_targets () : void;
 	drag_source_get_target_list () : TargetList;
-	drag_source_set (start_button_mask: Gdk.ModifierType, targets: , n_targets: number, actions: Gdk.DragAction) : void;
+	drag_source_set (start_button_mask: Gdk.ModifierType, targets: TargetEntry[], n_targets: number, actions: Gdk.DragAction) : void;
 	drag_source_set_icon_gicon (icon: Gio.Icon) : void;
 	drag_source_set_icon_name (icon_name: string) : void;
 	drag_source_set_icon_pixbuf (pixbuf: GdkPixbuf.Pixbuf) : void;
@@ -5368,6 +5585,7 @@ interface Widget extends GObject.InitiallyUnowned, Atk.ImplementorIface, Buildab
 	get_action_group (prefix: string) : Gio.ActionGroup;
 	get_allocated_baseline () : number;
 	get_allocated_height () : number;
+	get_allocated_size (allocation: Allocation, baseline: number) : void;
 	get_allocated_width () : number;
 	get_allocation (allocation: Allocation) : void;
 	get_ancestor (widget_type: GObject.Type) : Widget;
@@ -5385,6 +5603,7 @@ interface Widget extends GObject.InitiallyUnowned, Atk.ImplementorIface, Buildab
 	get_display () : Gdk.Display;
 	get_double_buffered () : boolean;
 	get_events () : number;
+	get_focus_on_click () : boolean;
 	get_font_map () : Pango.FontMap;
 	get_font_options () : cairo.FontOptions;
 	get_frame_clock () : Gdk.FrameClock;
@@ -5469,7 +5688,7 @@ interface Widget extends GObject.InitiallyUnowned, Atk.ImplementorIface, Buildab
 	is_visible () : boolean;
 	keynav_failed (direction: DirectionType) : boolean;
 	list_accel_closures () : GLib.List;
-	list_action_prefixes () : ;
+	list_action_prefixes () : string[];
 	list_mnemonic_labels () : GLib.List;
 	map () : void;
 	// mnemonic_activate (group_cycling: boolean) : boolean;
@@ -5486,6 +5705,7 @@ interface Widget extends GObject.InitiallyUnowned, Atk.ImplementorIface, Buildab
 	override_font (font_desc: Pango.FontDescription) : void;
 	override_symbolic_color (name: string, color: Gdk.RGBA) : void;
 	path (path_length: number, path: string, path_reversed: string) : void;
+	queue_allocate () : void;
 	queue_compute_expand () : void;
 	queue_draw () : void;
 	queue_draw_area (_x: number, _y: number, width: number, height: number) : void;
@@ -5518,6 +5738,7 @@ interface Widget extends GObject.InitiallyUnowned, Atk.ImplementorIface, Buildab
 	// set_direction (dir: TextDirection) : void;
 	set_double_buffered (double_buffered: boolean) : void;
 	set_events (events: number) : void;
+	set_focus_on_click (focus_on_click: boolean) : void;
 	set_font_map (font_map: Pango.FontMap) : void;
 	set_font_options (options: cairo.FontOptions) : void;
 	set_halign (align: Align) : void;
@@ -6011,7 +6232,7 @@ class AlignmentPrivate {
 
 class AppChooserButtonClass {
 	public parent_class: ComboBoxClass;
-	public padding: ;
+	public padding: any[];
 
 	custom_item_activated : {(self: AppChooserButton, item_name: string) : void;};
 
@@ -6028,7 +6249,7 @@ class AppChooserButtonPrivate {
 
 class AppChooserDialogClass {
 	public parent_class: DialogClass;
-	public padding: ;
+	public padding: any[];
 
 
 }
@@ -6044,7 +6265,7 @@ class AppChooserDialogPrivate {
 
 class AppChooserWidgetClass {
 	public parent_class: BoxClass;
-	public padding: ;
+	public padding: any[];
 
 	application_selected : {(self: AppChooserWidget, app_info: Gio.AppInfo) : void;};
 	application_activated : {(self: AppChooserWidget, app_info: Gio.AppInfo) : void;};
@@ -6063,7 +6284,7 @@ class AppChooserWidgetPrivate {
 
 class ApplicationClass {
 	public parent_class: Gio.ApplicationClass;
-	public padding: ;
+	public padding: any[];
 
 	window_added : {(application: Application, window: Window) : void;};
 	window_removed : {(application: Application, window: Window) : void;};
@@ -6081,7 +6302,7 @@ class ApplicationPrivate {
 
 class ApplicationWindowClass {
 	public parent_class: WindowClass;
-	public padding: ;
+	public padding: any[];
 
 
 }
@@ -6236,7 +6457,7 @@ class BindingSignal {
 	public next: BindingSignal;
 	public signal_name: string;
 	public n_args: number;
-	public args: ;
+	public args: BindingArg[];
 
 
 }
@@ -6438,6 +6659,9 @@ class CellAccessibleParentIface {
 	activate : {(parent: CellAccessibleParent, cell: CellAccessible) : void;};
 	edit : {(parent: CellAccessibleParent, cell: CellAccessible) : void;};
 	update_relationset : {(parent: CellAccessibleParent, cell: CellAccessible, relationset: Atk.RelationSet) : void;};
+	get_cell_position : {(parent: CellAccessibleParent, cell: CellAccessible, _row: number, column: number) : void;};
+	get_column_header_cells : {(parent: CellAccessibleParent, cell: CellAccessible) : Atk.Object[];};
+	get_row_header_cells : {(parent: CellAccessibleParent, cell: CellAccessible) : Atk.Object[];};
 
 }
 
@@ -6502,7 +6726,7 @@ class CellAreaClass {
 
 	public find_cell_property (property_name: string) : GObject.ParamSpec;
 	public install_cell_property (property_id: number, pspec: GObject.ParamSpec) : void;
-	public list_cell_properties (n_properties: number) : ;
+	public list_cell_properties (n_properties: number) : GObject.ParamSpec[];
 }
 
 
@@ -6872,11 +7096,11 @@ class ColorChooserDialogPrivate {
 
 class ColorChooserInterface {
 	public base_interface: GObject.TypeInterface;
-	public padding: ;
+	public padding: any[];
 
 	get_rgba : {(chooser: ColorChooser, color: Gdk.RGBA) : void;};
 	set_rgba : {(chooser: ColorChooser, color: Gdk.RGBA) : void;};
-	add_palette : {(chooser: ColorChooser, orientation: Orientation, colors_per_line: number, n_colors: number, colors: ) : void;};
+	add_palette : {(chooser: ColorChooser, orientation: Orientation, colors_per_line: number, n_colors: number, colors: Gdk.RGBA[]) : void;};
 	color_activated : {(chooser: ColorChooser, color: Gdk.RGBA) : void;};
 
 }
@@ -7056,9 +7280,9 @@ class ContainerClass {
 
 	public find_child_property (property_name: string) : GObject.ParamSpec;
 	public handle_border_width () : void;
-	public install_child_properties (n_pspecs: number, pspecs: ) : void;
+	public install_child_properties (n_pspecs: number, pspecs: GObject.ParamSpec[]) : void;
 	public install_child_property (property_id: number, pspec: GObject.ParamSpec) : void;
-	public list_child_properties (n_properties: number) : ;
+	public list_child_properties (n_properties: number) : GObject.ParamSpec[];
 }
 
 
@@ -7215,13 +7439,13 @@ class EntryClass {
 	toggle_overwrite : {(entry: Entry) : void;};
 	get_text_area_size : {(entry: Entry, _x: number, _y: number, width: number, height: number) : void;};
 	get_frame_size : {(entry: Entry, _x: number, _y: number, width: number, height: number) : void;};
+	insert_emoji : {(entry: Entry) : void;};
 	_gtk_reserved1 : {() : void;};
 	_gtk_reserved2 : {() : void;};
 	_gtk_reserved3 : {() : void;};
 	_gtk_reserved4 : {() : void;};
 	_gtk_reserved5 : {() : void;};
 	_gtk_reserved6 : {() : void;};
-	_gtk_reserved7 : {() : void;};
 
 }
 
@@ -7283,6 +7507,27 @@ class EventControllerClass {
 
 
 
+class EventControllerKeyClass {
+
+
+}
+
+
+
+class EventControllerMotionClass {
+
+
+}
+
+
+
+class EventControllerScrollClass {
+
+
+}
+
+
+
 class ExpanderAccessibleClass {
 	public parent_class: ContainerAccessibleClass;
 
@@ -7320,12 +7565,12 @@ class ExpanderPrivate {
 
 class FileChooserButtonClass {
 	public parent_class: BoxClass;
-	public __gtk_reserved1: any;
-	public __gtk_reserved2: any;
-	public __gtk_reserved3: any;
-	public __gtk_reserved4: any;
 
 	file_set : {(fc: FileChooserButton) : void;};
+	__gtk_reserved1 : {() : void;};
+	__gtk_reserved2 : {() : void;};
+	__gtk_reserved3 : {() : void;};
+	__gtk_reserved4 : {() : void;};
 
 }
 
@@ -7351,6 +7596,14 @@ class FileChooserDialogClass {
 
 
 class FileChooserDialogPrivate {
+
+
+}
+
+
+
+class FileChooserNativeClass {
+	public parent_class: NativeDialogClass;
 
 
 }
@@ -7513,7 +7766,7 @@ class FontChooserDialogPrivate {
 
 class FontChooserIface {
 	public base_iface: GObject.TypeInterface;
-	public padding: ;
+	public padding: any[];
 
 	get_font_family : {(fontchooser: FontChooser) : Pango.FontFamily;};
 	get_font_face : {(fontchooser: FontChooser) : Pango.FontFace;};
@@ -7625,7 +7878,7 @@ class FramePrivate {
 
 class GLAreaClass {
 	public parent_class: WidgetClass;
-	public _padding: ;
+	public _padding: any[];
 
 	render : {(area: GLArea, context: Gdk.GLContext) : boolean;};
 	resize : {(area: GLArea, width: number, height: number) : void;};
@@ -7678,6 +7931,13 @@ class GestureRotateClass {
 
 
 class GestureSingleClass {
+
+
+}
+
+
+
+class GestureStylusClass {
 
 
 }
@@ -7950,7 +8210,7 @@ class IconSet {
 
 	public add_source (source: IconSource) : void;
 	public copy () : IconSet;
-	public get_sizes (sizes: , n_sizes: number) : void;
+	public get_sizes (sizes: number[], n_sizes: number) : void;
 	public ref () : IconSet;
 	public render_icon (style: Style, direction: TextDirection, state: StateType, size: number, widget: Widget, detail: string) : GdkPixbuf.Pixbuf;
 	public render_icon_pixbuf (context: StyleContext, size: number) : GdkPixbuf.Pixbuf;
@@ -8242,7 +8502,7 @@ class LevelBarAccessiblePrivate {
 
 class LevelBarClass {
 	public parent_class: WidgetClass;
-	public padding: ;
+	public padding: any[];
 
 	offset_changed : {(self: LevelBar, name: string) : void;};
 
@@ -8653,6 +8913,21 @@ class MountOperationPrivate {
 
 
 
+class NativeDialogClass {
+	public parent_class: GObject.ObjectClass;
+
+	response : {(self: NativeDialog, response_id: number) : void;};
+	show : {(self: NativeDialog) : void;};
+	hide : {(self: NativeDialog) : void;};
+	_gtk_reserved1 : {() : void;};
+	_gtk_reserved2 : {() : void;};
+	_gtk_reserved3 : {() : void;};
+	_gtk_reserved4 : {() : void;};
+
+}
+
+
+
 class NotebookAccessibleClass {
 	public parent_class: ContainerAccessibleClass;
 
@@ -8719,7 +8994,7 @@ class NotebookPrivate {
 
 class NumerableIconClass {
 	public parent_class: Gio.EmblemedIconClass;
-	public padding: ;
+	public padding: any[];
 
 
 }
@@ -8771,6 +9046,25 @@ class OverlayClass {
 
 
 class OverlayPrivate {
+
+
+}
+
+
+
+class PadActionEntry {
+	public type: PadActionType;
+	public index: number;
+	public mode: number;
+	public label: string;
+	public action_name: string;
+
+
+}
+
+
+
+class PadControllerClass {
 
 
 }
@@ -8844,6 +9138,7 @@ class PaperSize {
 	public is_equal (size2: PaperSize) : boolean;
 	public is_ipp () : boolean;
 	public set_size (width: number, height: number, unit: Unit) : void;
+	public to_gvariant () : GLib.Variant;
 	public to_key_file (key_file: GLib.KeyFile, group_name: string) : void;
 }
 
@@ -8886,7 +9181,7 @@ class PopoverAccessibleClass {
 
 class PopoverClass {
 	public parent_class: BinClass;
-	public reserved: ;
+	public reserved: any[];
 
 	closed : {(popover: Popover) : void;};
 
@@ -8896,7 +9191,7 @@ class PopoverClass {
 
 class PopoverMenuClass {
 	public parent_class: PopoverClass;
-	public reserved: ;
+	public reserved: any[];
 
 
 }
@@ -9139,10 +9434,10 @@ class RangeClass {
 	move_slider : {(range: Range, scroll: ScrollType) : void;};
 	get_range_border : {(range: Range, border_: Border) : void;};
 	change_value : {(range: Range, scroll: ScrollType, new_value: number) : boolean;};
+	get_range_size_request : {(range: Range, orientation: Orientation, minimum: number, natural: number) : void;};
 	_gtk_reserved1 : {() : void;};
 	_gtk_reserved2 : {() : void;};
 	_gtk_reserved3 : {() : void;};
-	_gtk_reserved4 : {() : void;};
 
 }
 
@@ -9293,7 +9588,7 @@ class RecentData {
 	public mime_type: string;
 	public app_name: string;
 	public app_exec: string;
-	public groups: ;
+	public groups: string[];
 	public is_private: boolean;
 
 
@@ -9306,8 +9601,8 @@ class RecentFilterInfo {
 	public uri: string;
 	public display_name: string;
 	public mime_type: string;
-	public applications: ;
-	public groups: ;
+	public applications: string[];
+	public groups: string[];
 	public age: number;
 
 
@@ -9323,11 +9618,11 @@ class RecentInfo {
 	public get_added () : number;
 	public get_age () : number;
 	public get_application_info (app_name: string, app_exec: string, count: number, time_: number) : boolean;
-	public get_applications (length: number) : ;
+	public get_applications (length: number) : string[];
 	public get_description () : string;
 	public get_display_name () : string;
 	public get_gicon () : Gio.Icon;
-	public get_groups (length: number) : ;
+	public get_groups (length: number) : string[];
 	public get_icon (size: number) : GdkPixbuf.Pixbuf;
 	public get_mime_type () : string;
 	public get_modified () : number;
@@ -9570,22 +9865,22 @@ class SelectionData {
 
 	public copy () : SelectionData;
 	public free () : void;
-	public get_data () : ;
+	public get_data () : number[];
 	public get_data_type () : Gdk.Atom;
-	public get_data_with_length (length: number) : ;
+	public get_data_with_length (length: number) : number[];
 	public get_display () : Gdk.Display;
 	public get_format () : number;
 	public get_length () : number;
 	public get_pixbuf () : GdkPixbuf.Pixbuf;
 	public get_selection () : Gdk.Atom;
 	public get_target () : Gdk.Atom;
-	public get_targets (targets: , n_atoms: number) : boolean;
+	public get_targets (targets: Gdk.Atom[], n_atoms: number) : boolean;
 	public get_text () : string;
-	public get_uris () : ;
-	public set (_type: Gdk.Atom, format: number, data: , length: number) : void;
+	public get_uris () : string[];
+	public set (_type: Gdk.Atom, format: number, data: number[], length: number) : void;
 	public set_pixbuf (pixbuf: GdkPixbuf.Pixbuf) : boolean;
 	public set_text (_str: string, len: number) : boolean;
-	public set_uris (uris: ) : boolean;
+	public set_uris (uris: string[]) : boolean;
 	public targets_include_image (writable: boolean) : boolean;
 	public targets_include_rich_text (buffer: TextBuffer) : boolean;
 	public targets_include_text () : boolean;
@@ -9667,6 +9962,44 @@ class SettingsValue {
 	public origin: string;
 	public value: GObject.Value;
 
+
+}
+
+
+
+class ShortcutLabelClass {
+
+
+}
+
+
+
+class ShortcutsGroupClass {
+
+
+}
+
+
+
+class ShortcutsSectionClass {
+
+
+}
+
+
+
+class ShortcutsShortcutClass {
+
+
+}
+
+
+
+class ShortcutsWindowClass {
+	public parent_class: WindowClass;
+
+	close : {(self: ShortcutsWindow) : void;};
+	search : {(self: ShortcutsWindow) : void;};
 
 }
 
@@ -9785,6 +10118,14 @@ class SpinnerPrivate {
 
 
 
+class StackAccessibleClass {
+	public parent_class: ContainerAccessibleClass;
+
+
+}
+
+
+
 class StackClass {
 	public parent_class: ContainerClass;
 
@@ -9826,10 +10167,6 @@ class StackSwitcherClass {
 
 class StatusIconClass {
 	public parent_class: GObject.ObjectClass;
-	public __gtk_reserved1: any;
-	public __gtk_reserved2: any;
-	public __gtk_reserved3: any;
-	public __gtk_reserved4: any;
 
 	activate : {(status_icon: StatusIcon) : void;};
 	popup_menu : {(status_icon: StatusIcon, button: number, activate_time: number) : void;};
@@ -9838,6 +10175,10 @@ class StatusIconClass {
 	button_release_event : {(status_icon: StatusIcon, event: Gdk.EventButton) : boolean;};
 	scroll_event : {(status_icon: StatusIcon, event: Gdk.EventScroll) : boolean;};
 	query_tooltip : {(status_icon: StatusIcon, _x: number, _y: number, keyboard_mode: boolean, tooltip: Tooltip) : boolean;};
+	__gtk_reserved1 : {() : void;};
+	__gtk_reserved2 : {() : void;};
+	__gtk_reserved3 : {() : void;};
+	__gtk_reserved4 : {() : void;};
 
 }
 
@@ -10117,7 +10458,7 @@ class TargetList {
 	public add (target: Gdk.Atom, flags: number, info: number) : void;
 	public add_image_targets (info: number, writable: boolean) : void;
 	public add_rich_text_targets (info: number, deserializable: boolean, buffer: TextBuffer) : void;
-	public add_table (targets: , ntargets: number) : void;
+	public add_table (targets: TargetEntry[], ntargets: number) : void;
 	public add_text_targets (info: number) : void;
 	public add_uri_targets (info: number) : void;
 	public find (target: Gdk.Atom, info: number) : boolean;
@@ -10377,6 +10718,7 @@ class TextIter {
 	public set_visible_line_offset (char_on_line: number) : void;
 	public starts_line () : boolean;
 	public starts_sentence () : boolean;
+	public starts_tag (tag: TextTag) : boolean;
 	public starts_word () : boolean;
 	public toggles_tag (tag: TextTag) : boolean;
 }
@@ -10468,11 +10810,11 @@ class TextViewClass {
 	create_buffer : {(text_view: TextView) : TextBuffer;};
 	draw_layer : {(text_view: TextView, layer: TextViewLayer, cr: cairo.Context) : void;};
 	extend_selection : {(text_view: TextView, granularity: TextExtendSelection, location: TextIter, start: TextIter, _end: TextIter) : boolean;};
+	insert_emoji : {(text_view: TextView) : void;};
 	_gtk_reserved1 : {() : void;};
 	_gtk_reserved2 : {() : void;};
 	_gtk_reserved3 : {() : void;};
 	_gtk_reserved4 : {() : void;};
-	_gtk_reserved5 : {() : void;};
 
 }
 
@@ -10494,7 +10836,7 @@ class ThemeEngine {
 
 class ThemingEngineClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	render_line : {(engine: ThemingEngine, cr: cairo.Context, x0: number, y0: number, x1: number, y1: number) : void;};
 	render_background : {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number) : void;};
@@ -10860,7 +11202,7 @@ class TreePath {
 	public free () : void;
 	public get_depth () : number;
 	public get_indices () : number;
-	public get_indices_with_depth (depth: number) : ;
+	public get_indices_with_depth (depth: number) : number[];
 	public is_ancestor (descendant: TreePath) : boolean;
 	public is_descendant (ancestor: TreePath) : boolean;
 	public next () : void;
@@ -11225,12 +11567,14 @@ class WidgetClass {
 	public bind_template_callback_full (callback_name: string, callback_symbol: GObject.Callback) : void;
 	public bind_template_child_full (name: string, internal_child: boolean, struct_offset: number) : void;
 	public find_style_property (property_name: string) : GObject.ParamSpec;
+	public get_css_name () : string;
 	public install_style_property (pspec: GObject.ParamSpec) : void;
 	public install_style_property_parser (pspec: GObject.ParamSpec, parser: RcPropertyParser) : void;
-	public list_style_properties (n_properties: number) : ;
+	public list_style_properties (n_properties: number) : GObject.ParamSpec[];
 	public set_accessible_role (role: Atk.Role) : void;
 	public set_accessible_type (_type: GObject.Type) : void;
 	public set_connect_func (connect_func: BuilderConnectFunc, connect_data: any, connect_data_destroy: GLib.DestroyNotify) : void;
+	public set_css_name (name: string) : void;
 	public set_template (template_bytes: GLib.Bytes) : void;
 	public set_template_from_resource (resource_name: string) : void;
 }
@@ -11256,11 +11600,11 @@ class WidgetPath {
 	public has_parent (_type: GObject.Type) : boolean;
 	public is_type (_type: GObject.Type) : boolean;
 	public iter_add_class (pos: number, name: string) : void;
-	public iter_add_qclass (pos: number, qname: GLib.Quark) : void;
 	public iter_add_region (pos: number, name: string, flags: RegionFlags) : void;
 	public iter_clear_classes (pos: number) : void;
 	public iter_clear_regions (pos: number) : void;
 	public iter_get_name (pos: number) : string;
+	public iter_get_object_name (pos: number) : string;
 	public iter_get_object_type (pos: number) : GObject.Type;
 	public iter_get_sibling_index (pos: number) : number;
 	public iter_get_siblings (pos: number) : WidgetPath;
@@ -11276,6 +11620,7 @@ class WidgetPath {
 	public iter_remove_class (pos: number, name: string) : void;
 	public iter_remove_region (pos: number, name: string) : void;
 	public iter_set_name (pos: number, name: string) : void;
+	public iter_set_object_name (pos: number, name: string) : void;
 	public iter_set_object_type (pos: number, _type: GObject.Type) : void;
 	public iter_set_state (pos: number, state: StateFlags) : void;
 	public length () : number;
@@ -11358,6 +11703,73 @@ class WindowPrivate {
 
 
 
+class _MountOperationHandler {
+
+
+}
+
+
+
+class _MountOperationHandlerIface {
+	public parent_iface: GObject.TypeInterface;
+
+	handle_ask_password : {(object: undefined, invocation: Gio.DBusMethodInvocation, arg_id: string, arg_message: string, arg_icon_name: string, arg_default_user: string, arg_default_domain: string, arg_flags: number) : boolean;};
+	handle_ask_question : {(object: undefined, invocation: Gio.DBusMethodInvocation, arg_id: string, arg_message: string, arg_icon_name: string, arg_choices: string) : boolean;};
+	handle_close : {(object: undefined, invocation: Gio.DBusMethodInvocation) : boolean;};
+	handle_show_processes : {(object: undefined, invocation: Gio.DBusMethodInvocation, arg_id: string, arg_message: string, arg_icon_name: string, arg_application_pids: GLib.Variant, arg_choices: string) : boolean;};
+
+}
+
+
+
+class _MountOperationHandlerProxy {
+	public parent_instance: Gio.DBusProxy;
+	public priv: undefined;
+
+
+}
+
+
+
+class _MountOperationHandlerProxyClass {
+	public parent_class: Gio.DBusProxyClass;
+
+
+}
+
+
+
+class _MountOperationHandlerProxyPrivate {
+
+
+}
+
+
+
+class _MountOperationHandlerSkeleton {
+	public parent_instance: Gio.DBusInterfaceSkeleton;
+	public priv: undefined;
+
+
+}
+
+
+
+class _MountOperationHandlerSkeletonClass {
+	public parent_class: Gio.DBusInterfaceSkeletonClass;
+
+
+}
+
+
+
+class _MountOperationHandlerSkeletonPrivate {
+
+
+}
+
+
+
 interface Actionable {
 	get_action_name () : string;
 	get_action_target_value () : GLib.Variant;
@@ -11433,8 +11845,11 @@ interface CellAccessibleParent {
 	expand_collapse (cell: CellAccessible) : void;
 	get_cell_area (cell: CellAccessible, cell_rect: Gdk.Rectangle) : void;
 	get_cell_extents (cell: CellAccessible, _x: number, _y: number, width: number, height: number, coord_type: Atk.CoordType) : void;
+	get_cell_position (cell: CellAccessible, _row: number, column: number) : void;
 	get_child_index (cell: CellAccessible) : number;
+	get_column_header_cells (cell: CellAccessible) : Atk.Object[];
 	get_renderer_state (cell: CellAccessible) : CellRendererState;
+	get_row_header_cells (cell: CellAccessible) : Atk.Object[];
 	grab_focus (cell: CellAccessible) : boolean;
 	update_relationset (cell: CellAccessible, relationset: Atk.RelationSet) : void;
 }
@@ -11483,7 +11898,7 @@ var CellLayout: {
 
 
 interface ColorChooser {
-	add_palette (orientation: Orientation, colors_per_line: number, n_colors: number, colors: ) : void;
+	add_palette (orientation: Orientation, colors_per_line: number, n_colors: number, colors: Gdk.RGBA[]) : void;
 	get_rgba (color: Gdk.RGBA) : void;
 	get_use_alpha () : boolean;
 	set_rgba (color: Gdk.RGBA) : void;
@@ -11523,10 +11938,12 @@ var Editable: {
 
 
 interface FileChooser {
+	add_choice (_id: string, label: string, options: string[], option_labels: string[]) : void;
 	add_filter (filter: FileFilter) : void;
 	add_shortcut_folder (folder: string) : boolean;
 	add_shortcut_folder_uri (uri: string) : boolean;
 	get_action () : FileChooserAction;
+	get_choice (_id: string) : string;
 	get_create_folders () : boolean;
 	get_current_folder () : string;
 	get_current_folder_file () : Gio.File;
@@ -11553,6 +11970,7 @@ interface FileChooser {
 	list_filters () : GLib.SList;
 	list_shortcut_folder_uris () : GLib.SList;
 	list_shortcut_folders () : GLib.SList;
+	remove_choice (_id: string) : void;
 	remove_filter (filter: FileFilter) : void;
 	remove_shortcut_folder (folder: string) : boolean;
 	remove_shortcut_folder_uri (uri: string) : boolean;
@@ -11561,6 +11979,7 @@ interface FileChooser {
 	select_filename (filename: string) : boolean;
 	select_uri (uri: string) : boolean;
 	set_action (action: FileChooserAction) : void;
+	set_choice (_id: string, option: string) : void;
 	set_create_folders (create_folders: boolean) : void;
 	set_current_folder (filename: string) : boolean;
 	set_current_folder_file (file: Gio.File) : boolean;
@@ -11597,14 +12016,19 @@ interface FontChooser {
 	get_font_desc () : Pango.FontDescription;
 	get_font_face () : Pango.FontFace;
 	get_font_family () : Pango.FontFamily;
+	get_font_features () : string;
 	get_font_map () : Pango.FontMap;
 	get_font_size () : number;
+	get_language () : string;
+	get_level () : FontChooserLevel;
 	get_preview_text () : string;
 	get_show_preview_entry () : boolean;
 	set_filter_func (filter: FontFilterFunc, user_data: any, destroy: GLib.DestroyNotify) : void;
 	set_font (fontname: string) : void;
 	set_font_desc (font_desc: Pango.FontDescription) : void;
 	set_font_map (fontmap: Pango.FontMap) : void;
+	set_language (language: string) : void;
+	set_level (level: FontChooserLevel) : void;
 	set_preview_text (text: string) : void;
 	set_show_preview_entry (show_preview_entry: boolean) : void;
 }
@@ -11658,7 +12082,7 @@ interface RecentChooser {
 	get_show_private () : boolean;
 	get_show_tips () : boolean;
 	get_sort_type () : RecentSortType;
-	get_uris (length: number) : ;
+	get_uris (length: number) : string[];
 	list_filters () : GLib.SList;
 	remove_filter (filter: RecentFilter) : void;
 	select_all () : void;
@@ -11794,7 +12218,7 @@ interface TreeModel {
 	row_has_child_toggled (path: TreePath, iter: TreeIter) : void;
 	row_inserted (path: TreePath, iter: TreeIter) : void;
 	rows_reordered (path: TreePath, iter: TreeIter, new_order: number) : void;
-	rows_reordered_with_length (path: TreePath, iter: TreeIter, new_order: , length: number) : void;
+	rows_reordered_with_length (path: TreePath, iter: TreeIter, new_order: number[], length: number) : void;
 	sort_new_with_model () : TreeModel;
 	unref_node (iter: TreeIter) : void;
 }
@@ -11937,8 +12361,7 @@ enum ButtonsType {
 
 enum CellRendererAccelMode {
 	gtk = 0,
-	other = 1,
-	modifier_tap = 2
+	other = 1
 }
 
 
@@ -12173,7 +12596,9 @@ enum License {
 	gpl_2_0_only = 9,
 	gpl_3_0_only = 10,
 	lgpl_2_1_only = 11,
-	lgpl_3_0_only = 12
+	lgpl_3_0_only = 12,
+	agpl_3_0 = 13,
+	agpl_3_0_only = 14
 }
 
 
@@ -12255,6 +12680,14 @@ enum PackType {
 
 
 
+enum PadActionType {
+	button = 0,
+	ring = 1,
+	strip = 2
+}
+
+
+
 enum PageOrientation {
 	portrait = 0,
 	landscape = 1,
@@ -12305,6 +12738,13 @@ enum PolicyType {
 	automatic = 1,
 	never = 2,
 	external = 3
+}
+
+
+
+enum PopoverConstraint {
+	none = 0,
+	window = 1
 }
 
 
@@ -12576,6 +13016,19 @@ enum ShadowType {
 
 
 
+enum ShortcutType {
+	accelerator = 0,
+	gesture_pinch = 1,
+	gesture_stretch = 2,
+	gesture_rotate_clockwise = 3,
+	gesture_rotate_counterclockwise = 4,
+	gesture_two_finger_swipe_left = 5,
+	gesture_two_finger_swipe_right = 6,
+	gesture = 7
+}
+
+
+
 enum SizeGroupMode {
 	none = 0,
 	horizontal = 1,
@@ -12681,7 +13134,9 @@ enum TextExtendSelection {
 
 enum TextViewLayer {
 	below = 0,
-	above = 1
+	above = 1,
+	below_text = 2,
+	above_text = 3
 }
 
 
@@ -12849,7 +13304,9 @@ enum DebugFlag {
 	no_pixel_cache = 65536,
 	interactive = 131072,
 	touchscreen = 262144,
-	actions = 524288
+	actions = 524288,
+	resize = 1048576,
+	layout = 2097152
 }
 
 
@@ -12871,11 +13328,32 @@ enum DialogFlags {
 
 
 
+enum EventControllerScrollFlags {
+	none = 0,
+	vertical = 1,
+	horizontal = 2,
+	discrete = 4,
+	kinetic = 8,
+	both_axes = 3
+}
+
+
+
 enum FileFilterFlags {
 	filename = 1,
 	uri = 2,
 	display_name = 4,
 	mime_type = 8
+}
+
+
+
+enum FontChooserLevel {
+	family = 0,
+	style = 1,
+	size = 2,
+	variations = 4,
+	features = 8
 }
 
 
@@ -12904,7 +13382,9 @@ enum InputHints {
 	uppercase_words = 32,
 	uppercase_sentences = 64,
 	inhibit_osk = 128,
-	vertical_writing = 256
+	vertical_writing = 256,
+	emoji = 512,
+	no_emoji = 1024
 }
 
 
@@ -12975,7 +13455,16 @@ enum StateFlags {
 	dir_rtl = 256,
 	link = 512,
 	visited = 1024,
-	checked = 2048
+	checked = 2048,
+	drop_active = 4096
+}
+
+
+
+enum StyleContextPrintFlags {
+	none = 0,
+	recurse = 1,
+	show_style = 2
 }
 
 
@@ -13118,7 +13607,7 @@ interface ClipboardRichTextReceivedFunc {
 
 
 interface ClipboardTargetsReceivedFunc {
-	(clipboard: Clipboard, atoms: , n_atoms: number, data: any) : void;
+	(clipboard: Clipboard, atoms: Gdk.Atom[], n_atoms: number, data: any) : void;
 }
 
 
@@ -13130,19 +13619,19 @@ interface ClipboardTextReceivedFunc {
 
 
 interface ClipboardURIReceivedFunc {
-	(clipboard: Clipboard, uris: , data: any) : void;
+	(clipboard: Clipboard, uris: string[], data: any) : void;
 }
 
 
 
 interface ColorSelectionChangePaletteFunc {
-	(colors: , n_colors: number) : void;
+	(colors: Gdk.Color[], n_colors: number) : void;
 }
 
 
 
 interface ColorSelectionChangePaletteWithScreenFunc {
-	(screen: Gdk.Screen, colors: , n_colors: number) : void;
+	(screen: Gdk.Screen, colors: Gdk.Color[], n_colors: number) : void;
 }
 
 
@@ -13160,7 +13649,7 @@ interface FileFilterFunc {
 
 
 interface FlowBoxCreateWidgetFunc {
-	(item: any, user_data: any) : Widget;
+	(item: GObject.Object, user_data: any) : Widget;
 }
 
 
@@ -13250,7 +13739,7 @@ interface ModuleDisplayInitFunc {
 
 
 interface ModuleInitFunc {
-	(argc: number, argv: ) : void;
+	(argc: number, argv: string[]) : void;
 }
 
 
@@ -13292,7 +13781,7 @@ interface StylePropertyParser {
 
 
 interface TextBufferDeserializeFunc {
-	(register_buffer: TextBuffer, content_buffer: TextBuffer, iter: TextIter, data: , length: number, create_tags: boolean, user_data: any) : boolean;
+	(register_buffer: TextBuffer, content_buffer: TextBuffer, iter: TextIter, data: number[], length: number, create_tags: boolean, user_data: any) : boolean;
 }
 
 
@@ -13409,7 +13898,7 @@ type Allocation = Gdk.Rectangle;
 
 
 
-type Stock = any;
+type Stock = string;
 
 
 
@@ -13445,7 +13934,7 @@ function accelerator_parse (accelerator: string, accelerator_key: number, accele
 
 
 
-function accelerator_parse_with_keycode (accelerator: string, accelerator_key: number, accelerator_codes: , accelerator_mods: Gdk.ModifierType): void;
+function accelerator_parse_with_keycode (accelerator: string, accelerator_key: number, accelerator_codes: number[], accelerator_mods: Gdk.ModifierType): void;
 
 
 
@@ -13677,15 +14166,15 @@ function icon_theme_error_quark (): GLib.Quark;
 
 
 
-function init (argc: number, argv: ): void;
+function init (argc: number, argv: string[]): void;
 
 
 
-function init_check (argc: number, argv: ): boolean;
+function init_check (argc: number, argv: string[]): boolean;
 
 
 
-function init_with_args (argc: number, argv: , parameter_string: string, entries: , translation_domain: string): boolean;
+function init_with_args (argc: number, argv: string[], parameter_string: string, entries: GLib.OptionEntry[], translation_domain: string): boolean;
 
 
 
@@ -13809,7 +14298,7 @@ function paper_size_get_paper_sizes (include_custom: boolean): GLib.List;
 
 
 
-function parse_args (argc: number, argv: ): boolean;
+function parse_args (argc: number, argv: string[]): boolean;
 
 
 
@@ -13841,7 +14330,7 @@ function rc_find_pixmap_in_path (settings: Settings, scanner: GLib.Scanner, pixm
 
 
 
-function rc_get_default_files (): ;
+function rc_get_default_files (): string[];
 
 
 
@@ -13929,7 +14418,7 @@ function rc_scanner_new (): GLib.Scanner;
 
 
 
-function rc_set_default_files (filenames: ): void;
+function rc_set_default_files (filenames: string[]): void;
 
 
 
@@ -13950,6 +14439,10 @@ function render_arrow (context: StyleContext, cr: cairo.Context, angle: number, 
 
 
 function render_background (context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;
+
+
+
+function render_background_get_clip (context: StyleContext, _x: number, _y: number, width: number, height: number, out_clip: Gdk.Rectangle): void;
 
 
 
@@ -14021,7 +14514,7 @@ function selection_add_target (widget: Widget, selection: Gdk.Atom, target: Gdk.
 
 
 
-function selection_add_targets (widget: Widget, selection: Gdk.Atom, targets: , ntargets: number): void;
+function selection_add_targets (widget: Widget, selection: Gdk.Atom, targets: TargetEntry[], ntargets: number): void;
 
 
 
@@ -14057,11 +14550,15 @@ function show_uri (screen: Gdk.Screen, uri: string, timestamp: number): boolean;
 
 
 
-function stock_add (items: , n_items: number): void;
+function show_uri_on_window (parent: Window, uri: string, timestamp: number): boolean;
 
 
 
-function stock_add_static (items: , n_items: number): void;
+function stock_add (items: StockItem[], n_items: number): void;
+
+
+
+function stock_add_static (items: StockItem[], n_items: number): void;
 
 
 
@@ -14077,27 +14574,27 @@ function stock_set_translate_func (domain: string, _func: TranslateFunc, data: a
 
 
 
-function target_table_free (targets: , n_targets: number): void;
+function target_table_free (targets: TargetEntry[], n_targets: number): void;
 
 
 
-function target_table_new_from_list (list: TargetList, n_targets: number): ;
+function target_table_new_from_list (list: TargetList, n_targets: number): TargetEntry[];
 
 
 
-function targets_include_image (targets: , n_targets: number, writable: boolean): boolean;
+function targets_include_image (targets: Gdk.Atom[], n_targets: number, writable: boolean): boolean;
 
 
 
-function targets_include_rich_text (targets: , n_targets: number, buffer: TextBuffer): boolean;
+function targets_include_rich_text (targets: Gdk.Atom[], n_targets: number, buffer: TextBuffer): boolean;
 
 
 
-function targets_include_text (targets: , n_targets: number): boolean;
+function targets_include_text (targets: Gdk.Atom[], n_targets: number): boolean;
 
 
 
-function targets_include_uri (targets: , n_targets: number): boolean;
+function targets_include_uri (targets: Gdk.Atom[], n_targets: number): boolean;
 
 
 
@@ -14125,11 +14622,11 @@ function test_find_widget (widget: Widget, label_pattern: string, widget_type: G
 
 
 
-function test_init (argcp: number, argvp: ): void;
+function test_init (argcp: number, argvp: string[]): void;
 
 
 
-function test_list_all_types (n_types: number): ;
+function test_list_all_types (n_types: number): GObject.Type[];
 
 
 
@@ -14181,7 +14678,7 @@ function tree_row_reference_inserted (proxy: GObject.Object, path: TreePath): vo
 
 
 
-function tree_row_reference_reordered (proxy: GObject.Object, path: TreePath, iter: TreeIter, new_order: ): void;
+function tree_row_reference_reordered (proxy: GObject.Object, path: TreePath, iter: TreeIter, new_order: number[]): void;
 
 
 

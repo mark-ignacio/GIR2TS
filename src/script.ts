@@ -185,6 +185,7 @@ namespace GIR2TS {
             case 'gudouble':
             case 'gsize':
             case 'gssize':
+            case 'long double':
                 return 'number';
             case 'utf8':
             case 'gchar':
@@ -212,11 +213,11 @@ namespace GIR2TS {
         if (param_node.type) {
             type = convertToJSType(param_node.type[0].$.name);
             is_primitive = (type !== param_node.type[0].$.name);
-        } else if (param_node.array) {
+        } else if (param_node.array && param_node.array[0].type) {
             type = convertToJSType(param_node.array[0].type[0].$.name) + '[]';
             is_primitive = (type !== (param_node.array[0].type[0].$.name + '[]'));
         } else {
-            return ['', false];
+            return ['any', false];
         }
         return [type, is_primitive];
     }

@@ -40,13 +40,14 @@ var Cursor: {
 
 interface Device extends GObject.Object {
 	get_associated_device () : Device;
-	get_axis (axes: , use: AxisUse, value: number) : boolean;
+	get_axes () : AxisFlags;
+	get_axis (axes: number[], use: AxisUse, value: number) : boolean;
 	get_axis_use (index_: number) : AxisUse;
-	get_axis_value (axes: , axis_label: Atom, value: number) : boolean;
+	get_axis_value (axes: number[], axis_label: Atom, value: number) : boolean;
 	get_device_type () : DeviceType;
 	get_display () : Display;
 	get_has_cursor () : boolean;
-	get_history (window: Window, start: number, stop: number, events: , n_events: number) : boolean;
+	get_history (window: Window, start: number, stop: number, events: TimeCoord[], n_events: number) : boolean;
 	get_key (index_: number, keyval: number, modifiers: ModifierType) : boolean;
 	get_last_event_window () : Window;
 	get_mode () : InputMode;
@@ -56,8 +57,9 @@ interface Device extends GObject.Object {
 	get_position (screen: Screen, _x: number, _y: number) : void;
 	get_position_double (screen: Screen, _x: number, _y: number) : void;
 	get_product_id () : string;
+	get_seat () : Seat;
 	get_source () : InputSource;
-	get_state (window: Window, axes: , mask: ModifierType) : void;
+	get_state (window: Window, axes: number[], mask: ModifierType) : void;
 	get_vendor_id () : string;
 	get_window_at_position (win_x: number, win_y: number) : Window;
 	get_window_at_position_double (win_x: number, win_y: number) : Window;
@@ -73,7 +75,7 @@ interface Device extends GObject.Object {
 
 var Device: {
 	
-	free_history (events: , n_events: number) : void;
+	free_history (events: TimeCoord[], n_events: number) : void;
 	grab_info_libgtk_only (display: Display, device: Device, grab_window: Window, owner_events: boolean) : boolean;
 }
 
@@ -94,6 +96,20 @@ var DeviceManager: {
 
 
 
+interface DeviceTool extends GObject.Object {
+	get_hardware_id () : number;
+	get_serial () : number;
+	get_tool_type () : DeviceToolType;
+}
+
+var DeviceTool: {
+	
+	
+}
+
+
+
+
 interface Display extends GObject.Object {
 	beep () : void;
 	close () : void;
@@ -103,18 +119,25 @@ interface Display extends GObject.Object {
 	get_default_cursor_size () : number;
 	get_default_group () : Window;
 	get_default_screen () : Screen;
+	get_default_seat () : Seat;
 	get_device_manager () : DeviceManager;
 	get_event () : Event;
 	get_maximal_cursor_size (width: number, height: number) : void;
+	get_monitor (monitor_num: number) : Monitor;
+	get_monitor_at_point (_x: number, _y: number) : Monitor;
+	get_monitor_at_window (window: Window) : Monitor;
+	get_n_monitors () : number;
 	get_n_screens () : number;
 	get_name () : string;
 	get_pointer (screen: Screen, _x: number, _y: number, mask: ModifierType) : void;
+	get_primary_monitor () : Monitor;
 	get_screen (screen_num: number) : Screen;
 	get_window_at_pointer (win_x: number, win_y: number) : Window;
 	has_pending () : boolean;
 	is_closed () : boolean;
 	keyboard_ungrab (time_: number) : void;
 	list_devices () : GLib.List;
+	list_seats () : GLib.List;
 	notify_startup_complete (startup_id: string) : void;
 	peek_event () : Event;
 	pointer_is_grabbed () : boolean;
@@ -123,7 +146,7 @@ interface Display extends GObject.Object {
 	request_selection_notification (selection: Atom) : boolean;
 	set_double_click_distance (distance: number) : void;
 	set_double_click_time (msec: number) : void;
-	store_clipboard (clipboard_window: Window, time_: number, targets: , n_targets: number) : void;
+	store_clipboard (clipboard_window: Window, time_: number, targets: Atom[], n_targets: number) : void;
 	supports_clipboard_persistence () : boolean;
 	supports_composite () : boolean;
 	supports_cursor_alpha () : boolean;
@@ -164,15 +187,33 @@ interface DragContext extends GObject.Object {
 	get_actions () : DragAction;
 	get_dest_window () : Window;
 	get_device () : Device;
+	get_drag_window () : Window;
 	get_protocol () : DragProtocol;
 	get_selected_action () : DragAction;
 	get_source_window () : Window;
 	get_suggested_action () : DragAction;
 	list_targets () : GLib.List;
+	manage_dnd (ipc_window: Window, actions: DragAction) : boolean;
 	set_device (device: Device) : void;
+	set_hotspot (hot_x: number, hot_y: number) : void;
 }
 
 var DragContext: {
+	
+	
+}
+
+
+
+
+interface DrawingContext extends GObject.Object {
+	get_cairo_context () : cairo.Context;
+	get_clip () : cairo.Region;
+	get_window () : Window;
+	is_valid () : boolean;
+}
+
+var DrawingContext: {
 	
 	
 }
@@ -206,13 +247,16 @@ interface GLContext extends GObject.Object {
 	get_forward_compatible () : boolean;
 	get_required_version (major: number, minor: number) : void;
 	get_shared_context () : GLContext;
+	get_use_es () : boolean;
 	get_version (major: number, minor: number) : void;
 	get_window () : Window;
+	is_legacy () : boolean;
 	make_current () : void;
 	realize () : boolean;
 	set_debug_enabled (enabled: boolean) : void;
 	set_forward_compatible (compatible: boolean) : void;
 	set_required_version (major: number, minor: number) : void;
+	set_use_es (use_es: number) : void;
 }
 
 var GLContext: {
@@ -228,8 +272,8 @@ interface Keymap extends GObject.Object {
 	add_virtual_modifiers (state: ModifierType) : void;
 	get_caps_lock_state () : boolean;
 	get_direction () : Pango.Direction;
-	get_entries_for_keycode (hardware_keycode: number, keys: , keyvals: , n_entries: number) : boolean;
-	get_entries_for_keyval (keyval: number, keys: , n_keys: number) : boolean;
+	get_entries_for_keycode (hardware_keycode: number, keys: KeymapKey[], keyvals: number[], n_entries: number) : boolean;
+	get_entries_for_keyval (keyval: number, keys: KeymapKey[], n_keys: number) : boolean;
 	get_modifier_mask (intent: ModifierIntent) : ModifierType;
 	get_modifier_state () : number;
 	get_num_lock_state () : boolean;
@@ -244,6 +288,28 @@ var Keymap: {
 	
 	get_default () : Keymap;
 	get_for_display (display: Display) : Keymap;
+}
+
+
+
+
+interface Monitor extends GObject.Object {
+	get_display () : Display;
+	get_geometry (geometry: Rectangle) : void;
+	get_height_mm () : number;
+	get_manufacturer () : string;
+	get_model () : string;
+	get_refresh_rate () : number;
+	get_scale_factor () : number;
+	get_subpixel_layout () : SubpixelLayout;
+	get_width_mm () : number;
+	get_workarea (workarea: Rectangle) : void;
+	is_primary () : boolean;
+}
+
+var Monitor: {
+	
+	
 }
 
 
@@ -294,6 +360,24 @@ var Screen: {
 
 
 
+interface Seat extends GObject.Object {
+	get_capabilities () : SeatCapabilities;
+	get_display () : Display;
+	get_keyboard () : Device;
+	get_pointer () : Device;
+	get_slaves (capabilities: SeatCapabilities) : GLib.List;
+	grab (window: Window, capabilities: SeatCapabilities, owner_events: boolean, cursor: Cursor, event: Event, prepare_func: SeatGrabPrepareFunc, prepare_func_data: any) : GrabStatus;
+	ungrab () : void;
+}
+
+var Seat: {
+	
+	
+}
+
+
+
+
 interface Visual extends GObject.Object {
 	get_bits_per_rgb () : number;
 	get_blue_pixel_details (mask: number, shift: number, precision: number) : void;
@@ -323,6 +407,7 @@ var Visual: {
 interface Window extends GObject.Object {
 	add_filter (_function: FilterFunc, data: any) : void;
 	beep () : void;
+	begin_draw_frame (region: cairo.Region) : DrawingContext;
 	begin_move_drag (button: number, root_x: number, root_y: number, timestamp: number) : void;
 	begin_move_drag_for_device (device: Device, button: number, root_x: number, root_y: number, timestamp: number) : void;
 	begin_paint_rect (rectangle: Rectangle) : void;
@@ -339,6 +424,7 @@ interface Window extends GObject.Object {
 	destroy () : void;
 	destroy_notify () : void;
 	enable_synchronized_configure () : void;
+	end_draw_frame (context: DrawingContext) : void;
 	end_paint () : void;
 	ensure_native () : boolean;
 	flush () : void;
@@ -414,6 +500,7 @@ interface Window extends GObject.Object {
 	move (_x: number, _y: number) : void;
 	move_region (region: cairo.Region, dx: number, dy: number) : void;
 	move_resize (_x: number, _y: number, width: number, height: number) : void;
+	move_to_rect (rect: Rectangle, rect_anchor: Gravity, window_anchor: Gravity, anchor_hints: AnchorHints, rect_anchor_dx: number, rect_anchor_dy: number) : void;
 	peek_children () : GLib.List;
 	process_updates (update_children: boolean) : void;
 	raise () : void;
@@ -508,6 +595,20 @@ class Color {
 	public free () : void;
 	public hash () : number;
 	public to_string () : string;
+}
+
+
+
+class DevicePadInterface {
+
+
+}
+
+
+
+class DrawingContextClass {
+
+
 }
 
 
@@ -678,6 +779,48 @@ class EventOwnerChange {
 
 
 
+class EventPadAxis {
+	public type: EventType;
+	public window: Window;
+	public send_event: number;
+	public time: number;
+	public group: number;
+	public index: number;
+	public mode: number;
+	public value: number;
+
+
+}
+
+
+
+class EventPadButton {
+	public type: EventType;
+	public window: Window;
+	public send_event: number;
+	public time: number;
+	public group: number;
+	public button: number;
+	public mode: number;
+
+
+}
+
+
+
+class EventPadGroupMode {
+	public type: EventType;
+	public window: Window;
+	public send_event: number;
+	public time: number;
+	public group: number;
+	public mode: number;
+
+
+}
+
+
+
 class EventProperty {
 	public type: EventType;
 	public window: Window;
@@ -717,6 +860,7 @@ class EventScroll {
 	public y_root: number;
 	public delta_x: number;
 	public delta_y: number;
+	public is_stop: number;
 
 
 }
@@ -781,7 +925,7 @@ class EventTouchpadPinch {
 	public type: EventType;
 	public window: Window;
 	public send_event: number;
-	public phase: TouchpadGesturePhase;
+	public phase: number;
 	public n_fingers: number;
 	public time: number;
 	public x: number;
@@ -803,7 +947,7 @@ class EventTouchpadSwipe {
 	public type: EventType;
 	public window: Window;
 	public send_event: number;
-	public phase: TouchpadGesturePhase;
+	public phase: number;
 	public n_fingers: number;
 	public time: number;
 	public x: number;
@@ -899,6 +1043,13 @@ class KeymapKey {
 
 
 
+class MonitorClass {
+
+
+}
+
+
+
 class Point {
 	public x: number;
 	public y: number;
@@ -932,6 +1083,7 @@ class Rectangle {
 	public height: number;
 
 
+	public equal (rect2: Rectangle) : boolean;
 	public intersect (src2: Rectangle, dest: Rectangle) : boolean;
 	public union (src2: Rectangle, dest: Rectangle) : void;
 }
@@ -940,7 +1092,7 @@ class Rectangle {
 
 class TimeCoord {
 	public time: number;
-	public axes: ;
+	public axes: number[];
 
 
 }
@@ -995,6 +1147,21 @@ class WindowRedirect {
 
 
 
+interface DevicePad {
+	get_feature_group (feature: DevicePadFeature, feature_idx: number) : number;
+	get_group_n_modes (group_idx: number) : number;
+	get_n_features (feature: DevicePadFeature) : number;
+	get_n_groups () : number;
+}
+
+var DevicePad: {
+	
+	
+}
+
+
+
+
 enum AxisUse {
 	ignore = 0,
 	x = 1,
@@ -1003,7 +1170,10 @@ enum AxisUse {
 	xtilt = 4,
 	ytilt = 5,
 	wheel = 6,
-	last = 7
+	distance = 7,
+	rotation = 8,
+	slider = 9,
+	last = 10
 }
 
 
@@ -1114,10 +1284,39 @@ enum CursorType {
 
 
 
+enum DevicePadFeature {
+	button = 0,
+	ring = 1,
+	strip = 2
+}
+
+
+
+enum DeviceToolType {
+	unknown = 0,
+	pen = 1,
+	eraser = 2,
+	brush = 3,
+	pencil = 4,
+	airbrush = 5,
+	mouse = 6,
+	lens = 7
+}
+
+
+
 enum DeviceType {
 	master = 0,
 	slave = 1,
 	floating = 2
+}
+
+
+
+enum DragCancelReason {
+	no_target = 0,
+	user_cancelled = 1,
+	error = 2
 }
 
 
@@ -1181,7 +1380,12 @@ enum EventType {
 	touch_cancel = 40,
 	touchpad_swipe = 41,
 	touchpad_pinch = 42,
-	event_last = 43
+	pad_button_press = 43,
+	pad_button_release = 44,
+	pad_ring = 45,
+	pad_strip = 46,
+	pad_group_mode = 47,
+	event_last = 48
 }
 
 
@@ -1258,7 +1462,9 @@ enum InputSource {
 	cursor = 3,
 	keyboard = 4,
 	touchscreen = 5,
-	touchpad = 6
+	touchpad = 6,
+	trackpoint = 7,
+	tablet_pad = 8
 }
 
 
@@ -1333,6 +1539,17 @@ enum Status {
 	error_param = -2,
 	error_file = -3,
 	error_mem = -4
+}
+
+
+
+enum SubpixelLayout {
+	unknown = 0,
+	none = 1,
+	horizontal_rgb = 2,
+	horizontal_bgr = 3,
+	vertical_rgb = 4,
+	vertical_bgr = 5
 }
 
 
@@ -1416,6 +1633,34 @@ enum WindowWindowClass {
 
 
 
+enum AnchorHints {
+	flip_x = 1,
+	flip_y = 2,
+	slide_x = 4,
+	slide_y = 8,
+	resize_x = 16,
+	resize_y = 32,
+	flip = 3,
+	slide = 12,
+	resize = 48
+}
+
+
+
+enum AxisFlags {
+	x = 2,
+	y = 4,
+	pressure = 8,
+	xtilt = 16,
+	ytilt = 32,
+	wheel = 64,
+	distance = 128,
+	rotation = 256,
+	slider = 512
+}
+
+
+
 enum DragAction {
 	default = 1,
 	copy = 2,
@@ -1452,7 +1697,8 @@ enum EventMask {
 	touch_mask = 4194304,
 	smooth_scroll_mask = 8388608,
 	touchpad_gesture_mask = 16777216,
-	all_events_mask = 16777214
+	tablet_pad_mask = 33554432,
+	all_events_mask = 67108862
 }
 
 
@@ -1503,6 +1749,18 @@ enum ModifierType {
 	modifier_reserved_29_mask = 536870912,
 	release_mask = 1073741824,
 	modifier_mask = 1543512063
+}
+
+
+
+enum SeatCapabilities {
+	none = 0,
+	pointer = 1,
+	touch = 2,
+	tablet_stylus = 4,
+	keyboard = 8,
+	all_pointing = 7,
+	all = 15
 }
 
 
@@ -1566,7 +1824,15 @@ enum WindowState {
 	above = 32,
 	below = 64,
 	focused = 128,
-	tiled = 256
+	tiled = 256,
+	top_tiled = 512,
+	top_resizable = 1024,
+	right_tiled = 2048,
+	right_resizable = 4096,
+	bottom_tiled = 8192,
+	bottom_resizable = 16384,
+	left_tiled = 32768,
+	left_resizable = 65536
 }
 
 
@@ -1579,6 +1845,12 @@ interface EventFunc {
 
 interface FilterFunc {
 	(xevent: XEvent, event: Event, data: any) : FilterReturn;
+}
+
+
+
+interface SeatGrabPrepareFunc {
+	(seat: Seat, window: Window, user_data: any) : void;
 }
 
 
@@ -1599,7 +1871,7 @@ interface Event {}
 
 
 
-type XEvent = any;
+type XEvent = void;
 
 
 
@@ -1628,6 +1900,10 @@ function cairo_draw_from_gl (cr: cairo.Context, window: Window, source: number, 
 
 
 function cairo_get_clip_rectangle (cr: cairo.Context, rect: Rectangle): boolean;
+
+
+
+function cairo_get_drawing_context (cr: cairo.Context): DrawingContext;
 
 
 
@@ -1683,7 +1959,15 @@ function drag_begin_for_device (window: Window, device: Device, targets: GLib.Li
 
 
 
+function drag_begin_from_point (window: Window, device: Device, targets: GLib.List, x_root: number, y_root: number): DragContext;
+
+
+
 function drag_drop (context: DragContext, time_: number): void;
+
+
+
+function drag_drop_done (context: DragContext, success: boolean): void;
 
 
 
@@ -1787,11 +2071,11 @@ function gl_error_quark (): GLib.Quark;
 
 
 
-function init (argc: number, argv: ): void;
+function init (argc: number, argv: string[]): void;
 
 
 
-function init_check (argc: number, argv: ): boolean;
+function init_check (argc: number, argv: string[]): boolean;
 
 
 
@@ -1863,6 +2147,10 @@ function pango_context_get (): Pango.Context;
 
 
 
+function pango_context_get_for_display (display: Display): Pango.Context;
+
+
+
 function pango_context_get_for_screen (screen: Screen): Pango.Context;
 
 
@@ -1871,11 +2159,11 @@ function pango_layout_get_clip_region (layout: Pango.Layout, x_origin: number, y
 
 
 
-function pango_layout_line_get_clip_region (line: Pango.LayoutLine, x_origin: number, y_origin: number, index_ranges: , n_ranges: number): cairo.Region;
+function pango_layout_line_get_clip_region (line: Pango.LayoutLine, x_origin: number, y_origin: number, index_ranges: number[], n_ranges: number): cairo.Region;
 
 
 
-function parse_args (argc: number, argv: ): void;
+function parse_args (argc: number, argv: string[]): void;
 
 
 
@@ -1911,15 +2199,15 @@ function property_delete (window: Window, property: Atom): void;
 
 
 
-function property_get (window: Window, property: Atom, _type: Atom, offset: number, length: number, pdelete: number, actual_property_type: Atom, actual_format: number, actual_length: number, data: ): boolean;
+function property_get (window: Window, property: Atom, _type: Atom, offset: number, length: number, pdelete: number, actual_property_type: Atom, actual_format: number, actual_length: number, data: number[]): boolean;
 
 
 
-function query_depths (depths: , count: number): void;
+function query_depths (depths: number[], count: number): void;
 
 
 
-function query_visual_types (visual_types: , count: number): void;
+function query_visual_types (visual_types: VisualType[], count: number): void;
 
 
 
@@ -1991,7 +2279,7 @@ function test_simulate_key (window: Window, _x: number, _y: number, keyval: numb
 
 
 
-function text_property_to_utf8_list_for_display (display: Display, encoding: Atom, format: number, text: , length: number, list: ): number;
+function text_property_to_utf8_list_for_display (display: Display, encoding: Atom, format: number, text: number[], length: number, list: string[]): number;
 
 
 

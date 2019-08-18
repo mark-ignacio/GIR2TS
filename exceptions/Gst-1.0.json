@@ -1,0 +1,15 @@
+{
+    "exclude": {
+        "class": {
+            "ControlBinding": [
+                "get_g_value_array",
+                "get_value",
+                "get_value_array",
+                "sync_values"
+            ],
+            "Iterator": [
+                "copy"
+            ]
+        }
+    }
+}

@@ -14,7 +14,7 @@ var AppInfoMonitor: {
 
 interface AppLaunchContext extends GObject.Object {
 	get_display (info: AppInfo, files: GLib.List) : string;
-	get_environment () : ;
+	get_environment () : string[];
 	get_startup_notify_id (info: AppInfo, files: GLib.List) : string;
 	launch_failed (startup_notify_id: string) : void;
 	setenv (variable: string, value: string) : void;
@@ -32,7 +32,7 @@ var AppLaunchContext: {
 interface Application extends GObject.Object, ActionGroup, ActionMap {
 	activate () : void;
 	add_main_option (long_name: string, short_name: string, flags: GLib.OptionFlags, _arg: GLib.OptionArg, description: string, arg_description: string) : void;
-	add_main_option_entries (entries: ) : void;
+	add_main_option_entries (entries: GLib.OptionEntry[]) : void;
 	add_option_group (group: GLib.OptionGroup) : void;
 	bind_busy_property (object: GObject.Object, property: string) : void;
 	get_application_id () : string;
@@ -46,17 +46,20 @@ interface Application extends GObject.Object, ActionGroup, ActionMap {
 	get_resource_base_path () : string;
 	hold () : void;
 	mark_busy () : void;
-	open (files: , n_files: number, hint: string) : void;
+	open (files: File[], n_files: number, hint: string) : void;
 	quit () : void;
 	register (cancellable: Cancellable) : boolean;
 	release () : void;
-	run (argc: number, argv: ) : number;
+	run (argc: number, argv: string[]) : number;
 	send_notification (_id: string, notification: Notification) : void;
 	set_action_group (action_group: ActionGroup) : void;
 	set_application_id (application_id: string) : void;
 	set_default () : void;
 	set_flags (flags: ApplicationFlags) : void;
 	set_inactivity_timeout (inactivity_timeout: number) : void;
+	set_option_context_description (description: string) : void;
+	set_option_context_parameter_string (parameter_string: string) : void;
+	set_option_context_summary (summary: string) : void;
 	set_resource_base_path (resource_path: string) : void;
 	unbind_busy_property (object: GObject.Object, property: string) : void;
 	unmark_busy () : void;
@@ -74,9 +77,9 @@ var Application: {
 
 interface ApplicationCommandLine extends GObject.Object {
 	create_file_for_arg (_arg: string) : File;
-	get_arguments (argc: number) : ;
+	get_arguments (argc: number) : string[];
 	get_cwd () : string;
-	get_environ () : ;
+	get_environ () : string[];
 	get_exit_status () : number;
 	get_is_remote () : boolean;
 	get_options_dict () : GLib.VariantDict;
@@ -102,8 +105,8 @@ interface BufferedInputStream extends FilterInputStream, Seekable {
 	fill_finish (result: AsyncResult) : number;
 	get_available () : number;
 	get_buffer_size () : number;
-	peek (buffer: , offset: number, count: number) : number;
-	peek_buffer (count: number) : ;
+	peek (buffer: number[], offset: number, count: number) : number;
+	peek_buffer (count: number) : number[];
 	read_byte (cancellable: Cancellable) : number;
 	set_buffer_size (size: number) : void;
 }
@@ -268,6 +271,7 @@ interface DBusConnection extends GObject.Object, AsyncInitable, Initable {
 	flush_sync (cancellable: Cancellable) : boolean;
 	get_capabilities () : DBusCapabilityFlags;
 	get_exit_on_close () : boolean;
+	get_flags () : DBusConnectionFlags;
 	get_guid () : string;
 	get_last_serial () : number;
 	get_peer_credentials () : Credentials;
@@ -275,6 +279,7 @@ interface DBusConnection extends GObject.Object, AsyncInitable, Initable {
 	get_unique_name () : string;
 	is_closed () : boolean;
 	register_object (object_path: string, interface_info: DBusInterfaceInfo, vtable: DBusInterfaceVTable, user_data: any, user_data_free_func: GLib.DestroyNotify) : number;
+	register_object_with_closures (object_path: string, interface_info: DBusInterfaceInfo, method_call_closure: GObject.Closure, get_property_closure: GObject.Closure, set_property_closure: GObject.Closure) : number;
 	register_subtree (object_path: string, vtable: DBusSubtreeVTable, flags: DBusSubtreeFlags, user_data: any, user_data_free_func: GLib.DestroyNotify) : number;
 	remove_filter (filter_id: number) : void;
 	send_message (message: DBusMessage, flags: DBusSendMessageFlags, out_serial: number) : boolean;
@@ -348,7 +353,7 @@ interface DBusMessage extends GObject.Object {
 	get_error_name () : string;
 	get_flags () : DBusMessageFlags;
 	get_header (header_field: DBusMessageHeaderField) : GLib.Variant;
-	get_header_fields () : ;
+	get_header_fields () : number[];
 	get_interface () : string;
 	get_locked () : boolean;
 	get_member () : string;
@@ -382,16 +387,16 @@ interface DBusMessage extends GObject.Object {
 	set_serial (serial: number) : void;
 	set_signature (value: string) : void;
 	set_unix_fd_list (fd_list: UnixFDList) : void;
-	to_blob (out_size: number, capabilities: DBusCapabilityFlags) : ;
+	to_blob (out_size: number, capabilities: DBusCapabilityFlags) : number[];
 	to_gerror () : boolean;
 }
 
 var DBusMessage: {
 	new () : DBusMessage;
-	new_from_blob (blob: , blob_len: number, capabilities: DBusCapabilityFlags) : DBusMessage;
+	new_from_blob (blob: number[], blob_len: number, capabilities: DBusCapabilityFlags) : DBusMessage;
 	new_method_call (name: string, path: string, interface_: string, method: string) : DBusMessage;
 	new_signal (path: string, interface_: string, signal: string) : DBusMessage;
-	bytes_needed (blob: , blob_len: number) : number;
+	bytes_needed (blob: number[], blob_len: number) : number;
 }
 
 
@@ -498,7 +503,7 @@ interface DBusProxy extends GObject.Object, AsyncInitable, DBusInterface, Initab
 	call_with_unix_fd_list_finish (out_fd_list: UnixFDList, res: AsyncResult) : GLib.Variant;
 	call_with_unix_fd_list_sync (method_name: string, parameters: GLib.Variant, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList, out_fd_list: UnixFDList, cancellable: Cancellable) : GLib.Variant;
 	get_cached_property (property_name: string) : GLib.Variant;
-	get_cached_property_names () : ;
+	get_cached_property_names () : string[];
 	get_connection () : DBusConnection;
 	get_default_timeout () : number;
 	get_flags () : DBusProxyFlags;
@@ -548,9 +553,9 @@ interface DataInputStream extends BufferedInputStream, Seekable {
 	read_int16 (cancellable: Cancellable) : number;
 	read_int32 (cancellable: Cancellable) : number;
 	read_int64 (cancellable: Cancellable) : number;
-	read_line (length: number, cancellable: Cancellable) : ;
+	read_line (length: number, cancellable: Cancellable) : number[];
 	read_line_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
-	read_line_finish (result: AsyncResult, length: number) : ;
+	read_line_finish (result: AsyncResult, length: number) : number[];
 	read_line_finish_utf8 (result: AsyncResult, length: number) : string;
 	read_line_utf8 (length: number, cancellable: Cancellable) : string;
 	read_uint16 (cancellable: Cancellable) : number;
@@ -602,15 +607,18 @@ interface DesktopAppInfo extends GObject.Object, AppInfo {
 	get_filename () : string;
 	get_generic_name () : string;
 	get_is_hidden () : boolean;
-	get_keywords () : ;
+	get_keywords () : string[];
+	get_locale_string (key: string) : string;
 	get_nodisplay () : boolean;
 	get_show_in (desktop_env: string) : boolean;
 	get_startup_wm_class () : string;
 	get_string (key: string) : string;
+	get_string_list (key: string, length: number) : string[];
 	has_key (key: string) : boolean;
 	launch_action (action_name: string, launch_context: AppLaunchContext) : void;
 	launch_uris_as_manager (uris: GLib.List, launch_context: AppLaunchContext, spawn_flags: GLib.SpawnFlags, user_setup: GLib.SpawnChildSetupFunc, user_setup_data: any, pid_callback: DesktopAppLaunchCallback, pid_callback_data: any) : boolean;
-	list_actions () : ;
+	launch_uris_as_manager_with_fds (uris: GLib.List, launch_context: AppLaunchContext, spawn_flags: GLib.SpawnFlags, user_setup: GLib.SpawnChildSetupFunc, user_setup_data: any, pid_callback: DesktopAppLaunchCallback, pid_callback_data: any, stdin_fd: number, stdout_fd: number, stderr_fd: number) : boolean;
+	list_actions () : string[];
 }
 
 var DesktopAppInfo: {
@@ -618,7 +626,7 @@ var DesktopAppInfo: {
 	new_from_filename (filename: string) : DesktopAppInfo;
 	new_from_keyfile (key_file: GLib.KeyFile) : DesktopAppInfo;
 	get_implementations (_interface: string) : GLib.List;
-	search (search_string: string) : ;
+	search (search_string: string) : any;
 	set_desktop_env (desktop_env: string) : void;
 }
 
@@ -717,7 +725,7 @@ interface FileInfo extends GObject.Object {
 	get_attribute_object (attribute: string) : GObject.Object;
 	get_attribute_status (attribute: string) : FileAttributeStatus;
 	get_attribute_string (attribute: string) : string;
-	get_attribute_stringv (attribute: string) : ;
+	get_attribute_stringv (attribute: string) : string[];
 	get_attribute_type (attribute: string) : FileAttributeType;
 	get_attribute_uint32 (attribute: string) : number;
 	get_attribute_uint64 (attribute: string) : number;
@@ -739,7 +747,7 @@ interface FileInfo extends GObject.Object {
 	get_symlink_target () : string;
 	has_attribute (attribute: string) : boolean;
 	has_namespace (name_space: string) : boolean;
-	list_attributes (name_space: string) : ;
+	list_attributes (name_space: string) : string[];
 	remove_attribute (attribute: string) : void;
 	set_attribute (attribute: string, _type: FileAttributeType, value_p: any) : void;
 	set_attribute_boolean (attribute: string, attr_value: boolean) : void;
@@ -750,7 +758,7 @@ interface FileInfo extends GObject.Object {
 	set_attribute_object (attribute: string, attr_value: GObject.Object) : void;
 	set_attribute_status (attribute: string, status: FileAttributeStatus) : boolean;
 	set_attribute_string (attribute: string, attr_value: string) : void;
-	set_attribute_stringv (attribute: string, attr_value: ) : void;
+	set_attribute_stringv (attribute: string, attr_value: string[]) : void;
 	set_attribute_uint32 (attribute: string, attr_value: number) : void;
 	set_attribute_uint64 (attribute: string, attr_value: number) : void;
 	set_content_type (content_type: string) : void;
@@ -823,7 +831,7 @@ var FileOutputStream: {
 
 interface FilenameCompleter extends GObject.Object {
 	get_completion_suffix (initial_text: string) : string;
-	get_completions (initial_text: string) : ;
+	get_completions (initial_text: string) : string[];
 	set_dirs_only (dirs_only: boolean) : void;
 }
 
@@ -870,7 +878,7 @@ interface IOModule extends GObject.TypeModule, GObject.TypePlugin {
 
 var IOModule: {
 	new (filename: string) : IOModule;
-	query () : ;
+	query () : string[];
 }
 
 
@@ -917,7 +925,7 @@ interface InetAddress extends GObject.Object {
 
 var InetAddress: {
 	new_any (family: SocketFamily) : InetAddress;
-	new_from_bytes (bytes: , family: SocketFamily) : InetAddress;
+	new_from_bytes (bytes: number[], family: SocketFamily) : InetAddress;
 	new_from_string (string: string) : InetAddress;
 	new_loopback (family: SocketFamily) : InetAddress;
 	
@@ -967,11 +975,11 @@ interface InputStream extends GObject.Object {
 	close_finish (result: AsyncResult) : boolean;
 	has_pending () : boolean;
 	is_closed () : boolean;
-	read (buffer: , count: number, cancellable: Cancellable) : number;
-	read_all (buffer: , count: number, bytes_read: number, cancellable: Cancellable) : boolean;
-	read_all_async (buffer: , count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	read (buffer: number[], count: number, cancellable: Cancellable) : number;
+	read_all (buffer: number[], count: number, bytes_read: number, cancellable: Cancellable) : boolean;
+	read_all_async (buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	read_all_finish (result: AsyncResult, bytes_read: number) : boolean;
-	read_async (buffer: , count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	read_async (buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	read_bytes (count: number, cancellable: Cancellable) : GLib.Bytes;
 	read_bytes_async (count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	read_bytes_finish (result: AsyncResult) : GLib.Bytes;
@@ -991,12 +999,13 @@ var InputStream: {
 
 
 interface ListStore extends GObject.Object, ListModel {
-	append (item: any) : void;
-	insert (position: number, item: any) : void;
-	insert_sorted (item: any, compare_func: GLib.CompareDataFunc, user_data: any) : number;
+	append (item: GObject.Object) : void;
+	insert (position: number, item: GObject.Object) : void;
+	insert_sorted (item: GObject.Object, compare_func: GLib.CompareDataFunc, user_data: any) : number;
 	remove (position: number) : void;
 	remove_all () : void;
-	splice (position: number, n_removals: number, additions: , n_additions: number) : void;
+	sort (compare_func: GLib.CompareDataFunc, user_data: any) : void;
+	splice (position: number, n_removals: number, additions: GObject.Object[], n_additions: number) : void;
 }
 
 var ListStore: {
@@ -1009,13 +1018,13 @@ var ListStore: {
 
 interface MemoryInputStream extends InputStream, PollableInputStream, Seekable {
 	add_bytes (bytes: GLib.Bytes) : void;
-	add_data (data: , len: number, destroy: GLib.DestroyNotify) : void;
+	add_data (data: number[], len: number, destroy: GLib.DestroyNotify) : void;
 }
 
 var MemoryInputStream: {
 	new () : InputStream;
 	new_from_bytes (bytes: GLib.Bytes) : InputStream;
-	new_from_data (data: , len: number, destroy: GLib.DestroyNotify) : InputStream;
+	new_from_data (data: number[], len: number, destroy: GLib.DestroyNotify) : InputStream;
 	
 }
 
@@ -1145,15 +1154,21 @@ interface MountOperation extends GObject.Object {
 	get_anonymous () : boolean;
 	get_choice () : number;
 	get_domain () : string;
+	get_is_tcrypt_hidden_volume () : boolean;
+	get_is_tcrypt_system_volume () : boolean;
 	get_password () : string;
 	get_password_save () : PasswordSave;
+	get_pim () : number;
 	get_username () : string;
 	reply (result: MountOperationResult) : void;
 	set_anonymous (anonymous: boolean) : void;
 	set_choice (choice: number) : void;
 	set_domain (domain: string) : void;
+	set_is_tcrypt_hidden_volume (hidden_volume: boolean) : void;
+	set_is_tcrypt_system_volume (system_volume: boolean) : void;
 	set_password (password: string) : void;
 	set_password_save (save: PasswordSave) : void;
+	set_pim (pim: number) : void;
 	set_username (username: string) : void;
 }
 
@@ -1186,8 +1201,8 @@ interface NetworkAddress extends GObject.Object, SocketConnectable {
 var NetworkAddress: {
 	new (hostname: string, _port: number) : NetworkAddress;
 	new_loopback (_port: number) : NetworkAddress;
-	parse (host_and_port: string, default_port: number) : SocketConnectable;
-	parse_uri (uri: string, default_port: number) : SocketConnectable;
+	parse (host_and_port: string, default_port: number) : NetworkAddress;
+	parse_uri (uri: string, default_port: number) : NetworkAddress;
 }
 
 
@@ -1248,15 +1263,21 @@ interface OutputStream extends GObject.Object {
 	splice_async (source: InputStream, flags: OutputStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	splice_finish (result: AsyncResult) : number;
 	vprintf (bytes_written: number, cancellable: Cancellable, error: GLib.Error, format: string, args: any[]) : boolean;
-	write (buffer: , count: number, cancellable: Cancellable) : number;
-	write_all (buffer: , count: number, bytes_written: number, cancellable: Cancellable) : boolean;
-	write_all_async (buffer: , count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	write (buffer: number[], count: number, cancellable: Cancellable) : number;
+	write_all (buffer: number[], count: number, bytes_written: number, cancellable: Cancellable) : boolean;
+	write_all_async (buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	write_all_finish (result: AsyncResult, bytes_written: number) : boolean;
-	write_async (buffer: , count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	write_async (buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	write_bytes (bytes: GLib.Bytes, cancellable: Cancellable) : number;
 	write_bytes_async (bytes: GLib.Bytes, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	write_bytes_finish (result: AsyncResult) : number;
 	write_finish (result: AsyncResult) : number;
+	writev (vectors: OutputVector[], n_vectors: number, bytes_written: number, cancellable: Cancellable) : boolean;
+	writev_all (vectors: OutputVector[], n_vectors: number, bytes_written: number, cancellable: Cancellable) : boolean;
+	writev_all_async (vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	writev_all_finish (result: AsyncResult, bytes_written: number) : boolean;
+	writev_async (vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	writev_finish (result: AsyncResult, bytes_written: number) : boolean;
 }
 
 var OutputStream: {
@@ -1337,6 +1358,9 @@ interface Resolver extends GObject.Object {
 	lookup_by_name (hostname: string, cancellable: Cancellable) : GLib.List;
 	lookup_by_name_async (hostname: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	lookup_by_name_finish (result: AsyncResult) : GLib.List;
+	lookup_by_name_with_flags (hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable) : GLib.List;
+	lookup_by_name_with_flags_async (hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	lookup_by_name_with_flags_finish (result: AsyncResult) : GLib.List;
 	lookup_records (rrname: string, record_type: ResolverRecordType, cancellable: Cancellable) : GLib.List;
 	lookup_records_async (rrname: string, record_type: ResolverRecordType, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	lookup_records_finish (result: AsyncResult) : GLib.List;
@@ -1372,16 +1396,18 @@ interface Settings extends GObject.Object {
 	get_flags (key: string) : number;
 	get_has_unapplied () : boolean;
 	get_int (key: string) : number;
+	get_int64 (key: string) : number;
 	get_mapped (key: string, mapping: SettingsGetMapping, user_data: any) : any;
 	get_range (key: string) : GLib.Variant;
 	get_string (key: string) : string;
-	get_strv (key: string) : ;
+	get_strv (key: string) : string[];
 	get_uint (key: string) : number;
+	get_uint64 (key: string) : number;
 	get_user_value (key: string) : GLib.Variant;
 	get_value (key: string) : GLib.Variant;
 	is_writable (name: string) : boolean;
-	list_children () : ;
-	list_keys () : ;
+	list_children () : string[];
+	list_keys () : string[];
 	range_check (key: string, value: GLib.Variant) : boolean;
 	reset (key: string) : void;
 	revert () : void;
@@ -1391,9 +1417,11 @@ interface Settings extends GObject.Object {
 	set_enum (key: string, value: number) : boolean;
 	set_flags (key: string, value: number) : boolean;
 	set_int (key: string, value: number) : boolean;
+	set_int64 (key: string, value: number) : boolean;
 	set_string (key: string, value: string) : boolean;
-	set_strv (key: string, value: ) : boolean;
+	set_strv (key: string, value: string[]) : boolean;
 	set_uint (key: string, value: number) : boolean;
+	set_uint64 (key: string, value: number) : boolean;
 	set_value (key: string, value: GLib.Variant) : boolean;
 }
 
@@ -1403,10 +1431,28 @@ var Settings: {
 	new_with_backend (schema_id: string, backend: SettingsBackend) : Settings;
 	new_with_backend_and_path (schema_id: string, backend: SettingsBackend, path: string) : Settings;
 	new_with_path (schema_id: string, path: string) : Settings;
-	list_relocatable_schemas () : ;
-	list_schemas () : ;
+	list_relocatable_schemas () : string[];
+	list_schemas () : string[];
 	sync () : void;
 	unbind (object: GObject.Object, property: string) : void;
+}
+
+
+
+
+interface SettingsBackend extends GObject.Object {
+	changed (key: string, origin_tag: any) : void;
+	changed_tree (tree: GLib.Tree, origin_tag: any) : void;
+	keys_changed (path: string, items: string[], origin_tag: any) : void;
+	path_changed (path: string, origin_tag: any) : void;
+	path_writable_changed (path: string) : void;
+	writable_changed (key: string) : void;
+}
+
+var SettingsBackend: {
+	
+	flatten_tree (tree: GLib.Tree, path: string, keys: string[], values: GLib.Variant[]) : void;
+	get_default () : SettingsBackend;
 }
 
 
@@ -1428,7 +1474,7 @@ var SimpleAction: {
 
 
 interface SimpleActionGroup extends GObject.Object, ActionGroup, ActionMap {
-	add_entries (entries: , n_entries: number, user_data: any) : void;
+	add_entries (entries: ActionEntry[], n_entries: number, user_data: any) : void;
 	insert (action: Action) : void;
 	lookup (action_name: string) : Action;
 	remove (action_name: string) : void;
@@ -1511,13 +1557,13 @@ var SimpleProxyResolver: {
 
 
 
-interface Socket extends GObject.Object, Initable {
+interface Socket extends GObject.Object, DatagramBased, Initable {
 	accept (cancellable: Cancellable) : Socket;
 	bind (address: SocketAddress, allow_reuse: boolean) : boolean;
 	check_connect_result () : boolean;
 	close () : boolean;
 	condition_check (condition: GLib.IOCondition) : GLib.IOCondition;
-	condition_timed_wait (condition: GLib.IOCondition, timeout: number, cancellable: Cancellable) : boolean;
+	condition_timed_wait (condition: GLib.IOCondition, timeout_us: number, cancellable: Cancellable) : boolean;
 	condition_wait (condition: GLib.IOCondition, cancellable: Cancellable) : boolean;
 	connect (address: SocketAddress, cancellable: Cancellable) : boolean;
 	connection_factory_create_connection () : SocketConnection;
@@ -1542,17 +1588,21 @@ interface Socket extends GObject.Object, Initable {
 	is_closed () : boolean;
 	is_connected () : boolean;
 	join_multicast_group (group: InetAddress, source_specific: boolean, iface: string) : boolean;
+	join_multicast_group_ssm (group: InetAddress, source_specific: InetAddress, iface: string) : boolean;
 	leave_multicast_group (group: InetAddress, source_specific: boolean, iface: string) : boolean;
+	leave_multicast_group_ssm (group: InetAddress, source_specific: InetAddress, iface: string) : boolean;
 	listen () : boolean;
-	receive (buffer: , size: number, cancellable: Cancellable) : number;
-	receive_from (address: SocketAddress, buffer: , size: number, cancellable: Cancellable) : number;
-	receive_message (address: SocketAddress, vectors: , num_vectors: number, messages: , num_messages: number, flags: number, cancellable: Cancellable) : number;
-	receive_with_blocking (buffer: , size: number, blocking: boolean, cancellable: Cancellable) : number;
-	send (buffer: , size: number, cancellable: Cancellable) : number;
-	send_message (address: SocketAddress, vectors: , num_vectors: number, messages: , num_messages: number, flags: number, cancellable: Cancellable) : number;
-	send_messages (messages: , num_messages: number, flags: number, cancellable: Cancellable) : number;
-	send_to (address: SocketAddress, buffer: , size: number, cancellable: Cancellable) : number;
-	send_with_blocking (buffer: , size: number, blocking: boolean, cancellable: Cancellable) : number;
+	receive (buffer: number[], size: number, cancellable: Cancellable) : number;
+	receive_from (address: SocketAddress, buffer: number[], size: number, cancellable: Cancellable) : number;
+	receive_message (address: SocketAddress, vectors: InputVector[], num_vectors: number, messages: SocketControlMessage[], num_messages: number, flags: number, cancellable: Cancellable) : number;
+	receive_messages (messages: InputMessage[], num_messages: number, flags: number, cancellable: Cancellable) : number;
+	receive_with_blocking (buffer: number[], size: number, blocking: boolean, cancellable: Cancellable) : number;
+	send (buffer: number[], size: number, cancellable: Cancellable) : number;
+	send_message (address: SocketAddress, vectors: OutputVector[], num_vectors: number, messages: SocketControlMessage[], num_messages: number, flags: number, cancellable: Cancellable) : number;
+	send_message_with_timeout (address: SocketAddress, vectors: OutputVector[], num_vectors: number, messages: SocketControlMessage[], num_messages: number, flags: number, timeout_us: number, bytes_written: number, cancellable: Cancellable) : PollableReturn;
+	send_messages (messages: OutputMessage[], num_messages: number, flags: number, cancellable: Cancellable) : number;
+	send_to (address: SocketAddress, buffer: number[], size: number, cancellable: Cancellable) : number;
+	send_with_blocking (buffer: number[], size: number, blocking: boolean, cancellable: Cancellable) : number;
 	set_blocking (blocking: boolean) : void;
 	set_broadcast (broadcast: boolean) : void;
 	set_keepalive (keepalive: boolean) : void;
@@ -1673,7 +1723,7 @@ interface SocketControlMessage extends GObject.Object {
 
 var SocketControlMessage: {
 	
-	deserialize (level: number, _type: number, size: number, data: ) : SocketControlMessage;
+	deserialize (level: number, _type: number, size: number, data: number[]) : SocketControlMessage;
 }
 
 
@@ -1745,7 +1795,7 @@ interface Subprocess extends GObject.Object, Initable {
 
 var Subprocess: {
 	new (flags: SubprocessFlags, error: GLib.Error, argv0: string) : Subprocess;
-	newv (argv: , flags: SubprocessFlags) : Subprocess;
+	newv (argv: string[], flags: SubprocessFlags) : Subprocess;
 	
 }
 
@@ -1756,14 +1806,14 @@ interface SubprocessLauncher extends GObject.Object {
 	getenv (variable: string) : string;
 	set_child_setup (child_setup: GLib.SpawnChildSetupFunc, user_data: any, destroy_notify: GLib.DestroyNotify) : void;
 	set_cwd (cwd: string) : void;
-	set_environ (env: string) : void;
+	set_environ (env: string[]) : void;
 	set_flags (flags: SubprocessFlags) : void;
 	set_stderr_file_path (path: string) : void;
 	set_stdin_file_path (path: string) : void;
 	set_stdout_file_path (path: string) : void;
 	setenv (variable: string, value: string, overwrite: boolean) : void;
 	spawn (error: GLib.Error, argv0: string) : Subprocess;
-	spawnv (argv: ) : Subprocess;
+	spawnv (argv: string[]) : Subprocess;
 	take_fd (source_fd: number, target_fd: number) : void;
 	take_stderr_fd (fd: number) : void;
 	take_stdin_fd (fd: number) : void;
@@ -1785,6 +1835,7 @@ interface Task extends GObject.Object, AsyncResult {
 	get_check_cancellable () : boolean;
 	get_completed () : boolean;
 	get_context () : GLib.MainContext;
+	get_name () : string;
 	get_priority () : number;
 	get_return_on_cancel () : boolean;
 	get_source_object () : GObject.Object;
@@ -1803,6 +1854,7 @@ interface Task extends GObject.Object, AsyncResult {
 	run_in_thread (task_func: TaskThreadFunc) : void;
 	run_in_thread_sync (task_func: TaskThreadFunc) : void;
 	set_check_cancellable (check_cancellable: boolean) : void;
+	set_name (name: string) : void;
 	set_priority (priority: number) : void;
 	set_return_on_cancel (return_on_cancel: boolean) : boolean;
 	set_source_tag (source_tag: any) : void;
@@ -1863,13 +1915,13 @@ var TestDBus: {
 
 interface ThemedIcon extends GObject.Object, Icon {
 	append_name (iconname: string) : void;
-	get_names () : ;
+	get_names () : string[];
 	prepend_name (iconname: string) : void;
 }
 
 var ThemedIcon: {
 	new (iconname: string) : ThemedIcon;
-	new_from_names (iconnames: , len: number) : ThemedIcon;
+	new_from_names (iconnames: string[], len: number) : ThemedIcon;
 	new_with_default_fallbacks (iconname: string) : ThemedIcon;
 	
 }
@@ -1910,6 +1962,7 @@ interface TlsConnection extends IOStream {
 	get_certificate () : TlsCertificate;
 	get_database () : TlsDatabase;
 	get_interaction () : TlsInteraction;
+	get_negotiated_protocol () : string;
 	get_peer_certificate () : TlsCertificate;
 	get_peer_certificate_errors () : TlsCertificateFlags;
 	get_rehandshake_mode () : TlsRehandshakeMode;
@@ -1918,6 +1971,7 @@ interface TlsConnection extends IOStream {
 	handshake (cancellable: Cancellable) : boolean;
 	handshake_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	handshake_finish (result: AsyncResult) : boolean;
+	set_advertised_protocols (protocols: string[]) : void;
 	set_certificate (certificate: TlsCertificate) : void;
 	set_database (database: TlsDatabase) : void;
 	set_interaction (interaction: TlsInteraction) : void;
@@ -1942,8 +1996,8 @@ interface TlsDatabase extends GObject.Object {
 	lookup_certificate_issuer (certificate: TlsCertificate, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable) : TlsCertificate;
 	lookup_certificate_issuer_async (certificate: TlsCertificate, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	lookup_certificate_issuer_finish (result: AsyncResult) : TlsCertificate;
-	lookup_certificates_issued_by (issuer_raw_dn: , interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable) : GLib.List;
-	lookup_certificates_issued_by_async (issuer_raw_dn: , interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	lookup_certificates_issued_by (issuer_raw_dn: number[], interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable) : GLib.List;
+	lookup_certificates_issued_by_async (issuer_raw_dn: number[], interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	lookup_certificates_issued_by_finish (result: AsyncResult) : GLib.List;
 	verify_chain (chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable) : TlsCertificateFlags;
 	verify_chain_async (chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
@@ -1984,8 +2038,8 @@ interface TlsPassword extends GObject.Object {
 	get_warning () : string;
 	set_description (description: string) : void;
 	set_flags (flags: TlsPasswordFlags) : void;
-	set_value (value: number, length: number) : void;
-	set_value_full (value: number, length: number, destroy: GLib.DestroyNotify) : void;
+	set_value (value: number[], length: number) : void;
+	set_value_full (value: number[], length: number, destroy: GLib.DestroyNotify) : void;
 	set_warning (warning: string) : void;
 }
 
@@ -2033,13 +2087,13 @@ interface UnixFDList extends GObject.Object {
 	append (fd: number) : number;
 	get (index_: number) : number;
 	get_length () : number;
-	peek_fds (length: number) : ;
-	steal_fds (length: number) : ;
+	peek_fds (length: number) : number[];
+	steal_fds (length: number) : number[];
 }
 
 var UnixFDList: {
 	new () : UnixFDList;
-	new_from_array (fds: , n_fds: number) : UnixFDList;
+	new_from_array (fds: number[], n_fds: number) : UnixFDList;
 	
 }
 
@@ -2049,7 +2103,7 @@ var UnixFDList: {
 interface UnixFDMessage extends SocketControlMessage {
 	append_fd (fd: number) : boolean;
 	get_fd_list () : UnixFDList;
-	steal_fds (length: number) : ;
+	steal_fds (length: number) : number[];
 }
 
 var UnixFDMessage: {
@@ -2110,8 +2164,8 @@ interface UnixSocketAddress extends SocketAddress, SocketConnectable {
 
 var UnixSocketAddress: {
 	new (path: string) : SocketAddress;
-	new_abstract (path: , path_len: number) : SocketAddress;
-	new_with_type (path: , path_len: number, _type: UnixSocketAddressType) : SocketAddress;
+	new_abstract (path: string[], path_len: number) : SocketAddress;
+	new_with_type (path: string[], path_len: number, _type: UnixSocketAddressType) : SocketAddress;
 	abstract_names_supported () : boolean;
 }
 
@@ -2121,9 +2175,11 @@ var UnixSocketAddress: {
 interface Vfs extends GObject.Object {
 	get_file_for_path (path: string) : File;
 	get_file_for_uri (uri: string) : File;
-	get_supported_uri_schemes () : ;
+	get_supported_uri_schemes () : string[];
 	is_active () : boolean;
 	parse_name (parse_name: string) : File;
+	register_uri_scheme (scheme: string, uri_func: VfsFileLookupFunc, uri_data: any, uri_destroy: GLib.DestroyNotify, parse_name_func: VfsFileLookupFunc, parse_name_data: any, parse_name_destroy: GLib.DestroyNotify) : boolean;
+	unregister_uri_scheme (scheme: string) : boolean;
 }
 
 var Vfs: {
@@ -2181,7 +2237,7 @@ class ActionEntry {
 	public name: string;
 	public parameter_type: string;
 	public state: string;
-	public padding: ;
+	public padding: number[];
 
 	activate : {(action: SimpleAction, parameter: GLib.Variant, user_data: any) : void;};
 	change_state : {(action: SimpleAction, value: GLib.Variant, user_data: any) : void;};
@@ -2194,7 +2250,7 @@ class ActionGroupInterface {
 	public g_iface: GObject.TypeInterface;
 
 	has_action : {(action_group: ActionGroup, action_name: string) : boolean;};
-	list_actions : {(action_group: ActionGroup) : ;};
+	list_actions : {(action_group: ActionGroup) : string[];};
 	get_action_enabled : {(action_group: ActionGroup, action_name: string) : boolean;};
 	get_action_parameter_type : {(action_group: ActionGroup, action_name: string) : GLib.VariantType;};
 	get_action_state_type : {(action_group: ActionGroup, action_name: string) : GLib.VariantType;};
@@ -2249,10 +2305,10 @@ class AppInfoIface {
 	get_description : {(appinfo: AppInfo) : string;};
 	get_executable : {(appinfo: AppInfo) : string;};
 	get_icon : {(appinfo: AppInfo) : Icon;};
-	launch : {(appinfo: AppInfo, files: GLib.List, launch_context: AppLaunchContext) : boolean;};
+	launch : {(appinfo: AppInfo, files: GLib.List, context: AppLaunchContext) : boolean;};
 	supports_uris : {(appinfo: AppInfo) : boolean;};
 	supports_files : {(appinfo: AppInfo) : boolean;};
-	launch_uris : {(appinfo: AppInfo, uris: GLib.List, launch_context: AppLaunchContext) : boolean;};
+	launch_uris : {(appinfo: AppInfo, uris: GLib.List, context: AppLaunchContext) : boolean;};
 	should_show : {(appinfo: AppInfo) : boolean;};
 	set_as_default_for_type : {(appinfo: AppInfo, content_type: string) : boolean;};
 	set_as_default_for_extension : {(appinfo: AppInfo, extension: string) : boolean;};
@@ -2264,7 +2320,9 @@ class AppInfoIface {
 	get_commandline : {(appinfo: AppInfo) : string;};
 	get_display_name : {(appinfo: AppInfo) : string;};
 	set_as_last_used_for_type : {(appinfo: AppInfo, content_type: string) : boolean;};
-	get_supported_types : {(appinfo: AppInfo) : ;};
+	get_supported_types : {(appinfo: AppInfo) : string[];};
+	launch_uris_async : {(appinfo: AppInfo, uris: GLib.List, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
+	launch_uris_finish : {(appinfo: AppInfo, result: AsyncResult) : boolean;};
 
 }
 
@@ -2295,13 +2353,13 @@ class AppLaunchContextPrivate {
 
 class ApplicationClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	startup : {(application: Application) : void;};
 	activate : {(application: Application) : void;};
-	open : {(application: Application, files: , n_files: number, hint: string) : void;};
+	open : {(application: Application, files: File[], n_files: number, hint: string) : void;};
 	command_line : {(application: Application, command_line: ApplicationCommandLine) : number;};
-	local_command_line : {(application: Application, _arguments: , exit_status: number) : boolean;};
+	local_command_line : {(application: Application, _arguments: string[], exit_status: number) : boolean;};
 	before_emit : {(application: Application, platform_data: GLib.Variant) : void;};
 	after_emit : {(application: Application, platform_data: GLib.Variant) : void;};
 	add_platform_data : {(application: Application, builder: GLib.VariantBuilder) : void;};
@@ -2311,6 +2369,7 @@ class ApplicationClass {
 	dbus_register : {(application: Application, connection: DBusConnection, object_path: string) : boolean;};
 	dbus_unregister : {(application: Application, connection: DBusConnection, object_path: string) : void;};
 	handle_local_options : {(application: Application, options: GLib.VariantDict) : number;};
+	name_lost : {(application: Application) : boolean;};
 
 }
 
@@ -2318,7 +2377,7 @@ class ApplicationClass {
 
 class ApplicationCommandLineClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	print_literal : {(cmdline: ApplicationCommandLine, message: string) : void;};
 	printerr_literal : {(cmdline: ApplicationCommandLine, message: string) : void;};
@@ -2435,7 +2494,7 @@ class CharsetConverterClass {
 class ConverterIface {
 	public g_iface: GObject.TypeInterface;
 
-	convert : {(converter: Converter, inbuf: , inbuf_size: number, outbuf: any, outbuf_size: number, flags: ConverterFlags, bytes_read: number, bytes_written: number) : ConverterResult;};
+	convert : {(converter: Converter, inbuf: number[], inbuf_size: number, outbuf: number[], outbuf_size: number, flags: ConverterFlags, bytes_read: number, bytes_written: number) : ConverterResult;};
 	reset : {(converter: Converter) : void;};
 
 }
@@ -2493,7 +2552,7 @@ class DBusAnnotationInfo {
 	public ref_count: number;
 	public key: string;
 	public value: string;
-	public annotations: ;
+	public annotations: DBusAnnotationInfo[];
 
 
 	public ref () : DBusAnnotationInfo;
@@ -2506,7 +2565,7 @@ class DBusArgInfo {
 	public ref_count: number;
 	public name: string;
 	public signature: string;
-	public annotations: ;
+	public annotations: DBusAnnotationInfo[];
 
 
 	public ref () : DBusArgInfo;
@@ -2539,10 +2598,10 @@ class DBusInterfaceIface {
 class DBusInterfaceInfo {
 	public ref_count: number;
 	public name: string;
-	public methods: ;
-	public signals: ;
-	public properties: ;
-	public annotations: ;
+	public methods: DBusMethodInfo[];
+	public signals: DBusSignalInfo[];
+	public properties: DBusPropertyInfo[];
+	public annotations: DBusAnnotationInfo[];
 
 
 	public cache_build () : void;
@@ -2559,8 +2618,8 @@ class DBusInterfaceInfo {
 
 class DBusInterfaceSkeletonClass {
 	public parent_class: GObject.ObjectClass;
-	public vfunc_padding: ;
-	public signal_padding: ;
+	public vfunc_padding: any[];
+	public signal_padding: any[];
 
 	get_info : {(interface_: DBusInterfaceSkeleton) : DBusInterfaceInfo;};
 	get_vtable : {(interface_: DBusInterfaceSkeleton) : DBusInterfaceVTable;};
@@ -2583,7 +2642,7 @@ class DBusInterfaceVTable {
 	public method_call: DBusInterfaceMethodCallFunc;
 	public get_property: DBusInterfaceGetPropertyFunc;
 	public set_property: DBusInterfaceSetPropertyFunc;
-	public padding: ;
+	public padding: any[];
 
 
 }
@@ -2593,9 +2652,9 @@ class DBusInterfaceVTable {
 class DBusMethodInfo {
 	public ref_count: number;
 	public name: string;
-	public in_args: ;
-	public out_args: ;
-	public annotations: ;
+	public in_args: DBusArgInfo[];
+	public out_args: DBusArgInfo[];
+	public annotations: DBusAnnotationInfo[];
 
 
 	public ref () : DBusMethodInfo;
@@ -2607,9 +2666,9 @@ class DBusMethodInfo {
 class DBusNodeInfo {
 	public ref_count: number;
 	public path: string;
-	public interfaces: ;
-	public nodes: ;
-	public annotations: ;
+	public interfaces: DBusInterfaceInfo[];
+	public nodes: DBusNodeInfo[];
+	public annotations: DBusAnnotationInfo[];
 
 
 	public generate_xml (indent: number, string_builder: GLib.String) : void;
@@ -2635,7 +2694,7 @@ class DBusObjectIface {
 
 class DBusObjectManagerClientClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	interface_proxy_signal : {(manager: DBusObjectManagerClient, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant) : void;};
 	interface_proxy_properties_changed : {(manager: DBusObjectManagerClient, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string) : void;};
@@ -2669,7 +2728,7 @@ class DBusObjectManagerIface {
 
 class DBusObjectManagerServerClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 
 }
@@ -2685,7 +2744,7 @@ class DBusObjectManagerServerPrivate {
 
 class DBusObjectProxyClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 
 }
@@ -2701,7 +2760,7 @@ class DBusObjectProxyPrivate {
 
 class DBusObjectSkeletonClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	authorize_method : {(object: DBusObjectSkeleton, interface_: DBusInterfaceSkeleton, invocation: DBusMethodInvocation) : boolean;};
 
@@ -2721,7 +2780,7 @@ class DBusPropertyInfo {
 	public name: string;
 	public signature: string;
 	public flags: DBusPropertyInfoFlags;
-	public annotations: ;
+	public annotations: DBusAnnotationInfo[];
 
 
 	public ref () : DBusPropertyInfo;
@@ -2732,7 +2791,7 @@ class DBusPropertyInfo {
 
 class DBusProxyClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	g_properties_changed : {(proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string) : void;};
 	g_signal : {(proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant) : void;};
@@ -2751,8 +2810,8 @@ class DBusProxyPrivate {
 class DBusSignalInfo {
 	public ref_count: number;
 	public name: string;
-	public args: ;
-	public annotations: ;
+	public args: DBusArgInfo[];
+	public annotations: DBusAnnotationInfo[];
 
 
 	public ref () : DBusSignalInfo;
@@ -2765,7 +2824,7 @@ class DBusSubtreeVTable {
 	public enumerate: DBusSubtreeEnumerateFunc;
 	public introspect: DBusSubtreeIntrospectFunc;
 	public dispatch: DBusSubtreeDispatchFunc;
-	public padding: ;
+	public padding: any[];
 
 
 }
@@ -2812,6 +2871,19 @@ class DataOutputStreamPrivate {
 
 
 
+class DatagramBasedInterface {
+	public g_iface: GObject.TypeInterface;
+
+	receive_messages : {(datagram_based: DatagramBased, messages: InputMessage[], num_messages: number, flags: number, timeout: number, cancellable: Cancellable) : number;};
+	send_messages : {(datagram_based: DatagramBased, messages: OutputMessage[], num_messages: number, flags: number, timeout: number, cancellable: Cancellable) : number;};
+	create_source : {(datagram_based: DatagramBased, condition: GLib.IOCondition, cancellable: Cancellable) : GLib.Source;};
+	condition_check : {(datagram_based: DatagramBased, condition: GLib.IOCondition) : GLib.IOCondition;};
+	condition_wait : {(datagram_based: DatagramBased, condition: GLib.IOCondition, timeout: number, cancellable: Cancellable) : boolean;};
+
+}
+
+
+
 class DesktopAppInfoClass {
 	public parent_class: GObject.ObjectClass;
 
@@ -2849,7 +2921,7 @@ class DriveIface {
 	poll_for_media : {(drive: Drive, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	poll_for_media_finish : {(drive: Drive, result: AsyncResult) : boolean;};
 	get_identifier : {(drive: Drive, kind: string) : string;};
-	enumerate_identifiers : {(drive: Drive) : ;};
+	enumerate_identifiers : {(drive: Drive) : string[];};
 	get_start_stop_type : {(drive: Drive) : DriveStartStopType;};
 	can_start : {(drive: Drive) : boolean;};
 	can_start_degraded : {(drive: Drive) : boolean;};
@@ -2863,6 +2935,40 @@ class DriveIface {
 	eject_with_operation_finish : {(drive: Drive, result: AsyncResult) : boolean;};
 	get_sort_key : {(drive: Drive) : string;};
 	get_symbolic_icon : {(drive: Drive) : Icon;};
+	is_removable : {(drive: Drive) : boolean;};
+
+}
+
+
+
+class DtlsClientConnectionInterface {
+	public g_iface: GObject.TypeInterface;
+
+
+}
+
+
+
+class DtlsConnectionInterface {
+	public g_iface: GObject.TypeInterface;
+
+	accept_certificate : {(connection: DtlsConnection, peer_cert: TlsCertificate, errors: TlsCertificateFlags) : boolean;};
+	handshake : {(conn: DtlsConnection, cancellable: Cancellable) : boolean;};
+	handshake_async : {(conn: DtlsConnection, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
+	handshake_finish : {(conn: DtlsConnection, result: AsyncResult) : boolean;};
+	shutdown : {(conn: DtlsConnection, shutdown_read: boolean, shutdown_write: boolean, cancellable: Cancellable) : boolean;};
+	shutdown_async : {(conn: DtlsConnection, shutdown_read: boolean, shutdown_write: boolean, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
+	shutdown_finish : {(conn: DtlsConnection, result: AsyncResult) : boolean;};
+	set_advertised_protocols : {(conn: DtlsConnection, protocols: string[]) : void;};
+	get_negotiated_protocol : {(conn: DtlsConnection) : string;};
+
+}
+
+
+
+class DtlsServerConnectionInterface {
+	public g_iface: GObject.TypeInterface;
+
 
 }
 
@@ -3320,7 +3426,7 @@ class IconIface {
 
 	hash : {(icon: Icon) : number;};
 	equal : {(icon1: Icon, icon2: Icon) : boolean;};
-	to_tokens : {(icon: Icon, tokens: , out_version: number) : boolean;};
+	to_tokens : {(icon: Icon, tokens: any[], out_version: number) : boolean;};
 	from_tokens : {(tokens: string, num_tokens: number, version: number) : Icon;};
 	serialize : {(icon: Icon) : GLib.Variant;};
 
@@ -3384,13 +3490,27 @@ class InitableIface {
 
 
 
+class InputMessage {
+	public address: SocketAddress;
+	public vectors: InputVector[];
+	public num_vectors: number;
+	public bytes_received: number;
+	public flags: number;
+	public control_messages: SocketControlMessage[];
+	public num_control_messages: number;
+
+
+}
+
+
+
 class InputStreamClass {
 	public parent_class: GObject.ObjectClass;
 
 	read_fn : {(stream: InputStream, buffer: any, count: number, cancellable: Cancellable) : number;};
 	skip : {(stream: InputStream, count: number, cancellable: Cancellable) : number;};
 	close_fn : {(stream: InputStream, cancellable: Cancellable) : boolean;};
-	read_async : {(stream: InputStream, buffer: , count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
+	read_async : {(stream: InputStream, buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	read_finish : {(stream: InputStream, result: AsyncResult) : number;};
 	skip_async : {(stream: InputStream, count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	skip_finish : {(stream: InputStream, result: AsyncResult) : number;};
@@ -3427,7 +3547,7 @@ class ListModelInterface {
 
 	get_item_type : {(list: ListModel) : GObject.Type;};
 	get_n_items : {(list: ListModel) : number;};
-	get_item : {(list: ListModel, position: number) : any;};
+	get_item : {(list: ListModel, position: number) : GObject.Object;};
 
 }
 
@@ -3567,8 +3687,8 @@ class MountIface {
 	remount : {(mount: Mount, flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	remount_finish : {(mount: Mount, result: AsyncResult) : boolean;};
 	guess_content_type : {(mount: Mount, force_rescan: boolean, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
-	guess_content_type_finish : {(mount: Mount, result: AsyncResult) : ;};
-	guess_content_type_sync : {(mount: Mount, force_rescan: boolean, cancellable: Cancellable) : ;};
+	guess_content_type_finish : {(mount: Mount, result: AsyncResult) : string[];};
+	guess_content_type_sync : {(mount: Mount, force_rescan: boolean, cancellable: Cancellable) : string[];};
 	pre_unmount : {(mount: Mount) : void;};
 	unmount_with_operation : {(mount: Mount, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	unmount_with_operation_finish : {(mount: Mount, result: AsyncResult) : boolean;};
@@ -3586,10 +3706,10 @@ class MountOperationClass {
 	public parent_class: GObject.ObjectClass;
 
 	ask_password : {(op: MountOperation, message: string, default_user: string, default_domain: string, flags: AskPasswordFlags) : void;};
-	ask_question : {(op: MountOperation, message: string, choices: string) : void;};
+	ask_question : {(op: MountOperation, message: string, choices: string[]) : void;};
 	reply : {(op: MountOperation, result: MountOperationResult) : void;};
 	aborted : {(op: MountOperation) : void;};
-	show_processes : {(op: MountOperation, message: string, processes: , choices: string) : void;};
+	show_processes : {(op: MountOperation, message: string, processes: GLib.Pid[], choices: string[]) : void;};
 	show_unmount_progress : {(op: MountOperation, message: string, time_left: number, bytes_left: number) : void;};
 	_g_reserved1 : {() : void;};
 	_g_reserved2 : {() : void;};
@@ -3606,6 +3726,13 @@ class MountOperationClass {
 
 
 class MountOperationPrivate {
+
+
+}
+
+
+
+class NativeSocketAddress {
 
 
 }
@@ -3639,7 +3766,7 @@ class NetworkAddressPrivate {
 class NetworkMonitorInterface {
 	public g_iface: GObject.TypeInterface;
 
-	network_changed : {(monitor: NetworkMonitor, available: boolean) : void;};
+	network_changed : {(monitor: NetworkMonitor, network_available: boolean) : void;};
 	can_reach : {(monitor: NetworkMonitor, connectable: SocketConnectable, cancellable: Cancellable) : boolean;};
 	can_reach_async : {(monitor: NetworkMonitor, connectable: SocketConnectable, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	can_reach_finish : {(monitor: NetworkMonitor, result: AsyncResult) : boolean;};
@@ -3668,7 +3795,7 @@ class OutputMessage {
 	public vectors: OutputVector;
 	public num_vectors: number;
 	public bytes_sent: number;
-	public control_messages: ;
+	public control_messages: SocketControlMessage[];
 	public num_control_messages: number;
 
 
@@ -3679,11 +3806,11 @@ class OutputMessage {
 class OutputStreamClass {
 	public parent_class: GObject.ObjectClass;
 
-	write_fn : {(stream: OutputStream, buffer: , count: number, cancellable: Cancellable) : number;};
+	write_fn : {(stream: OutputStream, buffer: number[], count: number, cancellable: Cancellable) : number;};
 	splice : {(stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, cancellable: Cancellable) : number;};
 	flush : {(stream: OutputStream, cancellable: Cancellable) : boolean;};
 	close_fn : {(stream: OutputStream, cancellable: Cancellable) : boolean;};
-	write_async : {(stream: OutputStream, buffer: , count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
+	write_async : {(stream: OutputStream, buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	write_finish : {(stream: OutputStream, result: AsyncResult) : number;};
 	splice_async : {(stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	splice_finish : {(stream: OutputStream, result: AsyncResult) : number;};
@@ -3691,9 +3818,9 @@ class OutputStreamClass {
 	flush_finish : {(stream: OutputStream, result: AsyncResult) : boolean;};
 	close_async : {(stream: OutputStream, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	close_finish : {(stream: OutputStream, result: AsyncResult) : boolean;};
-	_g_reserved1 : {() : void;};
-	_g_reserved2 : {() : void;};
-	_g_reserved3 : {() : void;};
+	writev_fn : {(stream: OutputStream, vectors: OutputVector[], n_vectors: number, bytes_written: number, cancellable: Cancellable) : boolean;};
+	writev_async : {(stream: OutputStream, vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
+	writev_finish : {(stream: OutputStream, result: AsyncResult, bytes_written: number) : boolean;};
 	_g_reserved4 : {() : void;};
 	_g_reserved5 : {() : void;};
 	_g_reserved6 : {() : void;};
@@ -3722,7 +3849,7 @@ class OutputVector {
 
 class PermissionClass {
 	public parent_class: GObject.ObjectClass;
-	public reserved: ;
+	public reserved: any[];
 
 	acquire : {(permission: Permission, cancellable: Cancellable) : boolean;};
 	acquire_async : {(permission: Permission, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
@@ -3748,7 +3875,7 @@ class PollableInputStreamInterface {
 	can_poll : {(stream: PollableInputStream) : boolean;};
 	is_readable : {(stream: PollableInputStream) : boolean;};
 	create_source : {(stream: PollableInputStream, cancellable: Cancellable) : GLib.Source;};
-	read_nonblocking : {(stream: PollableInputStream, buffer: , count: number) : number;};
+	read_nonblocking : {(stream: PollableInputStream, buffer: number[], count: number) : number;};
 
 }
 
@@ -3760,7 +3887,8 @@ class PollableOutputStreamInterface {
 	can_poll : {(stream: PollableOutputStream) : boolean;};
 	is_writable : {(stream: PollableOutputStream) : boolean;};
 	create_source : {(stream: PollableOutputStream, cancellable: Cancellable) : GLib.Source;};
-	write_nonblocking : {(stream: PollableOutputStream, buffer: , count: number) : number;};
+	write_nonblocking : {(stream: PollableOutputStream, buffer: number[], count: number) : number;};
+	writev_nonblocking : {(stream: PollableOutputStream, vectors: OutputVector[], n_vectors: number, bytes_written: number) : PollableReturn;};
 
 }
 
@@ -3819,9 +3947,9 @@ class ProxyResolverInterface {
 	public g_iface: GObject.TypeInterface;
 
 	is_supported : {(resolver: ProxyResolver) : boolean;};
-	lookup : {(resolver: ProxyResolver, uri: string, cancellable: Cancellable) : ;};
+	lookup : {(resolver: ProxyResolver, uri: string, cancellable: Cancellable) : string[];};
 	lookup_async : {(resolver: ProxyResolver, uri: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
-	lookup_finish : {(resolver: ProxyResolver, result: AsyncResult) : ;};
+	lookup_finish : {(resolver: ProxyResolver, result: AsyncResult) : string[];};
 
 }
 
@@ -3853,9 +3981,9 @@ class ResolverClass {
 	lookup_records : {(resolver: Resolver, rrname: string, record_type: ResolverRecordType, cancellable: Cancellable) : GLib.List;};
 	lookup_records_async : {(resolver: Resolver, rrname: string, record_type: ResolverRecordType, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	lookup_records_finish : {(resolver: Resolver, result: AsyncResult) : GLib.List;};
-	_g_reserved4 : {() : void;};
-	_g_reserved5 : {() : void;};
-	_g_reserved6 : {() : void;};
+	lookup_by_name_with_flags_async : {(resolver: Resolver, hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
+	lookup_by_name_with_flags_finish : {(resolver: Resolver, result: AsyncResult) : GLib.List;};
+	lookup_by_name_with_flags : {(resolver: Resolver, hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable) : GLib.List;};
 
 }
 
@@ -3873,7 +4001,7 @@ class Resource {
 
 	public _register () : void;
 	public _unregister () : void;
-	public enumerate_children (path: string, lookup_flags: ResourceLookupFlags) : ;
+	public enumerate_children (path: string, lookup_flags: ResourceLookupFlags) : string[];
 	public get_info (path: string, lookup_flags: ResourceLookupFlags, size: number, flags: number) : boolean;
 	public lookup_data (path: string, lookup_flags: ResourceLookupFlags) : GLib.Bytes;
 	public open_stream (path: string, lookup_flags: ResourceLookupFlags) : InputStream;
@@ -3896,7 +4024,26 @@ class SeekableIface {
 
 
 
-class SettingsBackend {
+class SettingsBackendClass {
+	public parent_class: GObject.ObjectClass;
+	public padding: any[];
+
+	read : {(backend: SettingsBackend, key: string, expected_type: GLib.VariantType, default_value: boolean) : GLib.Variant;};
+	get_writable : {(backend: SettingsBackend, key: string) : boolean;};
+	write : {(backend: SettingsBackend, key: string, value: GLib.Variant, origin_tag: any) : boolean;};
+	write_tree : {(backend: SettingsBackend, tree: GLib.Tree, origin_tag: any) : boolean;};
+	reset : {(backend: SettingsBackend, key: string, origin_tag: any) : void;};
+	subscribe : {(backend: SettingsBackend, name: string) : void;};
+	unsubscribe : {(backend: SettingsBackend, name: string) : void;};
+	sync : {(backend: SettingsBackend) : void;};
+	get_permission : {(backend: SettingsBackend, path: string) : Permission;};
+	read_user_value : {(backend: SettingsBackend, key: string, expected_type: GLib.VariantType) : GLib.Variant;};
+
+}
+
+
+
+class SettingsBackendPrivate {
 
 
 }
@@ -3905,7 +4052,7 @@ class SettingsBackend {
 
 class SettingsClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	writable_changed : {(settings: Settings, key: string) : void;};
 	changed : {(settings: Settings, key: string) : void;};
@@ -3930,7 +4077,8 @@ class SettingsSchema {
 	public get_key (name: string) : SettingsSchemaKey;
 	public get_path () : string;
 	public has_key (name: string) : boolean;
-	public list_children () : ;
+	public list_children () : string[];
+	public list_keys () : string[];
 	public ref () : SettingsSchema;
 	public unref () : void;
 }
@@ -3956,7 +4104,7 @@ class SettingsSchemaKey {
 class SettingsSchemaSource {
 
 
-	public list_schemas (recursive: boolean, non_relocatable: , relocatable: ) : void;
+	public list_schemas (recursive: boolean, non_relocatable: string[], relocatable: string[]) : void;
 	public lookup (schema_id: string, recursive: boolean) : SettingsSchema;
 	public ref () : SettingsSchemaSource;
 	public unref () : void;
@@ -3966,7 +4114,7 @@ class SettingsSchemaSource {
 
 class SimpleActionGroupClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 
 }
@@ -4072,6 +4220,7 @@ class SocketConnectableIface {
 
 	enumerate : {(connectable: SocketConnectable) : SocketAddressEnumerator;};
 	proxy_enumerate : {(connectable: SocketConnectable) : SocketAddressEnumerator;};
+	to_string : {(connectable: SocketConnectable) : string;};
 
 }
 
@@ -4276,6 +4425,9 @@ class TlsBackendInterface {
 	get_server_connection_type : {() : GObject.Type;};
 	get_file_database_type : {() : GObject.Type;};
 	get_default_database : {(backend: TlsBackend) : TlsDatabase;};
+	supports_dtls : {(backend: TlsBackend) : boolean;};
+	get_dtls_client_connection_type : {() : GObject.Type;};
+	get_dtls_server_connection_type : {() : GObject.Type;};
 
 }
 
@@ -4283,7 +4435,7 @@ class TlsBackendInterface {
 
 class TlsCertificateClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	verify : {(cert: TlsCertificate, identity: SocketConnectable, trusted_ca: TlsCertificate) : TlsCertificateFlags;};
 
@@ -4309,7 +4461,7 @@ class TlsClientConnectionInterface {
 
 class TlsConnectionClass {
 	public parent_class: IOStreamClass;
-	public padding: ;
+	public padding: any[];
 
 	accept_certificate : {(connection: TlsConnection, peer_cert: TlsCertificate, errors: TlsCertificateFlags) : boolean;};
 	handshake : {(conn: TlsConnection, cancellable: Cancellable) : boolean;};
@@ -4329,7 +4481,7 @@ class TlsConnectionPrivate {
 
 class TlsDatabaseClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	verify_chain : {(self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable) : TlsCertificateFlags;};
 	verify_chain_async : {(self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
@@ -4341,8 +4493,8 @@ class TlsDatabaseClass {
 	lookup_certificate_issuer : {(self: TlsDatabase, certificate: TlsCertificate, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable) : TlsCertificate;};
 	lookup_certificate_issuer_async : {(self: TlsDatabase, certificate: TlsCertificate, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	lookup_certificate_issuer_finish : {(self: TlsDatabase, result: AsyncResult) : TlsCertificate;};
-	lookup_certificates_issued_by : {(self: TlsDatabase, issuer_raw_dn: , interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable) : GLib.List;};
-	lookup_certificates_issued_by_async : {(self: TlsDatabase, issuer_raw_dn: , interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
+	lookup_certificates_issued_by : {(self: TlsDatabase, issuer_raw_dn: number[], interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable) : GLib.List;};
+	lookup_certificates_issued_by_async : {(self: TlsDatabase, issuer_raw_dn: number[], interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	lookup_certificates_issued_by_finish : {(self: TlsDatabase, result: AsyncResult) : GLib.List;};
 
 }
@@ -4358,7 +4510,7 @@ class TlsDatabasePrivate {
 
 class TlsFileDatabaseInterface {
 	public g_iface: GObject.TypeInterface;
-	public padding: ;
+	public padding: any[];
 
 
 }
@@ -4367,7 +4519,7 @@ class TlsFileDatabaseInterface {
 
 class TlsInteractionClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	ask_password : {(interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable) : TlsInteractionResult;};
 	ask_password_async : {(interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
@@ -4389,10 +4541,10 @@ class TlsInteractionPrivate {
 
 class TlsPasswordClass {
 	public parent_class: GObject.ObjectClass;
-	public padding: ;
+	public padding: any[];
 
 	get_value : {(password: TlsPassword, length: number) : number;};
-	set_value : {(password: TlsPassword, value: number, length: number, destroy: GLib.DestroyNotify) : void;};
+	set_value : {(password: TlsPassword, value: number[], length: number, destroy: GLib.DestroyNotify) : void;};
 	get_default_warning : {(password: TlsPassword) : string;};
 
 }
@@ -4521,6 +4673,7 @@ class UnixMountPoint {
 
 
 	public compare (mount2: UnixMountPoint) : number;
+	public copy () : UnixMountPoint;
 	public free () : void;
 	public get_device_path () : string;
 	public get_fs_type () : string;
@@ -4578,7 +4731,7 @@ class VfsClass {
 	is_active : {(vfs: Vfs) : boolean;};
 	get_file_for_path : {(vfs: Vfs, path: string) : File;};
 	get_file_for_uri : {(vfs: Vfs, uri: string) : File;};
-	get_supported_uri_schemes : {(vfs: Vfs) : ;};
+	get_supported_uri_schemes : {(vfs: Vfs) : string[];};
 	parse_name : {(vfs: Vfs, parse_name: string) : File;};
 	local_file_add_info : {(vfs: Vfs, filename: string, device: number, attribute_matcher: FileAttributeMatcher, info: FileInfo, cancellable: Cancellable, extra_data: any, free_extra_data: GLib.DestroyNotify) : void;};
 	add_writable_namespaces : {(vfs: Vfs, list: FileAttributeInfoList) : void;};
@@ -4614,7 +4767,7 @@ class VolumeIface {
 	eject : {(volume: Volume, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
 	eject_finish : {(volume: Volume, result: AsyncResult) : boolean;};
 	get_identifier : {(volume: Volume, kind: string) : string;};
-	enumerate_identifiers : {(volume: Volume) : ;};
+	enumerate_identifiers : {(volume: Volume) : string[];};
 	should_automount : {(volume: Volume) : boolean;};
 	get_activation_root : {(volume: Volume) : File;};
 	eject_with_operation : {(volume: Volume, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;};
@@ -4709,7 +4862,7 @@ interface ActionGroup {
 	get_action_state_hint (action_name: string) : GLib.Variant;
 	get_action_state_type (action_name: string) : GLib.VariantType;
 	has_action (action_name: string) : boolean;
-	list_actions () : ;
+	list_actions () : string[];
 	query_action (action_name: string, enabled: boolean, parameter_type: GLib.VariantType, state_type: GLib.VariantType, state_hint: GLib.Variant, state: GLib.Variant) : boolean;
 }
 
@@ -4723,7 +4876,7 @@ var ActionGroup: {
 
 interface ActionMap {
 	add_action (action: Action) : void;
-	add_action_entries (entries: , n_entries: number, user_data: any) : void;
+	add_action_entries (entries: ActionEntry[], n_entries: number, user_data: any) : void;
 	lookup_action (action_name: string) : Action;
 	remove_action (action_name: string) : void;
 }
@@ -4750,9 +4903,11 @@ interface AppInfo {
 	get_icon () : Icon;
 	get_id () : string;
 	get_name () : string;
-	get_supported_types () : ;
-	launch (files: GLib.List, launch_context: AppLaunchContext) : boolean;
-	launch_uris (uris: GLib.List, launch_context: AppLaunchContext) : boolean;
+	get_supported_types () : string[];
+	launch (files: GLib.List, context: AppLaunchContext) : boolean;
+	launch_uris (uris: GLib.List, context: AppLaunchContext) : boolean;
+	launch_uris_async (uris: GLib.List, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	launch_uris_finish (result: AsyncResult) : boolean;
 	remove_supports_type (content_type: string) : boolean;
 	set_as_default_for_extension (extension: string) : boolean;
 	set_as_default_for_type (content_type: string) : boolean;
@@ -4771,7 +4926,9 @@ var AppInfo: {
 	get_default_for_uri_scheme (uri_scheme: string) : AppInfo;
 	get_fallback_for_type (content_type: string) : GLib.List;
 	get_recommended_for_type (content_type: string) : GLib.List;
-	launch_default_for_uri (uri: string, launch_context: AppLaunchContext) : boolean;
+	launch_default_for_uri (uri: string, context: AppLaunchContext) : boolean;
+	launch_default_for_uri_async (uri: string, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	launch_default_for_uri_finish (result: AsyncResult) : boolean;
 	reset_type_associations (content_type: string) : void;
 }
 
@@ -4810,7 +4967,7 @@ var AsyncResult: {
 
 
 interface Converter {
-	convert (inbuf: , inbuf_size: number, outbuf: any, outbuf_size: number, flags: ConverterFlags, bytes_read: number, bytes_written: number) : ConverterResult;
+	convert (inbuf: number[], inbuf_size: number, outbuf: number[], outbuf_size: number, flags: ConverterFlags, bytes_read: number, bytes_written: number) : ConverterResult;
 	reset () : void;
 }
 
@@ -4866,6 +5023,22 @@ var DBusObjectManager: {
 
 
 
+interface DatagramBased {
+	condition_check (condition: GLib.IOCondition) : GLib.IOCondition;
+	// condition_wait (condition: GLib.IOCondition, timeout: number, cancellable: Cancellable) : boolean;
+	create_source (condition: GLib.IOCondition, cancellable: Cancellable) : GLib.Source;
+	// receive_messages (messages: InputMessage[], num_messages: number, flags: number, timeout: number, cancellable: Cancellable) : number;
+	// send_messages (messages: OutputMessage[], num_messages: number, flags: number, timeout: number, cancellable: Cancellable) : number;
+}
+
+var DatagramBased: {
+	
+	
+}
+
+
+
+
 interface DesktopAppInfoLookup {
 	get_default_for_uri_scheme (uri_scheme: string) : AppInfo;
 }
@@ -4888,7 +5061,7 @@ interface Drive {
 	eject_finish (result: AsyncResult) : boolean;
 	eject_with_operation (flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	eject_with_operation_finish (result: AsyncResult) : boolean;
-	enumerate_identifiers () : ;
+	enumerate_identifiers () : string[];
 	get_icon () : Icon;
 	get_identifier (kind: string) : string;
 	get_name () : string;
@@ -4900,6 +5073,7 @@ interface Drive {
 	has_volumes () : boolean;
 	is_media_check_automatic () : boolean;
 	is_media_removable () : boolean;
+	is_removable () : boolean;
 	poll_for_media (cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	poll_for_media_finish (result: AsyncResult) : boolean;
 	start (flags: DriveStartFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
@@ -4911,6 +5085,69 @@ interface Drive {
 var Drive: {
 	
 	
+}
+
+
+
+
+interface DtlsClientConnection {
+	get_accepted_cas () : GLib.List;
+	get_server_identity () : SocketConnectable;
+	get_validation_flags () : TlsCertificateFlags;
+	set_server_identity (identity: SocketConnectable) : void;
+	set_validation_flags (flags: TlsCertificateFlags) : void;
+}
+
+var DtlsClientConnection: {
+	
+	new (base_socket: DatagramBased, server_identity: SocketConnectable) : DtlsClientConnection;
+}
+
+
+
+
+interface DtlsConnection {
+	close (cancellable: Cancellable) : boolean;
+	close_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	close_finish (result: AsyncResult) : boolean;
+	emit_accept_certificate (peer_cert: TlsCertificate, errors: TlsCertificateFlags) : boolean;
+	get_certificate () : TlsCertificate;
+	get_database () : TlsDatabase;
+	get_interaction () : TlsInteraction;
+	get_negotiated_protocol () : string;
+	get_peer_certificate () : TlsCertificate;
+	get_peer_certificate_errors () : TlsCertificateFlags;
+	get_rehandshake_mode () : TlsRehandshakeMode;
+	get_require_close_notify () : boolean;
+	handshake (cancellable: Cancellable) : boolean;
+	handshake_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	handshake_finish (result: AsyncResult) : boolean;
+	set_advertised_protocols (protocols: string[]) : void;
+	set_certificate (certificate: TlsCertificate) : void;
+	set_database (database: TlsDatabase) : void;
+	set_interaction (interaction: TlsInteraction) : void;
+	set_rehandshake_mode (mode: TlsRehandshakeMode) : void;
+	set_require_close_notify (require_close_notify: boolean) : void;
+	shutdown (shutdown_read: boolean, shutdown_write: boolean, cancellable: Cancellable) : boolean;
+	shutdown_async (shutdown_read: boolean, shutdown_write: boolean, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	shutdown_finish (result: AsyncResult) : boolean;
+}
+
+var DtlsConnection: {
+	
+	
+}
+
+
+
+
+interface DtlsServerConnection {
+	
+}
+
+var DtlsServerConnection: {
+	
+	new (base_socket: DatagramBased, certificate: TlsCertificate) : DtlsServerConnection;
 }
 
 
@@ -4959,11 +5196,14 @@ interface File {
 	has_uri_scheme (uri_scheme: string) : boolean;
 	hash () : number;
 	is_native () : boolean;
-	load_contents (cancellable: Cancellable, contents: , length: number, etag_out: string) : boolean;
+	load_bytes (cancellable: Cancellable, etag_out: string) : GLib.Bytes;
+	load_bytes_async (cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	load_bytes_finish (result: AsyncResult, etag_out: string) : GLib.Bytes;
+	load_contents (cancellable: Cancellable, contents: number[], length: number, etag_out: string) : boolean;
 	load_contents_async (cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
-	load_contents_finish (res: AsyncResult, contents: , length: number, etag_out: string) : boolean;
+	load_contents_finish (res: AsyncResult, contents: number[], length: number, etag_out: string) : boolean;
 	load_partial_contents_async (cancellable: Cancellable, read_more_callback: FileReadMoreCallback, callback: AsyncReadyCallback, user_data: any) : void;
-	load_partial_contents_finish (res: AsyncResult, contents: , length: number, etag_out: string) : boolean;
+	load_partial_contents_finish (res: AsyncResult, contents: number[], length: number, etag_out: string) : boolean;
 	make_directory (cancellable: Cancellable) : boolean;
 	make_directory_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	make_directory_finish (result: AsyncResult) : boolean;
@@ -4983,9 +5223,12 @@ interface File {
 	open_readwrite (cancellable: Cancellable) : FileIOStream;
 	open_readwrite_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	open_readwrite_finish (res: AsyncResult) : FileIOStream;
+	peek_path () : string;
 	poll_mountable (cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	poll_mountable_finish (result: AsyncResult) : boolean;
 	query_default_handler (cancellable: Cancellable) : AppInfo;
+	query_default_handler_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	query_default_handler_finish (result: AsyncResult) : AppInfo;
 	query_exists (cancellable: Cancellable) : boolean;
 	query_file_type (flags: FileQueryInfoFlags, cancellable: Cancellable) : FileType;
 	query_filesystem_info (attributes: string, cancellable: Cancellable) : FileInfo;
@@ -5001,8 +5244,8 @@ interface File {
 	read_finish (res: AsyncResult) : FileInputStream;
 	replace (etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable) : FileOutputStream;
 	replace_async (etag: string, make_backup: boolean, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
-	replace_contents (contents: , length: number, etag: string, make_backup: boolean, flags: FileCreateFlags, new_etag: string, cancellable: Cancellable) : boolean;
-	replace_contents_async (contents: , length: number, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+	replace_contents (contents: number[], length: number, etag: string, make_backup: boolean, flags: FileCreateFlags, new_etag: string, cancellable: Cancellable) : boolean;
+	replace_contents_async (contents: number[], length: number, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	replace_contents_bytes_async (contents: GLib.Bytes, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	replace_contents_finish (res: AsyncResult, new_etag: string) : boolean;
 	replace_finish (res: AsyncResult) : FileOutputStream;
@@ -5039,6 +5282,7 @@ interface File {
 
 var File: {
 	
+	new_build_filename (first_element: string) : File;
 	new_for_commandline_arg (_arg: string) : File;
 	new_for_commandline_arg_and_cwd (_arg: string, cwd: string) : File;
 	new_for_path (path: string) : File;
@@ -5086,14 +5330,14 @@ var Initable: {
 	
 	new (object_type: GObject.Type, cancellable: Cancellable, error: GLib.Error, first_property_name: string) : GObject.Object;
 	new_valist (object_type: GObject.Type, first_property_name: string, var_args: any[], cancellable: Cancellable) : GObject.Object;
-	newv (object_type: GObject.Type, n_parameters: number, parameters: , cancellable: Cancellable) : GObject.Object;
+	newv (object_type: GObject.Type, n_parameters: number, parameters: GObject.Parameter[], cancellable: Cancellable) : GObject.Object;
 }
 
 
 
 
 interface ListModel {
-	get_item (position: number) : GObject.Object;
+	get_item (position: number) : any;
 	get_item_type () : GObject.Type;
 	get_n_items () : number;
 	get_object (position: number) : GObject.Object;
@@ -5139,8 +5383,8 @@ interface Mount {
 	get_uuid () : string;
 	get_volume () : Volume;
 	guess_content_type (force_rescan: boolean, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
-	guess_content_type_finish (result: AsyncResult) : ;
-	guess_content_type_sync (force_rescan: boolean, cancellable: Cancellable) : ;
+	guess_content_type_finish (result: AsyncResult) : string[];
+	guess_content_type_sync (force_rescan: boolean, cancellable: Cancellable) : string[];
 	is_shadowed () : boolean;
 	remount (flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	remount_finish (result: AsyncResult) : boolean;
@@ -5166,6 +5410,7 @@ interface NetworkMonitor {
 	can_reach_finish (result: AsyncResult) : boolean;
 	get_connectivity () : NetworkConnectivity;
 	get_network_available () : boolean;
+	get_network_metered () : boolean;
 }
 
 var NetworkMonitor: {
@@ -5180,7 +5425,7 @@ interface PollableInputStream {
 	can_poll () : boolean;
 	create_source (cancellable: Cancellable) : GLib.Source;
 	is_readable () : boolean;
-	read_nonblocking (buffer: , count: number, cancellable: Cancellable) : number;
+	read_nonblocking (buffer: number[], count: number, cancellable: Cancellable) : number;
 }
 
 var PollableInputStream: {
@@ -5195,7 +5440,8 @@ interface PollableOutputStream {
 	can_poll () : boolean;
 	create_source (cancellable: Cancellable) : GLib.Source;
 	is_writable () : boolean;
-	write_nonblocking (buffer: , count: number, cancellable: Cancellable) : number;
+	write_nonblocking (buffer: number[], count: number, cancellable: Cancellable) : number;
+	writev_nonblocking (vectors: OutputVector[], n_vectors: number, bytes_written: number, cancellable: Cancellable) : PollableReturn;
 }
 
 var PollableOutputStream: {
@@ -5223,9 +5469,9 @@ var Proxy: {
 
 interface ProxyResolver {
 	is_supported () : boolean;
-	lookup (uri: string, cancellable: Cancellable) : ;
+	lookup (uri: string, cancellable: Cancellable) : string[];
 	lookup_async (uri: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
-	lookup_finish (result: AsyncResult) : ;
+	lookup_finish (result: AsyncResult) : string[];
 }
 
 var ProxyResolver: {
@@ -5268,6 +5514,7 @@ var Seekable: {
 interface SocketConnectable {
 	enumerate () : SocketAddressEnumerator;
 	proxy_enumerate () : SocketAddressEnumerator;
+	to_string () : string;
 }
 
 var SocketConnectable: {
@@ -5282,8 +5529,12 @@ interface TlsBackend {
 	get_certificate_type () : GObject.Type;
 	get_client_connection_type () : GObject.Type;
 	get_default_database () : TlsDatabase;
+	get_dtls_client_connection_type () : GObject.Type;
+	get_dtls_server_connection_type () : GObject.Type;
 	get_file_database_type () : GObject.Type;
 	get_server_connection_type () : GObject.Type;
+	set_default_database (database: TlsDatabase) : void;
+	supports_dtls () : boolean;
 	supports_tls () : boolean;
 }
 
@@ -5345,7 +5596,7 @@ interface Volume {
 	eject_finish (result: AsyncResult) : boolean;
 	eject_with_operation (flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
 	eject_with_operation_finish (result: AsyncResult) : boolean;
-	enumerate_identifiers () : ;
+	enumerate_identifiers () : string[];
 	get_activation_root () : File;
 	get_drive () : Drive;
 	get_icon () : Icon;
@@ -5621,7 +5872,8 @@ enum IOErrorEnum {
 	proxy_not_allowed = 43,
 	broken_pipe = 44,
 	connection_closed = 44,
-	not_connected = 45
+	not_connected = 45,
+	message_too_large = 46
 }
 
 
@@ -5663,6 +5915,14 @@ enum PasswordSave {
 	never = 0,
 	for_session = 1,
 	permanently = 2
+}
+
+
+
+enum PollableReturn {
+	failed = 0,
+	ok = 1,
+	would_block = -27
 }
 
 
@@ -5771,7 +6031,8 @@ enum TlsError {
 	not_tls = 3,
 	handshake = 4,
 	certificate_required = 5,
-	eof = 6
+	eof = 6,
+	inappropriate_fallback = 7
 }
 
 
@@ -5826,7 +6087,10 @@ enum ApplicationFlags {
 	handles_open = 4,
 	handles_command_line = 8,
 	send_environment = 16,
-	non_unique = 32
+	non_unique = 32,
+	can_override_app_id = 64,
+	allow_replacement = 128,
+	replace = 256
 }
 
 
@@ -5836,7 +6100,8 @@ enum AskPasswordFlags {
 	need_username = 2,
 	need_domain = 4,
 	saving_supported = 8,
-	anonymous_supported = 16
+	anonymous_supported = 16,
+	tcrypt = 32
 }
 
 
@@ -5844,7 +6109,8 @@ enum AskPasswordFlags {
 enum BusNameOwnerFlags {
 	none = 0,
 	allow_replacement = 1,
-	replace = 2
+	replace = 2,
+	do_not_queue = 4
 }
 
 
@@ -5866,7 +6132,8 @@ enum ConverterFlags {
 
 enum DBusCallFlags {
 	none = 0,
-	no_auto_start = 1
+	no_auto_start = 1,
+	allow_interactive_authorization = 2
 }
 
 
@@ -5899,7 +6166,8 @@ enum DBusInterfaceSkeletonFlags {
 enum DBusMessageFlags {
 	none = 0,
 	no_reply_expected = 1,
-	no_auto_start = 2
+	no_auto_start = 2,
+	allow_interactive_authorization = 4
 }
 
 
@@ -6047,6 +6315,14 @@ enum OutputStreamSpliceFlags {
 	none = 0,
 	close_source = 1,
 	close_target = 2
+}
+
+
+
+enum ResolverNameLookupFlags {
+	default = 0,
+	ipv4_only = 1,
+	ipv6_only = 2
 }
 
 
@@ -6217,13 +6493,19 @@ interface DBusSubtreeDispatchFunc {
 
 
 interface DBusSubtreeEnumerateFunc {
-	(connection: DBusConnection, sender: string, object_path: string, user_data: any) : ;
+	(connection: DBusConnection, sender: string, object_path: string, user_data: any) : string[];
 }
 
 
 
 interface DBusSubtreeIntrospectFunc {
 	(connection: DBusConnection, sender: string, object_path: string, node: string, user_data: any) : DBusInterfaceInfo;
+}
+
+
+
+interface DatagramBasedSourceFunc {
+	(datagram_based: DatagramBased, condition: GLib.IOCondition, user_data: any) : boolean;
 }
 
 
@@ -6306,551 +6588,9 @@ interface TaskThreadFunc {
 
 
 
-type ActionMap_autoptr = any;
-
-
-
-type Action_autoptr = any;
-
-
-
-type AppInfoMonitor_autoptr = any;
-
-
-
-type AppInfo_autoptr = any;
-
-
-
-type AppLaunchContext_autoptr = any;
-
-
-
-type ApplicationCommandLine_autoptr = any;
-
-
-
-type Application_autoptr = any;
-
-
-
-type AsyncInitable_autoptr = any;
-
-
-
-type AsyncResult_autoptr = any;
-
-
-
-type BufferedInputStream_autoptr = any;
-
-
-
-type BufferedOutputStream_autoptr = any;
-
-
-
-type BytesIcon_autoptr = any;
-
-
-
-type Cancellable_autoptr = any;
-
-
-
-type CharsetConverter_autoptr = any;
-
-
-
-type ConverterInputStream_autoptr = any;
-
-
-
-type ConverterOutputStream_autoptr = any;
-
-
-
-type Converter_autoptr = any;
-
-
-
-type Credentials_autoptr = any;
-
-
-
-type DBusActionGroup_autoptr = any;
-
-
-
-type DBusAuthObserver_autoptr = any;
-
-
-
-type DBusConnection_autoptr = any;
-
-
-
-type DBusInterfaceSkeleton_autoptr = any;
-
-
-
-type DBusInterface_autoptr = any;
-
-
-
-type DBusMenuModel_autoptr = any;
-
-
-
-type DBusMessage_autoptr = any;
-
-
-
-type DBusMethodInvocation_autoptr = any;
-
-
-
-type DBusNodeInfo_autoptr = any;
-
-
-
-type DBusObjectManagerClient_autoptr = any;
-
-
-
-type DBusObjectManagerServer_autoptr = any;
-
-
-
-type DBusObjectManager_autoptr = any;
-
-
-
-type DBusObjectProxy_autoptr = any;
-
-
-
-type DBusObjectSkeleton_autoptr = any;
-
-
-
-type DBusObject_autoptr = any;
-
-
-
-type DBusProxy_autoptr = any;
-
-
-
-type DBusServer_autoptr = any;
-
-
-
-type DataInputStream_autoptr = any;
-
-
-
-type DataOutputStream_autoptr = any;
-
-
-
-type DesktopAppInfo_autoptr = any;
-
-
-
-type Drive_autoptr = any;
-
-
-
-type Emblem_autoptr = any;
-
-
-
-type EmblemedIcon_autoptr = any;
-
-
-
-type FileDescriptorBased_autoptr = any;
-
-
-
-type FileEnumerator_autoptr = any;
-
-
-
-type FileIOStream_autoptr = any;
-
-
-
-type FileIcon_autoptr = any;
-
-
-
-type FileInfo_autoptr = any;
-
-
-
-type FileInputStream_autoptr = any;
-
-
-
-type FileMonitor_autoptr = any;
-
-
-
-type FileOutputStream_autoptr = any;
-
-
-
-type File_autoptr = any;
-
-
-
-type FilenameCompleter_autoptr = any;
-
-
-
-type FilterInputStream_autoptr = any;
-
-
-
-type FilterOutputStream_autoptr = any;
-
-
-
-type IOModule_autoptr = any;
-
-
-
-type IOStream_autoptr = any;
-
-
-
-type Icon_autoptr = any;
-
-
-
-type InetAddressMask_autoptr = any;
-
-
-
-type InetAddress_autoptr = any;
-
-
-
-type InetSocketAddress_autoptr = any;
-
-
-
-type Initable_autoptr = any;
-
-
-
-type InputStream_autoptr = any;
-
-
-
-type ListModel_autoptr = any;
-
-
-
-type ListStore_autoptr = any;
-
-
-
-type LoadableIcon_autoptr = any;
-
-
-
-type MemoryInputStream_autoptr = any;
-
-
-
-type MemoryOutputStream_autoptr = any;
-
-
-
-type MenuAttributeIter_autoptr = any;
-
-
-
-type MenuItem_autoptr = any;
-
-
-
-type MenuLinkIter_autoptr = any;
-
-
-
-type MenuModel_autoptr = any;
-
-
-
-type Menu_autoptr = any;
-
-
-
-type MountOperation_autoptr = any;
-
-
-
-type Mount_autoptr = any;
-
-
-
-type NativeVolumeMonitor_autoptr = any;
-
-
-
-type NetworkAddress_autoptr = any;
-
-
-
-type NetworkMonitor_autoptr = any;
-
-
-
-type NetworkService_autoptr = any;
-
-
-
-type Notification_autoptr = any;
-
-
-
-type OutputStream_autoptr = any;
-
-
-
-type Permission_autoptr = any;
-
-
-
-type PollableInputStream_autoptr = any;
-
-
-
-type PollableOutputStream_autoptr = any;
-
-
-
-type PropertyAction_autoptr = any;
-
-
-
-type ProxyAddressEnumerator_autoptr = any;
-
-
-
-type ProxyAddress_autoptr = any;
-
-
-
-type ProxyResolver_autoptr = any;
-
-
-
-type Proxy_autoptr = any;
-
-
-
-type RemoteActionGroup_autoptr = any;
-
-
-
-type Resolver_autoptr = any;
-
-
-
-type Seekable_autoptr = any;
-
-
-
-type SettingsBackend_autoptr = any;
-
-
-
-type SettingsSchema_autoptr = any;
-
-
-
-type Settings_autoptr = any;
-
-
-
-type SimpleActionGroup_autoptr = any;
-
-
-
-type SimpleAction_autoptr = any;
-
-
-
-type SimpleAsyncResult_autoptr = any;
-
-
-
-type SimplePermission_autoptr = any;
-
-
-
-type SimpleProxyResolver_autoptr = any;
-
-
-
-type SocketAddressEnumerator_autoptr = any;
-
-
-
-type SocketAddress_autoptr = any;
-
-
-
-type SocketClient_autoptr = any;
-
-
-
-type SocketConnectable_autoptr = any;
-
-
-
-type SocketConnection_autoptr = any;
-
-
-
-type SocketControlMessage_autoptr = any;
-
-
-
-type SocketListener_autoptr = any;
-
-
-
-type SocketService_autoptr = any;
-
-
-
-type Socket_autoptr = any;
-
-
-
-type SubprocessLauncher_autoptr = any;
-
-
-
-type Subprocess_autoptr = any;
-
-
-
-type Task_autoptr = any;
-
-
-
-type TcpConnection_autoptr = any;
-
-
-
-type TcpWrapperConnection_autoptr = any;
-
-
-
-type TestDBus_autoptr = any;
-
-
-
-type ThemedIcon_autoptr = any;
-
-
-
-type ThreadedSocketService_autoptr = any;
-
-
-
-type TlsBackend_autoptr = any;
-
-
-
-type TlsCertificate_autoptr = any;
-
-
-
-type TlsClientConnection_autoptr = any;
-
-
-
-type TlsConnection_autoptr = any;
-
-
-
-type TlsDatabase_autoptr = any;
-
-
-
-type TlsFileDatabase_autoptr = any;
-
-
-
-type TlsInteraction_autoptr = any;
-
-
-
-type TlsPassword_autoptr = any;
-
-
-
-type TlsServerConnection_autoptr = any;
-
-
-
-type UnixConnection_autoptr = any;
-
-
-
-type UnixCredentialsMessage_autoptr = any;
-
-
-
-type UnixFDList_autoptr = any;
-
-
-
-type UnixFDMessage_autoptr = any;
-
-
-
-type UnixInputStream_autoptr = any;
-
-
-
-type UnixMountMonitor_autoptr = any;
-
-
-
-type UnixOutputStream_autoptr = any;
-
-
-
-type UnixSocketAddress_autoptr = any;
-
-
-
-type Vfs_autoptr = any;
-
-
-
-type VolumeMonitor_autoptr = any;
-
-
-
-type Volume_autoptr = any;
-
-
-
-type ZlibCompressor_autoptr = any;
-
-
-
-type ZlibDecompressor_autoptr = any;
+interface VfsFileLookupFunc {
+	(vfs: Vfs, identifier: string, user_data: any) : File;
+}
 
 
 
@@ -6894,7 +6634,15 @@ function app_info_get_recommended_for_type (content_type: string): GLib.List;
 
 
 
-function app_info_launch_default_for_uri (uri: string, launch_context: AppLaunchContext): boolean;
+function app_info_launch_default_for_uri (uri: string, context: AppLaunchContext): boolean;
+
+
+
+function app_info_launch_default_for_uri_async (uri: string, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+
+
+
+function app_info_launch_default_for_uri_finish (result: AsyncResult): boolean;
 
 
 
@@ -6982,6 +6730,10 @@ function content_type_get_icon (_type: string): Icon;
 
 
 
+function content_type_get_mime_dirs (): string[];
+
+
+
 function content_type_get_mime_type (_type: string): string;
 
 
@@ -6990,11 +6742,11 @@ function content_type_get_symbolic_icon (_type: string): Icon;
 
 
 
-function content_type_guess (filename: string, data: , data_size: number, result_uncertain: boolean): string;
+function content_type_guess (filename: string, data: number[], data_size: number, result_uncertain: boolean): string;
 
 
 
-function content_type_guess_for_tree (root: File): ;
+function content_type_guess_for_tree (root: File): string[];
 
 
 
@@ -7002,7 +6754,15 @@ function content_type_is_a (_type: string, supertype: string): boolean;
 
 
 
+function content_type_is_mime_type (_type: string, mime_type: string): boolean;
+
+
+
 function content_type_is_unknown (_type: string): boolean;
+
+
+
+function content_type_set_mime_dirs (dirs: string[]): void;
 
 
 
@@ -7030,7 +6790,7 @@ function dbus_address_get_stream_sync (address: string, out_guid: string, cancel
 
 
 
-function dbus_annotation_info_lookup (annotations: , name: string): string;
+function dbus_annotation_info_lookup (annotations: DBusAnnotationInfo[], name: string): string;
 
 
 
@@ -7058,7 +6818,7 @@ function dbus_error_register_error (error_domain: GLib.Quark, error_code: number
 
 
 
-function dbus_error_register_error_domain (error_domain_quark_name: string, quark_volatile: number, entries: DBusErrorEntry, num_entries: number): void;
+function dbus_error_register_error_domain (error_domain_quark_name: string, quark_volatile: number, entries: DBusErrorEntry[], num_entries: number): void;
 
 
 
@@ -7110,6 +6870,14 @@ function dbus_is_unique_name (string: string): boolean;
 
 
 
+function dtls_client_connection_new (base_socket: DatagramBased, server_identity: SocketConnectable): DtlsClientConnection;
+
+
+
+function dtls_server_connection_new (base_socket: DatagramBased, certificate: TlsCertificate): DtlsServerConnection;
+
+
+
 function file_new_for_commandline_arg (_arg: string): File;
 
 
@@ -7146,7 +6914,7 @@ function icon_new_for_string (_str: string): Icon;
 
 
 
-function initable_newv (object_type: GObject.Type, n_parameters: number, parameters: , cancellable: Cancellable): GObject.Object;
+function initable_newv (object_type: GObject.Type, n_parameters: number, parameters: GObject.Parameter[], cancellable: Cancellable): GObject.Object;
 
 
 
@@ -7194,11 +6962,23 @@ function io_scheduler_push_job (job_func: IOSchedulerJobFunc, user_data: any, no
 
 
 
+function keyfile_settings_backend_new (filename: string, root_path: string, root_group: string): SettingsBackend;
+
+
+
+function memory_settings_backend_new (): SettingsBackend;
+
+
+
 function network_monitor_get_default (): NetworkMonitor;
 
 
 
 function networking_init (): void;
+
+
+
+function null_settings_backend_new (): SettingsBackend;
 
 
 
@@ -7210,15 +6990,15 @@ function pollable_source_new_full (pollable_stream: GObject.Object, child_source
 
 
 
-function pollable_stream_read (stream: InputStream, buffer: , count: number, blocking: boolean, cancellable: Cancellable): number;
+function pollable_stream_read (stream: InputStream, buffer: number[], count: number, blocking: boolean, cancellable: Cancellable): number;
 
 
 
-function pollable_stream_write (stream: OutputStream, buffer: , count: number, blocking: boolean, cancellable: Cancellable): number;
+function pollable_stream_write (stream: OutputStream, buffer: number[], count: number, blocking: boolean, cancellable: Cancellable): number;
 
 
 
-function pollable_stream_write_all (stream: OutputStream, buffer: , count: number, blocking: boolean, bytes_written: number, cancellable: Cancellable): boolean;
+function pollable_stream_write_all (stream: OutputStream, buffer: number[], count: number, blocking: boolean, bytes_written: number, cancellable: Cancellable): boolean;
 
 
 
@@ -7242,7 +7022,7 @@ function resource_load (filename: string): Resource;
 
 
 
-function resources_enumerate_children (path: string, lookup_flags: ResourceLookupFlags): ;
+function resources_enumerate_children (path: string, lookup_flags: ResourceLookupFlags): string[];
 
 
 
@@ -7310,11 +7090,27 @@ function unix_is_mount_path_system_internal (mount_path: string): boolean;
 
 
 
+function unix_is_system_device_path (device_path: string): boolean;
+
+
+
+function unix_is_system_fs_type (fs_type: string): boolean;
+
+
+
 function unix_mount_at (mount_path: string, time_read: number): UnixMountEntry;
 
 
 
 function unix_mount_compare (mount1: UnixMountEntry, mount2: UnixMountEntry): number;
+
+
+
+function unix_mount_copy (mount_entry: UnixMountEntry): UnixMountEntry;
+
+
+
+function unix_mount_for (file_path: string, time_read: number): UnixMountEntry;
 
 
 
@@ -7331,6 +7127,14 @@ function unix_mount_get_fs_type (mount_entry: UnixMountEntry): string;
 
 
 function unix_mount_get_mount_path (mount_entry: UnixMountEntry): string;
+
+
+
+function unix_mount_get_options (mount_entry: UnixMountEntry): string;
+
+
+
+function unix_mount_get_root_path (mount_entry: UnixMountEntry): string;
 
 
 

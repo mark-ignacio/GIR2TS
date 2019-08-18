@@ -8,6 +8,7 @@ interface Pixbuf extends GObject.Object, Gio.Icon, Gio.LoadableIcon {
 	composite_color_simple (dest_width: number, dest_height: number, interp_type: InterpType, overall_alpha: number, check_size: number, color1: number, color2: number) : Pixbuf;
 	copy () : Pixbuf;
 	copy_area (src_x: number, src_y: number, width: number, height: number, dest_pixbuf: Pixbuf, dest_x: number, dest_y: number) : void;
+	copy_options (dest_pixbuf: Pixbuf) : boolean;
 	fill (pixel: number) : void;
 	flip (horizontal: boolean) : Pixbuf;
 	get_bits_per_sample () : number;
@@ -18,44 +19,48 @@ interface Pixbuf extends GObject.Object, Gio.Icon, Gio.LoadableIcon {
 	get_n_channels () : number;
 	get_option (key: string) : string;
 	get_options () : GLib.HashTable;
-	get_pixels () : ;
-	get_pixels_with_length (length: number) : ;
+	get_pixels () : number[];
+	get_pixels_with_length (length: number) : number[];
 	get_rowstride () : number;
 	get_width () : number;
 	new_subpixbuf (src_x: number, src_y: number, width: number, height: number) : Pixbuf;
 	read_pixel_bytes () : GLib.Bytes;
 	read_pixels () : number;
 	ref () : Pixbuf;
+	remove_option (key: string) : boolean;
 	rotate_simple (angle: PixbufRotation) : Pixbuf;
 	saturate_and_pixelate (dest: Pixbuf, saturation: number, pixelate: boolean) : void;
 	save (filename: string, _type: string, error: GLib.Error) : boolean;
-	save_to_buffer (buffer: , buffer_size: number, _type: string, error: GLib.Error) : boolean;
-	save_to_bufferv (buffer: , buffer_size: number, _type: string, option_keys: , option_values: ) : boolean;
+	save_to_buffer (buffer: number[], buffer_size: number, _type: string, error: GLib.Error) : boolean;
+	save_to_bufferv (buffer: number[], buffer_size: number, _type: string, option_keys: string[], option_values: string[]) : boolean;
 	save_to_callback (save_func: PixbufSaveFunc, user_data: any, _type: string, error: GLib.Error) : boolean;
-	save_to_callbackv (save_func: PixbufSaveFunc, user_data: any, _type: string, option_keys: , option_values: ) : boolean;
+	save_to_callbackv (save_func: PixbufSaveFunc, user_data: any, _type: string, option_keys: string[], option_values: string[]) : boolean;
 	save_to_stream (stream: Gio.OutputStream, _type: string, cancellable: Gio.Cancellable, error: GLib.Error) : boolean;
 	save_to_stream_async (stream: Gio.OutputStream, _type: string, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback, user_data: any) : void;
-	savev (filename: string, _type: string, option_keys: , option_values: ) : boolean;
+	save_to_streamv (stream: Gio.OutputStream, _type: string, option_keys: string[], option_values: string[], cancellable: Gio.Cancellable) : boolean;
+	save_to_streamv_async (stream: Gio.OutputStream, _type: string, option_keys: string[], option_values: string[], cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback, user_data: any) : void;
+	savev (filename: string, _type: string, option_keys: string[], option_values: string[]) : boolean;
 	scale (dest: Pixbuf, dest_x: number, dest_y: number, dest_width: number, dest_height: number, offset_x: number, offset_y: number, scale_x: number, scale_y: number, interp_type: InterpType) : void;
 	scale_simple (dest_width: number, dest_height: number, interp_type: InterpType) : Pixbuf;
+	set_option (key: string, value: string) : boolean;
 	unref () : void;
 }
 
 var Pixbuf: {
 	new (colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number) : Pixbuf;
 	new_from_bytes (data: GLib.Bytes, colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number) : Pixbuf;
-	new_from_data (data: , colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number, destroy_fn: PixbufDestroyNotify, destroy_fn_data: any) : Pixbuf;
+	new_from_data (data: number[], colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number, destroy_fn: PixbufDestroyNotify, destroy_fn_data: any) : Pixbuf;
 	new_from_file (filename: string) : Pixbuf;
 	new_from_file_at_scale (filename: string, width: number, height: number, preserve_aspect_ratio: boolean) : Pixbuf;
 	new_from_file_at_size (filename: string, width: number, height: number) : Pixbuf;
-	new_from_inline (data_length: number, data: , copy_pixels: boolean) : Pixbuf;
+	new_from_inline (data_length: number, data: number[], copy_pixels: boolean) : Pixbuf;
 	new_from_resource (resource_path: string) : Pixbuf;
 	new_from_resource_at_scale (resource_path: string, width: number, height: number, preserve_aspect_ratio: boolean) : Pixbuf;
 	new_from_stream (stream: Gio.InputStream, cancellable: Gio.Cancellable) : Pixbuf;
 	new_from_stream_at_scale (stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable) : Pixbuf;
 	new_from_stream_finish (async_result: Gio.AsyncResult) : Pixbuf;
-	new_from_xpm_data (data: ) : Pixbuf;
-	from_pixdata (pixdata: Pixdata, copy_pixels: boolean) : Pixbuf;
+	new_from_xpm_data (data: string[]) : Pixbuf;
+	calculate_rowstride (colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number) : number;
 	get_file_info (filename: string, width: number, height: number) : PixbufFormat;
 	get_file_info_async (filename: string, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback, user_data: any) : void;
 	get_file_info_finish (async_result: Gio.AsyncResult, width: number, height: number) : PixbufFormat;
@@ -110,7 +115,7 @@ interface PixbufLoader extends GObject.Object {
 	get_format () : PixbufFormat;
 	get_pixbuf () : Pixbuf;
 	set_size (width: number, height: number) : void;
-	write (buf: , count: number) : boolean;
+	write (buf: number[], count: number) : boolean;
 	write_bytes (buffer: GLib.Bytes) : boolean;
 }
 
@@ -156,11 +161,12 @@ class PixbufFormat {
 	public copy () : PixbufFormat;
 	public free () : void;
 	public get_description () : string;
-	public get_extensions () : ;
+	public get_extensions () : string[];
 	public get_license () : string;
-	public get_mime_types () : ;
+	public get_mime_types () : string[];
 	public get_name () : string;
 	public is_disabled () : boolean;
+	public is_save_option_supported (option_key: string) : boolean;
 	public is_scalable () : boolean;
 	public is_writable () : boolean;
 	public set_disabled (disabled: boolean) : void;
@@ -183,24 +189,6 @@ class PixbufLoaderClass {
 class PixbufSimpleAnimClass {
 
 
-}
-
-
-
-class Pixdata {
-	public magic: number;
-	public length: number;
-	public pixdata_type: number;
-	public rowstride: number;
-	public width: number;
-	public height: number;
-	public pixel_data: ;
-
-
-	public deserialize (stream_length: number, stream: ) : boolean;
-	public from_pixbuf (pixbuf: Pixbuf, use_rle: boolean) : any;
-	public serialize (stream_length_p: number) : ;
-	public to_csource (name: string, dump_type: PixdataDumpType) : GLib.String;
 }
 
 
@@ -233,7 +221,8 @@ enum PixbufError {
 	bad_option = 2,
 	unknown_type = 3,
 	unsupported_operation = 4,
-	failed = 5
+	failed = 5,
+	incomplete_animation = 6
 }
 
 
@@ -247,61 +236,15 @@ enum PixbufRotation {
 
 
 
-enum PixdataDumpType {
-	pixdata_stream = 0,
-	pixdata_struct = 1,
-	macros = 2,
-	gtypes = 0,
-	ctypes = 256,
-	static = 512,
-	const = 1024,
-	rle_decoder = 65536
-}
-
-
-
-enum PixdataType {
-	color_type_rgb = 1,
-	color_type_rgba = 2,
-	color_type_mask = 255,
-	sample_width_8 = 65536,
-	sample_width_mask = 983040,
-	encoding_raw = 16777216,
-	encoding_rle = 33554432,
-	encoding_mask = 251658240
-}
-
-
-
 interface PixbufDestroyNotify {
-	(pixels: , data: any) : void;
+	(pixels: number[], data: any) : void;
 }
 
 
 
 interface PixbufSaveFunc {
-	(buf: , count: number, error: GLib.Error, data: any) : boolean;
+	(buf: number[], count: number, error: GLib.Error, data: any) : boolean;
 }
-
-
-
-type PixbufAnimationIter_autoptr = any;
-
-
-
-type PixbufAnimation_autoptr = any;
-
-
-
-type PixbufLoader_autoptr = any;
-
-
-
-type PixbufSimpleAnim_autoptr = any;
-
-
-
-type Pixbuf_autoptr = any;
 
 
 

@@ -11,8 +11,9 @@ interface Context extends GObject.Object {
 	get_language () : Language;
 	get_matrix () : Matrix;
 	get_metrics (desc: FontDescription, language: Language) : FontMetrics;
+	get_round_glyph_positions () : boolean;
 	get_serial () : number;
-	list_families (families: , n_families: number) : void;
+	list_families (families: FontFamily[], n_families: number) : void;
 	load_font (desc: FontDescription) : Font;
 	load_fontset (desc: FontDescription, language: Language) : Fontset;
 	set_base_dir (direction: Direction) : void;
@@ -22,11 +23,30 @@ interface Context extends GObject.Object {
 	set_gravity_hint (hint: GravityHint) : void;
 	set_language (language: Language) : void;
 	set_matrix (matrix: Matrix) : void;
+	set_round_glyph_positions (round_positions: boolean) : void;
 }
 
 var Context: {
 	new () : Context;
 	
+}
+
+
+
+
+interface Coverage extends GObject.Object {
+	copy () : Coverage;
+	get (index_: number) : CoverageLevel;
+	max (other: Coverage) : void;
+	ref () : Coverage;
+	set (index_: number, level: CoverageLevel) : void;
+	to_bytes (bytes: number[], n_bytes: number) : void;
+	unref () : void;
+}
+
+var Coverage: {
+	new () : Coverage;
+	from_bytes (bytes: number[], n_bytes: number) : Coverage;
 }
 
 
@@ -73,14 +93,17 @@ interface Font extends GObject.Object {
 	describe_with_absolute_size () : FontDescription;
 	find_shaper (language: Language, _ch: number) : EngineShape;
 	get_coverage (language: Language) : Coverage;
+	get_features (features: undefined[], len: number, num_features: number) : void;
 	get_font_map () : FontMap;
 	get_glyph_extents (glyph: Glyph, ink_rect: Rectangle, logical_rect: Rectangle) : void;
+	get_hb_font () : undefined;
 	get_metrics (language: Language) : FontMetrics;
+	has_char (wc: string) : boolean;
 }
 
 var Font: {
 	
-	descriptions_free (descs: , n_descs: number) : void;
+	descriptions_free (descs: FontDescription[], n_descs: number) : void;
 }
 
 
@@ -90,7 +113,7 @@ interface FontFace extends GObject.Object {
 	describe () : FontDescription;
 	get_face_name () : string;
 	is_synthesized () : boolean;
-	list_sizes (sizes: , n_sizes: number) : void;
+	list_sizes (sizes: number[], n_sizes: number) : void;
 }
 
 var FontFace: {
@@ -104,7 +127,8 @@ var FontFace: {
 interface FontFamily extends GObject.Object {
 	get_name () : string;
 	is_monospace () : boolean;
-	list_faces (faces: , n_faces: number) : void;
+	is_variable () : boolean;
+	list_faces (faces: FontFace[], n_faces: number) : void;
 }
 
 var FontFamily: {
@@ -119,8 +143,7 @@ interface FontMap extends GObject.Object {
 	changed () : void;
 	create_context () : Context;
 	get_serial () : number;
-	get_shape_engine_type () : string;
-	list_families (families: , n_families: number) : void;
+	list_families (families: FontFamily[], n_families: number) : void;
 	load_font (context: Context, desc: FontDescription) : Font;
 	load_fontset (context: Context, desc: FontDescription, language: Language) : Fontset;
 }
@@ -147,19 +170,6 @@ var Fontset: {
 
 
 
-interface FontsetSimple extends Fontset {
-	append (font: Font) : void;
-	size () : number;
-}
-
-var FontsetSimple: {
-	new (language: Language) : FontsetSimple;
-	
-}
-
-
-
-
 interface Layout extends GObject.Object {
 	context_changed () : void;
 	copy () : Layout;
@@ -180,10 +190,11 @@ interface Layout extends GObject.Object {
 	get_line (line: number) : LayoutLine;
 	get_line_count () : number;
 	get_line_readonly (line: number) : LayoutLine;
+	get_line_spacing () : number;
 	get_lines () : GLib.SList;
 	get_lines_readonly () : GLib.SList;
-	get_log_attrs (attrs: , n_attrs: number) : void;
-	get_log_attrs_readonly (n_attrs: number) : ;
+	get_log_attrs (attrs: LogAttr[], n_attrs: number) : void;
+	get_log_attrs_readonly (n_attrs: number) : LogAttr[];
 	get_pixel_extents (ink_rect: Rectangle, logical_rect: Rectangle) : void;
 	get_pixel_size (width: number, height: number) : void;
 	get_serial () : number;
@@ -208,6 +219,7 @@ interface Layout extends GObject.Object {
 	set_height (height: number) : void;
 	set_indent (indent: number) : void;
 	set_justify (justify: boolean) : void;
+	set_line_spacing (factor: number) : void;
 	set_markup (markup: string, length: number) : void;
 	set_markup_with_accel (markup: string, length: number, accel_marker: string, accel_char: string) : void;
 	set_single_paragraph_mode (setting: boolean) : void;
@@ -358,12 +370,14 @@ class AttrList {
 	public change (attr: Attribute) : void;
 	public copy () : AttrList;
 	public filter (_func: AttrFilterFunc, data: any) : AttrList;
+	public get_attributes () : GLib.SList;
 	public get_iterator () : AttrIterator;
 	public insert (attr: Attribute) : void;
 	public insert_before (attr: Attribute) : void;
 	public ref () : AttrList;
 	public splice (other: AttrList, pos: number, len: number) : void;
 	public unref () : void;
+	public update (pos: number, remove: number, add: number) : void;
 }
 
 
@@ -435,20 +449,6 @@ class ContextClass {
 
 
 
-class Coverage {
-
-
-	public copy () : Coverage;
-	public get (index_: number) : CoverageLevel;
-	public max (other: Coverage) : void;
-	public ref () : Coverage;
-	public set (index_: number, level: CoverageLevel) : void;
-	public to_bytes (bytes: , n_bytes: number) : void;
-	public unref () : void;
-}
-
-
-
 class EngineClass {
 	public parent_class: GObject.ObjectClass;
 
@@ -497,23 +497,6 @@ class EngineShapeClass {
 
 
 
-class FontClass {
-	public parent_class: GObject.ObjectClass;
-
-	describe : {(font: Font) : FontDescription;};
-	get_coverage : {(font: Font, lang: Language) : Coverage;};
-	find_shaper : {(font: Font, lang: Language, _ch: number) : EngineShape;};
-	get_glyph_extents : {(font: Font, glyph: Glyph, ink_rect: Rectangle, logical_rect: Rectangle) : void;};
-	get_metrics : {(font: Font, language: Language) : FontMetrics;};
-	get_font_map : {(font: Font) : FontMap;};
-	describe_absolute : {(font: Font) : FontDescription;};
-	_pango_reserved1 : {() : void;};
-	_pango_reserved2 : {() : void;};
-
-}
-
-
-
 class FontDescription {
 
 
@@ -530,6 +513,7 @@ class FontDescription {
 	public get_stretch () : Stretch;
 	public get_style () : Style;
 	public get_variant () : Variant;
+	public get_variations () : string;
 	public get_weight () : Weight;
 	public hash () : number;
 	public merge (desc_to_merge: FontDescription, replace_existing: boolean) : void;
@@ -542,38 +526,12 @@ class FontDescription {
 	public set_stretch (stretch: Stretch) : void;
 	public set_style (style: Style) : void;
 	public set_variant (variant: Variant) : void;
+	public set_variations (variations: string) : void;
+	public set_variations_static (variations: string) : void;
 	public set_weight (weight: Weight) : void;
 	public to_filename () : string;
 	public to_string () : string;
 	public unset_fields (to_unset: FontMask) : void;
-}
-
-
-
-class FontFaceClass {
-	public parent_class: GObject.ObjectClass;
-
-	get_face_name : {(_face: FontFace) : string;};
-	describe : {(_face: FontFace) : FontDescription;};
-	list_sizes : {(_face: FontFace, sizes: , n_sizes: number) : void;};
-	is_synthesized : {(_face: FontFace) : boolean;};
-	_pango_reserved3 : {() : void;};
-	_pango_reserved4 : {() : void;};
-
-}
-
-
-
-class FontFamilyClass {
-	public parent_class: GObject.ObjectClass;
-
-	list_faces : {(family: FontFamily, faces: , n_faces: number) : void;};
-	get_name : {(family: FontFamily) : string;};
-	is_monospace : {(family: FontFamily) : boolean;};
-	_pango_reserved2 : {() : void;};
-	_pango_reserved3 : {() : void;};
-	_pango_reserved4 : {() : void;};
-
 }
 
 
@@ -583,7 +541,7 @@ class FontMapClass {
 	public shape_engine_type: string;
 
 	load_font : {(fontmap: FontMap, context: Context, desc: FontDescription) : Font;};
-	list_families : {(fontmap: FontMap, families: , n_families: number) : void;};
+	list_families : {(fontmap: FontMap, families: FontFamily[], n_families: number) : void;};
 	load_fontset : {(fontmap: FontMap, context: Context, desc: FontDescription, language: Language) : Fontset;};
 	get_serial : {(fontmap: FontMap) : number;};
 	changed : {(fontmap: FontMap) : void;};
@@ -595,50 +553,19 @@ class FontMapClass {
 
 
 class FontMetrics {
-	public ref_count: number;
-	public ascent: number;
-	public descent: number;
-	public approximate_char_width: number;
-	public approximate_digit_width: number;
-	public underline_position: number;
-	public underline_thickness: number;
-	public strikethrough_position: number;
-	public strikethrough_thickness: number;
 
 
 	public get_approximate_char_width () : number;
 	public get_approximate_digit_width () : number;
 	public get_ascent () : number;
 	public get_descent () : number;
+	public get_height () : number;
 	public get_strikethrough_position () : number;
 	public get_strikethrough_thickness () : number;
 	public get_underline_position () : number;
 	public get_underline_thickness () : number;
 	public ref () : FontMetrics;
 	public unref () : void;
-}
-
-
-
-class FontsetClass {
-	public parent_class: GObject.ObjectClass;
-
-	get_font : {(fontset: Fontset, wc: number) : Font;};
-	get_metrics : {(fontset: Fontset) : FontMetrics;};
-	get_language : {(fontset: Fontset) : Language;};
-	foreach : {(fontset: Fontset, _func: FontsetForeachFunc, data: any) : void;};
-	_pango_reserved1 : {() : void;};
-	_pango_reserved2 : {() : void;};
-	_pango_reserved3 : {() : void;};
-	_pango_reserved4 : {() : void;};
-
-}
-
-
-
-class FontsetSimpleClass {
-
-
 }
 
 
@@ -671,8 +598,8 @@ class GlyphItem {
 	public apply_attrs (text: string, list: AttrList) : GLib.SList;
 	public copy () : GlyphItem;
 	public free () : void;
-	public get_logical_widths (text: string, logical_widths: ) : void;
-	public letter_space (text: string, log_attrs: , letter_spacing: number) : void;
+	public get_logical_widths (text: string, logical_widths: number[]) : void;
+	public letter_space (text: string, log_attrs: LogAttr[], letter_spacing: number) : void;
 	public split (text: string, split_index: number) : GlyphItem;
 }
 
@@ -701,7 +628,7 @@ class GlyphItemIter {
 
 class GlyphString {
 	public num_glyphs: number;
-	public glyphs: ;
+	public glyphs: GlyphInfo[];
 	public log_clusters: number;
 	public space: number;
 
@@ -710,7 +637,7 @@ class GlyphString {
 	public extents (font: Font, ink_rect: Rectangle, logical_rect: Rectangle) : void;
 	public extents_range (start: number, _end: number, font: Font, ink_rect: Rectangle, logical_rect: Rectangle) : void;
 	public free () : void;
-	public get_logical_widths (text: string, length: number, embedding_level: number, logical_widths: ) : void;
+	public get_logical_widths (text: string, length: number, embedding_level: number, logical_widths: number[]) : void;
 	public get_width () : number;
 	public index_to_x (text: string, length: number, analysis: Analysis, index_: number, trailing: boolean, x_pos: number) : void;
 	public set_size (new_len: number) : void;
@@ -745,6 +672,7 @@ class Item {
 	public analysis: Analysis;
 
 
+	public apply_attrs (iter: AttrIterator) : void;
 	public copy () : Item;
 	public free () : void;
 	public split (split_index: number, split_offset: number) : Item;
@@ -756,7 +684,7 @@ class Language {
 
 
 	public get_sample_string () : string;
-	public get_scripts (num_scripts: number) : ;
+	public get_scripts (num_scripts: number) : Script[];
 	public includes_script (script: Script) : boolean;
 	public matches (range_list: string) : boolean;
 	public to_string () : string;
@@ -808,8 +736,9 @@ class LayoutLine {
 
 
 	public get_extents (ink_rect: Rectangle, logical_rect: Rectangle) : void;
+	public get_height (height: number) : void;
 	public get_pixel_extents (ink_rect: Rectangle, logical_rect: Rectangle) : void;
-	public get_x_ranges (start_index: number, end_index: number, ranges: , n_ranges: number) : void;
+	public get_x_ranges (start_index: number, end_index: number, ranges: number[], n_ranges: number) : void;
 	public index_to_x (index_: number, trailing: boolean, x_pos: number) : void;
 	public ref () : LayoutLine;
 	public unref () : void;
@@ -919,15 +848,6 @@ class RendererPrivate {
 
 
 
-class ScriptForLang {
-	public lang: ;
-	public scripts: ;
-
-
-}
-
-
-
 class ScriptIter {
 
 
@@ -946,7 +866,7 @@ class TabArray {
 	public get_positions_in_pixels () : boolean;
 	public get_size () : number;
 	public get_tab (tab_index: number, alignment: TabAlign, location: number) : void;
-	public get_tabs (alignments: TabAlign, locations: ) : void;
+	public get_tabs (alignments: TabAlign, locations: number[]) : void;
 	public resize (new_size: number) : void;
 	public set_tab (tab_index: number, alignment: TabAlign, location: number) : void;
 }
@@ -987,7 +907,10 @@ enum AttrType {
 	gravity_hint = 22,
 	font_features = 23,
 	foreground_alpha = 24,
-	background_alpha = 25
+	background_alpha = 25,
+	allow_breaks = 26,
+	show = 27,
+	insert_hyphens = 28
 }
 
 
@@ -1162,7 +1085,36 @@ enum Script {
 	miao = 84,
 	sharada = 85,
 	sora_sompeng = 86,
-	takri = 87
+	takri = 87,
+	bassa_vah = 88,
+	caucasian_albanian = 89,
+	duployan = 90,
+	elbasan = 91,
+	grantha = 92,
+	khojki = 93,
+	khudawadi = 94,
+	linear_a = 95,
+	mahajani = 96,
+	manichaean = 97,
+	mende_kikakui = 98,
+	modi = 99,
+	mro = 100,
+	nabataean = 101,
+	old_north_arabian = 102,
+	old_permic = 103,
+	pahawh_hmong = 104,
+	palmyrene = 105,
+	pau_cin_hau = 106,
+	psalter_pahlavi = 107,
+	siddham = 108,
+	tirhuta = 109,
+	warang_citi = 110,
+	ahom = 111,
+	anatolian_hieroglyphs = 112,
+	hatran = 113,
+	multani = 114,
+	old_hungarian = 115,
+	signwriting = 116
 }
 
 
@@ -1244,7 +1196,24 @@ enum FontMask {
 	weight = 8,
 	stretch = 16,
 	size = 32,
-	gravity = 64
+	gravity = 64,
+	variations = 128
+}
+
+
+
+enum ShapeFlags {
+	none = 0,
+	round_positions = 1
+}
+
+
+
+enum ShowFlags {
+	none = 0,
+	spaces = 1,
+	line_breaks = 2,
+	ignorables = 4
 }
 
 
@@ -1279,6 +1248,10 @@ type LayoutRun = GlyphItem;
 
 
 
+function attr_allow_breaks_new (allow_breaks: boolean): Attribute;
+
+
+
 function attr_background_alpha_new (alpha: number): Attribute;
 
 
@@ -1292,6 +1265,14 @@ function attr_fallback_new (enable_fallback: boolean): Attribute;
 
 
 function attr_family_new (family: string): Attribute;
+
+
+
+function attr_font_desc_new (desc: FontDescription): Attribute;
+
+
+
+function attr_font_features_new (features: string): Attribute;
 
 
 
@@ -1311,6 +1292,14 @@ function attr_gravity_new (gravity: Gravity): Attribute;
 
 
 
+function attr_insert_hyphens_new (insert_hyphens: boolean): Attribute;
+
+
+
+function attr_language_new (language: Language): Attribute;
+
+
+
 function attr_letter_spacing_new (letter_spacing: number): Attribute;
 
 
@@ -1320,6 +1309,26 @@ function attr_rise_new (rise: number): Attribute;
 
 
 function attr_scale_new (scale_factor: number): Attribute;
+
+
+
+function attr_shape_new (ink_rect: Rectangle, logical_rect: Rectangle): Attribute;
+
+
+
+function attr_shape_new_with_data (ink_rect: Rectangle, logical_rect: Rectangle, data: any, copy_func: AttrDataCopyFunc, destroy_func: GLib.DestroyNotify): Attribute;
+
+
+
+function attr_show_new (flags: ShowFlags): Attribute;
+
+
+
+function attr_size_new (size: number): Attribute;
+
+
+
+function attr_size_new_absolute (size: number): Attribute;
 
 
 
@@ -1367,15 +1376,7 @@ function bidi_type_for_unichar (_ch: string): BidiType;
 
 
 
-function break (text: string, length: number, analysis: Analysis, attrs: , attrs_len: number): void;
-
-
-
-function config_key_get (key: string): string;
-
-
-
-function config_key_get_system (key: string): string;
+//function break (text: string, length: number, analysis: Analysis, attrs: LogAttr[], attrs_len: number): void;
 
 
 
@@ -1403,19 +1404,11 @@ function font_description_from_string (_str: string): FontDescription;
 
 
 
-function get_lib_subdirectory (): string;
-
-
-
-function get_log_attrs (text: string, length: number, level: number, language: Language, log_attrs: , attrs_len: number): void;
+function get_log_attrs (text: string, length: number, level: number, language: Language, log_attrs: LogAttr[], attrs_len: number): void;
 
 
 
 function get_mirror_char (_ch: string, mirrored_ch: string): boolean;
-
-
-
-function get_sysconf_subdirectory (): string;
 
 
 
@@ -1456,10 +1449,6 @@ function language_get_default (): Language;
 
 
 function log2vis_get_embedding_levels (text: string, length: number, pbase_dir: Direction): number;
-
-
-
-function lookup_aliases (fontname: string, families: , n_families: number): void;
 
 
 
@@ -1539,11 +1528,19 @@ function shape_full (item_text: string, item_length: number, paragraph_text: str
 
 
 
+function shape_with_flags (item_text: string, item_length: number, paragraph_text: string, paragraph_length: number, analysis: Analysis, glyphs: GlyphString, flags: ShapeFlags): void;
+
+
+
 function skip_space (pos: string): boolean;
 
 
 
-function split_file_list (_str: string): ;
+function split_file_list (_str: string): string[];
+
+
+
+function tailor_break (text: string, length: number, analysis: Analysis, offset: number, log_attrs: LogAttr[], log_attrs_len: number): void;
 
 
 

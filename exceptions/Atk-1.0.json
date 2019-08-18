@@ -4,7 +4,7 @@
             "NoOpObject": "self",
             "Action": "all",
             "Object": ["grab_focus", "get_description"],
-            "Component": ["grab_focus"]
+            "Component": ["grab_focus", "get_position"]
         },
         "interface": {
             "Action": "all"

@@ -146,12 +146,12 @@ var Registry: {
 interface Relation extends GObject.Object {
 	add_target (target: Object) : void;
 	get_relation_type () : RelationType;
-	get_target () : ;
+	get_target () : Object[];
 	remove_target (target: Object) : boolean;
 }
 
 var Relation: {
-	new (targets: , n_targets: number, relationship: RelationType) : Relation;
+	new (targets: Object[], n_targets: number, relationship: RelationType) : Relation;
 	
 }
 
@@ -192,11 +192,11 @@ var Socket: {
 
 interface StateSet extends GObject.Object {
 	add_state (_type: StateType) : boolean;
-	add_states (types: , n_types: number) : void;
+	add_states (types: StateType[], n_types: number) : void;
 	and_sets (compare_set: StateSet) : StateSet;
 	clear_states () : void;
 	contains_state (_type: StateType) : boolean;
-	contains_states (types: , n_types: number) : boolean;
+	contains_states (types: StateType[], n_types: number) : boolean;
 	is_empty () : boolean;
 	or_sets (compare_set: StateSet) : StateSet;
 	remove_state (_type: StateType) : boolean;
@@ -265,6 +265,8 @@ class ComponentIface {
 	get_mdi_zorder : {(component: Component) : number;};
 	bounds_changed : {(component: Component, bounds: Rectangle) : void;};
 	get_alpha : {(component: Component) : number;};
+	scroll_to : {(component: Component, _type: ScrollType) : boolean;};
+	scroll_to_point : {(component: Component, coords: CoordType, _x: number, _y: number) : boolean;};
 
 }
 
@@ -387,7 +389,7 @@ class KeyEventStruct {
 
 class MiscClass {
 	public parent: GObject.ObjectClass;
-	public vfuncs: ;
+	public vfuncs: any[];
 
 	threads_enter : {(misc: Misc) : void;};
 	threads_leave : {(misc: Misc) : void;};
@@ -580,10 +582,10 @@ class TableCellIface {
 	public parent: GObject.TypeInterface;
 
 	get_column_span : {(cell: TableCell) : number;};
-	get_column_header_cells : {(cell: TableCell) : ;};
+	get_column_header_cells : {(cell: TableCell) : Object[];};
 	get_position : {(cell: TableCell, _row: number, column: number) : boolean;};
 	get_row_span : {(cell: TableCell) : number;};
-	get_row_header_cells : {(cell: TableCell) : ;};
+	get_row_header_cells : {(cell: TableCell) : Object[];};
 	get_row_column_span : {(cell: TableCell, _row: number, column: number, row_span: number, column_span: number) : boolean;};
 	get_table : {(cell: TableCell) : Object;};
 
@@ -660,8 +662,10 @@ class TextIface {
 	text_selection_changed : {(text: Text) : void;};
 	text_attributes_changed : {(text: Text) : void;};
 	get_range_extents : {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle) : void;};
-	get_bounded_ranges : {(text: Text, rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType) : TextRange;};
+	get_bounded_ranges : {(text: Text, rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType) : TextRange[];};
 	get_string_at_offset : {(text: Text, offset: number, granularity: TextGranularity, start_offset: number, end_offset: number) : string;};
+	scroll_substring_to : {(text: Text, start_offset: number, end_offset: number, _type: ScrollType) : boolean;};
+	scroll_substring_to_point : {(text: Text, start_offset: number, end_offset: number, coords: CoordType, _x: number, _y: number) : boolean;};
 
 }
 
@@ -755,11 +759,13 @@ interface Component {
 	get_extents (_x: number, _y: number, width: number, height: number, coord_type: CoordType) : void;
 	get_layer () : Layer;
 	get_mdi_zorder () : number;
-	get_position (_x: number, _y: number, coord_type: CoordType) : void;
+	// get_position (_x: number, _y: number, coord_type: CoordType) : void;
 	get_size (width: number, height: number) : void;
 	// grab_focus () : boolean;
 	ref_accessible_at_point (_x: number, _y: number, coord_type: CoordType) : Object;
 	remove_focus_handler (handler_id: number) : void;
+	scroll_to (_type: ScrollType) : boolean;
+	scroll_to_point (coords: CoordType, _x: number, _y: number) : boolean;
 	set_extents (_x: number, _y: number, width: number, height: number, coord_type: CoordType) : boolean;
 	set_position (_x: number, _y: number, coord_type: CoordType) : boolean;
 	set_size (width: number, height: number) : boolean;
@@ -938,11 +944,11 @@ var Table: {
 
 
 interface TableCell {
-	get_column_header_cells () : ;
+	get_column_header_cells () : Object[];
 	get_column_span () : number;
 	get_position (_row: number, column: number) : boolean;
 	get_row_column_span (_row: number, column: number, row_span: number, column_span: number) : boolean;
-	get_row_header_cells () : ;
+	get_row_header_cells () : Object[];
 	get_row_span () : number;
 	get_table () : Object;
 }
@@ -957,7 +963,7 @@ var TableCell: {
 
 interface Text {
 	add_selection (start_offset: number, end_offset: number) : boolean;
-	get_bounded_ranges (rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType) : ;
+	get_bounded_ranges (rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType) : TextRange[];
 	get_caret_offset () : number;
 	get_character_at_offset (offset: number) : string;
 	get_character_count () : number;
@@ -974,13 +980,15 @@ interface Text {
 	get_text_at_offset (offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number) : string;
 	get_text_before_offset (offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number) : string;
 	remove_selection (selection_num: number) : boolean;
+	scroll_substring_to (start_offset: number, end_offset: number, _type: ScrollType) : boolean;
+	scroll_substring_to_point (start_offset: number, end_offset: number, coords: CoordType, _x: number, _y: number) : boolean;
 	set_caret_offset (offset: number) : boolean;
 	set_selection (selection_num: number, start_offset: number, end_offset: number) : boolean;
 }
 
 var Text: {
 	
-	free_ranges (ranges: ) : void;
+	free_ranges (ranges: TextRange[]) : void;
 }
 
 
@@ -1021,7 +1029,8 @@ var Window: {
 
 enum CoordType {
 	screen = 0,
-	window = 1
+	window = 1,
+	parent = 2
 }
 
 
@@ -1065,7 +1074,11 @@ enum RelationType {
 	described_by = 14,
 	description_for = 15,
 	node_parent_of = 16,
-	last_defined = 17
+	details = 17,
+	details_for = 18,
+	error_message = 19,
+	error_for = 20,
+	last_defined = 21
 }
 
 
@@ -1193,7 +1206,20 @@ enum Role {
 	math_root = 119,
 	subscript = 120,
 	superscript = 121,
-	last_defined = 122
+	footnote = 122,
+	last_defined = 123
+}
+
+
+
+enum ScrollType {
+	top_left = 0,
+	bottom_right = 1,
+	top_edge = 2,
+	bottom_edge = 3,
+	left_edge = 4,
+	right_edge = 5,
+	anywhere = 6
 }
 
 
@@ -1519,7 +1545,7 @@ function text_attribute_register (name: string): TextAttribute;
 
 
 
-function text_free_ranges (ranges: ): void;
+function text_free_ranges (ranges: TextRange[]): void;
 
 
 

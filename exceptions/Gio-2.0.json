@@ -1,0 +1,11 @@
+{
+    "exclude": {
+        "class": {
+            "DatagramBased": [
+                "condition_wait",
+                "receive_messages",
+                "send_messages"
+            ]
+        }
+    }
+}

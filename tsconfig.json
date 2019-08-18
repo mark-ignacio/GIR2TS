@@ -20,8 +20,6 @@
         "!node_modules/**"
     ],
     "files": [
-        "src/node.d.ts",
-        "src/script.ts",
         "typings/Atk-1.0.d.ts",
         "typings/cairo-1.0.d.ts",
         "typings/Gdk-3.0.d.ts",
@@ -31,7 +29,11 @@
         "typings/GObject-2.0.d.ts",
         "typings/Gtk-3.0.d.ts",
         "typings/Pango-1.0.d.ts",
-        "typings/xlib-2.0.d.ts"
+        "typings/xlib-2.0.d.ts",
+        "typings/Gst-1.0.d.ts",
+        "typings/CinnamonDesktop-3.0.d.ts",
+        "typings/CDesktopEnums-3.0.d.ts",
+        "typings/Soup-2.4.d.ts"
     ],
     "exclude": [
         "src/es6.d.ts"
