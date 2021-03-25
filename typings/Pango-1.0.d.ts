@@ -1376,7 +1376,7 @@ function bidi_type_for_unichar (_ch: string): BidiType;
 
 
 
-//function break (text: string, length: number, analysis: Analysis, attrs: LogAttr[], attrs_len: number): void;
+function break (text: string, length: number, analysis: Analysis, attrs: LogAttr[], attrs_len: number): void;
 
 
 

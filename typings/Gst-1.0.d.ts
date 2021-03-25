@@ -1558,11 +1558,11 @@ class GhostPadPrivate {
 
 
 class Iterator {
-	//public copy: IteratorCopyFunction;
-	//public next: IteratorNextFunction;
+	public copy: IteratorCopyFunction;
+	public next: IteratorNextFunction;
 	public item: IteratorItemFunction;
-	//public resync: IteratorResyncFunction;
-	//public free: IteratorFreeFunction;
+	public resync: IteratorResyncFunction;
+	public free: IteratorFreeFunction;
 	public pushed: Iterator;
 	public type: GObject.Type;
 	public lock: GLib.Mutex;
@@ -1729,7 +1729,7 @@ class MiniObject {
 	public refcount: number;
 	public lockstate: number;
 	public flags: number;
-	//public copy: MiniObjectCopyFunction;
+	public copy: MiniObjectCopyFunction;
 	public dispose: MiniObjectDisposeFunction;
 	public free: MiniObjectFreeFunction;
 	public priv_uint: number;
@@ -2472,9 +2472,9 @@ class TypeFind {
 	public data: any;
 	public _gst_reserved: any[];
 
-	//peek : {(data: any, offset: number, size: number) : number;};
-	//suggest : {(data: any, probability: number, caps: Caps) : void;};
-	//get_length : {(data: any) : number;};
+	peek : {(data: any, offset: number, size: number) : number;};
+	suggest : {(data: any, probability: number, caps: Caps) : void;};
+	get_length : {(data: any) : number;};
 
 	public get_length () : number;
 	public peek (offset: number, size: number) : number[];
