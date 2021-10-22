@@ -55,6 +55,7 @@ namespace GIR2TS {
         in
         static
         with
+        break
     `
 
     export interface parseGIRCallback {
@@ -80,12 +81,14 @@ namespace GIR2TS {
 
     interface Node {
         "$": NodeAttributes
+        "_": string;
     }
 
     interface ParameterNode extends Node {
         $: ParameterAttributes;
         type?: Node[];
         array?: NodeWithType[];
+        doc?: Node[];
     }
 
     interface NodeWithType extends Node {
@@ -99,17 +102,26 @@ namespace GIR2TS {
     interface FunctionNode extends Node {
         "return-value": ParameterNode[];
         parameters: ParametersNode[];
+        doc?: Node[];
     }
 
     interface Parameter {
         type: string;
         name: string;
+        docString: string | null;
     }
 
     interface FunctionInfo {
         name: string;
-        return_type: string;
+        return_type: ReturnInfo;
         params : Parameter[];
+        doc: string | null;
+    }
+
+    interface ReturnInfo {
+        type: string;
+        is_primitive: boolean;
+        docString: string;
     }
 
     interface MemberNode extends Node {
@@ -205,19 +217,22 @@ namespace GIR2TS {
         }
     }
 
-    function getTypeFromParameterNode (param_node: ParameterNode): [string, boolean] {
+    function getTypeFromParameterNode (param_node: ParameterNode): [string, boolean, string] {
         let type: string = null;
         let is_primitive = false;
+        let doc: string = "";
         if (param_node.type) {
             type = convertToJSType(param_node.type[0].$.name);
             is_primitive = (type !== param_node.type[0].$.name);
+            doc = param_node.doc?.[0]?._;
         } else if (param_node.array && param_node.array[0].type) {
             type = convertToJSType(param_node.array[0].type[0].$.name) + '[]';
             is_primitive = (type !== (param_node.array[0].type[0].$.name + '[]'));
+            doc = "";
         } else {
-            return ['any', false];
+            return ['any', false, ""];
         }
-        return [type, is_primitive];
+        return [type, is_primitive, doc];
     }
 
 
@@ -232,8 +247,9 @@ namespace GIR2TS {
 
     function getFunctionInfo (func_node: FunctionNode) : FunctionInfo {
         var func_name = func_node.$.name;
-        var return_type = getTypeFromParameterNode(func_node['return-value'][0])[0];
+        const [ return_type, primitive, returnDoc ] = getTypeFromParameterNode(func_node['return-value'][0]);
         var params: Parameter[] = [];
+        const doc = func_node.doc?.[0]?.["_"];
         //var has_params = "parameter" in method_node.parameters[0];
 
         if (func_node.parameters && func_node.parameters[0].parameter) {
@@ -246,25 +262,65 @@ namespace GIR2TS {
                 let [type, is_primitive] = getTypeFromParameterNode(param_node);
                 params.push({
                     name: param_name,
-                    type: type
+                    type: type,
+                    docString: param_node?.doc?.[0]?._ ?? null
                 });
             }
         }
 
         return {
             name: func_name,
-            return_type: return_type,
-            params: params
+            return_type: {
+               type: return_type,
+               docString: returnDoc,
+               is_primitive: primitive
+            },
+            params: params,
+            doc: doc
         }
     }
 
     function renderFreeFunction (func_node: FunctionNode, exclude_list: string[] = null): string {
-        let {name, return_type, params} = getFunctionInfo(func_node);
-        let str = `function ${name} (${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type};`;
+        let {name, return_type, params, doc } = getFunctionInfo(func_node);
+        let str = `${renderDocString(doc, params, return_type, 0)} function ${name} (${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type};`;
         if (exclude_list && exclude_list.indexOf(name) !== -1) {
             str = '// ' + str;
         }
         return str;
+    }
+
+    function renderDocString(docString: string | null, params: Parameter[], return_info: ReturnInfo, indent: number): string {
+        if (docString == null)
+            return "";
+
+        const ind = "\t".repeat(indent);
+
+        let doc = `${ind}/**\n`;
+        for (const line of docString?.replace(/@/g, "#")?.split("\n")) {
+            doc+= `${ind} * ${line}\n`;
+        }
+        for (const param of params) {
+            doc+= `${ind} * @param ${param.name}`;
+            if (param.docString == null) {
+                doc+= "\n";
+                continue;
+            }
+            else {
+                const lines = param.docString.replace(/@/g, "#").split("\n");
+                doc+= ` ${lines[0]}\n`;
+                if (lines.length > 1)
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i];
+                    doc+= `${ind} * ${line}\n`;
+                }
+            }
+        }
+        if (return_info.type != "void") {
+            doc+= `${ind} * @returns ${return_info.docString?.replace(/@/g, "#") ?? ""}\n`;
+        }
+
+        doc+= `${ind} */\n`
+        return doc;
     }
 
 
@@ -275,7 +331,9 @@ namespace GIR2TS {
             method_node: FunctionNode,
             include_access_modifier: boolean = true,
             include_name: boolean = true,
-            forExternalInterfaceInNamespace: string = null
+            forExternalInterfaceInNamespace: string = null,
+            indentNum: number,
+            exclude: boolean = false
     ): string {
 
         // interface Parameter {
@@ -284,7 +342,7 @@ namespace GIR2TS {
         // }
 
         var method_name = method_node.$.name;
-        var return_type = getTypeFromParameterNode(method_node['return-value'][0])[0];
+        const [return_type, primitive, docString] = getTypeFromParameterNode(method_node['return-value'][0]);
         var params: Parameter[] = [];
         //var has_params = "parameter" in method_node.parameters[0];
 
@@ -303,18 +361,36 @@ namespace GIR2TS {
                 }
                 params.push({
                     name: param_name,
-                    type: type
+                    type: type,
+                    docString: param_node?.doc?.[0]?._ ?? null
                 });
             }
         }
 
         //var str = (include_access_modifier ? 'public ' : '') + method_name + ' (';
+        const ind = "\t".repeat(indentNum);
+        let indentAdded = false;
         let str = '';
+        str += renderDocString(method_node.doc?.[0]?._, params, {type: return_type, is_primitive: primitive, docString: docString }, indentNum);
+        if (exclude) {
+            str += `${ind}// `;
+            indentAdded = true;
+        }
+
         if (include_access_modifier) {
-            str += 'public ';
+            if (!indentAdded) {
+                str += ind;
+                indentAdded = true;
+            }
+            str += `public `;
+            indentAdded = true;
         }
         if (include_name) {
-            str += method_name + ' ';
+            if (!indentAdded) {
+                str += ind;
+                indentAdded = true;
+            }
+            str += method_name;
         }
         str += '(';
 
@@ -325,7 +401,7 @@ namespace GIR2TS {
             str = str.slice(0, -2);
         }
 
-        str += ') : ' + return_type + ';';
+        str += '): ' + return_type + ';';
 
         return str;
     }
@@ -333,7 +409,7 @@ namespace GIR2TS {
 
     export function renderCallback (cb_node: FunctionNode): string {
         const cb_name = cb_node.$.name;
-        let body = `interface ${cb_name} {\n\t${renderMethod(cb_node, false, false)}\n}`;
+        let body = `interface ${cb_name} {\n${renderMethod(cb_node, false, false, undefined, 1)}\n}`;
         return body;
     }
 
@@ -423,7 +499,7 @@ namespace GIR2TS {
         if (cb_name === 'constructor') {
             cb_name += '_'; // Append an underscore.
         }
-        return `${cb_name} : {${renderMethod(cb_node, false, false)}};`
+        return `${cb_name} : {${renderMethod(cb_node, false, false, undefined, 0)}};`
     }
 
 
@@ -459,7 +535,7 @@ namespace GIR2TS {
         }
         body += '\n';
         for (let m of methods) {
-            body += '\t' + renderMethod(m) + '\n';
+            body += renderMethod(m, undefined, undefined, undefined, 1) + '\n';
         }
         return `class ${rec_node.$.name} {\n${body}}`;
     }
@@ -527,18 +603,16 @@ namespace GIR2TS {
         }
 
         const method_str_list: string[] = methods.map((m) => {
-            let method_str = renderMethod(m, false);
-
             // if method is present in exclude_list
-            if ((exclude_method_list.length > 0 && exclude.indexOf(m.$.name) !== -1) || exclude_all_members) {
-                method_str = '// ' + method_str;
-            }
+            const excluded = ((exclude_method_list.length > 0 && exclude.indexOf(m.$.name) !== -1) || exclude_all_members);
+            let method_str = renderMethod(m, false, undefined, undefined, 1, excluded);
+
             return method_str;
         });
 
-        let body = method_str_list.join('\n\t');
+        let body = method_str_list.join('\n');
 
-        body = ` {\n\t` +
+        body = ` {\n` +
             `${body}\n` +
             `${exclude_self?'// ':''}}\n`;
 
@@ -546,19 +620,19 @@ namespace GIR2TS {
 
         const ctor_str_list: string[] = ctors.map((c) => {
             // console.log(c);
-            return renderMethod(c, false);
+            return renderMethod(c, false, undefined, undefined, 1);
         });
-        const ctors_body = ctor_str_list.join('\n\t');
+        const ctors_body = ctor_str_list.join('\n');
 
         const static_func_str_list: string[] = static_funcs.map((sf) => {
-            return renderMethod(sf, false);
+            return renderMethod(sf, false, undefined, undefined, 1);
         });
-        const static_func_body = static_func_str_list.join('\n\t');
+        const static_func_body = static_func_str_list.join('\n');
 
         const static_side = '\n' +
             `var ${class_name}: {\n` +
-            `\t${ctors_body}\n` +
-            `\t${static_func_body}\n` +
+            `${ctors_body}\n` +
+            `${static_func_body + static_func_body.endsWith("\n") ? "" : "\n"}` +
             `}\n`;
 
         return iface_str + static_side;
@@ -652,8 +726,8 @@ namespace GIR2TS {
         //console.log("methods:\n" + unique_methods);
         if (unique_methods.length > 0) {
             str += '\n';
-            for (let method_str of unique_methods.map((func_node) => {return renderMethod(func_node);})) {
-                str += `\t${method_str}\n`;
+            for (let method_str of unique_methods.map((func_node) => {return renderMethod(func_node, undefined , undefined, undefined, 1);})) {
+                str += `${method_str}\n`;
             }
         }
 
@@ -681,7 +755,7 @@ namespace GIR2TS {
         let body = '\n\n';
         const methods = removeDuplicates(getAllMethods(iface_node), (a,b) => a.$.name === b.$.name);
         for (let m of methods) {
-            body += '\t' + renderMethod(m, false) + '\n';
+            body += renderMethod(m, false, undefined, undefined, 1) + '\n';
         }
 
         return `interface ${iface_node.$.name} {${body}}`;

@@ -57,6 +57,7 @@ var GIR2TS;
         in
         static
         with
+        break
     `;
     function convertToJSType(native_type) {
         switch (native_type) {
@@ -103,20 +104,24 @@ var GIR2TS;
         }
     }
     function getTypeFromParameterNode(param_node) {
+        var _a, _b;
         let type = null;
         let is_primitive = false;
+        let doc = "";
         if (param_node.type) {
             type = convertToJSType(param_node.type[0].$.name);
             is_primitive = (type !== param_node.type[0].$.name);
+            doc = (_b = (_a = param_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._;
         }
         else if (param_node.array && param_node.array[0].type) {
             type = convertToJSType(param_node.array[0].type[0].$.name) + '[]';
             is_primitive = (type !== (param_node.array[0].type[0].$.name + '[]'));
+            doc = "";
         }
         else {
-            return ['any', false];
+            return ['any', false, ""];
         }
-        return [type, is_primitive];
+        return [type, is_primitive, doc];
     }
     function renderProperty(prop_node, include_access_modifier = true) {
         let prop_name = prop_node.$.name;
@@ -127,9 +132,11 @@ var GIR2TS;
     }
     GIR2TS.renderProperty = renderProperty;
     function getFunctionInfo(func_node) {
+        var _a, _b, _c, _d, _e;
         var func_name = func_node.$.name;
-        var return_type = getTypeFromParameterNode(func_node['return-value'][0])[0];
+        const [return_type, primitive, returnDoc] = getTypeFromParameterNode(func_node['return-value'][0]);
         var params = [];
+        const doc = (_b = (_a = func_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b["_"];
         if (func_node.parameters && func_node.parameters[0].parameter) {
             for (var param_node of func_node.parameters[0].parameter) {
                 if (param_node.$.name === '...')
@@ -141,27 +148,65 @@ var GIR2TS;
                 let [type, is_primitive] = getTypeFromParameterNode(param_node);
                 params.push({
                     name: param_name,
-                    type: type
+                    type: type,
+                    docString: (_e = (_d = (_c = param_node === null || param_node === void 0 ? void 0 : param_node.doc) === null || _c === void 0 ? void 0 : _c[0]) === null || _d === void 0 ? void 0 : _d._) !== null && _e !== void 0 ? _e : null
                 });
             }
         }
         return {
             name: func_name,
-            return_type: return_type,
-            params: params
+            return_type: {
+                type: return_type,
+                docString: returnDoc,
+                is_primitive: primitive
+            },
+            params: params,
+            doc: doc
         };
     }
     function renderFreeFunction(func_node, exclude_list = null) {
-        let { name, return_type, params } = getFunctionInfo(func_node);
-        let str = `function ${name} (${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type};`;
+        let { name, return_type, params, doc } = getFunctionInfo(func_node);
+        let str = `${renderDocString(doc, params, return_type, 0)} function ${name} (${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type};`;
         if (exclude_list && exclude_list.indexOf(name) !== -1) {
             str = '// ' + str;
         }
         return str;
     }
-    function renderMethod(method_node, include_access_modifier = true, include_name = true, forExternalInterfaceInNamespace = null) {
+    function renderDocString(docString, params, return_info, indent) {
+        var _a, _b, _c;
+        if (docString == null)
+            return "";
+        const ind = "\t".repeat(indent);
+        let doc = `${ind}/**\n`;
+        for (const line of (_a = docString === null || docString === void 0 ? void 0 : docString.replace(/@/g, "#")) === null || _a === void 0 ? void 0 : _a.split("\n")) {
+            doc += `${ind} * ${line}\n`;
+        }
+        for (const param of params) {
+            doc += `${ind} * @param ${param.name}`;
+            if (param.docString == null) {
+                doc += "\n";
+                continue;
+            }
+            else {
+                const lines = param.docString.replace(/@/g, "#").split("\n");
+                doc += ` ${lines[0]}\n`;
+                if (lines.length > 1)
+                    for (let i = 1; i < lines.length; i++) {
+                        const line = lines[i];
+                        doc += `${ind} * ${line}\n`;
+                    }
+            }
+        }
+        if (return_info.type != "void") {
+            doc += `${ind} * @returns ${(_c = (_b = return_info.docString) === null || _b === void 0 ? void 0 : _b.replace(/@/g, "#")) !== null && _c !== void 0 ? _c : ""}\n`;
+        }
+        doc += `${ind} */\n`;
+        return doc;
+    }
+    function renderMethod(method_node, include_access_modifier = true, include_name = true, forExternalInterfaceInNamespace = null, indentNum, exclude = false) {
+        var _a, _b, _c, _d, _e;
         var method_name = method_node.$.name;
-        var return_type = getTypeFromParameterNode(method_node['return-value'][0])[0];
+        const [return_type, primitive, docString] = getTypeFromParameterNode(method_node['return-value'][0]);
         var params = [];
         console.log('rendering ' + method_name);
         if (method_node.parameters && "parameter" in method_node.parameters[0]) {
@@ -178,16 +223,33 @@ var GIR2TS;
                 }
                 params.push({
                     name: param_name,
-                    type: type
+                    type: type,
+                    docString: (_c = (_b = (_a = param_node === null || param_node === void 0 ? void 0 : param_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null
                 });
             }
         }
+        const ind = "\t".repeat(indentNum);
+        let indentAdded = false;
         let str = '';
+        str += renderDocString((_e = (_d = method_node.doc) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e._, params, { type: return_type, is_primitive: primitive, docString: docString }, indentNum);
+        if (exclude) {
+            str += `${ind}// `;
+            indentAdded = true;
+        }
         if (include_access_modifier) {
-            str += 'public ';
+            if (!indentAdded) {
+                str += ind;
+                indentAdded = true;
+            }
+            str += `public `;
+            indentAdded = true;
         }
         if (include_name) {
-            str += method_name + ' ';
+            if (!indentAdded) {
+                str += ind;
+                indentAdded = true;
+            }
+            str += method_name;
         }
         str += '(';
         if (params.length > 0) {
@@ -196,13 +258,13 @@ var GIR2TS;
             }
             str = str.slice(0, -2);
         }
-        str += ') : ' + return_type + ';';
+        str += '): ' + return_type + ';';
         return str;
     }
     GIR2TS.renderMethod = renderMethod;
     function renderCallback(cb_node) {
         const cb_name = cb_node.$.name;
-        let body = `interface ${cb_name} {\n\t${renderMethod(cb_node, false, false)}\n}`;
+        let body = `interface ${cb_name} {\n${renderMethod(cb_node, false, false, undefined, 1)}\n}`;
         return body;
     }
     GIR2TS.renderCallback = renderCallback;
@@ -284,7 +346,7 @@ var GIR2TS;
         if (cb_name === 'constructor') {
             cb_name += '_';
         }
-        return `${cb_name} : {${renderMethod(cb_node, false, false)}};`;
+        return `${cb_name} : {${renderMethod(cb_node, false, false, undefined, 0)}};`;
     }
     function renderNodeAsBlankInterface(node) {
         return `interface ${node.$.name} {}`;
@@ -317,7 +379,7 @@ var GIR2TS;
         }
         body += '\n';
         for (let m of methods) {
-            body += '\t' + renderMethod(m) + '\n';
+            body += renderMethod(m, undefined, undefined, undefined, 1) + '\n';
         }
         return `class ${rec_node.$.name} {\n${body}}`;
     }
@@ -370,29 +432,27 @@ var GIR2TS;
             header += ` extends ${ifaces.join(', ')}`;
         }
         const method_str_list = methods.map((m) => {
-            let method_str = renderMethod(m, false);
-            if ((exclude_method_list.length > 0 && exclude.indexOf(m.$.name) !== -1) || exclude_all_members) {
-                method_str = '// ' + method_str;
-            }
+            const excluded = ((exclude_method_list.length > 0 && exclude.indexOf(m.$.name) !== -1) || exclude_all_members);
+            let method_str = renderMethod(m, false, undefined, undefined, 1, excluded);
             return method_str;
         });
-        let body = method_str_list.join('\n\t');
-        body = ` {\n\t` +
+        let body = method_str_list.join('\n');
+        body = ` {\n` +
             `${body}\n` +
             `${exclude_self ? '// ' : ''}}\n`;
         let iface_str = header + body;
         const ctor_str_list = ctors.map((c) => {
-            return renderMethod(c, false);
+            return renderMethod(c, false, undefined, undefined, 1);
         });
-        const ctors_body = ctor_str_list.join('\n\t');
+        const ctors_body = ctor_str_list.join('\n');
         const static_func_str_list = static_funcs.map((sf) => {
-            return renderMethod(sf, false);
+            return renderMethod(sf, false, undefined, undefined, 1);
         });
-        const static_func_body = static_func_str_list.join('\n\t');
+        const static_func_body = static_func_str_list.join('\n');
         const static_side = '\n' +
             `var ${class_name}: {\n` +
-            `\t${ctors_body}\n` +
-            `\t${static_func_body}\n` +
+            `${ctors_body}\n` +
+            `${static_func_body + static_func_body.endsWith("\n") ? "" : "\n"}` +
             `}\n`;
         return iface_str + static_side;
     }
@@ -452,8 +512,8 @@ var GIR2TS;
         }
         if (unique_methods.length > 0) {
             str += '\n';
-            for (let method_str of unique_methods.map((func_node) => { return renderMethod(func_node); })) {
-                str += `\t${method_str}\n`;
+            for (let method_str of unique_methods.map((func_node) => { return renderMethod(func_node, undefined, undefined, undefined, 1); })) {
+                str += `${method_str}\n`;
             }
         }
         str += '\n';
@@ -477,7 +537,7 @@ var GIR2TS;
         let body = '\n\n';
         const methods = removeDuplicates(getAllMethods(iface_node), (a, b) => a.$.name === b.$.name);
         for (let m of methods) {
-            body += '\t' + renderMethod(m, false) + '\n';
+            body += renderMethod(m, false, undefined, undefined, 1) + '\n';
         }
         return `interface ${iface_node.$.name} {${body}}`;
     }

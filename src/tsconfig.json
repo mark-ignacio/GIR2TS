@@ -34,7 +34,8 @@
         //"typings/xlib-2.0.d.ts"
     ],
     "exclude": [
-        "src/es6.d.ts"
+        "src/es6.d.ts",
+
     ],
     "atom": {
         "rewriteTsconfig": true
