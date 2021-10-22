@@ -411,7 +411,7 @@ namespace GIR2TS {
             if (parseInt(mem_name)) {
                 mem_name = '_' + mem_name;
             }
-            body += `\t${mem_name} = ${mem.$.value},\n`;
+            body += `\t${mem_name.toUpperCase()} = ${mem.$.value},\n`;
         }
         body = body.slice(0, -2) + '\n'; // remove last comma
         return `enum ${enum_node.$.name} {\n${body}}`;
