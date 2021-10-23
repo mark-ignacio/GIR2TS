@@ -293,10 +293,11 @@ namespace GIR2TS {
 
     function renderFreeFunction(func_node: FunctionNode, ns_name: string, exclude_list: string[] | null = null): string {
         let { name, return_type, params, doc } = getFunctionInfo(func_node);
-        let str = `${renderDocString(doc, params, return_type, 0, ns_name)}function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type.type};`;
+        let str = `${renderDocString(doc, params, return_type, 0, ns_name)}`;
         if (exclude_list && exclude_list.indexOf(name) !== -1) {
-            str = '// ' + str;
+            str+= '// ';
         }
+        str += `function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type.type};`;
         return str;
     }
 

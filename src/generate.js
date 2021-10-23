@@ -121,7 +121,6 @@ var GIR2TS;
         else if (param_node.array && param_node.array[0].array) {
             [type, is_primitive, doc] = getTypeFromParameterNode(param_node.array[0]);
             type += "[]";
-            console.log(type);
         }
         else {
             console.log("can't get param type", JSON.stringify(param_node, null, 4));
@@ -172,10 +171,11 @@ var GIR2TS;
     }
     function renderFreeFunction(func_node, ns_name, exclude_list = null) {
         let { name, return_type, params, doc } = getFunctionInfo(func_node);
-        let str = `${renderDocString(doc, params, return_type, 0, ns_name)}function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type.type};`;
+        let str = `${renderDocString(doc, params, return_type, 0, ns_name)}`;
         if (exclude_list && exclude_list.indexOf(name) !== -1) {
-            str = '// ' + str;
+            str += '// ';
         }
+        str += `function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type.type};`;
         return str;
     }
     function renderDocString(docString, params, return_info, indent = 0, ns_name) {
@@ -503,9 +503,6 @@ var GIR2TS;
             `${ctors_body}\n` +
             `${static_func_body + (static_func_body.endsWith("\n") ? "" : "\n")}` +
             `}\n`;
-        if (class_name == "DesktopAppInfo") {
-            console.log(class_name, ctors_body, static_func_body);
-        }
         return iface_str + static_side;
     }
     GIR2TS.renderClassAsInterface = renderClassAsInterface;
