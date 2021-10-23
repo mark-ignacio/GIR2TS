@@ -94,7 +94,8 @@ namespace GIR2TS {
     }
 
     interface NodeWithType extends Node {
-        type: Node[];
+        type?: Node[];
+        array?: NodeWithType[];
     }
 
     interface ParametersNode extends Node {
@@ -235,7 +236,11 @@ namespace GIR2TS {
             type = convertToJSType(param_node.array[0].type[0].$.name) + '[]';
             is_primitive = (type !== (param_node.array[0].type[0].$.name + '[]'));
             doc = "";
-        } else {
+        } else if (param_node.array && param_node.array[0].array) {
+            [type, is_primitive, doc] = getTypeFromParameterNode(param_node.array[0] as ParameterNode);
+            type += "[]";
+        }else {
+            console.log("can't get param type", JSON.stringify(param_node, null, 4))
             return ['any', false, ""];
         }
         return [type, is_primitive, doc];
@@ -387,7 +392,7 @@ namespace GIR2TS {
         var params: Parameter[] = [];
         //var has_params = "parameter" in method_node.parameters[0];
 
-        console.log('rendering ' + method_name);
+        //console.log('rendering ' + method_name);
 
         if (method_node.parameters && "parameter" in method_node.parameters[0]) {
             for (var param_node of method_node.parameters[0].parameter) {
@@ -685,7 +690,7 @@ namespace GIR2TS {
         const static_side = '\n' +
             `var ${class_name}: {\n` +
             `${ctors_body}\n` +
-            `${static_func_body + static_func_body.endsWith("\n") ? "" : "\n"}` +
+            `${static_func_body + (static_func_body.endsWith("\n") ? "" : "\n")}` +
             `}\n`;
 
         return iface_str + static_side;

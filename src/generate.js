@@ -118,7 +118,13 @@ var GIR2TS;
             is_primitive = (type !== (param_node.array[0].type[0].$.name + '[]'));
             doc = "";
         }
+        else if (param_node.array && param_node.array[0].array) {
+            [type, is_primitive, doc] = getTypeFromParameterNode(param_node.array[0]);
+            type += "[]";
+            console.log(type);
+        }
         else {
+            console.log("can't get param type", JSON.stringify(param_node, null, 4));
             return ['any', false, ""];
         }
         return [type, is_primitive, doc];
@@ -233,7 +239,6 @@ var GIR2TS;
         var method_name = method_node.$.name;
         const [return_type, primitive, docString] = getTypeFromParameterNode(method_node['return-value'][0]);
         var params = [];
-        console.log('rendering ' + method_name);
         if (method_node.parameters && "parameter" in method_node.parameters[0]) {
             for (var param_node of method_node.parameters[0].parameter) {
                 if (param_node.$.name === '...')
@@ -496,8 +501,11 @@ var GIR2TS;
         const static_side = '\n' +
             `var ${class_name}: {\n` +
             `${ctors_body}\n` +
-            `${static_func_body + static_func_body.endsWith("\n") ? "" : "\n"}` +
+            `${static_func_body + (static_func_body.endsWith("\n") ? "" : "\n")}` +
             `}\n`;
+        if (class_name == "DesktopAppInfo") {
+            console.log(class_name, ctors_body, static_func_body);
+        }
         return iface_str + static_side;
     }
     GIR2TS.renderClassAsInterface = renderClassAsInterface;
