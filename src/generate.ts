@@ -82,6 +82,8 @@ namespace GIR2TS {
     interface Node {
         "$": NodeAttributes
         "_": string;
+        // doc can't have another doc inside
+        doc?: Omit<Node, "doc">[];
     }
 
     interface ParameterNode extends Node {
@@ -126,10 +128,12 @@ namespace GIR2TS {
 
     interface MemberNode extends Node {
         $: MemberAttributes;
+        doc?: Node[];
     }
 
     interface EnumNode extends Node {
         member: MemberNode[];
+        doc?: Node[];
     }
 
     interface FieldNode extends ParameterNode {
@@ -139,6 +143,7 @@ namespace GIR2TS {
     interface RecordNode extends Node {
         "field": FieldNode[];
         "method": FunctionNode[];
+        doc?: Node[];
     }
 
     interface ClassNode extends Node {
@@ -308,15 +313,12 @@ namespace GIR2TS {
             const regex = new RegExp(`#${ns_name}[\\w\\d]*`, "gm");
             const result = regex.exec(doc);
             if (result != null) {
-                console.log(result)
                 for (const item of result) {
                     if (item == `#${ns_name}`) {
-                        console.log(item)
                         continue;
                     }
 
                     const newItem = item.replace(`#${ns_name}`, "");
-                    console.log(item, newItem)
                     doc = doc.replace(item, `{@link ${newItem.toString()}}`);
                 }
             }
@@ -431,6 +433,11 @@ namespace GIR2TS {
             }
             str += method_name;
         }
+
+        if (!indentAdded) {
+            str += ind;
+            indentAdded = true;
+        }
         str += '(';
 
         if (params.length > 0) {
@@ -446,10 +453,10 @@ namespace GIR2TS {
     }
 
 
-    // TODO: add docstring
     export function renderCallback(cb_node: FunctionNode, ns_name: string): string {
         const cb_name = cb_node.$.name;
-        let body = `interface ${cb_name} {\n${renderMethod(cb_node, false, false, undefined, 1, ns_name)}\n}`;
+        let body = renderDocString(cb_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
+        body += `interface ${cb_name} {\n${renderMethod(cb_node, false, false, undefined, 1, ns_name)}\n}`;
         return body;
     }
 
@@ -518,7 +525,6 @@ namespace GIR2TS {
     }
 
 
-    // TODO: Add docstring
     export function renderEnumeration(enum_node: EnumNode, ns_name: string): string {
         let body = '';
         for (let mem of enum_node.member) {
@@ -526,10 +532,13 @@ namespace GIR2TS {
             if (parseInt(mem_name)) {
                 mem_name = '_' + mem_name;
             }
+            body += renderDocString(mem?.doc?.[0]?._ ?? null, undefined, undefined, 1, ns_name);
             body += `\t${mem_name.toUpperCase()} = ${mem.$.value},\n`;
         }
         body = body.slice(0, -2) + '\n'; // remove last comma
-        return `enum ${enum_node.$.name} {\n${body}}`;
+        let result = renderDocString(enum_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
+        result +=`enum ${enum_node.$.name} {\n${body}}`;
+        return result;
     }
 
 
@@ -542,17 +551,18 @@ namespace GIR2TS {
     }
 
 
-    // TODO: add docstring
     export function renderNodeAsBlankInterface(node: Node, ns_name: string) {
-        return `interface ${node.$.name} {}`;
+        let result = renderDocString(node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
+        result += `interface ${node.$.name} {}`;
+        return result;
     }
 
-    //TODO: add docstring
     export function renderAlias(alias_node: ParameterNode, ns_name: string): string {
-        return `type ${alias_node.$.name} = ${getTypeFromParameterNode(alias_node)[0]};`
+        let result = renderDocString(alias_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
+        result += `type ${alias_node.$.name} = ${getTypeFromParameterNode(alias_node)[0]};`;
+        return result;
     }
 
-    // TODO: add docstring
     export function renderRecordAsClass(rec_node: RecordNode, ns_name: string): string {
         let props: ParameterNode[] = [];
         let callback_fields: FunctionNode[] = [];
@@ -577,7 +587,10 @@ namespace GIR2TS {
         for (let m of methods) {
             body += renderMethod(m, undefined, undefined, undefined, 1, ns_name) + '\n';
         }
-        return `class ${rec_node.$.name} {\n${body}}`;
+
+        let result = renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
+        result += `class ${rec_node.$.name} {\n${body}}`;
+        return result
     }
 
     /*
@@ -812,7 +825,6 @@ namespace GIR2TS {
     }
 
 
-    // TODO: Add ns name
     export function renderNamespace(ns_node: NamespaceNode, ns_name: string, exclude?: ExcludeDesc): string {
         let body = '';
         let class_nodes: ClassNode[] = [];

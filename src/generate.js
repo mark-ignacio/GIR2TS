@@ -185,14 +185,11 @@ var GIR2TS;
             const regex = new RegExp(`#${ns_name}[\\w\\d]*`, "gm");
             const result = regex.exec(doc);
             if (result != null) {
-                console.log(result);
                 for (const item of result) {
                     if (item == `#${ns_name}`) {
-                        console.log(item);
                         continue;
                     }
                     const newItem = item.replace(`#${ns_name}`, "");
-                    console.log(item, newItem);
                     doc = doc.replace(item, `{@link ${newItem.toString()}}`);
                 }
             }
@@ -279,6 +276,10 @@ var GIR2TS;
             }
             str += method_name;
         }
+        if (!indentAdded) {
+            str += ind;
+            indentAdded = true;
+        }
         str += '(';
         if (params.length > 0) {
             for (var param of params) {
@@ -291,8 +292,10 @@ var GIR2TS;
     }
     GIR2TS.renderMethod = renderMethod;
     function renderCallback(cb_node, ns_name) {
+        var _a, _b, _c;
         const cb_name = cb_node.$.name;
-        let body = `interface ${cb_name} {\n${renderMethod(cb_node, false, false, undefined, 1, ns_name)}\n}`;
+        let body = renderDocString((_c = (_b = (_a = cb_node === null || cb_node === void 0 ? void 0 : cb_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, undefined, undefined, 0, ns_name);
+        body += `interface ${cb_name} {\n${renderMethod(cb_node, false, false, undefined, 1, ns_name)}\n}`;
         return body;
     }
     GIR2TS.renderCallback = renderCallback;
@@ -355,16 +358,20 @@ var GIR2TS;
         return [];
     }
     function renderEnumeration(enum_node, ns_name) {
+        var _a, _b, _c, _d, _e, _f;
         let body = '';
         for (let mem of enum_node.member) {
             let mem_name = mem.$.name;
             if (parseInt(mem_name)) {
                 mem_name = '_' + mem_name;
             }
+            body += renderDocString((_c = (_b = (_a = mem === null || mem === void 0 ? void 0 : mem.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, undefined, undefined, 1, ns_name);
             body += `\t${mem_name.toUpperCase()} = ${mem.$.value},\n`;
         }
         body = body.slice(0, -2) + '\n';
-        return `enum ${enum_node.$.name} {\n${body}}`;
+        let result = renderDocString((_f = (_e = (_d = enum_node === null || enum_node === void 0 ? void 0 : enum_node.doc) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e._) !== null && _f !== void 0 ? _f : null, undefined, undefined, 0, ns_name);
+        result += `enum ${enum_node.$.name} {\n${body}}`;
+        return result;
     }
     GIR2TS.renderEnumeration = renderEnumeration;
     function renderCallbackField(cb_node, ns_name) {
@@ -375,14 +382,21 @@ var GIR2TS;
         return `${cb_name} : {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`;
     }
     function renderNodeAsBlankInterface(node, ns_name) {
-        return `interface ${node.$.name} {}`;
+        var _a, _b, _c;
+        let result = renderDocString((_c = (_b = (_a = node === null || node === void 0 ? void 0 : node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, undefined, undefined, 0, ns_name);
+        result += `interface ${node.$.name} {}`;
+        return result;
     }
     GIR2TS.renderNodeAsBlankInterface = renderNodeAsBlankInterface;
     function renderAlias(alias_node, ns_name) {
-        return `type ${alias_node.$.name} = ${getTypeFromParameterNode(alias_node)[0]};`;
+        var _a, _b, _c;
+        let result = renderDocString((_c = (_b = (_a = alias_node === null || alias_node === void 0 ? void 0 : alias_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, undefined, undefined, 0, ns_name);
+        result += `type ${alias_node.$.name} = ${getTypeFromParameterNode(alias_node)[0]};`;
+        return result;
     }
     GIR2TS.renderAlias = renderAlias;
     function renderRecordAsClass(rec_node, ns_name) {
+        var _a, _b, _c;
         let props = [];
         let callback_fields = [];
         let methods = getAllMethods(rec_node);
@@ -407,7 +421,9 @@ var GIR2TS;
         for (let m of methods) {
             body += renderMethod(m, undefined, undefined, undefined, 1, ns_name) + '\n';
         }
-        return `class ${rec_node.$.name} {\n${body}}`;
+        let result = renderDocString((_c = (_b = (_a = rec_node === null || rec_node === void 0 ? void 0 : rec_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, undefined, undefined, 0, ns_name);
+        result += `class ${rec_node.$.name} {\n${body}}`;
+        return result;
     }
     GIR2TS.renderRecordAsClass = renderRecordAsClass;
     function renderClassAsInterface(class_node, ns_name, exclude) {
