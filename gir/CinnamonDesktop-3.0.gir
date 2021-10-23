@@ -195,7 +195,7 @@ current root pixmap to the new one.</doc>
               c:identifier="gnome_bg_create_frame_thumbnail">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-bg.c"
-             line="3376">Creates a thumbnail for a certain frame, where 'frame' is somewhat
+             line="3379">Creates a thumbnail for a certain frame, where 'frame' is somewhat
 vaguely defined as 'suitable point to show while single-stepping
 through the slideshow'.</doc>
         <source-position filename="../libcinnamon-desktop/gnome-bg.h"
@@ -203,7 +203,7 @@ through the slideshow'.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-bg.c"
-               line="3383">the newly created thumbnail or
+               line="3386">the newly created thumbnail or
 or NULL if frame_num is out of bounds.</doc>
           <type name="GdkPixbuf.Pixbuf" c:type="GdkPixbuf*"/>
         </return-value>
@@ -784,6 +784,94 @@ get emitted.</doc>
       <source-position filename="../libcinnamon-desktop/gnome-bg-crossfade.h"
                        line="43"/>
     </record>
+    <function-macro name="BG_CLASS"
+                    c:identifier="GNOME_BG_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-bg.h" line="43"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="BG_CROSSFADE"
+                    c:identifier="GNOME_BG_CROSSFADE"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-bg-crossfade.h"
+                       line="37"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="BG_CROSSFADE_CLASS"
+                    c:identifier="GNOME_BG_CROSSFADE_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-bg-crossfade.h"
+                       line="38"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="BG_CROSSFADE_GET_CLASS"
+                    c:identifier="GNOME_BG_CROSSFADE_GET_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-bg-crossfade.h"
+                       line="41"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="BG_GET_CLASS"
+                    c:identifier="GNOME_BG_GET_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-bg.h" line="46"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="DESKTOP_IS_THUMBNAIL_FACTORY"
+                    c:identifier="GNOME_DESKTOP_IS_THUMBNAIL_FACTORY"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-desktop-thumbnail.h"
+                       line="48"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="DESKTOP_IS_THUMBNAIL_FACTORY_CLASS"
+                    c:identifier="GNOME_DESKTOP_IS_THUMBNAIL_FACTORY_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-desktop-thumbnail.h"
+                       line="49"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="DESKTOP_THUMBNAIL_FACTORY"
+                    c:identifier="GNOME_DESKTOP_THUMBNAIL_FACTORY"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-desktop-thumbnail.h"
+                       line="46"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="DESKTOP_THUMBNAIL_FACTORY_CLASS"
+                    c:identifier="GNOME_DESKTOP_THUMBNAIL_FACTORY_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-desktop-thumbnail.h"
+                       line="47"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
     <class name="DesktopThumbnailFactory"
            c:symbol-prefix="desktop_thumbnail_factory"
            c:type="GnomeDesktopThumbnailFactory"
@@ -798,7 +886,7 @@ get emitted.</doc>
                    version="2.2">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="867">Creates a new #GnomeDesktopThumbnailFactory.
+             line="872">Creates a new #GnomeDesktopThumbnailFactory.
 
 This function must be called on the main thread.</doc>
         <source-position filename="../libcinnamon-desktop/gnome-desktop-thumbnail.h"
@@ -806,7 +894,7 @@ This function must be called on the main thread.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="875">a new #GnomeDesktopThumbnailFactory</doc>
+               line="880">a new #GnomeDesktopThumbnailFactory</doc>
           <type name="DesktopThumbnailFactory"
                 c:type="GnomeDesktopThumbnailFactory*"/>
         </return-value>
@@ -814,7 +902,7 @@ This function must be called on the main thread.</doc>
           <parameter name="size" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="869">The thumbnail size to use</doc>
+                 line="874">The thumbnail size to use</doc>
             <type name="DesktopThumbnailSize"
                   c:type="GnomeDesktopThumbnailSize"/>
           </parameter>
@@ -825,7 +913,7 @@ This function must be called on the main thread.</doc>
               version="2.2">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="1063">Returns TRUE if this GnomeIconFactory can (at least try) to thumbnail
+             line="1068">Returns TRUE if this GnomeIconFactory can (at least try) to thumbnail
 this file. Thumbnails or files with failed thumbnails won't be thumbnailed.
 
 Usage of this function is threadsafe.</doc>
@@ -834,33 +922,33 @@ Usage of this function is threadsafe.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="1075">TRUE if the file can be thumbnailed.</doc>
+               line="1080">TRUE if the file can be thumbnailed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="factory" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1065">a #GnomeDesktopThumbnailFactory</doc>
+                 line="1070">a #GnomeDesktopThumbnailFactory</doc>
             <type name="DesktopThumbnailFactory"
                   c:type="GnomeDesktopThumbnailFactory*"/>
           </instance-parameter>
           <parameter name="uri" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1066">the uri of a file</doc>
+                 line="1071">the uri of a file</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="mime_type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1067">the mime type of the file</doc>
+                 line="1072">the mime type of the file</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="mtime" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1068">the mtime of the file</doc>
+                 line="1073">the mtime of the file</doc>
             <type name="glong" c:type="time_t"/>
           </parameter>
         </parameters>
@@ -870,7 +958,7 @@ Usage of this function is threadsafe.</doc>
               version="2.2">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="1546">Creates a failed thumbnail for the file so that we don't try
+             line="1551">Creates a failed thumbnail for the file so that we don't try
 to re-thumbnail the file later.
 
 Usage of this function is threadsafe.</doc>
@@ -883,20 +971,20 @@ Usage of this function is threadsafe.</doc>
           <instance-parameter name="factory" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1548">a #GnomeDesktopThumbnailFactory</doc>
+                 line="1553">a #GnomeDesktopThumbnailFactory</doc>
             <type name="DesktopThumbnailFactory"
                   c:type="GnomeDesktopThumbnailFactory*"/>
           </instance-parameter>
           <parameter name="uri" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1549">the uri of a file</doc>
+                 line="1554">the uri of a file</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="mtime" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1550">the modification time of the file</doc>
+                 line="1555">the modification time of the file</doc>
             <type name="glong" c:type="time_t"/>
           </parameter>
         </parameters>
@@ -906,7 +994,7 @@ Usage of this function is threadsafe.</doc>
               version="2.2">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="1192">Tries to generate a thumbnail for the specified file. If it succeeds
+             line="1197">Tries to generate a thumbnail for the specified file. If it succeeds
 it returns a pixbuf that can be used as a thumbnail.
 
 Usage of this function is threadsafe.</doc>
@@ -915,27 +1003,27 @@ Usage of this function is threadsafe.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="1203">thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise.</doc>
+               line="1208">thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise.</doc>
           <type name="GdkPixbuf.Pixbuf" c:type="GdkPixbuf*"/>
         </return-value>
         <parameters>
           <instance-parameter name="factory" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1194">a #GnomeDesktopThumbnailFactory</doc>
+                 line="1199">a #GnomeDesktopThumbnailFactory</doc>
             <type name="DesktopThumbnailFactory"
                   c:type="GnomeDesktopThumbnailFactory*"/>
           </instance-parameter>
           <parameter name="uri" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1195">the uri of a file</doc>
+                 line="1200">the uri of a file</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="mime_type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1196">the mime type of the file</doc>
+                 line="1201">the mime type of the file</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
         </parameters>
@@ -945,7 +1033,7 @@ Usage of this function is threadsafe.</doc>
               version="2.2">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="953">Tries to locate an failed thumbnail for the file specified. Writing
+             line="958">Tries to locate an failed thumbnail for the file specified. Writing
 and looking for failed thumbnails is important to avoid to try to
 thumbnail e.g. broken images several times.
 
@@ -955,27 +1043,27 @@ Usage of this function is threadsafe.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="965">TRUE if there is a failed thumbnail for the file.</doc>
+               line="970">TRUE if there is a failed thumbnail for the file.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="factory" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="955">a #GnomeDesktopThumbnailFactory</doc>
+                 line="960">a #GnomeDesktopThumbnailFactory</doc>
             <type name="DesktopThumbnailFactory"
                   c:type="GnomeDesktopThumbnailFactory*"/>
           </instance-parameter>
           <parameter name="uri" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="956">the uri of a file</doc>
+                 line="961">the uri of a file</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="mtime" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="957">the mtime of the file</doc>
+                 line="962">the mtime of the file</doc>
             <type name="glong" c:type="time_t"/>
           </parameter>
         </parameters>
@@ -985,7 +1073,7 @@ Usage of this function is threadsafe.</doc>
               version="2.2">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="891">Tries to locate an existing thumbnail for the file specified.
+             line="896">Tries to locate an existing thumbnail for the file specified.
 
 Usage of this function is threadsafe.</doc>
         <source-position filename="../libcinnamon-desktop/gnome-desktop-thumbnail.h"
@@ -993,27 +1081,27 @@ Usage of this function is threadsafe.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="901">The absolute path of the thumbnail, or %NULL if none exist.</doc>
+               line="906">The absolute path of the thumbnail, or %NULL if none exist.</doc>
           <type name="utf8" c:type="char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="factory" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="893">a #GnomeDesktopThumbnailFactory</doc>
+                 line="898">a #GnomeDesktopThumbnailFactory</doc>
             <type name="DesktopThumbnailFactory"
                   c:type="GnomeDesktopThumbnailFactory*"/>
           </instance-parameter>
           <parameter name="uri" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="894">the uri of a file</doc>
+                 line="899">the uri of a file</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="mtime" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="895">the mtime of the file</doc>
+                 line="900">the mtime of the file</doc>
             <type name="glong" c:type="time_t"/>
           </parameter>
         </parameters>
@@ -1023,7 +1111,7 @@ Usage of this function is threadsafe.</doc>
               version="2.2">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="1433">Saves @thumbnail at the right place. If the save fails a
+             line="1438">Saves @thumbnail at the right place. If the save fails a
 failed thumbnail is written.
 
 Usage of this function is threadsafe.</doc>
@@ -1036,26 +1124,26 @@ Usage of this function is threadsafe.</doc>
           <instance-parameter name="factory" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1435">a #GnomeDesktopThumbnailFactory</doc>
+                 line="1440">a #GnomeDesktopThumbnailFactory</doc>
             <type name="DesktopThumbnailFactory"
                   c:type="GnomeDesktopThumbnailFactory*"/>
           </instance-parameter>
           <parameter name="thumbnail" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1436">the thumbnail as a pixbuf</doc>
+                 line="1441">the thumbnail as a pixbuf</doc>
             <type name="GdkPixbuf.Pixbuf" c:type="GdkPixbuf*"/>
           </parameter>
           <parameter name="uri" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1437">the uri of a file</doc>
+                 line="1442">the uri of a file</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="original_mtime" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-                 line="1438">the modification time of the original file</doc>
+                 line="1443">the modification time of the original file</doc>
             <type name="glong" c:type="time_t"/>
           </parameter>
         </parameters>
@@ -1096,6 +1184,180 @@ Usage of this function is threadsafe.</doc>
               c:identifier="GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE">
       </member>
     </enumeration>
+    <function-macro name="IS_BG" c:identifier="GNOME_IS_BG" introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-bg.h" line="44"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_BG_CLASS"
+                    c:identifier="GNOME_IS_BG_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-bg.h" line="45"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_BG_CROSSFADE"
+                    c:identifier="GNOME_IS_BG_CROSSFADE"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-bg-crossfade.h"
+                       line="39"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_BG_CROSSFADE_CLASS"
+                    c:identifier="GNOME_IS_BG_CROSSFADE_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-bg-crossfade.h"
+                       line="40"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_PNP_IDSS"
+                    c:identifier="GNOME_IS_PNP_IDSS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-pnp-ids.h"
+                       line="30"/>
+      <parameters>
+        <parameter name="o">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_PNP_IDSS_CLASS"
+                    c:identifier="GNOME_IS_PNP_IDSS_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-pnp-ids.h"
+                       line="31"/>
+      <parameters>
+        <parameter name="k">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_RR_CONFIG"
+                    c:identifier="GNOME_IS_RR_CONFIG"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                       line="118"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_RR_CONFIG_CLASS"
+                    c:identifier="GNOME_IS_RR_CONFIG_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                       line="120"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_RR_LABELER"
+                    c:identifier="GNOME_IS_RR_LABELER"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-labeler.h"
+                       line="38"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_RR_LABELER_CLASS"
+                    c:identifier="GNOME_IS_RR_LABELER_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-labeler.h"
+                       line="39"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_RR_OUTPUT_INFO"
+                    c:identifier="GNOME_IS_RR_OUTPUT_INFO"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                       line="55"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_RR_OUTPUT_INFO_CLASS"
+                    c:identifier="GNOME_IS_RR_OUTPUT_INFO_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                       line="57"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_RR_SCREEN"
+                    c:identifier="GNOME_IS_RR_SCREEN"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr.h" line="93"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_RR_SCREEN_CLASS"
+                    c:identifier="GNOME_IS_RR_SCREEN_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr.h" line="95"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_WALL_CLOCK"
+                    c:identifier="GNOME_IS_WALL_CLOCK"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
+                       line="41"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_WALL_CLOCK_CLASS"
+                    c:identifier="GNOME_IS_WALL_CLOCK_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
+                       line="42"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_XKB_INFO"
+                    c:identifier="GNOME_IS_XKB_INFO"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-xkb-info.h"
+                       line="41"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_XKB_INFO_CLASS"
+                    c:identifier="GNOME_IS_XKB_INFO_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-xkb-info.h"
+                       line="42"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
     <callback name="InstallerClientCallback"
               c:type="GnomeInstallerClientCallback">
       <source-position filename="../libcinnamon-desktop/gnome-installer.h"
@@ -1116,6 +1378,36 @@ Usage of this function is threadsafe.</doc>
         </parameter>
       </parameters>
     </callback>
+    <function-macro name="PNP_IDS"
+                    c:identifier="GNOME_PNP_IDS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-pnp-ids.h"
+                       line="28"/>
+      <parameters>
+        <parameter name="o">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="PNP_IDS_CLASS"
+                    c:identifier="GNOME_PNP_IDS_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-pnp-ids.h"
+                       line="29"/>
+      <parameters>
+        <parameter name="k">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="PNP_IDS_GET_CLASS"
+                    c:identifier="GNOME_PNP_IDS_GET_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-pnp-ids.h"
+                       line="32"/>
+      <parameters>
+        <parameter name="o">
+        </parameter>
+      </parameters>
+    </function-macro>
     <class name="PnpIds"
            c:symbol-prefix="pnp_ids"
            c:type="GnomePnpIds"
@@ -1195,12 +1487,12 @@ or %NULL when not found.</doc>
            glib:get-type="gnome_rr_config_get_type"
            glib:type-struct="RRConfigClass">
       <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                       line="100"/>
+                       line="114"/>
       <constructor name="new_current"
                    c:identifier="gnome_rr_config_new_current"
                    throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="111"/>
+                         line="125"/>
         <return-value transfer-ownership="full">
           <type name="RRConfig" c:type="GnomeRRConfig*"/>
         </return-value>
@@ -1214,7 +1506,7 @@ or %NULL when not found.</doc>
                    c:identifier="gnome_rr_config_new_stored"
                    throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="113"/>
+                         line="127"/>
         <return-value transfer-ownership="full">
           <type name="RRConfig" c:type="GnomeRRConfig*"/>
         </return-value>
@@ -1228,7 +1520,7 @@ or %NULL when not found.</doc>
                 c:identifier="gnome_rr_config_apply_from_filename_with_time"
                 throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="134"/>
+                         line="148"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1247,7 +1539,7 @@ or %NULL when not found.</doc>
       <function name="get_backup_filename"
                 c:identifier="gnome_rr_config_get_backup_filename">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="147"/>
+                         line="167"/>
         <return-value transfer-ownership="full">
           <type name="utf8" c:type="char*"/>
         </return-value>
@@ -1255,7 +1547,15 @@ or %NULL when not found.</doc>
       <function name="get_intended_filename"
                 c:identifier="gnome_rr_config_get_intended_filename">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="148"/>
+                         line="168"/>
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="char*"/>
+        </return-value>
+      </function>
+      <function name="get_legacy_filename"
+                c:identifier="gnome_rr_config_get_legacy_filename">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="169"/>
         <return-value transfer-ownership="full">
           <type name="utf8" c:type="char*"/>
         </return-value>
@@ -1264,7 +1564,7 @@ or %NULL when not found.</doc>
               c:identifier="gnome_rr_config_applicable"
               throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="139"/>
+                         line="153"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1281,7 +1581,7 @@ or %NULL when not found.</doc>
               c:identifier="gnome_rr_config_apply_with_time"
               throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="129"/>
+                         line="143"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1300,7 +1600,7 @@ or %NULL when not found.</doc>
       <method name="ensure_primary"
               c:identifier="gnome_rr_config_ensure_primary">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="127"/>
+                         line="141"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1312,7 +1612,7 @@ or %NULL when not found.</doc>
       </method>
       <method name="equal" c:identifier="gnome_rr_config_equal">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="122"/>
+                         line="136"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1325,13 +1625,39 @@ or %NULL when not found.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="get_auto_scale"
+              c:identifier="gnome_rr_config_get_auto_scale">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="162"/>
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="RRConfig" c:type="GnomeRRConfig*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_base_scale"
+              c:identifier="gnome_rr_config_get_base_scale">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="159"/>
+        <return-value transfer-ownership="none">
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="RRConfig" c:type="GnomeRRConfig*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_clone" c:identifier="gnome_rr_config_get_clone">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="143"/>
+                         line="157"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr-config.c"
-               line="1397">whether at least two outputs are at (0, 0) offset and they
+               line="1555">whether at least two outputs are at (0, 0) offset and they
 have the same width/height.  Those outputs are of course connected and on
 (i.e. they have a CRTC assigned).</doc>
           <type name="gboolean" c:type="gboolean"/>
@@ -1344,11 +1670,11 @@ have the same width/height.  Those outputs are of course connected and on
       </method>
       <method name="get_outputs" c:identifier="gnome_rr_config_get_outputs">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="145"/>
+                         line="165"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr-config.c"
-               line="1384">the output configuration for this #GnomeRRConfig</doc>
+               line="1542">the output configuration for this #GnomeRRConfig</doc>
           <array c:type="GnomeRROutputInfo**">
             <type name="RROutputInfo"/>
           </array>
@@ -1363,7 +1689,7 @@ have the same width/height.  Those outputs are of course connected and on
               c:identifier="gnome_rr_config_load_current"
               throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="115"/>
+                         line="129"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1377,7 +1703,7 @@ have the same width/height.  Those outputs are of course connected and on
               c:identifier="gnome_rr_config_load_filename"
               throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="117"/>
+                         line="131"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1392,7 +1718,7 @@ have the same width/height.  Those outputs are of course connected and on
       </method>
       <method name="match" c:identifier="gnome_rr_config_match">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="120"/>
+                         line="134"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1407,7 +1733,7 @@ have the same width/height.  Those outputs are of course connected and on
       </method>
       <method name="sanitize" c:identifier="gnome_rr_config_sanitize">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="126"/>
+                         line="140"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1419,7 +1745,7 @@ have the same width/height.  Those outputs are of course connected and on
       </method>
       <method name="save" c:identifier="gnome_rr_config_save" throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="124"/>
+                         line="138"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1429,9 +1755,41 @@ have the same width/height.  Those outputs are of course connected and on
           </instance-parameter>
         </parameters>
       </method>
+      <method name="set_auto_scale"
+              c:identifier="gnome_rr_config_set_auto_scale">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="163"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="RRConfig" c:type="GnomeRRConfig*"/>
+          </instance-parameter>
+          <parameter name="auto_scale" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_base_scale"
+              c:identifier="gnome_rr_config_set_base_scale">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="160"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="RRConfig" c:type="GnomeRRConfig*"/>
+          </instance-parameter>
+          <parameter name="base_scale" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="set_clone" c:identifier="gnome_rr_config_set_clone">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="144"/>
+                         line="158"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1462,7 +1820,7 @@ have the same width/height.  Those outputs are of course connected and on
             c:type="GnomeRRConfigClass"
             glib:is-gtype-struct-for="RRConfig">
       <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                       line="100"/>
+                       line="114"/>
       <field name="parent_class">
         <type name="GObject.ObjectClass" c:type="GObjectClass"/>
       </field>
@@ -1480,7 +1838,7 @@ have the same width/height.  Those outputs are of course connected and on
       <method name="can_drive_output"
               c:identifier="gnome_rr_crtc_can_drive_output">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="204"/>
+                         line="221"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1496,7 +1854,7 @@ have the same width/height.  Those outputs are of course connected and on
       <method name="get_current_mode"
               c:identifier="gnome_rr_crtc_get_current_mode">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="206"/>
+                         line="223"/>
         <return-value transfer-ownership="full">
           <type name="RRMode" c:type="GnomeRRMode*"/>
         </return-value>
@@ -1509,7 +1867,7 @@ have the same width/height.  Those outputs are of course connected and on
       <method name="get_current_rotation"
               c:identifier="gnome_rr_crtc_get_current_rotation">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="210"/>
+                         line="228"/>
         <return-value transfer-ownership="none">
           <type name="RRRotation" c:type="GnomeRRRotation"/>
         </return-value>
@@ -1521,7 +1879,7 @@ have the same width/height.  Those outputs are of course connected and on
       </method>
       <method name="get_gamma" c:identifier="gnome_rr_crtc_get_gamma">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="215"/>
+                         line="233"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1545,7 +1903,7 @@ have the same width/height.  Those outputs are of course connected and on
       </method>
       <method name="get_id" c:identifier="gnome_rr_crtc_get_id">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="193"/>
+                         line="208"/>
         <return-value transfer-ownership="none">
           <type name="guint32" c:type="guint32"/>
         </return-value>
@@ -1557,7 +1915,7 @@ have the same width/height.  Those outputs are of course connected and on
       </method>
       <method name="get_position" c:identifier="gnome_rr_crtc_get_position">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="207"/>
+                         line="224"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1575,9 +1933,21 @@ have the same width/height.  Those outputs are of course connected and on
       </method>
       <method name="get_rotations" c:identifier="gnome_rr_crtc_get_rotations">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="211"/>
+                         line="229"/>
         <return-value transfer-ownership="none">
           <type name="RRRotation" c:type="GnomeRRRotation"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="crtc" transfer-ownership="none">
+            <type name="RRCrtc" c:type="GnomeRRCrtc*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_scale" c:identifier="gnome_rr_crtc_get_scale">
+        <source-position filename="../libcinnamon-desktop/gnome-rr.h"
+                         line="227"/>
+        <return-value transfer-ownership="none">
+          <type name="gfloat" c:type="float"/>
         </return-value>
         <parameters>
           <instance-parameter name="crtc" transfer-ownership="none">
@@ -1589,7 +1959,7 @@ have the same width/height.  Those outputs are of course connected and on
               c:identifier="gnome_rr_crtc_set_config_with_time"
               throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="195"/>
+                         line="210"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1618,11 +1988,17 @@ have the same width/height.  Those outputs are of course connected and on
           <parameter name="n_outputs" transfer-ownership="none">
             <type name="gint" c:type="int"/>
           </parameter>
+          <parameter name="scale" transfer-ownership="none">
+            <type name="gfloat" c:type="float"/>
+          </parameter>
+          <parameter name="global_scale" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
         </parameters>
       </method>
       <method name="set_gamma" c:identifier="gnome_rr_crtc_set_gamma">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="220"/>
+                         line="238"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1647,7 +2023,7 @@ have the same width/height.  Those outputs are of course connected and on
       <method name="supports_rotation"
               c:identifier="gnome_rr_crtc_supports_rotation">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="212"/>
+                         line="230"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1845,9 +2221,30 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
             glib:get-type="gnome_rr_mode_get_type"
             c:symbol-prefix="rr_mode">
       <source-position filename="../libcinnamon-desktop/gnome-rr.h" line="37"/>
+      <method name="get_flags" c:identifier="gnome_rr_mode_get_flags">
+        <source-position filename="../libcinnamon-desktop/gnome-rr.h"
+                         line="203"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="mode" transfer-ownership="none">
+            <type name="RRMode" c:type="GnomeRRMode*"/>
+          </instance-parameter>
+          <parameter name="doublescan" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean*"/>
+          </parameter>
+          <parameter name="interlaced" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean*"/>
+          </parameter>
+          <parameter name="vsync" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="get_freq" c:identifier="gnome_rr_mode_get_freq">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="190"/>
+                         line="201"/>
         <return-value transfer-ownership="none">
           <type name="gint" c:type="int"/>
         </return-value>
@@ -1857,9 +2254,21 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_freq_f" c:identifier="gnome_rr_mode_get_freq_f">
+        <source-position filename="../libcinnamon-desktop/gnome-rr.h"
+                         line="202"/>
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="double"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="mode" transfer-ownership="none">
+            <type name="RRMode" c:type="GnomeRRMode*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_height" c:identifier="gnome_rr_mode_get_height">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="189"/>
+                         line="200"/>
         <return-value transfer-ownership="none">
           <type name="guint" c:type="guint"/>
         </return-value>
@@ -1871,7 +2280,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="get_id" c:identifier="gnome_rr_mode_get_id">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="187"/>
+                         line="198"/>
         <return-value transfer-ownership="none">
           <type name="guint32" c:type="guint32"/>
         </return-value>
@@ -1883,7 +2292,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="get_width" c:identifier="gnome_rr_mode_get_width">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="188"/>
+                         line="199"/>
         <return-value transfer-ownership="none">
           <type name="guint" c:type="guint"/>
         </return-value>
@@ -1902,7 +2311,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <source-position filename="../libcinnamon-desktop/gnome-rr.h" line="35"/>
       <method name="can_clone" c:identifier="gnome_rr_output_can_clone">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="178"/>
+                         line="189"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1919,11 +2328,11 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
               c:identifier="gnome_rr_output_get_backlight"
               throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="164"/>
+                         line="175"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr.c"
-               line="1772">The currently set backlight brightness</doc>
+               line="1791">The currently set backlight brightness</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
@@ -1935,11 +2344,11 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_backlight_max"
               c:identifier="gnome_rr_output_get_backlight_max">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="163"/>
+                         line="174"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr.c"
-               line="1760">The maximum backlight value, or -1 if not supported</doc>
+               line="1779">The maximum backlight value, or -1 if not supported</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
@@ -1951,11 +2360,11 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_backlight_min"
               c:identifier="gnome_rr_output_get_backlight_min">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="162"/>
+                         line="173"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr.c"
-               line="1748">The mimimum backlight value, or -1 if not supported</doc>
+               line="1767">The mimimum backlight value, or -1 if not supported</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
@@ -1967,7 +2376,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_connector_type"
               c:identifier="gnome_rr_output_get_connector_type">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="173"/>
+                         line="184"/>
         <return-value transfer-ownership="none">
           <type name="utf8" c:type="const char*"/>
         </return-value>
@@ -1979,7 +2388,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="get_crtc" c:identifier="gnome_rr_output_get_crtc">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="172"/>
+                         line="183"/>
         <return-value transfer-ownership="full">
           <type name="RRCrtc" c:type="GnomeRRCrtc*"/>
         </return-value>
@@ -1992,7 +2401,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_current_mode"
               c:identifier="gnome_rr_output_get_current_mode">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="171"/>
+                         line="182"/>
         <return-value transfer-ownership="full">
           <type name="RRMode" c:type="GnomeRRMode*"/>
         </return-value>
@@ -2005,7 +2414,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_edid_data"
               c:identifier="gnome_rr_output_get_edid_data">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="155"/>
+                         line="166"/>
         <return-value transfer-ownership="none">
           <type name="guint8" c:type="const guint8*"/>
         </return-value>
@@ -2021,7 +2430,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_height_mm"
               c:identifier="gnome_rr_output_get_height_mm">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="154"/>
+                         line="165"/>
         <return-value transfer-ownership="none">
           <type name="gint" c:type="int"/>
         </return-value>
@@ -2033,7 +2442,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="get_id" c:identifier="gnome_rr_output_get_id">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="149"/>
+                         line="160"/>
         <return-value transfer-ownership="none">
           <type name="guint32" c:type="guint32"/>
         </return-value>
@@ -2046,7 +2455,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_ids_from_edid"
               c:identifier="gnome_rr_output_get_ids_from_edid">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="157"/>
+                         line="168"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -2068,7 +2477,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_is_primary"
               c:identifier="gnome_rr_output_get_is_primary">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="184"/>
+                         line="195"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -2080,7 +2489,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="get_name" c:identifier="gnome_rr_output_get_name">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="150"/>
+                         line="161"/>
         <return-value transfer-ownership="none">
           <type name="utf8" c:type="const char*"/>
         </return-value>
@@ -2092,7 +2501,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="get_position" c:identifier="gnome_rr_output_get_position">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="175"/>
+                         line="186"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -2111,7 +2520,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_possible_crtcs"
               c:identifier="gnome_rr_output_get_possible_crtcs">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="170"/>
+                         line="181"/>
         <return-value transfer-ownership="full">
           <type name="RRCrtc" c:type="GnomeRRCrtc**"/>
         </return-value>
@@ -2124,7 +2533,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_preferred_mode"
               c:identifier="gnome_rr_output_get_preferred_mode">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="181"/>
+                         line="192"/>
         <return-value transfer-ownership="full">
           <type name="RRMode" c:type="GnomeRRMode*"/>
         </return-value>
@@ -2137,7 +2546,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_size_inches"
               c:identifier="gnome_rr_output_get_size_inches">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="152"/>
+                         line="163"/>
         <return-value transfer-ownership="none">
           <type name="gint" c:type="int"/>
         </return-value>
@@ -2149,7 +2558,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="get_width_mm" c:identifier="gnome_rr_output_get_width_mm">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="153"/>
+                         line="164"/>
         <return-value transfer-ownership="none">
           <type name="gint" c:type="int"/>
         </return-value>
@@ -2161,7 +2570,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="is_connected" c:identifier="gnome_rr_output_is_connected">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="151"/>
+                         line="162"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -2173,7 +2582,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="is_laptop" c:identifier="gnome_rr_output_is_laptop">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="174"/>
+                         line="185"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -2185,7 +2594,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="list_modes" c:identifier="gnome_rr_output_list_modes">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="180"/>
+                         line="191"/>
         <return-value transfer-ownership="full">
           <type name="RRMode" c:type="GnomeRRMode**"/>
         </return-value>
@@ -2199,11 +2608,11 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
               c:identifier="gnome_rr_output_set_backlight"
               throws="1">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="166"/>
+                         line="177"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr.c"
-               line="1834">%TRUE for success</doc>
+               line="1853">%TRUE for success</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -2213,7 +2622,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
           <parameter name="value" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="1832">the absolute value which is min &gt;= this &lt;= max</doc>
+                 line="1851">the absolute value which is min &gt;= this &lt;= max</doc>
             <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
@@ -2221,7 +2630,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="supports_mode"
               c:identifier="gnome_rr_output_supports_mode">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
-                         line="182"/>
+                         line="193"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -2247,7 +2656,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_aspect_ratio"
               c:identifier="gnome_rr_output_info_get_aspect_ratio">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="80"/>
+                         line="86"/>
         <return-value transfer-ownership="none">
           <type name="gdouble" c:type="double"/>
         </return-value>
@@ -2260,17 +2669,38 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_display_name"
               c:identifier="gnome_rr_output_info_get_display_name">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="81"/>
+                         line="87"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr-output-info.c"
-               line="209">the display name of this output</doc>
-          <type name="utf8" c:type="char*"/>
+               line="265">the display name of this output</doc>
+          <type name="utf8" c:type="const char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <type name="RROutputInfo" c:type="GnomeRROutputInfo*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_flags" c:identifier="gnome_rr_output_info_get_flags">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="95"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="RROutputInfo" c:type="GnomeRROutputInfo*"/>
+          </instance-parameter>
+          <parameter name="doublescan" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean*"/>
+          </parameter>
+          <parameter name="interlaced" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean*"/>
+          </parameter>
+          <parameter name="vsync" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean*"/>
+          </parameter>
         </parameters>
       </method>
       <method name="get_geometry"
@@ -2284,7 +2714,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr-output-info.c"
-                 line="99">a #GnomeRROutputInfo</doc>
+                 line="100">a #GnomeRROutputInfo</doc>
             <type name="RROutputInfo" c:type="GnomeRROutputInfo*"/>
           </instance-parameter>
           <parameter name="x"
@@ -2327,8 +2757,8 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr-output-info.c"
-               line="69">the output name</doc>
-          <type name="utf8" c:type="char*"/>
+               line="70">the output name</doc>
+          <type name="utf8" c:type="const char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
@@ -2339,7 +2769,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_preferred_height"
               c:identifier="gnome_rr_output_info_get_preferred_height">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="87"/>
+                         line="93"/>
         <return-value transfer-ownership="none">
           <type name="gint" c:type="int"/>
         </return-value>
@@ -2352,7 +2782,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_preferred_width"
               c:identifier="gnome_rr_output_info_get_preferred_width">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="86"/>
+                         line="92"/>
         <return-value transfer-ownership="none">
           <type name="gint" c:type="int"/>
         </return-value>
@@ -2365,7 +2795,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_primary"
               c:identifier="gnome_rr_output_info_get_primary">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="83"/>
+                         line="89"/>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -2378,7 +2808,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_product"
               c:identifier="gnome_rr_output_info_get_product">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="78"/>
+                         line="84"/>
         <return-value transfer-ownership="none">
           <type name="guint" c:type="guint"/>
         </return-value>
@@ -2391,9 +2821,22 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_refresh_rate"
               c:identifier="gnome_rr_output_info_get_refresh_rate">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="70"/>
+                         line="73"/>
         <return-value transfer-ownership="none">
           <type name="gint" c:type="int"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="RROutputInfo" c:type="GnomeRROutputInfo*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_refresh_rate_f"
+              c:identifier="gnome_rr_output_info_get_refresh_rate_f">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="76"/>
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="double"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
@@ -2404,7 +2847,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="get_rotation"
               c:identifier="gnome_rr_output_info_get_rotation">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="73"/>
+                         line="79"/>
         <return-value transfer-ownership="none">
           <type name="RRRotation" c:type="GnomeRRRotation"/>
         </return-value>
@@ -2414,9 +2857,21 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_scale" c:identifier="gnome_rr_output_info_get_scale">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="70"/>
+        <return-value transfer-ownership="none">
+          <type name="gfloat" c:type="float"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="RROutputInfo" c:type="GnomeRROutputInfo*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_serial" c:identifier="gnome_rr_output_info_get_serial">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="79"/>
+                         line="85"/>
         <return-value transfer-ownership="none">
           <type name="guint" c:type="guint"/>
         </return-value>
@@ -2428,7 +2883,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       </method>
       <method name="get_vendor" c:identifier="gnome_rr_output_info_get_vendor">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="77"/>
+                         line="83"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -2436,7 +2891,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr-output-info.c"
-                 line="171">a #GnomeRROutputInfo</doc>
+                 line="227">a #GnomeRROutputInfo</doc>
             <type name="RROutputInfo" c:type="GnomeRROutputInfo*"/>
           </instance-parameter>
           <parameter name="vendor"
@@ -2455,7 +2910,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr-output-info.c"
-               line="81">whether there is a CRTC assigned to this output (i.e. a signal is being sent to it)</doc>
+               line="82">whether there is a CRTC assigned to this output (i.e. a signal is being sent to it)</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -2467,11 +2922,11 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="is_connected"
               c:identifier="gnome_rr_output_info_is_connected">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="76"/>
+                         line="82"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr-output-info.c"
-               line="160">whether the output is physically connected to a monitor</doc>
+               line="216">whether the output is physically connected to a monitor</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -2491,6 +2946,27 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
             <type name="RROutputInfo" c:type="GnomeRROutputInfo*"/>
           </instance-parameter>
           <parameter name="active" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_flags" c:identifier="gnome_rr_output_info_set_flags">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="99"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="RROutputInfo" c:type="GnomeRROutputInfo*"/>
+          </instance-parameter>
+          <parameter name="doublescan" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+          <parameter name="interlaced" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+          <parameter name="vsync" transfer-ownership="none">
             <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
@@ -2523,7 +2999,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="set_primary"
               c:identifier="gnome_rr_output_info_set_primary">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="84"/>
+                         line="90"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -2539,7 +3015,7 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <method name="set_refresh_rate"
               c:identifier="gnome_rr_output_info_set_refresh_rate">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="71"/>
+                         line="74"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -2552,10 +3028,26 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
           </parameter>
         </parameters>
       </method>
+      <method name="set_refresh_rate_f"
+              c:identifier="gnome_rr_output_info_set_refresh_rate_f">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="77"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="RROutputInfo" c:type="GnomeRROutputInfo*"/>
+          </instance-parameter>
+          <parameter name="rate" transfer-ownership="none">
+            <type name="gdouble" c:type="double"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="set_rotation"
               c:identifier="gnome_rr_output_info_set_rotation">
         <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
-                         line="74"/>
+                         line="80"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -2565,6 +3057,21 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
           </instance-parameter>
           <parameter name="rotation" transfer-ownership="none">
             <type name="RRRotation" c:type="GnomeRRRotation"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_scale" c:identifier="gnome_rr_output_info_set_scale">
+        <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                         line="71"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="RROutputInfo" c:type="GnomeRROutputInfo*"/>
+          </instance-parameter>
+          <parameter name="scale" transfer-ownership="none">
+            <type name="gfloat" c:type="float"/>
           </parameter>
         </parameters>
       </method>
@@ -2625,13 +3132,13 @@ The labels will be shown by default, use gnome_rr_labeler_hide to hide them.</do
       <constructor name="new" c:identifier="gnome_rr_screen_new" throws="1">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="948">Creates a unique #GnomeRRScreen instance for the specified @screen.</doc>
+             line="964">Creates a unique #GnomeRRScreen instance for the specified @screen.</doc>
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
                          line="108"/>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr.c"
-               line="955">a unique #GnomeRRScreen instance, specific to the @screen, or NULL
+               line="971">a unique #GnomeRRScreen instance, specific to the @screen, or NULL
 if this could not be created, for instance if the driver does not support
 Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
           <type name="RRScreen" c:type="GnomeRRScreen*"/>
@@ -2640,11 +3147,49 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
           <parameter name="screen" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="950">the #GdkScreen on which to operate</doc>
+                 line="966">the #GdkScreen on which to operate</doc>
             <type name="Gdk.Screen" c:type="GdkScreen*"/>
           </parameter>
         </parameters>
       </constructor>
+      <method name="calculate_best_global_scale"
+              c:identifier="gnome_rr_screen_calculate_best_global_scale">
+        <source-position filename="../libcinnamon-desktop/gnome-rr.h"
+                         line="157"/>
+        <return-value transfer-ownership="none">
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="screen" transfer-ownership="none">
+            <type name="RRScreen" c:type="GnomeRRScreen*"/>
+          </instance-parameter>
+          <parameter name="index" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="calculate_supported_scales"
+              c:identifier="gnome_rr_screen_calculate_supported_scales">
+        <source-position filename="../libcinnamon-desktop/gnome-rr.h"
+                         line="152"/>
+        <return-value transfer-ownership="none">
+          <type name="gfloat" c:type="float*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="screen" transfer-ownership="none">
+            <type name="RRScreen" c:type="GnomeRRScreen*"/>
+          </instance-parameter>
+          <parameter name="width" transfer-ownership="none">
+            <type name="gint" c:type="int"/>
+          </parameter>
+          <parameter name="height" transfer-ownership="none">
+            <type name="gint" c:type="int"/>
+          </parameter>
+          <parameter name="n_supported_scales" transfer-ownership="none">
+            <type name="gint" c:type="int*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="create_clone_modes"
               c:identifier="gnome_rr_screen_create_clone_modes">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
@@ -2665,7 +3210,7 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr.c"
-               line="1354">the CRTC identified by @id</doc>
+               line="1372">the CRTC identified by @id</doc>
           <type name="RRCrtc" c:type="GnomeRRCrtc*"/>
         </return-value>
         <parameters>
@@ -2694,6 +3239,32 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="get_global_scale"
+              c:identifier="gnome_rr_screen_get_global_scale">
+        <source-position filename="../libcinnamon-desktop/gnome-rr.h"
+                         line="147"/>
+        <return-value transfer-ownership="none">
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="screen" transfer-ownership="none">
+            <type name="RRScreen" c:type="GnomeRRScreen*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_global_scale_setting"
+              c:identifier="gnome_rr_screen_get_global_scale_setting">
+        <source-position filename="../libcinnamon-desktop/gnome-rr.h"
+                         line="148"/>
+        <return-value transfer-ownership="none">
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="screen" transfer-ownership="none">
+            <type name="RRScreen" c:type="GnomeRRScreen*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_output_by_id"
               c:identifier="gnome_rr_screen_get_output_by_id">
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
@@ -2701,7 +3272,7 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr.c"
-               line="1380">the output identified by @id</doc>
+               line="1398">the output identified by @id</doc>
           <type name="RROutput" c:type="GnomeRROutput*"/>
         </return-value>
         <parameters>
@@ -2720,7 +3291,7 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr.c"
-               line="1881">the output identified by @name</doc>
+               line="1900">the output identified by @name</doc>
           <type name="RROutput" c:type="GnomeRROutput*"/>
         </return-value>
         <parameters>
@@ -2735,7 +3306,7 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
       <method name="get_ranges" c:identifier="gnome_rr_screen_get_ranges">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="999">Get the ranges of the screen</doc>
+             line="1017">Get the ranges of the screen</doc>
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
                          line="127"/>
         <return-value transfer-ownership="none">
@@ -2745,7 +3316,7 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
           <instance-parameter name="screen" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="1001">a #GnomeRRScreen</doc>
+                 line="1019">a #GnomeRRScreen</doc>
             <type name="RRScreen" c:type="GnomeRRScreen*"/>
           </instance-parameter>
           <parameter name="min_width"
@@ -2754,7 +3325,7 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="1002">the minimum width</doc>
+                 line="1020">the minimum width</doc>
             <type name="gint" c:type="int*"/>
           </parameter>
           <parameter name="max_width"
@@ -2763,7 +3334,7 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="1003">the maximum width</doc>
+                 line="1021">the maximum width</doc>
             <type name="gint" c:type="int*"/>
           </parameter>
           <parameter name="min_height"
@@ -2772,7 +3343,7 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="1004">the minimum height</doc>
+                 line="1022">the minimum height</doc>
             <type name="gint" c:type="int*"/>
           </parameter>
           <parameter name="max_height"
@@ -2781,7 +3352,7 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="1005">the maximum height</doc>
+                 line="1023">the maximum height</doc>
             <type name="gint" c:type="int*"/>
           </parameter>
         </parameters>
@@ -2790,7 +3361,7 @@ Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.</doc>
               c:identifier="gnome_rr_screen_get_timestamps">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="1035">Queries the two timestamps that the X RANDR extension maintains.  The X
+             line="1053">Queries the two timestamps that the X RANDR extension maintains.  The X
 server will prevent change requests for stale configurations, those whose
 timestamp is not equal to that of the latest request for configuration.  The
 X server will also prevent change requests that have an older timestamp to
@@ -2804,7 +3375,7 @@ the latest change request.</doc>
           <instance-parameter name="screen" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="1037">a #GnomeRRScreen</doc>
+                 line="1055">a #GnomeRRScreen</doc>
             <type name="RRScreen" c:type="GnomeRRScreen*"/>
           </instance-parameter>
           <parameter name="change_timestamp_ret"
@@ -2813,7 +3384,7 @@ the latest change request.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="1038">Location in which to store the timestamp at which the RANDR configuration was last changed</doc>
+                 line="1056">Location in which to store the timestamp at which the RANDR configuration was last changed</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
           <parameter name="config_timestamp_ret"
@@ -2822,16 +3393,29 @@ the latest change request.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="1039">Location in which to store the timestamp at which the RANDR configuration was last obtained</doc>
+                 line="1057">Location in which to store the timestamp at which the RANDR configuration was last obtained</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
+        </parameters>
+      </method>
+      <method name="get_use_upscaling"
+              c:identifier="gnome_rr_screen_get_use_upscaling">
+        <source-position filename="../libcinnamon-desktop/gnome-rr.h"
+                         line="151"/>
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="screen" transfer-ownership="none">
+            <type name="RRScreen" c:type="GnomeRRScreen*"/>
+          </instance-parameter>
         </parameters>
       </method>
       <method name="list_clone_modes"
               c:identifier="gnome_rr_screen_list_clone_modes">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="1303">List available XRandR clone modes</doc>
+             line="1321">List available XRandR clone modes</doc>
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
                          line="113"/>
         <return-value transfer-ownership="none">
@@ -2848,7 +3432,7 @@ the latest change request.</doc>
       <method name="list_crtcs" c:identifier="gnome_rr_screen_list_crtcs">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="1319">List all CRTCs</doc>
+             line="1337">List all CRTCs</doc>
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
                          line="111"/>
         <return-value transfer-ownership="none">
@@ -2865,7 +3449,7 @@ the latest change request.</doc>
       <method name="list_modes" c:identifier="gnome_rr_screen_list_modes">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="1287">List available XRandR modes</doc>
+             line="1305">List available XRandR modes</doc>
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
                          line="112"/>
         <return-value transfer-ownership="none">
@@ -2882,7 +3466,7 @@ the latest change request.</doc>
       <method name="list_outputs" c:identifier="gnome_rr_screen_list_outputs">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="1335">List all outputs</doc>
+             line="1353">List all outputs</doc>
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
                          line="110"/>
         <return-value transfer-ownership="none">
@@ -2899,14 +3483,14 @@ the latest change request.</doc>
       <method name="refresh" c:identifier="gnome_rr_screen_refresh" throws="1">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="1112">Refreshes the screen configuration, and calls the screen's callback if it
+             line="1130">Refreshes the screen configuration, and calls the screen's callback if it
 exists and if the screen's configuration changed.</doc>
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
                          line="121"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-rr.c"
-               line="1120">TRUE if the screen's configuration changed; otherwise, the
+               line="1138">TRUE if the screen's configuration changed; otherwise, the
 function returns FALSE and a NULL error if the configuration didn't change,
 or FALSE and a non-NULL error if there was an error while refreshing the
 configuration.</doc>
@@ -2916,7 +3500,7 @@ configuration.</doc>
           <instance-parameter name="screen" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="1114">a #GnomeRRScreen</doc>
+                 line="1132">a #GnomeRRScreen</doc>
             <type name="RRScreen" c:type="GnomeRRScreen*"/>
           </instance-parameter>
         </parameters>
@@ -2926,7 +3510,7 @@ configuration.</doc>
               throws="1">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="1225">This method also disables the DPMS timeouts.</doc>
+             line="1243">This method also disables the DPMS timeouts.</doc>
         <source-position filename="../libcinnamon-desktop/gnome-rr.h"
                          line="144"/>
         <return-value transfer-ownership="none">
@@ -2938,6 +3522,22 @@ configuration.</doc>
           </instance-parameter>
           <parameter name="mode" transfer-ownership="none">
             <type name="RRDpmsMode" c:type="GnomeRRDpmsMode"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_global_scale_setting"
+              c:identifier="gnome_rr_screen_set_global_scale_setting">
+        <source-position filename="../libcinnamon-desktop/gnome-rr.h"
+                         line="149"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="screen" transfer-ownership="none">
+            <type name="RRScreen" c:type="GnomeRRScreen*"/>
+          </instance-parameter>
+          <parameter name="scale_factor" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
           </parameter>
         </parameters>
       </method>
@@ -3004,7 +3604,7 @@ configuration.</doc>
                    no-hooks="1">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="865">This signal is emitted when a display device is connected to a
+             line="881">This signal is emitted when a display device is connected to a
 port, or a port is hotplugged with an active output. The latter
 can happen if a laptop is docked, and the dock provides a new
 active output.
@@ -3027,7 +3627,7 @@ idle function.</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="868">the #GnomeRROutput that was connected</doc>
+                 line="884">the #GnomeRROutput that was connected</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
         </parameters>
@@ -3038,7 +3638,7 @@ idle function.</doc>
                    no-hooks="1">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="894">This signal is emitted when a display device is disconnected from
+             line="910">This signal is emitted when a display device is disconnected from
 a port, or a port output is hot-unplugged. The latter can happen
 if a laptop is undocked, and the dock provided the output.
 
@@ -3060,7 +3660,7 @@ idle function.</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-rr.c"
-                 line="897">the #GnomeRROutput that was disconnected</doc>
+                 line="913">the #GnomeRROutput that was disconnected</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
         </parameters>
@@ -3114,12 +3714,159 @@ idle function.</doc>
     <record name="RRScreenPrivate" c:type="GnomeRRScreenPrivate" disguised="1">
       <source-position filename="../libcinnamon-desktop/gnome-rr.h" line="34"/>
     </record>
+    <function-macro name="RR_CONFIG"
+                    c:identifier="GNOME_RR_CONFIG"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                       line="117"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="RR_CONFIG_CLASS"
+                    c:identifier="GNOME_RR_CONFIG_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                       line="119"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="RR_CONFIG_GET_CLASS"
+                    c:identifier="GNOME_RR_CONFIG_GET_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                       line="121"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
     <constant name="RR_CONNECTOR_TYPE_PANEL"
               value="Panel"
               c:type="GNOME_RR_CONNECTOR_TYPE_PANEL">
       <source-position filename="../libcinnamon-desktop/gnome-rr.h" line="89"/>
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <function-macro name="RR_LABELER"
+                    c:identifier="GNOME_RR_LABELER"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-labeler.h"
+                       line="36"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="RR_LABELER_CLASS"
+                    c:identifier="GNOME_RR_LABELER_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-labeler.h"
+                       line="37"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="RR_LABELER_GET_CLASS"
+                    c:identifier="GNOME_RR_LABELER_GET_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-labeler.h"
+                       line="40"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="RR_OUTPUT_INFO"
+                    c:identifier="GNOME_RR_OUTPUT_INFO"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                       line="54"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="RR_OUTPUT_INFO_CLASS"
+                    c:identifier="GNOME_RR_OUTPUT_INFO_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                       line="56"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="RR_OUTPUT_INFO_GET_CLASS"
+                    c:identifier="GNOME_RR_OUTPUT_INFO_GET_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr-config.h"
+                       line="58"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="RR_SCREEN"
+                    c:identifier="GNOME_RR_SCREEN"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr.h" line="92"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="RR_SCREEN_CLASS"
+                    c:identifier="GNOME_RR_SCREEN_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr.h" line="94"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="RR_SCREEN_GET_CLASS"
+                    c:identifier="GNOME_RR_SCREEN_GET_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-rr.h" line="96"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WALL_CLOCK"
+                    c:identifier="GNOME_WALL_CLOCK"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
+                       line="39"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WALL_CLOCK_CLASS"
+                    c:identifier="GNOME_WALL_CLOCK_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
+                       line="40"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WALL_CLOCK_GET_CLASS"
+                    c:identifier="GNOME_WALL_CLOCK_GET_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
+                       line="43"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
     <class name="WallClock"
            c:symbol-prefix="wall_clock"
            c:type="GnomeWallClock"
@@ -3132,20 +3879,49 @@ idle function.</doc>
       <constructor name="new" c:identifier="gnome_wall_clock_new">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-wall-clock.c"
-             line="525">Returns a new GnomeWallClock instance</doc>
+             line="540">Returns a new GnomeWallClock instance</doc>
         <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
                          line="68"/>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-wall-clock.c"
-               line="530">A pointer to a new GnomeWallClock instance.</doc>
+               line="545">A pointer to a new GnomeWallClock instance.</doc>
           <type name="WallClock" c:type="GnomeWallClock*"/>
         </return-value>
       </constructor>
+      <function name="lctime_format"
+                c:identifier="gnome_wall_clock_lctime_format">
+        <doc xml:space="preserve"
+             filename="../libcinnamon-desktop/gnome-wall-clock.c"
+             line="587">Returns the translation of the format string according to
+the LC_TIME locale.</doc>
+        <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
+                         line="71"/>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="../libcinnamon-desktop/gnome-wall-clock.c"
+               line="596">The translated format string.</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="gettext_domain"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="format_string"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
       <method name="get_clock" c:identifier="gnome_wall_clock_get_clock">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-wall-clock.c"
-             line="449">Returns a formatted date and time based on either default format
+             line="464">Returns a formatted date and time based on either default format
 settings, or via a custom-set format string.
 
 The returned string should be ready to be set on a label.</doc>
@@ -3154,14 +3930,14 @@ The returned string should be ready to be set on a label.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-wall-clock.c"
-               line="458">The formatted date/time string.</doc>
+               line="473">The formatted date/time string.</doc>
           <type name="utf8" c:type="const char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="clock" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-wall-clock.c"
-                 line="451">The GnomeWallClock</doc>
+                 line="466">The GnomeWallClock</doc>
             <type name="WallClock" c:type="GnomeWallClock*"/>
           </instance-parameter>
         </parameters>
@@ -3170,14 +3946,14 @@ The returned string should be ready to be set on a label.</doc>
               c:identifier="gnome_wall_clock_get_clock_for_format">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-wall-clock.c"
-             line="497">Returns a formatted date and time based on the provided format string.
+             line="512">Returns a formatted date and time based on the provided format string.
 The returned string should be ready to be set on a label.</doc>
         <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
                          line="66"/>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-wall-clock.c"
-               line="505">The formatted date/time string, or NULL
+               line="520">The formatted date/time string, or NULL
 if there was a problem with the format string.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -3185,7 +3961,7 @@ if there was a problem with the format string.</doc>
           <instance-parameter name="clock" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-wall-clock.c"
-                 line="499">The GnomeWallClock</doc>
+                 line="514">The GnomeWallClock</doc>
             <type name="WallClock" c:type="GnomeWallClock*"/>
           </instance-parameter>
           <parameter name="format_string" transfer-ownership="none">
@@ -3197,14 +3973,37 @@ if there was a problem with the format string.</doc>
               c:identifier="gnome_wall_clock_get_default_date_format">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-wall-clock.c"
-             line="482">Returns the current date-only format based on current locale
+             line="497">Returns the current date-only format based on current locale
 defaults and clock settings.</doc>
         <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
                          line="65"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-wall-clock.c"
-               line="489">The default date format string.</doc>
+               line="504">The default date format string.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="clock" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="../libcinnamon-desktop/gnome-wall-clock.c"
+                 line="499">The GnomeWallClock</doc>
+            <type name="WallClock" c:type="GnomeWallClock*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_default_time_format"
+              c:identifier="gnome_wall_clock_get_default_time_format">
+        <doc xml:space="preserve"
+             filename="../libcinnamon-desktop/gnome-wall-clock.c"
+             line="482">Returns the current time-only format based on current locale
+defaults and clock settings.</doc>
+        <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
+                         line="64"/>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="../libcinnamon-desktop/gnome-wall-clock.c"
+               line="489">The default time format string.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
@@ -3216,34 +4015,11 @@ defaults and clock settings.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_default_time_format"
-              c:identifier="gnome_wall_clock_get_default_time_format">
-        <doc xml:space="preserve"
-             filename="../libcinnamon-desktop/gnome-wall-clock.c"
-             line="467">Returns the current time-only format based on current locale
-defaults and clock settings.</doc>
-        <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
-                         line="64"/>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve"
-               filename="../libcinnamon-desktop/gnome-wall-clock.c"
-               line="474">The default time format string.</doc>
-          <type name="utf8" c:type="const gchar*"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="clock" transfer-ownership="none">
-            <doc xml:space="preserve"
-                 filename="../libcinnamon-desktop/gnome-wall-clock.c"
-                 line="469">The GnomeWallClock</doc>
-            <type name="WallClock" c:type="GnomeWallClock*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
       <method name="set_format_string"
               c:identifier="gnome_wall_clock_set_format_string">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-wall-clock.c"
-             line="538">Sets the wall clock to use the provided format string for any
+             line="553">Sets the wall clock to use the provided format string for any
 subsequent updates.  Passing NULL will un-set any custom format,
 and rely on a default locale format.
 
@@ -3254,14 +4030,14 @@ and the default locale format used instead.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-wall-clock.c"
-               line="550">Whether or not the format string was valid and accepted.</doc>
+               line="565">Whether or not the format string was valid and accepted.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="clock" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="../libcinnamon-desktop/gnome-wall-clock.c"
-                 line="540">The GnomeWallClock</doc>
+                 line="555">The GnomeWallClock</doc>
             <type name="WallClock" c:type="GnomeWallClock*"/>
           </instance-parameter>
           <parameter name="format_string"
@@ -3308,6 +4084,36 @@ will be used instead.</doc>
       <source-position filename="../libcinnamon-desktop/gnome-wall-clock.h"
                        line="45"/>
     </record>
+    <function-macro name="XKB_INFO"
+                    c:identifier="GNOME_XKB_INFO"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-xkb-info.h"
+                       line="39"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="XKB_INFO_CLASS"
+                    c:identifier="GNOME_XKB_INFO_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-xkb-info.h"
+                       line="40"/>
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="XKB_INFO_GET_CLASS"
+                    c:identifier="GNOME_XKB_INFO_GET_CLASS"
+                    introspectable="0">
+      <source-position filename="../libcinnamon-desktop/gnome-xkb-info.h"
+                       line="43"/>
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
     <class name="XkbInfo"
            c:symbol-prefix="xkb_info"
            c:type="GnomeXkbInfo"
@@ -3812,27 +4618,27 @@ that is empty, will just create a new vector for you.</doc>
               version="2.2">
       <doc xml:space="preserve"
            filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-           line="1685">Returns whether the thumbnail has the correct uri embedded in the
+           line="1690">Returns whether the thumbnail has the correct uri embedded in the
 Thumb::URI option in the png.</doc>
       <source-position filename="../libcinnamon-desktop/gnome-desktop-thumbnail.h"
                        line="92"/>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="1693">TRUE if the thumbnail is for @uri</doc>
+             line="1698">TRUE if the thumbnail is for @uri</doc>
         <type name="gboolean" c:type="gboolean"/>
       </return-value>
       <parameters>
         <parameter name="pixbuf" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="1687">an loaded thumbnail pixbuf</doc>
+               line="1692">an loaded thumbnail pixbuf</doc>
           <type name="GdkPixbuf.Pixbuf" c:type="GdkPixbuf*"/>
         </parameter>
         <parameter name="uri" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="1688">a uri</doc>
+               line="1693">a uri</doc>
           <type name="utf8" c:type="const char*"/>
         </parameter>
       </parameters>
@@ -3842,33 +4648,33 @@ Thumb::URI option in the png.</doc>
               version="2.2">
       <doc xml:space="preserve"
            filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-           line="1710">Returns whether the thumbnail has the correct uri and mtime embedded in the
+           line="1715">Returns whether the thumbnail has the correct uri and mtime embedded in the
 png options.</doc>
       <source-position filename="../libcinnamon-desktop/gnome-desktop-thumbnail.h"
                        line="94"/>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="1719">TRUE if the thumbnail has the right @uri and @mtime</doc>
+             line="1724">TRUE if the thumbnail has the right @uri and @mtime</doc>
         <type name="gboolean" c:type="gboolean"/>
       </return-value>
       <parameters>
         <parameter name="pixbuf" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="1712">an loaded thumbnail #GdkPixbuf</doc>
+               line="1717">an loaded thumbnail #GdkPixbuf</doc>
           <type name="GdkPixbuf.Pixbuf" c:type="GdkPixbuf*"/>
         </parameter>
         <parameter name="uri" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="1713">a uri</doc>
+               line="1718">a uri</doc>
           <type name="utf8" c:type="const char*"/>
         </parameter>
         <parameter name="mtime" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="1714">the mtime</doc>
+               line="1719">the mtime</doc>
           <type name="glong" c:type="time_t"/>
         </parameter>
       </parameters>
@@ -3880,7 +4686,7 @@ png options.</doc>
               deprecated-version="2.22">
       <doc xml:space="preserve"
            filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-           line="1631">Calculates the MD5 checksum of the uri. This can be useful
+           line="1636">Calculates the MD5 checksum of the uri. This can be useful
 if you want to manually handle thumbnail files.</doc>
       <doc-deprecated xml:space="preserve">Use #GChecksum instead</doc-deprecated>
       <source-position filename="../libcinnamon-desktop/gnome-desktop-thumbnail.h"
@@ -3888,14 +4694,14 @@ if you want to manually handle thumbnail files.</doc>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="1638">A string with the MD5 digest of the uri string.</doc>
+             line="1643">A string with the MD5 digest of the uri string.</doc>
         <type name="utf8" c:type="char*"/>
       </return-value>
       <parameters>
         <parameter name="uri" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="1633">an uri</doc>
+               line="1638">an uri</doc>
           <type name="utf8" c:type="const char*"/>
         </parameter>
       </parameters>
@@ -3905,26 +4711,26 @@ if you want to manually handle thumbnail files.</doc>
               version="2.2">
       <doc xml:space="preserve"
            filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-           line="1651">Returns the filename that a thumbnail of size @size for @uri would have.</doc>
+           line="1656">Returns the filename that a thumbnail of size @size for @uri would have.</doc>
       <source-position filename="../libcinnamon-desktop/gnome-desktop-thumbnail.h"
                        line="98"/>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-             line="1658">an absolute filename</doc>
+             line="1663">an absolute filename</doc>
         <type name="utf8" c:type="char*"/>
       </return-value>
       <parameters>
         <parameter name="uri" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="1653">an uri</doc>
+               line="1658">an uri</doc>
           <type name="utf8" c:type="const char*"/>
         </parameter>
         <parameter name="size" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="../libcinnamon-desktop/gnome-desktop-thumbnail.c"
-               line="1654">a thumbnail size</doc>
+               line="1659">a thumbnail size</doc>
           <type name="DesktopThumbnailSize"
                 c:type="GnomeDesktopThumbnailSize"/>
         </parameter>
@@ -4050,12 +4856,12 @@ large amounts.</doc>
     <function name="rr_error_quark" c:identifier="gnome_rr_error_quark">
       <doc xml:space="preserve"
            filename="../libcinnamon-desktop/gnome-rr.c"
-           line="163">Returns the #GQuark that will be used for #GError values returned by the
+           line="172">Returns the #GQuark that will be used for #GError values returned by the
 GnomeRR API.</doc>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="../libcinnamon-desktop/gnome-rr.c"
-             line="169">a #GQuark used to identify errors coming from the GnomeRR API.</doc>
+             line="178">a #GQuark used to identify errors coming from the GnomeRR API.</doc>
         <type name="GLib.Quark" c:type="GQuark"/>
       </return-value>
     </function>

@@ -178,6 +178,12 @@ namespace GIR2TS {
         "alias": ParameterNode[];
     }
 
+    function NeedNewLine(text: string): string {
+        if (text != null && text.trim() != "" && !text.endsWith("\n"))
+            return "\n";
+        return "";
+    }
+
 
     function convertToJSType(native_type: string): string {
         switch (native_type) {
@@ -585,11 +591,11 @@ namespace GIR2TS {
         for (let f of props) {
             body += '\t' + renderProperty(f) + '\n';
         }
-        body += '\n';
+        //body += '\n';
         for (let c of callback_fields) {
             body += '\t' + renderCallbackField(c, ns_name) + '\n';
         }
-        body += '\n';
+        //body += '\n';
         for (let m of methods) {
             body += renderMethod(m, undefined, undefined, undefined, 1, ns_name) + '\n';
         }
@@ -690,8 +696,8 @@ namespace GIR2TS {
 
         const static_side = '\n' +
             `var ${class_name}: {\n` +
-            `${ctors_body}\n` +
-            `${static_func_body + (static_func_body.endsWith("\n") ? "" : "\n")}` +
+            `${ctors_body}` + NeedNewLine(ctors_body) +
+            `${static_func_body + NeedNewLine(static_func_body)}` +
             `}\n`;
 
         return iface_str + static_side;
@@ -839,40 +845,40 @@ namespace GIR2TS {
         for (let class_node of class_nodes) {
             let class_name = class_node.$.name;
             // if (exclude && class_name in exclude.exclude.class)
-            body += '\n\n' + GIR2TS.renderClassAsInterface(class_node, ns_name, exclude ? exclude.exclude.class[class_name] : undefined) + '\n\n';
+            body += '\n\t' + (GIR2TS.renderClassAsInterface(class_node, ns_name, exclude ? exclude.exclude.class[class_name] : undefined)).replace(/\n/gm, "\n\t");
         }
         if (ns_node.record)
             for (let rec_node of ns_node.record) {
-                body += '\n\n' + GIR2TS.renderRecordAsClass(rec_node, ns_name) + '\n\n';
+                body += '\n\t' + (GIR2TS.renderRecordAsClass(rec_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.interface)
             for (let iface_node of ns_node.interface) {
-                body += '\n\n' + GIR2TS.renderClassAsInterface(iface_node as ClassNode, ns_name, exclude ? exclude.exclude.class[iface_node.$.name] : undefined) + '\n\n';
+                body += '\n\t' + (GIR2TS.renderClassAsInterface(iface_node as ClassNode, ns_name, exclude ? exclude.exclude.class[iface_node.$.name] : undefined) + '\n\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.enumeration)
             for (let enum_node of ns_node.enumeration) {
-                body += '\n\n' + GIR2TS.renderEnumeration(enum_node, ns_name) + '\n\n';
+                body += '\n\t' + (GIR2TS.renderEnumeration(enum_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.bitfield)
             for (let bf_node of ns_node.bitfield) {
-                body += '\n\n' + GIR2TS.renderEnumeration(bf_node, ns_name) + '\n\n';
+                body += '\n\t' + (GIR2TS.renderEnumeration(bf_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.callback)
             for (let cb_node of ns_node.callback) {
-                body += '\n\n' + GIR2TS.renderCallback(cb_node, ns_name) + '\n\n';
+                body += '\n\t' + (GIR2TS.renderCallback(cb_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.union)
             for (let union_node of ns_node.union) {
-                body += '\n\n' + GIR2TS.renderNodeAsBlankInterface(union_node, ns_name) + '\n\n';
+                body += '\n\t' + (GIR2TS.renderNodeAsBlankInterface(union_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.alias)
             for (let alias_node of ns_node.alias) {
-                body += '\n\n' + GIR2TS.renderAlias(alias_node, ns_name) + '\n\n';
+                body += '\n\t' + (GIR2TS.renderAlias(alias_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.function)
             for (let func_node of ns_node.function) {
                 let exc = exclude && exclude.exclude.function ? exclude.exclude.function : undefined;
-                body += '\n\n' + renderFreeFunction(func_node, ns_name, exc) + '\n\n';
+                body += '\n\t' + (renderFreeFunction(func_node, ns_name, exc) + '\n').replace(/\n/gm, "\n\t");
             }
         return `declare namespace imports.gi.${ns_node.$.name} {${body}}`;
     }
