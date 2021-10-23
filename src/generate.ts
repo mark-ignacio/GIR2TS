@@ -282,7 +282,7 @@ namespace GIR2TS {
 
     function renderFreeFunction (func_node: FunctionNode, exclude_list: string[] = null): string {
         let {name, return_type, params, doc } = getFunctionInfo(func_node);
-        let str = `${renderDocString(doc, params, return_type, 0)} function ${name} (${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type};`;
+        let str = `${renderDocString(doc, params, return_type, 0)}function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type.type};`;
         if (exclude_list && exclude_list.indexOf(name) !== -1) {
             str = '// ' + str;
         }
@@ -299,6 +299,7 @@ namespace GIR2TS {
         for (const line of docString?.replace(/@/g, "#")?.split("\n")) {
             doc+= `${ind} * ${line}\n`;
         }
+
         for (const param of params) {
             doc+= `${ind} * @param ${param.name}`;
             if (param.docString == null) {
@@ -309,14 +310,21 @@ namespace GIR2TS {
                 const lines = param.docString.replace(/@/g, "#").split("\n");
                 doc+= ` ${lines[0]}\n`;
                 if (lines.length > 1)
-                for (let i = 1; i < lines.length; i++) {
+                    for (let i = 1; i < lines.length; i++) {
+                        const line = lines[i];
+                        doc+= `${ind} * ${line}\n`;
+                    }
+            }
+        }
+
+        if (return_info.type != "void") {
+            const lines = return_info.docString?.replace(/@/g, "#").split("\n") ?? [""];
+            doc+= `${ind} * @returns ${lines[0]}\n`;
+            if (lines.length > 1)
+                for (let i = 0; i < lines.length; i++) {
                     const line = lines[i];
                     doc+= `${ind} * ${line}\n`;
                 }
-            }
-        }
-        if (return_info.type != "void") {
-            doc+= `${ind} * @returns ${return_info.docString?.replace(/@/g, "#") ?? ""}\n`;
         }
 
         doc+= `${ind} */\n`
@@ -355,14 +363,14 @@ namespace GIR2TS {
                 if (js_reserved_words.indexOf(param_name) !== -1) { // if clashes with JS reserved word.
                     param_name = '_' + param_name;
                 }
-                let [type, is_primitive] = getTypeFromParameterNode(param_node);
+                let [type, is_primitive, doc] = getTypeFromParameterNode(param_node);
                 if (!is_primitive && forExternalInterfaceInNamespace) {
                     type = forExternalInterfaceInNamespace + '.' + type;
                 }
                 params.push({
                     name: param_name,
                     type: type,
-                    docString: param_node?.doc?.[0]?._ ?? null
+                    docString: doc ?? null
                 });
             }
         }

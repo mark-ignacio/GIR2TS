@@ -166,7 +166,7 @@ var GIR2TS;
     }
     function renderFreeFunction(func_node, exclude_list = null) {
         let { name, return_type, params, doc } = getFunctionInfo(func_node);
-        let str = `${renderDocString(doc, params, return_type, 0)} function ${name} (${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type};`;
+        let str = `${renderDocString(doc, params, return_type, 0)}function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type.type};`;
         if (exclude_list && exclude_list.indexOf(name) !== -1) {
             str = '// ' + str;
         }
@@ -198,13 +198,19 @@ var GIR2TS;
             }
         }
         if (return_info.type != "void") {
-            doc += `${ind} * @returns ${(_c = (_b = return_info.docString) === null || _b === void 0 ? void 0 : _b.replace(/@/g, "#")) !== null && _c !== void 0 ? _c : ""}\n`;
+            const lines = (_c = (_b = return_info.docString) === null || _b === void 0 ? void 0 : _b.replace(/@/g, "#").split("\n")) !== null && _c !== void 0 ? _c : [""];
+            doc += `${ind} * @returns ${lines[0]}\n`;
+            if (lines.length > 1)
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    doc += `${ind} * ${line}\n`;
+                }
         }
         doc += `${ind} */\n`;
         return doc;
     }
     function renderMethod(method_node, include_access_modifier = true, include_name = true, forExternalInterfaceInNamespace = null, indentNum, exclude = false) {
-        var _a, _b, _c, _d, _e;
+        var _a, _b;
         var method_name = method_node.$.name;
         const [return_type, primitive, docString] = getTypeFromParameterNode(method_node['return-value'][0]);
         var params = [];
@@ -217,21 +223,21 @@ var GIR2TS;
                 if (js_reserved_words.indexOf(param_name) !== -1) {
                     param_name = '_' + param_name;
                 }
-                let [type, is_primitive] = getTypeFromParameterNode(param_node);
+                let [type, is_primitive, doc] = getTypeFromParameterNode(param_node);
                 if (!is_primitive && forExternalInterfaceInNamespace) {
                     type = forExternalInterfaceInNamespace + '.' + type;
                 }
                 params.push({
                     name: param_name,
                     type: type,
-                    docString: (_c = (_b = (_a = param_node === null || param_node === void 0 ? void 0 : param_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null
+                    docString: doc !== null && doc !== void 0 ? doc : null
                 });
             }
         }
         const ind = "\t".repeat(indentNum);
         let indentAdded = false;
         let str = '';
-        str += renderDocString((_e = (_d = method_node.doc) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e._, params, { type: return_type, is_primitive: primitive, docString: docString }, indentNum);
+        str += renderDocString((_b = (_a = method_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._, params, { type: return_type, is_primitive: primitive, docString: docString }, indentNum);
         if (exclude) {
             str += `${ind}// `;
             indentAdded = true;
