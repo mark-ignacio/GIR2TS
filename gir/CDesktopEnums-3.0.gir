@@ -186,61 +186,61 @@ and/or use gtk-doc annotations.  -->
       </member>
       <member name="media" value="8" c:identifier="C_DESKTOP_MEDIA_KEY_MEDIA">
       </member>
-      <member name="screenshot"
-              value="9"
-              c:identifier="C_DESKTOP_MEDIA_KEY_SCREENSHOT">
+      <member name="play" value="9" c:identifier="C_DESKTOP_MEDIA_KEY_PLAY">
       </member>
-      <member name="window_screenshot"
-              value="10"
-              c:identifier="C_DESKTOP_MEDIA_KEY_WINDOW_SCREENSHOT">
+      <member name="pause" value="10" c:identifier="C_DESKTOP_MEDIA_KEY_PAUSE">
       </member>
-      <member name="play" value="11" c:identifier="C_DESKTOP_MEDIA_KEY_PLAY">
-      </member>
-      <member name="pause" value="12" c:identifier="C_DESKTOP_MEDIA_KEY_PAUSE">
-      </member>
-      <member name="stop" value="13" c:identifier="C_DESKTOP_MEDIA_KEY_STOP">
+      <member name="stop" value="11" c:identifier="C_DESKTOP_MEDIA_KEY_STOP">
       </member>
       <member name="previous"
-              value="14"
+              value="12"
               c:identifier="C_DESKTOP_MEDIA_KEY_PREVIOUS">
       </member>
-      <member name="next" value="15" c:identifier="C_DESKTOP_MEDIA_KEY_NEXT">
+      <member name="next" value="13" c:identifier="C_DESKTOP_MEDIA_KEY_NEXT">
       </member>
       <member name="rewind"
-              value="16"
+              value="14"
               c:identifier="C_DESKTOP_MEDIA_KEY_REWIND">
       </member>
       <member name="forward"
-              value="17"
+              value="15"
               c:identifier="C_DESKTOP_MEDIA_KEY_FORWARD">
       </member>
       <member name="repeat"
-              value="18"
+              value="16"
               c:identifier="C_DESKTOP_MEDIA_KEY_REPEAT">
       </member>
       <member name="random"
-              value="19"
+              value="17"
               c:identifier="C_DESKTOP_MEDIA_KEY_RANDOM">
       </member>
-      <member name="area_screenshot"
-              value="20"
-              c:identifier="C_DESKTOP_MEDIA_KEY_AREA_SCREENSHOT">
+      <member name="screenshot"
+              value="18"
+              c:identifier="C_DESKTOP_MEDIA_KEY_SCREENSHOT">
       </member>
       <member name="screenshot_clip"
-              value="21"
+              value="19"
               c:identifier="C_DESKTOP_MEDIA_KEY_SCREENSHOT_CLIP">
+      </member>
+      <member name="separator"
+              value="20"
+              c:identifier="C_DESKTOP_MEDIA_KEY_SEPARATOR">
+      </member>
+      <member name="window_screenshot"
+              value="21"
+              c:identifier="C_DESKTOP_MEDIA_KEY_WINDOW_SCREENSHOT">
       </member>
       <member name="window_screenshot_clip"
               value="22"
               c:identifier="C_DESKTOP_MEDIA_KEY_WINDOW_SCREENSHOT_CLIP">
       </member>
-      <member name="area_screenshot_clip"
+      <member name="area_screenshot"
               value="23"
-              c:identifier="C_DESKTOP_MEDIA_KEY_AREA_SCREENSHOT_CLIP">
+              c:identifier="C_DESKTOP_MEDIA_KEY_AREA_SCREENSHOT">
       </member>
-      <member name="separator"
+      <member name="area_screenshot_clip"
               value="24"
-              c:identifier="C_DESKTOP_MEDIA_KEY_SEPARATOR">
+              c:identifier="C_DESKTOP_MEDIA_KEY_AREA_SCREENSHOT_CLIP">
       </member>
       <member name="touchpad"
               value="25"

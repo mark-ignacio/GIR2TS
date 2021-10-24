@@ -1,0 +1,11 @@
+
+{
+    "exclude": {
+        "class": {
+
+        },
+        "function": [
+            "break"
+        ]
+    }
+}

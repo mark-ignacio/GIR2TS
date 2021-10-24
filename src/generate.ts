@@ -55,7 +55,6 @@ namespace GIR2TS {
         in
         static
         with
-        break
     `
 
     export interface parseGIRCallback {
@@ -880,7 +879,10 @@ namespace GIR2TS {
                 let exc = exclude && exclude.exclude.function ? exclude.exclude.function : undefined;
                 body += '\n\t' + (renderFreeFunction(func_node, ns_name, exc) + '\n').replace(/\n/gm, "\n\t");
             }
-        return `declare namespace imports.gi.${ns_node.$.name} {${body}}`;
+        
+        // Change lines with only whitespace chars to empty strings 
+        body = body.split("\n").reduce((p, c) => p += (c.trim() == "" ? "\n" : `${c}\n`));
+        return `declare namespace imports.gi.${ns_node.$.name} {\n${body}}`;
     }
 
 

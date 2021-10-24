@@ -57,7 +57,6 @@ var GIR2TS;
         in
         static
         with
-        break
     `;
     function NeedNewLine(text) {
         if (text != null && text.trim() != "" && !text.endsWith("\n"))
@@ -636,7 +635,8 @@ var GIR2TS;
                 let exc = exclude && exclude.exclude.function ? exclude.exclude.function : undefined;
                 body += '\n\t' + (renderFreeFunction(func_node, ns_name, exc) + '\n').replace(/\n/gm, "\n\t");
             }
-        return `declare namespace imports.gi.${ns_node.$.name} {${body}}`;
+        body = body.split("\n").reduce((p, c) => p += (c.trim() == "" ? "\n" : `${c}\n`));
+        return `declare namespace imports.gi.${ns_node.$.name} {\n${body}}`;
     }
     GIR2TS.renderNamespace = renderNamespace;
     function parseGIR(file_path, cb) {
