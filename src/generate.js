@@ -148,7 +148,7 @@ var GIR2TS;
         const doc = (_c = (_b = (_a = func_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b["_"]) !== null && _c !== void 0 ? _c : null;
         if (func_node.parameters && func_node.parameters[0].parameter) {
             for (var param_node of func_node.parameters[0].parameter) {
-                if (param_node.$.name === '...')
+                if (param_node.$.name === '...' || param_node.$.name === 'user_data')
                     continue;
                 let param_name = param_node.$.name;
                 if (js_reserved_words.indexOf(param_name) !== -1) {
@@ -245,7 +245,7 @@ var GIR2TS;
         var params = [];
         if (method_node.parameters && "parameter" in method_node.parameters[0]) {
             for (var param_node of method_node.parameters[0].parameter) {
-                if (param_node.$.name === '...')
+                if (param_node.$.name === '...' || param_node.$.name === "user_data")
                     continue;
                 let param_name = param_node.$.name;
                 if (js_reserved_words.indexOf(param_name) !== -1) {

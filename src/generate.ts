@@ -270,7 +270,7 @@ namespace GIR2TS {
 
         if (func_node.parameters && func_node.parameters[0].parameter) {
             for (var param_node of func_node.parameters[0].parameter) {
-                if (param_node.$.name === '...') continue;
+                if (param_node.$.name === '...' || param_node.$.name === 'user_data') continue;
                 let param_name = param_node.$.name;
                 if (js_reserved_words.indexOf(param_name) !== -1) { // if clashes with JS reserved word.
                     param_name = '_' + param_name;
@@ -402,7 +402,7 @@ namespace GIR2TS {
 
         if (method_node.parameters && "parameter" in method_node.parameters[0]) {
             for (var param_node of method_node.parameters[0].parameter) {
-                if (param_node.$.name === '...') continue;
+                if (param_node.$.name === '...' || param_node.$.name === "user_data") continue;
                 let param_name = param_node.$.name;
                 if (js_reserved_words.indexOf(param_name) !== -1) { // if clashes with JS reserved word.
                     param_name = '_' + param_name;
