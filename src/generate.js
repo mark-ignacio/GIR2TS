@@ -527,6 +527,7 @@ var GIR2TS;
         const static_func_body = static_func_str_list.join('\n');
         const static_side = '\n' +
             `class ${class_name} {\n` +
+            `\tconstructor();\n` +
             `${ctors_body}` + NeedNewLine(ctors_body) +
             `${static_func_body + NeedNewLine(static_func_body)}` +
             `}\n`;
