@@ -621,6 +621,7 @@ namespace GIR2TS {
         }
 
         for (let f of props) {
+            body+= renderDocString(f.doc?.[0]._ ?? null, undefined, undefined, 1, ns_name)
             const excluded = exclude?.prop?.includes(f.$.name) ?? false;
             body += '\t';
             if (excluded)

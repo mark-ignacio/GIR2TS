@@ -420,7 +420,7 @@ var GIR2TS;
     }
     GIR2TS.renderAlias = renderAlias;
     function renderRecordAsClass(rec_node, ns_name, exclude) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
         let props = [];
         let callback_fields = [];
         let methods = getAllMethods(rec_node);
@@ -444,23 +444,25 @@ var GIR2TS;
             }
         }
         for (let f of props) {
-            const excluded = (_d = (_c = exclude === null || exclude === void 0 ? void 0 : exclude.prop) === null || _c === void 0 ? void 0 : _c.includes(f.$.name)) !== null && _d !== void 0 ? _d : false;
+            body += renderDocString((_d = (_c = f.doc) === null || _c === void 0 ? void 0 : _c[0]._) !== null && _d !== void 0 ? _d : null, undefined, undefined, 1, ns_name);
+            const excluded = (_f = (_e = exclude === null || exclude === void 0 ? void 0 : exclude.prop) === null || _e === void 0 ? void 0 : _e.includes(f.$.name)) !== null && _f !== void 0 ? _f : false;
             body += '\t';
             if (excluded)
                 body += "// ";
             body += renderProperty(f) + '\n';
         }
         for (let c of callback_fields) {
+            body += renderDocString((_h = (_g = c.doc) === null || _g === void 0 ? void 0 : _g[0]._) !== null && _h !== void 0 ? _h : null, undefined, undefined, 1, ns_name);
             const func_name = c.$.name;
-            const excluded = (_f = (_e = exclude === null || exclude === void 0 ? void 0 : exclude.callback) === null || _e === void 0 ? void 0 : _e.includes(func_name)) !== null && _f !== void 0 ? _f : false;
+            const excluded = (_k = (_j = exclude === null || exclude === void 0 ? void 0 : exclude.callback) === null || _j === void 0 ? void 0 : _j.includes(func_name)) !== null && _k !== void 0 ? _k : false;
             body += renderCallbackField(c, ns_name, 1, excluded) + '\n';
         }
         for (let m of methods) {
             const func_name = m.$.name;
-            const excluded = (_h = (_g = exclude === null || exclude === void 0 ? void 0 : exclude.method) === null || _g === void 0 ? void 0 : _g.includes(func_name)) !== null && _h !== void 0 ? _h : false;
+            const excluded = (_m = (_l = exclude === null || exclude === void 0 ? void 0 : exclude.method) === null || _l === void 0 ? void 0 : _l.includes(func_name)) !== null && _m !== void 0 ? _m : false;
             body += renderMethod(m, undefined, undefined, undefined, 1, ns_name, excluded) + '\n';
         }
-        let result = renderDocString((_l = (_k = (_j = rec_node === null || rec_node === void 0 ? void 0 : rec_node.doc) === null || _j === void 0 ? void 0 : _j[0]) === null || _k === void 0 ? void 0 : _k._) !== null && _l !== void 0 ? _l : null, undefined, undefined, 0, ns_name);
+        let result = renderDocString((_q = (_p = (_o = rec_node === null || rec_node === void 0 ? void 0 : rec_node.doc) === null || _o === void 0 ? void 0 : _o[0]) === null || _p === void 0 ? void 0 : _p._) !== null && _q !== void 0 ? _q : null, undefined, undefined, 0, ns_name);
         result += `class ${rec_node.$.name} {\n${body}}`;
         return result;
     }

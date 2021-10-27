@@ -1,0 +1,16 @@
+
+{
+    "$schema": "./schema.json",
+    "exclude": {
+        "class": {
+            "JavascriptResult": {
+                "method": [
+                    "get_js_value"
+                ]
+            }
+        },
+        "function": [
+            
+        ]
+    }
+}
