@@ -396,10 +396,10 @@ var GIR2TS;
         if (cb_name === 'constructor') {
             cb_name += '_';
         }
-        let result = "";
+        let result = `${"\t".repeat(indent)}`;
         if (exclude)
             result += "// ";
-        result += `${"\t".repeat(indent)}${cb_name}: {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`;
+        result += `${cb_name}: {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`;
         return result;
     }
     function renderConstructorField(constructor_node, ns_name, indent, exclude) {
@@ -453,7 +453,7 @@ var GIR2TS;
         for (let c of callback_fields) {
             const func_name = c.$.name;
             const excluded = (_f = (_e = exclude === null || exclude === void 0 ? void 0 : exclude.callback) === null || _e === void 0 ? void 0 : _e.includes(func_name)) !== null && _f !== void 0 ? _f : false;
-            body += `\t` + renderCallbackField(c, ns_name, 1, excluded) + '\n';
+            body += renderCallbackField(c, ns_name, 1, excluded) + '\n';
         }
         for (let m of methods) {
             const func_name = m.$.name;

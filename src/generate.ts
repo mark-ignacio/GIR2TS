@@ -569,10 +569,10 @@ namespace GIR2TS {
             cb_name += '_'; // Append an underscore.
         }
 
-        let result = "";
+        let result = `${"\t".repeat(indent)}`;
         if (exclude)
             result += "// ";
-        result+= `${"\t".repeat(indent)}${cb_name}: {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`
+        result+= `${cb_name}: {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`
         return result;
     }
 
@@ -631,7 +631,7 @@ namespace GIR2TS {
         for (let c of callback_fields) {
             const func_name = c.$.name;
             const excluded = exclude?.callback?.includes(func_name) ?? false;
-            body += `\t` + renderCallbackField(c, ns_name, 1, excluded) + '\n';
+            body += renderCallbackField(c, ns_name, 1, excluded) + '\n';
         }
 
         for (let m of methods) {
