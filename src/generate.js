@@ -238,7 +238,7 @@ var GIR2TS;
         doc += `${ind} */\n`;
         return doc;
     }
-    function renderMethod(method_node, include_access_modifier = true, include_name = true, forExternalInterfaceInNamespace = null, indentNum, ns_name, exclude = false) {
+    function renderMethod(method_node, include_access_modifier = true, include_name = true, forExternalInterfaceInNamespace = null, indentNum, ns_name, exclude = false, staticFunc = false) {
         var _a, _b, _c;
         var method_name = method_node.$.name;
         const [return_type, primitive, docString] = getTypeFromParameterNode(method_node['return-value'][0]);
@@ -276,6 +276,14 @@ var GIR2TS;
                 indentAdded = true;
             }
             str += `public `;
+            indentAdded = true;
+        }
+        if (staticFunc) {
+            if (!indentAdded) {
+                str += ind;
+                indentAdded = true;
+            }
+            str += `static `;
             indentAdded = true;
         }
         if (include_name) {
@@ -443,6 +451,11 @@ var GIR2TS;
         let exclude_method_list = [];
         let exclude_self = false;
         let exclude_all_members = false;
+        function transformExtension(className) {
+            const parts = className.split(".");
+            parts[parts.length - 1] = `I${parts[parts.length - 1]}`;
+            return parts.join(".");
+        }
         if (exclude instanceof Array) {
             exclude_method_list = exclude_method_list.concat(exclude);
         }
@@ -453,11 +466,11 @@ var GIR2TS;
             exclude_self = exclude_all_members = true;
         }
         if (class_node.$.parent) {
-            ifaces.push(class_node.$.parent);
+            ifaces.push(transformExtension(class_node.$.parent));
         }
         if (class_node.implements) {
             for (let iface of class_node.implements) {
-                ifaces.push(iface.$.name);
+                ifaces.push(transformExtension(iface.$.name));
             }
         }
         if (class_node.method) {
@@ -476,36 +489,48 @@ var GIR2TS;
                 static_funcs.push(f);
             }
         }
+        let mixinDocstring = "";
+        mixinDocstring += `/** This construct is only for enabling class multi-inheritance,\n`;
+        mixinDocstring += ` * use {@link ${class_name}} instead.\n`;
+        mixinDocstring += ` */\n`;
         let header = '';
-        header += renderDocString((_c = (_b = (_a = class_node === null || class_node === void 0 ? void 0 : class_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, undefined, undefined, 0, ns_name);
-        header += `${exclude_self ? '// ' : ''}interface ${class_name}`;
-        if (ifaces.length > 0) {
-            header += ` extends ${ifaces.join(', ')}`;
-        }
+        header += mixinDocstring;
+        header += `interface I${class_name}`;
         const method_str_list = methods.map((m) => {
             const excluded = ((exclude_method_list.length > 0 && (exclude === null || exclude === void 0 ? void 0 : exclude.indexOf(m.$.name)) !== -1) || exclude_all_members);
             let method_str = renderMethod(m, false, undefined, undefined, 1, ns_name, excluded);
             return method_str;
         });
+        let mixin = "";
+        mixin += mixinDocstring;
+        mixin += `type ${class_name}Mixin = I${class_name}`;
+        if (ifaces.length > 0) {
+            mixin += " &";
+            mixin += ` ${ifaces.join(' & ')}`;
+        }
+        mixin += ";\n\n";
+        let extension = "";
+        extension += renderDocString((_c = (_b = (_a = class_node === null || class_node === void 0 ? void 0 : class_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, undefined, undefined, 0, ns_name);
+        extension += `${exclude_self ? '// ' : ''}interface ${class_name} extends ${class_name}Mixin {}\n`;
         let body = method_str_list.join('\n');
         body = ` {\n` +
             `${body}\n` +
-            `${exclude_self ? '// ' : ''}}\n`;
+            `}\n\n`;
         let iface_str = header + body;
         const ctor_str_list = ctors.map((c) => {
-            return renderMethod(c, false, undefined, undefined, 1, ns_name);
+            return renderMethod(c, false, undefined, undefined, 1, ns_name, false, true);
         });
         const ctors_body = ctor_str_list.join('\n');
         const static_func_str_list = static_funcs.map((sf) => {
-            return renderMethod(sf, false, undefined, undefined, 1, ns_name);
+            return renderMethod(sf, false, undefined, undefined, 1, ns_name, false, true);
         });
         const static_func_body = static_func_str_list.join('\n');
         const static_side = '\n' +
-            `var ${class_name}: {\n` +
+            `class ${class_name} {\n` +
             `${ctors_body}` + NeedNewLine(ctors_body) +
             `${static_func_body + NeedNewLine(static_func_body)}` +
             `}\n`;
-        return iface_str + static_side;
+        return iface_str + mixin + extension + static_side;
     }
     GIR2TS.renderClassAsInterface = renderClassAsInterface;
     function renderClassWithInterfaceMembers(class_node, ns_list = [], my_ns, ns_name) {
