@@ -143,6 +143,7 @@ namespace GIR2TS {
     interface RecordNode extends Node {
         "field": FieldNode[];
         "method": FunctionNode[];
+        "constructor"?: FunctionNode[]
         doc?: Node[];
     }
 
@@ -386,7 +387,7 @@ namespace GIR2TS {
         indentNum: number,
         ns_name: string,
         exclude: boolean = false,
-        staticFunc: boolean = false
+        staticFunc: boolean = false,
     ): string {
 
         // interface Parameter {
@@ -562,12 +563,16 @@ namespace GIR2TS {
     }
 
 
-    function renderCallbackField(cb_node: FunctionNode, ns_name: string): string {
+    function renderCallbackField(cb_node: FunctionNode, ns_name: string, indent: number): string {
         let cb_name = cb_node.$.name;
         if (cb_name === 'constructor') {
             cb_name += '_'; // Append an underscore.
         }
-        return `${cb_name} : {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`
+        return `${cb_name} : {${renderMethod(cb_node, false, false, undefined, indent, ns_name)}};`
+    }
+
+    function renderConstructorField(constructor_node: FunctionNode, ns_name: string, indent: number) {
+        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, false, true)}`
     }
 
 
@@ -587,6 +592,7 @@ namespace GIR2TS {
         let props: ParameterNode[] = [];
         let callback_fields: FunctionNode[] = [];
         let methods = getAllMethods(rec_node);
+
         if (rec_node.field)
             for (let f of rec_node.field) {
                 if (f.type || f.array) {
@@ -596,12 +602,24 @@ namespace GIR2TS {
                 }
             }
         let body = '';
+
+        // Constructor keyword causes problems here so we need to check with stringify as well
+        // even if value is null it still comes up as function
+        if (JSON.stringify(rec_node.constructor) != undefined && rec_node.constructor != null) {
+            for (let construct of rec_node.constructor) {
+                if (JSON.stringify(construct) == undefined || construct == null)
+                    continue;
+                body += renderConstructorField(construct, ns_name, 1) + "\n";
+            }
+        }
+
         for (let f of props) {
             body += '\t' + renderProperty(f) + '\n';
         }
+            
         //body += '\n';
         for (let c of callback_fields) {
-            body += '\t' + renderCallbackField(c, ns_name) + '\n';
+            body += renderCallbackField(c, ns_name, 1) + '\n';
         }
         //body += '\n';
         for (let m of methods) {
@@ -746,7 +764,7 @@ namespace GIR2TS {
                 let iface_name = iface.$.name;
                 let iface_list: InterfaceNode[] = [];
                 let iface_ns: string = '';
-                if (iface_name.indexOf('.') !== -1) { // if it cotains a period, idicating another namespace
+                if (iface_name.indexOf('.') !== -1) { // if it contains a period, indicating another namespace
                     iface_ns = iface_name.split('.')[0];
                     iface_name = iface_name.split('.')[1];
                     let ns_node = searchNodeByName(ns_list, iface_ns);

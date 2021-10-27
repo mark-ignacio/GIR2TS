@@ -391,12 +391,15 @@ var GIR2TS;
         return result;
     }
     GIR2TS.renderEnumeration = renderEnumeration;
-    function renderCallbackField(cb_node, ns_name) {
+    function renderCallbackField(cb_node, ns_name, indent) {
         let cb_name = cb_node.$.name;
         if (cb_name === 'constructor') {
             cb_name += '_';
         }
-        return `${cb_name} : {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`;
+        return `${cb_name} : {${renderMethod(cb_node, false, false, undefined, indent, ns_name)}};`;
+    }
+    function renderConstructorField(constructor_node, ns_name, indent) {
+        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, false, true)}`;
     }
     function renderNodeAsBlankInterface(node, ns_name) {
         var _a, _b, _c;
@@ -427,11 +430,15 @@ var GIR2TS;
                 }
             }
         let body = '';
+        if (JSON.stringify(rec_node.constructor) != undefined && rec_node.constructor != null) {
+            for (let construct of rec_node.constructor) {
+                if (JSON.stringify(construct) == undefined || construct == null)
+                    continue;
+                body += renderConstructorField(construct, ns_name, 1) + "\n";
+            }
+        }
         for (let f of props) {
             body += '\t' + renderProperty(f) + '\n';
-        }
-        for (let c of callback_fields) {
-            body += '\t' + renderCallbackField(c, ns_name) + '\n';
         }
         for (let m of methods) {
             body += renderMethod(m, undefined, undefined, undefined, 1, ns_name) + '\n';
