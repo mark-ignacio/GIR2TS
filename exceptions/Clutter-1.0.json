@@ -1,0 +1,18 @@
+{
+    "$schema": "./schema.json",
+    "exclude": {
+        "class": {
+            "ScriptableIface": {
+                "callback": [
+                    "parse_custom_node"
+                ]
+            },
+            "Scriptable": {
+                "method": [
+                    "parse_custom_node"
+                ]
+            }
+        },
+        "function": []
+    }
+}
