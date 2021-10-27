@@ -563,16 +563,21 @@ namespace GIR2TS {
     }
 
 
-    function renderCallbackField(cb_node: FunctionNode, ns_name: string, indent: number): string {
+    function renderCallbackField(cb_node: FunctionNode, ns_name: string, indent: number, exclude: boolean): string {
         let cb_name = cb_node.$.name;
         if (cb_name === 'constructor') {
             cb_name += '_'; // Append an underscore.
         }
-        return `${cb_name} : {${renderMethod(cb_node, false, false, undefined, indent, ns_name)}};`
+
+        let result = "";
+        if (exclude)
+            result += "// ";
+        result+= `${"\t".repeat(indent)}${cb_name}: {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`
+        return result;
     }
 
-    function renderConstructorField(constructor_node: FunctionNode, ns_name: string, indent: number) {
-        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, false, true)}`
+    function renderConstructorField(constructor_node: FunctionNode, ns_name: string, indent: number, exclude: boolean) {
+        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, exclude, true)}`
     }
 
 
@@ -588,7 +593,7 @@ namespace GIR2TS {
         return result;
     }
 
-    export function renderRecordAsClass(rec_node: RecordNode, ns_name: string): string {
+    export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclude?: ExcludeClass): string {
         let props: ParameterNode[] = [];
         let callback_fields: FunctionNode[] = [];
         let methods = getAllMethods(rec_node);
@@ -609,21 +614,30 @@ namespace GIR2TS {
             for (let construct of rec_node.constructor) {
                 if (JSON.stringify(construct) == undefined || construct == null)
                     continue;
-                body += renderConstructorField(construct, ns_name, 1) + "\n";
+                const func_name = construct.$.name;
+                const excluded = exclude?.static?.includes(func_name) ?? false;
+                body += renderConstructorField(construct, ns_name, 1, excluded) + "\n";
             }
         }
 
         for (let f of props) {
-            body += '\t' + renderProperty(f) + '\n';
+            const excluded = exclude?.prop?.includes(f.$.name) ?? false;
+            body += '\t';
+            if (excluded)
+                body += "// "
+            body += renderProperty(f) + '\n';
         }
             
-        //body += '\n';
         for (let c of callback_fields) {
-            body += renderCallbackField(c, ns_name, 1) + '\n';
+            const func_name = c.$.name;
+            const excluded = exclude?.callback?.includes(func_name) ?? false;
+            body += `\t` + renderCallbackField(c, ns_name, 1, excluded) + '\n';
         }
-        //body += '\n';
+
         for (let m of methods) {
-            body += renderMethod(m, undefined, undefined, undefined, 1, ns_name) + '\n';
+            const func_name = m.$.name;
+            const excluded = exclude?.method?.includes(func_name) ?? false;
+            body += renderMethod(m, undefined, undefined, undefined, 1, ns_name, excluded) + '\n';
         }
 
         let result = renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
@@ -637,7 +651,7 @@ namespace GIR2TS {
         methods.
         @exclude_list : An array of member names to exclude.
     */
-    export function renderClassAsInterface(class_node: ClassNode, ns_name: string, exclude?: string | string[]): string {
+    export function renderClassAsInterface(class_node: ClassNode, ns_name: string, exclude?: ExcludeClass): string {
 
         const class_name = class_node.$.name;
         const ifaces: string[] = [];
@@ -654,11 +668,9 @@ namespace GIR2TS {
             return parts.join(".")
         }
 
-        if (exclude instanceof Array) {
-            exclude_method_list = exclude_method_list.concat(exclude);
-        } else if (exclude === 'all') {
-            exclude_all_members = true;
-        } else if (exclude === 'self') {
+        exclude_method_list = exclude_method_list.concat(exclude?.method ?? []);
+        exclude_all_members = exclude?.members ?? false;
+        if (exclude?.self) {
             exclude_self = exclude_all_members = true;
         }
 
@@ -703,7 +715,7 @@ namespace GIR2TS {
 
         const method_str_list: string[] = methods.map((m) => {
             // if method is present in exclude_list
-            const excluded = ((exclude_method_list.length > 0 && exclude?.indexOf(m.$.name) !== -1) || exclude_all_members);
+            const excluded = (exclude_method_list.includes(m.$.name) || exclude_all_members);
             let method_str = renderMethod(m, false, undefined, undefined, 1, ns_name, excluded);
             return method_str;
         });
@@ -877,10 +889,19 @@ namespace GIR2TS {
     export interface ExcludeDesc {
         "exclude": {
             "class": {
-                [klass: string]: string | string[];
+                [klass: string]: ExcludeClass;
             },
             "function": string[]
         }
+    }
+
+    export interface ExcludeClass {
+        prop?: string[],
+        method?: string[],
+        static?: string[],
+        callback?: string[],
+        members?: boolean,
+        self?: boolean
     }
 
 
@@ -896,7 +917,7 @@ namespace GIR2TS {
         }
         if (ns_node.record)
             for (let rec_node of ns_node.record) {
-                body += '\n\t' + (GIR2TS.renderRecordAsClass(rec_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
+                body += '\n\t' + (GIR2TS.renderRecordAsClass(rec_node, ns_name, exclude ? exclude.exclude.class[rec_node.$.name] : undefined) + '\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.interface)
             for (let iface_node of ns_node.interface) {

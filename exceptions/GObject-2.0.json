@@ -1,19 +1,21 @@
 {
     "exclude": {
         "class": {
-            "Object": [
-                "get_property",
-                "get_valist",
-                "set_property",
-                "set_valist",
-                "get",
-                "set",
-                "connect",
-                "disconnect"
-            ],
-            "TypeModule": [
-                "use"
-            ]
+            "Object": {
+                "method": [
+                    "get_property",
+                    "get_valist",
+                    "set_property",
+                    "set_valist",
+                    "get",
+                    "set"
+                ]
+            },
+            "TypeModule": {
+                "method": [
+                    "use"
+                ]
+            }
         }
     }
 }

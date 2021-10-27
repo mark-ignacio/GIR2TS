@@ -391,15 +391,19 @@ var GIR2TS;
         return result;
     }
     GIR2TS.renderEnumeration = renderEnumeration;
-    function renderCallbackField(cb_node, ns_name, indent) {
+    function renderCallbackField(cb_node, ns_name, indent, exclude) {
         let cb_name = cb_node.$.name;
         if (cb_name === 'constructor') {
             cb_name += '_';
         }
-        return `${cb_name} : {${renderMethod(cb_node, false, false, undefined, indent, ns_name)}};`;
+        let result = "";
+        if (exclude)
+            result += "// ";
+        result += `${"\t".repeat(indent)}${cb_name}: {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`;
+        return result;
     }
-    function renderConstructorField(constructor_node, ns_name, indent) {
-        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, false, true)}`;
+    function renderConstructorField(constructor_node, ns_name, indent, exclude) {
+        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, exclude, true)}`;
     }
     function renderNodeAsBlankInterface(node, ns_name) {
         var _a, _b, _c;
@@ -415,8 +419,8 @@ var GIR2TS;
         return result;
     }
     GIR2TS.renderAlias = renderAlias;
-    function renderRecordAsClass(rec_node, ns_name) {
-        var _a, _b, _c;
+    function renderRecordAsClass(rec_node, ns_name, exclude) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
         let props = [];
         let callback_fields = [];
         let methods = getAllMethods(rec_node);
@@ -434,22 +438,35 @@ var GIR2TS;
             for (let construct of rec_node.constructor) {
                 if (JSON.stringify(construct) == undefined || construct == null)
                     continue;
-                body += renderConstructorField(construct, ns_name, 1) + "\n";
+                const func_name = construct.$.name;
+                const excluded = (_b = (_a = exclude === null || exclude === void 0 ? void 0 : exclude.static) === null || _a === void 0 ? void 0 : _a.includes(func_name)) !== null && _b !== void 0 ? _b : false;
+                body += renderConstructorField(construct, ns_name, 1, excluded) + "\n";
             }
         }
         for (let f of props) {
-            body += '\t' + renderProperty(f) + '\n';
+            const excluded = (_d = (_c = exclude === null || exclude === void 0 ? void 0 : exclude.prop) === null || _c === void 0 ? void 0 : _c.includes(f.$.name)) !== null && _d !== void 0 ? _d : false;
+            body += '\t';
+            if (excluded)
+                body += "// ";
+            body += renderProperty(f) + '\n';
+        }
+        for (let c of callback_fields) {
+            const func_name = c.$.name;
+            const excluded = (_f = (_e = exclude === null || exclude === void 0 ? void 0 : exclude.callback) === null || _e === void 0 ? void 0 : _e.includes(func_name)) !== null && _f !== void 0 ? _f : false;
+            body += `\t` + renderCallbackField(c, ns_name, 1, excluded) + '\n';
         }
         for (let m of methods) {
-            body += renderMethod(m, undefined, undefined, undefined, 1, ns_name) + '\n';
+            const func_name = m.$.name;
+            const excluded = (_h = (_g = exclude === null || exclude === void 0 ? void 0 : exclude.method) === null || _g === void 0 ? void 0 : _g.includes(func_name)) !== null && _h !== void 0 ? _h : false;
+            body += renderMethod(m, undefined, undefined, undefined, 1, ns_name, excluded) + '\n';
         }
-        let result = renderDocString((_c = (_b = (_a = rec_node === null || rec_node === void 0 ? void 0 : rec_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, undefined, undefined, 0, ns_name);
+        let result = renderDocString((_l = (_k = (_j = rec_node === null || rec_node === void 0 ? void 0 : rec_node.doc) === null || _j === void 0 ? void 0 : _j[0]) === null || _k === void 0 ? void 0 : _k._) !== null && _l !== void 0 ? _l : null, undefined, undefined, 0, ns_name);
         result += `class ${rec_node.$.name} {\n${body}}`;
         return result;
     }
     GIR2TS.renderRecordAsClass = renderRecordAsClass;
     function renderClassAsInterface(class_node, ns_name, exclude) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d, _e;
         const class_name = class_node.$.name;
         const ifaces = [];
         const methods = [];
@@ -463,13 +480,9 @@ var GIR2TS;
             parts[parts.length - 1] = `I${parts[parts.length - 1]}`;
             return parts.join(".");
         }
-        if (exclude instanceof Array) {
-            exclude_method_list = exclude_method_list.concat(exclude);
-        }
-        else if (exclude === 'all') {
-            exclude_all_members = true;
-        }
-        else if (exclude === 'self') {
+        exclude_method_list = exclude_method_list.concat((_a = exclude === null || exclude === void 0 ? void 0 : exclude.method) !== null && _a !== void 0 ? _a : []);
+        exclude_all_members = (_b = exclude === null || exclude === void 0 ? void 0 : exclude.members) !== null && _b !== void 0 ? _b : false;
+        if (exclude === null || exclude === void 0 ? void 0 : exclude.self) {
             exclude_self = exclude_all_members = true;
         }
         if (class_node.$.parent) {
@@ -504,7 +517,7 @@ var GIR2TS;
         header += mixinDocstring;
         header += `interface I${class_name}`;
         const method_str_list = methods.map((m) => {
-            const excluded = ((exclude_method_list.length > 0 && (exclude === null || exclude === void 0 ? void 0 : exclude.indexOf(m.$.name)) !== -1) || exclude_all_members);
+            const excluded = (exclude_method_list.includes(m.$.name) || exclude_all_members);
             let method_str = renderMethod(m, false, undefined, undefined, 1, ns_name, excluded);
             return method_str;
         });
@@ -517,7 +530,7 @@ var GIR2TS;
         }
         mixin += ";\n\n";
         let extension = "";
-        extension += renderDocString((_c = (_b = (_a = class_node === null || class_node === void 0 ? void 0 : class_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, undefined, undefined, 0, ns_name);
+        extension += renderDocString((_e = (_d = (_c = class_node === null || class_node === void 0 ? void 0 : class_node.doc) === null || _c === void 0 ? void 0 : _c[0]) === null || _d === void 0 ? void 0 : _d._) !== null && _e !== void 0 ? _e : null, undefined, undefined, 0, ns_name);
         extension += `${exclude_self ? '// ' : ''}interface ${class_name} extends ${class_name}Mixin {}\n`;
         let body = method_str_list.join('\n');
         body = ` {\n` +
@@ -637,7 +650,7 @@ var GIR2TS;
         }
         if (ns_node.record)
             for (let rec_node of ns_node.record) {
-                body += '\n\t' + (GIR2TS.renderRecordAsClass(rec_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
+                body += '\n\t' + (GIR2TS.renderRecordAsClass(rec_node, ns_name, exclude ? exclude.exclude.class[rec_node.$.name] : undefined) + '\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.interface)
             for (let iface_node of ns_node.interface) {

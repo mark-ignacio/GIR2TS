@@ -2,26 +2,32 @@
 {
     "exclude": {
         "class": {
-            "Widget": [
-                "activate",
-                "child_notify",
-                "get_window",
-                "mnemonic_activate",
-                "get_direction",
-                "get_state",
-                "grab_focus",
-                "set_direction",
-                "set_state",
-                "set_style",
-                "get_style"
-            ],
-            "Container": [
-                "remove"
-            ],
-            "CellAreaBox": [
-                "pack_end",
-                "pack_start"
-            ]
+            "Widget": {
+                "method": [
+                    "activate",
+                    "child_notify",
+                    "get_window",
+                    "mnemonic_activate",
+                    "get_direction",
+                    "get_state",
+                    "grab_focus",
+                    "set_direction",
+                    "set_state",
+                    "set_style",
+                    "get_style"
+                ]
+            },
+            "Container": {
+                "method": [
+                    "remove"
+                ]
+            },
+            "CellAreaBox": {
+                "method": [
+                    "pack_end",
+                    "pack_start"
+                ]
+            }
         },
         "function": [
             "false",
