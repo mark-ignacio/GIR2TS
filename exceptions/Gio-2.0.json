@@ -1,4 +1,5 @@
 {
+    "$schema": "./schema.json",
     "exclude": {
         "class": {
             "DatagramBased": {
@@ -8,6 +9,7 @@
                     "send_messages"
                 ]
             }
-        }
+        },
+        "function": []
     }
 }

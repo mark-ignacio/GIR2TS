@@ -1,4 +1,5 @@
 {
+    "$schema": "./schema.json",
     "exclude": {
         "class": {
             "ControlBinding": {
@@ -29,6 +30,7 @@
                     "get_length"
                 ]
             }
-        }
+        },
+        "function": []
     }
 }
