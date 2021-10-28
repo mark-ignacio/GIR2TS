@@ -1,0 +1,230 @@
+{
+    "$schema": "./schema.json",
+    "amend": {
+        "class": {
+            "FileIcon": {
+                "function": {
+                    "constructor": {
+                        "newParam": [
+                            {
+                                "type": "Partial<FileIconOptions>",
+                                "optional": true,
+                                "name": "options",
+                                "docs": ""
+                            }
+                        ]
+                    }
+                }
+            },
+            "File": {
+                "function": {
+                    "replace_contents": {
+                        "param": {
+                            "contents": {
+                                "type": "string"
+                            },
+                            "length": {
+                                "skip": true
+                            }
+                        }
+                    },
+                    "load_contents": {
+                        "param": {
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            },
+                            "contents": {
+                                "skip": true
+                            },
+                            "length": {
+                                "skip": true
+                            },
+                            "etag_out": {
+                                "skip": true
+                            }
+                        },
+                        "return_type": {
+                            "type": "[success: boolean, contents: Uint8Array]"
+                        }
+                    },
+                    "delete_async": {
+                        "param": {
+                            "io_priority": {
+                                "type_extension": ["null"]
+                            },
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            },
+                            "callback": {
+                                "type_extension": ["null"]
+                            }
+                        }
+                    },
+                    "load_contents_async": {
+                        "param": {
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            },
+                            "callback": {
+                                "type_extension": ["null"]
+                            }
+                        }
+                    },
+                    "make_directory_with_parents": {
+                        "param": {
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            }
+                        }
+                    },
+                    "query_exists": {
+                        "param": {
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            }
+                        }
+                    },
+                    "query_info_async": {
+                        "param": {
+                            "io_priority": {
+                                "type_extension": ["null"]
+                            },
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            },
+                            "callback": {
+                                "type_extension": ["null"]
+                            }
+                        }
+                    },
+                    "replace_readwrite_async": {
+                        "param": {
+                            "etag": {
+                                "type_extension": ["null"]
+                            },
+                            "make_backup": {
+                                "type_extension": ["null"]
+                            },
+                            "flags": {
+                                "type_extension": ["null"]
+                            },
+                            "io_priority": {
+                                "type_extension": ["null"]
+                            },
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            },
+                            "callback": {
+                                "type_extension": ["null"]
+                            }
+                        }
+                    }
+                }
+            },
+            "Settings": {
+                "function": {
+                    "constructor": {
+                        "newParam": [
+                            {
+                                "type": "Partial<SettingsInitOptions>",
+                                "optional": true,
+                                "name": "options",
+                                "docs": ""
+                            }
+                        ]
+                    }
+                }
+            },
+            "IOStream": {
+                "function": {
+                    "close_async": {
+                        "param": {
+                            "io_priority": {
+                                "type_extension": ["null"]
+                            },
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            }
+                        }
+                    }
+                }
+            },
+            "InputStream": {
+                "function": {
+                    "close_async": {
+                        "param": {
+                            "io_priority": {
+                                "type_extension": ["null"]
+                            },
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            }
+                        }
+                    }
+                }
+            },
+            "OutputStream": {
+                "function": {
+                    "close_async": {
+                        "param": {
+                            "io_priority": {
+                                "type_extension": ["null"]
+                            },
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            }
+                        }
+                    },
+                    "write_bytes_async": {
+                        "param": {
+                            "io_priority": {
+                                "type_extension": ["null"]
+                            },
+                            "cancellable": {
+                                "type_extension": ["null"]
+                            },
+                            "callback": {
+                                "optional": true
+                            }
+                        }
+                    },
+                    "write": {
+                        "param": {
+                            "count": {
+                                "skip": true
+                            }
+                        }
+                    },
+                    "write_all": {
+                        "param": {
+                            "count": {
+                                "skip": true
+                            }
+                        }
+                    },
+                    "write_all_async": {
+                        "param": {
+                            "count": {
+                                "skip": true
+                            }
+                        }
+                    },
+                    "write_all_finish": {
+                        "param": {
+                            "count": {
+                                "skip": true
+                            }
+                        }
+                    },
+                    "write_async": {
+                        "param": {
+                            "count": {
+                                "skip": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

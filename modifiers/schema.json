@@ -1,0 +1,136 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Exception",
+    "description": "Exception json",
+    "type": "object",
+    "properties": {
+        "exclude": {
+            "description": "Excluded properties in File",
+            "type": "object",
+            "properties": {
+                "class": {
+                    "description": "Class exclusion object",
+                    "type": "object",
+                    "additionalProperties" : {
+                        "description": "Class name Property",
+                        "type" : "object",
+                        "properties": {
+                            "self": {
+                                "description": "Class as a whole should be excluded.",
+                                "type" : "boolean"
+                            },
+                            "members": {
+                                "description": "Every member should be excluded, but not the class.",
+                                "type" : "boolean"
+                            },
+                            "method": {
+                                "description": "Excluded regular method names.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "minItems": 0,
+                                "uniqueItems": true
+                            },
+                            "prop": {
+                                "description": "Excluded property names.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "minItems": 0,
+                                "uniqueItems": true
+                            },
+                            "static": {
+                                "description": "Excluded static method names.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "minItems": 0,
+                                "uniqueItems": true
+                            },
+                            "callback": {
+                                "description": "Excluded callback function names.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "minItems": 0,
+                                "uniqueItems": true
+                            }
+                        }
+                    }
+                },
+                "function": {
+                    "description": "Excluded function names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 0,
+                    "uniqueItems": true
+                }
+            },
+            "required": ["class", "function"]
+        },
+        "include": {
+            "description": "Excluded properties in File",
+            "type": "object",
+            "properties": {
+                "add": {
+                    
+                },
+                "amend": {
+                    "class": {
+                        "description": "Amend Class",
+                        "type": "object",
+                        "additionalProperties" : {
+                            "description": "Class name Property",
+                            "type" : "object",
+                            "properties": {
+                                "start": {
+                                    "description": "New elements at the beginning",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    },
+                                    "minItems": 1,
+                                    "properties": {
+                                        "line": {
+                                            "description": "Element lines",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 1
+                                        }
+                                    }
+                                },
+                                "end": {
+                                    "description": "New elements at the end",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    },
+                                    "minItems": 1,
+                                    "properties": {
+                                        "line": {
+                                            "description": "Element lines",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "required": ["exclude", "include"]
+}

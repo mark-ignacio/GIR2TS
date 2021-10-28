@@ -1,0 +1,31 @@
+{
+    "$schema": "./schema.json",
+    "amend": {
+        "class": {
+            "Text": {
+                "function": {
+                    "new": {
+                        "return_type": {
+                            "type": "Text"
+                        }
+                    },
+                    "new_full": {
+                        "return_type": {
+                            "type": "Text"
+                        }
+                    },
+                    "new_with_buffer": {
+                        "return_type": {
+                            "type": "Text"
+                        }
+                    },
+                    "new_with_text": {
+                        "return_type": {
+                            "type": "Text"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

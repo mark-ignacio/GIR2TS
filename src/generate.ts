@@ -111,6 +111,7 @@ namespace GIR2TS {
         type: string;
         name: string;
         docString: string | null;
+        optional: boolean;
     }
 
     interface FunctionInfo {
@@ -234,7 +235,7 @@ namespace GIR2TS {
         let type: string | null = null;
         let is_primitive = false;
         let doc: string | null = "";
-        if (param_node.type) {
+        if (param_node?.type?.[0]) {
             type = convertToJSType(param_node.type[0].$.name);
             is_primitive = (type !== param_node.type[0].$.name);
             doc = param_node.doc?.[0]?._ ?? null;
@@ -280,7 +281,8 @@ namespace GIR2TS {
                 params.push({
                     name: param_name,
                     type: type,
-                    docString: param_node?.doc?.[0]?._ ?? null
+                    docString: param_node?.doc?.[0]?._ ?? null,
+                    optional: false
                 });
             }
         }
@@ -375,6 +377,16 @@ namespace GIR2TS {
         return doc;
     }
 
+    interface RenderMethodOptions {
+        exclude_name: boolean,
+        exclude_access_modifier: boolean;
+
+    }
+
+    function renderNewParam(paramInfo: NewParam): string {
+        return `${paramInfo.name}:${paramInfo?.optional ? "?" : ""} ${paramInfo?.type}`;
+    }
+
 
     /*
         Produces the TS string declaring the method represented by method_node.
@@ -388,6 +400,8 @@ namespace GIR2TS {
         ns_name: string,
         exclude: boolean = false,
         staticFunc: boolean = false,
+        funcModifier?: FunctionModifier,
+        constructor?: boolean
     ): string {
 
         // interface Parameter {
@@ -396,16 +410,29 @@ namespace GIR2TS {
         // }
 
         var method_name = method_node.$.name;
-        const [return_type, primitive, docString] = getTypeFromParameterNode(method_node['return-value'][0]);
+        let return_type: string = "any", primitive: boolean = false, docString: string | null = null;
+        if (!constructor) {
+            [return_type, primitive, docString] = getTypeFromParameterNode(method_node['return-value']?.[0]);
+
+            // Modifiers
+            return_type = funcModifier?.return_type?.type ?? return_type;
+            docString = funcModifier?.return_type?.doc ?? docString;
+        }
+        
+
         var params: Parameter[] = [];
         //var has_params = "parameter" in method_node.parameters[0];
 
         //console.log('rendering ' + method_name);
 
-        if (method_node.parameters && "parameter" in method_node.parameters[0]) {
-            for (var param_node of method_node.parameters[0].parameter) {
+        if (method_node?.parameters && "parameter" in method_node?.parameters?.[0]) {
+            for (const param_node of method_node.parameters[0].parameter) {
                 if (param_node.$.name === '...' || param_node.$.name === "user_data") continue;
+
                 let param_name = param_node.$.name;
+                if (funcModifier?.param?.[param_name]?.skip) 
+                    continue;
+
                 if (js_reserved_words.indexOf(param_name) !== -1) { // if clashes with JS reserved word.
                     param_name = '_' + param_name;
                 }
@@ -413,11 +440,27 @@ namespace GIR2TS {
                 if (!is_primitive && forExternalInterfaceInNamespace) {
                     type = forExternalInterfaceInNamespace + '.' + type;
                 }
+
+
+                let finalType = funcModifier?.param?.[param_name]?.type ?? ((funcModifier?.param?.[param_name]?.type_extension?.length ?? 0 > 1) ? `${type} | ${funcModifier?.param?.[param_name]?.type_extension?.join(" | ")}` : type);
                 params.push({
-                    name: param_name,
-                    type: type,
-                    docString: doc ?? null
+                    name: funcModifier?.param?.[param_name]?.newName ?? param_name,
+                    type: finalType,
+                    docString: funcModifier?.param?.[param_name]?.doc ?? (doc ?? null),
+                    optional: funcModifier?.param?.[param_name]?.optional ?? false
                 });
+            }
+        }
+
+        // Add any new params at the end
+        if (funcModifier?.newParam != null) {
+            for (const param of funcModifier.newParam) {
+                params.push({
+                    docString: param?.doc ?? null,
+                    type: param.type,
+                    name: param.name,
+                    optional: param.optional ?? false
+                })
             }
         }
 
@@ -463,12 +506,15 @@ namespace GIR2TS {
 
         if (params.length > 0) {
             for (var param of params) {
-                str += param.name + ': ' + param.type + ', ';
+                str += param.name + (param.optional ? "?" : "") + ': ' + param.type + ', ';
             }
             str = str.slice(0, -2);
         }
 
-        str += '): ' + return_type + ';';
+        str += ')'
+        if (!constructor)
+            str += ': ' + return_type;
+        str += ";";
 
         return str;
     }
@@ -576,8 +622,8 @@ namespace GIR2TS {
         return result;
     }
 
-    function renderConstructorField(constructor_node: FunctionNode, ns_name: string, indent: number, exclude: boolean) {
-        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, exclude, true)}`
+    function renderConstructorField(constructor_node: FunctionNode, ns_name: string, indent: number, exclude: boolean, modifier?: FunctionModifier) {
+        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, exclude, true, modifier)}`
     }
 
 
@@ -593,7 +639,7 @@ namespace GIR2TS {
         return result;
     }
 
-    export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclude?: ExcludeClass): string {
+    export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclude?: ExcludeClass, modifier?: ClassModifier): string {
         let props: ParameterNode[] = [];
         let callback_fields: FunctionNode[] = [];
         let methods = getAllMethods(rec_node);
@@ -616,7 +662,8 @@ namespace GIR2TS {
                     continue;
                 const func_name = construct.$.name;
                 const excluded = exclude?.static?.includes(func_name) ?? false;
-                body += renderConstructorField(construct, ns_name, 1, excluded) + "\n";
+                const modifierFunc = modifier?.function?.[func_name]
+                body += renderConstructorField(construct, ns_name, 1, excluded, modifierFunc) + "\n";
             }
         }
 
@@ -638,12 +685,42 @@ namespace GIR2TS {
         for (let m of methods) {
             const func_name = m.$.name;
             const excluded = exclude?.method?.includes(func_name) ?? false;
-            body += renderMethod(m, undefined, undefined, undefined, 1, ns_name, excluded) + '\n';
+            const modifierFunc = modifier?.function?.[func_name]
+            body += renderMethod(m, undefined, undefined, undefined, 1, ns_name, excluded, undefined, modifierFunc) + '\n';
         }
 
         let result = renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
         result += `class ${rec_node.$.name} {\n${body}}`;
         return result
+    }
+
+    function BuildConstructorNode(class_name: string): FunctionNode {
+        return {
+            _: "constructor",
+            $: {
+                name: "constructor"
+            },
+            "return-value": [
+                {
+                    $: {
+                        name: class_name
+                    },
+                    _: class_name,
+                    type: []
+                }
+            ],
+            "parameters": [
+                {
+                    "_": "",
+                    $: {
+                        name: "obj"
+                    },
+                    "parameter": [
+
+                    ]
+                }
+            ]
+        }
     }
 
     /*
@@ -652,7 +729,7 @@ namespace GIR2TS {
         methods.
         @exclude_list : An array of member names to exclude.
     */
-    export function renderClassAsInterface(class_node: ClassNode, ns_name: string, exclude?: ExcludeClass): string {
+    export function renderClassAsInterface(class_node: ClassNode, ns_name: string, exclude?: ExcludeClass, modifier?: ClassModifier): string {
 
         const class_name = class_node.$.name;
         const ifaces: string[] = [];
@@ -717,7 +794,8 @@ namespace GIR2TS {
         const method_str_list: string[] = methods.map((m) => {
             // if method is present in exclude_list
             const excluded = (exclude_method_list.includes(m.$.name) || exclude_all_members);
-            let method_str = renderMethod(m, false, undefined, undefined, 1, ns_name, excluded);
+            const funcModifier = modifier?.function?.[m.$.name];
+            let method_str = renderMethod(m, false, undefined, undefined, 1, ns_name, excluded, undefined, funcModifier);
             return method_str;
         });
 
@@ -744,121 +822,26 @@ namespace GIR2TS {
 
         const ctor_str_list: string[] = ctors.map((c) => {
             // console.log(c);
-            return renderMethod(c, false, undefined, undefined, 1, ns_name, false, true);
+            const funcModifier = modifier?.function?.[c.$.name];
+            return renderMethod(c, false, undefined, undefined, 1, ns_name, false, true, funcModifier);
         });
         const ctors_body = ctor_str_list.join('\n');
 
         const static_func_str_list: string[] = static_funcs.map((sf) => {
-            return renderMethod(sf, false, undefined, undefined, 1, ns_name, false, true);
+            const funcModifier = modifier?.function?.[sf.$.name];
+            return renderMethod(sf, false, undefined, undefined, 1, ns_name, false, true, funcModifier);
         });
         const static_func_body = static_func_str_list.join('\n');
 
+        const constructor_modifier = modifier?.function?.["constructor"];
         const static_side = '\n' +
             `class ${class_name} {\n` +
-            `\tconstructor();\n` +
+            `${renderMethod(BuildConstructorNode(class_name), false, undefined, undefined, 1, ns_name, false, false, constructor_modifier, true)}\n` +
             `${ctors_body}` + NeedNewLine(ctors_body) +
             `${static_func_body + NeedNewLine(static_func_body)}` +
             `}\n`;
 
         return iface_str + mixin + extension + static_side;
-
-    }
-
-
-    export function renderClassWithInterfaceMembers(class_node: ClassNode, ns_list: NamespaceNode[] = [], my_ns: NamespaceNode, ns_name: string): string {
-
-        let methods: FunctionNode[] = [];
-        let props: ParameterNode[] = [];
-        let externIfaceMethods: { ns_name: string; method: FunctionNode }[] = [];
-
-        // Add interface properties and methods
-        if (class_node.implements) {
-            for (let iface of class_node.implements) {
-                let iface_name = iface.$.name;
-                let iface_list: InterfaceNode[] = [];
-                let iface_ns: string = '';
-                if (iface_name.indexOf('.') !== -1) { // if it contains a period, indicating another namespace
-                    iface_ns = iface_name.split('.')[0];
-                    iface_name = iface_name.split('.')[1];
-                    let ns_node = searchNodeByName(ns_list, iface_ns);
-                    if (ns_node && ns_node.interface) {
-                        iface_list = ns_node.interface;
-                    }
-                } else {
-                    iface_list = my_ns.interface;
-                }
-                let i = searchNodeByName(iface_list, iface_name);
-                if (i) {
-                    //props = props.concat(getProperties(i));
-                    externIfaceMethods = externIfaceMethods.concat(getAllMethods(i).map((m) => {
-                        return {
-                            ns_name: iface_ns,
-                            method: m
-                        }
-                    }));
-                }
-            }
-        }
-
-
-
-        // Add class methods
-        methods = methods.concat(getAllMethods(class_node));
-        const unique_methods = removeDuplicates(methods, (a, b) => a.$.name === b.$.name);
-
-        // Add class properties
-        //props = props.concat(getProperties(class_node));
-
-        // Remove duplicate property names by name
-        //props = removeDuplicates(props, (p1, p2) => p1.$.name === p2.$.name);
-
-        // Remove properties with the same transformed name as a method name
-        // if (unique_methods.length > 0) {
-        //     props = arrayMinus<Node>(props, unique_methods, (a, b) => a.$.name.replace(/-/g, '_') === b.$.name);
-        // }
-
-        /*
-            GJS allows properties to shadow inherited methods. Either Typescript
-            does not allow this or I cannot figure out how. Anywho, as a temporary
-            workaroud we search parent class heirarchy ad remove the properties that clash.
-        */
-        // function deletePropsCollidingWithInheritedMethods (class_node: ClassNode, props: ParameterNode[]): ParameterNode[] {
-        //     return [];
-        // }
-        //
-        //
-        const unique_props = props;
-
-        let str = '';
-        str += 'class ' + class_node.$.name;
-        if (class_node.$.parent) {
-            str += ` extends ${class_node.$.parent}`;
-        }
-        if (class_node.implements) {
-            str += ' implements ';
-            for (let iface of class_node.implements) {
-                str += iface.$.name + ', '
-            }
-            str = str.slice(0, -2); // remove last comma.
-        }
-        str += ' {\n';
-        if (unique_props.length > 0) {
-            str += '\n';
-            for (let prop_str of unique_props.map((prop_node) => { return renderProperty(prop_node); })) {
-                str += `\t${prop_str}\n`;
-            }
-        }
-        //console.log("methods:\n" + unique_methods);
-        if (unique_methods.length > 0) {
-            str += '\n';
-            for (let method_str of unique_methods.map((func_node) => { return renderMethod(func_node, undefined, undefined, undefined, 1, ns_name); })) {
-                str += `${method_str}\n`;
-            }
-        }
-
-        str += '\n';
-        str += '}\n';
-        return str;
 
     }
 
@@ -905,8 +888,47 @@ namespace GIR2TS {
         self?: boolean
     }
 
+    export interface ModifierDesc {
+        amend: {
+            class: {
+                [klass: string]: ClassModifier;
+            }
+        }
+    }
 
-    export function renderNamespace(ns_node: NamespaceNode, ns_name: string, exclude?: ExcludeDesc): string {
+    export interface ClassModifier {
+        doc?: string;
+        function: {
+            [klass: string]: FunctionModifier;
+        }
+    }
+
+    export interface FunctionModifier {
+        doc?: string;
+        return_type?: ParamModifier;
+        param?: {
+            [param_name: string]: ParamModifier;
+        },
+        newParam?: NewParam[]
+    }
+
+    export interface NewParam {
+        optional?: boolean;
+        doc?: string;
+        type: string;
+        name: string;
+    }
+
+    export interface ParamModifier {
+        doc?: string;
+        type?: string;
+        type_extension?: string[];
+        optional?: boolean;
+        newName?: string;
+        skip?: boolean
+    }
+
+    export function renderNamespace(ns_node: NamespaceNode, ns_name: string, exclude?: ExcludeDesc, modifiers?: ModifierDesc): string {
         let body = '';
         let class_nodes: ClassNode[] = [];
         if (ns_node.class)
@@ -914,15 +936,30 @@ namespace GIR2TS {
         for (let class_node of class_nodes) {
             let class_name = class_node.$.name;
             // if (exclude && class_name in exclude.exclude.class)
-            body += '\n\t' + (GIR2TS.renderClassAsInterface(class_node, ns_name, exclude ? exclude.exclude.class[class_name] : undefined)).replace(/\n/gm, "\n\t");
+            body += '\n\t' + (GIR2TS.renderClassAsInterface(
+                class_node,
+                ns_name,
+                exclude?.exclude?.class?.[class_name],
+                modifiers?.amend?.class?.[class_name]
+            )).replace(/\n/gm, "\n\t");
         }
         if (ns_node.record)
             for (let rec_node of ns_node.record) {
-                body += '\n\t' + (GIR2TS.renderRecordAsClass(rec_node, ns_name, exclude ? exclude.exclude.class[rec_node.$.name] : undefined) + '\n').replace(/\n/gm, "\n\t");
+                body += '\n\t' + (GIR2TS.renderRecordAsClass(
+                    rec_node,
+                    ns_name,
+                    exclude ? exclude.exclude.class[rec_node.$.name] : undefined,
+                    modifiers?.amend?.class?.[rec_node.$.name]
+                ) + '\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.interface)
             for (let iface_node of ns_node.interface) {
-                body += '\n\t' + (GIR2TS.renderClassAsInterface(iface_node as ClassNode, ns_name, exclude ? exclude.exclude.class[iface_node.$.name] : undefined) + '\n\n').replace(/\n/gm, "\n\t");
+                body += '\n\t' + (GIR2TS.renderClassAsInterface(
+                    iface_node as ClassNode,
+                    ns_name,
+                    exclude?.exclude?.class?.[iface_node.$.name],
+                    modifiers?.amend?.class?.[iface_node.$.name]
+                ) + '\n\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.enumeration)
             for (let enum_node of ns_node.enumeration) {
@@ -991,10 +1028,12 @@ namespace GIR2TS {
         private lib_list: { lib_name: string; xml_str: string }[];
         private ns_list: { lib_name: string; ns_node: NamespaceNode }[] = [];
         private exclude_json_map: { [class_name: string]: any } = {};
+        private modifier_json_map: { [lib_name: string]: ModifierDesc } = {};
 
-        constructor(gir_xml_list: { lib_name: string; xml_str: string }[], exclude_json_map: { [class_name: string]: any } = {}) {
+        constructor(gir_xml_list: { lib_name: string; xml_str: string }[], exclude_json_map: { [class_name: string]: any } = {}, modifier_json_map: { [lib_name: string]: ModifierDesc }) {
             this.lib_list = gir_xml_list;
             this.exclude_json_map = exclude_json_map;
+            this.modifier_json_map = modifier_json_map;
         }
 
 
@@ -1026,7 +1065,7 @@ namespace GIR2TS {
                 const res: GeneratorResult[] = [];
                 for (let ns of self.ns_list) {
                     const ns_name = ns.ns_node.$.name;
-                    const typing_str = renderNamespace(ns.ns_node, ns_name, self.exclude_json_map[ns.lib_name]);
+                    const typing_str = renderNamespace(ns.ns_node, ns_name, self.exclude_json_map[ns.lib_name], self.modifier_json_map[ns.lib_name]);
                     res.push({
                         gir_name: ns.lib_name,
                         typing_str: typing_str
@@ -1046,10 +1085,10 @@ import path = require('path');
 function main() {
     console.log(__dirname);
     var argv = require('minimist')(process.argv.slice(2));
-
     let gir_files: string[] = [];
     let outdir = __dirname;
     let exclude_json_map: { [class_name: string]: any } = {};
+    let modifier_json_map: { [lib_name: string]: GIR2TS.ModifierDesc } = {};
     if (argv.outdir) {
         console.log("Output typings directory: " + argv.outdir);
         outdir = path.join(__dirname, argv.outdir);
@@ -1071,6 +1110,19 @@ function main() {
             let lib_name = path.basename(json_file, '.json');
             let data = fs.readFileSync(json_file, 'utf8');
             exclude_json_map[lib_name] = JSON.parse(data);
+        }
+    }
+    if (argv.modifiersdir) {
+        console.log("Modifiers directory: " + argv.modifiersdir);
+        let dir = path.join(__dirname, argv.modifiersdir);
+        let json_files: string[] = [];
+        if (fs.statSync(dir).isDirectory()) {
+            json_files = fs.readdirSync(dir).map((file) => path.join(dir, file));
+        }
+        for (let json_file of json_files) {
+            let lib_name = path.basename(json_file, '.json');
+            let data = fs.readFileSync(json_file, 'utf8');
+            modifier_json_map[lib_name] = JSON.parse(data);
         }
     }
     if (argv.girdir) {
@@ -1100,7 +1152,8 @@ function main() {
 
         });
     }
-    const gen = new GIR2TS.Generator(gir_xml_list, exclude_json_map);
+
+    const gen = new GIR2TS.Generator(gir_xml_list, exclude_json_map, modifier_json_map);
     gen.generateTypings((res) => {
         for (let lib of res) {
             let outfile = path.join(outdir, lib.gir_name + '.d.ts');

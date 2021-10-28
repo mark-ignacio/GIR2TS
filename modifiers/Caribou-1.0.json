@@ -1,0 +1,21 @@
+{
+    "$schema": "./schema.json",
+    "amend": {
+        "class": {
+            "KeyboardModel": {
+                "function": {
+                    "constructor": {
+                        "newParam": [
+                            {
+                                "type": "Partial<KeyboardModelOptions>",
+                                "name": "options",
+                                "optional": true,
+                                "docs": ""
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

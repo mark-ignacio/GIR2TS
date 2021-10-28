@@ -1,0 +1,21 @@
+{
+    "$schema": "./schema.json",
+    "amend": {
+        "class": {
+            "MixerControl": {
+                "function": {
+                    "constructor": {
+                        "newParam": [
+                            {
+                                "type": "Partial<MixerControlOptions>",
+                                "name": "options",
+                                "optional": true,
+                                "docs": ""
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

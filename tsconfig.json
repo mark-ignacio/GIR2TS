@@ -22,6 +22,7 @@
     ],
     "include": [
         "typings/**/*",
+        "extensions/**/*"
     ],
     "exclude": [
         "src/es6.d.ts"

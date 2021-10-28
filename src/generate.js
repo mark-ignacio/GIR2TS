@@ -108,14 +108,14 @@ var GIR2TS;
         }
     }
     function getTypeFromParameterNode(param_node) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         let type = null;
         let is_primitive = false;
         let doc = "";
-        if (param_node.type) {
+        if ((_a = param_node === null || param_node === void 0 ? void 0 : param_node.type) === null || _a === void 0 ? void 0 : _a[0]) {
             type = convertToJSType(param_node.type[0].$.name);
             is_primitive = (type !== param_node.type[0].$.name);
-            doc = (_c = (_b = (_a = param_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null;
+            doc = (_d = (_c = (_b = param_node.doc) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c._) !== null && _d !== void 0 ? _d : null;
         }
         else if (param_node.array && param_node.array[0].type) {
             type = convertToJSType(param_node.array[0].type[0].$.name) + '[]';
@@ -158,7 +158,8 @@ var GIR2TS;
                 params.push({
                     name: param_name,
                     type: type,
-                    docString: (_f = (_e = (_d = param_node === null || param_node === void 0 ? void 0 : param_node.doc) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e._) !== null && _f !== void 0 ? _f : null
+                    docString: (_f = (_e = (_d = param_node === null || param_node === void 0 ? void 0 : param_node.doc) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e._) !== null && _f !== void 0 ? _f : null,
+                    optional: false
                 });
             }
         }
@@ -238,16 +239,26 @@ var GIR2TS;
         doc += `${ind} */\n`;
         return doc;
     }
-    function renderMethod(method_node, include_access_modifier = true, include_name = true, forExternalInterfaceInNamespace = null, indentNum, ns_name, exclude = false, staticFunc = false) {
-        var _a, _b, _c;
+    function renderNewParam(paramInfo) {
+        return `${paramInfo.name}:${(paramInfo === null || paramInfo === void 0 ? void 0 : paramInfo.optional) ? "?" : ""} ${paramInfo === null || paramInfo === void 0 ? void 0 : paramInfo.type}`;
+    }
+    function renderMethod(method_node, include_access_modifier = true, include_name = true, forExternalInterfaceInNamespace = null, indentNum, ns_name, exclude = false, staticFunc = false, funcModifier, constructor) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7;
         var method_name = method_node.$.name;
-        const [return_type, primitive, docString] = getTypeFromParameterNode(method_node['return-value'][0]);
+        let return_type = "any", primitive = false, docString = null;
+        if (!constructor) {
+            [return_type, primitive, docString] = getTypeFromParameterNode((_a = method_node['return-value']) === null || _a === void 0 ? void 0 : _a[0]);
+            return_type = (_c = (_b = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.return_type) === null || _b === void 0 ? void 0 : _b.type) !== null && _c !== void 0 ? _c : return_type;
+            docString = (_e = (_d = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.return_type) === null || _d === void 0 ? void 0 : _d.doc) !== null && _e !== void 0 ? _e : docString;
+        }
         var params = [];
-        if (method_node.parameters && "parameter" in method_node.parameters[0]) {
-            for (var param_node of method_node.parameters[0].parameter) {
+        if ((method_node === null || method_node === void 0 ? void 0 : method_node.parameters) && "parameter" in ((_f = method_node === null || method_node === void 0 ? void 0 : method_node.parameters) === null || _f === void 0 ? void 0 : _f[0])) {
+            for (const param_node of method_node.parameters[0].parameter) {
                 if (param_node.$.name === '...' || param_node.$.name === "user_data")
                     continue;
                 let param_name = param_node.$.name;
+                if ((_h = (_g = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _g === void 0 ? void 0 : _g[param_name]) === null || _h === void 0 ? void 0 : _h.skip)
+                    continue;
                 if (js_reserved_words.indexOf(param_name) !== -1) {
                     param_name = '_' + param_name;
                 }
@@ -255,17 +266,29 @@ var GIR2TS;
                 if (!is_primitive && forExternalInterfaceInNamespace) {
                     type = forExternalInterfaceInNamespace + '.' + type;
                 }
+                let finalType = (_l = (_k = (_j = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _j === void 0 ? void 0 : _j[param_name]) === null || _k === void 0 ? void 0 : _k.type) !== null && _l !== void 0 ? _l : (((_q = (_p = (_o = (_m = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _m === void 0 ? void 0 : _m[param_name]) === null || _o === void 0 ? void 0 : _o.type_extension) === null || _p === void 0 ? void 0 : _p.length) !== null && _q !== void 0 ? _q : 0 > 1) ? `${type} | ${(_t = (_s = (_r = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _r === void 0 ? void 0 : _r[param_name]) === null || _s === void 0 ? void 0 : _s.type_extension) === null || _t === void 0 ? void 0 : _t.join(" | ")}` : type);
                 params.push({
-                    name: param_name,
-                    type: type,
-                    docString: doc !== null && doc !== void 0 ? doc : null
+                    name: (_w = (_v = (_u = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _u === void 0 ? void 0 : _u[param_name]) === null || _v === void 0 ? void 0 : _v.newName) !== null && _w !== void 0 ? _w : param_name,
+                    type: finalType,
+                    docString: (_z = (_y = (_x = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _x === void 0 ? void 0 : _x[param_name]) === null || _y === void 0 ? void 0 : _y.doc) !== null && _z !== void 0 ? _z : (doc !== null && doc !== void 0 ? doc : null),
+                    optional: (_2 = (_1 = (_0 = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _0 === void 0 ? void 0 : _0[param_name]) === null || _1 === void 0 ? void 0 : _1.optional) !== null && _2 !== void 0 ? _2 : false
+                });
+            }
+        }
+        if ((funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.newParam) != null) {
+            for (const param of funcModifier.newParam) {
+                params.push({
+                    docString: (_3 = param === null || param === void 0 ? void 0 : param.doc) !== null && _3 !== void 0 ? _3 : null,
+                    type: param.type,
+                    name: param.name,
+                    optional: (_4 = param.optional) !== null && _4 !== void 0 ? _4 : false
                 });
             }
         }
         const ind = "\t".repeat(indentNum);
         let indentAdded = false;
         let str = '';
-        str += renderDocString((_c = (_b = (_a = method_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, params, { type: return_type, is_primitive: primitive, docString: docString }, indentNum, ns_name);
+        str += renderDocString((_7 = (_6 = (_5 = method_node.doc) === null || _5 === void 0 ? void 0 : _5[0]) === null || _6 === void 0 ? void 0 : _6._) !== null && _7 !== void 0 ? _7 : null, params, { type: return_type, is_primitive: primitive, docString: docString }, indentNum, ns_name);
         if (exclude) {
             str += `${ind}// `;
             indentAdded = true;
@@ -300,11 +323,14 @@ var GIR2TS;
         str += '(';
         if (params.length > 0) {
             for (var param of params) {
-                str += param.name + ': ' + param.type + ', ';
+                str += param.name + (param.optional ? "?" : "") + ': ' + param.type + ', ';
             }
             str = str.slice(0, -2);
         }
-        str += '): ' + return_type + ';';
+        str += ')';
+        if (!constructor)
+            str += ': ' + return_type;
+        str += ";";
         return str;
     }
     GIR2TS.renderMethod = renderMethod;
@@ -402,8 +428,8 @@ var GIR2TS;
         result += `${cb_name}: {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`;
         return result;
     }
-    function renderConstructorField(constructor_node, ns_name, indent, exclude) {
-        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, exclude, true)}`;
+    function renderConstructorField(constructor_node, ns_name, indent, exclude, modifier) {
+        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, exclude, true, modifier)}`;
     }
     function renderNodeAsBlankInterface(node, ns_name) {
         var _a, _b, _c;
@@ -419,7 +445,7 @@ var GIR2TS;
         return result;
     }
     GIR2TS.renderAlias = renderAlias;
-    function renderRecordAsClass(rec_node, ns_name, exclude) {
+    function renderRecordAsClass(rec_node, ns_name, exclude, modifier) {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
         let props = [];
         let callback_fields = [];
@@ -440,35 +466,62 @@ var GIR2TS;
                     continue;
                 const func_name = construct.$.name;
                 const excluded = (_b = (_a = exclude === null || exclude === void 0 ? void 0 : exclude.static) === null || _a === void 0 ? void 0 : _a.includes(func_name)) !== null && _b !== void 0 ? _b : false;
-                body += renderConstructorField(construct, ns_name, 1, excluded) + "\n";
+                const modifierFunc = (_c = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _c === void 0 ? void 0 : _c[func_name];
+                body += renderConstructorField(construct, ns_name, 1, excluded, modifierFunc) + "\n";
             }
         }
         for (let f of props) {
-            body += renderDocString((_d = (_c = f.doc) === null || _c === void 0 ? void 0 : _c[0]._) !== null && _d !== void 0 ? _d : null, undefined, undefined, 1, ns_name);
-            const excluded = (_f = (_e = exclude === null || exclude === void 0 ? void 0 : exclude.prop) === null || _e === void 0 ? void 0 : _e.includes(f.$.name)) !== null && _f !== void 0 ? _f : false;
+            body += renderDocString((_e = (_d = f.doc) === null || _d === void 0 ? void 0 : _d[0]._) !== null && _e !== void 0 ? _e : null, undefined, undefined, 1, ns_name);
+            const excluded = (_g = (_f = exclude === null || exclude === void 0 ? void 0 : exclude.prop) === null || _f === void 0 ? void 0 : _f.includes(f.$.name)) !== null && _g !== void 0 ? _g : false;
             body += '\t';
             if (excluded)
                 body += "// ";
             body += renderProperty(f) + '\n';
         }
         for (let c of callback_fields) {
-            body += renderDocString((_h = (_g = c.doc) === null || _g === void 0 ? void 0 : _g[0]._) !== null && _h !== void 0 ? _h : null, undefined, undefined, 1, ns_name);
             const func_name = c.$.name;
-            const excluded = (_k = (_j = exclude === null || exclude === void 0 ? void 0 : exclude.callback) === null || _j === void 0 ? void 0 : _j.includes(func_name)) !== null && _k !== void 0 ? _k : false;
+            const excluded = (_j = (_h = exclude === null || exclude === void 0 ? void 0 : exclude.callback) === null || _h === void 0 ? void 0 : _h.includes(func_name)) !== null && _j !== void 0 ? _j : false;
             body += renderCallbackField(c, ns_name, 1, excluded) + '\n';
         }
         for (let m of methods) {
             const func_name = m.$.name;
-            const excluded = (_m = (_l = exclude === null || exclude === void 0 ? void 0 : exclude.method) === null || _l === void 0 ? void 0 : _l.includes(func_name)) !== null && _m !== void 0 ? _m : false;
-            body += renderMethod(m, undefined, undefined, undefined, 1, ns_name, excluded) + '\n';
+            const excluded = (_l = (_k = exclude === null || exclude === void 0 ? void 0 : exclude.method) === null || _k === void 0 ? void 0 : _k.includes(func_name)) !== null && _l !== void 0 ? _l : false;
+            const modifierFunc = (_m = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _m === void 0 ? void 0 : _m[func_name];
+            body += renderMethod(m, undefined, undefined, undefined, 1, ns_name, excluded, undefined, modifierFunc) + '\n';
         }
         let result = renderDocString((_q = (_p = (_o = rec_node === null || rec_node === void 0 ? void 0 : rec_node.doc) === null || _o === void 0 ? void 0 : _o[0]) === null || _p === void 0 ? void 0 : _p._) !== null && _q !== void 0 ? _q : null, undefined, undefined, 0, ns_name);
         result += `class ${rec_node.$.name} {\n${body}}`;
         return result;
     }
     GIR2TS.renderRecordAsClass = renderRecordAsClass;
-    function renderClassAsInterface(class_node, ns_name, exclude) {
-        var _a, _b, _c, _d, _e;
+    function BuildConstructorNode(class_name) {
+        return {
+            _: "constructor",
+            $: {
+                name: "constructor"
+            },
+            "return-value": [
+                {
+                    $: {
+                        name: class_name
+                    },
+                    _: class_name,
+                    type: []
+                }
+            ],
+            "parameters": [
+                {
+                    "_": "",
+                    $: {
+                        name: "obj"
+                    },
+                    "parameter": []
+                }
+            ]
+        };
+    }
+    function renderClassAsInterface(class_node, ns_name, exclude, modifier) {
+        var _a, _b, _c, _d, _e, _f;
         const class_name = class_node.$.name;
         const ifaces = [];
         const methods = [];
@@ -519,8 +572,10 @@ var GIR2TS;
         header += mixinDocstring;
         header += `interface I${class_name}`;
         const method_str_list = methods.map((m) => {
+            var _a;
             const excluded = (exclude_method_list.includes(m.$.name) || exclude_all_members);
-            let method_str = renderMethod(m, false, undefined, undefined, 1, ns_name, excluded);
+            const funcModifier = (_a = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _a === void 0 ? void 0 : _a[m.$.name];
+            let method_str = renderMethod(m, false, undefined, undefined, 1, ns_name, excluded, undefined, funcModifier);
             return method_str;
         });
         let mixin = "";
@@ -540,86 +595,27 @@ var GIR2TS;
             `}\n\n`;
         let iface_str = header + body;
         const ctor_str_list = ctors.map((c) => {
-            return renderMethod(c, false, undefined, undefined, 1, ns_name, false, true);
+            var _a;
+            const funcModifier = (_a = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _a === void 0 ? void 0 : _a[c.$.name];
+            return renderMethod(c, false, undefined, undefined, 1, ns_name, false, true, funcModifier);
         });
         const ctors_body = ctor_str_list.join('\n');
         const static_func_str_list = static_funcs.map((sf) => {
-            return renderMethod(sf, false, undefined, undefined, 1, ns_name, false, true);
+            var _a;
+            const funcModifier = (_a = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _a === void 0 ? void 0 : _a[sf.$.name];
+            return renderMethod(sf, false, undefined, undefined, 1, ns_name, false, true, funcModifier);
         });
         const static_func_body = static_func_str_list.join('\n');
+        const constructor_modifier = (_f = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _f === void 0 ? void 0 : _f["constructor"];
         const static_side = '\n' +
             `class ${class_name} {\n` +
-            `\tconstructor();\n` +
+            `${renderMethod(BuildConstructorNode(class_name), false, undefined, undefined, 1, ns_name, false, false, constructor_modifier, true)}\n` +
             `${ctors_body}` + NeedNewLine(ctors_body) +
             `${static_func_body + NeedNewLine(static_func_body)}` +
             `}\n`;
         return iface_str + mixin + extension + static_side;
     }
     GIR2TS.renderClassAsInterface = renderClassAsInterface;
-    function renderClassWithInterfaceMembers(class_node, ns_list = [], my_ns, ns_name) {
-        let methods = [];
-        let props = [];
-        let externIfaceMethods = [];
-        if (class_node.implements) {
-            for (let iface of class_node.implements) {
-                let iface_name = iface.$.name;
-                let iface_list = [];
-                let iface_ns = '';
-                if (iface_name.indexOf('.') !== -1) {
-                    iface_ns = iface_name.split('.')[0];
-                    iface_name = iface_name.split('.')[1];
-                    let ns_node = searchNodeByName(ns_list, iface_ns);
-                    if (ns_node && ns_node.interface) {
-                        iface_list = ns_node.interface;
-                    }
-                }
-                else {
-                    iface_list = my_ns.interface;
-                }
-                let i = searchNodeByName(iface_list, iface_name);
-                if (i) {
-                    externIfaceMethods = externIfaceMethods.concat(getAllMethods(i).map((m) => {
-                        return {
-                            ns_name: iface_ns,
-                            method: m
-                        };
-                    }));
-                }
-            }
-        }
-        methods = methods.concat(getAllMethods(class_node));
-        const unique_methods = removeDuplicates(methods, (a, b) => a.$.name === b.$.name);
-        const unique_props = props;
-        let str = '';
-        str += 'class ' + class_node.$.name;
-        if (class_node.$.parent) {
-            str += ` extends ${class_node.$.parent}`;
-        }
-        if (class_node.implements) {
-            str += ' implements ';
-            for (let iface of class_node.implements) {
-                str += iface.$.name + ', ';
-            }
-            str = str.slice(0, -2);
-        }
-        str += ' {\n';
-        if (unique_props.length > 0) {
-            str += '\n';
-            for (let prop_str of unique_props.map((prop_node) => { return renderProperty(prop_node); })) {
-                str += `\t${prop_str}\n`;
-            }
-        }
-        if (unique_methods.length > 0) {
-            str += '\n';
-            for (let method_str of unique_methods.map((func_node) => { return renderMethod(func_node, undefined, undefined, undefined, 1, ns_name); })) {
-                str += `${method_str}\n`;
-            }
-        }
-        str += '\n';
-        str += '}\n';
-        return str;
-    }
-    GIR2TS.renderClassWithInterfaceMembers = renderClassWithInterfaceMembers;
     function renderInterface(iface_node, exclude, ns_name) {
         let exclude_method_list = [];
         let exclude_self = false;
@@ -641,22 +637,23 @@ var GIR2TS;
         return `interface ${iface_node.$.name} {${body}}`;
     }
     GIR2TS.renderInterface = renderInterface;
-    function renderNamespace(ns_node, ns_name, exclude) {
+    function renderNamespace(ns_node, ns_name, exclude, modifiers) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
         let body = '';
         let class_nodes = [];
         if (ns_node.class)
             class_nodes = class_nodes.concat(ns_node.class);
         for (let class_node of class_nodes) {
             let class_name = class_node.$.name;
-            body += '\n\t' + (GIR2TS.renderClassAsInterface(class_node, ns_name, exclude ? exclude.exclude.class[class_name] : undefined)).replace(/\n/gm, "\n\t");
+            body += '\n\t' + (GIR2TS.renderClassAsInterface(class_node, ns_name, (_b = (_a = exclude === null || exclude === void 0 ? void 0 : exclude.exclude) === null || _a === void 0 ? void 0 : _a.class) === null || _b === void 0 ? void 0 : _b[class_name], (_d = (_c = modifiers === null || modifiers === void 0 ? void 0 : modifiers.amend) === null || _c === void 0 ? void 0 : _c.class) === null || _d === void 0 ? void 0 : _d[class_name])).replace(/\n/gm, "\n\t");
         }
         if (ns_node.record)
             for (let rec_node of ns_node.record) {
-                body += '\n\t' + (GIR2TS.renderRecordAsClass(rec_node, ns_name, exclude ? exclude.exclude.class[rec_node.$.name] : undefined) + '\n').replace(/\n/gm, "\n\t");
+                body += '\n\t' + (GIR2TS.renderRecordAsClass(rec_node, ns_name, exclude ? exclude.exclude.class[rec_node.$.name] : undefined, (_f = (_e = modifiers === null || modifiers === void 0 ? void 0 : modifiers.amend) === null || _e === void 0 ? void 0 : _e.class) === null || _f === void 0 ? void 0 : _f[rec_node.$.name]) + '\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.interface)
             for (let iface_node of ns_node.interface) {
-                body += '\n\t' + (GIR2TS.renderClassAsInterface(iface_node, ns_name, exclude ? exclude.exclude.class[iface_node.$.name] : undefined) + '\n\n').replace(/\n/gm, "\n\t");
+                body += '\n\t' + (GIR2TS.renderClassAsInterface(iface_node, ns_name, (_h = (_g = exclude === null || exclude === void 0 ? void 0 : exclude.exclude) === null || _g === void 0 ? void 0 : _g.class) === null || _h === void 0 ? void 0 : _h[iface_node.$.name], (_k = (_j = modifiers === null || modifiers === void 0 ? void 0 : modifiers.amend) === null || _j === void 0 ? void 0 : _j.class) === null || _k === void 0 ? void 0 : _k[iface_node.$.name]) + '\n\n').replace(/\n/gm, "\n\t");
             }
         if (ns_node.enumeration)
             for (let enum_node of ns_node.enumeration) {
@@ -701,11 +698,13 @@ var GIR2TS;
     }
     GIR2TS.parseGIR = parseGIR;
     class Generator {
-        constructor(gir_xml_list, exclude_json_map = {}) {
+        constructor(gir_xml_list, exclude_json_map = {}, modifier_json_map) {
             this.ns_list = [];
             this.exclude_json_map = {};
+            this.modifier_json_map = {};
             this.lib_list = gir_xml_list;
             this.exclude_json_map = exclude_json_map;
+            this.modifier_json_map = modifier_json_map;
         }
         generateTypings(cb) {
             let self = this;
@@ -729,7 +728,7 @@ var GIR2TS;
                 const res = [];
                 for (let ns of self.ns_list) {
                     const ns_name = ns.ns_node.$.name;
-                    const typing_str = renderNamespace(ns.ns_node, ns_name, self.exclude_json_map[ns.lib_name]);
+                    const typing_str = renderNamespace(ns.ns_node, ns_name, self.exclude_json_map[ns.lib_name], self.modifier_json_map[ns.lib_name]);
                     res.push({
                         gir_name: ns.lib_name,
                         typing_str: typing_str
@@ -749,6 +748,7 @@ function main() {
     let gir_files = [];
     let outdir = __dirname;
     let exclude_json_map = {};
+    let modifier_json_map = {};
     if (argv.outdir) {
         console.log("Output typings directory: " + argv.outdir);
         outdir = path.join(__dirname, argv.outdir);
@@ -772,6 +772,19 @@ function main() {
             let lib_name = path.basename(json_file, '.json');
             let data = fs.readFileSync(json_file, 'utf8');
             exclude_json_map[lib_name] = JSON.parse(data);
+        }
+    }
+    if (argv.modifiersdir) {
+        console.log("Modifiers directory: " + argv.modifiersdir);
+        let dir = path.join(__dirname, argv.modifiersdir);
+        let json_files = [];
+        if (fs.statSync(dir).isDirectory()) {
+            json_files = fs.readdirSync(dir).map((file) => path.join(dir, file));
+        }
+        for (let json_file of json_files) {
+            let lib_name = path.basename(json_file, '.json');
+            let data = fs.readFileSync(json_file, 'utf8');
+            modifier_json_map[lib_name] = JSON.parse(data);
         }
     }
     if (argv.girdir) {
@@ -801,7 +814,7 @@ function main() {
             xml_str: data
         });
     }
-    const gen = new GIR2TS.Generator(gir_xml_list, exclude_json_map);
+    const gen = new GIR2TS.Generator(gir_xml_list, exclude_json_map, modifier_json_map);
     gen.generateTypings((res) => {
         for (let lib of res) {
             let outfile = path.join(outdir, lib.gir_name + '.d.ts');
