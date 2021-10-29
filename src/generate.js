@@ -140,47 +140,64 @@ var GIR2TS;
         return (include_access_modifier ? 'public ' : '') + prop_name.replace(/-/g, '_') + ': ' + getTypeFromParameterNode(prop_node)[0] + ';';
     }
     GIR2TS.renderProperty = renderProperty;
-    function getFunctionInfo(func_node) {
-        var _a, _b, _c, _d, _e, _f;
-        var func_name = func_node.$.name;
-        const [return_type, primitive, returnDoc] = getTypeFromParameterNode(func_node['return-value'][0]);
-        var params = [];
-        const doc = (_c = (_b = (_a = func_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b["_"]) !== null && _c !== void 0 ? _c : null;
+    function getFunctionInfo(func_node, modifier, constructor = false) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20;
+        let func_name = func_node.$.name;
+        let return_type = "any", primitive = false, returnDoc = null;
+        if (!constructor) {
+            [return_type, primitive, returnDoc] = getTypeFromParameterNode((_a = func_node['return-value']) === null || _a === void 0 ? void 0 : _a[0]);
+            return_type = (_c = (_b = modifier === null || modifier === void 0 ? void 0 : modifier.return_type) === null || _b === void 0 ? void 0 : _b.type) !== null && _c !== void 0 ? _c : return_type;
+            returnDoc = (_e = (_d = modifier === null || modifier === void 0 ? void 0 : modifier.return_type) === null || _d === void 0 ? void 0 : _d.doc) !== null && _e !== void 0 ? _e : returnDoc;
+        }
+        let params = [];
+        const doc = (_h = (_g = (_f = func_node.doc) === null || _f === void 0 ? void 0 : _f[0]) === null || _g === void 0 ? void 0 : _g["_"]) !== null && _h !== void 0 ? _h : null;
         if (func_node.parameters && func_node.parameters[0].parameter) {
             for (var param_node of func_node.parameters[0].parameter) {
                 if (param_node.$.name === '...' || param_node.$.name === 'user_data')
                     continue;
                 let param_name = param_node.$.name;
+                if ((_k = (_j = modifier === null || modifier === void 0 ? void 0 : modifier.param) === null || _j === void 0 ? void 0 : _j[param_name]) === null || _k === void 0 ? void 0 : _k.skip)
+                    continue;
                 if (js_reserved_words.indexOf(param_name) !== -1) {
                     param_name = '_' + param_name;
                 }
                 let [type, is_primitive] = getTypeFromParameterNode(param_node);
                 params.push({
-                    name: param_name,
-                    type: type,
-                    docString: (_f = (_e = (_d = param_node === null || param_node === void 0 ? void 0 : param_node.doc) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e._) !== null && _f !== void 0 ? _f : null,
-                    optional: false
+                    name: (_o = (_m = (_l = modifier === null || modifier === void 0 ? void 0 : modifier.param) === null || _l === void 0 ? void 0 : _l[param_name]) === null || _m === void 0 ? void 0 : _m.newName) !== null && _o !== void 0 ? _o : param_name,
+                    type: (_r = (_q = (_p = modifier === null || modifier === void 0 ? void 0 : modifier.param) === null || _p === void 0 ? void 0 : _p[param_name]) === null || _q === void 0 ? void 0 : _q.type) !== null && _r !== void 0 ? _r : (((_v = (_u = (_t = (_s = modifier === null || modifier === void 0 ? void 0 : modifier.param) === null || _s === void 0 ? void 0 : _s[param_name]) === null || _t === void 0 ? void 0 : _t.type_extension) === null || _u === void 0 ? void 0 : _u.length) !== null && _v !== void 0 ? _v : 0 > 1) ? `${type} | ${(_y = (_x = (_w = modifier === null || modifier === void 0 ? void 0 : modifier.param) === null || _w === void 0 ? void 0 : _w[param_name]) === null || _x === void 0 ? void 0 : _x.type_extension) === null || _y === void 0 ? void 0 : _y.join(" | ")}` : type),
+                    docString: (_4 = (_1 = (_0 = (_z = modifier === null || modifier === void 0 ? void 0 : modifier.param) === null || _z === void 0 ? void 0 : _z[param_name]) === null || _0 === void 0 ? void 0 : _0.doc) !== null && _1 !== void 0 ? _1 : (_3 = (_2 = param_node === null || param_node === void 0 ? void 0 : param_node.doc) === null || _2 === void 0 ? void 0 : _2[0]) === null || _3 === void 0 ? void 0 : _3._) !== null && _4 !== void 0 ? _4 : null,
+                    optional: (_7 = (_6 = (_5 = modifier === null || modifier === void 0 ? void 0 : modifier.param) === null || _5 === void 0 ? void 0 : _5[param_name]) === null || _6 === void 0 ? void 0 : _6.optional) !== null && _7 !== void 0 ? _7 : false
+                });
+            }
+        }
+        if ((modifier === null || modifier === void 0 ? void 0 : modifier.newParam) != null) {
+            for (const param of modifier.newParam) {
+                params.push({
+                    docString: (_8 = param === null || param === void 0 ? void 0 : param.doc) !== null && _8 !== void 0 ? _8 : null,
+                    type: param.type,
+                    name: param.name,
+                    optional: (_9 = param.optional) !== null && _9 !== void 0 ? _9 : false
                 });
             }
         }
         return {
             name: func_name,
-            return_type: {
-                type: return_type,
-                docString: returnDoc,
-                is_primitive: primitive
+            return_type: (constructor) ? undefined : {
+                type: (_11 = (_10 = modifier === null || modifier === void 0 ? void 0 : modifier.return_type) === null || _10 === void 0 ? void 0 : _10.type) !== null && _11 !== void 0 ? _11 : (((_14 = (_13 = (_12 = modifier === null || modifier === void 0 ? void 0 : modifier.return_type) === null || _12 === void 0 ? void 0 : _12.type_extension) === null || _13 === void 0 ? void 0 : _13.length) !== null && _14 !== void 0 ? _14 : 0 > 1) ? `${return_type} | ${((_16 = (_15 = modifier === null || modifier === void 0 ? void 0 : modifier.return_type) === null || _15 === void 0 ? void 0 : _15.type_extension) === null || _16 === void 0 ? void 0 : _16.join(" | "))}` : return_type),
+                docString: (_18 = (_17 = modifier === null || modifier === void 0 ? void 0 : modifier.return_type) === null || _17 === void 0 ? void 0 : _17.doc) !== null && _18 !== void 0 ? _18 : returnDoc,
+                is_primitive: ((_19 = modifier === null || modifier === void 0 ? void 0 : modifier.return_type) === null || _19 === void 0 ? void 0 : _19.type) ? false : primitive
             },
             params: params,
-            doc: doc
+            doc: (_20 = modifier === null || modifier === void 0 ? void 0 : modifier.doc) !== null && _20 !== void 0 ? _20 : doc
         };
     }
-    function renderFreeFunction(func_node, ns_name, exclude_list = null) {
-        let { name, return_type, params, doc } = getFunctionInfo(func_node);
+    function renderFreeFunction(func_node, ns_name, exclude_list = null, modifier) {
+        let { name, return_type, params, doc } = getFunctionInfo(func_node, modifier);
         let str = `${renderDocString(doc, params, return_type, 0, ns_name)}`;
         if (exclude_list && exclude_list.indexOf(name) !== -1) {
             str += '// ';
         }
-        str += `function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type.type};`;
+        str += `function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')})${(return_type != null) ? (": " + return_type.type) : ""};`;
         return str;
     }
     function renderDocString(docString, params, return_info, indent = 0, ns_name) {
@@ -239,56 +256,20 @@ var GIR2TS;
         doc += `${ind} */\n`;
         return doc;
     }
-    function renderNewParam(paramInfo) {
-        return `${paramInfo.name}:${(paramInfo === null || paramInfo === void 0 ? void 0 : paramInfo.optional) ? "?" : ""} ${paramInfo === null || paramInfo === void 0 ? void 0 : paramInfo.type}`;
-    }
-    function renderMethod(method_node, include_access_modifier = true, include_name = true, forExternalInterfaceInNamespace = null, indentNum, ns_name, exclude = false, staticFunc = false, funcModifier, constructor) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7;
-        var method_name = method_node.$.name;
-        let return_type = "any", primitive = false, docString = null;
-        if (!constructor) {
-            [return_type, primitive, docString] = getTypeFromParameterNode((_a = method_node['return-value']) === null || _a === void 0 ? void 0 : _a[0]);
-            return_type = (_c = (_b = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.return_type) === null || _b === void 0 ? void 0 : _b.type) !== null && _c !== void 0 ? _c : return_type;
-            docString = (_e = (_d = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.return_type) === null || _d === void 0 ? void 0 : _d.doc) !== null && _e !== void 0 ? _e : docString;
-        }
-        var params = [];
-        if ((method_node === null || method_node === void 0 ? void 0 : method_node.parameters) && "parameter" in ((_f = method_node === null || method_node === void 0 ? void 0 : method_node.parameters) === null || _f === void 0 ? void 0 : _f[0])) {
-            for (const param_node of method_node.parameters[0].parameter) {
-                if (param_node.$.name === '...' || param_node.$.name === "user_data")
-                    continue;
-                let param_name = param_node.$.name;
-                if ((_h = (_g = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _g === void 0 ? void 0 : _g[param_name]) === null || _h === void 0 ? void 0 : _h.skip)
-                    continue;
-                if (js_reserved_words.indexOf(param_name) !== -1) {
-                    param_name = '_' + param_name;
-                }
-                let [type, is_primitive, doc] = getTypeFromParameterNode(param_node);
-                if (!is_primitive && forExternalInterfaceInNamespace) {
-                    type = forExternalInterfaceInNamespace + '.' + type;
-                }
-                let finalType = (_l = (_k = (_j = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _j === void 0 ? void 0 : _j[param_name]) === null || _k === void 0 ? void 0 : _k.type) !== null && _l !== void 0 ? _l : (((_q = (_p = (_o = (_m = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _m === void 0 ? void 0 : _m[param_name]) === null || _o === void 0 ? void 0 : _o.type_extension) === null || _p === void 0 ? void 0 : _p.length) !== null && _q !== void 0 ? _q : 0 > 1) ? `${type} | ${(_t = (_s = (_r = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _r === void 0 ? void 0 : _r[param_name]) === null || _s === void 0 ? void 0 : _s.type_extension) === null || _t === void 0 ? void 0 : _t.join(" | ")}` : type);
-                params.push({
-                    name: (_w = (_v = (_u = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _u === void 0 ? void 0 : _u[param_name]) === null || _v === void 0 ? void 0 : _v.newName) !== null && _w !== void 0 ? _w : param_name,
-                    type: finalType,
-                    docString: (_z = (_y = (_x = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _x === void 0 ? void 0 : _x[param_name]) === null || _y === void 0 ? void 0 : _y.doc) !== null && _z !== void 0 ? _z : (doc !== null && doc !== void 0 ? doc : null),
-                    optional: (_2 = (_1 = (_0 = funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.param) === null || _0 === void 0 ? void 0 : _0[param_name]) === null || _1 === void 0 ? void 0 : _1.optional) !== null && _2 !== void 0 ? _2 : false
-                });
-            }
-        }
-        if ((funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.newParam) != null) {
-            for (const param of funcModifier.newParam) {
-                params.push({
-                    docString: (_3 = param === null || param === void 0 ? void 0 : param.doc) !== null && _3 !== void 0 ? _3 : null,
-                    type: param.type,
-                    name: param.name,
-                    optional: (_4 = param.optional) !== null && _4 !== void 0 ? _4 : false
-                });
-            }
-        }
+    function renderMethod(method_node, ns_name, funcModifier, options = {
+        include_access_modifier: true,
+        include_name: true,
+        indentNum: 0,
+        exclude: false,
+        staticFunc: false,
+        isConstructor: false
+    }) {
+        const { include_access_modifier = true, include_name = true, indentNum = 0, exclude = false, staticFunc = false, isConstructor = false } = options;
+        const info = getFunctionInfo(method_node, funcModifier, isConstructor);
         const ind = "\t".repeat(indentNum);
         let indentAdded = false;
         let str = '';
-        str += renderDocString((_7 = (_6 = (_5 = method_node.doc) === null || _5 === void 0 ? void 0 : _5[0]) === null || _6 === void 0 ? void 0 : _6._) !== null && _7 !== void 0 ? _7 : null, params, { type: return_type, is_primitive: primitive, docString: docString }, indentNum, ns_name);
+        str += renderDocString(info.doc, info.params, info.return_type, indentNum, ns_name);
         if (exclude) {
             str += `${ind}// `;
             indentAdded = true;
@@ -314,22 +295,23 @@ var GIR2TS;
                 str += ind;
                 indentAdded = true;
             }
-            str += method_name;
+            str += info.name;
         }
         if (!indentAdded) {
             str += ind;
             indentAdded = true;
         }
         str += '(';
-        if (params.length > 0) {
-            for (var param of params) {
-                str += param.name + (param.optional ? "?" : "") + ': ' + param.type + ', ';
+        if (info.params.length > 0) {
+            let params = [];
+            for (const param of info.params) {
+                params.push(param.name + (param.optional ? "?" : "") + ': ' + param.type);
             }
-            str = str.slice(0, -2);
+            str += params.join(", ");
         }
         str += ')';
-        if (!constructor)
-            str += ': ' + return_type;
+        if (info.return_type != null)
+            str += ': ' + info.return_type.type;
         str += ";";
         return str;
     }
@@ -338,7 +320,7 @@ var GIR2TS;
         var _a, _b, _c;
         const cb_name = cb_node.$.name;
         let body = renderDocString((_c = (_b = (_a = cb_node === null || cb_node === void 0 ? void 0 : cb_node.doc) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b._) !== null && _c !== void 0 ? _c : null, undefined, undefined, 0, ns_name);
-        body += `interface ${cb_name} {\n${renderMethod(cb_node, false, false, undefined, 1, ns_name)}\n}`;
+        body += `interface ${cb_name} {\n${renderMethod(cb_node, ns_name, undefined, { include_name: false, include_access_modifier: false, indentNum: 1 })}\n}`;
         return body;
     }
     GIR2TS.renderCallback = renderCallback;
@@ -425,11 +407,11 @@ var GIR2TS;
         let result = `${"\t".repeat(indent)}`;
         if (exclude)
             result += "// ";
-        result += `${cb_name}: {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`;
+        result += `public ${cb_name}: {${renderMethod(cb_node, ns_name, undefined, { include_name: false, include_access_modifier: false })}};`;
         return result;
     }
     function renderConstructorField(constructor_node, ns_name, indent, exclude, modifier) {
-        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, exclude, true, modifier)}`;
+        return `${renderMethod(constructor_node, ns_name, modifier, { indentNum: indent, exclude: exclude, staticFunc: true })}`;
     }
     function renderNodeAsBlankInterface(node, ns_name) {
         var _a, _b, _c;
@@ -487,14 +469,14 @@ var GIR2TS;
             const func_name = m.$.name;
             const excluded = (_l = (_k = exclude === null || exclude === void 0 ? void 0 : exclude.method) === null || _k === void 0 ? void 0 : _k.includes(func_name)) !== null && _l !== void 0 ? _l : false;
             const modifierFunc = (_m = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _m === void 0 ? void 0 : _m[func_name];
-            body += renderMethod(m, undefined, undefined, undefined, 1, ns_name, excluded, undefined, modifierFunc) + '\n';
+            body += renderMethod(m, ns_name, modifierFunc, { indentNum: 1, exclude: excluded }) + '\n';
         }
         let result = renderDocString((_q = (_p = (_o = rec_node === null || rec_node === void 0 ? void 0 : rec_node.doc) === null || _o === void 0 ? void 0 : _o[0]) === null || _p === void 0 ? void 0 : _p._) !== null && _q !== void 0 ? _q : null, undefined, undefined, 0, ns_name);
         const genericModifier = (_r = modifier === null || modifier === void 0 ? void 0 : modifier.generic) !== null && _r !== void 0 ? _r : "";
         const constructor_modifier = (_s = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _s === void 0 ? void 0 : _s["constructor"];
         result += `interface ${rec_node.$.name} {}\n`;
         result += `class ${rec_node.$.name}${genericModifier} {\n`;
-        result += `${renderMethod(BuildConstructorNode(rec_node.$.name), false, undefined, undefined, 1, ns_name, false, false, constructor_modifier, true)}\n`;
+        result += `${renderMethod(BuildConstructorNode(rec_node.$.name), ns_name, constructor_modifier, { indentNum: 1, isConstructor: true })}\n`;
         result += `${body}}`;
         return result;
     }
@@ -580,7 +562,7 @@ var GIR2TS;
             var _a;
             const excluded = (exclude_method_list.includes(m.$.name) || exclude_all_members);
             const funcModifier = (_a = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _a === void 0 ? void 0 : _a[m.$.name];
-            let method_str = renderMethod(m, false, undefined, undefined, 1, ns_name, excluded, undefined, funcModifier);
+            let method_str = renderMethod(m, ns_name, funcModifier, { include_access_modifier: false, indentNum: 1, exclude: excluded });
             return method_str;
         });
         let mixin = "";
@@ -602,20 +584,23 @@ var GIR2TS;
         const ctor_str_list = ctors.map((c) => {
             var _a;
             const funcModifier = (_a = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _a === void 0 ? void 0 : _a[c.$.name];
-            return renderMethod(c, false, undefined, undefined, 1, ns_name, false, true, funcModifier);
+            return renderMethod(c, ns_name, funcModifier, { indentNum: 1, staticFunc: true });
         });
         const ctors_body = ctor_str_list.join('\n');
         const static_func_str_list = static_funcs.map((sf) => {
             var _a;
             const funcModifier = (_a = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _a === void 0 ? void 0 : _a[sf.$.name];
-            return renderMethod(sf, false, undefined, undefined, 1, ns_name, false, true, funcModifier);
+            return renderMethod(sf, ns_name, funcModifier, { indentNum: 1, staticFunc: true });
         });
         const static_func_body = static_func_str_list.join('\n');
         const constructor_modifier = (_f = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _f === void 0 ? void 0 : _f["constructor"];
         const classGenericModifier = (_g = modifier === null || modifier === void 0 ? void 0 : modifier.generic) !== null && _g !== void 0 ? _g : "";
         const static_side = '\n' +
             `class ${class_name}${classGenericModifier} {\n` +
-            `${renderMethod(BuildConstructorNode(class_name), false, undefined, undefined, 1, ns_name, false, false, constructor_modifier, true)}\n` +
+            `${renderMethod(BuildConstructorNode(class_name), ns_name, constructor_modifier, {
+                indentNum: 1,
+                isConstructor: true
+            })}\n` +
             `${ctors_body}` + NeedNewLine(ctors_body) +
             `${static_func_body + NeedNewLine(static_func_body)}` +
             `}\n`;
@@ -638,13 +623,16 @@ var GIR2TS;
         let body = '\n\n';
         const methods = removeDuplicates(getAllMethods(iface_node), (a, b) => a.$.name === b.$.name);
         for (let m of methods) {
-            body += renderMethod(m, false, undefined, undefined, 1, ns_name) + '\n';
+            body += renderMethod(m, ns_name, undefined, {
+                include_access_modifier: false,
+                indentNum: 1
+            }) + '\n';
         }
         return `interface ${iface_node.$.name} {${body}}`;
     }
     GIR2TS.renderInterface = renderInterface;
     function renderNamespace(ns_node, ns_name, exclude, modifiers) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         let body = '';
         let class_nodes = [];
         if (ns_node.class)
@@ -684,7 +672,7 @@ var GIR2TS;
         if (ns_node.function)
             for (let func_node of ns_node.function) {
                 let exc = exclude && exclude.exclude.function ? exclude.exclude.function : undefined;
-                body += '\n\t' + (renderFreeFunction(func_node, ns_name, exc) + '\n').replace(/\n/gm, "\n\t");
+                body += '\n\t' + (renderFreeFunction(func_node, ns_name, exc, (_m = (_l = modifiers === null || modifiers === void 0 ? void 0 : modifiers.amend) === null || _l === void 0 ? void 0 : _l.function) === null || _m === void 0 ? void 0 : _m[func_node.$.name]) + '\n').replace(/\n/gm, "\n\t");
             }
         body = body.split("\n").reduce((p, c) => p += (c.trim() == "" ? "\n" : `${c}\n`));
         return `declare namespace imports.gi.${ns_node.$.name} {\n${body}}`;

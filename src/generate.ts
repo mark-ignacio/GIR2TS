@@ -116,7 +116,7 @@ namespace GIR2TS {
 
     interface FunctionInfo {
         name: string;
-        return_type: ReturnInfo;
+        return_type?: ReturnInfo;
         params: Parameter[];
         doc: string | null;
     }
@@ -246,7 +246,7 @@ namespace GIR2TS {
         } else if (param_node.array && param_node.array[0].array) {
             [type, is_primitive, doc] = getTypeFromParameterNode(param_node.array[0] as ParameterNode);
             type += "[]";
-        }else {
+        } else {
             console.log("can't get param type", JSON.stringify(param_node, null, 4))
             return ['any', false, ""];
         }
@@ -263,10 +263,17 @@ namespace GIR2TS {
     }
 
 
-    function getFunctionInfo(func_node: FunctionNode): FunctionInfo {
-        var func_name = func_node.$.name;
-        const [return_type, primitive, returnDoc] = getTypeFromParameterNode(func_node['return-value'][0]);
-        var params: Parameter[] = [];
+    function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModifier, constructor: boolean = false): FunctionInfo {
+        let func_name = func_node.$.name;
+        let return_type: string = "any", primitive: boolean = false, returnDoc: string | null = null;
+        if (!constructor) {
+            [return_type, primitive, returnDoc] = getTypeFromParameterNode(func_node['return-value']?.[0]);
+
+            // Modifiers
+            return_type = modifier?.return_type?.type ?? return_type;
+            returnDoc = modifier?.return_type?.doc ?? returnDoc;
+        }
+        let params: Parameter[] = [];
         const doc = func_node.doc?.[0]?.["_"] ?? null;
         //var has_params = "parameter" in method_node.parameters[0];
 
@@ -274,38 +281,54 @@ namespace GIR2TS {
             for (var param_node of func_node.parameters[0].parameter) {
                 if (param_node.$.name === '...' || param_node.$.name === 'user_data') continue;
                 let param_name = param_node.$.name;
+
+                if (modifier?.param?.[param_name]?.skip)
+                    continue;
+
                 if (js_reserved_words.indexOf(param_name) !== -1) { // if clashes with JS reserved word.
                     param_name = '_' + param_name;
                 }
                 let [type, is_primitive] = getTypeFromParameterNode(param_node);
                 params.push({
-                    name: param_name,
-                    type: type,
-                    docString: param_node?.doc?.[0]?._ ?? null,
-                    optional: false
+                    name: modifier?.param?.[param_name]?.newName ?? param_name,
+                    type: modifier?.param?.[param_name]?.type ?? ((modifier?.param?.[param_name]?.type_extension?.length ?? 0 > 1) ? `${type} | ${modifier?.param?.[param_name]?.type_extension?.join(" | ")}` : type),
+                    docString: modifier?.param?.[param_name]?.doc ?? param_node?.doc?.[0]?._ ?? null,
+                    optional: modifier?.param?.[param_name]?.optional ?? false
                 });
+            }
+        }
+
+        if (modifier?.newParam != null) {
+            for (const param of modifier.newParam) {
+                params.push({
+                    docString: param?.doc ?? null,
+                    type: param.type,
+                    name: param.name,
+                    optional: param.optional ?? false
+                })
             }
         }
 
         return {
             name: func_name,
-            return_type: {
-                type: return_type,
-                docString: returnDoc,
-                is_primitive: primitive
+            return_type: (constructor) ? undefined : {
+                type: modifier?.return_type?.type ?? ((modifier?.return_type?.type_extension?.length ?? 0 > 1) ? `${return_type} | ${(modifier?.return_type?.type_extension?.join(" | "))}` : return_type),
+                docString: modifier?.return_type?.doc ?? returnDoc,
+                is_primitive: (modifier?.return_type?.type) ? false : primitive
             },
             params: params,
-            doc: doc
+            doc: modifier?.doc ?? doc
         }
     }
 
-    function renderFreeFunction(func_node: FunctionNode, ns_name: string, exclude_list: string[] | null = null): string {
-        let { name, return_type, params, doc } = getFunctionInfo(func_node);
+    function renderFreeFunction(func_node: FunctionNode, ns_name: string, exclude_list: string[] | null = null, modifier?: FunctionModifier): string {
+        let { name, return_type, params, doc } = getFunctionInfo(func_node, modifier);
+
         let str = `${renderDocString(doc, params, return_type, 0, ns_name)}`;
         if (exclude_list && exclude_list.indexOf(name) !== -1) {
-            str+= '// ';
+            str += '// ';
         }
-        str += `function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')}): ${return_type.type};`;
+        str += `function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')})${(return_type != null) ? (": " + return_type.type) : ""};`;
         return str;
     }
 
@@ -320,7 +343,7 @@ namespace GIR2TS {
         function convertLinks(doc: string | undefined, ns_name?: string): string | undefined {
             if (doc == undefined)
                 return doc;
-            
+
             if (ns_name == undefined)
                 return doc;
 
@@ -362,7 +385,7 @@ namespace GIR2TS {
                 }
             }
 
-        
+
         if (return_info != null && return_info.type != "void") {
             const lines = convertLinks(return_info.docString?.replace(/@/g, "#"), ns_name)?.split("\n") ?? [""];
             doc += `${ind} * @returns ${lines[0]}\n`;
@@ -378,97 +401,45 @@ namespace GIR2TS {
     }
 
     interface RenderMethodOptions {
-        exclude_name: boolean,
-        exclude_access_modifier: boolean;
-
+        include_name?: boolean;
+        include_access_modifier?: boolean;
+        indentNum?: number;
+        staticFunc?: boolean;
+        isConstructor?: boolean;
+        exclude?: boolean
     }
-
-    function renderNewParam(paramInfo: NewParam): string {
-        return `${paramInfo.name}:${paramInfo?.optional ? "?" : ""} ${paramInfo?.type}`;
-    }
-
 
     /*
         Produces the TS string declaring the method represented by method_node.
     */
     export function renderMethod(
         method_node: FunctionNode,
-        include_access_modifier: boolean = true,
-        include_name: boolean = true,
-        forExternalInterfaceInNamespace: string | null = null,
-        indentNum: number,
         ns_name: string,
-        exclude: boolean = false,
-        staticFunc: boolean = false,
         funcModifier?: FunctionModifier,
-        constructor?: boolean
+        options: RenderMethodOptions = {
+            include_access_modifier: true,
+            include_name: true,
+            indentNum: 0,
+            exclude: false,
+            staticFunc: false,
+            isConstructor: false
+        },
     ): string {
 
-        // interface Parameter {
-        //     type: string;
-        //     name: string;
-        // }
+        const {
+            include_access_modifier = true,
+            include_name = true,
+            indentNum = 0,
+            exclude = false,
+            staticFunc = false,
+            isConstructor = false
+        } = options;
 
-        var method_name = method_node.$.name;
-        let return_type: string = "any", primitive: boolean = false, docString: string | null = null;
-        if (!constructor) {
-            [return_type, primitive, docString] = getTypeFromParameterNode(method_node['return-value']?.[0]);
-
-            // Modifiers
-            return_type = funcModifier?.return_type?.type ?? return_type;
-            docString = funcModifier?.return_type?.doc ?? docString;
-        }
-        
-
-        var params: Parameter[] = [];
-        //var has_params = "parameter" in method_node.parameters[0];
-
-        //console.log('rendering ' + method_name);
-
-        if (method_node?.parameters && "parameter" in method_node?.parameters?.[0]) {
-            for (const param_node of method_node.parameters[0].parameter) {
-                if (param_node.$.name === '...' || param_node.$.name === "user_data") continue;
-
-                let param_name = param_node.$.name;
-                if (funcModifier?.param?.[param_name]?.skip) 
-                    continue;
-
-                if (js_reserved_words.indexOf(param_name) !== -1) { // if clashes with JS reserved word.
-                    param_name = '_' + param_name;
-                }
-                let [type, is_primitive, doc] = getTypeFromParameterNode(param_node);
-                if (!is_primitive && forExternalInterfaceInNamespace) {
-                    type = forExternalInterfaceInNamespace + '.' + type;
-                }
-
-
-                let finalType = funcModifier?.param?.[param_name]?.type ?? ((funcModifier?.param?.[param_name]?.type_extension?.length ?? 0 > 1) ? `${type} | ${funcModifier?.param?.[param_name]?.type_extension?.join(" | ")}` : type);
-                params.push({
-                    name: funcModifier?.param?.[param_name]?.newName ?? param_name,
-                    type: finalType,
-                    docString: funcModifier?.param?.[param_name]?.doc ?? (doc ?? null),
-                    optional: funcModifier?.param?.[param_name]?.optional ?? false
-                });
-            }
-        }
-
-        // Add any new params at the end
-        if (funcModifier?.newParam != null) {
-            for (const param of funcModifier.newParam) {
-                params.push({
-                    docString: param?.doc ?? null,
-                    type: param.type,
-                    name: param.name,
-                    optional: param.optional ?? false
-                })
-            }
-        }
-
-        //var str = (include_access_modifier ? 'public ' : '') + method_name + ' (';
+        const info = getFunctionInfo(method_node, funcModifier, isConstructor);
         const ind = "\t".repeat(indentNum);
         let indentAdded = false;
         let str = '';
-        str += renderDocString(method_node.doc?.[0]?._ ?? null, params, { type: return_type, is_primitive: primitive, docString: docString }, indentNum, ns_name);
+        str += renderDocString(info.doc, info.params, info.return_type, indentNum, ns_name);
         if (exclude) {
             str += `${ind}// `;
             indentAdded = true;
@@ -495,7 +466,7 @@ namespace GIR2TS {
                 str += ind;
                 indentAdded = true;
             }
-            str += method_name;
+            str += info.name;
         }
 
         if (!indentAdded) {
@@ -504,16 +475,17 @@ namespace GIR2TS {
         }
         str += '(';
 
-        if (params.length > 0) {
-            for (var param of params) {
-                str += param.name + (param.optional ? "?" : "") + ': ' + param.type + ', ';
+        if (info.params.length > 0) {
+            let params: string[] = [];
+            for (const param of info.params) {
+                params.push(param.name + (param.optional ? "?" : "") + ': ' + param.type);
             }
-            str = str.slice(0, -2);
+            str += params.join(", ");
         }
 
         str += ')'
-        if (!constructor)
-            str += ': ' + return_type;
+        if (info.return_type != null)
+            str += ': ' + info.return_type.type;
         str += ";";
 
         return str;
@@ -523,7 +495,7 @@ namespace GIR2TS {
     export function renderCallback(cb_node: FunctionNode, ns_name: string): string {
         const cb_name = cb_node.$.name;
         let body = renderDocString(cb_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
-        body += `interface ${cb_name} {\n${renderMethod(cb_node, false, false, undefined, 1, ns_name)}\n}`;
+        body += `interface ${cb_name} {\n${renderMethod(cb_node, ns_name, undefined, { include_name: false, include_access_modifier: false, indentNum: 1 })}\n}`;
         return body;
     }
 
@@ -604,7 +576,7 @@ namespace GIR2TS {
         }
         body = body.slice(0, -2) + '\n'; // remove last comma
         let result = renderDocString(enum_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
-        result +=`enum ${enum_node.$.name} {\n${body}}`;
+        result += `enum ${enum_node.$.name} {\n${body}}`;
         return result;
     }
 
@@ -618,12 +590,13 @@ namespace GIR2TS {
         let result = `${"\t".repeat(indent)}`;
         if (exclude)
             result += "// ";
-        result+= `${cb_name}: {${renderMethod(cb_node, false, false, undefined, 0, ns_name)}};`
+        result += `public ${cb_name}: {${renderMethod(cb_node, ns_name, undefined, { include_name: false, include_access_modifier: false })}};`;
         return result;
     }
 
+    /** Some static functions are in constructor nodes, render them as static functions */
     function renderConstructorField(constructor_node: FunctionNode, ns_name: string, indent: number, exclude: boolean, modifier?: FunctionModifier) {
-        return `${renderMethod(constructor_node, false, true, undefined, indent, ns_name, exclude, true, modifier)}`
+        return `${renderMethod(constructor_node, ns_name, modifier, { indentNum: indent, exclude: exclude, staticFunc: true })}`
     }
 
 
@@ -668,14 +641,14 @@ namespace GIR2TS {
         }
 
         for (let f of props) {
-            body+= renderDocString(f.doc?.[0]._ ?? null, undefined, undefined, 1, ns_name)
+            body += renderDocString(f.doc?.[0]._ ?? null, undefined, undefined, 1, ns_name)
             const excluded = exclude?.prop?.includes(f.$.name) ?? false;
             body += '\t';
             if (excluded)
                 body += "// "
             body += renderProperty(f) + '\n';
         }
-            
+
         for (let c of callback_fields) {
             const func_name = c.$.name;
             const excluded = exclude?.callback?.includes(func_name) ?? false;
@@ -686,7 +659,7 @@ namespace GIR2TS {
             const func_name = m.$.name;
             const excluded = exclude?.method?.includes(func_name) ?? false;
             const modifierFunc = modifier?.function?.[func_name]
-            body += renderMethod(m, undefined, undefined, undefined, 1, ns_name, excluded, undefined, modifierFunc) + '\n';
+            body += renderMethod(m, ns_name, modifierFunc, { indentNum: 1, exclude: excluded }) + '\n';
         }
 
         let result = renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
@@ -694,7 +667,7 @@ namespace GIR2TS {
         const constructor_modifier = modifier?.function?.["constructor"];
         result += `interface ${rec_node.$.name} {}\n`
         result += `class ${rec_node.$.name}${genericModifier} {\n`
-        result += `${renderMethod(BuildConstructorNode(rec_node.$.name), false, undefined, undefined, 1, ns_name, false, false, constructor_modifier, true)}\n`;
+        result += `${renderMethod(BuildConstructorNode(rec_node.$.name), ns_name, constructor_modifier, { indentNum: 1, isConstructor: true })}\n`;
         result += `${body}}`;
         return result
     }
@@ -800,7 +773,7 @@ namespace GIR2TS {
             // if method is present in exclude_list
             const excluded = (exclude_method_list.includes(m.$.name) || exclude_all_members);
             const funcModifier = modifier?.function?.[m.$.name];
-            let method_str = renderMethod(m, false, undefined, undefined, 1, ns_name, excluded, undefined, funcModifier);
+            let method_str = renderMethod(m, ns_name, funcModifier, { include_access_modifier: false, indentNum: 1, exclude: excluded });
             return method_str;
         });
 
@@ -811,11 +784,11 @@ namespace GIR2TS {
             mixin += " &"
             mixin += ` ${ifaces.join(' & ')}`;
         }
-        mixin+= ";\n\n";
+        mixin += ";\n\n";
 
         let extension = "";
-        extension+= renderDocString(class_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name)
-        extension+= `${exclude_self ? '// ' : ''}interface ${class_name} extends ${class_name}Mixin {}\n`;
+        extension += renderDocString(class_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name)
+        extension += `${exclude_self ? '// ' : ''}interface ${class_name} extends ${class_name}Mixin {}\n`;
 
         let body = method_str_list.join('\n');
 
@@ -828,13 +801,13 @@ namespace GIR2TS {
         const ctor_str_list: string[] = ctors.map((c) => {
             // console.log(c);
             const funcModifier = modifier?.function?.[c.$.name];
-            return renderMethod(c, false, undefined, undefined, 1, ns_name, false, true, funcModifier);
+            return renderMethod(c, ns_name, funcModifier, { indentNum: 1, staticFunc: true });
         });
         const ctors_body = ctor_str_list.join('\n');
 
         const static_func_str_list: string[] = static_funcs.map((sf) => {
             const funcModifier = modifier?.function?.[sf.$.name];
-            return renderMethod(sf, false, undefined, undefined, 1, ns_name, false, true, funcModifier);
+            return renderMethod(sf, ns_name, funcModifier, { indentNum: 1, staticFunc: true });
         });
         const static_func_body = static_func_str_list.join('\n');
 
@@ -842,7 +815,10 @@ namespace GIR2TS {
         const classGenericModifier = modifier?.generic ?? "";
         const static_side = '\n' +
             `class ${class_name}${classGenericModifier} {\n` +
-            `${renderMethod(BuildConstructorNode(class_name), false, undefined, undefined, 1, ns_name, false, false, constructor_modifier, true)}\n` +
+            `${renderMethod(BuildConstructorNode(class_name), ns_name, constructor_modifier, {
+                indentNum: 1,
+                isConstructor: true
+            })}\n` +
             `${ctors_body}` + NeedNewLine(ctors_body) +
             `${static_func_body + NeedNewLine(static_func_body)}` +
             `}\n`;
@@ -869,7 +845,10 @@ namespace GIR2TS {
         let body = '\n\n';
         const methods = removeDuplicates(getAllMethods(iface_node), (a, b) => a.$.name === b.$.name);
         for (let m of methods) {
-            body += renderMethod(m, false, undefined, undefined, 1, ns_name) + '\n';
+            body += renderMethod(m, ns_name, undefined, {
+                include_access_modifier: false,
+                indentNum: 1
+            }) + '\n';
         }
 
         return `interface ${iface_node.$.name} {${body}}`;
@@ -898,6 +877,9 @@ namespace GIR2TS {
         amend: {
             class: {
                 [klass: string]: ClassModifier;
+            },
+            function: {
+                [func: string]: FunctionModifier;
             }
         }
     }
@@ -991,9 +973,14 @@ namespace GIR2TS {
         if (ns_node.function)
             for (let func_node of ns_node.function) {
                 let exc = exclude && exclude.exclude.function ? exclude.exclude.function : undefined;
-                body += '\n\t' + (renderFreeFunction(func_node, ns_name, exc) + '\n').replace(/\n/gm, "\n\t");
+                body += '\n\t' + (renderFreeFunction(
+                    func_node,
+                    ns_name,
+                    exc,
+                    modifiers?.amend?.function?.[func_node.$.name]
+                ) + '\n').replace(/\n/gm, "\n\t");
             }
-        
+
         // Change lines with only whitespace chars to empty strings 
         body = body.split("\n").reduce((p, c) => p += (c.trim() == "" ? "\n" : `${c}\n`));
         return `declare namespace imports.gi.${ns_node.$.name} {\n${body}}`;
