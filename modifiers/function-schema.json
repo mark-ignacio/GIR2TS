@@ -1,0 +1,50 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Function modifier schema",
+    "description": "Library modifiers",
+    "type": "object",
+    "properties": {
+        "doc": {
+            "description": "Docstring override",
+            "type" : "string"
+        },
+        "return_type": {
+            "$ref": "./param-schema.json"
+        },
+        "param": {
+            "description": "Parameter modifiers",
+            "type" : "object",
+            "additionalProperties": {
+                "$ref": "./param-schema.json"
+            }
+        },
+        "newParam": {
+            "description": "New Parameters",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "Name of new parameter",
+                        "type" : "string"
+                    },
+                    "type": {
+                        "description": "Type of new parameter",
+                        "type" : "string"
+                    },
+                    "doc": {
+                        "description": "Docstring for new parameter",
+                        "type" : "string"
+                    },
+                    "optional": {
+                        "description": "Is the new parameter optional",
+                        "type" : "boolean"
+                    }
+                },
+                "required": ["name", "type"]
+            },
+            "minItems": 0,
+            "uniqueItems": true
+        }
+    }
+}

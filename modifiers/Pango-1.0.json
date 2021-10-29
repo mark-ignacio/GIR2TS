@@ -1,8 +1,6 @@
 {
     "$schema": "./schema.json",
     "amend": {
-        "class": {
-        },
         "function": {
             "parse_markup": {
                 "param": {
@@ -16,7 +14,6 @@
                         "skip": true
                     }
                 }
-                
             }
         }
     }

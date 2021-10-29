@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Parameter modifier schema",
+    "description": "Library modifiers",
+    "type": "object",
+    "properties": {
+        "doc": {
+            "description": "Docstring override",
+            "type" : "string"
+        },
+        "type": {
+            "description": "Type override",
+            "type" : "string"
+        },
+        "type_extension": {
+            "description": "Add Additional types to parameter",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+        },
+        "optional": {
+            "description": "Param should be optional",
+            "type" : "boolean"
+        },
+        "newName": {
+            "description": "Parameter name override",
+            "type" : "string"
+        },
+        "skip": {
+            "description": "Do not include parameter at all",
+            "type" : "boolean"
+        }
+    }
+}
