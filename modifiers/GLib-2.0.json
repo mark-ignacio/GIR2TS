@@ -1,0 +1,26 @@
+{
+    "$schema": "./schema.json",
+    "amend": {
+        "class": {
+            "Variant": {
+                "generic": "<UnpackType = any, DeepUnpackType = UnpackType, RecursiveUnpackType = UnpackType>",
+                "function": {
+                    "constructor": {
+                        "newParam": [
+                            {
+                                "type": "string",
+                                "name": "type",
+                                "docs": ""
+                            },
+                            {
+                                "type": "UnpackType",
+                                "name": "value",
+                                "docs": ""
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

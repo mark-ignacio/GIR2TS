@@ -446,7 +446,7 @@ var GIR2TS;
     }
     GIR2TS.renderAlias = renderAlias;
     function renderRecordAsClass(rec_node, ns_name, exclude, modifier) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
         let props = [];
         let callback_fields = [];
         let methods = getAllMethods(rec_node);
@@ -490,7 +490,12 @@ var GIR2TS;
             body += renderMethod(m, undefined, undefined, undefined, 1, ns_name, excluded, undefined, modifierFunc) + '\n';
         }
         let result = renderDocString((_q = (_p = (_o = rec_node === null || rec_node === void 0 ? void 0 : rec_node.doc) === null || _o === void 0 ? void 0 : _o[0]) === null || _p === void 0 ? void 0 : _p._) !== null && _q !== void 0 ? _q : null, undefined, undefined, 0, ns_name);
-        result += `class ${rec_node.$.name} {\n${body}}`;
+        const genericModifier = (_r = modifier === null || modifier === void 0 ? void 0 : modifier.generic) !== null && _r !== void 0 ? _r : "";
+        const constructor_modifier = (_s = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _s === void 0 ? void 0 : _s["constructor"];
+        result += `interface ${rec_node.$.name} {}\n`;
+        result += `class ${rec_node.$.name}${genericModifier} {\n`;
+        result += `${renderMethod(BuildConstructorNode(rec_node.$.name), false, undefined, undefined, 1, ns_name, false, false, constructor_modifier, true)}\n`;
+        result += `${body}}`;
         return result;
     }
     GIR2TS.renderRecordAsClass = renderRecordAsClass;
@@ -521,7 +526,7 @@ var GIR2TS;
         };
     }
     function renderClassAsInterface(class_node, ns_name, exclude, modifier) {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g;
         const class_name = class_node.$.name;
         const ifaces = [];
         const methods = [];
@@ -607,8 +612,9 @@ var GIR2TS;
         });
         const static_func_body = static_func_str_list.join('\n');
         const constructor_modifier = (_f = modifier === null || modifier === void 0 ? void 0 : modifier.function) === null || _f === void 0 ? void 0 : _f["constructor"];
+        const classGenericModifier = (_g = modifier === null || modifier === void 0 ? void 0 : modifier.generic) !== null && _g !== void 0 ? _g : "";
         const static_side = '\n' +
-            `class ${class_name} {\n` +
+            `class ${class_name}${classGenericModifier} {\n` +
             `${renderMethod(BuildConstructorNode(class_name), false, undefined, undefined, 1, ns_name, false, false, constructor_modifier, true)}\n` +
             `${ctors_body}` + NeedNewLine(ctors_body) +
             `${static_func_body + NeedNewLine(static_func_body)}` +

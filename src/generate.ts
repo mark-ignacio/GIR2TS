@@ -690,7 +690,12 @@ namespace GIR2TS {
         }
 
         let result = renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
-        result += `class ${rec_node.$.name} {\n${body}}`;
+        const genericModifier = modifier?.generic ?? "";
+        const constructor_modifier = modifier?.function?.["constructor"];
+        result += `interface ${rec_node.$.name} {}\n`
+        result += `class ${rec_node.$.name}${genericModifier} {\n`
+        result += `${renderMethod(BuildConstructorNode(rec_node.$.name), false, undefined, undefined, 1, ns_name, false, false, constructor_modifier, true)}\n`;
+        result += `${body}}`;
         return result
     }
 
@@ -834,8 +839,9 @@ namespace GIR2TS {
         const static_func_body = static_func_str_list.join('\n');
 
         const constructor_modifier = modifier?.function?.["constructor"];
+        const classGenericModifier = modifier?.generic ?? "";
         const static_side = '\n' +
-            `class ${class_name} {\n` +
+            `class ${class_name}${classGenericModifier} {\n` +
             `${renderMethod(BuildConstructorNode(class_name), false, undefined, undefined, 1, ns_name, false, false, constructor_modifier, true)}\n` +
             `${ctors_body}` + NeedNewLine(ctors_body) +
             `${static_func_body + NeedNewLine(static_func_body)}` +
@@ -900,7 +906,8 @@ namespace GIR2TS {
         doc?: string;
         function: {
             [klass: string]: FunctionModifier;
-        }
+        },
+        generic?: string;
     }
 
     export interface FunctionModifier {
