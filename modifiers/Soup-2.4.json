@@ -1,0 +1,48 @@
+{
+    "$schema": "./schema.json",
+    "amend": {
+        "class": {
+            "Message": {
+                "function": {
+                    "set_response": {
+                        "param": {
+                            "resp_body": {
+                                "type": "string | ByteArray"
+                            },
+                            "resp_length": {
+                                "skip": true
+                            }
+                        }
+                    }
+                }
+            },
+            "Server": {
+                "function": {
+                    "add_handler": {
+                        "param": {
+                            "path": {
+                                "type_extension": ["null"]
+                            },
+                            "user_data": {
+                                "skip": true
+                            },
+                            "destroy": {
+                                "skip": true
+                            }
+                        }
+                    },
+                    "constructor": {
+                        "newParam": [
+                            {
+                                "name": "options",
+                                "type": "Partial<SeverOptions>",
+                                "optional": true,
+                                "docs": ""
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
