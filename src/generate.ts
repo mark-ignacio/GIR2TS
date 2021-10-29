@@ -467,6 +467,8 @@ namespace GIR2TS {
                 indentAdded = true;
             }
             str += info.name;
+            if (funcModifier?.generic != null)
+                str+= funcModifier?.generic;
         }
 
         if (!indentAdded) {
@@ -898,7 +900,8 @@ namespace GIR2TS {
         param?: {
             [param_name: string]: ParamModifier;
         },
-        newParam?: NewParam[]
+        newParam?: NewParam[];
+        generic?: string;
     }
 
     export interface NewParam {

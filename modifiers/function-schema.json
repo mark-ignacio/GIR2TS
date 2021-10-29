@@ -8,6 +8,10 @@
             "description": "Docstring override",
             "type" : "string"
         },
+        "generic": {
+            "description": "Generic string appended after function name",
+            "type" : "string"
+        },
         "return_type": {
             "$ref": "./param-schema.json"
         },

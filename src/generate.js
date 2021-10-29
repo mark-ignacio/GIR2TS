@@ -296,6 +296,8 @@ var GIR2TS;
                 indentAdded = true;
             }
             str += info.name;
+            if ((funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.generic) != null)
+                str += funcModifier === null || funcModifier === void 0 ? void 0 : funcModifier.generic;
         }
         if (!indentAdded) {
             str += ind;

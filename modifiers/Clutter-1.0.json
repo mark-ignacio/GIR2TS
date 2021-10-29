@@ -2,6 +2,74 @@
     "$schema": "./schema.json",
     "amend": {
         "class": {
+            "Actor": {
+                "function": {
+                    "allocate": {
+                        "param": {
+                            "flags": {
+                                "optional": true
+                            }
+                        }
+                    },
+                    "constructor": {
+                        "newParam": [
+                            {
+                                "name": "options",
+                                "optional": true,
+                                "type": "Partial<ActorOptions>"
+                            }
+                        ]
+                    },
+                    "get_child_at_index": {
+                        "return_type": {
+                            "type": "T"
+                        },
+                        "generic": "<T = Actor>"
+                    },
+                    "get_children": {
+                        "return_type": {
+                            "type": "T"
+                        },
+                        "generic": "<T = Actor[]>"
+                    }
+                }
+            },
+            "GridLayout": {
+                "function": {
+                    "constructor": {
+                        "newParam": [
+                            {
+                                "name": "options",
+                                "optional": true,
+                                "type": "any"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Stage": {
+                "function": {
+                    "get_minimum_size":{
+                        "return_type": {
+                            "type": "number[]",
+                            "doc": "width (Number) — return location for the minimum width, in pixels,\nor null\nheight (Number) — return location for the minimum height, in pixels,\nor null"
+                        }
+                    }
+                }
+            },
+            "Point": {
+                "function": {
+                    "constructor": {
+                        "newParam": [
+                            {
+                                "name": "options",
+                                "type": "Partial<PointOptions>",
+                                "optional": true
+                            }
+                        ]
+                    }
+                }
+            },
             "Text": {
                 "function": {
                     "new": {
