@@ -1,0 +1,23 @@
+{
+    "$schema": "./schema.json",
+    "amend": {
+        "class": {
+        },
+        "function": {
+            "parse_markup": {
+                "param": {
+                    "attr_list": {
+                        "skip": true
+                    },
+                    "text": {
+                        "skip": true
+                    },
+                    "accel_char": {
+                        "skip": true
+                    }
+                }
+                
+            }
+        }
+    }
+}
