@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "es2017",
-        "module": "None",
+        "module": "CommonJS",
         "moduleResolution": "Node",
         "isolatedModules": false,
         "experimentalDecorators": true,
@@ -14,7 +14,8 @@
         "suppressImplicitAnyIndexErrors": true,
         "outDir": "../dist",
         "esModuleInterop": true,
-        "alwaysStrict": true
+        "alwaysStrict": true,
+        "rootDir": "./"
     },
     "filesGlob": [
         "**/*.ts",
@@ -24,7 +25,7 @@
     "exclude":[
         "../node_modules"
     ],
-    "files": [
-        "generate.ts"
-    ],
+    "include": [
+        "./**/*"
+    ]
 }
