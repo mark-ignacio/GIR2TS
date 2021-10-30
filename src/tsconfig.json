@@ -4,41 +4,27 @@
         "module": "None",
         "moduleResolution": "Node",
         "isolatedModules": false,
-        "jsx": "react",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "declaration": false,
-        "noImplicitAny": false,
         "removeComments": true,
         "noLib": false,
         "strict": true,
         "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true
+        "suppressImplicitAnyIndexErrors": true,
+        "outDir": "../dist",
+        "esModuleInterop": true,
+        "alwaysStrict": true
     },
     "filesGlob": [
         "**/*.ts",
         "**/*.tsx",
         "!node_modules/**"
     ],
+    "exclude":[
+        "../node_modules"
+    ],
     "files": [
-        "node.d.ts",
-        "generate.ts",
-        //"typings/Atk-1.0.d.ts",
-        //"typings/cairo-1.0.d.ts",
-        //"typings/Gdk-3.0.d.ts",
-        //"typings/GdkPixbuf-2.0.d.ts",
-        //"typings/Gio-2.0.d.ts",
-        //"typings/GLib-2.0.d.ts",
-        //"typings/GObject-2.0.d.ts",
-        //"typings/Gtk-3.0.d.ts",
-        //"typings/Pango-1.0.d.ts",
-        //"typings/xlib-2.0.d.ts"
+        "generate.ts"
     ],
-    "exclude": [
-        "src/es6.d.ts",
-
-    ],
-    "atom": {
-        "rewriteTsconfig": true
-    }
 }

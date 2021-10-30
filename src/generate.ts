@@ -1,3 +1,8 @@
+import fs = require('fs');
+import path = require('path');
+import xml2js = require("xml2js");
+import minimist = require("minimist");
+
 namespace GIR2TS {
 
     let js_reserved_words = `
@@ -1001,8 +1006,6 @@ namespace GIR2TS {
         The rest of the program renders this tree as TS declarations.
     */
     export function parseGIR(file_path: string, cb: parseGIRCallback) {
-        const fs = require('fs');
-        const xml2js = require('xml2js');
         const parser = new xml2js.Parser();
         fs.readFile(file_path, function (err, data) {
             if (err) {
@@ -1044,7 +1047,6 @@ namespace GIR2TS {
                     proceed();
             }
 
-            const xml2js = require('xml2js');
             const parser = new xml2js.Parser();
 
             //let ns_list: NamespaceNode[] = [];
@@ -1076,12 +1078,11 @@ namespace GIR2TS {
 
 }
 
-import fs = require('fs');
-import path = require('path');
+
 
 function main() {
     console.log(__dirname);
-    var argv = require('minimist')(process.argv.slice(2));
+    const argv = minimist(process.argv.slice(2));
     let gir_files: string[] = [];
     let outdir = __dirname;
     let exclude_json_map: { [class_name: string]: any } = {};
@@ -1167,4 +1168,3 @@ function main() {
 }
 
 main();
-//exports.lib = GIR2TS;
