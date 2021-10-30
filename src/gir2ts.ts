@@ -1,14 +1,14 @@
-import { ClassNode, EnumNode, FunctionNode, InterfaceNode, NamespaceNode, ParameterNode, Node, RecordNode } from "./gir-types";
-import { ClassModifier, FunctionModifier, ModifierDesc } from "./modifier-types";
-import { ExcludeClass, ExcludeDesc } from "./exclude-types";
+import { ClassNode, EnumNode, FunctionNode, InterfaceNode, NamespaceNode, ParameterNode, Node, RecordNode } from "./types/gir-types";
+import { ClassModifier, FunctionModifier, ModifierDesc } from "./types/modifier-types";
+import { ExcludeClass, ExcludeDesc } from "./types/exclude-types";
 import { js_reserved_words } from "./consts";
 import { Parser } from 'xml2js';
-import { BuildConstructorNode, NeedNewLine } from "./utils";
-import { getTypeFromParameterNode, TypeInfo } from "./paramRenderer";
-import { getFunctionInfo, Parameter } from "./functionUtils";
-import { renderDocString } from "./docStringRenderer";
-import { renderRecordAsClass } from "./recordRenderer";
-import { renderMethod } from "./methodRenderer";
+import { BuildConstructorNode, NeedNewLine } from "./utils/utils";
+import { GetTypeInfo, TypeInfo } from "./utils/paramUtils";
+import { getFunctionInfo, Parameter } from "./utils/functionUtils";
+import { renderDocString } from "./renderers/docStringRenderer";
+import { renderRecordAsClass } from "./renderers/recordRenderer";
+import { renderMethod } from "./renderers/methodRenderer";
 
 function renderFreeFunction(func_node: FunctionNode, ns_name: string, exclude_list: string[] | null = null, modifier?: FunctionModifier): string {
     let { name, return_type, params, doc } = getFunctionInfo(func_node, modifier);
@@ -20,9 +20,6 @@ function renderFreeFunction(func_node: FunctionNode, ns_name: string, exclude_li
     str += `function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')})${(return_type != null) ? (": " + return_type.type) : ""};`;
     return str;
 }
-
-
-
 
 export function renderCallback(cb_node: FunctionNode, ns_name: string): string {
     const cb_name = cb_node.$.name;
@@ -56,7 +53,7 @@ function renderNodeAsBlankInterface(node: Node, ns_name: string) {
 
 function renderAlias(alias_node: ParameterNode, ns_name: string): string {
     let result = renderDocString(alias_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
-    result += `type ${alias_node.$.name} = ${getTypeFromParameterNode(alias_node).type};`;
+    result += `type ${alias_node.$.name} = ${GetTypeInfo(alias_node).type};`;
     return result;
 }
 
@@ -77,6 +74,7 @@ function renderClassAsInterface(class_node: ClassNode, ns_name: string, exclude?
     let exclude_self = false;
     let exclude_all_members = false;
 
+    /** Transform all extends as I{className} for Mixins */
     function transformExtension(className: string): string {
         const parts = className.split(".");
         parts[parts.length - 1] = `I${parts[parts.length - 1]}`

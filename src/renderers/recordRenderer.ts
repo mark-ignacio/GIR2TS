@@ -1,10 +1,10 @@
 import { renderDocString } from "./docStringRenderer";
-import { FunctionNode, ParameterNode, RecordNode } from "./gir-types";
-import { ExcludeClass } from "./exclude-types";
-import { BuildConstructorNode } from "./utils";
-import { getTypeFromParameterNode } from "./paramRenderer";
+import { FunctionNode, ParameterNode, RecordNode } from "../types/gir-types";
+import { ExcludeClass } from "../types/exclude-types";
+import { BuildConstructorNode } from "../utils/utils";
+import { GetTypeInfo } from "../utils/paramUtils";
 import { renderMethod } from "./methodRenderer";
-import { ClassModifier, FunctionModifier } from "./modifier-types";
+import { ClassModifier, FunctionModifier } from "../types/modifier-types";
 
 function getAllMethods(object: RecordNode): FunctionNode[] {
     let methods: FunctionNode[] = [];
@@ -22,7 +22,7 @@ function renderProperty(prop_node: ParameterNode): string {
     if (prop_name === 'constructor') {
         prop_name += '_'; // Append an underscore.
     }
-    return 'public ' + prop_name.replace(/-/g, '_') + ': ' + getTypeFromParameterNode(prop_node).type + ';';
+    return 'public ' + prop_name.replace(/-/g, '_') + ': ' + GetTypeInfo(prop_node).type + ';';
 }
 
 function renderCallbackField(cb_node: FunctionNode, ns_name: string, indent: number, exclude: boolean): string {

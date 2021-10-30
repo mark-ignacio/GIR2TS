@@ -1,7 +1,7 @@
-import { js_reserved_words } from "./consts";
-import { FunctionNode } from "./gir-types";
-import { getTypeFromParameterNode, TypeInfo } from "./paramRenderer";
-import { ClassModifier, FunctionModifier, ModifierDesc } from "./modifier-types";
+import { js_reserved_words } from "../consts";
+import { FunctionNode } from "../types/gir-types";
+import { GetTypeInfo, TypeInfo } from "./paramUtils";
+import { ClassModifier, FunctionModifier, ModifierDesc } from "../types/modifier-types";
 
 export interface FunctionInfo {
     name: string;
@@ -22,7 +22,7 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
     let func_name = func_node.$.name;
     let return_type: string = "any", returnDoc: string | null = null;
     if (!constructor) {
-        ({ type:return_type, docString:returnDoc } = getTypeFromParameterNode(func_node['return-value']?.[0]));
+        ({ type:return_type, docString:returnDoc } = GetTypeInfo(func_node['return-value']?.[0]));
 
         // Modifiers
         return_type = modifier?.return_type?.type ?? return_type;
@@ -43,7 +43,7 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
             if (js_reserved_words.indexOf(param_name) !== -1) { // if clashes with JS reserved word.
                 param_name = '_' + param_name;
             }
-            let { type, docString } = getTypeFromParameterNode(param_node);
+            let { type, docString } = GetTypeInfo(param_node);
             params.push({
                 name: modifier?.param?.[param_name]?.newName ?? param_name,
                 type: modifier?.param?.[param_name]?.type ?? ((modifier?.param?.[param_name]?.type_extension?.length ?? 0 > 1) ? `${type} | ${modifier?.param?.[param_name]?.type_extension?.join(" | ")}` : type),

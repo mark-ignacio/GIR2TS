@@ -1,4 +1,4 @@
-import { ClassNode, EnumNode, FunctionNode, InterfaceNode, NamespaceNode, ParameterNode, Node, RecordNode } from "./gir-types";
+import { ClassNode, EnumNode, FunctionNode, InterfaceNode, NamespaceNode, ParameterNode, Node, RecordNode } from "../types/gir-types";
 
 function convertToJSType(native_type?: string): string {
     // If undefined ti should be any
@@ -54,7 +54,7 @@ export interface TypeInfo {
     docString: string | null;
 }
 
-export function getTypeFromParameterNode(param_node: ParameterNode): TypeInfo {
+export function GetTypeInfo(param_node: ParameterNode): TypeInfo {
     let type: string | null = null;
     let doc: string | null = "";
     if (param_node?.type?.[0]) {
@@ -64,7 +64,7 @@ export function getTypeFromParameterNode(param_node: ParameterNode): TypeInfo {
         type = convertToJSType(param_node.array[0].type[0].$.name) + '[]';
         doc = param_node.doc?.[0]?._ ?? null;
     } else if (param_node.array && param_node.array[0].array) {
-        ({ type, docString:doc } = getTypeFromParameterNode(param_node.array[0] as ParameterNode));
+        ({ type, docString:doc } = GetTypeInfo(param_node.array[0] as ParameterNode));
         type += "[]";
     } else {
         console.log("can't get param type", JSON.stringify(param_node, null, 4))

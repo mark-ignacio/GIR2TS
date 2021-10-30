@@ -1,7 +1,7 @@
 import { renderDocString } from "./docStringRenderer";
-import { getFunctionInfo } from "./functionUtils";
-import { FunctionNode } from "./gir-types";
-import { FunctionModifier } from "./modifier-types";
+import { getFunctionInfo } from "../utils/functionUtils";
+import { FunctionNode } from "../types/gir-types";
+import { FunctionModifier } from "../types/modifier-types";
 
 export interface RenderMethodOptions {
     include_name?: boolean;

@@ -1,4 +1,4 @@
-import { FunctionNode } from "./gir-types";
+import { FunctionNode } from "../types/gir-types";
 
 export function NeedNewLine(text: string): string {
     if (text != null && text.trim() != "" && !text.endsWith("\n"))

@@ -1,5 +1,5 @@
-import { Parameter } from "./functionUtils";
-import { TypeInfo } from "./paramRenderer";
+import { Parameter } from "../utils/functionUtils";
+import { TypeInfo } from "../utils/paramUtils";
 
 // TODO: Add support for param links like #param
 export function renderDocString(docString: string | null, params?: Parameter[], return_info?: TypeInfo, indent: number = 0, ns_name?: string): string {

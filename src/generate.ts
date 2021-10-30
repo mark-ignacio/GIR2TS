@@ -1,7 +1,7 @@
 import fs = require('fs');
 import path = require('path');
 import minimist = require("minimist");
-import { ModifierDesc } from "./modifier-types";
+import { ModifierDesc } from "./types/modifier-types";
 import { Generator } from "./gir2ts";
 
 function main() {
