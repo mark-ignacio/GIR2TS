@@ -2,7 +2,7 @@ import fs = require('fs');
 import path = require('path');
 import minimist = require("minimist");
 import { ModifierDesc } from "./modifier-types";
-import { GIR2TS } from "./gir2ts";
+import { Generator } from "./gir2ts";
 
 function main() {
     console.log(__dirname);
@@ -75,7 +75,7 @@ function main() {
         });
     }
 
-    const gen = new GIR2TS.Generator(gir_xml_list, exclude_json_map, modifier_json_map);
+    const gen = new Generator(gir_xml_list, exclude_json_map, modifier_json_map);
     gen.generateTypings((res) => {
         for (let lib of res) {
             let outfile = path.join(outdir, lib.gir_name + '.d.ts');
