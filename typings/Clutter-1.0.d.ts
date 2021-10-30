@@ -7058,7 +7058,9 @@ declare namespace imports.gi.Clutter {
 		 * stored inside the {@link LayoutMeta} sub-class used by #manager
 		 * @param n_pspecs return location for the number of returned
 		 *   #GParamSpec<!-- -->s
-		 * @returns 
+		 * @returns the newly-allocated,
+		 *   %NULL-terminated array of #GParamSpec<!-- -->s. Use g_free() to free the
+		 *   resources allocated for the array
 		 */
 		list_child_properties(n_pspecs: number): GObject.ParamSpec[];
 		/**
@@ -9300,7 +9302,9 @@ declare namespace imports.gi.Clutter {
 		 *   entire stage width
 		 * @param height Height dimention of pixels to be read, or -1 for the
 		 *   entire stage height
-		 * @returns 
+		 * @returns a pointer to newly allocated memory with the buffer
+		 *   or %NULL if the read failed. Use g_free() on the returned data
+		 *   to release the resources it has allocated.
 		 */
 		read_pixels(_x: number, _y: number, width: number, height: number): number[];
 		/**
@@ -11403,6 +11407,8 @@ declare namespace imports.gi.Clutter {
 		 * @param msecs the time to check, or -1
 		 * @param n_markers the number of markers returned
 		 * @returns 
+		 *   a newly allocated, %NULL terminated string array containing the names
+		 *   of the markers. Use g_strfreev() when done.
 		 */
 		list_markers(msecs: number, n_markers: number): string[];
 		/**
@@ -15546,7 +15552,8 @@ declare namespace imports.gi.Clutter {
 		 * Returns an array of #GParamSpec for all child properties.
 		 * @param klass a #GObjectClass implementing the {@link Container} interface.
 		 * @param n_properties return location for length of returned array.
-		 * @returns 
+		 * @returns an array
+		 *   of #GParamSpec<!-- -->s which should be freed after use.
 		 */
 		public static class_list_child_properties(klass: GObject.ObjectClass, n_properties: number): GObject.ParamSpec[];
 	}
@@ -18078,7 +18085,8 @@ declare namespace imports.gi.Clutter {
 	 * Returns an array of #GParamSpec for all child properties.
 	 * @param klass a #GObjectClass implementing the {@link Container} interface.
 	 * @param n_properties return location for length of returned array.
-	 * @returns 
+	 * @returns an array
+	 *   of #GParamSpec<!-- -->s which should be freed after use.
 	 */
 	function container_class_list_child_properties(klass: GObject.ObjectClass, n_properties: number): GObject.ParamSpec[];
 
@@ -19227,7 +19235,9 @@ declare namespace imports.gi.Clutter {
 	 * @param value a #GValue
 	 * @param length return location for the number of returned floating
 	 *   point values, or %NULL
-	 * @returns 
+	 * @returns the pointer to a list of
+	 *   floating point values.  The returned value is owned by the
+	 *   #GValue and should never be modified or freed.
 	 */
 	function value_get_shader_float(value: GObject.Value, length: number): number[];
 
@@ -19238,7 +19248,9 @@ declare namespace imports.gi.Clutter {
 	 * @param value a #GValue
 	 * @param length return location for the number of returned integer
 	 *   values, or %NULL
-	 * @returns 
+	 * @returns the pointer to a list of
+	 *   integer values.  The returned value is owned by the #GValue and
+	 *   should never be modified or freed.
 	 */
 	function value_get_shader_int(value: GObject.Value, length: number): number[];
 
@@ -19249,7 +19261,9 @@ declare namespace imports.gi.Clutter {
 	 * @param value a #GValue
 	 * @param length return location for the number of returned floating
 	 *   point values, or %NULL
-	 * @returns 
+	 * @returns the pointer to a matrix
+	 *   of floating point values. The returned value is owned by the #GValue and
+	 *   should never be modified or freed.
 	 */
 	function value_get_shader_matrix(value: GObject.Value, length: number): number[];
 

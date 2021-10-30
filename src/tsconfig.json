@@ -17,15 +17,7 @@
         "alwaysStrict": true,
         "rootDir": "./"
     },
-    "filesGlob": [
-        "**/*.ts",
-        "**/*.tsx",
-        "!node_modules/**"
-    ],
     "exclude":[
         "../node_modules"
-    ],
-    "include": [
-        "./**/*"
     ]
 }

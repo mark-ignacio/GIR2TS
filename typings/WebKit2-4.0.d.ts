@@ -582,7 +582,8 @@ declare namespace imports.gi.WebKit2 {
 		 * The return value is a %NULL terminated list of strings which should
 		 * be released with g_strfreev().
 		 * @param result a #GAsyncResult
-		 * @returns 
+		 * @returns A %NULL terminated array of domain names
+		 *    or %NULL in case of error.
 		 */
 		get_domains_with_cookies_finish(result: Gio.AsyncResult): string[];
 		/**
@@ -867,7 +868,11 @@ declare namespace imports.gi.WebKit2 {
 		 * elements. This function should normally be called before presenting
 		 * the file chooser dialog to the user, to decide whether to allow the
 		 * user to select multiple files at once or only one.
-		 * @returns 
+		 * @returns a
+		 * %NULL-terminated array of strings if a list of accepted MIME types
+		 * is defined or %NULL otherwise, meaning that any MIME type should be
+		 * accepted. This array and its contents are owned by WebKit and
+		 * should not be modified or freed.
 		 */
 		get_mime_types(): string[];
 		/**
@@ -902,7 +907,11 @@ declare namespace imports.gi.WebKit2 {
 		 * This function should normally be called only before presenting the
 		 * file chooser dialog to the user, to decide whether to perform some
 		 * extra action, like pre-selecting the files from a previous request.
-		 * @returns 
+		 * @returns a
+		 * %NULL-terminated array of strings if there are selected files
+		 * associated with the request or %NULL otherwise. This array and its
+		 * contents are owned by WebKit and should not be modified or
+		 * freed.
 		 */
 		get_selected_files(): string[];
 		/**
@@ -2647,7 +2656,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Finishes an asynchronous fetch of the list of identifiers for the stored filters previously
 		 * started with webkit_user_content_filter_store_fetch_identifiers().
 		 * @param result a #GAsyncResult
-		 * @returns 
+		 * @returns a %NULL-terminated list of filter identifiers.
 		 */
 		fetch_identifiers_finish(result: Gio.AsyncResult): string[];
 		get_path(): string;
@@ -3089,7 +3098,8 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * See webkit_web_context_set_spell_checking_languages() for more
 		 * details on the format of the languages in the list.
-		 * @returns 
+		 * @returns A %NULL-terminated
+		 *    array of languages if available, or %NULL otherwise.
 		 */
 		get_spell_checking_languages(): string[];
 		/**
@@ -3501,7 +3511,9 @@ declare namespace imports.gi.WebKit2 {
 		 * Finish an asynchronous operation started with webkit_web_resource_get_data().
 		 * @param result a #GAsyncResult
 		 * @param length return location for the length of the resource data
-		 * @returns 
+		 * @returns a
+		 *    string with the data of #resource, or %NULL in case of error. if #length
+		 *    is not %NULL, the size of the data will be assigned to it.
 		 */
 		get_data_finish(result: Gio.AsyncResult, length: number): number[];
 		/**
@@ -3691,7 +3703,7 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns the <function>JSGlobalContextRef</function> used by #web_view to deserialize
 		 *    the result values of scripts.
 		 */
-		get_javascript_global_context(): undefined;
+		get_javascript_global_context(): any;
 		/**
 		 * Return the main resource of #web_view.
 		 * @returns the main #WebKitWebResource of the view
@@ -5240,7 +5252,7 @@ declare namespace imports.gi.WebKit2 {
 		 * <function>JSValueRef</function> returned by webkit_javascript_result_get_value().
 		 * @returns the <function>JSGlobalContextRef</function> for the #WebKitJavascriptResult
 		 */
-		public get_global_context(): undefined;
+		public get_global_context(): any;
 		/**
 		 * Get the #JSCValue of #js_result.
 		 * @returns the #JSCValue of the #WebKitJavascriptResult
@@ -5251,7 +5263,7 @@ declare namespace imports.gi.WebKit2 {
 		 * returned by webkit_javascript_result_get_global_context() to use the <function>JSValueRef</function>.
 		 * @returns the <function>JSValueRef</function> of the #WebKitJavascriptResult
 		 */
-		public get_value(): undefined;
+		public get_value(): any;
 		/**
 		 * Atomically increments the reference count of #js_result by one. This
 		 * function is MT-safe and may be called from any thread.
@@ -5289,7 +5301,8 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Get the list of file extensions associated to the
 		 * MIME type of #info
-		 * @returns 
+		 * @returns a
+		 *     %NULL-terminated array of strings
 		 */
 		public get_extensions(): string[];
 		public get_mime_type(): string;

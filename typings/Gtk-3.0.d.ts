@@ -12,13 +12,17 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Returns the string which are displayed in the artists tab
 		 * of the secondary credits dialog.
-		 * @returns 
+		 * @returns A
+		 *  %NULL-terminated string array containing the artists. The array is
+		 *  owned by the about dialog and must not be modified.
 		 */
 		get_artists(): string[];
 		/**
 		 * Returns the string which are displayed in the authors tab
 		 * of the secondary credits dialog.
-		 * @returns 
+		 * @returns A
+		 *  %NULL-terminated string array containing the authors. The array is
+		 *  owned by the about dialog and must not be modified.
 		 */
 		get_authors(): string[];
 		/**
@@ -36,7 +40,9 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Returns the string which are displayed in the documenters
 		 * tab of the secondary credits dialog.
-		 * @returns 
+		 * @returns A
+		 *  %NULL-terminated string array containing the documenters. The
+		 *  array is owned by the about dialog and must not be modified.
 		 */
 		get_documenters(): string[];
 		/**
@@ -375,7 +381,9 @@ declare namespace imports.gi.Gtk {
 		 * @param accel_mods modifier combination of the accelerator
 		 * @param n_entries location to return the number
 		 *     of entries found, or %NULL
-		 * @returns 
+		 * @returns an array of
+		 *     #n_entries {@link AccelGroupEntry} elements, or %NULL. The array
+		 *     is owned by GTK+ and must not be freed.
 		 */
 		query(accel_key: number, accel_mods: Gdk.ModifierType, n_entries: number): AccelGroupEntry[];
 		/**
@@ -2093,7 +2101,8 @@ declare namespace imports.gi.Gtk {
 		 * the given action.
 		 * @param detailed_action_name a detailed action name, specifying an action
 		 *     and target to obtain accelerators for
-		 * @returns 
+		 * @returns accelerators for #detailed_action_name, as
+		 *     a %NULL-terminated array. Free with g_strfreev() when no longer needed
 		 */
 		get_accels_for_action(detailed_action_name: string): string[];
 		/**
@@ -2113,7 +2122,7 @@ declare namespace imports.gi.Gtk {
 		 * It is a programmer error to pass an invalid accelerator string.
 		 * If you are unsure, check it with gtk_accelerator_parse() first.
 		 * @param accel an accelerator that can be parsed by gtk_accelerator_parse()
-		 * @returns 
+		 * @returns a %NULL-terminated array of actions for #accel
 		 */
 		get_actions_for_accel(accel: string): string[];
 		/**
@@ -2217,7 +2226,8 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Lists the detailed action names which have associated accelerators.
 		 * See gtk_application_set_accels_for_action().
-		 * @returns 
+		 * @returns a %NULL-terminated array of strings,
+		 *     free with g_strfreev() when done
 		 */
 		list_action_descriptions(): string[];
 		/**
@@ -6448,7 +6458,13 @@ declare namespace imports.gi.Gtk {
 		 * @param buffer a {@link TextBuffer}
 		 * @param format return location for the format of the returned data
 		 * @param length return location for the length of the returned data
-		 * @returns 
+		 * @returns a
+		 *               newly-allocated binary block of data which must be
+		 *               freed with g_free(), or %NULL if retrieving the
+		 *               selection data failed. (This could happen for various
+		 *               reasons, in particular if the clipboard was empty or
+		 *               if the contents of the clipboard could not be
+		 *               converted into text form.)
 		 */
 		wait_for_rich_text(buffer: TextBuffer, format: Gdk.Atom, length: number): number[];
 		/**
@@ -6483,6 +6499,11 @@ declare namespace imports.gi.Gtk {
 		 * for the data to be received using the main loop, so events,
 		 * timeouts, etc, may be dispatched during the wait.
 		 * @returns 
+		 *     a newly-allocated %NULL-terminated array of strings which must
+		 *     be freed with g_strfreev(), or %NULL if retrieving the
+		 *     selection data failed. (This could happen for various reasons,
+		 *     in particular if the clipboard was empty or if the contents of
+		 *     the clipboard could not be converted into URI form.)
 		 */
 		wait_for_uris(): string[];
 		/**
@@ -14809,7 +14830,10 @@ declare namespace imports.gi.Gtk {
 		 * that the icon is available in a scalable format. The array
 		 * is zero-terminated.
 		 * @param icon_name the name of an icon
-		 * @returns 
+		 * @returns An newly
+		 * allocated array describing the sizes at which the icon is
+		 * available. The array should be freed with g_free() when it is no
+		 * longer needed.
 		 */
 		get_icon_sizes(icon_name: string): number[];
 		/**
@@ -23104,7 +23128,9 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Gets the value of %GTK_PRINT_SETTINGS_PAGE_RANGES.
 		 * @param num_ranges return location for the length of the returned array
-		 * @returns 
+		 * @returns an array
+		 *     of {@link PageRanges}.  Use g_free() to free the array when
+		 *     it is no longer needed.
 		 */
 		get_page_ranges(num_ranges: number): PageRange[];
 		/**
@@ -29505,7 +29531,8 @@ declare namespace imports.gi.Gtk {
 		 * with #buffer using gtk_text_buffer_register_deserialize_format() or
 		 * gtk_text_buffer_register_deserialize_tagset()
 		 * @param n_formats return location for the number of formats
-		 * @returns 
+		 * @returns an array of
+		 *               #GdkAtoms representing the registered formats.
 		 */
 		get_deserialize_formats(n_formats: number): Gdk.Atom[];
 		/**
@@ -29650,7 +29677,8 @@ declare namespace imports.gi.Gtk {
 		 * with #buffer using gtk_text_buffer_register_serialize_format() or
 		 * gtk_text_buffer_register_serialize_tagset()
 		 * @param n_formats return location for the number of formats
-		 * @returns 
+		 * @returns an array of
+		 *               #GdkAtoms representing the registered formats.
 		 */
 		get_serialize_formats(n_formats: number): Gdk.Atom[];
 		/**
@@ -29981,7 +30009,8 @@ declare namespace imports.gi.Gtk {
 		 * @param start start of block of text to serialize
 		 * @param _end end of block of test to serialize
 		 * @param length return location for the length of the serialized data
-		 * @returns 
+		 * @returns the serialized
+		 *               data, encoded as #format
 		 */
 		serialize(content_buffer: TextBuffer, format: Gdk.Atom, start: TextIter, _end: TextIter, length: number): number[];
 		/**
@@ -37376,7 +37405,7 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Retrieves a %NULL-terminated array of strings containing the prefixes of
 		 * #GActionGroup's available to #widget.
-		 * @returns 
+		 * @returns a %NULL-terminated array of strings.
 		 */
 		list_action_prefixes(): string[];
 		/**
@@ -41528,7 +41557,9 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Returns all cell properties of a cell area class.
 		 * @param n_properties location to return the number of cell properties found
-		 * @returns 
+		 * @returns a newly
+		 *     allocated %NULL-terminated array of #GParamSpec*.  The array
+		 *     must be freed with g_free().
 		 */
 		public list_cell_properties(n_properties: number): GObject.ParamSpec[];
 	}
@@ -42045,6 +42076,8 @@ declare namespace imports.gi.Gtk {
 		 * Returns all child properties of a container class.
 		 * @param n_properties location to return the number of child properties found
 		 * @returns 
+		 *     a newly allocated %NULL-terminated array of #GParamSpec*.
+		 *     The array must be freed with g_free().
 		 */
 		public list_child_properties(n_properties: number): GObject.ParamSpec[];
 	}
@@ -44872,6 +44905,8 @@ declare namespace imports.gi.Gtk {
 		 * Retrieves the list of applications that have registered this resource.
 		 * @param length return location for the length of the returned list
 		 * @returns 
+		 *     a newly allocated %NULL-terminated array of strings.
+		 *     Use g_strfreev() to free it.
 		 */
 		public get_applications(length: number): string[];
 		/**
@@ -44899,6 +44934,8 @@ declare namespace imports.gi.Gtk {
 		 * length might optionally be %NULL.
 		 * @param length return location for the number of groups returned
 		 * @returns 
+		 *   a newly allocated %NULL terminated array of strings.
+		 *   Use g_strfreev() to free it.
 		 */
 		public get_groups(length: number): string[];
 		/**
@@ -45242,7 +45279,7 @@ declare namespace imports.gi.Gtk {
 		public free(): void;
 		/**
 		 * Retrieves the raw data of the selection.
-		 * @returns 
+		 * @returns the raw data of the selection.
 		 */
 		public get_data(): number[];
 		/**
@@ -45253,7 +45290,7 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Retrieves the raw data of the selection along with its length.
 		 * @param length return location for length of the data segment
-		 * @returns 
+		 * @returns the raw data of the selection
 		 */
 		public get_data_with_length(length: number): number[];
 		/**
@@ -45313,7 +45350,11 @@ declare namespace imports.gi.Gtk {
 		public get_text(): string;
 		/**
 		 * Gets the contents of the selection data as array of URIs.
-		 * @returns 
+		 * @returns if
+		 *   the selection data contains a list of
+		 *   URIs, a newly allocated %NULL-terminated string array
+		 *   containing the URIs, otherwise %NULL. If the result is
+		 *   non-%NULL it must be freed with g_strfreev().
 		 */
 		public get_uris(): string[];
 		/**
@@ -47815,7 +47856,8 @@ declare namespace imports.gi.Gtk {
 		 * The array should not be freed.
 		 * @param depth return location for number of elements
 		 *     returned in the integer array, or %NULL
-		 * @returns 
+		 * @returns The current
+		 *     indices, or %NULL
 		 */
 		public get_indices_with_depth(depth: number): number[];
 		/**
@@ -48319,7 +48361,9 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Returns all style properties of a widget class.
 		 * @param n_properties location to return the number of style properties found
-		 * @returns 
+		 * @returns a
+		 *     newly allocated array of #GParamSpec*. The array must be
+		 *     freed with g_free().
 		 */
 		public list_style_properties(n_properties: number): GObject.ParamSpec[];
 		/**
@@ -48830,10 +48874,10 @@ declare namespace imports.gi.Gtk {
 		 * The parent interface.
 		 */
 		public parent_iface: GObject.TypeInterface;
-		public handle_ask_password: {(object: undefined, invocation: Gio.DBusMethodInvocation, arg_id: string, arg_message: string, arg_icon_name: string, arg_default_user: string, arg_default_domain: string, arg_flags: number): boolean;};
-		public handle_ask_question: {(object: undefined, invocation: Gio.DBusMethodInvocation, arg_id: string, arg_message: string, arg_icon_name: string, arg_choices: string): boolean;};
-		public handle_close: {(object: undefined, invocation: Gio.DBusMethodInvocation): boolean;};
-		public handle_show_processes: {(object: undefined, invocation: Gio.DBusMethodInvocation, arg_id: string, arg_message: string, arg_icon_name: string, arg_application_pids: GLib.Variant, arg_choices: string): boolean;};
+		public handle_ask_password: {(object: any, invocation: Gio.DBusMethodInvocation, arg_id: string, arg_message: string, arg_icon_name: string, arg_default_user: string, arg_default_domain: string, arg_flags: number): boolean;};
+		public handle_ask_question: {(object: any, invocation: Gio.DBusMethodInvocation, arg_id: string, arg_message: string, arg_icon_name: string, arg_choices: string): boolean;};
+		public handle_close: {(object: any, invocation: Gio.DBusMethodInvocation): boolean;};
+		public handle_show_processes: {(object: any, invocation: Gio.DBusMethodInvocation, arg_id: string, arg_message: string, arg_icon_name: string, arg_application_pids: GLib.Variant, arg_choices: string): boolean;};
 	}
 
 	/**
@@ -48843,7 +48887,7 @@ declare namespace imports.gi.Gtk {
 	class _MountOperationHandlerProxy {
 		public constructor();
 		public parent_instance: Gio.DBusProxy;
-		public priv: undefined;
+		public priv: any;
 	}
 
 	/**
@@ -48870,7 +48914,7 @@ declare namespace imports.gi.Gtk {
 	class _MountOperationHandlerSkeleton {
 		public constructor();
 		public parent_instance: Gio.DBusInterfaceSkeleton;
-		public priv: undefined;
+		public priv: any;
 	}
 
 	/**
@@ -51179,6 +51223,8 @@ declare namespace imports.gi.Gtk {
 		 * @param length return location for a the length of the
 		 *     URI list, or %NULL
 		 * @returns 
+		 *     A newly allocated, %NULL-terminated array of strings. Use
+		 *     g_strfreev() to free it.
 		 */
 		get_uris(length: number): string[];
 		/**
@@ -58365,6 +58411,9 @@ declare namespace imports.gi.Gtk {
 	 * Retrieves the current list of RC files that will be parsed
 	 * at the end of gtk_init().
 	 * @returns 
+	 *      A %NULL-terminated array of filenames.  This memory is owned
+	 *     by GTK+ and must not be freed by the application.  If you want
+	 *     to store this information, you should make a copy.
 	 */
 	function rc_get_default_files(): string[];
 
@@ -59153,7 +59202,7 @@ declare namespace imports.gi.Gtk {
 	 * longer needed.
 	 * @param list a {@link TargetList}
 	 * @param n_targets return location for the number ot targets in the table
-	 * @returns 
+	 * @returns the new table.
 	 */
 	function target_table_new_from_list(list: TargetList, n_targets: number): TargetEntry[];
 
@@ -59307,6 +59356,7 @@ declare namespace imports.gi.Gtk {
 	 * calling gtk_test_register_all_types().
 	 * @param n_types location to store number of types
 	 * @returns 
+	 *    0-terminated array of type ids
 	 */
 	function test_list_all_types(n_types: number): GObject.Type[];
 

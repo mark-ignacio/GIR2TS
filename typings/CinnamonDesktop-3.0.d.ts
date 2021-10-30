@@ -643,7 +643,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * gnome_xkb_info_get_var_defs().
 		 * @param var_defs #XkbRF_VarDefsRec instance to free
 		 */
-		public static free_var_defs(var_defs: undefined): void;
+		public static free_var_defs(var_defs: any): void;
 		/**
 		 * Gets both the XKB rules file path and the current XKB parameters in
 		 * use by the X server.
@@ -653,7 +653,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * #XkbRF_VarDefsRec pointer. Use gnome_xkb_info_free_var_defs() to
 		 * free it
 		 */
-		public static get_var_defs(rules: string, var_defs: undefined): void;
+		public static get_var_defs(rules: string, var_defs: any): void;
 	}
 
 	interface BGClass {}

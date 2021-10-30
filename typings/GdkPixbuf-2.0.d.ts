@@ -230,7 +230,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * 
 		 * Please see the section on [image data](#image-data) for information
 		 * about how the pixel data is stored in memory.
-		 * @returns 
+		 * @returns A pointer to the pixbuf's pixel data.
 		 */
 		get_pixels(): number[];
 		/**
@@ -242,7 +242,8 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Please see the section on [image data](#image-data) for information
 		 * about how the pixel data is stored in memory.
 		 * @param length The length of the binary data.
-		 * @returns 
+		 * @returns A pointer to the pixbuf's
+		 * pixel data.
 		 */
 		get_pixels_with_length(length: number): number[];
 		/**
@@ -1811,7 +1812,8 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Returns the filename extensions typically used for files in the
 		 * given format.
-		 * @returns 
+		 * @returns an array of
+		 *   filename extensions
 		 */
 		public get_extensions(): string[];
 		/**
@@ -1824,7 +1826,7 @@ declare namespace imports.gi.GdkPixbuf {
 		public get_license(): string;
 		/**
 		 * Returns the mime types supported by the format.
-		 * @returns 
+		 * @returns an array of mime types
 		 */
 		public get_mime_types(): string[];
 		/**

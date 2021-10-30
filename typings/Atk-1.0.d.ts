@@ -615,7 +615,7 @@ declare namespace imports.gi.Atk {
 		get_relation_type(): RelationType;
 		/**
 		 * Gets the target list of #relation
-		 * @returns 
+		 * @returns the target list of #relation
 		 */
 		get_target(): Object[];
 		/**
@@ -2665,7 +2665,8 @@ declare namespace imports.gi.Atk {
 	interface ITableCell {
 		/**
 		 * Returns the column headers as an array of cell accessibles.
-		 * @returns 
+		 * @returns a GPtrArray of AtkObjects
+		 * representing the column header cells.
 		 */
 		get_column_header_cells(): Object[];
 		/**
@@ -2696,7 +2697,8 @@ declare namespace imports.gi.Atk {
 		get_row_column_span(_row: number, column: number, row_span: number, column_span: number): boolean;
 		/**
 		 * Returns the row headers as an array of cell accessibles.
-		 * @returns 
+		 * @returns a GPtrArray of AtkObjects
+		 * representing the row header cells.
 		 */
 		get_row_header_cells(): Object[];
 		/**
@@ -2749,7 +2751,8 @@ declare namespace imports.gi.Atk {
 		 * @param coord_type Specify whether coordinates are relative to the screen or widget window.
 		 * @param x_clip_type Specify the horizontal clip type.
 		 * @param y_clip_type Specify the vertical clip type.
-		 * @returns 
+		 * @returns Array of AtkTextRange. The last
+		 *          element of the array returned by this function will be NULL.
 		 */
 		get_bounded_ranges(rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType): TextRange[];
 		/**

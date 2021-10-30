@@ -1032,7 +1032,7 @@ declare namespace imports.gi.Pango {
 		 * the first character and the position after the last character.
 		 * @param n_attrs location to store the number of the attributes in
 		 *   the array
-		 * @returns 
+		 * @returns an array of logical attributes
 		 */
 		get_log_attrs_readonly(n_attrs: number): LogAttr[];
 		/**
@@ -3524,6 +3524,10 @@ declare namespace imports.gi.Pango {
 		 * @param num_scripts location to
 		 *   return number of scripts
 		 * @returns 
+		 *   An array of `PangoScript` values, with the number of entries in
+		 *   the array stored in #num_scripts, or %NULL if Pango does not have
+		 *   any information about this particular language tag (also the case
+		 *   if #language is %NULL).
 		 */
 		public get_scripts(num_scripts: number): Script[];
 		/**
@@ -6814,7 +6818,8 @@ declare namespace imports.gi.Pango {
 	 * Splits a %G_SEARCHPATH_SEPARATOR-separated list of files, stripping
 	 * white space and substituting ~/ with $HOME/.
 	 * @param _str a %G_SEARCHPATH_SEPARATOR separated list of filenames
-	 * @returns 
+	 * @returns a list of
+	 *   strings to be freed with g_strfreev()
 	 */
 	function split_file_list(_str: string): string[];
 

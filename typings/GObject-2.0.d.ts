@@ -1066,7 +1066,11 @@ declare namespace imports.gi.GObject {
 		 * @param g_iface any interface vtable for the
 		 *  interface, or the default vtable for the interface
 		 * @param n_properties_p location to store number of properties returned.
-		 * @returns 
+		 * @returns a
+		 *          pointer to an array of pointers to #GParamSpec
+		 *          structures. The paramspecs are owned by GLib, but the
+		 *          array should be freed with g_free() when you are done with
+		 *          it.
 		 */
 		public static interface_list_properties(g_iface: TypeInterface, n_properties_p: number): ParamSpec[];
 	}
@@ -2505,7 +2509,8 @@ declare namespace imports.gi.GObject {
 		/**
 		 * Get an array of #GParamSpec* for all properties of a class.
 		 * @param n_properties return location for the length of the returned array
-		 * @returns 
+		 * @returns an array of
+		 *          #GParamSpec* which should be freed after use
 		 */
 		public list_properties(n_properties: number): ParamSpec[];
 		/**
@@ -2593,7 +2598,9 @@ declare namespace imports.gi.GObject {
 		 * the pool.
 		 * @param owner_type the owner to look for
 		 * @param n_pspecs_p return location for the length of the returned array
-		 * @returns 
+		 * @returns a newly
+		 *          allocated array containing pointers to all #GParamSpecs
+		 *          owned by #owner_type in the pool
 		 */
 		public list(owner_type: GObject.Type, n_pspecs_p: number): ParamSpec[];
 		/**
@@ -6236,7 +6243,7 @@ declare namespace imports.gi.GObject {
 	 * g_signal_query().
 	 * @param itype Instance or interface type.
 	 * @param n_ids Location to store the number of signal ids for #itype.
-	 * @returns 
+	 * @returns Newly allocated array of signal IDs.
 	 */
 	function signal_list_ids(itype: GObject.Type, n_ids: number): number[];
 
@@ -6648,7 +6655,8 @@ declare namespace imports.gi.GObject {
 	 * @param _type the parent type
 	 * @param n_children location to store the length of
 	 *     the returned array, or %NULL
-	 * @returns 
+	 * @returns Newly allocated
+	 *     and 0-terminated array of child types, free with g_free()
 	 */
 	function type_children(_type: GObject.Type, n_children: number): GObject.Type[];
 
@@ -6924,7 +6932,9 @@ declare namespace imports.gi.GObject {
 	 * @param interface_type an interface type
 	 * @param n_prerequisites location to return the number
 	 *     of prerequisites, or %NULL
-	 * @returns 
+	 * @returns a
+	 *     newly-allocated zero-terminated array of #GType containing
+	 *     the prerequisites of #interface_type
 	 */
 	function type_interface_prerequisites(interface_type: GObject.Type, n_prerequisites: number): GObject.Type[];
 
@@ -6934,7 +6944,8 @@ declare namespace imports.gi.GObject {
 	 * @param _type the type to list interface types for
 	 * @param n_interfaces location to store the length of
 	 *     the returned array, or %NULL
-	 * @returns 
+	 * @returns Newly allocated
+	 *     and 0-terminated array of interface types, free with g_free()
 	 */
 	function type_interfaces(_type: GObject.Type, n_interfaces: number): GObject.Type[];
 

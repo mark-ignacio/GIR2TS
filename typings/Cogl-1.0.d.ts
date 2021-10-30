@@ -2413,7 +2413,7 @@ declare namespace imports.gi.Cogl {
 	}
 
 	interface XlibFilterFunc {
-		(event: undefined, data: any): FilterReturn;
+		(event: any, data: any): FilterReturn;
 	}
 
 	/**
@@ -2601,7 +2601,7 @@ declare namespace imports.gi.Cogl {
 	 * @param bounds_y2 y coordinate for the bottom-right corner of the
 	 *             primitives bounds.
 	 */
-	function clip_push_primitive(primitive: undefined, bounds_x1: number, bounds_y1: number, bounds_x2: number, bounds_y2: number): void;
+	function clip_push_primitive(primitive: any, bounds_x1: number, bounds_y1: number, bounds_x2: number, bounds_y2: number): void;
 
 	/**
 	 * Specifies a rectangular clipping area for all subsequent drawing
@@ -2670,7 +2670,7 @@ declare namespace imports.gi.Cogl {
 
 	function clutter_winsys_has_feature_CLUTTER(feature: WinsysFeature): Bool;
 
-	function clutter_winsys_xlib_get_visual_info_CLUTTER(): undefined;
+	function clutter_winsys_xlib_get_visual_info_CLUTTER(): any;
 
 	/**
 	 * Compares two {@link Color}<!-- -->s and checks if they are the same.
@@ -2780,7 +2780,7 @@ declare namespace imports.gi.Cogl {
 	 * @param framebuffer A {@link Framebuffer} framebuffer
 	 * @returns 
 	 */
-	function framebuffer_get_color_format(framebuffer: undefined): PixelFormat;
+	function framebuffer_get_color_format(framebuffer: any): PixelFormat;
 
 	/**
 	 * Replaces the current projection matrix with a perspective matrix
@@ -3329,7 +3329,7 @@ declare namespace imports.gi.Cogl {
 	 * The previous framebuffer can be restored by calling cogl_pop_framebuffer()
 	 * @param buffer A {@link Framebuffer} object, either onscreen or offscreen.
 	 */
-	function push_framebuffer(buffer: undefined): void;
+	function push_framebuffer(buffer: any): void;
 
 	/**
 	 * Stores the current model-view matrix on the matrix stack. The matrix
@@ -3531,7 +3531,7 @@ declare namespace imports.gi.Cogl {
 	 * or in the future it may be an onscreen framebuffers too.
 	 * @param buffer A {@link Framebuffer} object, either onscreen or offscreen.
 	 */
-	function set_framebuffer(buffer: undefined): void;
+	function set_framebuffer(buffer: any): void;
 
 	/**
 	 * Loads #matrix as the new model-view matrix.
@@ -3960,17 +3960,17 @@ declare namespace imports.gi.Cogl {
 	 */
 	function viewport(width: number, height: number): void;
 
-	function xlib_renderer_add_filter(renderer: undefined, _func: XlibFilterFunc, data: any): void;
+	function xlib_renderer_add_filter(renderer: any, _func: XlibFilterFunc, data: any): void;
 
-	function xlib_renderer_get_display(renderer: undefined): undefined;
+	function xlib_renderer_get_display(renderer: any): any;
 
-	function xlib_renderer_get_foreign_display(renderer: undefined): undefined;
+	function xlib_renderer_get_foreign_display(renderer: any): any;
 
-	function xlib_renderer_get_visual_info(renderer: undefined): undefined;
+	function xlib_renderer_get_visual_info(renderer: any): any;
 
-	function xlib_renderer_handle_event(renderer: undefined, event: undefined): FilterReturn;
+	function xlib_renderer_handle_event(renderer: any, event: any): FilterReturn;
 
-	function xlib_renderer_remove_filter(renderer: undefined, _func: XlibFilterFunc, data: any): void;
+	function xlib_renderer_remove_filter(renderer: any, _func: XlibFilterFunc, data: any): void;
 
 	/**
 	 * Sets whether Cogl should automatically retrieve events from the X
@@ -3984,8 +3984,8 @@ declare namespace imports.gi.Cogl {
 	 * @param renderer a {@link Renderer}
 	 * @param enable The new value
 	 */
-	function xlib_renderer_set_event_retrieval_enabled(renderer: undefined, enable: Bool): void;
+	function xlib_renderer_set_event_retrieval_enabled(renderer: any, enable: Bool): void;
 
-	function xlib_renderer_set_foreign_display(renderer: undefined, display: undefined): void;
+	function xlib_renderer_set_foreign_display(renderer: any, display: any): void;
 
 }

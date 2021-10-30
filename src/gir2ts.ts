@@ -1,9 +1,10 @@
 import { Parser } from 'xml2js';
-import fs = require('fs');
 import { ClassNode, EnumNode, FunctionNode, InterfaceNode, NamespaceNode, ParameterNode, Node, RecordNode } from "./gir-types";
 import { ClassModifier, FunctionModifier, ModifierDesc } from "./modifier-types";
 import { ExcludeClass, ExcludeDesc } from "./exclude-types";
 import { js_reserved_words } from "./consts";
+import { NeedNewLine } from "./utils";
+import { getTypeFromParameterNode, TypeInfo } from "./paramRenderer";
 
 interface Parameter {
     type: string;
@@ -14,106 +15,25 @@ interface Parameter {
 
 interface FunctionInfo {
     name: string;
-    return_type?: ReturnInfo;
+    return_type?: TypeInfo;
     params: Parameter[];
     doc: string | null;
 }
-
-interface ReturnInfo {
-    type: string;
-    is_primitive: boolean;
-    docString: string | null;
-}
-
-function NeedNewLine(text: string): string {
-    if (text != null && text.trim() != "" && !text.endsWith("\n"))
-        return "\n";
-    return "";
-}
-
-
-function convertToJSType(native_type: string): string {
-    switch (native_type) {
-        case 'guint':
-        case 'guint8':
-        case 'guint16':
-        case 'guint32':
-        case 'guint64':
-        case 'gint':
-        case 'gint8':
-        case 'gint16':
-        case 'gint32':
-        case 'gint64':
-        case 'glong':
-        case 'gulong':
-        case 'gshort':
-        case 'gushort':
-        case 'guint':
-        case 'gfloat':
-        case 'gufloat':
-        case 'gdouble':
-        case 'gudouble':
-        case 'gsize':
-        case 'gssize':
-        case 'long double':
-            return 'number';
-        case 'utf8':
-        case 'gchar':
-        case 'gunichar':
-        case 'filename':
-            return 'string';
-        case 'gboolean':
-            return 'boolean';
-        case 'none':
-            return 'void';
-        case 'GType':
-            return 'GObject.Type';
-        case 'gpointer':
-            return 'any';
-        case 'va_list':
-            return 'any[]';
-        default:
-            return native_type;
-    }
-}
-
-function getTypeFromParameterNode(param_node: ParameterNode): [string, boolean, string | null] {
-    let type: string | null = null;
-    let is_primitive = false;
-    let doc: string | null = "";
-    if (param_node?.type?.[0]) {
-        type = convertToJSType(param_node.type[0].$.name);
-        is_primitive = (type !== param_node.type[0].$.name);
-        doc = param_node.doc?.[0]?._ ?? null;
-    } else if (param_node.array && param_node.array[0].type) {
-        type = convertToJSType(param_node.array[0].type[0].$.name) + '[]';
-        is_primitive = (type !== (param_node.array[0].type[0].$.name + '[]'));
-        doc = "";
-    } else if (param_node.array && param_node.array[0].array) {
-        [type, is_primitive, doc] = getTypeFromParameterNode(param_node.array[0] as ParameterNode);
-        type += "[]";
-    } else {
-        console.log("can't get param type", JSON.stringify(param_node, null, 4))
-        return ['any', false, ""];
-    }
-    return [type, is_primitive, doc];
-}
-
 
 function renderProperty(prop_node: ParameterNode, include_access_modifier: boolean = true): string {
     let prop_name = prop_node.$.name;
     if (prop_name === 'constructor') {
         prop_name += '_'; // Append an underscore.
     }
-    return (include_access_modifier ? 'public ' : '') + prop_name.replace(/-/g, '_') + ': ' + getTypeFromParameterNode(prop_node)[0] + ';';
+    return (include_access_modifier ? 'public ' : '') + prop_name.replace(/-/g, '_') + ': ' + getTypeFromParameterNode(prop_node).type + ';';
 }
 
 
 function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModifier, constructor: boolean = false): FunctionInfo {
     let func_name = func_node.$.name;
-    let return_type: string = "any", primitive: boolean = false, returnDoc: string | null = null;
+    let return_type: string = "any", returnDoc: string | null = null;
     if (!constructor) {
-        [return_type, primitive, returnDoc] = getTypeFromParameterNode(func_node['return-value']?.[0]);
+        ({ type:return_type, docString:returnDoc } = getTypeFromParameterNode(func_node['return-value']?.[0]));
 
         // Modifiers
         return_type = modifier?.return_type?.type ?? return_type;
@@ -134,11 +54,11 @@ function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModifier, c
             if (js_reserved_words.indexOf(param_name) !== -1) { // if clashes with JS reserved word.
                 param_name = '_' + param_name;
             }
-            let [type, is_primitive] = getTypeFromParameterNode(param_node);
+            let { type, docString } = getTypeFromParameterNode(param_node);
             params.push({
                 name: modifier?.param?.[param_name]?.newName ?? param_name,
                 type: modifier?.param?.[param_name]?.type ?? ((modifier?.param?.[param_name]?.type_extension?.length ?? 0 > 1) ? `${type} | ${modifier?.param?.[param_name]?.type_extension?.join(" | ")}` : type),
-                docString: modifier?.param?.[param_name]?.doc ?? param_node?.doc?.[0]?._ ?? null,
+                docString: modifier?.param?.[param_name]?.doc ?? docString,
                 optional: modifier?.param?.[param_name]?.optional ?? false
             });
         }
@@ -159,8 +79,7 @@ function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModifier, c
         name: func_name,
         return_type: (constructor) ? undefined : {
             type: modifier?.return_type?.type ?? ((modifier?.return_type?.type_extension?.length ?? 0 > 1) ? `${return_type} | ${(modifier?.return_type?.type_extension?.join(" | "))}` : return_type),
-            docString: modifier?.return_type?.doc ?? returnDoc,
-            is_primitive: (modifier?.return_type?.type) ? false : primitive
+            docString: modifier?.return_type?.doc ?? returnDoc
         },
         params: params,
         doc: modifier?.doc ?? doc
@@ -179,7 +98,7 @@ function renderFreeFunction(func_node: FunctionNode, ns_name: string, exclude_li
 }
 
 // TODO: Add support for param links like #param
-function renderDocString(docString: string | null, params?: Parameter[], return_info?: ReturnInfo, indent: number = 0, ns_name?: string): string {
+function renderDocString(docString: string | null, params?: Parameter[], return_info?: TypeInfo, indent: number = 0, ns_name?: string): string {
     if (docString == null)
         return "";
 
@@ -232,7 +151,7 @@ function renderDocString(docString: string | null, params?: Parameter[], return_
         }
 
 
-    if (return_info != null && return_info.type != "void") {
+    if (return_info?.type != null && return_info.type != "void") {
         const lines = convertLinks(return_info.docString?.replace(/@/g, "#"), ns_name)?.split("\n") ?? [""];
         doc += `${ind} * @returns ${lines[0]}\n`;
         if (lines.length > 1)
@@ -456,7 +375,7 @@ function renderNodeAsBlankInterface(node: Node, ns_name: string) {
 
 function renderAlias(alias_node: ParameterNode, ns_name: string): string {
     let result = renderDocString(alias_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
-    result += `type ${alias_node.$.name} = ${getTypeFromParameterNode(alias_node)[0]};`;
+    result += `type ${alias_node.$.name} = ${getTypeFromParameterNode(alias_node).type};`;
     return result;
 }
 

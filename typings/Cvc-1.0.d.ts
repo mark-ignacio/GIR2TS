@@ -121,7 +121,7 @@ declare namespace imports.gi.Cvc {
 
 	class MixerEventRole {
 		public constructor();
-		public static new(context: undefined, device: string, channel_map: ChannelMap): MixerStream;
+		public static new(context: any, device: string, channel_map: ChannelMap): MixerStream;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -140,7 +140,7 @@ declare namespace imports.gi.Cvc {
 
 	class MixerSink {
 		public constructor();
-		public static new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
+		public static new(context: any, index: number, channel_map: ChannelMap): MixerStream;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -159,7 +159,7 @@ declare namespace imports.gi.Cvc {
 
 	class MixerSinkInput {
 		public constructor();
-		public static new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
+		public static new(context: any, index: number, channel_map: ChannelMap): MixerStream;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -178,7 +178,7 @@ declare namespace imports.gi.Cvc {
 
 	class MixerSource {
 		public constructor();
-		public static new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
+		public static new(context: any, index: number, channel_map: ChannelMap): MixerStream;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -197,7 +197,7 @@ declare namespace imports.gi.Cvc {
 
 	class MixerSourceOutput {
 		public constructor();
-		public static new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
+		public static new(context: any, index: number, channel_map: ChannelMap): MixerStream;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

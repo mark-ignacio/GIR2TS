@@ -4347,7 +4347,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * Fetches the data from a blob.
 	 * @param blob a blob.
 	 * @param length The length in bytes of the data retrieved
-	 * @returns 
+	 * @returns the byte data of #blob.
 	 */
 	function blob_get_data(blob: blob_t, length: number): string[];
 
@@ -4359,7 +4359,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * fails.
 	 * @param blob a blob.
 	 * @param length output length of the writable data.
-	 * @returns 
+	 * @returns Writable blob data,
+	 * or %NULL if failed.
 	 */
 	function blob_get_data_writable(blob: blob_t, length: number): string[];
 
@@ -4639,6 +4640,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer An #hb_buffer_t
 	 * @param length The output-array length.
 	 * @returns 
+	 * The #buffer glyph information array.
+	 * The value valid as long as buffer has not been modified.
 	 */
 	function buffer_get_glyph_infos(buffer: buffer_t, length: number): glyph_info_t[];
 
@@ -4653,6 +4656,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer An #hb_buffer_t
 	 * @param length The output length
 	 * @returns 
+	 * The #buffer glyph position array.
+	 * The value valid as long as buffer has not been modified.
 	 */
 	function buffer_get_glyph_positions(buffer: buffer_t, length: number): glyph_position_t[];
 
@@ -4910,6 +4915,7 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Returns a list of supported buffer serialization formats.
 	 * @returns 
+	 * A string array of buffer serialization formats. Should not be freed.
 	 */
 	function buffer_serialize_list_formats(): string[];
 
@@ -6199,7 +6205,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param destroy A callback to call when the face object is not needed anymore
 	 * @returns the new #hb_face_t face object
 	 */
-	function ft_face_create(ft_face: undefined, destroy: destroy_func_t): face_t;
+	function ft_face_create(ft_face: any, destroy: destroy_func_t): face_t;
 
 	/**
 	 * Creates an #hb_face_t face object from the specified FT_Face.
@@ -6215,7 +6221,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param ft_face FT_Face to work upon
 	 * @returns the new #hb_face_t face object
 	 */
-	function ft_face_create_cached(ft_face: undefined): face_t;
+	function ft_face_create_cached(ft_face: any): face_t;
 
 	/**
 	 * Creates an #hb_face_t face object from the specified FT_Face.
@@ -6230,7 +6236,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param ft_face FT_Face to work upon
 	 * @returns the new #hb_face_t face object
 	 */
-	function ft_face_create_referenced(ft_face: undefined): face_t;
+	function ft_face_create_referenced(ft_face: any): face_t;
 
 	/**
 	 * Refreshes the state of #font when the underlying FT_Face has changed.
@@ -6265,7 +6271,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param destroy A callback to call when the font object is not needed anymore
 	 * @returns the new #hb_font_t font object
 	 */
-	function ft_font_create(ft_face: undefined, destroy: destroy_func_t): font_t;
+	function ft_font_create(ft_face: any, destroy: destroy_func_t): font_t;
 
 	/**
 	 * Creates an #hb_font_t font object from the specified FT_Face.
@@ -6283,7 +6289,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param ft_face FT_Face to work upon
 	 * @returns the new #hb_font_t font object
 	 */
-	function ft_font_create_referenced(ft_face: undefined): font_t;
+	function ft_font_create_referenced(ft_face: any): font_t;
 
 	/**
 	 * Fetches the FT_Face associated with the specified #hb_font_t
@@ -6291,7 +6297,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @returns the FT_Face found or %NULL
 	 */
-	function ft_font_get_face(font: font_t): undefined;
+	function ft_font_get_face(font: font_t): any;
 
 	/**
 	 * Fetches the FT_Load_Glyph load flags of the specified #hb_font_t.
@@ -6309,7 +6315,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @returns the FT_Face associated with #font or %NULL
 	 */
-	function ft_font_lock_face(font: font_t): undefined;
+	function ft_font_lock_face(font: font_t): any;
 
 	/**
 	 * Configures the font-functions structure of the specified
@@ -6391,14 +6397,14 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face #hb_face_t to query
 	 * @returns the gr_face found
 	 */
-	function graphite2_face_get_gr_face(_face: face_t): undefined;
+	function graphite2_face_get_gr_face(_face: face_t): any;
 
 	/**
 	 * Always returns %NULL. Use hb_graphite2_face_get_gr_face() instead.
 	 * @param font An #hb_font_t
 	 * @returns Graphite2 font associated with #font.
 	 */
-	function graphite2_font_get_gr_font(font: font_t): undefined;
+	function graphite2_font_get_gr_font(font: font_t): any;
 
 	/**
 	 * Converts #str representing a BCP 47 language tag to the corresponding
@@ -7345,7 +7351,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * used as long as #face is alive.
 	 * @param _face font face.
 	 * @param num_entries number of returned entries.
-	 * @returns 
+	 * @returns Array of available name entries.
 	 */
 	function ot_name_list_names(_face: face_t, num_entries: number): ot_name_entry_t[];
 
@@ -7863,7 +7869,8 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Retrieves the list of shapers supported by HarfBuzz.
-	 * @returns 
+	 * @returns an array of
+	 *    constant strings
 	 */
 	function shape_list_shapers(): string[];
 

@@ -415,7 +415,8 @@ declare namespace imports.gi.GLib {
 		 * #error is set to #G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 		 * @param uri a valid URI
 		 * @param length return location of the length of the returned list, or %NULL
-		 * @returns 
+		 * @returns a newly allocated %NULL-terminated array of strings.
+		 *   Use g_strfreev() to free it.
 		 */
 		public get_applications(uri: string, length: number): string[];
 		/**
@@ -438,7 +439,8 @@ declare namespace imports.gi.GLib {
 		 * be %NULL.
 		 * @param uri a valid URI
 		 * @param length return location for the length of the returned string, or %NULL
-		 * @returns 
+		 * @returns a newly allocated %NULL-terminated array of group names.
+		 *   Use g_strfreev() to free it.
 		 */
 		public get_groups(uri: string, length: number): string[];
 		/**
@@ -516,7 +518,8 @@ declare namespace imports.gi.GLib {
 		 * The array of returned URIs will be %NULL-terminated, so #length may
 		 * optionally be %NULL.
 		 * @param length return location for the number of returned URIs, or %NULL
-		 * @returns 
+		 * @returns a newly allocated %NULL-terminated array of strings.
+		 *   Use g_strfreev() to free it.
 		 */
 		public get_uris(length: number): string[];
 		/**
@@ -850,6 +853,7 @@ declare namespace imports.gi.GLib {
 		 * This function outputs #bookmark as a string.
 		 * @param length return location for the length of the returned string, or %NULL
 		 * @returns 
+		 *   a newly allocated string holding the contents of the #GBookmarkFile
 		 */
 		public to_data(length: number): number[];
 		/**
@@ -1000,6 +1004,7 @@ declare namespace imports.gi.GLib {
 		 * not be returned if #size is non-zero.
 		 * @param size location to return size of byte data
 		 * @returns 
+		 *          a pointer to the byte data, or %NULL
 		 */
 		public get_data(size: number): number[];
 		/**
@@ -1083,7 +1088,7 @@ declare namespace imports.gi.GLib {
 		 * Do not use it if #bytes contains more than %G_MAXUINT
 		 * bytes. #GByteArray stores the length of its data in #guint, which
 		 * may be shorter than #gsize, that #bytes is using.
-		 * @returns 
+		 * @returns a new mutable #GByteArray containing the same byte data
 		 */
 		public unref_to_array(): number[];
 		/**
@@ -1095,7 +1100,8 @@ declare namespace imports.gi.GLib {
 		 * g_bytes_new_take() or g_byte_array_free_to_bytes(). In all other cases the
 		 * data is copied.
 		 * @param size location to place the length of the returned data
-		 * @returns 
+		 * @returns a pointer to the same byte data, which should be
+		 *          freed with g_free()
 		 */
 		public unref_to_data(size: number): number[];
 	}
@@ -3297,6 +3303,9 @@ declare namespace imports.gi.GLib {
 		 * @param key a key
 		 * @param length the number of booleans returned
 		 * @returns 
+		 *    the values associated with the key as a list of booleans, or %NULL if the
+		 *    key was not found or could not be parsed. The returned list of booleans
+		 *    should be freed with g_free() when no longer needed.
 		 */
 		public get_boolean_list(group_name: string, key: string, length: number): boolean[];
 		/**
@@ -3339,6 +3348,9 @@ declare namespace imports.gi.GLib {
 		 * @param key a key
 		 * @param length the number of doubles returned
 		 * @returns 
+		 *     the values associated with the key as a list of doubles, or %NULL if the
+		 *     key was not found or could not be parsed. The returned list of doubles
+		 *     should be freed with g_free() when no longer needed.
 		 */
 		public get_double_list(group_name: string, key: string, length: number): number[];
 		/**
@@ -3346,7 +3358,8 @@ declare namespace imports.gi.GLib {
 		 * The array of returned groups will be %NULL-terminated, so
 		 * #length may optionally be %NULL.
 		 * @param length return location for the number of returned groups, or %NULL
-		 * @returns 
+		 * @returns a newly-allocated %NULL-terminated array of strings.
+		 *   Use g_strfreev() to free it.
 		 */
 		public get_groups(length: number): string[];
 		/**
@@ -3387,6 +3400,9 @@ declare namespace imports.gi.GLib {
 		 * @param key a key
 		 * @param length the number of integers returned
 		 * @returns 
+		 *     the values associated with the key as a list of integers, or %NULL if
+		 *     the key was not found or could not be parsed. The returned list of
+		 *     integers should be freed with g_free() when no longer needed.
 		 */
 		public get_integer_list(group_name: string, key: string, length: number): number[];
 		/**
@@ -3397,7 +3413,8 @@ declare namespace imports.gi.GLib {
 		 * #G_KEY_FILE_ERROR_GROUP_NOT_FOUND.
 		 * @param group_name a group name
 		 * @param length return location for the number of keys returned, or %NULL
-		 * @returns 
+		 * @returns a newly-allocated %NULL-terminated array of strings.
+		 *     Use g_strfreev() to free it.
 		 */
 		public get_keys(group_name: string, length: number): string[];
 		/**
@@ -3456,7 +3473,9 @@ declare namespace imports.gi.GLib {
 		 * @param key a key
 		 * @param locale a locale identifier or %NULL
 		 * @param length return location for the number of returned strings or %NULL
-		 * @returns 
+		 * @returns a newly allocated %NULL-terminated string array
+		 *   or %NULL if the key isn't found. The string array should be freed
+		 *   with g_strfreev().
 		 */
 		public get_locale_string_list(group_name: string, key: string, locale: string, length: number): string[];
 		/**
@@ -3490,6 +3509,8 @@ declare namespace imports.gi.GLib {
 		 * @param key a key
 		 * @param length return location for the number of returned strings, or %NULL
 		 * @returns 
+		 *  a %NULL-terminated string array or %NULL if the specified
+		 *  key cannot be found. The array should be freed with g_strfreev().
 		 */
 		public get_string_list(group_name: string, key: string, length: number): string[];
 		/**
@@ -4656,7 +4677,9 @@ declare namespace imports.gi.GLib {
 		 * 
 		 * The strings are fetched from the string passed to the match function,
 		 * so you cannot call this function after freeing the string.
-		 * @returns 
+		 * @returns a %NULL-terminated array of gchar *
+		 *     pointers.  It must be freed using g_strfreev(). If the previous
+		 *     match failed %NULL is returned
 		 */
 		public fetch_all(): string[];
 		/**
@@ -6686,7 +6709,8 @@ declare namespace imports.gi.GLib {
 		 * "a", "b" and "c".
 		 * @param string the string to split with the pattern
 		 * @param match_options match time option flags
-		 * @returns 
+		 * @returns a %NULL-terminated gchar ** array. Free
+		 * it using g_strfreev()
 		 */
 		public split(string: string, match_options: RegexMatchFlags): string[];
 		/**
@@ -6717,7 +6741,8 @@ declare namespace imports.gi.GLib {
 		 * @param match_options match time option flags
 		 * @param max_tokens the maximum number of tokens to split #string into.
 		 *   If this is less than 1, the string is split completely
-		 * @returns 
+		 * @returns a %NULL-terminated gchar ** array. Free
+		 * it using g_strfreev()
 		 */
 		public split_full(string: string[], string_len: number, start_position: number, match_options: RegexMatchFlags, max_tokens: number): string[];
 		/**
@@ -8412,7 +8437,9 @@ declare namespace imports.gi.GLib {
 		 * Ends the builder process and returns the constructed NULL-terminated string
 		 * array. The returned value should be freed with g_strfreev() when no longer
 		 * needed.
-		 * @returns 
+		 * @returns the constructed string array.
+		 * 
+		 * Since 2.68
 		 */
 		public end(): string[];
 		/**
@@ -10523,6 +10550,7 @@ declare namespace imports.gi.GLib {
 		 * @param length a pointer to a #gsize, to store
 		 *          the length (not including the nul terminator)
 		 * @returns 
+		 *          a newly allocated string
 		 */
 		public dup_bytestring(length: number): number[];
 		/**
@@ -10537,7 +10565,7 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @param length the length of the result, or %NULL
-		 * @returns 
+		 * @returns an array of strings
 		 */
 		public dup_bytestring_array(length: number): string[];
 		/**
@@ -10552,7 +10580,7 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @param length the length of the result, or %NULL
-		 * @returns 
+		 * @returns an array of strings
 		 */
 		public dup_objv(length: number): string[];
 		/**
@@ -10578,7 +10606,7 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @param length the length of the result, or %NULL
-		 * @returns 
+		 * @returns an array of strings
 		 */
 		public dup_strv(length: number): string[];
 		/**
@@ -10646,6 +10674,7 @@ declare namespace imports.gi.GLib {
 		 * 
 		 * The return value remains valid as long as #value exists.
 		 * @returns 
+		 *          the constant string
 		 */
 		public get_bytestring(): number[];
 		/**
@@ -10660,7 +10689,7 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @param length the length of the result, or %NULL
-		 * @returns 
+		 * @returns an array of constant strings
 		 */
 		public get_bytestring_array(length: number): string[];
 		/**
@@ -10779,7 +10808,8 @@ declare namespace imports.gi.GLib {
 		 * items in the array.
 		 * @param n_elements a pointer to the location to store the number of items
 		 * @param element_size the size of each element
-		 * @returns 
+		 * @returns a pointer to
+		 *     the fixed array
 		 */
 		public get_fixed_array(n_elements: number, element_size: number): any[];
 		/**
@@ -10863,7 +10893,7 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @param length the length of the result, or %NULL
-		 * @returns 
+		 * @returns an array of constant strings
 		 */
 		public get_objv(length: number): string[];
 		/**
@@ -10917,7 +10947,7 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @param length the length of the result, or %NULL
-		 * @returns 
+		 * @returns an array of constant strings
 		 */
 		public get_strv(length: number): string[];
 		/**
@@ -17906,6 +17936,9 @@ declare namespace imports.gi.GLib {
 	 * @param text zero-terminated string with base64 text to decode
 	 * @param out_len The length of the decoded data is written here
 	 * @returns 
+	 *               newly allocated buffer containing the binary data
+	 *               that #text represents. The returned buffer must
+	 *               be freed with g_free().
 	 */
 	function base64_decode(text: string, out_len: number): number[];
 
@@ -18212,7 +18245,7 @@ declare namespace imports.gi.GLib {
 
 	/**
 	 * Creates a new #GByteArray with a reference count of 1.
-	 * @returns 
+	 * @returns the new #GByteArray
 	 */
 	function byte_array_new(): number[];
 
@@ -18225,7 +18258,7 @@ declare namespace imports.gi.GLib {
 	 * #gsize.
 	 * @param data byte data for the array
 	 * @param len length of #data
-	 * @returns 
+	 * @returns a new #GByteArray
 	 */
 	function byte_array_new_take(data: number[], len: number): number[];
 
@@ -18620,6 +18653,9 @@ declare namespace imports.gi.GLib {
 	 * @param bytes_written the number of bytes stored in
 	 *                 the output buffer (not including the terminating nul).
 	 * @returns 
+	 *          If the conversion was successful, a newly allocated buffer
+	 *          containing the converted string, which must be freed with g_free().
+	 *          Otherwise %NULL and #error will be set.
 	 */
 	function convert(_str: number[], len: number, to_codeset: string, from_codeset: string, bytes_read: number, bytes_written: number): number[];
 
@@ -18664,6 +18700,9 @@ declare namespace imports.gi.GLib {
 	 * @param bytes_written the number of bytes stored in
 	 *                 the output buffer (not including the terminating nul).
 	 * @returns 
+	 *          If the conversion was successful, a newly allocated buffer
+	 *          containing the converted string, which must be freed with g_free().
+	 *          Otherwise %NULL and #error will be set.
 	 */
 	function convert_with_fallback(_str: number[], len: number, to_codeset: string, from_codeset: string, fallback: string, bytes_read: number, bytes_written: number): number[];
 
@@ -18705,6 +18744,9 @@ declare namespace imports.gi.GLib {
 	 * @param bytes_written the number of bytes stored in
 	 *                 the output buffer (not including the terminating nul).
 	 * @returns 
+	 *               If the conversion was successful, a newly allocated buffer
+	 *               containing the converted string, which must be freed with
+	 *               g_free(). Otherwise %NULL and #error will be set.
 	 */
 	function convert_with_iconv(_str: number[], len: number, converter: IConv, bytes_read: number, bytes_written: number): number[];
 
@@ -19250,6 +19292,7 @@ declare namespace imports.gi.GLib {
 	 * @param value the value for to set the variable to
 	 * @param overwrite whether to change the variable if it already exists
 	 * @returns 
+	 *     the updated environment list. Free it using g_strfreev().
 	 */
 	function environ_setenv(envp: string[], variable: string, value: string, overwrite: boolean): string[];
 
@@ -19262,6 +19305,7 @@ declare namespace imports.gi.GLib {
 	 * @param variable the environment variable to remove, must not
 	 *     contain '='
 	 * @returns 
+	 *     the updated environment list. Free it using g_strfreev().
 	 */
 	function environ_unsetenv(envp: string[], variable: string): string[];
 
@@ -19797,6 +19841,7 @@ declare namespace imports.gi.GLib {
 	 * The return value is freshly allocated and it should be freed with
 	 * g_strfreev() when it is no longer needed.
 	 * @returns 
+	 *     the list of environment variables
 	 */
 	function get_environ(): string[];
 
@@ -19887,7 +19932,8 @@ declare namespace imports.gi.GLib {
 	 * This function consults the environment variables `LANGUAGE`, `LC_ALL`,
 	 * `LC_MESSAGES` and `LANG` to find the list of locales specified by the
 	 * user.
-	 * @returns 
+	 * @returns a %NULL-terminated array of strings owned by GLib
+	 *    that must not be modified or freed.
 	 */
 	function get_language_names(): string[];
 
@@ -19903,7 +19949,9 @@ declare namespace imports.gi.GLib {
 	 * 
 	 * g_get_language_names() returns g_get_language_names_with_category("LC_MESSAGES").
 	 * @param category_name a locale category name
-	 * @returns 
+	 * @returns a %NULL-terminated array of strings owned by
+	 *    the thread g_get_language_names_with_category was called from.
+	 *    It must not be modified or freed. It must be copied if planned to be used in another thread.
 	 */
 	function get_language_names_with_category(category_name: string): string[];
 
@@ -19924,7 +19972,9 @@ declare namespace imports.gi.GLib {
 	 * If you need the list of variants for the current locale,
 	 * use g_get_language_names().
 	 * @param locale a locale identifier
-	 * @returns 
+	 * @returns a newly
+	 *   allocated array of newly allocated strings with the locale variants. Free with
+	 *   g_strfreev().
 	 */
 	function get_locale_variants(locale: string): string[];
 
@@ -20028,6 +20078,8 @@ declare namespace imports.gi.GLib {
 	 * The return value is cached and modifying it at runtime is not supported, as
 	 * it’s not thread-safe to modify environment variables at runtime.
 	 * @returns 
+	 *     a %NULL-terminated array of strings owned by GLib that must not be
+	 *     modified or freed.
 	 */
 	function get_system_config_dirs(): string[];
 
@@ -20067,6 +20119,8 @@ declare namespace imports.gi.GLib {
 	 * The return value is cached and modifying it at runtime is not supported, as
 	 * it’s not thread-safe to modify environment variables at runtime.
 	 * @returns 
+	 *     a %NULL-terminated array of strings owned by GLib that must not be
+	 *     modified or freed.
 	 */
 	function get_system_data_dirs(): string[];
 
@@ -20764,6 +20818,8 @@ declare namespace imports.gi.GLib {
 	 * use cases for environment variables in GLib-using programs you want
 	 * the UTF-8 encoding that this function and g_getenv() provide.
 	 * @returns 
+	 *     a %NULL-terminated list of strings which must be freed with
+	 *     g_strfreev().
 	 */
 	function listenv(): string[];
 
@@ -20791,6 +20847,8 @@ declare namespace imports.gi.GLib {
 	 * @param bytes_written the number of bytes stored in the output
 	 *                 buffer (not including the terminating nul).
 	 * @returns 
+	 *          A newly-allocated buffer containing the converted string,
+	 *          or %NULL on an error, and error will be set.
 	 */
 	function locale_from_utf8(utf8string: string, len: number, bytes_read: number, bytes_written: number): number[];
 
@@ -22646,7 +22704,8 @@ declare namespace imports.gi.GLib {
 	 * @param string the string to scan for matches
 	 * @param compile_options compile options for the regular expression, or 0
 	 * @param match_options match options, or 0
-	 * @returns 
+	 * @returns a %NULL-terminated array of strings. Free
+	 * it using g_strfreev()
 	 */
 	function regex_split_simple(pattern: string, string: string, compile_options: RegexCompileFlags, match_options: RegexMatchFlags): string[];
 
@@ -23754,7 +23813,7 @@ declare namespace imports.gi.GLib {
 	 *   'en_GB') from which #string originates
 	 * @param ascii_alternates a
 	 *   return location for ASCII alternates
-	 * @returns 
+	 * @returns the folded tokens
 	 */
 	function str_tokenize_and_fold(string: string, translit_locale: string, ascii_alternates: string[]): string[];
 
@@ -23943,7 +24002,7 @@ declare namespace imports.gi.GLib {
 	 * the array itself. g_strfreev() does this for you. If called
 	 * on a %NULL value, g_strdupv() simply returns %NULL.
 	 * @param str_array a %NULL-terminated array of strings
-	 * @returns 
+	 * @returns a new %NULL-terminated array of strings.
 	 */
 	function strdupv(str_array: string): string[];
 
@@ -24186,7 +24245,8 @@ declare namespace imports.gi.GLib {
 	 *     strings, unless #max_tokens is reached.
 	 * @param max_tokens the maximum number of pieces to split #string into.
 	 *     If this is less than 1, the string is split completely.
-	 * @returns 
+	 * @returns a newly-allocated %NULL-terminated array of strings. Use
+	 *    g_strfreev() to free it.
 	 */
 	function strsplit(string: string, delimiter: string, max_tokens: number): string[];
 
@@ -24218,7 +24278,8 @@ declare namespace imports.gi.GLib {
 	 *     in no string splitting).
 	 * @param max_tokens The maximum number of tokens to split #string into.
 	 *     If this is less than 1, the string is split completely
-	 * @returns 
+	 * @returns a newly-allocated %NULL-terminated array of strings. Use
+	 *    g_strfreev() to free it.
 	 */
 	function strsplit_set(string: string, delimiters: string, max_tokens: number): string[];
 
@@ -26225,7 +26286,9 @@ declare namespace imports.gi.GLib {
 	 * mime type defined in RFC 2483 into individual URIs,
 	 * discarding any comments. The URIs are not validated.
 	 * @param uri_list an URI list
-	 * @returns 
+	 * @returns a newly allocated %NULL-terminated list
+	 *   of strings holding the individual URIs. The array should be freed
+	 *   with g_strfreev().
 	 */
 	function uri_list_extract_uris(uri_list: string): string[];
 

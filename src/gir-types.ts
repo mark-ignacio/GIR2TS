@@ -21,10 +21,13 @@ export interface Node {
     // doc can't have another doc inside
     doc?: Omit<Node, "doc">[];
 }
+export interface TypeNode extends Omit<Node, "$"> {
+    "$": Partial<NodeAttributes>
+}
 
 export interface ParameterNode extends Node {
     $: ParameterAttributes;
-    type?: Node[];
+    type?: TypeNode[];
     array?: NodeWithType[];
     doc?: Node[];
 }

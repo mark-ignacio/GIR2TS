@@ -452,7 +452,8 @@ declare namespace imports.gi.Gst {
 		 * Get a %NULL terminated array of string with supported bufferpool options for
 		 * #pool. An option would typically be enabled with
 		 * gst_buffer_pool_config_add_option().
-		 * @returns 
+		 * @returns a %NULL terminated array
+		 *          of strings.
 		 */
 		get_options(): string[];
 		/**
@@ -1805,6 +1806,8 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * This
 		 * @returns 
+		 *     A list of device provider factory names that are currently being
+		 *     monitored by #monitor or %NULL when nothing is being monitored.
 		 */
 		get_providers(): string[];
 		/**
@@ -1977,6 +1980,8 @@ declare namespace imports.gi.Gst {
 		 * Get the provider factory names of the {@link DeviceProvider} instances that
 		 * are hidden by #provider.
 		 * @returns 
+		 *   a list of hidden providers factory names or %NULL when
+		 *   nothing is hidden by #provider. Free with g_strfreev.
 		 */
 		get_hidden_providers(): string[];
 		/**
@@ -2089,6 +2094,8 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the available keys for the metadata on #factory.
 		 * @returns 
+		 * a %NULL-terminated array of key strings, or %NULL when there is no
+		 * metadata. Free with g_strfreev() when no longer needed.
 		 */
 		get_metadata_keys(): string[];
 		/**
@@ -3170,6 +3177,8 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the available keys for the metadata on #factory.
 		 * @returns 
+		 * a %NULL-terminated array of key strings, or %NULL when there is no
+		 * metadata. Free with g_strfreev() when no longer needed.
 		 */
 		get_metadata_keys(): string[];
 		/**
@@ -3188,7 +3197,8 @@ declare namespace imports.gi.Gst {
 		 * no protocols are supported. You may not change the contents of the returned
 		 * array, as it is still owned by the element factory. Use g_strdupv() to
 		 * make a copy of the protocol string array if you need to.
-		 * @returns 
+		 * @returns the supported protocols
+		 *     or %NULL
 		 */
 		get_uri_protocols(): string[];
 		/**
@@ -6598,6 +6608,7 @@ declare namespace imports.gi.Gst {
 		 * copy it using g_strdupv().  This function may return %NULL to indicate
 		 * a 0-length list.
 		 * @returns 
+		 *     a %NULL-terminated array of extensions associated with this factory
 		 */
 		get_extensions(): string[];
 		/**
@@ -12208,7 +12219,9 @@ declare namespace imports.gi.Gst {
 		 * Retrieve missing elements from a previous run of gst_parse_launch_full()
 		 * or gst_parse_launchv_full(). Will only return results if an error code
 		 * of %GST_PARSE_ERROR_NO_SUCH_ELEMENT was returned.
-		 * @returns 
+		 * @returns a
+		 *     %NULL-terminated array of element factory name strings of missing
+		 *     elements. Free with g_strfreev() when no longer needed.
 		 */
 		public get_missing_elements(): string[];
 	}
@@ -15584,7 +15597,8 @@ declare namespace imports.gi.Gst {
 		 * returns and must not be freed.
 		 * @param offset The offset
 		 * @param size The number of bytes to return
-		 * @returns 
+		 * @returns the
+		 *     requested data, or %NULL if that data is not available.
 		 */
 		public peek(offset: number, size: number): number[];
 		/**
@@ -16121,11 +16135,13 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get a copy of preset names as a %NULL terminated string array.
 		 * @returns 
+		 *     list with names, use g_strfreev() after usage.
 		 */
 		get_preset_names(): string[];
 		/**
 		 * Get a the names of the GObject properties that can be used for presets.
-		 * @returns 
+		 * @returns an
+		 *   array of property names which should be freed with g_strfreev() after use.
 		 */
 		get_property_names(): string[];
 		/**
@@ -16410,7 +16426,10 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Gets the list of protocols supported by #handler. This list may not be
 		 * modified.
-		 * @returns 
+		 * @returns the
+		 *     supported protocols.  Returns %NULL if the #handler isn't
+		 *     implemented properly, or the #handler doesn't support any
+		 *     protocols.
 		 */
 		get_protocols(): string[];
 		/**
@@ -21204,7 +21223,8 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Fetches the current logs per thread from the ring buffer logger. See
 	 * gst_debug_add_ring_buffer_logger() for details.
-	 * @returns 
+	 * @returns NULL-terminated array of
+	 * strings with the debug output per thread
 	 */
 	function debug_ring_buffer_logger_get_logs(): string[];
 
@@ -21944,6 +21964,9 @@ declare namespace imports.gi.Gst {
 	 * A null terminated array of strings that contains the UUID values of each
 	 * protection system that is to be checked.
 	 * @returns 
+	 * A null terminated array containing all
+	 * the #system_identifiers supported by the set of available decryptors, or
+	 * %NULL if no matches were found.
 	 */
 	function protection_filter_systems_by_available_decryptors(system_identifiers: string[]): string[];
 
