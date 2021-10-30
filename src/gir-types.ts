@@ -64,6 +64,7 @@ export interface FieldNode extends ParameterNode {
 export interface RecordNode extends Node {
     "field": FieldNode[];
     "method": FunctionNode[];
+    "virtual-method": FunctionNode[];
     "constructor"?: FunctionNode[]
     doc?: Node[];
 }

@@ -1,90 +1,14 @@
-import { Parser } from 'xml2js';
 import { ClassNode, EnumNode, FunctionNode, InterfaceNode, NamespaceNode, ParameterNode, Node, RecordNode } from "./gir-types";
 import { ClassModifier, FunctionModifier, ModifierDesc } from "./modifier-types";
 import { ExcludeClass, ExcludeDesc } from "./exclude-types";
 import { js_reserved_words } from "./consts";
-import { NeedNewLine } from "./utils";
+import { Parser } from 'xml2js';
+import { BuildConstructorNode, NeedNewLine } from "./utils";
 import { getTypeFromParameterNode, TypeInfo } from "./paramRenderer";
-
-interface Parameter {
-    type: string;
-    name: string;
-    docString: string | null;
-    optional: boolean;
-}
-
-interface FunctionInfo {
-    name: string;
-    return_type?: TypeInfo;
-    params: Parameter[];
-    doc: string | null;
-}
-
-function renderProperty(prop_node: ParameterNode, include_access_modifier: boolean = true): string {
-    let prop_name = prop_node.$.name;
-    if (prop_name === 'constructor') {
-        prop_name += '_'; // Append an underscore.
-    }
-    return (include_access_modifier ? 'public ' : '') + prop_name.replace(/-/g, '_') + ': ' + getTypeFromParameterNode(prop_node).type + ';';
-}
-
-
-function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModifier, constructor: boolean = false): FunctionInfo {
-    let func_name = func_node.$.name;
-    let return_type: string = "any", returnDoc: string | null = null;
-    if (!constructor) {
-        ({ type:return_type, docString:returnDoc } = getTypeFromParameterNode(func_node['return-value']?.[0]));
-
-        // Modifiers
-        return_type = modifier?.return_type?.type ?? return_type;
-        returnDoc = modifier?.return_type?.doc ?? returnDoc;
-    }
-    let params: Parameter[] = [];
-    const doc = func_node.doc?.[0]?.["_"] ?? null;
-    //var has_params = "parameter" in method_node.parameters[0];
-
-    if (func_node.parameters && func_node.parameters[0].parameter) {
-        for (var param_node of func_node.parameters[0].parameter) {
-            if (param_node.$.name === '...' || param_node.$.name === 'user_data') continue;
-            let param_name = param_node.$.name;
-
-            if (modifier?.param?.[param_name]?.skip)
-                continue;
-
-            if (js_reserved_words.indexOf(param_name) !== -1) { // if clashes with JS reserved word.
-                param_name = '_' + param_name;
-            }
-            let { type, docString } = getTypeFromParameterNode(param_node);
-            params.push({
-                name: modifier?.param?.[param_name]?.newName ?? param_name,
-                type: modifier?.param?.[param_name]?.type ?? ((modifier?.param?.[param_name]?.type_extension?.length ?? 0 > 1) ? `${type} | ${modifier?.param?.[param_name]?.type_extension?.join(" | ")}` : type),
-                docString: modifier?.param?.[param_name]?.doc ?? docString,
-                optional: modifier?.param?.[param_name]?.optional ?? false
-            });
-        }
-    }
-
-    if (modifier?.newParam != null) {
-        for (const param of modifier.newParam) {
-            params.push({
-                docString: param?.doc ?? null,
-                type: param.type,
-                name: param.name,
-                optional: param.optional ?? false
-            })
-        }
-    }
-
-    return {
-        name: func_name,
-        return_type: (constructor) ? undefined : {
-            type: modifier?.return_type?.type ?? ((modifier?.return_type?.type_extension?.length ?? 0 > 1) ? `${return_type} | ${(modifier?.return_type?.type_extension?.join(" | "))}` : return_type),
-            docString: modifier?.return_type?.doc ?? returnDoc
-        },
-        params: params,
-        doc: modifier?.doc ?? doc
-    }
-}
+import { getFunctionInfo, Parameter } from "./functionUtils";
+import { renderDocString } from "./docStringRenderer";
+import { renderRecordAsClass } from "./recordRenderer";
+import { renderMethod } from "./methodRenderer";
 
 function renderFreeFunction(func_node: FunctionNode, ns_name: string, exclude_list: string[] | null = null, modifier?: FunctionModifier): string {
     let { name, return_type, params, doc } = getFunctionInfo(func_node, modifier);
@@ -97,239 +21,15 @@ function renderFreeFunction(func_node: FunctionNode, ns_name: string, exclude_li
     return str;
 }
 
-// TODO: Add support for param links like #param
-function renderDocString(docString: string | null, params?: Parameter[], return_info?: TypeInfo, indent: number = 0, ns_name?: string): string {
-    if (docString == null)
-        return "";
-
-    const ind = "\t".repeat(indent);
-
-    /** Convert references to for same library, like #SoupMessage to {link Message} */
-    function convertLinks(doc: string | undefined, ns_name?: string): string | undefined {
-        if (doc == undefined)
-            return doc;
-
-        if (ns_name == undefined)
-            return doc;
-
-        const regex = new RegExp(`#${ns_name}[\\w\\d]*`, "gm");
-        const result = regex.exec(doc);
-        if (result != null) {
-            for (const item of result) {
-                if (item == `#${ns_name}`) {
-                    continue;
-                }
-
-                const newItem = item.replace(`#${ns_name}`, "");
-                doc = doc.replace(item, `{@link ${newItem.toString()}}`);
-            }
-        }
-        return doc;
-    }
-
-    let doc = `${ind}/**\n`;
-    for (const line of convertLinks(docString?.replace(/@/g, "#"), ns_name)?.split("\n") ?? []) {
-        doc += `${ind} * ${line}\n`;
-    }
-
-    if (params != null)
-        for (const param of params) {
-            doc += `${ind} * @param ${param.name}`;
-            if (param.docString == null) {
-                doc += "\n";
-                continue;
-            }
-            else {
-                const lines = convertLinks(param.docString.replace(/@/g, "#"), ns_name)?.split("\n") ?? [""];
-                doc += ` ${lines[0]}\n`;
-                if (lines.length > 1)
-                    for (let i = 1; i < lines.length; i++) {
-                        const line = lines[i];
-                        doc += `${ind} * ${line}\n`;
-                    }
-            }
-        }
 
 
-    if (return_info?.type != null && return_info.type != "void") {
-        const lines = convertLinks(return_info.docString?.replace(/@/g, "#"), ns_name)?.split("\n") ?? [""];
-        doc += `${ind} * @returns ${lines[0]}\n`;
-        if (lines.length > 1)
-            for (let i = 1; i < lines.length; i++) {
-                const line = lines[i];
-                doc += `${ind} * ${line}\n`;
-            }
-    }
 
-    doc += `${ind} */\n`
-    return doc;
-}
-
-interface RenderMethodOptions {
-    include_name?: boolean;
-    include_access_modifier?: boolean;
-    indentNum?: number;
-    staticFunc?: boolean;
-    isConstructor?: boolean;
-    exclude?: boolean
-}
-
-/*
-    Produces the TS string declaring the method represented by method_node.
-*/
-function renderMethod(
-    method_node: FunctionNode,
-    ns_name: string,
-    funcModifier?: FunctionModifier,
-    options: RenderMethodOptions = {
-        include_access_modifier: true,
-        include_name: true,
-        indentNum: 0,
-        exclude: false,
-        staticFunc: false,
-        isConstructor: false
-    },
-): string {
-
-    const {
-        include_access_modifier = true,
-        include_name = true,
-        indentNum = 0,
-        exclude = false,
-        staticFunc = false,
-        isConstructor = false
-    } = options;
-
-    const info = getFunctionInfo(method_node, funcModifier, isConstructor);
-    const ind = "\t".repeat(indentNum);
-    let indentAdded = false;
-    let str = '';
-    str += renderDocString(info.doc, info.params, info.return_type, indentNum, ns_name);
-    if (exclude) {
-        str += `${ind}// `;
-        indentAdded = true;
-    }
-
-    if (include_access_modifier) {
-        if (!indentAdded) {
-            str += ind;
-            indentAdded = true;
-        }
-        str += `public `;
-        indentAdded = true;
-    }
-    if (staticFunc) {
-        if (!indentAdded) {
-            str += ind;
-            indentAdded = true;
-        }
-        str += `static `;
-        indentAdded = true;
-    }
-    if (include_name) {
-        if (!indentAdded) {
-            str += ind;
-            indentAdded = true;
-        }
-        str += info.name;
-        if (funcModifier?.generic != null)
-            str += funcModifier?.generic;
-    }
-
-    if (!indentAdded) {
-        str += ind;
-        indentAdded = true;
-    }
-    str += '(';
-
-    if (info.params.length > 0) {
-        let params: string[] = [];
-        for (const param of info.params) {
-            params.push(param.name + (param.optional ? "?" : "") + ': ' + param.type);
-        }
-        str += params.join(", ");
-    }
-
-    str += ')'
-    if (info.return_type != null)
-        str += ': ' + info.return_type.type;
-    str += ";";
-
-    return str;
-}
-
-
-function renderCallback(cb_node: FunctionNode, ns_name: string): string {
+export function renderCallback(cb_node: FunctionNode, ns_name: string): string {
     const cb_name = cb_node.$.name;
     let body = renderDocString(cb_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
     body += `interface ${cb_name} {\n${renderMethod(cb_node, ns_name, undefined, { include_name: false, include_access_modifier: false, indentNum: 1 })}\n}`;
     return body;
 }
-
-
-function arrayMinus<T>(first: T[], second: T[], equals: { (a: T, b: T): boolean }): T[] {
-    return first.filter((a) => {
-        for (let b of second) {
-            if (equals(a, b)) {
-                return false;
-            }
-        }
-        return true;
-    });
-}
-
-
-function removeDuplicates<T>(arr: T[], equals: { (a: T, b: T): boolean }): T[] {
-    const unique_arr: T[] = [];
-    arr.forEach((elem) => {
-        let dup = false;
-        for (let e of unique_arr) {
-            if (equals(e, elem)) {
-                dup = true;
-                break;
-            }
-        }
-        if (!dup) unique_arr.push(elem);
-    });
-    return unique_arr;
-}
-
-
-function searchNodeByName<N extends Node>(nodes: N[], name: string): N | null {
-    for (let c of nodes) {
-        if (c.$.name === name) {
-            return c;
-        }
-    }
-    return null;
-}
-
-function getAllMethods(object: { method: FunctionNode[] }): FunctionNode[] {
-    let methods: FunctionNode[] = [];
-    if (object.method) {
-        methods = methods.concat(object.method);
-    }
-    if (object['virtual-method']) {
-        methods = methods.concat(object['virtual-method']);
-    }
-    return methods;
-}
-
-function getProperties(object: { property: ParameterNode[] | null }): ParameterNode[] {
-    let props: ParameterNode[] = [];
-    if (object.property) {
-        props = props.concat(object.property);
-    }
-    return props;
-}
-
-function getFields(object: { field: ParameterNode[] }): ParameterNode[] {
-    if (object.field) {
-        return getProperties({ property: object.field });
-    }
-    return [];
-}
-
 
 function renderEnumeration(enum_node: EnumNode, ns_name: string): string {
     let body = '';
@@ -348,25 +48,6 @@ function renderEnumeration(enum_node: EnumNode, ns_name: string): string {
 }
 
 
-function renderCallbackField(cb_node: FunctionNode, ns_name: string, indent: number, exclude: boolean): string {
-    let cb_name = cb_node.$.name;
-    if (cb_name === 'constructor') {
-        cb_name += '_'; // Append an underscore.
-    }
-
-    let result = `${"\t".repeat(indent)}`;
-    if (exclude)
-        result += "// ";
-    result += `public ${cb_name}: {${renderMethod(cb_node, ns_name, undefined, { include_name: false, include_access_modifier: false })}};`;
-    return result;
-}
-
-/** Some static functions are in constructor nodes, render them as static functions */
-function renderConstructorField(constructor_node: FunctionNode, ns_name: string, indent: number, exclude: boolean, modifier?: FunctionModifier) {
-    return `${renderMethod(constructor_node, ns_name, modifier, { indentNum: indent, exclude: exclude, staticFunc: true })}`
-}
-
-
 function renderNodeAsBlankInterface(node: Node, ns_name: string) {
     let result = renderDocString(node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
     result += `interface ${node.$.name} {}`;
@@ -377,95 +58,6 @@ function renderAlias(alias_node: ParameterNode, ns_name: string): string {
     let result = renderDocString(alias_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
     result += `type ${alias_node.$.name} = ${getTypeFromParameterNode(alias_node).type};`;
     return result;
-}
-
-function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclude?: ExcludeClass, modifier?: ClassModifier): string {
-    let props: ParameterNode[] = [];
-    let callback_fields: FunctionNode[] = [];
-    let methods = getAllMethods(rec_node);
-
-    if (rec_node.field)
-        for (let f of rec_node.field) {
-            if (f.type || f.array) {
-                props.push(f);
-            } else if (f.callback) {
-                callback_fields.push(f.callback[0]);
-            }
-        }
-    let body = '';
-
-    // Constructor keyword causes problems here so we need to check with stringify as well
-    // even if value is null it still comes up as function
-    if (JSON.stringify(rec_node.constructor) != undefined && rec_node.constructor != null) {
-        for (let construct of rec_node.constructor) {
-            if (JSON.stringify(construct) == undefined || construct == null)
-                continue;
-            const func_name = construct.$.name;
-            const excluded = exclude?.static?.includes(func_name) ?? false;
-            const modifierFunc = modifier?.function?.[func_name]
-            body += renderConstructorField(construct, ns_name, 1, excluded, modifierFunc) + "\n";
-        }
-    }
-
-    for (let f of props) {
-        body += renderDocString(f.doc?.[0]._ ?? null, undefined, undefined, 1, ns_name)
-        const excluded = exclude?.prop?.includes(f.$.name) ?? false;
-        body += '\t';
-        if (excluded)
-            body += "// "
-        body += renderProperty(f) + '\n';
-    }
-
-    for (let c of callback_fields) {
-        const func_name = c.$.name;
-        const excluded = exclude?.callback?.includes(func_name) ?? false;
-        body += renderCallbackField(c, ns_name, 1, excluded) + '\n';
-    }
-
-    for (let m of methods) {
-        const func_name = m.$.name;
-        const excluded = exclude?.method?.includes(func_name) ?? false;
-        const modifierFunc = modifier?.function?.[func_name]
-        body += renderMethod(m, ns_name, modifierFunc, { indentNum: 1, exclude: excluded }) + '\n';
-    }
-
-    let result = renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
-    const genericModifier = modifier?.generic ?? "";
-    const constructor_modifier = modifier?.function?.["constructor"];
-    result += `interface ${rec_node.$.name} {}\n`
-    result += `class ${rec_node.$.name}${genericModifier} {\n`
-    result += `${renderMethod(BuildConstructorNode(rec_node.$.name), ns_name, constructor_modifier, { indentNum: 1, isConstructor: true })}\n`;
-    result += `${body}}`;
-    return result
-}
-
-function BuildConstructorNode(class_name: string): FunctionNode {
-    return {
-        _: "constructor",
-        $: {
-            name: "constructor"
-        },
-        "return-value": [
-            {
-                $: {
-                    name: class_name
-                },
-                _: class_name,
-                type: []
-            }
-        ],
-        "parameters": [
-            {
-                "_": "",
-                $: {
-                    name: "obj"
-                },
-                "parameter": [
-
-                ]
-            }
-        ]
-    }
 }
 
 /*
@@ -592,33 +184,6 @@ function renderClassAsInterface(class_node: ClassNode, ns_name: string, exclude?
 
     return iface_str + mixin + extension + static_side;
 
-}
-
-
-function renderInterface(iface_node: InterfaceNode, exclude: string | string[], ns_name: string): string {
-
-    let exclude_method_list: string[] = [];
-    let exclude_self = false;
-    let exclude_all_members = false;
-
-    if (exclude instanceof Array) {
-        exclude_method_list = exclude_method_list.concat(exclude);
-    } else if (exclude === 'all') {
-        exclude_all_members = true;
-    } else if (exclude === 'self') {
-        exclude_self = exclude_all_members = true;
-    }
-
-    let body = '\n\n';
-    const methods = removeDuplicates(getAllMethods(iface_node), (a, b) => a.$.name === b.$.name);
-    for (let m of methods) {
-        body += renderMethod(m, ns_name, undefined, {
-            include_access_modifier: false,
-            indentNum: 1
-        }) + '\n';
-    }
-
-    return `interface ${iface_node.$.name} {${body}}`;
 }
 
 function renderNamespace(ns_node: NamespaceNode, ns_name: string, exclude?: ExcludeDesc, modifiers?: ModifierDesc): string {
