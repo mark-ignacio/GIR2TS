@@ -198,8 +198,3 @@ For example, this is the overrides file for Gtk:
     }
 }
 ```
-
-## TODO
-
-* in out parameter
-* signals
