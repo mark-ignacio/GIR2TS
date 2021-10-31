@@ -26,6 +26,604 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IActor {
 		/**
+		 * The allocation for the actor, in pixels
+		 * 
+		 * This is property is read-only, but you might monitor it to know when an
+		 * actor moves or resizes
+		 */
+		readonly allocation: ActorBox;
+		/**
+		 * The anchor point expressed as a {@link Gravity}
+		 * 
+		 * It is highly recommended not to use #ClutterActor:anchor-x,
+		 * #ClutterActor:anchor-y, and #ClutterActor:anchor-gravity in newly
+		 * written code; the anchor point adds an additional translation that
+		 * will affect the actor's relative position with regards to its
+		 * parent, as well as the position of its children. This change needs
+		 * to always be taken into account when positioning the actor. It is
+		 * recommended to use the #ClutterActor:pivot-point property instead,
+		 * as it will affect only the transformations.
+		 */
+		anchor_gravity: Gravity;
+		/**
+		 * The X coordinate of an actor's anchor point, relative to
+		 * the actor coordinate space, in pixels.
+		 * 
+		 * It is highly recommended not to use {@link Actor}:anchor-x,
+		 * #ClutterActor:anchor-y, and #ClutterActor:anchor-gravity in newly
+		 * written code; the anchor point adds an additional translation that
+		 * will affect the actor's relative position with regards to its
+		 * parent, as well as the position of its children. This change needs
+		 * to always be taken into account when positioning the actor. It is
+		 * recommended to use the #ClutterActor:pivot-point property instead,
+		 * as it will affect only the transformations.
+		 */
+		anchor_x: number;
+		/**
+		 * The Y coordinate of an actor's anchor point, relative to
+		 * the actor coordinate space, in pixels
+		 * 
+		 * It is highly recommended not to use {@link Actor}:anchor-x,
+		 * #ClutterActor:anchor-y, and #ClutterActor:anchor-gravity in newly
+		 * written code; the anchor point adds an additional translation that
+		 * will affect the actor's relative position with regards to its
+		 * parent, as well as the position of its children. This change needs
+		 * to always be taken into account when positioning the actor. It is
+		 * recommended to use the #ClutterActor:pivot-point property instead,
+		 * as it will affect only the transformations.
+		 */
+		anchor_y: number;
+		/**
+		 * Paints a solid fill of the actor's allocation using the specified
+		 * color.
+		 * 
+		 * The {@link Actor}:background-color property is animatable.
+		 */
+		background_color: Color;
+		/**
+		 * Whether the {@link Actor}:background-color property has been set.
+		 */
+		readonly background_color_set: boolean;
+		/**
+		 * Applies a transformation matrix on each child of an actor.
+		 * 
+		 * Setting this property with a {@link Matrix} will set the
+		 * #ClutterActor:child-transform-set property to %TRUE as a side effect;
+		 * setting this property with %NULL will set the
+		 * #ClutterActor:child-transform-set property to %FALSE.
+		 * 
+		 * The #ClutterActor:child-transform property is animatable.
+		 */
+		child_transform: Matrix;
+		/**
+		 * Whether the {@link Actor}:child-transform property is set.
+		 */
+		readonly child_transform_set: boolean;
+		/**
+		 * The visible region of the actor, in actor-relative coordinates
+		 */
+		clip: Geometry;
+		/**
+		 * The visible region of the actor, in actor-relative coordinates,
+		 * expressed as a {@link Rect}.
+		 * 
+		 * Setting this property to %NULL will unset the existing clip.
+		 * 
+		 * Setting this property will change the #ClutterActor:has-clip
+		 * property as a side effect.
+		 */
+		clip_rect: Rect;
+		/**
+		 * Whether the clip region should track the allocated area
+		 * of the actor.
+		 * 
+		 * This property is ignored if a clip area has been explicitly
+		 * set using clutter_actor_set_clip().
+		 */
+		clip_to_allocation: boolean;
+		/**
+		 * The {@link Content} implementation that controls the content
+		 * of the actor.
+		 */
+		content: Content;
+		/**
+		 * The bounding box for the {@link Content} used by the actor.
+		 * 
+		 * The value of this property is controlled by the #ClutterActor:allocation
+		 * and #ClutterActor:content-gravity properties of #ClutterActor.
+		 * 
+		 * The bounding box for the content is guaranteed to never exceed the
+		 * allocation's of the actor.
+		 */
+		readonly content_box: ActorBox;
+		/**
+		 * The alignment that should be honoured by the {@link Content}
+		 * set with the #ClutterActor:content property.
+		 * 
+		 * Changing the value of this property will change the bounding box of
+		 * the content; you can use the #ClutterActor:content-box property to
+		 * get the position and size of the content within the actor's
+		 * allocation.
+		 * 
+		 * This property is meaningful only for #ClutterContent implementations
+		 * that have a preferred size, and if the preferred size is smaller than
+		 * the actor's allocation.
+		 * 
+		 * The #ClutterActor:content-gravity property is animatable.
+		 */
+		content_gravity: ContentGravity;
+		/**
+		 * The repeat policy for the actor's {@link Actor}:content.
+		 */
+		content_repeat: ContentRepeat;
+		/**
+		 * The position of the actor on the Z axis.
+		 * 
+		 * The {@link Actor}:depth property is relative to the parent's
+		 * modelview matrix.
+		 * 
+		 * Setting this property will call #ClutterContainerIface.sort_depth_order()
+		 * which is usually a no-op, and it's most likely not what you want.
+		 * 
+		 * The #ClutterActor:depth property is animatable.
+		 */
+		depth: number;
+		/**
+		 * The actor's first child.
+		 */
+		readonly first_child: Actor;
+		/**
+		 * This flag controls whether the {@link Actor}:fixed-x and
+		 * #ClutterActor:fixed-y properties are used
+		 */
+		fixed_position_set: boolean;
+		/**
+		 * The fixed X position of the actor in pixels.
+		 * 
+		 * Writing this property sets {@link Actor}:fixed-position-set
+		 * property as well, as a side effect
+		 */
+		fixed_x: number;
+		/**
+		 * The fixed Y position of the actor in pixels.
+		 * 
+		 * Writing this property sets the {@link Actor}:fixed-position-set
+		 * property as well, as a side effect
+		 */
+		fixed_y: number;
+		/**
+		 * Whether the actor has the {@link Actor}:clip property set or not
+		 */
+		// readonly has_clip: boolean;
+		/**
+		 * Whether the actor contains the pointer of a {@link InputDevice}
+		 * or not.
+		 */
+		// readonly has_pointer: boolean;
+		/**
+		 * Height of the actor (in pixels).  If written, forces the minimum and
+		 * natural size request of the actor to the given height. If read, returns
+		 * the allocated height if available, otherwise the height request.
+		 * 
+		 * The {@link Actor}:height property is animatable.
+		 */
+		height: number;
+		/**
+		 * The actor's last child.
+		 */
+		readonly last_child: Actor;
+		/**
+		 * A delegate object for controlling the layout of the children of
+		 * an actor.
+		 */
+		layout_manager: LayoutManager;
+		magnification_filter: ScalingFilter;
+		/**
+		 * Whether the actor is mapped (will be painted when the stage
+		 * to which it belongs is mapped)
+		 */
+		readonly mapped: boolean;
+		/**
+		 * The margin (in pixels) from the bottom of the actor.
+		 * 
+		 * This property adds a margin to the actor's preferred size; the margin
+		 * will be automatically taken into account when allocating the actor.
+		 * 
+		 * The {@link Actor}:margin-bottom property is animatable.
+		 */
+		margin_bottom: number;
+		/**
+		 * The margin (in pixels) from the left of the actor.
+		 * 
+		 * This property adds a margin to the actor's preferred size; the margin
+		 * will be automatically taken into account when allocating the actor.
+		 * 
+		 * The {@link Actor}:margin-left property is animatable.
+		 */
+		margin_left: number;
+		/**
+		 * The margin (in pixels) from the right of the actor.
+		 * 
+		 * This property adds a margin to the actor's preferred size; the margin
+		 * will be automatically taken into account when allocating the actor.
+		 * 
+		 * The {@link Actor}:margin-right property is animatable.
+		 */
+		margin_right: number;
+		/**
+		 * The margin (in pixels) from the top of the actor.
+		 * 
+		 * This property adds a margin to the actor's preferred size; the margin
+		 * will be automatically taken into account when allocating the actor.
+		 * 
+		 * The {@link Actor}:margin-top property is animatable.
+		 */
+		margin_top: number;
+		/**
+		 * A forced minimum height request for the actor, in pixels
+		 * 
+		 * Writing this property sets the {@link Actor}:min-height-set property
+		 * as well, as a side effect. This property overrides the usual height
+		 * request of the actor.
+		 */
+		min_height: number;
+		/**
+		 * This flag controls whether the {@link Actor}:min-height property
+		 * is used
+		 */
+		min_height_set: boolean;
+		/**
+		 * A forced minimum width request for the actor, in pixels
+		 * 
+		 * Writing this property sets the {@link Actor}:min-width-set property
+		 * as well, as a side effect.
+		 * 
+		 * This property overrides the usual width request of the actor.
+		 */
+		min_width: number;
+		/**
+		 * This flag controls whether the {@link Actor}:min-width property
+		 * is used
+		 */
+		min_width_set: boolean;
+		minification_filter: ScalingFilter;
+		/**
+		 * The name of the actor
+		 */
+		name: string;
+		/**
+		 * A forced natural height request for the actor, in pixels
+		 * 
+		 * Writing this property sets the {@link Actor}:natural-height-set
+		 * property as well, as a side effect. This property overrides the
+		 * usual height request of the actor
+		 */
+		natural_height: number;
+		/**
+		 * This flag controls whether the {@link Actor}:natural-height property
+		 * is used
+		 */
+		natural_height_set: boolean;
+		/**
+		 * A forced natural width request for the actor, in pixels
+		 * 
+		 * Writing this property sets the {@link Actor}:natural-width-set
+		 * property as well, as a side effect. This property overrides the
+		 * usual width request of the actor
+		 */
+		natural_width: number;
+		/**
+		 * This flag controls whether the {@link Actor}:natural-width property
+		 * is used
+		 */
+		natural_width_set: boolean;
+		/**
+		 * Determines the conditions in which the actor will be redirected
+		 * to an offscreen framebuffer while being painted. For example this
+		 * can be used to cache an actor in a framebuffer or for improved
+		 * handling of transparent actors. See
+		 * clutter_actor_set_offscreen_redirect() for details.
+		 */
+		offscreen_redirect: OffscreenRedirect;
+		/**
+		 * Opacity of an actor, between 0 (fully transparent) and
+		 * 255 (fully opaque)
+		 * 
+		 * The {@link Actor}:opacity property is animatable.
+		 */
+		opacity: number;
+		/**
+		 * The point around which the scaling and rotation transformations occur.
+		 * 
+		 * The pivot point is expressed in normalized coordinates space, with (0, 0)
+		 * being the top left corner of the actor and (1, 1) the bottom right corner
+		 * of the actor.
+		 * 
+		 * The default pivot point is located at (0, 0).
+		 * 
+		 * The {@link Actor}:pivot-point property is animatable.
+		 */
+		pivot_point: Point;
+		/**
+		 * The Z component of the {@link Actor}:pivot-point, expressed as a value
+		 * along the Z axis.
+		 * 
+		 * The #ClutterActor:pivot-point-z property is animatable.
+		 */
+		pivot_point_z: number;
+		/**
+		 * The position of the origin of the actor.
+		 * 
+		 * This property is a shorthand for setting and getting the
+		 * {@link Actor}:x and #ClutterActor:y properties at the same
+		 * time.
+		 * 
+		 * The #ClutterActor:position property is animatable.
+		 */
+		position: Point;
+		/**
+		 * Whether the actor is reactive to events or not
+		 * 
+		 * Only reactive actors will emit event-related signals
+		 */
+		reactive: boolean;
+		/**
+		 * Whether the actor has been realized
+		 */
+		readonly realized: boolean;
+		/**
+		 * Request mode for the {@link Actor}. The request mode determines the
+		 * type of geometry management used by the actor, either height for width
+		 * (the default) or width for height.
+		 * 
+		 * For actors implementing height for width, the parent container should get
+		 * the preferred width first, and then the preferred height for that width.
+		 * 
+		 * For actors implementing width for height, the parent container should get
+		 * the preferred height first, and then the preferred width for that height.
+		 * 
+		 * For instance:
+		 * 
+		 * |[<!-- language="C" -->
+		 *   ClutterRequestMode mode;
+		 *   gfloat natural_width, min_width;
+		 *   gfloat natural_height, min_height;
+		 * 
+		 *   mode = clutter_actor_get_request_mode (child);
+		 *   if (mode == CLUTTER_REQUEST_HEIGHT_FOR_WIDTH)
+		 *     {
+		 *       clutter_actor_get_preferred_width (child, -1,
+		 *                                          &min_width,
+		 *                                          &natural_width);
+		 *       clutter_actor_get_preferred_height (child, natural_width,
+		 *                                           &min_height,
+		 *                                           &natural_height);
+		 *     }
+		 *   else if (mode == CLUTTER_REQUEST_WIDTH_FOR_HEIGHT)
+		 *     {
+		 *       clutter_actor_get_preferred_height (child, -1,
+		 *                                           &min_height,
+		 *                                           &natural_height);
+		 *       clutter_actor_get_preferred_width (child, natural_height,
+		 *                                          &min_width,
+		 *                                          &natural_width);
+		 *     }
+		 *   else if (mode == CLUTTER_REQUEST_CONTENT_SIZE)
+		 *     {
+		 *       ClutterContent *content = clutter_actor_get_content (child);
+		 * 
+		 *       min_width, min_height = 0;
+		 *       natural_width = natural_height = 0;
+		 * 
+		 *       if (content != NULL)
+		 *         clutter_content_get_preferred_size (content, &natural_width, &natural_height);
+		 *     }
+		 * ]|
+		 * 
+		 * will retrieve the minimum and natural width and height depending on the
+		 * preferred request mode of the #ClutterActor "child".
+		 * 
+		 * The clutter_actor_get_preferred_size() function will implement this
+		 * check for you.
+		 */
+		request_mode: RequestMode;
+		/**
+		 * The rotation angle on the X axis.
+		 * 
+		 * The {@link Actor}:rotation-angle-x property is animatable.
+		 */
+		rotation_angle_x: number;
+		/**
+		 * The rotation angle on the Y axis
+		 * 
+		 * The {@link Actor}:rotation-angle-y property is animatable.
+		 */
+		rotation_angle_y: number;
+		/**
+		 * The rotation angle on the Z axis
+		 * 
+		 * The {@link Actor}:rotation-angle-z property is animatable.
+		 */
+		rotation_angle_z: number;
+		/**
+		 * The rotation center on the X axis.
+		 */
+		rotation_center_x: Vertex;
+		/**
+		 * The rotation center on the Y axis.
+		 */
+		rotation_center_y: Vertex;
+		/**
+		 * The rotation center on the Z axis.
+		 */
+		rotation_center_z: Vertex;
+		/**
+		 * The rotation center on the Z axis expressed as a {@link Gravity}.
+		 */
+		rotation_center_z_gravity: Gravity;
+		/**
+		 * The horizontal center point for scaling
+		 */
+		scale_center_x: number;
+		/**
+		 * The vertical center point for scaling
+		 */
+		scale_center_y: number;
+		/**
+		 * The center point for scaling expressed as a {@link Gravity}
+		 */
+		scale_gravity: Gravity;
+		/**
+		 * The horizontal scale of the actor.
+		 * 
+		 * The {@link Actor}:scale-x property is animatable.
+		 */
+		scale_x: number;
+		/**
+		 * The vertical scale of the actor.
+		 * 
+		 * The {@link Actor}:scale-y property is animatable.
+		 */
+		scale_y: number;
+		/**
+		 * The scale factor of the actor along the Z axis.
+		 * 
+		 * The {@link Actor}:scale-y property is animatable.
+		 */
+		scale_z: number;
+		/**
+		 * If %TRUE, the actor is automatically shown when parented.
+		 * 
+		 * Calling clutter_actor_hide() on an actor which has not been
+		 * parented will set this property to %FALSE as a side effect.
+		 */
+		show_on_set_parent: boolean;
+		/**
+		 * The size of the actor.
+		 * 
+		 * This property is a shorthand for setting and getting the
+		 * {@link Actor}:width and #ClutterActor:height at the same time.
+		 * 
+		 * The #ClutterActor:size property is animatable.
+		 */
+		size: Size;
+		/**
+		 * The direction of the text inside a {@link Actor}.
+		 */
+		text_direction: TextDirection;
+		/**
+		 * Overrides the transformations of a {@link Actor} with a custom
+		 * matrix.
+		 * 
+		 * The matrix specified by the #ClutterActor:transform property is
+		 * applied to the actor and its children relative to the actor's
+		 * #ClutterActor:allocation and #ClutterActor:pivot-point.
+		 * 
+		 * Application code should rarely need to use this function directly.
+		 * 
+		 * Setting this property with a #ClutterMatrix will set the
+		 * #ClutterActor:transform-set property to %TRUE as a side effect;
+		 * setting this property with %NULL will set the
+		 * #ClutterActor:transform-set property to %FALSE.
+		 * 
+		 * The #ClutterActor:transform property is animatable.
+		 */
+		transform: Matrix;
+		/**
+		 * Whether the {@link Actor}:transform property is set.
+		 */
+		readonly transform_set: boolean;
+		/**
+		 * An additional translation applied along the X axis, relative
+		 * to the actor's {@link Actor}:pivot-point.
+		 * 
+		 * The #ClutterActor:translation-x property is animatable.
+		 */
+		translation_x: number;
+		/**
+		 * An additional translation applied along the Y axis, relative
+		 * to the actor's {@link Actor}:pivot-point.
+		 * 
+		 * The #ClutterActor:translation-y property is animatable.
+		 */
+		translation_y: number;
+		/**
+		 * An additional translation applied along the Z axis, relative
+		 * to the actor's {@link Actor}:pivot-point.
+		 * 
+		 * The #ClutterActor:translation-z property is animatable.
+		 */
+		translation_z: number;
+		/**
+		 * Whether the actor is set to be visible or not
+		 * 
+		 * See also {@link Actor}:mapped
+		 */
+		visible: boolean;
+		/**
+		 * Width of the actor (in pixels). If written, forces the minimum and
+		 * natural size request of the actor to the given width. If read, returns
+		 * the allocated width if available, otherwise the width request.
+		 * 
+		 * The {@link Actor}:width property is animatable.
+		 */
+		width: number;
+		/**
+		 * X coordinate of the actor in pixels. If written, forces a fixed
+		 * position for the actor. If read, returns the fixed position if any,
+		 * otherwise the allocation if available, otherwise 0.
+		 * 
+		 * The {@link Actor}:x property is animatable.
+		 */
+		x: number;
+		/**
+		 * The alignment of an actor on the X axis, if the actor has been given
+		 * extra space for its allocation. See also the {@link Actor}:x-expand
+		 * property.
+		 */
+		x_align: ActorAlign;
+		/**
+		 * Whether a layout manager should assign more space to the actor on
+		 * the X axis.
+		 */
+		x_expand: boolean;
+		/**
+		 * Y coordinate of the actor in pixels. If written, forces a fixed
+		 * position for the actor.  If read, returns the fixed position if
+		 * any, otherwise the allocation if available, otherwise 0.
+		 * 
+		 * The {@link Actor}:y property is animatable.
+		 */
+		y: number;
+		/**
+		 * The alignment of an actor on the Y axis, if the actor has been given
+		 * extra space for its allocation.
+		 */
+		y_align: ActorAlign;
+		/**
+		 * Whether a layout manager should assign more space to the actor on
+		 * the Y axis.
+		 */
+		y_expand: boolean;
+		/**
+		 * The actor's position on the Z axis, relative to the parent's
+		 * transformations.
+		 * 
+		 * Positive values will bring the actor's position nearer to the user,
+		 * whereas negative values will bring the actor's position farther from
+		 * the user.
+		 * 
+		 * The {@link Actor}:z-position does not affect the paint or allocation
+		 * order.
+		 * 
+		 * The #ClutterActor:z-position property is animatable.
+		 */
+		z_position: number;
+		/**
+		 * {@link ActorFlags}
+		 */
+		readonly flags: number;
+		/**
 		 * Adds #action to the list of actions applied to #self
 		 * 
 		 * A {@link Action} can only belong to one actor at a time
@@ -2912,6 +3510,18 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IActorMeta {
 		/**
+		 * The {@link Actor} attached to the #ClutterActorMeta instance
+		 */
+		readonly actor: Actor;
+		/**
+		 * Whether or not the {@link ActorMeta} is enabled
+		 */
+		enabled: boolean;
+		/**
+		 * The unique name to access the {@link ActorMeta}
+		 */
+		name: string;
+		/**
 		 * Retrieves a pointer to the {@link Actor} that owns #meta
 		 * @returns a pointer to a {@link Actor} or %NULL
 		 */
@@ -2962,6 +3572,26 @@ declare namespace imports.gi.Clutter {
 	 * use {@link AlignConstraint} instead.
 	 */
 	interface IAlignConstraint {
+		/**
+		 * The axis to be used to compute the alignment
+		 */
+		align_axis: AlignAxis;
+		/**
+		 * The alignment factor, as a normalized value between 0.0 and 1.0
+		 * 
+		 * The factor depends on the {@link AlignConstraint}:align-axis property:
+		 * with an align-axis value of %CLUTTER_ALIGN_X_AXIS, 0.0 means left and
+		 * 1.0 means right; with a value of %CLUTTER_ALIGN_Y_AXIS, 0.0 means top
+		 * and 1.0 means bottom.
+		 */
+		factor: number;
+		/**
+		 * The {@link Actor} used as the source for the alignment.
+		 * 
+		 * The #ClutterActor must not be a child or a grandchild of the actor
+		 * using the constraint.
+		 */
+		source: Actor;
 		/**
 		 * Retrieves the value set using clutter_align_constraint_set_align_axis()
 		 * @returns the alignment axis
@@ -3035,6 +3665,26 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Alpha} instead.
 	 */
 	interface IAlpha {
+		/**
+		 * The alpha value as computed by the alpha function. The linear
+		 * interval is 0.0 to 1.0, but the Alpha allows overshooting by
+		 * one unit in each direction, so the valid interval is -1.0 to 2.0.
+		 */
+		readonly alpha: number;
+		/**
+		 * The progress function logical id - either a value from the
+		 * {@link AnimationMode} enumeration or a value returned by
+		 * clutter_alpha_register_func().
+		 * 
+		 * If %CLUTTER_CUSTOM_MODE is used then the function set using
+		 * clutter_alpha_set_closure() or clutter_alpha_set_func()
+		 * will be used.
+		 */
+		mode: number;
+		/**
+		 * A {@link Timeline} instance used to drive the alpha function.
+		 */
+		timeline: Timeline;
 		/**
 		 * Query the current alpha value.
 		 * @returns The current alpha value for the alpha
@@ -3157,6 +3807,32 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Animation} instead.
 	 */
 	interface IAnimation {
+		/**
+		 * The {@link Alpha} used by the animation.
+		 */
+		alpha: Alpha;
+		/**
+		 * The duration of the animation, expressed in milliseconds.
+		 */
+		duration: number;
+		/**
+		 * Whether the animation should loop.
+		 */
+		loop: boolean;
+		/**
+		 * The animation mode, either a value from {@link AnimationMode}
+		 * or a value returned by clutter_alpha_register_func(). The
+		 * default value is %CLUTTER_LINEAR.
+		 */
+		mode: number;
+		/**
+		 * The #GObject to which the animation applies.
+		 */
+		object: GObject.Object;
+		/**
+		 * The {@link Timeline} used by the animation.
+		 */
+		timeline: Timeline;
 		/**
 		 * Adds a single property with name #property_name to the
 		 * animation #animation.  For more information about animations,
@@ -3348,6 +4024,16 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Animator} instead.
 	 */
 	interface IAnimator {
+		/**
+		 * The duration of the {@link Timeline} used by the #ClutterAnimator
+		 * to drive the animation
+		 */
+		duration: number;
+		/**
+		 * The {@link Timeline} used by the #ClutterAnimator to drive the
+		 * animation
+		 */
+		timeline: Timeline;
 		/**
 		 * Compute the value for a managed property at a given progress.
 		 * 
@@ -3606,6 +4292,13 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBehaviour {
 		/**
+		 * The {@link Alpha} object used to drive this behaviour. A #ClutterAlpha
+		 * object binds a #ClutterTimeline and a function which computes a value
+		 * (the "alpha") depending on the time. Each time the alpha value changes
+		 * the alpha-notify virtual function is called.
+		 */
+		alpha: Alpha;
+		/**
 		 * Calls #func for every actor driven by #behave.
 		 * @param _func a function called for each actor
 		 * @param data optional data to be passed to the function, or %NULL
@@ -3694,6 +4387,14 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBehaviourDepth {
 		/**
+		 * End depth level to apply to the actors.
+		 */
+		depth_end: number;
+		/**
+		 * Start depth level to apply to the actors.
+		 */
+		depth_start: number;
+		/**
 		 * Gets the boundaries of the #behaviour
 		 * @param depth_start return location for the initial depth value, or %NULL
 		 * @param depth_end return location for the final depth value, or %NULL
@@ -3739,6 +4440,42 @@ declare namespace imports.gi.Clutter {
 	 * use {@link BehaviourEllipse} instead.
 	 */
 	interface IBehaviourEllipse {
+		/**
+		 * The final angle to where the rotation should end.
+		 */
+		angle_end: number;
+		/**
+		 * The initial angle from where the rotation should start.
+		 */
+		angle_start: number;
+		/**
+		 * The tilt angle for the rotation around center in X axis
+		 */
+		angle_tilt_x: number;
+		/**
+		 * The tilt angle for the rotation around center in Y axis
+		 */
+		angle_tilt_y: number;
+		/**
+		 * The tilt angle for the rotation on the Z axis
+		 */
+		angle_tilt_z: number;
+		/**
+		 * The center of the ellipse.
+		 */
+		center: Knot;
+		/**
+		 * The direction of the rotation.
+		 */
+		direction: RotateDirection;
+		/**
+		 * Height of the ellipse, in pixels
+		 */
+		height: number;
+		/**
+		 * Width of the ellipse, in pixels
+		 */
+		width: number;
 		/**
 		 * Gets the at which movements ends.
 		 * @returns angle in degrees
@@ -3874,6 +4611,14 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBehaviourOpacity {
 		/**
+		 * Final opacity level of the behaviour.
+		 */
+		opacity_end: number;
+		/**
+		 * Initial opacity level of the behaviour.
+		 */
+		opacity_start: number;
+		/**
 		 * Gets the initial and final levels of the opacity applied by #behaviour
 		 * on each actor it controls.
 		 * @param opacity_start return location for the minimum level of opacity, or %NULL
@@ -3922,6 +4667,7 @@ declare namespace imports.gi.Clutter {
 	 * use {@link BehaviourPath} instead.
 	 */
 	interface IBehaviourPath {
+		path: Path;
 		/**
 		 * Get the current path of the behaviour
 		 * @returns the path
@@ -3999,6 +4745,34 @@ declare namespace imports.gi.Clutter {
 	 * use {@link BehaviourRotate} instead.
 	 */
 	interface IBehaviourRotate {
+		/**
+		 * The final angle to where the rotation should end.
+		 */
+		angle_end: number;
+		/**
+		 * The initial angle from whence the rotation should start.
+		 */
+		angle_start: number;
+		/**
+		 * The axis of rotation.
+		 */
+		axis: RotateAxis;
+		/**
+		 * The x center of rotation.
+		 */
+		center_x: number;
+		/**
+		 * The y center of rotation.
+		 */
+		center_y: number;
+		/**
+		 * The z center of rotation.
+		 */
+		center_z: number;
+		/**
+		 * The direction of the rotation.
+		 */
+		direction: RotateDirection;
 		/**
 		 * Retrieves the {@link RotateAxis} used by the rotate behaviour.
 		 * @returns the rotation axis
@@ -4088,6 +4862,22 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBehaviourScale {
 		/**
+		 * The final scaling factor on the X axis for the actors.
+		 */
+		x_scale_end: number;
+		/**
+		 * The initial scaling factor on the X axis for the actors.
+		 */
+		x_scale_start: number;
+		/**
+		 * The final scaling factor on the Y axis for the actors.
+		 */
+		y_scale_end: number;
+		/**
+		 * The initial scaling factor on the Y axis for the actors.
+		 */
+		y_scale_start: number;
+		/**
 		 * Retrieves the bounds used by scale behaviour.
 		 * @param x_scale_start return location for the initial scale factor on the X
 		 *   axis, or %NULL
@@ -4142,6 +4932,16 @@ declare namespace imports.gi.Clutter {
 	 * use {@link BinLayout} instead.
 	 */
 	interface IBinLayout {
+		/**
+		 * The default horizontal alignment policy for actors managed
+		 * by the {@link BinLayout}
+		 */
+		x_align: BinAlignment;
+		/**
+		 * The default vertical alignment policy for actors managed
+		 * by the {@link BinLayout}
+		 */
+		y_align: BinAlignment;
 		/**
 		 * Adds a {@link Actor} to the container using #self and
 		 * sets the alignment policies for it
@@ -4212,6 +5012,21 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBindConstraint {
 		/**
+		 * The coordinate to be bound
+		 */
+		coordinate: BindCoordinate;
+		/**
+		 * The offset, in pixels, to be applied to the binding
+		 */
+		offset: number;
+		/**
+		 * The {@link Actor} used as the source for the binding.
+		 * 
+		 * The #ClutterActor must not be contained inside the actor associated
+		 * to the constraint.
+		 */
+		source: Actor;
+		/**
 		 * Retrieves the bound coordinate of the constraint
 		 * @returns the bound coordinate
 		 */
@@ -4272,6 +5087,10 @@ declare namespace imports.gi.Clutter {
 	 * use {@link BindingPool} instead.
 	 */
 	interface IBindingPool {
+		/**
+		 * The unique name of the {@link BindingPool}.
+		 */
+		name: string;
 		/**
 		 * Activates the callback associated to the action that is
 		 * bound to the #key_val and #modifiers pair.
@@ -4492,6 +5311,22 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBox {
 		/**
+		 * The color to be used to paint the background of the
+		 * {@link Box}. Setting this property will set the
+		 * #ClutterBox:color-set property as a side effect
+		 * 
+		 * This property sets the #ClutterActor:background-color property
+		 * internally.
+		 */
+		color: Color;
+		/**
+		 * Whether the {@link Box}:color property has been set.
+		 * 
+		 * This property reads the #ClutterActor:background-color-set property
+		 * internally.
+		 */
+		color_set: boolean;
+		/**
 		 * Retrieves the background color of #box
 		 * 
 		 * If the {@link Box}:color-set property is set to %FALSE the
@@ -4614,6 +5449,54 @@ declare namespace imports.gi.Clutter {
 	 * use {@link BoxLayout} instead.
 	 */
 	interface IBoxLayout {
+		/**
+		 * The duration of the animations, in case {@link BoxLayout}:use-animations
+		 * is set to %TRUE.
+		 * 
+		 * The duration is expressed in milliseconds.
+		 */
+		easing_duration: number;
+		/**
+		 * The easing mode for the animations, in case
+		 * {@link BoxLayout}:use-animations is set to %TRUE.
+		 * 
+		 * The easing mode has the same semantics of #ClutterAnimation:mode: it can
+		 * either be a value from the #ClutterAnimationMode enumeration, like
+		 * %CLUTTER_EASE_OUT_CUBIC, or a logical id as returned by
+		 * clutter_alpha_register_func().
+		 * 
+		 * The default value is %CLUTTER_EASE_OUT_CUBIC.
+		 */
+		easing_mode: number;
+		/**
+		 * Whether the {@link BoxLayout} should arrange its children
+		 * homogeneously, i.e. all children get the same size
+		 */
+		homogeneous: boolean;
+		/**
+		 * The orientation of the {@link BoxLayout}, either horizontal
+		 * or vertical
+		 */
+		orientation: Orientation;
+		/**
+		 * Whether the {@link BoxLayout} should pack items at the start
+		 * or append them at the end
+		 */
+		pack_start: boolean;
+		/**
+		 * The spacing between children of the {@link BoxLayout}, in pixels
+		 */
+		spacing: number;
+		/**
+		 * Whether the {@link BoxLayout} should animate changes in the
+		 * layout, overriding the easing state of the children.
+		 */
+		use_animations: boolean;
+		/**
+		 * Whether the {@link BoxLayout} should arrange its children
+		 * alongside the Y axis, instead of alongside the X axis
+		 */
+		vertical: boolean;
 		/**
 		 * Retrieves the horizontal and vertical alignment policies for #actor
 		 * as set using clutter_box_layout_pack() or clutter_box_layout_set_alignment()
@@ -4795,6 +5678,26 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBrightnessContrastEffect {
 		/**
+		 * The brightness change to apply to the effect.
+		 * 
+		 * This property uses a {@link Color} to represent the changes to each
+		 * color channel. The range is [ 0, 255 ], with 127 as the value used
+		 * to indicate no change; values smaller than 127 indicate a decrease
+		 * in brightness, and values larger than 127 indicate an increase in
+		 * brightness.
+		 */
+		brightness: Color;
+		/**
+		 * The contrast change to apply to the effect.
+		 * 
+		 * This property uses a {@link Color} to represent the changes to each
+		 * color channel. The range is [ 0, 255 ], with 127 as the value used
+		 * to indicate no change; values smaller than 127 indicate a decrease
+		 * in contrast, and values larger than 127 indicate an increase in
+		 * contrast.
+		 */
+		contrast: Color;
+		/**
 		 * Retrieves the change in brightness used by #effect.
 		 * @param red return location for red component of the
 		 *    change in brightness
@@ -4875,6 +5778,23 @@ declare namespace imports.gi.Clutter {
 	 * use {@link CairoTexture} instead.
 	 */
 	interface ICairoTexture {
+		/**
+		 * Controls whether the {@link CairoTexture} should automatically
+		 * resize the Cairo surface whenever the actor's allocation changes.
+		 * If :auto-resize is set to %TRUE the surface contents will also
+		 * be invalidated automatically.
+		 */
+		auto_resize: boolean;
+		/**
+		 * The height of the Cairo surface used by the {@link CairoTexture}
+		 * actor, in pixels.
+		 */
+		surface_height: number;
+		/**
+		 * The width of the Cairo surface used by the {@link CairoTexture}
+		 * actor, in pixels.
+		 */
+		surface_width: number;
 		/**
 		 * Clears #self's internal drawing surface, so that the next upload
 		 * will replace the previous contents of the {@link CairoTexture}
@@ -4993,6 +5913,34 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ICanvas {
 		/**
+		 * The height of the canvas.
+		 */
+		height: number;
+		/**
+		 * The scaling factor to be applied to the Cairo surface used for
+		 * drawing.
+		 * 
+		 * If {@link Canvas}:scale-factor is set to a negative value, the
+		 * value of the #ClutterSettings:window-scaling-factor property is
+		 * used instead.
+		 * 
+		 * Use #ClutterCanvas:scale-factor-set to check if the scale factor
+		 * is set.
+		 */
+		scale_factor: number;
+		/**
+		 * Whether the {@link Canvas}:scale-factor property is set.
+		 * 
+		 * If the #ClutterCanvas:scale-factor-set property is %FALSE
+		 * then #ClutterCanvas will use the #ClutterSettings:window-scaling-factor
+		 * property.
+		 */
+		readonly scale_factor_set: boolean;
+		/**
+		 * The width of the canvas.
+		 */
+		width: number;
+		/**
 		 * Retrieves the scaling factor of #canvas, as set using
 		 * clutter_canvas_set_scale_factor().
 		 * @returns the scaling factor, or -1 if the #canvas
@@ -5067,6 +6015,22 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IChildMeta {
 		/**
+		 * The {@link Actor} being wrapped by this #ClutterChildMeta
+		 */
+		actor: Actor;
+		/**
+		 * The {@link Container} that created this #ClutterChildMeta.
+		 */
+		container: Container;
+		/**
+		 * the container handling this data
+		 */
+		// readonly container: Container;
+		/**
+		 * the actor wrapped by this data
+		 */
+		// readonly actor: Actor;
+		/**
 		 * Retrieves the actor wrapped by #data
 		 * @returns a {@link Actor}
 		 */
@@ -5127,6 +6091,30 @@ declare namespace imports.gi.Clutter {
 	 * use {@link ClickAction} instead.
 	 */
 	interface IClickAction {
+		/**
+		 * Whether the clickable actor has the pointer grabbed
+		 */
+		readonly held: boolean;
+		/**
+		 * The minimum duration of a press for it to be recognized as a long
+		 * press gesture, in milliseconds.
+		 * 
+		 * A value of -1 will make the {@link ClickAction} use the value of
+		 * the #ClutterSettings:long-press-duration property.
+		 */
+		long_press_duration: number;
+		/**
+		 * The maximum allowed distance that can be covered (on both axes) before
+		 * a long press gesture is cancelled, in pixels.
+		 * 
+		 * A value of -1 will make the {@link ClickAction} use the value of
+		 * the #ClutterSettings:dnd-drag-threshold property.
+		 */
+		long_press_threshold: number;
+		/**
+		 * Whether the clickable actor should be in "pressed" state
+		 */
+		readonly pressed: boolean;
 		/**
 		 * Retrieves the button that was pressed.
 		 * @returns the button value
@@ -5210,6 +6198,10 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IClone {
 		/**
+		 * This property specifies the source actor being cloned.
+		 */
+		source: Actor;
+		/**
 		 * Retrieves the source {@link Actor} being cloned by #self.
 		 * @returns the actor source for the clone
 		 */
@@ -5277,6 +6269,10 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IColorizeEffect {
 		/**
+		 * The tint to apply to the actor
+		 */
+		tint: Color;
+		/**
 		 * Retrieves the tint used by #effect
 		 * @param tint return location for the color used
 		 */
@@ -5336,6 +6332,23 @@ declare namespace imports.gi.Clutter {
 	 * use {@link DeformEffect} instead.
 	 */
 	interface IDeformEffect {
+		/**
+		 * A material to be used when painting the back of the actor
+		 * to which this effect has been applied
+		 * 
+		 * By default, no material will be used
+		 */
+		back_material: any;
+		/**
+		 * The number of horizontal tiles. The bigger the number, the
+		 * smaller the tiles
+		 */
+		x_tiles: number;
+		/**
+		 * The number of vertical tiles. The bigger the number, the
+		 * smaller the tiles
+		 */
+		y_tiles: number;
 		/**
 		 * Retrieves the handle to the back face material used by #effect
 		 * @returns a handle for the material, or %NULL.
@@ -5398,6 +6411,11 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IDesaturateEffect {
 		/**
+		 * The desaturation factor, between 0.0 (no desaturation) and 1.0 (full
+		 * desaturation).
+		 */
+		factor: number;
+		/**
 		 * Retrieves the desaturation factor of #effect
 		 * @returns the desaturation factor
 		 */
@@ -5436,6 +6454,7 @@ declare namespace imports.gi.Clutter {
 	 * use {@link DeviceManager} instead.
 	 */
 	interface IDeviceManager {
+		backend: Backend;
 		/**
 		 * Retrieves the core {@link InputDevice} of type #device_type
 		 * 
@@ -5497,6 +6516,65 @@ declare namespace imports.gi.Clutter {
 	 * use {@link DragAction} instead.
 	 */
 	interface IDragAction {
+		/**
+		 * Constains the dragging action (or in particular, the resulting
+		 * actor position) to the specified {@link Rect}, in parent's
+		 * coordinates.
+		 */
+		drag_area: Rect;
+		/**
+		 * Whether the {@link DragAction}:drag-area property has been set.
+		 */
+		readonly drag_area_set: boolean;
+		/**
+		 * Constraints the dragging action to the specified axis
+		 */
+		drag_axis: DragAxis;
+		/**
+		 * The {@link Actor} that is effectively being dragged
+		 * 
+		 * A #ClutterDragAction will, be default, use the #ClutterActor that
+		 * has been attached to the action; it is possible to create a
+		 * separate #ClutterActor and use it instead.
+		 * 
+		 * Setting this property has no effect on the #ClutterActor argument
+		 * passed to the #ClutterDragAction signals
+		 */
+		drag_handle: Actor;
+		/**
+		 * The horizontal threshold, in pixels, that the cursor must travel
+		 * in order to begin a drag action.
+		 * 
+		 * When set to a positive value, {@link DragAction} will only emit
+		 * #ClutterDragAction::drag-begin if the pointer has moved
+		 * horizontally at least of the given amount of pixels since
+		 * the button press event.
+		 * 
+		 * When set to -1, #ClutterDragAction will use the default threshold
+		 * stored in the #ClutterSettings:dnd-drag-threshold property of
+		 * #ClutterSettings.
+		 * 
+		 * When read, this property will always return a valid drag
+		 * threshold, either as set or the default one.
+		 */
+		x_drag_threshold: number;
+		/**
+		 * The vertical threshold, in pixels, that the cursor must travel
+		 * in order to begin a drag action.
+		 * 
+		 * When set to a positive value, {@link DragAction} will only emit
+		 * #ClutterDragAction::drag-begin if the pointer has moved
+		 * vertically at least of the given amount of pixels since
+		 * the button press event.
+		 * 
+		 * When set to -1, #ClutterDragAction will use the value stored
+		 * in the #ClutterSettings:dnd-drag-threshold property of
+		 * #ClutterSettings.
+		 * 
+		 * When read, this property will always return a valid drag
+		 * threshold, either as set or the default one.
+		 */
+		y_drag_threshold: number;
 		/**
 		 * Retrieves the "drag area" associated with #action, that
 		 * is a {@link Rect} that constrains the actor movements,
@@ -5719,6 +6797,53 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IFlowLayout {
 		/**
+		 * The spacing between columns, in pixels; the value of this
+		 * property is honoured by horizontal non-overflowing layouts
+		 * and by vertical overflowing layouts
+		 */
+		column_spacing: number;
+		/**
+		 * Whether each child inside the {@link FlowLayout} should receive
+		 * the same allocation
+		 */
+		homogeneous: boolean;
+		/**
+		 * Maximum width for each column in the layout, in pixels. If
+		 * set to -1 the width will be the maximum child width
+		 */
+		max_column_width: number;
+		/**
+		 * Maximum height for each row in the layout, in pixels. If
+		 * set to -1 the width will be the maximum child height
+		 */
+		max_row_height: number;
+		/**
+		 * Minimum width for each column in the layout, in pixels
+		 */
+		min_column_width: number;
+		/**
+		 * Minimum height for each row in the layout, in pixels
+		 */
+		min_row_height: number;
+		/**
+		 * The orientation of the {@link FlowLayout}. The children
+		 * of the layout will be layed out following the orientation.
+		 * 
+		 * This property also controls the overflowing directions
+		 */
+		orientation: FlowOrientation;
+		/**
+		 * The spacing between rows, in pixels; the value of this
+		 * property is honoured by vertical non-overflowing layouts and
+		 * by horizontal overflowing layouts
+		 */
+		row_spacing: number;
+		/**
+		 * Whether the {@link FlowLayout} should arrange its children
+		 * on a grid
+		 */
+		snap_to_grid: boolean;
+		/**
 		 * Retrieves the spacing between columns
 		 * @returns the spacing between columns of the {@link FlowLayout},
 		 *   in pixels
@@ -5826,6 +6951,32 @@ declare namespace imports.gi.Clutter {
 	 * use {@link GestureAction} instead.
 	 */
 	interface IGestureAction {
+		/**
+		 * Number of touch points to trigger a gesture action.
+		 */
+		n_touch_points: number;
+		/**
+		 * The horizontal trigger distance to be used by the action to either
+		 * emit the {@link GestureAction}::gesture-begin signal or to emit
+		 * the #ClutterGestureAction::gesture-cancel signal.
+		 * 
+		 * A negative value will be interpreted as the default drag threshold.
+		 */
+		threshold_trigger_distance_x: number;
+		/**
+		 * The vertical trigger distance to be used by the action to either
+		 * emit the {@link GestureAction}::gesture-begin signal or to emit
+		 * the #ClutterGestureAction::gesture-cancel signal.
+		 * 
+		 * A negative value will be interpreted as the default drag threshold.
+		 */
+		threshold_trigger_distance_y: number;
+		/**
+		 * The trigger edge to be used by the action to either emit the
+		 * {@link GestureAction}::gesture-begin signal or to emit the
+		 * #ClutterGestureAction::gesture-cancel signal.
+		 */
+		threshold_trigger_edge: GestureTriggerEdge;
 		/**
 		 * Cancel a {@link GestureAction} before it begins
 		 */
@@ -5984,6 +7135,26 @@ declare namespace imports.gi.Clutter {
 	 * use {@link GridLayout} instead.
 	 */
 	interface IGridLayout {
+		/**
+		 * Whether all columns of the layout should have the same width
+		 */
+		column_homogeneous: boolean;
+		/**
+		 * The amount of space in pixels between two consecutive columns
+		 */
+		column_spacing: number;
+		/**
+		 * The orientation of the layout, either horizontal or vertical
+		 */
+		orientation: Orientation;
+		/**
+		 * Whether all rows of the layout should have the same height
+		 */
+		row_homogeneous: boolean;
+		/**
+		 * The amount of space in pixels between two consecutive rows
+		 */
+		row_spacing: number;
 		/**
 		 * Adds a widget to the grid.
 		 * 
@@ -6288,6 +7459,52 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IInputDevice {
 		/**
+		 * The {@link Backend} that created the device.
+		 */
+		backend: Backend;
+		/**
+		 * The {@link DeviceManager} instance which owns the device
+		 */
+		device_manager: DeviceManager;
+		device_mode: InputMode;
+		/**
+		 * The type of the device
+		 */
+		device_type: InputDeviceType;
+		/**
+		 * Whether the device is enabled.
+		 * 
+		 * A device with the {@link InputDevice}:device-mode property set
+		 * to %CLUTTER_INPUT_MODE_MASTER cannot be disabled.
+		 * 
+		 * A device must be enabled in order to receive events from it.
+		 */
+		enabled: boolean;
+		/**
+		 * Whether the device has an on screen cursor following its movement.
+		 */
+		has_cursor: boolean;
+		/**
+		 * The unique identifier of the device
+		 */
+		id: number;
+		/**
+		 * The number of axes of the device.
+		 */
+		readonly n_axes: number;
+		/**
+		 * The name of the device
+		 */
+		name: string;
+		/**
+		 * Product ID of this device.
+		 */
+		product_id: string;
+		/**
+		 * Vendor ID of this device.
+		 */
+		vendor_id: string;
+		/**
 		 * Retrieves a pointer to the {@link InputDevice} that has been
 		 * associated to #device.
 		 * 
@@ -6587,6 +7804,18 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Interval} instead.
 	 */
 	interface IInterval {
+		/**
+		 * The final value of the interval.
+		 */
+		final: GObject.Value;
+		/**
+		 * The initial value of the interval.
+		 */
+		initial: GObject.Value;
+		/**
+		 * The type of the values in the interval.
+		 */
+		value_type: GObject.Type;
 		/**
 		 * Creates a copy of #interval.
 		 * @returns the newly created {@link Interval}
@@ -7095,6 +8324,14 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ILayoutMeta {
 		/**
+		 * The {@link LayoutManager} that created this #ClutterLayoutMeta.
+		 */
+		manager: LayoutManager;
+		/**
+		 * the layout manager handling this data
+		 */
+		// readonly manager: LayoutManager;
+		/**
 		 * Retrieves the actor wrapped by #data
 		 * @returns a {@link LayoutManager}
 		 */
@@ -7176,6 +8413,13 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Model} instead.
 	 */
 	interface IModel {
+		/**
+		 * Whether the {@link Model} has a filter set
+		 * 
+		 * This property is set to %TRUE if a filter function has been
+		 * set using clutter_model_set_filter()
+		 */
+		readonly filter_set: boolean;
 		/**
 		 * Creates and appends a new row to the {@link Model}, setting the
 		 * row values upon creation. For example, to append a new row where
@@ -7413,6 +8657,14 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IModelIter {
 		/**
+		 * A reference to the {@link Model} that this iter belongs to.
+		 */
+		model: Model;
+		/**
+		 * The row number to which this iter points to.
+		 */
+		row: number;
+		/**
 		 * Copies the passed iterator.
 		 * @returns a copy of the iterator, or %NULL
 		 */
@@ -7616,6 +8868,19 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IPageTurnEffect {
 		/**
+		 * The angle of the page rotation, in degrees, between 0.0 and 360.0
+		 */
+		angle: number;
+		/**
+		 * The period of the page turn, between 0.0 (no curling) and
+		 * 1.0 (fully curled)
+		 */
+		period: number;
+		/**
+		 * The radius of the page curl, in pixels
+		 */
+		radius: number;
+		/**
 		 * Retrieves the value set using clutter_page_turn_effect_get_angle()
 		 * @returns the angle of the page curling
 		 */
@@ -7736,6 +9001,29 @@ declare namespace imports.gi.Clutter {
 	 * use {@link PanAction} instead.
 	 */
 	interface IPanAction {
+		/**
+		 * The initial acceleration factor
+		 * 
+		 * The kinetic momentum measured at the time of releasing the pointer will
+		 * be multiplied by the factor specified by this property before being used
+		 * to generate interpolated ::pan events.
+		 */
+		acceleration_factor: number;
+		/**
+		 * The rate at which the interpolated panning will decelerate in
+		 * 
+		 * {@link PanAction} will emit interpolated ::pan events with decreasing
+		 * scroll deltas, using the rate specified by this property.
+		 */
+		deceleration: number;
+		/**
+		 * Whether interpolated events emission is enabled.
+		 */
+		interpolate: boolean;
+		/**
+		 * Constraints the panning action to the specified axis
+		 */
+		pan_axis: PanAxis;
 		/**
 		 * Retrieves the initial acceleration factor for interpolated ::pan events.
 		 * @returns The initial acceleration factor for interpolated events.
@@ -7869,6 +9157,10 @@ declare namespace imports.gi.Clutter {
 	 * use {@link ParamSpecColor} instead.
 	 */
 	interface IParamSpecColor {
+		/**
+		 * default color value
+		 */
+		readonly default_value: Color;
 
 	}
 
@@ -7891,6 +9183,18 @@ declare namespace imports.gi.Clutter {
 	 * use {@link ParamSpecFixed} instead.
 	 */
 	interface IParamSpecFixed {
+		/**
+		 * lower boundary
+		 */
+		readonly minimum: Cogl.Fixed;
+		/**
+		 * higher boundary
+		 */
+		readonly maximum: Cogl.Fixed;
+		/**
+		 * default value
+		 */
+		readonly default_value: Cogl.Fixed;
 
 	}
 
@@ -7930,6 +9234,8 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Path} instead.
 	 */
 	interface IPath {
+		description: string;
+		readonly length: number;
 		/**
 		 * Add the nodes of the Cairo path to the end of #path.
 		 * @param cpath a Cairo path
@@ -8151,6 +9457,14 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IPathConstraint {
 		/**
+		 * The offset along the {@link PathConstraint}:path, between -1.0 and 2.0.
+		 */
+		offset: number;
+		/**
+		 * The {@link Path} used to constrain the position of an actor.
+		 */
+		path: Path;
+		/**
 		 * Retrieves the offset along the {@link Path} used by #constraint.
 		 * @returns the offset
 		 */
@@ -8226,6 +9540,10 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IPropertyTransition {
 		/**
+		 * The name of the property of a {@link Animatable} to animate.
+		 */
+		property_name: string;
+		/**
 		 * Retrieves the value of the {@link PropertyTransition}:property-name
 		 * property.
 		 * @returns the name of the property being animated, or %NULL if
@@ -8266,6 +9584,22 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Rectangle} instead.
 	 */
 	interface IRectangle {
+		/**
+		 * The color of the border of the rectangle.
+		 */
+		border_color: Color;
+		/**
+		 * The width of the border of the rectangle, in pixels.
+		 */
+		border_width: number;
+		/**
+		 * The color of the rectangle.
+		 */
+		color: Color;
+		/**
+		 * Whether the {@link Rectangle} should be displayed with a border.
+		 */
+		has_border: boolean;
 		/**
 		 * Gets the color of the border used by #rectangle and places
 		 * it into #color.
@@ -8358,6 +9692,10 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Score} instead.
 	 */
 	interface IScore {
+		/**
+		 * Whether the {@link Score} should restart once finished.
+		 */
+		loop: boolean;
 		/**
 		 * Appends a timeline to another one existing in the score; the newly
 		 * appended timeline will be started when #parent is complete.
@@ -8476,6 +9814,25 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Script} instead.
 	 */
 	interface IScript {
+		/**
+		 * The path of the currently parsed file. If {@link Script}:filename-set
+		 * is %FALSE then the value of this property is undefined.
+		 */
+		readonly filename: string;
+		/**
+		 * Whether the {@link Script}:filename property is set. If this property
+		 * is %TRUE then the currently parsed data comes from a file, and the
+		 * file name is stored inside the #ClutterScript:filename property.
+		 */
+		readonly filename_set: boolean;
+		/**
+		 * The translation domain, used to localize strings marked as translatable
+		 * inside a UI definition.
+		 * 
+		 * If {@link Script}:translation-domain is set to %NULL, #ClutterScript
+		 * will use gettext(), otherwise g_dgettext() will be used.
+		 */
+		translation_domain: string;
 		/**
 		 * Adds #paths to the list of search paths held by #script.
 		 * 
@@ -8678,6 +10035,10 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IScrollActor {
 		/**
+		 * The scrollin direction.
+		 */
+		scroll_mode: ScrollMode;
+		/**
 		 * Retrieves the {@link ScrollActor}:scroll-mode property
 		 * @returns the scrolling mode
 		 */
@@ -8730,6 +10091,74 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Settings} instead.
 	 */
 	interface ISettings {
+		/**
+		 * The default distance that the cursor of a pointer device
+		 * should travel before a drag operation should start.
+		 */
+		dnd_drag_threshold: number;
+		/**
+		 * The maximum distance, in pixels, between button-press events that
+		 * determines whether or not to increase the click count by 1.
+		 */
+		double_click_distance: number;
+		/**
+		 * The time, in milliseconds, that should elapse between button-press
+		 * events in order to increase the click count by 1.
+		 */
+		double_click_time: number;
+		/**
+		 * Whether or not to use antialiasing when rendering text; a value
+		 * of 1 enables it unconditionally; a value of 0 disables it
+		 * unconditionally; and -1 will use the system's default.
+		 */
+		font_antialias: number;
+		/**
+		 * The DPI used when rendering text, as a value of 1024 * dots/inch.
+		 * 
+		 * If set to -1, the system's default will be used instead
+		 */
+		font_dpi: number;
+		/**
+		 * The style of the hinting used when rendering text. Valid values
+		 * are:
+		 * 
+		 *   - hintnone
+		 *   - hintslight
+		 *   - hintmedium
+		 *   - hintfull
+		 */
+		font_hint_style: string;
+		/**
+		 * Whether or not to use hinting when rendering text; a value of 1
+		 * unconditionally enables it; a value of 0 unconditionally disables
+		 * it; and a value of -1 will use the system's default.
+		 */
+		font_hinting: number;
+		/**
+		 * The default font name that should be used by text actors, as
+		 * a string that can be passed to pango_font_description_from_string().
+		 */
+		font_name: string;
+		/**
+		 * The type of sub-pixel antialiasing used when rendering text. Valid
+		 * values are:
+		 * 
+		 *   - none
+		 *   - rgb
+		 *   - bgr
+		 *   - vrgb
+		 *   - vbgr
+		 */
+		font_subpixel_order: string;
+		/**
+		 * Sets the minimum duration for a press to be recognized as a long press
+		 * gesture. The duration is expressed in milliseconds.
+		 * 
+		 * See also {@link ClickAction}:long-press-duration.
+		 */
+		long_press_duration: number;
+		password_hint_time: number;
+		window_scaling_factor: number;
 
 	}
 
@@ -8759,6 +10188,24 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Shader} instead.
 	 */
 	interface IShader {
+		/**
+		 * Whether the shader is compiled and linked, ready for use
+		 * in the GL context.
+		 */
+		readonly compiled: boolean;
+		/**
+		 * Whether the shader is currently used in the GL rendering pipeline.
+		 */
+		enabled: boolean;
+		/**
+		 * GLSL source code for the fragment shader part of the shader program.
+		 */
+		fragment_source: string;
+		/**
+		 * GLSL source code for the vertex shader part of the shader
+		 * program, if any
+		 */
+		vertex_source: string;
 		/**
 		 * Compiles and links GLSL sources set for vertex and fragment shaders for
 		 * a {@link Shader}. If the compilation fails and a #GError return location is
@@ -9056,6 +10503,23 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ISnapConstraint {
 		/**
+		 * The edge of the {@link Actor} that should be snapped
+		 */
+		from_edge: SnapEdge;
+		/**
+		 * The offset, in pixels, between {@link SnapConstraint}:from-edge
+		 * and #ClutterSnapConstraint:to-edge
+		 */
+		offset: number;
+		/**
+		 * The {@link Actor} used as the source for the constraint
+		 */
+		source: Actor;
+		/**
+		 * The edge of the {@link SnapConstraint}:source that should be snapped
+		 */
+		to_edge: SnapEdge;
+		/**
 		 * Retrieves the edges used by the #constraint
 		 * @param from_edge return location for the actor's edge, or %NULL
 		 * @param to_edge return location for the source's edge, or %NULL
@@ -9123,6 +10587,68 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Stage} instead.
 	 */
 	interface IStage {
+		/**
+		 * Whether the {@link Stage} should accept key focus when shown.
+		 */
+		accept_focus: boolean;
+		/**
+		 * The background color of the main stage.
+		 */
+		color: Color;
+		/**
+		 * Whether the mouse pointer should be visible
+		 */
+		cursor_visible: boolean;
+		/**
+		 * The settings for the GL "fog", used only if {@link Stage}:use-fog
+		 * is set to %TRUE
+		 */
+		fog: Fog;
+		readonly fullscreen_set: boolean;
+		/**
+		 * The {@link Actor} that will receive key events from the underlying
+		 * windowing system.
+		 * 
+		 * If %NULL, the #ClutterStage will receive the events.
+		 */
+		key_focus: Actor;
+		/**
+		 * Whether or not the {@link Stage} should clear its contents
+		 * before each paint cycle.
+		 * 
+		 * See clutter_stage_set_no_clear_hint() for further information.
+		 */
+		no_clear_hint: boolean;
+		/**
+		 * Whether the stage should be rendered in an offscreen buffer.
+		 */
+		offscreen: boolean;
+		/**
+		 * The parameters used for the perspective projection from 3D
+		 * coordinates to 2D
+		 */
+		perspective: Perspective;
+		/**
+		 * The stage's title - usually displayed in stage windows title decorations.
+		 */
+		title: string;
+		/**
+		 * Whether the {@link Stage} should honour the alpha component of the
+		 * #ClutterStage:color property when painting. If Clutter is run under
+		 * a compositing manager this will result in the stage being blended
+		 * with the underlying window(s)
+		 */
+		use_alpha: boolean;
+		/**
+		 * Whether the stage should use a linear GL "fog" in creating the
+		 * depth-cueing effect, to enhance the perception of depth by fading
+		 * actors farther from the viewpoint.
+		 */
+		use_fog: boolean;
+		/**
+		 * Whether the stage is resizable via user interaction.
+		 */
+		user_resizable: boolean;
 		/**
 		 * This function essentially makes sure the right GL context is
 		 * current for the passed stage. It is not intended to
@@ -9567,6 +11093,10 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IStageManager {
 		/**
+		 * The default stage used by Clutter.
+		 */
+		readonly default_stage: Stage;
+		/**
 		 * Returns the default {@link Stage}.
 		 * @returns the default stage. The returned object
 		 *   is owned by Clutter and you should never reference or unreference it
@@ -9618,6 +11148,18 @@ declare namespace imports.gi.Clutter {
 	 * use {@link State} instead.
 	 */
 	interface IState {
+		/**
+		 * Default duration used if an duration has not been specified for a specific
+		 * source/target state pair. The values is in milliseconds.
+		 */
+		duration: number;
+		/**
+		 * The currently set target state, setting it causes the
+		 * state machine to transition to the new state, use
+		 * clutter_state_warp_to_state() to change state without
+		 * a transition.
+		 */
+		state: string;
 		/**
 		 * Retrieves the {@link Animator} that is being used for transitioning
 		 * between the two states, if any has been set
@@ -9881,6 +11423,44 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ITableLayout {
 		/**
+		 * The spacing between columns of the {@link TableLayout}, in pixels
+		 */
+		column_spacing: number;
+		/**
+		 * The duration of the animations, in case {@link TableLayout}:use-animations
+		 * is set to %TRUE.
+		 * 
+		 * The duration is expressed in milliseconds.
+		 */
+		easing_duration: number;
+		/**
+		 * The easing mode for the animations, in case
+		 * {@link TableLayout}:use-animations is set to %TRUE.
+		 * 
+		 * The easing mode has the same semantics of #ClutterAnimation:mode: it can
+		 * either be a value from the #ClutterAnimationMode enumeration, like
+		 * %CLUTTER_EASE_OUT_CUBIC, or a logical id as returned by
+		 * clutter_alpha_register_func().
+		 * 
+		 * The default value is %CLUTTER_EASE_OUT_CUBIC.
+		 */
+		easing_mode: number;
+		/**
+		 * The spacing between rows of the {@link TableLayout}, in pixels
+		 */
+		row_spacing: number;
+		/**
+		 * Whether the {@link TableLayout} should animate changes in the
+		 * layout properties.
+		 * 
+		 * By default, #ClutterTableLayout will honour the easing state of
+		 * the children when allocating them. Setting this property to
+		 * %TRUE will override the easing state with the layout manager's
+		 * #ClutterTableLayout:easing-mode and #ClutterTableLayout:easing-duration
+		 * properties.
+		 */
+		use_animations: boolean;
+		/**
 		 * Retrieves the horizontal and vertical alignment policies for #actor
 		 * as set using clutter_table_layout_pack() or
 		 * clutter_table_layout_set_alignment().
@@ -10081,6 +11661,163 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Text} instead.
 	 */
 	interface IText {
+		/**
+		 * Toggles whether return invokes the activate signal or not.
+		 */
+		activatable: boolean;
+		/**
+		 * A list of #PangoStyleAttribute<!-- -->s to be applied to the
+		 * contents of the {@link Text} actor.
+		 */
+		attributes: Pango.AttrList;
+		/**
+		 * The buffer which stores the text for this {@link Text}.
+		 * 
+		 * If set to %NULL, a default buffer will be created.
+		 */
+		buffer: TextBuffer;
+		/**
+		 * The color used to render the text.
+		 */
+		color: Color;
+		/**
+		 * The color of the cursor.
+		 */
+		cursor_color: Color;
+		/**
+		 * Will be set to %TRUE if {@link Text}:cursor-color has been set.
+		 */
+		readonly cursor_color_set: boolean;
+		/**
+		 * The current input cursor position. -1 is taken to be the end of the text
+		 */
+		cursor_position: number;
+		/**
+		 * The size of the cursor, in pixels. If set to -1 the size used will
+		 * be the default cursor size of 2 pixels.
+		 */
+		cursor_size: number;
+		/**
+		 * Whether the input cursor is visible or not.
+		 * 
+		 * The cursor will only be visible if this property and either
+		 * the {@link Text}:editable or the #ClutterText:selectable properties
+		 * are set to %TRUE.
+		 */
+		cursor_visible: boolean;
+		/**
+		 * Whether key events delivered to the actor causes editing.
+		 */
+		editable: boolean;
+		/**
+		 * The preferred place to ellipsize the contents of the {@link Text} actor
+		 */
+		ellipsize: Pango.EllipsizeMode;
+		/**
+		 * The #PangoFontDescription that should be used by the {@link Text}
+		 * 
+		 * If you have a string describing the font then you should look at
+		 * #ClutterText:font-name instead
+		 */
+		font_description: Pango.FontDescription;
+		/**
+		 * The font to be used by the {@link Text}, as a string
+		 * that can be parsed by pango_font_description_from_string().
+		 * 
+		 * If set to %NULL, the default system font will be used instead.
+		 */
+		font_name: string;
+		/**
+		 * Whether the contents of the {@link Text} should be justified
+		 * on both margins.
+		 */
+		justify: boolean;
+		/**
+		 * The preferred alignment for the text. This property controls
+		 * the alignment of multi-line paragraphs.
+		 */
+		line_alignment: Pango.Alignment;
+		/**
+		 * Whether to wrap the lines of {@link Text}:text if the contents
+		 * exceed the available allocation. The wrapping strategy is
+		 * controlled by the #ClutterText:line-wrap-mode property.
+		 */
+		line_wrap: boolean;
+		/**
+		 * If {@link Text}:line-wrap is set to %TRUE, this property will
+		 * control how the text is wrapped.
+		 */
+		line_wrap_mode: Pango.WrapMode;
+		/**
+		 * The maximum length of the contents of the {@link Text} actor.
+		 */
+		max_length: number;
+		/**
+		 * If non-zero, the character that should be used in place of
+		 * the actual text in a password text actor.
+		 */
+		password_char: number;
+		/**
+		 * The current input cursor position. -1 is taken to be the end of the text
+		 */
+		position: number;
+		/**
+		 * Whether it is possible to select text, either using the pointer
+		 * or the keyboard.
+		 * 
+		 * This property depends on the {@link Actor}:reactive property being
+		 * set to %TRUE.
+		 */
+		selectable: boolean;
+		/**
+		 * The color of selected text.
+		 */
+		selected_text_color: Color;
+		/**
+		 * Will be set to %TRUE if {@link Text}:selected-text-color has been set.
+		 */
+		readonly selected_text_color_set: boolean;
+		/**
+		 * The current input cursor position. -1 is taken to be the end of the text
+		 */
+		selection_bound: number;
+		/**
+		 * The color of the selection.
+		 */
+		selection_color: Color;
+		/**
+		 * Will be set to %TRUE if {@link Text}:selection-color has been set.
+		 */
+		readonly selection_color_set: boolean;
+		/**
+		 * Whether the {@link Text} actor should be in single line mode
+		 * or not. A single line #ClutterText actor will only contain a
+		 * single line of text, scrolling it in case its length is bigger
+		 * than the allocated size.
+		 * 
+		 * Setting this property will also set the #ClutterText:activatable
+		 * property as a side-effect.
+		 * 
+		 * The #ClutterText:single-line-mode property is used only if the
+		 * #ClutterText:editable property is set to %TRUE.
+		 */
+		single_line_mode: boolean;
+		/**
+		 * The text to render inside the actor.
+		 */
+		text: string;
+		/**
+		 * Whether the text includes Pango markup.
+		 * 
+		 * For more informations about the Pango markup format, see
+		 * pango_layout_set_markup() in the Pango documentation.
+		 * 
+		 * It is not possible to round-trip this property between
+		 * %TRUE and %FALSE. Once a string with markup has been set on
+		 * a {@link Text} actor with :use-markup set to %TRUE, the markup
+		 * is stripped from the string.
+		 */
+		use_markup: boolean;
 		/**
 		 * Emits the {@link Text}::activate signal, if #self has been set
 		 * as activatable using clutter_text_set_activatable().
@@ -10686,6 +12423,18 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ITextBuffer {
 		/**
+		 * The length (in characters) of the text in buffer.
+		 */
+		readonly length: number;
+		/**
+		 * The maximum length (in characters) of the text in the buffer.
+		 */
+		max_length: number;
+		/**
+		 * The contents of the buffer.
+		 */
+		readonly text: string;
+		/**
 		 * Deletes a sequence of characters from the buffer. #n_chars characters are
 		 * deleted starting at #position. If #n_chars is negative, then all characters
 		 * until the end of the text are deleted.
@@ -10849,6 +12598,25 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Texture} instead.
 	 */
 	interface ITexture {
+		cogl_material: any;
+		cogl_texture: any;
+		disable_slicing: boolean;
+		/**
+		 * The path of the file containing the image data to be displayed by
+		 * the texture.
+		 * 
+		 * This property is unset when using the clutter_texture_set_from_*_data()
+		 * family of functions.
+		 */
+		filename: string;
+		filter_quality: TextureQuality;
+		keep_aspect_ratio: boolean;
+		pick_with_alpha: boolean;
+		readonly pixel_format: Cogl.PixelFormat;
+		repeat_x: boolean;
+		repeat_y: boolean;
+		sync_size: boolean;
+		readonly tile_waste: number;
 		/**
 		 * Gets the size in pixels of the untransformed underlying image
 		 * @param width return location for the width, or %NULL
@@ -11215,6 +12983,48 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Timeline} instead.
 	 */
 	interface ITimeline {
+		/**
+		 * If the direction of the timeline should be automatically reversed
+		 * when reaching the end.
+		 */
+		auto_reverse: boolean;
+		/**
+		 * A delay, in milliseconds, that should be observed by the
+		 * timeline before actually starting.
+		 */
+		delay: number;
+		/**
+		 * The direction of the timeline, either %CLUTTER_TIMELINE_FORWARD or
+		 * %CLUTTER_TIMELINE_BACKWARD.
+		 */
+		direction: TimelineDirection;
+		/**
+		 * Duration of the timeline in milliseconds, depending on the
+		 * ClutterTimeline:fps value.
+		 */
+		duration: number;
+		/**
+		 * Whether the timeline should automatically rewind and restart.
+		 * 
+		 * As a side effect, setting this property to %TRUE will set the
+		 * {@link Timeline}:repeat-count property to -1, while setting this
+		 * property to %FALSE will set the #ClutterTimeline:repeat-count
+		 * property to 0.
+		 */
+		loop: boolean;
+		/**
+		 * Controls the way a {@link Timeline} computes the normalized progress.
+		 */
+		progress_mode: AnimationMode;
+		/**
+		 * Defines how many times the timeline should repeat.
+		 * 
+		 * If the repeat count is 0, the timeline does not repeat.
+		 * 
+		 * If the repeat count is set to -1, the timeline will repeat until it is
+		 * stopped.
+		 */
+		repeat_count: number;
 		/**
 		 * Adds a named marker that will be hit when the timeline has reached
 		 * the specified #progress.
@@ -11587,6 +13397,26 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ITransition {
 		/**
+		 * The {@link Animatable} instance currently being animated.
+		 */
+		animatable: Animatable;
+		/**
+		 * The {@link Interval} used to describe the initial and final states
+		 * of the transition.
+		 */
+		interval: Interval;
+		/**
+		 * Whether the {@link Transition} should be automatically detached
+		 * from the #ClutterTransition:animatable instance whenever the
+		 * #ClutterTimeline::stopped signal is emitted.
+		 * 
+		 * The #ClutterTransition:remove-on-complete property takes into
+		 * account the value of the #ClutterTimeline:repeat-count property,
+		 * and it only detaches the transition if the transition is not
+		 * repeating.
+		 */
+		remove_on_complete: boolean;
+		/**
 		 * Retrieves the {@link Animatable} set using clutter_transition_set_animatable().
 		 * @returns a {@link Animatable}, or %NULL; the returned
 		 *   animatable is owned by the #ClutterTransition, and it should not be freed
@@ -11774,6 +13604,10 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IZoomAction {
 		/**
+		 * Constraints the zooming action to the specified axis
+		 */
+		zoom_axis: ZoomAxis;
+		/**
 		 * Retrieves the focal point of the current zoom
 		 * @param point a {@link Point}
 		 */
@@ -11822,7 +13656,6 @@ declare namespace imports.gi.Clutter {
 	interface ActionClass {}
 	class ActionClass {
 		public constructor();
-		public parent_class: ActorMetaClass;
 		public _clutter_action1: {(): void;};
 		public _clutter_action2: {(): void;};
 		public _clutter_action3: {(): void;};
@@ -12000,8 +13833,7 @@ declare namespace imports.gi.Clutter {
 	interface ActorClass {}
 	class ActorClass {
 		public constructor();
-		public parent_class: GObject.InitiallyUnownedClass;
-		public _padding_dummy: any[];
+		public readonly _padding_dummy: any[];
 		public show: {(self: Actor): void;};
 		public show_all: {(self: Actor): void;};
 		public hide: {(self: Actor): void;};
@@ -12049,11 +13881,11 @@ declare namespace imports.gi.Clutter {
 	interface ActorIter {}
 	class ActorIter {
 		public constructor();
-		public dummy1: any;
-		public dummy2: any;
-		public dummy3: any;
-		public dummy4: number;
-		public dummy5: any;
+		public readonly dummy1: any;
+		public readonly dummy2: any;
+		public readonly dummy3: any;
+		public readonly dummy4: number;
+		public readonly dummy5: any;
 		/**
 		 * Safely destroys the {@link Actor} currently pointer to by the iterator
 		 * from its parent.
@@ -12141,7 +13973,6 @@ declare namespace imports.gi.Clutter {
 	interface ActorMetaClass {}
 	class ActorMetaClass {
 		public constructor();
-		public parent_class: GObject.InitiallyUnownedClass;
 		public set_actor: {(meta: ActorMeta, actor: Actor): void;};
 		public _clutter_meta1: {(): void;};
 		public _clutter_meta2: {(): void;};
@@ -12173,7 +14004,6 @@ declare namespace imports.gi.Clutter {
 	interface AlphaClass {}
 	class AlphaClass {
 		public constructor();
-		public parent_class: GObject.InitiallyUnownedClass;
 		public _clutter_alpha_1: {(): void;};
 		public _clutter_alpha_2: {(): void;};
 		public _clutter_alpha_3: {(): void;};
@@ -12193,7 +14023,7 @@ declare namespace imports.gi.Clutter {
 	interface AnimatableIface {}
 	class AnimatableIface {
 		public constructor();
-		public parent_iface: GObject.TypeInterface;
+		public readonly parent_iface: GObject.TypeInterface;
 		public animate_property: {(animatable: Animatable, animation: Animation, property_name: string, initial_value: GObject.Value, final_value: GObject.Value, progress: number, value: GObject.Value): boolean;};
 		public find_property: {(animatable: Animatable, property_name: string): GObject.ParamSpec;};
 		public get_initial_state: {(animatable: Animatable, property_name: string, value: GObject.Value): void;};
@@ -12208,7 +14038,6 @@ declare namespace imports.gi.Clutter {
 	interface AnimationClass {}
 	class AnimationClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public started: {(animation: Animation): void;};
 		public completed: {(animation: Animation): void;};
 		public _clutter_reserved1: {(): void;};
@@ -12232,8 +14061,7 @@ declare namespace imports.gi.Clutter {
 	interface AnimatorClass {}
 	class AnimatorClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public _padding_dummy: any[];
+		public readonly _padding_dummy: any[];
 	}
 
 	/**
@@ -12329,7 +14157,6 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourClass {}
 	class BehaviourClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public alpha_notify: {(behave: Behaviour, alpha_value: number): void;};
 		public applied: {(behave: Behaviour, actor: Actor): void;};
 		public removed: {(behave: Behaviour, actor: Actor): void;};
@@ -12347,7 +14174,6 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourDepthClass {}
 	class BehaviourDepthClass {
 		public constructor();
-		public parent_class: BehaviourClass;
 	}
 
 	interface BehaviourDepthPrivate {}
@@ -12361,7 +14187,6 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourEllipseClass {}
 	class BehaviourEllipseClass {
 		public constructor();
-		public parent_class: BehaviourClass;
 	}
 
 	interface BehaviourEllipsePrivate {}
@@ -12375,7 +14200,6 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourOpacityClass {}
 	class BehaviourOpacityClass {
 		public constructor();
-		public parent_class: BehaviourClass;
 	}
 
 	interface BehaviourOpacityPrivate {}
@@ -12389,7 +14213,6 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourPathClass {}
 	class BehaviourPathClass {
 		public constructor();
-		public parent_class: BehaviourClass;
 		public knot_reached: {(pathb: BehaviourPath, knot_num: number): void;};
 		public _clutter_path_1: {(): void;};
 		public _clutter_path_2: {(): void;};
@@ -12413,7 +14236,6 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourRotateClass {}
 	class BehaviourRotateClass {
 		public constructor();
-		public parent_class: BehaviourClass;
 	}
 
 	interface BehaviourRotatePrivate {}
@@ -12427,7 +14249,6 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourScaleClass {}
 	class BehaviourScaleClass {
 		public constructor();
-		public parent_class: BehaviourClass;
 	}
 
 	interface BehaviourScalePrivate {}
@@ -12442,7 +14263,6 @@ declare namespace imports.gi.Clutter {
 	interface BinLayoutClass {}
 	class BinLayoutClass {
 		public constructor();
-		public parent_class: LayoutManagerClass;
 	}
 
 	interface BinLayoutPrivate {}
@@ -12471,7 +14291,6 @@ declare namespace imports.gi.Clutter {
 	interface BoxClass {}
 	class BoxClass {
 		public constructor();
-		public parent_class: ActorClass;
 		public clutter_padding_1: {(): void;};
 		public clutter_padding_2: {(): void;};
 		public clutter_padding_3: {(): void;};
@@ -12487,7 +14306,6 @@ declare namespace imports.gi.Clutter {
 	interface BoxLayoutClass {}
 	class BoxLayoutClass {
 		public constructor();
-		public parent_class: LayoutManagerClass;
 	}
 
 	interface BoxLayoutPrivate {}
@@ -12573,7 +14391,6 @@ declare namespace imports.gi.Clutter {
 	interface CairoTextureClass {}
 	class CairoTextureClass {
 		public constructor();
-		public parent_class: TextureClass;
 		public create_surface: {(texture: CairoTexture, width: number, height: number): cairo.Surface;};
 		public draw: {(texture: CairoTexture, cr: cairo.Context): boolean;};
 		public _clutter_cairo_3: {(): void;};
@@ -12592,8 +14409,7 @@ declare namespace imports.gi.Clutter {
 	interface CanvasClass {}
 	class CanvasClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public _padding: any[];
+		public readonly _padding: any[];
 		public draw: {(canvas: Canvas, cr: cairo.Context, width: number, height: number): boolean;};
 	}
 
@@ -12608,7 +14424,6 @@ declare namespace imports.gi.Clutter {
 	interface ChildMetaClass {}
 	class ChildMetaClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	/**
@@ -12618,7 +14433,6 @@ declare namespace imports.gi.Clutter {
 	interface ClickActionClass {}
 	class ClickActionClass {
 		public constructor();
-		public parent_class: ActionClass;
 		public clicked: {(action: ClickAction, actor: Actor): void;};
 		public long_press: {(action: ClickAction, actor: Actor, state: LongPressState): boolean;};
 		public _clutter_click_action1: {(): void;};
@@ -12650,7 +14464,6 @@ declare namespace imports.gi.Clutter {
 	interface CloneClass {}
 	class CloneClass {
 		public constructor();
-		public parent_class: ActorClass;
 		public _clutter_actor_clone1: {(): void;};
 		public _clutter_actor_clone2: {(): void;};
 		public _clutter_actor_clone3: {(): void;};
@@ -12837,7 +14650,6 @@ declare namespace imports.gi.Clutter {
 	interface ConstraintClass {}
 	class ConstraintClass {
 		public constructor();
-		public parent_class: ActorMetaClass;
 		public update_allocation: {(constraint: Constraint, actor: Actor, allocation: ActorBox): void;};
 		public update_preferred_size: {(constraint: Constraint, actor: Actor, direction: Orientation, for_size: number, minimum_size: number, natural_size: number): void;};
 		public _clutter_constraint1: {(): void;};
@@ -12857,12 +14669,12 @@ declare namespace imports.gi.Clutter {
 	interface ContainerIface {}
 	class ContainerIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		/**
 		 * The GType used for storing auxiliary information about
 		 *   each of the containers children.
 		 */
-		public child_meta_type: GObject.Type;
+		public readonly child_meta_type: GObject.Type;
 		public add: {(container: Container, actor: Actor): void;};
 		public remove: {(container: Container, actor: Actor): void;};
 		public foreach: {(container: Container, callback: Callback): void;};
@@ -12885,7 +14697,7 @@ declare namespace imports.gi.Clutter {
 	interface ContentIface {}
 	class ContentIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public get_preferred_size: {(content: Content, width: number, height: number): boolean;};
 		public paint_content: {(content: Content, actor: Actor, node: PaintNode): void;};
 		public attached: {(content: Content, actor: Actor): void;};
@@ -12945,7 +14757,6 @@ declare namespace imports.gi.Clutter {
 	interface DeformEffectClass {}
 	class DeformEffectClass {
 		public constructor();
-		public parent_class: OffscreenEffectClass;
 		public deform_vertex: {(effect: DeformEffect, width: number, height: number, vertex: Cogl.TextureVertex): void;};
 		public _clutter_deform1: {(): void;};
 		public _clutter_deform2: {(): void;};
@@ -12972,8 +14783,7 @@ declare namespace imports.gi.Clutter {
 	interface DeviceManagerClass {}
 	class DeviceManagerClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public _padding: any[];
+		public readonly _padding: any[];
 		public get_devices: {(device_manager: DeviceManager): GLib.SList;};
 		public get_core_device: {(device_manager: DeviceManager, device_type: InputDeviceType): InputDevice;};
 		public get_device: {(device_manager: DeviceManager, device_id: number): InputDevice;};
@@ -12994,7 +14804,6 @@ declare namespace imports.gi.Clutter {
 	interface DragActionClass {}
 	class DragActionClass {
 		public constructor();
-		public parent_class: ActionClass;
 		public drag_begin: {(action: DragAction, actor: Actor, event_x: number, event_y: number, modifiers: ModifierType): void;};
 		public drag_motion: {(action: DragAction, actor: Actor, delta_x: number, delta_y: number): void;};
 		public drag_end: {(action: DragAction, actor: Actor, event_x: number, event_y: number, modifiers: ModifierType): void;};
@@ -13017,7 +14826,6 @@ declare namespace imports.gi.Clutter {
 	interface DropActionClass {}
 	class DropActionClass {
 		public constructor();
-		public parent_class: ActionClass;
 		public can_drop: {(action: DropAction, actor: Actor, event_x: number, event_y: number): boolean;};
 		public over_in: {(action: DropAction, actor: Actor): void;};
 		public over_out: {(action: DropAction, actor: Actor): void;};
@@ -13043,7 +14851,6 @@ declare namespace imports.gi.Clutter {
 	interface EffectClass {}
 	class EffectClass {
 		public constructor();
-		public parent_class: ActorMetaClass;
 		public pre_paint: {(effect: Effect): boolean;};
 		public post_paint: {(effect: Effect): void;};
 		public get_paint_volume: {(effect: Effect, volume: PaintVolume): boolean;};
@@ -13070,7 +14877,6 @@ declare namespace imports.gi.Clutter {
 	interface FixedLayoutClass {}
 	class FixedLayoutClass {
 		public constructor();
-		public parent_class: LayoutManagerClass;
 	}
 
 	/**
@@ -13080,7 +14886,6 @@ declare namespace imports.gi.Clutter {
 	interface FlowLayoutClass {}
 	class FlowLayoutClass {
 		public constructor();
-		public parent_class: LayoutManagerClass;
 	}
 
 	interface FlowLayoutPrivate {}
@@ -13155,7 +14960,6 @@ declare namespace imports.gi.Clutter {
 	interface GestureActionClass {}
 	class GestureActionClass {
 		public constructor();
-		public parent_class: ActionClass;
 		public gesture_begin: {(action: GestureAction, actor: Actor): boolean;};
 		public gesture_progress: {(action: GestureAction, actor: Actor): boolean;};
 		public gesture_end: {(action: GestureAction, actor: Actor): void;};
@@ -13181,8 +14985,7 @@ declare namespace imports.gi.Clutter {
 	interface GridLayoutClass {}
 	class GridLayoutClass {
 		public constructor();
-		public parent_class: LayoutManagerClass;
-		public _padding: any[];
+		public readonly _padding: any[];
 	}
 
 	interface GridLayoutPrivate {}
@@ -13196,7 +14999,6 @@ declare namespace imports.gi.Clutter {
 	interface GroupClass {}
 	class GroupClass {
 		public constructor();
-		public parent_class: ActorClass;
 		public _clutter_reserved1: {(): void;};
 		public _clutter_reserved2: {(): void;};
 		public _clutter_reserved3: {(): void;};
@@ -13217,8 +15019,7 @@ declare namespace imports.gi.Clutter {
 	interface ImageClass {}
 	class ImageClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public _padding: any[];
+		public readonly _padding: any[];
 	}
 
 	interface ImagePrivate {}
@@ -13237,7 +15038,6 @@ declare namespace imports.gi.Clutter {
 	interface IntervalClass {}
 	class IntervalClass {
 		public constructor();
-		public parent_class: GObject.InitiallyUnownedClass;
 		public validate: {(interval: Interval, pspec: GObject.ParamSpec): boolean;};
 		public compute_value: {(interval: Interval, factor: number, value: GObject.Value): boolean;};
 		public _clutter_reserved1: {(): void;};
@@ -13309,8 +15109,7 @@ declare namespace imports.gi.Clutter {
 	interface KeyframeTransitionClass {}
 	class KeyframeTransitionClass {
 		public constructor();
-		public parent_class: PropertyTransitionClass;
-		public _padding: any[];
+		public readonly _padding: any[];
 	}
 
 	interface KeyframeTransitionPrivate {}
@@ -13356,7 +15155,6 @@ declare namespace imports.gi.Clutter {
 	interface LayoutManagerClass {}
 	class LayoutManagerClass {
 		public constructor();
-		public parent_class: GObject.InitiallyUnownedClass;
 		public get_preferred_width: {(manager: LayoutManager, container: Container, for_height: number, min_width_p: number, nat_width_p: number): void;};
 		public get_preferred_height: {(manager: LayoutManager, container: Container, for_width: number, min_height_p: number, nat_height_p: number): void;};
 		public allocate: {(manager: LayoutManager, container: Container, allocation: ActorBox, flags: AllocationFlags): void;};
@@ -13384,7 +15182,6 @@ declare namespace imports.gi.Clutter {
 	interface LayoutMetaClass {}
 	class LayoutMetaClass {
 		public constructor();
-		public parent_class: ChildMetaClass;
 		public _clutter_padding1: {(): void;};
 		public _clutter_padding2: {(): void;};
 		public _clutter_padding3: {(): void;};
@@ -13397,7 +15194,6 @@ declare namespace imports.gi.Clutter {
 	interface ListModelClass {}
 	class ListModelClass {
 		public constructor();
-		public parent_class: ModelClass;
 	}
 
 	interface ListModelPrivate {}
@@ -13494,7 +15290,7 @@ declare namespace imports.gi.Clutter {
 	interface MediaIface {}
 	class MediaIface {
 		public constructor();
-		public base_iface: GObject.TypeInterface;
+		public readonly base_iface: GObject.TypeInterface;
 		public eos: {(media: Media): void;};
 		public error: {(media: Media, error: GLib.Error): void;};
 	}
@@ -13505,7 +15301,6 @@ declare namespace imports.gi.Clutter {
 	interface ModelClass {}
 	class ModelClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_n_rows: {(model: Model): number;};
 		public get_n_columns: {(model: Model): number;};
 		public get_column_name: {(model: Model, column: number): string;};
@@ -13535,7 +15330,6 @@ declare namespace imports.gi.Clutter {
 	interface ModelIterClass {}
 	class ModelIterClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_value: {(iter: ModelIter, column: number, value: GObject.Value): void;};
 		public set_value: {(iter: ModelIter, column: number, value: GObject.Value): void;};
 		public is_first: {(iter: ModelIter): boolean;};
@@ -13620,7 +15414,6 @@ declare namespace imports.gi.Clutter {
 	interface OffscreenEffectClass {}
 	class OffscreenEffectClass {
 		public constructor();
-		public parent_class: EffectClass;
 		public create_texture: {(effect: OffscreenEffect, width: number, height: number): Cogl.Handle;};
 		public paint_target: {(effect: OffscreenEffect): void;};
 		public _clutter_offscreen1: {(): void;};
@@ -13839,7 +15632,6 @@ declare namespace imports.gi.Clutter {
 	interface PanActionClass {}
 	class PanActionClass {
 		public constructor();
-		public parent_class: GestureActionClass;
 		public pan: {(action: PanAction, actor: Actor, is_interpolated: boolean): boolean;};
 		public pan_stopped: {(action: PanAction, actor: Actor): void;};
 		public _clutter_pan_action1: {(): void;};
@@ -13861,7 +15653,6 @@ declare namespace imports.gi.Clutter {
 	interface ParamSpecUnits {}
 	class ParamSpecUnits {
 		public constructor();
-		public parent_instance: GObject.ParamSpec;
 		/**
 		 * default type
 		 */
@@ -13886,7 +15677,6 @@ declare namespace imports.gi.Clutter {
 	interface PathClass {}
 	class PathClass {
 		public constructor();
-		public parent_class: GObject.InitiallyUnownedClass;
 	}
 
 	interface PathConstraintClass {}
@@ -14035,8 +15825,7 @@ declare namespace imports.gi.Clutter {
 	interface PropertyTransitionClass {}
 	class PropertyTransitionClass {
 		public constructor();
-		public parent_class: TransitionClass;
-		public _padding: any[];
+		public readonly _padding: any[];
 	}
 
 	interface PropertyTransitionPrivate {}
@@ -14227,7 +16016,6 @@ declare namespace imports.gi.Clutter {
 	interface RectangleClass {}
 	class RectangleClass {
 		public constructor();
-		public parent_class: ActorClass;
 		public _clutter_rectangle1: {(): void;};
 		public _clutter_rectangle2: {(): void;};
 		public _clutter_rectangle3: {(): void;};
@@ -14246,7 +16034,6 @@ declare namespace imports.gi.Clutter {
 	interface RotateActionClass {}
 	class RotateActionClass {
 		public constructor();
-		public parent_class: GestureActionClass;
 		public rotate: {(action: RotateAction, actor: Actor, angle: number): boolean;};
 		public _clutter_rotate_action1: {(): void;};
 		public _clutter_rotate_action2: {(): void;};
@@ -14268,7 +16055,6 @@ declare namespace imports.gi.Clutter {
 	interface ScoreClass {}
 	class ScoreClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public timeline_started: {(score: Score, timeline: Timeline): void;};
 		public timeline_completed: {(score: Score, timeline: Timeline): void;};
 		public started: {(score: Score): void;};
@@ -14292,7 +16078,6 @@ declare namespace imports.gi.Clutter {
 	interface ScriptClass {}
 	class ScriptClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_type_from_name: {(script: Script, type_name: string): GObject.Type;};
 		public _clutter_reserved1: {(): void;};
 		public _clutter_reserved2: {(): void;};
@@ -14317,7 +16102,7 @@ declare namespace imports.gi.Clutter {
 	interface ScriptableIface {}
 	class ScriptableIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public set_id: {(scriptable: Scriptable, id_: string): void;};
 		public get_id: {(scriptable: Scriptable): string;};
 		// public parse_custom_node: {(scriptable: Scriptable, script: Script, value: GObject.Value, name: string, node: Json.Node): boolean;};
@@ -14331,8 +16116,7 @@ declare namespace imports.gi.Clutter {
 	interface ScrollActorClass {}
 	class ScrollActorClass {
 		public constructor();
-		public parent_instance: ActorClass;
-		public _padding: any[];
+		public readonly _padding: any[];
 	}
 
 	interface ScrollActorPrivate {}
@@ -14412,7 +16196,6 @@ declare namespace imports.gi.Clutter {
 	interface ShaderClass {}
 	class ShaderClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	/**
@@ -14422,7 +16205,6 @@ declare namespace imports.gi.Clutter {
 	interface ShaderEffectClass {}
 	class ShaderEffectClass {
 		public constructor();
-		public parent_class: OffscreenEffectClass;
 		public get_static_shader_source: {(effect: ShaderEffect): string;};
 		public _clutter_shader1: {(): void;};
 		public _clutter_shader2: {(): void;};
@@ -14497,8 +16279,7 @@ declare namespace imports.gi.Clutter {
 	interface StageClass {}
 	class StageClass {
 		public constructor();
-		public parent_class: GroupClass;
-		public _padding_dummy: any[];
+		public readonly _padding_dummy: any[];
 		public fullscreen: {(stage: Stage): void;};
 		public unfullscreen: {(stage: Stage): void;};
 		public activate: {(stage: Stage): void;};
@@ -14513,7 +16294,6 @@ declare namespace imports.gi.Clutter {
 	interface StageManagerClass {}
 	class StageManagerClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public stage_added: {(stage_manager: StageManager, stage: Stage): void;};
 		public stage_removed: {(stage_manager: StageManager, stage: Stage): void;};
 	}
@@ -14566,8 +16346,7 @@ declare namespace imports.gi.Clutter {
 	interface StateClass {}
 	class StateClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public _padding_dummy: any[];
+		public readonly _padding_dummy: any[];
 		public completed: {(state: State): void;};
 	}
 
@@ -14657,7 +16436,6 @@ declare namespace imports.gi.Clutter {
 	interface SwipeActionClass {}
 	class SwipeActionClass {
 		public constructor();
-		public parent_class: GestureActionClass;
 		public swept: {(action: SwipeAction, actor: Actor, direction: SwipeDirection): void;};
 		public swipe: {(action: SwipeAction, actor: Actor, direction: SwipeDirection): boolean;};
 		public _clutter_swipe_action1: {(): void;};
@@ -14680,7 +16458,6 @@ declare namespace imports.gi.Clutter {
 	interface TableLayoutClass {}
 	class TableLayoutClass {
 		public constructor();
-		public parent_class: LayoutManagerClass;
 	}
 
 	interface TableLayoutPrivate {}
@@ -14695,7 +16472,6 @@ declare namespace imports.gi.Clutter {
 	interface TapActionClass {}
 	class TapActionClass {
 		public constructor();
-		public parent_class: GestureActionClass;
 		public tap: {(action: TapAction, actor: Actor): boolean;};
 		public _clutter_tap_action1: {(): void;};
 		public _clutter_tap_action2: {(): void;};
@@ -14717,7 +16493,6 @@ declare namespace imports.gi.Clutter {
 	interface TextBufferClass {}
 	class TextBufferClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public inserted_text: {(buffer: TextBuffer, position: number, chars: string, n_chars: number): void;};
 		public deleted_text: {(buffer: TextBuffer, position: number, n_chars: number): void;};
 		public get_text: {(buffer: TextBuffer, n_bytes: number): string;};
@@ -14745,7 +16520,6 @@ declare namespace imports.gi.Clutter {
 	interface TextClass {}
 	class TextClass {
 		public constructor();
-		public parent_class: ActorClass;
 		public text_changed: {(self: Text): void;};
 		public activate: {(self: Text): void;};
 		public cursor_event: {(self: Text, geometry: Geometry): void;};
@@ -14779,7 +16553,6 @@ declare namespace imports.gi.Clutter {
 	interface TextureClass {}
 	class TextureClass {
 		public constructor();
-		public parent_class: ActorClass;
 		public size_change: {(texture: Texture, width: number, height: number): void;};
 		public pixbuf_change: {(texture: Texture): void;};
 		public load_finished: {(texture: Texture, error: GLib.Error): void;};
@@ -14810,7 +16583,6 @@ declare namespace imports.gi.Clutter {
 	interface TimelineClass {}
 	class TimelineClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public started: {(timeline: Timeline): void;};
 		public completed: {(timeline: Timeline): void;};
 		public paused: {(timeline: Timeline): void;};
@@ -15056,8 +16828,7 @@ declare namespace imports.gi.Clutter {
 	interface TransitionClass {}
 	class TransitionClass {
 		public constructor();
-		public parent_class: TimelineClass;
-		public _padding: any[];
+		public readonly _padding: any[];
 		public attached: {(transition: Transition, animatable: Animatable): void;};
 		public detached: {(transition: Transition, animatable: Animatable): void;};
 		public compute_value: {(transition: Transition, animatable: Animatable, interval: Interval, progress: number): void;};
@@ -15070,8 +16841,7 @@ declare namespace imports.gi.Clutter {
 	interface TransitionGroupClass {}
 	class TransitionGroupClass {
 		public constructor();
-		public parent_class: TransitionClass;
-		public _padding: any[];
+		public readonly _padding: any[];
 	}
 
 	interface TransitionGroupPrivate {}
@@ -15091,13 +16861,13 @@ declare namespace imports.gi.Clutter {
 	interface Units {}
 	class Units {
 		public constructor();
-		public unit_type: UnitType;
-		public value: number;
-		public pixels: number;
-		public pixels_set: number;
-		public serial: number;
-		public __padding_1: number;
-		public __padding_2: number;
+		public readonly unit_type: UnitType;
+		public readonly value: number;
+		public readonly pixels: number;
+		public readonly pixels_set: number;
+		public readonly serial: number;
+		public readonly __padding_1: number;
+		public readonly __padding_2: number;
 		/**
 		 * Copies #units
 		 * @returns the newly created copy of a
@@ -15216,7 +16986,6 @@ declare namespace imports.gi.Clutter {
 	interface ZoomActionClass {}
 	class ZoomActionClass {
 		public constructor();
-		public parent_class: GestureActionClass;
 		public zoom: {(action: ZoomAction, actor: Actor, focal_point: Point, factor: number): boolean;};
 		public _clutter_zoom_action1: {(): void;};
 		public _clutter_zoom_action2: {(): void;};
@@ -15607,6 +17376,47 @@ declare namespace imports.gi.Clutter {
 	 * use {@link Media} instead.
 	 */
 	interface IMedia {
+		/**
+		 * The volume of the audio, as a normalized value between
+		 * 0.0 and 1.0.
+		 */
+		audio_volume: number;
+		/**
+		 * The fill level of the buffer for the current stream,
+		 * as a value between 0.0 and 1.0.
+		 */
+		readonly buffer_fill: number;
+		/**
+		 * Whether the current stream is seekable.
+		 */
+		readonly can_seek: boolean;
+		/**
+		 * The duration of the current stream, in seconds
+		 */
+		readonly duration: number;
+		/**
+		 * Whether the {@link Media} actor is playing.
+		 */
+		playing: boolean;
+		/**
+		 * The current progress of the playback, as a normalized
+		 * value between 0.0 and 1.0.
+		 */
+		progress: number;
+		/**
+		 * The font used to display subtitles. The font description has to
+		 * follow the same grammar as the one recognized by
+		 * pango_font_description_from_string().
+		 */
+		subtitle_font_name: string;
+		/**
+		 * The location of a subtitle file, expressed as a valid URI.
+		 */
+		subtitle_uri: string;
+		/**
+		 * The location of a media file, expressed as a valid URI.
+		 */
+		uri: string;
 		/**
 		 * Retrieves the playback volume of #media.
 		 * @returns The playback volume between 0.0 and 1.0

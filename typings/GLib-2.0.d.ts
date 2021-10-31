@@ -1253,8 +1253,8 @@ declare namespace imports.gi.GLib {
 	interface Cond {}
 	class Cond {
 		public constructor();
-		public p: any;
-		public i: number[];
+		public readonly p: any;
+		public readonly i: number[];
 		/**
 		 * If threads are waiting for #cond, all of them are unblocked.
 		 * If no threads are waiting for #cond, this function has no effect.
@@ -2532,12 +2532,12 @@ declare namespace imports.gi.GLib {
 	interface HashTableIter {}
 	class HashTableIter {
 		public constructor();
-		public dummy1: any;
-		public dummy2: any;
-		public dummy3: any;
-		public dummy4: number;
-		public dummy5: boolean;
-		public dummy6: any;
+		public readonly dummy1: any;
+		public readonly dummy2: any;
+		public readonly dummy3: any;
+		public readonly dummy4: number;
+		public readonly dummy5: boolean;
+		public readonly dummy6: any;
 		/**
 		 * Returns the #GHashTable associated with #iter.
 		 * @returns the #GHashTable associated with #iter.
@@ -2901,26 +2901,26 @@ declare namespace imports.gi.GLib {
 		 * @returns a new #GIOChannel.
 		 */
 		public static unix_new(fd: number): IOChannel;
-		public ref_count: number;
-		public funcs: IOFuncs;
-		public encoding: string;
-		public read_cd: IConv;
-		public write_cd: IConv;
-		public line_term: string;
-		public line_term_len: number;
-		public buf_size: number;
-		public read_buf: String;
-		public encoded_read_buf: String;
-		public write_buf: String;
-		public partial_write_buf: string[];
-		public use_buffer: number;
-		public do_encode: number;
-		public close_on_unref: number;
-		public is_readable: number;
-		public is_writeable: number;
-		public is_seekable: number;
-		public reserved1: any;
-		public reserved2: any;
+		public readonly ref_count: number;
+		public readonly funcs: IOFuncs;
+		public readonly encoding: string;
+		public readonly read_cd: IConv;
+		public readonly write_cd: IConv;
+		public readonly line_term: string;
+		public readonly line_term_len: number;
+		public readonly buf_size: number;
+		public readonly read_buf: String;
+		public readonly encoded_read_buf: String;
+		public readonly write_buf: String;
+		public readonly partial_write_buf: string[];
+		public readonly use_buffer: number;
+		public readonly do_encode: number;
+		public readonly close_on_unref: number;
+		public readonly is_readable: number;
+		public readonly is_writeable: number;
+		public readonly is_seekable: number;
+		public readonly reserved1: any;
+		public readonly reserved2: any;
 		/**
 		 * Close an IO channel. Any pending data to be written will be
 		 * flushed, ignoring errors. The channel will not be freed until the
@@ -4870,11 +4870,6 @@ declare namespace imports.gi.GLib {
 		 */
 		public prev: Node;
 		/**
-		 * points to the parent of the #GNode, or is %NULL if the
-		 *          #GNode is the root of the tree.
-		 */
-		public parent: Node;
-		/**
 		 * points to the first child of the #GNode.  The other
 		 *            children are accessed by using the #next pointer of each
 		 *            child.
@@ -5590,9 +5585,9 @@ declare namespace imports.gi.GLib {
 	interface Private {}
 	class Private {
 		public constructor();
-		public p: any;
-		public notify: DestroyNotify;
-		public future: any[];
+		public readonly p: any;
+		public readonly notify: DestroyNotify;
+		public readonly future: any[];
 		/**
 		 * Returns the current value of the thread local variable #key.
 		 * 
@@ -6018,8 +6013,8 @@ declare namespace imports.gi.GLib {
 	interface RWLock {}
 	class RWLock {
 		public constructor();
-		public p: any;
-		public i: number[];
+		public readonly p: any;
+		public readonly i: number[];
 		/**
 		 * Frees the resources allocated to a lock with g_rw_lock_init().
 		 * 
@@ -6197,8 +6192,8 @@ declare namespace imports.gi.GLib {
 	interface RecMutex {}
 	class RecMutex {
 		public constructor();
-		public p: any;
-		public i: number[];
+		public readonly p: any;
+		public readonly i: number[];
 		/**
 		 * Frees the resources allocated to a recursive mutex with
 		 * g_rec_mutex_init().
@@ -6846,12 +6841,12 @@ declare namespace imports.gi.GLib {
 		 * char number of the last token from g_scanner_peek_next_token()
 		 */
 		public next_position: number;
-		public symbol_table: GLib.HashTable;
-		public input_fd: number;
-		public text: string;
-		public text_end: string;
-		public buffer: string;
-		public scope_id: number;
+		public readonly symbol_table: GLib.HashTable;
+		public readonly input_fd: number;
+		public readonly text: string;
+		public readonly text_end: string;
+		public readonly buffer: string;
+		public readonly scope_id: number;
 		/**
 		 * handler function for _warn and _error
 		 */
@@ -7159,7 +7154,7 @@ declare namespace imports.gi.GLib {
 		 * use value.v_int64 rather than v_int
 		 */
 		public store_int64: number;
-		public padding_dummy: number;
+		public readonly padding_dummy: number;
 	}
 
 	/**
@@ -7457,19 +7452,18 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly-created #GSource.
 		 */
 		public static new(source_funcs: SourceFuncs, struct_size: number): Source;
-		public callback_data: any;
-		public callback_funcs: SourceCallbackFuncs;
-		public source_funcs: SourceFuncs;
-		public ref_count: number;
-		public context: MainContext;
-		public priority: number;
-		public flags: number;
-		public source_id: number;
-		public poll_fds: GLib.SList;
-		public prev: Source;
-		public next: Source;
-		public name: string;
-		public priv: SourcePrivate;
+		public readonly callback_data: any;
+		public readonly callback_funcs: SourceCallbackFuncs;
+		public readonly source_funcs: SourceFuncs;
+		public readonly ref_count: number;
+		public readonly context: MainContext;
+		public readonly priority: number;
+		public readonly flags: number;
+		public readonly source_id: number;
+		public readonly poll_fds: GLib.SList;
+		public readonly prev: Source;
+		public readonly next: Source;
+		public readonly name: string;
 		/**
 		 * Adds #child_source to #source as a "polled" source; when #source is
 		 * added to a #GMainContext, #child_source will be automatically added
@@ -7964,8 +7958,8 @@ declare namespace imports.gi.GLib {
 	interface SourceFuncs {}
 	class SourceFuncs {
 		public constructor();
-		public closure_callback: SourceFunc;
-		public closure_marshal: SourceDummyMarshal;
+		public readonly closure_callback: SourceFunc;
+		public readonly closure_marshal: SourceDummyMarshal;
 		public prepare: {(source: Source, timeout_: number): boolean;};
 		public check: {(source: Source): boolean;};
 		public dispatch: {(source: Source, callback: SourceFunc): boolean;};
@@ -8483,8 +8477,8 @@ declare namespace imports.gi.GLib {
 	interface TestLogBuffer {}
 	class TestLogBuffer {
 		public constructor();
-		public data: String;
-		public msgs: GLib.SList;
+		public readonly data: String;
+		public readonly msgs: GLib.SList;
 		/**
 		 * Internal function for gtester to free test log messages, no ABI guarantees provided.
 		 */
@@ -9707,10 +9701,10 @@ declare namespace imports.gi.GLib {
 	interface UriParamsIter {}
 	class UriParamsIter {
 		public constructor();
-		public dummy0: number;
-		public dummy1: any;
-		public dummy2: any;
-		public dummy3: number[];
+		public readonly dummy0: number;
+		public readonly dummy1: any;
+		public readonly dummy2: any;
+		public readonly dummy3: number[];
 		/**
 		 * Initializes an attribute/value pair iterator.
 		 * 
@@ -11758,7 +11752,7 @@ declare namespace imports.gi.GLib {
 	interface VariantIter {}
 	class VariantIter {
 		public constructor();
-		public x: number[];
+		public readonly x: number[];
 		/**
 		 * Creates a new heap-allocated #GVariantIter to iterate over the
 		 * container that was being iterated over by #iter.  Iteration begins on

@@ -4,6 +4,49 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface IPixbuf {
 		/**
+		 * The number of bits per sample.
+		 * 
+		 * Currently only 8 bit per sample are supported.
+		 */
+		bits_per_sample: number;
+		/**
+		 * The color space of the pixbuf.
+		 * 
+		 * Currently, only `GDK_COLORSPACE_RGB` is supported.
+		 */
+		colorspace: Colorspace;
+		/**
+		 * Whether the pixbuf has an alpha channel.
+		 */
+		has_alpha: boolean;
+		/**
+		 * The number of rows of the pixbuf.
+		 */
+		height: number;
+		/**
+		 * The number of samples per pixel.
+		 * 
+		 * Currently, only 3 or 4 samples per pixel are supported.
+		 */
+		n_channels: number;
+		pixel_bytes: GLib.Bytes;
+		/**
+		 * A pointer to the pixel data of the pixbuf.
+		 */
+		pixels: any;
+		/**
+		 * The number of bytes between the start of a row and
+		 * the start of the next row.
+		 * 
+		 * This number must (obviously) be at least as large as the
+		 * width of the pixbuf.
+		 */
+		rowstride: number;
+		/**
+		 * The number of columns of the pixbuf.
+		 */
+		width: number;
+		/**
 		 * Takes an existing pixbuf and adds an alpha channel to it.
 		 * 
 		 * If the existing pixbuf already had an alpha channel, the channel
@@ -1651,6 +1694,10 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface IPixbufSimpleAnim {
 		/**
+		 * Whether the animation should loop when it reaches the end.
+		 */
+		loop: boolean;
+		/**
 		 * Adds a new frame to #animation. The #pixbuf must
 		 * have the dimensions specified when the animation
 		 * was constructed.
@@ -1717,10 +1764,6 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufAnimationClass {}
 	class PixbufAnimationClass {
 		public constructor();
-		/**
-		 * the parent class
-		 */
-		public parent_class: GObject.ObjectClass;
 		public is_static_image: {(animation: PixbufAnimation): boolean;};
 		public get_static_image: {(animation: PixbufAnimation): Pixbuf;};
 		public get_size: {(animation: PixbufAnimation, width: number, height: number): void;};
@@ -1735,10 +1778,6 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufAnimationIterClass {}
 	class PixbufAnimationIterClass {
 		public constructor();
-		/**
-		 * the parent class
-		 */
-		public parent_class: GObject.ObjectClass;
 		public get_delay_time: {(iter: PixbufAnimationIter): number;};
 		public get_pixbuf: {(iter: PixbufAnimationIter): Pixbuf;};
 		public on_currently_loading_frame: {(iter: PixbufAnimationIter): boolean;};
@@ -1880,7 +1919,6 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufLoaderClass {}
 	class PixbufLoaderClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public size_prepared: {(loader: PixbufLoader, width: number, height: number): void;};
 		public area_prepared: {(loader: PixbufLoader): void;};
 		public area_updated: {(loader: PixbufLoader, _x: number, _y: number, width: number, height: number): void;};

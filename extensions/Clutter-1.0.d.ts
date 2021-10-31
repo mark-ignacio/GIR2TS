@@ -2,71 +2,9 @@ declare namespace imports.gi.Clutter {
 
     /** Write only */
     interface IActor {
-        actions: Action;
-        readonly allocation: ActorBox;
-        background_color: Color;
-        readonly background_color_set: boolean;
-        readonly child_transform_set: boolean;
-        clip_rect: Graphene.Rect;
-        clip_to_allocation: boolean;
-        /** Write only */
-        constraints: Constraint;
-        content: Content;
-        readonly content_box: ActorBox;
-        content_gravity: ContentGravity;
-        content_repeat: ContentRepeat;
-        /** Write only */
-        effect: Effect;
-        readonly first_child: Actor;
-        fixed_position_set: boolean;
-        fixed_x: boolean;
-        fixed_y: boolean;
-        //readonly has_clip: boolean;
-        //readonly has_pointer: boolean;
-        height: number;
-        readonly last_child: Actor;
-        layout_manager: LayoutManager;
-        magnification_filter: ScalingFilter;
-        readonly mapped: boolean;
-        margin_bottom: number;
-        margin_left: number;
-        margin_right: number;
-        margin_top: number;
-        min_height: number;
-        min_height_set: boolean;
-        min_width: number;
-        min_width_set: boolean;
-        minification_filter: ScalingFilter;
-        name: string;
-        natural_height: number;
-        natural_height_set: boolean;
-        natural_width: number;
-        natural_width_set: number;
-        offscreen_redirect: OffscreenRedirect;
-        opacity: number;
-        pivot_point: Graphene.Point;
-        pivot_point_z: number;
-        position: Graphene.Point;
-        reactive: boolean;
-        readonly realized: boolean;
-        request_mode: RequestMode;
-        rotation_angle_x: number;
-        rotation_angle_y: number;
-        rotation_angle_z: number;
-        scale_x: number;
-        scale_y: number;
-        scale_z: number;
-        show_on_set_parent: boolean;
-        size: Graphene.Size;
-        text_direction: TextDirection;
-        readonly transform_set: boolean;
-        translation_x: number;
-        translation_y: number;
-        translation_z: number;
-        visible: boolean;
-        width: number;
-        x: number;
         /**
+         * 
+         * 
 		 * According to the GJS docs (https://gjs-docs.gnome.org), the Clutter 
 		 * Actor properties 'x_align' and 'y_align' have the type Clutter.ActorAlign. 
 		 * However according to the gnome docs (https://developer.gnome.org/st/stable/StBin.html) 
@@ -79,12 +17,8 @@ declare namespace imports.gi.Clutter {
 		* 
 		*/
 		x_align: ActorAlign | St.Align;
-        x_expand: boolean;
-        y: number;
         /** See {@link x_align} */
 		y_align: ActorAlign | St.Align;
-        y_expand: boolean;
-        z_position: number;
         connect(signal: 'button-press-event' | 'button-release-event' | 'captured-event' | 'enter-event' | 'event' | 'key-press-event' | 'key-release-event' | 'leave-event' | 'motion-event' | 'scroll-event' | 'touch-event', callback: (actor: this, event: Event) => boolean | void): number;
         connect(signal: 'destroy' | 'hide' | 'key-focus-in' | 'key-focus-out' | 'queue-relayout' | 'realize' | 'resource-scale-changed' | 'show' | 'stage-views-changed' | 'transitions-completed' | 'unrealize', callback: (actor: this) => void): number;
         connect(signal: 'paint', callback: (actor: this, paint_context: PaintContext) => void): number;
@@ -94,16 +28,13 @@ declare namespace imports.gi.Clutter {
         connect(event: 'transition-stopped', callback: (name: string, is_finished: Boolean) => void): number;
     }
 
-    interface ActorOptions  extends Pick<IActor,
-         "actions"|
+    interface ActorOptions extends Pick<IActor,
          "background_color" |
          "clip_rect" |
          "clip_to_allocation" |
-         "constraints" |
          "content" |
          "content_gravity" |
          "content_repeat" |
-         "effect" |
          "fixed_position_set" |
          "fixed_x" |
          "fixed_y" |

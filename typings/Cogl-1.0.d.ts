@@ -204,13 +204,13 @@ declare namespace imports.gi.Cogl {
 		 *   to free the allocated resources
 		 */
 		public static new(): Color;
-		public private_member_red: number;
-		public private_member_green: number;
-		public private_member_blue: number;
-		public private_member_alpha: number;
-		public private_member_padding0: number;
-		public private_member_padding1: number;
-		public private_member_padding2: number;
+		public readonly private_member_red: number;
+		public readonly private_member_green: number;
+		public readonly private_member_blue: number;
+		public readonly private_member_alpha: number;
+		public readonly private_member_padding0: number;
+		public readonly private_member_padding1: number;
+		public readonly private_member_padding2: number;
 		/**
 		 * Creates a copy of #color
 		 * @returns a newly-allocated {@link Color}. Use cogl_color_free()
@@ -1040,10 +1040,10 @@ declare namespace imports.gi.Cogl {
 		public yw: number;
 		public zw: number;
 		public ww: number;
-		public private_member_inv: number[];
-		public private_member_type: number;
-		public private_member_flags: number;
-		public private_member__padding3: number;
+		public readonly private_member_inv: number[];
+		public readonly private_member_type: number;
+		public readonly private_member_flags: number;
+		public readonly private_member__padding3: number;
 		/**
 		 * Allocates a new {@link Matrix} on the heap and initializes it with
 		 * the same values as #matrix.

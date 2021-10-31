@@ -130,6 +130,17 @@ declare namespace imports.gi.Gio {
 	 * use {@link Application} instead.
 	 */
 	interface IApplication {
+		application_id: string;
+		flags: ApplicationFlags;
+		inactivity_timeout: number;
+		/**
+		 * Whether the application is currently marked as busy through
+		 * g_application_mark_busy() or g_application_bind_busy_property().
+		 */
+		readonly is_busy: boolean;
+		readonly is_registered: boolean;
+		readonly is_remote: boolean;
+		resource_base_path: string;
 		/**
 		 * Activates the application.
 		 * 
@@ -923,6 +934,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link ApplicationCommandLine} instead.
 	 */
 	interface IApplicationCommandLine {
+		readonly is_remote: boolean;
 		/**
 		 * Creates a #GFile corresponding to a filename that was given as part
 		 * of the invocation of #cmdline.
@@ -1267,6 +1279,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link BufferedInputStream} instead.
 	 */
 	interface IBufferedInputStream {
+		buffer_size: number;
 		/**
 		 * Tries to read #count bytes from the stream into the buffer.
 		 * Will block during this read.
@@ -1419,6 +1432,8 @@ declare namespace imports.gi.Gio {
 	 * use {@link BufferedOutputStream} instead.
 	 */
 	interface IBufferedOutputStream {
+		auto_grow: boolean;
+		buffer_size: number;
 		/**
 		 * Checks if the buffer automatically grows as data is added.
 		 * @returns %TRUE if the #stream's buffer automatically grows,
@@ -1489,6 +1504,10 @@ declare namespace imports.gi.Gio {
 	 * use {@link BytesIcon} instead.
 	 */
 	interface IBytesIcon {
+		/**
+		 * The bytes containing the icon.
+		 */
+		bytes: GLib.Bytes;
 		/**
 		 * Gets the #GBytes associated with the given #icon.
 		 * @returns a #GBytes.
@@ -1737,6 +1756,9 @@ declare namespace imports.gi.Gio {
 	 * use {@link CharsetConverter} instead.
 	 */
 	interface ICharsetConverter {
+		from_charset: string;
+		to_charset: string;
+		use_fallback: boolean;
 		/**
 		 * Gets the number of fallbacks that #converter has applied so far.
 		 * @returns the number of fallbacks that #converter has applied
@@ -1780,6 +1802,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link ConverterInputStream} instead.
 	 */
 	interface IConverterInputStream {
+		converter: Converter;
 		/**
 		 * Gets the #GConverter that is used by #converter_stream.
 		 * @returns the converter of the converter input stream
@@ -1816,6 +1839,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link ConverterOutputStream} instead.
 	 */
 	interface IConverterOutputStream {
+		converter: Converter;
 		/**
 		 * Gets the #GConverter that is used by #converter_stream.
 		 * @returns the converter of the converter output stream
@@ -2129,6 +2153,69 @@ declare namespace imports.gi.Gio {
 	 * use {@link DBusConnection} instead.
 	 */
 	interface IDBusConnection {
+		/**
+		 * Flags from the #GDBusCapabilityFlags enumeration
+		 * representing connection features negotiated with the other peer.
+		 */
+		readonly capabilities: DBusCapabilityFlags;
+		/**
+		 * A boolean specifying whether the connection has been closed.
+		 */
+		readonly closed: boolean;
+		/**
+		 * A boolean specifying whether the process will be terminated (by
+		 * calling `raise(SIGTERM)`) if the connection is closed by the
+		 * remote peer.
+		 * 
+		 * Note that #GDBusConnection objects returned by g_bus_get_finish()
+		 * and g_bus_get_sync() will (usually) have this property set to %TRUE.
+		 */
+		exit_on_close: boolean;
+		/**
+		 * Flags from the #GDBusConnectionFlags enumeration.
+		 */
+		flags: DBusConnectionFlags;
+		/**
+		 * The GUID of the peer performing the role of server when
+		 * authenticating.
+		 * 
+		 * If you are constructing a #GDBusConnection and pass
+		 * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER in the
+		 * #GDBusConnection:flags property then you **must** also set this
+		 * property to a valid guid.
+		 * 
+		 * If you are constructing a #GDBusConnection and pass
+		 * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT in the
+		 * #GDBusConnection:flags property you will be able to read the GUID
+		 * of the other peer here after the connection has been successfully
+		 * initialized.
+		 * 
+		 * Note that the
+		 * [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses)
+		 * uses the term ‘UUID’ to refer to this, whereas GLib consistently uses the
+		 * term ‘GUID’ for historical reasons.
+		 * 
+		 * Despite its name, the format of #GDBusConnection:guid does not follow
+		 * [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122) or the Microsoft
+		 * GUID format.
+		 */
+		guid: string;
+		/**
+		 * The underlying #GIOStream used for I/O.
+		 * 
+		 * If this is passed on construction and is a #GSocketConnection,
+		 * then the corresponding #GSocket will be put into non-blocking mode.
+		 * 
+		 * While the #GDBusConnection is active, it will interact with this
+		 * stream from a worker thread, so it is not safe to interact with
+		 * the stream directly.
+		 */
+		stream: IOStream;
+		/**
+		 * The unique name as assigned by the message bus or %NULL if the
+		 * connection is not open or not a message bus connection.
+		 */
+		readonly unique_name: string;
 		/**
 		 * Adds a message filter. Filters are handlers that are run on all
 		 * incoming and outgoing messages, prior to standard dispatch. Filters
@@ -3163,6 +3250,10 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IDBusInterfaceSkeleton {
 		/**
+		 * Flags from the #GDBusInterfaceSkeletonFlags enumeration.
+		 */
+		g_flags: DBusInterfaceSkeletonFlags;
+		/**
 		 * Exports #interface_ at #object_path on #connection.
 		 * 
 		 * This can be called multiple times to export the same #interface_
@@ -3319,6 +3410,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link DBusMessage} instead.
 	 */
 	interface IDBusMessage {
+		readonly locked: boolean;
 		/**
 		 * Copies #message. The copy is a deep copy and the returned
 		 * #GDBusMessage is completely identical except that it is guaranteed
@@ -3934,6 +4026,41 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IDBusObjectManagerClient {
 		/**
+		 * The #GDBusConnection to use.
+		 */
+		connection: DBusConnection;
+		/**
+		 * Flags from the #GDBusObjectManagerClientFlags enumeration.
+		 */
+		flags: DBusObjectManagerClientFlags;
+		/**
+		 * A #GDestroyNotify for the #gpointer user_data in #GDBusObjectManagerClient:get-proxy-type-user-data.
+		 */
+		get_proxy_type_destroy_notify: any;
+		/**
+		 * The #GDBusProxyTypeFunc to use when determining what #GType to
+		 * use for interface proxies or %NULL.
+		 */
+		get_proxy_type_func: any;
+		/**
+		 * The #gpointer user_data to pass to #GDBusObjectManagerClient:get-proxy-type-func.
+		 */
+		get_proxy_type_user_data: any;
+		/**
+		 * The well-known name or unique name that the manager is for.
+		 */
+		name: string;
+		/**
+		 * The unique name that owns #GDBusObjectManagerClient:name or %NULL if
+		 * no-one is currently owning the name. Connect to the
+		 * #GObject::notify signal to track changes to this property.
+		 */
+		readonly name_owner: string;
+		/**
+		 * The object path the manager is for.
+		 */
+		object_path: string;
+		/**
 		 * Gets the #GDBusConnection used by #manager.
 		 * @returns A #GDBusConnection object. Do not free,
 		 *   the object belongs to #manager.
@@ -4152,6 +4279,14 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IDBusObjectManagerServer {
 		/**
+		 * The #GDBusConnection to export objects on.
+		 */
+		connection: DBusConnection;
+		/**
+		 * The object path to register the manager object at.
+		 */
+		object_path: string;
+		/**
 		 * Exports #object on #manager.
 		 * 
 		 * If there is already a #GDBusObject exported at the object path,
@@ -4256,6 +4391,14 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IDBusObjectProxy {
 		/**
+		 * The connection of the proxy.
+		 */
+		g_connection: DBusConnection;
+		/**
+		 * The object path of the proxy.
+		 */
+		g_object_path: string;
+		/**
 		 * Gets the connection that #proxy is for.
 		 * @returns A #GDBusConnection. Do not free, the
 		 *   object is owned by #proxy.
@@ -4292,6 +4435,10 @@ declare namespace imports.gi.Gio {
 	 * use {@link DBusObjectSkeleton} instead.
 	 */
 	interface IDBusObjectSkeleton {
+		/**
+		 * The object path where the object is exported.
+		 */
+		g_object_path: string;
 		/**
 		 * Adds #interface_ to #object.
 		 * 
@@ -4357,6 +4504,70 @@ declare namespace imports.gi.Gio {
 	 * use {@link DBusProxy} instead.
 	 */
 	interface IDBusProxy {
+		/**
+		 * The #GDBusConnection the proxy is for.
+		 */
+		g_connection: DBusConnection;
+		/**
+		 * The timeout to use if -1 (specifying default timeout) is passed
+		 * as #timeout_msec in the g_dbus_proxy_call() and
+		 * g_dbus_proxy_call_sync() functions.
+		 * 
+		 * This allows applications to set a proxy-wide timeout for all
+		 * remote method invocations on the proxy. If this property is -1,
+		 * the default timeout (typically 25 seconds) is used. If set to
+		 * %G_MAXINT, then no timeout is used.
+		 */
+		g_default_timeout: number;
+		/**
+		 * Flags from the #GDBusProxyFlags enumeration.
+		 */
+		g_flags: DBusProxyFlags;
+		/**
+		 * Ensure that interactions with this proxy conform to the given
+		 * interface. This is mainly to ensure that malformed data received
+		 * from the other peer is ignored. The given #GDBusInterfaceInfo is
+		 * said to be the "expected interface".
+		 * 
+		 * The checks performed are:
+		 * - When completing a method call, if the type signature of
+		 *   the reply message isn't what's expected, the reply is
+		 *   discarded and the #GError is set to %G_IO_ERROR_INVALID_ARGUMENT.
+		 * 
+		 * - Received signals that have a type signature mismatch are dropped and
+		 *   a warning is logged via g_warning().
+		 * 
+		 * - Properties received via the initial `GetAll()` call or via the
+		 *   `::PropertiesChanged` signal (on the
+		 *   [org.freedesktop.DBus.Properties](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties)
+		 *   interface) or set using g_dbus_proxy_set_cached_property()
+		 *   with a type signature mismatch are ignored and a warning is
+		 *   logged via g_warning().
+		 * 
+		 * Note that these checks are never done on methods, signals and
+		 * properties that are not referenced in the given
+		 * #GDBusInterfaceInfo, since extending a D-Bus interface on the
+		 * service-side is not considered an ABI break.
+		 */
+		g_interface_info: DBusInterfaceInfo;
+		/**
+		 * The D-Bus interface name the proxy is for.
+		 */
+		g_interface_name: string;
+		/**
+		 * The well-known or unique name that the proxy is for.
+		 */
+		g_name: string;
+		/**
+		 * The unique name that owns #GDBusProxy:g-name or %NULL if no-one
+		 * currently owns that name. You may connect to #GObject::notify signal to
+		 * track changes to this property.
+		 */
+		readonly g_name_owner: string;
+		/**
+		 * The object path the proxy is for.
+		 */
+		g_object_path: string;
 		/**
 		 * Asynchronously invokes the #method_name method on #proxy.
 		 * 
@@ -4814,6 +5025,32 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IDBusServer {
 		/**
+		 * Whether the server is currently active.
+		 */
+		readonly active: boolean;
+		/**
+		 * The D-Bus address to listen on.
+		 */
+		address: string;
+		/**
+		 * A #GDBusAuthObserver object to assist in the authentication process or %NULL.
+		 */
+		authentication_observer: DBusAuthObserver;
+		/**
+		 * The D-Bus address that clients can use.
+		 */
+		readonly client_address: string;
+		/**
+		 * Flags from the #GDBusServerFlags enumeration.
+		 */
+		flags: DBusServerFlags;
+		/**
+		 * The GUID of the server.
+		 * 
+		 * See #GDBusConnection:guid for more details.
+		 */
+		guid: string;
+		/**
 		 * Gets a
 		 * [D-Bus address](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses)
 		 * string that can be used by clients to connect to #server.
@@ -4913,6 +5150,17 @@ declare namespace imports.gi.Gio {
 	 * use {@link DataInputStream} instead.
 	 */
 	interface IDataInputStream {
+		/**
+		 * The :byte-order property determines the byte ordering that
+		 * is used when reading multi-byte entities (such as integers)
+		 * from the stream.
+		 */
+		byte_order: DataStreamByteOrder;
+		/**
+		 * The :newline-type property determines what is considered
+		 * as a line ending when reading complete lines from the stream.
+		 */
+		newline_type: DataStreamNewlineType;
 		/**
 		 * Gets the byte order for the data input stream.
 		 * @returns the #stream's current #GDataStreamByteOrder.
@@ -5242,6 +5490,11 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IDataOutputStream {
 		/**
+		 * Determines the byte ordering that is used when writing
+		 * multi-byte entities (such as integers) to the stream.
+		 */
+		byte_order: DataStreamByteOrder;
+		/**
 		 * Gets the byte order for the stream.
 		 * @returns the #GDataStreamByteOrder for the #stream.
 		 */
@@ -5334,6 +5587,10 @@ declare namespace imports.gi.Gio {
 	 * use {@link DesktopAppInfo} instead.
 	 */
 	interface IDesktopAppInfo {
+		/**
+		 * The origin filename of this #GDesktopAppInfo
+		 */
+		filename: string;
 		/**
 		 * Gets the user-visible display name of the "additional application
 		 * action" specified by #action_name.
@@ -5628,6 +5885,8 @@ declare namespace imports.gi.Gio {
 	 * use {@link Emblem} instead.
 	 */
 	interface IEmblem {
+		icon: GObject.Object;
+		origin: EmblemOrigin;
 		/**
 		 * Gives back the icon from #emblem.
 		 * @returns a #GIcon. The returned object belongs to
@@ -5677,6 +5936,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link EmblemedIcon} instead.
 	 */
 	interface IEmblemedIcon {
+		gicon: Icon;
 		/**
 		 * Adds #emblem to the #GList of #GEmblems.
 		 * @param emblem a #GEmblem
@@ -6034,6 +6294,10 @@ declare namespace imports.gi.Gio {
 	 * use {@link FileIcon} instead.
 	 */
 	interface IFileIcon {
+		/**
+		 * The file containing the icon.
+		 */
+		file: File;
 		/**
 		 * Gets the #GFile associated with the given #icon.
 		 * @returns a #GFile.
@@ -6648,6 +6912,8 @@ declare namespace imports.gi.Gio {
 	 * use {@link FileMonitor} instead.
 	 */
 	interface IFileMonitor {
+		readonly cancelled: boolean;
+		rate_limit: number;
 		/**
 		 * Cancels a file monitor.
 		 * @returns always %TRUE
@@ -6842,6 +7108,9 @@ declare namespace imports.gi.Gio {
 	 * use {@link FilterInputStream} instead.
 	 */
 	interface IFilterInputStream {
+		base_stream: InputStream;
+		close_base_stream: boolean;
+		// readonly base_stream: InputStream;
 		/**
 		 * Gets the base stream for the filter stream.
 		 * @returns a #GInputStream.
@@ -6881,6 +7150,9 @@ declare namespace imports.gi.Gio {
 	 * use {@link FilterOutputStream} instead.
 	 */
 	interface IFilterOutputStream {
+		base_stream: OutputStream;
+		close_base_stream: boolean;
+		// readonly base_stream: OutputStream;
 		/**
 		 * Gets the base stream for the filter stream.
 		 * @returns a #GOutputStream.
@@ -7018,6 +7290,9 @@ declare namespace imports.gi.Gio {
 	 * use {@link IOStream} instead.
 	 */
 	interface IIOStream {
+		readonly closed: boolean;
+		readonly input_stream: InputStream;
+		readonly output_stream: OutputStream;
 		/**
 		 * Clears the pending flag on #stream.
 		 */
@@ -7199,6 +7474,58 @@ declare namespace imports.gi.Gio {
 	 * use {@link InetAddress} instead.
 	 */
 	interface IInetAddress {
+		bytes: any;
+		family: SocketFamily;
+		/**
+		 * Whether this is the "any" address for its family.
+		 * See g_inet_address_get_is_any().
+		 */
+		readonly is_any: boolean;
+		/**
+		 * Whether this is a link-local address.
+		 * See g_inet_address_get_is_link_local().
+		 */
+		readonly is_link_local: boolean;
+		/**
+		 * Whether this is the loopback address for its family.
+		 * See g_inet_address_get_is_loopback().
+		 */
+		readonly is_loopback: boolean;
+		/**
+		 * Whether this is a global multicast address.
+		 * See g_inet_address_get_is_mc_global().
+		 */
+		readonly is_mc_global: boolean;
+		/**
+		 * Whether this is a link-local multicast address.
+		 * See g_inet_address_get_is_mc_link_local().
+		 */
+		readonly is_mc_link_local: boolean;
+		/**
+		 * Whether this is a node-local multicast address.
+		 * See g_inet_address_get_is_mc_node_local().
+		 */
+		readonly is_mc_node_local: boolean;
+		/**
+		 * Whether this is an organization-local multicast address.
+		 * See g_inet_address_get_is_mc_org_local().
+		 */
+		readonly is_mc_org_local: boolean;
+		/**
+		 * Whether this is a site-local multicast address.
+		 * See g_inet_address_get_is_mc_site_local().
+		 */
+		readonly is_mc_site_local: boolean;
+		/**
+		 * Whether this is a multicast address.
+		 * See g_inet_address_get_is_multicast().
+		 */
+		readonly is_multicast: boolean;
+		/**
+		 * Whether this is a site-local address.
+		 * See g_inet_address_get_is_loopback().
+		 */
+		readonly is_site_local: boolean;
 		/**
 		 * Checks if two #GInetAddress instances are equal, e.g. the same address.
 		 * @param other_address Another #GInetAddress.
@@ -7348,6 +7675,9 @@ declare namespace imports.gi.Gio {
 	 * use {@link InetAddressMask} instead.
 	 */
 	interface IInetAddressMask {
+		address: InetAddress;
+		readonly family: SocketFamily;
+		length: number;
 		/**
 		 * Tests if #mask and #mask2 are the same mask.
 		 * @param mask2 another #GInetAddressMask
@@ -7422,6 +7752,13 @@ declare namespace imports.gi.Gio {
 	 * use {@link InetSocketAddress} instead.
 	 */
 	interface IInetSocketAddress {
+		address: InetAddress;
+		/**
+		 * The `sin6_flowinfo` field, for IPv6 addresses.
+		 */
+		flowinfo: number;
+		port: number;
+		scope_id: number;
 		/**
 		 * Gets #address's #GInetAddress.
 		 * @returns the #GInetAddress for #address, which must be
@@ -7835,6 +8172,11 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IListStore {
 		/**
+		 * The type of items contained in this list store. Items must be
+		 * subclasses of #GObject.
+		 */
+		item_type: GObject.Type;
+		/**
 		 * Appends #item to #store. #item must be of type #GListStore:item-type.
 		 * 
 		 * This function takes a ref on #item.
@@ -8020,6 +8362,26 @@ declare namespace imports.gi.Gio {
 	 * use {@link MemoryOutputStream} instead.
 	 */
 	interface IMemoryOutputStream {
+		/**
+		 * Pointer to buffer where data will be written.
+		 */
+		data: any;
+		/**
+		 * Size of data written to the buffer.
+		 */
+		readonly data_size: number;
+		/**
+		 * Function called with the buffer as argument when the stream is destroyed.
+		 */
+		destroy_function: any;
+		/**
+		 * Function with realloc semantics called to enlarge the buffer.
+		 */
+		realloc_function: any;
+		/**
+		 * Current size of the data buffer.
+		 */
+		size: number;
 		/**
 		 * Gets any loaded data from the #ostream.
 		 * 
@@ -9046,6 +9408,51 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IMountOperation {
 		/**
+		 * Whether to use an anonymous user when authenticating.
+		 */
+		anonymous: boolean;
+		/**
+		 * The index of the user's choice when a question is asked during the
+		 * mount operation. See the #GMountOperation::ask-question signal.
+		 */
+		choice: number;
+		/**
+		 * The domain to use for the mount operation.
+		 */
+		domain: string;
+		/**
+		 * Whether the device to be unlocked is a TCRYPT hidden volume.
+		 * See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden%20Volume.html).
+		 */
+		is_tcrypt_hidden_volume: boolean;
+		/**
+		 * Whether the device to be unlocked is a TCRYPT system volume.
+		 * In this context, a system volume is a volume with a bootloader
+		 * and operating system installed. This is only supported for Windows
+		 * operating systems. For further documentation, see
+		 * [the VeraCrypt documentation](https://www.veracrypt.fr/en/System%20Encryption.html).
+		 */
+		is_tcrypt_system_volume: boolean;
+		/**
+		 * The password that is used for authentication when carrying out
+		 * the mount operation.
+		 */
+		password: string;
+		/**
+		 * Determines if and how the password information should be saved.
+		 */
+		password_save: PasswordSave;
+		/**
+		 * The VeraCrypt PIM value, when unlocking a VeraCrypt volume. See
+		 * [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal%20Iterations%20Multiplier%20(PIM).html).
+		 */
+		pim: number;
+		/**
+		 * The user name that is used for authentication when carrying out
+		 * the mount operation.
+		 */
+		username: string;
+		/**
 		 * Check to see whether the mount operation is being used
 		 * for an anonymous user.
 		 * @returns %TRUE if mount operation is anonymous.
@@ -9235,6 +9642,9 @@ declare namespace imports.gi.Gio {
 	 * use {@link NetworkAddress} instead.
 	 */
 	interface INetworkAddress {
+		hostname: string;
+		port: number;
+		scheme: string;
 		/**
 		 * Gets #addr's hostname. This might be either UTF-8 or ASCII-encoded,
 		 * depending on what #addr was created with.
@@ -9352,6 +9762,10 @@ declare namespace imports.gi.Gio {
 	 * use {@link NetworkService} instead.
 	 */
 	interface INetworkService {
+		domain: string;
+		protocol: string;
+		scheme: string;
+		service: string;
 		/**
 		 * Gets the domain that #srv serves. This might be either UTF-8 or
 		 * ASCII-encoded, depending on what #srv was created with.
@@ -10168,6 +10582,21 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IPermission {
 		/**
+		 * %TRUE if the caller currently has permission to perform the action that
+		 * #permission represents the permission to perform.
+		 */
+		readonly allowed: boolean;
+		/**
+		 * %TRUE if it is generally possible to acquire the permission by calling
+		 * g_permission_acquire().
+		 */
+		readonly can_acquire: boolean;
+		/**
+		 * %TRUE if it is generally possible to release the permission by calling
+		 * g_permission_release().
+		 */
+		readonly can_release: boolean;
+		/**
 		 * Attempts to acquire the permission represented by #permission.
 		 * 
 		 * The precise method by which this happens depends on the permission
@@ -10311,6 +10740,37 @@ declare namespace imports.gi.Gio {
 	 * use {@link PropertyAction} instead.
 	 */
 	interface IPropertyAction {
+		/**
+		 * If #action is currently enabled.
+		 * 
+		 * If the action is disabled then calls to g_action_activate() and
+		 * g_action_change_state() have no effect.
+		 */
+		readonly enabled: boolean;
+		/**
+		 * If %TRUE, the state of the action will be the negation of the
+		 * property value, provided the property is boolean.
+		 */
+		invert_boolean: boolean;
+		/**
+		 * The name of the action.  This is mostly meaningful for identifying
+		 * the action once it has been added to a #GActionMap.
+		 */
+		name: string;
+		/**
+		 * The type of the parameter that must be given when activating the
+		 * action.
+		 */
+		readonly parameter_type: GLib.VariantType;
+		/**
+		 * The state of the action, or %NULL if the action is stateless.
+		 */
+		readonly state: GLib.Variant;
+		/**
+		 * The #GVariantType of the state that the action has, or %NULL if the
+		 * action is stateless.
+		 */
+		readonly state_type: GLib.VariantType;
 
 	}
 
@@ -10398,6 +10858,21 @@ declare namespace imports.gi.Gio {
 	 * use {@link ProxyAddress} instead.
 	 */
 	interface IProxyAddress {
+		destination_hostname: string;
+		destination_port: number;
+		/**
+		 * The protocol being spoke to the destination host, or %NULL if
+		 * the #GProxyAddress doesn't know.
+		 */
+		destination_protocol: string;
+		password: string;
+		protocol: string;
+		/**
+		 * The URI string that the proxy was constructed from (or %NULL
+		 * if the creator didn't specify this).
+		 */
+		uri: string;
+		username: string;
 		/**
 		 * Gets #proxy's destination hostname; that is, the name of the host
 		 * that will be connected to via the proxy, not the name of the proxy
@@ -10477,6 +10952,17 @@ declare namespace imports.gi.Gio {
 	 * use {@link ProxyAddressEnumerator} instead.
 	 */
 	interface IProxyAddressEnumerator {
+		connectable: SocketConnectable;
+		/**
+		 * The default port to use if #GProxyAddressEnumerator:uri does not
+		 * specify one.
+		 */
+		default_port: number;
+		/**
+		 * The proxy resolver to use.
+		 */
+		proxy_resolver: ProxyResolver;
+		uri: string;
 
 	}
 
@@ -10802,6 +11288,51 @@ declare namespace imports.gi.Gio {
 	 * use {@link Settings} instead.
 	 */
 	interface ISettings {
+		/**
+		 * The name of the context that the settings are stored in.
+		 */
+		backend: SettingsBackend;
+		/**
+		 * Whether the #GSettings object is in 'delay-apply' mode. See
+		 * g_settings_delay() for details.
+		 */
+		readonly delay_apply: boolean;
+		/**
+		 * If this property is %TRUE, the #GSettings object has outstanding
+		 * changes that will be applied when g_settings_apply() is called.
+		 */
+		readonly has_unapplied: boolean;
+		/**
+		 * The path within the backend where the settings are stored.
+		 */
+		path: string;
+		/**
+		 * The name of the schema that describes the types of keys
+		 * for this #GSettings object.
+		 * 
+		 * The type of this property is *not* #GSettingsSchema.
+		 * #GSettingsSchema has only existed since version 2.32 and
+		 * unfortunately this name was used in previous versions to refer to
+		 * the schema ID rather than the schema itself.  Take care to use the
+		 * 'settings-schema' property if you wish to pass in a
+		 * #GSettingsSchema.
+		 */
+		schema: string;
+		/**
+		 * The name of the schema that describes the types of keys
+		 * for this #GSettings object.
+		 */
+		schema_id: string;
+		/**
+		 * The #GSettingsSchema describing the types of keys for this
+		 * #GSettings object.
+		 * 
+		 * Ideally, this property would be called 'schema'.  #GSettingsSchema
+		 * has only existed since version 2.32, however, and before then the
+		 * 'schema' property was used to refer to the ID of the schema rather
+		 * than the schema itself.  Take care.
+		 */
+		settings_schema: SettingsSchema;
 		/**
 		 * Applies any changes that have been made to the settings.  This
 		 * function does nothing unless #settings is in 'delay-apply' mode;
@@ -12001,6 +12532,32 @@ declare namespace imports.gi.Gio {
 	 */
 	interface ISimpleAction {
 		/**
+		 * If #action is currently enabled.
+		 * 
+		 * If the action is disabled then calls to g_action_activate() and
+		 * g_action_change_state() have no effect.
+		 */
+		enabled: boolean;
+		/**
+		 * The name of the action. This is mostly meaningful for identifying
+		 * the action once it has been added to a #GSimpleActionGroup.
+		 */
+		name: string;
+		/**
+		 * The type of the parameter that must be given when activating the
+		 * action.
+		 */
+		parameter_type: GLib.VariantType;
+		/**
+		 * The state of the action, or %NULL if the action is stateless.
+		 */
+		state: GLib.Variant;
+		/**
+		 * The #GVariantType of the state that the action has, or %NULL if the
+		 * action is stateless.
+		 */
+		readonly state_type: GLib.VariantType;
+		/**
 		 * Sets the action as enabled or not.
 		 * 
 		 * An action must be enabled in order to be activated or in order to
@@ -12523,6 +13080,8 @@ declare namespace imports.gi.Gio {
 	 * use {@link SimpleIOStream} instead.
 	 */
 	interface ISimpleIOStream {
+		input_stream: InputStream;
+		output_stream: OutputStream;
 
 	}
 
@@ -12591,6 +13150,53 @@ declare namespace imports.gi.Gio {
 	 * use {@link SimpleProxyResolver} instead.
 	 */
 	interface ISimpleProxyResolver {
+		/**
+		 * The default proxy URI that will be used for any URI that doesn't
+		 * match #GSimpleProxyResolver:ignore-hosts, and doesn't match any
+		 * of the schemes set with g_simple_proxy_resolver_set_uri_proxy().
+		 * 
+		 * Note that as a special case, if this URI starts with
+		 * "socks://", #GSimpleProxyResolver will treat it as referring
+		 * to all three of the socks5, socks4a, and socks4 proxy types.
+		 */
+		default_proxy: string;
+		/**
+		 * A list of hostnames and IP addresses that the resolver should
+		 * allow direct connections to.
+		 * 
+		 * Entries can be in one of 4 formats:
+		 * 
+		 * - A hostname, such as "example.com", ".example.com", or
+		 *   "*.example.com", any of which match "example.com" or
+		 *   any subdomain of it.
+		 * 
+		 * - An IPv4 or IPv6 address, such as "192.168.1.1",
+		 *   which matches only that address.
+		 * 
+		 * - A hostname or IP address followed by a port, such as
+		 *   "example.com:80", which matches whatever the hostname or IP
+		 *   address would match, but only for URLs with the (explicitly)
+		 *   indicated port. In the case of an IPv6 address, the address
+		 *   part must appear in brackets: "[::1]:443"
+		 * 
+		 * - An IP address range, given by a base address and prefix length,
+		 *   such as "fe80::/10", which matches any address in that range.
+		 * 
+		 * Note that when dealing with Unicode hostnames, the matching is
+		 * done against the ASCII form of the name.
+		 * 
+		 * Also note that hostname exclusions apply only to connections made
+		 * to hosts identified by name, and IP address exclusions apply only
+		 * to connections made to hosts identified by address. That is, if
+		 * example.com has an address of 192.168.1.1, and the :ignore-hosts list
+		 * contains only "192.168.1.1", then a connection to "example.com"
+		 * (eg, via a #GNetworkAddress) will use the proxy, and a connection to
+		 * "192.168.1.1" (eg, via a #GInetSocketAddress) will not.
+		 * 
+		 * These rules match the "ignore-hosts"/"noproxy" rules most
+		 * commonly used by other applications.
+		 */
+		ignore_hosts: string[];
 		/**
 		 * Sets the default proxy on #resolver, to be used for any URIs that
 		 * don't match #GSimpleProxyResolver:ignore-hosts or a proxy set
@@ -12663,6 +13269,35 @@ declare namespace imports.gi.Gio {
 	 * use {@link Socket} instead.
 	 */
 	interface ISocket {
+		blocking: boolean;
+		/**
+		 * Whether the socket should allow sending to broadcast addresses.
+		 */
+		broadcast: boolean;
+		family: SocketFamily;
+		fd: number;
+		keepalive: boolean;
+		listen_backlog: number;
+		readonly local_address: SocketAddress;
+		/**
+		 * Whether outgoing multicast packets loop back to the local host.
+		 */
+		multicast_loopback: boolean;
+		/**
+		 * Time-to-live out outgoing multicast packets
+		 */
+		multicast_ttl: number;
+		protocol: SocketProtocol;
+		readonly remote_address: SocketAddress;
+		/**
+		 * The timeout in seconds on socket I/O
+		 */
+		timeout: number;
+		/**
+		 * Time-to-live for outgoing unicast packets
+		 */
+		ttl: number;
+		type: SocketType;
 		/**
 		 * Accept incoming connections on a connection-based socket. This removes
 		 * the first outstanding connection request from the listening socket and
@@ -13753,6 +14388,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link SocketAddress} instead.
 	 */
 	interface ISocketAddress {
+		readonly family: SocketFamily;
 		/**
 		 * Gets the socket family type of #address.
 		 * @returns the socket family type of #address
@@ -13886,6 +14522,18 @@ declare namespace imports.gi.Gio {
 	 * use {@link SocketClient} instead.
 	 */
 	interface ISocketClient {
+		enable_proxy: boolean;
+		family: SocketFamily;
+		local_address: SocketAddress;
+		protocol: SocketProtocol;
+		/**
+		 * The proxy resolver to use
+		 */
+		proxy_resolver: ProxyResolver;
+		timeout: number;
+		tls: boolean;
+		tls_validation_flags: TlsCertificateFlags;
+		type: SocketType;
 		/**
 		 * Enable proxy protocols to be handled by the application. When the
 		 * indicated proxy protocol is returned by the #GProxyResolver,
@@ -14297,6 +14945,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link SocketConnection} instead.
 	 */
 	interface ISocketConnection {
+		socket: Socket;
 		/**
 		 * Connect #connection to the specified remote address.
 		 * @param address a #GSocketAddress specifying the remote address.
@@ -14493,6 +15142,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link SocketListener} instead.
 	 */
 	interface ISocketListener {
+		listen_backlog: number;
 		/**
 		 * Blocks waiting for a client to connect to any of the sockets added
 		 * to the listener. Returns a #GSocketConnection for the socket that was
@@ -14701,6 +15351,10 @@ declare namespace imports.gi.Gio {
 	 * use {@link SocketService} instead.
 	 */
 	interface ISocketService {
+		/**
+		 * Whether the service is currently accepting connections.
+		 */
+		active: boolean;
 		/**
 		 * Check whether the service is active or not. An active
 		 * service will accept new clients that connect, while
@@ -15454,6 +16108,18 @@ declare namespace imports.gi.Gio {
 	 * use {@link Task} instead.
 	 */
 	interface ITask {
+		/**
+		 * Whether the task has completed, meaning its callback (if set) has been
+		 * invoked. This can only happen after g_task_return_pointer(),
+		 * g_task_return_error() or one of the other return functions have been called
+		 * on the task.
+		 * 
+		 * This property is guaranteed to change from %FALSE to %TRUE exactly once.
+		 * 
+		 * The #GObject::notify signal for this change is emitted in the same main
+		 * context as the task’s callback, immediately after that callback is invoked.
+		 */
+		readonly completed: boolean;
 		/**
 		 * A utility function for dealing with async operations where you need
 		 * to wait for a #GSource to trigger. Attaches #source to #task's
@@ -16387,6 +17053,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link TcpConnection} instead.
 	 */
 	interface ITcpConnection {
+		graceful_disconnect: boolean;
 		/**
 		 * Checks if graceful disconnects are used. See
 		 * g_tcp_connection_set_graceful_disconnect().
@@ -16427,6 +17094,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link TcpWrapperConnection} instead.
 	 */
 	interface ITcpWrapperConnection {
+		base_io_stream: IOStream;
 		/**
 		 * Gets #conn's base #GIOStream
 		 * @returns #conn's base #GIOStream
@@ -16463,6 +17131,10 @@ declare namespace imports.gi.Gio {
 	 * use {@link TestDBus} instead.
 	 */
 	interface ITestDBus {
+		/**
+		 * #GTestDBusFlags specifying the behaviour of the D-Bus session.
+		 */
+		flags: TestDBusFlags;
 		/**
 		 * Add a path where dbus-daemon will look up .service files. This can't be
 		 * called after g_test_dbus_up().
@@ -16616,6 +17288,28 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IThemedIcon {
 		/**
+		 * A %NULL-terminated array of icon names.
+		 */
+		names: string[];
+		/**
+		 * Whether to use the default fallbacks found by shortening the icon name
+		 * at '-' characters. If the "names" array has more than one element,
+		 * ignores any past the first.
+		 * 
+		 * For example, if the icon name was "gnome-dev-cdrom-audio", the array
+		 * would become
+		 * |[<!-- language="C" -->
+		 * {
+		 *   "gnome-dev-cdrom-audio",
+		 *   "gnome-dev-cdrom",
+		 *   "gnome-dev",
+		 *   "gnome",
+		 *   NULL
+		 * };
+		 * ]|
+		 */
+		use_default_fallbacks: boolean;
+		/**
 		 * Append a name to the list of icons from within #icon.
 		 * 
 		 * Note that doing so invalidates the hash computed by prior calls
@@ -16696,6 +17390,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link ThreadedSocketService} instead.
 	 */
 	interface IThreadedSocketService {
+		max_threads: number;
 
 	}
 
@@ -16739,6 +17434,121 @@ declare namespace imports.gi.Gio {
 	 * use {@link TlsCertificate} instead.
 	 */
 	interface ITlsCertificate {
+		/**
+		 * The DER (binary) encoded representation of the certificate.
+		 * This property and the #GTlsCertificate:certificate-pem property
+		 * represent the same data, just in different forms.
+		 */
+		certificate: number[];
+		/**
+		 * The PEM (ASCII) encoded representation of the certificate.
+		 * This property and the #GTlsCertificate:certificate
+		 * property represent the same data, just in different forms.
+		 */
+		certificate_pem: string;
+		/**
+		 * The DNS names from the certificate's Subject Alternative Names (SANs),
+		 * %NULL if unavailable.
+		 */
+		readonly dns_names: any[];
+		/**
+		 * The IP addresses from the certificate's Subject Alternative Names (SANs),
+		 * %NULL if unavailable.
+		 */
+		readonly ip_addresses: any[];
+		/**
+		 * A #GTlsCertificate representing the entity that issued this
+		 * certificate. If %NULL, this means that the certificate is either
+		 * self-signed, or else the certificate of the issuer is not
+		 * available.
+		 * 
+		 * Beware the issuer certificate may not be the same as the
+		 * certificate that would actually be used to construct a valid
+		 * certification path during certificate verification.
+		 * [RFC 4158](https://datatracker.ietf.org/doc/html/rfc4158) explains
+		 * why an issuer certificate cannot be naively assumed to be part of the
+		 * the certification path (though GLib's TLS backends may not follow the
+		 * path building strategies outlined in this RFC). Due to the complexity
+		 * of certification path building, GLib does not provide any way to know
+		 * which certification path will actually be used. Accordingly, this
+		 * property cannot be used to make security-related decisions. Only
+		 * GLib itself should make security decisions about TLS certificates.
+		 */
+		issuer: TlsCertificate;
+		/**
+		 * The issuer from the certificate,
+		 * %NULL if unavailable.
+		 */
+		readonly issuer_name: string;
+		/**
+		 * The time at which this cert is no longer valid,
+		 * %NULL if unavailable.
+		 */
+		readonly not_valid_after: GLib.DateTime;
+		/**
+		 * The time at which this cert is considered to be valid,
+		 * %NULL if unavailable.
+		 */
+		readonly not_valid_before: GLib.DateTime;
+		/**
+		 * A URI referencing the [PKCS \#11](https://docs.oasis-open.org/pkcs11/pkcs11-base/v3.0/os/pkcs11-base-v3.0-os.html)
+		 * objects containing an X.509 certificate and optionally a private key.
+		 * 
+		 * If %NULL, the certificate is either not backed by PKCS \#11 or the
+		 * #GTlsBackend does not support PKCS \#11.
+		 */
+		pkcs11_uri: string;
+		/**
+		 * The DER (binary) encoded representation of the certificate's
+		 * private key, in either [PKCS \#1 format](https://datatracker.ietf.org/doc/html/rfc8017)
+		 * or unencrypted [PKCS \#8 format.](https://datatracker.ietf.org/doc/html/rfc5208)
+		 * PKCS \#8 format is supported since 2.32; earlier releases only
+		 * support PKCS \#1. You can use the `openssl rsa` tool to convert
+		 * PKCS \#8 keys to PKCS \#1.
+		 * 
+		 * This property (or the #GTlsCertificate:private-key-pem property)
+		 * can be set when constructing a key (for example, from a file).
+		 * Since GLib 2.70, it is now also readable; however, be aware that if
+		 * the private key is backed by a PKCS \#11 URI – for example, if it
+		 * is stored on a smartcard – then this property will be %NULL. If so,
+		 * the private key must be referenced via its PKCS \#11 URI,
+		 * #GTlsCertificate:private-key-pkcs11-uri. You must check both
+		 * properties to see if the certificate really has a private key.
+		 * When this property is read, the output format will be unencrypted
+		 * PKCS \#8.
+		 */
+		private_key: number[];
+		/**
+		 * The PEM (ASCII) encoded representation of the certificate's
+		 * private key in either [PKCS \#1 format](https://datatracker.ietf.org/doc/html/rfc8017)
+		 * ("`BEGIN RSA PRIVATE KEY`") or unencrypted
+		 * [PKCS \#8 format](https://datatracker.ietf.org/doc/html/rfc5208)
+		 * ("`BEGIN PRIVATE KEY`"). PKCS \#8 format is supported since 2.32;
+		 * earlier releases only support PKCS \#1. You can use the `openssl rsa`
+		 * tool to convert PKCS \#8 keys to PKCS \#1.
+		 * 
+		 * This property (or the #GTlsCertificate:private-key property)
+		 * can be set when constructing a key (for example, from a file).
+		 * Since GLib 2.70, it is now also readable; however, be aware that if
+		 * the private key is backed by a PKCS \#11 URI - for example, if it
+		 * is stored on a smartcard - then this property will be %NULL. If so,
+		 * the private key must be referenced via its PKCS \#11 URI,
+		 * #GTlsCertificate:private-key-pkcs11-uri. You must check both
+		 * properties to see if the certificate really has a private key.
+		 * When this property is read, the output format will be unencrypted
+		 * PKCS \#8.
+		 */
+		private_key_pem: string;
+		/**
+		 * A URI referencing a [PKCS \#11](https://docs.oasis-open.org/pkcs11/pkcs11-base/v3.0/os/pkcs11-base-v3.0-os.html)
+		 * object containing a private key.
+		 */
+		private_key_pkcs11_uri: string;
+		/**
+		 * The subject from the cert,
+		 * %NULL if unavailable.
+		 */
+		readonly subject_name: string;
 		/**
 		 * Gets the value of #GTlsCertificate:dns-names.
 		 * @returns A #GPtrArray of
@@ -16946,6 +17756,84 @@ declare namespace imports.gi.Gio {
 	 * use {@link TlsConnection} instead.
 	 */
 	interface ITlsConnection {
+		/**
+		 * The list of application-layer protocols that the connection
+		 * advertises that it is willing to speak. See
+		 * g_tls_connection_set_advertised_protocols().
+		 */
+		advertised_protocols: string[];
+		/**
+		 * The #GIOStream that the connection wraps. The connection holds a reference
+		 * to this stream, and may run operations on the stream from other threads
+		 * throughout its lifetime. Consequently, after the #GIOStream has been
+		 * constructed, application code may only run its own operations on this
+		 * stream when no #GIOStream operations are running.
+		 */
+		base_io_stream: IOStream;
+		/**
+		 * The connection's certificate; see
+		 * g_tls_connection_set_certificate().
+		 */
+		certificate: TlsCertificate;
+		/**
+		 * The name of the TLS ciphersuite in use. See g_tls_connection_get_ciphersuite_name().
+		 */
+		readonly ciphersuite_name: string;
+		/**
+		 * The certificate database to use when verifying this TLS connection.
+		 * If no certificate database is set, then the default database will be
+		 * used. See g_tls_backend_get_default_database().
+		 */
+		database: TlsDatabase;
+		/**
+		 * A #GTlsInteraction object to be used when the connection or certificate
+		 * database need to interact with the user. This will be used to prompt the
+		 * user for passwords where necessary.
+		 */
+		interaction: TlsInteraction;
+		/**
+		 * The application-layer protocol negotiated during the TLS
+		 * handshake. See g_tls_connection_get_negotiated_protocol().
+		 */
+		readonly negotiated_protocol: string;
+		/**
+		 * The connection's peer's certificate, after the TLS handshake has
+		 * completed or failed. Note in particular that this is not yet set
+		 * during the emission of #GTlsConnection::accept-certificate.
+		 * 
+		 * (You can watch for a #GObject::notify signal on this property to
+		 * detect when a handshake has occurred.)
+		 */
+		readonly peer_certificate: TlsCertificate;
+		/**
+		 * The errors noticed while verifying
+		 * #GTlsConnection:peer-certificate. Normally this should be 0, but
+		 * it may not be if #GTlsClientConnection:validation-flags is not
+		 * %G_TLS_CERTIFICATE_VALIDATE_ALL, or if
+		 * #GTlsConnection::accept-certificate overrode the default
+		 * behavior.
+		 */
+		readonly peer_certificate_errors: TlsCertificateFlags;
+		/**
+		 * The TLS protocol version in use. See g_tls_connection_get_protocol_version().
+		 */
+		readonly protocol_version: TlsProtocolVersion;
+		/**
+		 * The rehandshaking mode. See
+		 * g_tls_connection_set_rehandshake_mode().
+		 */
+		rehandshake_mode: TlsRehandshakeMode;
+		/**
+		 * Whether or not proper TLS close notification is required.
+		 * See g_tls_connection_set_require_close_notify().
+		 */
+		require_close_notify: boolean;
+		/**
+		 * Whether or not the system certificate database will be used to
+		 * verify peer certificates. See
+		 * g_tls_connection_set_use_system_certdb().
+		 */
+		use_system_certdb: boolean;
 		/**
 		 * Used by #GTlsConnection implementations to emit the
 		 * #GTlsConnection::accept-certificate signal.
@@ -17702,6 +18590,9 @@ declare namespace imports.gi.Gio {
 	 * use {@link TlsPassword} instead.
 	 */
 	interface ITlsPassword {
+		description: string;
+		flags: TlsPasswordFlags;
+		warning: string;
 		/**
 		 * Get a description string about what the password will be used for.
 		 * @returns The description of the password.
@@ -17941,6 +18832,10 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IUnixCredentialsMessage {
 		/**
+		 * The credentials stored in the message.
+		 */
+		credentials: Credentials;
+		/**
 		 * Gets the credentials stored in #message.
 		 * @returns A #GCredentials instance. Do not free, it is owned by #message.
 		 */
@@ -18125,6 +19020,7 @@ declare namespace imports.gi.Gio {
 	 * use {@link UnixFDMessage} instead.
 	 */
 	interface IUnixFDMessage {
+		fd_list: UnixFDList;
 		/**
 		 * Adds a file descriptor to #message.
 		 * 
@@ -18213,6 +19109,14 @@ declare namespace imports.gi.Gio {
 	 * use {@link UnixInputStream} instead.
 	 */
 	interface IUnixInputStream {
+		/**
+		 * Whether to close the file descriptor when the stream is closed.
+		 */
+		close_fd: boolean;
+		/**
+		 * The file descriptor that the stream reads from.
+		 */
+		fd: number;
 		/**
 		 * Returns whether the file descriptor of #stream will be
 		 * closed when the stream is closed.
@@ -18322,6 +19226,14 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IUnixOutputStream {
 		/**
+		 * Whether to close the file descriptor when the stream is closed.
+		 */
+		close_fd: boolean;
+		/**
+		 * The file descriptor that the stream writes to.
+		 */
+		fd: number;
+		/**
 		 * Returns whether the file descriptor of #stream will be
 		 * closed when the stream is closed.
 		 * @returns %TRUE if the file descriptor is closed when done
@@ -18376,6 +19288,13 @@ declare namespace imports.gi.Gio {
 	 * use {@link UnixSocketAddress} instead.
 	 */
 	interface IUnixSocketAddress {
+		/**
+		 * Whether or not this is an abstract address
+		 */
+		abstract: boolean;
+		address_type: UnixSocketAddressType;
+		path: string;
+		path_as_array: number[];
 		/**
 		 * Gets #address's type.
 		 * @returns a #GUnixSocketAddressType
@@ -18721,6 +19640,14 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IZlibCompressor {
 		/**
+		 * If set to a non-%NULL #GFileInfo object, and #GZlibCompressor:format is
+		 * %G_ZLIB_COMPRESSOR_FORMAT_GZIP, the compressor will write the file name
+		 * and modification time from the file info to the GZIP header.
+		 */
+		file_info: FileInfo;
+		format: ZlibCompressorFormat;
+		level: number;
+		/**
 		 * Returns the #GZlibCompressor:file-info property.
 		 * @returns a #GFileInfo, or %NULL
 		 */
@@ -18765,6 +19692,14 @@ declare namespace imports.gi.Gio {
 	 * use {@link ZlibDecompressor} instead.
 	 */
 	interface IZlibDecompressor {
+		/**
+		 * A #GFileInfo containing the information found in the GZIP header
+		 * of the data stream processed, or %NULL if the header was not yet
+		 * fully processed, is not present at all, or the compressor's
+		 * #GZlibDecompressor:format property is not %G_ZLIB_COMPRESSOR_FORMAT_GZIP.
+		 */
+		readonly file_info: FileInfo;
+		format: ZlibCompressorFormat;
 		/**
 		 * Retrieves the #GFileInfo constructed from the GZIP header data
 		 * of compressed data processed by #compressor, or %NULL if #decompressor's
@@ -18830,7 +19765,7 @@ declare namespace imports.gi.Gio {
 		 *         give %NULL here.
 		 */
 		public state: string;
-		public padding: number[];
+		public readonly padding: number[];
 		public activate: {(action: SimpleAction, parameter: GLib.Variant): void;};
 		public change_state: {(action: SimpleAction, value: GLib.Variant): void;};
 	}
@@ -18841,7 +19776,7 @@ declare namespace imports.gi.Gio {
 	interface ActionGroupInterface {}
 	class ActionGroupInterface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public has_action: {(action_group: ActionGroup, action_name: string): boolean;};
 		public list_actions: {(action_group: ActionGroup): string[];};
 		public get_action_enabled: {(action_group: ActionGroup, action_name: string): boolean;};
@@ -18864,7 +19799,7 @@ declare namespace imports.gi.Gio {
 	interface ActionInterface {}
 	class ActionInterface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public get_name: {(action: Action): string;};
 		public get_parameter_type: {(action: Action): GLib.VariantType;};
 		public get_state_type: {(action: Action): GLib.VariantType;};
@@ -18881,7 +19816,7 @@ declare namespace imports.gi.Gio {
 	interface ActionMapInterface {}
 	class ActionMapInterface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public lookup_action: {(action_map: ActionMap, action_name: string): Action;};
 		public add_action: {(action_map: ActionMap, action: Action): void;};
 		public remove_action: {(action_map: ActionMap, action_name: string): void;};
@@ -18896,7 +19831,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public dup: {(appinfo: AppInfo): AppInfo;};
 		public equal: {(appinfo1: AppInfo, appinfo2: AppInfo): boolean;};
 		public get_id: {(appinfo: AppInfo): string;};
@@ -18927,7 +19862,6 @@ declare namespace imports.gi.Gio {
 	interface AppLaunchContextClass {}
 	class AppLaunchContextClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_display: {(context: AppLaunchContext, info: AppInfo, files: GLib.List): string;};
 		public get_startup_notify_id: {(context: AppLaunchContext, info: AppInfo, files: GLib.List): string;};
 		public launch_failed: {(context: AppLaunchContext, startup_notify_id: string): void;};
@@ -18949,8 +19883,7 @@ declare namespace imports.gi.Gio {
 	interface ApplicationClass {}
 	class ApplicationClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public startup: {(application: Application): void;};
 		public activate: {(application: Application): void;};
 		public open: {(application: Application, files: File[], n_files: number, hint: string): void;};
@@ -18975,8 +19908,7 @@ declare namespace imports.gi.Gio {
 	interface ApplicationCommandLineClass {}
 	class ApplicationCommandLineClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public print_literal: {(cmdline: ApplicationCommandLine, message: string): void;};
 		public printerr_literal: {(cmdline: ApplicationCommandLine, message: string): void;};
 		public get_stdin: {(cmdline: ApplicationCommandLine): InputStream;};
@@ -19002,7 +19934,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public init_async: {(initable: AsyncInitable, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
 		public init_finish: {(initable: AsyncInitable, res: AsyncResult): boolean;};
 	}
@@ -19016,7 +19948,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public get_user_data: {(res: AsyncResult): any;};
 		public get_source_object: {(res: AsyncResult): GObject.Object;};
 		public is_tagged: {(res: AsyncResult, source_tag: any): boolean;};
@@ -19025,7 +19957,6 @@ declare namespace imports.gi.Gio {
 	interface BufferedInputStreamClass {}
 	class BufferedInputStreamClass {
 		public constructor();
-		public parent_class: FilterInputStreamClass;
 		public fill: {(stream: BufferedInputStream, count: number, cancellable: Cancellable): number;};
 		public fill_async: {(stream: BufferedInputStream, count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
 		public fill_finish: {(stream: BufferedInputStream, result: AsyncResult): number;};
@@ -19044,7 +19975,6 @@ declare namespace imports.gi.Gio {
 	interface BufferedOutputStreamClass {}
 	class BufferedOutputStreamClass {
 		public constructor();
-		public parent_class: FilterOutputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 	}
@@ -19057,7 +19987,6 @@ declare namespace imports.gi.Gio {
 	interface CancellableClass {}
 	class CancellableClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public cancelled: {(cancellable: Cancellable): void;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
@@ -19074,7 +20003,6 @@ declare namespace imports.gi.Gio {
 	interface CharsetConverterClass {}
 	class CharsetConverterClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	/**
@@ -19088,7 +20016,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public convert: {(converter: Converter, inbuf: number[], inbuf_size: number, outbuf: number[], outbuf_size: number, flags: ConverterFlags, bytes_read: number, bytes_written: number): ConverterResult;};
 		public reset: {(converter: Converter): void;};
 	}
@@ -19096,7 +20024,6 @@ declare namespace imports.gi.Gio {
 	interface ConverterInputStreamClass {}
 	class ConverterInputStreamClass {
 		public constructor();
-		public parent_class: FilterInputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -19112,7 +20039,6 @@ declare namespace imports.gi.Gio {
 	interface ConverterOutputStreamClass {}
 	class ConverterOutputStreamClass {
 		public constructor();
-		public parent_class: FilterOutputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -19230,7 +20156,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public parent_iface: GObject.TypeInterface;
+		public readonly parent_iface: GObject.TypeInterface;
 		public get_info: {(interface_: DBusInterface): DBusInterfaceInfo;};
 		public get_object: {(interface_: DBusInterface): DBusObject;};
 		public set_object: {(interface_: DBusInterface, object: DBusObject): void;};
@@ -19344,12 +20270,8 @@ declare namespace imports.gi.Gio {
 	interface DBusInterfaceSkeletonClass {}
 	class DBusInterfaceSkeletonClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
-		public vfunc_padding: any[];
-		public signal_padding: any[];
+		public readonly vfunc_padding: any[];
+		public readonly signal_padding: any[];
 		public get_info: {(interface_: DBusInterfaceSkeleton): DBusInterfaceInfo;};
 		public get_vtable: {(interface_: DBusInterfaceSkeleton): DBusInterfaceVTable;};
 		public get_properties: {(interface_: DBusInterfaceSkeleton): GLib.Variant;};
@@ -19420,7 +20342,7 @@ declare namespace imports.gi.Gio {
 		 * Function for setting a property.
 		 */
 		public set_property: DBusInterfaceSetPropertyFunc;
-		public padding: any[];
+		public readonly padding: any[];
 	}
 
 	/**
@@ -19543,7 +20465,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public parent_iface: GObject.TypeInterface;
+		public readonly parent_iface: GObject.TypeInterface;
 		public get_object_path: {(object: DBusObject): string;};
 		public get_interfaces: {(object: DBusObject): GLib.List;};
 		public get_interface: {(object: DBusObject, interface_name: string): DBusInterface;};
@@ -19557,11 +20479,7 @@ declare namespace imports.gi.Gio {
 	interface DBusObjectManagerClientClass {}
 	class DBusObjectManagerClientClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public interface_proxy_signal: {(manager: DBusObjectManagerClient, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant): void;};
 		public interface_proxy_properties_changed: {(manager: DBusObjectManagerClient, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string): void;};
 	}
@@ -19580,7 +20498,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public parent_iface: GObject.TypeInterface;
+		public readonly parent_iface: GObject.TypeInterface;
 		public get_object_path: {(manager: DBusObjectManager): string;};
 		public get_objects: {(manager: DBusObjectManager): GLib.List;};
 		public get_object: {(manager: DBusObjectManager, object_path: string): DBusObject;};
@@ -19597,11 +20515,7 @@ declare namespace imports.gi.Gio {
 	interface DBusObjectManagerServerClass {}
 	class DBusObjectManagerServerClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 	}
 
 	interface DBusObjectManagerServerPrivate {}
@@ -19615,11 +20529,7 @@ declare namespace imports.gi.Gio {
 	interface DBusObjectProxyClass {}
 	class DBusObjectProxyClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 	}
 
 	interface DBusObjectProxyPrivate {}
@@ -19633,11 +20543,7 @@ declare namespace imports.gi.Gio {
 	interface DBusObjectSkeletonClass {}
 	class DBusObjectSkeletonClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public authorize_method: {(object: DBusObjectSkeleton, interface_: DBusInterfaceSkeleton, invocation: DBusMethodInvocation): boolean;};
 	}
 
@@ -19692,8 +20598,7 @@ declare namespace imports.gi.Gio {
 	interface DBusProxyClass {}
 	class DBusProxyClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public g_properties_changed: {(proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string): void;};
 		public g_signal: {(proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant): void;};
 	}
@@ -19757,13 +20662,12 @@ declare namespace imports.gi.Gio {
 		 * Function for dispatching a remote call on a child node.
 		 */
 		public dispatch: DBusSubtreeDispatchFunc;
-		public padding: any[];
+		public readonly padding: any[];
 	}
 
 	interface DataInputStreamClass {}
 	class DataInputStreamClass {
 		public constructor();
-		public parent_class: BufferedInputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -19779,7 +20683,6 @@ declare namespace imports.gi.Gio {
 	interface DataOutputStreamClass {}
 	class DataOutputStreamClass {
 		public constructor();
-		public parent_class: FilterOutputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -19805,7 +20708,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public receive_messages: {(datagram_based: DatagramBased, messages: InputMessage[], num_messages: number, flags: number, timeout: number, cancellable: Cancellable): number;};
 		public send_messages: {(datagram_based: DatagramBased, messages: OutputMessage[], num_messages: number, flags: number, timeout: number, cancellable: Cancellable): number;};
 		public create_source: {(datagram_based: DatagramBased, condition: GLib.IOCondition, cancellable: Cancellable): GLib.Source;};
@@ -19816,7 +20719,6 @@ declare namespace imports.gi.Gio {
 	interface DesktopAppInfoClass {}
 	class DesktopAppInfoClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	/**
@@ -19826,7 +20728,7 @@ declare namespace imports.gi.Gio {
 	interface DesktopAppInfoLookupIface {}
 	class DesktopAppInfoLookupIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public get_default_for_uri_scheme: {(lookup: DesktopAppInfoLookup, uri_scheme: string): AppInfo;};
 	}
 
@@ -19839,7 +20741,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public changed: {(drive: Drive): void;};
 		public disconnected: {(drive: Drive): void;};
 		public eject_button: {(drive: Drive): void;};
@@ -19883,7 +20785,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 	}
 
 	/**
@@ -19895,7 +20797,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public accept_certificate: {(connection: DtlsConnection, peer_cert: TlsCertificate, errors: TlsCertificateFlags): boolean;};
 		public handshake: {(conn: DtlsConnection, cancellable: Cancellable): boolean;};
 		public handshake_async: {(conn: DtlsConnection, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
@@ -19917,7 +20819,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 	}
 
 	interface EmblemClass {}
@@ -19928,7 +20830,6 @@ declare namespace imports.gi.Gio {
 	interface EmblemedIconClass {}
 	class EmblemedIconClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface EmblemedIconPrivate {}
@@ -20115,14 +21016,13 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public get_fd: {(fd_based: FileDescriptorBased): number;};
 	}
 
 	interface FileEnumeratorClass {}
 	class FileEnumeratorClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public next_file: {(enumerator: FileEnumerator, cancellable: Cancellable): FileInfo;};
 		public close_fn: {(enumerator: FileEnumerator, cancellable: Cancellable): boolean;};
 		public next_files_async: {(enumerator: FileEnumerator, num_files: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
@@ -20146,7 +21046,6 @@ declare namespace imports.gi.Gio {
 	interface FileIOStreamClass {}
 	class FileIOStreamClass {
 		public constructor();
-		public parent_class: IOStreamClass;
 		public tell: {(stream: FileIOStream): number;};
 		public can_seek: {(stream: FileIOStream): boolean;};
 		public seek: {(stream: FileIOStream, offset: number, _type: GLib.SeekType, cancellable: Cancellable): boolean;};
@@ -20182,11 +21081,11 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		/**
 		 * a boolean that indicates whether the #GFile implementation supports thread-default contexts. Since 2.22.
 		 */
-		public supports_thread_contexts: boolean;
+		public readonly supports_thread_contexts: boolean;
 		public dup: {(file: File): File;};
 		public hash: {(file: File): number;};
 		public equal: {(file1: File, file2: File): boolean;};
@@ -20299,7 +21198,6 @@ declare namespace imports.gi.Gio {
 	interface FileInputStreamClass {}
 	class FileInputStreamClass {
 		public constructor();
-		public parent_class: InputStreamClass;
 		public tell: {(stream: FileInputStream): number;};
 		public can_seek: {(stream: FileInputStream): boolean;};
 		public seek: {(stream: FileInputStream, offset: number, _type: GLib.SeekType, cancellable: Cancellable): boolean;};
@@ -20321,7 +21219,6 @@ declare namespace imports.gi.Gio {
 	interface FileMonitorClass {}
 	class FileMonitorClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public changed: {(monitor: FileMonitor, file: File, other_file: File, event_type: FileMonitorEvent): void;};
 		public cancel: {(monitor: FileMonitor): boolean;};
 		public _g_reserved1: {(): void;};
@@ -20339,7 +21236,6 @@ declare namespace imports.gi.Gio {
 	interface FileOutputStreamClass {}
 	class FileOutputStreamClass {
 		public constructor();
-		public parent_class: OutputStreamClass;
 		public tell: {(stream: FileOutputStream): number;};
 		public can_seek: {(stream: FileOutputStream): boolean;};
 		public seek: {(stream: FileOutputStream, offset: number, _type: GLib.SeekType, cancellable: Cancellable): boolean;};
@@ -20364,7 +21260,6 @@ declare namespace imports.gi.Gio {
 	interface FilenameCompleterClass {}
 	class FilenameCompleterClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public got_completion_data: {(filename_completer: FilenameCompleter): void;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
@@ -20374,7 +21269,6 @@ declare namespace imports.gi.Gio {
 	interface FilterInputStreamClass {}
 	class FilterInputStreamClass {
 		public constructor();
-		public parent_class: InputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -20383,7 +21277,6 @@ declare namespace imports.gi.Gio {
 	interface FilterOutputStreamClass {}
 	class FilterOutputStreamClass {
 		public constructor();
-		public parent_class: OutputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -20525,7 +21418,6 @@ declare namespace imports.gi.Gio {
 	interface IOStreamClass {}
 	class IOStreamClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_input_stream: {(stream: IOStream): InputStream;};
 		public get_output_stream: {(stream: IOStream): OutputStream;};
 		public close_fn: {(stream: IOStream, cancellable: Cancellable): boolean;};
@@ -20559,7 +21451,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public hash: {(icon: Icon): number;};
 		public equal: {(icon1: Icon, icon2: Icon): boolean;};
 		public to_tokens: {(icon: Icon, tokens: any[], out_version: number): boolean;};
@@ -20570,7 +21462,6 @@ declare namespace imports.gi.Gio {
 	interface InetAddressClass {}
 	class InetAddressClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public to_string: {(address: InetAddress): string;};
 		public to_bytes: {(address: InetAddress): number;};
 	}
@@ -20578,7 +21469,6 @@ declare namespace imports.gi.Gio {
 	interface InetAddressMaskClass {}
 	class InetAddressMaskClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface InetAddressMaskPrivate {}
@@ -20594,7 +21484,6 @@ declare namespace imports.gi.Gio {
 	interface InetSocketAddressClass {}
 	class InetSocketAddressClass {
 		public constructor();
-		public parent_class: SocketAddressClass;
 	}
 
 	interface InetSocketAddressPrivate {}
@@ -20612,7 +21501,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public init: {(initable: Initable, cancellable: Cancellable): boolean;};
 	}
 
@@ -20679,7 +21568,6 @@ declare namespace imports.gi.Gio {
 	interface InputStreamClass {}
 	class InputStreamClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public read_fn: {(stream: InputStream, buffer: any, count: number, cancellable: Cancellable): number;};
 		public skip: {(stream: InputStream, count: number, cancellable: Cancellable): number;};
 		public close_fn: {(stream: InputStream, cancellable: Cancellable): boolean;};
@@ -20729,7 +21617,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * parent #GTypeInterface
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public get_item_type: {(list: ListModel): GObject.Type;};
 		public get_n_items: {(list: ListModel): number;};
 		public get_item: {(list: ListModel, position: number): GObject.Object;};
@@ -20738,7 +21626,6 @@ declare namespace imports.gi.Gio {
 	interface ListStoreClass {}
 	class ListStoreClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	/**
@@ -20750,7 +21637,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public load: {(icon: LoadableIcon, size: number, _type: string, cancellable: Cancellable): InputStream;};
 		public load_async: {(icon: LoadableIcon, size: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
 		public load_finish: {(icon: LoadableIcon, res: AsyncResult, _type: string): InputStream;};
@@ -20759,7 +21646,6 @@ declare namespace imports.gi.Gio {
 	interface MemoryInputStreamClass {}
 	class MemoryInputStreamClass {
 		public constructor();
-		public parent_class: InputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -20781,14 +21667,13 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public low_memory_warning: {(monitor: MemoryMonitor, level: MemoryMonitorWarningLevel): void;};
 	}
 
 	interface MemoryOutputStreamClass {}
 	class MemoryOutputStreamClass {
 		public constructor();
-		public parent_class: OutputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -20804,7 +21689,6 @@ declare namespace imports.gi.Gio {
 	interface MenuAttributeIterClass {}
 	class MenuAttributeIterClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_next: {(iter: MenuAttributeIter, out_name: string, value: GLib.Variant): boolean;};
 	}
 
@@ -20816,7 +21700,6 @@ declare namespace imports.gi.Gio {
 	interface MenuLinkIterClass {}
 	class MenuLinkIterClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_next: {(iter: MenuLinkIter, out_link: string, value: MenuModel): boolean;};
 	}
 
@@ -20828,7 +21711,6 @@ declare namespace imports.gi.Gio {
 	interface MenuModelClass {}
 	class MenuModelClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public is_mutable: {(model: MenuModel): boolean;};
 		public get_n_items: {(model: MenuModel): number;};
 		public get_item_attributes: {(model: MenuModel, item_index: number, attributes: GLib.HashTable): void;};
@@ -20853,7 +21735,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public changed: {(mount: Mount): void;};
 		public unmounted: {(mount: Mount): void;};
 		public get_root: {(mount: Mount): File;};
@@ -20886,7 +21768,6 @@ declare namespace imports.gi.Gio {
 	interface MountOperationClass {}
 	class MountOperationClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public ask_password: {(op: MountOperation, message: string, default_user: string, default_domain: string, flags: AskPasswordFlags): void;};
 		public ask_question: {(op: MountOperation, message: string, choices: string[]): void;};
 		public reply: {(op: MountOperation, result: MountOperationResult): void;};
@@ -20912,7 +21793,6 @@ declare namespace imports.gi.Gio {
 	interface NativeSocketAddressClass {}
 	class NativeSocketAddressClass {
 		public constructor();
-		public parent_class: SocketAddressClass;
 	}
 
 	interface NativeSocketAddressPrivate {}
@@ -20923,14 +21803,12 @@ declare namespace imports.gi.Gio {
 	interface NativeVolumeMonitorClass {}
 	class NativeVolumeMonitorClass {
 		public constructor();
-		public parent_class: VolumeMonitorClass;
 		public get_mount_for_mount_path: {(mount_path: string, cancellable: Cancellable): Mount;};
 	}
 
 	interface NetworkAddressClass {}
 	class NetworkAddressClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface NetworkAddressPrivate {}
@@ -20947,7 +21825,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public network_changed: {(monitor: NetworkMonitor, network_available: boolean): void;};
 		public can_reach: {(monitor: NetworkMonitor, connectable: SocketConnectable, cancellable: Cancellable): boolean;};
 		public can_reach_async: {(monitor: NetworkMonitor, connectable: SocketConnectable, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
@@ -20957,7 +21835,6 @@ declare namespace imports.gi.Gio {
 	interface NetworkServiceClass {}
 	class NetworkServiceClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface NetworkServicePrivate {}
@@ -21008,7 +21885,6 @@ declare namespace imports.gi.Gio {
 	interface OutputStreamClass {}
 	class OutputStreamClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public write_fn: {(stream: OutputStream, buffer: number[], count: number, cancellable: Cancellable): number;};
 		public splice: {(stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, cancellable: Cancellable): number;};
 		public flush: {(stream: OutputStream, cancellable: Cancellable): boolean;};
@@ -21058,8 +21934,7 @@ declare namespace imports.gi.Gio {
 	interface PermissionClass {}
 	class PermissionClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public reserved: any[];
+		public readonly reserved: any[];
 		public acquire: {(permission: Permission, cancellable: Cancellable): boolean;};
 		public acquire_async: {(permission: Permission, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
 		public acquire_finish: {(permission: Permission, result: AsyncResult): boolean;};
@@ -21091,7 +21966,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public can_poll: {(stream: PollableInputStream): boolean;};
 		public is_readable: {(stream: PollableInputStream): boolean;};
 		public create_source: {(stream: PollableInputStream, cancellable: Cancellable): GLib.Source;};
@@ -21122,7 +21997,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public can_poll: {(stream: PollableOutputStream): boolean;};
 		public is_writable: {(stream: PollableOutputStream): boolean;};
 		public create_source: {(stream: PollableOutputStream, cancellable: Cancellable): GLib.Source;};
@@ -21139,7 +22014,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 	}
 
 	/**
@@ -21148,7 +22023,6 @@ declare namespace imports.gi.Gio {
 	interface ProxyAddressClass {}
 	class ProxyAddressClass {
 		public constructor();
-		public parent_class: InetSocketAddressClass;
 	}
 
 	/**
@@ -21157,7 +22031,6 @@ declare namespace imports.gi.Gio {
 	interface ProxyAddressEnumeratorClass {}
 	class ProxyAddressEnumeratorClass {
 		public constructor();
-		public parent_class: SocketAddressEnumeratorClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -21186,7 +22059,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public connect: {(proxy: Proxy, connection: IOStream, proxy_address: ProxyAddress, cancellable: Cancellable): IOStream;};
 		public connect_async: {(proxy: Proxy, connection: IOStream, proxy_address: ProxyAddress, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
 		public connect_finish: {(proxy: Proxy, result: AsyncResult): IOStream;};
@@ -21202,7 +22075,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public is_supported: {(resolver: ProxyResolver): boolean;};
 		public lookup: {(resolver: ProxyResolver, uri: string, cancellable: Cancellable): string[];};
 		public lookup_async: {(resolver: ProxyResolver, uri: string, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
@@ -21215,7 +22088,7 @@ declare namespace imports.gi.Gio {
 	interface RemoteActionGroupInterface {}
 	class RemoteActionGroupInterface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public activate_action_full: {(remote: RemoteActionGroup, action_name: string, parameter: GLib.Variant, platform_data: GLib.Variant): void;};
 		public change_action_state_full: {(remote: RemoteActionGroup, action_name: string, value: GLib.Variant, platform_data: GLib.Variant): void;};
 	}
@@ -21223,7 +22096,6 @@ declare namespace imports.gi.Gio {
 	interface ResolverClass {}
 	class ResolverClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public reload: {(resolver: Resolver): void;};
 		public lookup_by_name: {(resolver: Resolver, hostname: string, cancellable: Cancellable): GLib.List;};
 		public lookup_by_name_async: {(resolver: Resolver, hostname: string, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
@@ -21499,7 +22371,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public tell: {(seekable: Seekable): number;};
 		public can_seek: {(seekable: Seekable): boolean;};
 		public seek: {(seekable: Seekable, offset: number, _type: GLib.SeekType, cancellable: Cancellable): boolean;};
@@ -21513,8 +22385,7 @@ declare namespace imports.gi.Gio {
 	interface SettingsBackendClass {}
 	class SettingsBackendClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public read: {(backend: SettingsBackend, key: string, expected_type: GLib.VariantType, default_value: boolean): GLib.Variant;};
 		public get_writable: {(backend: SettingsBackend, key: string): boolean;};
 		public write: {(backend: SettingsBackend, key: string, value: GLib.Variant, origin_tag: any): boolean;};
@@ -21535,8 +22406,7 @@ declare namespace imports.gi.Gio {
 	interface SettingsClass {}
 	class SettingsClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public writable_changed: {(settings: Settings, key: string): void;};
 		public changed: {(settings: Settings, key: string): void;};
 		public writable_change_event: {(settings: Settings, key: GLib.Quark): boolean;};
@@ -21921,8 +22791,7 @@ declare namespace imports.gi.Gio {
 	interface SimpleActionGroupClass {}
 	class SimpleActionGroupClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 	}
 
 	interface SimpleActionGroupPrivate {}
@@ -21938,7 +22807,6 @@ declare namespace imports.gi.Gio {
 	interface SimpleProxyResolverClass {}
 	class SimpleProxyResolverClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -21954,7 +22822,6 @@ declare namespace imports.gi.Gio {
 	interface SocketAddressClass {}
 	class SocketAddressClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_family: {(address: SocketAddress): SocketFamily;};
 		public get_native_size: {(address: SocketAddress): number;};
 		public to_native: {(address: SocketAddress, dest: any, destlen: number): boolean;};
@@ -21966,7 +22833,6 @@ declare namespace imports.gi.Gio {
 	interface SocketAddressEnumeratorClass {}
 	class SocketAddressEnumeratorClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public next: {(enumerator: SocketAddressEnumerator, cancellable: Cancellable): SocketAddress;};
 		public next_async: {(enumerator: SocketAddressEnumerator, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
 		public next_finish: {(enumerator: SocketAddressEnumerator, result: AsyncResult): SocketAddress;};
@@ -21975,7 +22841,6 @@ declare namespace imports.gi.Gio {
 	interface SocketClass {}
 	class SocketClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -21991,7 +22856,6 @@ declare namespace imports.gi.Gio {
 	interface SocketClientClass {}
 	class SocketClientClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public event: {(client: SocketClient, event: SocketClientEvent, connectable: SocketConnectable, connection: IOStream): void;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
@@ -22014,7 +22878,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public enumerate: {(connectable: SocketConnectable): SocketAddressEnumerator;};
 		public proxy_enumerate: {(connectable: SocketConnectable): SocketAddressEnumerator;};
 		public to_string: {(connectable: SocketConnectable): string;};
@@ -22023,7 +22887,6 @@ declare namespace imports.gi.Gio {
 	interface SocketConnectionClass {}
 	class SocketConnectionClass {
 		public constructor();
-		public parent_class: IOStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -22043,7 +22906,6 @@ declare namespace imports.gi.Gio {
 	interface SocketControlMessageClass {}
 	class SocketControlMessageClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_size: {(message: SocketControlMessage): number;};
 		public get_level: {(message: SocketControlMessage): number;};
 		public get_type: {(message: SocketControlMessage): number;};
@@ -22067,7 +22929,6 @@ declare namespace imports.gi.Gio {
 	interface SocketListenerClass {}
 	class SocketListenerClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public changed: {(listener: SocketListener): void;};
 		public event: {(listener: SocketListener, event: SocketListenerEvent, socket: Socket): void;};
 		public _g_reserved2: {(): void;};
@@ -22093,7 +22954,6 @@ declare namespace imports.gi.Gio {
 	interface SocketServiceClass {}
 	class SocketServiceClass {
 		public constructor();
-		public parent_class: SocketListenerClass;
 		public incoming: {(service: SocketService, connection: SocketConnection, source_object: GObject.Object): boolean;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
@@ -22184,11 +23044,11 @@ declare namespace imports.gi.Gio {
 	interface StaticResource {}
 	class StaticResource {
 		public constructor();
-		public data: number;
-		public data_len: number;
-		public resource: Resource;
-		public next: StaticResource;
-		public padding: any;
+		public readonly data: number;
+		public readonly data_len: number;
+		public readonly resource: Resource;
+		public readonly next: StaticResource;
+		public readonly padding: any;
 		/**
 		 * Finalized a GResource initialized by g_static_resource_init().
 		 * 
@@ -22225,7 +23085,6 @@ declare namespace imports.gi.Gio {
 	interface TcpConnectionClass {}
 	class TcpConnectionClass {
 		public constructor();
-		public parent_class: SocketConnectionClass;
 	}
 
 	interface TcpConnectionPrivate {}
@@ -22236,7 +23095,6 @@ declare namespace imports.gi.Gio {
 	interface TcpWrapperConnectionClass {}
 	class TcpWrapperConnectionClass {
 		public constructor();
-		public parent_class: TcpConnectionClass;
 	}
 
 	interface TcpWrapperConnectionPrivate {}
@@ -22252,7 +23110,6 @@ declare namespace imports.gi.Gio {
 	interface ThreadedSocketServiceClass {}
 	class ThreadedSocketServiceClass {
 		public constructor();
-		public parent_class: SocketServiceClass;
 		public run: {(service: ThreadedSocketService, connection: SocketConnection, source_object: GObject.Object): boolean;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
@@ -22275,7 +23132,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public supports_tls: {(backend: TlsBackend): boolean;};
 		public get_certificate_type: {(): GObject.Type;};
 		public get_client_connection_type: {(): GObject.Type;};
@@ -22290,8 +23147,7 @@ declare namespace imports.gi.Gio {
 	interface TlsCertificateClass {}
 	class TlsCertificateClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public verify: {(cert: TlsCertificate, identity: SocketConnectable, trusted_ca: TlsCertificate): TlsCertificateFlags;};
 	}
 
@@ -22309,7 +23165,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public copy_session_state: {(conn: TlsClientConnection, source: TlsClientConnection): void;};
 	}
 
@@ -22319,11 +23175,7 @@ declare namespace imports.gi.Gio {
 	interface TlsConnectionClass {}
 	class TlsConnectionClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: IOStreamClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public accept_certificate: {(connection: TlsConnection, peer_cert: TlsCertificate, errors: TlsCertificateFlags): boolean;};
 		public handshake: {(conn: TlsConnection, cancellable: Cancellable): boolean;};
 		public handshake_async: {(conn: TlsConnection, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
@@ -22345,8 +23197,7 @@ declare namespace imports.gi.Gio {
 	interface TlsDatabaseClass {}
 	class TlsDatabaseClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public verify_chain: {(self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable): TlsCertificateFlags;};
 		public verify_chain_async: {(self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
 		public verify_chain_finish: {(self: TlsDatabase, result: AsyncResult): TlsCertificateFlags;};
@@ -22376,8 +23227,8 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
-		public padding: any[];
+		public readonly g_iface: GObject.TypeInterface;
+		public readonly padding: any[];
 	}
 
 	/**
@@ -22399,8 +23250,7 @@ declare namespace imports.gi.Gio {
 	interface TlsInteractionClass {}
 	class TlsInteractionClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public ask_password: {(interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable): TlsInteractionResult;};
 		public ask_password_async: {(interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable, callback: AsyncReadyCallback): void;};
 		public ask_password_finish: {(interaction: TlsInteraction, result: AsyncResult): TlsInteractionResult;};
@@ -22420,8 +23270,7 @@ declare namespace imports.gi.Gio {
 	interface TlsPasswordClass {}
 	class TlsPasswordClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public get_value: {(password: TlsPassword, length: number): number[];};
 		public set_value: {(password: TlsPassword, value: number[], length: number, destroy: GLib.DestroyNotify): void;};
 		public get_default_warning: {(password: TlsPassword): string;};
@@ -22441,13 +23290,12 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 	}
 
 	interface UnixConnectionClass {}
 	class UnixConnectionClass {
 		public constructor();
-		public parent_class: SocketConnectionClass;
 	}
 
 	interface UnixConnectionPrivate {}
@@ -22461,7 +23309,6 @@ declare namespace imports.gi.Gio {
 	interface UnixCredentialsMessageClass {}
 	class UnixCredentialsMessageClass {
 		public constructor();
-		public parent_class: SocketControlMessageClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 	}
@@ -22474,7 +23321,6 @@ declare namespace imports.gi.Gio {
 	interface UnixFDListClass {}
 	class UnixFDListClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -22490,7 +23336,6 @@ declare namespace imports.gi.Gio {
 	interface UnixFDMessageClass {}
 	class UnixFDMessageClass {
 		public constructor();
-		public parent_class: SocketControlMessageClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 	}
@@ -22503,7 +23348,6 @@ declare namespace imports.gi.Gio {
 	interface UnixInputStreamClass {}
 	class UnixInputStreamClass {
 		public constructor();
-		public parent_class: InputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -22615,7 +23459,6 @@ declare namespace imports.gi.Gio {
 	interface UnixOutputStreamClass {}
 	class UnixOutputStreamClass {
 		public constructor();
-		public parent_class: OutputStreamClass;
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -22631,7 +23474,6 @@ declare namespace imports.gi.Gio {
 	interface UnixSocketAddressClass {}
 	class UnixSocketAddressClass {
 		public constructor();
-		public parent_class: SocketAddressClass;
 	}
 
 	interface UnixSocketAddressPrivate {}
@@ -22642,7 +23484,6 @@ declare namespace imports.gi.Gio {
 	interface VfsClass {}
 	class VfsClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public is_active: {(vfs: Vfs): boolean;};
 		public get_file_for_path: {(vfs: Vfs, path: string): File;};
 		public get_file_for_uri: {(vfs: Vfs, uri: string): File;};
@@ -22671,7 +23512,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The parent interface.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public changed: {(volume: Volume): void;};
 		public removed: {(volume: Volume): void;};
 		public get_name: {(volume: Volume): string;};
@@ -22698,7 +23539,6 @@ declare namespace imports.gi.Gio {
 	interface VolumeMonitorClass {}
 	class VolumeMonitorClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public volume_added: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
 		public volume_removed: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
 		public volume_changed: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
@@ -22729,19 +23569,44 @@ declare namespace imports.gi.Gio {
 	interface ZlibCompressorClass {}
 	class ZlibCompressorClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface ZlibDecompressorClass {}
 	class ZlibDecompressorClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
 	 */
 	interface IAction {
+		/**
+		 * If #action is currently enabled.
+		 * 
+		 * If the action is disabled then calls to g_action_activate() and
+		 * g_action_change_state() have no effect.
+		 */
+		readonly enabled: boolean;
+		/**
+		 * The name of the action.  This is mostly meaningful for identifying
+		 * the action once it has been added to a #GActionGroup. It is immutable.
+		 */
+		readonly name: string;
+		/**
+		 * The type of the parameter that must be given when activating the
+		 * action. This is immutable, and may be %NULL if no parameter is needed when
+		 * activating the action.
+		 */
+		readonly parameter_type: GLib.VariantType;
+		/**
+		 * The state of the action, or %NULL if the action is stateless.
+		 */
+		readonly state: GLib.Variant;
+		/**
+		 * The #GVariantType of the state that the action has, or %NULL if the
+		 * action is stateless. This is immutable.
+		 */
+		readonly state_type: GLib.VariantType;
 		/**
 		 * Activates the action.
 		 * 
@@ -24940,6 +25805,40 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IDtlsClientConnection {
 		/**
+		 * A list of the distinguished names of the Certificate Authorities
+		 * that the server will accept client certificates signed by. If the
+		 * server requests a client certificate during the handshake, then
+		 * this property will be set after the handshake completes.
+		 * 
+		 * Each item in the list is a #GByteArray which contains the complete
+		 * subject DN of the certificate authority.
+		 */
+		readonly accepted_cas: GLib.List;
+		/**
+		 * A #GSocketConnectable describing the identity of the server that
+		 * is expected on the other end of the connection.
+		 * 
+		 * If the %G_TLS_CERTIFICATE_BAD_IDENTITY flag is set in
+		 * #GDtlsClientConnection:validation-flags, this object will be used
+		 * to determine the expected identify of the remote end of the
+		 * connection; if #GDtlsClientConnection:server-identity is not set,
+		 * or does not match the identity presented by the server, then the
+		 * %G_TLS_CERTIFICATE_BAD_IDENTITY validation will fail.
+		 * 
+		 * In addition to its use in verifying the server certificate,
+		 * this is also used to give a hint to the server about what
+		 * certificate we expect, which is useful for servers that serve
+		 * virtual hosts.
+		 */
+		server_identity: SocketConnectable;
+		/**
+		 * What steps to perform when validating a certificate received from
+		 * a server. Server certificates that fail to validate in any of the
+		 * ways indicated here will be rejected unless the application
+		 * overrides the default via #GDtlsConnection::accept-certificate.
+		 */
+		validation_flags: TlsCertificateFlags;
+		/**
 		 * Gets the list of distinguished names of the Certificate Authorities
 		 * that the server will accept certificates from. This will be set
 		 * during the TLS handshake if the server requests a certificate.
@@ -25011,6 +25910,75 @@ declare namespace imports.gi.Gio {
 	 * use {@link DtlsConnection} instead.
 	 */
 	interface IDtlsConnection {
+		/**
+		 * The list of application-layer protocols that the connection
+		 * advertises that it is willing to speak. See
+		 * g_dtls_connection_set_advertised_protocols().
+		 */
+		advertised_protocols: string[];
+		/**
+		 * The #GDatagramBased that the connection wraps. Note that this may be any
+		 * implementation of #GDatagramBased, not just a #GSocket.
+		 */
+		base_socket: DatagramBased;
+		/**
+		 * The connection's certificate; see
+		 * g_dtls_connection_set_certificate().
+		 */
+		certificate: TlsCertificate;
+		/**
+		 * The name of the DTLS ciphersuite in use. See g_dtls_connection_get_ciphersuite_name().
+		 */
+		readonly ciphersuite_name: string;
+		/**
+		 * The certificate database to use when verifying this TLS connection.
+		 * If no certificate database is set, then the default database will be
+		 * used. See g_tls_backend_get_default_database().
+		 */
+		database: TlsDatabase;
+		/**
+		 * A #GTlsInteraction object to be used when the connection or certificate
+		 * database need to interact with the user. This will be used to prompt the
+		 * user for passwords where necessary.
+		 */
+		interaction: TlsInteraction;
+		/**
+		 * The application-layer protocol negotiated during the TLS
+		 * handshake. See g_dtls_connection_get_negotiated_protocol().
+		 */
+		readonly negotiated_protocol: string;
+		/**
+		 * The connection's peer's certificate, after the TLS handshake has
+		 * completed or failed. Note in particular that this is not yet set
+		 * during the emission of #GDtlsConnection::accept-certificate.
+		 * 
+		 * (You can watch for a #GObject::notify signal on this property to
+		 * detect when a handshake has occurred.)
+		 */
+		readonly peer_certificate: TlsCertificate;
+		/**
+		 * The errors noticed while verifying
+		 * #GDtlsConnection:peer-certificate. Normally this should be 0, but
+		 * it may not be if #GDtlsClientConnection:validation-flags is not
+		 * %G_TLS_CERTIFICATE_VALIDATE_ALL, or if
+		 * #GDtlsConnection::accept-certificate overrode the default
+		 * behavior.
+		 */
+		readonly peer_certificate_errors: TlsCertificateFlags;
+		/**
+		 * The DTLS protocol version in use. See g_dtls_connection_get_protocol_version().
+		 */
+		readonly protocol_version: TlsProtocolVersion;
+		/**
+		 * The rehandshaking mode. See
+		 * g_dtls_connection_set_rehandshake_mode().
+		 */
+		rehandshake_mode: TlsRehandshakeMode;
+		/**
+		 * Whether or not proper TLS close notification is required.
+		 * See g_dtls_connection_set_require_close_notify().
+		 */
+		require_close_notify: boolean;
 		/**
 		 * Close the DTLS connection. This is equivalent to calling
 		 * g_dtls_connection_shutdown() to shut down both sides of the connection.
@@ -25381,6 +26349,12 @@ declare namespace imports.gi.Gio {
 	 * use {@link DtlsServerConnection} instead.
 	 */
 	interface IDtlsServerConnection {
+		/**
+		 * The #GTlsAuthenticationMode for the server. This can be changed
+		 * before calling g_dtls_connection_handshake() if you want to
+		 * rehandshake with a different mode from the initial handshake.
+		 */
+		authentication_mode: TlsAuthenticationMode;
 
 	}
 
@@ -28498,6 +29472,52 @@ declare namespace imports.gi.Gio {
 	 */
 	interface INetworkMonitor {
 		/**
+		 * More detailed information about the host's network connectivity.
+		 * See g_network_monitor_get_connectivity() and
+		 * #GNetworkConnectivity for more details.
+		 */
+		readonly connectivity: NetworkConnectivity;
+		/**
+		 * Whether the network is considered available. That is, whether the
+		 * system has a default route for at least one of IPv4 or IPv6.
+		 * 
+		 * Real-world networks are of course much more complicated than
+		 * this; the machine may be connected to a wifi hotspot that
+		 * requires payment before allowing traffic through, or may be
+		 * connected to a functioning router that has lost its own upstream
+		 * connectivity. Some hosts might only be accessible when a VPN is
+		 * active. Other hosts might only be accessible when the VPN is
+		 * not active. Thus, it is best to use g_network_monitor_can_reach()
+		 * or g_network_monitor_can_reach_async() to test for reachability
+		 * on a host-by-host basis. (On the other hand, when the property is
+		 * %FALSE, the application can reasonably expect that no remote
+		 * hosts at all are reachable, and should indicate this to the user
+		 * in its UI.)
+		 * 
+		 * See also #GNetworkMonitor::network-changed.
+		 */
+		readonly network_available: boolean;
+		/**
+		 * Whether the network is considered metered. That is, whether the
+		 * system has traffic flowing through the default connection that is
+		 * subject to limitations set by service providers. For example, traffic
+		 * might be billed by the amount of data transmitted, or there might be a
+		 * quota on the amount of traffic per month. This is typical with tethered
+		 * connections (3G and 4G) and in such situations, bandwidth intensive
+		 * applications may wish to avoid network activity where possible if it will
+		 * cost the user money or use up their limited quota.
+		 * 
+		 * If more information is required about specific devices then the
+		 * system network management API should be used instead (for example,
+		 * NetworkManager or ConnMan).
+		 * 
+		 * If this information is not available then no networks will be
+		 * marked as metered.
+		 * 
+		 * See also #GNetworkMonitor:network-available.
+		 */
+		readonly network_metered: boolean;
+		/**
 		 * Attempts to determine whether or not the host pointed to by
 		 * #connectable can be reached, without actually trying to connect to
 		 * it.
@@ -28813,6 +29833,10 @@ declare namespace imports.gi.Gio {
 	 * use {@link PowerProfileMonitor} instead.
 	 */
 	interface IPowerProfileMonitor {
+		/**
+		 * Whether “Power Saver” mode is enabled on the system.
+		 */
+		readonly power_saver_enabled: boolean;
 		/**
 		 * Gets whether the system is in “Power Saver” mode.
 		 * 
@@ -29388,6 +30412,45 @@ declare namespace imports.gi.Gio {
 	 */
 	interface ITlsClientConnection {
 		/**
+		 * A list of the distinguished names of the Certificate Authorities
+		 * that the server will accept client certificates signed by. If the
+		 * server requests a client certificate during the handshake, then
+		 * this property will be set after the handshake completes.
+		 * 
+		 * Each item in the list is a #GByteArray which contains the complete
+		 * subject DN of the certificate authority.
+		 */
+		readonly accepted_cas: GLib.List;
+		/**
+		 * A #GSocketConnectable describing the identity of the server that
+		 * is expected on the other end of the connection.
+		 * 
+		 * If the %G_TLS_CERTIFICATE_BAD_IDENTITY flag is set in
+		 * #GTlsClientConnection:validation-flags, this object will be used
+		 * to determine the expected identify of the remote end of the
+		 * connection; if #GTlsClientConnection:server-identity is not set,
+		 * or does not match the identity presented by the server, then the
+		 * %G_TLS_CERTIFICATE_BAD_IDENTITY validation will fail.
+		 * 
+		 * In addition to its use in verifying the server certificate,
+		 * this is also used to give a hint to the server about what
+		 * certificate we expect, which is useful for servers that serve
+		 * virtual hosts.
+		 */
+		server_identity: SocketConnectable;
+		/**
+		 * SSL 3.0 is no longer supported. See
+		 * g_tls_client_connection_set_use_ssl3() for details.
+		 */
+		use_ssl3: boolean;
+		/**
+		 * What steps to perform when validating a certificate received from
+		 * a server. Server certificates that fail to validate in any of the
+		 * ways indicated here will be rejected unless the application
+		 * overrides the default via #GTlsConnection::accept-certificate.
+		 */
+		validation_flags: TlsCertificateFlags;
+		/**
 		 * Possibly copies session state from one connection to another, for use
 		 * in TLS session resumption. This is not normally needed, but may be
 		 * used when the same session needs to be used between different
@@ -29516,6 +30579,13 @@ declare namespace imports.gi.Gio {
 	 * use {@link TlsFileDatabase} instead.
 	 */
 	interface ITlsFileDatabase {
+		/**
+		 * The path to a file containing PEM encoded certificate authority
+		 * root anchors. The certificates in this file will be treated as
+		 * root authorities for the purpose of verifying other certificates
+		 * via the g_tls_database_verify_chain() operation.
+		 */
+		anchors: string;
 
 	}
 
@@ -29551,6 +30621,12 @@ declare namespace imports.gi.Gio {
 	 * use {@link TlsServerConnection} instead.
 	 */
 	interface ITlsServerConnection {
+		/**
+		 * The #GTlsAuthenticationMode for the server. This can be changed
+		 * before calling g_tls_connection_handshake() if you want to
+		 * rehandshake with a different mode from the initial handshake.
+		 */
+		authentication_mode: TlsAuthenticationMode;
 
 	}
 

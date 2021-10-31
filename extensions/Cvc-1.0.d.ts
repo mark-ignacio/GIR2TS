@@ -9,9 +9,6 @@ declare namespace imports.gi.Cvc {
     }
 
     interface IMixerStream {
-        name: string;
-        is_muted: boolean;
-        volume: number;
         connect(signal: 'notify::volume', callback: (...args: any) => void): number;
     }
 }

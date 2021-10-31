@@ -5,6 +5,7 @@ import { BuildConstructorNode } from "../utils/utils";
 import { GetTypeInfo } from "../utils/paramUtils";
 import { renderMethod } from "./methodRenderer";
 import { ClassModifier, FunctionModifier } from "../types/modifier-types";
+import { ignored_property_names } from "../consts";
 
 function getAllMethods(object: RecordNode): FunctionNode[] {
     let methods: FunctionNode[] = [];
@@ -17,12 +18,20 @@ function getAllMethods(object: RecordNode): FunctionNode[] {
     return methods;
 }
 
-function renderProperty(prop_node: ParameterNode): string {
+export function renderProperty(prop_node: ParameterNode, ns_name: string, include_access_modifier: boolean = true, indent: number = 0, exclude?: boolean): string {
     let prop_name = prop_node.$.name;
     if (prop_name === 'constructor') {
         prop_name += '_'; // Append an underscore.
     }
-    return 'public ' + prop_name.replace(/-/g, '_') + ': ' + GetTypeInfo(prop_node).type + ';';
+    let result = renderDocString(prop_node.doc?.[0]?._ ?? null, undefined, undefined, indent, ns_name);
+    result += "\t".repeat(indent);
+    if (exclude)
+        result += "// ";
+    result += (include_access_modifier) ? 'public ' : "";
+    if (prop_node?.$?.writable != 1)
+        result+= "readonly ";
+    result += (prop_name.replace(/-/g, '_') + ': ' + GetTypeInfo(prop_node).type + ';');
+    return result;
 }
 
 function renderCallbackField(cb_node: FunctionNode, ns_name: string, indent: number, exclude: boolean): string {
@@ -50,7 +59,7 @@ export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclu
 
     if (rec_node.field)
         for (let f of rec_node.field) {
-            if (f.type || f.array) {
+            if ((f.type || f.array) && !ignored_property_names.includes(f.$.name)) {
                 props.push(f);
             } else if (f.callback) {
                 callback_fields.push(f.callback[0]);
@@ -72,12 +81,8 @@ export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclu
     }
 
     for (let f of props) {
-        body += renderDocString(f.doc?.[0]._ ?? null, undefined, undefined, 1, ns_name)
         const excluded = exclude?.prop?.includes(f.$.name) ?? false;
-        body += '\t';
-        if (excluded)
-            body += "// "
-        body += renderProperty(f) + '\n';
+        body += renderProperty(f, ns_name, true, 1, excluded) + '\n';
     }
 
     for (let c of callback_fields) {

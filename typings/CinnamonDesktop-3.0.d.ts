@@ -96,6 +96,17 @@ declare namespace imports.gi.CinnamonDesktop {
 	 */
 	interface IBGCrossfade {
 		/**
+		 * When a crossfade is running, this is height of the fading
+		 * surface.
+		 */
+		height: number;
+		/**
+		 * When a crossfade is running, this is width of the fading
+		 * surface.
+		 */
+		width: number;
+		readonly parent_object: GObject.Object;
+		/**
 		 * This function reveals whether or not #fade is currently
 		 * running on a window.  See gnome_bg_crossfade_start() for
 		 * information on how to initiate a crossfade.
@@ -396,6 +407,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	 * use {@link RRScreen} instead.
 	 */
 	interface IRRScreen {
+		gdk_screen: Gdk.Screen;
 		calculate_best_global_scale(index: number): number;
 		calculate_supported_scales(width: number, height: number, n_supported_scales: number): number;
 		create_clone_modes(): RRMode;
@@ -488,6 +500,17 @@ declare namespace imports.gi.CinnamonDesktop {
 	 */
 	interface IWallClock {
 		/**
+		 * A formatted string representing the current clock display.
+		 */
+		readonly clock: string;
+		/**
+		 * If not NULL, the wall clock will format the time/date according to
+		 * this format string.  If the format string is invalid, the default string
+		 * will be used instead.
+		 */
+		format_string: string;
+		readonly parent_object: GObject.Object;
+		/**
 		 * Returns a formatted date and time based on either default format
 		 * settings, or via a custom-set format string.
 		 * 
@@ -556,6 +579,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	 * use {@link XkbInfo} instead.
 	 */
 	interface IXkbInfo {
+		readonly parent_object: GObject.Object;
 		description_for_option(group_id: string, _id: string): string;
 		/**
 		 * Returns a list of all layout identifiers we know about.
@@ -664,7 +688,6 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface BGCrossfadeClass {}
 	class BGCrossfadeClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public finished: {(fade: BGCrossfade, window: Gdk.Window): void;};
 	}
 
@@ -676,7 +699,6 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface DesktopThumbnailFactoryClass {}
 	class DesktopThumbnailFactoryClass {
 		public constructor();
-		public parent: GObject.ObjectClass;
 	}
 
 	interface DesktopThumbnailFactoryPrivate {}
@@ -687,7 +709,6 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface PnpIdsClass {}
 	class PnpIdsClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface PnpIdsPrivate {}
@@ -698,7 +719,6 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface RRConfigClass {}
 	class RRConfigClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface RRConfigPrivate {}
@@ -725,7 +745,6 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface RRLabelerClass {}
 	class RRLabelerClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface RRLabelerPrivate {}
@@ -775,7 +794,6 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface RROutputInfoClass {}
 	class RROutputInfoClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface RROutputInfoPrivate {}
@@ -786,7 +804,6 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface RRScreenClass {}
 	class RRScreenClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public changed: {(): void;};
 		public output_connected: {(output: RROutput): void;};
 		public output_disconnected: {(output: RROutput): void;};
@@ -800,7 +817,6 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface WallClockClass {}
 	class WallClockClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface WallClockPrivate {}
@@ -811,7 +827,6 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface XkbInfoClass {}
 	class XkbInfoClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface XkbInfoPrivate {}

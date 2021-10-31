@@ -4,6 +4,101 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IAboutDialog {
 		/**
+		 * The people who contributed artwork to the program, as a %NULL-terminated
+		 * array of strings. Each string may contain email addresses and URLs, which
+		 * will be displayed as links, see the introduction for more details.
+		 */
+		artists: string[];
+		/**
+		 * The authors of the program, as a %NULL-terminated array of strings.
+		 * Each string may contain email addresses and URLs, which will be displayed
+		 * as links, see the introduction for more details.
+		 */
+		authors: string[];
+		/**
+		 * Comments about the program. This string is displayed in a label
+		 * in the main dialog, thus it should be a short explanation of
+		 * the main purpose of the program, not a detailed list of features.
+		 */
+		comments: string;
+		/**
+		 * Copyright information for the program.
+		 */
+		copyright: string;
+		/**
+		 * The people documenting the program, as a %NULL-terminated array of strings.
+		 * Each string may contain email addresses and URLs, which will be displayed
+		 * as links, see the introduction for more details.
+		 */
+		documenters: string[];
+		/**
+		 * The license of the program. This string is displayed in a
+		 * text view in a secondary dialog, therefore it is fine to use
+		 * a long multi-paragraph text. Note that the text is only wrapped
+		 * in the text view if the "wrap-license" property is set to %TRUE;
+		 * otherwise the text itself must contain the intended linebreaks.
+		 * When setting this property to a non-%NULL value, the
+		 * {@link AboutDialog}:license-type property is set to %GTK_LICENSE_CUSTOM
+		 * as a side effect.
+		 */
+		license: string;
+		/**
+		 * The license of the program, as a value of the %GtkLicense enumeration.
+		 * 
+		 * The {@link AboutDialog} will automatically fill out a standard disclaimer
+		 * and link the user to the appropriate online resource for the license
+		 * text.
+		 * 
+		 * If %GTK_LICENSE_UNKNOWN is used, the link used will be the same
+		 * specified in the #GtkAboutDialog:website property.
+		 * 
+		 * If %GTK_LICENSE_CUSTOM is used, the current contents of the
+		 * #GtkAboutDialog:license property are used.
+		 * 
+		 * For any other #GtkLicense value, the contents of the
+		 * #GtkAboutDialog:license property are also set by this property as
+		 * a side effect.
+		 */
+		license_type: License;
+		/**
+		 * A logo for the about box. If it is %NULL, the default window icon
+		 * set with gtk_window_set_default_icon() will be used.
+		 */
+		logo: GdkPixbuf.Pixbuf;
+		/**
+		 * A named icon to use as the logo for the about box. This property
+		 * overrides the {@link AboutDialog}:logo property.
+		 */
+		logo_icon_name: string;
+		/**
+		 * The name of the program.
+		 * If this is not set, it defaults to g_get_application_name().
+		 */
+		program_name: string;
+		/**
+		 * Credits to the translators. This string should be marked as translatable.
+		 * The string may contain email addresses and URLs, which will be displayed
+		 * as links, see the introduction for more details.
+		 */
+		translator_credits: string;
+		/**
+		 * The version of the program.
+		 */
+		version: string;
+		/**
+		 * The URL for the link to the website of the program.
+		 * This should be a string starting with "http://.
+		 */
+		website: string;
+		/**
+		 * The label for the link to the website of the program.
+		 */
+		website_label: string;
+		/**
+		 * Whether to wrap the text in the license dialog.
+		 */
+		wrap_license: boolean;
+		/**
 		 * Creates a new section in the Credits page.
 		 * @param section_name The name of the section
 		 * @param people The people who belong to that section
@@ -275,6 +370,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link AccelGroup} instead.
 	 */
 	interface IAccelGroup {
+		readonly is_locked: boolean;
+		readonly modifier_mask: Gdk.ModifierType;
 		/**
 		 * Finds the first accelerator in #accel_group that matches
 		 * #accel_key and #accel_mods, and activates it.
@@ -437,6 +534,9 @@ declare namespace imports.gi.Gtk {
 	 * use {@link AccelLabel} instead.
 	 */
 	interface IAccelLabel {
+		accel_closure: GObject.Closure;
+		accel_widget: Widget;
+		readonly label: Label;
 		/**
 		 * Gets the keyval and modifier mask set with
 		 * gtk_accel_label_set_accel().
@@ -796,6 +896,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Accessible} instead.
 	 */
 	interface IAccessible {
+		widget: Widget;
 		/**
 		 * This function specifies the callback function to be called
 		 * when the widget corresponding to a GtkAccessible is destroyed.
@@ -849,6 +950,102 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Action} instead.
 	 */
 	interface IAction {
+		/**
+		 * The GtkActionGroup this GtkAction is associated with, or NULL
+		 * (for internal use).
+		 */
+		action_group: ActionGroup;
+		/**
+		 * If %TRUE, the action's menu item proxies will ignore the {@link Settings}:gtk-menu-images
+		 * setting and always show their image, if available.
+		 * 
+		 * Use this property if the menu item would be useless or hard to use
+		 * without their image.
+		 */
+		always_show_image: boolean;
+		/**
+		 * The #GIcon displayed in the {@link Action}.
+		 * 
+		 * Note that the stock icon is preferred, if the #GtkAction:stock-id
+		 * property holds the id of an existing stock icon.
+		 * 
+		 * This is an appearance property and thus only applies if
+		 * #GtkActivatable:use-action-appearance is %TRUE.
+		 */
+		gicon: Gio.Icon;
+		/**
+		 * When TRUE, empty menu proxies for this action are hidden.
+		 */
+		hide_if_empty: boolean;
+		/**
+		 * The name of the icon from the icon theme.
+		 * 
+		 * Note that the stock icon is preferred, if the {@link Action}:stock-id
+		 * property holds the id of an existing stock icon, and the #GIcon is
+		 * preferred if the #GtkAction:gicon property is set.
+		 * 
+		 * This is an appearance property and thus only applies if
+		 * #GtkActivatable:use-action-appearance is %TRUE.
+		 */
+		icon_name: string;
+		/**
+		 * Whether the action is considered important. When TRUE, toolitem
+		 * proxies for this action show text in GTK_TOOLBAR_BOTH_HORIZ mode.
+		 */
+		is_important: boolean;
+		/**
+		 * The label used for menu items and buttons that activate
+		 * this action. If the label is %NULL, GTK+ uses the stock
+		 * label specified via the stock-id property.
+		 * 
+		 * This is an appearance property and thus only applies if
+		 * {@link Activatable}:use-action-appearance is %TRUE.
+		 */
+		label: string;
+		/**
+		 * A unique name for the action.
+		 */
+		name: string;
+		/**
+		 * Whether the action is enabled.
+		 */
+		sensitive: boolean;
+		/**
+		 * A shorter label that may be used on toolbar buttons.
+		 * 
+		 * This is an appearance property and thus only applies if
+		 * {@link Activatable}:use-action-appearance is %TRUE.
+		 */
+		short_label: string;
+		/**
+		 * The stock icon displayed in widgets representing this action.
+		 * 
+		 * This is an appearance property and thus only applies if
+		 * {@link Activatable}:use-action-appearance is %TRUE.
+		 */
+		stock_id: string;
+		/**
+		 * A tooltip for this action.
+		 */
+		tooltip: string;
+		/**
+		 * Whether the action is visible.
+		 */
+		visible: boolean;
+		/**
+		 * Whether the toolbar item is visible when the toolbar is in a horizontal orientation.
+		 */
+		visible_horizontal: boolean;
+		/**
+		 * When %TRUE, toolitem proxies for this action are represented in the
+		 * toolbar overflow menu.
+		 */
+		visible_overflown: boolean;
+		/**
+		 * Whether the toolbar item is visible when the toolbar is in a vertical orientation.
+		 */
+		visible_vertical: boolean;
+		readonly object: GObject.Object;
 		/**
 		 * Emits the “activate” signal on the specified action, if it isn't
 		 * insensitive. This gets called by the proxy widgets when they get
@@ -1244,6 +1441,22 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IActionGroup {
 		/**
+		 * The accelerator group the actions of this group should use.
+		 */
+		accel_group: AccelGroup;
+		/**
+		 * A name for the action.
+		 */
+		name: string;
+		/**
+		 * Whether the action group is enabled.
+		 */
+		sensitive: boolean;
+		/**
+		 * Whether the action group is visible.
+		 */
+		visible: boolean;
+		/**
 		 * Adds an action object to the action group. Note that this function
 		 * does not set up the accel path of the action, which can lead to problems
 		 * if a user tries to modify the accelerator of a menuitem associated with
@@ -1494,6 +1707,36 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IAdjustment {
 		/**
+		 * The minimum value of the adjustment.
+		 */
+		lower: number;
+		/**
+		 * The page increment of the adjustment.
+		 */
+		page_increment: number;
+		/**
+		 * The page size of the adjustment.
+		 * Note that the page-size is irrelevant and should be set to zero
+		 * if the adjustment is used for a simple scalar value, e.g. in a
+		 * {@link SpinButton}.
+		 */
+		page_size: number;
+		/**
+		 * The step increment of the adjustment.
+		 */
+		step_increment: number;
+		/**
+		 * The maximum value of the adjustment.
+		 * Note that values will be restricted by
+		 * `upper - page-size` if the page-size
+		 * property is nonzero.
+		 */
+		upper: number;
+		/**
+		 * The value of the adjustment.
+		 */
+		value: number;
+		/**
 		 * Emits a {@link Adjustment}::changed signal from the #GtkAdjustment.
 		 * This is typically called by the owner of the #GtkAdjustment after it has
 		 * changed any of the #GtkAdjustment properties other than the value.
@@ -1672,6 +1915,47 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IAlignment {
 		/**
+		 * The padding to insert at the bottom of the widget.
+		 */
+		bottom_padding: number;
+		/**
+		 * The padding to insert at the left of the widget.
+		 */
+		left_padding: number;
+		/**
+		 * The padding to insert at the right of the widget.
+		 */
+		right_padding: number;
+		/**
+		 * The padding to insert at the top of the widget.
+		 */
+		top_padding: number;
+		/**
+		 * Horizontal position of child in available space. A value of 0.0
+		 * will flush the child left (or right, in RTL locales); a value
+		 * of 1.0 will flush the child right (or left, in RTL locales).
+		 */
+		xalign: number;
+		/**
+		 * If available horizontal space is bigger than needed, how much
+		 * of it to use for the child. A value of 0.0 means none; a value
+		 * of 1.0 means all.
+		 */
+		xscale: number;
+		/**
+		 * Vertical position of child in available space. A value of 0.0
+		 * will flush the child to the top; a value of 1.0 will flush the
+		 * child to the bottom.
+		 */
+		yalign: number;
+		/**
+		 * If available vertical space is bigger than needed, how much
+		 * of it to use for the child. A value of 0.0 means none; a value
+		 * of 1.0 means all.
+		 */
+		yscale: number;
+		readonly bin: Bin;
+		/**
 		 * Gets the padding on the different sides of the widget.
 		 * See gtk_alignment_set_padding ().
 		 * @param padding_top location to store the padding for
@@ -1762,6 +2046,23 @@ declare namespace imports.gi.Gtk {
 	 * use {@link AppChooserButton} instead.
 	 */
 	interface IAppChooserButton {
+		/**
+		 * The text to show at the top of the dialog that can be
+		 * opened from the button. The string may contain Pango markup.
+		 */
+		heading: string;
+		/**
+		 * The {@link AppChooserButton}:show-default-item property determines
+		 * whether the dropdown menu should show the default application
+		 * on top for the provided content type.
+		 */
+		show_default_item: boolean;
+		/**
+		 * The {@link AppChooserButton}:show-dialog-item property determines
+		 * whether the dropdown menu should show an item that triggers
+		 * a #GtkAppChooserDialog when clicked.
+		 */
+		show_dialog_item: boolean;
 		/**
 		 * Appends a custom item to the list of applications that is shown
 		 * in the popup; the item name must be unique per-widget.
@@ -1873,6 +2174,17 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IAppChooserDialog {
 		/**
+		 * The GFile used by the {@link AppChooserDialog}.
+		 * The dialog's #GtkAppChooserWidget content type will be guessed from the
+		 * file, if present.
+		 */
+		gfile: Gio.File;
+		/**
+		 * The text to show at the top of the dialog.
+		 * The string may contain Pango markup.
+		 */
+		heading: string;
+		/**
 		 * Returns the text to display at the top of the dialog.
 		 * @returns the text to display at the top of the dialog, or %NULL, in which
 		 *     case a default text is displayed
@@ -1935,6 +2247,45 @@ declare namespace imports.gi.Gtk {
 	 * use {@link AppChooserWidget} instead.
 	 */
 	interface IAppChooserWidget {
+		/**
+		 * The {@link AppChooserWidget}:default-text property determines the text
+		 * that appears in the widget when there are no applications for the
+		 * given content type.
+		 * See also gtk_app_chooser_widget_set_default_text().
+		 */
+		default_text: string;
+		/**
+		 * If the {@link AppChooserWidget}:show-all property is %TRUE, the app
+		 * chooser presents all applications in a single list, without
+		 * subsections for default, recommended or related applications.
+		 */
+		show_all: boolean;
+		/**
+		 * The ::show-default property determines whether the app chooser
+		 * should show the default handler for the content type in a
+		 * separate section. If %FALSE, the default handler is listed
+		 * among the recommended applications.
+		 */
+		show_default: boolean;
+		/**
+		 * The {@link AppChooserWidget}:show-fallback property determines whether
+		 * the app chooser should show a section for fallback applications.
+		 * If %FALSE, the fallback applications are listed among the other
+		 * applications.
+		 */
+		show_fallback: boolean;
+		/**
+		 * The {@link AppChooserWidget}:show-other property determines whether
+		 * the app chooser should show a section for other applications.
+		 */
+		show_other: boolean;
+		/**
+		 * The {@link AppChooserWidget}:show-recommended property determines
+		 * whether the app chooser should show a section for recommended
+		 * applications. If %FALSE, the recommended applications are listed
+		 * among the other applications.
+		 */
+		show_recommended: boolean;
 		/**
 		 * Returns the text that is shown if there are not applications
 		 * that can handle the content type.
@@ -2054,6 +2405,21 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Application} instead.
 	 */
 	interface IApplication {
+		readonly active_window: Window;
+		app_menu: Gio.MenuModel;
+		menubar: Gio.MenuModel;
+		/**
+		 * Set this property to %TRUE to register with the session manager.
+		 */
+		register_session: boolean;
+		/**
+		 * This property is %TRUE if GTK+ believes that the screensaver is
+		 * currently active. GTK+ only tracks session state (including this)
+		 * when {@link Application}::register-session is set to %TRUE.
+		 * 
+		 * Tracking the screensaver state is supported on Linux.
+		 */
+		readonly screensaver_active: boolean;
 		/**
 		 * Installs an accelerator that will cause the named action
 		 * to be activated when the key combination specificed by #accelerator
@@ -2479,6 +2845,16 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IApplicationWindow {
 		/**
+		 * If this property is %TRUE, the window will display a menubar
+		 * that includes the app menu and menubar, unless these are
+		 * shown by the desktop shell. See gtk_application_set_app_menu()
+		 * and gtk_application_set_menubar().
+		 * 
+		 * If %FALSE, the window will not display a menubar, regardless
+		 * of whether the desktop shell is showing the menus or not.
+		 */
+		show_menubar: boolean;
+		/**
 		 * Gets the {@link ShortcutsWindow} that has been set up with
 		 * a prior call to gtk_application_window_set_help_overlay().
 		 * @returns the help overlay associated with #window, or %NULL
@@ -2640,6 +3016,9 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Arrow} instead.
 	 */
 	interface IArrow {
+		arrow_type: ArrowType;
+		shadow_type: ShadowType;
+		readonly misc: Misc;
 		/**
 		 * Sets the direction and style of the {@link Arrow}, #arrow.
 		 * @param arrow_type a valid {@link ArrowType}.
@@ -2710,6 +3089,11 @@ declare namespace imports.gi.Gtk {
 	 * use {@link AspectFrame} instead.
 	 */
 	interface IAspectFrame {
+		obey_child: boolean;
+		ratio: number;
+		xalign: number;
+		yalign: number;
+		readonly frame: Frame;
 		/**
 		 * Set parameters for an existing {@link AspectFrame}.
 		 * @param xalign Horizontal alignment of the child within the allocation of
@@ -2768,6 +3152,14 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Assistant} instead.
 	 */
 	interface IAssistant {
+		/**
+		 * %TRUE if the assistant uses a {@link HeaderBar} for action buttons
+		 * instead of the action-area.
+		 * 
+		 * For technical reasons, this property is declared as an integer
+		 * property, but you should only set it to %TRUE or %FALSE.
+		 */
+		use_header_bar: number;
 		/**
 		 * Adds a widget to the action area of a {@link Assistant}.
 		 * @param child a {@link Widget}
@@ -3032,6 +3424,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Bin} instead.
 	 */
 	interface IBin {
+		readonly container: Container;
 		/**
 		 * Gets the child of the {@link Bin}, or %NULL if the bin contains
 		 * no child widget. The returned widget does not have a reference
@@ -3083,6 +3476,10 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Box} instead.
 	 */
 	interface IBox {
+		baseline_position: BaselinePosition;
+		homogeneous: boolean;
+		spacing: number;
+		readonly container: Container;
 		/**
 		 * Gets the value set by gtk_box_set_baseline_position().
 		 * @returns the baseline position
@@ -3288,6 +3685,13 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Builder} instead.
 	 */
 	interface IBuilder {
+		/**
+		 * The translation domain used when translating property values that
+		 * have been marked as translatable in interface descriptions.
+		 * If the translation domain is %NULL, {@link Builder} uses gettext(),
+		 * otherwise g_dgettext().
+		 */
+		translation_domain: string;
 		/**
 		 * Adds the #callback_symbol to the scope of #builder under the given #callback_name.
 		 * 
@@ -3816,6 +4220,38 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IButton {
 		/**
+		 * If %TRUE, the button will ignore the {@link Settings}:gtk-button-images
+		 * setting and always show the image, if available.
+		 * 
+		 * Use this property if the button would be useless or hard to use
+		 * without the image.
+		 */
+		always_show_image: boolean;
+		/**
+		 * The child widget to appear next to the button text.
+		 */
+		image: Widget;
+		/**
+		 * The position of the image relative to the text inside the button.
+		 */
+		image_position: PositionType;
+		label: string;
+		relief: ReliefStyle;
+		use_stock: boolean;
+		use_underline: boolean;
+		/**
+		 * If the child of the button is a {@link Misc} or #GtkAlignment, this property
+		 * can be used to control its horizontal alignment. 0.0 is left aligned,
+		 * 1.0 is right aligned.
+		 */
+		xalign: number;
+		/**
+		 * If the child of the button is a {@link Misc} or #GtkAlignment, this property
+		 * can be used to control its vertical alignment. 0.0 is top aligned,
+		 * 1.0 is bottom aligned.
+		 */
+		yalign: number;
+		/**
 		 * Emits a {@link Button}::clicked signal to the given #GtkButton.
 		 */
 		clicked(): void;
@@ -4083,6 +4519,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ButtonBox} instead.
 	 */
 	interface IButtonBox {
+		layout_style: ButtonBoxStyle;
+		readonly box: Box;
 		/**
 		 * Returns whether the child is exempted from homogenous
 		 * sizing.
@@ -4153,6 +4591,55 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Calendar} instead.
 	 */
 	interface ICalendar {
+		/**
+		 * The selected day (as a number between 1 and 31, or 0
+		 * to unselect the currently selected day).
+		 * This property gets initially set to the current day.
+		 */
+		day: number;
+		/**
+		 * Height of a detail cell, in rows.
+		 * A value of 0 allows any width. See gtk_calendar_set_detail_func().
+		 */
+		detail_height_rows: number;
+		/**
+		 * Width of a detail cell, in characters.
+		 * A value of 0 allows any width. See gtk_calendar_set_detail_func().
+		 */
+		detail_width_chars: number;
+		/**
+		 * The selected month (as a number between 0 and 11).
+		 * This property gets initially set to the current month.
+		 */
+		month: number;
+		/**
+		 * Determines whether the selected month can be changed.
+		 */
+		no_month_change: boolean;
+		/**
+		 * Determines whether day names are displayed.
+		 */
+		show_day_names: boolean;
+		/**
+		 * Determines whether details are shown directly in the widget, or if they are
+		 * available only as tooltip. When this property is set days with details are
+		 * marked.
+		 */
+		show_details: boolean;
+		/**
+		 * Determines whether a heading is displayed.
+		 */
+		show_heading: boolean;
+		/**
+		 * Determines whether week numbers are displayed.
+		 */
+		show_week_numbers: boolean;
+		/**
+		 * The selected year.
+		 * This property gets initially set to the current year.
+		 */
+		year: number;
+		readonly widget: Widget;
 		/**
 		 * Remove all visual markers.
 		 */
@@ -4309,6 +4796,24 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellArea} instead.
 	 */
 	interface ICellArea {
+		/**
+		 * The widget currently editing the edited cell
+		 * 
+		 * This property is read-only and only changes as
+		 * a result of a call gtk_cell_area_activate_cell().
+		 */
+		readonly edit_widget: CellEditable;
+		/**
+		 * The cell in the area that is currently edited
+		 * 
+		 * This property is read-only and only changes as
+		 * a result of a call gtk_cell_area_activate_cell().
+		 */
+		readonly edited_cell: CellRenderer;
+		/**
+		 * The cell in the area that currently has focus
+		 */
+		focus_cell: CellRenderer;
 		/**
 		 * Activates #area, usually by activating the currently focused
 		 * cell, however some subclasses which embed widgets in the area
@@ -5075,6 +5580,10 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface ICellAreaBox {
 		/**
+		 * The amount of space to reserve between cells.
+		 */
+		spacing: number;
+		/**
 		 * Gets the spacing added between cell renderers.
 		 * @returns the space added between cell renderers in #box.
 		 */
@@ -5149,6 +5658,34 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellAreaContext} instead.
 	 */
 	interface ICellAreaContext {
+		/**
+		 * The {@link CellArea} this context was created by
+		 */
+		area: CellArea;
+		/**
+		 * The minimum height for the {@link CellArea} in this context
+		 * for all #GtkTreeModel rows that this context was requested
+		 * for using gtk_cell_area_get_preferred_height().
+		 */
+		readonly minimum_height: number;
+		/**
+		 * The minimum width for the {@link CellArea} in this context
+		 * for all #GtkTreeModel rows that this context was requested
+		 * for using gtk_cell_area_get_preferred_width().
+		 */
+		readonly minimum_width: number;
+		/**
+		 * The natural height for the {@link CellArea} in this context
+		 * for all #GtkTreeModel rows that this context was requested
+		 * for using gtk_cell_area_get_preferred_height().
+		 */
+		readonly natural_height: number;
+		/**
+		 * The natural width for the {@link CellArea} in this context
+		 * for all #GtkTreeModel rows that this context was requested
+		 * for using gtk_cell_area_get_preferred_width().
+		 */
+		readonly natural_width: number;
 		/**
 		 * Allocates a width and/or a height for all rows which are to be
 		 * rendered with #context.
@@ -5322,6 +5859,27 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellRenderer} instead.
 	 */
 	interface ICellRenderer {
+		/**
+		 * Cell background as a #GdkColor
+		 */
+		cell_background_gdk: Gdk.Color;
+		/**
+		 * Cell background as a #GdkRGBA
+		 */
+		cell_background_rgba: Gdk.RGBA;
+		cell_background_set: boolean;
+		readonly editing: boolean;
+		height: number;
+		is_expanded: boolean;
+		is_expander: boolean;
+		mode: CellRendererMode;
+		sensitive: boolean;
+		visible: boolean;
+		width: number;
+		xalign: number;
+		xpad: number;
+		yalign: number;
+		ypad: number;
 		/**
 		 * Passes an activate event to the cell renderer for possible processing.
 		 * Some cell renderers may use events; for example, {@link CellRendererToggle}
@@ -5573,6 +6131,27 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellRendererAccel} instead.
 	 */
 	interface ICellRendererAccel {
+		/**
+		 * The keyval of the accelerator.
+		 */
+		accel_key: number;
+		/**
+		 * Determines if the edited accelerators are GTK+ accelerators. If
+		 * they are, consumed modifiers are suppressed, only accelerators
+		 * accepted by GTK+ are allowed, and the accelerators are rendered
+		 * in the same way as they are in menus.
+		 */
+		accel_mode: CellRendererAccelMode;
+		/**
+		 * The modifier mask of the accelerator.
+		 */
+		accel_mods: Gdk.ModifierType;
+		/**
+		 * The hardware keycode of the accelerator. Note that the hardware keycode is
+		 * only relevant if the key does not have a keyval. Normally, the keyboard
+		 * configuration should assign keyvals to all keys.
+		 */
+		keycode: number;
 
 	}
 
@@ -5603,6 +6182,28 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellRendererCombo} instead.
 	 */
 	interface ICellRendererCombo {
+		/**
+		 * If %TRUE, the cell renderer will include an entry and allow to enter
+		 * values other than the ones in the popup list.
+		 */
+		has_entry: boolean;
+		/**
+		 * Holds a tree model containing the possible values for the combo box.
+		 * Use the text_column property to specify the column holding the values.
+		 */
+		model: TreeModel;
+		/**
+		 * Specifies the model column which holds the possible values for the
+		 * combo box.
+		 * 
+		 * Note that this refers to the model specified in the model property,
+		 * not the model backing the tree view to which
+		 * this cell renderer is attached.
+		 * 
+		 * {@link CellRendererCombo} automatically adds a text cell renderer for
+		 * this column to its combo box.
+		 */
+		text_column: number;
 
 	}
 
@@ -5646,6 +6247,33 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellRendererPixbuf} instead.
 	 */
 	interface ICellRendererPixbuf {
+		/**
+		 * Specifies whether the rendered pixbuf should be colorized
+		 * according to the {@link CellRendererState}.
+		 */
+		follow_state: boolean;
+		/**
+		 * The GIcon representing the icon to display.
+		 * If the icon theme is changed, the image will be updated
+		 * automatically.
+		 */
+		gicon: Gio.Icon;
+		/**
+		 * The name of the themed icon to display.
+		 * This property only has an effect if not overridden by "stock_id"
+		 * or "pixbuf" properties.
+		 */
+		icon_name: string;
+		pixbuf: GdkPixbuf.Pixbuf;
+		pixbuf_expander_closed: GdkPixbuf.Pixbuf;
+		pixbuf_expander_open: GdkPixbuf.Pixbuf;
+		stock_detail: string;
+		stock_id: string;
+		/**
+		 * The {@link IconSize} value that specifies the size of the rendered icon.
+		 */
+		stock_size: number;
+		surface: cairo.Surface;
 
 	}
 
@@ -5689,6 +6317,44 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellRendererProgress} instead.
 	 */
 	interface ICellRendererProgress {
+		inverted: boolean;
+		/**
+		 * Setting this to a non-negative value causes the cell renderer to
+		 * enter "activity mode", where a block bounces back and forth to
+		 * indicate that some progress is made, without specifying exactly how
+		 * much.
+		 * 
+		 * Each increment of the property causes the block to move by a little
+		 * bit.
+		 * 
+		 * To indicate that the activity has not started yet, set the property
+		 * to zero. To indicate completion, set the property to %G_MAXINT.
+		 */
+		pulse: number;
+		/**
+		 * The "text" property determines the label which will be drawn
+		 * over the progress bar. Setting this property to %NULL causes the default
+		 * label to be displayed. Setting this property to an empty string causes
+		 * no label to be displayed.
+		 */
+		text: string;
+		/**
+		 * The "text-xalign" property controls the horizontal alignment of the
+		 * text in the progress bar.  Valid values range from 0 (left) to 1
+		 * (right).  Reserved for RTL layouts.
+		 */
+		text_xalign: number;
+		/**
+		 * The "text-yalign" property controls the vertical alignment of the
+		 * text in the progress bar.  Valid values range from 0 (top) to 1
+		 * (bottom).
+		 */
+		text_yalign: number;
+		/**
+		 * The "value" property determines the percentage to which the
+		 * progress bar will be "filled in".
+		 */
+		value: number;
 
 	}
 
@@ -5718,6 +6384,19 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellRendererSpin} instead.
 	 */
 	interface ICellRendererSpin {
+		/**
+		 * The adjustment that holds the value of the spinbutton.
+		 * This must be non-%NULL for the cell renderer to be editable.
+		 */
+		adjustment: Adjustment;
+		/**
+		 * The acceleration rate when you hold down a button.
+		 */
+		climb_rate: number;
+		/**
+		 * The number of decimal places to display.
+		 */
+		digits: number;
 
 	}
 
@@ -5756,6 +6435,19 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellRendererSpinner} instead.
 	 */
 	interface ICellRendererSpinner {
+		active: boolean;
+		/**
+		 * Pulse of the spinner. Increment this value to draw the next frame of the
+		 * spinner animation. Usually, you would update this value in a timeout.
+		 * 
+		 * By default, the {@link Spinner} widget draws one full cycle of the animation,
+		 * consisting of 12 frames, in 750 milliseconds.
+		 */
+		pulse: number;
+		/**
+		 * The {@link IconSize} value that specifies the size of the rendered spinner.
+		 */
+		size: IconSize;
 
 	}
 
@@ -5792,6 +6484,107 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellRendererText} instead.
 	 */
 	interface ICellRendererText {
+		align_set: boolean;
+		/**
+		 * Specifies how to align the lines of text with respect to each other.
+		 * 
+		 * Note that this property describes how to align the lines of text in
+		 * case there are several of them. The "xalign" property of {@link CellRenderer},
+		 * on the other hand, sets the horizontal alignment of the whole text.
+		 */
+		alignment: Pango.Alignment;
+		attributes: Pango.AttrList;
+		/**
+		 * Background color as a #GdkColor
+		 */
+		background_gdk: Gdk.Color;
+		/**
+		 * Background color as a #GdkRGBA
+		 */
+		background_rgba: Gdk.RGBA;
+		background_set: boolean;
+		editable: boolean;
+		editable_set: boolean;
+		/**
+		 * Specifies the preferred place to ellipsize the string, if the cell renderer
+		 * does not have enough room to display the entire string. Setting it to
+		 * %PANGO_ELLIPSIZE_NONE turns off ellipsizing. See the wrap-width property
+		 * for another way of making the text fit into a given width.
+		 */
+		ellipsize: Pango.EllipsizeMode;
+		ellipsize_set: boolean;
+		family: string;
+		family_set: boolean;
+		font: string;
+		font_desc: Pango.FontDescription;
+		/**
+		 * Foreground color as a #GdkColor
+		 */
+		foreground_gdk: Gdk.Color;
+		/**
+		 * Foreground color as a #GdkRGBA
+		 */
+		foreground_rgba: Gdk.RGBA;
+		foreground_set: boolean;
+		language: string;
+		language_set: boolean;
+		/**
+		 * The desired maximum width of the cell, in characters. If this property
+		 * is set to -1, the width will be calculated automatically.
+		 * 
+		 * For cell renderers that ellipsize or wrap text; this property
+		 * controls the maximum reported width of the cell. The
+		 * cell should not receive any greater allocation unless it is
+		 * set to expand in its {@link CellLayout} and all of the cell's siblings
+		 * have received their natural width.
+		 */
+		max_width_chars: number;
+		/**
+		 * The text that will be displayed in the {@link CellRenderer} if
+		 * #GtkCellRendererText:editable is %TRUE and the cell is empty.
+		 * 
+		 * Since 3.6
+		 */
+		placeholder_text: string;
+		rise: number;
+		rise_set: boolean;
+		scale: number;
+		scale_set: boolean;
+		single_paragraph_mode: boolean;
+		size: number;
+		size_points: number;
+		size_set: boolean;
+		stretch: Pango.Stretch;
+		stretch_set: boolean;
+		strikethrough: boolean;
+		strikethrough_set: boolean;
+		style: Pango.Style;
+		style_set: boolean;
+		text: string;
+		underline: Pango.Underline;
+		underline_set: boolean;
+		variant: Pango.Variant;
+		variant_set: boolean;
+		weight: number;
+		weight_set: boolean;
+		/**
+		 * The desired width of the cell, in characters. If this property is set to
+		 * -1, the width will be calculated automatically, otherwise the cell will
+		 * request either 3 characters or the property value, whichever is greater.
+		 */
+		width_chars: number;
+		/**
+		 * Specifies how to break the string into multiple lines, if the cell
+		 * renderer does not have enough room to display the entire string.
+		 * This property has no effect unless the wrap-width property is set.
+		 */
+		wrap_mode: Pango.WrapMode;
+		/**
+		 * Specifies the minimum width at which the text is wrapped. The wrap-mode property can
+		 * be used to influence at what character positions the line breaks can be placed.
+		 * Setting wrap-width to -1 turns wrapping off.
+		 */
+		wrap_width: number;
 		/**
 		 * Sets the height of a renderer to explicitly be determined by the “font” and
 		 * “y_pad” property set on it.  Further changes in these properties do not
@@ -5839,6 +6632,11 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellRendererToggle} instead.
 	 */
 	interface ICellRendererToggle {
+		activatable: boolean;
+		active: boolean;
+		inconsistent: boolean;
+		indicator_size: number;
+		radio: boolean;
 		/**
 		 * Returns whether the cell renderer is activatable. See
 		 * gtk_cell_renderer_toggle_set_activatable().
@@ -5911,6 +6709,62 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellView} instead.
 	 */
 	interface ICellView {
+		/**
+		 * The background color as a #GdkColor
+		 */
+		background_gdk: Gdk.Color;
+		/**
+		 * The background color as a #GdkRGBA
+		 */
+		background_rgba: Gdk.RGBA;
+		background_set: boolean;
+		/**
+		 * The {@link CellArea} rendering cells
+		 * 
+		 * If no area is specified when creating the cell view with gtk_cell_view_new_with_context()
+		 * a horizontally oriented #GtkCellAreaBox will be used.
+		 * 
+		 * since 3.0
+		 */
+		cell_area: CellArea;
+		/**
+		 * The {@link CellAreaContext} used to compute the geometry of the cell view.
+		 * 
+		 * A group of cell views can be assigned the same context in order to
+		 * ensure the sizes and cell alignments match across all the views with
+		 * the same context.
+		 * 
+		 * #GtkComboBox menus uses this to assign the same context to all cell views
+		 * in the menu items for a single menu (each submenu creates its own
+		 * context since the size of each submenu does not depend on parent
+		 * or sibling menus).
+		 * 
+		 * since 3.0
+		 */
+		cell_area_context: CellAreaContext;
+		/**
+		 * Whether all cells should be draw as sensitive for this view regardless
+		 * of the actual cell properties (used to make menus with submenus appear
+		 * sensitive when the items in submenus might be insensitive).
+		 * 
+		 * since 3.0
+		 */
+		draw_sensitive: boolean;
+		/**
+		 * Whether the view should request enough space to always fit
+		 * the size of every row in the model (used by the combo box to
+		 * ensure the combo box size doesnt change when different items
+		 * are selected).
+		 * 
+		 * since 3.0
+		 */
+		fit_model: boolean;
+		/**
+		 * The model for cell view
+		 * 
+		 * since 2.10
+		 */
+		model: TreeModel;
 		/**
 		 * Returns a {@link TreePath} referring to the currently
 		 * displayed row. If no row is currently displayed,
@@ -6066,6 +6920,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CheckButton} instead.
 	 */
 	interface ICheckButton {
+		readonly toggle_button: ToggleButton;
 
 	}
 
@@ -6133,6 +6988,10 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CheckMenuItem} instead.
 	 */
 	interface ICheckMenuItem {
+		active: boolean;
+		draw_as_radio: boolean;
+		inconsistent: boolean;
+		readonly menu_item: MenuItem;
 		/**
 		 * Returns whether the check menu item is active. See
 		 * gtk_check_menu_item_set_active ().
@@ -6699,6 +7558,38 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IColorButton {
 		/**
+		 * The selected opacity value (0 fully transparent, 65535 fully opaque).
+		 */
+		alpha: number;
+		/**
+		 * The selected color.
+		 */
+		color: Gdk.Color;
+		/**
+		 * The RGBA color.
+		 */
+		rgba: Gdk.RGBA;
+		/**
+		 * Set this property to %TRUE to skip the palette
+		 * in the dialog and go directly to the color editor.
+		 * 
+		 * This property should be used in cases where the palette
+		 * in the editor would be redundant, such as when the color
+		 * button is already part of a palette.
+		 */
+		show_editor: boolean;
+		/**
+		 * The title of the color selection dialog
+		 */
+		title: string;
+		/**
+		 * If this property is set to %TRUE, the color swatch on the button is
+		 * rendered against a checkerboard background to show its opacity and
+		 * the opacity slider is displayed in the color selection dialog.
+		 */
+		use_alpha: boolean;
+		readonly button: Button;
+		/**
 		 * Returns the current alpha value.
 		 * @returns an integer between 0 and 65535
 		 */
@@ -6798,6 +7689,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ColorChooserDialog} instead.
 	 */
 	interface IColorChooserDialog {
+		show_editor: boolean;
 
 	}
 
@@ -6827,6 +7719,12 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ColorChooserWidget} instead.
 	 */
 	interface IColorChooserWidget {
+		/**
+		 * The ::show-editor property is %TRUE when the color chooser
+		 * is showing the single-color editor. It can be set to switch
+		 * the color chooser into single-color editing mode.
+		 */
+		show_editor: boolean;
 
 	}
 
@@ -6872,6 +7770,17 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ColorSelection} instead.
 	 */
 	interface IColorSelection {
+		current_alpha: number;
+		/**
+		 * The current GdkColor color.
+		 */
+		current_color: Gdk.Color;
+		/**
+		 * The current RGBA color.
+		 */
+		current_rgba: Gdk.RGBA;
+		has_opacity_control: boolean;
+		has_palette: boolean;
 		/**
 		 * Returns the current alpha value.
 		 * @returns an integer between 0 and 65535
@@ -7031,6 +7940,10 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ColorSelectionDialog} instead.
 	 */
 	interface IColorSelectionDialog {
+		readonly cancel_button: Widget;
+		readonly color_selection: Widget;
+		readonly help_button: Widget;
+		readonly ok_button: Widget;
 		/**
 		 * Retrieves the {@link ColorSelection} widget embedded in the dialog.
 		 * @returns the embedded {@link ColorSelection}
@@ -7059,6 +7972,97 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ComboBox} instead.
 	 */
 	interface IComboBox {
+		/**
+		 * The item which is currently active. If the model is a non-flat treemodel,
+		 * and the active item is not an immediate child of the root of the tree,
+		 * this property has the value
+		 * `gtk_tree_path_get_indices (path)[0]`,
+		 * where `path` is the {@link TreePath} of the active item.
+		 */
+		active: number;
+		/**
+		 * The value of the ID column of the active row.
+		 */
+		active_id: string;
+		/**
+		 * The add-tearoffs property controls whether generated menus
+		 * have tearoff menu items.
+		 * 
+		 * Note that this only affects menu style combo boxes.
+		 */
+		add_tearoffs: boolean;
+		/**
+		 * Whether the dropdown button is sensitive when
+		 * the model is empty.
+		 */
+		button_sensitivity: SensitivityType;
+		/**
+		 * The {@link CellArea} used to layout cell renderers for this combo box.
+		 * 
+		 * If no area is specified when creating the combo box with gtk_combo_box_new_with_area()
+		 * a horizontally oriented #GtkCellAreaBox will be used.
+		 */
+		cell_area: CellArea;
+		/**
+		 * If this is set to a non-negative value, it must be the index of a column
+		 * of type %G_TYPE_INT in the model. The value in that column for each item
+		 * will determine how many columns that item will span in the popup.
+		 * Therefore, values in this column must be greater than zero, and the sum of
+		 * an item’s column position + span should not exceed {@link ComboBox}:wrap-width.
+		 */
+		column_span_column: number;
+		/**
+		 * The column in the combo box's model to associate with strings from the entry
+		 * if the combo was created with {@link ComboBox}:has-entry = %TRUE.
+		 */
+		entry_text_column: number;
+		/**
+		 * Whether the combo box has an entry.
+		 */
+		has_entry: boolean;
+		/**
+		 * The has-frame property controls whether a frame
+		 * is drawn around the entry.
+		 */
+		has_frame: boolean;
+		/**
+		 * The column in the combo box's model that provides string
+		 * IDs for the values in the model, if != -1.
+		 */
+		id_column: number;
+		/**
+		 * The model from which the combo box takes the values shown
+		 * in the list.
+		 */
+		model: TreeModel;
+		/**
+		 * Whether the popup's width should be a fixed width matching the
+		 * allocated width of the combo box.
+		 */
+		popup_fixed_width: boolean;
+		/**
+		 * Whether the combo boxes dropdown is popped up.
+		 * Note that this property is mainly useful, because
+		 * it allows you to connect to notify::popup-shown.
+		 */
+		readonly popup_shown: boolean;
+		/**
+		 * If this is set to a non-negative value, it must be the index of a column
+		 * of type %G_TYPE_INT in the model. The value in that column for each item
+		 * will determine how many rows that item will span in the popup. Therefore,
+		 * values in this column must be greater than zero.
+		 */
+		row_span_column: number;
+		/**
+		 * A title that may be displayed by the window manager
+		 * when the popup is torn-off.
+		 */
+		tearoff_title: string;
+		/**
+		 * If wrap-width is set to a positive value, items in the popup will be laid
+		 * out along multiple columns, starting a new row on reaching the wrap width.
+		 */
+		wrap_width: number;
 		/**
 		 * Returns the index of the currently active item, or -1 if there’s no
 		 * active item. If the model is a non-flat treemodel, and the active item
@@ -7606,6 +8610,9 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Container} instead.
 	 */
 	interface IContainer {
+		border_width: number;
+		resize_mode: ResizeMode;
+		readonly widget: Widget;
 		/**
 		 * Adds #widget to #container. Typically used for simple containers
 		 * such as {@link Window}, #GtkFrame, or #GtkButton; for more complicated
@@ -8301,6 +9308,15 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IDialog {
 		/**
+		 * %TRUE if the dialog uses a {@link HeaderBar} for action buttons
+		 * instead of the action-area.
+		 * 
+		 * For technical reasons, this property is declared as an integer
+		 * property, but you should only set it to %TRUE or %FALSE.
+		 */
+		use_header_bar: number;
+		readonly window: Window;
+		/**
 		 * Adds an activatable widget to the action area of a {@link Dialog},
 		 * connecting a signal handler that will emit the #GtkDialog::response
 		 * signal on the dialog when the widget is activated. The widget is
@@ -8674,6 +9690,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link DrawingArea} instead.
 	 */
 	interface IDrawingArea {
+		readonly widget: Widget;
 
 	}
 
@@ -8782,6 +9799,240 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Entry} instead.
 	 */
 	interface IEntry {
+		activates_default: boolean;
+		/**
+		 * A list of Pango attributes to apply to the text of the entry.
+		 * 
+		 * This is mainly useful to change the size or weight of the text.
+		 * 
+		 * The #PangoAttribute's #start_index and #end_index must refer to the
+		 * {@link EntryBuffer} text, i.e. without the preedit string.
+		 */
+		attributes: Pango.AttrList;
+		buffer: EntryBuffer;
+		/**
+		 * Whether password entries will show a warning when Caps Lock is on.
+		 * 
+		 * Note that the warning is shown using a secondary icon, and thus
+		 * does not work if you are using the secondary icon position for some
+		 * other purpose.
+		 */
+		caps_lock_warning: boolean;
+		/**
+		 * The auxiliary completion object to use with the entry.
+		 */
+		completion: EntryCompletion;
+		readonly cursor_position: number;
+		editable: boolean;
+		enable_emoji_completion: boolean;
+		has_frame: boolean;
+		/**
+		 * Which IM (input method) module should be used for this entry.
+		 * See {@link IMContext}.
+		 * 
+		 * Setting this to a non-%NULL value overrides the
+		 * system-wide IM module setting. See the GtkSettings
+		 * #GtkSettings:gtk-im-module property.
+		 */
+		im_module: string;
+		/**
+		 * Sets the text area's border between the text and the frame.
+		 */
+		inner_border: Border;
+		/**
+		 * Additional hints (beyond {@link Entry}:input-purpose) that
+		 * allow input methods to fine-tune their behaviour.
+		 */
+		input_hints: InputHints;
+		/**
+		 * The purpose of this text field.
+		 * 
+		 * This property can be used by on-screen keyboards and other input
+		 * methods to adjust their behaviour.
+		 * 
+		 * Note that setting the purpose to %GTK_INPUT_PURPOSE_PASSWORD or
+		 * %GTK_INPUT_PURPOSE_PIN is independent from setting
+		 * {@link Entry}:visibility.
+		 */
+		input_purpose: InputPurpose;
+		/**
+		 * The invisible character is used when masking entry contents (in
+		 * \"password mode\")"). When it is not explicitly set with the
+		 * {@link Entry}:invisible-char property, GTK+ determines the character
+		 * to use from a list of possible candidates, depending on availability
+		 * in the current font.
+		 * 
+		 * This style property allows the theme to prepend a character
+		 * to the list of candidates.
+		 */
+		invisible_char: number;
+		/**
+		 * Whether the invisible char has been set for the {@link Entry}.
+		 */
+		invisible_char_set: boolean;
+		max_length: number;
+		/**
+		 * The desired maximum width of the entry, in characters.
+		 * If this property is set to -1, the width will be calculated
+		 * automatically.
+		 */
+		max_width_chars: number;
+		/**
+		 * If text is overwritten when typing in the {@link Entry}.
+		 */
+		overwrite_mode: boolean;
+		/**
+		 * The text that will be displayed in the {@link Entry} when it is empty
+		 * and unfocused.
+		 */
+		placeholder_text: string;
+		/**
+		 * If :populate-all is %TRUE, the {@link Entry}::populate-popup
+		 * signal is also emitted for touch popups.
+		 */
+		populate_all: boolean;
+		/**
+		 * Whether the primary icon is activatable.
+		 * 
+		 * GTK+ emits the {@link Entry}::icon-press and #GtkEntry::icon-release
+		 * signals only on sensitive, activatable icons.
+		 * 
+		 * Sensitive, but non-activatable icons can be used for purely
+		 * informational purposes.
+		 */
+		primary_icon_activatable: boolean;
+		/**
+		 * The #GIcon to use for the primary icon for the entry.
+		 */
+		primary_icon_gicon: Gio.Icon;
+		/**
+		 * The icon name to use for the primary icon for the entry.
+		 */
+		primary_icon_name: string;
+		/**
+		 * A pixbuf to use as the primary icon for the entry.
+		 */
+		primary_icon_pixbuf: GdkPixbuf.Pixbuf;
+		/**
+		 * Whether the primary icon is sensitive.
+		 * 
+		 * An insensitive icon appears grayed out. GTK+ does not emit the
+		 * {@link Entry}::icon-press and #GtkEntry::icon-release signals and
+		 * does not allow DND from insensitive icons.
+		 * 
+		 * An icon should be set insensitive if the action that would trigger
+		 * when clicked is currently not available.
+		 */
+		primary_icon_sensitive: boolean;
+		/**
+		 * The stock id to use for the primary icon for the entry.
+		 */
+		primary_icon_stock: string;
+		/**
+		 * The representation which is used for the primary icon of the entry.
+		 */
+		readonly primary_icon_storage_type: ImageType;
+		/**
+		 * The contents of the tooltip on the primary icon, which is marked up
+		 * with the [Pango text markup language][PangoMarkupFormat].
+		 * 
+		 * Also see gtk_entry_set_icon_tooltip_markup().
+		 */
+		primary_icon_tooltip_markup: string;
+		/**
+		 * The contents of the tooltip on the primary icon.
+		 * 
+		 * Also see gtk_entry_set_icon_tooltip_text().
+		 */
+		primary_icon_tooltip_text: string;
+		/**
+		 * The current fraction of the task that's been completed.
+		 */
+		progress_fraction: number;
+		/**
+		 * The fraction of total entry width to move the progress
+		 * bouncing block for each call to gtk_entry_progress_pulse().
+		 */
+		progress_pulse_step: number;
+		readonly scroll_offset: number;
+		/**
+		 * Whether the secondary icon is activatable.
+		 * 
+		 * GTK+ emits the {@link Entry}::icon-press and #GtkEntry::icon-release
+		 * signals only on sensitive, activatable icons.
+		 * 
+		 * Sensitive, but non-activatable icons can be used for purely
+		 * informational purposes.
+		 */
+		secondary_icon_activatable: boolean;
+		/**
+		 * The #GIcon to use for the secondary icon for the entry.
+		 */
+		secondary_icon_gicon: Gio.Icon;
+		/**
+		 * The icon name to use for the secondary icon for the entry.
+		 */
+		secondary_icon_name: string;
+		/**
+		 * An pixbuf to use as the secondary icon for the entry.
+		 */
+		secondary_icon_pixbuf: GdkPixbuf.Pixbuf;
+		/**
+		 * Whether the secondary icon is sensitive.
+		 * 
+		 * An insensitive icon appears grayed out. GTK+ does not emit the
+		 * {@link Entry}::icon-press and #GtkEntry::icon-release signals and
+		 * does not allow DND from insensitive icons.
+		 * 
+		 * An icon should be set insensitive if the action that would trigger
+		 * when clicked is currently not available.
+		 */
+		secondary_icon_sensitive: boolean;
+		/**
+		 * The stock id to use for the secondary icon for the entry.
+		 */
+		secondary_icon_stock: string;
+		/**
+		 * The representation which is used for the secondary icon of the entry.
+		 */
+		readonly secondary_icon_storage_type: ImageType;
+		/**
+		 * The contents of the tooltip on the secondary icon, which is marked up
+		 * with the [Pango text markup language][PangoMarkupFormat].
+		 * 
+		 * Also see gtk_entry_set_icon_tooltip_markup().
+		 */
+		secondary_icon_tooltip_markup: string;
+		/**
+		 * The contents of the tooltip on the secondary icon.
+		 * 
+		 * Also see gtk_entry_set_icon_tooltip_text().
+		 */
+		secondary_icon_tooltip_text: string;
+		readonly selection_bound: number;
+		/**
+		 * Which kind of shadow to draw around the entry when
+		 * {@link Entry}:has-frame is set to %TRUE.
+		 */
+		shadow_type: ShadowType;
+		show_emoji_icon: boolean;
+		tabs: Pango.TabArray;
+		text: string;
+		/**
+		 * The length of the text in the {@link Entry}.
+		 */
+		readonly text_length: number;
+		/**
+		 * When %TRUE, pasted multi-line text is truncated to the first line.
+		 */
+		truncate_multiline: boolean;
+		visibility: boolean;
+		width_chars: number;
+		/**
+		 * The horizontal alignment, from 0 (left) to 1 (right).
+		 * Reversed for RTL layouts.
+		 */
+		xalign: number;
 		/**
 		 * Retrieves the value set by gtk_entry_set_activates_default().
 		 * @returns %TRUE if the entry will activate the default widget
@@ -9552,6 +10803,18 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IEntryBuffer {
 		/**
+		 * The length (in characters) of the text in buffer.
+		 */
+		readonly length: number;
+		/**
+		 * The maximum length (in characters) of the text in the buffer.
+		 */
+		max_length: number;
+		/**
+		 * The contents of the buffer.
+		 */
+		text: string;
+		/**
 		 * Deletes a sequence of characters from the buffer. #n_chars characters are
 		 * deleted starting at #position. If #n_chars is negative, then all characters
 		 * until the end of the text are deleted.
@@ -9682,6 +10945,50 @@ declare namespace imports.gi.Gtk {
 	 * use {@link EntryCompletion} instead.
 	 */
 	interface IEntryCompletion {
+		/**
+		 * The {@link CellArea} used to layout cell renderers in the treeview column.
+		 * 
+		 * If no area is specified when creating the entry completion with
+		 * gtk_entry_completion_new_with_area() a horizontally oriented
+		 * #GtkCellAreaBox will be used.
+		 */
+		cell_area: CellArea;
+		/**
+		 * Determines whether the common prefix of the possible completions
+		 * should be inserted automatically in the entry. Note that this
+		 * requires text-column to be set, even if you are using a custom
+		 * match function.
+		 */
+		inline_completion: boolean;
+		/**
+		 * Determines whether the possible completions on the popup
+		 * will appear in the entry as you navigate through them.
+		 */
+		inline_selection: boolean;
+		minimum_key_length: number;
+		model: TreeModel;
+		/**
+		 * Determines whether the possible completions should be
+		 * shown in a popup window.
+		 */
+		popup_completion: boolean;
+		/**
+		 * Determines whether the completions popup window will be
+		 * resized to the width of the entry.
+		 */
+		popup_set_width: boolean;
+		/**
+		 * Determines whether the completions popup window will shown
+		 * for a single possible completion. You probably want to set
+		 * this to %FALSE if you are using
+		 * [inline completion][GtkEntryCompletion--inline-completion].
+		 */
+		popup_single_match: boolean;
+		/**
+		 * The column of the model containing the strings.
+		 * Note that the strings must be UTF-8.
+		 */
+		text_column: number;
 		/**
 		 * Requests a completion operation, or in other words a refiltering of the
 		 * current list with completions, using the current key. The completion list
@@ -9944,6 +11251,9 @@ declare namespace imports.gi.Gtk {
 	 * use {@link EventBox} instead.
 	 */
 	interface IEventBox {
+		above_child: boolean;
+		visible_window: boolean;
+		readonly bin: Bin;
 		/**
 		 * Returns whether the event box window is above or below the
 		 * windows of its child. See gtk_event_box_set_above_child()
@@ -10033,6 +11343,14 @@ declare namespace imports.gi.Gtk {
 	 * use {@link EventController} instead.
 	 */
 	interface IEventController {
+		/**
+		 * The propagation phase at which this controller will handle events.
+		 */
+		propagation_phase: PropagationPhase;
+		/**
+		 * The widget receiving the #GdkEvents that the controller will handle.
+		 */
+		widget: Widget;
 		/**
 		 * Gets the propagation phase at which #controller handles events.
 		 * @returns the propagation phase
@@ -10152,6 +11470,10 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IEventControllerScroll {
 		/**
+		 * The flags affecting event controller behavior
+		 */
+		flags: EventControllerScrollFlags;
+		/**
 		 * Gets the flags conditioning the scroll controller behavior.
 		 * @returns the controller flags.
 		 */
@@ -10222,6 +11544,28 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Expander} instead.
 	 */
 	interface IExpander {
+		expanded: boolean;
+		label: string;
+		/**
+		 * Whether the label widget should fill all available horizontal space.
+		 * 
+		 * Note that this property is ignored since 3.20.
+		 */
+		label_fill: boolean;
+		label_widget: Widget;
+		/**
+		 * When this property is %TRUE, the expander will resize the toplevel
+		 * widget containing the expander upon expanding and collapsing.
+		 */
+		resize_toplevel: boolean;
+		/**
+		 * Space to put between the label and the child when the
+		 * expander is expanded.
+		 */
+		spacing: number;
+		use_markup: boolean;
+		use_underline: boolean;
+		readonly bin: Bin;
 		/**
 		 * Queries a {@link Expander} and returns its current state. Returns %TRUE
 		 * if the child widget is revealed.
@@ -10476,6 +11820,14 @@ declare namespace imports.gi.Gtk {
 	 * use {@link FileChooserButton} instead.
 	 */
 	interface IFileChooserButton {
+		/**
+		 * Title to put on the {@link FileChooserDialog} associated with the button.
+		 */
+		title: string;
+		/**
+		 * The width of the entry and label inside the button, in characters.
+		 */
+		width_chars: number;
 		/**
 		 * Returns whether the button grabs focus when it is clicked with the mouse.
 		 * See gtk_file_chooser_button_set_focus_on_click().
@@ -10773,6 +12125,16 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IFileChooserNative {
 		/**
+		 * The text used for the label on the accept button in the dialog, or
+		 * %NULL to use the default text.
+		 */
+		accept_label: string;
+		/**
+		 * The text used for the label on the cancel button in the dialog, or
+		 * %NULL to use the default text.
+		 */
+		cancel_label: string;
+		/**
 		 * Retrieves the custom label text for the accept button.
 		 * @returns The custom label, or %NULL for the default. This string
 		 * is owned by GTK+ and should not be modified or freed
@@ -10991,6 +12353,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link FileChooserWidget} instead.
 	 */
 	interface IFileChooserWidget {
+		search_mode: boolean;
+		readonly subtitle: string;
 
 	}
 
@@ -11197,6 +12561,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Fixed} instead.
 	 */
 	interface IFixed {
+		readonly container: Container;
 		/**
 		 * Moves a child of a {@link Fixed} container to the given position.
 		 * @param widget the child widget.
@@ -11275,6 +12640,43 @@ declare namespace imports.gi.Gtk {
 	 * use {@link FlowBox} instead.
 	 */
 	interface IFlowBox {
+		/**
+		 * Determines whether children can be activated with a single
+		 * click, or require a double-click.
+		 */
+		activate_on_single_click: boolean;
+		/**
+		 * The amount of horizontal space between two children.
+		 */
+		column_spacing: number;
+		/**
+		 * Determines whether all children should be allocated the
+		 * same size.
+		 */
+		homogeneous: boolean;
+		/**
+		 * The maximum amount of children to request space for consecutively
+		 * in the given orientation.
+		 */
+		max_children_per_line: number;
+		/**
+		 * The minimum number of children to allocate consecutively
+		 * in the given orientation.
+		 * 
+		 * Setting the minimum children per line ensures
+		 * that a reasonably small height will be requested
+		 * for the overall minimum width of the box.
+		 */
+		min_children_per_line: number;
+		/**
+		 * The amount of vertical space between two children.
+		 */
+		row_spacing: number;
+		/**
+		 * The selection mode used by the flow  box.
+		 */
+		selection_mode: SelectionMode;
+		readonly container: Container;
 		/**
 		 * Binds #model to #box.
 		 * 
@@ -11688,6 +13090,37 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IFontButton {
 		/**
+		 * The name of the currently selected font.
+		 */
+		font_name: string;
+		/**
+		 * If this property is set to %TRUE, the selected font size will be shown
+		 * in the label. For a more WYSIWYG way to show the selected size, see the
+		 * ::use-size property.
+		 */
+		show_size: boolean;
+		/**
+		 * If this property is set to %TRUE, the name of the selected font style
+		 * will be shown in the label. For a more WYSIWYG way to show the selected
+		 * style, see the ::use-font property.
+		 */
+		show_style: boolean;
+		/**
+		 * The title of the font chooser dialog.
+		 */
+		title: string;
+		/**
+		 * If this property is set to %TRUE, the label will be drawn
+		 * in the selected font.
+		 */
+		use_font: boolean;
+		/**
+		 * If this property is set to %TRUE, the label will be drawn
+		 * with the selected font size.
+		 */
+		use_size: boolean;
+		readonly button: Button;
+		/**
 		 * Retrieves the name of the currently selected font. This name includes
 		 * style and size information as well. If you want to render something
 		 * with the font, use this string with pango_font_description_from_string() .
@@ -11825,6 +13258,15 @@ declare namespace imports.gi.Gtk {
 	 * use {@link FontChooserWidget} instead.
 	 */
 	interface IFontChooserWidget {
+		/**
+		 * A toggle action that can be used to switch to the tweak page
+		 * of the font chooser widget, which lets the user tweak the
+		 * OpenType features and variation axes of the selected font.
+		 * 
+		 * The action will be enabled or disabled depending on whether
+		 * the selected font has any features or axes.
+		 */
+		readonly tweak_action: Gio.Action;
 
 	}
 
@@ -11867,6 +13309,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link FontSelection} instead.
 	 */
 	interface IFontSelection {
+		font_name: string;
+		preview_text: string;
 		/**
 		 * Gets the #PangoFontFace representing the selected font group
 		 * details (i.e. family, slant, weight, width, etc).
@@ -12049,6 +13493,12 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Frame} instead.
 	 */
 	interface IFrame {
+		label: string;
+		label_widget: Widget;
+		label_xalign: number;
+		label_yalign: number;
+		shadow_type: ShadowType;
+		readonly bin: Bin;
 		/**
 		 * If the frame’s label widget is a {@link Label}, returns the
 		 * text in the label widget. (The frame will have a #GtkLabel
@@ -12200,6 +13650,52 @@ declare namespace imports.gi.Gtk {
 	 * use {@link GLArea} instead.
 	 */
 	interface IGLArea {
+		/**
+		 * If set to %TRUE the {@link GLArea}::render signal will be emitted every time
+		 * the widget draws. This is the default and is useful if drawing the widget
+		 * is faster.
+		 * 
+		 * If set to %FALSE the data from previous rendering is kept around and will
+		 * be used for drawing the widget the next time, unless the window is resized.
+		 * In order to force a rendering gtk_gl_area_queue_render() must be called.
+		 * This mode is useful when the scene changes seldomly, but takes a long time
+		 * to redraw.
+		 */
+		auto_render: boolean;
+		/**
+		 * The #GdkGLContext used by the {@link GLArea} widget.
+		 * 
+		 * The #GtkGLArea widget is responsible for creating the #GdkGLContext
+		 * instance. If you need to render with other kinds of buffers (stencil,
+		 * depth, etc), use render buffers.
+		 */
+		readonly context: Gdk.GLContext;
+		/**
+		 * If set to %TRUE the buffer allocated by the widget will have an alpha channel
+		 * component, and when rendering to the window the result will be composited over
+		 * whatever is below the widget.
+		 * 
+		 * If set to %FALSE there will be no alpha channel, and the buffer will fully
+		 * replace anything below the widget.
+		 */
+		has_alpha: boolean;
+		/**
+		 * If set to %TRUE the widget will allocate and enable a depth buffer for the
+		 * target framebuffer.
+		 */
+		has_depth_buffer: boolean;
+		/**
+		 * If set to %TRUE the widget will allocate and enable a stencil buffer for the
+		 * target framebuffer.
+		 */
+		has_stencil_buffer: boolean;
+		/**
+		 * If set to %TRUE the widget will try to create a #GdkGLContext using
+		 * OpenGL ES instead of OpenGL.
+		 * 
+		 * See also: gdk_gl_context_set_use_es()
+		 */
+		use_es: boolean;
 		/**
 		 * Ensures that the #area framebuffer object is made the current draw
 		 * and read target, and that all the required buffers for the #area
@@ -12456,6 +13952,15 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Gesture} instead.
 	 */
 	interface IGesture {
+		/**
+		 * The number of touch points that trigger recognition on this gesture,
+		 */
+		n_points: number;
+		/**
+		 * If non-%NULL, the gesture will only listen for events that happen on
+		 * this #GdkWindow, or a child of it.
+		 */
+		window: Gdk.Window;
 		/**
 		 * If there are touch sequences being currently handled by #gesture,
 		 * this function returns %TRUE and fills in #rect with the bounding
@@ -12810,6 +14315,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link GestureLongPress} instead.
 	 */
 	interface IGestureLongPress {
+		delay_factor: number;
 
 	}
 
@@ -12902,6 +14408,10 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IGesturePan {
 		/**
+		 * The expected orientation of pan gestures.
+		 */
+		orientation: Orientation;
+		/**
 		 * Returns the orientation of the pan gestures that this #gesture expects.
 		 * @returns the expected orientation for pan gestures
 		 */
@@ -12987,6 +14497,19 @@ declare namespace imports.gi.Gtk {
 	 * use {@link GestureSingle} instead.
 	 */
 	interface IGestureSingle {
+		/**
+		 * Mouse button number to listen to, or 0 to listen for any button.
+		 */
+		button: number;
+		/**
+		 * Whether the gesture is exclusive. Exclusive gestures only listen to pointer
+		 * and pointer emulated events.
+		 */
+		exclusive: boolean;
+		/**
+		 * Whether the gesture handles only touch events.
+		 */
+		touch_only: boolean;
 		/**
 		 * Returns the button number #gesture listens for, or 0 if #gesture
 		 * reacts to any button press.
@@ -13205,6 +14728,11 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Grid} instead.
 	 */
 	interface IGrid {
+		baseline_row: number;
+		column_homogeneous: boolean;
+		column_spacing: number;
+		row_homogeneous: boolean;
+		row_spacing: number;
 		/**
 		 * Adds a widget to the grid.
 		 * 
@@ -13402,6 +14930,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link HBox} instead.
 	 */
 	interface IHBox {
+		readonly box: Box;
 
 	}
 
@@ -13447,6 +14976,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link HButtonBox} instead.
 	 */
 	interface IHButtonBox {
+		readonly button_box: ButtonBox;
 
 	}
 
@@ -13470,6 +15000,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link HPaned} instead.
 	 */
 	interface IHPaned {
+		readonly paned: Paned;
 
 	}
 
@@ -13584,6 +15115,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link HScale} instead.
 	 */
 	interface IHScale {
+		readonly scale: Scale;
 
 	}
 
@@ -13633,6 +15165,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link HScrollbar} instead.
 	 */
 	interface IHScrollbar {
+		readonly scrollbar: Scrollbar;
 
 	}
 
@@ -13667,6 +15200,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link HSeparator} instead.
 	 */
 	interface IHSeparator {
+		readonly separator: Separator;
 
 	}
 
@@ -13702,6 +15236,12 @@ declare namespace imports.gi.Gtk {
 	 * use {@link HandleBox} instead.
 	 */
 	interface IHandleBox {
+		readonly child_detached: boolean;
+		handle_position: PositionType;
+		shadow_type: ShadowType;
+		snap_edge: PositionType;
+		snap_edge_set: boolean;
+		readonly bin: Bin;
 		/**
 		 * Whether the handlebox’s child is currently detached.
 		 * @returns %TRUE if the child is currently detached, otherwise %FALSE
@@ -13806,6 +15346,38 @@ declare namespace imports.gi.Gtk {
 	 * use {@link HeaderBar} instead.
 	 */
 	interface IHeaderBar {
+		custom_title: Widget;
+		/**
+		 * The decoration layout for buttons. If this property is
+		 * not set, the {@link Settings}:gtk-decoration-layout setting
+		 * is used.
+		 * 
+		 * See gtk_header_bar_set_decoration_layout() for information
+		 * about the format of this string.
+		 */
+		decoration_layout: string;
+		/**
+		 * Set to %TRUE if {@link HeaderBar}:decoration-layout is set.
+		 */
+		decoration_layout_set: boolean;
+		/**
+		 * If %TRUE, reserve space for a subtitle, even if none
+		 * is currently set.
+		 */
+		has_subtitle: boolean;
+		/**
+		 * Whether to show window decorations.
+		 * 
+		 * Which buttons are actually shown and where is determined
+		 * by the {@link HeaderBar}:decoration-layout property, and by
+		 * the state of the window (e.g. a close button will not be
+		 * shown if the window can't be closed).
+		 */
+		show_close_button: boolean;
+		spacing: number;
+		subtitle: string;
+		title: string;
+		readonly container: Container;
 		/**
 		 * Retrieves the custom title widget of the header. See
 		 * gtk_header_bar_set_custom_title().
@@ -13980,6 +15552,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link IMContext} instead.
 	 */
 	interface IIMContext {
+		input_hints: InputHints;
+		input_purpose: InputPurpose;
 		/**
 		 * Asks the widget that the input context is attached to to delete
 		 * characters around the cursor position by emitting the
@@ -14189,6 +15763,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link IMContextSimple} instead.
 	 */
 	interface IIMContextSimple {
+		readonly object: IMContext;
 		/**
 		 * Adds an additional table from the X11 compose file.
 		 * @param compose_file The path of compose file
@@ -14249,6 +15824,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link IMMulticontext} instead.
 	 */
 	interface IIMMulticontext {
+		readonly object: IMContext;
 		/**
 		 * Add menuitems for various available input methods to a menu;
 		 * the menuitems, when selected, will switch the input method
@@ -15209,6 +16785,95 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IIconView {
 		/**
+		 * The activate-on-single-click property specifies whether the "item-activated" signal
+		 * will be emitted after a single click.
+		 */
+		activate_on_single_click: boolean;
+		/**
+		 * The {@link CellArea} used to layout cell renderers for this view.
+		 * 
+		 * If no area is specified when creating the icon view with gtk_icon_view_new_with_area()
+		 * a #GtkCellAreaBox will be used.
+		 */
+		cell_area: CellArea;
+		/**
+		 * The column-spacing property specifies the space which is inserted between
+		 * the columns of the icon view.
+		 */
+		column_spacing: number;
+		/**
+		 * The columns property contains the number of the columns in which the
+		 * items should be displayed. If it is -1, the number of columns will
+		 * be chosen automatically to fill the available area.
+		 */
+		columns: number;
+		/**
+		 * The item-orientation property specifies how the cells (i.e. the icon and
+		 * the text) of the item are positioned relative to each other.
+		 */
+		item_orientation: Orientation;
+		/**
+		 * The item-padding property specifies the padding around each
+		 * of the icon view's item.
+		 */
+		item_padding: number;
+		/**
+		 * The item-width property specifies the width to use for each item.
+		 * If it is set to -1, the icon view will automatically determine a
+		 * suitable item size.
+		 */
+		item_width: number;
+		/**
+		 * The margin property specifies the space which is inserted
+		 * at the edges of the icon view.
+		 */
+		margin: number;
+		/**
+		 * The ::markup-column property contains the number of the model column
+		 * containing markup information to be displayed. The markup column must be
+		 * of type #G_TYPE_STRING. If this property and the :text-column property
+		 * are both set to column numbers, it overrides the text column.
+		 * If both are set to -1, no texts are displayed.
+		 */
+		markup_column: number;
+		model: TreeModel;
+		/**
+		 * The ::pixbuf-column property contains the number of the model column
+		 * containing the pixbufs which are displayed. The pixbuf column must be
+		 * of type #GDK_TYPE_PIXBUF. Setting this property to -1 turns off the
+		 * display of pixbufs.
+		 */
+		pixbuf_column: number;
+		/**
+		 * The reorderable property specifies if the items can be reordered
+		 * by DND.
+		 */
+		reorderable: boolean;
+		/**
+		 * The row-spacing property specifies the space which is inserted between
+		 * the rows of the icon view.
+		 */
+		row_spacing: number;
+		/**
+		 * The ::selection-mode property specifies the selection mode of
+		 * icon view. If the mode is #GTK_SELECTION_MULTIPLE, rubberband selection
+		 * is enabled, for the other modes, only keyboard selection is possible.
+		 */
+		selection_mode: SelectionMode;
+		/**
+		 * The spacing property specifies the space which is inserted between
+		 * the cells (i.e. the icon and the text) of an item.
+		 */
+		spacing: number;
+		/**
+		 * The ::text-column property contains the number of the model column
+		 * containing the texts which are displayed. The text column must be
+		 * of type #G_TYPE_STRING. If this property and the :markup-column
+		 * property are both set to -1, no texts are displayed.
+		 */
+		text_column: number;
+		tooltip_column: number;
+		/**
 		 * Converts widget coordinates to coordinates for the bin_window,
 		 * as expected by e.g. gtk_icon_view_get_path_at_pos().
 		 * @param wx X coordinate relative to the widget
@@ -15765,6 +17430,43 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Image} instead.
 	 */
 	interface IImage {
+		file: string;
+		/**
+		 * The GIcon displayed in the GtkImage. For themed icons,
+		 * If the icon theme is changed, the image will be updated
+		 * automatically.
+		 */
+		gicon: Gio.Icon;
+		/**
+		 * The name of the icon in the icon theme. If the icon theme is
+		 * changed, the image will be updated automatically.
+		 */
+		icon_name: string;
+		icon_set: IconSet;
+		icon_size: number;
+		pixbuf: GdkPixbuf.Pixbuf;
+		pixbuf_animation: GdkPixbuf.PixbufAnimation;
+		/**
+		 * The "pixel-size" property can be used to specify a fixed size
+		 * overriding the {@link Image}:icon-size property for images of type
+		 * %GTK_IMAGE_ICON_NAME.
+		 */
+		pixel_size: number;
+		/**
+		 * A path to a resource file to display.
+		 */
+		resource: string;
+		stock: string;
+		readonly storage_type: ImageType;
+		surface: cairo.Surface;
+		/**
+		 * Whether the icon displayed in the GtkImage will use
+		 * standard icon names fallback. The value of this property
+		 * is only relevant for images of type %GTK_IMAGE_ICON_NAME
+		 * and %GTK_IMAGE_GICON.
+		 */
+		use_fallback: boolean;
+		readonly misc: Misc;
 		/**
 		 * Resets the image to be empty.
 		 */
@@ -16176,6 +17878,23 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IImageMenuItem {
 		/**
+		 * If %TRUE, the menu item will always show the image, if available.
+		 * 
+		 * Use this property only if the menuitem would be useless or hard to use
+		 * without the image.
+		 */
+		always_show_image: boolean;
+		/**
+		 * Child widget to appear next to the menu text.
+		 */
+		image: Widget;
+		/**
+		 * If %TRUE, the label set in the menuitem is used as a
+		 * stock id to select the stock item for the item.
+		 */
+		use_stock: boolean;
+		readonly menu_item: MenuItem;
+		/**
 		 * Returns whether the menu item will ignore the {@link Settings}:gtk-menu-images
 		 * setting and always show the image, if available.
 		 * @returns %TRUE if the menu item will always show the image
@@ -16343,6 +18062,17 @@ declare namespace imports.gi.Gtk {
 	 * use {@link InfoBar} instead.
 	 */
 	interface IInfoBar {
+		/**
+		 * The type of the message.
+		 * 
+		 * The type may be used to determine the appearance of the info bar.
+		 */
+		message_type: MessageType;
+		revealed: boolean;
+		/**
+		 * Whether to include a standard close button.
+		 */
+		show_close_button: boolean;
 		/**
 		 * Add an activatable widget to the action area of a {@link InfoBar},
 		 * connecting a signal handler that will emit the #GtkInfoBar::response
@@ -16544,6 +18274,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Invisible} instead.
 	 */
 	interface IInvisible {
+		screen: Gdk.Screen;
+		readonly widget: Widget;
 		/**
 		 * Returns the #GdkScreen object associated with #invisible
 		 * @returns the associated #GdkScreen.
@@ -16590,6 +18322,111 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Label} instead.
 	 */
 	interface ILabel {
+		/**
+		 * The angle that the baseline of the label makes with the horizontal,
+		 * in degrees, measured counterclockwise. An angle of 90 reads from
+		 * from bottom to top, an angle of 270, from top to bottom. Ignored
+		 * if the label is selectable.
+		 */
+		angle: number;
+		attributes: Pango.AttrList;
+		readonly cursor_position: number;
+		/**
+		 * The preferred place to ellipsize the string, if the label does
+		 * not have enough room to display the entire string, specified as a
+		 * #PangoEllipsizeMode.
+		 * 
+		 * Note that setting this property to a value other than
+		 * %PANGO_ELLIPSIZE_NONE has the side-effect that the label requests
+		 * only enough space to display the ellipsis "...". In particular, this
+		 * means that ellipsizing labels do not work well in notebook tabs, unless
+		 * the {@link Notebook} tab-expand child property is set to %TRUE. Other ways
+		 * to set a label's width are gtk_widget_set_size_request() and
+		 * gtk_label_set_width_chars().
+		 */
+		ellipsize: Pango.EllipsizeMode;
+		justify: Justification;
+		/**
+		 * The contents of the label.
+		 * 
+		 * If the string contains [Pango XML markup][PangoMarkupFormat], you will
+		 * have to set the {@link Label}:use-markup property to %TRUE in order for the
+		 * label to display the markup attributes. See also gtk_label_set_markup()
+		 * for a convenience function that sets both this property and the
+		 * #GtkLabel:use-markup property at the same time.
+		 * 
+		 * If the string contains underlines acting as mnemonics, you will have to
+		 * set the #GtkLabel:use-underline property to %TRUE in order for the label
+		 * to display them.
+		 */
+		label: string;
+		/**
+		 * The number of lines to which an ellipsized, wrapping label
+		 * should be limited. This property has no effect if the
+		 * label is not wrapping or ellipsized. Set this property to
+		 * -1 if you don't want to limit the number of lines.
+		 */
+		lines: number;
+		/**
+		 * The desired maximum width of the label, in characters. If this property
+		 * is set to -1, the width will be calculated automatically.
+		 * 
+		 * See the section on [text layout][label-text-layout]
+		 * for details of how {@link Label}:width-chars and #GtkLabel:max-width-chars
+		 * determine the width of ellipsized and wrapped labels.
+		 */
+		max_width_chars: number;
+		readonly mnemonic_keyval: number;
+		mnemonic_widget: Widget;
+		selectable: boolean;
+		readonly selection_bound: number;
+		/**
+		 * Whether the label is in single line mode. In single line mode,
+		 * the height of the label does not depend on the actual text, it
+		 * is always set to ascent + descent of the font. This can be an
+		 * advantage in situations where resizing the label because of text
+		 * changes would be distracting, e.g. in a statusbar.
+		 */
+		single_line_mode: boolean;
+		/**
+		 * Set this property to %TRUE to make the label track which links
+		 * have been visited. It will then apply the #GTK_STATE_FLAG_VISITED
+		 * when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
+		 */
+		track_visited_links: boolean;
+		use_markup: boolean;
+		use_underline: boolean;
+		/**
+		 * The desired width of the label, in characters. If this property is set to
+		 * -1, the width will be calculated automatically.
+		 * 
+		 * See the section on [text layout][label-text-layout]
+		 * for details of how {@link Label}:width-chars and #GtkLabel:max-width-chars
+		 * determine the width of ellipsized and wrapped labels.
+		 */
+		width_chars: number;
+		wrap: boolean;
+		/**
+		 * If line wrapping is on (see the {@link Label}:wrap property) this controls
+		 * how the line wrapping is done. The default is %PANGO_WRAP_WORD, which
+		 * means wrap on word boundaries.
+		 */
+		wrap_mode: Pango.WrapMode;
+		/**
+		 * The xalign property determines the horizontal aligment of the label text
+		 * inside the labels size allocation. Compare this to {@link Widget}:halign,
+		 * which determines how the labels size allocation is positioned in the
+		 * space available for the label.
+		 */
+		xalign: number;
+		/**
+		 * The yalign property determines the vertical aligment of the label text
+		 * inside the labels size allocation. Compare this to {@link Widget}:valign,
+		 * which determines how the labels size allocation is positioned in the
+		 * space available for the label.
+		 */
+		yalign: number;
+		readonly misc: Misc;
 		/**
 		 * Gets the angle of rotation for the label. See
 		 * gtk_label_set_angle().
@@ -17226,6 +19063,9 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Layout} instead.
 	 */
 	interface ILayout {
+		height: number;
+		width: number;
+		readonly container: Container;
 		/**
 		 * Retrieve the bin window of the layout used for drawing operations.
 		 * @returns a #GdkWindow
@@ -17336,6 +19176,37 @@ declare namespace imports.gi.Gtk {
 	 * use {@link LevelBar} instead.
 	 */
 	interface ILevelBar {
+		/**
+		 * Level bars normally grow from top to bottom or left to right.
+		 * Inverted level bars grow in the opposite direction.
+		 */
+		inverted: boolean;
+		/**
+		 * The {@link LevelBar}:max-value property determaxes the maximum value of
+		 * the interval that can be displayed by the bar.
+		 */
+		max_value: number;
+		/**
+		 * The {@link LevelBar}:min-value property determines the minimum value of
+		 * the interval that can be displayed by the bar.
+		 */
+		min_value: number;
+		/**
+		 * The {@link LevelBar}:mode property determines the way #GtkLevelBar
+		 * interprets the value properties to draw the level fill area.
+		 * Specifically, when the value is #GTK_LEVEL_BAR_MODE_CONTINUOUS,
+		 * #GtkLevelBar will draw a single block representing the current value in
+		 * that area; when the value is #GTK_LEVEL_BAR_MODE_DISCRETE,
+		 * the widget will draw a succession of separate blocks filling the
+		 * draw area, with the number of blocks being equal to the units separating
+		 * the integral roundings of #GtkLevelBar:min-value and #GtkLevelBar:max-value.
+		 */
+		mode: LevelBarMode;
+		/**
+		 * The {@link LevelBar}:value property determines the currently
+		 * filled value of the level bar.
+		 */
+		value: number;
 		/**
 		 * Adds a new offset marker on #self at the position specified by #value.
 		 * When the bar value is in the interval topped by #value (or between #value
@@ -17564,6 +19435,15 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface ILinkButton {
 		/**
+		 * The URI bound to this button.
+		 */
+		uri: string;
+		/**
+		 * The 'visited' state of this button. A visited link is drawn in a
+		 * different color.
+		 */
+		visited: boolean;
+		/**
 		 * Retrieves the URI set using gtk_link_button_set_uri().
 		 * @returns a valid URI.  The returned string is owned by the link button
 		 *   and should not be modified or freed.
@@ -17660,6 +19540,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ListBox} instead.
 	 */
 	interface IListBox {
+		activate_on_single_click: boolean;
+		selection_mode: SelectionMode;
 		/**
 		 * Binds #model to #box.
 		 * 
@@ -17971,6 +19853,15 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ListBoxRow} instead.
 	 */
 	interface IListBoxRow {
+		/**
+		 * The property determines whether the {@link ListBox}::row-activated
+		 * signal will be emitted for this row.
+		 */
+		activatable: boolean;
+		/**
+		 * The property determines whether this row can be selected.
+		 */
+		selectable: boolean;
 		/**
 		 * Marks #row as changed, causing any state that depends on this
 		 * to be updated. This affects sorting, filtering and headers.
@@ -18442,6 +20333,12 @@ declare namespace imports.gi.Gtk {
 	 * use {@link LockButton} instead.
 	 */
 	interface ILockButton {
+		permission: Gio.Permission;
+		text_lock: string;
+		text_unlock: string;
+		tooltip_lock: string;
+		tooltip_not_authorized: string;
+		tooltip_unlock: string;
 		/**
 		 * Obtains the #GPermission object that controls #button.
 		 * @returns the #GPermission of #button
@@ -18525,6 +20422,91 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Menu} instead.
 	 */
 	interface IMenu {
+		/**
+		 * The accel group holding accelerators for the menu.
+		 */
+		accel_group: AccelGroup;
+		/**
+		 * An accel path used to conveniently construct accel paths of child items.
+		 */
+		accel_path: string;
+		/**
+		 * The index of the currently selected menu item, or -1 if no
+		 * menu item is selected.
+		 */
+		active: number;
+		/**
+		 * Positioning hints for aligning the menu relative to a rectangle.
+		 * 
+		 * These hints determine how the menu should be positioned in the case that
+		 * the menu would fall off-screen if placed in its ideal position.
+		 * 
+		 * ![](popup-flip.png)
+		 * 
+		 * For example, %GDK_ANCHOR_FLIP_Y will replace %GDK_GRAVITY_NORTH_WEST with
+		 * %GDK_GRAVITY_SOUTH_WEST and vice versa if the menu extends beyond the
+		 * bottom edge of the monitor.
+		 * 
+		 * See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+		 * gtk_menu_popup_at_pointer (), {@link Menu}:rect-anchor-dx,
+		 * #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+		 */
+		anchor_hints: Gdk.AnchorHints;
+		/**
+		 * The widget the menu is attached to. Setting this property attaches
+		 * the menu without a {@link MenuDetachFunc}. If you need to use a detacher,
+		 * use gtk_menu_attach_to_widget() directly.
+		 */
+		attach_widget: Widget;
+		/**
+		 * The #GdkWindowTypeHint to use for the menu's #GdkWindow.
+		 * 
+		 * See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+		 * gtk_menu_popup_at_pointer (), {@link Menu}:anchor-hints,
+		 * #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
+		 */
+		menu_type_hint: Gdk.WindowTypeHint;
+		/**
+		 * The monitor the menu will be popped up on.
+		 */
+		monitor: number;
+		/**
+		 * Horizontal offset to apply to the menu, i.e. the rectangle or widget
+		 * anchor.
+		 * 
+		 * See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+		 * gtk_menu_popup_at_pointer (), {@link Menu}:anchor-hints,
+		 * #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+		 */
+		rect_anchor_dx: number;
+		/**
+		 * Vertical offset to apply to the menu, i.e. the rectangle or widget anchor.
+		 * 
+		 * See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+		 * gtk_menu_popup_at_pointer (), {@link Menu}:anchor-hints,
+		 * #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+		 */
+		rect_anchor_dy: number;
+		/**
+		 * A boolean that indicates whether the menu reserves space for
+		 * toggles and icons, regardless of their actual presence.
+		 * 
+		 * This property should only be changed from its default value
+		 * for special-purposes such as tabular menus. Regular menus that
+		 * are connected to a menu bar or context menus should reserve
+		 * toggle space for consistency.
+		 */
+		reserve_toggle_size: boolean;
+		/**
+		 * A boolean that indicates whether the menu is torn-off.
+		 */
+		tearoff_state: boolean;
+		/**
+		 * A title that may be displayed by the window manager when this
+		 * menu is torn-off.
+		 */
+		tearoff_title: string;
+		readonly menu_shell: MenuShell;
 		/**
 		 * Adds a new {@link MenuItem} to a (table) menu. The number of “cells” that
 		 * an item will occupy is specified by #left_attach, #right_attach,
@@ -18999,6 +20981,17 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IMenuBar {
 		/**
+		 * The child pack direction of the menubar. It determines how
+		 * the widgets contained in child menuitems are arranged.
+		 */
+		child_pack_direction: PackDirection;
+		/**
+		 * The pack direction of the menubar. It determines how
+		 * menuitems are arranged in the menubar.
+		 */
+		pack_direction: PackDirection;
+		readonly menu_shell: MenuShell;
+		/**
 		 * Retrieves the current child pack direction of the menubar.
 		 * See gtk_menu_bar_set_child_pack_direction().
 		 * @returns the child pack direction
@@ -19063,6 +21056,37 @@ declare namespace imports.gi.Gtk {
 	 * use {@link MenuButton} instead.
 	 */
 	interface IMenuButton {
+		/**
+		 * The {@link Widget} to use to align the menu with.
+		 */
+		align_widget: Container;
+		/**
+		 * The {@link ArrowType} representing the direction in which the
+		 * menu or popover will be popped out.
+		 */
+		direction: ArrowType;
+		/**
+		 * The #GMenuModel from which the popup will be created.
+		 * Depending on the {@link MenuButton}:use-popover property, that may
+		 * be a menu or a popover.
+		 * 
+		 * See gtk_menu_button_set_menu_model() for the interaction with the
+		 * #GtkMenuButton:popup property.
+		 */
+		menu_model: Gio.MenuModel;
+		/**
+		 * The {@link Popover} that will be popped up when the button is clicked.
+		 */
+		popover: Popover;
+		/**
+		 * The {@link Menu} that will be popped up when the button is clicked.
+		 */
+		popup: Menu;
+		/**
+		 * Whether to construct a {@link Popover} from the menu model,
+		 * or a #GtkMenu.
+		 */
+		use_popover: boolean;
 		/**
 		 * Returns the parent {@link Widget} to use to line up with menu.
 		 * @returns a {@link Widget} value or %NULL
@@ -19291,6 +21315,30 @@ declare namespace imports.gi.Gtk {
 	 * use {@link MenuItem} instead.
 	 */
 	interface IMenuItem {
+		/**
+		 * Sets the accelerator path of the menu item, through which runtime
+		 * changes of the menu item's accelerator caused by the user can be
+		 * identified and saved to persistant storage.
+		 */
+		accel_path: string;
+		/**
+		 * The text for the child label.
+		 */
+		label: string;
+		/**
+		 * Sets whether the menu item appears justified
+		 * at the right side of a menu bar.
+		 */
+		right_justified: boolean;
+		/**
+		 * The submenu attached to the menu item, or %NULL if it has none.
+		 */
+		submenu: Menu;
+		/**
+		 * %TRUE if underlines in the text indicate mnemonics.
+		 */
+		use_underline: boolean;
+		readonly bin: Bin;
 		/**
 		 * Emits the {@link MenuItem}::activate signal on the given item
 		 */
@@ -19523,6 +21571,13 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IMenuShell {
 		/**
+		 * A boolean that determines whether the menu and its submenus grab the
+		 * keyboard focus. See gtk_menu_shell_set_take_focus() and
+		 * gtk_menu_shell_get_take_focus().
+		 */
+		take_focus: boolean;
+		readonly container: Container;
+		/**
 		 * Activates the menu item within the menu shell.
 		 * @param menu_item the {@link MenuItem} to activate
 		 * @param force_deactivate if %TRUE, force the deactivation of the
@@ -19735,6 +21790,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link MenuToolButton} instead.
 	 */
 	interface IMenuToolButton {
+		menu: Menu;
 		/**
 		 * Gets the {@link Menu} associated with #GtkMenuToolButton.
 		 * @returns the {@link Menu} associated
@@ -19818,6 +21874,39 @@ declare namespace imports.gi.Gtk {
 	 * use {@link MessageDialog} instead.
 	 */
 	interface IMessageDialog {
+		/**
+		 * The image for this dialog.
+		 */
+		image: Widget;
+		/**
+		 * The {@link Box} that corresponds to the message area of this dialog.  See
+		 * gtk_message_dialog_get_message_area() for a detailed description of this
+		 * area.
+		 */
+		readonly message_area: Widget;
+		/**
+		 * The type of the message.
+		 */
+		message_type: MessageType;
+		/**
+		 * The secondary text of the message dialog.
+		 */
+		secondary_text: string;
+		/**
+		 * %TRUE if the secondary text of the dialog includes Pango markup.
+		 * See pango_parse_markup().
+		 */
+		secondary_use_markup: boolean;
+		/**
+		 * The primary text of the message dialog. If the dialog has
+		 * a secondary text, this will appear as the title.
+		 */
+		text: string;
+		/**
+		 * %TRUE if the primary text of the dialog includes Pango markup.
+		 * See pango_parse_markup().
+		 */
+		use_markup: boolean;
 		/**
 		 * Sets the secondary text of the message dialog to be #message_format (with
 		 * printf()-style), which is marked up with the
@@ -19991,6 +22080,28 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IMisc {
 		/**
+		 * The horizontal alignment. A value of 0.0 means left alignment (or right
+		 * on RTL locales); a value of 1.0 means right alignment (or left on RTL
+		 * locales).
+		 */
+		xalign: number;
+		/**
+		 * The amount of space to add on the left and right of the widget, in
+		 * pixels.
+		 */
+		xpad: number;
+		/**
+		 * The vertical alignment. A value of 0.0 means top alignment;
+		 * a value of 1.0 means bottom alignment.
+		 */
+		yalign: number;
+		/**
+		 * The amount of space to add on the top and bottom of the widget, in
+		 * pixels.
+		 */
+		ypad: number;
+		readonly widget: Widget;
+		/**
 		 * Gets the X and Y alignment of the widget within its allocation.
 		 * See gtk_misc_set_alignment().
 		 * @param xalign location to store X alignment of #misc, or %NULL
@@ -20054,6 +22165,54 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ModelButton} instead.
 	 */
 	interface IModelButton {
+		/**
+		 * The state of the button. This is reflecting the state of the associated
+		 * #GAction.
+		 */
+		active: boolean;
+		/**
+		 * Whether to render the button contents centered instead of left-aligned.
+		 * This property should be set for title-like items.
+		 */
+		centered: boolean;
+		/**
+		 * A #GIcon that will be used if iconic appearance for the button is
+		 * desired.
+		 */
+		icon: Gio.Icon;
+		/**
+		 * If this property is set, the button will show an icon if one is set.
+		 * If no icon is set, the text will be used. This is typically used for
+		 * horizontal sections of linked buttons.
+		 */
+		iconic: boolean;
+		/**
+		 * Whether to show the submenu indicator at the opposite side than normal.
+		 * This property should be set for model buttons that 'go back' to a parent
+		 * menu.
+		 */
+		inverted: boolean;
+		/**
+		 * The name of a submenu to open when the button is activated.
+		 * If this is set, the button should not have an action associated with it.
+		 */
+		menu_name: string;
+		/**
+		 * Specifies whether the button is a plain, check or radio button.
+		 * When {@link Actionable}:action-name is set, the role will be determined
+		 * from the action and does not have to be set explicitly.
+		 */
+		role: ButtonRole;
+		/**
+		 * The label for the button.
+		 */
+		text: string;
+		/**
+		 * If %TRUE, XML tags in the text of the button are interpreted as by
+		 * pango_parse_markup() to format the enclosed spans of text. If %FALSE, the
+		 * text will be displayed verbatim.
+		 */
+		use_markup: boolean;
 
 	}
 
@@ -20178,6 +22337,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link MountOperation} instead.
 	 */
 	interface IMountOperation {
+		// readonly is_showing: boolean;
+		screen: Gdk.Screen;
 		/**
 		 * Gets the transient parent used by the {@link MountOperation}
 		 * @returns the transient parent for windows shown by #op
@@ -20232,6 +22393,22 @@ declare namespace imports.gi.Gtk {
 	 * use {@link NativeDialog} instead.
 	 */
 	interface INativeDialog {
+		/**
+		 * Whether the window should be modal with respect to its transient parent.
+		 */
+		modal: boolean;
+		/**
+		 * The title of the dialog window
+		 */
+		title: string;
+		/**
+		 * The transient parent of the dialog, or %NULL for none.
+		 */
+		transient_for: Window;
+		/**
+		 * Whether the window is currenlty visible.
+		 */
+		visible: boolean;
 		/**
 		 * Destroys a dialog.
 		 * 
@@ -20378,6 +22555,16 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Notebook} instead.
 	 */
 	interface INotebook {
+		enable_popup: boolean;
+		/**
+		 * Group name for tab drag and drop.
+		 */
+		group_name: string;
+		page: number;
+		scrollable: boolean;
+		show_border: boolean;
+		show_tabs: boolean;
+		tab_pos: PositionType;
 		/**
 		 * Appends a page to #notebook.
 		 * @param child the {@link Widget} to use as the contents of the page
@@ -20909,6 +23096,11 @@ declare namespace imports.gi.Gtk {
 	 * use {@link NumerableIcon} instead.
 	 */
 	interface INumerableIcon {
+		background_icon: Gio.Icon;
+		background_icon_name: string;
+		count: number;
+		label: string;
+		style_context: StyleContext;
 		/**
 		 * Returns the #GIcon that was set as the base background image, or
 		 * %NULL if there’s none. The caller of this function does not own
@@ -21045,6 +23237,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link OffscreenWindow} instead.
 	 */
 	interface IOffscreenWindow {
+		readonly parent_object: Window;
 		/**
 		 * Retrieves a snapshot of the contained widget in the form of
 		 * a #GdkPixbuf.  This is a new pixbuf with a reference count of 1,
@@ -21193,6 +23386,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link PadController} instead.
 	 */
 	interface IPadController {
+		action_group: Gio.ActionGroup;
+		pad: Gdk.Device;
 		/**
 		 * Adds an individual action to #controller. This action will only be activated
 		 * if the given button/ring/strip number in #index is interacted while
@@ -21542,6 +23737,27 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IPaned {
 		/**
+		 * The largest possible value for the position property.
+		 * This property is derived from the size and shrinkability
+		 * of the widget's children.
+		 */
+		readonly max_position: number;
+		/**
+		 * The smallest possible value for the position property.
+		 * This property is derived from the size and shrinkability
+		 * of the widget's children.
+		 */
+		readonly min_position: number;
+		position: number;
+		position_set: boolean;
+		/**
+		 * Setting this property to %TRUE indicates that the paned needs
+		 * to provide stronger visual separation (e.g. because it separates
+		 * between two notebooks, whose tab rows would otherwise merge visually).
+		 */
+		wide_handle: boolean;
+		readonly container: Container;
+		/**
 		 * Adds a child to the top or left pane with default parameters. This is
 		 * equivalent to
 		 * `gtk_paned_pack1 (paned, child, FALSE, TRUE)`.
@@ -21715,6 +23931,21 @@ declare namespace imports.gi.Gtk {
 	 * use {@link PlacesSidebar} instead.
 	 */
 	interface IPlacesSidebar {
+		local_only: boolean;
+		location: Gio.File;
+		open_flags: PlacesOpenFlags;
+		/**
+		 * If :populate-all is %TRUE, the {@link PlacesSidebar}::populate-popup signal
+		 * is also emitted for popovers.
+		 */
+		populate_all: boolean;
+		show_connect_to_server: boolean;
+		show_desktop: boolean;
+		show_enter_location: boolean;
+		show_other_locations: boolean;
+		show_recent: boolean;
+		show_starred_location: boolean;
+		show_trash: boolean;
 		/**
 		 * Applications may want to present some folders in the places sidebar if
 		 * they could be immediately useful to users.  For example, a drawing
@@ -21985,6 +24216,15 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IPlug {
 		/**
+		 * %TRUE if the plug is embedded in a socket.
+		 */
+		readonly embedded: boolean;
+		/**
+		 * The window of the socket the plug is embedded in.
+		 */
+		readonly socket_window: Gdk.Window;
+		readonly window: Window;
+		/**
 		 * Finish the initialization of #plug for a given {@link Socket} identified by
 		 * #socket_id. This function will generally only be used by classes deriving from #GtkPlug.
 		 * @param socket_id the XID of the socket’s window.
@@ -22086,6 +24326,31 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Popover} instead.
 	 */
 	interface IPopover {
+		/**
+		 * Sets a constraint for the popover position.
+		 */
+		constrain_to: PopoverConstraint;
+		/**
+		 * Sets whether the popover is modal (so other elements in the window do not
+		 * receive input while the popover is visible).
+		 */
+		modal: boolean;
+		/**
+		 * Marks a specific rectangle to be pointed.
+		 */
+		pointing_to: Gdk.Rectangle;
+		/**
+		 * Sets the preferred position of the popover.
+		 */
+		position: PositionType;
+		/**
+		 * Sets the attached widget.
+		 */
+		relative_to: Widget;
+		/**
+		 * Whether show/hide transitions are enabled for this popover.
+		 */
+		transitions_enabled: boolean;
 		/**
 		 * Establishes a binding between a {@link Popover} and a #GMenuModel.
 		 * 
@@ -22349,6 +24614,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link PopoverMenu} instead.
 	 */
 	interface IPopoverMenu {
+		visible_submenu: string;
 		/**
 		 * Opens a submenu of the #popover. The #name
 		 * must be one of the names given to the submenus
@@ -22617,6 +24883,154 @@ declare namespace imports.gi.Gtk {
 	 * use {@link PrintOperation} instead.
 	 */
 	interface IPrintOperation {
+		/**
+		 * Determines whether the print operation may run asynchronously or not.
+		 * 
+		 * Some systems don't support asynchronous printing, but those that do
+		 * will return %GTK_PRINT_OPERATION_RESULT_IN_PROGRESS as the status, and
+		 * emit the {@link PrintOperation}::done signal when the operation is actually
+		 * done.
+		 * 
+		 * The Windows port does not support asynchronous operation at all (this
+		 * is unlikely to change). On other platforms, all actions except for
+		 * %GTK_PRINT_OPERATION_ACTION_EXPORT support asynchronous operation.
+		 */
+		allow_async: boolean;
+		/**
+		 * The current page in the document.
+		 * 
+		 * If this is set before gtk_print_operation_run(),
+		 * the user will be able to select to print only the current page.
+		 * 
+		 * Note that this only makes sense for pre-paginated documents.
+		 */
+		current_page: number;
+		/**
+		 * Used as the label of the tab containing custom widgets.
+		 * Note that this property may be ignored on some platforms.
+		 * 
+		 * If this is %NULL, GTK+ uses a default label.
+		 */
+		custom_tab_label: string;
+		/**
+		 * The {@link PageSetup} used by default.
+		 * 
+		 * This page setup will be used by gtk_print_operation_run(),
+		 * but it can be overridden on a per-page basis by connecting
+		 * to the #GtkPrintOperation::request-page-setup signal.
+		 */
+		default_page_setup: PageSetup;
+		/**
+		 * If %TRUE, page size combo box and orientation combo box are embedded into page setup page.
+		 */
+		embed_page_setup: boolean;
+		/**
+		 * The name of a file to generate instead of showing the print dialog.
+		 * Currently, PDF is the only supported format.
+		 * 
+		 * The intended use of this property is for implementing
+		 * “Export to PDF” actions.
+		 * 
+		 * “Print to PDF” support is independent of this and is done
+		 * by letting the user pick the “Print to PDF” item from the
+		 * list of printers in the print dialog.
+		 */
+		export_filename: string;
+		/**
+		 * Determines whether there is a selection in your application.
+		 * This can allow your application to print the selection.
+		 * This is typically used to make a "Selection" button sensitive.
+		 */
+		has_selection: boolean;
+		/**
+		 * A string used to identify the job (e.g. in monitoring
+		 * applications like eggcups).
+		 * 
+		 * If you don't set a job name, GTK+ picks a default one
+		 * by numbering successive print jobs.
+		 */
+		job_name: string;
+		/**
+		 * The number of pages in the document.
+		 * 
+		 * This must be set to a positive number
+		 * before the rendering starts. It may be set in a
+		 * {@link PrintOperation}::begin-print signal hander.
+		 * 
+		 * Note that the page numbers passed to the
+		 * #GtkPrintOperation::request-page-setup and
+		 * #GtkPrintOperation::draw-page signals are 0-based, i.e. if
+		 * the user chooses to print all pages, the last ::draw-page signal
+		 * will be for page #n_pages - 1.
+		 */
+		n_pages: number;
+		/**
+		 * The number of pages that will be printed.
+		 * 
+		 * Note that this value is set during print preparation phase
+		 * (%GTK_PRINT_STATUS_PREPARING), so this value should never be
+		 * get before the data generation phase (%GTK_PRINT_STATUS_GENERATING_DATA).
+		 * You can connect to the {@link PrintOperation}::status-changed signal
+		 * and call gtk_print_operation_get_n_pages_to_print() when
+		 * print status is %GTK_PRINT_STATUS_GENERATING_DATA.
+		 * This is typically used to track the progress of print operation.
+		 */
+		readonly n_pages_to_print: number;
+		/**
+		 * The {@link PrintSettings} used for initializing the dialog.
+		 * 
+		 * Setting this property is typically used to re-establish
+		 * print settings from a previous print operation, see
+		 * gtk_print_operation_run().
+		 */
+		print_settings: PrintSettings;
+		/**
+		 * Determines whether to show a progress dialog during the
+		 * print operation.
+		 */
+		show_progress: boolean;
+		/**
+		 * The status of the print operation.
+		 */
+		readonly status: PrintStatus;
+		/**
+		 * A string representation of the status of the print operation.
+		 * The string is translated and suitable for displaying the print
+		 * status e.g. in a {@link Statusbar}.
+		 * 
+		 * See the #GtkPrintOperation:status property for a status value that
+		 * is suitable for programmatic use.
+		 */
+		readonly status_string: string;
+		/**
+		 * If %TRUE, the print operation will support print of selection.
+		 * This allows the print dialog to show a "Selection" button.
+		 */
+		support_selection: boolean;
+		/**
+		 * If %TRUE, the print operation will try to continue report on
+		 * the status of the print job in the printer queues and printer.
+		 * This can allow your application to show things like “out of paper”
+		 * issues, and when the print job actually reaches the printer.
+		 * However, this is often implemented using polling, and should
+		 * not be enabled unless needed.
+		 */
+		track_print_status: boolean;
+		/**
+		 * The transformation for the cairo context obtained from
+		 * {@link PrintContext} is set up in such a way that distances
+		 * are measured in units of #unit.
+		 */
+		unit: Unit;
+		/**
+		 * If %TRUE, the transformation for the cairo context obtained
+		 * from {@link PrintContext} puts the origin at the top left corner
+		 * of the page (which may not be the top left corner of the sheet,
+		 * depending on page orientation and the number of pages per sheet).
+		 * Otherwise, the origin is at the top left corner of the imageable
+		 * area (i.e. inside the margins).
+		 */
+		use_full_page: boolean;
 		/**
 		 * Cancels a running print operation. This function may
 		 * be called from a {@link PrintOperation}::begin-print,
@@ -23492,6 +25906,33 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IProgressBar {
 		/**
+		 * The preferred place to ellipsize the string, if the progress bar does
+		 * not have enough room to display the entire string, specified as a
+		 * #PangoEllipsizeMode.
+		 * 
+		 * Note that setting this property to a value other than
+		 * %PANGO_ELLIPSIZE_NONE has the side-effect that the progress bar requests
+		 * only enough space to display the ellipsis ("..."). Another means to set a
+		 * progress bar's width is gtk_widget_set_size_request().
+		 */
+		ellipsize: Pango.EllipsizeMode;
+		fraction: number;
+		inverted: boolean;
+		pulse_step: number;
+		/**
+		 * Sets whether the progress bar will show a text in addition
+		 * to the bar itself. The shown text is either the value of
+		 * the {@link ProgressBar}:text property or, if that is %NULL,
+		 * the #GtkProgressBar:fraction value, as a percentage.
+		 * 
+		 * To make a progress bar that is styled and sized suitably for
+		 * showing text (even if the actual text is blank), set
+		 * #GtkProgressBar:show-text to %TRUE and #GtkProgressBar:text
+		 * to the empty string (not %NULL).
+		 */
+		show_text: boolean;
+		text: string;
+		/**
 		 * Returns the ellipsizing position of the progress bar.
 		 * See gtk_progress_bar_set_ellipsize().
 		 * @returns #PangoEllipsizeMode
@@ -23668,6 +26109,19 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IRadioAction {
 		/**
+		 * The value property of the currently active member of the group to which
+		 * this action belongs.
+		 */
+		current_value: number;
+		/**
+		 * The value is an arbitrary integer which can be used as a
+		 * convenient way to determine which action in the group is
+		 * currently active in an ::activate or ::changed signal handler.
+		 * See gtk_radio_action_get_current_value() and {@link RadioActionEntry}
+		 * for convenient ways to get and set this property.
+		 */
+		value: number;
+		/**
 		 * Obtains the value property of the currently active member of
 		 * the group to which #action belongs.
 		 * @returns The value of the currently active group member
@@ -23765,6 +26219,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link RadioButton} instead.
 	 */
 	interface IRadioButton {
+		readonly check_button: CheckButton;
 		/**
 		 * Retrieves the group assigned to a radio button.
 		 * @returns a linked list
@@ -23980,6 +26435,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link RadioMenuItem} instead.
 	 */
 	interface IRadioMenuItem {
+		readonly check_menu_item: CheckMenuItem;
 		/**
 		 * Returns the group to which the radio menu item belongs, as a #GList of
 		 * {@link RadioMenuItem}. The list belongs to GTK+ and should not be freed.
@@ -24216,6 +26672,33 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Range} instead.
 	 */
 	interface IRange {
+		adjustment: Adjustment;
+		/**
+		 * The fill level (e.g. prebuffering of a network stream).
+		 * See gtk_range_set_fill_level().
+		 */
+		fill_level: number;
+		inverted: boolean;
+		lower_stepper_sensitivity: SensitivityType;
+		/**
+		 * The restrict-to-fill-level property controls whether slider
+		 * movement is restricted to an upper boundary set by the
+		 * fill level. See gtk_range_set_restrict_to_fill_level().
+		 */
+		restrict_to_fill_level: boolean;
+		/**
+		 * The number of digits to round the value to when
+		 * it changes, or -1. See {@link Range}::change-value.
+		 */
+		round_digits: number;
+		/**
+		 * The show-fill-level property controls whether fill level indicator
+		 * graphics are displayed on the trough. See
+		 * gtk_range_set_show_fill_level().
+		 */
+		show_fill_level: boolean;
+		upper_stepper_sensitivity: SensitivityType;
+		readonly widget: Widget;
 		/**
 		 * Get the {@link Adjustment} which is the “model” object for #GtkRange.
 		 * See gtk_range_set_adjustment() for details.
@@ -24470,6 +26953,46 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IRcStyle {
 		/**
+		 * Name
+		 */
+		readonly name: string;
+		/**
+		 * Pixmap name
+		 */
+		readonly bg_pixmap_name: string[];
+		/**
+		 * A #PangoFontDescription
+		 */
+		readonly font_desc: Pango.FontDescription;
+		/**
+		 * {@link RcFlags}
+		 */
+		readonly color_flags: RcFlags[];
+		/**
+		 * Foreground colors
+		 */
+		readonly fg: Gdk.Color[];
+		/**
+		 * Background colors
+		 */
+		readonly bg: Gdk.Color[];
+		/**
+		 * Text colors
+		 */
+		readonly text: Gdk.Color[];
+		/**
+		 * Base colors
+		 */
+		readonly base: Gdk.Color[];
+		/**
+		 * X thickness
+		 */
+		readonly xthickness: number;
+		/**
+		 * Y thickness
+		 */
+		readonly ythickness: number;
+		/**
 		 * Makes a copy of the specified {@link RcStyle}. This function
 		 * will correctly copy an RC style that is a member of a class
 		 * derived from #GtkRcStyle.
@@ -24505,6 +27028,10 @@ declare namespace imports.gi.Gtk {
 	 * use {@link RecentAction} instead.
 	 */
 	interface IRecentAction {
+		/**
+		 * Whether the items should be displayed with a number.
+		 */
+		show_numbers: boolean;
 		/**
 		 * Returns the value set by gtk_recent_chooser_menu_set_show_numbers().
 		 * @returns %TRUE if numbers should be shown.
@@ -24655,6 +27182,11 @@ declare namespace imports.gi.Gtk {
 	 * use {@link RecentChooserMenu} instead.
 	 */
 	interface IRecentChooserMenu {
+		/**
+		 * Whether the first ten items in the menu should be prepended by
+		 * a number acting as a unique mnemonic.
+		 */
+		show_numbers: boolean;
 		/**
 		 * Returns the value set by gtk_recent_chooser_menu_set_show_numbers().
 		 * @returns %TRUE if numbers should be shown.
@@ -24947,6 +27479,15 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IRecentManager {
 		/**
+		 * The full path to the file to be used to store and read the
+		 * recently used resources list
+		 */
+		filename: string;
+		/**
+		 * The size of the recently used resources list.
+		 */
+		readonly size: number;
+		/**
 		 * Adds a new resource, pointed by #uri, into the recently used
 		 * resources list, using the metadata specified inside the
 		 * {@link RecentData}-struct passed in #recent_data.
@@ -25135,6 +27676,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link RendererCellAccessible} instead.
 	 */
 	interface IRendererCellAccessible {
+		renderer: CellRenderer;
 
 	}
 
@@ -25154,6 +27696,10 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Revealer} instead.
 	 */
 	interface IRevealer {
+		readonly child_revealed: boolean;
+		reveal_child: boolean;
+		transition_duration: number;
+		transition_type: RevealerTransitionType;
 		/**
 		 * Returns whether the child is fully revealed, in other words whether
 		 * the transition to the revealed state is completed.
@@ -25241,6 +27787,11 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Scale} instead.
 	 */
 	interface IScale {
+		digits: number;
+		draw_value: boolean;
+		has_origin: boolean;
+		value_pos: PositionType;
+		readonly range: Range;
 		/**
 		 * Adds a mark at #value.
 		 * 
@@ -25472,6 +28023,27 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ScaleButton} instead.
 	 */
 	interface IScaleButton {
+		adjustment: Adjustment;
+		/**
+		 * The names of the icons to be used by the scale button.
+		 * The first item in the array will be used in the button
+		 * when the current value is the lowest value, the second
+		 * item for the highest value. All the subsequent icons will
+		 * be used for all the other values, spread evenly over the
+		 * range of values.
+		 * 
+		 * If there's only one icon name in the #icons array, it will
+		 * be used for all the values. If only two icon names are in
+		 * the #icons array, the first one will be used for the bottom
+		 * 50% of the scale, and the second one for the top 50%.
+		 * 
+		 * It is recommended to use at least 3 icons so that the
+		 * {@link ScaleButton} reflects the current value of the scale
+		 * better for the users.
+		 */
+		icons: string[];
+		size: IconSize;
+		value: number;
 		/**
 		 * Gets the {@link Adjustment} associated with the #GtkScaleButton’s scale.
 		 * See gtk_range_get_adjustment() for details.
@@ -25581,6 +28153,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Scrollbar} instead.
 	 */
 	interface IScrollbar {
+		readonly range: Range;
 
 	}
 
@@ -25647,6 +28220,65 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ScrolledWindow} instead.
 	 */
 	interface IScrolledWindow {
+		hadjustment: Adjustment;
+		hscrollbar_policy: PolicyType;
+		/**
+		 * Whether kinetic scrolling is enabled or not. Kinetic scrolling
+		 * only applies to devices with source %GDK_SOURCE_TOUCHSCREEN.
+		 */
+		kinetic_scrolling: boolean;
+		/**
+		 * The maximum content height of #scrolled_window, or -1 if not set.
+		 */
+		max_content_height: number;
+		/**
+		 * The maximum content width of #scrolled_window, or -1 if not set.
+		 */
+		max_content_width: number;
+		/**
+		 * The minimum content height of #scrolled_window, or -1 if not set.
+		 */
+		min_content_height: number;
+		/**
+		 * The minimum content width of #scrolled_window, or -1 if not set.
+		 */
+		min_content_width: number;
+		/**
+		 * Whether overlay scrolling is enabled or not. If it is, the
+		 * scrollbars are only added as traditional widgets when a mouse
+		 * is present. Otherwise, they are overlayed on top of the content,
+		 * as narrow indicators.
+		 * 
+		 * Note that overlay scrolling can also be globally disabled, with
+		 * the {@link Settings}::gtk-overlay-scrolling setting.
+		 */
+		overlay_scrolling: boolean;
+		/**
+		 * Whether the natural height of the child should be calculated and propagated
+		 * through the scrolled window’s requested natural height.
+		 * 
+		 * This is useful in cases where an attempt should be made to allocate exactly
+		 * enough space for the natural size of the child.
+		 */
+		propagate_natural_height: boolean;
+		/**
+		 * Whether the natural width of the child should be calculated and propagated
+		 * through the scrolled window’s requested natural width.
+		 * 
+		 * This is useful in cases where an attempt should be made to allocate exactly
+		 * enough space for the natural size of the child.
+		 */
+		propagate_natural_width: boolean;
+		shadow_type: ShadowType;
+		vadjustment: Adjustment;
+		vscrollbar_policy: PolicyType;
+		window_placement: CornerType;
+		/**
+		 * Whether "window-placement" should be used to determine the location
+		 * of the contents with respect to the scrollbars.
+		 */
+		window_placement_set: boolean;
+		readonly container: Bin;
 		/**
 		 * Used to add children without native scrolling capabilities. This
 		 * is simply a convenience function; it is equivalent to adding the
@@ -26019,6 +28651,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link SearchBar} instead.
 	 */
 	interface ISearchBar {
+		search_mode_enabled: boolean;
+		show_close_button: boolean;
 		/**
 		 * Connects the {@link Entry} widget passed as the one to be used in
 		 * this search bar. The entry should be a descendant of the search bar.
@@ -26211,6 +28845,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Separator} instead.
 	 */
 	interface ISeparator {
+		readonly widget: Widget;
 
 	}
 
@@ -26246,6 +28881,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link SeparatorMenuItem} instead.
 	 */
 	interface ISeparatorMenuItem {
+		readonly menu_item: MenuItem;
 
 	}
 
@@ -26278,6 +28914,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link SeparatorToolItem} instead.
 	 */
 	interface ISeparatorToolItem {
+		draw: boolean;
 		/**
 		 * Returns whether #item is drawn as a line, or just blank.
 		 * See gtk_separator_tool_item_set_draw().
@@ -26328,6 +28965,421 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Settings} instead.
 	 */
 	interface ISettings {
+		/**
+		 * Holds a hash table representation of the {@link Settings}:gtk-color-scheme
+		 * setting, mapping color names to #GdkColors.
+		 */
+		readonly color_hash: GLib.HashTable;
+		gtk_alternative_button_order: boolean;
+		/**
+		 * Controls the direction of the sort indicators in sorted list and tree
+		 * views. By default an arrow pointing down means the column is sorted
+		 * in ascending order. When set to %TRUE, this order will be inverted.
+		 */
+		gtk_alternative_sort_arrows: boolean;
+		/**
+		 * Whether the application prefers to use a dark theme. If a GTK+ theme
+		 * includes a dark variant, it will be used instead of the configured
+		 * theme.
+		 * 
+		 * Some applications benefit from minimizing the amount of light pollution that
+		 * interferes with the content. Good candidates for dark themes are photo and
+		 * video editors that make the actual content get all the attention and minimize
+		 * the distraction of the chrome.
+		 * 
+		 * Dark themes should not be used for documents, where large spaces are white/light
+		 * and the dark chrome creates too much contrast (web browser, text editor...).
+		 */
+		gtk_application_prefer_dark_theme: boolean;
+		/**
+		 * Whether mnemonics should be automatically shown and hidden when the user
+		 * presses the mnemonic activator.
+		 */
+		gtk_auto_mnemonics: boolean;
+		/**
+		 * Whether images should be shown on buttons
+		 */
+		gtk_button_images: boolean;
+		/**
+		 * Whether menu accelerators can be changed by pressing a key over the menu item.
+		 */
+		gtk_can_change_accels: boolean;
+		/**
+		 * Palette to use in the deprecated color selector.
+		 */
+		gtk_color_palette: string;
+		/**
+		 * A palette of named colors for use in themes. The format of the string is
+		 * |[
+		 * name1: color1
+		 * name2: color2
+		 * ...
+		 * ]|
+		 * Color names must be acceptable as identifiers in the
+		 * [gtkrc][gtk3-Resource-Files] syntax, and
+		 * color specifications must be in the format accepted by
+		 * gdk_color_parse().
+		 * 
+		 * Note that due to the way the color tables from different sources are
+		 * merged, color specifications will be converted to hexadecimal form
+		 * when getting this property.
+		 * 
+		 * Starting with GTK+ 2.12, the entries can alternatively be separated
+		 * by ';' instead of newlines:
+		 * |[
+		 * name1: color1; name2: color2; ...
+		 * ]|
+		 */
+		gtk_color_scheme: string;
+		gtk_cursor_aspect_ratio: number;
+		/**
+		 * Whether the cursor should blink.
+		 * 
+		 * Also see the {@link Settings}:gtk-cursor-blink-timeout setting,
+		 * which allows more flexible control over cursor blinking.
+		 */
+		gtk_cursor_blink: boolean;
+		gtk_cursor_blink_time: number;
+		/**
+		 * Time after which the cursor stops blinking, in seconds.
+		 * The timer is reset after each user interaction.
+		 * 
+		 * Setting this to zero has the same effect as setting
+		 * {@link Settings}:gtk-cursor-blink to %FALSE.
+		 */
+		gtk_cursor_blink_timeout: number;
+		gtk_cursor_theme_name: string;
+		gtk_cursor_theme_size: number;
+		/**
+		 * This setting determines which buttons should be put in the
+		 * titlebar of client-side decorated windows, and whether they
+		 * should be placed at the left of right.
+		 * 
+		 * The format of the string is button names, separated by commas.
+		 * A colon separates the buttons that should appear on the left
+		 * from those on the right. Recognized button names are minimize,
+		 * maximize, close, icon (the window icon) and menu (a menu button
+		 * for the fallback app menu).
+		 * 
+		 * For example, "menu:minimize,maximize,close" specifies a menu
+		 * on the left, and minimize, maximize and close buttons on the right.
+		 * 
+		 * Note that buttons will only be shown when they are meaningful.
+		 * E.g. a menu button only appears when the desktop shell does not
+		 * show the app menu, and a close button only appears on a window
+		 * that can be closed.
+		 * 
+		 * Also note that the setting can be overridden with the
+		 * {@link HeaderBar}:decoration-layout property.
+		 */
+		gtk_decoration_layout: string;
+		/**
+		 * Whether builtin GTK+ dialogs such as the file chooser, the
+		 * color chooser or the font chooser will use a header bar at
+		 * the top to show action widgets, or an action area at the bottom.
+		 * 
+		 * This setting does not affect custom dialogs using GtkDialog
+		 * directly, or message dialogs.
+		 */
+		gtk_dialogs_use_header: boolean;
+		gtk_dnd_drag_threshold: number;
+		gtk_double_click_distance: number;
+		gtk_double_click_time: number;
+		/**
+		 * Whether menu items should have visible accelerators which can be
+		 * activated.
+		 */
+		gtk_enable_accels: boolean;
+		gtk_enable_animations: boolean;
+		/**
+		 * Whether to play any event sounds at all.
+		 * 
+		 * See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+		 * for more information on event sounds and sound themes.
+		 * 
+		 * GTK+ itself does not support event sounds, you have to use a loadable
+		 * module like the one that comes with libcanberra.
+		 */
+		gtk_enable_event_sounds: boolean;
+		/**
+		 * Whether to play event sounds as feedback to user input.
+		 * 
+		 * See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+		 * for more information on event sounds and sound themes.
+		 * 
+		 * GTK+ itself does not support event sounds, you have to use a loadable
+		 * module like the one that comes with libcanberra.
+		 */
+		gtk_enable_input_feedback_sounds: boolean;
+		/**
+		 * Whether labels and menu items should have visible mnemonics which
+		 * can be activated.
+		 */
+		gtk_enable_mnemonics: boolean;
+		/**
+		 * Whether a middle click on a mouse should paste the
+		 * 'PRIMARY' clipboard content at the cursor location.
+		 */
+		gtk_enable_primary_paste: boolean;
+		/**
+		 * Whether tooltips should be shown on widgets.
+		 */
+		gtk_enable_tooltips: boolean;
+		/**
+		 * How long to show the last input character in hidden
+		 * entries. This value is in milliseconds. 0 disables showing the
+		 * last char. 600 is a good value for enabling it.
+		 */
+		gtk_entry_password_hint_timeout: number;
+		gtk_entry_select_on_focus: boolean;
+		/**
+		 * When %TRUE, keyboard navigation and other input-related errors
+		 * will cause a beep. Since the error bell is implemented using
+		 * gdk_window_beep(), the windowing system may offer ways to
+		 * configure the error bell in many ways, such as flashing the
+		 * window or similar visual effects.
+		 */
+		gtk_error_bell: boolean;
+		/**
+		 * Name of a icon theme to fall back to.
+		 */
+		gtk_fallback_icon_theme: string;
+		/**
+		 * Name of the GtkFileChooser backend to use by default.
+		 */
+		gtk_file_chooser_backend: string;
+		/**
+		 * The default font to use. GTK+ uses the family name and size from this string.
+		 */
+		gtk_font_name: string;
+		gtk_fontconfig_timestamp: number;
+		/**
+		 * A list of icon sizes. The list is separated by colons, and
+		 * item has the form:
+		 * 
+		 * `size-name` = `width` , `height`
+		 * 
+		 * E.g. "gtk-menu=16,16:gtk-button=20,20:gtk-dialog=48,48".
+		 * GTK+ itself use the following named icon sizes: gtk-menu,
+		 * gtk-button, gtk-small-toolbar, gtk-large-toolbar, gtk-dnd,
+		 * gtk-dialog. Applications can register their own named icon
+		 * sizes with gtk_icon_size_register().
+		 */
+		gtk_icon_sizes: string;
+		gtk_icon_theme_name: string;
+		/**
+		 * Which IM (input method) module should be used by default. This is the
+		 * input method that will be used if the user has not explicitly chosen
+		 * another input method from the IM context menu.
+		 * This also can be a colon-separated list of input methods, which GTK+
+		 * will try in turn until it finds one available on the system.
+		 * 
+		 * See {@link IMContext}.
+		 */
+		gtk_im_module: string;
+		/**
+		 * How to draw the input method preedit string.
+		 */
+		gtk_im_preedit_style: IMPreeditStyle;
+		/**
+		 * How to draw the input method statusbar.
+		 */
+		gtk_im_status_style: IMStatusStyle;
+		gtk_key_theme_name: string;
+		/**
+		 * When %TRUE, keyboard navigation should be able to reach all widgets
+		 * by using the cursor keys only. Tab, Shift etc. keys can't be expected
+		 * to be present on the used input device.
+		 */
+		gtk_keynav_cursor_only: boolean;
+		/**
+		 * Whether GTK+ should make sure that text can be navigated with
+		 * a caret, even if it is not editable. This is useful when using
+		 * a screen reader.
+		 */
+		gtk_keynav_use_caret: boolean;
+		/**
+		 * When %TRUE, some widgets will wrap around when doing keyboard
+		 * navigation, such as menus, menubars and notebooks.
+		 */
+		gtk_keynav_wrap_around: boolean;
+		gtk_label_select_on_focus: boolean;
+		/**
+		 * The time for a button or touch press to be considered a "long press".
+		 */
+		gtk_long_press_time: number;
+		/**
+		 * Keybinding to activate the menu bar.
+		 */
+		gtk_menu_bar_accel: string;
+		/**
+		 * Delay before the submenus of a menu bar appear.
+		 */
+		gtk_menu_bar_popup_delay: number;
+		/**
+		 * Whether images should be shown in menu items
+		 */
+		gtk_menu_images: boolean;
+		/**
+		 * The time before hiding a submenu when the pointer is moving towards the submenu.
+		 */
+		gtk_menu_popdown_delay: number;
+		/**
+		 * Minimum time the pointer must stay over a menu item before the submenu appear.
+		 */
+		gtk_menu_popup_delay: number;
+		gtk_modules: string;
+		/**
+		 * Whether scrolled windows may use overlayed scrolling indicators.
+		 * If this is set to %FALSE, scrolled windows will have permanent
+		 * scrollbars.
+		 */
+		gtk_overlay_scrolling: boolean;
+		/**
+		 * If the value of this setting is %TRUE, clicking the primary button in a
+		 * {@link Range} trough will move the slider, and hence set the range’s value, to
+		 * the point that you clicked. If it is %FALSE, a primary click will cause the
+		 * slider/value to move by the range’s page-size towards the point clicked.
+		 * 
+		 * Whichever action you choose for the primary button, the other action will
+		 * be available by holding Shift and primary-clicking, or (since GTK+ 3.22.25)
+		 * clicking the middle mouse button.
+		 */
+		gtk_primary_button_warps_slider: boolean;
+		/**
+		 * A comma-separated list of print backends to use in the print
+		 * dialog. Available print backends depend on the GTK+ installation,
+		 * and may include "file", "cups", "lpr" or "papi".
+		 */
+		gtk_print_backends: string;
+		/**
+		 * A command to run for displaying the print preview. The command
+		 * should contain a `%f` placeholder, which will get replaced by
+		 * the path to the pdf file. The command may also contain a `%s`
+		 * placeholder, which will get replaced by the path to a file
+		 * containing the print settings in the format produced by
+		 * gtk_print_settings_to_file().
+		 * 
+		 * The preview application is responsible for removing the pdf file
+		 * and the print settings file when it is done.
+		 */
+		gtk_print_preview_command: string;
+		/**
+		 * Whether GTK+ should keep track of items inside the recently used
+		 * resources list. If set to %FALSE, the list will always be empty.
+		 */
+		gtk_recent_files_enabled: boolean;
+		/**
+		 * The number of recently used files that should be displayed by default by
+		 * {@link RecentChooser} implementations and by the #GtkFileChooser. A value of
+		 * -1 means every recently used file stored.
+		 */
+		gtk_recent_files_limit: number;
+		/**
+		 * The maximum age, in days, of the items inside the recently used
+		 * resources list. Items older than this setting will be excised
+		 * from the list. If set to 0, the list will always be empty; if
+		 * set to -1, no item will be removed.
+		 */
+		gtk_recent_files_max_age: number;
+		/**
+		 * Where the contents of scrolled windows are located with respect to the
+		 * scrollbars, if not overridden by the scrolled window's own placement.
+		 */
+		gtk_scrolled_window_placement: CornerType;
+		gtk_shell_shows_app_menu: boolean;
+		gtk_shell_shows_desktop: boolean;
+		gtk_shell_shows_menubar: boolean;
+		gtk_show_input_method_menu: boolean;
+		gtk_show_unicode_menu: boolean;
+		/**
+		 * The XDG sound theme to use for event sounds.
+		 * 
+		 * See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+		 * for more information on event sounds and sound themes.
+		 * 
+		 * GTK+ itself does not support event sounds, you have to use a loadable
+		 * module like the one that comes with libcanberra.
+		 */
+		gtk_sound_theme_name: string;
+		gtk_split_cursor: boolean;
+		gtk_theme_name: string;
+		gtk_timeout_expand: number;
+		gtk_timeout_initial: number;
+		gtk_timeout_repeat: number;
+		/**
+		 * This setting determines the action to take when a double-click
+		 * occurs on the titlebar of client-side decorated windows.
+		 * 
+		 * Recognized actions are minimize, toggle-maximize, menu, lower
+		 * or none.
+		 */
+		gtk_titlebar_double_click: string;
+		/**
+		 * This setting determines the action to take when a middle-click
+		 * occurs on the titlebar of client-side decorated windows.
+		 * 
+		 * Recognized actions are minimize, toggle-maximize, menu, lower
+		 * or none.
+		 */
+		gtk_titlebar_middle_click: string;
+		/**
+		 * This setting determines the action to take when a right-click
+		 * occurs on the titlebar of client-side decorated windows.
+		 * 
+		 * Recognized actions are minimize, toggle-maximize, menu, lower
+		 * or none.
+		 */
+		gtk_titlebar_right_click: string;
+		/**
+		 * The size of icons in default toolbars.
+		 */
+		gtk_toolbar_icon_size: IconSize;
+		/**
+		 * The size of icons in default toolbars.
+		 */
+		gtk_toolbar_style: ToolbarStyle;
+		/**
+		 * Amount of time, in milliseconds, after which the browse mode
+		 * will be disabled.
+		 * 
+		 * See {@link Settings}:gtk-tooltip-browse-timeout for more information
+		 * about browse mode.
+		 */
+		gtk_tooltip_browse_mode_timeout: number;
+		/**
+		 * Controls the time after which tooltips will appear when
+		 * browse mode is enabled, in milliseconds.
+		 * 
+		 * Browse mode is enabled when the mouse pointer moves off an object
+		 * where a tooltip was currently being displayed. If the mouse pointer
+		 * hits another object before the browse mode timeout expires (see
+		 * {@link Settings}:gtk-tooltip-browse-mode-timeout), it will take the
+		 * amount of milliseconds specified by this setting to popup the tooltip
+		 * for the new object.
+		 */
+		gtk_tooltip_browse_timeout: number;
+		/**
+		 * Time, in milliseconds, after which a tooltip could appear if the
+		 * cursor is hovering on top of a widget.
+		 */
+		gtk_tooltip_timeout: number;
+		/**
+		 * When %TRUE, there are no motion notify events delivered on this screen,
+		 * and widgets can't use the pointer hovering them for any essential
+		 * functionality.
+		 */
+		gtk_touchscreen_mode: boolean;
+		/**
+		 * Whether 'focus rectangles' should be always visible, never visible,
+		 * or hidden until the user starts to use the keyboard.
+		 */
+		gtk_visible_focus: PolicyType;
+		gtk_xft_antialias: number;
+		gtk_xft_dpi: number;
+		gtk_xft_hinting: number;
+		gtk_xft_hintstyle: string;
+		gtk_xft_rgba: string;
 		/**
 		 * Undoes the effect of calling g_object_set() to install an
 		 * application-specific value for a setting. After this call,
@@ -26411,6 +29463,15 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IShortcutLabel {
 		/**
+		 * The accelerator that #self displays. See {@link ShortcutsShortcut}:accelerator
+		 * for the accepted syntax.
+		 */
+		accelerator: string;
+		/**
+		 * The text that is displayed when no accelerator is set.
+		 */
+		disabled_text: string;
+		/**
 		 * Retrieves the current accelerator of #self.
 		 * @returns the current accelerator.
 		 */
@@ -26458,6 +29519,24 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ShortcutsGroup} instead.
 	 */
 	interface IShortcutsGroup {
+		/**
+		 * A rough measure for the number of lines in this group.
+		 * 
+		 * This is used internally by GTK+, and is not useful for applications.
+		 */
+		readonly height: number;
+		/**
+		 * The title for this group of shortcuts.
+		 */
+		title: string;
+		/**
+		 * An optional view that the shortcuts in this group are relevant for.
+		 * The group will be hidden if the {@link ShortcutsWindow}:view-name property
+		 * does not match the view of this group.
+		 * 
+		 * Set this to %NULL to make the group always visible.
+		 */
+		view: string;
 
 	}
 
@@ -26484,6 +29563,34 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ShortcutsSection} instead.
 	 */
 	interface IShortcutsSection {
+		/**
+		 * The maximum number of lines to allow per column. This property can
+		 * be used to influence how the groups in this section are distributed
+		 * across pages and columns. The default value of 15 should work in
+		 * most cases.
+		 */
+		max_height: number;
+		/**
+		 * A unique name to identify this section among the sections
+		 * added to the GtkShortcutsWindow. Setting the {@link ShortcutsWindow}:section-name
+		 * property to this string will make this section shown in the
+		 * GtkShortcutsWindow.
+		 */
+		section_name: string;
+		/**
+		 * The string to show in the section selector of the GtkShortcutsWindow
+		 * for this section. If there is only one section, you don't need to
+		 * set a title, since the section selector will not be shown in this case.
+		 */
+		title: string;
+		/**
+		 * A view name to filter the groups in this section by.
+		 * See {@link ShortcutsGroup}:view.
+		 * 
+		 * Applications are expected to use the #GtkShortcutsWindow:view-name
+		 * property for this purpose.
+		 */
+		view_name: string;
 
 	}
 
@@ -26514,6 +29621,76 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ShortcutsShortcut} instead.
 	 */
 	interface IShortcutsShortcut {
+		/**
+		 * The accelerator(s) represented by this object. This property is used
+		 * if {@link ShortcutsShortcut}:shortcut-type is set to #GTK_SHORTCUT_ACCELERATOR.
+		 * 
+		 * The syntax of this property is (an extension of) the syntax understood by
+		 * gtk_accelerator_parse(). Multiple accelerators can be specified by separating
+		 * them with a space, but keep in mind that the available width is limited.
+		 * It is also possible to specify ranges of shortcuts, using `...` between the keys.
+		 * Sequences of keys can be specified using a `+` or `&` between the keys.
+		 * 
+		 * Examples:
+		 * 
+		 * - A single shortcut: `<ctl><alt>delete`
+		 * - Two alternative shortcuts: `<shift>a Home`
+		 * - A range of shortcuts: `<alt>1...<alt>9`
+		 * - Several keys pressed together: `Control_L&Control_R`
+		 * - A sequence of shortcuts or keys: `<ctl>c+<ctl>x`
+		 * 
+		 * Use + instead of & when the keys may (or have to be) pressed sequentially (e.g
+		 * use t+t for 'press the t key twice').
+		 * 
+		 * Note that `<`, `>` and `&` need to be escaped as &lt;, &gt; and &amp; when used
+		 * in .ui files.
+		 */
+		accelerator: string;
+		/**
+		 * A detailed action name. If this is set for a shortcut
+		 * of type %GTK_SHORTCUT_ACCELERATOR, then GTK+ will use
+		 * the accelerators that are associated with the action
+		 * via gtk_application_set_accels_for_action(), and setting
+		 * {@link ShortcutsShortcut}::accelerator is not necessary.
+		 */
+		action_name: string;
+		/**
+		 * The text direction for which this shortcut is active. If the shortcut
+		 * is used regardless of the text direction, set this property to
+		 * #GTK_TEXT_DIR_NONE.
+		 */
+		direction: TextDirection;
+		/**
+		 * An icon to represent the shortcut or gesture. This property is used if
+		 * {@link ShortcutsShortcut}:shortcut-type is set to #GTK_SHORTCUT_GESTURE.
+		 * For the other predefined gesture types, GTK+ provides an icon on its own.
+		 */
+		icon: Gio.Icon;
+		/**
+		 * %TRUE if an icon has been set.
+		 */
+		icon_set: boolean;
+		/**
+		 * The type of shortcut that is represented.
+		 */
+		shortcut_type: ShortcutType;
+		/**
+		 * The subtitle for the shortcut or gesture.
+		 * 
+		 * This is typically used for gestures and should be a short, one-line
+		 * text that describes the gesture itself. For the predefined gesture
+		 * types, GTK+ provides a subtitle on its own.
+		 */
+		subtitle: string;
+		/**
+		 * %TRUE if a subtitle has been set.
+		 */
+		subtitle_set: boolean;
+		/**
+		 * The textual description for the shortcut or gesture represented by
+		 * this object. This should be a short string that can fit in a single line.
+		 */
+		title: string;
 
 	}
 
@@ -26536,6 +29713,23 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ShortcutsWindow} instead.
 	 */
 	interface IShortcutsWindow {
+		/**
+		 * The name of the section to show.
+		 * 
+		 * This should be the section-name of one of the {@link ShortcutsSection}
+		 * objects that are in this shortcuts window.
+		 */
+		section_name: string;
+		/**
+		 * The view name by which to filter the contents.
+		 * 
+		 * This should correspond to the {@link ShortcutsGroup}:view property of some of
+		 * the #GtkShortcutsGroup objects that are inside this shortcuts window.
+		 * 
+		 * Set this to %NULL to show all groups.
+		 */
+		view_name: string;
+		readonly window: Window;
 
 	}
 
@@ -26596,6 +29790,12 @@ declare namespace imports.gi.Gtk {
 	 * use {@link SizeGroup} instead.
 	 */
 	interface ISizeGroup {
+		/**
+		 * If %TRUE, unmapped widgets are ignored when determining
+		 * the size of the group.
+		 */
+		ignore_hidden: boolean;
+		mode: SizeGroupMode;
 		/**
 		 * Adds a widget to a {@link SizeGroup}. In the future, the requisition
 		 * of the widget will be determined as the maximum of its requisition
@@ -26737,6 +29937,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Socket} instead.
 	 */
 	interface ISocket {
+		readonly container: Container;
 		/**
 		 * Adds an XEMBED client, such as a {@link Plug}, to the #GtkSocket.  The
 		 * client may be in the same process or in a different process.
@@ -26863,6 +30064,15 @@ declare namespace imports.gi.Gtk {
 	 * use {@link SpinButton} instead.
 	 */
 	interface ISpinButton {
+		adjustment: Adjustment;
+		climb_rate: number;
+		digits: number;
+		numeric: boolean;
+		snap_to_ticks: boolean;
+		update_policy: SpinButtonUpdatePolicy;
+		value: number;
+		wrap: boolean;
+		readonly entry: Entry;
 		/**
 		 * Changes the properties of an existing spin button. The adjustment,
 		 * climb rate, and number of decimal places are updated accordingly.
@@ -27171,6 +30381,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Spinner} instead.
 	 */
 	interface ISpinner {
+		active: boolean;
 		/**
 		 * Starts the animation of the spinner.
 		 */
@@ -27232,6 +30443,21 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Stack} instead.
 	 */
 	interface IStack {
+		/**
+		 * %TRUE if the stack allocates the same width for all children.
+		 */
+		hhomogeneous: boolean;
+		homogeneous: boolean;
+		interpolate_size: boolean;
+		transition_duration: number;
+		readonly transition_running: boolean;
+		transition_type: StackTransitionType;
+		/**
+		 * %TRUE if the stack allocates the same height for all children.
+		 */
+		vhomogeneous: boolean;
+		visible_child: Widget;
+		visible_child_name: string;
 		/**
 		 * Adds a child to #stack.
 		 * The child is identified by the #name.
@@ -27461,6 +30687,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link StackSidebar} instead.
 	 */
 	interface IStackSidebar {
+		stack: Stack;
 		/**
 		 * Retrieves the stack.
 		 * See gtk_stack_sidebar_set_stack().
@@ -27516,6 +30743,13 @@ declare namespace imports.gi.Gtk {
 	 * use {@link StackSwitcher} instead.
 	 */
 	interface IStackSwitcher {
+		/**
+		 * Use the "icon-size" property to change the size of the image displayed
+		 * when a {@link StackSwitcher} is displaying icons.
+		 */
+		icon_size: number;
+		stack: Stack;
+		readonly widget: Box;
 		/**
 		 * Retrieves the stack.
 		 * See gtk_stack_switcher_set_stack().
@@ -27574,6 +30808,79 @@ declare namespace imports.gi.Gtk {
 	 * use {@link StatusIcon} instead.
 	 */
 	interface IStatusIcon {
+		/**
+		 * %TRUE if the statusicon is embedded in a notification area.
+		 */
+		readonly embedded: boolean;
+		/**
+		 * The #GIcon displayed in the {@link StatusIcon}. For themed icons,
+		 * the image will be updated automatically if the theme changes.
+		 */
+		gicon: Gio.Icon;
+		/**
+		 * Enables or disables the emission of {@link StatusIcon}::query-tooltip on
+		 * #status_icon.  A value of %TRUE indicates that #status_icon can have a
+		 * tooltip, in this case the status icon will be queried using
+		 * #GtkStatusIcon::query-tooltip to determine whether it will provide a
+		 * tooltip or not.
+		 * 
+		 * Note that setting this property to %TRUE for the first time will change
+		 * the event masks of the windows of this status icon to include leave-notify
+		 * and motion-notify events. This will not be undone when the property is set
+		 * to %FALSE again.
+		 * 
+		 * Whether this property is respected is platform dependent.
+		 * For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
+		 */
+		has_tooltip: boolean;
+		icon_name: string;
+		/**
+		 * The orientation of the tray in which the statusicon
+		 * is embedded.
+		 */
+		readonly orientation: Orientation;
+		pixbuf: GdkPixbuf.Pixbuf;
+		screen: Gdk.Screen;
+		readonly size: number;
+		stock: string;
+		readonly storage_type: ImageType;
+		/**
+		 * The title of this tray icon. This should be a short, human-readable,
+		 * localized string describing the tray icon. It may be used by tools
+		 * like screen readers to render the tray icon.
+		 */
+		title: string;
+		/**
+		 * Sets the text of tooltip to be the given string, which is marked up
+		 * with the [Pango text markup language][PangoMarkupFormat].
+		 * Also see gtk_tooltip_set_markup().
+		 * 
+		 * This is a convenience property which will take care of getting the
+		 * tooltip shown if the given string is not %NULL.
+		 * {@link StatusIcon}:has-tooltip will automatically be set to %TRUE and
+		 * the default handler for the #GtkStatusIcon::query-tooltip signal
+		 * will take care of displaying the tooltip.
+		 * 
+		 * On some platforms, embedded markup will be ignored.
+		 */
+		tooltip_markup: string;
+		/**
+		 * Sets the text of tooltip to be the given string.
+		 * 
+		 * Also see gtk_tooltip_set_text().
+		 * 
+		 * This is a convenience property which will take care of getting the
+		 * tooltip shown if the given string is not %NULL.
+		 * {@link StatusIcon}:has-tooltip will automatically be set to %TRUE and
+		 * the default handler for the #GtkStatusIcon::query-tooltip signal
+		 * will take care of displaying the tooltip.
+		 * 
+		 * Note that some platforms have limitations on the length of tooltips
+		 * that they allow on status icons, e.g. Windows only shows the first
+		 * 64 characters.
+		 */
+		tooltip_text: string;
+		visible: boolean;
 		/**
 		 * Obtains information about the location of the status icon
 		 * on screen. This information can be used to e.g. position
@@ -27916,6 +31223,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Statusbar} instead.
 	 */
 	interface IStatusbar {
+		readonly parent_widget: Box;
 		/**
 		 * Returns a new context identifier, given a description
 		 * of the actual context. Note that the description is
@@ -28037,6 +31345,63 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Style} instead.
 	 */
 	interface IStyle {
+		context: StyleContext;
+		/**
+		 * Set of foreground #GdkColor
+		 */
+		readonly fg: Gdk.Color[];
+		/**
+		 * Set of background #GdkColor
+		 */
+		readonly bg: Gdk.Color[];
+		/**
+		 * Set of light #GdkColor
+		 */
+		readonly light: Gdk.Color[];
+		/**
+		 * Set of dark #GdkColor
+		 */
+		readonly dark: Gdk.Color[];
+		/**
+		 * Set of mid #GdkColor
+		 */
+		readonly mid: Gdk.Color[];
+		/**
+		 * Set of text #GdkColor
+		 */
+		readonly text: Gdk.Color[];
+		/**
+		 * Set of base #GdkColor
+		 */
+		readonly base: Gdk.Color[];
+		/**
+		 * Color halfway between text/base
+		 */
+		readonly text_aa: Gdk.Color[];
+		/**
+		 * #GdkColor to use for black
+		 */
+		readonly black: Gdk.Color;
+		/**
+		 * #GdkColor to use for white
+		 */
+		readonly white: Gdk.Color;
+		/**
+		 * #PangoFontDescription
+		 */
+		readonly font_desc: Pango.FontDescription;
+		/**
+		 * Thickness in X direction
+		 */
+		readonly xthickness: number;
+		/**
+		 * Thickness in Y direction
+		 */
+		readonly ythickness: number;
+		/**
+		 * Set of background #cairo_pattern_t
+		 */
+		readonly background: cairo.Pattern[];
 		apply_default_background(cr: cairo.Context, window: Gdk.Window, state_type: StateType, _x: number, _y: number, width: number, height: number): void;
 		/**
 		 * Attaches a style to a window; this process allocates the
@@ -28178,6 +31543,10 @@ declare namespace imports.gi.Gtk {
 	 * use {@link StyleContext} instead.
 	 */
 	interface IStyleContext {
+		direction: TextDirection;
+		paint_clock: Gdk.FrameClock;
+		screen: Gdk.Screen;
+		readonly parent_object: GObject.Object;
 		/**
 		 * Adds a style class to #context, so posterior calls to
 		 * gtk_style_context_get() or any of the gtk_render_*()
@@ -28967,6 +32336,15 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface ISwitch {
 		/**
+		 * Whether the {@link Switch} widget is in its on or off state.
+		 */
+		active: boolean;
+		/**
+		 * The backend state that is controlled by the switch.
+		 * See {@link Switch}::state-set for details.
+		 */
+		state: boolean;
+		/**
 		 * Gets whether the {@link Switch} is in its “on” or “off” state.
 		 * @returns %TRUE if the {@link Switch} is active, and %FALSE otherwise
 		 */
@@ -29050,6 +32428,12 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Table} instead.
 	 */
 	interface ITable {
+		column_spacing: number;
+		homogeneous: boolean;
+		n_columns: number;
+		n_rows: number;
+		row_spacing: number;
+		readonly container: Container;
 		/**
 		 * Adds a widget to a table. The number of “cells” that a widget will occupy is
 		 * specified by #left_attach, #right_attach, #top_attach and #bottom_attach.
@@ -29224,6 +32608,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link TearoffMenuItem} instead.
 	 */
 	interface ITearoffMenuItem {
+		readonly menu_item: MenuItem;
 
 	}
 
@@ -29264,6 +32649,32 @@ declare namespace imports.gi.Gtk {
 	 * use {@link TextBuffer} instead.
 	 */
 	interface ITextBuffer {
+		/**
+		 * The list of targets this buffer supports for clipboard copying
+		 * and as DND source.
+		 */
+		readonly copy_target_list: TargetList;
+		/**
+		 * The position of the insert mark (as offset from the beginning
+		 * of the buffer). It is useful for getting notified when the
+		 * cursor moves.
+		 */
+		readonly cursor_position: number;
+		/**
+		 * Whether the buffer has some text currently selected.
+		 */
+		readonly has_selection: boolean;
+		/**
+		 * The list of targets this buffer supports for clipboard pasting
+		 * and as DND destination.
+		 */
+		readonly paste_target_list: TargetList;
+		tag_table: TextTagTable;
+		/**
+		 * The text content of the buffer. Without child widgets and images,
+		 * see gtk_text_buffer_get_text() for more information.
+		 */
+		text: string;
 		/**
 		 * Adds the mark at position #where. The mark must not be added to
 		 * another buffer, and if its name is not %NULL then there must not
@@ -30137,6 +33548,16 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface ITextMark {
 		/**
+		 * Whether the mark has left gravity. When text is inserted at the mark’s
+		 * current location, if the mark has left gravity it will be moved
+		 * to the left of the newly-inserted text, otherwise to the right.
+		 */
+		left_gravity: boolean;
+		/**
+		 * The name of the mark or %NULL if the mark is anonymous.
+		 */
+		name: string;
+		/**
 		 * Gets the buffer this mark is located inside,
 		 * or %NULL if the mark is deleted.
 		 * @returns the mark’s {@link TextBuffer}
@@ -30237,6 +33658,153 @@ declare namespace imports.gi.Gtk {
 	 * use {@link TextTag} instead.
 	 */
 	interface ITextTag {
+		/**
+		 * Whether the margins accumulate or override each other.
+		 * 
+		 * When set to %TRUE the margins of this tag are added to the margins
+		 * of any other non-accumulative margins present. When set to %FALSE
+		 * the margins override one another (the default).
+		 */
+		accumulative_margin: boolean;
+		background_full_height: boolean;
+		background_full_height_set: boolean;
+		/**
+		 * Background color as a #GdkColor.
+		 */
+		background_gdk: Gdk.Color;
+		/**
+		 * Background color as a #GdkRGBA.
+		 */
+		background_rgba: Gdk.RGBA;
+		background_set: boolean;
+		direction: TextDirection;
+		editable: boolean;
+		editable_set: boolean;
+		/**
+		 * Whether font fallback is enabled.
+		 * 
+		 * When set to %TRUE, other fonts will be substituted
+		 * where the current font is missing glyphs.
+		 */
+		fallback: boolean;
+		fallback_set: boolean;
+		family: string;
+		family_set: boolean;
+		/**
+		 * Font description as string, e.g. \"Sans Italic 12\".
+		 * 
+		 * Note that the initial value of this property depends on
+		 * the internals of #PangoFontDescription.
+		 */
+		font: string;
+		font_desc: Pango.FontDescription;
+		/**
+		 * OpenType font features, as a string.
+		 */
+		font_features: string;
+		font_features_set: boolean;
+		/**
+		 * Foreground color as a #GdkColor.
+		 */
+		foreground_gdk: Gdk.Color;
+		/**
+		 * Foreground color as a #GdkRGBA.
+		 */
+		foreground_rgba: Gdk.RGBA;
+		foreground_set: boolean;
+		indent: number;
+		indent_set: boolean;
+		/**
+		 * Whether this text is hidden.
+		 * 
+		 * Note that there may still be problems with the support for invisible
+		 * text, in particular when navigating programmatically inside a buffer
+		 * containing invisible segments.
+		 */
+		invisible: boolean;
+		invisible_set: boolean;
+		justification: Justification;
+		justification_set: boolean;
+		/**
+		 * The language this text is in, as an ISO code. Pango can use this as a
+		 * hint when rendering the text. If not set, an appropriate default will be
+		 * used.
+		 * 
+		 * Note that the initial value of this property depends on the current
+		 * locale, see also gtk_get_default_language().
+		 */
+		language: string;
+		language_set: boolean;
+		left_margin: number;
+		left_margin_set: boolean;
+		/**
+		 * Extra spacing between graphemes, in Pango units.
+		 */
+		letter_spacing: number;
+		letter_spacing_set: boolean;
+		name: string;
+		/**
+		 * The paragraph background color as a #GdkColor.
+		 */
+		paragraph_background_gdk: Gdk.Color;
+		/**
+		 * The paragraph background color as a #GdkRGBA.
+		 */
+		paragraph_background_rgba: Gdk.RGBA;
+		paragraph_background_set: boolean;
+		pixels_above_lines: number;
+		pixels_above_lines_set: boolean;
+		pixels_below_lines: number;
+		pixels_below_lines_set: boolean;
+		pixels_inside_wrap: number;
+		pixels_inside_wrap_set: boolean;
+		right_margin: number;
+		right_margin_set: boolean;
+		rise: number;
+		rise_set: boolean;
+		scale: number;
+		scale_set: boolean;
+		size: number;
+		size_points: number;
+		size_set: boolean;
+		stretch: Pango.Stretch;
+		stretch_set: boolean;
+		strikethrough: boolean;
+		/**
+		 * This property modifies the color of strikeouts. If not set, strikeouts
+		 * will use the forground color.
+		 */
+		strikethrough_rgba: Gdk.RGBA;
+		/**
+		 * If the {@link TextTag}:strikethrough-rgba property has been set.
+		 */
+		strikethrough_rgba_set: boolean;
+		strikethrough_set: boolean;
+		style: Pango.Style;
+		style_set: boolean;
+		tabs: Pango.TabArray;
+		tabs_set: boolean;
+		underline: Pango.Underline;
+		/**
+		 * This property modifies the color of underlines. If not set, underlines
+		 * will use the forground color.
+		 * 
+		 * If {@link TextTag}:underline is set to %PANGO_UNDERLINE_ERROR, an alternate
+		 * color may be applied instead of the foreground. Setting this property
+		 * will always override those defaults.
+		 */
+		underline_rgba: Gdk.RGBA;
+		/**
+		 * If the {@link TextTag}:underline-rgba property has been set.
+		 */
+		underline_rgba_set: boolean;
+		underline_set: boolean;
+		variant: Pango.Variant;
+		variant_set: boolean;
+		weight: number;
+		weight_set: boolean;
+		wrap_mode: WrapMode;
+		wrap_mode_set: boolean;
 		/**
 		 * Emits the {@link TextTagTable}::tag-changed signal on the #GtkTextTagTable where
 		 * the tag is included.
@@ -30398,6 +33966,87 @@ declare namespace imports.gi.Gtk {
 	 * use {@link TextView} instead.
 	 */
 	interface ITextView {
+		accepts_tab: boolean;
+		/**
+		 * The bottom margin for text in the text view.
+		 * 
+		 * Note that this property is confusingly named. In CSS terms,
+		 * the value set here is padding, and it is applied in addition
+		 * to the padding from the theme.
+		 * 
+		 * Don't confuse this property with {@link Widget}:margin-bottom.
+		 */
+		bottom_margin: number;
+		buffer: TextBuffer;
+		cursor_visible: boolean;
+		editable: boolean;
+		/**
+		 * Which IM (input method) module should be used for this text_view.
+		 * See {@link IMContext}.
+		 * 
+		 * Setting this to a non-%NULL value overrides the
+		 * system-wide IM module setting. See the GtkSettings
+		 * #GtkSettings:gtk-im-module property.
+		 */
+		im_module: string;
+		indent: number;
+		/**
+		 * Additional hints (beyond {@link TextView}:input-purpose) that
+		 * allow input methods to fine-tune their behaviour.
+		 */
+		input_hints: InputHints;
+		/**
+		 * The purpose of this text field.
+		 * 
+		 * This property can be used by on-screen keyboards and other input
+		 * methods to adjust their behaviour.
+		 */
+		input_purpose: InputPurpose;
+		justification: Justification;
+		/**
+		 * The default left margin for text in the text view.
+		 * Tags in the buffer may override the default.
+		 * 
+		 * Note that this property is confusingly named. In CSS terms,
+		 * the value set here is padding, and it is applied in addition
+		 * to the padding from the theme.
+		 * 
+		 * Don't confuse this property with {@link Widget}:margin-left.
+		 */
+		left_margin: number;
+		monospace: boolean;
+		overwrite: boolean;
+		pixels_above_lines: number;
+		pixels_below_lines: number;
+		pixels_inside_wrap: number;
+		/**
+		 * If :populate-all is %TRUE, the {@link TextView}::populate-popup
+		 * signal is also emitted for touch popups.
+		 */
+		populate_all: boolean;
+		/**
+		 * The default right margin for text in the text view.
+		 * Tags in the buffer may override the default.
+		 * 
+		 * Note that this property is confusingly named. In CSS terms,
+		 * the value set here is padding, and it is applied in addition
+		 * to the padding from the theme.
+		 * 
+		 * Don't confuse this property with {@link Widget}:margin-right.
+		 */
+		right_margin: number;
+		tabs: Pango.TabArray;
+		/**
+		 * The top margin for text in the text view.
+		 * 
+		 * Note that this property is confusingly named. In CSS terms,
+		 * the value set here is padding, and it is applied in addition
+		 * to the padding from the theme.
+		 * 
+		 * Don't confuse this property with {@link Widget}:margin-top.
+		 */
+		top_margin: number;
+		wrap_mode: WrapMode;
 		/**
 		 * Adds a child widget in the text buffer, at the given #anchor.
 		 * @param child a {@link Widget}
@@ -31136,6 +34785,17 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IThemingEngine {
 		/**
+		 * The theming engine name, this name will be used when registering
+		 * custom properties, for a theming engine named "Clearlooks" registering
+		 * a "glossy" custom property, it could be referenced in the CSS file as
+		 * 
+		 * |[
+		 * -Clearlooks-glossy: true;
+		 * ]|
+		 */
+		name: string;
+		readonly parent_object: GObject.Object;
+		/**
 		 * Retrieves several style property values that apply to the currently
 		 * rendered element.
 		 * @param state state to retrieve values for
@@ -31352,6 +35012,17 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IToggleAction {
 		/**
+		 * Whether the toggle action should be active.
+		 */
+		active: boolean;
+		/**
+		 * Whether the proxies for this action look like radio action proxies.
+		 * 
+		 * This is an appearance property and thus only applies if
+		 * {@link Activatable}:use-action-appearance is %TRUE.
+		 */
+		draw_as_radio: boolean;
+		/**
 		 * Returns the checked state of the toggle action.
 		 * @returns the checked state of the toggle action
 		 */
@@ -31410,6 +35081,9 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ToggleButton} instead.
 	 */
 	interface IToggleButton {
+		active: boolean;
+		draw_indicator: boolean;
+		inconsistent: boolean;
 		/**
 		 * Queries a {@link ToggleButton} and returns its current state. Returns %TRUE if
 		 * the toggle button is pressed in and %FALSE if it is raised.
@@ -31587,6 +35261,10 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IToggleToolButton {
 		/**
+		 * If the toggle tool button should be pressed in.
+		 */
+		active: boolean;
+		/**
 		 * Queries a {@link ToggleToolButton} and returns its current state.
 		 * Returns %TRUE if the toggle button is pressed in and %FALSE if it is raised.
 		 * @returns %TRUE if the toggle tool button is pressed in, %FALSE if not
@@ -31641,6 +35319,18 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ToolButton} instead.
 	 */
 	interface IToolButton {
+		/**
+		 * The name of the themed icon displayed on the item.
+		 * This property only has an effect if not overridden by
+		 * {@link ToolButton}:label-widget, #GtkToolButton:icon-widget or
+		 * #GtkToolButton:stock-id properties.
+		 */
+		icon_name: string;
+		icon_widget: Widget;
+		label: string;
+		label_widget: Widget;
+		stock_id: string;
+		use_underline: boolean;
 		/**
 		 * Returns the name of the themed icon for the tool button,
 		 * see gtk_tool_button_set_icon_name().
@@ -31795,6 +35485,9 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ToolItem} instead.
 	 */
 	interface IToolItem {
+		is_important: boolean;
+		visible_horizontal: boolean;
+		visible_vertical: boolean;
 		/**
 		 * Returns the ellipsize mode used for #tool_item. Custom subclasses of
 		 * {@link ToolItem} should call this function to find out how text should
@@ -32046,6 +35739,11 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ToolItemGroup} instead.
 	 */
 	interface IToolItemGroup {
+		collapsed: boolean;
+		ellipsize: Pango.EllipsizeMode;
+		header_relief: ReliefStyle;
+		label: string;
+		label_widget: Widget;
 		/**
 		 * Gets whether #group is collapsed or expanded.
 		 * @returns %TRUE if #group is collapsed, %FALSE if it is expanded
@@ -32174,6 +35872,23 @@ declare namespace imports.gi.Gtk {
 	 * use {@link ToolPalette} instead.
 	 */
 	interface IToolPalette {
+		/**
+		 * The size of the icons in a tool palette. When this property is set,
+		 * it overrides the default setting.
+		 * 
+		 * This should only be used for special-purpose tool palettes, normal
+		 * application tool palettes should respect the user preferences for the
+		 * size of icons.
+		 */
+		icon_size: IconSize;
+		/**
+		 * Is %TRUE if the {@link ToolPalette}:icon-size property has been set.
+		 */
+		icon_size_set: boolean;
+		/**
+		 * The style of items in the tool palette.
+		 */
+		toolbar_style: ToolbarStyle;
 		/**
 		 * Sets #palette as drag source (see gtk_tool_palette_set_drag_source())
 		 * and sets #widget as a drag destination for drags from #palette.
@@ -32405,6 +36120,23 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Toolbar} instead.
 	 */
 	interface IToolbar {
+		/**
+		 * The size of the icons in a toolbar is normally determined by
+		 * the toolbar-icon-size setting. When this property is set, it
+		 * overrides the setting.
+		 * 
+		 * This should only be used for special-purpose toolbars, normal
+		 * application toolbars should respect the user preferences for the
+		 * size of icons.
+		 */
+		icon_size: IconSize;
+		/**
+		 * Is %TRUE if the icon-size property has been set.
+		 */
+		icon_size_set: boolean;
+		show_arrow: boolean;
+		toolbar_style: ToolbarStyle;
+		readonly container: Container;
 		/**
 		 * Returns the position corresponding to the indicated point on
 		 * #toolbar. This is useful when dragging items to the toolbar:
@@ -32710,6 +36442,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link TreeModelFilter} instead.
 	 */
 	interface ITreeModelFilter {
+		child_model: TreeModel;
+		virtual_root: TreePath;
 		/**
 		 * This function should almost never be called. It clears the #filter
 		 * of any cached iterators that haven’t been reffed with
@@ -32919,6 +36653,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link TreeModelSort} instead.
 	 */
 	interface ITreeModelSort {
+		model: TreeModel;
 		/**
 		 * This function should almost never be called.  It clears the #tree_model_sort
 		 * of any cached iterators that haven’t been reffed with
@@ -33103,6 +36838,11 @@ declare namespace imports.gi.Gtk {
 	 * use {@link TreeSelection} instead.
 	 */
 	interface ITreeSelection {
+		/**
+		 * Selection mode.
+		 * See gtk_tree_selection_set_mode() for more information on this property.
+		 */
+		mode: SelectionMode;
 		/**
 		 * Returns the number of rows that have been selected in #tree.
 		 * @returns The number of rows selected.
@@ -33562,6 +37302,61 @@ declare namespace imports.gi.Gtk {
 	 * use {@link TreeView} instead.
 	 */
 	interface ITreeView {
+		/**
+		 * The activate-on-single-click property specifies whether the "row-activated" signal
+		 * will be emitted after a single click.
+		 */
+		activate_on_single_click: boolean;
+		enable_grid_lines: TreeViewGridLines;
+		enable_search: boolean;
+		enable_tree_lines: boolean;
+		expander_column: TreeViewColumn;
+		/**
+		 * Setting the ::fixed-height-mode property to %TRUE speeds up
+		 * {@link TreeView} by assuming that all rows have the same height.
+		 * Only enable this option if all rows are the same height.
+		 * Please see gtk_tree_view_set_fixed_height_mode() for more
+		 * information on this option.
+		 */
+		fixed_height_mode: boolean;
+		headers_clickable: boolean;
+		headers_visible: boolean;
+		/**
+		 * Enables or disables the hover expansion mode of #tree_view.
+		 * Hover expansion makes rows expand or collapse if the pointer moves
+		 * over them.
+		 * 
+		 * This mode is primarily intended for treeviews in popups, e.g.
+		 * in {@link ComboBox} or #GtkEntryCompletion.
+		 */
+		hover_expand: boolean;
+		/**
+		 * Enables or disables the hover selection mode of #tree_view.
+		 * Hover selection makes the selected row follow the pointer.
+		 * Currently, this works only for the selection modes
+		 * %GTK_SELECTION_SINGLE and %GTK_SELECTION_BROWSE.
+		 * 
+		 * This mode is primarily intended for treeviews in popups, e.g.
+		 * in {@link ComboBox} or #GtkEntryCompletion.
+		 */
+		hover_selection: boolean;
+		/**
+		 * Extra indentation for each level.
+		 */
+		level_indentation: number;
+		model: TreeModel;
+		reorderable: boolean;
+		rubber_banding: boolean;
+		/**
+		 * Sets a hint to the theme to draw rows in alternating colors.
+		 */
+		rules_hint: boolean;
+		search_column: number;
+		/**
+		 * %TRUE if the view has expanders.
+		 */
+		show_expanders: boolean;
+		tooltip_column: number;
 		/**
 		 * Appends #column to the list of columns. If #tree_view has “fixed_height”
 		 * mode enabled, then #column must have its “sizing” property set to be
@@ -34575,6 +38370,35 @@ declare namespace imports.gi.Gtk {
 	 * use {@link TreeViewColumn} instead.
 	 */
 	interface ITreeViewColumn {
+		alignment: number;
+		/**
+		 * The {@link CellArea} used to layout cell renderers for this column.
+		 * 
+		 * If no area is specified when creating the tree view column with gtk_tree_view_column_new_with_area()
+		 * a horizontally oriented #GtkCellAreaBox will be used.
+		 */
+		cell_area: CellArea;
+		clickable: boolean;
+		expand: boolean;
+		fixed_width: number;
+		max_width: number;
+		min_width: number;
+		reorderable: boolean;
+		resizable: boolean;
+		sizing: TreeViewColumnSizing;
+		/**
+		 * Logical sort column ID this column sorts on when selected for sorting. Setting the sort column ID makes the column header
+		 * clickable. Set to -1 to make the column unsortable.
+		 */
+		sort_column_id: number;
+		sort_indicator: boolean;
+		sort_order: SortType;
+		spacing: number;
+		title: string;
+		visible: boolean;
+		widget: Widget;
+		readonly width: number;
+		readonly x_offset: number;
 		/**
 		 * Adds an attribute mapping to the list in #tree_column.  The #column is the
 		 * column of the model to get a value from, and the #attribute is the
@@ -34991,6 +38815,15 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IUIManager {
 		/**
+		 * The "add-tearoffs" property controls whether generated menus
+		 * have tearoff menu items.
+		 * 
+		 * Note that this only affects regular menus. Generated popup
+		 * menus never have tearoff menu items.
+		 */
+		add_tearoffs: boolean;
+		readonly ui: string;
+		/**
 		 * Adds a UI element to the current contents of #manager.
 		 * 
 		 * If #type is %GTK_UI_MANAGER_AUTO, GTK+ inserts a menuitem, toolitem or
@@ -35404,6 +39237,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link VBox} instead.
 	 */
 	interface IVBox {
+		readonly box: Box;
 
 	}
 
@@ -35456,6 +39290,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link VButtonBox} instead.
 	 */
 	interface IVButtonBox {
+		readonly button_box: ButtonBox;
 
 	}
 
@@ -35479,6 +39314,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link VPaned} instead.
 	 */
 	interface IVPaned {
+		readonly paned: Paned;
 
 	}
 
@@ -35510,6 +39346,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link VScale} instead.
 	 */
 	interface IVScale {
+		readonly scale: Scale;
 
 	}
 
@@ -35558,6 +39395,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link VScrollbar} instead.
 	 */
 	interface IVScrollbar {
+		readonly scrollbar: Scrollbar;
 
 	}
 
@@ -35592,6 +39430,7 @@ declare namespace imports.gi.Gtk {
 	 * use {@link VSeparator} instead.
 	 */
 	interface IVSeparator {
+		readonly separator: Separator;
 
 	}
 
@@ -35622,6 +39461,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Viewport} instead.
 	 */
 	interface IViewport {
+		shadow_type: ShadowType;
+		readonly bin: Bin;
 		/**
 		 * Gets the bin window of the {@link Viewport}.
 		 * @returns a #GdkWindow
@@ -35709,6 +39550,13 @@ declare namespace imports.gi.Gtk {
 	 * use {@link VolumeButton} instead.
 	 */
 	interface IVolumeButton {
+		/**
+		 * Whether to use symbolic icons as the icons. Note that
+		 * if the symbolic icons are not available in your installed
+		 * theme, then the normal (potentially colorful) icons will
+		 * be used.
+		 */
+		use_symbolic: boolean;
 
 	}
 
@@ -35739,6 +39587,177 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Widget} instead.
 	 */
 	interface IWidget {
+		app_paintable: boolean;
+		can_default: boolean;
+		can_focus: boolean;
+		readonly composite_child: boolean;
+		/**
+		 * Whether the widget is double buffered.
+		 */
+		double_buffered: boolean;
+		events: Gdk.EventMask;
+		/**
+		 * Whether to expand in both directions. Setting this sets both {@link Widget}:hexpand and #GtkWidget:vexpand
+		 */
+		expand: boolean;
+		/**
+		 * Whether the widget should grab focus when it is clicked with the mouse.
+		 * 
+		 * This property is only relevant for widgets that can take focus.
+		 * 
+		 * Before 3.20, several widgets (GtkButton, GtkFileChooserButton,
+		 * GtkComboBox) implemented this property individually.
+		 */
+		focus_on_click: boolean;
+		/**
+		 * How to distribute horizontal space if widget gets extra space, see {@link Align}
+		 */
+		halign: Align;
+		// has_default: boolean;
+		// has_focus: boolean;
+		/**
+		 * Enables or disables the emission of {@link Widget}::query-tooltip on #widget.
+		 * A value of %TRUE indicates that #widget can have a tooltip, in this case
+		 * the widget will be queried using #GtkWidget::query-tooltip to determine
+		 * whether it will provide a tooltip or not.
+		 * 
+		 * Note that setting this property to %TRUE for the first time will change
+		 * the event masks of the GdkWindows of this widget to include leave-notify
+		 * and motion-notify events.  This cannot and will not be undone when the
+		 * property is set to %FALSE again.
+		 */
+		has_tooltip: boolean;
+		height_request: number;
+		/**
+		 * Whether to expand horizontally. See gtk_widget_set_hexpand().
+		 */
+		hexpand: boolean;
+		/**
+		 * Whether to use the {@link Widget}:hexpand property. See gtk_widget_get_hexpand_set().
+		 */
+		hexpand_set: boolean;
+		// is_focus: boolean;
+		/**
+		 * Sets all four sides' margin at once. If read, returns max
+		 * margin on any side.
+		 */
+		margin: number;
+		/**
+		 * Margin on bottom side of widget.
+		 * 
+		 * This property adds margin outside of the widget's normal size
+		 * request, the margin will be added in addition to the size from
+		 * gtk_widget_set_size_request() for example.
+		 */
+		margin_bottom: number;
+		/**
+		 * Margin on end of widget, horizontally. This property supports
+		 * left-to-right and right-to-left text directions.
+		 * 
+		 * This property adds margin outside of the widget's normal size
+		 * request, the margin will be added in addition to the size from
+		 * gtk_widget_set_size_request() for example.
+		 */
+		margin_end: number;
+		/**
+		 * Margin on left side of widget.
+		 * 
+		 * This property adds margin outside of the widget's normal size
+		 * request, the margin will be added in addition to the size from
+		 * gtk_widget_set_size_request() for example.
+		 */
+		margin_left: number;
+		/**
+		 * Margin on right side of widget.
+		 * 
+		 * This property adds margin outside of the widget's normal size
+		 * request, the margin will be added in addition to the size from
+		 * gtk_widget_set_size_request() for example.
+		 */
+		margin_right: number;
+		/**
+		 * Margin on start of widget, horizontally. This property supports
+		 * left-to-right and right-to-left text directions.
+		 * 
+		 * This property adds margin outside of the widget's normal size
+		 * request, the margin will be added in addition to the size from
+		 * gtk_widget_set_size_request() for example.
+		 */
+		margin_start: number;
+		/**
+		 * Margin on top side of widget.
+		 * 
+		 * This property adds margin outside of the widget's normal size
+		 * request, the margin will be added in addition to the size from
+		 * gtk_widget_set_size_request() for example.
+		 */
+		margin_top: number;
+		name: string;
+		no_show_all: boolean;
+		/**
+		 * The requested opacity of the widget. See gtk_widget_set_opacity() for
+		 * more details about window opacity.
+		 * 
+		 * Before 3.8 this was only available in GtkWindow
+		 */
+		opacity: number;
+		receives_default: boolean;
+		/**
+		 * The scale factor of the widget. See gtk_widget_get_scale_factor() for
+		 * more details about widget scaling.
+		 */
+		readonly scale_factor: number;
+		sensitive: boolean;
+		/**
+		 * The style of the widget, which contains information about how it will look (colors, etc).
+		 */
+		style: Style;
+		/**
+		 * Sets the text of tooltip to be the given string, which is marked up
+		 * with the [Pango text markup language][PangoMarkupFormat].
+		 * Also see gtk_tooltip_set_markup().
+		 * 
+		 * This is a convenience property which will take care of getting the
+		 * tooltip shown if the given string is not %NULL: {@link Widget}:has-tooltip
+		 * will automatically be set to %TRUE and there will be taken care of
+		 * #GtkWidget::query-tooltip in the default signal handler.
+		 * 
+		 * Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
+		 * are set, the last one wins.
+		 */
+		tooltip_markup: string;
+		/**
+		 * Sets the text of tooltip to be the given string.
+		 * 
+		 * Also see gtk_tooltip_set_text().
+		 * 
+		 * This is a convenience property which will take care of getting the
+		 * tooltip shown if the given string is not %NULL: {@link Widget}:has-tooltip
+		 * will automatically be set to %TRUE and there will be taken care of
+		 * #GtkWidget::query-tooltip in the default signal handler.
+		 * 
+		 * Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
+		 * are set, the last one wins.
+		 */
+		tooltip_text: string;
+		/**
+		 * How to distribute vertical space if widget gets extra space, see {@link Align}
+		 */
+		valign: Align;
+		/**
+		 * Whether to expand vertically. See gtk_widget_set_vexpand().
+		 */
+		vexpand: boolean;
+		/**
+		 * Whether to use the {@link Widget}:vexpand property. See gtk_widget_get_vexpand_set().
+		 */
+		vexpand_set: boolean;
+		visible: boolean;
+		width_request: number;
+		/**
+		 * The widget's window if it is realized, %NULL otherwise.
+		 */
+		readonly window: Gdk.Window;
 		/**
 		 * For widgets that can be “activated” (buttons, menu items, etc.)
 		 * this function activates them. Activation is what happens when you
@@ -39148,6 +43167,109 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IWindow {
 		/**
+		 * Whether the window should receive the input focus.
+		 */
+		accept_focus: boolean;
+		/**
+		 * The {@link Application} associated with the window.
+		 * 
+		 * The application will be kept alive for at least as long as it
+		 * has any windows associated with it (see g_application_hold()
+		 * for a way to keep it alive without windows).
+		 * 
+		 * Normally, the connection between the application and the window
+		 * will remain until the window is destroyed, but you can explicitly
+		 * remove it by setting the :application property to %NULL.
+		 */
+		application: Application;
+		/**
+		 * The widget to which this window is attached.
+		 * See gtk_window_set_attached_to().
+		 * 
+		 * Examples of places where specifying this relation is useful are
+		 * for instance a {@link Menu} created by a #GtkComboBox, a completion
+		 * popup window created by #GtkEntry or a typeahead search entry
+		 * created by #GtkTreeView.
+		 */
+		attached_to: Widget;
+		/**
+		 * Whether the window should be decorated by the window manager.
+		 */
+		decorated: boolean;
+		default_height: number;
+		default_width: number;
+		/**
+		 * Whether the window frame should have a close button.
+		 */
+		deletable: boolean;
+		destroy_with_parent: boolean;
+		/**
+		 * Whether the window should receive the input focus when mapped.
+		 */
+		focus_on_map: boolean;
+		/**
+		 * Whether 'focus rectangles' are currently visible in this window.
+		 * 
+		 * This property is maintained by GTK+ based on user input
+		 * and should not be set by applications.
+		 */
+		focus_visible: boolean;
+		/**
+		 * The window gravity of the window. See gtk_window_move() and #GdkGravity for
+		 * more details about window gravity.
+		 */
+		gravity: Gdk.Gravity;
+		/**
+		 * Whether the window has a corner resize grip.
+		 * 
+		 * Note that the resize grip is only shown if the window is
+		 * actually resizable and not maximized. Use
+		 * {@link Window}:resize-grip-visible to find out if the resize
+		 * grip is currently shown.
+		 */
+		has_resize_grip: boolean;
+		// readonly has_toplevel_focus: boolean;
+		/**
+		 * Whether the titlebar should be hidden during maximization.
+		 */
+		hide_titlebar_when_maximized: boolean;
+		icon: GdkPixbuf.Pixbuf;
+		/**
+		 * The :icon-name property specifies the name of the themed icon to
+		 * use as the window icon. See {@link IconTheme} for more details.
+		 */
+		icon_name: string;
+		// readonly is_active: boolean;
+		// readonly is_maximized: boolean;
+		/**
+		 * Whether mnemonics are currently visible in this window.
+		 * 
+		 * This property is maintained by GTK+ based on user input,
+		 * and should not be set by applications.
+		 */
+		mnemonics_visible: boolean;
+		modal: boolean;
+		resizable: boolean;
+		/**
+		 * Whether a corner resize grip is currently shown.
+		 */
+		readonly resize_grip_visible: boolean;
+		role: string;
+		screen: Gdk.Screen;
+		skip_pager_hint: boolean;
+		skip_taskbar_hint: boolean;
+		title: string;
+		/**
+		 * The transient parent of the window. See gtk_window_set_transient_for() for
+		 * more details about transient windows.
+		 */
+		transient_for: Window;
+		type: WindowType;
+		type_hint: Gdk.WindowTypeHint;
+		urgency_hint: boolean;
+		window_position: WindowPosition;
+		readonly bin: Bin;
+		/**
 		 * Activates the default widget for the window, unless the current
 		 * focused widget has been configured to receive the default action
 		 * (see gtk_widget_set_receives_default()), in which case the
@@ -40706,7 +44828,6 @@ declare namespace imports.gi.Gtk {
 	interface AboutDialogClass {}
 	class AboutDialogClass {
 		public constructor();
-		public parent_class: DialogClass;
 		public activate_link: {(dialog: AboutDialog, uri: string): boolean;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -40722,10 +44843,6 @@ declare namespace imports.gi.Gtk {
 	interface AccelGroupClass {}
 	class AccelGroupClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
 		public accel_changed: {(accel_group: AccelGroup, keyval: number, modifier: Gdk.ModifierType, accel_closure: GObject.Closure): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -40766,13 +44883,12 @@ declare namespace imports.gi.Gtk {
 	interface AccelLabelClass {}
 	class AccelLabelClass {
 		public constructor();
-		public parent_class: LabelClass;
-		public signal_quote1: string;
-		public signal_quote2: string;
-		public mod_name_shift: string;
-		public mod_name_control: string;
-		public mod_name_alt: string;
-		public mod_separator: string;
+		public readonly signal_quote1: string;
+		public readonly signal_quote2: string;
+		public readonly mod_name_shift: string;
+		public readonly mod_name_control: string;
+		public readonly mod_name_alt: string;
+		public readonly mod_separator: string;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -40792,7 +44908,6 @@ declare namespace imports.gi.Gtk {
 	interface AccessibleClass {}
 	class AccessibleClass {
 		public constructor();
-		public parent_class: Atk.ObjectClass;
 		public connect_widget_destroyed: {(accessible: Accessible): void;};
 		public widget_set: {(accessible: Accessible): void;};
 		public widget_unset: {(accessible: Accessible): void;};
@@ -40808,7 +44923,6 @@ declare namespace imports.gi.Gtk {
 	interface ActionBarClass {}
 	class ActionBarClass {
 		public constructor();
-		public parent_class: BinClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -40823,12 +44937,8 @@ declare namespace imports.gi.Gtk {
 	interface ActionClass {}
 	class ActionClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
-		public menu_item_type: GObject.Type;
-		public toolbar_item_type: GObject.Type;
+		public readonly menu_item_type: GObject.Type;
+		public readonly toolbar_item_type: GObject.Type;
 		public activate: {(action: Action): void;};
 		public create_menu_item: {(action: Action): Widget;};
 		public create_tool_item: {(action: Action): Widget;};
@@ -40882,10 +44992,6 @@ declare namespace imports.gi.Gtk {
 	interface ActionGroupClass {}
 	class ActionGroupClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
 		public get_action: {(action_group: ActionGroup, action_name: string): Action;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -40909,7 +45015,7 @@ declare namespace imports.gi.Gtk {
 	interface ActionableInterface {}
 	class ActionableInterface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public get_action_name: {(actionable: Actionable): string;};
 		public set_action_name: {(actionable: Actionable, action_name: string): void;};
 		public get_action_target_value: {(actionable: Actionable): GLib.Variant;};
@@ -40922,7 +45028,7 @@ declare namespace imports.gi.Gtk {
 	interface ActivatableIface {}
 	class ActivatableIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public update: {(activatable: Activatable, action: Action, property_name: string): void;};
 		public sync_action_properties: {(activatable: Activatable, action: Action): void;};
 	}
@@ -40930,7 +45036,6 @@ declare namespace imports.gi.Gtk {
 	interface AdjustmentClass {}
 	class AdjustmentClass {
 		public constructor();
-		public parent_class: GObject.InitiallyUnownedClass;
 		public changed: {(adjustment: Adjustment): void;};
 		public value_changed: {(adjustment: Adjustment): void;};
 		public _gtk_reserved1: {(): void;};
@@ -40947,10 +45052,6 @@ declare namespace imports.gi.Gtk {
 	interface AlignmentClass {}
 	class AlignmentClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -40965,11 +45066,7 @@ declare namespace imports.gi.Gtk {
 	interface AppChooserButtonClass {}
 	class AppChooserButtonClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ComboBoxClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public custom_item_activated: {(self: AppChooserButton, item_name: string): void;};
 	}
 
@@ -40981,11 +45078,7 @@ declare namespace imports.gi.Gtk {
 	interface AppChooserDialogClass {}
 	class AppChooserDialogClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: DialogClass;
-		public padding: any[];
+		public readonly padding: any[];
 	}
 
 	interface AppChooserDialogPrivate {}
@@ -40996,11 +45089,7 @@ declare namespace imports.gi.Gtk {
 	interface AppChooserWidgetClass {}
 	class AppChooserWidgetClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BoxClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public application_selected: {(self: AppChooserWidget, app_info: Gio.AppInfo): void;};
 		public application_activated: {(self: AppChooserWidget, app_info: Gio.AppInfo): void;};
 		public populate_popup: {(self: AppChooserWidget, menu: Menu, app_info: Gio.AppInfo): void;};
@@ -41014,11 +45103,7 @@ declare namespace imports.gi.Gtk {
 	interface ApplicationClass {}
 	class ApplicationClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: Gio.ApplicationClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public window_added: {(application: Application, window: Window): void;};
 		public window_removed: {(application: Application, window: Window): void;};
 	}
@@ -41031,11 +45116,7 @@ declare namespace imports.gi.Gtk {
 	interface ApplicationWindowClass {}
 	class ApplicationWindowClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: WindowClass;
-		public padding: any[];
+		public readonly padding: any[];
 	}
 
 	interface ApplicationWindowPrivate {}
@@ -41046,7 +45127,6 @@ declare namespace imports.gi.Gtk {
 	interface ArrowAccessibleClass {}
 	class ArrowAccessibleClass {
 		public constructor();
-		public parent_class: WidgetAccessibleClass;
 	}
 
 	interface ArrowAccessiblePrivate {}
@@ -41057,7 +45137,6 @@ declare namespace imports.gi.Gtk {
 	interface ArrowClass {}
 	class ArrowClass {
 		public constructor();
-		public parent_class: MiscClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41072,10 +45151,6 @@ declare namespace imports.gi.Gtk {
 	interface AspectFrameClass {}
 	class AspectFrameClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: FrameClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41090,10 +45165,6 @@ declare namespace imports.gi.Gtk {
 	interface AssistantClass {}
 	class AssistantClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: WindowClass;
 		public prepare: {(assistant: Assistant, page: Widget): void;};
 		public apply: {(assistant: Assistant): void;};
 		public close: {(assistant: Assistant): void;};
@@ -41113,10 +45184,6 @@ declare namespace imports.gi.Gtk {
 	interface BinClass {}
 	class BinClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ContainerClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41280,7 +45347,6 @@ declare namespace imports.gi.Gtk {
 	interface BooleanCellAccessibleClass {}
 	class BooleanCellAccessibleClass {
 		public constructor();
-		public parent_class: RendererCellAccessibleClass;
 	}
 
 	interface BooleanCellAccessiblePrivate {}
@@ -41331,10 +45397,6 @@ declare namespace imports.gi.Gtk {
 	interface BoxClass {}
 	class BoxClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ContainerClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41357,7 +45419,7 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * the parent class
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public set_name: {(buildable: Buildable, name: string): void;};
 		public get_name: {(buildable: Buildable): string;};
 		public add_child: {(buildable: Buildable, builder: Builder, child: GObject.Object, _type: string): void;};
@@ -41373,7 +45435,6 @@ declare namespace imports.gi.Gtk {
 	interface BuilderClass {}
 	class BuilderClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_type_from_name: {(builder: Builder, type_name: string): GObject.Type;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -41393,7 +45454,6 @@ declare namespace imports.gi.Gtk {
 	interface ButtonAccessibleClass {}
 	class ButtonAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface ButtonAccessiblePrivate {}
@@ -41404,10 +45464,6 @@ declare namespace imports.gi.Gtk {
 	interface ButtonBoxClass {}
 	class ButtonBoxClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BoxClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41422,10 +45478,6 @@ declare namespace imports.gi.Gtk {
 	interface ButtonClass {}
 	class ButtonClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public pressed: {(button: Button): void;};
 		public released: {(button: Button): void;};
 		public clicked: {(button: Button): void;};
@@ -41446,7 +45498,6 @@ declare namespace imports.gi.Gtk {
 	interface CalendarClass {}
 	class CalendarClass {
 		public constructor();
-		public parent_class: WidgetClass;
 		public month_changed: {(calendar: Calendar): void;};
 		public day_selected: {(calendar: Calendar): void;};
 		public day_selected_double_click: {(calendar: Calendar): void;};
@@ -41468,14 +45519,12 @@ declare namespace imports.gi.Gtk {
 	interface CellAccessibleClass {}
 	class CellAccessibleClass {
 		public constructor();
-		public parent_class: AccessibleClass;
 		public update_cache: {(cell: CellAccessible, emit_signal: boolean): void;};
 	}
 
 	interface CellAccessibleParentIface {}
 	class CellAccessibleParentIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public get_cell_extents: {(parent: CellAccessibleParent, cell: CellAccessible, _x: number, _y: number, width: number, height: number, coord_type: Atk.CoordType): void;};
 		public get_cell_area: {(parent: CellAccessibleParent, cell: CellAccessible, cell_rect: Gdk.Rectangle): void;};
 		public grab_focus: {(parent: CellAccessibleParent, cell: CellAccessible): boolean;};
@@ -41498,7 +45547,6 @@ declare namespace imports.gi.Gtk {
 	interface CellAreaBoxClass {}
 	class CellAreaBoxClass {
 		public constructor();
-		public parent_class: CellAreaClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41513,7 +45561,6 @@ declare namespace imports.gi.Gtk {
 	interface CellAreaClass {}
 	class CellAreaClass {
 		public constructor();
-		public parent_class: GObject.InitiallyUnownedClass;
 		public add: {(area: CellArea, renderer: CellRenderer): void;};
 		public remove: {(area: CellArea, renderer: CellRenderer): void;};
 		public foreach: {(area: CellArea, callback: CellCallback, callback_data: any): void;};
@@ -41567,7 +45614,6 @@ declare namespace imports.gi.Gtk {
 	interface CellAreaContextClass {}
 	class CellAreaContextClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public allocate: {(context: CellAreaContext, width: number, height: number): void;};
 		public reset: {(context: CellAreaContext): void;};
 		public get_preferred_height_for_width: {(context: CellAreaContext, width: number, minimum_height: number, natural_height: number): void;};
@@ -41593,7 +45639,7 @@ declare namespace imports.gi.Gtk {
 	interface CellEditableIface {}
 	class CellEditableIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public editing_done: {(cell_editable: CellEditable): void;};
 		public remove_widget: {(cell_editable: CellEditable): void;};
 		public start_editing: {(cell_editable: CellEditable, event: Gdk.Event): void;};
@@ -41602,7 +45648,7 @@ declare namespace imports.gi.Gtk {
 	interface CellLayoutIface {}
 	class CellLayoutIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public pack_start: {(cell_layout: CellLayout, cell: CellRenderer, expand: boolean): void;};
 		public pack_end: {(cell_layout: CellLayout, cell: CellRenderer, expand: boolean): void;};
 		public clear: {(cell_layout: CellLayout): void;};
@@ -41617,7 +45663,6 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererAccelClass {}
 	class CellRendererAccelClass {
 		public constructor();
-		public parent_class: CellRendererTextClass;
 		public accel_edited: {(accel: CellRendererAccel, path_string: string, accel_key: number, accel_mods: Gdk.ModifierType, hardware_keycode: number): void;};
 		public accel_cleared: {(accel: CellRendererAccel, path_string: string): void;};
 		public _gtk_reserved0: {(): void;};
@@ -41635,8 +45680,6 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererClass {}
 	class CellRendererClass {
 		public constructor();
-		public parent_class: GObject.InitiallyUnownedClass;
-		public priv: CellRendererClassPrivate;
 		public get_request_mode: {(cell: CellRenderer): SizeRequestMode;};
 		public get_preferred_width: {(cell: CellRenderer, widget: Widget, minimum_size: number, natural_size: number): void;};
 		public get_preferred_height_for_width: {(cell: CellRenderer, widget: Widget, width: number, minimum_height: number, natural_height: number): void;};
@@ -41673,7 +45716,6 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererComboClass {}
 	class CellRendererComboClass {
 		public constructor();
-		public parent: CellRendererTextClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41688,7 +45730,6 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererPixbufClass {}
 	class CellRendererPixbufClass {
 		public constructor();
-		public parent_class: CellRendererClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41708,7 +45749,6 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererProgressClass {}
 	class CellRendererProgressClass {
 		public constructor();
-		public parent_class: CellRendererClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41723,7 +45763,6 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererSpinClass {}
 	class CellRendererSpinClass {
 		public constructor();
-		public parent: CellRendererTextClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41738,7 +45777,6 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererSpinnerClass {}
 	class CellRendererSpinnerClass {
 		public constructor();
-		public parent_class: CellRendererClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41753,7 +45791,6 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererTextClass {}
 	class CellRendererTextClass {
 		public constructor();
-		public parent_class: CellRendererClass;
 		public edited: {(cell_renderer_text: CellRendererText, path: string, new_text: string): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -41769,7 +45806,6 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererToggleClass {}
 	class CellRendererToggleClass {
 		public constructor();
-		public parent_class: CellRendererClass;
 		public toggled: {(cell_renderer_toggle: CellRendererToggle, path: string): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -41785,10 +45821,6 @@ declare namespace imports.gi.Gtk {
 	interface CellViewClass {}
 	class CellViewClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: WidgetClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41803,7 +45835,6 @@ declare namespace imports.gi.Gtk {
 	interface CheckButtonClass {}
 	class CheckButtonClass {
 		public constructor();
-		public parent_class: ToggleButtonClass;
 		public draw_indicator: {(check_button: CheckButton, cr: cairo.Context): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -41814,7 +45845,6 @@ declare namespace imports.gi.Gtk {
 	interface CheckMenuItemAccessibleClass {}
 	class CheckMenuItemAccessibleClass {
 		public constructor();
-		public parent_class: MenuItemAccessibleClass;
 	}
 
 	interface CheckMenuItemAccessiblePrivate {}
@@ -41825,10 +45855,6 @@ declare namespace imports.gi.Gtk {
 	interface CheckMenuItemClass {}
 	class CheckMenuItemClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: MenuItemClass;
 		public toggled: {(check_menu_item: CheckMenuItem): void;};
 		public draw_indicator: {(check_menu_item: CheckMenuItem, cr: cairo.Context): void;};
 		public _gtk_reserved1: {(): void;};
@@ -41845,7 +45871,6 @@ declare namespace imports.gi.Gtk {
 	interface ColorButtonClass {}
 	class ColorButtonClass {
 		public constructor();
-		public parent_class: ButtonClass;
 		public color_set: {(cp: ColorButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -41861,7 +45886,6 @@ declare namespace imports.gi.Gtk {
 	interface ColorChooserDialogClass {}
 	class ColorChooserDialogClass {
 		public constructor();
-		public parent_class: DialogClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41876,8 +45900,8 @@ declare namespace imports.gi.Gtk {
 	interface ColorChooserInterface {}
 	class ColorChooserInterface {
 		public constructor();
-		public base_interface: GObject.TypeInterface;
-		public padding: any[];
+		public readonly base_interface: GObject.TypeInterface;
+		public readonly padding: any[];
 		public get_rgba: {(chooser: ColorChooser, color: Gdk.RGBA): void;};
 		public set_rgba: {(chooser: ColorChooser, color: Gdk.RGBA): void;};
 		public add_palette: {(chooser: ColorChooser, orientation: Orientation, colors_per_line: number, n_colors: number, colors: Gdk.RGBA[]): void;};
@@ -41887,10 +45911,6 @@ declare namespace imports.gi.Gtk {
 	interface ColorChooserWidgetClass {}
 	class ColorChooserWidgetClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BoxClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41909,10 +45929,6 @@ declare namespace imports.gi.Gtk {
 	interface ColorSelectionClass {}
 	class ColorSelectionClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BoxClass;
 		public color_changed: {(color_selection: ColorSelection): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -41923,7 +45939,6 @@ declare namespace imports.gi.Gtk {
 	interface ColorSelectionDialogClass {}
 	class ColorSelectionDialogClass {
 		public constructor();
-		public parent_class: DialogClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41943,7 +45958,6 @@ declare namespace imports.gi.Gtk {
 	interface ComboBoxAccessibleClass {}
 	class ComboBoxAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface ComboBoxAccessiblePrivate {}
@@ -41954,10 +45968,6 @@ declare namespace imports.gi.Gtk {
 	interface ComboBoxClass {}
 	class ComboBoxClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public changed: {(combo_box: ComboBox): void;};
 		public format_entry_text: {(combo_box: ComboBox, path: string): string;};
 		public _gtk_reserved1: {(): void;};
@@ -41973,7 +45983,6 @@ declare namespace imports.gi.Gtk {
 	interface ComboBoxTextClass {}
 	class ComboBoxTextClass {
 		public constructor();
-		public parent_class: ComboBoxClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -41988,7 +45997,6 @@ declare namespace imports.gi.Gtk {
 	interface ContainerAccessibleClass {}
 	class ContainerAccessibleClass {
 		public constructor();
-		public parent_class: WidgetAccessibleClass;
 		public add_gtk: {(container: Container, widget: Widget, data: any): number;};
 		public remove_gtk: {(container: Container, widget: Widget, data: any): number;};
 	}
@@ -42001,7 +46009,6 @@ declare namespace imports.gi.Gtk {
 	interface ContainerCellAccessibleClass {}
 	class ContainerCellAccessibleClass {
 		public constructor();
-		public parent_class: CellAccessibleClass;
 	}
 
 	interface ContainerCellAccessiblePrivate {}
@@ -42015,11 +46022,7 @@ declare namespace imports.gi.Gtk {
 	interface ContainerClass {}
 	class ContainerClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: WidgetClass;
-		public _handle_border_width: number;
+		public readonly _handle_border_width: number;
 		public add: {(container: Container, widget: Widget): void;};
 		public remove: {(container: Container, widget: Widget): void;};
 		public check_resize: {(container: Container): void;};
@@ -42090,7 +46093,6 @@ declare namespace imports.gi.Gtk {
 	interface CssProviderClass {}
 	class CssProviderClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public parsing_error: {(provider: CssProvider, section: CssSection, error: GLib.Error): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42187,10 +46189,6 @@ declare namespace imports.gi.Gtk {
 	interface DialogClass {}
 	class DialogClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: WindowClass;
 		public response: {(dialog: Dialog, response_id: number): void;};
 		public close: {(dialog: Dialog): void;};
 		public _gtk_reserved1: {(): void;};
@@ -42207,7 +46205,6 @@ declare namespace imports.gi.Gtk {
 	interface DrawingAreaClass {}
 	class DrawingAreaClass {
 		public constructor();
-		public parent_class: WidgetClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42217,7 +46214,7 @@ declare namespace imports.gi.Gtk {
 	interface EditableInterface {}
 	class EditableInterface {
 		public constructor();
-		public base_iface: GObject.TypeInterface;
+		public readonly base_iface: GObject.TypeInterface;
 		public insert_text: {(editable: Editable, new_text: string, new_text_length: number, position: number): void;};
 		public delete_text: {(editable: Editable, start_pos: number, end_pos: number): void;};
 		public changed: {(editable: Editable): void;};
@@ -42233,7 +46230,6 @@ declare namespace imports.gi.Gtk {
 	interface EntryAccessibleClass {}
 	class EntryAccessibleClass {
 		public constructor();
-		public parent_class: WidgetAccessibleClass;
 	}
 
 	interface EntryAccessiblePrivate {}
@@ -42244,7 +46240,6 @@ declare namespace imports.gi.Gtk {
 	interface EntryBufferClass {}
 	class EntryBufferClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public inserted_text: {(buffer: EntryBuffer, position: number, chars: string, n_chars: number): void;};
 		public deleted_text: {(buffer: EntryBuffer, position: number, n_chars: number): void;};
 		public get_text: {(buffer: EntryBuffer, n_bytes: number): string;};
@@ -42276,10 +46271,6 @@ declare namespace imports.gi.Gtk {
 	interface EntryClass {}
 	class EntryClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: WidgetClass;
 		public populate_popup: {(entry: Entry, popup: Widget): void;};
 		public activate: {(entry: Entry): void;};
 		public move_cursor: {(entry: Entry, step: MovementStep, count: number, extend_selection: boolean): void;};
@@ -42304,7 +46295,6 @@ declare namespace imports.gi.Gtk {
 	interface EntryCompletionClass {}
 	class EntryCompletionClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public match_selected: {(completion: EntryCompletion, model: TreeModel, iter: TreeIter): boolean;};
 		public action_activated: {(completion: EntryCompletion, index_: number): void;};
 		public insert_prefix: {(completion: EntryCompletion, prefix: string): boolean;};
@@ -42328,10 +46318,6 @@ declare namespace imports.gi.Gtk {
 	interface EventBoxClass {}
 	class EventBoxClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42366,7 +46352,6 @@ declare namespace imports.gi.Gtk {
 	interface ExpanderAccessibleClass {}
 	class ExpanderAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface ExpanderAccessiblePrivate {}
@@ -42377,10 +46362,6 @@ declare namespace imports.gi.Gtk {
 	interface ExpanderClass {}
 	class ExpanderClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public activate: {(expander: Expander): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -42396,10 +46377,6 @@ declare namespace imports.gi.Gtk {
 	interface FileChooserButtonClass {}
 	class FileChooserButtonClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BoxClass;
 		public file_set: {(fc: FileChooserButton): void;};
 		public __gtk_reserved1: {(): void;};
 		public __gtk_reserved2: {(): void;};
@@ -42415,7 +46392,6 @@ declare namespace imports.gi.Gtk {
 	interface FileChooserDialogClass {}
 	class FileChooserDialogClass {
 		public constructor();
-		public parent_class: DialogClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42430,13 +46406,11 @@ declare namespace imports.gi.Gtk {
 	interface FileChooserNativeClass {}
 	class FileChooserNativeClass {
 		public constructor();
-		public parent_class: NativeDialogClass;
 	}
 
 	interface FileChooserWidgetAccessibleClass {}
 	class FileChooserWidgetAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface FileChooserWidgetAccessiblePrivate {}
@@ -42447,10 +46421,6 @@ declare namespace imports.gi.Gtk {
 	interface FileChooserWidgetClass {}
 	class FileChooserWidgetClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BoxClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42504,7 +46474,6 @@ declare namespace imports.gi.Gtk {
 	interface FixedClass {}
 	class FixedClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42519,7 +46488,6 @@ declare namespace imports.gi.Gtk {
 	interface FlowBoxAccessibleClass {}
 	class FlowBoxAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface FlowBoxAccessiblePrivate {}
@@ -42530,13 +46498,11 @@ declare namespace imports.gi.Gtk {
 	interface FlowBoxChildAccessibleClass {}
 	class FlowBoxChildAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface FlowBoxChildClass {}
 	class FlowBoxChildClass {
 		public constructor();
-		public parent_class: BinClass;
 		public activate: {(child: FlowBoxChild): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -42545,7 +46511,6 @@ declare namespace imports.gi.Gtk {
 	interface FlowBoxClass {}
 	class FlowBoxClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public child_activated: {(box: FlowBox, child: FlowBoxChild): void;};
 		public selected_children_changed: {(box: FlowBox): void;};
 		public activate_cursor_child: {(box: FlowBox): void;};
@@ -42564,7 +46529,6 @@ declare namespace imports.gi.Gtk {
 	interface FontButtonClass {}
 	class FontButtonClass {
 		public constructor();
-		public parent_class: ButtonClass;
 		public font_set: {(gfp: FontButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -42580,10 +46544,6 @@ declare namespace imports.gi.Gtk {
 	interface FontChooserDialogClass {}
 	class FontChooserDialogClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: DialogClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42598,8 +46558,8 @@ declare namespace imports.gi.Gtk {
 	interface FontChooserIface {}
 	class FontChooserIface {
 		public constructor();
-		public base_iface: GObject.TypeInterface;
-		public padding: any[];
+		public readonly base_iface: GObject.TypeInterface;
+		public readonly padding: any[];
 		public get_font_family: {(fontchooser: FontChooser): Pango.FontFamily;};
 		public get_font_face: {(fontchooser: FontChooser): Pango.FontFace;};
 		public get_font_size: {(fontchooser: FontChooser): number;};
@@ -42612,10 +46572,6 @@ declare namespace imports.gi.Gtk {
 	interface FontChooserWidgetClass {}
 	class FontChooserWidgetClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BoxClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42634,7 +46590,6 @@ declare namespace imports.gi.Gtk {
 	interface FontSelectionClass {}
 	class FontSelectionClass {
 		public constructor();
-		public parent_class: BoxClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42644,7 +46599,6 @@ declare namespace imports.gi.Gtk {
 	interface FontSelectionDialogClass {}
 	class FontSelectionDialogClass {
 		public constructor();
-		public parent_class: DialogClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42664,7 +46618,6 @@ declare namespace imports.gi.Gtk {
 	interface FrameAccessibleClass {}
 	class FrameAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface FrameAccessiblePrivate {}
@@ -42675,10 +46628,6 @@ declare namespace imports.gi.Gtk {
 	interface FrameClass {}
 	class FrameClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public compute_child_allocation: {(frame: Frame, allocation: Allocation): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -42697,8 +46646,7 @@ declare namespace imports.gi.Gtk {
 	interface GLAreaClass {}
 	class GLAreaClass {
 		public constructor();
-		public parent_class: WidgetClass;
-		public _padding: any[];
+		public readonly _padding: any[];
 		public render: {(area: GLArea, context: Gdk.GLContext): boolean;};
 		public resize: {(area: GLArea, width: number, height: number): void;};
 		public create_context: {(area: GLArea): Gdk.GLContext;};
@@ -42837,10 +46785,6 @@ declare namespace imports.gi.Gtk {
 	interface GridClass {}
 	class GridClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ContainerClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42859,25 +46803,21 @@ declare namespace imports.gi.Gtk {
 	interface HBoxClass {}
 	class HBoxClass {
 		public constructor();
-		public parent_class: BoxClass;
 	}
 
 	interface HButtonBoxClass {}
 	class HButtonBoxClass {
 		public constructor();
-		public parent_class: ButtonBoxClass;
 	}
 
 	interface HPanedClass {}
 	class HPanedClass {
 		public constructor();
-		public parent_class: PanedClass;
 	}
 
 	interface HSVClass {}
 	class HSVClass {
 		public constructor();
-		public parent_class: WidgetClass;
 		public changed: {(hsv: HSV): void;};
 		public move: {(hsv: HSV, _type: DirectionType): void;};
 		public _gtk_reserved1: {(): void;};
@@ -42894,28 +46834,21 @@ declare namespace imports.gi.Gtk {
 	interface HScaleClass {}
 	class HScaleClass {
 		public constructor();
-		public parent_class: ScaleClass;
 	}
 
 	interface HScrollbarClass {}
 	class HScrollbarClass {
 		public constructor();
-		public parent_class: ScrollbarClass;
 	}
 
 	interface HSeparatorClass {}
 	class HSeparatorClass {
 		public constructor();
-		public parent_class: SeparatorClass;
 	}
 
 	interface HandleBoxClass {}
 	class HandleBoxClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public child_attached: {(handle_box: HandleBox, child: Widget): void;};
 		public child_detached: {(handle_box: HandleBox, child: Widget): void;};
 		public _gtk_reserved1: {(): void;};
@@ -42932,7 +46865,6 @@ declare namespace imports.gi.Gtk {
 	interface HeaderBarAccessibleClass {}
 	class HeaderBarAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface HeaderBarAccessiblePrivate {}
@@ -42943,7 +46875,6 @@ declare namespace imports.gi.Gtk {
 	interface HeaderBarClass {}
 	class HeaderBarClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -42958,7 +46889,6 @@ declare namespace imports.gi.Gtk {
 	interface IMContextClass {}
 	class IMContextClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public preedit_start: {(context: IMContext): void;};
 		public preedit_end: {(context: IMContext): void;};
 		public preedit_changed: {(context: IMContext): void;};
@@ -43015,7 +46945,6 @@ declare namespace imports.gi.Gtk {
 	interface IMContextSimpleClass {}
 	class IMContextSimpleClass {
 		public constructor();
-		public parent_class: IMContextClass;
 	}
 
 	interface IMContextSimplePrivate {}
@@ -43026,7 +46955,6 @@ declare namespace imports.gi.Gtk {
 	interface IMMulticontextClass {}
 	class IMMulticontextClass {
 		public constructor();
-		public parent_class: IMContextClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43041,10 +46969,6 @@ declare namespace imports.gi.Gtk {
 	interface IconFactoryClass {}
 	class IconFactoryClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43398,10 +47322,6 @@ declare namespace imports.gi.Gtk {
 	interface IconThemeClass {}
 	class IconThemeClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
 		public changed: {(icon_theme: IconTheme): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -43417,7 +47337,6 @@ declare namespace imports.gi.Gtk {
 	interface IconViewAccessibleClass {}
 	class IconViewAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface IconViewAccessiblePrivate {}
@@ -43428,7 +47347,6 @@ declare namespace imports.gi.Gtk {
 	interface IconViewClass {}
 	class IconViewClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public item_activated: {(icon_view: IconView, path: TreePath): void;};
 		public selection_changed: {(icon_view: IconView): void;};
 		public select_all: {(icon_view: IconView): void;};
@@ -43451,7 +47369,6 @@ declare namespace imports.gi.Gtk {
 	interface ImageAccessibleClass {}
 	class ImageAccessibleClass {
 		public constructor();
-		public parent_class: WidgetAccessibleClass;
 	}
 
 	interface ImageAccessiblePrivate {}
@@ -43462,7 +47379,6 @@ declare namespace imports.gi.Gtk {
 	interface ImageCellAccessibleClass {}
 	class ImageCellAccessibleClass {
 		public constructor();
-		public parent_class: RendererCellAccessibleClass;
 	}
 
 	interface ImageCellAccessiblePrivate {}
@@ -43473,7 +47389,6 @@ declare namespace imports.gi.Gtk {
 	interface ImageClass {}
 	class ImageClass {
 		public constructor();
-		public parent_class: MiscClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43483,10 +47398,6 @@ declare namespace imports.gi.Gtk {
 	interface ImageMenuItemClass {}
 	class ImageMenuItemClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: MenuItemClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43506,7 +47417,6 @@ declare namespace imports.gi.Gtk {
 	interface InfoBarClass {}
 	class InfoBarClass {
 		public constructor();
-		public parent_class: BoxClass;
 		public response: {(info_bar: InfoBar, response_id: number): void;};
 		public close: {(info_bar: InfoBar): void;};
 		public _gtk_reserved1: {(): void;};
@@ -43523,7 +47433,6 @@ declare namespace imports.gi.Gtk {
 	interface InvisibleClass {}
 	class InvisibleClass {
 		public constructor();
-		public parent_class: WidgetClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43538,7 +47447,6 @@ declare namespace imports.gi.Gtk {
 	interface LabelAccessibleClass {}
 	class LabelAccessibleClass {
 		public constructor();
-		public parent_class: WidgetAccessibleClass;
 	}
 
 	interface LabelAccessiblePrivate {}
@@ -43549,7 +47457,6 @@ declare namespace imports.gi.Gtk {
 	interface LabelClass {}
 	class LabelClass {
 		public constructor();
-		public parent_class: MiscClass;
 		public move_cursor: {(label: Label, step: MovementStep, count: number, extend_selection: boolean): void;};
 		public copy_clipboard: {(label: Label): void;};
 		public populate_popup: {(label: Label, menu: Menu): void;};
@@ -43577,7 +47484,6 @@ declare namespace imports.gi.Gtk {
 	interface LayoutClass {}
 	class LayoutClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43592,7 +47498,6 @@ declare namespace imports.gi.Gtk {
 	interface LevelBarAccessibleClass {}
 	class LevelBarAccessibleClass {
 		public constructor();
-		public parent_class: WidgetAccessibleClass;
 	}
 
 	interface LevelBarAccessiblePrivate {}
@@ -43603,8 +47508,7 @@ declare namespace imports.gi.Gtk {
 	interface LevelBarClass {}
 	class LevelBarClass {
 		public constructor();
-		public parent_class: WidgetClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public offset_changed: {(self: LevelBar, name: string): void;};
 	}
 
@@ -43616,7 +47520,6 @@ declare namespace imports.gi.Gtk {
 	interface LinkButtonAccessibleClass {}
 	class LinkButtonAccessibleClass {
 		public constructor();
-		public parent_class: ButtonAccessibleClass;
 	}
 
 	interface LinkButtonAccessiblePrivate {}
@@ -43631,7 +47534,6 @@ declare namespace imports.gi.Gtk {
 	interface LinkButtonClass {}
 	class LinkButtonClass {
 		public constructor();
-		public parent_class: ButtonClass;
 		public activate_link: {(button: LinkButton): boolean;};
 		public _gtk_padding1: {(): void;};
 		public _gtk_padding2: {(): void;};
@@ -43647,7 +47549,6 @@ declare namespace imports.gi.Gtk {
 	interface ListBoxAccessibleClass {}
 	class ListBoxAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface ListBoxAccessiblePrivate {}
@@ -43658,10 +47559,6 @@ declare namespace imports.gi.Gtk {
 	interface ListBoxClass {}
 	class ListBoxClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ContainerClass;
 		public row_selected: {(box: ListBox, _row: ListBoxRow): void;};
 		public row_activated: {(box: ListBox, _row: ListBoxRow): void;};
 		public activate_cursor_row: {(box: ListBox): void;};
@@ -43678,16 +47575,11 @@ declare namespace imports.gi.Gtk {
 	interface ListBoxRowAccessibleClass {}
 	class ListBoxRowAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface ListBoxRowClass {}
 	class ListBoxRowClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public activate: {(_row: ListBoxRow): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -43696,7 +47588,6 @@ declare namespace imports.gi.Gtk {
 	interface ListStoreClass {}
 	class ListStoreClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43711,7 +47602,6 @@ declare namespace imports.gi.Gtk {
 	interface LockButtonAccessibleClass {}
 	class LockButtonAccessibleClass {
 		public constructor();
-		public parent_class: ButtonAccessibleClass;
 	}
 
 	interface LockButtonAccessiblePrivate {}
@@ -43722,10 +47612,6 @@ declare namespace imports.gi.Gtk {
 	interface LockButtonClass {}
 	class LockButtonClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ButtonClass;
 		public reserved0: {(): void;};
 		public reserved1: {(): void;};
 		public reserved2: {(): void;};
@@ -43744,7 +47630,6 @@ declare namespace imports.gi.Gtk {
 	interface MenuAccessibleClass {}
 	class MenuAccessibleClass {
 		public constructor();
-		public parent_class: MenuShellAccessibleClass;
 	}
 
 	interface MenuAccessiblePrivate {}
@@ -43755,7 +47640,6 @@ declare namespace imports.gi.Gtk {
 	interface MenuBarClass {}
 	class MenuBarClass {
 		public constructor();
-		public parent_class: MenuShellClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43770,7 +47654,6 @@ declare namespace imports.gi.Gtk {
 	interface MenuButtonAccessibleClass {}
 	class MenuButtonAccessibleClass {
 		public constructor();
-		public parent_class: ToggleButtonAccessibleClass;
 	}
 
 	interface MenuButtonAccessiblePrivate {}
@@ -43781,7 +47664,6 @@ declare namespace imports.gi.Gtk {
 	interface MenuButtonClass {}
 	class MenuButtonClass {
 		public constructor();
-		public parent_class: ToggleButtonClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43796,7 +47678,6 @@ declare namespace imports.gi.Gtk {
 	interface MenuClass {}
 	class MenuClass {
 		public constructor();
-		public parent_class: MenuShellClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43806,7 +47687,6 @@ declare namespace imports.gi.Gtk {
 	interface MenuItemAccessibleClass {}
 	class MenuItemAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface MenuItemAccessiblePrivate {}
@@ -43818,15 +47698,11 @@ declare namespace imports.gi.Gtk {
 	class MenuItemClass {
 		public constructor();
 		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
-		/**
 		 * If %TRUE, then we should always
 		 *    hide the menu when the %GtkMenuItem is activated. Otherwise,
 		 *    it is up to the caller.
 		 */
-		public hide_on_activate: number;
+		public readonly hide_on_activate: number;
 		public activate: {(menu_item: MenuItem): void;};
 		public activate_item: {(menu_item: MenuItem): void;};
 		public toggle_size_request: {(menu_item: MenuItem, requisition: number): void;};
@@ -43854,7 +47730,6 @@ declare namespace imports.gi.Gtk {
 	interface MenuShellAccessibleClass {}
 	class MenuShellAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface MenuShellAccessiblePrivate {}
@@ -43865,8 +47740,7 @@ declare namespace imports.gi.Gtk {
 	interface MenuShellClass {}
 	class MenuShellClass {
 		public constructor();
-		public parent_class: ContainerClass;
-		public submenu_placement: number;
+		public readonly submenu_placement: number;
 		public deactivate: {(menu_shell: MenuShell): void;};
 		public selection_done: {(menu_shell: MenuShell): void;};
 		public move_current: {(menu_shell: MenuShell, direction: MenuDirectionType): void;};
@@ -43890,10 +47764,6 @@ declare namespace imports.gi.Gtk {
 	interface MenuToolButtonClass {}
 	class MenuToolButtonClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ToolButtonClass;
 		public show_menu: {(button: MenuToolButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -43909,7 +47779,6 @@ declare namespace imports.gi.Gtk {
 	interface MessageDialogClass {}
 	class MessageDialogClass {
 		public constructor();
-		public parent_class: DialogClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43924,7 +47793,6 @@ declare namespace imports.gi.Gtk {
 	interface MiscClass {}
 	class MiscClass {
 		public constructor();
-		public parent_class: WidgetClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43939,10 +47807,6 @@ declare namespace imports.gi.Gtk {
 	interface MountOperationClass {}
 	class MountOperationClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: Gio.MountOperationClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -43957,7 +47821,6 @@ declare namespace imports.gi.Gtk {
 	interface NativeDialogClass {}
 	class NativeDialogClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public response: {(self: NativeDialog, response_id: number): void;};
 		public show: {(self: NativeDialog): void;};
 		public hide: {(self: NativeDialog): void;};
@@ -43970,7 +47833,6 @@ declare namespace imports.gi.Gtk {
 	interface NotebookAccessibleClass {}
 	class NotebookAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface NotebookAccessiblePrivate {}
@@ -43981,7 +47843,6 @@ declare namespace imports.gi.Gtk {
 	interface NotebookClass {}
 	class NotebookClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public switch_page: {(notebook: Notebook, page: Widget, page_num: number): void;};
 		public select_page: {(notebook: Notebook, move_focus: boolean): boolean;};
 		public focus_tab: {(notebook: Notebook, _type: NotebookTab): boolean;};
@@ -44006,7 +47867,6 @@ declare namespace imports.gi.Gtk {
 	interface NotebookPageAccessibleClass {}
 	class NotebookPageAccessibleClass {
 		public constructor();
-		public parent_class: Atk.ObjectClass;
 	}
 
 	interface NotebookPageAccessiblePrivate {}
@@ -44022,8 +47882,7 @@ declare namespace imports.gi.Gtk {
 	interface NumerableIconClass {}
 	class NumerableIconClass {
 		public constructor();
-		public parent_class: Gio.EmblemedIconClass;
-		public padding: any[];
+		public readonly padding: any[];
 	}
 
 	interface NumerableIconPrivate {}
@@ -44034,10 +47893,6 @@ declare namespace imports.gi.Gtk {
 	interface OffscreenWindowClass {}
 	class OffscreenWindowClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: WindowClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -44047,16 +47902,12 @@ declare namespace imports.gi.Gtk {
 	interface OrientableIface {}
 	class OrientableIface {
 		public constructor();
-		public base_iface: GObject.TypeInterface;
+		public readonly base_iface: GObject.TypeInterface;
 	}
 
 	interface OverlayClass {}
 	class OverlayClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public get_child_position: {(overlay: Overlay, widget: Widget, allocation: Allocation): boolean;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -44127,7 +47978,6 @@ declare namespace imports.gi.Gtk {
 	interface PanedAccessibleClass {}
 	class PanedAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface PanedAccessiblePrivate {}
@@ -44138,7 +47988,6 @@ declare namespace imports.gi.Gtk {
 	interface PanedClass {}
 	class PanedClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public cycle_child_focus: {(paned: Paned, reverse: boolean): boolean;};
 		public toggle_handle_focus: {(paned: Paned): boolean;};
 		public move_handle: {(paned: Paned, scroll: ScrollType): boolean;};
@@ -44350,7 +48199,6 @@ declare namespace imports.gi.Gtk {
 	interface PlugAccessibleClass {}
 	class PlugAccessibleClass {
 		public constructor();
-		public parent_class: WindowAccessibleClass;
 	}
 
 	interface PlugAccessiblePrivate {}
@@ -44361,7 +48209,6 @@ declare namespace imports.gi.Gtk {
 	interface PlugClass {}
 	class PlugClass {
 		public constructor();
-		public parent_class: WindowClass;
 		public embedded: {(plug: Plug): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -44377,22 +48224,19 @@ declare namespace imports.gi.Gtk {
 	interface PopoverAccessibleClass {}
 	class PopoverAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface PopoverClass {}
 	class PopoverClass {
 		public constructor();
-		public parent_class: BinClass;
-		public reserved: any[];
+		public readonly reserved: any[];
 		public closed: {(popover: Popover): void;};
 	}
 
 	interface PopoverMenuClass {}
 	class PopoverMenuClass {
 		public constructor();
-		public parent_class: PopoverClass;
-		public reserved: any[];
+		public readonly reserved: any[];
 	}
 
 	interface PopoverPrivate {}
@@ -44403,10 +48247,6 @@ declare namespace imports.gi.Gtk {
 	interface PrintOperationClass {}
 	class PrintOperationClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
 		public done: {(operation: PrintOperation, result: PrintOperationResult): void;};
 		public begin_print: {(operation: PrintOperation, context: PrintContext): void;};
 		public paginate: {(operation: PrintOperation, context: PrintContext): boolean;};
@@ -44431,7 +48271,7 @@ declare namespace imports.gi.Gtk {
 	interface PrintOperationPreviewIface {}
 	class PrintOperationPreviewIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public ready: {(preview: PrintOperationPreview, context: PrintContext): void;};
 		public got_page_size: {(preview: PrintOperationPreview, context: PrintContext, page_setup: PageSetup): void;};
 		public render_page: {(preview: PrintOperationPreview, page_nr: number): void;};
@@ -44455,7 +48295,6 @@ declare namespace imports.gi.Gtk {
 	interface ProgressBarAccessibleClass {}
 	class ProgressBarAccessibleClass {
 		public constructor();
-		public parent_class: WidgetAccessibleClass;
 	}
 
 	interface ProgressBarAccessiblePrivate {}
@@ -44466,7 +48305,6 @@ declare namespace imports.gi.Gtk {
 	interface ProgressBarClass {}
 	class ProgressBarClass {
 		public constructor();
-		public parent_class: WidgetClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -44481,7 +48319,6 @@ declare namespace imports.gi.Gtk {
 	interface RadioActionClass {}
 	class RadioActionClass {
 		public constructor();
-		public parent_class: ToggleActionClass;
 		public changed: {(action: RadioAction, current: RadioAction): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -44535,7 +48372,6 @@ declare namespace imports.gi.Gtk {
 	interface RadioButtonAccessibleClass {}
 	class RadioButtonAccessibleClass {
 		public constructor();
-		public parent_class: ToggleButtonAccessibleClass;
 	}
 
 	interface RadioButtonAccessiblePrivate {}
@@ -44546,7 +48382,6 @@ declare namespace imports.gi.Gtk {
 	interface RadioButtonClass {}
 	class RadioButtonClass {
 		public constructor();
-		public parent_class: CheckButtonClass;
 		public group_changed: {(radio_button: RadioButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -44562,7 +48397,6 @@ declare namespace imports.gi.Gtk {
 	interface RadioMenuItemAccessibleClass {}
 	class RadioMenuItemAccessibleClass {
 		public constructor();
-		public parent_class: CheckMenuItemAccessibleClass;
 	}
 
 	interface RadioMenuItemAccessiblePrivate {}
@@ -44573,7 +48407,6 @@ declare namespace imports.gi.Gtk {
 	interface RadioMenuItemClass {}
 	class RadioMenuItemClass {
 		public constructor();
-		public parent_class: CheckMenuItemClass;
 		public group_changed: {(radio_menu_item: RadioMenuItem): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -44589,7 +48422,6 @@ declare namespace imports.gi.Gtk {
 	interface RadioToolButtonClass {}
 	class RadioToolButtonClass {
 		public constructor();
-		public parent_class: ToggleToolButtonClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -44599,7 +48431,6 @@ declare namespace imports.gi.Gtk {
 	interface RangeAccessibleClass {}
 	class RangeAccessibleClass {
 		public constructor();
-		public parent_class: WidgetAccessibleClass;
 	}
 
 	interface RangeAccessiblePrivate {}
@@ -44610,9 +48441,8 @@ declare namespace imports.gi.Gtk {
 	interface RangeClass {}
 	class RangeClass {
 		public constructor();
-		public parent_class: WidgetClass;
-		public slider_detail: string;
-		public stepper_detail: string;
+		public readonly slider_detail: string;
+		public readonly stepper_detail: string;
 		public value_changed: {(range: Range): void;};
 		public adjust_bounds: {(range: Range, new_value: number): void;};
 		public move_slider: {(range: Range, scroll: ScrollType): void;};
@@ -44662,10 +48492,6 @@ declare namespace imports.gi.Gtk {
 	interface RcStyleClass {}
 	class RcStyleClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
 		public create_rc_style: {(rc_style: RcStyle): RcStyle;};
 		public parse: {(rc_style: RcStyle, settings: Settings, scanner: GLib.Scanner): number;};
 		public merge: {(dest: RcStyle, src: RcStyle): void;};
@@ -44679,7 +48505,6 @@ declare namespace imports.gi.Gtk {
 	interface RecentActionClass {}
 	class RecentActionClass {
 		public constructor();
-		public parent_class: ActionClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -44694,7 +48519,6 @@ declare namespace imports.gi.Gtk {
 	interface RecentChooserDialogClass {}
 	class RecentChooserDialogClass {
 		public constructor();
-		public parent_class: DialogClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -44709,7 +48533,7 @@ declare namespace imports.gi.Gtk {
 	interface RecentChooserIface {}
 	class RecentChooserIface {
 		public constructor();
-		public base_iface: GObject.TypeInterface;
+		public readonly base_iface: GObject.TypeInterface;
 		public set_current_uri: {(chooser: RecentChooser, uri: string): boolean;};
 		public get_current_uri: {(chooser: RecentChooser): string;};
 		public select_uri: {(chooser: RecentChooser, uri: string): boolean;};
@@ -44729,7 +48553,6 @@ declare namespace imports.gi.Gtk {
 	interface RecentChooserMenuClass {}
 	class RecentChooserMenuClass {
 		public constructor();
-		public parent_class: MenuClass;
 		public gtk_recent1: {(): void;};
 		public gtk_recent2: {(): void;};
 		public gtk_recent3: {(): void;};
@@ -44744,7 +48567,6 @@ declare namespace imports.gi.Gtk {
 	interface RecentChooserWidgetClass {}
 	class RecentChooserWidgetClass {
 		public constructor();
-		public parent_class: BoxClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45048,7 +48870,6 @@ declare namespace imports.gi.Gtk {
 	interface RecentManagerClass {}
 	class RecentManagerClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public changed: {(manager: RecentManager): void;};
 		public _gtk_recent1: {(): void;};
 		public _gtk_recent2: {(): void;};
@@ -45064,7 +48885,6 @@ declare namespace imports.gi.Gtk {
 	interface RendererCellAccessibleClass {}
 	class RendererCellAccessibleClass {
 		public constructor();
-		public parent_class: CellAccessibleClass;
 	}
 
 	interface RendererCellAccessiblePrivate {}
@@ -45130,16 +48950,11 @@ declare namespace imports.gi.Gtk {
 	interface RevealerClass {}
 	class RevealerClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 	}
 
 	interface ScaleAccessibleClass {}
 	class ScaleAccessibleClass {
 		public constructor();
-		public parent_class: RangeAccessibleClass;
 	}
 
 	interface ScaleAccessiblePrivate {}
@@ -45150,7 +48965,6 @@ declare namespace imports.gi.Gtk {
 	interface ScaleButtonAccessibleClass {}
 	class ScaleButtonAccessibleClass {
 		public constructor();
-		public parent_class: ButtonAccessibleClass;
 	}
 
 	interface ScaleButtonAccessiblePrivate {}
@@ -45161,7 +48975,6 @@ declare namespace imports.gi.Gtk {
 	interface ScaleButtonClass {}
 	class ScaleButtonClass {
 		public constructor();
-		public parent_class: ButtonClass;
 		public value_changed: {(button: ScaleButton, value: number): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -45177,7 +48990,6 @@ declare namespace imports.gi.Gtk {
 	interface ScaleClass {}
 	class ScaleClass {
 		public constructor();
-		public parent_class: RangeClass;
 		public format_value: {(scale: Scale, value: number): string;};
 		public draw_value: {(scale: Scale): void;};
 		public get_layout_offsets: {(scale: Scale, _x: number, _y: number): void;};
@@ -45195,14 +49007,13 @@ declare namespace imports.gi.Gtk {
 	interface ScrollableInterface {}
 	class ScrollableInterface {
 		public constructor();
-		public base_iface: GObject.TypeInterface;
+		public readonly base_iface: GObject.TypeInterface;
 		public get_border: {(scrollable: Scrollable, border: Border): boolean;};
 	}
 
 	interface ScrollbarClass {}
 	class ScrollbarClass {
 		public constructor();
-		public parent_class: RangeClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45212,7 +49023,6 @@ declare namespace imports.gi.Gtk {
 	interface ScrolledWindowAccessibleClass {}
 	class ScrolledWindowAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface ScrolledWindowAccessiblePrivate {}
@@ -45223,11 +49033,7 @@ declare namespace imports.gi.Gtk {
 	interface ScrolledWindowClass {}
 	class ScrolledWindowClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
-		public scrollbar_spacing: number;
+		public readonly scrollbar_spacing: number;
 		public scroll_child: {(scrolled_window: ScrolledWindow, scroll: ScrollType, horizontal: boolean): boolean;};
 		public move_focus_out: {(scrolled_window: ScrolledWindow, direction: DirectionType): void;};
 		public _gtk_reserved1: {(): void;};
@@ -45244,10 +49050,6 @@ declare namespace imports.gi.Gtk {
 	interface SearchBarClass {}
 	class SearchBarClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45257,7 +49059,6 @@ declare namespace imports.gi.Gtk {
 	interface SearchEntryClass {}
 	class SearchEntryClass {
 		public constructor();
-		public parent_class: EntryClass;
 		public search_changed: {(entry: SearchEntry): void;};
 		public next_match: {(entry: SearchEntry): void;};
 		public previous_match: {(entry: SearchEntry): void;};
@@ -45437,7 +49238,6 @@ declare namespace imports.gi.Gtk {
 	interface SeparatorClass {}
 	class SeparatorClass {
 		public constructor();
-		public parent_class: WidgetClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45447,10 +49247,6 @@ declare namespace imports.gi.Gtk {
 	interface SeparatorMenuItemClass {}
 	class SeparatorMenuItemClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: MenuItemClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45465,10 +49261,6 @@ declare namespace imports.gi.Gtk {
 	interface SeparatorToolItemClass {}
 	class SeparatorToolItemClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ToolItemClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45483,7 +49275,6 @@ declare namespace imports.gi.Gtk {
 	interface SettingsClass {}
 	class SettingsClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45533,7 +49324,6 @@ declare namespace imports.gi.Gtk {
 	interface ShortcutsWindowClass {}
 	class ShortcutsWindowClass {
 		public constructor();
-		public parent_class: WindowClass;
 		public close: {(self: ShortcutsWindow): void;};
 		public search: {(self: ShortcutsWindow): void;};
 	}
@@ -45541,7 +49331,6 @@ declare namespace imports.gi.Gtk {
 	interface SizeGroupClass {}
 	class SizeGroupClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45556,7 +49345,6 @@ declare namespace imports.gi.Gtk {
 	interface SocketAccessibleClass {}
 	class SocketAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface SocketAccessiblePrivate {}
@@ -45567,7 +49355,6 @@ declare namespace imports.gi.Gtk {
 	interface SocketClass {}
 	class SocketClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public plug_added: {(socket_: Socket): void;};
 		public plug_removed: {(socket_: Socket): boolean;};
 		public _gtk_reserved1: {(): void;};
@@ -45584,7 +49371,6 @@ declare namespace imports.gi.Gtk {
 	interface SpinButtonAccessibleClass {}
 	class SpinButtonAccessibleClass {
 		public constructor();
-		public parent_class: EntryAccessibleClass;
 	}
 
 	interface SpinButtonAccessiblePrivate {}
@@ -45595,7 +49381,6 @@ declare namespace imports.gi.Gtk {
 	interface SpinButtonClass {}
 	class SpinButtonClass {
 		public constructor();
-		public parent_class: EntryClass;
 		public input: {(spin_button: SpinButton, new_value: number): number;};
 		public output: {(spin_button: SpinButton): number;};
 		public value_changed: {(spin_button: SpinButton): void;};
@@ -45615,7 +49400,6 @@ declare namespace imports.gi.Gtk {
 	interface SpinnerAccessibleClass {}
 	class SpinnerAccessibleClass {
 		public constructor();
-		public parent_class: WidgetAccessibleClass;
 	}
 
 	interface SpinnerAccessiblePrivate {}
@@ -45626,7 +49410,6 @@ declare namespace imports.gi.Gtk {
 	interface SpinnerClass {}
 	class SpinnerClass {
 		public constructor();
-		public parent_class: WidgetClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45641,19 +49424,16 @@ declare namespace imports.gi.Gtk {
 	interface StackAccessibleClass {}
 	class StackAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface StackClass {}
 	class StackClass {
 		public constructor();
-		public parent_class: ContainerClass;
 	}
 
 	interface StackSidebarClass {}
 	class StackSidebarClass {
 		public constructor();
-		public parent_class: BinClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45668,7 +49448,6 @@ declare namespace imports.gi.Gtk {
 	interface StackSwitcherClass {}
 	class StackSwitcherClass {
 		public constructor();
-		public parent_class: BoxClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45678,7 +49457,6 @@ declare namespace imports.gi.Gtk {
 	interface StatusIconClass {}
 	class StatusIconClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public activate: {(status_icon: StatusIcon): void;};
 		public popup_menu: {(status_icon: StatusIcon, button: number, activate_time: number): void;};
 		public size_changed: {(status_icon: StatusIcon, size: number): boolean;};
@@ -45700,7 +49478,6 @@ declare namespace imports.gi.Gtk {
 	interface StatusbarAccessibleClass {}
 	class StatusbarAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface StatusbarAccessiblePrivate {}
@@ -45711,8 +49488,7 @@ declare namespace imports.gi.Gtk {
 	interface StatusbarClass {}
 	class StatusbarClass {
 		public constructor();
-		public parent_class: BoxClass;
-		public reserved: any;
+		public readonly reserved: any;
 		public text_pushed: {(statusbar: Statusbar, context_id: number, text: string): void;};
 		public text_popped: {(statusbar: Statusbar, context_id: number, text: string): void;};
 		public _gtk_reserved1: {(): void;};
@@ -45765,10 +49541,6 @@ declare namespace imports.gi.Gtk {
 	interface StyleClass {}
 	class StyleClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
 		public realize: {(style: Style): void;};
 		public unrealize: {(style: Style): void;};
 		public copy: {(style: Style, src: Style): void;};
@@ -45812,7 +49584,6 @@ declare namespace imports.gi.Gtk {
 	interface StyleContextClass {}
 	class StyleContextClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public changed: {(context: StyleContext): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -45828,7 +49599,6 @@ declare namespace imports.gi.Gtk {
 	interface StylePropertiesClass {}
 	class StylePropertiesClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -45843,7 +49613,7 @@ declare namespace imports.gi.Gtk {
 	interface StyleProviderIface {}
 	class StyleProviderIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public get_style: {(provider: StyleProvider, path: WidgetPath): StyleProperties;};
 		public get_style_property: {(provider: StyleProvider, path: WidgetPath, state: StateFlags, pspec: GObject.ParamSpec, value: GObject.Value): boolean;};
 		public get_icon_factory: {(provider: StyleProvider, path: WidgetPath): IconFactory;};
@@ -45852,7 +49622,6 @@ declare namespace imports.gi.Gtk {
 	interface SwitchAccessibleClass {}
 	class SwitchAccessibleClass {
 		public constructor();
-		public parent_class: WidgetAccessibleClass;
 	}
 
 	interface SwitchAccessiblePrivate {}
@@ -45863,10 +49632,6 @@ declare namespace imports.gi.Gtk {
 	interface SwitchClass {}
 	class SwitchClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: WidgetClass;
 		public activate: {(_sw: Switch): void;};
 		public state_set: {(_sw: Switch, state: boolean): boolean;};
 		public _switch_padding_1: {(): void;};
@@ -46014,7 +49779,6 @@ declare namespace imports.gi.Gtk {
 	interface TableClass {}
 	class TableClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -46197,10 +49961,6 @@ declare namespace imports.gi.Gtk {
 	interface TearoffMenuItemClass {}
 	class TearoffMenuItemClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: MenuItemClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -46272,7 +50032,7 @@ declare namespace imports.gi.Gtk {
 		 *     free with gtk_text_attributes_unref().
 		 */
 		public static new(): TextAttributes;
-		public refcount: number;
+		public readonly refcount: number;
 		/**
 		 * {@link TextAppearance} for text.
 		 */
@@ -46330,7 +50090,7 @@ declare namespace imports.gi.Gtk {
 		 * #PangoLanguage for text.
 		 */
 		public language: Pango.Language;
-		public pg_bg_color: Gdk.Color;
+		public readonly pg_bg_color: Gdk.Color;
 		/**
 		 * Hide the text.
 		 */
@@ -46348,7 +50108,7 @@ declare namespace imports.gi.Gtk {
 		 * Whether to disable font fallback.
 		 */
 		public no_fallback: number;
-		public pg_bg_rgba: Gdk.RGBA;
+		public readonly pg_bg_rgba: Gdk.RGBA;
 		/**
 		 * Extra space to insert between graphemes, in Pango units
 		 */
@@ -46385,10 +50145,6 @@ declare namespace imports.gi.Gtk {
 	interface TextBufferClass {}
 	class TextBufferClass {
 		public constructor();
-		/**
-		 * The object class structure needs to be the first.
-		 */
-		public parent_class: GObject.ObjectClass;
 		public insert_text: {(buffer: TextBuffer, pos: TextIter, new_text: string, new_text_length: number): void;};
 		public insert_pixbuf: {(buffer: TextBuffer, iter: TextIter, pixbuf: GdkPixbuf.Pixbuf): void;};
 		public insert_child_anchor: {(buffer: TextBuffer, iter: TextIter, anchor: TextChildAnchor): void;};
@@ -46416,7 +50172,6 @@ declare namespace imports.gi.Gtk {
 	interface TextCellAccessibleClass {}
 	class TextCellAccessibleClass {
 		public constructor();
-		public parent_class: RendererCellAccessibleClass;
 	}
 
 	interface TextCellAccessiblePrivate {}
@@ -46427,7 +50182,6 @@ declare namespace imports.gi.Gtk {
 	interface TextChildAnchorClass {}
 	class TextChildAnchorClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -46443,20 +50197,20 @@ declare namespace imports.gi.Gtk {
 	interface TextIter {}
 	class TextIter {
 		public constructor();
-		public dummy1: any;
-		public dummy2: any;
-		public dummy3: number;
-		public dummy4: number;
-		public dummy5: number;
-		public dummy6: number;
-		public dummy7: number;
-		public dummy8: number;
-		public dummy9: any;
-		public dummy10: any;
-		public dummy11: number;
-		public dummy12: number;
-		public dummy13: number;
-		public dummy14: any;
+		public readonly dummy1: any;
+		public readonly dummy2: any;
+		public readonly dummy3: number;
+		public readonly dummy4: number;
+		public readonly dummy5: number;
+		public readonly dummy6: number;
+		public readonly dummy7: number;
+		public readonly dummy8: number;
+		public readonly dummy9: any;
+		public readonly dummy10: any;
+		public readonly dummy11: number;
+		public readonly dummy12: number;
+		public readonly dummy13: number;
+		public readonly dummy14: any;
 		/**
 		 * Assigns the value of #other to #iter.  This function
 		 * is not useful in applications, because iterators can be assigned
@@ -47293,7 +51047,6 @@ declare namespace imports.gi.Gtk {
 	interface TextMarkClass {}
 	class TextMarkClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -47303,7 +51056,6 @@ declare namespace imports.gi.Gtk {
 	interface TextTagClass {}
 	class TextTagClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public event: {(tag: TextTag, event_object: GObject.Object, event: Gdk.Event, iter: TextIter): boolean;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -47319,7 +51071,6 @@ declare namespace imports.gi.Gtk {
 	interface TextTagTableClass {}
 	class TextTagTableClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public tag_changed: {(table: TextTagTable, tag: TextTag, size_changed: boolean): void;};
 		public tag_added: {(table: TextTagTable, tag: TextTag): void;};
 		public tag_removed: {(table: TextTagTable, tag: TextTag): void;};
@@ -47337,7 +51088,6 @@ declare namespace imports.gi.Gtk {
 	interface TextViewAccessibleClass {}
 	class TextViewAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface TextViewAccessiblePrivate {}
@@ -47348,10 +51098,6 @@ declare namespace imports.gi.Gtk {
 	interface TextViewClass {}
 	class TextViewClass {
 		public constructor();
-		/**
-		 * The object class structure needs to be the first
-		 */
-		public parent_class: ContainerClass;
 		public populate_popup: {(text_view: TextView, popup: Widget): void;};
 		public move_cursor: {(text_view: TextView, step: MovementStep, count: number, extend_selection: boolean): void;};
 		public set_anchor: {(text_view: TextView): void;};
@@ -47388,11 +51134,7 @@ declare namespace imports.gi.Gtk {
 	interface ThemingEngineClass {}
 	class ThemingEngineClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
-		public padding: any[];
+		public readonly padding: any[];
 		public render_line: {(engine: ThemingEngine, cr: cairo.Context, x0: number, y0: number, x1: number, y1: number): void;};
 		public render_background: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;};
 		public render_frame: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;};
@@ -47420,7 +51162,6 @@ declare namespace imports.gi.Gtk {
 	interface ToggleActionClass {}
 	class ToggleActionClass {
 		public constructor();
-		public parent_class: ActionClass;
 		public toggled: {(action: ToggleAction): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -47477,7 +51218,6 @@ declare namespace imports.gi.Gtk {
 	interface ToggleButtonAccessibleClass {}
 	class ToggleButtonAccessibleClass {
 		public constructor();
-		public parent_class: ButtonAccessibleClass;
 	}
 
 	interface ToggleButtonAccessiblePrivate {}
@@ -47488,7 +51228,6 @@ declare namespace imports.gi.Gtk {
 	interface ToggleButtonClass {}
 	class ToggleButtonClass {
 		public constructor();
-		public parent_class: ButtonClass;
 		public toggled: {(toggle_button: ToggleButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -47504,10 +51243,6 @@ declare namespace imports.gi.Gtk {
 	interface ToggleToolButtonClass {}
 	class ToggleToolButtonClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ToolButtonClass;
 		public toggled: {(button: ToggleToolButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -47523,11 +51258,7 @@ declare namespace imports.gi.Gtk {
 	interface ToolButtonClass {}
 	class ToolButtonClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ToolItemClass;
-		public button_type: GObject.Type;
+		public readonly button_type: GObject.Type;
 		public clicked: {(tool_item: ToolButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -47543,10 +51274,6 @@ declare namespace imports.gi.Gtk {
 	interface ToolItemClass {}
 	class ToolItemClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public create_menu_proxy: {(tool_item: ToolItem): boolean;};
 		public toolbar_reconfigured: {(tool_item: ToolItem): void;};
 		public _gtk_reserved1: {(): void;};
@@ -47558,10 +51285,6 @@ declare namespace imports.gi.Gtk {
 	interface ToolItemGroupClass {}
 	class ToolItemGroupClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ContainerClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -47581,10 +51304,6 @@ declare namespace imports.gi.Gtk {
 	interface ToolPaletteClass {}
 	class ToolPaletteClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: ContainerClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -47602,7 +51321,7 @@ declare namespace imports.gi.Gtk {
 	interface ToolShellIface {}
 	class ToolShellIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public get_icon_size: {(shell: ToolShell): IconSize;};
 		public get_orientation: {(shell: ToolShell): Orientation;};
 		public get_style: {(shell: ToolShell): ToolbarStyle;};
@@ -47617,7 +51336,6 @@ declare namespace imports.gi.Gtk {
 	interface ToolbarClass {}
 	class ToolbarClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public orientation_changed: {(toolbar: Toolbar, orientation: Orientation): void;};
 		public style_changed: {(toolbar: Toolbar, style: ToolbarStyle): void;};
 		public popup_context_menu: {(toolbar: Toolbar, _x: number, _y: number, button_number: number): boolean;};
@@ -47635,7 +51353,6 @@ declare namespace imports.gi.Gtk {
 	interface ToplevelAccessibleClass {}
 	class ToplevelAccessibleClass {
 		public constructor();
-		public parent_class: Atk.ObjectClass;
 	}
 
 	interface ToplevelAccessiblePrivate {}
@@ -47646,7 +51363,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeDragDestIface {}
 	class TreeDragDestIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public drag_data_received: {(drag_dest: TreeDragDest, dest: TreePath, selection_data: SelectionData): boolean;};
 		public row_drop_possible: {(drag_dest: TreeDragDest, dest_path: TreePath, selection_data: SelectionData): boolean;};
 	}
@@ -47654,7 +51371,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeDragSourceIface {}
 	class TreeDragSourceIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public row_draggable: {(drag_source: TreeDragSource, path: TreePath): boolean;};
 		public drag_data_get: {(drag_source: TreeDragSource, path: TreePath, selection_data: SelectionData): boolean;};
 		public drag_data_delete: {(drag_source: TreeDragSource, path: TreePath): boolean;};
@@ -47707,7 +51424,6 @@ declare namespace imports.gi.Gtk {
 	interface TreeModelFilterClass {}
 	class TreeModelFilterClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public visible: {(self: TreeModelFilter, child_model: TreeModel, iter: TreeIter): boolean;};
 		public modify: {(self: TreeModelFilter, child_model: TreeModel, iter: TreeIter, value: GObject.Value, column: number): void;};
 		public _gtk_reserved1: {(): void;};
@@ -47724,7 +51440,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeModelIface {}
 	class TreeModelIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public row_changed: {(tree_model: TreeModel, path: TreePath, iter: TreeIter): void;};
 		public row_inserted: {(tree_model: TreeModel, path: TreePath, iter: TreeIter): void;};
 		public row_has_child_toggled: {(tree_model: TreeModel, path: TreePath, iter: TreeIter): void;};
@@ -47750,7 +51466,6 @@ declare namespace imports.gi.Gtk {
 	interface TreeModelSortClass {}
 	class TreeModelSortClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -47989,10 +51704,6 @@ declare namespace imports.gi.Gtk {
 	interface TreeSelectionClass {}
 	class TreeSelectionClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
 		public changed: {(selection: TreeSelection): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -48008,7 +51719,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeSortableIface {}
 	class TreeSortableIface {
 		public constructor();
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 		public sort_column_changed: {(sortable: TreeSortable): void;};
 		public get_sort_column_id: {(sortable: TreeSortable, sort_column_id: number, order: SortType): boolean;};
 		public set_sort_column_id: {(sortable: TreeSortable, sort_column_id: number, order: SortType): void;};
@@ -48020,7 +51731,6 @@ declare namespace imports.gi.Gtk {
 	interface TreeStoreClass {}
 	class TreeStoreClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -48035,7 +51745,6 @@ declare namespace imports.gi.Gtk {
 	interface TreeViewAccessibleClass {}
 	class TreeViewAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface TreeViewAccessiblePrivate {}
@@ -48046,7 +51755,6 @@ declare namespace imports.gi.Gtk {
 	interface TreeViewClass {}
 	class TreeViewClass {
 		public constructor();
-		public parent_class: ContainerClass;
 		public row_activated: {(tree_view: TreeView, path: TreePath, column: TreeViewColumn): void;};
 		public test_expand_row: {(tree_view: TreeView, iter: TreeIter, path: TreePath): boolean;};
 		public test_collapse_row: {(tree_view: TreeView, iter: TreeIter, path: TreePath): boolean;};
@@ -48075,7 +51783,6 @@ declare namespace imports.gi.Gtk {
 	interface TreeViewColumnClass {}
 	class TreeViewColumnClass {
 		public constructor();
-		public parent_class: GObject.InitiallyUnownedClass;
 		public clicked: {(tree_column: TreeViewColumn): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -48096,7 +51803,6 @@ declare namespace imports.gi.Gtk {
 	interface UIManagerClass {}
 	class UIManagerClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public add_widget: {(manager: UIManager, widget: Widget): void;};
 		public actions_changed: {(manager: UIManager): void;};
 		public connect_proxy: {(manager: UIManager, action: Action, proxy: Widget): void;};
@@ -48119,46 +51825,36 @@ declare namespace imports.gi.Gtk {
 	interface VBoxClass {}
 	class VBoxClass {
 		public constructor();
-		public parent_class: BoxClass;
 	}
 
 	interface VButtonBoxClass {}
 	class VButtonBoxClass {
 		public constructor();
-		public parent_class: ButtonBoxClass;
 	}
 
 	interface VPanedClass {}
 	class VPanedClass {
 		public constructor();
-		public parent_class: PanedClass;
 	}
 
 	interface VScaleClass {}
 	class VScaleClass {
 		public constructor();
-		public parent_class: ScaleClass;
 	}
 
 	interface VScrollbarClass {}
 	class VScrollbarClass {
 		public constructor();
-		public parent_class: ScrollbarClass;
 	}
 
 	interface VSeparatorClass {}
 	class VSeparatorClass {
 		public constructor();
-		public parent_class: SeparatorClass;
 	}
 
 	interface ViewportClass {}
 	class ViewportClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -48173,7 +51869,6 @@ declare namespace imports.gi.Gtk {
 	interface VolumeButtonClass {}
 	class VolumeButtonClass {
 		public constructor();
-		public parent_class: ScaleButtonClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -48183,7 +51878,6 @@ declare namespace imports.gi.Gtk {
 	interface WidgetAccessibleClass {}
 	class WidgetAccessibleClass {
 		public constructor();
-		public parent_class: AccessibleClass;
 		public notify_gtk: {(object: GObject.Object, pspec: GObject.ParamSpec): void;};
 	}
 
@@ -48196,19 +51890,11 @@ declare namespace imports.gi.Gtk {
 	class WidgetClass {
 		public constructor();
 		/**
-		 * The object class structure needs to be the first
-		 *   element in the widget class structure in order for the class mechanism
-		 *   to work correctly. This allows a GtkWidgetClass pointer to be cast to
-		 *   a GObjectClass pointer.
-		 */
-		public parent_class: GObject.InitiallyUnownedClass;
-		/**
 		 * The signal to emit when a widget of this class is
 		 *   activated, gtk_widget_activate() handles the emission.
 		 *   Implementation of this signal is optional.
 		 */
-		public activate_signal: number;
-		public priv: WidgetClassPrivate;
+		public readonly activate_signal: number;
 		public dispatch_child_properties_changed: {(widget: Widget, n_pspecs: number, pspecs: GObject.ParamSpec): void;};
 		public destroy: {(widget: Widget): void;};
 		public show: {(widget: Widget): void;};
@@ -48806,7 +52492,6 @@ declare namespace imports.gi.Gtk {
 	interface WindowAccessibleClass {}
 	class WindowAccessibleClass {
 		public constructor();
-		public parent_class: ContainerAccessibleClass;
 	}
 
 	interface WindowAccessiblePrivate {}
@@ -48817,10 +52502,6 @@ declare namespace imports.gi.Gtk {
 	interface WindowClass {}
 	class WindowClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: BinClass;
 		public set_focus: {(window: Window, focus: Widget): void;};
 		public activate_focus: {(window: Window): void;};
 		public activate_default: {(window: Window): void;};
@@ -48839,7 +52520,6 @@ declare namespace imports.gi.Gtk {
 	interface WindowGroupClass {}
 	class WindowGroupClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -48886,8 +52566,6 @@ declare namespace imports.gi.Gtk {
 	interface _MountOperationHandlerProxy {}
 	class _MountOperationHandlerProxy {
 		public constructor();
-		public parent_instance: Gio.DBusProxy;
-		public priv: any;
 	}
 
 	/**
@@ -48896,10 +52574,6 @@ declare namespace imports.gi.Gtk {
 	interface _MountOperationHandlerProxyClass {}
 	class _MountOperationHandlerProxyClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: Gio.DBusProxyClass;
 	}
 
 	interface _MountOperationHandlerProxyPrivate {}
@@ -48913,8 +52587,6 @@ declare namespace imports.gi.Gtk {
 	interface _MountOperationHandlerSkeleton {}
 	class _MountOperationHandlerSkeleton {
 		public constructor();
-		public parent_instance: Gio.DBusInterfaceSkeleton;
-		public priv: any;
 	}
 
 	/**
@@ -48923,10 +52595,6 @@ declare namespace imports.gi.Gtk {
 	interface _MountOperationHandlerSkeletonClass {}
 	class _MountOperationHandlerSkeletonClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: Gio.DBusInterfaceSkeletonClass;
 	}
 
 	interface _MountOperationHandlerSkeletonPrivate {}
@@ -48938,6 +52606,8 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Actionable} instead.
 	 */
 	interface IActionable {
+		action_name: string;
+		action_target: GLib.Variant;
 		/**
 		 * Gets the action name for #actionable.
 		 * 
@@ -49051,6 +52721,27 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Activatable} instead.
 	 */
 	interface IActivatable {
+		/**
+		 * The action that this activatable will activate and receive
+		 * updates from for various states and possibly appearance.
+		 * 
+		 * > {@link Activatable} implementors need to handle the this property and
+		 * > call gtk_activatable_do_set_related_action() when it changes.
+		 */
+		related_action: Action;
+		/**
+		 * Whether this activatable should reset its layout
+		 * and appearance when setting the related action or when
+		 * the action changes appearance.
+		 * 
+		 * See the {@link Action} documentation directly to find which properties
+		 * should be ignored by the #GtkActivatable when this property is %FALSE.
+		 * 
+		 * > #GtkActivatable implementors need to handle this property
+		 * > and call gtk_activatable_sync_action_properties() on the activatable
+		 * > widget when it changes.
+		 */
+		use_action_appearance: boolean;
 		/**
 		 * This is a utility function for {@link Activatable} implementors.
 		 * 
@@ -49365,6 +53056,13 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IAppChooser {
 		/**
+		 * The content type of the {@link AppChooser} object.
+		 * 
+		 * See [GContentType][gio-GContentType]
+		 * for more information about content types.
+		 */
+		content_type: string;
+		/**
 		 * Returns the currently selected application.
 		 * @returns a #GAppInfo for the currently selected
 		 *     application, or %NULL if none is selected. Free with g_object_unref()
@@ -49566,6 +53264,10 @@ declare namespace imports.gi.Gtk {
 	 * use {@link CellEditable} instead.
 	 */
 	interface ICellEditable {
+		/**
+		 * Indicates whether editing on the cell has been canceled.
+		 */
+		editing_canceled: boolean;
 		/**
 		 * Emits the {@link CellEditable}::editing-done signal.
 		 */
@@ -49830,6 +53532,22 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IColorChooser {
 		/**
+		 * The ::rgba property contains the currently selected color,
+		 * as a #GdkRGBA struct. The property can be set to change
+		 * the current selection programmatically.
+		 */
+		rgba: Gdk.RGBA;
+		/**
+		 * When ::use-alpha is %TRUE, colors may have alpha (translucency)
+		 * information. When it is %FALSE, the #GdkRGBA struct obtained
+		 * via the {@link ColorChooser}:rgba property will be forced to have
+		 * alpha == 1.
+		 * 
+		 * Implementations are expected to show alpha by rendering the color
+		 * over a non-uniform background (like a checkerboard pattern).
+		 */
+		use_alpha: boolean;
+		/**
 		 * Adds a palette to the color chooser. If #orientation is horizontal,
 		 * the colors are grouped in rows, with #colors_per_line colors
 		 * in each row. If #horizontal is %FALSE, the colors are grouped
@@ -50069,6 +53787,26 @@ declare namespace imports.gi.Gtk {
 	 * use {@link FileChooser} instead.
 	 */
 	interface IFileChooser {
+		action: FileChooserAction;
+		/**
+		 * Whether a file chooser not in %GTK_FILE_CHOOSER_ACTION_OPEN mode
+		 * will offer the user to create new folders.
+		 */
+		create_folders: boolean;
+		/**
+		 * Whether a file chooser in %GTK_FILE_CHOOSER_ACTION_SAVE mode
+		 * will present an overwrite confirmation dialog if the user
+		 * selects a file name that already exists.
+		 */
+		do_overwrite_confirmation: boolean;
+		extra_widget: Widget;
+		filter: FileFilter;
+		local_only: boolean;
+		preview_widget: Widget;
+		preview_widget_active: boolean;
+		select_multiple: boolean;
+		show_hidden: boolean;
+		use_preview_label: boolean;
 		/**
 		 * Adds a 'choice' to the file chooser. This is typically implemented
 		 * as a combobox or, for boolean choices, as a checkbutton. You can select
@@ -50863,6 +54601,37 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IFontChooser {
 		/**
+		 * The font description as a string, e.g. "Sans Italic 12".
+		 */
+		font: string;
+		/**
+		 * The font description as a #PangoFontDescription.
+		 */
+		font_desc: Pango.FontDescription;
+		/**
+		 * The selected font features, in a format that is compatible with
+		 * CSS and with Pango attributes.
+		 */
+		readonly font_features: string;
+		/**
+		 * The language for which the {@link FontChooser}:font-features were
+		 * selected, in a format that is compatible with CSS and with Pango
+		 * attributes.
+		 */
+		language: string;
+		/**
+		 * The level of granularity to offer for selecting fonts.
+		 */
+		level: FontChooserLevel;
+		/**
+		 * The string with which to preview the font.
+		 */
+		preview_text: string;
+		/**
+		 * Whether to show an entry to change the preview text.
+		 */
+		show_preview_entry: boolean;
+		/**
 		 * Gets the currently-selected font name.
 		 * 
 		 * Note that this can be a different string than what you set with
@@ -51045,6 +54814,10 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IOrientable {
 		/**
+		 * The orientation of the orientable.
+		 */
+		orientation: Orientation;
+		/**
 		 * Retrieves the orientation of the #orientable.
 		 * @returns the orientation of the #orientable.
 		 */
@@ -51128,6 +54901,46 @@ declare namespace imports.gi.Gtk {
 	 * use {@link RecentChooser} instead.
 	 */
 	interface IRecentChooser {
+		/**
+		 * The {@link RecentFilter} object to be used when displaying
+		 * the recently used resources.
+		 */
+		filter: RecentFilter;
+		/**
+		 * The maximum number of recently used resources to be displayed,
+		 * or -1 to display all items.
+		 */
+		limit: number;
+		/**
+		 * Whether this {@link RecentChooser} should display only local (file:)
+		 * resources.
+		 */
+		local_only: boolean;
+		/**
+		 * Allow the user to select multiple resources.
+		 */
+		select_multiple: boolean;
+		/**
+		 * Whether this {@link RecentChooser} should display an icon near the item.
+		 */
+		show_icons: boolean;
+		/**
+		 * Whether this {@link RecentChooser} should display the recently used resources
+		 * even if not present anymore. Setting this to %FALSE will perform a
+		 * potentially expensive check on every local resource (every remote
+		 * resource will always be displayed).
+		 */
+		show_not_found: boolean;
+		show_private: boolean;
+		/**
+		 * Whether this {@link RecentChooser} should display a tooltip containing the
+		 * full path of the recently used resources.
+		 */
+		show_tips: boolean;
+		/**
+		 * Sorting order to be used when displaying the recently used resources.
+		 */
+		sort_type: RecentSortType;
 		/**
 		 * Adds #filter to the list of {@link RecentFilter} objects held by #chooser.
 		 * 
@@ -51360,6 +55173,26 @@ declare namespace imports.gi.Gtk {
 	 * use {@link Scrollable} instead.
 	 */
 	interface IScrollable {
+		/**
+		 * Horizontal {@link Adjustment} of the scrollable widget. This adjustment is
+		 * shared between the scrollable widget and its parent.
+		 */
+		hadjustment: Adjustment;
+		/**
+		 * Determines whether horizontal scrolling should start once the scrollable
+		 * widget is allocated less than its minimum width or less than its natural width.
+		 */
+		hscroll_policy: ScrollablePolicy;
+		/**
+		 * Verical {@link Adjustment} of the scrollable widget. This adjustment is shared
+		 * between the scrollable widget and its parent.
+		 */
+		vadjustment: Adjustment;
+		/**
+		 * Determines whether vertical scrolling should start once the scrollable
+		 * widget is allocated less than its minimum height or less than its natural height.
+		 */
+		vscroll_policy: ScrollablePolicy;
 		/**
 		 * Returns the size of a non-scrolling border around the
 		 * outside of the scrollable. An example for this would

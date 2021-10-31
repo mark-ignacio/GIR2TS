@@ -4,6 +4,34 @@ declare namespace imports.gi.GObject {
 	 */
 	interface IBinding {
 		/**
+		 * Flags to be used to control the #GBinding
+		 */
+		flags: BindingFlags;
+		/**
+		 * The #GObject that should be used as the source of the binding
+		 */
+		source: Object;
+		/**
+		 * The name of the property of #GBinding:source that should be used
+		 * as the source of the binding.
+		 * 
+		 * This should be in [canonical form][canonical-parameter-names] to get the
+		 * best performance.
+		 */
+		source_property: string;
+		/**
+		 * The #GObject that should be used as the target of the binding
+		 */
+		target: Object;
+		/**
+		 * The name of the property of #GBinding:target that should be used
+		 * as the target of the binding.
+		 * 
+		 * This should be in [canonical form][canonical-parameter-names] to get the
+		 * best performance.
+		 */
+		target_property: string;
+		/**
 		 * Retrieves the #GObject instance used as the source of the binding.
 		 * 
 		 * A #GBinding can outlive the source #GObject as the binding does not hold a
@@ -1080,6 +1108,22 @@ declare namespace imports.gi.GObject {
 	 */
 	interface IParamSpec {
 		/**
+		 * name of this parameter: always an interned string
+		 */
+		readonly name: string;
+		/**
+		 * #GParamFlags flags for this parameter
+		 */
+		readonly flags: ParamFlags;
+		/**
+		 * the #GValue type for this parameter
+		 */
+		readonly value_type: GObject.Type;
+		/**
+		 * #GType type that uses (introduces) this parameter
+		 */
+		readonly owner_type: GObject.Type;
+		/**
 		 * Get the short description of a #GParamSpec.
 		 * @returns the short description of #pspec.
 		 */
@@ -1247,6 +1291,10 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecBoolean} instead.
 	 */
 	interface IParamSpecBoolean {
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: boolean;
 
 	}
 
@@ -1289,6 +1337,18 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecChar} instead.
 	 */
 	interface IParamSpecChar {
+		/**
+		 * minimum value for the property specified
+		 */
+		readonly minimum: number;
+		/**
+		 * maximum value for the property specified
+		 */
+		readonly maximum: number;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
 
 	}
 
@@ -1310,6 +1370,23 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecDouble} instead.
 	 */
 	interface IParamSpecDouble {
+		/**
+		 * minimum value for the property specified
+		 */
+		readonly minimum: number;
+		/**
+		 * maximum value for the property specified
+		 */
+		readonly maximum: number;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
+		/**
+		 * values closer than #epsilon will be considered identical
+		 *  by g_param_values_cmp(); the default value is 1e-90.
+		 */
+		readonly epsilon: number;
 
 	}
 
@@ -1331,6 +1408,14 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecEnum} instead.
 	 */
 	interface IParamSpecEnum {
+		/**
+		 * the #GEnumClass for the enum
+		 */
+		readonly enum_class: EnumClass;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
 
 	}
 
@@ -1353,6 +1438,14 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecFlags} instead.
 	 */
 	interface IParamSpecFlags {
+		/**
+		 * the #GFlagsClass for the flags
+		 */
+		readonly flags_class: FlagsClass;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
 
 	}
 
@@ -1375,6 +1468,23 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecFloat} instead.
 	 */
 	interface IParamSpecFloat {
+		/**
+		 * minimum value for the property specified
+		 */
+		readonly minimum: number;
+		/**
+		 * maximum value for the property specified
+		 */
+		readonly maximum: number;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
+		/**
+		 * values closer than #epsilon will be considered identical
+		 *  by g_param_values_cmp(); the default value is 1e-30.
+		 */
+		readonly epsilon: number;
 
 	}
 
@@ -1396,6 +1506,10 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecGType} instead.
 	 */
 	interface IParamSpecGType {
+		/**
+		 * a #GType whose subtypes can occur as values
+		 */
+		readonly is_a_type: GObject.Type;
 
 	}
 
@@ -1417,6 +1531,18 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecInt} instead.
 	 */
 	interface IParamSpecInt {
+		/**
+		 * minimum value for the property specified
+		 */
+		readonly minimum: number;
+		/**
+		 * maximum value for the property specified
+		 */
+		readonly maximum: number;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
 
 	}
 
@@ -1438,6 +1564,18 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecInt64} instead.
 	 */
 	interface IParamSpecInt64 {
+		/**
+		 * minimum value for the property specified
+		 */
+		readonly minimum: number;
+		/**
+		 * maximum value for the property specified
+		 */
+		readonly maximum: number;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
 
 	}
 
@@ -1459,6 +1597,18 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecLong} instead.
 	 */
 	interface IParamSpecLong {
+		/**
+		 * minimum value for the property specified
+		 */
+		readonly minimum: number;
+		/**
+		 * maximum value for the property specified
+		 */
+		readonly maximum: number;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
 
 	}
 
@@ -1575,6 +1725,30 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecString} instead.
 	 */
 	interface IParamSpecString {
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: string;
+		/**
+		 * a string containing the allowed values for the first byte
+		 */
+		readonly cset_first: string;
+		/**
+		 * a string containing the allowed values for the subsequent bytes
+		 */
+		readonly cset_nth: string;
+		/**
+		 * the replacement byte for bytes which don't match #cset_first or #cset_nth.
+		 */
+		readonly substitutor: string;
+		/**
+		 * replace empty string by %NULL
+		 */
+		readonly null_fold_if_empty: number;
+		/**
+		 * replace %NULL strings by an empty string
+		 */
+		readonly ensure_non_null: number;
 
 	}
 
@@ -1597,6 +1771,18 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecUChar} instead.
 	 */
 	interface IParamSpecUChar {
+		/**
+		 * minimum value for the property specified
+		 */
+		readonly minimum: number;
+		/**
+		 * maximum value for the property specified
+		 */
+		readonly maximum: number;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
 
 	}
 
@@ -1618,6 +1804,18 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecUInt} instead.
 	 */
 	interface IParamSpecUInt {
+		/**
+		 * minimum value for the property specified
+		 */
+		readonly minimum: number;
+		/**
+		 * maximum value for the property specified
+		 */
+		readonly maximum: number;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
 
 	}
 
@@ -1639,6 +1837,18 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecUInt64} instead.
 	 */
 	interface IParamSpecUInt64 {
+		/**
+		 * minimum value for the property specified
+		 */
+		readonly minimum: number;
+		/**
+		 * maximum value for the property specified
+		 */
+		readonly maximum: number;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
 
 	}
 
@@ -1660,6 +1870,18 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecULong} instead.
 	 */
 	interface IParamSpecULong {
+		/**
+		 * minimum value for the property specified
+		 */
+		readonly minimum: number;
+		/**
+		 * maximum value for the property specified
+		 */
+		readonly maximum: number;
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: number;
 
 	}
 
@@ -1681,6 +1903,10 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecUnichar} instead.
 	 */
 	interface IParamSpecUnichar {
+		/**
+		 * default value for the property specified
+		 */
+		readonly default_value: string;
 
 	}
 
@@ -1702,6 +1928,14 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecValueArray} instead.
 	 */
 	interface IParamSpecValueArray {
+		/**
+		 * a #GParamSpec describing the elements contained in arrays of this property, may be %NULL
+		 */
+		readonly element_spec: ParamSpec;
+		/**
+		 * if greater than 0, arrays of this property will always have this many elements
+		 */
+		readonly fixed_n_elements: number;
 
 	}
 
@@ -1723,6 +1957,14 @@ declare namespace imports.gi.GObject {
 	 * use {@link ParamSpecVariant} instead.
 	 */
 	interface IParamSpecVariant {
+		/**
+		 * a #GVariantType, or %NULL
+		 */
+		readonly type: GLib.VariantType;
+		/**
+		 * a #GVariant, or %NULL
+		 */
+		readonly default_value: GLib.Variant;
 
 	}
 
@@ -1750,6 +1992,13 @@ declare namespace imports.gi.GObject {
 	 * use {@link TypeModule} instead.
 	 */
 	interface ITypeModule {
+		readonly use_count: number;
+		readonly type_infos: GLib.SList;
+		readonly interface_infos: GLib.SList;
+		/**
+		 * the name of the module
+		 */
+		readonly name: string;
 		/**
 		 * Registers an additional interface for a type, whose interface lives
 		 * in the given type plugin. If the interface was already registered
@@ -2013,14 +2262,14 @@ declare namespace imports.gi.GObject {
 		 * @returns a floating reference to a new #GClosure
 		 */
 		public static new_simple(sizeof_closure: number, data: any): Closure;
-		public ref_count: number;
-		public meta_marshal_nouse: number;
-		public n_guards: number;
-		public n_fnotifiers: number;
-		public n_inotifiers: number;
-		public in_inotify: number;
-		public floating: number;
-		public derivative_flag: number;
+		public readonly ref_count: number;
+		public readonly meta_marshal_nouse: number;
+		public readonly n_guards: number;
+		public readonly n_fnotifiers: number;
+		public readonly n_inotifiers: number;
+		public readonly in_inotify: number;
+		public readonly floating: number;
+		public readonly derivative_flag: number;
 		/**
 		 * Indicates whether the closure is currently being invoked with
 		 *  g_closure_invoke()
@@ -2031,8 +2280,8 @@ declare namespace imports.gi.GObject {
 		 *  g_closure_invalidate()
 		 */
 		public is_invalid: number;
-		public data: any;
-		public notifiers: ClosureNotifyData;
+		public readonly data: any;
+		public readonly notifiers: ClosureNotifyData;
 		public marshal: {(closure: Closure, return_value: Value, n_param_values: number, param_values: Value, invocation_hint: any, marshal_data: any): void;};
 		/**
 		 * Registers a finalization notifier which will be called when the
@@ -2336,10 +2585,10 @@ declare namespace imports.gi.GObject {
 		/**
 		 * the parent class
 		 */
-		public g_type_class: TypeClass;
-		public construct_properties: GLib.SList;
-		public flags: number;
-		public pdummy: any[];
+		public readonly g_type_class: TypeClass;
+		public readonly construct_properties: GLib.SList;
+		public readonly flags: number;
+		public readonly pdummy: any[];
 		public constructor_: {(_type: GObject.Type, n_construct_properties: number, construct_properties: ObjectConstructParam): Object;};
 		public set_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
 		public get_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
@@ -2405,10 +2654,10 @@ declare namespace imports.gi.GObject {
 		/**
 		 * the parent class
 		 */
-		public g_type_class: TypeClass;
-		public construct_properties: GLib.SList;
-		public flags: number;
-		public pdummy: any[];
+		public readonly g_type_class: TypeClass;
+		public readonly construct_properties: GLib.SList;
+		public readonly flags: number;
+		public readonly pdummy: any[];
 		public constructor_: {(_type: GObject.Type, n_construct_properties: number, construct_properties: ObjectConstructParam): Object;};
 		public set_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
 		public get_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
@@ -2565,12 +2814,12 @@ declare namespace imports.gi.GObject {
 		/**
 		 * the parent class
 		 */
-		public g_type_class: TypeClass;
+		public readonly g_type_class: TypeClass;
 		/**
 		 * the #GValue type for this parameter
 		 */
-		public value_type: GObject.Type;
-		public dummy: any[];
+		public readonly value_type: GObject.Type;
+		public readonly dummy: any[];
 		public finalize: {(pspec: ParamSpec): void;};
 		public value_set_default: {(pspec: ParamSpec, value: Value): void;};
 		public value_validate: {(pspec: ParamSpec, value: Value): boolean;};
@@ -2754,7 +3003,7 @@ declare namespace imports.gi.GObject {
 	interface TypeClass {}
 	class TypeClass {
 		public constructor();
-		public g_type: GObject.Type;
+		public readonly g_type: GObject.Type;
 		/**
 		 * Registers a private structure for an instantiatable type.
 		 * 
@@ -2946,7 +3195,7 @@ declare namespace imports.gi.GObject {
 	interface TypeInstance {}
 	class TypeInstance {
 		public constructor();
-		public g_class: TypeClass;
+		public readonly g_class: TypeClass;
 		public get_private(private_type: GObject.Type): any;
 	}
 
@@ -2956,8 +3205,8 @@ declare namespace imports.gi.GObject {
 	interface TypeInterface {}
 	class TypeInterface {
 		public constructor();
-		public g_type: GObject.Type;
-		public g_instance_type: GObject.Type;
+		public readonly g_type: GObject.Type;
+		public readonly g_instance_type: GObject.Type;
 		/**
 		 * Returns the corresponding #GTypeInterface structure of the parent type
 		 * of the instance type to which #g_iface belongs. This is useful when
@@ -2978,10 +3227,6 @@ declare namespace imports.gi.GObject {
 	interface TypeModuleClass {}
 	class TypeModuleClass {
 		public constructor();
-		/**
-		 * the parent class
-		 */
-		public parent_class: ObjectClass;
 		public load: {(module: TypeModule): boolean;};
 		public unload: {(module: TypeModule): void;};
 		public reserved1: {(): void;};
@@ -2997,7 +3242,7 @@ declare namespace imports.gi.GObject {
 	interface TypePluginClass {}
 	class TypePluginClass {
 		public constructor();
-		public base_iface: TypeInterface;
+		public readonly base_iface: TypeInterface;
 		/**
 		 * Increases the use count of the plugin.
 		 */
@@ -3097,7 +3342,7 @@ declare namespace imports.gi.GObject {
 	interface Value {}
 	class Value {
 		public constructor();
-		public g_type: GObject.Type;
+		public readonly g_type: GObject.Type;
 		public data: _Value__data__union[];
 		/**
 		 * Copies the value of #src_value into #dest_value.
@@ -3540,7 +3785,7 @@ declare namespace imports.gi.GObject {
 		 * array of values
 		 */
 		public values: Value;
-		public n_prealloced: number;
+		public readonly n_prealloced: number;
 		/**
 		 * Insert a copy of #value as last element of #value_array. If #value is
 		 * %NULL, an uninitialized value is appended.

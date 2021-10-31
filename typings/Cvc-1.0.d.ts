@@ -34,6 +34,13 @@ declare namespace imports.gi.Cvc {
 	 * use {@link MixerCard} instead.
 	 */
 	interface IMixerCard {
+		readonly human_profile: string;
+		icon_name: string;
+		id: number;
+		index: number;
+		name: string;
+		pa_context: any;
+		profile: string;
 		change_profile(profile: string): boolean;
 		get_gicon(): Gio.Icon;
 		get_icon_name(): string;
@@ -65,6 +72,7 @@ declare namespace imports.gi.Cvc {
 	 * use {@link MixerControl} instead.
 	 */
 	interface IMixerControl {
+		name: string;
 		change_input(input: MixerUIDevice): void;
 		change_output(output: MixerUIDevice): void;
 		change_profile_on_selected_device(device: MixerUIDevice, profile: string): boolean;
@@ -109,6 +117,7 @@ declare namespace imports.gi.Cvc {
 	 * use {@link MixerEventRole} instead.
 	 */
 	interface IMixerEventRole {
+		device: string;
 
 	}
 
@@ -204,6 +213,24 @@ declare namespace imports.gi.Cvc {
 	 * use {@link MixerStream} instead.
 	 */
 	interface IMixerStream {
+		application_id: string;
+		can_decibel: boolean;
+		card_index: number;
+		channel_map: ChannelMap;
+		decibel: number;
+		description: string;
+		form_factor: string;
+		icon_name: string;
+		id: number;
+		index: number;
+		// is_event_stream: boolean;
+		is_muted: boolean;
+		// is_virtual: boolean;
+		name: string;
+		pa_context: any;
+		port: string;
+		sysfs_path: string;
+		volume: number;
 		change_is_muted(is_muted: boolean): boolean;
 		change_port(_port: string): boolean;
 		create_monitor(): void;
@@ -263,6 +290,14 @@ declare namespace imports.gi.Cvc {
 	 * use {@link MixerUIDevice} instead.
 	 */
 	interface IMixerUIDevice {
+		card: any;
+		description: string;
+		icon_name: string;
+		origin: string;
+		port_available: boolean;
+		port_name: string;
+		stream_id: number;
+		type: number;
 		get_active_profile(): string;
 		get_best_profile(selected: string, current: string): string;
 		get_card(): MixerCard;
@@ -321,7 +356,6 @@ declare namespace imports.gi.Cvc {
 	interface ChannelMapClass {}
 	class ChannelMapClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public volume_changed: {(channel_map: ChannelMap, set: boolean): void;};
 	}
 
@@ -333,7 +367,6 @@ declare namespace imports.gi.Cvc {
 	interface MixerCardClass {}
 	class MixerCardClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface MixerCardPort {}
@@ -368,7 +401,6 @@ declare namespace imports.gi.Cvc {
 	interface MixerControlClass {}
 	class MixerControlClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public state_changed: {(control: MixerControl, new_state: MixerControlState): void;};
 		public stream_added: {(control: MixerControl, _id: number): void;};
 		public stream_changed: {(control: MixerControl, _id: number): void;};
@@ -394,7 +426,6 @@ declare namespace imports.gi.Cvc {
 	interface MixerEventRoleClass {}
 	class MixerEventRoleClass {
 		public constructor();
-		public parent_class: MixerStreamClass;
 	}
 
 	interface MixerEventRolePrivate {}
@@ -405,13 +436,11 @@ declare namespace imports.gi.Cvc {
 	interface MixerSinkClass {}
 	class MixerSinkClass {
 		public constructor();
-		public parent_class: MixerStreamClass;
 	}
 
 	interface MixerSinkInputClass {}
 	class MixerSinkInputClass {
 		public constructor();
-		public parent_class: MixerStreamClass;
 	}
 
 	interface MixerSinkInputPrivate {}
@@ -427,13 +456,11 @@ declare namespace imports.gi.Cvc {
 	interface MixerSourceClass {}
 	class MixerSourceClass {
 		public constructor();
-		public parent_class: MixerStreamClass;
 	}
 
 	interface MixerSourceOutputClass {}
 	class MixerSourceOutputClass {
 		public constructor();
-		public parent_class: MixerStreamClass;
 	}
 
 	interface MixerSourceOutputPrivate {}
@@ -449,7 +476,6 @@ declare namespace imports.gi.Cvc {
 	interface MixerStreamClass {}
 	class MixerStreamClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public push_volume: {(stream: MixerStream, operation: any): boolean;};
 		public change_is_muted: {(stream: MixerStream, is_muted: boolean): boolean;};
 		public change_port: {(stream: MixerStream, _port: string): boolean;};
@@ -474,7 +500,6 @@ declare namespace imports.gi.Cvc {
 	interface MixerUIDeviceClass {}
 	class MixerUIDeviceClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface MixerUIDevicePrivate {}

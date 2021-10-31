@@ -54,3 +54,17 @@ export const js_reserved_words = `
         static
         with
     `
+
+/** Always private properties */
+export const ignored_property_names: string[] = [
+    "priv",
+    // TODO: Special handling for these?
+    "parent",
+    "parent_class",
+    "parent_instance",
+    "g_type_instance"
+]
+
+export const ignored_parameter_names: string[] = [
+    "user_data"
+]

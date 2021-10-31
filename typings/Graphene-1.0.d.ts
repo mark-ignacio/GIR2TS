@@ -14,8 +14,8 @@ declare namespace imports.gi.Graphene {
 		 *   Use graphene_box_free() to free the resources allocated by this function
 		 */
 		public static alloc(): Box;
-		public min: Vec3;
-		public max: Vec3;
+		public readonly min: Vec3;
+		public readonly max: Vec3;
 		/**
 		 * Checks whether the #graphene_box_t #a contains the given
 		 * #graphene_box_t #b.
@@ -190,8 +190,8 @@ declare namespace imports.gi.Graphene {
 		 * @returns the newly allocated #graphene_euler_t
 		 */
 		public static alloc(): Euler;
-		public angles: Vec3;
-		public order: EulerOrder;
+		public readonly angles: Vec3;
+		public readonly order: EulerOrder;
 		/**
 		 * Checks if two #graphene_euler_t are equal.
 		 * @param _b a #graphene_euler_t
@@ -385,7 +385,7 @@ declare namespace imports.gi.Graphene {
 		 *   allocated by this function.
 		 */
 		public static alloc(): Frustum;
-		public planes: Plane[];
+		public readonly planes: Plane[];
 		/**
 		 * Checks whether a point is inside the volume defined by the given
 		 * #graphene_frustum_t.
@@ -464,7 +464,7 @@ declare namespace imports.gi.Graphene {
 		 * @returns the newly allocated matrix
 		 */
 		public static alloc(): Matrix;
-		public value: Simd4X4F;
+		public readonly value: Simd4X4F;
 		/**
 		 * Decomposes a transformation matrix into its component transformations.
 		 * 
@@ -1080,8 +1080,8 @@ declare namespace imports.gi.Graphene {
 		 *   this function
 		 */
 		public static alloc(): Plane;
-		public normal: Vec3;
-		public constant: number;
+		public readonly normal: Vec3;
+		public readonly constant: number;
 		/**
 		 * Computes the distance of #point from a #graphene_plane_t.
 		 * @param point a #graphene_point3d_t
@@ -1447,7 +1447,7 @@ declare namespace imports.gi.Graphene {
 		 * @returns the newly created #graphene_quad_t instance
 		 */
 		public static alloc(): Quad;
-		public points: Point[];
+		public readonly points: Point[];
 		/**
 		 * Computes the bounding rectangle of #q and places it into #r.
 		 * @param _r return location for a #graphene_rect_t
@@ -1509,10 +1509,10 @@ declare namespace imports.gi.Graphene {
 		 * @returns the newly allocated #graphene_quaternion_t
 		 */
 		public static alloc(): Quaternion;
-		public x: number;
-		public y: number;
-		public z: number;
-		public w: number;
+		public readonly x: number;
+		public readonly y: number;
+		public readonly z: number;
+		public readonly w: number;
 		/**
 		 * Adds two #graphene_quaternion_t #a and #b.
 		 * @param _b a #graphene_quaternion_t
@@ -1706,8 +1706,8 @@ declare namespace imports.gi.Graphene {
 		 *   this function
 		 */
 		public static alloc(): Ray;
-		public origin: Vec3;
-		public direction: Vec3;
+		public readonly origin: Vec3;
+		public readonly direction: Vec3;
 		/**
 		 * Checks whether the two given #graphene_ray_t are equal.
 		 * @param _b a #graphene_ray_t
@@ -2143,19 +2143,19 @@ declare namespace imports.gi.Graphene {
 	interface Simd4F {}
 	class Simd4F {
 		public constructor();
-		public x: number;
-		public y: number;
-		public z: number;
-		public w: number;
+		public readonly x: number;
+		public readonly y: number;
+		public readonly z: number;
+		public readonly w: number;
 	}
 
 	interface Simd4X4F {}
 	class Simd4X4F {
 		public constructor();
-		public x: Simd4F;
-		public y: Simd4F;
-		public z: Simd4F;
-		public w: Simd4F;
+		public readonly x: Simd4F;
+		public readonly y: Simd4F;
+		public readonly z: Simd4F;
+		public readonly w: Simd4F;
 	}
 
 	/**
@@ -2233,8 +2233,8 @@ declare namespace imports.gi.Graphene {
 		 *   graphene_sphere_free() to free the resources allocated by this function
 		 */
 		public static alloc(): Sphere;
-		public center: Vec3;
-		public radius: number;
+		public readonly center: Vec3;
+		public readonly radius: number;
 		/**
 		 * Checks whether the given #point is contained in the volume
 		 * of a #graphene_sphere_t.
@@ -2337,9 +2337,9 @@ declare namespace imports.gi.Graphene {
 		 *   allocated by this function
 		 */
 		public static alloc(): Triangle;
-		public a: Vec3;
-		public b: Vec3;
-		public c: Vec3;
+		public readonly a: Vec3;
+		public readonly b: Vec3;
+		public readonly c: Vec3;
 		/**
 		 * Checks whether the given triangle #t contains the point #p.
 		 * @param _p a #graphene_point3d_t
@@ -2496,7 +2496,7 @@ declare namespace imports.gi.Graphene {
 		 *   by this function.
 		 */
 		public static alloc(): Vec2;
-		public value: Simd4F;
+		public readonly value: Simd4F;
 		/**
 		 * Adds each component of the two passed vectors and places
 		 * each result into the components of #res.
@@ -2654,7 +2654,7 @@ declare namespace imports.gi.Graphene {
 		 *   by this function.
 		 */
 		public static alloc(): Vec3;
-		public value: Simd4F;
+		public readonly value: Simd4F;
 		/**
 		 * Adds each component of the two given vectors.
 		 * @param _b a #graphene_vec3_t
@@ -2853,7 +2853,7 @@ declare namespace imports.gi.Graphene {
 		 *   by this function.
 		 */
 		public static alloc(): Vec4;
-		public value: Simd4F;
+		public readonly value: Simd4F;
 		/**
 		 * Adds each component of the two given vectors.
 		 * @param _b a #graphene_vec4_t

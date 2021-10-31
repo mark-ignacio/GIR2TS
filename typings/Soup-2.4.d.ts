@@ -3,6 +3,12 @@ declare namespace imports.gi.Soup {
 	 * use {@link Address} instead.
 	 */
 	interface IAddress {
+		family: AddressFamily;
+		name: string;
+		readonly physical: string;
+		port: number;
+		protocol: string;
+		sockaddr: any;
 		/**
 		 * Tests if #addr1 and #addr2 have the same IP address. This method
 		 * can be used with soup_address_hash_by_ip() to create a
@@ -193,6 +199,12 @@ declare namespace imports.gi.Soup {
 	 * use {@link Auth} instead.
 	 */
 	interface IAuth {
+		host: string;
+		// readonly is_authenticated: boolean;
+		// is_for_proxy: boolean;
+		realm: string;
+		readonly scheme_name: string;
+		// readonly realm: string;
 		/**
 		 * Call this on an auth to authenticate it; normally this will cause
 		 * the auth's message to be requeued with the new authentication info.
@@ -364,6 +376,18 @@ declare namespace imports.gi.Soup {
 	 */
 	interface IAuthDomain {
 		/**
+		 * The {@link AuthDomainFilter} for the domain
+		 */
+		filter: AuthDomainFilter;
+		filter_data: any;
+		/**
+		 * The {@link AuthDomainGenericAuthCallback} for the domain
+		 */
+		generic_auth_callback: AuthDomainGenericAuthCallback;
+		generic_auth_data: any;
+		proxy: boolean;
+		realm: string;
+		/**
 		 * Checks if #msg contains appropriate authorization for #domain to
 		 * accept it. Mirroring soup_auth_domain_covers(), this does not check
 		 * whether or not #domain <emphasis>cares</emphasis> if #msg is
@@ -505,6 +529,14 @@ declare namespace imports.gi.Soup {
 	 */
 	interface IAuthDomainBasic {
 		/**
+		 * The {@link AuthDomainBasicAuthCallback}
+		 */
+		auth_callback: AuthDomainBasicAuthCallback;
+		/**
+		 * The data to pass to the {@link AuthDomainBasicAuthCallback}
+		 */
+		auth_data: any;
+		/**
 		 * Sets the callback that #domain will use to authenticate incoming
 		 * requests. For each request containing authorization, #domain will
 		 * invoke the callback, and then either accept or reject the request
@@ -545,6 +577,14 @@ declare namespace imports.gi.Soup {
 	 * use {@link AuthDomainDigest} instead.
 	 */
 	interface IAuthDomainDigest {
+		/**
+		 * The {@link AuthDomainDigestAuthCallback}
+		 */
+		auth_callback: AuthDomainDigestAuthCallback;
+		/**
+		 * The data to pass to the {@link AuthDomainDigestAuthCallback}
+		 */
+		auth_data: any;
 		/**
 		 * Sets the callback that #domain will use to authenticate incoming
 		 * requests. For each request containing authorization, #domain will
@@ -685,6 +725,8 @@ declare namespace imports.gi.Soup {
 	 * use {@link Cache} instead.
 	 */
 	interface ICache {
+		cache_dir: string;
+		cache_type: CacheType;
 		/**
 		 * Will remove all entries in the #cache plus all the cache files.
 		 */
@@ -806,6 +848,11 @@ declare namespace imports.gi.Soup {
 	 * use {@link CookieJar} instead.
 	 */
 	interface ICookieJar {
+		/**
+		 * The policy the jar should follow to accept or reject cookies
+		 */
+		accept_policy: CookieJarAcceptPolicy;
+		read_only: boolean;
 		/**
 		 * Adds #cookie to #jar, emitting the 'changed' signal if we are modifying
 		 * an existing cookie or adding a valid new cookie ('valid' means
@@ -982,6 +1029,7 @@ declare namespace imports.gi.Soup {
 	 * use {@link CookieJarDB} instead.
 	 */
 	interface ICookieJarDB {
+		filename: string;
 
 	}
 
@@ -1014,6 +1062,7 @@ declare namespace imports.gi.Soup {
 	 * use {@link CookieJarText} instead.
 	 */
 	interface ICookieJarText {
+		filename: string;
 
 	}
 
@@ -1117,6 +1166,10 @@ declare namespace imports.gi.Soup {
 	 * use {@link HSTSEnforcerDB} instead.
 	 */
 	interface IHSTSEnforcerDB {
+		/**
+		 * The filename of the SQLite database where HSTS policies are stored.
+		 */
+		filename: string;
 
 	}
 
@@ -1148,6 +1201,16 @@ declare namespace imports.gi.Soup {
 	 * use {@link Logger} instead.
 	 */
 	interface ILogger {
+		/**
+		 * The level of logging output
+		 */
+		level: LoggerLogLevel;
+		/**
+		 * If {@link Logger}:level is %SOUP_LOGGER_LOG_BODY, this gives
+		 * the maximum number of bytes of the body that will be logged.
+		 * (-1 means "no limit".)
+		 */
+		max_body_size: number;
 		/**
 		 * Sets #logger to watch #session and print debug information for
 		 * its messages.
@@ -1223,6 +1286,72 @@ declare namespace imports.gi.Soup {
 	 * use {@link Message} instead.
 	 */
 	interface IMessage {
+		/**
+		 * The {@link URI} loaded in the application when the message was
+		 * queued.
+		 */
+		first_party: URI;
+		flags: MessageFlags;
+		http_version: HTTPVersion;
+		/**
+		 * Set when the message is navigating between top level domains.
+		 */
+		is_top_level_navigation: boolean;
+		method: string;
+		priority: MessagePriority;
+		reason_phrase: string;
+		readonly request_body: MessageBody;
+		/**
+		 * The message's HTTP request body, as a #GBytes.
+		 */
+		readonly request_body_data: GLib.Bytes;
+		readonly request_headers: MessageHeaders;
+		readonly response_body: MessageBody;
+		/**
+		 * The message's HTTP response body, as a #GBytes.
+		 */
+		readonly response_body_data: GLib.Bytes;
+		readonly response_headers: MessageHeaders;
+		server_side: boolean;
+		site_for_cookies: URI;
+		status_code: number;
+		/**
+		 * The #GTlsCertificate associated with the message
+		 */
+		tls_certificate: Gio.TlsCertificate;
+		/**
+		 * The verification errors on {@link Message}:tls-certificate
+		 */
+		tls_errors: Gio.TlsCertificateFlags;
+		uri: URI;
+		/**
+		 * the HTTP method
+		 */
+		// readonly method: string;
+		/**
+		 * the HTTP status code
+		 */
+		// readonly status_code: number;
+		/**
+		 * the status phrase associated with #status_code
+		 */
+		// readonly reason_phrase: string;
+		/**
+		 * the request body
+		 */
+		// readonly request_body: MessageBody;
+		/**
+		 * the request headers
+		 */
+		// readonly request_headers: MessageHeaders;
+		/**
+		 * the response body
+		 */
+		// readonly response_body: MessageBody;
+		/**
+		 * the response headers
+		 */
+		// readonly response_headers: MessageHeaders;
 		/**
 		 * Adds a signal handler to #msg for #signal, as with
 		 * g_signal_connect(), but the #callback will only be run if #msg's
@@ -1565,6 +1694,7 @@ declare namespace imports.gi.Soup {
 	 * use {@link MultipartInputStream} instead.
 	 */
 	interface IMultipartInputStream {
+		message: Message;
 		/**
 		 * Obtains the headers for the part currently being processed. Note
 		 * that the {@link MessageHeaders} that are returned are owned by the
@@ -1661,6 +1791,14 @@ declare namespace imports.gi.Soup {
 	 * use {@link Request} instead.
 	 */
 	interface IRequest {
+		/**
+		 * The request's {@link Session}.
+		 */
+		session: Session;
+		/**
+		 * The request URI.
+		 */
+		uri: URI;
 		/**
 		 * Gets the length of the data represented by #request. For most
 		 * request types, this will not be known until after you call
@@ -1820,6 +1958,107 @@ declare namespace imports.gi.Soup {
 	 * use {@link Server} instead.
 	 */
 	interface IServer {
+		/**
+		 * The server's #GMainContext, if you are using the old API.
+		 * Servers created using soup_server_listen() will listen on
+		 * the #GMainContext that was the thread-default context at
+		 * the time soup_server_listen() was called.
+		 */
+		async_context: any;
+		/**
+		 * A %NULL-terminated array of URI schemes that should be
+		 * considered to be aliases for "http". Eg, if this included
+		 * <literal>"dav"</literal>, than a URI of
+		 * <literal>dav://example.com/path</literal> would be treated
+		 * identically to <literal>http://example.com/path</literal>.
+		 * In particular, this is needed in cases where a client
+		 * sends requests with absolute URIs, where those URIs do
+		 * not use "http:".
+		 * 
+		 * The default value is an array containing the single element
+		 * <literal>"*"</literal>, a special value which means that
+		 * any scheme except "https" is considered to be an alias for
+		 * "http".
+		 * 
+		 * See also {@link Server}:https-aliases.
+		 */
+		http_aliases: string[];
+		/**
+		 * A comma-delimited list of URI schemes that should be
+		 * considered to be aliases for "https". See
+		 * {@link Server}:http-aliases for more information.
+		 * 
+		 * The default value is %NULL, meaning that no URI schemes
+		 * are considered aliases for "https".
+		 */
+		https_aliases: string[];
+		/**
+		 * The address of the network interface the server is
+		 * listening on, if you are using the old {@link Server} API.
+		 * (This will not be set if you use soup_server_listen(),
+		 * etc.)
+		 */
+		interface: Address;
+		/**
+		 * The port the server is listening on, if you are using the
+		 * old {@link Server} API. (This will not be set if you use
+		 * soup_server_listen(), etc.)
+		 */
+		port: number;
+		raw_paths: boolean;
+		/**
+		 * If non-%NULL, the value to use for the "Server" header on
+		 * {@link Message}<!-- -->s processed by this server.
+		 * 
+		 * The Server header is the server equivalent of the
+		 * User-Agent header, and provides information about the
+		 * server and its components. It contains a list of one or
+		 * more product tokens, separated by whitespace, with the most
+		 * significant product token coming first. The tokens must be
+		 * brief, ASCII, and mostly alphanumeric (although "-", "_",
+		 * and "." are also allowed), and may optionally include a "/"
+		 * followed by a version string. You may also put comments,
+		 * enclosed in parentheses, between or after the tokens.
+		 * 
+		 * Some HTTP server implementations intentionally do not use
+		 * version numbers in their Server header, so that
+		 * installations running older versions of the server don't
+		 * end up advertising their vulnerability to specific security
+		 * holes.
+		 * 
+		 * As with #SoupSession:user_agent, if you set a
+		 * #SoupServer:server_header property that has trailing whitespace,
+		 * #SoupServer will append its own product token (eg,
+		 * "<literal>libsoup/2.3.2</literal>") to the end of the
+		 * header for you.
+		 */
+		server_header: string;
+		/**
+		 * Path to a file containing a PEM-encoded certificate.
+		 * 
+		 * If you set this property and {@link Server}:ssl-key-file at
+		 * construct time, then soup_server_new() will try to read the
+		 * files; if it cannot, it will return %NULL, with no explicit
+		 * indication of what went wrong (and logging a warning with
+		 * newer versions of glib, since returning %NULL from a
+		 * constructor is illegal).
+		 */
+		ssl_cert_file: string;
+		/**
+		 * Path to a file containing a PEM-encoded private key. See
+		 * {@link Server}:ssl-cert-file for more information about how this
+		 * is used.
+		 */
+		ssl_key_file: string;
+		/**
+		 * A #GTlsCertificate that has a #GTlsCertificate:private-key
+		 * set. If this is set, then the server will be able to speak
+		 * https in addition to (or instead of) plain http.
+		 * 
+		 * Alternatively, you can call soup_server_set_ssl_cert_file()
+		 * to have {@link Server} read in a a certificate from a file.
+		 */
+		tls_certificate: Gio.TlsCertificate;
 		/**
 		 * Add a new client stream to the #server.
 		 * @param stream a #GIOStream
@@ -2239,6 +2478,277 @@ declare namespace imports.gi.Soup {
 	 * use {@link Session} instead.
 	 */
 	interface ISession {
+		/**
+		 * If non-%NULL, the value to use for the "Accept-Language" header
+		 * on {@link Message}<!-- -->s sent from this session.
+		 * 
+		 * Setting this will disable
+		 * #SoupSession:accept-language-auto.
+		 */
+		accept_language: string;
+		/**
+		 * If %TRUE, {@link Session} will automatically set the string
+		 * for the "Accept-Language" header on every #SoupMessage
+		 * sent, based on the return value of g_get_language_names().
+		 * 
+		 * Setting this will override any previous value of
+		 * #SoupSession:accept-language.
+		 */
+		accept_language_auto: boolean;
+		/**
+		 * Add a feature object to the session. (Shortcut for calling
+		 * soup_session_add_feature().)
+		 */
+		// add_feature: SessionFeature;
+		/**
+		 * Add a feature object of the given type to the session.
+		 * (Shortcut for calling soup_session_add_feature_by_type().)
+		 */
+		// add_feature_by_type: GObject.Type;
+		/**
+		 * The #GMainContext that miscellaneous session-related
+		 * asynchronous callbacks are invoked on. (Eg, setting
+		 * {@link Session}:idle-timeout will add a timeout source on this
+		 * context.)
+		 * 
+		 * For a plain #SoupSession, this property is always set to
+		 * the #GMainContext that is the thread-default at the time
+		 * the session was created, and cannot be overridden. For the
+		 * deprecated #SoupSession subclasses, the default value is
+		 * %NULL, meaning to use the global default #GMainContext.
+		 * 
+		 * If #SoupSession:use-thread-context is %FALSE, this context
+		 * will also be used for asynchronous HTTP I/O.
+		 */
+		async_context: any;
+		/**
+		 * A %NULL-terminated array of URI schemes that should be
+		 * considered to be aliases for "http". Eg, if this included
+		 * <literal>"dav"</literal>, than a URI of
+		 * <literal>dav://example.com/path</literal> would be treated
+		 * identically to <literal>http://example.com/path</literal>.
+		 * 
+		 * In a plain {@link Session}, the default value is %NULL,
+		 * meaning that only "http" is recognized as meaning "http".
+		 * In #SoupSessionAsync and #SoupSessionSync, for backward
+		 * compatibility, the default value is an array containing the
+		 * single element <literal>"*"</literal>, a special value
+		 * which means that any scheme except "https" is considered to
+		 * be an alias for "http".
+		 * 
+		 * See also #SoupSession:https-aliases.
+		 */
+		http_aliases: string[];
+		/**
+		 * A comma-delimited list of URI schemes that should be
+		 * considered to be aliases for "https". See
+		 * {@link Session}:http-aliases for more information.
+		 * 
+		 * The default value is %NULL, meaning that no URI schemes
+		 * are considered aliases for "https".
+		 */
+		https_aliases: string[];
+		/**
+		 * Connection lifetime (in seconds) when idle. Any connection
+		 * left idle longer than this will be closed.
+		 * 
+		 * Although you can change this property at any time, it will
+		 * only affect newly-created connections, not currently-open
+		 * ones. You can call soup_session_abort() after setting this
+		 * if you want to ensure that all future connections will have
+		 * this timeout value.
+		 * 
+		 * Note that the default value of 60 seconds only applies to
+		 * plain {@link Sessions}. If you are using #SoupSessionAsync or
+		 * #SoupSessionSync, the default value is 0 (meaning idle
+		 * connections will never time out).
+		 */
+		idle_timeout: number;
+		/**
+		 * Sets the {@link Address} to use for the client side of
+		 * the connection.
+		 * 
+		 * Use this property if you want for instance to bind the
+		 * local socket to a specific IP address.
+		 */
+		local_address: Address;
+		max_conns: number;
+		max_conns_per_host: number;
+		/**
+		 * A #GProxyResolver to use with this session. Setting this
+		 * will clear the {@link Session}:proxy-uri property, and remove
+		 * any <type>SoupProxyURIResolver</type> features that have
+		 * been added to the session.
+		 * 
+		 * By default, in a plain #SoupSession, this is set to the
+		 * default #GProxyResolver, but you can set it to %NULL if you
+		 * don't want to use proxies, or set it to your own
+		 * #GProxyResolver if you want to control what proxies get
+		 * used.
+		 */
+		proxy_resolver: Gio.ProxyResolver;
+		/**
+		 * A proxy to use for all http and https requests in this
+		 * session. Setting this will clear the
+		 * {@link Session}:proxy-resolver property, and remove any
+		 * <type>SoupProxyURIResolver</type> features that have been
+		 * added to the session. Setting this property will also
+		 * cancel all currently pending messages.
+		 * 
+		 * Note that #SoupSession will normally handle looking up the
+		 * user's proxy settings for you; you should only use
+		 * #SoupSession:proxy-uri if you need to override the user's
+		 * normal proxy settings.
+		 * 
+		 * Also note that this proxy will be used for
+		 * <emphasis>all</emphasis> requests; even requests to
+		 * <literal>localhost</literal>. If you need more control over
+		 * proxies, you can create a #GSimpleProxyResolver and set the
+		 * #SoupSession:proxy-resolver property.
+		 */
+		proxy_uri: URI;
+		/**
+		 * Remove feature objects from the session. (Shortcut for
+		 * calling soup_session_remove_feature_by_type().)
+		 */
+		// remove_feature_by_type: GObject.Type;
+		/**
+		 * File containing SSL CA certificates.
+		 * 
+		 * If the specified file does not exist or cannot be read,
+		 * then libsoup will print a warning, and then behave as
+		 * though it had read in a empty CA file, meaning that all SSL
+		 * certificates will be considered invalid.
+		 */
+		ssl_ca_file: string;
+		/**
+		 * Normally, if {@link Session}:tls-database is set (including if
+		 * it was set via #SoupSession:ssl-use-system-ca-file or
+		 * #SoupSession:ssl-ca-file), then libsoup will reject any
+		 * certificate that is invalid (ie, expired) or that is not
+		 * signed by one of the given CA certificates, and the
+		 * #SoupMessage will fail with the status
+		 * %SOUP_STATUS_SSL_FAILED.
+		 * 
+		 * If you set #SoupSession:ssl-strict to %FALSE, then all
+		 * certificates will be accepted, and you will need to call
+		 * soup_message_get_https_status() to distinguish valid from
+		 * invalid certificates. (This can be used, eg, if you want to
+		 * accept invalid certificates after giving some sort of
+		 * warning.)
+		 * 
+		 * For a plain #SoupSession, if the session has no CA file or
+		 * TLS database, and this property is %TRUE, then all
+		 * certificates will be rejected. However, beware that the
+		 * deprecated #SoupSession subclasses (#SoupSessionAsync and
+		 * #SoupSessionSync) have the opposite behavior: if there is
+		 * no CA file or TLS database, then all certificates are always
+		 * accepted, and this property has no effect.
+		 */
+		ssl_strict: boolean;
+		/**
+		 * Setting this to %TRUE is equivalent to setting
+		 * {@link Session}:tls-database to the default system CA database.
+		 * (and likewise, setting #SoupSession:tls-database to the
+		 * default database by hand will cause this property to
+		 * become %TRUE).
+		 * 
+		 * Setting this to %FALSE (when it was previously %TRUE) will
+		 * clear the #SoupSession:tls-database field.
+		 * 
+		 * See #SoupSession:ssl-strict for more information on how
+		 * https certificate validation is handled.
+		 * 
+		 * If you are using #SoupSessionAsync or
+		 * #SoupSessionSync, on libsoup older than 2.72.1, the default value
+		 * is %FALSE, for backward compatibility.
+		 */
+		ssl_use_system_ca_file: boolean;
+		/**
+		 * The timeout (in seconds) for socket I/O operations
+		 * (including connecting to a server, and waiting for a reply
+		 * to an HTTP request).
+		 * 
+		 * Although you can change this property at any time, it will
+		 * only affect newly-created connections, not currently-open
+		 * ones. You can call soup_session_abort() after setting this
+		 * if you want to ensure that all future connections will have
+		 * this timeout value.
+		 * 
+		 * Note that the default value of 60 seconds only applies to
+		 * plain {@link Sessions}. If you are using #SoupSessionAsync or
+		 * #SoupSessionSync, the default value is 0 (meaning socket I/O
+		 * will not time out).
+		 * 
+		 * Not to be confused with #SoupSession:idle-timeout (which is
+		 * the length of time that idle persistent connections will be
+		 * kept open).
+		 */
+		timeout: number;
+		/**
+		 * Sets the #GTlsDatabase to use for validating SSL/TLS
+		 * certificates.
+		 * 
+		 * Note that setting the {@link Session}:ssl-ca-file or
+		 * #SoupSession:ssl-use-system-ca-file property will cause
+		 * this property to be set to a #GTlsDatabase corresponding to
+		 * the indicated file or system default.
+		 * 
+		 * See #SoupSession:ssl-strict for more information on how
+		 * https certificate validation is handled.
+		 * 
+		 * If you are using a plain #SoupSession then
+		 * #SoupSession:ssl-use-system-ca-file will be %TRUE by
+		 * default, and so this property will be a copy of the system
+		 * CA database. If you are using #SoupSessionAsync or
+		 * #SoupSessionSync, on libsoup older than 2.72.1, this property
+		 * will be %NULL by default.
+		 */
+		tls_database: Gio.TlsDatabase;
+		/**
+		 * A #GTlsInteraction object that will be passed on to any
+		 * #GTlsConnections created by the session. (This can be used to
+		 * provide client-side certificates, for example.)
+		 */
+		tls_interaction: Gio.TlsInteraction;
+		/**
+		 * Whether or not to use NTLM authentication.
+		 */
+		use_ntlm: boolean;
+		/**
+		 * If %TRUE (which it always is on a plain {@link Session}),
+		 * asynchronous HTTP requests in this session will run in
+		 * whatever the thread-default #GMainContext is at the time
+		 * they are started, rather than always occurring in
+		 * #SoupSession:async-context.
+		 */
+		use_thread_context: boolean;
+		/**
+		 * If non-%NULL, the value to use for the "User-Agent" header
+		 * on {@link Message}<!-- -->s sent from this session.
+		 * 
+		 * RFC 2616 says: "The User-Agent request-header field
+		 * contains information about the user agent originating the
+		 * request. This is for statistical purposes, the tracing of
+		 * protocol violations, and automated recognition of user
+		 * agents for the sake of tailoring responses to avoid
+		 * particular user agent limitations. User agents SHOULD
+		 * include this field with requests."
+		 * 
+		 * The User-Agent header contains a list of one or more
+		 * product tokens, separated by whitespace, with the most
+		 * significant product token coming first. The tokens must be
+		 * brief, ASCII, and mostly alphanumeric (although "-", "_",
+		 * and "." are also allowed), and may optionally include a "/"
+		 * followed by a version string. You may also put comments,
+		 * enclosed in parentheses, between or after the tokens.
+		 * 
+		 * If you set a #SoupSession:user_agent property that has trailing
+		 * whitespace, #SoupSession will append its own product token
+		 * (eg, "<literal>libsoup/2.3.2</literal>") to the end of the
+		 * header for you.
+		 */
+		user_agent: string;
 		/**
 		 * Cancels all pending requests in #session and closes all idle
 		 * persistent connections.
@@ -2751,6 +3261,55 @@ declare namespace imports.gi.Soup {
 	 * use {@link Socket} instead.
 	 */
 	interface ISocket {
+		async_context: any;
+		fd: number;
+		ipv6_only: boolean;
+		/**
+		 * Whether or not the socket is a server socket.
+		 * 
+		 * Note that for "ordinary" {@link Sockets} this will be set for
+		 * both listening sockets and the sockets emitted by
+		 * #SoupSocket::new-connection, but for sockets created by
+		 * setting #SoupSocket:fd, it will only be set for listening
+		 * sockets.
+		 */
+		readonly is_server: boolean;
+		local_address: Address;
+		/**
+		 * Whether or not the socket uses non-blocking I/O.
+		 * 
+		 * {@link Socket}'s I/O methods are designed around the idea of
+		 * using a single codepath for both synchronous and
+		 * asynchronous I/O. If you want to read off a #SoupSocket,
+		 * the "correct" way to do it is to call soup_socket_read() or
+		 * soup_socket_read_until() repeatedly until you have read
+		 * everything you want. If it returns %SOUP_SOCKET_WOULD_BLOCK
+		 * at any point, stop reading and wait for it to emit the
+		 * #SoupSocket::readable signal. Then go back to the
+		 * reading-as-much-as-you-can loop. Likewise, for writing to a
+		 * #SoupSocket, you should call soup_socket_write() either
+		 * until you have written everything, or it returns
+		 * %SOUP_SOCKET_WOULD_BLOCK (in which case you wait for
+		 * #SoupSocket::writable and then go back into the loop).
+		 * 
+		 * Code written this way will work correctly with both
+		 * blocking and non-blocking sockets; blocking sockets will
+		 * simply never return %SOUP_SOCKET_WOULD_BLOCK, and so the
+		 * code that handles that case just won't get used for them.
+		 */
+		non_blocking: boolean;
+		remote_address: Address;
+		ssl_creds: any;
+		ssl_fallback: boolean;
+		ssl_strict: boolean;
+		timeout: number;
+		readonly tls_certificate: Gio.TlsCertificate;
+		readonly tls_errors: Gio.TlsCertificateFlags;
+		readonly trusted_certificate: boolean;
+		/**
+		 * Use g_main_context_get_thread_default().
+		 */
+		use_thread_context: boolean;
 		/**
 		 * Begins asynchronously connecting to #sock's remote address. The
 		 * socket will call #callback when it succeeds or fails (but not
@@ -2926,6 +3485,52 @@ declare namespace imports.gi.Soup {
 	 * use {@link WebsocketConnection} instead.
 	 */
 	interface IWebsocketConnection {
+		/**
+		 * The type of connection (client/server).
+		 */
+		connection_type: WebsocketConnectionType;
+		/**
+		 * List of {@link WebsocketExtension} objects that are active in the connection.
+		 */
+		extensions: any;
+		/**
+		 * The underlying IO stream the WebSocket is communicating
+		 * over.
+		 * 
+		 * The input and output streams must be pollable streams.
+		 */
+		io_stream: Gio.IOStream;
+		/**
+		 * Interval in seconds on when to send a ping message which will
+		 * serve as a keepalive message. If set to 0 the keepalive message is
+		 * disabled.
+		 */
+		keepalive_interval: number;
+		/**
+		 * The maximum payload size for incoming packets the protocol expects
+		 * or 0 to not limit it.
+		 */
+		max_incoming_payload_size: number;
+		/**
+		 * The client's Origin.
+		 */
+		origin: string;
+		/**
+		 * The chosen protocol, or %NULL if a protocol was not agreed
+		 * upon.
+		 */
+		protocol: string;
+		/**
+		 * The current state of the WebSocket.
+		 */
+		readonly state: WebsocketState;
+		/**
+		 * The URI of the WebSocket.
+		 * 
+		 * For servers this represents the address of the WebSocket,
+		 * and for clients it is the address connected to.
+		 */
+		uri: URI;
 		/**
 		 * Close the connection in an orderly fashion.
 		 * 
@@ -3187,7 +3792,6 @@ declare namespace imports.gi.Soup {
 	interface AddressClass {}
 	class AddressClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -3197,9 +3801,8 @@ declare namespace imports.gi.Soup {
 	interface AuthClass {}
 	class AuthClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public scheme_name: string;
-		public strength: number;
+		public readonly scheme_name: string;
+		public readonly strength: number;
 		public update: {(auth: Auth, msg: Message, auth_header: GLib.HashTable): boolean;};
 		public get_protection_space: {(auth: Auth, source_uri: URI): GLib.SList;};
 		public authenticate: {(auth: Auth, username: string, password: string): void;};
@@ -3214,7 +3817,6 @@ declare namespace imports.gi.Soup {
 	interface AuthDomainBasicClass {}
 	class AuthDomainBasicClass {
 		public constructor();
-		public parent_class: AuthDomainClass;
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -3224,7 +3826,6 @@ declare namespace imports.gi.Soup {
 	interface AuthDomainClass {}
 	class AuthDomainClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public accepts: {(domain: AuthDomain, msg: Message, header: string): string;};
 		public challenge: {(domain: AuthDomain, msg: Message): string;};
 		public check_password: {(domain: AuthDomain, msg: Message, username: string, password: string): boolean;};
@@ -3236,7 +3837,6 @@ declare namespace imports.gi.Soup {
 	interface AuthDomainDigestClass {}
 	class AuthDomainDigestClass {
 		public constructor();
-		public parent_class: AuthDomainClass;
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -3246,7 +3846,6 @@ declare namespace imports.gi.Soup {
 	interface AuthManagerClass {}
 	class AuthManagerClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public authenticate: {(manager: AuthManager, msg: Message, auth: Auth, retrying: boolean): void;};
 	}
 
@@ -3372,7 +3971,6 @@ declare namespace imports.gi.Soup {
 	interface CacheClass {}
 	class CacheClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_cacheability: {(cache: Cache, msg: Message): Cacheability;};
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
@@ -3503,7 +4101,6 @@ declare namespace imports.gi.Soup {
 	interface ContentDecoderClass {}
 	class ContentDecoderClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -3519,7 +4116,6 @@ declare namespace imports.gi.Soup {
 	interface ContentSnifferClass {}
 	class ContentSnifferClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public sniff: {(sniffer: ContentSniffer, msg: Message, buffer: Buffer, params: GLib.HashTable): string;};
 		public get_buffer_size: {(sniffer: ContentSniffer): number;};
 		public _libsoup_reserved1: {(): void;};
@@ -3769,7 +4365,6 @@ declare namespace imports.gi.Soup {
 	interface CookieJarClass {}
 	class CookieJarClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public save: {(jar: CookieJar): void;};
 		public is_persistent: {(jar: CookieJar): boolean;};
 		public changed: {(jar: CookieJar, old_cookie: Cookie, new_cookie: Cookie): void;};
@@ -3780,7 +4375,6 @@ declare namespace imports.gi.Soup {
 	interface CookieJarDBClass {}
 	class CookieJarDBClass {
 		public constructor();
-		public parent_class: CookieJarClass;
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -3790,7 +4384,6 @@ declare namespace imports.gi.Soup {
 	interface CookieJarTextClass {}
 	class CookieJarTextClass {
 		public constructor();
-		public parent_class: CookieJarClass;
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -3962,10 +4555,6 @@ declare namespace imports.gi.Soup {
 	interface HSTSEnforcerClass {}
 	class HSTSEnforcerClass {
 		public constructor();
-		/**
-		 * The parent class.
-		 */
-		public parent_class: GObject.ObjectClass;
 		public is_persistent: {(hsts_enforcer: HSTSEnforcer): boolean;};
 		public has_valid_policy: {(hsts_enforcer: HSTSEnforcer, domain: string): boolean;};
 		public changed: {(enforcer: HSTSEnforcer, old_policy: HSTSPolicy, new_policy: HSTSPolicy): void;};
@@ -3979,7 +4568,6 @@ declare namespace imports.gi.Soup {
 	interface HSTSEnforcerDBClass {}
 	class HSTSEnforcerDBClass {
 		public constructor();
-		public parent_class: HSTSEnforcerClass;
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -4129,7 +4717,6 @@ declare namespace imports.gi.Soup {
 	interface LoggerClass {}
 	class LoggerClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -4301,7 +4888,6 @@ declare namespace imports.gi.Soup {
 	interface MessageClass {}
 	class MessageClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public wrote_informational: {(msg: Message): void;};
 		public wrote_headers: {(msg: Message): void;};
 		public wrote_chunk: {(msg: Message): void;};
@@ -4679,7 +5265,7 @@ declare namespace imports.gi.Soup {
 	interface MessageHeadersIter {}
 	class MessageHeadersIter {
 		public constructor();
-		public dummy: any[];
+		public readonly dummy: any[];
 		/**
 		 * Yields the next name/value pair in the %SoupMessageHeaders being
 		 * iterated by #iter. If #iter has already yielded the last header,
@@ -4797,7 +5383,6 @@ declare namespace imports.gi.Soup {
 	interface MultipartInputStreamClass {}
 	class MultipartInputStreamClass {
 		public constructor();
-		public parent_class: Gio.FilterInputStreamClass;
 	}
 
 	interface MultipartInputStreamPrivate {}
@@ -4808,7 +5393,7 @@ declare namespace imports.gi.Soup {
 	interface PasswordManagerInterface {}
 	class PasswordManagerInterface {
 		public constructor();
-		public base: GObject.TypeInterface;
+		public readonly base: GObject.TypeInterface;
 		public get_passwords_async: {(password_manager: PasswordManager, msg: Message, auth: Auth, retrying: boolean, async_context: GLib.MainContext, cancellable: Gio.Cancellable, callback: PasswordManagerCallback): void;};
 		public get_passwords_sync: {(password_manager: PasswordManager, msg: Message, auth: Auth, cancellable: Gio.Cancellable): void;};
 	}
@@ -4816,13 +5401,12 @@ declare namespace imports.gi.Soup {
 	interface ProxyResolverDefaultClass {}
 	class ProxyResolverDefaultClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface ProxyResolverInterface {}
 	class ProxyResolverInterface {
 		public constructor();
-		public base: GObject.TypeInterface;
+		public readonly base: GObject.TypeInterface;
 		public get_proxy_async: {(proxy_resolver: ProxyResolver, msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable, callback: ProxyResolverCallback): void;};
 		public get_proxy_sync: {(proxy_resolver: ProxyResolver, msg: Message, cancellable: Gio.Cancellable, addr: Address): number;};
 	}
@@ -4830,7 +5414,7 @@ declare namespace imports.gi.Soup {
 	interface ProxyURIResolverInterface {}
 	class ProxyURIResolverInterface {
 		public constructor();
-		public base: GObject.TypeInterface;
+		public readonly base: GObject.TypeInterface;
 		public get_proxy_uri_async: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, async_context: GLib.MainContext, cancellable: Gio.Cancellable, callback: ProxyURIResolverCallback): void;};
 		public get_proxy_uri_sync: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, cancellable: Gio.Cancellable, proxy_uri: URI): number;};
 		public _libsoup_reserved1: {(): void;};
@@ -4871,8 +5455,7 @@ declare namespace imports.gi.Soup {
 	interface RequestClass {}
 	class RequestClass {
 		public constructor();
-		public parent: GObject.ObjectClass;
-		public schemes: string;
+		public readonly schemes: string;
 		public check_uri: {(req_base: Request, uri: URI): boolean;};
 		public send: {(request: Request, cancellable: Gio.Cancellable): Gio.InputStream;};
 		public send_async: {(request: Request, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;};
@@ -4884,7 +5467,6 @@ declare namespace imports.gi.Soup {
 	interface RequestDataClass {}
 	class RequestDataClass {
 		public constructor();
-		public parent: RequestClass;
 	}
 
 	interface RequestDataPrivate {}
@@ -4895,7 +5477,6 @@ declare namespace imports.gi.Soup {
 	interface RequestFileClass {}
 	class RequestFileClass {
 		public constructor();
-		public parent: RequestClass;
 	}
 
 	interface RequestFilePrivate {}
@@ -4906,7 +5487,6 @@ declare namespace imports.gi.Soup {
 	interface RequestHTTPClass {}
 	class RequestHTTPClass {
 		public constructor();
-		public parent: RequestClass;
 	}
 
 	interface RequestHTTPPrivate {}
@@ -4922,7 +5502,6 @@ declare namespace imports.gi.Soup {
 	interface RequesterClass {}
 	class RequesterClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface RequesterPrivate {}
@@ -4933,7 +5512,6 @@ declare namespace imports.gi.Soup {
 	interface ServerClass {}
 	class ServerClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public request_started: {(server: Server, msg: Message, client: ClientContext): void;};
 		public request_read: {(server: Server, msg: Message, client: ClientContext): void;};
 		public request_finished: {(server: Server, msg: Message, client: ClientContext): void;};
@@ -4947,7 +5525,6 @@ declare namespace imports.gi.Soup {
 	interface SessionAsyncClass {}
 	class SessionAsyncClass {
 		public constructor();
-		public parent_class: SessionClass;
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -4957,7 +5534,6 @@ declare namespace imports.gi.Soup {
 	interface SessionClass {}
 	class SessionClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public request_started: {(session: Session, msg: Message, socket: Socket): void;};
 		public authenticate: {(session: Session, msg: Message, auth: Auth, retrying: boolean): void;};
 		public queue_message: {(session: Session, msg: Message, callback: SessionCallback): void;};
@@ -4976,10 +5552,6 @@ declare namespace imports.gi.Soup {
 	interface SessionFeatureInterface {}
 	class SessionFeatureInterface {
 		public constructor();
-		/**
-		 * The parent interface.
-		 */
-		public parent: GObject.TypeInterface;
 		public attach: {(feature: SessionFeature, session: Session): void;};
 		public detach: {(feature: SessionFeature, session: Session): void;};
 		public request_queued: {(feature: SessionFeature, session: Session, msg: Message): void;};
@@ -4993,7 +5565,6 @@ declare namespace imports.gi.Soup {
 	interface SessionSyncClass {}
 	class SessionSyncClass {
 		public constructor();
-		public parent_class: SessionClass;
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -5003,7 +5574,6 @@ declare namespace imports.gi.Soup {
 	interface SocketClass {}
 	class SocketClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public readable: {(sock: Socket): void;};
 		public writable: {(sock: Socket): void;};
 		public disconnected: {(sock: Socket): void;};
@@ -5273,7 +5843,6 @@ declare namespace imports.gi.Soup {
 	interface WebsocketConnectionClass {}
 	class WebsocketConnectionClass {
 		public constructor();
-		public parent: GObject.ObjectClass;
 		public message: {(self: WebsocketConnection, _type: WebsocketDataType, message: GLib.Bytes): void;};
 		public error: {(self: WebsocketConnection, error: GLib.Error): void;};
 		public closing: {(self: WebsocketConnection): void;};
@@ -5292,11 +5861,7 @@ declare namespace imports.gi.Soup {
 	interface WebsocketExtensionClass {}
 	class WebsocketExtensionClass {
 		public constructor();
-		/**
-		 * the parent class
-		 */
-		public parent_class: GObject.ObjectClass;
-		public name: string;
+		public readonly name: string;
 		public configure: {(extension: WebsocketExtension, connection_type: WebsocketConnectionType, params: GLib.HashTable): boolean;};
 		public get_request_params: {(extension: WebsocketExtension): string;};
 		public get_response_params: {(extension: WebsocketExtension): string;};
@@ -5311,13 +5876,11 @@ declare namespace imports.gi.Soup {
 	interface WebsocketExtensionDeflateClass {}
 	class WebsocketExtensionDeflateClass {
 		public constructor();
-		public parent_class: WebsocketExtensionClass;
 	}
 
 	interface WebsocketExtensionManagerClass {}
 	class WebsocketExtensionManagerClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	/**

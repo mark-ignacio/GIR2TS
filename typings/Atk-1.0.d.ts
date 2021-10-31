@@ -39,6 +39,13 @@ declare namespace imports.gi.Atk {
 	 * use {@link Hyperlink} instead.
 	 */
 	interface IHyperlink {
+		readonly end_index: number;
+		readonly number_of_anchors: number;
+		/**
+		 * Selected link
+		 */
+		readonly selected_link: boolean;
+		readonly start_index: number;
 		/**
 		 * Gets the index with the hypertext document at which this link ends.
 		 * @returns the index with the hypertext document at which this link ends
@@ -225,6 +232,45 @@ declare namespace imports.gi.Atk {
 	 * use {@link Object} instead.
 	 */
 	interface IObject {
+		readonly accessible_component_layer: number;
+		readonly accessible_component_mdi_zorder: number;
+		accessible_description: string;
+		readonly accessible_hypertext_nlinks: number;
+		accessible_name: string;
+		accessible_parent: Object;
+		accessible_role: Role;
+		/**
+		 * Table caption.
+		 */
+		accessible_table_caption: string;
+		accessible_table_caption_object: Object;
+		/**
+		 * Accessible table column description.
+		 */
+		accessible_table_column_description: string;
+		/**
+		 * Accessible table column header.
+		 */
+		accessible_table_column_header: Object;
+		/**
+		 * Accessible table row description.
+		 */
+		accessible_table_row_description: string;
+		/**
+		 * Accessible table row header.
+		 */
+		accessible_table_row_header: Object;
+		accessible_table_summary: Object;
+		/**
+		 * Numeric value of this object, in case being and AtkValue.
+		 */
+		accessible_value: number;
+		readonly description: string;
+		readonly name: string;
+		// readonly accessible_parent: Object;
+		readonly role: Role;
+		readonly relation_set: RelationSet;
+		readonly layer: Layer;
 		/**
 		 * Adds a relationship of the specified type with the specified target.
 		 * @param relationship The {@link RelationType} of the relation
@@ -551,6 +597,8 @@ declare namespace imports.gi.Atk {
 	 * use {@link Registry} instead.
 	 */
 	interface IRegistry {
+		readonly factory_type_registry: GLib.HashTable;
+		readonly factory_singleton_cache: GLib.HashTable;
 		/**
 		 * Gets an {@link ObjectFactory} appropriate for creating #AtkObjects
 		 * appropriate for #type.
@@ -602,6 +650,10 @@ declare namespace imports.gi.Atk {
 	 * use {@link Relation} instead.
 	 */
 	interface IRelation {
+		relation_type: RelationType;
+		target: GObject.ValueArray;
+		// readonly target: any[];
+		readonly relationship: RelationType;
 		/**
 		 * Adds the specified AtkObject to the target for the relation, if it is
 		 * not already present.  See also atk_object_add_relationship().
@@ -658,6 +710,7 @@ declare namespace imports.gi.Atk {
 	 * use {@link RelationSet} instead.
 	 */
 	interface IRelationSet {
+		readonly relations: any[];
 		/**
 		 * Add a new relation to the current relation set if it is not already
 		 * present.
@@ -955,7 +1008,6 @@ declare namespace imports.gi.Atk {
 	interface ActionIface {}
 	class ActionIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public do_action: {(action: Action, _i: number): boolean;};
 		public get_n_actions: {(action: Action): number;};
 		public get_description: {(action: Action, _i: number): string;};
@@ -1000,7 +1052,6 @@ declare namespace imports.gi.Atk {
 	interface ComponentIface {}
 	class ComponentIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public add_focus_handler: {(component: Component, handler: FocusHandler): number;};
 		public contains: {(component: Component, _x: number, _y: number, coord_type: CoordType): boolean;};
 		public ref_accessible_at_point: {(component: Component, _x: number, _y: number, coord_type: CoordType): Object;};
@@ -1023,7 +1074,6 @@ declare namespace imports.gi.Atk {
 	interface DocumentIface {}
 	class DocumentIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public get_document_type: {(document: Document): string;};
 		public get_document: {(document: Document): any;};
 		public get_document_locale: {(document: Document): string;};
@@ -1037,7 +1087,7 @@ declare namespace imports.gi.Atk {
 	interface EditableTextIface {}
 	class EditableTextIface {
 		public constructor();
-		public parent_interface: GObject.TypeInterface;
+		public readonly parent_interface: GObject.TypeInterface;
 		public set_run_attributes: {(text: EditableText, attrib_set: AttributeSet, start_offset: number, end_offset: number): boolean;};
 		public set_text_contents: {(text: EditableText, string: string): void;};
 		public insert_text: {(text: EditableText, string: string, length: number, position: number): void;};
@@ -1050,16 +1100,14 @@ declare namespace imports.gi.Atk {
 	interface GObjectAccessibleClass {}
 	class GObjectAccessibleClass {
 		public constructor();
-		public parent_class: ObjectClass;
-		public pad1: Function;
-		public pad2: Function;
+		public readonly pad1: Function;
+		public readonly pad2: Function;
 	}
 
 	interface HyperlinkClass {}
 	class HyperlinkClass {
 		public constructor();
-		public parent: GObject.ObjectClass;
-		public pad1: Function;
+		public readonly pad1: Function;
 		public get_uri: {(link_: Hyperlink, _i: number): string;};
 		public get_object: {(link_: Hyperlink, _i: number): Object;};
 		public get_end_index: {(link_: Hyperlink): number;};
@@ -1074,14 +1122,12 @@ declare namespace imports.gi.Atk {
 	interface HyperlinkImplIface {}
 	class HyperlinkImplIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public get_hyperlink: {(_impl: HyperlinkImpl): Hyperlink;};
 	}
 
 	interface HypertextIface {}
 	class HypertextIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public get_link: {(hypertext: Hypertext, link_index: number): Hyperlink;};
 		public get_n_links: {(hypertext: Hypertext): number;};
 		public get_link_index: {(hypertext: Hypertext, char_index: number): number;};
@@ -1091,7 +1137,6 @@ declare namespace imports.gi.Atk {
 	interface ImageIface {}
 	class ImageIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public get_image_position: {(image: Image, _x: number, _y: number, coord_type: CoordType): void;};
 		public get_image_description: {(image: Image): string;};
 		public get_image_size: {(image: Image, width: number, height: number): void;};
@@ -1162,8 +1207,7 @@ declare namespace imports.gi.Atk {
 	interface MiscClass {}
 	class MiscClass {
 		public constructor();
-		public parent: GObject.ObjectClass;
-		public vfuncs: any[];
+		public readonly vfuncs: any[];
 		public threads_enter: {(misc: Misc): void;};
 		public threads_leave: {(misc: Misc): void;};
 	}
@@ -1171,20 +1215,17 @@ declare namespace imports.gi.Atk {
 	interface NoOpObjectClass {}
 	class NoOpObjectClass {
 		public constructor();
-		public parent_class: ObjectClass;
 	}
 
 	interface NoOpObjectFactoryClass {}
 	class NoOpObjectFactoryClass {
 		public constructor();
-		public parent_class: ObjectFactoryClass;
 	}
 
 	interface ObjectClass {}
 	class ObjectClass {
 		public constructor();
-		public parent: GObject.ObjectClass;
-		public pad1: Function;
+		public readonly pad1: Function;
 		public get_name: {(accessible: Object): string;};
 		public get_description: {(accessible: Object): string;};
 		public get_parent: {(accessible: Object): Object;};
@@ -1216,9 +1257,8 @@ declare namespace imports.gi.Atk {
 	interface ObjectFactoryClass {}
 	class ObjectFactoryClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
-		public pad1: Function;
-		public pad2: Function;
+		public readonly pad1: Function;
+		public readonly pad2: Function;
 		public create_accessible: {(obj: GObject.Object): Object;};
 		public invalidate: {(factory: ObjectFactory): void;};
 		public get_accessible_type: {(): GObject.Type;};
@@ -1227,7 +1267,6 @@ declare namespace imports.gi.Atk {
 	interface PlugClass {}
 	class PlugClass {
 		public constructor();
-		public parent_class: ObjectClass;
 		public get_object_id: {(obj: Plug): string;};
 	}
 
@@ -1325,27 +1364,23 @@ declare namespace imports.gi.Atk {
 	interface RegistryClass {}
 	class RegistryClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 	}
 
 	interface RelationClass {}
 	class RelationClass {
 		public constructor();
-		public parent: GObject.ObjectClass;
 	}
 
 	interface RelationSetClass {}
 	class RelationSetClass {
 		public constructor();
-		public parent: GObject.ObjectClass;
-		public pad1: Function;
-		public pad2: Function;
+		public readonly pad1: Function;
+		public readonly pad2: Function;
 	}
 
 	interface SelectionIface {}
 	class SelectionIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public add_selection: {(selection: Selection, _i: number): boolean;};
 		public clear_selection: {(selection: Selection): boolean;};
 		public ref_selection: {(selection: Selection, _i: number): Object;};
@@ -1359,23 +1394,20 @@ declare namespace imports.gi.Atk {
 	interface SocketClass {}
 	class SocketClass {
 		public constructor();
-		public parent_class: ObjectClass;
 		public embed: {(obj: Socket, plug_id: string): void;};
 	}
 
 	interface StateSetClass {}
 	class StateSetClass {
 		public constructor();
-		public parent: GObject.ObjectClass;
 	}
 
 	interface StreamableContentIface {}
 	class StreamableContentIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
-		public pad1: Function;
-		public pad2: Function;
-		public pad3: Function;
+		public readonly pad1: Function;
+		public readonly pad2: Function;
+		public readonly pad3: Function;
 		public get_n_mime_types: {(streamable: StreamableContent): number;};
 		public get_mime_type: {(streamable: StreamableContent, _i: number): string;};
 		public get_stream: {(streamable: StreamableContent, mime_type: string): GLib.IOChannel;};
@@ -1388,7 +1420,6 @@ declare namespace imports.gi.Atk {
 	interface TableCellIface {}
 	class TableCellIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public get_column_span: {(cell: TableCell): number;};
 		public get_column_header_cells: {(cell: TableCell): Object[];};
 		public get_position: {(cell: TableCell, _row: number, column: number): boolean;};
@@ -1401,7 +1432,6 @@ declare namespace imports.gi.Atk {
 	interface TableIface {}
 	class TableIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public ref_at: {(table: Table, _row: number, column: number): Object;};
 		public get_index_at: {(table: Table, _row: number, column: number): number;};
 		public get_column_at_index: {(table: Table, index_: number): number;};
@@ -1443,7 +1473,6 @@ declare namespace imports.gi.Atk {
 	interface TextIface {}
 	class TextIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public get_text: {(text: Text, start_offset: number, end_offset: number): string;};
 		public get_text_after_offset: {(text: Text, offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;};
 		public get_text_at_offset: {(text: Text, offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;};
@@ -1523,7 +1552,6 @@ declare namespace imports.gi.Atk {
 	interface UtilClass {}
 	class UtilClass {
 		public constructor();
-		public parent: GObject.ObjectClass;
 		public add_global_event_listener: {(listener: GObject.SignalEmissionHook, event_type: string): number;};
 		public remove_global_event_listener: {(listener_id: number): void;};
 		public add_key_event_listener: {(listener: KeySnoopFunc, data: any): number;};
@@ -1536,7 +1564,6 @@ declare namespace imports.gi.Atk {
 	interface ValueIface {}
 	class ValueIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 		public get_current_value: {(obj: Value, value: GObject.Value): void;};
 		public get_maximum_value: {(obj: Value, value: GObject.Value): void;};
 		public get_minimum_value: {(obj: Value, value: GObject.Value): void;};
@@ -1552,7 +1579,6 @@ declare namespace imports.gi.Atk {
 	interface WindowIface {}
 	class WindowIface {
 		public constructor();
-		public parent: GObject.TypeInterface;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

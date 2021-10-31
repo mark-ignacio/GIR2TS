@@ -5,6 +5,9 @@ export interface NodeAttributes {
 
 export interface ParameterAttributes extends NodeAttributes {
     direction?: string;
+    readable?: number;
+    private?: number;
+    writable?: number;
 }
 
 export interface MemberAttributes extends NodeAttributes {
@@ -62,8 +65,8 @@ export interface FieldNode extends ParameterNode {
 }
 
 export interface RecordNode extends Node {
-    "field": FieldNode[];
-    "method": FunctionNode[];
+    field: FieldNode[];
+    method: FunctionNode[];
     "virtual-method": FunctionNode[];
     "constructor"?: FunctionNode[]
     doc?: Node[];
@@ -74,7 +77,7 @@ export interface ClassNode extends Node {
     "implements": Node[];
     "constructor": FunctionNode[];
     "function": FunctionNode[];
-    //"field": NodeWithType[];
+    "field": ParameterNode[];
     "glib-signal": Node[];
     "method": FunctionNode[];
     "virtual-method": FunctionNode[];
@@ -96,6 +99,6 @@ export interface NamespaceNode extends Node {
     "bitfield": EnumNode[];
     "callback": FunctionNode[];
     "function": FunctionNode[];
-    "union": Node[];
+    "union": ClassNode[];
     "alias": ParameterNode[];
 }

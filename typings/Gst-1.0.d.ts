@@ -3,6 +3,38 @@ declare namespace imports.gi.Gst {
 	 * use {@link Allocator} instead.
 	 */
 	interface IAllocator {
+		readonly object: Object;
+		readonly mem_type: string;
+		/**
+		 * the implementation of the GstMemoryMapFunction
+		 */
+		readonly mem_map: MemoryMapFunction;
+		/**
+		 * the implementation of the GstMemoryUnmapFunction
+		 */
+		readonly mem_unmap: MemoryUnmapFunction;
+		/**
+		 * the implementation of the GstMemoryCopyFunction
+		 */
+		readonly mem_copy: MemoryCopyFunction;
+		/**
+		 * the implementation of the GstMemoryShareFunction
+		 */
+		readonly mem_share: MemoryShareFunction;
+		/**
+		 * the implementation of the GstMemoryIsSpanFunction
+		 */
+		readonly mem_is_span: MemoryIsSpanFunction;
+		/**
+		 * the implementation of the GstMemoryMapFullFunction.
+		 *      Will be used instead of #mem_map if present. (Since: 1.6)
+		 */
+		readonly mem_map_full: MemoryMapFullFunction;
+		/**
+		 * the implementation of the GstMemoryUnmapFullFunction.
+		 *      Will be used instead of #mem_unmap if present. (Since: 1.6)
+		 */
+		readonly mem_unmap_full: MemoryUnmapFullFunction;
 		/**
 		 * Use #allocator to allocate a new memory block with memory that is at least
 		 * #size big.
@@ -79,6 +111,64 @@ declare namespace imports.gi.Gst {
 	 * use {@link Bin} instead.
 	 */
 	interface IBin {
+		/**
+		 * If set to %TRUE, the bin will handle asynchronous state changes.
+		 * This should be used only if the bin subclass is modifying the state
+		 * of its children on its own.
+		 */
+		async_handling: boolean;
+		/**
+		 * Forward all children messages, even those that would normally be filtered by
+		 * the bin. This can be interesting when one wants to be notified of the EOS
+		 * state of individual elements, for example.
+		 * 
+		 * The messages are converted to an ELEMENT message with the bin as the
+		 * source. The structure of the message is named 'GstBinForwarded' and contains
+		 * a field named 'message' of type GST_TYPE_MESSAGE that contains the original
+		 * forwarded message.
+		 */
+		message_forward: boolean;
+		readonly element: Element;
+		/**
+		 * the number of children in this bin
+		 */
+		readonly numchildren: number;
+		/**
+		 * the list of children in this bin
+		 */
+		readonly children: GLib.List;
+		/**
+		 * updated whenever #children changes
+		 */
+		readonly children_cookie: number;
+		/**
+		 * internal bus for handling child messages
+		 */
+		readonly child_bus: Bus;
+		/**
+		 * queued and cached messages
+		 */
+		readonly messages: GLib.List;
+		/**
+		 * the bin is currently calculating its state
+		 */
+		readonly polling: boolean;
+		/**
+		 * the bin needs to recalculate its state (deprecated)
+		 */
+		readonly state_dirty: boolean;
+		/**
+		 * the bin needs to select a new clock
+		 */
+		readonly clock_dirty: boolean;
+		/**
+		 * the last clock selected
+		 */
+		readonly provided_clock: Clock;
+		/**
+		 * the element that provided #provided_clock
+		 */
+		readonly clock_provider: Element;
 		/**
 		 * Adds the given element to the bin.  Sets the element's parent, and thus
 		 * takes ownership of the element. An element can only be added to one bin.
@@ -428,6 +518,8 @@ declare namespace imports.gi.Gst {
 	 * use {@link BufferPool} instead.
 	 */
 	interface IBufferPool {
+		readonly object: Object;
+		readonly flushing: number;
 		/**
 		 * Acquire a buffer from #pool. #buffer should point to a memory location that
 		 * can hold a pointer to the new buffer.
@@ -673,6 +765,7 @@ declare namespace imports.gi.Gst {
 	 * use {@link Bus} instead.
 	 */
 	interface IBus {
+		readonly object: Object;
 		/**
 		 * Adds a bus signal watch to the default main context with the default priority
 		 * (%G_PRIORITY_DEFAULT). It is also possible to use a non-default
@@ -1063,6 +1156,10 @@ declare namespace imports.gi.Gst {
 	 * use {@link Clock} instead.
 	 */
 	interface IClock {
+		timeout: number;
+		window_size: number;
+		window_threshold: number;
+		readonly object: Object;
 		/**
 		 * The time #master of the master clock and the time #slave of the slave
 		 * clock are added to the list of observations. If enough observations
@@ -1551,6 +1648,16 @@ declare namespace imports.gi.Gst {
 	 * use {@link ControlBinding} instead.
 	 */
 	interface IControlBinding {
+		name: string;
+		object: Object;
+		/**
+		 * name of the property of this binding
+		 */
+		// readonly name: string;
+		/**
+		 * #GParamSpec for this property
+		 */
+		readonly pspec: GObject.ParamSpec;
 		/**
 		 * Gets a number of #GValues for the given controlled property starting at the
 		 * requested time. The array #values need to hold enough space for #n_values of
@@ -1639,6 +1746,14 @@ declare namespace imports.gi.Gst {
 	 */
 	interface IControlSource {
 		/**
+		 * Function for returning a value for a given timestamp
+		 */
+		readonly get_value: ControlSourceGetValue;
+		/**
+		 * Function for returning a values array for a given timestamp
+		 */
+		readonly get_value_array: ControlSourceGetValueArray;
+		/**
 		 * Gets the value for this {@link ControlSource} at a given timestamp.
 		 * @param timestamp the time for which the value should be returned
 		 * @param value the value
@@ -1687,6 +1802,10 @@ declare namespace imports.gi.Gst {
 	 * use {@link Device} instead.
 	 */
 	interface IDevice {
+		caps: Caps;
+		device_class: string;
+		display_name: string;
+		properties: Structure;
 		/**
 		 * Creates the element with all of the required parameters set to use
 		 * this device.
@@ -1771,6 +1890,7 @@ declare namespace imports.gi.Gst {
 	 * use {@link DeviceMonitor} instead.
 	 */
 	interface IDeviceMonitor {
+		show_all: boolean;
 		/**
 		 * Adds a filter for which {@link Device} will be monitored, any device that matches
 		 * all these classes and the #GstCaps will be returned.
@@ -1925,6 +2045,10 @@ declare namespace imports.gi.Gst {
 	 * use {@link DeviceProvider} instead.
 	 */
 	interface IDeviceProvider {
+		/**
+		 * a #GList of the {@link Device} objects
+		 */
+		readonly devices: GLib.List;
 		can_monitor(): boolean;
 		/**
 		 * Posts a message on the provider's {@link Bus} to inform applications that
@@ -2225,6 +2349,94 @@ declare namespace imports.gi.Gst {
 	 * use {@link Element} instead.
 	 */
 	interface IElement {
+		readonly object: Object;
+		/**
+		 * Used to serialize execution of gst_element_set_state()
+		 */
+		readonly state_lock: GLib.RecMutex;
+		/**
+		 * Used to signal completion of a state change
+		 */
+		readonly state_cond: GLib.Cond;
+		/**
+		 * Used to detect concurrent execution of
+		 * gst_element_set_state() and gst_element_get_state()
+		 */
+		readonly state_cookie: number;
+		/**
+		 * the target state of an element as set by the application
+		 */
+		readonly target_state: State;
+		/**
+		 * the current state of an element
+		 */
+		readonly current_state: State;
+		/**
+		 * the next state of an element, can be #GST_STATE_VOID_PENDING if
+		 * the element is in the correct state.
+		 */
+		readonly next_state: State;
+		/**
+		 * the final state the element should go to, can be
+		 * #GST_STATE_VOID_PENDING if the element is in the correct state
+		 */
+		readonly pending_state: State;
+		/**
+		 * the last return value of an element state change
+		 */
+		readonly last_return: StateChangeReturn;
+		/**
+		 * the bus of the element. This bus is provided to the element by the
+		 * parent element or the application. A {@link Pipeline} has a bus of its own.
+		 */
+		readonly bus: Bus;
+		/**
+		 * the clock of the element. This clock is usually provided to the
+		 * element by the toplevel {@link Pipeline}.
+		 */
+		readonly clock: Clock;
+		/**
+		 * the time of the clock right before the element is set to
+		 * PLAYING. Subtracting #base_time from the current clock time in the PLAYING
+		 * state will yield the running_time against the clock.
+		 */
+		readonly base_time: ClockTimeDiff;
+		/**
+		 * the running_time of the last PAUSED state
+		 */
+		readonly start_time: ClockTime;
+		/**
+		 * number of pads of the element, includes both source and sink pads.
+		 */
+		readonly numpads: number;
+		/**
+		 * list of pads
+		 */
+		readonly pads: GLib.List;
+		/**
+		 * number of source pads of the element.
+		 */
+		readonly numsrcpads: number;
+		/**
+		 * list of source pads
+		 */
+		readonly srcpads: GLib.List;
+		/**
+		 * number of sink pads of the element.
+		 */
+		readonly numsinkpads: number;
+		/**
+		 * list of sink pads
+		 */
+		readonly sinkpads: GLib.List;
+		/**
+		 * updated whenever the a pad is added or removed
+		 */
+		readonly pads_cookie: number;
+		/**
+		 * list of contexts
+		 */
+		readonly contexts: GLib.List;
 		/**
 		 * Abort the state change of the element. This function is used
 		 * by elements that do asynchronous state changes and find out
@@ -3383,6 +3595,7 @@ declare namespace imports.gi.Gst {
 	 * use {@link GhostPad} instead.
 	 */
 	interface IGhostPad {
+		readonly pad: ProxyPad;
 		/**
 		 * Finish initialization of a newly allocated ghost pad.
 		 * 
@@ -3546,6 +3759,20 @@ declare namespace imports.gi.Gst {
 	 * use {@link Object} instead.
 	 */
 	interface IObject {
+		name: string;
+		readonly object: GObject.InitiallyUnowned;
+		/**
+		 * object LOCK
+		 */
+		readonly lock: GLib.Mutex;
+		/**
+		 * The name of the object
+		 */
+		// readonly name: string;
+		/**
+		 * flags for this object
+		 */
+		readonly flags: number;
 		/**
 		 * Attach the {@link ControlBinding} to the object. If there already was a
 		 * #GstControlBinding for this property it will be replaced.
@@ -3924,6 +4151,27 @@ declare namespace imports.gi.Gst {
 	 * use {@link Pad} instead.
 	 */
 	interface IPad {
+		readonly caps: Caps;
+		direction: PadDirection;
+		/**
+		 * The offset that will be applied to the running time of the pad.
+		 */
+		offset: number;
+		template: PadTemplate;
+		readonly object: Object;
+		/**
+		 * private data owned by the parent element
+		 */
+		readonly element_private: any;
+		/**
+		 * padtemplate for this pad
+		 */
+		readonly padtemplate: PadTemplate;
+		/**
+		 * the direction of the pad, cannot change after creating
+		 *             the pad.
+		 */
+		// readonly direction: PadDirection;
 		/**
 		 * Activates or deactivates the given pad in #mode via dispatching to the
 		 * pad's activatemodefunc. For use from within pad activation functions only.
@@ -4966,6 +5214,31 @@ declare namespace imports.gi.Gst {
 	 */
 	interface IPadTemplate {
 		/**
+		 * The capabilities of the pad described by the pad template.
+		 */
+		caps: Caps;
+		/**
+		 * The direction of the pad described by the pad template.
+		 */
+		direction: PadDirection;
+		/**
+		 * The type of the pad described by the pad template.
+		 */
+		gtype: GObject.Type;
+		/**
+		 * The name template of the pad template.
+		 */
+		name_template: string;
+		/**
+		 * When the pad described by the pad template will become available.
+		 */
+		presence: PadPresence;
+		readonly object: Object;
+		// readonly name_template: string;
+		// readonly direction: PadDirection;
+		// readonly presence: PadPresence;
+		// readonly caps: Caps;
+		/**
 		 * Gets the capabilities of the pad template.
 		 * @returns the {@link Caps} of the pad template.
 		 * Unref after usage.
@@ -5141,6 +5414,40 @@ declare namespace imports.gi.Gst {
 	 * use {@link Pipeline} instead.
 	 */
 	interface IPipeline {
+		/**
+		 * Whether or not to automatically flush all messages on the
+		 * pipeline's bus when going from READY to NULL state. Please see
+		 * gst_pipeline_set_auto_flush_bus() for more information on this option.
+		 */
+		auto_flush_bus: boolean;
+		/**
+		 * The expected delay needed for elements to spin up to the
+		 * PLAYING state expressed in nanoseconds.
+		 * see gst_pipeline_set_delay() for more information on this option.
+		 */
+		delay: number;
+		/**
+		 * Latency to configure on the pipeline. See gst_pipeline_set_latency().
+		 */
+		latency: number;
+		readonly bin: Bin;
+		/**
+		 * The fixed clock of the pipeline, used when
+		 *               GST_PIPELINE_FLAG_FIXED_CLOCK is set.
+		 */
+		readonly fixed_clock: Clock;
+		/**
+		 * The stream time of the pipeline. A better name for this
+		 *         property would be the running_time, the total time spent in the
+		 *         PLAYING state without being flushed. (deprecated, use the start_time
+		 *         on GstElement).
+		 */
+		readonly stream_time: ClockTime;
+		/**
+		 * Extra delay added to base_time to compensate for computing delays
+		 *         when setting elements to PLAYING.
+		 */
+		// readonly delay: ClockTime;
 		/**
 		 * Let #pipeline select a clock automatically. This is the default
 		 * behaviour.
@@ -5690,6 +5997,7 @@ declare namespace imports.gi.Gst {
 	 * use {@link ProxyPad} instead.
 	 */
 	interface IProxyPad {
+		readonly pad: Pad;
 		/**
 		 * Get the internal pad of #pad. Unref target pad after usage.
 		 * 
@@ -5753,6 +6061,7 @@ declare namespace imports.gi.Gst {
 	 * use {@link Registry} instead.
 	 */
 	interface IRegistry {
+		readonly object: Object;
 		/**
 		 * Add the feature to the registry. The feature-added signal will be emitted.
 		 * 
@@ -6008,6 +6317,28 @@ declare namespace imports.gi.Gst {
 	 */
 	interface IStream {
 		/**
+		 * The {@link Caps} of the #GstStream.
+		 */
+		caps: Caps;
+		stream_flags: StreamFlags;
+		/**
+		 * The unique identifier of the {@link Stream}. Can only be set at construction
+		 * time.
+		 */
+		stream_id: string;
+		/**
+		 * The {@link StreamType} of the #GstStream. Can only be set at construction time.
+		 */
+		stream_type: StreamType;
+		/**
+		 * The {@link TagList} of the #GstStream.
+		 */
+		tags: TagList;
+		/**
+		 * The Stream Identifier for this {@link Stream}
+		 */
+		// readonly stream_id: string;
+		/**
 		 * Retrieve the caps for #stream, if any
 		 * @returns The {@link Caps} for #stream
 		 */
@@ -6095,6 +6426,7 @@ declare namespace imports.gi.Gst {
 	 * use {@link StreamCollection} instead.
 	 */
 	interface IStreamCollection {
+		upstream_id: string;
 		/**
 		 * Add the given #stream to the #collection.
 		 * @param stream the {@link Stream} to add
@@ -6160,6 +6492,8 @@ declare namespace imports.gi.Gst {
 	 * use {@link SystemClock} instead.
 	 */
 	interface ISystemClock {
+		clock_type: ClockType;
+		readonly clock: Clock;
 
 	}
 
@@ -6210,6 +6544,35 @@ declare namespace imports.gi.Gst {
 	 * use {@link Task} instead.
 	 */
 	interface ITask {
+		readonly object: Object;
+		/**
+		 * the state of the task
+		 */
+		readonly state: TaskState;
+		/**
+		 * used to pause/resume the task
+		 */
+		readonly cond: GLib.Cond;
+		/**
+		 * The lock taken when iterating the task function
+		 */
+		readonly lock: GLib.RecMutex;
+		/**
+		 * the function executed by this task
+		 */
+		readonly func: TaskFunction;
+		/**
+		 * user_data passed to the task function
+		 */
+		readonly user_data: any;
+		/**
+		 * GDestroyNotify for #user_data
+		 */
+		readonly notify: GLib.DestroyNotify;
+		/**
+		 * a flag indicating that the task is running
+		 */
+		readonly running: boolean;
 		/**
 		 * Get the {@link TaskPool} that this task will use for its streaming
 		 * threads.
@@ -6408,6 +6771,7 @@ declare namespace imports.gi.Gst {
 	 * use {@link TaskPool} instead.
 	 */
 	interface ITaskPool {
+		readonly object: Object;
 		/**
 		 * Wait for all tasks to be stopped. This is mainly used internally
 		 * to ensure proper cleanup of internal data structures in test suites.
@@ -6464,6 +6828,7 @@ declare namespace imports.gi.Gst {
 	 * use {@link Tracer} instead.
 	 */
 	interface ITracer {
+		params: string;
 
 	}
 
@@ -6857,7 +7222,7 @@ declare namespace imports.gi.Gst {
 		 * the desired padding
 		 */
 		public padding: number;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		/**
 		 * Create a copy of #params.
 		 * 
@@ -6885,8 +7250,8 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Object parent class
 		 */
-		public object_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly object_class: ObjectClass;
+		public readonly _gst_reserved: any[];
 		public alloc: {(allocator: Allocator, size: number, params: AllocationParams): Memory;};
 		public free: {(allocator: Allocator, memory: Memory): void;};
 	}
@@ -6959,12 +7324,8 @@ declare namespace imports.gi.Gst {
 	interface BinClass {}
 	class BinClass {
 		public constructor();
-		/**
-		 * bin parent class
-		 */
-		public parent_class: ElementClass;
-		public pool: GLib.ThreadPool;
-		public _gst_reserved: any[];
+		public readonly pool: GLib.ThreadPool;
+		public readonly _gst_reserved: any[];
 		public element_added: {(bin: Bin, child: Element): void;};
 		public element_removed: {(bin: Bin, child: Element): void;};
 		public add_element: {(bin: Bin, element: Element): boolean;};
@@ -7775,7 +8136,7 @@ declare namespace imports.gi.Gst {
 		 * additional flags
 		 */
 		public flags: BufferPoolAcquireFlags;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	/**
@@ -7787,8 +8148,8 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Object parent class
 		 */
-		public object_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly object_class: ObjectClass;
+		public readonly _gst_reserved: any[];
 		public get_options: {(pool: BufferPool): string[];};
 		public set_config: {(pool: BufferPool, config: Structure): boolean;};
 		public start: {(pool: BufferPool): boolean;};
@@ -7810,8 +8171,7 @@ declare namespace imports.gi.Gst {
 	interface BusClass {}
 	class BusClass {
 		public constructor();
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		public message: {(bus: Bus, message: Message): void;};
 		public sync_message: {(bus: Bus, message: Message): void;};
 	}
@@ -8440,11 +8800,7 @@ declare namespace imports.gi.Gst {
 	interface ChildProxyInterface {}
 	class ChildProxyInterface {
 		public constructor();
-		/**
-		 * parent interface type.
-		 */
-		public parent: GObject.TypeInterface;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		public get_child_by_name: {(parent: ChildProxy, name: string): GObject.Object;};
 		public get_child_by_index: {(parent: ChildProxy, index: number): GObject.Object;};
 		public get_children_count: {(parent: ChildProxy): number;};
@@ -8459,11 +8815,7 @@ declare namespace imports.gi.Gst {
 	interface ClockClass {}
 	class ClockClass {
 		public constructor();
-		/**
-		 * the parent class structure
-		 */
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		public change_resolution: {(clock: Clock, old_resolution: ClockTime, new_resolution: ClockTime): ClockTime;};
 		public get_resolution: {(clock: Clock): ClockTime;};
 		public get_internal_time: {(clock: Clock): ClockTime;};
@@ -8495,7 +8847,7 @@ declare namespace imports.gi.Gst {
 		public destroy_data: GLib.DestroyNotify;
 		public unscheduled: boolean;
 		public woken_up: boolean;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	interface ClockPrivate {}
@@ -8582,11 +8934,7 @@ declare namespace imports.gi.Gst {
 	interface ControlBindingClass {}
 	class ControlBindingClass {
 		public constructor();
-		/**
-		 * Parent class
-		 */
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		public sync_values: {(binding: ControlBinding, object: Object, timestamp: ClockTime, last_sync: ClockTime): boolean;};
 		public get_value: {(binding: ControlBinding, timestamp: ClockTime): GObject.Value;};
 		public get_value_array: {(binding: ControlBinding, timestamp: ClockTime, interval: ClockTime, n_values: number, values: any[]): boolean;};
@@ -8604,11 +8952,7 @@ declare namespace imports.gi.Gst {
 	interface ControlSourceClass {}
 	class ControlSourceClass {
 		public constructor();
-		/**
-		 * Parent class
-		 */
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	/**
@@ -8890,10 +9234,10 @@ declare namespace imports.gi.Gst {
 	interface DebugCategory {}
 	class DebugCategory {
 		public constructor();
-		public threshold: number;
-		public color: number;
-		public name: string;
-		public description: string;
+		public readonly threshold: number;
+		public readonly color: number;
+		public readonly name: string;
+		public readonly description: string;
 		/**
 		 * Removes and frees the category and all associated resources.
 		 */
@@ -8956,11 +9300,7 @@ declare namespace imports.gi.Gst {
 	interface DeviceClass {}
 	class DeviceClass {
 		public constructor();
-		/**
-		 * The parent {@link ObjectClass} structure.
-		 */
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		public create_element: {(device: Device, name: string): Element;};
 		public reconfigure_element: {(device: Device, element: Element): boolean;};
 	}
@@ -8971,11 +9311,7 @@ declare namespace imports.gi.Gst {
 	interface DeviceMonitorClass {}
 	class DeviceMonitorClass {
 		public constructor();
-		/**
-		 * the parent {@link ObjectClass} structure
-		 */
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	interface DeviceMonitorPrivate {}
@@ -8995,16 +9331,12 @@ declare namespace imports.gi.Gst {
 	class DeviceProviderClass {
 		public constructor();
 		/**
-		 * the parent {@link ObjectClass} structure
-		 */
-		public parent_class: ObjectClass;
-		/**
 		 * a pointer to the {@link DeviceProviderFactory} that creates this
 		 *  provider
 		 */
-		public factory: DeviceProviderFactory;
-		public metadata: any;
-		public _gst_reserved: any[];
+		public readonly factory: DeviceProviderFactory;
+		public readonly metadata: any;
+		public readonly _gst_reserved: any[];
 		public probe: {(provider: DeviceProvider): GLib.List;};
 		public start: {(provider: DeviceProvider): boolean;};
 		public stop: {(provider: DeviceProvider): void;};
@@ -9094,30 +9426,26 @@ declare namespace imports.gi.Gst {
 	class ElementClass {
 		public constructor();
 		/**
-		 * the parent class structure
-		 */
-		public parent_class: ObjectClass;
-		/**
 		 * metadata for elements of this class
 		 */
-		public metadata: any;
+		public readonly metadata: any;
 		/**
 		 * the {@link ElementFactory} that creates these elements
 		 */
-		public elementfactory: ElementFactory;
+		public readonly elementfactory: ElementFactory;
 		/**
 		 * a #GList of {@link PadTemplate}
 		 */
-		public padtemplates: GLib.List;
+		public readonly padtemplates: GLib.List;
 		/**
 		 * the number of padtemplates
 		 */
-		public numpadtemplates: number;
+		public readonly numpadtemplates: number;
 		/**
 		 * changed whenever the padtemplates change
 		 */
-		public pad_templ_cookie: number;
-		public _gst_reserved: any[];
+		public readonly pad_templ_cookie: number;
+		public readonly _gst_reserved: any[];
 		public pad_added: {(element: Element, pad: Pad): void;};
 		public pad_removed: {(element: Element, pad: Pad): void;};
 		public no_more_pads: {(element: Element): void;};
@@ -10088,8 +10416,7 @@ declare namespace imports.gi.Gst {
 	interface GhostPadClass {}
 	class GhostPadClass {
 		public constructor();
-		public parent_class: ProxyPadClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	interface GhostPadPrivate {}
@@ -10241,7 +10568,7 @@ declare namespace imports.gi.Gst {
 		 * the size of the iterator
 		 */
 		public size: number;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		/**
 		 * Copy the iterator and its state.
 		 * @returns a new copy of #it.
@@ -10400,7 +10727,7 @@ declare namespace imports.gi.Gst {
 		 *             can use to store extra info.
 		 */
 		public user_data: any[];
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	/**
@@ -10467,10 +10794,6 @@ declare namespace imports.gi.Gst {
 		 * pointer to the {@link Allocator}
 		 */
 		public allocator: Allocator;
-		/**
-		 * parent memory block
-		 */
-		public parent: Memory;
 		/**
 		 * the maximum size allocated
 		 */
@@ -11166,8 +11489,8 @@ declare namespace imports.gi.Gst {
 		 * the sequence number of the message
 		 */
 		public seqnum: number;
-		public lock: GLib.Mutex;
-		public cond: GLib.Cond;
+		public readonly lock: GLib.Mutex;
+		public readonly cond: GLib.Cond;
 		/**
 		 * Creates and appends a new entry.
 		 * 
@@ -11895,8 +12218,8 @@ declare namespace imports.gi.Gst {
 		 * the free function
 		 */
 		public free: MiniObjectFreeFunction;
-		public priv_uint: number;
-		public priv_pointer: any;
+		public readonly priv_uint: number;
+		public readonly priv_pointer: any;
 		/**
 		 * This adds #parent as a parent for #object. Having one ore more parents affects the
 		 * writability of #object: if a #parent is not writable, #object is also not
@@ -12047,22 +12370,17 @@ declare namespace imports.gi.Gst {
 	class ObjectClass {
 		public constructor();
 		/**
-		 * parent
-		 */
-		public parent_class: GObject.InitiallyUnownedClass;
-		/**
 		 * separator used by gst_object_get_path_string()
 		 */
-		public path_string_separator: string;
-		public _gst_reserved: any[];
+		public readonly path_string_separator: string;
+		public readonly _gst_reserved: any[];
 		public deep_notify: {(object: Object, orig: Object, pspec: GObject.ParamSpec): void;};
 	}
 
 	interface PadClass {}
 	class PadClass {
 		public constructor();
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		public linked: {(pad: Pad, peer: Pad): void;};
 		public unlinked: {(pad: Pad, peer: Pad): void;};
 	}
@@ -12110,8 +12428,7 @@ declare namespace imports.gi.Gst {
 	interface PadTemplateClass {}
 	class PadTemplateClass {
 		public constructor();
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		public pad_created: {(templ: PadTemplate, pad: Pad): void;};
 	}
 
@@ -12121,10 +12438,6 @@ declare namespace imports.gi.Gst {
 	interface ParamSpecArray {}
 	class ParamSpecArray {
 		public constructor();
-		/**
-		 * super class
-		 */
-		public parent_instance: GObject.ParamSpec;
 		/**
 		 * the #GParamSpec of the type of values in the array
 		 */
@@ -12138,10 +12451,6 @@ declare namespace imports.gi.Gst {
 	interface ParamSpecFraction {}
 	class ParamSpecFraction {
 		public constructor();
-		/**
-		 * super class
-		 */
-		public parent_instance: GObject.ParamSpec;
 		/**
 		 * minimal numerator
 		 */
@@ -12181,10 +12490,6 @@ declare namespace imports.gi.Gst {
 	interface ParentBufferMeta {}
 	class ParentBufferMeta {
 		public constructor();
-		/**
-		 * the parent {@link Meta} structure
-		 */
-		public parent: Meta;
 		/**
 		 * the {@link Buffer} on which a reference is being held.
 		 */
@@ -12229,8 +12534,7 @@ declare namespace imports.gi.Gst {
 	interface PipelineClass {}
 	class PipelineClass {
 		public constructor();
-		public parent_class: BinClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	interface PipelinePrivate {}
@@ -12302,7 +12606,7 @@ declare namespace imports.gi.Gst {
 		 *     preprocessor macro.
 		 */
 		public release_datetime: string;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	interface PluginFeatureClass {}
@@ -12519,7 +12823,7 @@ declare namespace imports.gi.Gst {
 		 * a file descriptor
 		 */
 		public fd: number;
-		public idx: number;
+		public readonly idx: number;
 		/**
 		 * Initializes #fd. Alternatively you can initialize it with
 		 * #GST_POLL_FD_INIT.
@@ -12533,11 +12837,7 @@ declare namespace imports.gi.Gst {
 	interface PresetInterface {}
 	class PresetInterface {
 		public constructor();
-		/**
-		 * parent interface type.
-		 */
-		public parent: GObject.TypeInterface;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		public get_preset_names: {(preset: Preset): string[];};
 		public get_property_names: {(preset: Preset): string[];};
 		public load_preset: {(preset: Preset, name: string): boolean;};
@@ -12617,10 +12917,6 @@ declare namespace imports.gi.Gst {
 		 */
 		public static new_with_change_func(_func: PromiseChangeFunc, notify: GLib.DestroyNotify): Promise;
 		/**
-		 * parent {@link MiniObject}
-		 */
-		public parent: MiniObject;
-		/**
 		 * Expire a #promise.  This will wake up any waiters with
 		 * %GST_PROMISE_RESULT_EXPIRED.  Called by a message loop when the parent
 		 * message is handled and/or destroyed (possibly unanswered).
@@ -12677,8 +12973,7 @@ declare namespace imports.gi.Gst {
 	interface ProxyPadClass {}
 	class ProxyPadClass {
 		public constructor();
-		public parent_class: PadClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	interface ProxyPadPrivate {}
@@ -13416,10 +13711,6 @@ declare namespace imports.gi.Gst {
 	class ReferenceTimestampMeta {
 		public constructor();
 		/**
-		 * the parent {@link Meta} structure
-		 */
-		public parent: Meta;
-		/**
 		 * identifier for the timestamp reference.
 		 */
 		public reference: Caps;
@@ -13436,7 +13727,6 @@ declare namespace imports.gi.Gst {
 	interface RegistryClass {}
 	class RegistryClass {
 		public constructor();
-		public parent_class: ObjectClass;
 	}
 
 	interface RegistryPrivate {}
@@ -13678,7 +13968,7 @@ declare namespace imports.gi.Gst {
 		 *                seeking with #GST_SEEK_TYPE_END.
 		 */
 		public duration: number;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		/**
 		 * Clip the given #start and #stop values to the segment boundaries given
 		 * in #segment. #start and #stop are compared and clipped to #segment
@@ -13959,7 +14249,7 @@ declare namespace imports.gi.Gst {
 		 * a string describing a caps
 		 */
 		public string: string;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		/**
 		 * Clean up the cached caps contained in #static_caps.
 		 */
@@ -14017,11 +14307,7 @@ declare namespace imports.gi.Gst {
 	interface StreamClass {}
 	class StreamClass {
 		public constructor();
-		/**
-		 * the parent class structure
-		 */
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	/**
@@ -14030,11 +14316,7 @@ declare namespace imports.gi.Gst {
 	interface StreamCollectionClass {}
 	class StreamCollectionClass {
 		public constructor();
-		/**
-		 * the parent class structure
-		 */
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		public stream_notify: {(collection: StreamCollection, stream: Stream, pspec: GObject.ParamSpec): void;};
 	}
 
@@ -14242,7 +14524,7 @@ declare namespace imports.gi.Gst {
 		 * the GType of a structure
 		 */
 		public type: GObject.Type;
-		public name: GLib.Quark;
+		public readonly name: GLib.Quark;
 		/**
 		 * Tries intersecting #struct1 and #struct2 and reports whether the result
 		 * would not be empty.
@@ -14812,8 +15094,7 @@ declare namespace imports.gi.Gst {
 	interface SystemClockClass {}
 	class SystemClockClass {
 		public constructor();
-		public parent_class: ClockClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	interface SystemClockPrivate {}
@@ -15300,15 +15581,14 @@ declare namespace imports.gi.Gst {
 		/**
 		 * parent interface type.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 	}
 
 	interface TaskClass {}
 	class TaskClass {
 		public constructor();
-		public parent_class: ObjectClass;
-		public pool: TaskPool;
-		public _gst_reserved: any[];
+		public readonly pool: TaskPool;
+		public readonly _gst_reserved: any[];
 	}
 
 	/**
@@ -15317,11 +15597,7 @@ declare namespace imports.gi.Gst {
 	interface TaskPoolClass {}
 	class TaskPoolClass {
 		public constructor();
-		/**
-		 * the parent class structure
-		 */
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		public prepare: {(pool: TaskPool): void;};
 		public cleanup: {(pool: TaskPool): void;};
 		public push: {(pool: TaskPool, _func: TaskPoolFunction): any;};
@@ -15544,14 +15820,13 @@ declare namespace imports.gi.Gst {
 		/**
 		 * parent interface type.
 		 */
-		public g_iface: GObject.TypeInterface;
+		public readonly g_iface: GObject.TypeInterface;
 	}
 
 	interface TracerClass {}
 	class TracerClass {
 		public constructor();
-		public parent_class: ObjectClass;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	interface TracerFactoryClass {}
@@ -15580,7 +15855,7 @@ declare namespace imports.gi.Gst {
 		 * The data used by the caller of the typefinding function.
 		 */
 		public data: any;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 		// public peek: {(data: any, offset: number, size: number): number;};
 		// public suggest: {(data: any, probability: number, caps: Caps): void;};
 		// public get_length: {(data: any): number;};
@@ -15642,10 +15917,6 @@ declare namespace imports.gi.Gst {
 	interface URIHandlerInterface {}
 	class URIHandlerInterface {
 		public constructor();
-		/**
-		 * The parent interface type
-		 */
-		public parent: GObject.TypeInterface;
 		public get_type: {(_type: GObject.Type): URIType;};
 		public get_protocols: {(_type: GObject.Type): string[];};
 		public get_uri: {(handler: URIHandler): string;};
@@ -15985,7 +16256,7 @@ declare namespace imports.gi.Gst {
 		 * a {@link ValueDeserializeFunc}
 		 */
 		public deserialize: ValueDeserializeFunc;
-		public _gst_reserved: any[];
+		public readonly _gst_reserved: any[];
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

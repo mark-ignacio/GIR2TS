@@ -1,48 +1,16 @@
 import { ClassNode, EnumNode, FunctionNode, InterfaceNode, NamespaceNode, ParameterNode, Node, RecordNode } from "./types/gir-types";
-import { ClassModifier, FunctionModifier, ModifierDesc } from "./types/modifier-types";
-import { ExcludeClass, ExcludeDesc } from "./types/exclude-types";
-import { js_reserved_words } from "./consts";
+import { FunctionModifier, ModifierDesc } from "./types/modifier-types";
+import { ExcludeDesc } from "./types/exclude-types";
 import { Parser } from 'xml2js';
-import { BuildConstructorNode, NeedNewLine } from "./utils/utils";
-import { GetTypeInfo, TypeInfo } from "./utils/paramUtils";
-import { getFunctionInfo, Parameter } from "./utils/functionUtils";
+import { GetTypeInfo } from "./utils/paramUtils";
+import { getFunctionInfo } from "./utils/functionUtils";
 import { renderDocString } from "./renderers/docStringRenderer";
 import { renderRecordAsClass } from "./renderers/recordRenderer";
 import { renderMethod } from "./renderers/methodRenderer";
-
-function renderFreeFunction(func_node: FunctionNode, ns_name: string, exclude_list: string[] | null = null, modifier?: FunctionModifier): string {
-    let { name, return_type, params, doc } = getFunctionInfo(func_node, modifier);
-
-    let str = `${renderDocString(doc, params, return_type, 0, ns_name)}`;
-    if (exclude_list && exclude_list.indexOf(name) !== -1) {
-        str += '// ';
-    }
-    str += `function ${name}(${params.map((p) => `${p.name}: ${p.type}`).join(', ')})${(return_type != null) ? (": " + return_type.type) : ""};`;
-    return str;
-}
-
-export function renderCallback(cb_node: FunctionNode, ns_name: string): string {
-    const cb_name = cb_node.$.name;
-    let body = renderDocString(cb_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
-    body += `interface ${cb_name} {\n${renderMethod(cb_node, ns_name, undefined, { include_name: false, include_access_modifier: false, indentNum: 1 })}\n}`;
-    return body;
-}
-
-function renderEnumeration(enum_node: EnumNode, ns_name: string): string {
-    let body = '';
-    for (let mem of enum_node.member) {
-        let mem_name = mem.$.name;
-        if (parseInt(mem_name)) {
-            mem_name = '_' + mem_name;
-        }
-        body += renderDocString(mem?.doc?.[0]?._ ?? null, undefined, undefined, 1, ns_name);
-        body += `\t${mem_name.toUpperCase()} = ${mem.$.value},\n`;
-    }
-    body = body.slice(0, -2) + '\n'; // remove last comma
-    let result = renderDocString(enum_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
-    result += `enum ${enum_node.$.name} {\n${body}}`;
-    return result;
-}
+import { renderClassAsInterface } from "./renderers/classRenderer";
+import { renderFreeFunction } from "./renderers/freeFuncRenderer";
+import { renderCallback } from "./renderers/freeCallbackRenderer";
+import { renderEnumeration } from "./renderers/enumRenderer";
 
 
 function renderNodeAsBlankInterface(node: Node, ns_name: string) {
@@ -55,133 +23,6 @@ function renderAlias(alias_node: ParameterNode, ns_name: string): string {
     let result = renderDocString(alias_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
     result += `type ${alias_node.$.name} = ${GetTypeInfo(alias_node).type};`;
     return result;
-}
-
-/*
-    Render class as a TS interface with construct signature.
-    Saves us a lot of hassle with generating stud declarations for implemented
-    methods.
-    @exclude_list : An array of member names to exclude.
-*/
-function renderClassAsInterface(class_node: ClassNode, ns_name: string, exclude?: ExcludeClass, modifier?: ClassModifier): string {
-
-    const class_name = class_node.$.name;
-    const ifaces: string[] = [];
-    const methods: FunctionNode[] = [];
-    const ctors: FunctionNode[] = [];
-    const static_funcs: FunctionNode[] = [];
-    let exclude_method_list: string[] = [];
-    let exclude_self = false;
-    let exclude_all_members = false;
-
-    /** Transform all extends as I{className} for Mixins */
-    function transformExtension(className: string): string {
-        const parts = className.split(".");
-        parts[parts.length - 1] = `I${parts[parts.length - 1]}`
-        return parts.join(".")
-    }
-
-    exclude_method_list = exclude_method_list.concat(exclude?.method ?? []);
-    exclude_all_members = exclude?.members ?? false;
-    if (exclude?.self) {
-        exclude_self = exclude_all_members = true;
-    }
-
-    if (class_node.$.parent) {
-        ifaces.push(transformExtension(class_node.$.parent));
-    }
-    if (class_node.implements) {
-        for (let iface of class_node.implements) {
-            ifaces.push(transformExtension(iface.$.name));
-        }
-    }
-
-    if (class_node.method) {
-        for (let m of class_node.method) {
-            methods.push(m);
-        }
-    }
-
-    // console.log('rendering ' + class_node.$.name);
-    if (class_node.hasOwnProperty('constructor')) {
-        // console.log(class_node.constructor);
-        for (let c of class_node.constructor) {
-            if (typeof c !== 'function')
-                ctors.push(c);
-        }
-    }
-
-    if (class_node.function) {
-        for (let f of class_node.function) {
-            static_funcs.push(f);
-        }
-    }
-
-    let mixinDocstring = ""
-    mixinDocstring += `/** This construct is only for enabling class multi-inheritance,\n`;
-    mixinDocstring += ` * use {@link ${class_name}} instead.\n`
-    mixinDocstring += ` */\n`;
-
-    let header = '';
-    header += mixinDocstring;
-    header += `interface I${class_name}`;
-
-    const method_str_list: string[] = methods.map((m) => {
-        // if method is present in exclude_list
-        const excluded = (exclude_method_list.includes(m.$.name) || exclude_all_members);
-        const funcModifier = modifier?.function?.[m.$.name];
-        let method_str = renderMethod(m, ns_name, funcModifier, { include_access_modifier: false, indentNum: 1, exclude: excluded });
-        return method_str;
-    });
-
-    let mixin = "";
-    mixin += mixinDocstring;
-    mixin += `type ${class_name}Mixin = I${class_name}`;
-    if (ifaces.length > 0) {
-        mixin += " &"
-        mixin += ` ${ifaces.join(' & ')}`;
-    }
-    mixin += ";\n\n";
-
-    let extension = "";
-    extension += renderDocString(class_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name)
-    extension += `${exclude_self ? '// ' : ''}interface ${class_name} extends ${class_name}Mixin {}\n`;
-
-    let body = method_str_list.join('\n');
-
-    body = ` {\n` +
-        `${body}\n` +
-        `}\n\n`;
-
-    let iface_str = header + body;
-
-    const ctor_str_list: string[] = ctors.map((c) => {
-        // console.log(c);
-        const funcModifier = modifier?.function?.[c.$.name];
-        return renderMethod(c, ns_name, funcModifier, { indentNum: 1, staticFunc: true });
-    });
-    const ctors_body = ctor_str_list.join('\n');
-
-    const static_func_str_list: string[] = static_funcs.map((sf) => {
-        const funcModifier = modifier?.function?.[sf.$.name];
-        return renderMethod(sf, ns_name, funcModifier, { indentNum: 1, staticFunc: true });
-    });
-    const static_func_body = static_func_str_list.join('\n');
-
-    const constructor_modifier = modifier?.function?.["constructor"];
-    const classGenericModifier = modifier?.generic ?? "";
-    const static_side = '\n' +
-        `class ${class_name}${classGenericModifier} {\n` +
-        `${renderMethod(BuildConstructorNode(class_name), ns_name, constructor_modifier, {
-            indentNum: 1,
-            isConstructor: true
-        })}\n` +
-        `${ctors_body}` + NeedNewLine(ctors_body) +
-        `${static_func_body + NeedNewLine(static_func_body)}` +
-        `}\n`;
-
-    return iface_str + mixin + extension + static_side;
-
 }
 
 function renderNamespace(ns_node: NamespaceNode, ns_name: string, exclude?: ExcludeDesc, modifiers?: ModifierDesc): string {

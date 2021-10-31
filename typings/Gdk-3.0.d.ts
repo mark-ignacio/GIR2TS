@@ -3,6 +3,7 @@ declare namespace imports.gi.Gdk {
 	 * use {@link AppLaunchContext} instead.
 	 */
 	interface IAppLaunchContext {
+		display: Display;
 		/**
 		 * Sets the workspace on which applications will be launched when
 		 * using this context when running under a window manager that
@@ -109,6 +110,8 @@ declare namespace imports.gi.Gdk {
 	 * use {@link Cursor} instead.
 	 */
 	interface ICursor {
+		cursor_type: CursorType;
+		display: Display;
 		/**
 		 * Returns the cursor type for this cursor.
 		 * @returns a {@link CursorType}
@@ -283,6 +286,64 @@ declare namespace imports.gi.Gdk {
 	 * use {@link Device} instead.
 	 */
 	interface IDevice {
+		/**
+		 * Associated pointer or keyboard with this device, if any. Devices of type #GDK_DEVICE_TYPE_MASTER
+		 * always come in keyboard/pointer pairs. Other device types will have a %NULL associated device.
+		 */
+		readonly associated_device: Device;
+		/**
+		 * The axes currently available for this device.
+		 */
+		readonly axes: AxisFlags;
+		/**
+		 * The {@link DeviceManager} the #GdkDevice pertains to.
+		 */
+		device_manager: DeviceManager;
+		/**
+		 * The {@link Display} the #GdkDevice pertains to.
+		 */
+		display: Display;
+		/**
+		 * Whether the device is represented by a cursor on the screen. Devices of type
+		 * %GDK_DEVICE_TYPE_MASTER will have %TRUE here.
+		 */
+		has_cursor: boolean;
+		input_mode: InputMode;
+		/**
+		 * Source type for the device.
+		 */
+		input_source: InputSource;
+		/**
+		 * Number of axes in the device.
+		 */
+		readonly n_axes: number;
+		/**
+		 * The device name.
+		 */
+		name: string;
+		/**
+		 * The maximal number of concurrent touches on a touch device.
+		 * Will be 0 if the device is not a touch device or if the number
+		 * of touches is unknown.
+		 */
+		num_touches: number;
+		/**
+		 * Product ID of this device, see gdk_device_get_product_id().
+		 */
+		product_id: string;
+		/**
+		 * {@link Seat} of this device.
+		 */
+		seat: Seat;
+		readonly tool: DeviceTool;
+		/**
+		 * Device role in the device manager.
+		 */
+		type: DeviceType;
+		/**
+		 * Vendor ID of this device, see gdk_device_get_vendor_id().
+		 */
+		vendor_id: string;
 		/**
 		 * Returns the associated device to #device, if #device is of type
 		 * %GDK_DEVICE_TYPE_MASTER, it will return the paired pointer or
@@ -668,6 +729,7 @@ declare namespace imports.gi.Gdk {
 	 * use {@link DeviceManager} instead.
 	 */
 	interface IDeviceManager {
+		display: Display;
 		/**
 		 * Returns the client pointer, that is, the master pointer that acts as the core pointer
 		 * for this application. In X11, window managers may change this depending on the interaction
@@ -829,6 +891,10 @@ declare namespace imports.gi.Gdk {
 	 * use {@link DeviceTool} instead.
 	 */
 	interface IDeviceTool {
+		axes: AxisFlags;
+		hardware_id: number;
+		serial: number;
+		tool_type: DeviceToolType;
 		/**
 		 * Gets the hardware ID of this tool, or 0 if it's not known. When
 		 * non-zero, the identificator is unique for the given tool model,
@@ -1278,6 +1344,7 @@ declare namespace imports.gi.Gdk {
 	 * use {@link DisplayManager} instead.
 	 */
 	interface IDisplayManager {
+		default_display: Display;
 		/**
 		 * Gets the default {@link Display}.
 		 * @returns a {@link Display}, or %NULL if
@@ -1479,6 +1546,14 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface IDrawingContext {
 		/**
+		 * The clip region applied to the drawing context.
+		 */
+		clip: cairo.Region;
+		/**
+		 * The {@link Window} that created the drawing context.
+		 */
+		window: Window;
+		/**
 		 * Retrieves a Cairo context to be used to draw on the {@link Window}
 		 * that created the #GdkDrawingContext.
 		 * 
@@ -1679,6 +1754,18 @@ declare namespace imports.gi.Gdk {
 	 * use {@link GLContext} instead.
 	 */
 	interface IGLContext {
+		/**
+		 * The {@link Display} used to create the #GdkGLContext.
+		 */
+		display: Display;
+		/**
+		 * The {@link GLContext} that this context is sharing data with, or %NULL
+		 */
+		shared_context: GLContext;
+		/**
+		 * The {@link Window} the gl context is bound to.
+		 */
+		window: Window;
 		/**
 		 * Retrieves the value set using gdk_gl_context_set_debug_enabled().
 		 * @returns %TRUE if debugging is enabled
@@ -2104,6 +2191,16 @@ declare namespace imports.gi.Gdk {
 	 * use {@link Monitor} instead.
 	 */
 	interface IMonitor {
+		display: Display;
+		readonly geometry: Rectangle;
+		readonly height_mm: number;
+		readonly manufacturer: string;
+		readonly model: string;
+		readonly refresh_rate: number;
+		readonly scale_factor: number;
+		readonly subpixel_layout: SubpixelLayout;
+		readonly width_mm: number;
+		readonly workarea: Rectangle;
 		/**
 		 * Gets the display that this monitor belongs to.
 		 * @returns the display
@@ -2216,6 +2313,8 @@ declare namespace imports.gi.Gdk {
 	 * use {@link Screen} instead.
 	 */
 	interface IScreen {
+		font_options: any;
+		resolution: number;
 		/**
 		 * Returns the screen’s currently active window.
 		 * 
@@ -2582,6 +2681,10 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface ISeat {
 		/**
+		 * {@link Display} of this seat.
+		 */
+		display: Display;
+		/**
 		 * Returns the capabilities this {@link Seat} currently has.
 		 * @returns the seat capabilities
 		 */
@@ -2827,6 +2930,11 @@ declare namespace imports.gi.Gdk {
 	 * use {@link Window} instead.
 	 */
 	interface IWindow {
+		/**
+		 * The mouse pointer for a {@link Window}. See gdk_window_set_cursor() and
+		 * gdk_window_get_cursor() for details.
+		 */
+		cursor: Cursor;
 		/**
 		 * Adds an event filter to #window, allowing you to intercept events
 		 * before they reach GDK. This is a low-level operation and makes it
@@ -6405,7 +6513,6 @@ declare namespace imports.gi.Gdk {
 	interface WindowClass {}
 	class WindowClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public pick_embedded_child: {(window: Window, _x: number, _y: number): Window;};
 		public to_embedder: {(window: Window, offscreen_x: number, offscreen_y: number, embedder_x: number, embedder_y: number): void;};
 		public from_embedder: {(window: Window, embedder_x: number, embedder_y: number, offscreen_x: number, offscreen_y: number): void;};

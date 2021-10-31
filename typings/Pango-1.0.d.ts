@@ -1548,6 +1548,12 @@ declare namespace imports.gi.Pango {
 	 */
 	interface IRenderer {
 		/**
+		 * the current transformation matrix for
+		 *   the Renderer; may be %NULL, which should be treated the
+		 *   same as the identity matrix.
+		 */
+		readonly matrix: Matrix;
+		/**
 		 * Does initial setup before rendering operations on #renderer.
 		 * 
 		 * [method#Pango.Renderer.deactivate] should be called when done drawing.
@@ -2425,7 +2431,6 @@ declare namespace imports.gi.Pango {
 	interface FontClass {}
 	class FontClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public describe: {(font: Font): FontDescription;};
 		public get_coverage: {(font: Font, language: Language): Coverage;};
 		public get_glyph_extents: {(font: Font, glyph: Glyph, ink_rect: Rectangle, logical_rect: Rectangle): void;};
@@ -2801,7 +2806,6 @@ declare namespace imports.gi.Pango {
 	interface FontFaceClass {}
 	class FontFaceClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public get_face_name: {(_face: FontFace): string;};
 		public describe: {(_face: FontFace): FontDescription;};
 		public list_sizes: {(_face: FontFace, sizes: number[], n_sizes: number): void;};
@@ -2814,7 +2818,6 @@ declare namespace imports.gi.Pango {
 	interface FontFamilyClass {}
 	class FontFamilyClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public list_faces: {(family: FontFamily, faces: FontFace[], n_faces: number): void;};
 		public get_name: {(family: FontFamily): string;};
 		public is_monospace: {(family: FontFamily): boolean;};
@@ -2831,14 +2834,10 @@ declare namespace imports.gi.Pango {
 	class FontMapClass {
 		public constructor();
 		/**
-		 * parent `GObjectClass`
-		 */
-		public parent_class: GObject.ObjectClass;
-		/**
 		 * the type of rendering-system-dependent engines that
 		 * can handle fonts of this fonts loaded with this fontmap.
 		 */
-		public shape_engine_type: string;
+		public readonly shape_engine_type: string;
 		public load_font: {(fontmap: FontMap, context: Context, desc: FontDescription): Font;};
 		public list_families: {(fontmap: FontMap, families: FontFamily[], n_families: number): void;};
 		public load_fontset: {(fontmap: FontMap, context: Context, desc: FontDescription, language: Language): Fontset;};
@@ -2860,16 +2859,16 @@ declare namespace imports.gi.Pango {
 	interface FontMetrics {}
 	class FontMetrics {
 		public constructor();
-		public ref_count: number;
-		public ascent: number;
-		public descent: number;
-		public height: number;
-		public approximate_char_width: number;
-		public approximate_digit_width: number;
-		public underline_position: number;
-		public underline_thickness: number;
-		public strikethrough_position: number;
-		public strikethrough_thickness: number;
+		public readonly ref_count: number;
+		public readonly ascent: number;
+		public readonly descent: number;
+		public readonly height: number;
+		public readonly approximate_char_width: number;
+		public readonly approximate_digit_width: number;
+		public readonly underline_position: number;
+		public readonly underline_thickness: number;
+		public readonly strikethrough_position: number;
+		public readonly strikethrough_thickness: number;
 		/**
 		 * Gets the approximate character width for a font metrics structure.
 		 * 
@@ -2966,10 +2965,6 @@ declare namespace imports.gi.Pango {
 	interface FontsetClass {}
 	class FontsetClass {
 		public constructor();
-		/**
-		 * parent `GObjectClass`
-		 */
-		public parent_class: GObject.ObjectClass;
 		public get_font: {(fontset: Fontset, wc: number): Font;};
 		public get_metrics: {(fontset: Fontset): FontMetrics;};
 		public get_language: {(fontset: Fontset): Language;};
@@ -3262,7 +3257,7 @@ declare namespace imports.gi.Pango {
 		 *   within the text corresponding to the glyph string.
 		 */
 		public log_clusters: number;
-		public space: number;
+		public readonly space: number;
 		/**
 		 * Copy a glyph string and associated storage.
 		 * @returns the newly allocated `PangoGlyphString`
@@ -4198,7 +4193,6 @@ declare namespace imports.gi.Pango {
 	interface RendererClass {}
 	class RendererClass {
 		public constructor();
-		public parent_class: GObject.ObjectClass;
 		public draw_glyphs: {(renderer: Renderer, font: Font, glyphs: GlyphString, _x: number, _y: number): void;};
 		public draw_rectangle: {(renderer: Renderer, part: RenderPart, _x: number, _y: number, width: number, height: number): void;};
 		public draw_error_underline: {(renderer: Renderer, _x: number, _y: number, width: number, height: number): void;};

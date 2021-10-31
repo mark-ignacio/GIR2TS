@@ -17,7 +17,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * The value to turn the selector off
 		 */
 		public disable: aat_layout_feature_selector_t;
-		public reserved: number;
+		public readonly reserved: number;
 	}
 
 	/**
@@ -106,15 +106,15 @@ declare namespace imports.gi.HarfBuzz {
 		 * The suggested line-spacing gap.
 		 */
 		public line_gap: position_t;
-		public reserved9: position_t;
-		public reserved8: position_t;
-		public reserved7: position_t;
-		public reserved6: position_t;
-		public reserved5: position_t;
-		public reserved4: position_t;
-		public reserved3: position_t;
-		public reserved2: position_t;
-		public reserved1: position_t;
+		public readonly reserved9: position_t;
+		public readonly reserved8: position_t;
+		public readonly reserved7: position_t;
+		public readonly reserved6: position_t;
+		public readonly reserved5: position_t;
+		public readonly reserved4: position_t;
+		public readonly reserved3: position_t;
+		public readonly reserved2: position_t;
+		public readonly reserved1: position_t;
 	}
 
 	/**
@@ -178,7 +178,7 @@ declare namespace imports.gi.HarfBuzz {
 		 *             (after shaping).
 		 */
 		public codepoint: codepoint_t;
-		public mask: mask_t;
+		public readonly mask: mask_t;
 		/**
 		 * the index of the character in the original text that corresponds
 		 *           to this #hb_glyph_info_t, or whatever the client passes to
@@ -193,8 +193,8 @@ declare namespace imports.gi.HarfBuzz {
 		 *           allow selecting more fine-grained cluster handling.
 		 */
 		public cluster: number;
-		public var1: var_int_t;
-		public var2: var_int_t;
+		public readonly var1: var_int_t;
+		public readonly var2: var_int_t;
 	}
 
 	/**
@@ -225,7 +225,7 @@ declare namespace imports.gi.HarfBuzz {
 		 *            should not affect how much the line advances.
 		 */
 		public y_offset: position_t;
-		public var: var_int_t;
+		public readonly var: var_int_t;
 	}
 
 	/**
@@ -324,7 +324,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * name ID
 		 */
 		public name_id: ot_name_id_t;
-		public var: var_int_t;
+		public readonly var: var_int_t;
 		/**
 		 * language
 		 */
@@ -370,7 +370,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * The maximum value on the variation axis that the font covers
 		 */
 		public max_value: number;
-		public reserved: number;
+		public readonly reserved: number;
 	}
 
 	/**
@@ -421,8 +421,8 @@ declare namespace imports.gi.HarfBuzz {
 		 * the #hb_language_t of the buffer, see hb_buffer_set_language().
 		 */
 		public language: language_t;
-		public reserved1: any;
-		public reserved2: any;
+		public readonly reserved1: any;
+		public readonly reserved2: any;
 	}
 
 	/**
@@ -473,7 +473,7 @@ declare namespace imports.gi.HarfBuzz {
 	interface user_data_key_t {}
 	class user_data_key_t {
 		public constructor();
-		public unused: string;
+		public readonly unused: string;
 	}
 
 	/**

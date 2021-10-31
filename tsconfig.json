@@ -25,7 +25,8 @@
         "extensions/**/*"
     ],
     "exclude": [
-        "src/es6.d.ts"
+        "node_modules/**/*",
+        "dist/**/*"
     ],
     "atom": {
         "rewriteTsconfig": true
