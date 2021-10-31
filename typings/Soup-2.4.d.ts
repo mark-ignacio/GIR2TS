@@ -2420,7 +2420,7 @@ declare namespace imports.gi.Soup {
 		 * @param path the toplevel path for the handler
 		 * @param callback callback to invoke for requests under #path
 		 */
-		add_handler(path: string | null | null, callback: ServerCallback): void;
+		add_handler(path: string | null, callback: ServerCallback): void;
 		/**
 		 * Add support for a WebSocket extension of the given #extension_type.
 		 * When a WebSocket client requests an extension of #extension_type,

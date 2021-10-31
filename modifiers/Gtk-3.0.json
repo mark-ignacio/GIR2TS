@@ -30,18 +30,6 @@
                     }
                 }
             }
-        },
-        "function": {
-            "init": {
-                "param": {
-                    "argc": {
-                        "type_extension": ["null"]
-                    },
-                    "argv": {
-                        "optional": true
-                    }
-                }
-            }
         }
     }
 }

@@ -81,7 +81,7 @@ export function GetTypeInfo(param_node: ParameterNode, modifier?: ParamModifier)
     }
 
     let finalType = modifier?.type ?? ((modifier?.type_extension?.length ?? 0 > 1)) ? `${type} | ${modifier?.type_extension?.join(" | ")}`  : type;
-    if (param_node?.$?.["allow-none"] == 1)
+    if (param_node?.$?.["allow-none"] == 1 /*|| param_node?.$?.["nullable"] == 1*/)
         finalType+= " | null";
     return {
         type: finalType,

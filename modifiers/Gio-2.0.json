@@ -29,20 +29,6 @@
                         }
                     },
                     "load_contents": {
-                        "param": {
-                            "cancellable": {
-                                "type_extension": ["null"]
-                            },
-                            "contents": {
-                                "skip": true
-                            },
-                            "length": {
-                                "skip": true
-                            },
-                            "etag_out": {
-                                "skip": true
-                            }
-                        },
                         "return_type": {
                             "type": "[success: boolean, contents: Uint8Array]"
                         }
@@ -51,36 +37,6 @@
                         "param": {
                             "io_priority": {
                                 "type_extension": ["null"]
-                            },
-                            "cancellable": {
-                                "type_extension": ["null"]
-                            },
-                            "callback": {
-                                "type_extension": ["null"]
-                            }
-                        }
-                    },
-                    "load_contents_async": {
-                        "param": {
-                            "cancellable": {
-                                "type_extension": ["null"]
-                            },
-                            "callback": {
-                                "type_extension": ["null"]
-                            }
-                        }
-                    },
-                    "make_directory_with_parents": {
-                        "param": {
-                            "cancellable": {
-                                "type_extension": ["null"]
-                            }
-                        }
-                    },
-                    "query_exists": {
-                        "param": {
-                            "cancellable": {
-                                "type_extension": ["null"]
                             }
                         }
                     },
@@ -88,33 +44,15 @@
                         "param": {
                             "io_priority": {
                                 "type_extension": ["null"]
-                            },
-                            "cancellable": {
-                                "type_extension": ["null"]
-                            },
-                            "callback": {
-                                "type_extension": ["null"]
                             }
                         }
                     },
                     "replace_readwrite_async": {
                         "param": {
-                            "etag": {
-                                "type_extension": ["null"]
-                            },
-                            "make_backup": {
-                                "type_extension": ["null"]
-                            },
                             "flags": {
                                 "type_extension": ["null"]
                             },
                             "io_priority": {
-                                "type_extension": ["null"]
-                            },
-                            "cancellable": {
-                                "type_extension": ["null"]
-                            },
-                            "callback": {
                                 "type_extension": ["null"]
                             }
                         }
@@ -141,9 +79,6 @@
                         "param": {
                             "io_priority": {
                                 "type_extension": ["null"]
-                            },
-                            "cancellable": {
-                                "type_extension": ["null"]
                             }
                         }
                     }
@@ -154,9 +89,6 @@
                     "close_async": {
                         "param": {
                             "io_priority": {
-                                "type_extension": ["null"]
-                            },
-                            "cancellable": {
                                 "type_extension": ["null"]
                             }
                         }
@@ -169,9 +101,6 @@
                         "param": {
                             "io_priority": {
                                 "type_extension": ["null"]
-                            },
-                            "cancellable": {
-                                "type_extension": ["null"]
                             }
                         }
                     },
@@ -179,12 +108,6 @@
                         "param": {
                             "io_priority": {
                                 "type_extension": ["null"]
-                            },
-                            "cancellable": {
-                                "type_extension": ["null"]
-                            },
-                            "callback": {
-                                "optional": true
                             }
                         }
                     },

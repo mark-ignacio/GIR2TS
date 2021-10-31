@@ -39,7 +39,7 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
             if (param_node.$.name === '...' || param_node.$.name === 'user_data') continue;
             let param_name = param_node.$.name;
 
-            // Return param if dierection is out an it's not caller allocated
+            // Return param if direction is out an it's not caller allocated
             if (param_node.$.direction == "out" && param_node.$["caller-allocates"] == 0) {
                 return_params.push(param_node);
                 continue;

@@ -20,12 +20,6 @@
                 "function": {
                     "add_handler": {
                         "param": {
-                            "path": {
-                                "type_extension": ["null"]
-                            },
-                            "user_data": {
-                                "skip": true
-                            },
                             "destroy": {
                                 "skip": true
                             }

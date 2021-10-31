@@ -7759,7 +7759,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional cancellable object
 		 * @param callback callback to call when the request is satisfied
 		 */
-		close_async(io_priority: number | null, cancellable: Cancellable | null | null, callback: AsyncReadyCallback | null): void;
+		close_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Closes a stream.
 		 * @param result a #GAsyncResult
@@ -8303,7 +8303,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional cancellable object
 		 * @param callback callback to call when the request is satisfied
 		 */
-		close_async(io_priority: number | null, cancellable: Cancellable | null | null, callback: AsyncReadyCallback | null): void;
+		close_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes closing a stream asynchronously, started from g_input_stream_close_async().
 		 * @param result a #GAsyncResult.
@@ -10619,7 +10619,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional cancellable object
 		 * @param callback callback to call when the request is satisfied
 		 */
-		close_async(io_priority: number | null, cancellable: Cancellable | null | null, callback: AsyncReadyCallback | null): void;
+		close_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Closes an output stream.
 		 * @param result a #GAsyncResult.
@@ -10925,7 +10925,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @param callback callback to call when the request is satisfied
 		 */
-		write_bytes_async(bytes: GLib.Bytes, io_priority: number | null, cancellable: Cancellable | null | null, callback?: AsyncReadyCallback | null): void;
+		write_bytes_async(bytes: GLib.Bytes, io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes a stream write-from-#GBytes operation.
 		 * @param result a #GAsyncResult.
@@ -27760,7 +27760,7 @@ declare namespace imports.gi.Gio {
 		 * @param callback a #GAsyncReadyCallback to call
 		 *     when the request is satisfied
 		 */
-		delete_async(io_priority: number | null, cancellable: Cancellable | null | null, callback: AsyncReadyCallback | null | null): void;
+		delete_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes deleting a file started with g_file_delete_async().
 		 * @param result a #GAsyncResult
@@ -28197,7 +28197,7 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if the #file's contents were successfully loaded.
 		 *     %FALSE if there were errors.
 		 */
-		load_contents(cancellable: Cancellable | null | null): [success: boolean, contents: Uint8Array];
+		load_contents(cancellable: Cancellable | null): [success: boolean, contents: Uint8Array];
 		/**
 		 * Starts an asynchronous load of the #file's contents.
 		 * 
@@ -28215,7 +28215,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
-		load_contents_async(cancellable: Cancellable | null | null, callback: AsyncReadyCallback | null | null): void;
+		load_contents_async(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous load of the #file's contents.
 		 * The contents are placed in #contents, and #length is set to the
@@ -28313,7 +28313,7 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if all directories have been successfully created, %FALSE
 		 * otherwise.
 		 */
-		make_directory_with_parents(cancellable: Cancellable | null | null): boolean;
+		make_directory_with_parents(cancellable: Cancellable | null): boolean;
 		/**
 		 * Creates a symbolic link named #file which contains the string
 		 * #symlink_value.
@@ -28679,7 +28679,7 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if the file exists (and can be detected without error),
 		 *     %FALSE otherwise (or if cancelled).
 		 */
-		query_exists(cancellable: Cancellable | null | null): boolean;
+		query_exists(cancellable: Cancellable | null): boolean;
 		/**
 		 * Utility function to inspect the #GFileType of a file. This is
 		 * implemented using g_file_query_info() and as such does blocking I/O.
@@ -28812,7 +28812,7 @@ declare namespace imports.gi.Gio {
 		 * @param callback a #GAsyncReadyCallback to call when the
 		 *     request is satisfied
 		 */
-		query_info_async(attributes: string, flags: FileQueryInfoFlags, io_priority: number | null, cancellable: Cancellable | null | null, callback: AsyncReadyCallback | null | null): void;
+		query_info_async(attributes: string, flags: FileQueryInfoFlags, io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous file info query.
 		 * See g_file_query_info_async().
@@ -29100,7 +29100,7 @@ declare namespace imports.gi.Gio {
 		 * @param callback a #GAsyncReadyCallback to call
 		 *     when the request is satisfied
 		 */
-		replace_readwrite_async(etag: string | null | null, make_backup: boolean | null, flags: FileCreateFlags | null, io_priority: number | null, cancellable: Cancellable | null | null, callback: AsyncReadyCallback | null | null): void;
+		replace_readwrite_async(etag: string | null, make_backup: boolean, flags: FileCreateFlags | null, io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous file replace operation started with
 		 * g_file_replace_readwrite_async().

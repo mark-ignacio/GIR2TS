@@ -11,6 +11,7 @@ export interface ParameterAttributes extends NodeAttributes {
     "caller-allocates"?: number;
     "optional"?: number;
     "allow-none"?: number;
+    "nullable"?: number;
 }
 
 export interface MemberAttributes extends NodeAttributes {
