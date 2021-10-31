@@ -4,7 +4,7 @@ import { ExcludeClass } from "../types/exclude-types";
 import { BuildConstructorNode } from "../utils/utils";
 import { GetTypeInfo } from "../utils/paramUtils";
 import { renderMethod } from "./methodRenderer";
-import { ClassModifier, FunctionModifier } from "../types/modifier-types";
+import { ClassModifier, FunctionModifier, ParamModifier } from "../types/modifier-types";
 import { ignored_property_names } from "../consts";
 
 function getAllMethods(object: RecordNode): FunctionNode[] {
@@ -18,19 +18,25 @@ function getAllMethods(object: RecordNode): FunctionNode[] {
     return methods;
 }
 
-export function renderProperty(prop_node: ParameterNode, ns_name: string, include_access_modifier: boolean = true, indent: number = 0, exclude?: boolean): string {
+export function renderProperty(prop_node: ParameterNode, ns_name: string, modifiers?: ParamModifier, include_access_modifier: boolean = true, indent: number = 0, exclude?: boolean): string {
     let prop_name = prop_node.$.name;
     if (prop_name === 'constructor') {
         prop_name += '_'; // Append an underscore.
     }
-    let result = renderDocString(prop_node.doc?.[0]?._ ?? null, undefined, undefined, indent, ns_name);
+    prop_name = prop_name.replace(/-/g, '_');
+
+    let result = renderDocString(modifiers?.doc ?? prop_node.doc?.[0]?._ ?? null, undefined, undefined, indent, ns_name);
     result += "\t".repeat(indent);
     if (exclude)
         result += "// ";
     result += (include_access_modifier) ? 'public ' : "";
     if (prop_node?.$?.writable != 1)
         result+= "readonly ";
-    result += (prop_name.replace(/-/g, '_') + ': ' + GetTypeInfo(prop_node).type + ';');
+    result += modifiers?.newName ?? prop_name;
+    result += modifiers?.optional ? "?: " : ": ";
+    if (prop_name == "x_align")
+        console.log(modifiers)
+    result += GetTypeInfo(prop_node, modifiers).type + ';';
     return result;
 }
 
@@ -82,7 +88,7 @@ export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclu
 
     for (let f of props) {
         const excluded = exclude?.prop?.includes(f.$.name) ?? false;
-        body += renderProperty(f, ns_name, true, 1, excluded) + '\n';
+        body += renderProperty(f, ns_name, modifier?.prop?.[f.$.name], true, 1, excluded) + '\n';
     }
 
     for (let c of callback_fields) {

@@ -34,8 +34,8 @@ declare namespace imports.gi.St {
 		y_fill: boolean
 	}
 
-
-	interface Bin extends BinOptions, WidgetMethodsReadableProps {
+	type BinMixin = BinOptions & WidgetMethodsReadableProps;
+	interface Bin extends BinMixin {
 		get_child(): Widget;
 		set_child(widget: Widget): void
 	}
@@ -55,7 +55,7 @@ declare namespace imports.gi.St {
 		pack_start: boolean;
 	}
 
-	interface BoxLayoutMethodsReadableProps extends WidgetMethodsReadableProps {
+	interface BoxLayoutMethodsReadableProps {
 		add(element: Widget, options?: AddOptions): void;
 		/**
 		 * Get the value of the St.BoxLayout.pack-start property.
@@ -79,7 +79,8 @@ declare namespace imports.gi.St {
 		set_vertical(vertical: boolean): void; 
 	}
 
-	interface BoxLayout extends BoxLayoutOptions, BoxLayoutMethodsReadableProps, Scrollable { }
+	type BoxLayoutMixin = BoxLayoutOptions & BoxLayoutMethodsReadableProps & Scrollable & WidgetMethodsReadableProps;
+	interface BoxLayout extends BoxLayoutMixin { }
 
 	export class BoxLayout {
 		constructor(options?: Partial<BoxLayoutOptions>)

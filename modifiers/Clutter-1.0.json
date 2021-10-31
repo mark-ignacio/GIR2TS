@@ -32,6 +32,18 @@
                         },
                         "generic": "<T = Actor[]>"
                     }
+                },
+                "prop": {
+                    "x_align": {
+                        "type_extension": [
+                            "St.Align"
+                        ]
+                    },
+                    "y_align": {
+                        "type_extension": [
+                            "St.Align"
+                        ]
+                    }
                 }
             },
             "GridLayout": {

@@ -15,6 +15,9 @@ export interface ClassModifier {
         [klass: string]: FunctionModifier;
     },
     generic?: string;
+    prop: {
+        [prop: string]: ParamModifier;
+    }
 }
 
 export interface FunctionModifier {

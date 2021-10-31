@@ -130,7 +130,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
             if (exclude?.prop?.includes(fieldName))
                 excluded = true
 
-            body+= `${renderProperty(field, ns_name, false, 1, excluded)}\n`;
+            body+= `${renderProperty(field, ns_name, modifier?.prop?.[fieldName] , false, 1, excluded)}\n`;
             fieldsAdded.add(fieldName);
         }
     }

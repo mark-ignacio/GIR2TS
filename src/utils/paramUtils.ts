@@ -1,4 +1,5 @@
 import { ClassNode, EnumNode, FunctionNode, InterfaceNode, NamespaceNode, ParameterNode, Node, RecordNode } from "../types/gir-types";
+import { ParamModifier } from "../types/modifier-types";
 
 function convertToJSType(native_type?: string): string {
     // If undefined ti should be any
@@ -54,7 +55,7 @@ export interface TypeInfo {
     docString: string | null;
 }
 
-export function GetTypeInfo(param_node: ParameterNode): TypeInfo {
+export function GetTypeInfo(param_node: ParameterNode, modifier?: ParamModifier): TypeInfo {
     let type: string | null = null;
     let doc: string | null = "";
     if (param_node?.type?.[0]) {
@@ -69,15 +70,15 @@ export function GetTypeInfo(param_node: ParameterNode): TypeInfo {
     } else {
         console.log("can't get param type", JSON.stringify(param_node, null, 4))
         return {
-            type: "any",
-            docString: null
+            type: modifier?.type ?? "any",
+            docString: modifier?.doc ?? doc
         };
     }
     if (type == undefined) {
 
     }
     return {
-        type: type,
-        docString: doc
+        type: modifier?.type ?? ((modifier?.type_extension?.length ?? 0 > 1)) ? `${type} | ${modifier?.type_extension?.join(" | ")}`  : type,
+        docString: modifier?.doc ?? doc
     };
 }

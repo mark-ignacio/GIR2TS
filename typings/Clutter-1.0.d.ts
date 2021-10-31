@@ -581,7 +581,7 @@ declare namespace imports.gi.Clutter {
 		 * extra space for its allocation. See also the {@link Actor}:x-expand
 		 * property.
 		 */
-		x_align: ActorAlign;
+		x_align: ActorAlign | St.Align;
 		/**
 		 * Whether a layout manager should assign more space to the actor on
 		 * the X axis.
@@ -599,7 +599,7 @@ declare namespace imports.gi.Clutter {
 		 * The alignment of an actor on the Y axis, if the actor has been given
 		 * extra space for its allocation.
 		 */
-		y_align: ActorAlign;
+		y_align: ActorAlign | St.Align;
 		/**
 		 * Whether a layout manager should assign more space to the actor on
 		 * the Y axis.
