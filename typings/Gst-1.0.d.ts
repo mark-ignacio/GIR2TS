@@ -735,9 +735,10 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the #allocator and #params from #config.
 		 * @param config a {@link BufferPool} configuration
+		 * @param params {@link AllocationParams}, or %NULL
 		 * @returns %TRUE, if the values are set.
 		 */
-		public static config_get_allocator(config: Structure): boolean;
+		public static config_get_allocator(config: Structure, params: AllocationParams | null): boolean;
 		/**
 		 * Parse an available #config and get the option at #index of the options API
 		 * array.
@@ -968,8 +969,9 @@ declare namespace imports.gi.Gst {
 		 * Warning: NEVER read or write anything to the returned fd but only use it
 		 * for getting notifications via g_poll() or similar and then use the normal
 		 * GstBus API, e.g. gst_bus_pop().
+		 * @param fd A GPollFD to fill
 		 */
-		get_pollfd(): void;
+		get_pollfd(fd: GLib.PollFD): void;
 		/**
 		 * Check if there are pending messages on the bus that
 		 * should be handled.
@@ -7367,10 +7369,11 @@ declare namespace imports.gi.Gst {
 		 * Concatenates copies of #value1 and #value2 into a list.  Values that are not
 		 * of type #GST_TYPE_LIST are treated as if they were lists of length 1.
 		 * #dest will be initialized to the type #GST_TYPE_LIST.
+		 * @param dest an uninitialized #GValue to take the result
 		 * @param value1 a #GValue
 		 * @param value2 a #GValue
 		 */
-		public static concat(value1: GObject.Value, value2: GObject.Value): void;
+		public static concat(dest: GObject.Value, value1: GObject.Value, value2: GObject.Value): void;
 		/**
 		 * Gets the number of values contained in #value.
 		 * @param value a #GValue of type #GST_TYPE_LIST
@@ -7399,10 +7402,11 @@ declare namespace imports.gi.Gst {
 		 * The result will be put into #dest and will either be a list that will not
 		 * contain any duplicates, or a non-list type (if #value1 and #value2
 		 * were equal).
+		 * @param dest an uninitialized #GValue to take the result
 		 * @param value1 a #GValue
 		 * @param value2 a #GValue
 		 */
-		public static merge(value1: GObject.Value, value2: GObject.Value): void;
+		public static merge(dest: GObject.Value, value1: GObject.Value, value2: GObject.Value): void;
 		/**
 		 * Prepends #prepend_value to the GstValueList in #value.
 		 * @param value a #GValue of type #GST_TYPE_LIST
@@ -7849,10 +7853,12 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Copy #size bytes starting from #offset in #buffer to #dest.
 		 * @param offset the offset to extract
+		 * @param dest 
+		 *     the destination address
 		 * @returns The amount of bytes extracted. This value can be lower than #size
 		 *    when #buffer did not contain enough data.
 		 */
-		public extract(offset: number): number;
+		public extract(offset: number, dest: number[]): number;
 		/**
 		 * Extracts a copy of at most #size bytes the data at #offset into
 		 * newly-allocated memory. #dest must be freed using g_free() when done.
@@ -8025,21 +8031,23 @@ declare namespace imports.gi.Gst {
 		 * to %NULL, the first metadata is returned.
 		 * 
 		 * #state will be updated with an opaque state pointer
+		 * @param state an opaque state pointer
 		 * @returns The next {@link Meta} or %NULL
 		 * when there are no more items.
 		 */
-		public iterate_meta(): Meta;
+		public iterate_meta(state: any): Meta;
 		/**
 		 * Retrieve the next {@link Meta} of type #meta_api_type after the current one
 		 * according to #state. If #state points to %NULL, the first metadata of
 		 * type #meta_api_type is returned.
 		 * 
 		 * #state will be updated with an opaque state pointer
+		 * @param state an opaque state pointer
 		 * @param meta_api_type only return {@link Meta} of this type
 		 * @returns The next {@link Meta} of type
 		 * #meta_api_type or %NULL when there are no more items.
 		 */
-		public iterate_meta_filtered(meta_api_type: GObject.Type): Meta;
+		public iterate_meta_filtered(state: any, meta_api_type: GObject.Type): Meta;
 		/**
 		 * This function fills #info with the {@link MapInfo} of all merged memory
 		 * blocks in #buffer.
@@ -8054,10 +8062,11 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * The memory in #info should be unmapped with gst_buffer_unmap() after
 		 * usage.
+		 * @param info info about the mapping
 		 * @param flags flags for the mapping
 		 * @returns %TRUE if the map succeeded and #info contains valid data.
 		 */
-		public map(flags: MapFlags): boolean;
+		public map(info: MapInfo, flags: MapFlags): boolean;
 		/**
 		 * This function fills #info with the {@link MapInfo} of #length merged memory blocks
 		 * starting at #idx in #buffer. When #length is -1, all memory blocks starting
@@ -8074,11 +8083,12 @@ declare namespace imports.gi.Gst {
 		 * The memory in #info should be unmapped with gst_buffer_unmap() after usage.
 		 * @param idx an index
 		 * @param length a length
+		 * @param info info about the mapping
 		 * @param flags flags for the mapping
 		 * @returns %TRUE if the map succeeded and #info contains valid
 		 * data.
 		 */
-		public map_range(idx: number, length: number, flags: MapFlags): boolean;
+		public map_range(idx: number, length: number, info: MapInfo, flags: MapFlags): boolean;
 		/**
 		 * Compare #size bytes starting from #offset in #buffer with the memory in #mem.
 		 * @param offset the offset in #buffer
@@ -10809,11 +10819,12 @@ declare namespace imports.gi.Gst {
 		 * This function will return %FALSE if an error happened to the iterator
 		 * or if the element wasn't found.
 		 * @param _func the compare function to use
+		 * @param elem pointer to a #GValue where to store the result
 		 * @returns Returns %TRUE if the element was found, else %FALSE.
 		 * 
 		 * MT safe.
 		 */
-		public find_custom(_func: GLib.CompareFunc): boolean;
+		public find_custom(_func: GLib.CompareFunc, elem: GObject.Value): boolean;
 		/**
 		 * Folds #func over the elements of #iter. That is to say, #func will be called
 		 * as #func (object, #ret, #user_data) for each object in #it. The normal use
@@ -10870,11 +10881,12 @@ declare namespace imports.gi.Gst {
 		 * get the newly updated list.
 		 * 
 		 * A return value of %GST_ITERATOR_ERROR indicates an unrecoverable fatal error.
+		 * @param elem pointer to hold next element
 		 * @returns The result of the iteration. Unset #elem after usage.
 		 * 
 		 * MT safe.
 		 */
-		public next(): IteratorResult;
+		public next(elem: GObject.Value): IteratorResult;
 		/**
 		 * Pushes #other iterator onto #it. All calls performed on #it are
 		 * forwarded to #other. If #other returns %GST_ITERATOR_DONE, it is
@@ -11067,11 +11079,12 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * This function takes ownership of old #mem and returns a reference to a new
 		 * #GstMemory.
+		 * @param info pointer for info
 		 * @param flags mapping flags
 		 * @returns a {@link Memory} object mapped
 		 * with #flags or %NULL when a mapping is not possible.
 		 */
-		public make_mapped(flags: MapFlags): Memory;
+		public make_mapped(info: MapInfo, flags: MapFlags): Memory;
 		/**
 		 * Fill #info with the pointer and sizes of the memory in #mem that can be
 		 * accessed according to #flags.
@@ -11085,10 +11098,11 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * For each gst_memory_map() call, a corresponding gst_memory_unmap() call
 		 * should be done.
+		 * @param info pointer for info
 		 * @param flags mapping flags
 		 * @returns %TRUE if the map operation was successful.
 		 */
-		public map(flags: MapFlags): boolean;
+		public map(info: MapInfo, flags: MapFlags): boolean;
 		/**
 		 * Resize the memory region. #mem should be writable and offset + size should be
 		 * less than the maxsize of #mem.
@@ -13634,11 +13648,9 @@ declare namespace imports.gi.Gst {
 		 * Parse an available query and get the allocator and its params
 		 * at #index of the allocator array.
 		 * @param index position in the allocator array to read
-		 * @returns variable to hold the result
-		 * 
-		 * parameters for the allocator
+		 * @param params parameters for the allocator
 		 */
-		public parse_nth_allocation_param(index: number): [ allocator: Allocator | null, params: AllocationParams | null ];
+		public parse_nth_allocation_param(index: number, params: AllocationParams | null): void;
 		/**
 		 * Get the pool parameters in #query.
 		 * 
@@ -16477,8 +16489,9 @@ declare namespace imports.gi.Gst {
 		 * Gets a single property using the GstChildProxy mechanism.
 		 * You are responsible for freeing it by calling g_value_unset()
 		 * @param name name of the property
+		 * @param value a #GValue that should take the result.
 		 */
-		get_property(name: string): void;
+		get_property(name: string, value: GObject.Value): void;
 		/**
 		 * Gets properties of the parent object and its children.
 		 * @param first_property_name name of the first property to get
@@ -22541,27 +22554,30 @@ declare namespace imports.gi.Gst {
 	 * merging multiple values into one if multiple values are associated
 	 * with the tag.
 	 * You must g_value_unset() the value after use.
+	 * @param dest uninitialized #GValue to copy into
 	 * @param list list to get the tag from
 	 * @param tag tag to read out
 	 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 	 *          given list.
 	 */
-	function tag_list_copy_value(list: TagList, tag: string): boolean;
+	function tag_list_copy_value(dest: GObject.Value, list: TagList, tag: string): boolean;
 
 	/**
 	 * This is a convenience function for the func argument of gst_tag_register().
 	 * It concatenates all given strings using a comma. The tag must be registered
 	 * as a G_TYPE_STRING or this function will fail.
+	 * @param dest uninitialized GValue to store result in
 	 * @param src GValue to copy from
 	 */
-	function tag_merge_strings_with_comma(src: GObject.Value): void;
+	function tag_merge_strings_with_comma(dest: GObject.Value, src: GObject.Value): void;
 
 	/**
 	 * This is a convenience function for the func argument of gst_tag_register().
 	 * It creates a copy of the first value from the list.
+	 * @param dest uninitialized GValue to store result in
 	 * @param src GValue to copy from
 	 */
-	function tag_merge_use_first(src: GObject.Value): void;
+	function tag_merge_use_first(dest: GObject.Value, src: GObject.Value): void;
 
 	/**
 	 * Registers a new tag type for the use with GStreamer's type system. If a type
@@ -22999,9 +23015,10 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * Note that this function is dangerous as it does not return any indication
 	 * if the conversion worked or not.
+	 * @param value the value to set
 	 * @param value_str the string to get the value from
 	 */
-	function util_set_value_from_string(value_str: string): void;
+	function util_set_value_from_string(value: GObject.Value, value_str: string): void;
 
 	/**
 	 * Scale #val by the rational number #num / #denom, avoiding overflows and
@@ -23161,10 +23178,12 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Tries to deserialize a string into the type specified by the given GValue.
 	 * If the operation succeeds, %TRUE is returned, %FALSE otherwise.
+	 * @param dest #GValue to fill with contents of
+	 *     deserialization
 	 * @param src string to deserialize
 	 * @returns %TRUE on success
 	 */
-	function value_deserialize(src: string): boolean;
+	function value_deserialize(dest: GObject.Value, src: string): boolean;
 
 	/**
 	 * Fixate #src into a new value #dest.
@@ -23327,20 +23346,25 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Initialises the target value to be of the same type as source and then copies
 	 * the contents from source to target.
+	 * @param dest the target value
 	 * @param src the source value
 	 */
-	function value_init_and_copy(src: GObject.Value): void;
+	function value_init_and_copy(dest: GObject.Value, src: GObject.Value): void;
 
 	/**
 	 * Calculates the intersection of two values.  If the values have
 	 * a non-empty intersection, the value representing the intersection
 	 * is placed in #dest, unless %NULL.  If the intersection is non-empty,
 	 * #dest is not modified.
+	 * @param dest 
+	 *   a uninitialized #GValue that will hold the calculated
+	 *   intersection value. May be %NULL if the resulting set if not
+	 *   needed.
 	 * @param value1 a value to intersect
 	 * @param value2 another value to intersect
 	 * @returns %TRUE if the intersection is non-empty
 	 */
-	function value_intersect(value1: GObject.Value, value2: GObject.Value): boolean;
+	function value_intersect(dest: GObject.Value | null, value1: GObject.Value, value2: GObject.Value): boolean;
 
 	/**
 	 * Tests if the given GValue, if available in a GstStructure (or any other
@@ -23491,19 +23515,24 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Subtracts #subtrahend from #minuend and stores the result in #dest.
 	 * Note that this means subtraction as in sets, not as in mathematics.
+	 * @param dest the destination value
+	 *     for the result if the subtraction is not empty. May be %NULL,
+	 *     in which case the resulting set will not be computed, which can
+	 *     give a fair speedup.
 	 * @param minuend the value to subtract from
 	 * @param subtrahend the value to subtract
 	 * @returns %TRUE if the subtraction is not empty
 	 */
-	function value_subtract(minuend: GObject.Value, subtrahend: GObject.Value): boolean;
+	function value_subtract(dest: GObject.Value | null, minuend: GObject.Value, subtrahend: GObject.Value): boolean;
 
 	/**
 	 * Creates a GValue corresponding to the union of #value1 and #value2.
+	 * @param dest the destination value
 	 * @param value1 a value to union
 	 * @param value2 another value to union
 	 * @returns %TRUE if the union succeeded.
 	 */
-	function value_union(value1: GObject.Value, value2: GObject.Value): boolean;
+	function value_union(dest: GObject.Value, value1: GObject.Value, value2: GObject.Value): boolean;
 
 	/**
 	 * Gets the version number of the GStreamer library.

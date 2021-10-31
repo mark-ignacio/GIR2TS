@@ -5059,8 +5059,9 @@ declare namespace imports.gi.Soup {
 		public to_time_t(): number;
 		/**
 		 * Converts #date to a #GTimeVal.
+		 * @param time a #GTimeVal structure in which to store the converted time.
 		 */
-		public to_timeval(): void;
+		public to_timeval(time: GLib.TimeVal): void;
 	}
 
 	interface HSTSEnforcerClass {}
@@ -8525,9 +8526,11 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Initializes #iter for iterating #hdrs.
+	 * @param iter a pointer to a %SoupMessageHeadersIter
+	 * structure
 	 * @param hdrs a %SoupMessageHeaders
 	 */
-	function message_headers_iter_init(hdrs: MessageHeaders): void;
+	function message_headers_iter_init(iter: MessageHeadersIter, hdrs: MessageHeaders): void;
 
 	function request_error_quark(): GLib.Quark;
 
@@ -9194,10 +9197,11 @@ declare namespace imports.gi.Soup {
 	 * will be unset.)
 	 * @param method_response the XML-RPC methodResponse string
 	 * @param length the length of #method_response, or -1 if it is NUL-terminated
+	 * @param value on return, the return value from #method_call
 	 * @returns %TRUE if a return value was parsed, %FALSE if the
 	 * response could not be parsed, or contained a fault.
 	 */
-	function xmlrpc_parse_method_response(method_response: string, length: number): boolean;
+	function xmlrpc_parse_method_response(method_response: string, length: number, value: GObject.Value): boolean;
 
 	/**
 	 * Parses #method_call and return the method name. Method parameters can be

@@ -441,8 +441,9 @@ declare namespace imports.gi.Cogl {
 		public get_ambient(ambient: Color): void;
 		/**
 		 * Retrieves the current material color.
+		 * @param color The location to store the color
 		 */
-		public get_color(): void;
+		public get_color(color: Color): void;
 		/**
 		 * Retrieves the current diffuse color for #material
 		 * @param diffuse The location to store the diffuse color
@@ -1083,11 +1084,12 @@ declare namespace imports.gi.Cogl {
 		 * technically save a copy of the inverse transform within the given
 		 * #CoglMatrix so that subsequent requests for the inverse transform may
 		 * avoid costly inversion calculations.</note>
+		 * @param inverse The destination for a 4x4 inverse transformation matrix
 		 * @returns %TRUE if the inverse was successfully calculated or %FALSE
 		 *   for degenerate transformations that can't be inverted (in this case the
 		 *   #inverse matrix will simply be initialized with the identity matrix)
 		 */
-		public get_inverse(): Bool;
+		public get_inverse(inverse: Matrix): Bool;
 		/**
 		 * Initializes #matrix with the contents of #array
 		 * @param array A linear array of 16 floats (column-major order)
@@ -2676,11 +2678,12 @@ declare namespace imports.gi.Cogl {
 	/**
 	 * Converts a color expressed in HLS (hue, luminance and saturation)
 	 * values into a {@link Color}.
+	 * @param color return location for a {@link Color}
 	 * @param hue hue value, in the 0 .. 360 range
 	 * @param saturation saturation value, in the 0 .. 1 range
 	 * @param luminance luminance value, in the 0 .. 1 range
 	 */
-	function color_init_from_hsl(hue: number, saturation: number, luminance: number): void;
+	function color_init_from_hsl(color: Color, hue: number, saturation: number, luminance: number): void;
 
 	/**
 	 * Create a new cogl program object that can be used to replace parts of the GL
@@ -2823,8 +2826,9 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Stores the current model-view matrix in #matrix.
+	 * @param matrix return location for the model-view matrix
 	 */
-	function get_modelview_matrix(): void;
+	function get_modelview_matrix(matrix: Matrix): void;
 
 	/**
 	 * Retrieves the #GOptionGroup used by Cogl to parse the command
@@ -2850,8 +2854,9 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Stores the current projection matrix in #matrix.
+	 * @param matrix return location for the projection matrix
 	 */
-	function get_projection_matrix(): void;
+	function get_projection_matrix(matrix: Matrix): void;
 
 	/**
 	 * Returns the current source material as previously set using

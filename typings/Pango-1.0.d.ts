@@ -387,11 +387,9 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * Note that this does not include OpenType features which the
 		 * rendering system enables by default.
-		 * @returns Array to features in
-		 * 
-		 * the length of #features
+		 * @param features Array to features in
 		 */
-		get_features(): [ HarfBuzz.feature_t[], number ];
+		get_features(features: HarfBuzz.feature_t[]): void;
 		/**
 		 * Gets the font map for which the font was created.
 		 * 
@@ -421,11 +419,10 @@ declare namespace imports.gi.Pango {
 		 * If #font is %NULL, this function gracefully sets some sane values in the
 		 * output variables and returns.
 		 * @param glyph the glyph index
-		 * @returns rectangle used to store the extents of the glyph as drawn
-		 * 
-		 * rectangle used to store the logical extents of the glyph
+		 * @param ink_rect rectangle used to store the extents of the glyph as drawn
+		 * @param logical_rect rectangle used to store the logical extents of the glyph
 		 */
-		get_glyph_extents(glyph: Glyph): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		get_glyph_extents(glyph: Glyph, ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Get a `hb_font_t` object backing this font.
 		 * 
@@ -878,11 +875,10 @@ declare namespace imports.gi.Pango {
 		 * The weak cursor location is the location where characters of the
 		 * directionality opposite to the base direction of the layout are inserted.
 		 * @param index_ the byte index of the cursor
-		 * @returns location to store the strong cursor position
-		 * 
-		 * location to store the weak cursor position
+		 * @param strong_pos location to store the strong cursor position
+		 * @param weak_pos location to store the weak cursor position
 		 */
-		get_cursor_pos(index_: number): [ strong_pos: Rectangle | null, weak_pos: Rectangle | null ];
+		get_cursor_pos(index_: number, strong_pos: Rectangle | null, weak_pos: Rectangle | null): void;
 		/**
 		 * Gets the text direction at the given character position in #layout.
 		 * @param index the byte index of the char
@@ -910,13 +906,12 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * The extents are given in layout coordinates and in Pango units; layout
 		 * coordinates begin at the top left corner of the layout.
-		 * @returns rectangle used to store the extents of the
+		 * @param ink_rect rectangle used to store the extents of the
 		 *   layout as drawn
-		 * 
-		 * rectangle used to store the logical
+		 * @param logical_rect rectangle used to store the logical
 		 *   extents of the layout
 		 */
-		get_extents(): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		get_extents(ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Gets the font description for the layout, if any.
 		 * @returns a pointer to the
@@ -1049,13 +1044,12 @@ declare namespace imports.gi.Pango {
 		 * two [func#extents_to_pixels] calls, rounding #ink_rect and #logical_rect
 		 * such that the rounded rectangles fully contain the unrounded one (that is,
 		 * passes them as first argument to [func#Pango.extents_to_pixels]).
-		 * @returns rectangle used to store the extents of the
+		 * @param ink_rect rectangle used to store the extents of the
 		 *   layout as drawn
-		 * 
-		 * rectangle used to store the logical
+		 * @param logical_rect rectangle used to store the logical
 		 *   extents of the layout
 		 */
-		get_pixel_extents(): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		get_pixel_extents(ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Determines the logical width and height of a `PangoLayout` in device
 		 * units.
@@ -1171,8 +1165,9 @@ declare namespace imports.gi.Pango {
 		 * trailing edge of the grapheme. If the directionality of the grapheme
 		 * is right-to-left, then `pos->width` will be negative.
 		 * @param index_ byte index within #layout
+		 * @param pos rectangle in which to store the position of the grapheme
 		 */
-		index_to_pos(index_: number): void;
+		index_to_pos(index_: number, pos: Rectangle): void;
 		/**
 		 * Queries whether the layout had to ellipsize any paragraphs.
 		 * 
@@ -1407,8 +1402,10 @@ declare namespace imports.gi.Pango {
 		 * @param length length of marked-up text in bytes, or -1 if #markup is
 		 *   `NUL`-terminated
 		 * @param accel_marker marker for accelerators in the text
+		 * @param accel_char return location
+		 *   for first located accelerator
 		 */
-		set_markup_with_accel(markup: string, length: number, accel_marker: string): void;
+		set_markup_with_accel(markup: string, length: number, accel_marker: string, accel_char: string | null): void;
 		/**
 		 * Sets the single paragraph mode of #layout.
 		 * 
@@ -2440,11 +2437,11 @@ declare namespace imports.gi.Pango {
 		public constructor();
 		public describe: {(font: Font): FontDescription;};
 		public get_coverage: {(font: Font, language: Language): Coverage;};
-		public get_glyph_extents: {(font: Font | null, glyph: Glyph): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];};
+		public get_glyph_extents: {(font: Font | null, glyph: Glyph, ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;};
 		public get_metrics: {(font: Font | null, language: Language | null): FontMetrics;};
 		public get_font_map: {(font: Font | null): FontMap;};
 		public describe_absolute: {(font: Font): FontDescription;};
-		public get_features: {(font: Font): [ HarfBuzz.feature_t[], number ];};
+		public get_features: {(font: Font, features: HarfBuzz.feature_t[]): void;};
 		public create_hb_font: {(font: Font): HarfBuzz.font_t;};
 	}
 
@@ -3280,11 +3277,10 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * ![](rects1.png) ![](rects2.png)
 		 * @param font a `PangoFont`
-		 * @returns rectangle used to store the extents of the glyph string as drawn
-		 * 
-		 * rectangle used to store the logical extents of the glyph string
+		 * @param ink_rect rectangle used to store the extents of the glyph string as drawn
+		 * @param logical_rect rectangle used to store the logical extents of the glyph string
 		 */
-		public extents(font: Font): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		public extents(font: Font, ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Computes the extents of a sub-portion of a glyph string.
 		 * 
@@ -3295,13 +3291,12 @@ declare namespace imports.gi.Pango {
 		 * @param _end end index (the range is the set of bytes with
 		 *   indices such that start <= index < end)
 		 * @param font a `PangoFont`
-		 * @returns rectangle used to
+		 * @param ink_rect rectangle used to
 		 *   store the extents of the glyph string range as drawn
-		 * 
-		 * rectangle used to
+		 * @param logical_rect rectangle used to
 		 *   store the logical extents of the glyph string range
 		 */
-		public extents_range(start: number, _end: number, font: Font): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		public extents_range(start: number, _end: number, font: Font, ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Free a glyph string and associated storage.
 		 */
@@ -3525,13 +3520,15 @@ declare namespace imports.gi.Pango {
 		 * Note: while the return value is declared as `PangoScript`, the
 		 * returned values are from the `GUnicodeScript` enumeration, which
 		 * may have more values. Callers need to handle unknown values.
+		 * @param num_scripts location to
+		 *   return number of scripts
 		 * @returns 
 		 *   An array of `PangoScript` values, with the number of entries in
 		 *   the array stored in #num_scripts, or %NULL if Pango does not have
 		 *   any information about this particular language tag (also the case
 		 *   if #language is %NULL).
 		 */
-		public get_scripts(): Script[];
+		public get_scripts(num_scripts: number | null): Script[];
 		/**
 		 * Determines if #script is one of the scripts used to
 		 * write #language.
@@ -3620,17 +3617,18 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * Only logical extents can sensibly be obtained for characters;
 		 * ink extents make sense only down to the level of clusters.
+		 * @param logical_rect rectangle to fill with
+		 *   logical extents
 		 */
-		public get_char_extents(): void;
+		public get_char_extents(logical_rect: Rectangle): void;
 		/**
 		 * Gets the extents of the current cluster, in layout coordinates.
 		 * 
 		 * Layout coordinates have the origin at the top left of the entire layout.
-		 * @returns rectangle to fill with ink extents
-		 * 
-		 * rectangle to fill with logical extents
+		 * @param ink_rect rectangle to fill with ink extents
+		 * @param logical_rect rectangle to fill with logical extents
 		 */
-		public get_cluster_extents(): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		public get_cluster_extents(ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Gets the current byte index.
 		 * 
@@ -3648,11 +3646,10 @@ declare namespace imports.gi.Pango {
 		public get_layout(): Layout;
 		/**
 		 * Obtains the extents of the `PangoLayout` being iterated over.
-		 * @returns rectangle to fill with ink extents
-		 * 
-		 * rectangle to fill with logical extents
+		 * @param ink_rect rectangle to fill with ink extents
+		 * @param logical_rect rectangle to fill with logical extents
 		 */
-		public get_layout_extents(): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		public get_layout_extents(ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Gets the current line.
 		 * 
@@ -3669,11 +3666,10 @@ declare namespace imports.gi.Pango {
 		 * of the entire `PangoLayout`). Thus the extents returned by this
 		 * function will be the same width/height but not at the same x/y
 		 * as the extents returned from [method#Pango.LayoutLine.get_extents].
-		 * @returns rectangle to fill with ink extents
-		 * 
-		 * rectangle to fill with logical extents
+		 * @param ink_rect rectangle to fill with ink extents
+		 * @param logical_rect rectangle to fill with logical extents
 		 */
-		public get_line_extents(): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		public get_line_extents(ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Gets the current line for read-only access.
 		 * 
@@ -3718,11 +3714,10 @@ declare namespace imports.gi.Pango {
 		 * Gets the extents of the current run in layout coordinates.
 		 * 
 		 * Layout coordinates have the origin at the top left of the entire layout.
-		 * @returns rectangle to fill with ink extents
-		 * 
-		 * rectangle to fill with logical extents
+		 * @param ink_rect rectangle to fill with ink extents
+		 * @param logical_rect rectangle to fill with logical extents
 		 */
-		public get_run_extents(): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		public get_run_extents(ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Gets the current run for read-only access.
 		 * 
@@ -3809,13 +3804,12 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * See [method#Pango.Font.get_glyph_extents] for details
 		 * about the interpretation of the rectangles.
-		 * @returns rectangle used to store the extents of
+		 * @param ink_rect rectangle used to store the extents of
 		 *   the glyph string as drawn
-		 * 
-		 * rectangle used to store the logical
+		 * @param logical_rect rectangle used to store the logical
 		 *   extents of the glyph string
 		 */
-		public get_extents(): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		public get_extents(ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Computes the height of the line, i.e. the distance between
 		 * this and the previous lines baseline.
@@ -3828,13 +3822,12 @@ declare namespace imports.gi.Pango {
 		 * two [func#extents_to_pixels] calls, rounding #ink_rect and #logical_rect
 		 * such that the rounded rectangles fully contain the unrounded one (that is,
 		 * passes them as first argument to [func#extents_to_pixels]).
-		 * @returns rectangle used to store the extents of
+		 * @param ink_rect rectangle used to store the extents of
 		 *   the glyph string as drawn
-		 * 
-		 * rectangle used to store the logical
+		 * @param logical_rect rectangle used to store the logical
 		 *   extents of the glyph string
 		 */
-		public get_pixel_extents(): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];
+		public get_pixel_extents(ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Gets a list of visual ranges corresponding to a given logical range.
 		 * 

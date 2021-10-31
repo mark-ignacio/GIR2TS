@@ -342,8 +342,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		/**
 		 * Get the color used for the label on a given output (monitor).
 		 * @param output Output device (i.e. monitor) to query
+		 * @param rgba_out Color of selected monitor.
 		 */
-		get_rgba_for_output(output: RROutputInfo): void;
+		get_rgba_for_output(output: RROutputInfo, rgba_out: Gdk.RGBA): void;
 		/**
 		 * Hide ouput labels.
 		 */
@@ -392,7 +393,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_rotation(): RRRotation;
 		get_scale(): number;
 		get_serial(): number;
-		get_vendor(): void;
+		get_vendor(vendor: string[]): void;
 		is_active(): boolean;
 		is_connected(): boolean;
 		set_active(active: boolean): void;

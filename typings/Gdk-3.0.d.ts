@@ -2389,8 +2389,9 @@ declare namespace imports.gi.Gdk {
 		 * Retrieves the size and position of an individual monitor within the
 		 * display coordinate space. The returned geometry is in  ”application pixels”,
 		 * not in ”device pixels” (see gdk_monitor_get_scale_factor()).
+		 * @param geometry a {@link Rectangle} to be filled with the monitor geometry
 		 */
-		get_geometry(): void;
+		get_geometry(geometry: Rectangle): void;
 		/**
 		 * Gets the height in millimeters of the monitor.
 		 * @returns the physical height of the monitor
@@ -2454,8 +2455,10 @@ declare namespace imports.gi.Gdk {
 		 * Note that not all backends may have a concept of workarea. This
 		 * function will return the monitor geometry if a workarea is not
 		 * available, or does not apply.
+		 * @param workarea a {@link Rectangle} to be filled with
+		 *     the monitor workarea
 		 */
-		get_workarea(): void;
+		get_workarea(workarea: Rectangle): void;
 		/**
 		 * Gets whether this monitor should be considered primary
 		 * (see gdk_display_get_primary_monitor()).
@@ -2579,8 +2582,10 @@ declare namespace imports.gi.Gdk {
 		 * Note that the size of the entire screen area can be retrieved via
 		 * gdk_screen_get_width() and gdk_screen_get_height().
 		 * @param monitor_num the monitor number
+		 * @param dest a {@link Rectangle} to be filled with
+		 *     the monitor geometry
 		 */
-		get_monitor_geometry(monitor_num: number): void;
+		get_monitor_geometry(monitor_num: number, dest: Rectangle | null): void;
 		/**
 		 * Gets the height in millimeters of the specified monitor.
 		 * @param monitor_num number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
@@ -2631,8 +2636,10 @@ declare namespace imports.gi.Gdk {
 		 * Monitor numbers start at 0. To obtain the number of monitors of
 		 * #screen, use gdk_screen_get_n_monitors().
 		 * @param monitor_num the monitor number
+		 * @param dest a {@link Rectangle} to be filled with
+		 *     the monitor workarea
 		 */
-		get_monitor_workarea(monitor_num: number): void;
+		get_monitor_workarea(monitor_num: number, dest: Rectangle | null): void;
 		/**
 		 * Returns the number of monitors which #screen consists of.
 		 * @returns number of monitors which #screen consists of
@@ -3747,8 +3754,9 @@ declare namespace imports.gi.Gdk {
 		 * titlebar/borders if any. The frame position is given in root window
 		 * coordinates. To get the position of the window itself (rather than
 		 * the frame) in root window coordinates, use gdk_window_get_origin().
+		 * @param rect rectangle to fill with bounding box of the window frame
 		 */
-		get_frame_extents(): void;
+		get_frame_extents(rect: Rectangle): void;
 		/**
 		 * Obtains the {@link FullscreenMode} of the #window.
 		 * @returns The {@link FullscreenMode} applied to the window when fullscreen.
@@ -6686,9 +6694,11 @@ declare namespace imports.gi.Gdk {
 		 * the rectangles intersect, but not in the intersecting area itself,
 		 * pass %NULL for #dest.
 		 * @param src2 a {@link Rectangle}
+		 * @param dest return location for the
+		 * intersection of #src1 and #src2, or %NULL
 		 * @returns %TRUE if the rectangles intersect.
 		 */
-		public intersect(src2: Rectangle): boolean;
+		public intersect(src2: Rectangle, dest: Rectangle | null): boolean;
 		/**
 		 * Calculates the union of two rectangles.
 		 * The union of rectangles #src1 and #src2 is the smallest rectangle which
@@ -6698,8 +6708,9 @@ declare namespace imports.gi.Gdk {
 		 * Note that this function does not ignore 'empty' rectangles (ie. with
 		 * zero width or height).
 		 * @param src2 a {@link Rectangle}
+		 * @param dest return location for the union of #src1 and #src2
 		 */
-		public union(src2: Rectangle): void;
+		public union(src2: Rectangle, dest: Rectangle): void;
 	}
 
 	/**
@@ -9879,10 +9890,11 @@ declare namespace imports.gi.Gdk {
 	 * It rounds the clip extents to integer coordinates and returns
 	 * a boolean indicating if a clip area exists.
 	 * @param cr a cairo context
+	 * @param rect return location for the clip, or %NULL
 	 * @returns %TRUE if a clip rectangle exists, %FALSE if all of #cr is
 	 *     clipped and all drawing can be skipped
 	 */
-	function cairo_get_clip_rectangle(cr: cairo.Context): boolean;
+	function cairo_get_clip_rectangle(cr: cairo.Context, rect: Rectangle | null): boolean;
 
 	/**
 	 * Retrieves the {@link DrawingContext} that created the Cairo
@@ -9981,9 +9993,10 @@ declare namespace imports.gi.Gdk {
 	 * (White in the four forms is “\#fff”, “\#ffffff”, “\#fffffffff”
 	 * and “\#ffffffffffff”).
 	 * @param spec the string specifying the color
+	 * @param color the {@link Color} to fill in
 	 * @returns %TRUE if the parsing succeeded
 	 */
-	function color_parse(spec: string): boolean;
+	function color_parse(spec: string, color: Color): boolean;
 
 	/**
 	 * Disables multidevice support in GDK. This call must happen prior
@@ -10851,10 +10864,12 @@ declare namespace imports.gi.Gdk {
 	 *   when rounded up).
 	 * @param pdelete if %TRUE, delete the property after retrieving the
 	 *   data.
+	 * @param actual_property_type location to store the
+	 *   actual type of the property.
 	 * @returns %TRUE if data was successfully received and stored
 	 *   in #data, otherwise %FALSE.
 	 */
-	function property_get(window: Window, property: Atom, _type: Atom, offset: number, length: number, pdelete: number): boolean;
+	function property_get(window: Window, property: Atom, _type: Atom, offset: number, length: number, pdelete: number, actual_property_type: Atom): boolean;
 
 	/**
 	 * This function returns the available bit depths for the default

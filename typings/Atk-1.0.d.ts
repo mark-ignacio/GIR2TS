@@ -1582,7 +1582,7 @@ declare namespace imports.gi.Atk {
 		public text_caret_moved: {(text: Text, location: number): void;};
 		public text_selection_changed: {(text: Text): void;};
 		public text_attributes_changed: {(text: Text): void;};
-		public get_range_extents: {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType): void;};
+		public get_range_extents: {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle): void;};
 		public get_bounded_ranges: {(text: Text, rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType): TextRange[];};
 		public get_string_at_offset: {(text: Text, offset: number, granularity: TextGranularity): string;};
 		public scroll_substring_to: {(text: Text, start_offset: number, end_offset: number, _type: ScrollType): boolean;};
@@ -1652,11 +1652,11 @@ declare namespace imports.gi.Atk {
 	interface ValueIface {}
 	class ValueIface {
 		public constructor();
-		public get_current_value: {(obj: Value): void;};
-		public get_maximum_value: {(obj: Value): void;};
-		public get_minimum_value: {(obj: Value): void;};
+		public get_current_value: {(obj: Value, value: GObject.Value): void;};
+		public get_maximum_value: {(obj: Value, value: GObject.Value): void;};
+		public get_minimum_value: {(obj: Value, value: GObject.Value): void;};
 		public set_current_value: {(obj: Value, value: GObject.Value): boolean;};
-		public get_minimum_increment: {(obj: Value): void;};
+		public get_minimum_increment: {(obj: Value, value: GObject.Value): void;};
 		public get_value_and_text: {(obj: Value): [ value: number, text: string | null ];};
 		public get_range: {(obj: Value): Range;};
 		public get_increment: {(obj: Value): number;};
@@ -3036,8 +3036,9 @@ declare namespace imports.gi.Atk {
 		 * @param end_offset The offset of the text character after the last character
 		 *        for which boundary information is required.
 		 * @param coord_type Specify whether coordinates are relative to the screen or widget window.
+		 * @param rect A pointer to a AtkTextRectangle which is filled in by this function.
 		 */
-		get_range_extents(start_offset: number, end_offset: number, coord_type: CoordType): void;
+		get_range_extents(start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle): void;
 		/**
 		 * Creates an {@link AttributeSet} which consists of the attributes explicitly
 		 * set at the position #offset in the text. #start_offset and #end_offset are
@@ -3317,8 +3318,9 @@ declare namespace imports.gi.Atk {
 	interface IValue {
 		/**
 		 * Gets the value of this object.
+		 * @param value a #GValue representing the current accessible value
 		 */
-		get_current_value(): void;
+		get_current_value(value: GObject.Value): void;
 		/**
 		 * Gets the minimum increment by which the value of this object may be
 		 * changed.  If zero, the minimum increment is undefined, which may
@@ -3330,18 +3332,21 @@ declare namespace imports.gi.Atk {
 		get_increment(): number;
 		/**
 		 * Gets the maximum value of this object.
+		 * @param value a #GValue representing the maximum accessible value
 		 */
-		get_maximum_value(): void;
+		get_maximum_value(value: GObject.Value): void;
 		/**
 		 * Gets the minimum increment by which the value of this object may be changed.  If zero,
 		 * the minimum increment is undefined, which may mean that it is limited only by the
 		 * floating point precision of the platform.
+		 * @param value a #GValue representing the minimum increment by which the accessible value may be changed
 		 */
-		get_minimum_increment(): void;
+		get_minimum_increment(value: GObject.Value): void;
 		/**
 		 * Gets the minimum value of this object.
+		 * @param value a #GValue representing the minimum accessible value
 		 */
-		get_minimum_value(): void;
+		get_minimum_value(value: GObject.Value): void;
 		/**
 		 * Gets the range of this object.
 		 * @returns a newly allocated {@link Range}

@@ -2988,12 +2988,14 @@ declare namespace imports.gi.GLib {
 		public read(buf: string, count: number, bytes_read: number): IOError;
 		/**
 		 * Replacement for g_io_channel_read() with the new API.
+		 * @param buf 
+		 *     a buffer to read data into
 		 * @param count the size of the buffer. Note that the buffer may not be
 		 *     completely filled even if there is data in the buffer if the
 		 *     remaining data is not a complete character.
 		 * @returns the status of the operation.
 		 */
-		public read_chars(count: number): IOStatus;
+		public read_chars(buf: number[], count: number): IOStatus;
 		/**
 		 * Reads a line, including the terminating character(s),
 		 * from a #GIOChannel into a newly-allocated string.
@@ -4049,12 +4051,14 @@ declare namespace imports.gi.GLib {
 		 * You must have successfully acquired the context with
 		 * g_main_context_acquire() before you may call this function.
 		 * @param max_priority maximum priority source to check
+		 * @param fds location to
+		 *       store #GPollFD records that need to be polled.
 		 * @param n_fds length of #fds.
 		 * @returns the number of records actually stored in #fds,
 		 *   or, if more than #n_fds records need to be stored, the number
 		 *   of records that need to be stored.
 		 */
-		public query(max_priority: number, n_fds: number): number;
+		public query(max_priority: number, fds: PollFD[], n_fds: number): number;
 		/**
 		 * Increases the reference count on a #GMainContext object by one.
 		 * @returns the #context that was passed in (since 2.6)
@@ -18055,9 +18059,10 @@ declare namespace imports.gi.GLib {
 	 * state).
 	 * @param _in binary input data
 	 * @param len max length of #in data to decode
+	 * @param out output buffer
 	 * @returns The number of bytes of output that was written
 	 */
-	function base64_decode_step(_in: number[], len: number): number;
+	function base64_decode_step(_in: number[], len: number, out: number[]): number;
 
 	/**
 	 * Encode a sequence of binary data into its Base-64 stringified
@@ -25157,9 +25162,10 @@ declare namespace imports.gi.GLib {
 	 * g_date_time_unref (dt);
 	 * ]|
 	 * @param iso_date an ISO 8601 encoded date string
+	 * @param time_ a #GTimeVal
 	 * @returns %TRUE if the conversion was successful.
 	 */
-	function time_val_from_iso8601(iso_date: string): boolean;
+	function time_val_from_iso8601(iso_date: string, time_: TimeVal): boolean;
 
 	/**
 	 * Sets a function to be called at regular intervals, with the default
@@ -25565,10 +25571,11 @@ declare namespace imports.gi.GLib {
 	 * for details.
 	 * @param _ch a Unicode character.
 	 * @param compat whether perform canonical or compatibility decomposition
+	 * @param result location to store decomposed result, or %NULL
 	 * @param result_len length of #result
 	 * @returns the length of the full decomposition.
 	 */
-	function unichar_fully_decompose(_ch: string, compat: boolean, result_len: number): number;
+	function unichar_fully_decompose(_ch: string, compat: boolean, result: string | null, result_len: number): number;
 
 	/**
 	 * In Unicode, some characters are "mirrored". This means that their
@@ -25778,9 +25785,12 @@ declare namespace imports.gi.GLib {
 	/**
 	 * Converts a single character to UTF-8.
 	 * @param _c a Unicode character code
+	 * @param outbuf output buffer, must have at
+	 *       least 6 bytes of space. If %NULL, the length will be computed and
+	 *       returned and nothing will be written to #outbuf.
 	 * @returns number of bytes written
 	 */
-	function unichar_to_utf8(_c: string): number;
+	function unichar_to_utf8(_c: string, outbuf: string | null): number;
 
 	/**
 	 * Converts a character to lower case.

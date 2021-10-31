@@ -1127,15 +1127,17 @@ declare namespace imports.gi.Clutter {
 		 * @param ancestor A {@link Actor} ancestor, or %NULL to use the
 		 *   default #ClutterStage
 		 * @param point A point as {@link Vertex}
+		 * @param vertex The translated {@link Vertex}
 		 */
-		apply_relative_transform_to_point(ancestor: Actor | null, point: Vertex): void;
+		apply_relative_transform_to_point(ancestor: Actor | null, point: Vertex, vertex: Vertex): void;
 		/**
 		 * Transforms #point in coordinates relative to the actor
 		 * into screen-relative coordinates with the current actor
 		 * transformation (i.e. scale, rotation, etc)
 		 * @param point A point as {@link Vertex}
+		 * @param vertex The translated {@link Vertex}
 		 */
-		apply_transform_to_point(point: Vertex): void;
+		apply_transform_to_point(point: Vertex, vertex: Vertex): void;
 		/**
 		 * Binds a #GListModel to a {@link Actor}.
 		 * 
@@ -1318,8 +1320,10 @@ declare namespace imports.gi.Clutter {
 		 *  - v[1] contains (x2, y1)
 		 *  - v[2] contains (x1, y2)
 		 *  - v[3] contains (x2, y2)
+		 * @param verts Pointer to a location of an array
+		 *   of 4 {@link Vertex} where to store the result.
 		 */
-		get_abs_allocation_vertices(): void;
+		get_abs_allocation_vertices(verts: Vertex[]): void;
 		/**
 		 * Returns the accessible object that describes the actor to an
 		 * assistive technology.
@@ -1364,8 +1368,9 @@ declare namespace imports.gi.Clutter {
 		 * Do not call any of the clutter_actor_get_allocation_*() family
 		 * of functions inside the implementation of the get_preferred_width()
 		 * or get_preferred_height() virtual functions.
+		 * @param box the function fills this in with the actor's allocation
 		 */
-		get_allocation_box(): void;
+		get_allocation_box(box: ActorBox): void;
 		/**
 		 * Gets the layout box an actor has been assigned.  The allocation can
 		 * only be assumed valid inside a paint() method; anywhere else, it
@@ -1375,8 +1380,9 @@ declare namespace imports.gi.Clutter {
 		 * those transformations do not affect layout, only rendering.
 		 * 
 		 * The returned rectangle is in pixels.
+		 * @param geom allocation geometry in pixels
 		 */
-		get_allocation_geometry(): void;
+		get_allocation_geometry(geom: Geometry): void;
 		/**
 		 * Calculates the transformed coordinates of the four corners of the
 		 * actor in the plane of #ancestor. The returned vertices relate to
@@ -1393,8 +1399,10 @@ declare namespace imports.gi.Clutter {
 		 * the behaviour of clutter_actor_get_abs_allocation_vertices().
 		 * @param ancestor A {@link Actor} to calculate the vertices
 		 *   against, or %NULL to use the #ClutterStage
+		 * @param verts return
+		 *   location for an array of 4 {@link Vertex} in which to store the result
 		 */
-		get_allocation_vertices(ancestor: Actor | null): void;
+		get_allocation_vertices(ancestor: Actor | null, verts: Vertex[]): void;
 		/**
 		 * Gets the current anchor point of the #actor in pixels.
 		 * @returns return location for the X coordinate of the anchor point
@@ -1417,8 +1425,9 @@ declare namespace imports.gi.Clutter {
 		get_animation(): Animation;
 		/**
 		 * Retrieves the color set using clutter_actor_set_background_color().
+		 * @param color return location for a {@link Color}
 		 */
-		get_background_color(): void;
+		get_background_color(color: Color): void;
 		/**
 		 * Retrieves the actor at the given #index_ inside the list of
 		 * children of #self.
@@ -1430,8 +1439,9 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the child transformation matrix set using
 		 * clutter_actor_set_child_transform(); if none is currently set,
 		 * the #transform matrix will be initialized to the identity matrix.
+		 * @param transform a {@link Matrix}
 		 */
-		get_child_transform(): void;
+		get_child_transform(transform: Matrix): void;
 		/**
 		 * Retrieves the list of children of #self.
 		 * @returns A newly
@@ -1496,8 +1506,10 @@ declare namespace imports.gi.Clutter {
 		 * If the #ClutterContent used by the actor has a preferred size, then
 		 * it is possible to modify the content box by using the
 		 * #ClutterActor:content-gravity property.
+		 * @param box the return location for the bounding
+		 *   box for the {@link Content}
 		 */
-		get_content_box(): void;
+		get_content_box(box: ActorBox): void;
 		/**
 		 * Retrieves the content gravity as set using
 		 * clutter_actor_set_content_gravity().
@@ -1602,8 +1614,9 @@ declare namespace imports.gi.Clutter {
 		 * actor. This is the same as calling clutter_actor_get_position() and
 		 * clutter_actor_get_size(). It tries to "do what you mean" and get the
 		 * requested size and position if the actor's allocation is invalid.
+		 * @param geometry A location to store actors {@link Geometry}
 		 */
-		get_geometry(): void;
+		get_geometry(geometry: Geometry): void;
 		/**
 		 * Retrieves the unique id for #self.
 		 * @returns Globally unique value for this object instance.
@@ -1648,8 +1661,9 @@ declare namespace imports.gi.Clutter {
 		get_layout_manager(): LayoutManager;
 		/**
 		 * Retrieves all the components of the margin of a {@link Actor}.
+		 * @param margin return location for a {@link Margin}
 		 */
-		get_margin(): void;
+		get_margin(margin: Margin): void;
 		/**
 		 * Retrieves the bottom margin of a {@link Actor}.
 		 * @returns the bottom margin
@@ -1719,10 +1733,11 @@ declare namespace imports.gi.Clutter {
 		 * There are times when a 2D paint box can't be determined, e.g.
 		 * because the actor isn't yet parented under a stage or because
 		 * the actor is unable to determine a paint volume.
+		 * @param box return location for a {@link ActorBox}
 		 * @returns %TRUE if a 2D paint box could be determined, else
 		 * %FALSE.
 		 */
-		get_paint_box(): boolean;
+		get_paint_box(box: ActorBox): boolean;
 		/**
 		 * Retrieves the absolute opacity of the actor, as it appears on the stage.
 		 * 
@@ -1982,13 +1997,15 @@ declare namespace imports.gi.Clutter {
 		get_text_direction(): TextDirection;
 		/**
 		 * Retrieves the current transformation matrix of a {@link Actor}.
+		 * @param transform a {@link Matrix}
 		 */
-		get_transform(): void;
+		get_transform(transform: Matrix): void;
 		/**
 		 * Retrieves the transformations applied to #self relative to its
 		 * parent.
+		 * @param matrix the return location for a {@link Matrix}
 		 */
-		get_transformation_matrix(): void;
+		get_transformation_matrix(matrix: Matrix): void;
 		/**
 		 * Retrieves the 3D paint volume of an actor like
 		 * clutter_actor_get_paint_volume() does (Please refer to the
@@ -5751,8 +5768,9 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If the {@link Box}:color-set property is set to %FALSE the
 		 * returned #ClutterColor is undefined
+		 * @param color return location for a {@link Color}
 		 */
-		get_color(): void;
+		get_color(color: Color): void;
 		/**
 		 * Retrieves the {@link LayoutManager} instance used by #box
 		 * @returns a {@link LayoutManager}. The returned
@@ -6798,8 +6816,9 @@ declare namespace imports.gi.Clutter {
 		tint: Color;
 		/**
 		 * Retrieves the tint used by #effect
+		 * @param tint return location for the color used
 		 */
-		get_tint(): void;
+		get_tint(tint: Color): void;
 		/**
 		 * Sets the tint to be used when colorizing
 		 * @param tint the color to be used
@@ -7124,10 +7143,11 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the "drag area" associated with #action, that
 		 * is a {@link Rect} that constrains the actor movements,
 		 * in parents coordinates.
+		 * @param drag_area a {@link Rect} to be filled
 		 * @returns %TRUE if the actor is actually constrained (and thus
 		 *          #drag_area is valid), %FALSE otherwise
 		 */
-		get_drag_area(): boolean;
+		get_drag_area(drag_area: Rect): boolean;
 		/**
 		 * Retrieves the axis constraint set by clutter_drag_action_set_drag_axis()
 		 * @returns the axis constraint
@@ -8231,10 +8251,12 @@ declare namespace imports.gi.Clutter {
 		 * #device.
 		 * @param sequence a {@link EventSequence}, or %NULL if
 		 *   the device is not touch-based
+		 * @param point return location for the pointer
+		 *   or touch point
 		 * @returns %FALSE if the device's sequence hasn't been found,
 		 *   and %TRUE otherwise.
 		 */
-		get_coords(sequence: EventSequence | null): boolean;
+		get_coords(sequence: EventSequence | null, point: Point): boolean;
 		/**
 		 * Retrieves the latest coordinates of the pointer of #device
 		 * @returns return location for the X coordinate
@@ -8533,25 +8555,28 @@ declare namespace imports.gi.Clutter {
 		 * Computes the value between the #interval boundaries given the
 		 * progress #factor and copies it into #value.
 		 * @param factor the progress factor, between 0 and 1
+		 * @param value return location for an initialized #GValue
 		 * @returns %TRUE if the operation was successful
 		 */
-		compute_value(factor: number): boolean;
+		compute_value(factor: number, value: GObject.Value): boolean;
 		/**
 		 * Retrieves the final value of #interval and copies
 		 * it into #value.
 		 * 
 		 * The passed #GValue must be initialized to the value held by
 		 * the {@link Interval}.
+		 * @param value a #GValue
 		 */
-		get_final_value(): void;
+		get_final_value(value: GObject.Value): void;
 		/**
 		 * Retrieves the initial value of #interval and copies
 		 * it into #value.
 		 * 
 		 * The passed #GValue must be initialized to the value held by
 		 * the {@link Interval}.
+		 * @param value a #GValue
 		 */
-		get_initial_value(): void;
+		get_initial_value(value: GObject.Value): void;
 		/**
 		 * Variable arguments wrapper for clutter_interval_get_initial_value()
 		 * and clutter_interval_get_final_value() that avoids using the
@@ -8743,14 +8768,13 @@ declare namespace imports.gi.Clutter {
 		 * The #transition must already have key frames set, and #index_ must be
 		 * smaller than the number of key frames.
 		 * @param index_ the index of the key frame
+		 * @param value a #GValue initialized with the type of
+		 *   the values
 		 * @returns return location for the key, or %NULL
 		 * 
 		 * return location for the easing mode, or %NULL
-		 * 
-		 * a #GValue initialized with the type of
-		 *   the values
 		 */
-		get_key_frame(index_: number): [ key: number | null, mode: AnimationMode | null, value: GObject.Value ];
+		get_key_frame(index_: number, value: GObject.Value): [ key: number | null, mode: AnimationMode | null ];
 		/**
 		 * Retrieves the number of key frames inside #transition.
 		 * @returns the number of key frames
@@ -9458,8 +9482,9 @@ declare namespace imports.gi.Clutter {
 		 * Sets an initializes #value to that at #column. When done with #value,
 		 * g_value_unset() needs to be called to free any allocated memory.
 		 * @param column column number to retrieve the value from
+		 * @param value an empty #GValue to set
 		 */
-		get_value(column: number): void;
+		get_value(column: number, value: GObject.Value): void;
 		/**
 		 * Gets whether the current iterator is at the beginning of the model
 		 * to which it belongs.
@@ -9565,10 +9590,11 @@ declare namespace imports.gi.Clutter {
 		 * This function should only be called by {@link OffscreenEffect}
 		 * implementations, from within the #ClutterOffscreenEffectClass.paint_target()
 		 * virtual function.
+		 * @param rect return location for the target area
 		 * @returns %TRUE if the offscreen buffer has a valid rectangle,
 		 *   and %FALSE otherwise
 		 */
-		get_target_rect(): boolean;
+		get_target_rect(rect: Rect): boolean;
 		/**
 		 * Retrieves the size of the offscreen buffer used by #effect to
 		 * paint the actor to which it has been applied.
@@ -10136,8 +10162,9 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Retrieves the node of the path indexed by #index.
 		 * @param index_ the node number to retrieve
+		 * @param node a location to store a copy of the node
 		 */
-		get_node(index_: number): void;
+		get_node(index_: number, node: PathNode): void;
 		/**
 		 * Returns a #GSList of {@link PathNode}<!-- -->s. The list should be
 		 * freed with g_slist_free(). The nodes are owned by the path and
@@ -10153,9 +10180,10 @@ declare namespace imports.gi.Clutter {
 		 * 0.0 is the beginning and 1.0 is the end of the path. An
 		 * interpolated position is then stored in #position.
 		 * @param progress a position along the path as a fraction of its length
+		 * @param position location to store the position
 		 * @returns index of the node used to calculate the position.
 		 */
-		get_position(progress: number): number;
+		get_position(progress: number, position: Knot): number;
 		/**
 		 * Inserts #node into the path before the node at the given offset. If
 		 * #index_ is negative it will append the node to the end of the path.
@@ -10391,8 +10419,9 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Gets the color of the border used by #rectangle and places
 		 * it into #color.
+		 * @param color return location for a {@link Color}
 		 */
-		get_border_color(): void;
+		get_border_color(color: Color): void;
 		/**
 		 * Gets the width (in pixels) of the border used by #rectangle
 		 * @returns the border's width
@@ -10400,8 +10429,9 @@ declare namespace imports.gi.Clutter {
 		get_border_width(): number;
 		/**
 		 * Retrieves the color of #rectangle.
+		 * @param color return location for a {@link Color}
 		 */
-		get_color(): void;
+		get_color(color: Color): void;
 		/**
 		 * Sets the color of the border used by #rectangle using #color
 		 * @param color the color of the border
@@ -11558,12 +11588,14 @@ declare namespace imports.gi.Clutter {
 		get_actor_at_pos(pick_mode: PickMode, _x: number, _y: number): Actor;
 		/**
 		 * Retrieves the stage color.
+		 * @param color return location for a {@link Color}
 		 */
-		get_color(): void;
+		get_color(color: Color): void;
 		/**
 		 * Retrieves the current depth cueing settings from the stage.
+		 * @param fog return location for a {@link Fog} structure
 		 */
-		get_fog(): void;
+		get_fog(fog: Fog): void;
 		/**
 		 * Retrieves whether the stage is full screen or not
 		 * @returns %TRUE if the stage is full screen
@@ -11602,8 +11634,10 @@ declare namespace imports.gi.Clutter {
 		get_no_clear_hint(): boolean;
 		/**
 		 * Retrieves the stage perspective.
+		 * @param perspective return location for a
+		 *   {@link Perspective}
 		 */
-		get_perspective(): void;
+		get_perspective(perspective: Perspective | null): void;
 		/**
 		 * Gets the bounds of the current redraw for #stage in stage pixel
 		 * coordinates. E.g., if only a single actor has queued a redraw then
@@ -11614,8 +11648,9 @@ declare namespace imports.gi.Clutter {
 		 * aren't going to be painted. This should only be called while the
 		 * stage is being painted. If there is no current redraw clip then
 		 * this function will set #clip to the full extents of the stage.
+		 * @param clip Return location for the clip bounds
 		 */
-		get_redraw_clip_bounds(): void;
+		get_redraw_clip_bounds(clip: cairo.RectangleInt): void;
 		/**
 		 * Retrieves the value set with clutter_stage_set_throttle_motion_events()
 		 * @returns %TRUE if the motion events are being throttled,
@@ -12846,12 +12881,14 @@ declare namespace imports.gi.Clutter {
 		get_chars(start_pos: number, end_pos: number): string;
 		/**
 		 * Retrieves the text color as set by clutter_text_set_color().
+		 * @param color return location for a {@link Color}
 		 */
-		get_color(): void;
+		get_color(color: Color): void;
 		/**
 		 * Retrieves the color of the cursor of a {@link Text} actor.
+		 * @param color return location for a {@link Color}
 		 */
-		get_cursor_color(): void;
+		get_cursor_color(color: Color): void;
 		/**
 		 * Retrieves the cursor position.
 		 * @returns the cursor position, in characters
@@ -12862,8 +12899,9 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The coordinates of the rectangle's origin are in actor-relative
 		 * coordinates.
+		 * @param rect return location of a {@link Rect}
 		 */
-		get_cursor_rect(): void;
+		get_cursor_rect(rect: Rect): void;
 		/**
 		 * Retrieves the size of the cursor of a {@link Text} actor.
 		 * @returns the size of the cursor, in pixels
@@ -12958,8 +12996,9 @@ declare namespace imports.gi.Clutter {
 		get_selectable(): boolean;
 		/**
 		 * Retrieves the color of selected text of a {@link Text} actor.
+		 * @param color return location for a {@link Color}
 		 */
-		get_selected_text_color(): void;
+		get_selected_text_color(color: Color): void;
 		/**
 		 * Retrieves the currently selected text.
 		 * @returns a newly allocated string containing the currently
@@ -12975,8 +13014,9 @@ declare namespace imports.gi.Clutter {
 		get_selection_bound(): number;
 		/**
 		 * Retrieves the color of the selection of a {@link Text} actor.
+		 * @param color return location for a {@link Color}
 		 */
-		get_selection_color(): void;
+		get_selection_color(color: Color): void;
 		/**
 		 * Retrieves whether the {@link Text} actor is in single line mode.
 		 * @returns %TRUE if the {@link Text} actor is in single line mode
@@ -14157,10 +14197,14 @@ declare namespace imports.gi.Clutter {
 		get_auto_reverse(): boolean;
 		/**
 		 * Retrieves the control points for the cubic bezier progress mode.
+		 * @param c_1 return location for the first control
+		 *   point of the cubic bezier, or %NULL
+		 * @param c_2 return location for the second control
+		 *   point of the cubic bezier, or %NULL
 		 * @returns %TRUE if the #timeline is using a cubic bezier progress
 		 *   more, and %FALSE otherwise
 		 */
-		get_cubic_bezier_progress(): boolean;
+		get_cubic_bezier_progress(c_1: Point, c_2: Point): boolean;
 		/**
 		 * Retrieves the current repeat for a timeline.
 		 * 
@@ -14733,13 +14777,15 @@ declare namespace imports.gi.Clutter {
 		zoom_axis: ZoomAxis;
 		/**
 		 * Retrieves the focal point of the current zoom
+		 * @param point a {@link Point}
 		 */
-		get_focal_point(): void;
+		get_focal_point(point: Point): void;
 		/**
 		 * Retrieves the focal point relative to the actor's coordinates of
 		 * the current zoom
+		 * @param point a {@link Point}
 		 */
-		get_transformed_focal_point(): void;
+		get_transformed_focal_point(point: Point): void;
 		/**
 		 * Retrieves the axis constraint set by clutter_zoom_action_set_zoom_axis()
 		 * @returns the axis constraint
@@ -14941,8 +14987,9 @@ declare namespace imports.gi.Clutter {
 		 * using #progress
 		 * @param _final the final {@link ActorBox}
 		 * @param progress the interpolation progress
+		 * @param result return location for the interpolation
 		 */
-		public interpolate(_final: ActorBox, progress: number): void;
+		public interpolate(_final: ActorBox, progress: number, result: ActorBox): void;
 		/**
 		 * Changes the origin of #box, maintaining the size of the {@link ActorBox}.
 		 * @param _x the X coordinate of the new origin
@@ -14958,8 +15005,10 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Unions the two boxes #a and #b and stores the result in #result.
 		 * @param _b the second {@link ActorBox}
+		 * @param result the {@link ActorBox} representing a union
+		 *   of #a and #b
 		 */
-		public union(_b: ActorBox): void;
+		public union(_b: ActorBox, result: ActorBox): void;
 	}
 
 	/**
@@ -15161,7 +15210,7 @@ declare namespace imports.gi.Clutter {
 		public find_property: {(animatable: Animatable, property_name: string): GObject.ParamSpec;};
 		public get_initial_state: {(animatable: Animatable, property_name: string, value: GObject.Value): void;};
 		public set_final_state: {(animatable: Animatable, property_name: string, value: GObject.Value): void;};
-		public interpolate_value: {(animatable: Animatable, property_name: string, interval: Interval, progress: number): boolean;};
+		public interpolate_value: {(animatable: Animatable, property_name: string, interval: Interval, progress: number, value: GObject.Value): boolean;};
 	}
 
 	/**
@@ -15658,8 +15707,9 @@ declare namespace imports.gi.Clutter {
 		 * The alpha channel of #result is set as as the maximum value
 		 * between the alpha channels of #a and #b.
 		 * @param _b a {@link Color}
+		 * @param result return location for the result
 		 */
-		public add(_b: Color): void;
+		public add(_b: Color, result: Color): void;
 		/**
 		 * Makes a copy of the color structure.  The result must be
 		 * freed using clutter_color_free().
@@ -15669,8 +15719,9 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Darkens #color by a fixed amount, and saves the changed color
 		 * in #result.
+		 * @param result return location for the darker color
 		 */
-		public darken(): void;
+		public darken(result: Color): void;
 		/**
 		 * Compares two {@link Color}<!-- -->s and checks if they are the same.
 		 * 
@@ -15706,18 +15757,21 @@ declare namespace imports.gi.Clutter {
 		 * using #progress
 		 * @param _final the final {@link Color}
 		 * @param progress the interpolation progress
+		 * @param result return location for the interpolation
 		 */
-		public interpolate(_final: Color, progress: number): void;
+		public interpolate(_final: Color, progress: number, result: Color): void;
 		/**
 		 * Lightens #color by a fixed amount, and saves the changed color
 		 * in #result.
+		 * @param result return location for the lighter color
 		 */
-		public lighten(): void;
+		public lighten(result: Color): void;
 		/**
 		 * Shades #color by #factor and saves the modified color into #result.
 		 * @param factor the shade factor to apply
+		 * @param result return location for the shaded color
 		 */
-		public shade(factor: number): void;
+		public shade(factor: number, result: Color): void;
 		/**
 		 * Subtracts #b from #a and saves the resulting color inside #result.
 		 * 
@@ -15727,8 +15781,9 @@ declare namespace imports.gi.Clutter {
 		 * The alpha channel of #result is set as the minimum value
 		 * between the alpha channels of #a and #b.
 		 * @param _b a {@link Color}
+		 * @param result return location for the result
 		 */
-		public subtract(_b: Color): void;
+		public subtract(_b: Color, result: Color): void;
 		/**
 		 * Converts #color to the HLS format.
 		 * 
@@ -16077,8 +16132,9 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Find the union of two rectangles represented as {@link Geometry}.
 		 * @param geometry_b another {@link Geometry}
+		 * @param result location to store the result
 		 */
-		public union(geometry_b: Geometry): void;
+		public union(geometry_b: Geometry, result: Geometry): void;
 	}
 
 	/**
@@ -16167,7 +16223,7 @@ declare namespace imports.gi.Clutter {
 	class IntervalClass {
 		public constructor();
 		public validate: {(interval: Interval, pspec: GObject.ParamSpec): boolean;};
-		public compute_value: {(interval: Interval, factor: number): boolean;};
+		public compute_value: {(interval: Interval, factor: number, value: GObject.Value): boolean;};
 		public _clutter_reserved1: {(): void;};
 		public _clutter_reserved2: {(): void;};
 		public _clutter_reserved3: {(): void;};
@@ -16458,7 +16514,7 @@ declare namespace imports.gi.Clutter {
 	interface ModelIterClass {}
 	class ModelIterClass {
 		public constructor();
-		public get_value: {(iter: ModelIter, column: number): void;};
+		public get_value: {(iter: ModelIter, column: number, value: GObject.Value): void;};
 		public set_value: {(iter: ModelIter, column: number, value: GObject.Value): void;};
 		public is_first: {(iter: ModelIter): boolean;};
 		public is_last: {(iter: ModelIter): boolean;};
@@ -16656,8 +16712,9 @@ declare namespace imports.gi.Clutter {
 		public get_height(): number;
 		/**
 		 * Retrieves the origin of the {@link PaintVolume}.
+		 * @param vertex the return location for a {@link Vertex}
 		 */
-		public get_origin(): void;
+		public get_origin(vertex: Vertex): void;
 		/**
 		 * Retrieves the width of the volume's, axis aligned, bounding box.
 		 * 
@@ -17040,8 +17097,9 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Retrieves the center of #rect, after normalizing the rectangle,
 		 * and updates #center with the correct coordinates.
+		 * @param center a {@link Point}
 		 */
-		public get_center(): void;
+		public get_center(center: Point): void;
 		/**
 		 * Retrieves the height of #rect.
 		 * @returns the height of the rectangle
@@ -17096,9 +17154,10 @@ declare namespace imports.gi.Clutter {
 		 * This function can be used to simply check if the intersection of #a and #b
 		 * is not empty, by using %NULL for #res.
 		 * @param _b a {@link Rect}
+		 * @param res a {@link Rect}, or %NULL
 		 * @returns %TRUE if the intersection of #a and #b is not empty
 		 */
-		public intersection(_b: Rect): boolean;
+		public intersection(_b: Rect, res: Rect | null): boolean;
 		/**
 		 * Normalizes a {@link Rect}.
 		 * 
@@ -17126,8 +17185,9 @@ declare namespace imports.gi.Clutter {
 		 * This function will normalize both #a and #b prior to computing their
 		 * union.
 		 * @param _b a {@link Rect}
+		 * @param res a {@link Rect}
 		 */
-		public union(_b: Rect): void;
+		public union(_b: Rect, res: Rect): void;
 	}
 
 	/**
@@ -18169,10 +18229,12 @@ declare namespace imports.gi.Clutter {
 		 * @param interval a {@link Interval} with the animation range
 		 * @param progress the progress to use to interpolate between the
 		 *   initial and final values of the #interval
+		 * @param value return location for an initialized #GValue
+		 *   using the same type of the #interval
 		 * @returns %TRUE if the interpolation was successful,
 		 *   and %FALSE otherwise
 		 */
-		interpolate_value(property_name: string, interval: Interval, progress: number): boolean;
+		interpolate_value(property_name: string, interval: Interval, progress: number, value: GObject.Value): boolean;
 		/**
 		 * Sets the current state of #property_name to #value
 		 * @param property_name the name of the animatable property to set
@@ -21352,18 +21414,20 @@ declare namespace imports.gi.Clutter {
 	/**
 	 * Converts a color expressed in HLS (hue, luminance and saturation)
 	 * values into a {@link Color}.
+	 * @param color return location for a {@link Color}
 	 * @param hue hue value, in the 0 .. 360 range
 	 * @param luminance luminance value, in the 0 .. 1 range
 	 * @param saturation saturation value, in the 0 .. 1 range
 	 */
-	function color_from_hls(hue: number, luminance: number, saturation: number): void;
+	function color_from_hls(color: Color, hue: number, luminance: number, saturation: number): void;
 
 	/**
 	 * Converts #pixel from the packed representation of a four 8 bit channel
 	 * color to a {@link Color}.
+	 * @param color return location for a {@link Color}
 	 * @param pixel a 32 bit packed integer containing a color
 	 */
-	function color_from_pixel(pixel: number): void;
+	function color_from_pixel(color: Color, pixel: number): void;
 
 	/**
 	 * Parses a string definition of a color, filling the {@link Color}.red,
@@ -21400,10 +21464,11 @@ declare namespace imports.gi.Clutter {
 	 * 
 	 * If the alpha component is not specified then it is assumed to be set to
 	 * be fully opaque.
+	 * @param color return location for a {@link Color}
 	 * @param _str a string specifiying a color
 	 * @returns %TRUE if parsing succeeded, and %FALSE otherwise
 	 */
-	function color_from_string(_str: string): boolean;
+	function color_from_string(color: Color, _str: string): boolean;
 
 	/**
 	 * Retrieves a static color for the given #color name
@@ -22056,9 +22121,10 @@ declare namespace imports.gi.Clutter {
 	 * @param stage a {@link Stage}
 	 * @param point coordinates to check
 	 * @param color expected color
+	 * @param result color at the given coordinates
 	 * @returns %TRUE if the colors match
 	 */
-	function test_check_color_at_point(stage: Actor, point: Point, color: Color): boolean;
+	function test_check_color_at_point(stage: Actor, point: Point, color: Color, result: Color): boolean;
 
 	/**
 	 * Retrieves the {@link Stage} used for testing.
@@ -22439,41 +22505,47 @@ declare namespace imports.gi.Clutter {
 
 	/**
 	 * Stores a value in centimeters inside #units
+	 * @param units a {@link Units}
 	 * @param cm centimeters
 	 */
-	function units_from_cm(cm: number): void;
+	function units_from_cm(units: Units, cm: number): void;
 
 	/**
 	 * Stores a value in em inside #units, using the default font
 	 * name as returned by clutter_backend_get_font_name()
+	 * @param units a {@link Units}
 	 * @param _em em
 	 */
-	function units_from_em(_em: number): void;
+	function units_from_em(units: Units, _em: number): void;
 
 	/**
 	 * Stores a value in em inside #units using #font_name
+	 * @param units a {@link Units}
 	 * @param font_name the font name and size
 	 * @param _em em
 	 */
-	function units_from_em_for_font(font_name: string | null, _em: number): void;
+	function units_from_em_for_font(units: Units, font_name: string | null, _em: number): void;
 
 	/**
 	 * Stores a value in millimiters inside #units
+	 * @param units a {@link Units}
 	 * @param mm millimeters
 	 */
-	function units_from_mm(mm: number): void;
+	function units_from_mm(units: Units, mm: number): void;
 
 	/**
 	 * Stores a value in pixels inside #units
+	 * @param units a {@link Units}
 	 * @param px pixels
 	 */
-	function units_from_pixels(px: number): void;
+	function units_from_pixels(units: Units, px: number): void;
 
 	/**
 	 * Stores a value in typographic points inside #units
+	 * @param units a {@link Units}
 	 * @param pt typographic points
 	 */
-	function units_from_pt(pt: number): void;
+	function units_from_pt(units: Units, pt: number): void;
 
 	/**
 	 * Parses a value and updates #units with it
@@ -22509,11 +22581,12 @@ declare namespace imports.gi.Clutter {
 	 * ]|
 	 * 
 	 * If no unit is specified, pixels are assumed.
+	 * @param units a {@link Units}
 	 * @param _str the string to convert
 	 * @returns %TRUE if the string was successfully parsed,
 	 *   and %FALSE otherwise
 	 */
-	function units_from_string(_str: string): boolean;
+	function units_from_string(units: Units, _str: string): boolean;
 
 	/**
 	 * Calculates the nearest power of two, greater than or equal to #a.

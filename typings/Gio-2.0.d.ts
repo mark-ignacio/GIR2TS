@@ -6901,8 +6901,9 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the modification time of the current #info and sets it
 		 * in #result.
+		 * @param result a #GTimeVal.
 		 */
-		get_modification_time(): void;
+		get_modification_time(result: GLib.TimeVal): void;
 		/**
 		 * Gets the name for a file. This is guaranteed to always be set.
 		 * @returns a string containing the file name.
@@ -8341,11 +8342,13 @@ declare namespace imports.gi.Gio {
 		 * partial result will be returned, without an error.
 		 * 
 		 * On error -1 is returned and #error is set accordingly.
+		 * @param buffer 
+		 *     a buffer to read data into (which should be at least count bytes long).
 		 * @param count the number of bytes that will be read from the stream
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns Number of bytes read, or -1 on error, or 0 on end of file.
 		 */
-		read(count: number, cancellable: Cancellable | null): number;
+		read(buffer: number[], count: number, cancellable: Cancellable | null): number;
 		/**
 		 * Tries to read #count bytes from the stream into the buffer starting at
 		 * #buffer. Will block during this read.
@@ -8366,11 +8369,13 @@ declare namespace imports.gi.Gio {
 		 * read before the error was encountered.  This functionality is only
 		 * available from C.  If you need it from another language then you must
 		 * write your own loop around g_input_stream_read().
+		 * @param buffer 
+		 *     a buffer to read data into (which should be at least count bytes long).
 		 * @param count the number of bytes that will be read from the stream
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns %TRUE on success, %FALSE if there was an error
 		 */
-		read_all(count: number, cancellable: Cancellable | null): boolean;
+		read_all(buffer: number[], count: number, cancellable: Cancellable | null): boolean;
 		/**
 		 * Request an asynchronous read of #count bytes from the stream into the
 		 * buffer starting at #buffer.
@@ -8382,12 +8387,14 @@ declare namespace imports.gi.Gio {
 		 * Any outstanding I/O request with higher priority (lower numerical
 		 * value) will be executed before an outstanding request with lower
 		 * priority. Default priority is %G_PRIORITY_DEFAULT.
+		 * @param buffer 
+		 *     a buffer to read data into (which should be at least count bytes long)
 		 * @param count the number of bytes that will be read from the stream
 		 * @param io_priority the [I/O priority][io-priority] of the request
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
 		 * @param callback callback to call when the request is satisfied
 		 */
-		read_all_async(count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
+		read_all_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous stream read operation started with
 		 * g_input_stream_read_all_async().
@@ -8426,13 +8433,15 @@ declare namespace imports.gi.Gio {
 		 * The asynchronous methods have a default fallback that uses threads to implement
 		 * asynchronicity, so they are optional for inheriting classes. However, if you
 		 * override one you must override all.
+		 * @param buffer 
+		 *     a buffer to read data into (which should be at least count bytes long).
 		 * @param count the number of bytes that will be read from the stream
 		 * @param io_priority the [I/O priority][io-priority]
 		 * of the request.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @param callback callback to call when the request is satisfied
 		 */
-		read_async(count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
+		read_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Like g_input_stream_read(), this tries to read #count bytes from
 		 * the stream in a blocking fashion. However, rather than reading into
@@ -14465,11 +14474,13 @@ declare namespace imports.gi.Gio {
 		 * %G_IO_IN condition.
 		 * 
 		 * On error -1 is returned and #error is set accordingly.
+		 * @param buffer 
+		 *     a buffer to read data into (which should be at least #size bytes long).
 		 * @param cancellable a %GCancellable or %NULL
 		 * @returns Number of bytes read, or 0 if the connection was closed by
 		 * the peer, or -1 on error
 		 */
-		receive(cancellable: Cancellable | null): number;
+		receive(buffer: number[], cancellable: Cancellable | null): number;
 		/**
 		 * Receive data (up to #size bytes) from a socket.
 		 * 
@@ -14478,11 +14489,13 @@ declare namespace imports.gi.Gio {
 		 * #address is owned by the caller.
 		 * 
 		 * See g_socket_receive() for additional information.
+		 * @param buffer 
+		 *     a buffer to read data into (which should be at least #size bytes long).
 		 * @param cancellable a %GCancellable or %NULL
 		 * @returns Number of bytes read, or 0 if the connection was closed by
 		 * the peer, or -1 on error
 		 */
-		receive_from(cancellable: Cancellable | null): number;
+		receive_from(buffer: number[], cancellable: Cancellable | null): number;
 		/**
 		 * Receive data from a socket.  For receiving multiple messages, see
 		 * g_socket_receive_messages(); for easier use, see
@@ -14616,12 +14629,14 @@ declare namespace imports.gi.Gio {
 		 * This behaves exactly the same as g_socket_receive(), except that
 		 * the choice of blocking or non-blocking behavior is determined by
 		 * the #blocking argument rather than by #socket's properties.
+		 * @param buffer 
+		 *     a buffer to read data into (which should be at least #size bytes long).
 		 * @param blocking whether to do blocking or non-blocking I/O
 		 * @param cancellable a %GCancellable or %NULL
 		 * @returns Number of bytes read, or 0 if the connection was closed by
 		 * the peer, or -1 on error
 		 */
-		receive_with_blocking(blocking: boolean, cancellable: Cancellable | null): number;
+		receive_with_blocking(buffer: number[], blocking: boolean, cancellable: Cancellable | null): number;
 		/**
 		 * Tries to send #size bytes from #buffer on the socket. This is
 		 * mainly used by connection-oriented sockets; it is identical to
@@ -17003,9 +17018,10 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Since this method transfers ownership of the return value (or
 		 * error) to the caller, you may only call it once.
+		 * @param value return location for the #GValue
 		 * @returns %TRUE if #task succeeded, %FALSE on error.
 		 */
-		propagate_value(): boolean;
+		propagate_value(value: GObject.Value): boolean;
 		/**
 		 * Sets #task's result to #result and completes the task (see
 		 * g_task_return_pointer() for more discussion of exactly what this
@@ -22492,7 +22508,7 @@ declare namespace imports.gi.Gio {
 		public read_fn: {(stream: InputStream, buffer: any | null, count: number, cancellable: Cancellable | null): number;};
 		public skip: {(stream: InputStream, count: number, cancellable: Cancellable | null): number;};
 		public close_fn: {(stream: InputStream, cancellable: Cancellable | null): boolean;};
-		public read_async: {(stream: InputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
+		public read_async: {(stream: InputStream, buffer: number[], count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public read_finish: {(stream: InputStream, result: AsyncResult): number;};
 		public skip_async: {(stream: InputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public skip_finish: {(stream: InputStream, result: AsyncResult): number;};
@@ -22891,7 +22907,7 @@ declare namespace imports.gi.Gio {
 		public can_poll: {(stream: PollableInputStream): boolean;};
 		public is_readable: {(stream: PollableInputStream): boolean;};
 		public create_source: {(stream: PollableInputStream, cancellable: Cancellable | null): GLib.Source;};
-		public read_nonblocking: {(stream: PollableInputStream, count: number): number;};
+		public read_nonblocking: {(stream: PollableInputStream, buffer: number[], count: number): number;};
 	}
 
 	/**
@@ -30743,12 +30759,14 @@ declare namespace imports.gi.Gio {
 		 * if #cancellable has already been cancelled when you call, which
 		 * may happen if you call this method after a source triggers due
 		 * to having been cancelled.
+		 * @param buffer a
+		 *     buffer to read data into (which should be at least #count bytes long).
 		 * @param count the number of bytes you want to read
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns the number of bytes read, or -1 on error (including
 		 *   %G_IO_ERROR_WOULD_BLOCK).
 		 */
-		read_nonblocking(count: number, cancellable: Cancellable | null): number;
+		read_nonblocking(buffer: number[], count: number, cancellable: Cancellable | null): number;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -36306,8 +36324,9 @@ declare namespace imports.gi.Gio {
 	 * The conversion never fails - a valid #GValue is always returned in
 	 * #out_gvalue.
 	 * @param value A #GVariant.
+	 * @param out_gvalue Return location pointing to a zero-filled (uninitialized) #GValue.
 	 */
-	function dbus_gvariant_to_gvalue(value: GLib.Variant): void;
+	function dbus_gvariant_to_gvalue(value: GLib.Variant, out_gvalue: GObject.Value): void;
 
 	/**
 	 * Checks if #string is a

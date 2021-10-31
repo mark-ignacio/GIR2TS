@@ -282,12 +282,14 @@ declare namespace imports.gi.WebKit2 {
 		finish(): void;
 		/**
 		 * Gets the bounding box of the color input element.
+		 * @param rect a #GdkRectangle to fill in with the element area
 		 */
-		get_element_rectangle(): void;
+		get_element_rectangle(rect: Gdk.Rectangle): void;
 		/**
 		 * Gets the current #GdkRGBA color of #request
+		 * @param rgba a #GdkRGBA to fill in with the current color.
 		 */
-		get_rgba(): void;
+		get_rgba(rgba: Gdk.RGBA): void;
 		/**
 		 * Sets the current #GdkRGBA color of #request
 		 * @param rgba a pointer #GdkRGBA
@@ -4885,8 +4887,9 @@ declare namespace imports.gi.WebKit2 {
 		 * Gets the color that is used to draw the #web_view background before
 		 * the actual contents are rendered.
 		 * For more information see also webkit_web_view_set_background_color()
+		 * @param rgba a #GdkRGBA to fill in with the background color
 		 */
-		get_background_color(): void;
+		get_background_color(rgba: Gdk.RGBA): void;
 		/**
 		 * Gets the web context of #web_view.
 		 * @returns the #WebKitWebContext of the view
@@ -6439,8 +6442,9 @@ declare namespace imports.gi.WebKit2 {
 		get_fullscreen(): boolean;
 		/**
 		 * Get the geometry the window should have on the screen when shown.
+		 * @param geometry return location for the window geometry
 		 */
-		get_geometry(): void;
+		get_geometry(geometry: Gdk.Rectangle): void;
 		/**
 		 * Get whether the window should have the locationbar visible or not.
 		 * @returns %TRUE if locationbar should be visible or %FALSE otherwise.

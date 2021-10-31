@@ -2445,13 +2445,16 @@ declare namespace imports.gi.GObject {
 		public invalidate(): void;
 		/**
 		 * Invokes the closure, i.e. executes the callback represented by the #closure.
+		 * @param return_value a #GValue to store the return
+		 *                value. May be %NULL if the callback of #closure
+		 *                doesn't return a value.
 		 * @param n_param_values the length of the #param_values array
 		 * @param param_values an array of
 		 *                #GValues holding the arguments on which to
 		 *                invoke the callback of #closure
 		 * @param invocation_hint a context-dependent invocation hint
 		 */
-		public invoke(n_param_values: number, param_values: Value[], invocation_hint: any | null): void;
+		public invoke(return_value: Value | null, n_param_values: number, param_values: Value[], invocation_hint: any | null): void;
 		/**
 		 * Increments the reference count on a closure to force it staying
 		 * alive while the caller holds a pointer to it.
@@ -6852,8 +6855,10 @@ declare namespace imports.gi.GObject {
 	 * is 0. All members filled into the #GSignalQuery structure should
 	 * be considered constant and have to be left untouched.
 	 * @param signal_id The signal id of the signal to query information for.
+	 * @param query A user provided structure that is
+	 *  filled in with constant values upon success.
 	 */
-	function signal_query(signal_id: number): void;
+	function signal_query(signal_id: number, query: SignalQuery): void;
 
 	/**
 	 * Deletes an emission hook.
@@ -7394,8 +7399,10 @@ declare namespace imports.gi.GObject {
 	 * #GTypeQuery structure should be considered constant and have to be
 	 * left untouched.
 	 * @param _type #GType of a static, classed type
+	 * @param query a user provided structure that is
+	 *     filled in with constant values upon success
 	 */
-	function type_query(_type: GObject.Type): void;
+	function type_query(_type: GObject.Type, query: TypeQuery): void;
 
 	/**
 	 * Registers #type_name as the name of a new dynamic type derived from
