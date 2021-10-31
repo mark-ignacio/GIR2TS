@@ -4065,7 +4065,30 @@ declare namespace imports.gi.HarfBuzz {
 		(ufuncs: unicode_funcs_t, unicode: codepoint_t): script_t;
 	}
 
-	interface var_int_t {}
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link var_int_t} instead.
+	 */
+	interface Ivar_int_t {
+		u32: number;
+		i32: number;
+		u16: number[];
+		i16: number[];
+		u8: number[];
+		i8: number[];
+
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link var_int_t} instead.
+	 */
+	type var_int_tMixin = Ivar_int_t;
+
+	interface var_int_t extends var_int_tMixin {}
+
+	class var_int_t {
+		public constructor();
+	}
+
 
 	/**
 	 * Data type for booleans.

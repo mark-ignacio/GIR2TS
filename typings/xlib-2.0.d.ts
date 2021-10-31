@@ -44,7 +44,24 @@ declare namespace imports.gi.xlib {
 		public constructor();
 	}
 
-	interface XEvent {}
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link XEvent} instead.
+	 */
+	interface IXEvent {
+
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link XEvent} instead.
+	 */
+	type XEventMixin = IXEvent;
+
+	interface XEvent extends XEventMixin {}
+
+	class XEvent {
+		public constructor();
+	}
+
 
 	type Atom = number;
 

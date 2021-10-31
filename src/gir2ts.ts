@@ -72,7 +72,12 @@ function renderNamespace(ns_node: NamespaceNode, ns_name: string, exclude?: Excl
         }
     if (ns_node.union)
         for (let union_node of ns_node.union) {
-            body += '\n\t' + (renderNodeAsBlankInterface(union_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
+            body += '\n\t' + (renderClassAsInterface(
+                union_node,
+                ns_name,
+                exclude?.exclude?.class?.[union_node?.$?.name],
+                modifiers?.amend?.class?.[union_node?.$?.name]
+            ) + '\n').replace(/\n/gm, "\n\t");
         }
     if (ns_node.alias)
         for (let alias_node of ns_node.alias) {

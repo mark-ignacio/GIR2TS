@@ -26,6 +26,13 @@
                                     "$ref": "./function-schema.json"
                                 }
                             },
+                            "prop": {
+                                "description": "Properties to amend",
+                                "type" : "object",
+                                "additionalProperties" : {
+                                    "$ref": "./param-schema.json"
+                                }
+                            },
                             "generic": {
                                 "description": "Additional generic type (or anything) which will be appended after classname",
                                 "type": "string"

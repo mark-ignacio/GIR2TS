@@ -16986,13 +16986,21 @@ declare namespace imports.gi.GLib {
 		(): void;
 	}
 
-	/**
-	 * The #GFloatIEEE754 and #GDoubleIEEE754 unions are used to access the sign,
-	 * mantissa and exponent of IEEE floats and doubles. These unions are defined
-	 * as appropriate for a given platform. IEEE floats and doubles are supported
-	 * (used for storage) by at least Intel, PPC and Sparc.
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link DoubleIEEE754} instead.
 	 */
-	interface DoubleIEEE754 {}
+	interface IDoubleIEEE754 {
+		/**
+		 * the double value
+		 */
+		v_double: number;
+
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link DoubleIEEE754} instead.
+	 */
+	type DoubleIEEE754Mixin = IDoubleIEEE754;
 
 	/**
 	 * The #GFloatIEEE754 and #GDoubleIEEE754 unions are used to access the sign,
@@ -17000,7 +17008,122 @@ declare namespace imports.gi.GLib {
 	 * as appropriate for a given platform. IEEE floats and doubles are supported
 	 * (used for storage) by at least Intel, PPC and Sparc.
 	 */
-	interface FloatIEEE754 {}
+	interface DoubleIEEE754 extends DoubleIEEE754Mixin {}
+
+	class DoubleIEEE754 {
+		public constructor();
+	}
+
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link FloatIEEE754} instead.
+	 */
+	interface IFloatIEEE754 {
+		/**
+		 * the double value
+		 */
+		v_float: number;
+
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link FloatIEEE754} instead.
+	 */
+	type FloatIEEE754Mixin = IFloatIEEE754;
+
+	/**
+	 * The #GFloatIEEE754 and #GDoubleIEEE754 unions are used to access the sign,
+	 * mantissa and exponent of IEEE floats and doubles. These unions are defined
+	 * as appropriate for a given platform. IEEE floats and doubles are supported
+	 * (used for storage) by at least Intel, PPC and Sparc.
+	 */
+	interface FloatIEEE754 extends FloatIEEE754Mixin {}
+
+	class FloatIEEE754 {
+		public constructor();
+	}
+
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link Mutex} instead.
+	 */
+	interface IMutex {
+		/**
+		 * Frees the resources allocated to a mutex with g_mutex_init().
+		 * 
+		 * This function should not be used with a #GMutex that has been
+		 * statically allocated.
+		 * 
+		 * Calling g_mutex_clear() on a locked mutex leads to undefined
+		 * behaviour.
+		 * 
+		 * Sine: 2.32
+		 */
+		clear(): void;
+		/**
+		 * Initializes a #GMutex so that it can be used.
+		 * 
+		 * This function is useful to initialize a mutex that has been
+		 * allocated on the stack, or as part of a larger structure.
+		 * It is not necessary to initialize a mutex that has been
+		 * statically allocated.
+		 * 
+		 * |[<!-- language="C" -->
+		 *   typedef struct {
+		 *     GMutex m;
+		 *     ...
+		 *   } Blob;
+		 * 
+		 * Blob *b;
+		 * 
+		 * b = g_new (Blob, 1);
+		 * g_mutex_init (&b->m);
+		 * ]|
+		 * 
+		 * To undo the effect of g_mutex_init() when a mutex is no longer
+		 * needed, use g_mutex_clear().
+		 * 
+		 * Calling g_mutex_init() on an already initialized #GMutex leads
+		 * to undefined behaviour.
+		 */
+		init(): void;
+		/**
+		 * Locks #mutex. If #mutex is already locked by another thread, the
+		 * current thread will block until #mutex is unlocked by the other
+		 * thread.
+		 * 
+		 * #GMutex is neither guaranteed to be recursive nor to be
+		 * non-recursive.  As such, calling g_mutex_lock() on a #GMutex that has
+		 * already been locked by the same thread results in undefined behaviour
+		 * (including but not limited to deadlocks).
+		 */
+		lock(): void;
+		/**
+		 * Tries to lock #mutex. If #mutex is already locked by another thread,
+		 * it immediately returns %FALSE. Otherwise it locks #mutex and returns
+		 * %TRUE.
+		 * 
+		 * #GMutex is neither guaranteed to be recursive nor to be
+		 * non-recursive.  As such, calling g_mutex_lock() on a #GMutex that has
+		 * already been locked by the same thread results in undefined behaviour
+		 * (including but not limited to deadlocks or arbitrary return values).
+		 * @returns %TRUE if #mutex could be locked
+		 */
+		trylock(): boolean;
+		/**
+		 * Unlocks #mutex. If another thread is blocked in a g_mutex_lock()
+		 * call for #mutex, it will become unblocked and can lock #mutex itself.
+		 * 
+		 * Calling g_mutex_unlock() on a mutex that is not locked by the
+		 * current thread leads to undefined behaviour.
+		 */
+		unlock(): void;
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link Mutex} instead.
+	 */
+	type MutexMixin = IMutex;
 
 	/**
 	 * The #GMutex struct is an opaque data structure to represent a mutex
@@ -17048,12 +17171,82 @@ declare namespace imports.gi.GLib {
 	 * 
 	 * A #GMutex should only be accessed via g_mutex_ functions.
 	 */
-	interface Mutex {}
+	interface Mutex extends MutexMixin {}
+
+	class Mutex {
+		public constructor();
+	}
+
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link TokenValue} instead.
+	 */
+	interface ITokenValue {
+		/**
+		 * token symbol value
+		 */
+		v_symbol: any;
+		/**
+		 * token identifier value
+		 */
+		v_identifier: string;
+		/**
+		 * token binary integer value
+		 */
+		v_binary: number;
+		/**
+		 * octal integer value
+		 */
+		v_octal: number;
+		/**
+		 * integer value
+		 */
+		v_int: number;
+		/**
+		 * 64-bit integer value
+		 */
+		v_int64: number;
+		/**
+		 * floating point value
+		 */
+		v_float: number;
+		/**
+		 * hex integer value
+		 */
+		v_hex: number;
+		/**
+		 * string value
+		 */
+		v_string: string;
+		/**
+		 * comment value
+		 */
+		v_comment: string;
+		/**
+		 * character value
+		 */
+		v_char: number;
+		/**
+		 * error value
+		 */
+		v_error: number;
+
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link TokenValue} instead.
+	 */
+	type TokenValueMixin = ITokenValue;
 
 	/**
 	 * A union holding the value of the token.
 	 */
-	interface TokenValue {}
+	interface TokenValue extends TokenValueMixin {}
+
+	class TokenValue {
+		public constructor();
+	}
+
 
 	/**
 	 * Integer representing a day of the month; between 1 and 31.

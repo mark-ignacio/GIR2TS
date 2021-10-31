@@ -19721,10 +19721,379 @@ declare namespace imports.gi.Clutter {
 		(timeline: Timeline, elapsed: number, total: number): number;
 	}
 
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link Event} instead.
+	 */
+	interface IEvent {
+		/**
+		 * Copies #event.
+		 * @returns A newly allocated {@link Event}
+		 */
+		copy(): Event;
+		/**
+		 * Frees all resources used by #event.
+		 */
+		free(): void;
+		/**
+		 * Retrieves the angle relative from #source to #target.
+		 * 
+		 * The direction of the angle is from the position X axis towards
+		 * the positive Y axis.
+		 * @param target a {@link Event}
+		 * @returns the angle between two {@link Event}
+		 */
+		get_angle(target: Event): number;
+		/**
+		 * Retrieves the array of axes values attached to the event.
+		 * @param n_axes return location for the number of axes returned
+		 * @returns an array of axis values
+		 */
+		get_axes(n_axes: number): number;
+		/**
+		 * Retrieves the button number of #event
+		 * @returns the button number
+		 */
+		get_button(): number;
+		/**
+		 * Retrieves the number of clicks of #event
+		 * @returns the click count
+		 */
+		get_click_count(): number;
+		/**
+		 * Retrieves the coordinates of #event and puts them into #x and #y.
+		 * @param _x return location for the X coordinate, or %NULL
+		 * @param _y return location for the Y coordinate, or %NULL
+		 */
+		get_coords(_x: number, _y: number): void;
+		/**
+		 * Retrieves the {@link InputDevice} for the event.
+		 * If you want the physical device the event originated from, use
+		 * clutter_event_get_source_device().
+		 * 
+		 * The #ClutterInputDevice structure is completely opaque and should
+		 * be cast to the platform-specific implementation.
+		 * @returns the {@link InputDevice} or %NULL. The
+		 *   returned device is owned by the #ClutterEvent and it should not
+		 *   be unreferenced
+		 */
+		get_device(): InputDevice;
+		/**
+		 * Retrieves the events device id if set.
+		 * @returns A unique identifier for the device or -1 if the event has
+		 *   no specific device set.
+		 */
+		get_device_id(): number;
+		/**
+		 * Retrieves the type of the device for #event
+		 * @returns the {@link InputDeviceType} for the device, if
+		 *   any is set
+		 */
+		get_device_type(): InputDeviceType;
+		/**
+		 * Retrieves the distance between two events, a #source and a #target.
+		 * @param target a {@link Event}
+		 * @returns the distance between two {@link Event}
+		 */
+		get_distance(target: Event): number;
+		/**
+		 * Retrieves the {@link EventSequence} of #event.
+		 * @returns the event sequence, or %NULL
+		 */
+		get_event_sequence(): EventSequence;
+		/**
+		 * Retrieves the {@link EventFlags} of #event
+		 * @returns the event flags
+		 */
+		get_flags(): EventFlags;
+		/**
+		 * Returns the gesture motion deltas relative to the current pointer
+		 * position.
+		 * @param dx the displacement relative to the pointer
+		 *      position in the X axis, or %NULL
+		 * @param dy the displacement relative to the pointer
+		 *      position in the Y axis, or %NULL
+		 */
+		get_gesture_motion_delta(dx: number, dy: number): void;
+		/**
+		 * Returns the phase of the event, See {@link TouchpadGesturePhase}.
+		 * @returns the phase of the gesture event.
+		 */
+		get_gesture_phase(): TouchpadGesturePhase;
+		/**
+		 * Returns the angle delta reported by this specific event.
+		 * @returns The angle delta relative to the previous event.
+		 */
+		get_gesture_pinch_angle_delta(): number;
+		/**
+		 * Returns the current scale as reported by #event, 1.0 being the original
+		 * distance at the time the corresponding event with phase
+		 * %CLUTTER_TOUCHPAD_GESTURE_PHASE_BEGIN is received.
+		 * is received.
+		 * @returns the current pinch gesture scale
+		 */
+		get_gesture_pinch_scale(): number;
+		/**
+		 * Returns the number of fingers that is triggering the touchpad gesture.
+		 * @returns the number of fingers swiping.
+		 */
+		get_gesture_swipe_finger_count(): number;
+		/**
+		 * Retrieves the keycode of the key that caused #event
+		 * @returns The keycode representing the key
+		 */
+		get_key_code(): number;
+		/**
+		 * Retrieves the key symbol of #event
+		 * @returns the key symbol representing the key
+		 */
+		get_key_symbol(): number;
+		/**
+		 * Retrieves the unicode value for the key that caused #keyev.
+		 * @returns The unicode value representing the key
+		 */
+		get_key_unicode(): string;
+		/**
+		 * Retrieves the event coordinates as a {@link Point}.
+		 * @param position a {@link Point}
+		 */
+		get_position(position: Point): void;
+		/**
+		 * Retrieves the related actor of a crossing event.
+		 * @returns the related {@link Actor}, or %NULL
+		 */
+		get_related(): Actor;
+		/**
+		 * Retrieves the precise scrolling information of #event.
+		 * 
+		 * The #event has to have a {@link ScrollEvent}.direction value
+		 * of %CLUTTER_SCROLL_SMOOTH.
+		 * @param dx return location for the delta on the horizontal axis
+		 * @param dy return location for the delta on the vertical axis
+		 */
+		get_scroll_delta(dx: number, dy: number): void;
+		/**
+		 * Retrieves the direction of the scrolling of #event
+		 * @returns the scrolling direction
+		 */
+		get_scroll_direction(): ScrollDirection;
+		/**
+		 * Returns the {@link ScrollFinishFlags} of an scroll event. Those
+		 * can be used to determine whether post-scroll effects like kinetic
+		 * scrolling should be applied.
+		 * @returns The scroll finish flags
+		 */
+		get_scroll_finish_flags(): ScrollFinishFlags;
+		/**
+		 * Returns the {@link ScrollSource} that applies to an scroll event.
+		 * @returns The source of scroll events
+		 */
+		get_scroll_source(): ScrollSource;
+		/**
+		 * Retrieves the source {@link Actor} the event originated from, or
+		 * NULL if the event has no source.
+		 * @returns a {@link Actor}
+		 */
+		get_source(): Actor;
+		/**
+		 * Retrieves the hardware device that originated the event.
+		 * 
+		 * If you need the virtual device, use clutter_event_get_device().
+		 * 
+		 * If no hardware device originated this event, this function will
+		 * return the same device as clutter_event_get_device().
+		 * @returns a pointer to a {@link InputDevice}
+		 *   or %NULL
+		 */
+		get_source_device(): InputDevice;
+		/**
+		 * Retrieves the source {@link Stage} the event originated for, or
+		 * %NULL if the event has no stage.
+		 * @returns a {@link Stage}
+		 */
+		get_stage(): Stage;
+		/**
+		 * Retrieves the modifier state of the event. In case the window system
+		 * supports reporting latched and locked modifiers, this function returns
+		 * the effective state.
+		 * @returns the modifier state parameter, or 0
+		 */
+		get_state(): ModifierType;
+		/**
+		 * Retrieves the decomposition of the keyboard state into button, base,
+		 * latched, locked and effective. This can be used to transmit to other
+		 * applications, for example when implementing a wayland compositor.
+		 * @param button_state the pressed buttons as a mask
+		 * @param base_state the regular pressed modifier keys
+		 * @param latched_state the latched modifier keys (currently released but still valid for one key press/release)
+		 * @param locked_state the locked modifier keys (valid until the lock key is pressed and released again)
+		 * @param effective_state the logical OR of all the state bits above
+		 */
+		get_state_full(button_state: ModifierType, base_state: ModifierType, latched_state: ModifierType, locked_state: ModifierType, effective_state: ModifierType): void;
+		/**
+		 * Retrieves the time of the event.
+		 * @returns the time of the event, or %CLUTTER_CURRENT_TIME
+		 */
+		get_time(): number;
+		/**
+		 * Checks whether #event has the Control modifier mask set.
+		 * @returns %TRUE if the event has the Control modifier mask set
+		 */
+		has_control_modifier(): boolean;
+		/**
+		 * Checks whether #event has the Shift modifier mask set.
+		 * @returns %TRUE if the event has the Shift modifier mask set
+		 */
+		has_shift_modifier(): boolean;
+		/**
+		 * Checks whether a pointer #event has been generated by the windowing
+		 * system. The returned value can be used to distinguish between events
+		 * synthesized by the windowing system itself (as opposed by Clutter).
+		 * @returns %TRUE if the event is pointer emulated
+		 */
+		is_pointer_emulated(): boolean;
+		/**
+		 * Puts a copy of the event on the back of the event queue. The event will
+		 * have the %CLUTTER_EVENT_FLAG_SYNTHETIC flag set. If the source is set
+		 * event signals will be emitted for this source and capture/bubbling for
+		 * its ancestors. If the source is not set it will be generated by picking
+		 * or use the actor that currently has keyboard focus
+		 */
+		put(): void;
+		/**
+		 * Sets the button number of #event
+		 * @param button the button number
+		 */
+		set_button(button: number): void;
+		/**
+		 * Sets the coordinates of the #event.
+		 * @param _x the X coordinate of the event
+		 * @param _y the Y coordinate of the event
+		 */
+		set_coords(_x: number, _y: number): void;
+		/**
+		 * Sets the device for #event.
+		 * @param device a {@link InputDevice}, or %NULL
+		 */
+		set_device(device: InputDevice): void;
+		/**
+		 * Sets the {@link EventFlags} of #event
+		 * @param flags a binary OR of {@link EventFlags} values
+		 */
+		set_flags(flags: EventFlags): void;
+		/**
+		 * Sets the keycode of the #event.
+		 * @param key_code the keycode representing the key
+		 */
+		set_key_code(key_code: number): void;
+		/**
+		 * Sets the key symbol of #event.
+		 * @param key_sym the key symbol representing the key
+		 */
+		set_key_symbol(key_sym: number): void;
+		/**
+		 * Sets the Unicode value of #event.
+		 * @param key_unicode the Unicode value representing the key
+		 */
+		set_key_unicode(key_unicode: string): void;
+		/**
+		 * Sets the related actor of a crossing event
+		 * @param actor a {@link Actor} or %NULL
+		 */
+		set_related(actor: Actor): void;
+		/**
+		 * Sets the precise scrolling information of #event.
+		 * @param dx delta on the horizontal axis
+		 * @param dy delta on the vertical axis
+		 */
+		set_scroll_delta(dx: number, dy: number): void;
+		/**
+		 * Sets the direction of the scrolling of #event
+		 * @param direction the scrolling direction
+		 */
+		set_scroll_direction(direction: ScrollDirection): void;
+		/**
+		 * Sets the source {@link Actor} of #event.
+		 * @param actor a {@link Actor}, or %NULL
+		 */
+		set_source(actor: Actor): void;
+		/**
+		 * Sets the source {@link InputDevice} for #event.
+		 * 
+		 * The #ClutterEvent must have been created using clutter_event_new().
+		 * @param device a {@link InputDevice}
+		 */
+		set_source_device(device: InputDevice): void;
+		/**
+		 * Sets the source {@link Stage} of the event.
+		 * @param stage a {@link Stage}, or %NULL
+		 */
+		set_stage(stage: Stage): void;
+		/**
+		 * Sets the modifier state of the event.
+		 * @param state the modifier state to set
+		 */
+		set_state(state: ModifierType): void;
+		/**
+		 * Sets the time of the event.
+		 * @param time_ the time of the event
+		 */
+		set_time(time_: number): void;
+		/**
+		 * Retrieves the type of the event.
+		 * @returns a {@link EventType}
+		 */
+		type(): EventType;
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link Event} instead.
+	 */
+	type EventMixin = IEvent;
+
 	/**
 	 * Generic event wrapper.
 	 */
-	interface Event {}
+	interface Event extends EventMixin {}
+
+	class Event {
+		public constructor();
+		/**
+		 * Creates a new {@link Event} of the specified type.
+		 * @param _type The type of event.
+		 * @returns A newly allocated {@link Event}.
+		 */
+		public static new(_type: EventType): Event;
+		/**
+		 * Adds a function which will be called for all events that Clutter
+		 * processes. The function will be called before any signals are
+		 * emitted for the event and it will take precedence over any grabs.
+		 * @param stage The {@link Stage} to capture events for
+		 * @param _func The callback function which will be passed all events.
+		 * @param notify A #GDestroyNotify
+		 * @returns an identifier for the event filter, to be used
+		 *   with clutter_event_remove_filter().
+		 */
+		public static add_filter(stage: Stage, _func: EventFilterFunc, notify: GLib.DestroyNotify): number;
+		/**
+		 * Pops an event off the event queue. Applications should not need to call
+		 * this.
+		 * @returns A {@link Event} or NULL if queue empty
+		 */
+		public static get(): Event;
+		/**
+		 * Returns a pointer to the first event from the event queue but
+		 * does not remove it.
+		 * @returns A {@link Event} or NULL if queue empty.
+		 */
+		public static peek(): Event;
+		/**
+		 * Removes an event filter that was previously added with
+		 * clutter_event_add_filter().
+		 * @param _id The ID of the event filter, as returned from clutter_event_add_filter()
+		 */
+		public static remove_filter(_id: number): void;
+	}
+
 
 	/**
 	 * Allocates a new {@link ActorBox}.

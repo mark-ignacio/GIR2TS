@@ -8996,6 +8996,412 @@ declare namespace imports.gi.Gdk {
 		(window: Window, region: cairo.Region): void;
 	}
 
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link Event} instead.
+	 */
+	interface IEvent {
+		/**
+		 * the {@link EventType}
+		 */
+		type: EventType;
+		/**
+		 * a {@link EventAny}
+		 */
+		any: EventAny;
+		/**
+		 * a {@link EventExpose}
+		 */
+		expose: EventExpose;
+		/**
+		 * a {@link EventVisibility}
+		 */
+		visibility: EventVisibility;
+		/**
+		 * a {@link EventMotion}
+		 */
+		motion: EventMotion;
+		/**
+		 * a {@link EventButton}
+		 */
+		button: EventButton;
+		/**
+		 * a {@link EventTouch}
+		 */
+		touch: EventTouch;
+		/**
+		 * a {@link EventScroll}
+		 */
+		scroll: EventScroll;
+		/**
+		 * a {@link EventKey}
+		 */
+		key: EventKey;
+		/**
+		 * a {@link EventCrossing}
+		 */
+		crossing: EventCrossing;
+		/**
+		 * a {@link EventFocus}
+		 */
+		focus_change: EventFocus;
+		/**
+		 * a {@link EventConfigure}
+		 */
+		configure: EventConfigure;
+		/**
+		 * a {@link EventProperty}
+		 */
+		property: EventProperty;
+		/**
+		 * a {@link EventSelection}
+		 */
+		selection: EventSelection;
+		/**
+		 * a {@link EventOwnerChange}
+		 */
+		owner_change: EventOwnerChange;
+		/**
+		 * a {@link EventProximity}
+		 */
+		proximity: EventProximity;
+		/**
+		 * a {@link EventDND}
+		 */
+		dnd: EventDND;
+		/**
+		 * a {@link EventWindowState}
+		 */
+		window_state: EventWindowState;
+		/**
+		 * a {@link EventSetting}
+		 */
+		setting: EventSetting;
+		/**
+		 * a {@link EventGrabBroken}
+		 */
+		grab_broken: EventGrabBroken;
+		/**
+		 * a {@link EventTouchpadSwipe}
+		 */
+		touchpad_swipe: EventTouchpadSwipe;
+		/**
+		 * a {@link EventTouchpadPinch}
+		 */
+		touchpad_pinch: EventTouchpadPinch;
+		/**
+		 * a {@link EventPadButton}
+		 */
+		pad_button: EventPadButton;
+		/**
+		 * a {@link EventPadAxis}
+		 */
+		pad_axis: EventPadAxis;
+		/**
+		 * a {@link EventPadGroupMode}
+		 */
+		pad_group_mode: EventPadGroupMode;
+		/**
+		 * If both events contain X/Y information, this function will return %TRUE
+		 * and return in #angle the relative angle from #event1 to #event2. The rotation
+		 * direction for positive angles is from the positive X axis towards the positive
+		 * Y axis.
+		 * @param event2 second {@link Event}
+		 * @param angle return location for the relative angle between both events
+		 * @returns %TRUE if the angle could be calculated.
+		 */
+		_get_angle(event2: Event, angle: number): boolean;
+		/**
+		 * If both events contain X/Y information, the center of both coordinates
+		 * will be returned in #x and #y.
+		 * @param event2 second {@link Event}
+		 * @param _x return location for the X coordinate of the center
+		 * @param _y return location for the Y coordinate of the center
+		 * @returns %TRUE if the center could be calculated.
+		 */
+		_get_center(event2: Event, _x: number, _y: number): boolean;
+		/**
+		 * If both events have X/Y information, the distance between both coordinates
+		 * (as in a straight line going from #event1 to #event2) will be returned.
+		 * @param event2 second {@link Event}
+		 * @param distance return location for the distance
+		 * @returns %TRUE if the distance could be calculated.
+		 */
+		_get_distance(event2: Event, distance: number): boolean;
+		/**
+		 * Copies a {@link Event}, copying or incrementing the reference count of the
+		 * resources associated with it (e.g. #GdkWindow’s and strings).
+		 * @returns a copy of #event. The returned {@link Event} should be freed with
+		 * gdk_event_free().
+		 */
+		copy(): Event;
+		/**
+		 * Frees a {@link Event}, freeing or decrementing any resources associated with it.
+		 * Note that this function should only be called with events returned from
+		 * functions such as gdk_event_peek(), gdk_event_get(), gdk_event_copy()
+		 * and gdk_event_new().
+		 */
+		free(): void;
+		/**
+		 * Extract the axis value for a particular axis use from
+		 * an event structure.
+		 * @param axis_use the axis use to look for
+		 * @param value location to store the value found
+		 * @returns %TRUE if the specified axis was found, otherwise %FALSE
+		 */
+		get_axis(axis_use: AxisUse, value: number): boolean;
+		/**
+		 * Extract the button number from an event.
+		 * @param button location to store mouse button number
+		 * @returns %TRUE if the event delivered a button number
+		 */
+		get_button(button: number): boolean;
+		/**
+		 * Extracts the click count from an event.
+		 * @param click_count location to store click count
+		 * @returns %TRUE if the event delivered a click count
+		 */
+		get_click_count(click_count: number): boolean;
+		/**
+		 * Extract the event window relative x/y coordinates from an event.
+		 * @param x_win location to put event window x coordinate
+		 * @param y_win location to put event window y coordinate
+		 * @returns %TRUE if the event delivered event window coordinates
+		 */
+		get_coords(x_win: number, y_win: number): boolean;
+		/**
+		 * If the event contains a “device” field, this function will return
+		 * it, else it will return %NULL.
+		 * @returns a {@link Device}, or %NULL.
+		 */
+		get_device(): Device;
+		/**
+		 * If the event was generated by a device that supports
+		 * different tools (eg. a tablet), this function will
+		 * return a {@link DeviceTool} representing the tool that
+		 * caused the event. Otherwise, %NULL will be returned.
+		 * 
+		 * Note: the #GdkDeviceTool<!-- -->s will be constant during
+		 * the application lifetime, if settings must be stored
+		 * persistently across runs, see gdk_device_tool_get_serial()
+		 * @returns The current device tool, or %NULL
+		 */
+		get_device_tool(): DeviceTool;
+		/**
+		 * If #event if of type %GDK_TOUCH_BEGIN, %GDK_TOUCH_UPDATE,
+		 * %GDK_TOUCH_END or %GDK_TOUCH_CANCEL, returns the {@link EventSequence}
+		 * to which the event belongs. Otherwise, return %NULL.
+		 * @returns the event sequence that the event belongs to
+		 */
+		get_event_sequence(): EventSequence;
+		/**
+		 * Retrieves the type of the event.
+		 * @returns a {@link EventType}
+		 */
+		get_event_type(): EventType;
+		/**
+		 * Extracts the hardware keycode from an event.
+		 * 
+		 * Also see gdk_event_get_scancode().
+		 * @param keycode location to store the keycode
+		 * @returns %TRUE if the event delivered a hardware keycode
+		 */
+		get_keycode(keycode: number): boolean;
+		/**
+		 * Extracts the keyval from an event.
+		 * @param keyval location to store the keyval
+		 * @returns %TRUE if the event delivered a key symbol
+		 */
+		get_keyval(keyval: number): boolean;
+		/**
+		 * #event: a {@link Event}
+		 * Returns whether this event is an 'emulated' pointer event (typically
+		 * from a touch event), as opposed to a real one.
+		 * @returns %TRUE if this event is emulated
+		 */
+		get_pointer_emulated(): boolean;
+		/**
+		 * Extract the root window relative x/y coordinates from an event.
+		 * @param x_root location to put root window x coordinate
+		 * @param y_root location to put root window y coordinate
+		 * @returns %TRUE if the event delivered root window coordinates
+		 */
+		get_root_coords(x_root: number, y_root: number): boolean;
+		/**
+		 * Gets the keyboard low-level scancode of a key event.
+		 * 
+		 * This is usually hardware_keycode. On Windows this is the high
+		 * word of WM_KEY{DOWN,UP} lParam which contains the scancode and
+		 * some extended flags.
+		 * @returns The associated keyboard scancode or 0
+		 */
+		get_scancode(): number;
+		/**
+		 * Returns the screen for the event. The screen is
+		 * typically the screen for `event->any.window`, but
+		 * for events such as mouse events, it is the screen
+		 * where the pointer was when the event occurs -
+		 * that is, the screen which has the root window
+		 * to which `event->motion.x_root` and
+		 * `event->motion.y_root` are relative.
+		 * @returns the screen for the event
+		 */
+		get_screen(): Screen;
+		/**
+		 * Retrieves the scroll deltas from a {@link Event}
+		 * 
+		 * See also: gdk_event_get_scroll_direction()
+		 * @param delta_x return location for X delta
+		 * @param delta_y return location for Y delta
+		 * @returns %TRUE if the event contains smooth scroll information
+		 *   and %FALSE otherwise
+		 */
+		get_scroll_deltas(delta_x: number, delta_y: number): boolean;
+		/**
+		 * Extracts the scroll direction from an event.
+		 * 
+		 * If #event is not of type %GDK_SCROLL, the contents of #direction
+		 * are undefined.
+		 * 
+		 * If you wish to handle both discrete and smooth scrolling, you
+		 * should check the return value of this function, or of
+		 * gdk_event_get_scroll_deltas(); for instance:
+		 * 
+		 * |[<!-- language="C" -->
+		 *   GdkScrollDirection direction;
+		 *   double vscroll_factor = 0.0;
+		 *   double x_scroll, y_scroll;
+		 * 
+		 *   if (gdk_event_get_scroll_direction (event, &direction))
+		 *     {
+		 *       // Handle discrete scrolling with a known constant delta;
+		 *       const double delta = 12.0;
+		 * 
+		 *       switch (direction)
+		 *         {
+		 *         case GDK_SCROLL_UP:
+		 *           vscroll_factor = -delta;
+		 *           break;
+		 *         case GDK_SCROLL_DOWN:
+		 *           vscroll_factor = delta;
+		 *           break;
+		 *         default:
+		 *           // no scrolling
+		 *           break;
+		 *         }
+		 *     }
+		 *   else if (gdk_event_get_scroll_deltas (event, &x_scroll, &y_scroll))
+		 *     {
+		 *       // Handle smooth scrolling directly
+		 *       vscroll_factor = y_scroll;
+		 *     }
+		 * ]|
+		 * @param direction location to store the scroll direction
+		 * @returns %TRUE if the event delivered a scroll direction
+		 *   and %FALSE otherwise
+		 */
+		get_scroll_direction(direction: ScrollDirection): boolean;
+		/**
+		 * Returns the {@link Seat} this event was generated for.
+		 * @returns The {@link Seat} of this event
+		 */
+		get_seat(): Seat;
+		/**
+		 * This function returns the hardware (slave) {@link Device} that has
+		 * triggered the event, falling back to the virtual (master) device
+		 * (as in gdk_event_get_device()) if the event wasn’t caused by
+		 * interaction with a hardware device. This may happen for example
+		 * in synthesized crossing events after a #GdkWindow updates its
+		 * geometry or a grab is acquired/released.
+		 * 
+		 * If the event does not contain a device field, this function will
+		 * return %NULL.
+		 * @returns a {@link Device}, or %NULL.
+		 */
+		get_source_device(): Device;
+		/**
+		 * If the event contains a “state” field, puts that field in #state. Otherwise
+		 * stores an empty state (0). Returns %TRUE if there was a state field
+		 * in the event. #event may be %NULL, in which case it’s treated
+		 * as if the event had no state field.
+		 * @param state return location for state
+		 * @returns %TRUE if there was a state field in the event
+		 */
+		get_state(state: ModifierType): boolean;
+		/**
+		 * Returns the time stamp from #event, if there is one; otherwise
+		 * returns #GDK_CURRENT_TIME. If #event is %NULL, returns #GDK_CURRENT_TIME.
+		 * @returns time stamp field from #event
+		 */
+		get_time(): number;
+		/**
+		 * Extracts the {@link Window} associated with an event.
+		 * @returns The {@link Window} associated with the event
+		 */
+		get_window(): Window;
+		/**
+		 * Check whether a scroll event is a stop scroll event. Scroll sequences
+		 * with smooth scroll information may provide a stop scroll event once the
+		 * interaction with the device finishes, e.g. by lifting a finger. This
+		 * stop scroll event is the signal that a widget may trigger kinetic
+		 * scrolling based on the current velocity.
+		 * 
+		 * Stop scroll events always have a a delta of 0/0.
+		 * @returns %TRUE if the event is a scroll stop event
+		 */
+		is_scroll_stop_event(): boolean;
+		/**
+		 * Appends a copy of the given event onto the front of the event
+		 * queue for event->any.window’s display, or the default event
+		 * queue if event->any.window is %NULL. See gdk_display_put_event().
+		 */
+		put(): void;
+		/**
+		 * Sets the device for #event to #device. The event must
+		 * have been allocated by GTK+, for instance, by
+		 * gdk_event_copy().
+		 * @param device a {@link Device}
+		 */
+		set_device(device: Device): void;
+		/**
+		 * Sets the device tool for this event, should be rarely used.
+		 * @param tool tool to set on the event, or %NULL
+		 */
+		set_device_tool(tool: DeviceTool): void;
+		/**
+		 * Sets the screen for #event to #screen. The event must
+		 * have been allocated by GTK+, for instance, by
+		 * gdk_event_copy().
+		 * @param screen a {@link Screen}
+		 */
+		set_screen(screen: Screen): void;
+		/**
+		 * Sets the slave device for #event to #device.
+		 * 
+		 * The event must have been allocated by GTK+,
+		 * for instance by gdk_event_copy().
+		 * @param device a {@link Device}
+		 */
+		set_source_device(device: Device): void;
+		/**
+		 * This function returns whether a {@link EventButton} should trigger a
+		 * context menu, according to platform conventions. The right mouse
+		 * button always triggers context menus. Additionally, if
+		 * gdk_keymap_get_modifier_mask() returns a non-0 mask for
+		 * %GDK_MODIFIER_INTENT_CONTEXT_MENU, then the left mouse button will
+		 * also trigger a context menu if this modifier is pressed.
+		 * 
+		 * This function should always be used instead of simply checking for
+		 * event->button == %GDK_BUTTON_SECONDARY.
+		 * @returns %TRUE if the event should trigger a context menu.
+		 */
+		triggers_context_menu(): boolean;
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link Event} instead.
+	 */
+	type EventMixin = IEvent;
+
 	/**
 	 * A {@link Event} contains a union of all of the event types,
 	 * and allows access to the data fields in a number of ways.
@@ -9028,7 +9434,70 @@ declare namespace imports.gi.Gdk {
 	 *   x = event->button.x;
 	 * ]|
 	 */
-	interface Event {}
+	interface Event extends EventMixin {}
+
+	class Event {
+		public constructor();
+		/**
+		 * Creates a new event of the given type. All fields are set to 0.
+		 * @param _type a {@link EventType}
+		 * @returns a newly-allocated {@link Event}. The returned #GdkEvent
+		 * should be freed with gdk_event_free().
+		 */
+		public static new(_type: EventType): Event;
+		/**
+		 * Checks all open displays for a {@link Event} to process,to be processed
+		 * on, fetching events from the windowing system if necessary.
+		 * See gdk_display_get_event().
+		 * @returns the next {@link Event} to be processed, or %NULL
+		 * if no events are pending. The returned #GdkEvent should be freed
+		 * with gdk_event_free().
+		 */
+		public static get(): Event;
+		/**
+		 * Sets the function to call to handle all events from GDK.
+		 * 
+		 * Note that GTK+ uses this to install its own event handler, so it is
+		 * usually not useful for GTK+ applications. (Although an application
+		 * can call this function then call gtk_main_do_event() to pass
+		 * events to GTK+.)
+		 * @param _func the function to call to handle events from GDK.
+		 * @param data user data to pass to the function.
+		 * @param notify the function to call when the handler function is removed, i.e. when
+		 *          gdk_event_handler_set() is called with another event handler.
+		 */
+		public static handler_set(_func: EventFunc, data: any, notify: GLib.DestroyNotify): void;
+		/**
+		 * If there is an event waiting in the event queue of some open
+		 * display, returns a copy of it. See gdk_display_peek_event().
+		 * @returns a copy of the first {@link Event} on some event
+		 * queue, or %NULL if no events are in any queues. The returned
+		 * #GdkEvent should be freed with gdk_event_free().
+		 */
+		public static peek(): Event;
+		/**
+		 * Request more motion notifies if #event is a motion notify hint event.
+		 * 
+		 * This function should be used instead of gdk_window_get_pointer() to
+		 * request further motion notifies, because it also works for extension
+		 * events where motion notifies are provided for devices other than the
+		 * core pointer. Coordinate extraction, processing and requesting more
+		 * motion events from a %GDK_MOTION_NOTIFY event usually works like this:
+		 * 
+		 * |[<!-- language="C" -->
+		 * {
+		 *   // motion_event handler
+		 *   x = motion_event->x;
+		 *   y = motion_event->y;
+		 *   // handle (x,y) motion
+		 *   gdk_event_request_motions (motion_event); // handles is_hint events
+		 * }
+		 * ]|
+		 * @param event a valid {@link Event}
+		 */
+		public static request_motions(event: EventMotion): void;
+	}
+
 
 	/**
 	 * Used to represent native events (XEvents for the X11

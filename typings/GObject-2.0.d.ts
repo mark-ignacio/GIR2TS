@@ -5095,9 +5095,52 @@ declare namespace imports.gi.GObject {
 		(data: any, where_the_object_was: Object): void;
 	}
 
-	interface TypeCValue {}
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link TypeCValue} instead.
+	 */
+	interface ITypeCValue {
 
-	interface _Value__data__union {}
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link TypeCValue} instead.
+	 */
+	type TypeCValueMixin = ITypeCValue;
+
+	interface TypeCValue extends TypeCValueMixin {}
+
+	class TypeCValue {
+		public constructor();
+	}
+
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link _Value__data__union} instead.
+	 */
+	interface I_Value__data__union {
+		v_int: number;
+		v_uint: number;
+		v_long: number;
+		v_ulong: number;
+		v_int64: number;
+		v_uint64: number;
+		v_float: number;
+		v_double: number;
+		v_pointer: any;
+
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link _Value__data__union} instead.
+	 */
+	type _Value__data__unionMixin = I_Value__data__union;
+
+	interface _Value__data__union extends _Value__data__unionMixin {}
+
+	class _Value__data__union {
+		public constructor();
+	}
+
 
 	/**
 	 * This is the signature of marshaller functions, required to marshall
