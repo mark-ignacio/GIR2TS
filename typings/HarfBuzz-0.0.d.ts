@@ -3607,7 +3607,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param extents The font extents retrieved
 		 * @returns 
 		 */
-		(font: font_t, font_data: any, extents: font_extents_t): bool_t;
+		(font: font_t, font_data: any | null, extents: font_extents_t): bool_t;
 	}
 
 	/**
@@ -3627,7 +3627,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param glyph The glyph ID to query
 		 * @returns The advance of #glyph within #font
 		 */
-		(font: font_t, font_data: any, glyph: codepoint_t): position_t;
+		(font: font_t, font_data: any | null, glyph: codepoint_t): position_t;
 	}
 
 	/**
@@ -3648,7 +3648,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param first_advance The first advance retrieved
 		 * @param advance_stride The stride between successive advances
 		 */
-		(font: font_t, font_data: any, count: number, first_glyph: codepoint_t, glyph_stride: number, first_advance: position_t, advance_stride: number): void;
+		(font: font_t, font_data: any | null, count: number, first_glyph: codepoint_t, glyph_stride: number, first_advance: position_t, advance_stride: number): void;
 	}
 
 	/**
@@ -3673,7 +3673,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param _y The Y value retrieved for the contour point
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, glyph: codepoint_t, point_index: number, _x: position_t, _y: position_t): bool_t;
+		(font: font_t, font_data: any | null, glyph: codepoint_t, point_index: number, _x: position_t, _y: position_t): bool_t;
 	}
 
 	/**
@@ -3694,7 +3694,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param extents The #hb_glyph_extents_t retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, glyph: codepoint_t, extents: glyph_extents_t): bool_t;
+		(font: font_t, font_data: any | null, glyph: codepoint_t, extents: glyph_extents_t): bool_t;
 	}
 
 	/**
@@ -3716,7 +3716,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param glyph The glyph ID retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, name: string[], len: number, glyph: codepoint_t): bool_t;
+		(font: font_t, font_data: any | null, name: string[], len: number, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3738,7 +3738,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param glyph The glyph ID retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t;
+		(font: font_t, font_data: any | null, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3755,7 +3755,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param second_glyph The glyph ID of the second glyph in the glyph pair
 		 * @returns 
 		 */
-		(font: font_t, font_data: any, first_glyph: codepoint_t, second_glyph: codepoint_t): position_t;
+		(font: font_t, font_data: any | null, first_glyph: codepoint_t, second_glyph: codepoint_t): position_t;
 	}
 
 	/**
@@ -3777,7 +3777,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param size Length of the glyph-name string retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, glyph: codepoint_t, name: string[], size: number): bool_t;
+		(font: font_t, font_data: any | null, glyph: codepoint_t, name: string[], size: number): bool_t;
 	}
 
 	/**
@@ -3801,7 +3801,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param _y The Y coordinate of the origin
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, glyph: codepoint_t, _x: position_t, _y: position_t): bool_t;
+		(font: font_t, font_data: any | null, glyph: codepoint_t, _x: position_t, _y: position_t): bool_t;
 	}
 
 	/**
@@ -3822,7 +3822,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param glyph The glyph ID retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, unicode: codepoint_t, glyph: codepoint_t): bool_t;
+		(font: font_t, font_data: any | null, unicode: codepoint_t, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3848,7 +3848,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param glyph_stride The stride between successive glyph IDs
 		 * @returns the number of code points processed
 		 */
-		(font: font_t, font_data: any, count: number, first_unicode: codepoint_t, unicode_stride: number, first_glyph: codepoint_t, glyph_stride: number): number;
+		(font: font_t, font_data: any | null, count: number, first_unicode: codepoint_t, unicode_stride: number, first_glyph: codepoint_t, glyph_stride: number): number;
 	}
 
 	/**
@@ -3872,7 +3872,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param glyph The glyph ID retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t;
+		(font: font_t, font_data: any | null, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -4253,7 +4253,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param default_index The index of the feature's default selector, if any
 	 * @returns Number of all available feature selectors
 	 */
-	function aat_layout_feature_type_get_selector_infos(_face: face_t, feature_type: aat_layout_feature_type_t, start_offset: number, selector_count: number, selectors: aat_layout_feature_selector_info_t[], default_index: number): number;
+	function aat_layout_feature_type_get_selector_infos(_face: face_t, feature_type: aat_layout_feature_type_t, start_offset: number, selector_count: number | null, selectors: aat_layout_feature_selector_info_t[] | null, default_index: number | null): number;
 
 	/**
 	 * Fetches a list of the AAT feature types included in the specified face.
@@ -4264,7 +4264,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param features Array of feature types found
 	 * @returns Number of all available feature types.
 	 */
-	function aat_layout_get_feature_types(_face: face_t, start_offset: number, feature_count: number, features: aat_layout_feature_type_t[]): number;
+	function aat_layout_get_feature_types(_face: face_t, start_offset: number, feature_count: number | null, features: aat_layout_feature_type_t[]): number;
 
 	/**
 	 * Tests whether the specified face includes any positioning information
@@ -4311,7 +4311,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @returns New blob, or the empty blob if something failed or if #length is
 	 * zero.  Destroy with hb_blob_destroy().
 	 */
-	function blob_create(data: string, length: number, mode: memory_mode_t, destroy: destroy_func_t): blob_t;
+	function blob_create(data: string, length: number, mode: memory_mode_t, destroy: destroy_func_t | null): blob_t;
 
 	/**
 	 * Creates a new blob containing the data from the
@@ -4344,7 +4344,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param destroy Callback to call when #data is not needed anymore.
 	 * @returns New blob, or %NULL if failed.  Destroy with hb_blob_destroy().
 	 */
-	function blob_create_or_fail(data: string, length: number, mode: memory_mode_t, destroy: destroy_func_t): blob_t;
+	function blob_create_or_fail(data: string, length: number, mode: memory_mode_t, destroy: destroy_func_t | null): blob_t;
 
 	/**
 	 * Returns a blob that represents a range of bytes in #parent.  The new
@@ -4449,7 +4449,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param replace Whether to replace an existing data with the same key
 	 * @returns %true if success, %false otherwise
 	 */
-	function blob_set_user_data(blob: blob_t, key: user_data_key_t, data: any, destroy: destroy_func_t, replace: bool_t): bool_t;
+	function blob_set_user_data(blob: blob_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
 	 * Appends a character with the Unicode value of #codepoint to #buffer, and
@@ -4592,7 +4592,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param format the #hb_buffer_serialize_format_t of the input #buf
 	 * @returns %true if #buf is not fully consumed, %false otherwise.
 	 */
-	function buffer_deserialize_glyphs(buffer: buffer_t, buf: string[], buf_len: number, end_ptr: string, font: font_t, format: buffer_serialize_format_t): bool_t;
+	function buffer_deserialize_glyphs(buffer: buffer_t, buf: string[], buf_len: number, end_ptr: string | null, font: font_t | null, format: buffer_serialize_format_t): bool_t;
 
 	/**
 	 * Deserializes Unicode #buffer from textual representation in the format
@@ -4605,7 +4605,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param format the #hb_buffer_serialize_format_t of the input #buf
 	 * @returns %true if #buf is not fully consumed, %false otherwise.
 	 */
-	function buffer_deserialize_unicode(buffer: buffer_t, buf: string[], buf_len: number, end_ptr: string, format: buffer_serialize_format_t): bool_t;
+	function buffer_deserialize_unicode(buffer: buffer_t, buf: string[], buf_len: number, end_ptr: string | null, format: buffer_serialize_format_t): bool_t;
 
 	/**
 	 * Deallocate the #buffer.
@@ -4862,7 +4862,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *         to serialize.
 	 * @returns The number of serialized items.
 	 */
-	function buffer_serialize(buffer: buffer_t, start: number, _end: number, buf: number[], buf_size: number, buf_consumed: number, font: font_t, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
+	function buffer_serialize(buffer: buffer_t, start: number, _end: number, buf: number[], buf_size: number, buf_consumed: number | null, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
 
 	/**
 	 * Parses a string into an #hb_buffer_serialize_format_t. Does not check if
@@ -4940,7 +4940,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *         to serialize.
 	 * @returns The number of serialized items.
 	 */
-	function buffer_serialize_glyphs(buffer: buffer_t, start: number, _end: number, buf: number[], buf_size: number, buf_consumed: number, font: font_t, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
+	function buffer_serialize_glyphs(buffer: buffer_t, start: number, _end: number, buf: number[], buf_size: number, buf_consumed: number | null, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
 
 	/**
 	 * Returns a list of supported buffer serialization formats.
@@ -4994,7 +4994,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *         to serialize.
 	 * @returns The number of serialized items.
 	 */
-	function buffer_serialize_unicode(buffer: buffer_t, start: number, _end: number, buf: number[], buf_size: number, buf_consumed: number, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
+	function buffer_serialize_unicode(buffer: buffer_t, start: number, _end: number, buf: number[], buf_size: number, buf_consumed: number | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
 
 	/**
 	 * Sets the cluster level of a buffer. The #hb_buffer_cluster_level_t
@@ -5073,7 +5073,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func Callback function
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function buffer_set_message_func(buffer: buffer_t, _func: buffer_message_func_t, destroy: destroy_func_t): void;
+	function buffer_set_message_func(buffer: buffer_t, _func: buffer_message_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the #hb_codepoint_t that replaces invalid entries for a given encoding
@@ -5126,7 +5126,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param replace Whether to replace an existing data with the same key
 	 * @returns %true if success, %false otherwise
 	 */
-	function buffer_set_user_data(buffer: buffer_t, key: user_data_key_t, data: any, destroy: destroy_func_t, replace: bool_t): bool_t;
+	function buffer_set_user_data(buffer: buffer_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
 	 * Fetches the alpha channel of the given #color.
@@ -5249,7 +5249,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param destroy A callback to call when #data is not needed anymore
 	 * @returns The new face object
 	 */
-	function face_create_for_tables(reference_table_func: reference_table_func_t, destroy: destroy_func_t): face_t;
+	function face_create_for_tables(reference_table_func: reference_table_func_t, destroy: destroy_func_t | null): face_t;
 
 	/**
 	 * Decreases the reference count on a face object. When the
@@ -5380,7 +5380,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param replace Whether to replace an existing data with the same key
 	 * @returns %true if success, %false otherwise
 	 */
-	function face_set_user_data(_face: face_t, key: user_data_key_t, data: any, destroy: destroy_func_t, replace: bool_t): bool_t;
+	function face_set_user_data(_face: face_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
 	 * Parses a string into a #hb_feature_t.
@@ -5531,7 +5531,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_font_h_extents_func(ffuncs: font_funcs_t, _func: font_get_font_h_extents_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_font_h_extents_func(ffuncs: font_funcs_t, _func: font_get_font_h_extents_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_font_v_extents_func_t.
@@ -5539,7 +5539,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_font_v_extents_func(ffuncs: font_funcs_t, _func: font_get_font_v_extents_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_font_v_extents_func(ffuncs: font_funcs_t, _func: font_get_font_v_extents_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_contour_point_func_t.
@@ -5547,7 +5547,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_contour_point_func(ffuncs: font_funcs_t, _func: font_get_glyph_contour_point_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_contour_point_func(ffuncs: font_funcs_t, _func: font_get_glyph_contour_point_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_extents_func_t.
@@ -5555,7 +5555,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_extents_func(ffuncs: font_funcs_t, _func: font_get_glyph_extents_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_extents_func(ffuncs: font_funcs_t, _func: font_get_glyph_extents_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_from_name_func_t.
@@ -5563,7 +5563,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_from_name_func(ffuncs: font_funcs_t, _func: font_get_glyph_from_name_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_from_name_func(ffuncs: font_funcs_t, _func: font_get_glyph_from_name_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Deprecated.  Use hb_font_funcs_set_nominal_glyph_func() and
@@ -5572,7 +5572,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func callback function
 	 * @param destroy function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_func(ffuncs: font_funcs_t, _func: font_get_glyph_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_func(ffuncs: font_funcs_t, _func: font_get_glyph_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_advance_func_t.
@@ -5580,7 +5580,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_advance_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_advance_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_h_advance_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_advance_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_advances_func_t.
@@ -5588,7 +5588,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_advances_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_advances_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_h_advances_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_advances_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_kerning_func_t.
@@ -5596,7 +5596,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_kerning_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_kerning_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_h_kerning_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_kerning_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_origin_func_t.
@@ -5604,7 +5604,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_origin_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_origin_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_h_origin_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_origin_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_name_func_t.
@@ -5612,7 +5612,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_name_func(ffuncs: font_funcs_t, _func: font_get_glyph_name_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_name_func(ffuncs: font_funcs_t, _func: font_get_glyph_name_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_advance_func_t.
@@ -5620,7 +5620,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_advance_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_advance_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_v_advance_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_advance_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_advances_func_t.
@@ -5628,7 +5628,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_advances_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_advances_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_v_advances_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_advances_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_kerning_func_t.
@@ -5636,7 +5636,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_kerning_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_kerning_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_v_kerning_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_kerning_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_origin_func_t.
@@ -5644,7 +5644,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_origin_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_origin_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_v_origin_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_origin_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_nominal_glyph_func_t.
@@ -5652,7 +5652,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_nominal_glyph_func(ffuncs: font_funcs_t, _func: font_get_nominal_glyph_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_nominal_glyph_func(ffuncs: font_funcs_t, _func: font_get_nominal_glyph_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_nominal_glyphs_func_t.
@@ -5660,7 +5660,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_nominal_glyphs_func(ffuncs: font_funcs_t, _func: font_get_nominal_glyphs_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_nominal_glyphs_func(ffuncs: font_funcs_t, _func: font_get_nominal_glyphs_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Attaches a user-data key/data pair to the specified font-functions structure.
@@ -5671,7 +5671,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param replace Whether to replace an existing data with the same key
 	 * @returns %true if success, %false otherwise
 	 */
-	function font_funcs_set_user_data(ffuncs: font_funcs_t, key: user_data_key_t, data: any, destroy: destroy_func_t, replace: bool_t): bool_t;
+	function font_funcs_set_user_data(ffuncs: font_funcs_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_variation_glyph_func_t.
@@ -5679,7 +5679,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_variation_glyph_func(ffuncs: font_funcs_t, _func: font_get_variation_glyph_func_t, destroy: destroy_func_t): void;
+	function font_funcs_set_variation_glyph_func(ffuncs: font_funcs_t, _func: font_get_variation_glyph_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Fetches the empty font object.
@@ -6114,7 +6114,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font_data Data to attach to #font
 	 * @param destroy The function to call when #font_data is not needed anymore
 	 */
-	function font_set_funcs(font: font_t, klass: font_funcs_t, font_data: any, destroy: destroy_func_t): void;
+	function font_set_funcs(font: font_t, klass: font_funcs_t, font_data: any | null, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Replaces the user data attached to a font, updating the font's
@@ -6123,7 +6123,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font_data Data to attach to #font
 	 * @param destroy The function to call when #font_data is not needed anymore
 	 */
-	function font_set_funcs_data(font: font_t, font_data: any, destroy: destroy_func_t): void;
+	function font_set_funcs_data(font: font_t, font_data: any | null, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the parent font of #font.
@@ -6167,7 +6167,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param replace Whether to replace an existing data with the same key
 	 * @returns %true if success, %false otherwise
 	 */
-	function font_set_user_data(font: font_t, key: user_data_key_t, data: any, destroy: destroy_func_t, replace: bool_t): bool_t;
+	function font_set_user_data(font: font_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
 	 * Applies a list of variation coordinates (in design-space units)
@@ -6235,7 +6235,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param destroy A callback to call when the face object is not needed anymore
 	 * @returns the new #hb_face_t face object
 	 */
-	function ft_face_create(ft_face: any, destroy: destroy_func_t): face_t;
+	function ft_face_create(ft_face: any, destroy: destroy_func_t | null): face_t;
 
 	/**
 	 * Creates an #hb_face_t face object from the specified FT_Face.
@@ -6301,7 +6301,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param destroy A callback to call when the font object is not needed anymore
 	 * @returns the new #hb_font_t font object
 	 */
-	function ft_font_create(ft_face: any, destroy: destroy_func_t): font_t;
+	function ft_font_create(ft_face: any, destroy: destroy_func_t | null): font_t;
 
 	/**
 	 * Creates an #hb_font_t font object from the specified FT_Face.
@@ -6573,7 +6573,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param replace Whether to replace an existing data with the same key
 	 * @returns %true if success, %false otherwise
 	 */
-	function map_set_user_data(map: map_t, key: user_data_key_t, data: any, destroy: destroy_func_t, replace: bool_t): bool_t;
+	function map_set_user_data(map: map_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
 	 * Fetches a list of all color layers for the specified glyph index in the specified
@@ -6586,7 +6586,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param layers The array of layers found
 	 * @returns Total number of layers available for the glyph index queried
 	 */
-	function ot_color_glyph_get_layers(_face: face_t, glyph: codepoint_t, start_offset: number, layer_count: number, layers: ot_color_layer_t[]): number;
+	function ot_color_glyph_get_layers(_face: face_t, glyph: codepoint_t, start_offset: number, layer_count: number | null, layers: ot_color_layer_t[]): number;
 
 	/**
 	 * Fetches the PNG image for a glyph. This function takes a font object, not a face object,
@@ -6662,7 +6662,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param colors The array of #hb_color_t records found
 	 * @returns the total number of colors in the palette
 	 */
-	function ot_color_palette_get_colors(_face: face_t, palette_index: number, start_offset: number, color_count: number, colors: color_t[]): number;
+	function ot_color_palette_get_colors(_face: face_t, palette_index: number, start_offset: number, color_count: number | null, colors: color_t[]): number;
 
 	/**
 	 * Fetches the number of color palettes in a face.
@@ -6742,7 +6742,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *               glyph variants.
 	 * @returns Number of total sample characters in the cvXX feature.
 	 */
-	function ot_layout_feature_get_characters(_face: face_t, table_tag: tag_t, feature_index: number, start_offset: number, char_count: number, characters: codepoint_t[]): number;
+	function ot_layout_feature_get_characters(_face: face_t, table_tag: tag_t, feature_index: number, start_offset: number, char_count: number | null, characters: codepoint_t[]): number;
 
 	/**
 	 * Fetches a list of all lookups enumerated for the specified feature, in
@@ -6757,7 +6757,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param lookup_indexes The array of lookup indexes found for the query
 	 * @returns Total number of lookups.
 	 */
-	function ot_layout_feature_get_lookups(_face: face_t, table_tag: tag_t, feature_index: number, start_offset: number, lookup_count: number, lookup_indexes: number[]): number;
+	function ot_layout_feature_get_lookups(_face: face_t, table_tag: tag_t, feature_index: number, start_offset: number, lookup_count: number | null, lookup_indexes: number[]): number;
 
 	/**
 	 * Fetches name indices from feature parameters for "Stylistic Set" ('ssXX') or
@@ -6778,7 +6778,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *                  parameters. (Must be zero if numParameters is zero.)
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_layout_feature_get_name_ids(_face: face_t, table_tag: tag_t, feature_index: number, label_id: ot_name_id_t, tooltip_id: ot_name_id_t, sample_id: ot_name_id_t, num_named_parameters: number, first_param_id: ot_name_id_t): bool_t;
+	function ot_layout_feature_get_name_ids(_face: face_t, table_tag: tag_t, feature_index: number, label_id: ot_name_id_t | null, tooltip_id: ot_name_id_t | null, sample_id: ot_name_id_t | null, num_named_parameters: number | null, first_param_id: ot_name_id_t | null): bool_t;
 
 	/**
 	 * Fetches a list of all lookups enumerated for the specified feature, in
@@ -6794,7 +6794,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param lookup_indexes The array of lookups found for the query
 	 * @returns Total number of lookups.
 	 */
-	function ot_layout_feature_with_variations_get_lookups(_face: face_t, table_tag: tag_t, feature_index: number, variations_index: number, start_offset: number, lookup_count: number, lookup_indexes: number[]): number;
+	function ot_layout_feature_with_variations_get_lookups(_face: face_t, table_tag: tag_t, feature_index: number, variations_index: number, start_offset: number, lookup_count: number | null, lookup_indexes: number[]): number;
 
 	/**
 	 * Fetches a list of all attachment points for the specified glyph in the GDEF
@@ -6809,7 +6809,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param point_array The array of attachment points found for the query
 	 * @returns Total number of attachment points for #glyph.
 	 */
-	function ot_layout_get_attach_points(_face: face_t, glyph: codepoint_t, start_offset: number, point_count: number, point_array: number[]): number;
+	function ot_layout_get_attach_points(_face: face_t, glyph: codepoint_t, start_offset: number, point_count: number | null, point_array: number[]): number;
 
 	/**
 	 * Fetches a baseline value from the face.
@@ -6854,7 +6854,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param caret_array The array of caret positions found for the query
 	 * @returns Total number of ligature caret positions for #glyph.
 	 */
-	function ot_layout_get_ligature_carets(font: font_t, direction: direction_t, glyph: codepoint_t, start_offset: number, caret_count: number, caret_array: position_t[]): number;
+	function ot_layout_get_ligature_carets(font: font_t, direction: direction_t, glyph: codepoint_t, start_offset: number, caret_count: number | null, caret_array: position_t[]): number;
 
 	/**
 	 * Fetches optical-size feature data (i.e., the `size` feature from GPOS). Note that
@@ -6923,7 +6923,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param feature_indexes The array of feature indexes found for the query
 	 * @returns Total number of features.
 	 */
-	function ot_layout_language_get_feature_indexes(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number, feature_count: number, feature_indexes: number[]): number;
+	function ot_layout_language_get_feature_indexes(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number, feature_count: number | null, feature_indexes: number[]): number;
 
 	/**
 	 * Fetches a list of all features in the specified face's GSUB table
@@ -6939,7 +6939,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param feature_tags The array of #hb_tag_t feature tags found for the query
 	 * @returns Total number of feature tags.
 	 */
-	function ot_layout_language_get_feature_tags(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number, feature_count: number, feature_tags: tag_t[]): number;
+	function ot_layout_language_get_feature_tags(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number, feature_count: number | null, feature_tags: tag_t[]): number;
 
 	/**
 	 * Fetches the tag of a requested feature index in the given face's GSUB or GPOS table,
@@ -6991,7 +6991,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *                    Alternate glyphs associated with the glyph id.
 	 * @returns Total number of alternates found in the specific lookup index for the given glyph id.
 	 */
-	function ot_layout_lookup_get_glyph_alternates(_face: face_t, lookup_index: number, glyph: codepoint_t, start_offset: number, alternate_count: number, alternate_glyphs: codepoint_t[]): number;
+	function ot_layout_lookup_get_glyph_alternates(_face: face_t, lookup_index: number, glyph: codepoint_t, start_offset: number, alternate_count: number | null, alternate_glyphs: codepoint_t[]): number;
 
 	/**
 	 * Compute the transitive closure of glyphs needed for a
@@ -7048,7 +7048,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param language_tags Array of language tags found in the table
 	 * @returns Total number of language tags.
 	 */
-	function ot_layout_script_get_language_tags(_face: face_t, table_tag: tag_t, script_index: number, start_offset: number, language_count: number, language_tags: tag_t[]): number;
+	function ot_layout_script_get_language_tags(_face: face_t, table_tag: tag_t, script_index: number, start_offset: number, language_count: number | null, language_tags: tag_t[]): number;
 
 	/**
 	 * Fetches the index of a given language tag in the specified face's GSUB table
@@ -7107,7 +7107,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param feature_tags Array of feature tags found in the table
 	 * @returns Total number of feature tags.
 	 */
-	function ot_layout_table_get_feature_tags(_face: face_t, table_tag: tag_t, start_offset: number, feature_count: number, feature_tags: tag_t[]): number;
+	function ot_layout_table_get_feature_tags(_face: face_t, table_tag: tag_t, start_offset: number, feature_count: number | null, feature_tags: tag_t[]): number;
 
 	/**
 	 * Fetches the total number of lookups enumerated in the specified
@@ -7129,7 +7129,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param script_tags The array of #hb_tag_t script tags found for the query
 	 * @returns Total number of script tags.
 	 */
-	function ot_layout_table_get_script_tags(_face: face_t, table_tag: tag_t, start_offset: number, script_count: number, script_tags: tag_t[]): number;
+	function ot_layout_table_get_script_tags(_face: face_t, table_tag: tag_t, start_offset: number, script_count: number | null, script_tags: tag_t[]): number;
 
 	/**
 	 * Selects an OpenType script for #table_tag from the #script_tags array.
@@ -7147,7 +7147,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @returns %true if one of the requested scripts is selected, %false if a fallback
 	 * script is selected or if no scripts are selected.
 	 */
-	function ot_layout_table_select_script(_face: face_t, table_tag: tag_t, script_count: number, script_tags: tag_t, script_index: number, chosen_script: tag_t): bool_t;
+	function ot_layout_table_select_script(_face: face_t, table_tag: tag_t, script_count: number, script_tags: tag_t, script_index: number | null, chosen_script: tag_t | null): bool_t;
 
 	/**
 	 * Fetches the specified math constant. For most constants, the value returned
@@ -7284,7 +7284,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param entries entries tags buffer
 	 * @returns Number of all available feature types.
 	 */
-	function ot_meta_get_entry_tags(_face: face_t, start_offset: number, entries_count: number, entries: ot_meta_tag_t[]): number;
+	function ot_meta_get_entry_tags(_face: face_t, start_offset: number, entries_count: number | null, entries: ot_meta_tag_t[]): number;
 
 	/**
 	 * It fetches metadata entry of a given tag from a font.
@@ -7301,7 +7301,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param position result of metrics value from the font.
 	 * @returns Whether found the requested metrics in the font.
 	 */
-	function ot_metrics_get_position(font: font_t, metrics_tag: ot_metrics_tag_t, position: position_t): bool_t;
+	function ot_metrics_get_position(font: font_t, metrics_tag: ot_metrics_tag_t, position: position_t | null): bool_t;
 
 	/**
 	 * Fetches metrics value corresponding to #metrics_tag from #font with the
@@ -7343,7 +7343,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param text buffer to write fetched name into.
 	 * @returns full length of the requested string, or 0 if not found.
 	 */
-	function ot_name_get_utf16(_face: face_t, name_id: ot_name_id_t, language: language_t, text_size: number, text: number[]): number;
+	function ot_name_get_utf16(_face: face_t, name_id: ot_name_id_t, language: language_t, text_size: number | null, text: number[]): number;
 
 	/**
 	 * Fetches a font name from the OpenType 'name' table.
@@ -7358,7 +7358,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param text buffer to write fetched name into.
 	 * @returns full length of the requested string, or 0 if not found.
 	 */
-	function ot_name_get_utf32(_face: face_t, name_id: ot_name_id_t, language: language_t, text_size: number, text: number[]): number;
+	function ot_name_get_utf32(_face: face_t, name_id: ot_name_id_t, language: language_t, text_size: number | null, text: number[]): number;
 
 	/**
 	 * Fetches a font name from the OpenType 'name' table.
@@ -7373,7 +7373,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param text buffer to write fetched name into.
 	 * @returns full length of the requested string, or 0 if not found.
 	 */
-	function ot_name_get_utf8(_face: face_t, name_id: ot_name_id_t, language: language_t, text_size: number, text: string[]): number;
+	function ot_name_get_utf8(_face: face_t, name_id: ot_name_id_t, language: language_t, text_size: number | null, text: string[]): number;
 
 	/**
 	 * Enumerates all available name IDs and language combinations. Returned
@@ -7383,7 +7383,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param num_entries number of returned entries.
 	 * @returns Array of available name entries.
 	 */
-	function ot_name_list_names(_face: face_t, num_entries: number): ot_name_entry_t[];
+	function ot_name_list_names(_face: face_t, num_entries: number | null): ot_name_entry_t[];
 
 	/**
 	 * Computes the transitive closure of glyphs needed for a specified
@@ -7438,7 +7438,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param language_tags array of size at least #language_count to store
 	 * the language tag results
 	 */
-	function ot_tags_from_script_and_language(script: script_t, language: language_t, script_count: number, script_tags: tag_t, language_count: number, language_tags: tag_t): void;
+	function ot_tags_from_script_and_language(script: script_t, language: language_t, script_count: number, script_tags: tag_t | null, language_count: number, language_tags: tag_t | null): void;
 
 	/**
 	 * Converts a script tag and a language tag to an #hb_script_t and an
@@ -7449,7 +7449,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param language the #hb_language_t corresponding to #script_tag and
 	 * #language_tag.
 	 */
-	function ot_tags_to_script_and_language(script_tag: tag_t, language_tag: tag_t, script: script_t, language: language_t): void;
+	function ot_tags_to_script_and_language(script_tag: tag_t, language_tag: tag_t, script: script_t | null, language: language_t | null): void;
 
 	/**
 	 * Fetches the variation-axis information corresponding to the specified axis tag
@@ -7482,7 +7482,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param axes_array The array of variation axes found
 	 * @returns 
 	 */
-	function ot_var_get_axes(_face: face_t, start_offset: number, axes_count: number, axes_array: ot_var_axis_t[]): number;
+	function ot_var_get_axes(_face: face_t, start_offset: number, axes_count: number | null, axes_array: ot_var_axis_t[]): number;
 
 	/**
 	 * Fetches the number of OpenType variation axes included in the face.
@@ -7501,7 +7501,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param axes_array The array of variation axes found
 	 * @returns the number of variation axes in the face
 	 */
-	function ot_var_get_axis_infos(_face: face_t, start_offset: number, axes_count: number, axes_array: ot_var_axis_info_t[]): number;
+	function ot_var_get_axis_infos(_face: face_t, start_offset: number, axes_count: number | null, axes_array: ot_var_axis_info_t[]): number;
 
 	/**
 	 * Fetches the number of named instances included in the face.
@@ -7527,7 +7527,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param coords The array of coordinates found for the query
 	 * @returns the number of variation axes in the face
 	 */
-	function ot_var_named_instance_get_design_coords(_face: face_t, instance_index: number, coords_length: number, coords: number[]): number;
+	function ot_var_named_instance_get_design_coords(_face: face_t, instance_index: number, coords_length: number | null, coords: number[]): number;
 
 	/**
 	 * Fetches the `name` table Name ID that provides display names for
@@ -7844,7 +7844,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param replace Whether to replace an existing data with the same key
 	 * @returns %true if success, %false otherwise
 	 */
-	function set_set_user_data(set: set_t, key: user_data_key_t, data: any, destroy: destroy_func_t, replace: bool_t): bool_t;
+	function set_set_user_data(set: set_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
 	 * Subtracts the contents of #other from #set.
@@ -7880,7 +7880,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *    specified #hb_feature_t or %NULL
 	 * @param num_features the length of #features array
 	 */
-	function shape(font: font_t, buffer: buffer_t, features: feature_t[], num_features: number): void;
+	function shape(font: font_t, buffer: buffer_t, features: feature_t[] | null, num_features: number): void;
 
 	/**
 	 * See hb_shape() for details. If #shaper_list is not %NULL, the specified
@@ -7895,7 +7895,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *    array of shapers to use or %NULL
 	 * @returns false if all shapers failed, true otherwise
 	 */
-	function shape_full(font: font_t, buffer: buffer_t, features: feature_t[], num_features: number, shaper_list: string[]): bool_t;
+	function shape_full(font: font_t, buffer: buffer_t, features: feature_t[] | null, num_features: number, shaper_list: string[] | null): bool_t;
 
 	/**
 	 * Retrieves the list of shapers supported by HarfBuzz.
@@ -8017,7 +8017,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param replace Whether to replace an existing data with the same key
 	 * @returns %true if success, %false otherwise.
 	 */
-	function shape_plan_set_user_data(shape_plan: shape_plan_t, key: user_data_key_t, data: any, destroy: destroy_func_t, replace: bool_t): bool_t;
+	function shape_plan_set_user_data(shape_plan: shape_plan_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
 	 * Searches variation axes of a #hb_font_t object for a specific axis first,
@@ -8107,7 +8107,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param parent Parent Unicode-functions structure
 	 * @returns The Unicode-functions structure
 	 */
-	function unicode_funcs_create(parent: unicode_funcs_t): unicode_funcs_t;
+	function unicode_funcs_create(parent: unicode_funcs_t | null): unicode_funcs_t;
 
 	/**
 	 * Decreases the reference count on a Unicode-functions structure. When
@@ -8175,7 +8175,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_combining_class_func(ufuncs: unicode_funcs_t, _func: unicode_combining_class_func_t, destroy: destroy_func_t): void;
+	function unicode_funcs_set_combining_class_func(ufuncs: unicode_funcs_t, _func: unicode_combining_class_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_compose_func_t.
@@ -8183,7 +8183,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_compose_func(ufuncs: unicode_funcs_t, _func: unicode_compose_func_t, destroy: destroy_func_t): void;
+	function unicode_funcs_set_compose_func(ufuncs: unicode_funcs_t, _func: unicode_compose_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_decompose_compatibility_func_t.
@@ -8191,7 +8191,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_decompose_compatibility_func(ufuncs: unicode_funcs_t, _func: unicode_decompose_compatibility_func_t, destroy: destroy_func_t): void;
+	function unicode_funcs_set_decompose_compatibility_func(ufuncs: unicode_funcs_t, _func: unicode_decompose_compatibility_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_decompose_func_t.
@@ -8199,7 +8199,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_decompose_func(ufuncs: unicode_funcs_t, _func: unicode_decompose_func_t, destroy: destroy_func_t): void;
+	function unicode_funcs_set_decompose_func(ufuncs: unicode_funcs_t, _func: unicode_decompose_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_eastasian_width_func_t.
@@ -8207,7 +8207,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_eastasian_width_func(ufuncs: unicode_funcs_t, _func: unicode_eastasian_width_func_t, destroy: destroy_func_t): void;
+	function unicode_funcs_set_eastasian_width_func(ufuncs: unicode_funcs_t, _func: unicode_eastasian_width_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_general_category_func_t.
@@ -8215,7 +8215,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_general_category_func(ufuncs: unicode_funcs_t, _func: unicode_general_category_func_t, destroy: destroy_func_t): void;
+	function unicode_funcs_set_general_category_func(ufuncs: unicode_funcs_t, _func: unicode_general_category_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_mirroring_func_t.
@@ -8223,7 +8223,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_mirroring_func(ufuncs: unicode_funcs_t, _func: unicode_mirroring_func_t, destroy: destroy_func_t): void;
+	function unicode_funcs_set_mirroring_func(ufuncs: unicode_funcs_t, _func: unicode_mirroring_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_script_func_t.
@@ -8231,7 +8231,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_script_func(ufuncs: unicode_funcs_t, _func: unicode_script_func_t, destroy: destroy_func_t): void;
+	function unicode_funcs_set_script_func(ufuncs: unicode_funcs_t, _func: unicode_script_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Attaches a user-data key/data pair to the specified Unicode-functions structure.
@@ -8242,7 +8242,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param replace Whether to replace an existing data with the same key
 	 * @returns %true if success, %false otherwise
 	 */
-	function unicode_funcs_set_user_data(ufuncs: unicode_funcs_t, key: user_data_key_t, data: any, destroy: destroy_func_t, replace: bool_t): bool_t;
+	function unicode_funcs_set_user_data(ufuncs: unicode_funcs_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
 	 * Retrieves the General Category (gc) property

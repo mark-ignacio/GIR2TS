@@ -454,7 +454,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param error return location for error
 		 * @returns `TRUE` on success, and `FALSE` otherwise
 		 */
-		save(filename: string, _type: string, error: GLib.Error): boolean;
+		save(filename: string, _type: string, error: GLib.Error | null): boolean;
 		/**
 		 * Saves pixbuf to a new buffer in format `type`, which is currently "jpeg",
 		 * "png", "tiff", "ico" or "bmp".
@@ -477,7 +477,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param error return location for error, or `NULL`
 		 * @returns whether an error was set
 		 */
-		save_to_buffer(buffer: number[], buffer_size: number, _type: string, error: GLib.Error): boolean;
+		save_to_buffer(buffer: number[], buffer_size: number, _type: string, error: GLib.Error | null): boolean;
 		/**
 		 * Vector version of `gdk_pixbuf_save_to_buffer()`.
 		 * 
@@ -493,7 +493,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param option_values values for named options
 		 * @returns whether an error was set
 		 */
-		save_to_bufferv(buffer: number[], buffer_size: number, _type: string, option_keys: string[], option_values: string[]): boolean;
+		save_to_bufferv(buffer: number[], buffer_size: number, _type: string, option_keys: string[] | null, option_values: string[] | null): boolean;
 		/**
 		 * Saves pixbuf in format `type` by feeding the produced data to a
 		 * callback.
@@ -512,7 +512,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param error return location for error, or `NULL`
 		 * @returns whether an error was set
 		 */
-		save_to_callback(save_func: PixbufSaveFunc, _type: string, error: GLib.Error): boolean;
+		save_to_callback(save_func: PixbufSaveFunc, _type: string, error: GLib.Error | null): boolean;
 		/**
 		 * Vector version of `gdk_pixbuf_save_to_callback()`.
 		 * 
@@ -529,7 +529,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param option_values values for named options
 		 * @returns whether an error was set
 		 */
-		save_to_callbackv(save_func: PixbufSaveFunc, _type: string, option_keys: string[], option_values: string[]): boolean;
+		save_to_callbackv(save_func: PixbufSaveFunc, _type: string, option_keys: string[] | null, option_values: string[] | null): boolean;
 		/**
 		 * Saves `pixbuf` to an output stream.
 		 * 
@@ -549,7 +549,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @returns `TRUE` if the pixbuf was saved successfully, `FALSE` if an
 		 *   error was set.
 		 */
-		save_to_stream(stream: Gio.OutputStream, _type: string, cancellable: Gio.Cancellable, error: GLib.Error): boolean;
+		save_to_stream(stream: Gio.OutputStream, _type: string, cancellable: Gio.Cancellable | null, error: GLib.Error | null): boolean;
 		/**
 		 * Saves `pixbuf` to an output stream asynchronously.
 		 * 
@@ -565,7 +565,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @param callback a `GAsyncReadyCallback` to call when the pixbuf is saved
 		 */
-		save_to_stream_async(stream: Gio.OutputStream, _type: string, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		save_to_stream_async(stream: Gio.OutputStream, _type: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Saves `pixbuf` to an output stream.
 		 * 
@@ -581,7 +581,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @returns `TRUE` if the pixbuf was saved successfully, `FALSE` if an
 		 *   error was set.
 		 */
-		save_to_streamv(stream: Gio.OutputStream, _type: string, option_keys: string[], option_values: string[], cancellable: Gio.Cancellable): boolean;
+		save_to_streamv(stream: Gio.OutputStream, _type: string, option_keys: string[] | null, option_values: string[] | null, cancellable: Gio.Cancellable | null): boolean;
 		/**
 		 * Saves `pixbuf` to an output stream asynchronously.
 		 * 
@@ -599,7 +599,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @param callback a `GAsyncReadyCallback` to call when the pixbuf is saved
 		 */
-		save_to_streamv_async(stream: Gio.OutputStream, _type: string, option_keys: string[], option_values: string[], cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		save_to_streamv_async(stream: Gio.OutputStream, _type: string, option_keys: string[] | null, option_values: string[] | null, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Vector version of `gdk_pixbuf_save()`.
 		 * 
@@ -614,7 +614,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param option_values values for named options
 		 * @returns whether an error was set
 		 */
-		savev(filename: string, _type: string, option_keys: string[], option_values: string[]): boolean;
+		savev(filename: string, _type: string, option_keys: string[] | null, option_values: string[] | null): boolean;
 		/**
 		 * Creates a transformation of the source image #src by scaling by
 		 * #scale_x and #scale_y then translating by #offset_x and #offset_y,
@@ -894,7 +894,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param destroy_fn_data Closure data to pass to the destroy notification function
 		 * @returns A newly-created pixbuf
 		 */
-		public static new_from_data(data: number[], colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number, destroy_fn: PixbufDestroyNotify, destroy_fn_data: any): Pixbuf;
+		public static new_from_data(data: number[], colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number, destroy_fn: PixbufDestroyNotify | null, destroy_fn_data: any | null): Pixbuf;
 		/**
 		 * Creates a new pixbuf by loading an image from a file.
 		 * 
@@ -1060,7 +1060,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @returns A newly-created pixbuf
 		 */
-		public static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable): Pixbuf;
+		public static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable | null): Pixbuf;
 		/**
 		 * Creates a new pixbuf by loading an image from an input stream.
 		 * 
@@ -1090,7 +1090,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @returns A newly-created pixbuf
 		 */
-		public static new_from_stream_at_scale(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable): Pixbuf;
+		public static new_from_stream_at_scale(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable | null): Pixbuf;
 		/**
 		 * Finishes an asynchronous pixbuf creation operation started with
 		 * gdk_pixbuf_new_from_stream_async().
@@ -1129,7 +1129,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @returns A `GdkPixbufFormat` describing
 		 *   the image format of the file
 		 */
-		public static get_file_info(filename: string, width: number, height: number): PixbufFormat;
+		public static get_file_info(filename: string, width: number | null, height: number | null): PixbufFormat;
 		/**
 		 * Asynchronously parses an image file far enough to determine its
 		 * format and size.
@@ -1144,7 +1144,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @param callback a `GAsyncReadyCallback` to call when the file info is available
 		 */
-		public static get_file_info_async(filename: string, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		public static get_file_info_async(filename: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous pixbuf parsing operation started with
 		 * gdk_pixbuf_get_file_info_async().
@@ -1193,7 +1193,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @param callback a `GAsyncReadyCallback` to call when the pixbuf is loaded
 		 */
-		public static new_from_stream_async(stream: Gio.InputStream, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		public static new_from_stream_async(stream: Gio.InputStream, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Creates a new pixbuf by asynchronously loading an image from an input stream.
 		 * 
@@ -1209,7 +1209,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @param callback a `GAsyncReadyCallback` to call when the pixbuf is loaded
 		 */
-		public static new_from_stream_at_scale_async(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		public static new_from_stream_at_scale_async(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous pixbuf save operation started with
 		 * gdk_pixbuf_save_to_stream_async().
@@ -1266,7 +1266,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param start_time time when the animation starts playing
 		 * @returns an iterator to move over the animation
 		 */
-		get_iter(start_time: GLib.TimeVal): PixbufAnimationIter;
+		get_iter(start_time: GLib.TimeVal | null): PixbufAnimationIter;
 		/**
 		 * Retrieves a static image for the animation.
 		 * 
@@ -1372,7 +1372,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object
 		 * @returns A newly-created animation
 		 */
-		public static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable): PixbufAnimation;
+		public static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable | null): PixbufAnimation;
 		/**
 		 * Finishes an asynchronous pixbuf animation creation operation started with
 		 * [func#GdkPixbuf.PixbufAnimation.new_from_stream_async].
@@ -1393,7 +1393,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional #GCancellable object
 		 * @param callback a `GAsyncReadyCallback` to call when the pixbuf is loaded
 		 */
-		public static new_from_stream_async(stream: Gio.InputStream, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		public static new_from_stream_async(stream: Gio.InputStream, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1425,7 +1425,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param current_time current time
 		 * @returns `TRUE` if the image may need updating
 		 */
-		advance(current_time: GLib.TimeVal): boolean;
+		advance(current_time: GLib.TimeVal | null): boolean;
 		/**
 		 * Gets the number of milliseconds the current pixbuf should be displayed,
 		 * or -1 if the current pixbuf should be displayed forever.
@@ -1818,7 +1818,7 @@ declare namespace imports.gi.GdkPixbuf {
 		public is_static_image: {(animation: PixbufAnimation): boolean;};
 		public get_static_image: {(animation: PixbufAnimation): Pixbuf;};
 		public get_size: {(animation: PixbufAnimation, width: number, height: number): void;};
-		public get_iter: {(animation: PixbufAnimation, start_time: GLib.TimeVal): PixbufAnimationIter;};
+		public get_iter: {(animation: PixbufAnimation, start_time: GLib.TimeVal | null): PixbufAnimationIter;};
 	}
 
 	/**
@@ -1832,7 +1832,7 @@ declare namespace imports.gi.GdkPixbuf {
 		public get_delay_time: {(iter: PixbufAnimationIter): number;};
 		public get_pixbuf: {(iter: PixbufAnimationIter): Pixbuf;};
 		public on_currently_loading_frame: {(iter: PixbufAnimationIter): boolean;};
-		public advance: {(iter: PixbufAnimationIter, current_time: GLib.TimeVal): boolean;};
+		public advance: {(iter: PixbufAnimationIter, current_time: GLib.TimeVal | null): boolean;};
 	}
 
 	/**
@@ -2306,7 +2306,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 *   that is being finalized.
 		 * @param data User closure data.
 		 */
-		(pixels: number[], data: any): void;
+		(pixels: number[], data: any | null): void;
 	}
 
 	/**
@@ -2444,7 +2444,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param data user data passed to gdk_pixbuf_save_to_callback().
 		 * @returns `TRUE` if successful, `FALSE` otherwise
 		 */
-		(buf: number[], count: number, error: GLib.Error, data: any): boolean;
+		(buf: number[], count: number, error: GLib.Error, data: any | null): boolean;
 	}
 
 	function pixbuf_error_quark(): GLib.Quark;

@@ -8,6 +8,9 @@ export interface ParameterAttributes extends NodeAttributes {
     readable?: number;
     private?: number;
     writable?: number;
+    "caller-allocates"?: number;
+    "optional"?: number;
+    "allow-none"?: number;
 }
 
 export interface MemberAttributes extends NodeAttributes {

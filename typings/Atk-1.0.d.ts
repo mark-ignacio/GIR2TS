@@ -381,7 +381,7 @@ declare namespace imports.gi.Atk {
 		 * to create an instance of a subclass of #AtkObject
 		 * @param data a #gpointer which identifies the object for which the AtkObject was created.
 		 */
-		initialize(data: any): void;
+		initialize(data: any | null): void;
 		/**
 		 * Emits a state-change signal for the specified state.
 		 * 
@@ -1143,9 +1143,9 @@ declare namespace imports.gi.Atk {
 		public add_focus_handler: {(component: Component, handler: FocusHandler): number;};
 		public contains: {(component: Component, _x: number, _y: number, coord_type: CoordType): boolean;};
 		public ref_accessible_at_point: {(component: Component, _x: number, _y: number, coord_type: CoordType): Object;};
-		public get_extents: {(component: Component, _x: number, _y: number, width: number, height: number, coord_type: CoordType): void;};
-		public get_position: {(component: Component, _x: number, _y: number, coord_type: CoordType): void;};
-		public get_size: {(component: Component, width: number, height: number): void;};
+		public get_extents: {(component: Component, _x: number | null, _y: number | null, width: number | null, height: number | null, coord_type: CoordType): void;};
+		public get_position: {(component: Component, _x: number | null, _y: number | null, coord_type: CoordType): void;};
+		public get_size: {(component: Component, width: number | null, height: number | null): void;};
 		public grab_focus: {(component: Component): boolean;};
 		public remove_focus_handler: {(component: Component, handler_id: number): void;};
 		public set_extents: {(component: Component, _x: number, _y: number, width: number, height: number, coord_type: CoordType): boolean;};
@@ -1225,9 +1225,9 @@ declare namespace imports.gi.Atk {
 	interface ImageIface {}
 	class ImageIface {
 		public constructor();
-		public get_image_position: {(image: Image, _x: number, _y: number, coord_type: CoordType): void;};
+		public get_image_position: {(image: Image, _x: number | null, _y: number | null, coord_type: CoordType): void;};
 		public get_image_description: {(image: Image): string;};
-		public get_image_size: {(image: Image, width: number, height: number): void;};
+		public get_image_size: {(image: Image, width: number | null, height: number | null): void;};
 		public set_image_description: {(image: Image, description: string): boolean;};
 		public get_image_locale: {(image: Image): string;};
 	}
@@ -1331,13 +1331,13 @@ declare namespace imports.gi.Atk {
 		public set_role: {(accessible: Object, role: Role): void;};
 		public connect_property_change_handler: {(accessible: Object, handler: PropertyChangeHandler): number;};
 		public remove_property_change_handler: {(accessible: Object, handler_id: number): void;};
-		public initialize: {(accessible: Object, data: any): void;};
-		public children_changed: {(accessible: Object, change_index: number, changed_child: any): void;};
+		public initialize: {(accessible: Object, data: any | null): void;};
+		public children_changed: {(accessible: Object, change_index: number, changed_child: any | null): void;};
 		public focus_event: {(accessible: Object, focus_in: boolean): void;};
 		public property_change: {(accessible: Object, values: PropertyValues): void;};
 		public state_change: {(accessible: Object, name: string, state_set: boolean): void;};
 		public visible_data_changed: {(accessible: Object): void;};
-		public active_descendant_changed: {(accessible: Object, child: any): void;};
+		public active_descendant_changed: {(accessible: Object, child: any | null): void;};
 		public get_attributes: {(accessible: Object): AttributeSet;};
 		public get_object_locale: {(accessible: Object): string;};
 	}
@@ -1569,7 +1569,7 @@ declare namespace imports.gi.Atk {
 		public get_caret_offset: {(text: Text): number;};
 		public get_run_attributes: {(text: Text, offset: number, start_offset: number, end_offset: number): AttributeSet;};
 		public get_default_attributes: {(text: Text): AttributeSet;};
-		public get_character_extents: {(text: Text, offset: number, _x: number, _y: number, width: number, height: number, coords: CoordType): void;};
+		public get_character_extents: {(text: Text, offset: number, _x: number | null, _y: number | null, width: number | null, height: number | null, coords: CoordType): void;};
 		public get_character_count: {(text: Text): number;};
 		public get_offset_at_point: {(text: Text, _x: number, _y: number, coords: CoordType): number;};
 		public get_n_selections: {(text: Text): number;};
@@ -1642,7 +1642,7 @@ declare namespace imports.gi.Atk {
 		public constructor();
 		public add_global_event_listener: {(listener: GObject.SignalEmissionHook, event_type: string): number;};
 		public remove_global_event_listener: {(listener_id: number): void;};
-		public add_key_event_listener: {(listener: KeySnoopFunc, data: any): number;};
+		public add_key_event_listener: {(listener: KeySnoopFunc, data: any | null): number;};
 		public remove_key_event_listener: {(listener_id: number): void;};
 		public get_root: {(): Object;};
 		public get_toolkit_name: {(): string;};
@@ -1657,7 +1657,7 @@ declare namespace imports.gi.Atk {
 		public get_minimum_value: {(obj: Value, value: GObject.Value): void;};
 		public set_current_value: {(obj: Value, value: GObject.Value): boolean;};
 		public get_minimum_increment: {(obj: Value, value: GObject.Value): void;};
-		public get_value_and_text: {(obj: Value, value: number, text: string): void;};
+		public get_value_and_text: {(obj: Value, value: number, text: string | null): void;};
 		public get_range: {(obj: Value): Range;};
 		public get_increment: {(obj: Value): number;};
 		public get_sub_ranges: {(obj: Value): GLib.SList;};
@@ -1836,7 +1836,7 @@ declare namespace imports.gi.Atk {
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
 		 */
-		get_extents(_x: number, _y: number, width: number, height: number, coord_type: CoordType): void;
+		get_extents(_x: number | null, _y: number | null, width: number | null, height: number | null, coord_type: CoordType): void;
 		/**
 		 * Gets the layer of the component.
 		 * @returns an {@link Layer} which is the layer of the component
@@ -1861,7 +1861,7 @@ declare namespace imports.gi.Atk {
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
 		 */
-		// get_position(_x: number, _y: number, coord_type: CoordType): void;
+		// get_position(_x: number | null, _y: number | null, coord_type: CoordType): void;
 		/**
 		 * Gets the size of the #component in terms of width and height.
 		 * 
@@ -1870,7 +1870,7 @@ declare namespace imports.gi.Atk {
 		 * @param width address of #gint to put width of #component
 		 * @param height address of #gint to put height of #component
 		 */
-		get_size(width: number, height: number): void;
+		get_size(width: number | null, height: number | null): void;
 		/**
 		 * Grabs focus for this #component.
 		 * @returns %TRUE if successful, %FALSE otherwise.
@@ -2324,7 +2324,7 @@ declare namespace imports.gi.Atk {
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
 		 */
-		get_image_position(_x: number, _y: number, coord_type: CoordType): void;
+		get_image_position(_x: number | null, _y: number | null, coord_type: CoordType): void;
 		/**
 		 * Get the width and height in pixels for the specified image.
 		 * The values of #width and #height are returned as -1 if the
@@ -2335,7 +2335,7 @@ declare namespace imports.gi.Atk {
 		 * @param width filled with the image width, or -1 if the value cannot be obtained.
 		 * @param height filled with the image height, or -1 if the value cannot be obtained.
 		 */
-		get_image_size(width: number, height: number): void;
+		get_image_size(width: number | null, height: number | null): void;
 		/**
 		 * Sets the textual description for this image.
 		 * @param description a string description to set for #image
@@ -2994,7 +2994,7 @@ declare namespace imports.gi.Atk {
 		 * @param height Pointer for the height of the bounding box
 		 * @param coords specify whether coordinates are relative to the screen or widget window
 		 */
-		get_character_extents(offset: number, _x: number, _y: number, width: number, height: number, coords: CoordType): void;
+		get_character_extents(offset: number, _x: number | null, _y: number | null, width: number | null, height: number | null, coords: CoordType): void;
 		/**
 		 * Creates an {@link AttributeSet} which consists of the default values of
 		 * attributes for the text. See the enum AtkTextAttribute for types of text
@@ -3384,7 +3384,7 @@ declare namespace imports.gi.Atk {
 		 * @param text address of #gchar to put the human
 		 * readable text alternative for #value
 		 */
-		get_value_and_text(value: number, text: string): void;
+		get_value_and_text(value: number, text: string | null): void;
 		/**
 		 * Sets the value of this object.
 		 * @param value a #GValue which is the desired new accessible value.
@@ -5184,7 +5184,7 @@ declare namespace imports.gi.Atk {
 	 *        along with the event notification, when it occurs.
 	 * @returns added event listener id, or 0 on failure.
 	 */
-	function add_key_event_listener(listener: KeySnoopFunc, data: any): number;
+	function add_key_event_listener(listener: KeySnoopFunc, data: any | null): number;
 
 	/**
 	 * Frees the memory used by an {@link AttributeSet}, including all its

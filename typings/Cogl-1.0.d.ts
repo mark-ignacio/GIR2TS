@@ -181,13 +181,13 @@ declare namespace imports.gi.Cogl {
 		 * @returns For convenience it returns the
 		 *                                given #offscreen
 		 */
-		public static ref(offscreen: any): any;
+		public static ref(offscreen: any | null): any;
 		/**
 		 * Decreases the reference count for the #offscreen buffer and frees it when
 		 * the count reaches 0.
 		 * @param offscreen A pointer to a {@link Offscreen} framebuffer
 		 */
-		public static unref(offscreen: any): void;
+		public static unref(offscreen: any | null): void;
 	}
 
 	/**
@@ -1355,7 +1355,7 @@ declare namespace imports.gi.Cogl {
 		 * @returns %TRUE if the handle was successfully retrieved, %FALSE
 		 *   if the handle was invalid
 		 */
-		get_gl_texture(out_gl_handle: number, out_gl_target: number): Bool;
+		get_gl_texture(out_gl_handle: number | null, out_gl_target: number | null): Bool;
 		/**
 		 * Queries the height of a cogl texture.
 		 * @returns the height of the GPU side texture in pixels
@@ -1479,12 +1479,12 @@ declare namespace imports.gi.Cogl {
 		 * @param texture a {@link Texture}.
 		 * @returns the #texture pointer.
 		 */
-		public static ref(texture: any): any;
+		public static ref(texture: any | null): any;
 		/**
 		 * Decrement the reference count for a cogl texture.
 		 * @param texture a {@link Texture}.
 		 */
-		public static unref(texture: any): void;
+		public static unref(texture: any | null): void;
 	}
 
 
@@ -2413,7 +2413,7 @@ declare namespace imports.gi.Cogl {
 	}
 
 	interface XlibFilterFunc {
-		(event: any, data: any): FilterReturn;
+		(event: any, data: any | null): FilterReturn;
 	}
 
 	/**
@@ -2681,7 +2681,7 @@ declare namespace imports.gi.Cogl {
 	 * @param v2 a {@link Color}
 	 * @returns %TRUE if the two colors are the same.
 	 */
-	function color_equal(v1: any, v2: any): Bool;
+	function color_equal(v1: any | null, v2: any | null): Bool;
 
 	/**
 	 * Converts a color expressed in HLS (hue, luminance and saturation)
@@ -2909,7 +2909,7 @@ declare namespace imports.gi.Cogl {
 	 * @returns %TRUE if the passed #object represents a bitmap,
 	 *   and %FALSE otherwise
 	 */
-	function is_bitmap(object: any): Bool;
+	function is_bitmap(object: any | null): Bool;
 
 	/**
 	 * Gets whether the given handle references an existing material object.
@@ -2926,7 +2926,7 @@ declare namespace imports.gi.Cogl {
 	 * @returns %TRUE if #object is a {@link Offscreen} framebuffer,
 	 *          %FALSE otherwise
 	 */
-	function is_offscreen(object: any): Bool;
+	function is_offscreen(object: any | null): Bool;
 
 	/**
 	 * Gets whether the given handle references an existing program object.
@@ -2950,7 +2950,7 @@ declare namespace imports.gi.Cogl {
 	 * @returns %TRUE if the #object references a texture, and
 	 *   %FALSE otherwise
 	 */
-	function is_texture(object: any): Bool;
+	function is_texture(object: any | null): Bool;
 
 	/**
 	 * Checks whether #handle is a Vertex Buffer Object
@@ -2991,7 +2991,7 @@ declare namespace imports.gi.Cogl {
 	 * @param v2 A 4x4 transformation matrix
 	 * @returns 
 	 */
-	function matrix_equal(v1: any, v2: any): Bool;
+	function matrix_equal(v1: any | null, v2: any | null): Bool;
 
 	function onscreen_clutter_backend_set_size_CLUTTER(width: number, height: number): void;
 
@@ -3343,7 +3343,7 @@ declare namespace imports.gi.Cogl {
 	 * process later primitives as defined by cogl_set_source().
 	 * @param material A {@link Material}
 	 */
-	function push_source(material: any): void;
+	function push_source(material: any | null): void;
 
 	/**
 	 * This reads a rectangle of pixels from the current framebuffer where
@@ -3552,7 +3552,7 @@ declare namespace imports.gi.Cogl {
 	 * cogl_rectangle() or vertices drawn using cogl_vertex_buffer_draw().
 	 * @param material A {@link Material}
 	 */
-	function set_source(material: any): void;
+	function set_source(material: any | null): void;
 
 	/**
 	 * This is a convenience function for creating a solid fill source material
@@ -3706,13 +3706,13 @@ declare namespace imports.gi.Cogl {
 	 * @param texture a {@link Texture}.
 	 * @returns the #texture pointer.
 	 */
-	function texture_ref(texture: any): any;
+	function texture_ref(texture: any | null): any;
 
 	/**
 	 * Decrement the reference count for a cogl texture.
 	 * @param texture a {@link Texture}.
 	 */
-	function texture_unref(texture: any): void;
+	function texture_unref(texture: any | null): void;
 
 	/**
 	 * Multiplies the current model-view matrix by the given matrix.
@@ -3790,7 +3790,7 @@ declare namespace imports.gi.Cogl {
 	 *   must remain valid until you either call cogl_vertex_buffer_submit() or
 	 *   issue a draw call.
 	 */
-	function vertex_buffer_add(handle: Handle, attribute_name: string, n_components: number, _type: AttributeType, normalized: Bool, stride: number, pointer: any): void;
+	function vertex_buffer_add(handle: Handle, attribute_name: string, n_components: number, _type: AttributeType, normalized: Bool, stride: number, pointer: any | null): void;
 
 	/**
 	 * Deletes an attribute from a buffer. You will need to call
@@ -3960,7 +3960,7 @@ declare namespace imports.gi.Cogl {
 	 */
 	function viewport(width: number, height: number): void;
 
-	function xlib_renderer_add_filter(renderer: any, _func: XlibFilterFunc, data: any): void;
+	function xlib_renderer_add_filter(renderer: any, _func: XlibFilterFunc, data: any | null): void;
 
 	function xlib_renderer_get_display(renderer: any): any;
 
@@ -3970,7 +3970,7 @@ declare namespace imports.gi.Cogl {
 
 	function xlib_renderer_handle_event(renderer: any, event: any): FilterReturn;
 
-	function xlib_renderer_remove_filter(renderer: any, _func: XlibFilterFunc, data: any): void;
+	function xlib_renderer_remove_filter(renderer: any, _func: XlibFilterFunc, data: any | null): void;
 
 	/**
 	 * Sets whether Cogl should automatically retrieve events from the X

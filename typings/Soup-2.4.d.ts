@@ -137,7 +137,7 @@ declare namespace imports.gi.Soup {
 		 * @param cancellable a #GCancellable object, or %NULL
 		 * @param callback callback to call with the result
 		 */
-		resolve_async(async_context: GLib.MainContext, cancellable: Gio.Cancellable, callback: AddressCallback): void;
+		resolve_async(async_context: GLib.MainContext | null, cancellable: Gio.Cancellable | null, callback: AddressCallback): void;
 		/**
 		 * Synchronously resolves the missing half of #addr, as with
 		 * soup_address_resolve_async().
@@ -154,7 +154,7 @@ declare namespace imports.gi.Soup {
 		 * @returns %SOUP_STATUS_OK, %SOUP_STATUS_CANT_RESOLVE, or
 		 * %SOUP_STATUS_CANCELLED.
 		 */
-		resolve_sync(cancellable: Gio.Cancellable): number;
+		resolve_sync(cancellable: Gio.Cancellable | null): number;
 		connect(signal: "notify::family", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::physical", callback: (owner: this, ...args: any) => number): number;
@@ -199,7 +199,7 @@ declare namespace imports.gi.Soup {
 		 * @param len size of #sa
 		 * @returns the new {@link Address}
 		 */
-		public static new_from_sockaddr(sa: any, len: number): Address;
+		public static new_from_sockaddr(sa: any | null, len: number): Address;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -510,7 +510,7 @@ declare namespace imports.gi.Soup {
 		 * @param dnotify destroy notifier to free #filter_data when #domain
 		 * is destroyed
 		 */
-		set_filter(filter: AuthDomainFilter, filter_data: any, dnotify: GLib.DestroyNotify): void;
+		set_filter(filter: AuthDomainFilter, filter_data: any | null, dnotify: GLib.DestroyNotify): void;
 		/**
 		 * Sets #auth_callback as an authentication-handling callback for
 		 * #domain. Whenever a request comes in to #domain which cannot be
@@ -523,7 +523,7 @@ declare namespace imports.gi.Soup {
 		 * @param dnotify destroy notifier to free #auth_data when #domain
 		 * is destroyed
 		 */
-		set_generic_auth_callback(auth_callback: AuthDomainGenericAuthCallback, auth_data: any, dnotify: GLib.DestroyNotify): void;
+		set_generic_auth_callback(auth_callback: AuthDomainGenericAuthCallback, auth_data: any | null, dnotify: GLib.DestroyNotify): void;
 		try_generic_auth_callback(msg: Message, username: string): boolean;
 		connect(signal: "notify::filter", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::filter_data", callback: (owner: this, ...args: any) => number): number;
@@ -823,7 +823,7 @@ declare namespace imports.gi.Soup {
 		 * @param cache_type the {@link CacheType} of the cache
 		 * @returns a new {@link Cache}
 		 */
-		public static new(cache_dir: string, cache_type: CacheType): Cache;
+		public static new(cache_dir: string | null, cache_type: CacheType): Cache;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -865,7 +865,7 @@ declare namespace imports.gi.Soup {
 		 * @returns the sniffed Content-Type of #buffer; this will never be %NULL,
 		 *   but may be "application/octet-stream".
 		 */
-		sniff(msg: Message, buffer: Buffer, params: GLib.HashTable): string;
+		sniff(msg: Message, buffer: Buffer, params: GLib.HashTable | null): string;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -918,7 +918,7 @@ declare namespace imports.gi.Soup {
 		 * @param uri the URI setting the cookie
 		 * @param first_party the URI for the main document
 		 */
-		add_cookie_full(cookie: Cookie, uri: URI, first_party: URI): void;
+		add_cookie_full(cookie: Cookie, uri: URI | null, first_party: URI | null): void;
 		/**
 		 * Adds #cookie to #jar, emitting the 'changed' signal if we are modifying
 		 * an existing cookie or adding a valid new cookie ('valid' means
@@ -987,7 +987,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a #GSList
 		 * with the cookies in the #jar that would be sent with a request to #uri.
 		 */
-		get_cookie_list_with_same_site_info(uri: URI, top_level: URI, site_for_cookies: URI, for_http: boolean, is_safe_method: boolean, is_top_level_navigation: boolean): GLib.SList;
+		get_cookie_list_with_same_site_info(uri: URI, top_level: URI | null, site_for_cookies: URI | null, for_http: boolean, is_safe_method: boolean, is_top_level_navigation: boolean): GLib.SList;
 		/**
 		 * Retrieves (in Cookie-header form) the list of cookies that would
 		 * be sent with a request to #uri.
@@ -1313,7 +1313,7 @@ declare namespace imports.gi.Soup {
 		 * @param printer_data data to pass to the callback
 		 * @param destroy a #GDestroyNotify to free #printer_data
 		 */
-		set_printer(printer: LoggerPrinter, printer_data: any, destroy: GLib.DestroyNotify): void;
+		set_printer(printer: LoggerPrinter, printer_data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Sets up a filter to determine the log level for a given request.
 		 * For each HTTP request #logger will invoke #request_filter to
@@ -1324,7 +1324,7 @@ declare namespace imports.gi.Soup {
 		 * @param filter_data data to pass to the callback
 		 * @param destroy a #GDestroyNotify to free #filter_data
 		 */
-		set_request_filter(request_filter: LoggerFilter, filter_data: any, destroy: GLib.DestroyNotify): void;
+		set_request_filter(request_filter: LoggerFilter, filter_data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Sets up a filter to determine the log level for a given response.
 		 * For each HTTP response #logger will invoke #response_filter to
@@ -1335,7 +1335,7 @@ declare namespace imports.gi.Soup {
 		 * @param filter_data data to pass to the callback
 		 * @param destroy a #GDestroyNotify to free #filter_data
 		 */
-		set_response_filter(response_filter: LoggerFilter, filter_data: any, destroy: GLib.DestroyNotify): void;
+		set_response_filter(response_filter: LoggerFilter, filter_data: any | null, destroy: GLib.DestroyNotify): void;
 		connect(signal: "notify::level", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::max_body_size", callback: (owner: this, ...args: any) => number): number;
 
@@ -1656,7 +1656,7 @@ declare namespace imports.gi.Soup {
 		 *   a data buffer containing the body of the message request.
 		 * @param req_length the byte length of #req_body.
 		 */
-		set_request(content_type: string, req_use: MemoryUse, req_body: number[], req_length: number): void;
+		set_request(content_type: string | null, req_use: MemoryUse, req_body: number[] | null, req_length: number): void;
 		/**
 		 * Convenience function to set the response body of a {@link Message}. If
 		 * #content_type is %NULL, the response body must be empty as well.
@@ -1665,7 +1665,7 @@ declare namespace imports.gi.Soup {
 		 * @param resp_body 
 		 *   a data buffer containing the body of the message response.
 		 */
-		set_response(content_type: string, resp_use: MemoryUse, resp_body: string | ByteArray): void;
+		set_response(content_type: string | null, resp_use: MemoryUse, resp_body: string | ByteArray): void;
 		/**
 		 * Sets #site_for_cookies as the policy URL for same-site cookies for #msg.
 		 * 
@@ -1677,7 +1677,7 @@ declare namespace imports.gi.Soup {
 		 * for more information.
 		 * @param site_for_cookies the {@link URI} for the #msg's site for cookies
 		 */
-		set_site_for_cookies(site_for_cookies: URI): void;
+		set_site_for_cookies(site_for_cookies: URI | null): void;
 		/**
 		 * Sets #msg's status code to #status_code. If #status_code is a
 		 * known value, it will also set #msg's reason_phrase.
@@ -1987,7 +1987,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a new #GInputStream, or
 		 * %NULL if there are no more parts
 		 */
-		next_part(cancellable: Gio.Cancellable): Gio.InputStream;
+		next_part(cancellable: Gio.Cancellable | null): Gio.InputStream;
 		/**
 		 * Obtains a #GInputStream for the next request. See
 		 * soup_multipart_input_stream_next_part() for details on the
@@ -1997,7 +1997,7 @@ declare namespace imports.gi.Soup {
 		 * @param callback callback to call when request is satisfied.
 		 * @param data data for #callback
 		 */
-		next_part_async(io_priority: number, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback, data: any): void;
+		next_part_async(io_priority: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null, data: any | null): void;
 		/**
 		 * Finishes an asynchronous request for the next part.
 		 * @param result a #GAsyncResult.
@@ -2101,7 +2101,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a #GInputStream that can be used to
 		 *   read from the URI pointed to by #request.
 		 */
-		send(cancellable: Gio.Cancellable): Gio.InputStream;
+		send(cancellable: Gio.Cancellable | null): Gio.InputStream;
 		/**
 		 * Begins an asynchronously request for the URI pointed to by
 		 * #request.
@@ -2111,7 +2111,7 @@ declare namespace imports.gi.Soup {
 		 * @param cancellable a #GCancellable or %NULL
 		 * @param callback a #GAsyncReadyCallback
 		 */
-		send_async(cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		send_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Gets the result of a soup_request_send_async().
 		 * @param result the #GAsyncResult
@@ -2334,7 +2334,7 @@ declare namespace imports.gi.Soup {
 		 * accepted or any other error occurred (in which case #error will be
 		 * set).
 		 */
-		accept_iostream(stream: Gio.IOStream, local_addr: Gio.SocketAddress, remote_addr: Gio.SocketAddress): boolean;
+		accept_iostream(stream: Gio.IOStream, local_addr: Gio.SocketAddress | null, remote_addr: Gio.SocketAddress | null): boolean;
 		/**
 		 * Adds an authentication domain to #server. Each auth domain will
 		 * have the chance to require authentication for each request that
@@ -2382,7 +2382,7 @@ declare namespace imports.gi.Soup {
 		 * @param callback callback to invoke for requests under #path
 		 * @param destroy destroy notifier to free #user_data
 		 */
-		add_early_handler(path: string, callback: ServerCallback, destroy: GLib.DestroyNotify): void;
+		add_early_handler(path: string | null, callback: ServerCallback, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Adds a handler to #server for requests under #path. If #path is
 		 * %NULL or "/", then this will be the default handler for all
@@ -2424,7 +2424,7 @@ declare namespace imports.gi.Soup {
 		 * @param path the toplevel path for the handler
 		 * @param callback callback to invoke for requests under #path
 		 */
-		add_handler(path: string | null, callback: ServerCallback): void;
+		add_handler(path: string | null | null, callback: ServerCallback): void;
 		/**
 		 * Add support for a WebSocket extension of the given #extension_type.
 		 * When a WebSocket client requests an extension of #extension_type,
@@ -2464,7 +2464,7 @@ declare namespace imports.gi.Soup {
 		 * @param callback callback to invoke for successful WebSocket requests under #path
 		 * @param destroy destroy notifier to free #user_data
 		 */
-		add_websocket_handler(path: string, origin: string, protocols: string[], callback: ServerWebsocketCallback, destroy: GLib.DestroyNotify): void;
+		add_websocket_handler(path: string | null, origin: string | null, protocols: string[] | null, callback: ServerWebsocketCallback, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Closes and frees #server's listening sockets. If you are using the
 		 * old {@link Server} APIs, this also includes the effect of
@@ -3149,7 +3149,7 @@ declare namespace imports.gi.Soup {
 		 * will be called for every network event that occurs during the connection.
 		 * @param callback the callback to invoke when the operation finishes
 		 */
-		connect_async(uri: URI, cancellable: Gio.Cancellable, progress_callback: SessionConnectProgressCallback, callback: Gio.AsyncReadyCallback): void;
+		connect_async(uri: URI, cancellable: Gio.Cancellable | null, progress_callback: SessionConnectProgressCallback | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Gets the #GIOStream created for the connection to communicate with the server.
 		 * @param result the #GAsyncResult passed to your callback
@@ -3231,7 +3231,7 @@ declare namespace imports.gi.Soup {
 		 * @param callback callback to call with the
 		 *     result, or %NULL
 		 */
-		prefetch_dns(hostname: string, cancellable: Gio.Cancellable, callback: AddressCallback): void;
+		prefetch_dns(hostname: string, cancellable: Gio.Cancellable | null, callback: AddressCallback | null): void;
 		/**
 		 * Tells #session that #uri may be requested shortly, and so the
 		 * session can try to prepare (resolving the domain name, obtaining
@@ -3265,7 +3265,7 @@ declare namespace imports.gi.Soup {
 		 * @param callback a {@link SessionCallback} which will
 		 * be called after the message completes or when an unrecoverable error occurs.
 		 */
-		queue_message(msg: Message, callback: SessionCallback): void;
+		queue_message(msg: Message, callback: SessionCallback | null): void;
 		/**
 		 * Updates #msg's URI according to its status code and "Location"
 		 * header, and requeues it on #session. Use this when you have set
@@ -3369,7 +3369,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a #GInputStream for reading the
 		 *   response body, or %NULL on error.
 		 */
-		send(msg: Message, cancellable: Gio.Cancellable): Gio.InputStream;
+		send(msg: Message, cancellable: Gio.Cancellable | null): Gio.InputStream;
 		/**
 		 * Asynchronously sends #msg and waits for the beginning of a
 		 * response. When #callback is called, then either #msg has been sent,
@@ -3391,7 +3391,7 @@ declare namespace imports.gi.Soup {
 		 * @param cancellable a #GCancellable
 		 * @param callback the callback to invoke
 		 */
-		send_async(msg: Message, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		send_async(msg: Message, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Gets the response to a soup_session_send_async() call and (if
 		 * successful), returns a #GInputStream that can be used to read the
@@ -3477,7 +3477,7 @@ declare namespace imports.gi.Soup {
 		 * @param cancellable a #GCancellable
 		 * @param callback the callback to invoke
 		 */
-		websocket_connect_async(msg: Message, origin: string, protocols: string[], cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		websocket_connect_async(msg: Message, origin: string | null, protocols: string[] | null, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Gets the {@link WebsocketConnection} response to a
 		 * soup_session_websocket_connect_async() call and (if successful),
@@ -3748,7 +3748,7 @@ declare namespace imports.gi.Soup {
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @param callback callback to call after connecting
 		 */
-		connect_async(cancellable: Gio.Cancellable, callback: SocketCallback): void;
+		connect_async(cancellable: Gio.Cancellable | null, callback: SocketCallback): void;
 		/**
 		 * Attempt to synchronously connect #sock to its remote address.
 		 * 
@@ -3758,7 +3758,7 @@ declare namespace imports.gi.Soup {
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns a success or failure code.
 		 */
-		connect_sync(cancellable: Gio.Cancellable): number;
+		connect_sync(cancellable: Gio.Cancellable | null): number;
 		/**
 		 * Disconnects #sock. Any further read or write attempts on it will
 		 * fail.
@@ -3827,7 +3827,7 @@ declare namespace imports.gi.Soup {
 		 * %SOUP_SOCKET_ERROR on any other error, in which case #error will
 		 * also be set).
 		 */
-		read(buffer: number[], len: number, nread: number, cancellable: Gio.Cancellable): SocketIOStatus;
+		read(buffer: number[], len: number, nread: number, cancellable: Gio.Cancellable | null): SocketIOStatus;
 		/**
 		 * Like soup_socket_read(), but reads no further than the first
 		 * occurrence of #boundary. (If the boundary is found, it will be
@@ -3852,7 +3852,7 @@ declare namespace imports.gi.Soup {
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns as for soup_socket_read()
 		 */
-		read_until(buffer: number[], len: number, boundary: any, boundary_len: number, nread: number, got_boundary: boolean, cancellable: Gio.Cancellable): SocketIOStatus;
+		read_until(buffer: number[], len: number, boundary: any | null, boundary_len: number, nread: number, got_boundary: boolean, cancellable: Gio.Cancellable | null): SocketIOStatus;
 		/**
 		 * Starts using SSL on #socket, expecting to find a host named
 		 * #ssl_host.
@@ -3860,13 +3860,13 @@ declare namespace imports.gi.Soup {
 		 * @param cancellable a #GCancellable
 		 * @returns success or failure
 		 */
-		start_proxy_ssl(ssl_host: string, cancellable: Gio.Cancellable): boolean;
+		start_proxy_ssl(ssl_host: string, cancellable: Gio.Cancellable | null): boolean;
 		/**
 		 * Starts using SSL on #socket.
 		 * @param cancellable a #GCancellable
 		 * @returns success or failure
 		 */
-		start_ssl(cancellable: Gio.Cancellable): boolean;
+		start_ssl(cancellable: Gio.Cancellable | null): boolean;
 		/**
 		 * Attempts to write #len bytes from #buffer to #sock. If some data is
 		 * successfully written, the return status will be %SOUP_SOCKET_OK,
@@ -3888,7 +3888,7 @@ declare namespace imports.gi.Soup {
 		 * %SOUP_SOCKET_EOF or %SOUP_SOCKET_ERROR. #error will be set if the
 		 * return value is %SOUP_SOCKET_ERROR.)
 		 */
-		write(buffer: number[], len: number, nwrote: number, cancellable: Gio.Cancellable): SocketIOStatus;
+		write(buffer: number[], len: number, nwrote: number, cancellable: Gio.Cancellable | null): SocketIOStatus;
 		/**
 		 * Emitted when the socket is disconnected, for whatever
 		 * reason.
@@ -4018,7 +4018,7 @@ declare namespace imports.gi.Soup {
 		 * @param code close code
 		 * @param data close data
 		 */
-		close(code: number, data: string): void;
+		close(code: number, data: string | null): void;
 		/**
 		 * Get the close code received from the WebSocket peer.
 		 * 
@@ -4094,7 +4094,7 @@ declare namespace imports.gi.Soup {
 		 * @param data the message contents
 		 * @param length the length of #data
 		 */
-		send_binary(data: number[], length: number): void;
+		send_binary(data: number[] | null, length: number): void;
 		/**
 		 * Send a message of the given #type to the peer. Note that this method,
 		 * allows to send text messages containing %NULL characters.
@@ -4199,7 +4199,7 @@ declare namespace imports.gi.Soup {
 		 * @param protocol the subprotocol in use
 		 * @returns a new {@link WebsocketConnection}
 		 */
-		public static new(stream: Gio.IOStream, uri: URI, _type: WebsocketConnectionType, origin: string, protocol: string): WebsocketConnection;
+		public static new(stream: Gio.IOStream, uri: URI, _type: WebsocketConnectionType, origin: string | null, protocol: string | null): WebsocketConnection;
 		/**
 		 * Creates a {@link WebsocketConnection} on #stream with the given active #extensions.
 		 * This should be called after completing the handshake to begin using the WebSocket
@@ -4212,7 +4212,7 @@ declare namespace imports.gi.Soup {
 		 * @param extensions a #GList of {@link WebsocketExtension} objects
 		 * @returns a new {@link WebsocketConnection}
 		 */
-		public static new_with_extensions(stream: Gio.IOStream, uri: URI, _type: WebsocketConnectionType, origin: string, protocol: string, extensions: GLib.List): WebsocketConnection;
+		public static new_with_extensions(stream: Gio.IOStream, uri: URI, _type: WebsocketConnectionType, origin: string | null, protocol: string | null, extensions: GLib.List): WebsocketConnection;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4225,7 +4225,7 @@ declare namespace imports.gi.Soup {
 		 * @param params the parameters, or %NULL
 		 * @returns %TRUE if extension could be configured with the given parameters, or %FALSE otherwise
 		 */
-		configure(connection_type: WebsocketConnectionType, params: GLib.HashTable): boolean;
+		configure(connection_type: WebsocketConnectionType, params: GLib.HashTable | null): boolean;
 		/**
 		 * Get the parameters strings to be included in the request header. If the extension
 		 * doesn't include any parameter in the request, this function returns %NULL.
@@ -4428,7 +4428,7 @@ declare namespace imports.gi.Soup {
 		 * the buffer is freed
 		 * @returns the new {@link Buffer}.
 		 */
-		public static new_with_owner(data: number[], length: number, owner: any, owner_dnotify: GLib.DestroyNotify): Buffer;
+		public static new_with_owner(data: number[], length: number, owner: any | null, owner_dnotify: GLib.DestroyNotify | null): Buffer;
 		/**
 		 * the data
 		 */
@@ -4636,7 +4636,7 @@ declare namespace imports.gi.Soup {
 	interface ContentSnifferClass {}
 	class ContentSnifferClass {
 		public constructor();
-		public sniff: {(sniffer: ContentSniffer, msg: Message, buffer: Buffer, params: GLib.HashTable): string;};
+		public sniff: {(sniffer: ContentSniffer, msg: Message, buffer: Buffer, params: GLib.HashTable | null): string;};
 		public get_buffer_size: {(sniffer: ContentSniffer): number;};
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
@@ -5541,7 +5541,7 @@ declare namespace imports.gi.Soup {
 		 * @returns %TRUE if #hdrs contained a "Content-Range" header
 		 * containing a byte range which could be parsed, %FALSE otherwise.
 		 */
-		public get_content_range(start: number, _end: number, total_length: number): boolean;
+		public get_content_range(start: number, _end: number, total_length: number | null): boolean;
 		/**
 		 * Looks up the "Content-Type" header in #hdrs, parses it, and returns
 		 * its value in *#content_type and *#params. #params can be %NULL if you
@@ -5554,7 +5554,7 @@ declare namespace imports.gi.Soup {
 		 * header or it cannot be parsed (in which case *#params will be
 		 * unchanged).
 		 */
-		public get_content_type(params: GLib.HashTable): string;
+		public get_content_type(params: GLib.HashTable | null): string;
 		/**
 		 * Gets the message body encoding that #hdrs declare. This may not
 		 * always correspond to the encoding used on the wire; eg, a HEAD
@@ -5692,7 +5692,7 @@ declare namespace imports.gi.Soup {
 		 * @param params additional
 		 * parameters, or %NULL
 		 */
-		public set_content_disposition(disposition: string, params: GLib.HashTable): void;
+		public set_content_disposition(disposition: string, params: GLib.HashTable | null): void;
 		/**
 		 * Sets the message body length that #hdrs will declare, and sets
 		 * #hdrs's encoding to %SOUP_ENCODING_CONTENT_LENGTH.
@@ -5730,7 +5730,7 @@ declare namespace imports.gi.Soup {
 		 * @param params additional
 		 * parameters, or %NULL
 		 */
-		public set_content_type(content_type: string, params: GLib.HashTable): void;
+		public set_content_type(content_type: string, params: GLib.HashTable | null): void;
 		/**
 		 * Sets the message body encoding that #hdrs will declare. In particular,
 		 * you should use this if you are going to send a request or response in
@@ -5914,8 +5914,8 @@ declare namespace imports.gi.Soup {
 	class PasswordManagerInterface {
 		public constructor();
 		public readonly base: GObject.TypeInterface;
-		public get_passwords_async: {(password_manager: PasswordManager, msg: Message, auth: Auth, retrying: boolean, async_context: GLib.MainContext, cancellable: Gio.Cancellable, callback: PasswordManagerCallback): void;};
-		public get_passwords_sync: {(password_manager: PasswordManager, msg: Message, auth: Auth, cancellable: Gio.Cancellable): void;};
+		public get_passwords_async: {(password_manager: PasswordManager, msg: Message, auth: Auth, retrying: boolean, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: PasswordManagerCallback): void;};
+		public get_passwords_sync: {(password_manager: PasswordManager, msg: Message, auth: Auth, cancellable: Gio.Cancellable | null): void;};
 	}
 
 	interface ProxyResolverDefaultClass {}
@@ -5927,16 +5927,16 @@ declare namespace imports.gi.Soup {
 	class ProxyResolverInterface {
 		public constructor();
 		public readonly base: GObject.TypeInterface;
-		public get_proxy_async: {(proxy_resolver: ProxyResolver, msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable, callback: ProxyResolverCallback): void;};
-		public get_proxy_sync: {(proxy_resolver: ProxyResolver, msg: Message, cancellable: Gio.Cancellable, addr: Address): number;};
+		public get_proxy_async: {(proxy_resolver: ProxyResolver, msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: ProxyResolverCallback): void;};
+		public get_proxy_sync: {(proxy_resolver: ProxyResolver, msg: Message, cancellable: Gio.Cancellable | null, addr: Address): number;};
 	}
 
 	interface ProxyURIResolverInterface {}
 	class ProxyURIResolverInterface {
 		public constructor();
 		public readonly base: GObject.TypeInterface;
-		public get_proxy_uri_async: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, async_context: GLib.MainContext, cancellable: Gio.Cancellable, callback: ProxyURIResolverCallback): void;};
-		public get_proxy_uri_sync: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, cancellable: Gio.Cancellable, proxy_uri: URI): number;};
+		public get_proxy_uri_async: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, async_context: GLib.MainContext | null, cancellable: Gio.Cancellable | null, callback: ProxyURIResolverCallback): void;};
+		public get_proxy_uri_sync: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, cancellable: Gio.Cancellable | null, proxy_uri: URI): number;};
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -5977,8 +5977,8 @@ declare namespace imports.gi.Soup {
 		public constructor();
 		public readonly schemes: string;
 		public check_uri: {(req_base: Request, uri: URI): boolean;};
-		public send: {(request: Request, cancellable: Gio.Cancellable): Gio.InputStream;};
-		public send_async: {(request: Request, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;};
+		public send: {(request: Request, cancellable: Gio.Cancellable | null): Gio.InputStream;};
+		public send_async: {(request: Request, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;};
 		public send_finish: {(request: Request, result: Gio.AsyncResult): Gio.InputStream;};
 		public get_content_length: {(request: Request): number;};
 		public get_content_type: {(request: Request): string;};
@@ -6056,7 +6056,7 @@ declare namespace imports.gi.Soup {
 		public constructor();
 		public request_started: {(session: Session, msg: Message, socket: Socket): void;};
 		public authenticate: {(session: Session, msg: Message, auth: Auth, retrying: boolean): void;};
-		public queue_message: {(session: Session, msg: Message, callback: SessionCallback): void;};
+		public queue_message: {(session: Session, msg: Message, callback: SessionCallback | null): void;};
 		public requeue_message: {(session: Session, msg: Message): void;};
 		public send_message: {(session: Session, msg: Message): number;};
 		public cancel_message: {(session: Session, msg: Message, status_code: number): void;};
@@ -6161,7 +6161,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a {@link URI}, or %NULL if the given string
 		 *  was found to be invalid.
 		 */
-		public static new(uri_string: string): URI;
+		public static new(uri_string: string | null): URI;
 		/**
 		 * Parses #uri_string relative to #base.
 		 * @param base a base URI
@@ -6277,7 +6277,7 @@ declare namespace imports.gi.Soup {
 		 * Sets #uri's fragment to #fragment.
 		 * @param fragment the fragment
 		 */
-		public set_fragment(fragment: string): void;
+		public set_fragment(fragment: string | null): void;
 		/**
 		 * Sets #uri's host to #host.
 		 * 
@@ -6288,12 +6288,12 @@ declare namespace imports.gi.Soup {
 		 * http and https URIs should not have a %NULL #host.
 		 * @param host the hostname or IP address, or %NULL
 		 */
-		public set_host(host: string): void;
+		public set_host(host: string | null): void;
 		/**
 		 * Sets #uri's password to #password.
 		 * @param password the password, or %NULL
 		 */
-		public set_password(password: string): void;
+		public set_password(password: string | null): void;
 		/**
 		 * Sets #uri's path to #path.
 		 * @param path the non-%NULL path
@@ -6309,7 +6309,7 @@ declare namespace imports.gi.Soup {
 		 * Sets #uri's query to #query.
 		 * @param query the query
 		 */
-		public set_query(query: string): void;
+		public set_query(query: string | null): void;
 		/**
 		 * Sets #uri's query to the result of encoding the given form fields
 		 * and values according to the * HTML form rules. See
@@ -6334,7 +6334,7 @@ declare namespace imports.gi.Soup {
 		 * Sets #uri's user to #user.
 		 * @param user the username, or %NULL
 		 */
-		public set_user(user: string): void;
+		public set_user(user: string | null): void;
 		/**
 		 * Returns a string representing #uri.
 		 * 
@@ -6382,7 +6382,7 @@ declare namespace imports.gi.Soup {
 	class WebsocketExtensionClass {
 		public constructor();
 		public readonly name: string;
-		public configure: {(extension: WebsocketExtension, connection_type: WebsocketConnectionType, params: GLib.HashTable): boolean;};
+		public configure: {(extension: WebsocketExtension, connection_type: WebsocketConnectionType, params: GLib.HashTable | null): boolean;};
 		public get_request_params: {(extension: WebsocketExtension): string;};
 		public get_response_params: {(extension: WebsocketExtension): string;};
 		public process_outgoing_message: {(extension: WebsocketExtension, header: number, payload: GLib.Bytes): GLib.Bytes;};
@@ -6439,15 +6439,15 @@ declare namespace imports.gi.Soup {
 		 * @param signature A valid #GVariant type string, or %NULL
 		 * @returns a new (non-floating) #GVariant, or %NULL
 		 */
-		public parse(signature: string): GLib.Variant;
+		public parse(signature: string | null): GLib.Variant;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PasswordManager} instead.
 	 */
 	interface IPasswordManager {
-		get_passwords_async(msg: Message, auth: Auth, retrying: boolean, async_context: GLib.MainContext, cancellable: Gio.Cancellable, callback: PasswordManagerCallback): void;
-		get_passwords_sync(msg: Message, auth: Auth, cancellable: Gio.Cancellable): void;
+		get_passwords_async(msg: Message, auth: Auth, retrying: boolean, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: PasswordManagerCallback): void;
+		get_passwords_sync(msg: Message, auth: Auth, cancellable: Gio.Cancellable | null): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6467,8 +6467,8 @@ declare namespace imports.gi.Soup {
 	 * use {@link ProxyResolver} instead.
 	 */
 	interface IProxyResolver {
-		get_proxy_async(msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable, callback: ProxyResolverCallback): void;
-		get_proxy_sync(msg: Message, cancellable: Gio.Cancellable, addr: Address): number;
+		get_proxy_async(msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: ProxyResolverCallback): void;
+		get_proxy_sync(msg: Message, cancellable: Gio.Cancellable | null, addr: Address): number;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6496,7 +6496,7 @@ declare namespace imports.gi.Soup {
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @param callback callback to invoke with the proxy address
 		 */
-		get_proxy_uri_async(uri: URI, async_context: GLib.MainContext, cancellable: Gio.Cancellable, callback: ProxyURIResolverCallback): void;
+		get_proxy_uri_async(uri: URI, async_context: GLib.MainContext | null, cancellable: Gio.Cancellable | null, callback: ProxyURIResolverCallback): void;
 		/**
 		 * Synchronously determines a proxy URI to use for #uri. If #uri
 		 * should be sent via proxy, *#proxy_uri will be set to the URI of the
@@ -6507,7 +6507,7 @@ declare namespace imports.gi.Soup {
 		 * @returns %SOUP_STATUS_OK if successful, or a transport-level
 		 * error.
 		 */
-		get_proxy_uri_sync(uri: URI, cancellable: Gio.Cancellable, proxy_uri: URI): number;
+		get_proxy_uri_sync(uri: URI, cancellable: Gio.Cancellable | null, proxy_uri: URI): number;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7968,7 +7968,7 @@ declare namespace imports.gi.Soup {
 		 *   component of #msg's Request-URI
 		 * @param client additional contextual information about the client
 		 */
-		(server: Server, msg: Message, path: string, query: GLib.HashTable, client: ClientContext): void;
+		(server: Server, msg: Message, path: string, query: GLib.HashTable | null, client: ClientContext): void;
 	}
 
 	/**
@@ -8047,7 +8047,7 @@ declare namespace imports.gi.Soup {
 	 * @returns a #GSource, which can be removed from #async_context
 	 * with g_source_destroy().
 	 */
-	function add_completion(async_context: GLib.MainContext, _function: GLib.SourceFunc, data: any): GLib.Source;
+	function add_completion(async_context: GLib.MainContext | null, _function: GLib.SourceFunc, data: any | null): GLib.Source;
 
 	/**
 	 * Adds an idle event as with g_idle_add(), but using the given
@@ -8063,7 +8063,7 @@ declare namespace imports.gi.Soup {
 	 * @returns a #GSource, which can be removed from #async_context
 	 * with g_source_destroy().
 	 */
-	function add_idle(async_context: GLib.MainContext, _function: GLib.SourceFunc, data: any): GLib.Source;
+	function add_idle(async_context: GLib.MainContext | null, _function: GLib.SourceFunc, data: any | null): GLib.Source;
 
 	/**
 	 * Adds an I/O watch as with g_io_add_watch(), but using the given
@@ -8077,7 +8077,7 @@ declare namespace imports.gi.Soup {
 	 * @returns a #GSource, which can be removed from #async_context
 	 * with g_source_destroy().
 	 */
-	function add_io_watch(async_context: GLib.MainContext, chan: GLib.IOChannel, condition: GLib.IOCondition, _function: GLib.IOFunc, data: any): GLib.Source;
+	function add_io_watch(async_context: GLib.MainContext | null, chan: GLib.IOChannel, condition: GLib.IOCondition, _function: GLib.IOFunc, data: any | null): GLib.Source;
 
 	/**
 	 * Adds a timeout as with g_timeout_add(), but using the given
@@ -8090,7 +8090,7 @@ declare namespace imports.gi.Soup {
 	 * @returns a #GSource, which can be removed from #async_context
 	 * with g_source_destroy().
 	 */
-	function add_timeout(async_context: GLib.MainContext, interval: number, _function: GLib.SourceFunc, data: any): GLib.Source;
+	function add_timeout(async_context: GLib.MainContext | null, interval: number, _function: GLib.SourceFunc, data: any | null): GLib.Source;
 
 	/**
 	 * Like SOUP_CHECK_VERSION, but the check for soup_check_version is
@@ -8222,7 +8222,7 @@ declare namespace imports.gi.Soup {
 	 * #file_control_name) from #msg, which you can free with
 	 * g_hash_table_destroy(). On error, it will return %NULL.
 	 */
-	function form_decode_multipart(msg: Message, file_control_name: string, filename: string, content_type: string, file: Buffer): GLib.HashTable;
+	function form_decode_multipart(msg: Message, file_control_name: string | null, filename: string | null, content_type: string | null, file: Buffer | null): GLib.HashTable;
 
 	/**
 	 * Encodes the given field names and values into a value of type
@@ -8474,7 +8474,7 @@ declare namespace imports.gi.Soup {
 	 * @returns a #GSList of
 	 * acceptable values (as allocated strings), highest-qvalue first.
 	 */
-	function header_parse_quality_list(header: string, unacceptable: GLib.SList): GLib.SList;
+	function header_parse_quality_list(header: string, unacceptable: GLib.SList | null): GLib.SList;
 
 	/**
 	 * Parses a header which is a semicolon-delimited list of something
@@ -8541,7 +8541,7 @@ declare namespace imports.gi.Soup {
 	 * @returns %SOUP_STATUS_OK if the headers could be parsed, or an
 	 * HTTP error to be returned to the client if they could not be.
 	 */
-	function headers_parse_request(_str: string, len: number, req_headers: MessageHeaders, req_method: string, req_path: string, ver: HTTPVersion): number;
+	function headers_parse_request(_str: string, len: number, req_headers: MessageHeaders, req_method: string | null, req_path: string | null, ver: HTTPVersion | null): number;
 
 	/**
 	 * Parses the headers of an HTTP response in #str and stores the
@@ -8559,7 +8559,7 @@ declare namespace imports.gi.Soup {
 	 * the reason phrase
 	 * @returns success or failure.
 	 */
-	function headers_parse_response(_str: string, len: number, headers: MessageHeaders, ver: HTTPVersion, status_code: number, reason_phrase: string): boolean;
+	function headers_parse_response(_str: string, len: number, headers: MessageHeaders, ver: HTTPVersion | null, status_code: number | null, reason_phrase: string | null): boolean;
 
 	/**
 	 * Parses the HTTP Status-Line string in #status_line into #ver,
@@ -8574,7 +8574,7 @@ declare namespace imports.gi.Soup {
 	 * the reason phrase
 	 * @returns %TRUE if #status_line was parsed successfully.
 	 */
-	function headers_parse_status_line(status_line: string, ver: HTTPVersion, status_code: number, reason_phrase: string): boolean;
+	function headers_parse_status_line(status_line: string, ver: HTTPVersion | null, status_code: number | null, reason_phrase: string | null): boolean;
 
 	function http_error_quark(): GLib.Quark;
 
@@ -8625,14 +8625,14 @@ declare namespace imports.gi.Soup {
 	 * @param v2 another ASCII string
 	 * @returns %TRUE if they are equal (modulo case)
 	 */
-	function str_case_equal(v1: any, v2: any): boolean;
+	function str_case_equal(v1: any | null, v2: any | null): boolean;
 
 	/**
 	 * Hashes #key in a case-insensitive manner.
 	 * @param key ASCII string to hash
 	 * @returns the hash code.
 	 */
-	function str_case_hash(key: any): number;
+	function str_case_hash(key: any | null): number;
 
 	/**
 	 * Looks whether the #domain passed as argument is a public domain
@@ -8688,7 +8688,7 @@ declare namespace imports.gi.Soup {
 	 * escape (or %NULL)
 	 * @returns the encoded URI part
 	 */
-	function uri_encode(part: string, escape_extra: string): string;
+	function uri_encode(part: string, escape_extra: string | null): string;
 
 	/**
 	 * %<!-- -->-decodes any "unreserved" characters (or characters in
@@ -8712,7 +8712,7 @@ declare namespace imports.gi.Soup {
 	 * @param unescape_extra reserved characters to unescape (or %NULL)
 	 * @returns the normalized URI part
 	 */
-	function uri_normalize(part: string, unescape_extra: string): string;
+	function uri_normalize(part: string, unescape_extra: string | null): string;
 
 	/**
 	 * Appends the provided value of type #type to #array as with
@@ -8875,7 +8875,7 @@ declare namespace imports.gi.Soup {
 	 * @param protocols list of
 	 *   protocols to offer
 	 */
-	function websocket_client_prepare_handshake(msg: Message, origin: string, protocols: string[]): void;
+	function websocket_client_prepare_handshake(msg: Message, origin: string | null, protocols: string[] | null): void;
 
 	/**
 	 * Adds the necessary headers to #msg to request a WebSocket
@@ -8893,7 +8893,7 @@ declare namespace imports.gi.Soup {
 	 * @param supported_extensions list
 	 *   of supported extension types
 	 */
-	function websocket_client_prepare_handshake_with_extensions(msg: Message, origin: string, protocols: string[], supported_extensions: GObject.TypeClass[]): void;
+	function websocket_client_prepare_handshake_with_extensions(msg: Message, origin: string | null, protocols: string[] | null, supported_extensions: GObject.TypeClass[] | null): void;
 
 	/**
 	 * Looks at the response status code and headers in #msg and
@@ -8936,7 +8936,7 @@ declare namespace imports.gi.Soup {
 	 * @returns %TRUE if #msg contains a completed valid WebSocket
 	 *   handshake, %FALSE and an error if not.
 	 */
-	function websocket_client_verify_handshake_with_extensions(msg: Message, supported_extensions: GObject.TypeClass[], accepted_extensions: GLib.List): boolean;
+	function websocket_client_verify_handshake_with_extensions(msg: Message, supported_extensions: GObject.TypeClass[] | null, accepted_extensions: GLib.List | null): boolean;
 
 	function websocket_error_get_quark(): GLib.Quark;
 
@@ -8968,7 +8968,7 @@ declare namespace imports.gi.Soup {
 	 * @returns %TRUE if #msg contained a valid WebSocket handshake,
 	 *   %FALSE and an error if not.
 	 */
-	function websocket_server_check_handshake(msg: Message, origin: string, protocols: string[]): boolean;
+	function websocket_server_check_handshake(msg: Message, origin: string | null, protocols: string[] | null): boolean;
 
 	/**
 	 * Examines the method and request headers in #msg and determines
@@ -8997,7 +8997,7 @@ declare namespace imports.gi.Soup {
 	 * @returns %TRUE if #msg contained a valid WebSocket handshake,
 	 *   %FALSE and an error if not.
 	 */
-	function websocket_server_check_handshake_with_extensions(msg: Message, origin: string, protocols: string[], supported_extensions: GObject.TypeClass[]): boolean;
+	function websocket_server_check_handshake_with_extensions(msg: Message, origin: string | null, protocols: string[] | null, supported_extensions: GObject.TypeClass[] | null): boolean;
 
 	/**
 	 * Examines the method and request headers in #msg and (assuming #msg
@@ -9025,7 +9025,7 @@ declare namespace imports.gi.Soup {
 	 * @returns %TRUE if #msg contained a valid WebSocket handshake
 	 *   request and was updated to contain a handshake response. %FALSE if not.
 	 */
-	function websocket_server_process_handshake(msg: Message, expected_origin: string, protocols: string[]): boolean;
+	function websocket_server_process_handshake(msg: Message, expected_origin: string | null, protocols: string[] | null): boolean;
 
 	/**
 	 * Examines the method and request headers in #msg and (assuming #msg
@@ -9054,7 +9054,7 @@ declare namespace imports.gi.Soup {
 	 * @returns %TRUE if #msg contained a valid WebSocket handshake
 	 *   request and was updated to contain a handshake response. %FALSE if not.
 	 */
-	function websocket_server_process_handshake_with_extensions(msg: Message, expected_origin: string, protocols: string[], supported_extensions: GObject.TypeClass[], accepted_extensions: GLib.List): boolean;
+	function websocket_server_process_handshake_with_extensions(msg: Message, expected_origin: string | null, protocols: string[] | null, supported_extensions: GObject.TypeClass[] | null, accepted_extensions: GLib.List | null): boolean;
 
 	/**
 	 * This creates an XML-RPC fault response and returns it as a string.
@@ -9288,7 +9288,7 @@ declare namespace imports.gi.Soup {
 	 * @param signature A valid #GVariant type string, or %NULL
 	 * @returns a new (non-floating) #GVariant, or %NULL
 	 */
-	function xmlrpc_parse_response(method_response: string, length: number, signature: string): GLib.Variant;
+	function xmlrpc_parse_response(method_response: string, length: number, signature: string | null): GLib.Variant;
 
 	/**
 	 * Creates an XML-RPC methodCall and returns a {@link Message}, ready

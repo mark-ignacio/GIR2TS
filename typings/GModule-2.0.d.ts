@@ -130,7 +130,7 @@ declare namespace imports.gi.GModule {
 	 * @returns the complete path of the module, including the standard library
 	 *     prefix and suffix. This should be freed when no longer needed
 	 */
-	function module_build_path(directory: string, module_name: string): string;
+	function module_build_path(directory: string | null, module_name: string): string;
 
 	/**
 	 * Gets a string describing the last module error.

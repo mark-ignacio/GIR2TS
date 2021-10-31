@@ -1,5 +1,5 @@
 import { js_reserved_words } from "../consts";
-import { FunctionNode } from "../types/gir-types";
+import { FunctionNode, ParameterNode } from "../types/gir-types";
 import { GetTypeInfo, TypeInfo } from "./paramUtils";
 import { ClassModifier, FunctionModifier, ModifierDesc } from "../types/modifier-types";
 
@@ -32,10 +32,20 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
     const doc = func_node.doc?.[0]?.["_"] ?? null;
     //var has_params = "parameter" in method_node.parameters[0];
 
+    let return_params: ParameterNode[] = [];
+
     if (func_node.parameters && func_node.parameters[0].parameter) {
         for (var param_node of func_node.parameters[0].parameter) {
             if (param_node.$.name === '...' || param_node.$.name === 'user_data') continue;
             let param_name = param_node.$.name;
+
+            /*if (param_node.$.direction == "out") {
+                return_params.push(param_node);
+                continue;
+            }
+
+            if (param_node.$["caller-allocates"] == 0)
+                continue;*/
 
             if (modifier?.param?.[param_name]?.skip)
                 continue;
@@ -44,9 +54,11 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
                 param_name = '_' + param_name;
             }
             let { type, docString } = GetTypeInfo(param_node);
+
+            const finalType = modifier?.param?.[param_name]?.type ?? ((modifier?.param?.[param_name]?.type_extension?.length ?? 0 > 1) ? `${type} | ${modifier?.param?.[param_name]?.type_extension?.join(" | ")}` : type);
             params.push({
                 name: modifier?.param?.[param_name]?.newName ?? param_name,
-                type: modifier?.param?.[param_name]?.type ?? ((modifier?.param?.[param_name]?.type_extension?.length ?? 0 > 1) ? `${type} | ${modifier?.param?.[param_name]?.type_extension?.join(" | ")}` : type),
+                type: finalType,
                 docString: modifier?.param?.[param_name]?.doc ?? docString,
                 optional: modifier?.param?.[param_name]?.optional ?? false
             });

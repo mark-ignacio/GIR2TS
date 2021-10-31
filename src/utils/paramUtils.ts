@@ -74,11 +74,12 @@ export function GetTypeInfo(param_node: ParameterNode, modifier?: ParamModifier)
             docString: modifier?.doc ?? doc
         };
     }
-    if (type == undefined) {
 
-    }
+    let finalType = modifier?.type ?? ((modifier?.type_extension?.length ?? 0 > 1)) ? `${type} | ${modifier?.type_extension?.join(" | ")}`  : type;
+    if (param_node?.$?.["allow-none"] == 1)
+        finalType+= " | null";
     return {
-        type: modifier?.type ?? ((modifier?.type_extension?.length ?? 0 > 1)) ? `${type} | ${modifier?.type_extension?.join(" | ")}`  : type,
+        type: finalType,
         docString: modifier?.doc ?? doc
     };
 }

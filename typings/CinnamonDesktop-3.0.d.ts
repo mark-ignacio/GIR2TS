@@ -382,7 +382,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_aspect_ratio(): number;
 		get_display_name(): string;
 		get_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
-		get_geometry(_x: number, _y: number, width: number, height: number): void;
+		get_geometry(_x: number | null, _y: number | null, width: number | null, height: number | null): void;
 		get_name(): string;
 		get_preferred_height(): number;
 		get_preferred_width(): number;
@@ -504,7 +504,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * handler, instead of keeping the #output reference for an async or
 		 * idle function.
 		 */
-		connect(signal: "output-connected", callback: (owner: this, output: any) => void): number;
+		connect(signal: "output-connected", callback: (owner: this, output: any | null) => void): number;
 		/**
 		 * This signal is emitted when a display device is disconnected from
 		 * a port, or a port output is hot-unplugged. The latter can happen
@@ -519,7 +519,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * handler, instead of keeping the #output reference for an async or
 		 * idle function.
 		 */
-		connect(signal: "output-disconnected", callback: (owner: this, output: any) => void): number;
+		connect(signal: "output-disconnected", callback: (owner: this, output: any | null) => void): number;
 
 		connect(signal: "notify::gdk_screen", callback: (owner: this, ...args: any) => number): number;
 
@@ -597,7 +597,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param format_string
 		 * @returns Whether or not the format string was valid and accepted.
 		 */
-		set_format_string(format_string: string): boolean;
+		set_format_string(format_string: string | null): boolean;
 		connect(signal: "notify::clock", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::format_string", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
@@ -625,7 +625,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param format_string
 		 * @returns The translated format string.
 		 */
-		public static lctime_format(gettext_domain: string, format_string: string): string;
+		public static lctime_format(gettext_domain: string | null, format_string: string | null): string;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -672,7 +672,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * the layout's XKB variant, or %NULL
 		 * @returns %TRUE if the layout exists or %FALSE otherwise.
 		 */
-		get_layout_info(_id: string, display_name: string, short_name: string, xkb_layout: string, xkb_variant: string): boolean;
+		get_layout_info(_id: string, display_name: string | null, short_name: string | null, xkb_layout: string | null, xkb_variant: string | null): boolean;
 		/**
 		 * Retrieves the layout that better fits #language. It also fetches
 		 * information about that layout like gnome_xkb_info_get_layout_info().
@@ -692,7 +692,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * the layout's XKB variant, or %NULL
 		 * @returns %TRUE if a layout exists or %FALSE otherwise.
 		 */
-		get_layout_info_for_language(language: string, _id: string, display_name: string, short_name: string, xkb_layout: string, xkb_variant: string): boolean;
+		get_layout_info_for_language(language: string, _id: string | null, display_name: string | null, short_name: string | null, xkb_layout: string | null, xkb_variant: string | null): boolean;
 		/**
 		 * Returns a list of all option identifiers we know about for group
 		 * #group_id.
