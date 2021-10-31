@@ -65,6 +65,16 @@ declare namespace imports.gi.Gst {
 		 * Set the default allocator. This function takes ownership of #allocator.
 		 */
 		set_default(): void;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::mem_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::mem_map", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::mem_unmap", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::mem_copy", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::mem_share", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::mem_is_span", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::mem_map_full", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::mem_unmap_full", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -407,6 +417,20 @@ declare namespace imports.gi.Gst {
 		 */
 		connect(signal: "element-removed", callback: (owner: this, element: Element) => void): number;
 
+		connect(signal: "notify::async_handling", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::message_forward", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::element", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::numchildren", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::children", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::children_cookie", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::child_bus", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::messages", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::polling", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state_dirty", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::clock_dirty", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::provided_clock", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::clock_provider", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -642,6 +666,9 @@ declare namespace imports.gi.Gst {
 		 * @param flushing whether to start or stop flushing
 		 */
 		set_flushing(flushing: boolean): void;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::flushing", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1139,6 +1166,8 @@ declare namespace imports.gi.Gst {
 		 */
 		connect(signal: "sync-message", callback: (owner: this, message: Message) => void): number;
 
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1506,6 +1535,11 @@ declare namespace imports.gi.Gst {
 		 */
 		connect(signal: "synced", callback: (owner: this, synced: boolean) => void): number;
 
+		connect(signal: "notify::timeout", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::window_size", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::window_threshold", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1778,6 +1812,11 @@ declare namespace imports.gi.Gst {
 		 * property, %FALSE otherwise
 		 */
 		// sync_values(object: Object, timestamp: ClockTime, last_sync: ClockTime): boolean;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::pspec", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1826,6 +1865,9 @@ declare namespace imports.gi.Gst {
 		 * @returns %TRUE if the given array could be filled, %FALSE otherwise
 		 */
 		control_source_get_value_array(timestamp: ClockTime, interval: ClockTime, n_values: number, values: number[]): boolean;
+		connect(signal: "notify::get_value", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::get_value_array", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1923,6 +1965,11 @@ declare namespace imports.gi.Gst {
 		reconfigure_element(element: Element): boolean;
 		connect(signal: "removed", callback: (owner: this) => void): number;
 
+		connect(signal: "notify::caps", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::device_class", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::display_name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::properties", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2018,6 +2065,8 @@ declare namespace imports.gi.Gst {
 		 * Stops monitoring the devices.
 		 */
 		stop(): void;
+		connect(signal: "notify::show_all", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2215,6 +2264,8 @@ declare namespace imports.gi.Gst {
 		unhide_provider(name: string): void;
 		connect(signal: "provider-hidden", callback: (owner: this, object: string) => void): number;
 		connect(signal: "provider-unhidden", callback: (owner: this, object: string) => void): number;
+
+		connect(signal: "notify::devices", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -3316,6 +3367,28 @@ declare namespace imports.gi.Gst {
 		 */
 		connect(signal: "pad-removed", callback: (owner: this, old_pad: Pad) => void): number;
 
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state_lock", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state_cond", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state_cookie", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::target_state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::current_state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::next_state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::pending_state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::last_return", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::bus", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::clock", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::base_time", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::start_time", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::numpads", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::pads", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::numsrcpads", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::srcpads", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::numsinkpads", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::sinkpads", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::pads_cookie", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::contexts", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3702,6 +3775,8 @@ declare namespace imports.gi.Gst {
 		 *     can return %FALSE when the internal pads could not be linked.
 		 */
 		set_target(newtarget: Pad): boolean;
+		connect(signal: "notify::pad", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4110,6 +4185,12 @@ declare namespace imports.gi.Gst {
 		 * the elements contained in that bin.
 		 */
 		connect(signal: "deep-notify", callback: (owner: this, prop_object: Object, prop: GObject.ParamSpec) => void): number;
+
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::lock", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -5193,6 +5274,15 @@ declare namespace imports.gi.Gst {
 		 */
 		connect(signal: "unlinked", callback: (owner: this, peer: Pad) => void): number;
 
+		connect(signal: "notify::caps", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::offset", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::template", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::element_private", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::padtemplate", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5363,6 +5453,17 @@ declare namespace imports.gi.Gst {
 		 * This signal is fired when an element creates a pad from this template.
 		 */
 		connect(signal: "pad-created", callback: (owner: this, pad: Pad) => void): number;
+
+		connect(signal: "notify::caps", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::gtype", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name_template", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::presence", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name_template", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::presence", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::caps", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -5674,6 +5775,14 @@ declare namespace imports.gi.Gst {
 		 * @param clock the clock to use
 		 */
 		use_clock(clock: Clock): void;
+		connect(signal: "notify::auto_flush_bus", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::delay", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::latency", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::fixed_clock", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::stream_time", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::delay", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6108,6 +6217,8 @@ declare namespace imports.gi.Gst {
 		 * be %NULL.  Unref target pad after usage.
 		 */
 		get_internal(): ProxyPad;
+		connect(signal: "notify::pad", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6326,6 +6437,8 @@ declare namespace imports.gi.Gst {
 		 */
 		connect(signal: "plugin-added", callback: (owner: this, plugin: Plugin) => void): number;
 
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6496,6 +6609,13 @@ declare namespace imports.gi.Gst {
 		 * @param tags a {@link TagList}
 		 */
 		set_tags(tags: TagList): void;
+		connect(signal: "notify::caps", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::stream_flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::stream_id", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::stream_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::tags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::stream_id", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6565,6 +6685,8 @@ declare namespace imports.gi.Gst {
 		get_upstream_id(): string;
 		connect(signal: "stream-notify", callback: (owner: this, object: Stream, p0: GObject.ParamSpec) => void): number;
 
+		connect(signal: "notify::upstream_id", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6608,6 +6730,9 @@ declare namespace imports.gi.Gst {
 	interface ISystemClock {
 		clock_type: ClockType;
 		readonly clock: Clock;
+
+		connect(signal: "notify::clock_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::clock", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -6799,6 +6924,15 @@ declare namespace imports.gi.Gst {
 		 * MT safe.
 		 */
 		stop(): boolean;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::cond", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::lock", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::func", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::user_data", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::notify", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::running", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6913,6 +7047,8 @@ declare namespace imports.gi.Gst {
 		 * must check #error to detect errors.
 		 */
 		push(_func: TaskPoolFunction): any;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6943,6 +7079,8 @@ declare namespace imports.gi.Gst {
 	 */
 	interface ITracer {
 		params: string;
+
+		connect(signal: "notify::params", callback: (owner: this, ...args: any) => number): number;
 
 	}
 

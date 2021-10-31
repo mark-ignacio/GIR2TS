@@ -827,6 +827,14 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "startup", callback: (owner: this) => void): number;
 
+		connect(signal: "notify::application_id", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::inactivity_timeout", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_busy", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_registered", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_remote", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::resource_base_path", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1206,6 +1214,8 @@ declare namespace imports.gi.Gio {
 		 * @param exit_status the exit status
 		 */
 		set_exit_status(exit_status: number): void;
+		connect(signal: "notify::is_remote", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1484,6 +1494,8 @@ declare namespace imports.gi.Gio {
 		 * @param size a #gsize
 		 */
 		set_buffer_size(size: number): void;
+		connect(signal: "notify::buffer_size", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1558,6 +1570,9 @@ declare namespace imports.gi.Gio {
 		 * @param size a #gsize.
 		 */
 		set_buffer_size(size: number): void;
+		connect(signal: "notify::auto_grow", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::buffer_size", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1613,6 +1628,8 @@ declare namespace imports.gi.Gio {
 		 * @returns a #GBytes.
 		 */
 		get_bytes(): GLib.Bytes;
+		connect(signal: "notify::bytes", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1929,6 +1946,10 @@ declare namespace imports.gi.Gio {
 		 * @param use_fallback %TRUE to use fallbacks
 		 */
 		set_use_fallback(use_fallback: boolean): void;
+		connect(signal: "notify::from_charset", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::to_charset", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::use_fallback", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1963,6 +1984,8 @@ declare namespace imports.gi.Gio {
 		 * @returns the converter of the converter input stream
 		 */
 		get_converter(): Converter;
+		connect(signal: "notify::converter", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2000,6 +2023,8 @@ declare namespace imports.gi.Gio {
 		 * @returns the converter of the converter output stream
 		 */
 		get_converter(): Converter;
+		connect(signal: "notify::converter", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3240,6 +3265,14 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "closed", callback: (owner: this, remote_peer_vanished: boolean, error: GLib.Error) => void): number;
 
+		connect(signal: "notify::capabilities", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::closed", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::exit_on_close", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::guid", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::stream", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::unique_name", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3571,6 +3604,8 @@ declare namespace imports.gi.Gio {
 		 * to was exported in.
 		 */
 		connect(signal: "g-authorize-method", callback: (owner: this, invocation: DBusMethodInvocation) => boolean): number;
+
+		connect(signal: "notify::g_flags", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -3948,6 +3983,8 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if #error was set, %FALSE otherwise.
 		 */
 		to_gerror(): boolean;
+		connect(signal: "notify::locked", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4336,6 +4373,15 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "interface-proxy-signal", callback: (owner: this, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant) => void): number;
 
+		connect(signal: "notify::connection", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::get_proxy_type_destroy_notify", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::get_proxy_type_func", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::get_proxy_type_user_data", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name_owner", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::object_path", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4585,6 +4631,9 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if object at #object_path was removed, %FALSE otherwise.
 		 */
 		unexport(object_path: string): boolean;
+		connect(signal: "notify::connection", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::object_path", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4652,6 +4701,9 @@ declare namespace imports.gi.Gio {
 		 *   object is owned by #proxy.
 		 */
 		get_connection(): DBusConnection;
+		connect(signal: "notify::g_connection", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::g_object_path", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4733,6 +4785,8 @@ declare namespace imports.gi.Gio {
 		 * The default class handler just returns %TRUE.
 		 */
 		connect(signal: "authorize-method", callback: (owner: this, _interface: DBusInterfaceSkeleton, invocation: DBusMethodInvocation) => boolean): number;
+
+		connect(signal: "notify::g_object_path", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -5125,6 +5179,15 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "g-signal", callback: (owner: this, sender_name: string, signal_name: string, parameters: GLib.Variant) => void): number;
 
+		connect(signal: "notify::g_connection", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::g_default_timeout", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::g_flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::g_interface_info", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::g_interface_name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::g_name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::g_name_owner", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::g_object_path", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5387,6 +5450,13 @@ declare namespace imports.gi.Gio {
 		 * similar from the signal handler.
 		 */
 		connect(signal: "new-connection", callback: (owner: this, connection: DBusConnection) => boolean): number;
+
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::address", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::authentication_observer", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::client_address", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::guid", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -5767,6 +5837,9 @@ declare namespace imports.gi.Gio {
 		 * @param _type the type of new line return as #GDataStreamNewlineType.
 		 */
 		set_newline_type(_type: DataStreamNewlineType): void;
+		connect(signal: "notify::byte_order", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::newline_type", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5865,6 +5938,8 @@ declare namespace imports.gi.Gio {
 		 * @param order a %GDataStreamByteOrder.
 		 */
 		set_byte_order(order: DataStreamByteOrder): void;
+		connect(signal: "notify::byte_order", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6094,6 +6169,8 @@ declare namespace imports.gi.Gio {
 		 * @returns a list of strings, always non-%NULL
 		 */
 		list_actions(): string[];
+		connect(signal: "notify::filename", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6203,6 +6280,9 @@ declare namespace imports.gi.Gio {
 		 * @returns the origin of the emblem
 		 */
 		get_origin(): EmblemOrigin;
+		connect(signal: "notify::icon", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::origin", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6262,6 +6342,8 @@ declare namespace imports.gi.Gio {
 		 * @returns a #GIcon that is owned by #emblemed
 		 */
 		get_icon(): Icon;
+		connect(signal: "notify::gicon", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6608,6 +6690,8 @@ declare namespace imports.gi.Gio {
 		 * @returns a #GFile.
 		 */
 		get_file(): File;
+		connect(signal: "notify::file", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7281,6 +7365,9 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "changed", callback: (owner: this, file: File, other_file: File, event_type: FileMonitorEvent) => void): number;
 
+		connect(signal: "notify::cancelled", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::rate_limit", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7469,6 +7556,10 @@ declare namespace imports.gi.Gio {
 		 * @param close_base %TRUE to close the base stream.
 		 */
 		set_close_base_stream(close_base: boolean): void;
+		connect(signal: "notify::base_stream", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::close_base_stream", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::base_stream", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7511,6 +7602,10 @@ declare namespace imports.gi.Gio {
 		 * @param close_base %TRUE to close the base stream.
 		 */
 		set_close_base_stream(close_base: boolean): void;
+		connect(signal: "notify::base_stream", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::close_base_stream", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::base_stream", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7745,6 +7840,10 @@ declare namespace imports.gi.Gio {
 		 * @param callback a #GAsyncReadyCallback.
 		 */
 		splice_async(stream2: IOStream, flags: IOStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
+		connect(signal: "notify::closed", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::input_stream", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::output_stream", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7953,6 +8052,19 @@ declare namespace imports.gi.Gio {
 		 * freed after use.
 		 */
 		to_string(): string;
+		connect(signal: "notify::bytes", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::family", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_any", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_link_local", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_loopback", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_mc_global", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_mc_link_local", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_mc_node_local", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_mc_org_local", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_mc_site_local", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_multicast", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_site_local", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8053,6 +8165,10 @@ declare namespace imports.gi.Gio {
 		 * @returns a string corresponding to #mask.
 		 */
 		to_string(): string;
+		connect(signal: "notify::address", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::family", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::length", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8124,6 +8240,11 @@ declare namespace imports.gi.Gio {
 		 * @returns the scope id field
 		 */
 		get_scope_id(): number;
+		connect(signal: "notify::address", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::flowinfo", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::port", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::scope_id", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8618,6 +8739,8 @@ declare namespace imports.gi.Gio {
 		 * @param n_additions the number of items to add
 		 */
 		splice(position: number, n_removals: number, additions: GObject.Object[], n_additions: number): void;
+		connect(signal: "notify::item_type", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8775,6 +8898,12 @@ declare namespace imports.gi.Gio {
 		 *    been stolen
 		 */
 		steal_data(): any;
+		connect(signal: "notify::data", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::data_size", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::destroy_function", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::realloc_function", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::size", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9981,6 +10110,16 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "show-unmount-progress", callback: (owner: this, message: string, time_left: number, bytes_left: number) => void): number;
 
+		connect(signal: "notify::anonymous", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::choice", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::domain", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_tcrypt_hidden_volume", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_tcrypt_system_volume", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::password", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::password_save", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::pim", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::username", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10091,6 +10230,10 @@ declare namespace imports.gi.Gio {
 		 * @returns #addr's scheme (%NULL if not built from URI)
 		 */
 		get_scheme(): string;
+		connect(signal: "notify::hostname", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::port", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::scheme", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10224,6 +10367,11 @@ declare namespace imports.gi.Gio {
 		 * @param scheme a URI scheme
 		 */
 		set_scheme(scheme: string): void;
+		connect(signal: "notify::domain", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::protocol", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::scheme", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::service", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11136,6 +11284,10 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if the permission was successfully released
 		 */
 		release_finish(result: AsyncResult): boolean;
+		connect(signal: "notify::allowed", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::can_acquire", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::can_release", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11201,6 +11353,13 @@ declare namespace imports.gi.Gio {
 		 * action is stateless.
 		 */
 		readonly state_type: GLib.VariantType;
+
+		connect(signal: "notify::enabled", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::invert_boolean", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::parameter_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state_type", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -11343,6 +11502,14 @@ declare namespace imports.gi.Gio {
 		 * @returns the #proxy's username
 		 */
 		get_username(): string;
+		connect(signal: "notify::destination_hostname", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::destination_port", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::destination_protocol", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::password", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::protocol", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::username", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11393,6 +11560,11 @@ declare namespace imports.gi.Gio {
 		 */
 		proxy_resolver: ProxyResolver;
 		uri: string;
+
+		connect(signal: "notify::connectable", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_port", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::proxy_resolver", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -12419,6 +12591,14 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "writable-changed", callback: (owner: this, key: string) => void): number;
 
+		connect(signal: "notify::backend", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::delay_apply", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::has_unapplied", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::path", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::schema", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::schema_id", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::settings_schema", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13142,6 +13322,12 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "change-state", callback: (owner: this, value: GLib.Variant) => void): number;
 
+		connect(signal: "notify::enabled", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::parameter_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state_type", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13635,6 +13821,9 @@ declare namespace imports.gi.Gio {
 		input_stream: InputStream;
 		output_stream: OutputStream;
 
+		connect(signal: "notify::input_stream", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::output_stream", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13782,6 +13971,9 @@ declare namespace imports.gi.Gio {
 		 * @param proxy the proxy to use for #uri_scheme
 		 */
 		set_uri_proxy(uri_scheme: string, proxy: string): void;
+		connect(signal: "notify::default_proxy", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::ignore_hosts", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14830,6 +15022,21 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if this socket can be used with IPv4.
 		 */
 		speaks_ipv4(): boolean;
+		connect(signal: "notify::blocking", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::broadcast", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::family", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::fd", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::keepalive", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::listen_backlog", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::local_address", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::multicast_loopback", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::multicast_ttl", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::protocol", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::remote_address", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::timeout", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::ttl", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::type", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14968,6 +15175,8 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if #dest was filled in, %FALSE on error
 		 */
 		to_native(dest: any, destlen: number): boolean;
+		connect(signal: "notify::family", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15512,6 +15721,16 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "event", callback: (owner: this, event: SocketClientEvent, connectable: SocketConnectable, connection: IOStream) => void): number;
 
+		connect(signal: "notify::enable_proxy", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::family", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::local_address", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::protocol", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::proxy_resolver", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::timeout", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::tls", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::tls_validation_flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::type", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15608,6 +15827,8 @@ declare namespace imports.gi.Gio {
 		 * @returns whether #connection is connected
 		 */
 		is_connected(): boolean;
+		connect(signal: "notify::socket", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15924,6 +16145,8 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "event", callback: (owner: this, event: SocketListenerEvent, socket: Socket) => void): number;
 
+		connect(signal: "notify::listen_backlog", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -16014,6 +16237,8 @@ declare namespace imports.gi.Gio {
 		 * so you need to ref it yourself if you are planning to use it.
 		 */
 		connect(signal: "incoming", callback: (owner: this, connection: SocketConnection, source_object: GObject.Object) => boolean): number;
+
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -17090,6 +17315,8 @@ declare namespace imports.gi.Gio {
 		 * @param task_data_destroy #GDestroyNotify for #task_data
 		 */
 		set_task_data(task_data: any, task_data_destroy: GLib.DestroyNotify): void;
+		connect(signal: "notify::completed", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17697,6 +17924,8 @@ declare namespace imports.gi.Gio {
 		 * @param graceful_disconnect Whether to do graceful disconnects or not
 		 */
 		set_graceful_disconnect(graceful_disconnect: boolean): void;
+		connect(signal: "notify::graceful_disconnect", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17724,6 +17953,8 @@ declare namespace imports.gi.Gio {
 		 * @returns #conn's base #GIOStream
 		 */
 		get_base_io_stream(): IOStream;
+		connect(signal: "notify::base_io_stream", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17805,6 +18036,8 @@ declare namespace imports.gi.Gio {
 		 * must be called after g_test_run().
 		 */
 		up(): void;
+		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17954,6 +18187,9 @@ declare namespace imports.gi.Gio {
 		 * @param iconname name of icon to prepend to list of icons from within #icon.
 		 */
 		prepend_name(iconname: string): void;
+		connect(signal: "notify::names", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::use_default_fallbacks", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -18023,6 +18259,8 @@ declare namespace imports.gi.Gio {
 		 * not return until the connection is closed.
 		 */
 		connect(signal: "run", callback: (owner: this, connection: SocketConnection, source_object: GObject.Object) => boolean): number;
+
+		connect(signal: "notify::max_threads", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -18262,6 +18500,20 @@ declare namespace imports.gi.Gio {
 		 * @returns the appropriate #GTlsCertificateFlags
 		 */
 		verify(identity: SocketConnectable, trusted_ca: TlsCertificate): TlsCertificateFlags;
+		connect(signal: "notify::certificate", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::certificate_pem", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::dns_names", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::ip_addresses", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::issuer", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::issuer_name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::not_valid_after", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::not_valid_before", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::pkcs11_uri", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::private_key", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::private_key_pem", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::private_key_pkcs11_uri", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::subject_name", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -18776,6 +19028,20 @@ declare namespace imports.gi.Gio {
 		 * handler until the UI thread returns an answer.
 		 */
 		connect(signal: "accept-certificate", callback: (owner: this, peer_cert: TlsCertificate, errors: TlsCertificateFlags) => boolean): number;
+
+		connect(signal: "notify::advertised_protocols", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::base_io_stream", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::certificate", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::ciphersuite_name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::database", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::interaction", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::negotiated_protocol", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::peer_certificate", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::peer_certificate_errors", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::protocol_version", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::rehandshake_mode", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::require_close_notify", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::use_system_certdb", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -19333,6 +19599,10 @@ declare namespace imports.gi.Gio {
 		 * @param warning The user readable warning
 		 */
 		set_warning(warning: string): void;
+		connect(signal: "notify::description", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::warning", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19509,6 +19779,8 @@ declare namespace imports.gi.Gio {
 		 * @returns A #GCredentials instance. Do not free, it is owned by #message.
 		 */
 		get_credentials(): Credentials;
+		connect(signal: "notify::credentials", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19734,6 +20006,8 @@ declare namespace imports.gi.Gio {
 		 *     descriptors
 		 */
 		steal_fds(length: number): number[];
+		connect(signal: "notify::fd_list", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19803,6 +20077,9 @@ declare namespace imports.gi.Gio {
 		 * @param close_fd %TRUE to close the file descriptor when done
 		 */
 		set_close_fd(close_fd: boolean): void;
+		connect(signal: "notify::close_fd", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::fd", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19928,6 +20205,9 @@ declare namespace imports.gi.Gio {
 		 * @param close_fd %TRUE to close the file descriptor when done
 		 */
 		set_close_fd(close_fd: boolean): void;
+		connect(signal: "notify::close_fd", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::fd", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -20000,6 +20280,11 @@ declare namespace imports.gi.Gio {
 		 * @returns the length of the path
 		 */
 		get_path_len(): number;
+		connect(signal: "notify::abstract", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::address_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::path", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::path_as_array", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -20394,6 +20679,10 @@ declare namespace imports.gi.Gio {
 		 * @param file_info a #GFileInfo
 		 */
 		set_file_info(file_info: FileInfo): void;
+		connect(signal: "notify::file_info", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::format", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::level", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -20439,6 +20728,9 @@ declare namespace imports.gi.Gio {
 		 * @returns a #GFileInfo, or %NULL
 		 */
 		get_file_info(): FileInfo;
+		connect(signal: "notify::file_info", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::format", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -24437,6 +24729,12 @@ declare namespace imports.gi.Gio {
 		 * @returns the state type, if the action is stateful
 		 */
 		get_state_type(): GLib.VariantType;
+		connect(signal: "notify::enabled", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::parameter_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state_type", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -26683,6 +26981,10 @@ declare namespace imports.gi.Gio {
 		 * @param flags the #GTlsCertificateFlags to use
 		 */
 		set_validation_flags(flags: TlsCertificateFlags): void;
+		connect(signal: "notify::accepted_cas", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::server_identity", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::validation_flags", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -27151,6 +27453,19 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "accept-certificate", callback: (owner: this, peer_cert: TlsCertificate, errors: TlsCertificateFlags) => boolean): number;
 
+		connect(signal: "notify::advertised_protocols", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::base_socket", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::certificate", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::ciphersuite_name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::database", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::interaction", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::negotiated_protocol", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::peer_certificate", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::peer_certificate_errors", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::protocol_version", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::rehandshake_mode", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::require_close_notify", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -27197,6 +27512,8 @@ declare namespace imports.gi.Gio {
 		 * rehandshake with a different mode from the initial handshake.
 		 */
 		authentication_mode: TlsAuthenticationMode;
+
+		connect(signal: "notify::authentication_mode", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -30485,6 +30802,10 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(signal: "network-changed", callback: (owner: this, network_available: boolean) => void): number;
 
+		connect(signal: "notify::connectivity", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::network_available", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::network_metered", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -30731,6 +31052,8 @@ declare namespace imports.gi.Gio {
 		 * @returns Whether the system is in “Power Saver” mode.
 		 */
 		get_power_saver_enabled(): boolean;
+		connect(signal: "notify::power_saver_enabled", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -31427,6 +31750,11 @@ declare namespace imports.gi.Gio {
 		 * @param flags the #GTlsCertificateFlags to use
 		 */
 		set_validation_flags(flags: TlsCertificateFlags): void;
+		connect(signal: "notify::accepted_cas", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::server_identity", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::use_ssl3", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::validation_flags", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -31472,6 +31800,8 @@ declare namespace imports.gi.Gio {
 		 */
 		anchors: string;
 
+		connect(signal: "notify::anchors", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -31512,6 +31842,8 @@ declare namespace imports.gi.Gio {
 		 * rehandshake with a different mode from the initial handshake.
 		 */
 		authentication_mode: TlsAuthenticationMode;
+
+		connect(signal: "notify::authentication_mode", callback: (owner: this, ...args: any) => number): number;
 
 	}
 

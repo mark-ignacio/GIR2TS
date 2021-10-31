@@ -110,6 +110,12 @@ declare namespace imports.gi.GObject {
 		 * g_object_bind_property() and is owned by the binding.
 		 */
 		unbind(): void;
+		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::source", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::source_property", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::target", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::target_property", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1256,6 +1262,11 @@ declare namespace imports.gi.GObject {
 		 * Decrements the reference count of a #pspec.
 		 */
 		unref(): void;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::value_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::owner_type", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1325,6 +1336,8 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly default_value: boolean;
 
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1379,6 +1392,10 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly default_value: number;
 
+		connect(signal: "notify::minimum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::maximum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1417,6 +1434,11 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly epsilon: number;
 
+		connect(signal: "notify::minimum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::maximum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::epsilon", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1445,6 +1467,9 @@ declare namespace imports.gi.GObject {
 		 * default value for the property specified
 		 */
 		readonly default_value: number;
+
+		connect(signal: "notify::enum_class", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -1475,6 +1500,9 @@ declare namespace imports.gi.GObject {
 		 * default value for the property specified
 		 */
 		readonly default_value: number;
+
+		connect(signal: "notify::flags_class", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -1515,6 +1543,11 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly epsilon: number;
 
+		connect(signal: "notify::minimum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::maximum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::epsilon", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1539,6 +1572,8 @@ declare namespace imports.gi.GObject {
 		 * a #GType whose subtypes can occur as values
 		 */
 		readonly is_a_type: GObject.Type;
+
+		connect(signal: "notify::is_a_type", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -1573,6 +1608,10 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly default_value: number;
 
+		connect(signal: "notify::minimum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::maximum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1606,6 +1645,10 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly default_value: number;
 
+		connect(signal: "notify::minimum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::maximum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1638,6 +1681,10 @@ declare namespace imports.gi.GObject {
 		 * default value for the property specified
 		 */
 		readonly default_value: number;
+
+		connect(signal: "notify::minimum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::maximum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -1779,6 +1826,13 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly ensure_non_null: number;
 
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::cset_first", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::cset_nth", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::substitutor", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::null_fold_if_empty", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::ensure_non_null", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1813,6 +1867,10 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly default_value: number;
 
+		connect(signal: "notify::minimum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::maximum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1845,6 +1903,10 @@ declare namespace imports.gi.GObject {
 		 * default value for the property specified
 		 */
 		readonly default_value: number;
+
+		connect(signal: "notify::minimum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::maximum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -1879,6 +1941,10 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly default_value: number;
 
+		connect(signal: "notify::minimum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::maximum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1912,6 +1978,10 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly default_value: number;
 
+		connect(signal: "notify::minimum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::maximum", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1936,6 +2006,8 @@ declare namespace imports.gi.GObject {
 		 * default value for the property specified
 		 */
 		readonly default_value: string;
+
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -1966,6 +2038,9 @@ declare namespace imports.gi.GObject {
 		 */
 		readonly fixed_n_elements: number;
 
+		connect(signal: "notify::element_spec", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::fixed_n_elements", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1994,6 +2069,9 @@ declare namespace imports.gi.GObject {
 		 * a #GVariant, or %NULL
 		 */
 		readonly default_value: GLib.Variant;
+
+		connect(signal: "notify::type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_value", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -2125,6 +2203,11 @@ declare namespace imports.gi.GObject {
 		 *  loading the plugin failed.
 		 */
 		// use(): boolean;
+		connect(signal: "notify::use_count", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::type_infos", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::interface_infos", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5156,6 +5239,16 @@ declare namespace imports.gi.GObject {
 		v_float: number;
 		v_double: number;
 		v_pointer: any;
+
+		connect(signal: "notify::v_int", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_uint", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_long", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_ulong", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_int64", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_uint64", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_float", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_double", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_pointer", callback: (owner: this, ...args: any) => number): number;
 
 	}
 

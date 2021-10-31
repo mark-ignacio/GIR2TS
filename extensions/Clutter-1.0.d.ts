@@ -19,13 +19,6 @@ declare namespace imports.gi.Clutter {
 		x_align: ActorAlign | St.Align;
         /** See {@link x_align} */
 		y_align: ActorAlign | St.Align;
-        connect(signal: 'button-press-event' | 'button-release-event' | 'captured-event' | 'enter-event' | 'event' | 'key-press-event' | 'key-release-event' | 'leave-event' | 'motion-event' | 'scroll-event' | 'touch-event', callback: (actor: this, event: Event) => boolean | void): number;
-        connect(signal: 'destroy' | 'hide' | 'key-focus-in' | 'key-focus-out' | 'queue-relayout' | 'realize' | 'resource-scale-changed' | 'show' | 'stage-views-changed' | 'transitions-completed' | 'unrealize', callback: (actor: this) => void): number;
-        connect(signal: 'paint', callback: (actor: this, paint_context: PaintContext) => void): number;
-        connect(signal: 'parent-set', callback: (actor: this, old_parent: Actor) => void): number;
-        connect(signal: 'pick', callback: (actor: this, pick_context: PickContext) => void): number;
-        connect(signal: 'queue-redraw', callback: (actor: this, origin: Actor, volume: PaintVolume) => void): number;
-        connect(event: 'transition-stopped', callback: (name: string, is_finished: Boolean) => void): number;
     }
 
     interface ActorOptions extends Pick<IActor,

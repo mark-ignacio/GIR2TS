@@ -1776,6 +1776,8 @@ declare namespace imports.gi.Pango {
 		 *  (No matrix set is the same as setting the identity matrix.)
 		 */
 		set_matrix(matrix: Matrix): void;
+		connect(signal: "notify::matrix", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

@@ -66,6 +66,8 @@ declare namespace imports.gi.Gdk {
 		 * @param timestamp a timestamp
 		 */
 		set_timestamp(timestamp: number): void;
+		connect(signal: "notify::display", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -156,6 +158,9 @@ declare namespace imports.gi.Gdk {
 		 * if no references remain.
 		 */
 		unref(): void;
+		connect(signal: "notify::cursor_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::display", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -701,6 +706,22 @@ declare namespace imports.gi.Gdk {
 		 */
 		connect(signal: "tool-changed", callback: (owner: this, tool: DeviceTool) => void): number;
 
+		connect(signal: "notify::associated_device", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::axes", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::device_manager", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::display", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::has_cursor", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::input_mode", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::input_source", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::n_axes", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::num_touches", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::product_id", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::seat", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::tool", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::vendor_id", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -799,6 +820,8 @@ declare namespace imports.gi.Gdk {
 		 * is unplugged.
 		 */
 		connect(signal: "device-removed", callback: (owner: this, device: Device) => void): number;
+
+		connect(signal: "notify::display", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -962,6 +985,11 @@ declare namespace imports.gi.Gdk {
 		 * sort of pen is being used, such as an airbrush or a pencil.
 		 */
 		get_tool_type(): DeviceToolType;
+		connect(signal: "notify::axes", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::hardware_id", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::serial", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::tool_type", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1448,6 +1476,8 @@ declare namespace imports.gi.Gdk {
 		 */
 		connect(signal: "display-opened", callback: (owner: this, display: Display) => void): number;
 
+		connect(signal: "notify::default_display", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1693,6 +1723,9 @@ declare namespace imports.gi.Gdk {
 		 * @returns %TRUE if the context is valid
 		 */
 		is_valid(): boolean;
+		connect(signal: "notify::clip", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2053,6 +2086,10 @@ declare namespace imports.gi.Gdk {
 		 *   or -1 to allow auto-detection
 		 */
 		set_use_es(use_es: number): void;
+		connect(signal: "notify::display", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::shared_context", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2465,6 +2502,17 @@ declare namespace imports.gi.Gdk {
 		is_primary(): boolean;
 		connect(signal: "invalidate", callback: (owner: this) => void): number;
 
+		connect(signal: "notify::display", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::geometry", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::height_mm", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::manufacturer", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::model", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::refresh_rate", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::scale_factor", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::subpixel_layout", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::width_mm", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::workarea", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2813,6 +2861,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		connect(signal: "size-changed", callback: (owner: this) => void): number;
 
+		connect(signal: "notify::font_options", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::resolution", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2987,6 +3038,8 @@ declare namespace imports.gi.Gdk {
 		 * to this #seat.
 		 */
 		connect(signal: "tool-removed", callback: (owner: this, tool: DeviceTool) => void): number;
+
+		connect(signal: "notify::display", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -5002,6 +5055,8 @@ declare namespace imports.gi.Gdk {
 		 * See also {@link Window}::from-embedder.
 		 */
 		connect(signal: "to-embedder", callback: (owner: this, offscreen_x: number, offscreen_y: number, embedder_x: number, embedder_y: number) => void): number;
+
+		connect(signal: "notify::cursor", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -9665,6 +9720,32 @@ declare namespace imports.gi.Gdk {
 		 * @returns %TRUE if the event should trigger a context menu.
 		 */
 		triggers_context_menu(): boolean;
+		connect(signal: "notify::type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::any", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::expose", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::visibility", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::motion", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::button", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::touch", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::scroll", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::key", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::crossing", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::focus_change", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::configure", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::property", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::selection", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::owner_change", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::proximity", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::dnd", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::window_state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::setting", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::grab_broken", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::touchpad_swipe", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::touchpad_pinch", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::pad_button", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::pad_axis", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::pad_group_mode", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

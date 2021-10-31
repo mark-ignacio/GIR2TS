@@ -16995,6 +16995,8 @@ declare namespace imports.gi.GLib {
 		 */
 		v_double: number;
 
+		connect(signal: "notify::v_double", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17023,6 +17025,8 @@ declare namespace imports.gi.GLib {
 		 * the double value
 		 */
 		v_float: number;
+
+		connect(signal: "notify::v_float", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -17230,6 +17234,19 @@ declare namespace imports.gi.GLib {
 		 * error value
 		 */
 		v_error: number;
+
+		connect(signal: "notify::v_symbol", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_identifier", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_binary", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_octal", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_int", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_int64", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_float", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_hex", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_string", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_comment", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_char", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::v_error", callback: (owner: this, ...args: any) => number): number;
 
 	}
 

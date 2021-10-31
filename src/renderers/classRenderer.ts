@@ -6,7 +6,7 @@ import { BuildConstructorNode, NeedNewLine } from "../utils/utils";
 import { renderDocString } from "./docStringRenderer";
 import { ignored_property_names } from "../consts";
 import { renderProperty } from "./propertyRenderer";
-import { renderSignal } from "./signalRenderer";
+import { renderSignal, renderSignalFromInfo } from "./signalRenderer";
 
 /*
     Render class as a TS interface with construct signature.
@@ -49,6 +49,12 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
         }
     }
 
+    if (class_node.method) {
+        for (let m of class_node.method) {
+            methods.push(m);
+        }
+    }
+
     if (class_node.property) {
         for (let prop of class_node.property) {
             if (prop.$.private == 1 || prop.$.readable == 0 || ignored_property_names.includes(prop.$.name))
@@ -62,12 +68,6 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
             if (field.$.private == 1 || field.$.readable == 0 || ignored_property_names.includes(field.$.name))
                 continue;
             fields.push(field);
-        }
-    }
-
-    if (class_node.method) {
-        for (let m of class_node.method) {
-            methods.push(m);
         }
     }
 
@@ -125,6 +125,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     let body = "";
 
     let fieldsAdded: Set<string> = new Set();
+    let signalFields: ParameterNode[] = [];
     if (fields.length > 0) {
         const methodNames = new Set(methods.map((x) => x.$.name));
         for (const field of fields) {
@@ -140,6 +141,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
 
             body+= `${renderProperty(field, ns_name, modifier?.prop?.[fieldName] , false, 1, excluded)}\n`;
             fieldsAdded.add(fieldName);
+            signalFields.push(field);
         }
     }
 
@@ -151,6 +153,29 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
         body+= "\n";
         for (const signal of signals) {
             body+= renderSignal(signal, ns_name, false, 1);
+        }
+    }
+
+    if (signalFields.length > 0) {
+        body+= "\n";
+        for (const signal of signalFields) {
+            const fieldName = signal.$.name.replace(/-/g, "_");
+            body+= renderSignalFromInfo({
+                doc: null,
+                name: `notify::${fieldName}`,
+                params: [
+                    {
+                        docString: "",
+                        name: "...args",
+                        type: "any",
+                        optional: false
+                    }
+                ],
+                return_type: {
+                    docString: "",
+                    type: "number"
+                }
+            }, ns_name, false, 1);
         }
     }
 
