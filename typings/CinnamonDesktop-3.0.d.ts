@@ -44,6 +44,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		set_color(_type: CDesktopEnums.BackgroundShading, primary: Gdk.Color, secondary: Gdk.Color): void;
 		set_filename(filename: string): void;
 		set_placement(placement: CDesktopEnums.BackgroundStyle): void;
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		connect(signal: "transitioned", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -146,6 +149,13 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * already stopped.
 		 */
 		stop(): void;
+		/**
+		 * When a crossfade finishes, #window will have a copy
+		 * of the end surface as its background, and this signal will
+		 * get emitted.
+		 */
+		connect(signal: "finished", callback: (owner: this, window: GObject.Object) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -474,6 +484,39 @@ declare namespace imports.gi.CinnamonDesktop {
 		set_global_scale_setting(scale_factor: number): void;
 		set_primary_output(output: RROutput): void;
 		set_size(width: number, height: number, mm_width: number, mm_height: number): void;
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when a display device is connected to a
+		 * port, or a port is hotplugged with an active output. The latter
+		 * can happen if a laptop is docked, and the dock provides a new
+		 * active output.
+		 * 
+		 * The #output value is not a #GObject. The returned #output value can
+		 * only assume to be valid during the emission of the signal (i.e. within
+		 * your signal handler only), as it may change later when the #screen
+		 * is modified due to an event from the X server, or due to another
+		 * place in the application modifying the #screen and the #output.
+		 * Therefore, deal with changes to the #output right in your signal
+		 * handler, instead of keeping the #output reference for an async or
+		 * idle function.
+		 */
+		connect(signal: "output-connected", callback: (owner: this, output: any) => void): number;
+		/**
+		 * This signal is emitted when a display device is disconnected from
+		 * a port, or a port output is hot-unplugged. The latter can happen
+		 * if a laptop is undocked, and the dock provided the output.
+		 * 
+		 * The #output value is not a #GObject. The returned #output value can
+		 * only assume to be valid during the emission of the signal (i.e. within
+		 * your signal handler only), as it may change later when the #screen
+		 * is modified due to an event from the X server, or due to another
+		 * place in the application modifying the #screen and the #output.
+		 * Therefore, deal with changes to the #output right in your signal
+		 * handler, instead of keeping the #output reference for an async or
+		 * idle function.
+		 */
+		connect(signal: "output-disconnected", callback: (owner: this, output: any) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

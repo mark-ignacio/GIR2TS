@@ -15,6 +15,10 @@ declare namespace imports.gi.Caribou {
 		register_key_func(keyval: number, _func: Caribou.KeyButtonCallback, func_target: any): void;
 		register_button_func(button: number, _func: Caribou.KeyButtonCallback, func_target: any): void;
 		get_display(): Gdk.Display;
+		connect(signal: "modifiers-changed", callback: (owner: this, modifiers: number) => void): number;
+		connect(signal: "group-changed", callback: (owner: this, gid: number, group: string, variant: string) => void): number;
+		connect(signal: "config-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -80,6 +84,9 @@ declare namespace imports.gi.Caribou {
 		get_active_group(): string;
 		get_keyboard_type(): string;
 		get_keyboard_file(): string;
+		connect(signal: "group-added", callback: (owner: this, name: string) => void): number;
+		connect(signal: "group-removed", callback: (owner: this, name: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -149,6 +156,8 @@ declare namespace imports.gi.Caribou {
 		mode: string;
 		get_rows(result_length1: number): Caribou.RowModel[];
 		get_mode(): string;
+		connect(signal: "level-toggled", callback: (owner: this, new_level: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -217,6 +226,9 @@ declare namespace imports.gi.Caribou {
 		get_text(): string;
 		get_label(): string;
 		set_label(value: string): void;
+		connect(signal: "key-hold-end", callback: (owner: this) => void): number;
+		connect(signal: "key-hold", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -526,6 +538,10 @@ declare namespace imports.gi.Caribou {
 		get_selected_path(result_length1: number): Caribou.IScannableItem[];
 		get_scan_grouping(): Caribou.ScanGrouping;
 		set_scan_grouping(value: Caribou.ScanGrouping): void;
+		connect(signal: "selected-item-changed", callback: (owner: this, selected_item: Caribou.IScannableItem) => void): number;
+		connect(signal: "step-item-changed", callback: (owner: this, step_item: Caribou.IScannableItem) => void): number;
+		connect(signal: "scan-cleared", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -547,6 +563,10 @@ declare namespace imports.gi.Caribou {
 	interface IIKeyboardObject {
 		get_children(result_length1: number): Caribou.IKeyboardObject[];
 		get_keys(result_length1: number): Caribou.KeyModel[];
+		connect(signal: "key-clicked", callback: (owner: this, key: Caribou.KeyModel) => void): number;
+		connect(signal: "key-pressed", callback: (owner: this, key: Caribou.KeyModel) => void): number;
+		connect(signal: "key-released", callback: (owner: this, key: Caribou.KeyModel) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

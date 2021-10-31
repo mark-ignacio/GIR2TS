@@ -102,6 +102,11 @@ declare namespace imports.gi.Atk {
 		 * @returns whether or not this link is still valid
 		 */
 		is_valid(): boolean;
+		/**
+		 * The signal link-activated is emitted when a link is activated.
+		 */
+		connect(signal: "link-activated", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -462,6 +467,52 @@ declare namespace imports.gi.Atk {
 		 * @param role an {@link Role} to be set as the role
 		 */
 		set_role(role: Role): void;
+		/**
+		 * The "active-descendant-changed" signal is emitted by an object
+		 * which has the state ATK_STATE_MANAGES_DESCENDANTS when the focus
+		 * object in the object changes. For instance, a table will emit the
+		 * signal when the cell in the table which has focus changes.
+		 */
+		connect(signal: "active-descendant-changed", callback: (owner: this, arg1: Object) => void): number;
+		/**
+		 * The signal "children-changed" is emitted when a child is added or
+		 * removed form an object. It supports two details: "add" and
+		 * "remove"
+		 */
+		connect(signal: "children-changed", callback: (owner: this, arg1: number, arg2: Object) => void): number;
+		/**
+		 * The signal "focus-event" is emitted when an object gained or lost
+		 * focus.
+		 */
+		connect(signal: "focus-event", callback: (owner: this, arg1: boolean) => void): number;
+		/**
+		 * The signal "property-change" is emitted when an object's property
+		 * value changes. #arg1 contains an {@link PropertyValues} with the name
+		 * and the new value of the property whose value has changed. Note
+		 * that, as with GObject notify, getting this signal does not
+		 * guarantee that the value of the property has actually changed; it
+		 * may also be emitted when the setter of the property is called to
+		 * reinstate the previous value.
+		 * 
+		 * Toolkit implementor note: ATK implementors should use
+		 * g_object_notify() to emit property-changed
+		 * notifications. #AtkObject::property-changed is needed by the
+		 * implementation of atk_add_global_event_listener() because GObject
+		 * notify doesn't support emission hooks.
+		 */
+		connect(signal: "property-change", callback: (owner: this, arg1: PropertyValues) => void): number;
+		/**
+		 * The "state-change" signal is emitted when an object's state
+		 * changes.  The detail value identifies the state type which has
+		 * changed.
+		 */
+		connect(signal: "state-change", callback: (owner: this, arg1: string, arg2: boolean) => void): number;
+		/**
+		 * The "visible-data-changed" signal is emitted when the visual
+		 * appearance of the object changed.
+		 */
+		connect(signal: "visible-data-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1857,6 +1908,12 @@ declare namespace imports.gi.Atk {
 		 * @returns %TRUE or %FALSE whether the size was set or not
 		 */
 		set_size(width: number, height: number): boolean;
+		/**
+		 * The 'bounds-changed" signal is emitted when the bposition or
+		 * size of the component changes.
+		 */
+		connect(signal: "bounds-changed", callback: (owner: this, arg1: Rectangle) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1950,6 +2007,42 @@ declare namespace imports.gi.Atk {
 		 *   document does not allow the attribute to be modified
 		 */
 		set_attribute_value(attribute_name: string, attribute_value: string): boolean;
+		/**
+		 * The 'load-complete' signal is emitted when a pending load of
+		 * a static document has completed.  This signal is to be
+		 * expected by ATK clients if and when AtkDocument implementors
+		 * expose ATK_STATE_BUSY.  If the state of an AtkObject which
+		 * implements AtkDocument does not include ATK_STATE_BUSY, it
+		 * should be safe for clients to assume that the AtkDocument's
+		 * static contents are fully loaded into the container.
+		 * (Dynamic document contents should be exposed via other
+		 * signals.)
+		 */
+		connect(signal: "load-complete", callback: (owner: this) => void): number;
+		/**
+		 * The 'load-stopped' signal is emitted when a pending load of
+		 * document contents is cancelled, paused, or otherwise
+		 * interrupted by the user or application logic.  It should not
+		 * however be emitted while waiting for a resource (for instance
+		 * while blocking on a file or network read) unless a
+		 * user-significant timeout has occurred.
+		 */
+		connect(signal: "load-stopped", callback: (owner: this) => void): number;
+		/**
+		 * The 'page-changed' signal is emitted when the current page of
+		 * a document changes, e.g. pressing page up/down in a document
+		 * viewer.
+		 */
+		connect(signal: "page-changed", callback: (owner: this, page_number: number) => void): number;
+		/**
+		 * The 'reload' signal is emitted when the contents of a
+		 * document is refreshed from its source.  Once 'reload' has
+		 * been emitted, a matching 'load-complete' or 'load-stopped'
+		 * signal should follow, which clients may await before
+		 * interrogating ATK for the latest document content.
+		 */
+		connect(signal: "reload", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2135,6 +2228,13 @@ declare namespace imports.gi.Atk {
 		 * @returns the number of links within this hypertext document
 		 */
 		get_n_links(): number;
+		/**
+		 * The "link-selected" signal is emitted by an AtkHyperText
+		 * object when one of the hyperlinks associated with the object
+		 * is selected.
+		 */
+		connect(signal: "link-selected", callback: (owner: this, arg1: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2326,6 +2426,12 @@ declare namespace imports.gi.Atk {
 		 * @returns TRUE if success, FALSE otherwise.
 		 */
 		select_all_selection(): boolean;
+		/**
+		 * The "selection-changed" signal is emitted by an object which
+		 * implements AtkSelection interface when the selection changes.
+		 */
+		connect(signal: "selection-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2640,6 +2746,45 @@ declare namespace imports.gi.Atk {
 		 * to set for #table
 		 */
 		set_summary(accessible: Object): void;
+		/**
+		 * The "column-deleted" signal is emitted by an object which
+		 * implements the AtkTable interface when a column is deleted.
+		 */
+		connect(signal: "column-deleted", callback: (owner: this, arg1: number, arg2: number) => void): number;
+		/**
+		 * The "column-inserted" signal is emitted by an object which
+		 * implements the AtkTable interface when a column is inserted.
+		 */
+		connect(signal: "column-inserted", callback: (owner: this, arg1: number, arg2: number) => void): number;
+		/**
+		 * The "column-reordered" signal is emitted by an object which
+		 * implements the AtkTable interface when the columns are
+		 * reordered.
+		 */
+		connect(signal: "column-reordered", callback: (owner: this) => void): number;
+		/**
+		 * The "model-changed" signal is emitted by an object which
+		 * implements the AtkTable interface when the model displayed by
+		 * the table changes.
+		 */
+		connect(signal: "model-changed", callback: (owner: this) => void): number;
+		/**
+		 * The "row-deleted" signal is emitted by an object which
+		 * implements the AtkTable interface when a row is deleted.
+		 */
+		connect(signal: "row-deleted", callback: (owner: this, arg1: number, arg2: number) => void): number;
+		/**
+		 * The "row-inserted" signal is emitted by an object which
+		 * implements the AtkTable interface when a row is inserted.
+		 */
+		connect(signal: "row-inserted", callback: (owner: this, arg1: number, arg2: number) => void): number;
+		/**
+		 * The "row-reordered" signal is emitted by an object which
+		 * implements the AtkTable interface when the rows are
+		 * reordered.
+		 */
+		connect(signal: "row-reordered", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3060,6 +3205,46 @@ declare namespace imports.gi.Atk {
 		 * @returns %TRUE if successful, %FALSE otherwise
 		 */
 		set_selection(selection_num: number, start_offset: number, end_offset: number): boolean;
+		/**
+		 * The "text-attributes-changed" signal is emitted when the text
+		 * attributes of the text of an object which implements AtkText
+		 * changes.
+		 */
+		connect(signal: "text-attributes-changed", callback: (owner: this) => void): number;
+		/**
+		 * The "text-caret-moved" signal is emitted when the caret
+		 * position of the text of an object which implements AtkText
+		 * changes.
+		 */
+		connect(signal: "text-caret-moved", callback: (owner: this, arg1: number) => void): number;
+		/**
+		 * The "text-changed" signal is emitted when the text of the
+		 * object which implements the AtkText interface changes, This
+		 * signal will have a detail which is either "insert" or
+		 * "delete" which identifies whether the text change was an
+		 * insertion or a deletion.
+		 */
+		connect(signal: "text-changed", callback: (owner: this, arg1: number, arg2: number) => void): number;
+		/**
+		 * The "text-insert" signal is emitted when a new text is
+		 * inserted. If the signal was not triggered by the user
+		 * (e.g. typing or pasting text), the "system" detail should be
+		 * included.
+		 */
+		connect(signal: "text-insert", callback: (owner: this, arg1: number, arg2: number, arg3: string) => void): number;
+		/**
+		 * The "text-remove" signal is emitted when a new text is
+		 * removed. If the signal was not triggered by the user
+		 * (e.g. typing or pasting text), the "system" detail should be
+		 * included.
+		 */
+		connect(signal: "text-remove", callback: (owner: this, arg1: number, arg2: number, arg3: string) => void): number;
+		/**
+		 * The "text-selection-changed" signal is emitted when the
+		 * selected text of an object which implements AtkText changes.
+		 */
+		connect(signal: "text-selection-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3187,6 +3372,22 @@ declare namespace imports.gi.Atk {
 		 * @param new_value a double which is the desired new accessible value.
 		 */
 		set_value(new_value: number): void;
+		/**
+		 * The 'value-changed' signal is emitted when the current value
+		 * that represent the object changes. #value is the numerical
+		 * representation of this new value.  #text is the human
+		 * readable text alternative of #value, and can be NULL if it is
+		 * not available. Note that if there is a textual description
+		 * associated with the new numeric value, that description
+		 * should be included regardless of whether or not it has also
+		 * changed.
+		 * 
+		 * Example: a password meter whose value changes as the user
+		 * types their new password. Appropiate value text would be
+		 * "weak", "acceptable" and "strong".
+		 */
+		connect(signal: "value-changed", callback: (owner: this, value: number, text: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3348,6 +3549,52 @@ declare namespace imports.gi.Atk {
 	 * use {@link Window} instead.
 	 */
 	interface IWindow {
+
+		/**
+		 * The signal {@link Window}::activate is emitted when a window
+		 * becomes the active window of the application or session.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+		/**
+		 * The signal {@link Window}::create is emitted when a new window
+		 * is created.
+		 */
+		connect(signal: "create", callback: (owner: this) => void): number;
+		/**
+		 * The signal {@link Window}::deactivate is emitted when a window is
+		 * no longer the active window of the application or session.
+		 */
+		connect(signal: "deactivate", callback: (owner: this) => void): number;
+		/**
+		 * The signal {@link Window}::destroy is emitted when a window is
+		 * destroyed.
+		 */
+		connect(signal: "destroy", callback: (owner: this) => void): number;
+		/**
+		 * The signal {@link Window}::maximize is emitted when a window
+		 * is maximized.
+		 */
+		connect(signal: "maximize", callback: (owner: this) => void): number;
+		/**
+		 * The signal {@link Window}::minimize is emitted when a window
+		 * is minimized.
+		 */
+		connect(signal: "minimize", callback: (owner: this) => void): number;
+		/**
+		 * The signal {@link Window}::move is emitted when a window
+		 * is moved.
+		 */
+		connect(signal: "move", callback: (owner: this) => void): number;
+		/**
+		 * The signal {@link Window}::resize is emitted when a window
+		 * is resized.
+		 */
+		connect(signal: "resize", callback: (owner: this) => void): number;
+		/**
+		 * The signal {@link Window}::restore is emitted when a window
+		 * is restored.
+		 */
+		connect(signal: "restore", callback: (owner: this) => void): number;
 
 	}
 

@@ -376,6 +376,37 @@ declare namespace imports.gi.Gst {
 		 *  otherwise %FALSE.
 		 */
 		sync_children_states(): boolean;
+		/**
+		 * Will be emitted after the element was added to sub_bin.
+		 */
+		connect(signal: "deep-element-added", callback: (owner: this, sub_bin: Bin, element: Element) => void): number;
+		/**
+		 * Will be emitted after the element was removed from sub_bin.
+		 */
+		connect(signal: "deep-element-removed", callback: (owner: this, sub_bin: Bin, element: Element) => void): number;
+		/**
+		 * Will be emitted when the bin needs to perform latency calculations. This
+		 * signal is only emitted for toplevel bins or when async-handling is
+		 * enabled.
+		 * 
+		 * Only one signal handler is invoked. If no signals are connected, the
+		 * default handler is invoked, which will query and distribute the lowest
+		 * possible latency to all sinks.
+		 * 
+		 * Connect to this signal if the default latency calculations are not
+		 * sufficient, like when you need different latencies for different sinks in
+		 * the same pipeline.
+		 */
+		connect(signal: "do-latency", callback: (owner: this) => boolean): number;
+		/**
+		 * Will be emitted after the element was added to the bin.
+		 */
+		connect(signal: "element-added", callback: (owner: this, element: Element) => void): number;
+		/**
+		 * Will be emitted after the element was removed from the bin.
+		 */
+		connect(signal: "element-removed", callback: (owner: this, element: Element) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1093,6 +1124,21 @@ declare namespace imports.gi.Gst {
 		 * MT safe.
 		 */
 		timed_pop_filtered(timeout: ClockTime, types: MessageType): Message;
+		/**
+		 * A message has been posted on the bus. This signal is emitted from a
+		 * GSource added to the mainloop. this signal will only be emitted when
+		 * there is a mainloop running.
+		 */
+		connect(signal: "message", callback: (owner: this, message: Message) => void): number;
+		/**
+		 * A message has been posted on the bus. This signal is emitted from the
+		 * thread that posted the message so one has to be careful with locking.
+		 * 
+		 * This signal will not be emitted by default, you have to call
+		 * gst_bus_enable_sync_message_emission() before.
+		 */
+		connect(signal: "sync-message", callback: (owner: this, message: Message) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1450,6 +1496,16 @@ declare namespace imports.gi.Gst {
 		 * @returns %TRUE if waiting was successful, or %FALSE on timeout
 		 */
 		wait_for_sync(timeout: ClockTime): boolean;
+		/**
+		 * Signaled on clocks with GST_CLOCK_FLAG_NEEDS_STARTUP_SYNC set once
+		 * the clock is synchronized, or when it completely lost synchronization.
+		 * This signal will not be emitted on clocks without the flag.
+		 * 
+		 * This signal will be emitted from an arbitrary thread, most likely not
+		 * the application's main thread.
+		 */
+		connect(signal: "synced", callback: (owner: this, synced: boolean) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1865,6 +1921,8 @@ declare namespace imports.gi.Gst {
 		 * %FALSE otherwise.
 		 */
 		reconfigure_element(element: Element): boolean;
+		connect(signal: "removed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2155,6 +2213,9 @@ declare namespace imports.gi.Gst {
 		 * @param name a provider factory name
 		 */
 		unhide_provider(name: string): void;
+		connect(signal: "provider-hidden", callback: (owner: this, object: string) => void): number;
+		connect(signal: "provider-unhidden", callback: (owner: this, object: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3236,6 +3297,25 @@ declare namespace imports.gi.Gst {
 		 * @param destpadname the name of the {@link Pad} in destination element.
 		 */
 		unlink_pads(srcpadname: string, dest: Element, destpadname: string): void;
+		/**
+		 * This signals that the element will not generate more dynamic pads.
+		 * Note that this signal will usually be emitted from the context of
+		 * the streaming thread.
+		 */
+		connect(signal: "no-more-pads", callback: (owner: this) => void): number;
+		/**
+		 * a new {@link Pad} has been added to the element. Note that this signal will
+		 * usually be emitted from the context of the streaming thread. Also keep in
+		 * mind that if you add new elements to the pipeline in the signal handler
+		 * you will need to set them to the desired target state with
+		 * gst_element_set_state() or gst_element_sync_state_with_parent().
+		 */
+		connect(signal: "pad-added", callback: (owner: this, new_pad: Pad) => void): number;
+		/**
+		 * a {@link Pad} has been removed from the element
+		 */
+		connect(signal: "pad-removed", callback: (owner: this, old_pad: Pad) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4024,6 +4104,13 @@ declare namespace imports.gi.Gst {
 		 * this might deadlock the dispose function.
 		 */
 		unref(): void;
+		/**
+		 * The deep notify signal is used to be notified of property changes. It is
+		 * typically attached to the toplevel bin to receive notifications from all
+		 * the elements contained in that bin.
+		 */
+		connect(signal: "deep-notify", callback: (owner: this, prop_object: Object, prop: GObject.ParamSpec) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5097,6 +5184,15 @@ declare namespace imports.gi.Gst {
 		 * be renegotiated to something else.
 		 */
 		use_fixed_caps(): void;
+		/**
+		 * Signals that a pad has been linked to the peer pad.
+		 */
+		connect(signal: "linked", callback: (owner: this, peer: Pad) => void): number;
+		/**
+		 * Signals that a pad has been unlinked from the peer pad.
+		 */
+		connect(signal: "unlinked", callback: (owner: this, peer: Pad) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5263,6 +5359,11 @@ declare namespace imports.gi.Gst {
 		 * @param caps the documented capabilities
 		 */
 		set_documentation_caps(caps: Caps): void;
+		/**
+		 * This signal is fired when an element creates a pad from this template.
+		 */
+		connect(signal: "pad-created", callback: (owner: this, pad: Pad) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6214,6 +6315,17 @@ declare namespace imports.gi.Gst {
 		 * @returns %TRUE if registry changed
 		 */
 		scan_path(path: string): boolean;
+		/**
+		 * Signals that a feature has been added to the registry (possibly
+		 * replacing a previously-added one by the same name)
+		 */
+		connect(signal: "feature-added", callback: (owner: this, feature: PluginFeature) => void): number;
+		/**
+		 * Signals that a plugin has been added to the registry (possibly
+		 * replacing a previously-added one by the same name)
+		 */
+		connect(signal: "plugin-added", callback: (owner: this, plugin: Plugin) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6451,6 +6563,8 @@ declare namespace imports.gi.Gst {
 		 * @returns The upstream id
 		 */
 		get_upstream_id(): string;
+		connect(signal: "stream-notify", callback: (owner: this, object: Stream, p0: GObject.ParamSpec) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -16353,6 +16467,15 @@ declare namespace imports.gi.Gst {
 		 * @param var_args value for the first property, followed optionally by more name/value pairs, followed by %NULL
 		 */
 		set_valist(first_property_name: string, var_args: any[]): void;
+		/**
+		 * Will be emitted after the #object was added to the #child_proxy.
+		 */
+		connect(signal: "child-added", callback: (owner: this, object: GObject.Object, name: string) => void): number;
+		/**
+		 * Will be emitted after the #object was removed from the #child_proxy.
+		 */
+		connect(signal: "child-removed", callback: (owner: this, object: GObject.Object, name: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

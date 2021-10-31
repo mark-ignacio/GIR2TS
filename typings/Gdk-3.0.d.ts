@@ -685,6 +685,22 @@ declare namespace imports.gi.Gdk {
 		 * @param _y the Y coordinate of the destination.
 		 */
 		warp(screen: Screen, _x: number, _y: number): void;
+		/**
+		 * The ::changed signal is emitted either when the {@link Device}
+		 * has changed the number of either axes or keys. For example
+		 * In X this will normally happen when the slave device routing
+		 * events through the master device changes (for example, user
+		 * switches from the USB mouse to a tablet), in that case the
+		 * master device will change to reflect the new slave device
+		 * axes and keys.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::tool-changed signal is emitted on pen/eraser
+		 * {@link Devices} whenever tools enter or leave proximity.
+		 */
+		connect(signal: "tool-changed", callback: (owner: this, tool: DeviceTool) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -758,6 +774,32 @@ declare namespace imports.gi.Gdk {
 		 *          GTK+ and must not be freed or unreffed.
 		 */
 		list_devices(_type: DeviceType): GLib.List;
+		/**
+		 * The ::device-added signal is emitted either when a new master
+		 * pointer is created, or when a slave (Hardware) input device
+		 * is plugged in.
+		 */
+		connect(signal: "device-added", callback: (owner: this, device: Device) => void): number;
+		/**
+		 * The ::device-changed signal is emitted whenever a device
+		 * has changed in the hierarchy, either slave devices being
+		 * disconnected from their master device or connected to
+		 * another one, or master devices being added or removed
+		 * a slave device.
+		 * 
+		 * If a slave device is detached from all master devices
+		 * (gdk_device_get_associated_device() returns %NULL), its
+		 * {@link DeviceType} will change to %GDK_DEVICE_TYPE_FLOATING,
+		 * if it's attached, it will change to %GDK_DEVICE_TYPE_SLAVE.
+		 */
+		connect(signal: "device-changed", callback: (owner: this, device: Device) => void): number;
+		/**
+		 * The ::device-removed signal is emitted either when a master
+		 * pointer is removed, or when a slave (Hardware) input device
+		 * is unplugged.
+		 */
+		connect(signal: "device-removed", callback: (owner: this, device: Device) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1282,6 +1324,37 @@ declare namespace imports.gi.Gdk {
 		 * @param _y the y coordinate of the destination
 		 */
 		warp_pointer(screen: Screen, _x: number, _y: number): void;
+		/**
+		 * The ::closed signal is emitted when the connection to the windowing
+		 * system for #display is closed.
+		 */
+		connect(signal: "closed", callback: (owner: this, is_error: boolean) => void): number;
+		/**
+		 * The ::monitor-added signal is emitted whenever a monitor is
+		 * added.
+		 */
+		connect(signal: "monitor-added", callback: (owner: this, monitor: Monitor) => void): number;
+		/**
+		 * The ::monitor-removed signal is emitted whenever a monitor is
+		 * removed.
+		 */
+		connect(signal: "monitor-removed", callback: (owner: this, monitor: Monitor) => void): number;
+		/**
+		 * The ::opened signal is emitted when the connection to the windowing
+		 * system for #display is opened.
+		 */
+		connect(signal: "opened", callback: (owner: this) => void): number;
+		/**
+		 * The ::seat-added signal is emitted whenever a new seat is made
+		 * known to the windowing system.
+		 */
+		connect(signal: "seat-added", callback: (owner: this, seat: Seat) => void): number;
+		/**
+		 * The ::seat-removed signal is emitted whenever a seat is removed
+		 * by the windowing system.
+		 */
+		connect(signal: "seat-removed", callback: (owner: this, seat: Seat) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1370,6 +1443,11 @@ declare namespace imports.gi.Gdk {
 		 * @param display a {@link Display}
 		 */
 		set_default_display(display: Display): void;
+		/**
+		 * The ::display-opened signal is emitted when a display is opened.
+		 */
+		connect(signal: "display-opened", callback: (owner: this, display: Display) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1528,6 +1606,41 @@ declare namespace imports.gi.Gdk {
 		 * @param hot_y y coordinate of the drag window hotspot
 		 */
 		set_hotspot(hot_x: number, hot_y: number): void;
+		/**
+		 * A new action is being chosen for the drag and drop operation.
+		 * 
+		 * This signal will only be emitted if the {@link DragContext} manages
+		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
+		 * for more information.
+		 */
+		connect(signal: "action-changed", callback: (owner: this, action: DragAction) => void): number;
+		/**
+		 * The drag and drop operation was cancelled.
+		 * 
+		 * This signal will only be emitted if the {@link DragContext} manages
+		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
+		 * for more information.
+		 */
+		connect(signal: "cancel", callback: (owner: this, reason: DragCancelReason) => void): number;
+		/**
+		 * The drag and drop operation was finished, the drag destination
+		 * finished reading all data. The drag source can now free all
+		 * miscellaneous data.
+		 * 
+		 * This signal will only be emitted if the {@link DragContext} manages
+		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
+		 * for more information.
+		 */
+		connect(signal: "dnd-finished", callback: (owner: this) => void): number;
+		/**
+		 * The drag and drop operation was performed on an accepting client.
+		 * 
+		 * This signal will only be emitted if the {@link DragContext} manages
+		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
+		 * for more information.
+		 */
+		connect(signal: "drop-performed", callback: (owner: this, time: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1702,6 +1815,53 @@ declare namespace imports.gi.Gdk {
 		 * @param phase the phase that is requested
 		 */
 		request_phase(phase: FrameClockPhase): void;
+		/**
+		 * This signal ends processing of the frame. Applications
+		 * should generally not handle this signal.
+		 */
+		connect(signal: "after-paint", callback: (owner: this) => void): number;
+		/**
+		 * This signal begins processing of the frame. Applications
+		 * should generally not handle this signal.
+		 */
+		connect(signal: "before-paint", callback: (owner: this) => void): number;
+		/**
+		 * This signal is used to flush pending motion events that
+		 * are being batched up and compressed together. Applications
+		 * should not handle this signal.
+		 */
+		connect(signal: "flush-events", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted as the second step of toolkit and
+		 * application processing of the frame. Any work to update
+		 * sizes and positions of application elements should be
+		 * performed. GTK+ normally handles this internally.
+		 */
+		connect(signal: "layout", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted as the third step of toolkit and
+		 * application processing of the frame. The frame is
+		 * repainted. GDK normally handles this internally and
+		 * produces expose events, which are turned into GTK+
+		 * #GtkWidget::draw signals.
+		 */
+		connect(signal: "paint", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted after processing of the frame is
+		 * finished, and is handled internally by GTK+ to resume normal
+		 * event processing. Applications should not handle this signal.
+		 */
+		connect(signal: "resume-events", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted as the first step of toolkit and
+		 * application processing of the frame. Animations should
+		 * be updated using gdk_frame_clock_get_frame_time().
+		 * Applications can connect directly to this signal, or
+		 * use gtk_widget_add_tick_callback() as a more convenient
+		 * interface.
+		 */
+		connect(signal: "update", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2155,6 +2315,23 @@ declare namespace imports.gi.Gdk {
 		 * @returns %TRUE if there was a keyval bound to the keycode/state/group
 		 */
 		translate_keyboard_state(hardware_keycode: number, state: ModifierType, group: number, keyval: number, effective_group: number, level: number, consumed_modifiers: ModifierType): boolean;
+		/**
+		 * The ::direction-changed signal gets emitted when the direction of
+		 * the keymap changes.
+		 */
+		connect(signal: "direction-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::keys-changed signal is emitted when the mapping represented by
+		 * #keymap changes.
+		 */
+		connect(signal: "keys-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::state-changed signal is emitted when the state of the
+		 * keyboard changes, e.g when Caps Lock is turned on or off.
+		 * See gdk_keymap_get_caps_lock_state().
+		 */
+		connect(signal: "state-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2286,6 +2463,8 @@ declare namespace imports.gi.Gdk {
 		 * @returns %TRUE if #monitor is primary
 		 */
 		is_primary(): boolean;
+		connect(signal: "invalidate", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2615,6 +2794,25 @@ declare namespace imports.gi.Gdk {
 		 *   involved; the terminology is conventional.)
 		 */
 		set_resolution(dpi: number): void;
+		/**
+		 * The ::composited-changed signal is emitted when the composited
+		 * status of the screen changes
+		 */
+		connect(signal: "composited-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::monitors-changed signal is emitted when the number, size
+		 * or position of the monitors attached to the screen change.
+		 * 
+		 * Only for X11 and OS X for now. A future implementation for Win32
+		 * may be a possibility.
+		 */
+		connect(signal: "monitors-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::size-changed signal is emitted when the pixel width or
+		 * height of a screen changes.
+		 */
+		connect(signal: "size-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2765,6 +2963,31 @@ declare namespace imports.gi.Gdk {
 		 * Releases a grab added through gdk_seat_grab().
 		 */
 		ungrab(): void;
+		/**
+		 * The ::device-added signal is emitted when a new input
+		 * device is related to this seat.
+		 */
+		connect(signal: "device-added", callback: (owner: this, device: Device) => void): number;
+		/**
+		 * The ::device-removed signal is emitted when an
+		 * input device is removed (e.g. unplugged).
+		 */
+		connect(signal: "device-removed", callback: (owner: this, device: Device) => void): number;
+		/**
+		 * The ::tool-added signal is emitted whenever a new tool
+		 * is made known to the seat. The tool may later be assigned
+		 * to a device (i.e. on proximity with a tablet). The device
+		 * will emit the {@link Device}::tool-changed signal accordingly.
+		 * 
+		 * A same tool may be used by several devices.
+		 */
+		connect(signal: "tool-added", callback: (owner: this, tool: DeviceTool) => void): number;
+		/**
+		 * This signal is emitted whenever a tool is no longer known
+		 * to this #seat.
+		 */
+		connect(signal: "tool-removed", callback: (owner: this, tool: DeviceTool) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4733,6 +4956,53 @@ declare namespace imports.gi.Gdk {
 		 * withdraws toplevel windows before hiding them.
 		 */
 		withdraw(): void;
+		/**
+		 * The ::create-surface signal is emitted when an offscreen window
+		 * needs its surface (re)created, which happens either when the
+		 * window is first drawn to, or when the window is being
+		 * resized. The first signal handler that returns a non-%NULL
+		 * surface will stop any further signal emission, and its surface
+		 * will be used.
+		 * 
+		 * Note that it is not possible to access the window's previous
+		 * surface from within any callback of this signal. Calling
+		 * gdk_offscreen_window_get_surface() will lead to a crash.
+		 */
+		connect(signal: "create-surface", callback: (owner: this, width: number, height: number) => cairo.Surface): number;
+		/**
+		 * The ::from-embedder signal is emitted to translate coordinates
+		 * in the embedder of an offscreen window to the offscreen window.
+		 * 
+		 * See also {@link Window}::to-embedder.
+		 */
+		connect(signal: "from-embedder", callback: (owner: this, embedder_x: number, embedder_y: number, offscreen_x: number, offscreen_y: number) => void): number;
+		/**
+		 * Emitted when the position of #window is finalized after being moved to a
+		 * destination rectangle.
+		 * 
+		 * #window might be flipped over the destination rectangle in order to keep
+		 * it on-screen, in which case #flipped_x and #flipped_y will be set to %TRUE
+		 * accordingly.
+		 * 
+		 * #flipped_rect is the ideal position of #window after any possible
+		 * flipping, but before any possible sliding. #final_rect is #flipped_rect,
+		 * but possibly translated in the case that flipping is still ineffective in
+		 * keeping #window on-screen.
+		 */
+		connect(signal: "moved-to-rect", callback: (owner: this, flipped_rect: any, final_rect: any, flipped_x: boolean, flipped_y: boolean) => void): number;
+		/**
+		 * The ::pick-embedded-child signal is emitted to find an embedded
+		 * child at the given position.
+		 */
+		connect(signal: "pick-embedded-child", callback: (owner: this, _x: number, _y: number) => Window): number;
+		/**
+		 * The ::to-embedder signal is emitted to translate coordinates
+		 * in an offscreen window to its embedder.
+		 * 
+		 * See also {@link Window}::from-embedder.
+		 */
+		connect(signal: "to-embedder", callback: (owner: this, offscreen_x: number, offscreen_y: number, embedder_x: number, embedder_y: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

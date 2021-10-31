@@ -88,6 +88,19 @@ declare namespace imports.gi.WebKit2 {
 		 * @param credential a #WebKitCredential, or %NULL
 		 */
 		set_proposed_credential(credential: Credential): void;
+		/**
+		 * This signal is emitted when the user authentication request succeeded.
+		 * Applications handling their own credential storage should connect to
+		 * this signal to save the credentials.
+		 */
+		connect(signal: "authenticated", callback: (owner: this, credential: Credential) => void): number;
+		/**
+		 * This signal is emitted when the user authentication request is
+		 * cancelled. It allows the application to dismiss its authentication
+		 * dialog in case of page load failure for example.
+		 */
+		connect(signal: "cancelled", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -129,6 +142,22 @@ declare namespace imports.gi.WebKit2 {
 		 * @param info a #WebKitApplicationInfo
 		 */
 		set_application_info(info: ApplicationInfo): void;
+		/**
+		 * This signal is emitted when the automation client requests a new
+		 * browsing context to interact with it. The callback handler should
+		 * return a #WebKitWebView created with #WebKitWebView:is-controlled-by-automation
+		 * construct property enabled and #WebKitWebView:automation-presentation-type construct
+		 * property set if needed.
+		 * 
+		 * If the signal is emitted with "tab" detail, the returned #WebKitWebView should be
+		 * a new web view added to a new tab of the current browsing context window.
+		 * If the signal is emitted with "window" detail, the returned #WebKitWebView should be
+		 * a new web view added to a new window.
+		 * When creating a new web view and there's an active browsing context, the new window
+		 * or tab shouldn't be focused.
+		 */
+		connect(signal: "create-web-view", callback: (owner: this) => WebView): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -176,6 +205,15 @@ declare namespace imports.gi.WebKit2 {
 		 *    located at the specified index relative to the current item or %NULL.
 		 */
 		get_nth_item(index: number): BackForwardListItem;
+		/**
+		 * This signal is emitted when #back_forward_list changes. This happens
+		 * when the current item is updated, a new item is added or one or more
+		 * items are removed. Note that both #item_added and #items_removed can
+		 * %NULL when only the current item is updated. Items are only removed
+		 * when the list is cleared or the maximum items limit is reached.
+		 */
+		connect(signal: "changed", callback: (owner: this, item_added: BackForwardListItem, items_removed: any) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -255,6 +293,14 @@ declare namespace imports.gi.WebKit2 {
 		 * @param rgba a pointer #GdkRGBA
 		 */
 		set_rgba(rgba: Gdk.RGBA): void;
+		/**
+		 * Emitted when the #request finishes. This signal can be emitted because the
+		 * user completed the #request calling webkit_color_chooser_request_finish(),
+		 * or cancelled it with webkit_color_chooser_request_cancel() or because the
+		 * color input element is removed from the DOM.
+		 */
+		connect(signal: "finished", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -614,6 +660,11 @@ declare namespace imports.gi.WebKit2 {
 		 * @param storage a #WebKitCookiePersistentStorage
 		 */
 		set_persistent_storage(filename: string, storage: CookiePersistentStorage): void;
+		/**
+		 * This signal is emitted when cookies are added, removed or modified.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -759,6 +810,40 @@ declare namespace imports.gi.WebKit2 {
 		 * @param uri the destination URI
 		 */
 		set_destination(uri: string): void;
+		/**
+		 * This signal is emitted after #WebKitDownload::decide-destination and before
+		 * #WebKitDownload::received-data to notify that destination file has been
+		 * created successfully at #destination.
+		 */
+		connect(signal: "created-destination", callback: (owner: this, destination: string) => void): number;
+		/**
+		 * This signal is emitted after response is received to
+		 * decide a destination URI for the download. If this signal is not
+		 * handled the file will be downloaded to %G_USER_DIRECTORY_DOWNLOAD
+		 * directory using #suggested_filename.
+		 */
+		connect(signal: "decide-destination", callback: (owner: this, suggested_filename: string) => boolean): number;
+		/**
+		 * This signal is emitted when an error occurs during the download
+		 * operation. The given #error, of the domain %WEBKIT_DOWNLOAD_ERROR,
+		 * contains further details of the failure. If the download is cancelled
+		 * with webkit_download_cancel(), this signal is emitted with error
+		 * %WEBKIT_DOWNLOAD_ERROR_CANCELLED_BY_USER. The download operation finishes
+		 * after an error and #WebKitDownload::finished signal is emitted after this one.
+		 */
+		connect(signal: "failed", callback: (owner: this, error: GLib.Error) => void): number;
+		/**
+		 * This signal is emitted when download finishes successfully or due to an error.
+		 * In case of errors #WebKitDownload::failed signal is emitted before this one.
+		 */
+		connect(signal: "finished", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted after response is received,
+		 * every time new data has been written to the destination. It's
+		 * useful to know the progress of the download operation.
+		 */
+		connect(signal: "received-data", callback: (owner: this, data_length: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -870,6 +955,16 @@ declare namespace imports.gi.WebKit2 {
 		 * database doesn't have a favicon for #page_uri.
 		 */
 		get_favicon_uri(page_uri: string): string;
+		/**
+		 * This signal is emitted when the favicon URI of #page_uri has
+		 * been changed to #favicon_uri in the database. You can connect
+		 * to this signal and call webkit_favicon_database_get_favicon()
+		 * to get the favicon. If you are interested in the favicon of a
+		 * #WebKitWebView it's easier to use the #WebKitWebView:favicon
+		 * property. See webkit_web_view_get_favicon() for more details.
+		 */
+		connect(signal: "favicon-changed", callback: (owner: this, page_uri: string, favicon_uri: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1100,6 +1195,29 @@ declare namespace imports.gi.WebKit2 {
 		 * webkit_find_controller_count_matches() is a programming error.
 		 */
 		search_previous(): void;
+		/**
+		 * This signal is emitted when the #WebKitFindController has
+		 * counted the number of matches for a given text after a call
+		 * to webkit_find_controller_count_matches().
+		 */
+		connect(signal: "counted-matches", callback: (owner: this, match_count: number) => void): number;
+		/**
+		 * This signal is emitted when a search operation does not find
+		 * any result for the given text. It will be issued if the text
+		 * is not found asynchronously after a call to
+		 * webkit_find_controller_search(), webkit_find_controller_search_next()
+		 * or webkit_find_controller_search_previous().
+		 */
+		connect(signal: "failed-to-find-text", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when a given text is found in the web
+		 * page text. It will be issued if the text is found
+		 * asynchronously after a call to webkit_find_controller_search(),
+		 * webkit_find_controller_search_next() or
+		 * webkit_find_controller_search_previous().
+		 */
+		connect(signal: "found-text", callback: (owner: this, match_count: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1182,6 +1300,23 @@ declare namespace imports.gi.WebKit2 {
 		 * @param position a #WebKitGeolocationPosition
 		 */
 		update_position(position: GeolocationPosition): void;
+		/**
+		 * The signal is emitted to notify that #manager needs to start receiving
+		 * position updates. After this signal is emitted the user should provide
+		 * the updates using webkit_geolocation_manager_update_position() every time
+		 * the position changes, or use webkit_geolocation_manager_failed() in case
+		 * it isn't possible to determine the current position.
+		 * 
+		 * If the signal is not handled, WebKit will try to determine the position
+		 * using GeoClue if available.
+		 */
+		connect(signal: "start", callback: (owner: this) => boolean): number;
+		/**
+		 * The signal is emitted to notify that #manager doesn't need to receive
+		 * position updates anymore.
+		 */
+		connect(signal: "stop", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1410,6 +1545,32 @@ declare namespace imports.gi.WebKit2 {
 		 * @param purpose a #WebKitInputPurpose
 		 */
 		set_input_purpose(purpose: InputPurpose): void;
+		/**
+		 * Emitted when a complete input sequence has been entered by the user.
+		 * This can be a single character immediately after a key press or the
+		 * final result of preediting.
+		 */
+		connect(signal: "committed", callback: (owner: this, text: string) => void): number;
+		/**
+		 * Emitted when the input method wants to delete the context surrounding the cursor.
+		 * If #offset is a negative value, it means a position before the cursor.
+		 */
+		connect(signal: "delete-surrounding", callback: (owner: this, offset: number, n_chars: number) => void): number;
+		/**
+		 * Emitted whenever the preedit sequence currently being entered has changed.
+		 * It is also emitted at the end of a preedit sequence, in which case
+		 * webkit_input_method_context_get_preedit() returns the empty string.
+		 */
+		connect(signal: "preedit-changed", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when a preediting sequence has been completed or canceled.
+		 */
+		connect(signal: "preedit-finished", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when a new preediting sequence starts.
+		 */
+		connect(signal: "preedit-started", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1597,6 +1758,18 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns the title for the notification
 		 */
 		get_title(): string;
+		/**
+		 * Emitted when a notification has been clicked. See webkit_notification_clicked().
+		 */
+		connect(signal: "clicked", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when a notification has been withdrawn.
+		 * 
+		 * The default handler will close the notification using libnotify, if built with
+		 * support for it.
+		 */
+		connect(signal: "closed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1667,6 +1840,13 @@ declare namespace imports.gi.WebKit2 {
 		 * @param index the index of the item
 		 */
 		select_item(index: number): void;
+		/**
+		 * Emitted when closing a #WebKitOptionMenu is requested. This can happen
+		 * when the user explicitly calls webkit_option_menu_close() or when the
+		 * element is detached from the current page.
+		 */
+		connect(signal: "close", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1792,6 +1972,19 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns a #GtkWidget.
 		 */
 		get_widget(): Gtk.Widget;
+		/**
+		 * Emitted right before the printing will start. You should read the information
+		 * from the widget and update the content based on it if necessary. The widget
+		 * is not guaranteed to be valid at a later time.
+		 */
+		connect(signal: "apply", callback: (owner: this) => void): number;
+		/**
+		 * Emitted after change of selected printer in the dialog. The actual page setup
+		 * and print settings are available and the custom widget can actualize itself
+		 * according to their values.
+		 */
+		connect(signal: "update", callback: (owner: this, page_setup: Gtk.PageSetup, print_settings: Gtk.PrintSettings) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1885,6 +2078,25 @@ declare namespace imports.gi.WebKit2 {
 		 * @param print_settings a #GtkPrintSettings to set
 		 */
 		set_print_settings(print_settings: Gtk.PrintSettings): void;
+		/**
+		 * Emitted when displaying the print dialog with webkit_print_operation_run_dialog().
+		 * The returned #WebKitPrintCustomWidget will be added to the print dialog and
+		 * it will be owned by the #print_operation. However, the object is guaranteed
+		 * to be alive until the #WebKitPrintCustomWidget::apply is emitted.
+		 */
+		connect(signal: "create-custom-widget", callback: (owner: this) => PrintCustomWidget): number;
+		/**
+		 * Emitted when an error occurs while printing. The given #error, of the domain
+		 * %WEBKIT_PRINT_ERROR, contains further details of the failure.
+		 * The #WebKitPrintOperation::finished signal is emitted after this one.
+		 */
+		connect(signal: "failed", callback: (owner: this, error: GLib.Error) => void): number;
+		/**
+		 * Emitted when the print operation has finished doing everything
+		 * required for printing.
+		 */
+		connect(signal: "finished", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3484,6 +3696,14 @@ declare namespace imports.gi.WebKit2 {
 		 * @param world_name the name of a #WebKitScriptWorld
 		 */
 		unregister_script_message_handler_in_world(name: string, world_name: string): void;
+		/**
+		 * This signal is emitted when JavaScript in a web view calls
+		 * <code>window.webkit.messageHandlers.&lt;name&gt;.postMessage()</code>, after registering
+		 * <code>&lt;name&gt;</code> using
+		 * webkit_user_content_manager_register_script_message_handler()
+		 */
+		connect(signal: "script-message-received", callback: (owner: this, js_result: JavascriptResult) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4022,6 +4242,44 @@ declare namespace imports.gi.WebKit2 {
 		 * @param limit the maximum number of web processes
 		 */
 		set_web_process_count_limit(limit: number): void;
+		/**
+		 * This signal is emitted when a new automation request is made.
+		 * Note that it will never be emitted if automation is not enabled in #context,
+		 * see webkit_web_context_set_automation_allowed() for more details.
+		 */
+		connect(signal: "automation-started", callback: (owner: this, session: AutomationSession) => void): number;
+		/**
+		 * This signal is emitted when a new download request is made.
+		 */
+		connect(signal: "download-started", callback: (owner: this, download: Download) => void): number;
+		/**
+		 * This signal is emitted when a #WebKitWebContext needs to set
+		 * initial notification permissions for a web process. It is emitted
+		 * when a new web process is about to be launched, and signals the
+		 * most appropriate moment to use
+		 * webkit_web_context_initialize_notification_permissions(). If no
+		 * notification permissions have changed since the last time this
+		 * signal was emitted, then there is no need to call
+		 * webkit_web_context_initialize_notification_permissions() again.
+		 */
+		connect(signal: "initialize-notification-permissions", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when a new web process is about to be
+		 * launched. It signals the most appropriate moment to use
+		 * webkit_web_context_set_web_extensions_initialization_user_data()
+		 * and webkit_web_context_set_web_extensions_directory().
+		 */
+		connect(signal: "initialize-web-extensions", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when a #WebKitUserMessage is received from a
+		 * #WebKitWebExtension. You can reply to the message using
+		 * webkit_user_message_send_reply().
+		 * 
+		 * You can handle the user message asynchronously by calling g_object_ref() on
+		 * #message and returning %TRUE.
+		 */
+		connect(signal: "user-message-received", callback: (owner: this, message: UserMessage) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4131,6 +4389,63 @@ declare namespace imports.gi.WebKit2 {
 		 * Request #inspector to be shown.
 		 */
 		show(): void;
+		/**
+		 * Emitted when the inspector is requested to be attached to the window
+		 * where the inspected web view is.
+		 * If this signal is not handled the inspector view will be automatically
+		 * attached to the inspected view, so you only need to handle this signal
+		 * if you want to attach the inspector view yourself (for example, to add
+		 * the inspector view to a browser tab).
+		 * 
+		 * To prevent the inspector view from being attached you can connect to this
+		 * signal and simply return %TRUE.
+		 */
+		connect(signal: "attach", callback: (owner: this) => boolean): number;
+		/**
+		 * Emitted when the inspector should be shown.
+		 * 
+		 * If the inspector is not attached the inspector window should be shown
+		 * on top of any other windows.
+		 * If the inspector is attached the inspector view should be made visible.
+		 * For example, if the inspector view is attached using a tab in a browser
+		 * window, the browser window should be raised and the tab containing the
+		 * inspector view should be the active one.
+		 * In both cases, if this signal is not handled, the default implementation
+		 * calls gtk_window_present() on the current toplevel #GtkWindow of the
+		 * inspector view.
+		 */
+		connect(signal: "bring-to-front", callback: (owner: this) => boolean): number;
+		/**
+		 * Emitted when the inspector page is closed. If you are using your own
+		 * inspector window, you should connect to this signal and destroy your
+		 * window.
+		 */
+		connect(signal: "closed", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the inspector is requested to be detached from the window
+		 * it is currently attached to. The inspector is detached when the inspector page
+		 * is about to be closed, and this signal is emitted right before
+		 * #WebKitWebInspector::closed, or when the user clicks on the detach button
+		 * in the inspector view to show the inspector in a separate window. In this case
+		 * the signal #WebKitWebInspector::open-window is emitted after this one.
+		 * 
+		 * To prevent the inspector view from being detached you can connect to this
+		 * signal and simply return %TRUE.
+		 */
+		connect(signal: "detach", callback: (owner: this) => boolean): number;
+		/**
+		 * Emitted when the inspector is requested to open in a separate window.
+		 * If this signal is not handled, a #GtkWindow with the inspector will be
+		 * created and shown, so you only need to handle this signal if you want
+		 * to use your own window.
+		 * This signal is emitted after #WebKitWebInspector::detach to show
+		 * the inspector in a separate window after being detached.
+		 * 
+		 * To prevent the inspector from being shown you can connect to this
+		 * signal and simply return %TRUE
+		 */
+		connect(signal: "open-window", callback: (owner: this) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4213,6 +4528,37 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns the current active URI of #resource
 		 */
 		get_uri(): string;
+		/**
+		 * This signal is emitted when an error occurs during the resource
+		 * load operation.
+		 */
+		connect(signal: "failed", callback: (owner: this, error: GLib.Error) => void): number;
+		/**
+		 * This signal is emitted when a TLS error occurs during the resource load operation.
+		 */
+		connect(signal: "failed-with-tls-errors", callback: (owner: this, certificate: Gio.TlsCertificate, errors: Gio.TlsCertificateFlags) => void): number;
+		/**
+		 * This signal is emitted when the resource load finishes successfully
+		 * or due to an error. In case of errors #WebKitWebResource::failed signal
+		 * is emitted before this one.
+		 */
+		connect(signal: "finished", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted after response is received,
+		 * every time new data has been received. It's
+		 * useful to know the progress of the resource load operation.
+		 */
+		connect(signal: "received-data", callback: (owner: this, data_length: number) => void): number;
+		/**
+		 * This signal is emitted when #request has been sent to the
+		 * server. In case of a server redirection this signal is
+		 * emitted again with the #request argument containing the new
+		 * request sent to the server due to the redirection and the
+		 * #redirected_response parameter containing the response
+		 * received by the server for the initial request.
+		 */
+		connect(signal: "sent-request", callback: (owner: this, request: URIRequest, redirected_response: URIResponse) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5019,6 +5365,457 @@ declare namespace imports.gi.WebKit2 {
 		 * the #WebKitWebView::close signal is emitted, otherwise nothing happens.
 		 */
 		try_close(): void;
+		/**
+		 * This signal is emitted when the user is challenged with HTTP
+		 * authentication. To let the  application access or supply
+		 * the credentials as well as to allow the client application
+		 * to either cancel the request or perform the authentication,
+		 * the signal will pass an instance of the
+		 * #WebKitAuthenticationRequest in the #request argument.
+		 * To handle this signal asynchronously you should keep a ref
+		 * of the request and return %TRUE. To disable HTTP authentication
+		 * entirely, connect to this signal and simply return %TRUE.
+		 * 
+		 * The default signal handler will run a default authentication
+		 * dialog asynchronously for the user to interact with.
+		 */
+		connect(signal: "authenticate", callback: (owner: this, request: AuthenticationRequest) => boolean): number;
+		/**
+		 * Emitted when closing a #WebKitWebView is requested. This occurs when a
+		 * call is made from JavaScript's <function>window.close</function> function or
+		 * after trying to close the #web_view with webkit_web_view_try_close().
+		 * It is the owner's responsibility to handle this signal to hide or
+		 * destroy the #WebKitWebView, if necessary.
+		 */
+		connect(signal: "close", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when a context menu is about to be displayed to give the application
+		 * a chance to customize the proposed menu, prevent the menu from being displayed,
+		 * or build its own context menu.
+		 * <itemizedlist>
+		 * <listitem><para>
+		 *  To customize the proposed menu you can use webkit_context_menu_prepend(),
+		 *  webkit_context_menu_append() or webkit_context_menu_insert() to add new
+		 *  #WebKitContextMenuItem<!-- -->s to #context_menu, webkit_context_menu_move_item()
+		 *  to reorder existing items, or webkit_context_menu_remove() to remove an
+		 *  existing item. The signal handler should return %FALSE, and the menu represented
+		 *  by #context_menu will be shown.
+		 * </para></listitem>
+		 * <listitem><para>
+		 *  To prevent the menu from being displayed you can just connect to this signal
+		 *  and return %TRUE so that the proposed menu will not be shown.
+		 * </para></listitem>
+		 * <listitem><para>
+		 *  To build your own menu, you can remove all items from the proposed menu with
+		 *  webkit_context_menu_remove_all(), add your own items and return %FALSE so
+		 *  that the menu will be shown. You can also ignore the proposed #WebKitContextMenu,
+		 *  build your own #GtkMenu and return %TRUE to prevent the proposed menu from being shown.
+		 * </para></listitem>
+		 * <listitem><para>
+		 *  If you just want the default menu to be shown always, simply don't connect to this
+		 *  signal because showing the proposed context menu is the default behaviour.
+		 * </para></listitem>
+		 * </itemizedlist>
+		 * 
+		 * The #event is expected to be one of the following types:
+		 * <itemizedlist>
+		 * <listitem><para>
+		 * a #GdkEventButton of type %GDK_BUTTON_PRESS when the context menu
+		 * was triggered with mouse.
+		 * </para></listitem>
+		 * <listitem><para>
+		 * a #GdkEventKey of type %GDK_KEY_PRESS if the keyboard was used to show
+		 * the menu.
+		 * </para></listitem>
+		 * <listitem><para>
+		 * a generic #GdkEvent of type %GDK_NOTHING when the #GtkWidget::popup-menu
+		 * signal was used to show the context menu.
+		 * </para></listitem>
+		 * </itemizedlist>
+		 * 
+		 * If the signal handler returns %FALSE the context menu represented by #context_menu
+		 * will be shown, if it return %TRUE the context menu will not be shown.
+		 * 
+		 * The proposed #WebKitContextMenu passed in #context_menu argument is only valid
+		 * during the signal emission.
+		 */
+		connect(signal: "context-menu", callback: (owner: this, context_menu: ContextMenu, event: Gdk.Event, hit_test_result: HitTestResult) => boolean): number;
+		/**
+		 * Emitted after #WebKitWebView::context-menu signal, if the context menu is shown,
+		 * to notify that the context menu is dismissed.
+		 */
+		connect(signal: "context-menu-dismissed", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the creation of a new #WebKitWebView is requested.
+		 * If this signal is handled the signal handler should return the
+		 * newly created #WebKitWebView.
+		 * 
+		 * The #WebKitNavigationAction parameter contains information about the
+		 * navigation action that triggered this signal.
+		 * 
+		 * The new #WebKitWebView must be related to #web_view, see
+		 * webkit_web_view_new_with_related_view() for more details.
+		 * 
+		 * The new #WebKitWebView should not be displayed to the user
+		 * until the #WebKitWebView::ready-to-show signal is emitted.
+		 */
+		connect(signal: "create", callback: (owner: this, navigation_action: NavigationAction) => Gtk.Widget): number;
+		/**
+		 * This signal is emitted when WebKit is requesting the client to decide a policy
+		 * decision, such as whether to navigate to a page, open a new window or whether or
+		 * not to download a resource. The #WebKitNavigationPolicyDecision passed in the
+		 * #decision argument is a generic type, but should be casted to a more
+		 * specific type when making the decision. For example:
+		 * 
+		 * <informalexample><programlisting>
+		 * static gboolean
+		 * decide_policy_cb (WebKitWebView *web_view,
+		 *                   WebKitPolicyDecision *decision,
+		 *                   WebKitPolicyDecisionType type)
+		 * {
+		 *     switch (type) {
+		 *     case WEBKIT_POLICY_DECISION_TYPE_NAVIGATION_ACTION: {
+		 *         WebKitNavigationPolicyDecision *navigation_decision = WEBKIT_NAVIGATION_POLICY_DECISION (decision);
+		 *         /<!-- -->* Make a policy decision here. *<!-- -->/
+		 *         break;
+		 *     }
+		 *     case WEBKIT_POLICY_DECISION_TYPE_NEW_WINDOW_ACTION: {
+		 *         WebKitNavigationPolicyDecision *navigation_decision = WEBKIT_NAVIGATION_POLICY_DECISION (decision);
+		 *         /<!-- -->* Make a policy decision here. *<!-- -->/
+		 *         break;
+		 *     }
+		 *     case WEBKIT_POLICY_DECISION_TYPE_RESPONSE:
+		 *         WebKitResponsePolicyDecision *response = WEBKIT_RESPONSE_POLICY_DECISION (decision);
+		 *         /<!-- -->* Make a policy decision here. *<!-- -->/
+		 *         break;
+		 *     default:
+		 *         /<!-- -->* Making no decision results in webkit_policy_decision_use(). *<!-- -->/
+		 *         return FALSE;
+		 *     }
+		 *     return TRUE;
+		 * }
+		 * </programlisting></informalexample>
+		 * 
+		 * It is possible to make policy decision asynchronously, by simply calling g_object_ref()
+		 * on the #decision argument and returning %TRUE to block the default signal handler.
+		 * If the last reference is removed on a #WebKitPolicyDecision and no decision has been
+		 * made explicitly, webkit_policy_decision_use() will be the default policy decision. The
+		 * default signal handler will simply call webkit_policy_decision_use(). Only the first
+		 * policy decision chosen for a given #WebKitPolicyDecision will have any affect.
+		 */
+		connect(signal: "decide-policy", callback: (owner: this, decision: PolicyDecision, decision_type: PolicyDecisionType) => boolean): number;
+		/**
+		 * Emitted when JavaScript code calls
+		 * <function>element.webkitRequestFullScreen</function>. If the
+		 * signal is not handled the #WebKitWebView will proceed to full screen
+		 * its top level window. This signal can be used by client code to
+		 * request permission to the user prior doing the full screen
+		 * transition and eventually prepare the top-level window
+		 * (e.g. hide some widgets that would otherwise be part of the
+		 * full screen window).
+		 */
+		connect(signal: "enter-fullscreen", callback: (owner: this) => boolean): number;
+		/**
+		 * This signal is emitted when insecure content has been detected
+		 * in a page loaded through a secure connection. This typically
+		 * means that a external resource from an unstrusted source has
+		 * been run or displayed, resulting in a mix of HTTPS and
+		 * non-HTTPS content.
+		 * 
+		 * You can check the #event parameter to know exactly which kind
+		 * of event has been detected (see #WebKitInsecureContentEvent).
+		 */
+		connect(signal: "insecure-content-detected", callback: (owner: this, event: InsecureContentEvent) => void): number;
+		/**
+		 * Emitted when the #WebKitWebView is about to restore its top level
+		 * window out of its full screen state. This signal can be used by
+		 * client code to restore widgets hidden during the
+		 * #WebKitWebView::enter-fullscreen stage for instance.
+		 */
+		connect(signal: "leave-fullscreen", callback: (owner: this) => boolean): number;
+		/**
+		 * Emitted when a load operation in #web_view changes.
+		 * The signal is always emitted with %WEBKIT_LOAD_STARTED when a
+		 * new load request is made and %WEBKIT_LOAD_FINISHED when the load
+		 * finishes successfully or due to an error. When the ongoing load
+		 * operation fails #WebKitWebView::load-failed signal is emitted
+		 * before #WebKitWebView::load-changed is emitted with
+		 * %WEBKIT_LOAD_FINISHED.
+		 * If a redirection is received from the server, this signal is emitted
+		 * with %WEBKIT_LOAD_REDIRECTED after the initial emission with
+		 * %WEBKIT_LOAD_STARTED and before %WEBKIT_LOAD_COMMITTED.
+		 * When the page content starts arriving the signal is emitted with
+		 * %WEBKIT_LOAD_COMMITTED event.
+		 * 
+		 * You can handle this signal and use a switch to track any ongoing
+		 * load operation.
+		 * 
+		 * <informalexample><programlisting>
+		 * static void web_view_load_changed (WebKitWebView  *web_view,
+		 *                                    WebKitLoadEvent load_event,
+		 *                                    gpointer        user_data)
+		 * {
+		 *     switch (load_event) {
+		 *     case WEBKIT_LOAD_STARTED:
+		 *         /<!-- -->* New load, we have now a provisional URI *<!-- -->/
+		 *         provisional_uri = webkit_web_view_get_uri (web_view);
+		 *         /<!-- -->* Here we could start a spinner or update the
+		 *          <!-- -->* location bar with the provisional URI *<!-- -->/
+		 *         break;
+		 *     case WEBKIT_LOAD_REDIRECTED:
+		 *         redirected_uri = webkit_web_view_get_uri (web_view);
+		 *         break;
+		 *     case WEBKIT_LOAD_COMMITTED:
+		 *         /<!-- -->* The load is being performed. Current URI is
+		 *          <!-- -->* the final one and it won't change unless a new
+		 *          <!-- -->* load is requested or a navigation within the
+		 *          <!-- -->* same page is performed *<!-- -->/
+		 *         uri = webkit_web_view_get_uri (web_view);
+		 *         break;
+		 *     case WEBKIT_LOAD_FINISHED:
+		 *         /<!-- -->* Load finished, we can now stop the spinner *<!-- -->/
+		 *         break;
+		 *     }
+		 * }
+		 * </programlisting></informalexample>
+		 */
+		connect(signal: "load-changed", callback: (owner: this, load_event: LoadEvent) => void): number;
+		/**
+		 * Emitted when an error occurs during a load operation.
+		 * If the error happened when starting to load data for a page
+		 * #load_event will be %WEBKIT_LOAD_STARTED. If it happened while
+		 * loading a committed data source #load_event will be %WEBKIT_LOAD_COMMITTED.
+		 * Since a load error causes the load operation to finish, the signal
+		 * WebKitWebView::load-changed will always be emitted with
+		 * %WEBKIT_LOAD_FINISHED event right after this one.
+		 * 
+		 * By default, if the signal is not handled, a stock error page will be displayed.
+		 * You need to handle the signal if you want to provide your own error page.
+		 */
+		connect(signal: "load-failed", callback: (owner: this, load_event: LoadEvent, failing_uri: string, error: GLib.Error) => boolean): number;
+		/**
+		 * Emitted when a TLS error occurs during a load operation.
+		 * To allow an exception for this #certificate
+		 * and the host of #failing_uri use webkit_web_context_allow_tls_certificate_for_host().
+		 * 
+		 * To handle this signal asynchronously you should call g_object_ref() on #certificate
+		 * and return %TRUE.
+		 * 
+		 * If %FALSE is returned, #WebKitWebView::load-failed will be emitted. The load
+		 * will finish regardless of the returned value.
+		 */
+		connect(signal: "load-failed-with-tls-errors", callback: (owner: this, failing_uri: string, certificate: Gio.TlsCertificate, errors: Gio.TlsCertificateFlags) => boolean): number;
+		/**
+		 * This signal is emitted when the mouse cursor moves over an
+		 * element such as a link, image or a media element. To determine
+		 * what type of element the mouse cursor is over, a Hit Test is performed
+		 * on the current mouse coordinates and the result is passed in the
+		 * #hit_test_result argument. The #modifiers argument is a bitmask of
+		 * #GdkModifierType flags indicating the state of modifier keys.
+		 * The signal is emitted again when the mouse is moved out of the
+		 * current element with a new #hit_test_result.
+		 */
+		connect(signal: "mouse-target-changed", callback: (owner: this, hit_test_result: HitTestResult, modifiers: number) => void): number;
+		/**
+		 * This signal is emitted when WebKit is requesting the client to
+		 * decide about a permission request, such as allowing the browser
+		 * to switch to fullscreen mode, sharing its location or similar
+		 * operations.
+		 * 
+		 * A possible way to use this signal could be through a dialog
+		 * allowing the user decide what to do with the request:
+		 * 
+		 * <informalexample><programlisting>
+		 * static gboolean permission_request_cb (WebKitWebView *web_view,
+		 *                                        WebKitPermissionRequest *request,
+		 *                                        GtkWindow *parent_window)
+		 * {
+		 *     GtkWidget *dialog = gtk_message_dialog_new (parent_window,
+		 *                                                 GTK_DIALOG_MODAL,
+		 *                                                 GTK_MESSAGE_QUESTION,
+		 *                                                 GTK_BUTTONS_YES_NO,
+		 *                                                 "Allow Permission Request?");
+		 *     gtk_widget_show (dialog);
+		 *     gint result = gtk_dialog_run (GTK_DIALOG (dialog));
+		 * 
+		 *     switch (result) {
+		 *     case GTK_RESPONSE_YES:
+		 *         webkit_permission_request_allow (request);
+		 *         break;
+		 *     default:
+		 *         webkit_permission_request_deny (request);
+		 *         break;
+		 *     }
+		 *     gtk_widget_destroy (dialog);
+		 * 
+		 *     return TRUE;
+		 * }
+		 * </programlisting></informalexample>
+		 * 
+		 * It is possible to handle permission requests asynchronously, by
+		 * simply calling g_object_ref() on the #request argument and
+		 * returning %TRUE to block the default signal handler.  If the
+		 * last reference is removed on a #WebKitPermissionRequest and the
+		 * request has not been handled, webkit_permission_request_deny()
+		 * will be the default action.
+		 * 
+		 * If the signal is not handled, the #request will be completed automatically
+		 * by the specific #WebKitPermissionRequest that could allow or deny it. Check the
+		 * documentation of classes implementing #WebKitPermissionRequest interface to know
+		 * their default action.
+		 */
+		connect(signal: "permission-request", callback: (owner: this, request: PermissionRequest) => boolean): number;
+		/**
+		 * Emitted when printing is requested on #web_view, usually by a JavaScript call,
+		 * before the print dialog is shown. This signal can be used to set the initial
+		 * print settings and page setup of #print_operation to be used as default values in
+		 * the print dialog. You can call webkit_print_operation_set_print_settings() and
+		 * webkit_print_operation_set_page_setup() and then return %FALSE to propagate the
+		 * event so that the print dialog is shown.
+		 * 
+		 * You can connect to this signal and return %TRUE to cancel the print operation
+		 * or implement your own print dialog.
+		 */
+		connect(signal: "print", callback: (owner: this, print_operation: PrintOperation) => boolean): number;
+		/**
+		 * Emitted after #WebKitWebView::create on the newly created #WebKitWebView
+		 * when it should be displayed to the user. When this signal is emitted
+		 * all the information about how the window should look, including
+		 * size, position, whether the location, status and scrollbars
+		 * should be displayed, is already set on the #WebKitWindowProperties
+		 * of #web_view. See also webkit_web_view_get_window_properties().
+		 */
+		connect(signal: "ready-to-show", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when a new resource is going to be loaded. The #request parameter
+		 * contains the #WebKitURIRequest that will be sent to the server.
+		 * You can monitor the load operation by connecting to the different signals
+		 * of #resource.
+		 */
+		connect(signal: "resource-load-started", callback: (owner: this, resource: WebResource, request: URIRequest) => void): number;
+		/**
+		 * Emitted after #WebKitWebView::ready-to-show on the newly
+		 * created #WebKitWebView when JavaScript code calls
+		 * <function>window.showModalDialog</function>. The purpose of
+		 * this signal is to allow the client application to prepare the
+		 * new view to behave as modal. Once the signal is emitted a new
+		 * main loop will be run to block user interaction in the parent
+		 * #WebKitWebView until the new dialog is closed.
+		 */
+		connect(signal: "run-as-modal", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when the user interacts with a &lt;input
+		 * type='color' /&gt; HTML element, requesting from WebKit to show
+		 * a dialog to select a color. To let the application know the details of
+		 * the color chooser, as well as to allow the client application to either
+		 * cancel the request or perform an actual color selection, the signal will
+		 * pass an instance of the #WebKitColorChooserRequest in the #request
+		 * argument.
+		 * 
+		 * It is possible to handle this request asynchronously by increasing the
+		 * reference count of the request.
+		 * 
+		 * The default signal handler will asynchronously run a regular
+		 * #GtkColorChooser for the user to interact with.
+		 */
+		connect(signal: "run-color-chooser", callback: (owner: this, request: ColorChooserRequest) => boolean): number;
+		/**
+		 * This signal is emitted when the user interacts with a &lt;input
+		 * type='file' /&gt; HTML element, requesting from WebKit to show
+		 * a dialog to select one or more files to be uploaded. To let the
+		 * application know the details of the file chooser, as well as to
+		 * allow the client application to either cancel the request or
+		 * perform an actual selection of files, the signal will pass an
+		 * instance of the #WebKitFileChooserRequest in the #request
+		 * argument.
+		 * 
+		 * The default signal handler will asynchronously run a regular
+		 * #GtkFileChooserDialog for the user to interact with.
+		 */
+		connect(signal: "run-file-chooser", callback: (owner: this, request: FileChooserRequest) => boolean): number;
+		/**
+		 * Emitted when JavaScript code calls <function>window.alert</function>,
+		 * <function>window.confirm</function> or <function>window.prompt</function>,
+		 * or when <function>onbeforeunload</function> event is fired.
+		 * The #dialog parameter should be used to build the dialog.
+		 * If the signal is not handled a different dialog will be built and shown depending
+		 * on the dialog type:
+		 * <itemizedlist>
+		 * <listitem><para>
+		 *  %WEBKIT_SCRIPT_DIALOG_ALERT: message dialog with a single Close button.
+		 * </para></listitem>
+		 * <listitem><para>
+		 *  %WEBKIT_SCRIPT_DIALOG_CONFIRM: message dialog with OK and Cancel buttons.
+		 * </para></listitem>
+		 * <listitem><para>
+		 *  %WEBKIT_SCRIPT_DIALOG_PROMPT: message dialog with OK and Cancel buttons and
+		 *  a text entry with the default text.
+		 * </para></listitem>
+		 * <listitem><para>
+		 *  %WEBKIT_SCRIPT_DIALOG_BEFORE_UNLOAD_CONFIRM: message dialog with Stay and Leave buttons.
+		 * </para></listitem>
+		 * </itemizedlist>
+		 * 
+		 * It is possible to handle the script dialog request asynchronously, by simply
+		 * caling webkit_script_dialog_ref() on the #dialog argument and calling
+		 * webkit_script_dialog_close() when done.
+		 * If the last reference is removed on a #WebKitScriptDialog and the dialog has not been
+		 * closed, webkit_script_dialog_close() will be called.
+		 */
+		connect(signal: "script-dialog", callback: (owner: this, dialog: ScriptDialog) => boolean): number;
+		/**
+		 * This signal is emitted when a notification should be presented to the
+		 * user. The #notification is kept alive until either: 1) the web page cancels it
+		 * or 2) a navigation happens.
+		 * 
+		 * The default handler will emit a notification using libnotify, if built with
+		 * support for it.
+		 */
+		connect(signal: "show-notification", callback: (owner: this, notification: Notification) => boolean): number;
+		/**
+		 * This signal is emitted when a select element in #web_view needs to display a
+		 * dropdown menu. This signal can be used to show a custom menu, using #menu to get
+		 * the details of all items that should be displayed. The area of the element in the
+		 * #WebKitWebView is given as #rectangle parameter, it can be used to position the
+		 * menu.
+		 * To handle this signal asynchronously you should keep a ref of the #menu.
+		 */
+		connect(signal: "show-option-menu", callback: (owner: this, object: OptionMenu, p0: Gdk.Event, p1: Gdk.Rectangle) => boolean): number;
+		/**
+		 * This signal is emitted when a form is about to be submitted. The #request
+		 * argument passed contains information about the text fields of the form. This
+		 * is typically used to store login information that can be used later to
+		 * pre-fill the form.
+		 * The form will not be submitted until webkit_form_submission_request_submit() is called.
+		 * 
+		 * It is possible to handle the form submission request asynchronously, by
+		 * simply calling g_object_ref() on the #request argument and calling
+		 * webkit_form_submission_request_submit() when done to continue with the form submission.
+		 * If the last reference is removed on a #WebKitFormSubmissionRequest and the
+		 * form has not been submitted, webkit_form_submission_request_submit() will be called.
+		 */
+		connect(signal: "submit-form", callback: (owner: this, request: FormSubmissionRequest) => void): number;
+		/**
+		 * This signal is emitted when a #WebKitUserMessage is received from the
+		 * #WebKitWebPage corresponding to #web_view. You can reply to the message
+		 * using webkit_user_message_send_reply().
+		 * 
+		 * You can handle the user message asynchronously by calling g_object_ref() on
+		 * #message and returning %TRUE. If the last reference of #message is removed
+		 * and the message has not been replied to, the operation in the #WebKitWebPage will
+		 * finish with error %WEBKIT_USER_MESSAGE_UNHANDLED_MESSAGE.
+		 */
+		connect(signal: "user-message-received", callback: (owner: this, message: UserMessage) => boolean): number;
+		/**
+		 * This signal is emitted when the web process crashes.
+		 */
+		connect(signal: "web-process-crashed", callback: (owner: this) => boolean): number;
+		/**
+		 * This signal is emitted when the web process terminates abnormally due
+		 * to #reason.
+		 */
+		connect(signal: "web-process-terminated", callback: (owner: this, reason: WebProcessTerminationReason) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

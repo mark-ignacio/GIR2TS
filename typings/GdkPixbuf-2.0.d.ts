@@ -1566,6 +1566,45 @@ declare namespace imports.gi.GdkPixbuf {
 		 *   the loader cannot parse the buffer
 		 */
 		write_bytes(buffer: GLib.Bytes): boolean;
+		/**
+		 * This signal is emitted when the pixbuf loader has allocated the
+		 * pixbuf in the desired size.
+		 * 
+		 * After this signal is emitted, applications can call
+		 * gdk_pixbuf_loader_get_pixbuf() to fetch the partially-loaded
+		 * pixbuf.
+		 */
+		connect(signal: "area-prepared", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when a significant area of the image being
+		 * loaded has been updated.
+		 * 
+		 * Normally it means that a complete scanline has been read in, but
+		 * it could be a different area as well.
+		 * 
+		 * Applications can use this signal to know when to repaint
+		 * areas of an image that is being loaded.
+		 */
+		connect(signal: "area-updated", callback: (owner: this, _x: number, _y: number, width: number, height: number) => void): number;
+		/**
+		 * This signal is emitted when gdk_pixbuf_loader_close() is called.
+		 * 
+		 * It can be used by different parts of an application to receive
+		 * notification when an image loader is closed by the code that
+		 * drives it.
+		 */
+		connect(signal: "closed", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when the pixbuf loader has been fed the
+		 * initial amount of data that is required to figure out the size
+		 * of the image that it will create.
+		 * 
+		 * Applications can call gdk_pixbuf_loader_set_size() in response
+		 * to this signal to set the desired size to which the image
+		 * should be scaled.
+		 */
+		connect(signal: "size-prepared", callback: (owner: this, width: number, height: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

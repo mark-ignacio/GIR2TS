@@ -309,6 +309,13 @@ declare namespace imports.gi.Gtk {
 		 * @param wrap_license whether to wrap the license
 		 */
 		set_wrap_license(wrap_license: boolean): void;
+		/**
+		 * The signal which gets emitted to activate a URI.
+		 * Applications may connect to it to override the default behaviour,
+		 * which is to call gtk_show_uri_on_window().
+		 */
+		connect(signal: "activate-link", callback: (owner: this, uri: string) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -487,6 +494,21 @@ declare namespace imports.gi.Gtk {
 		 * Undoes the last call to gtk_accel_group_lock() on this #accel_group.
 		 */
 		unlock(): void;
+		/**
+		 * The accel-activate signal is an implementation detail of
+		 * {@link AccelGroup} and not meant to be used by applications.
+		 */
+		connect(signal: "accel-activate", callback: (owner: this, acceleratable: GObject.Object, keyval: number, modifier: Gdk.ModifierType) => boolean): number;
+		/**
+		 * The accel-changed signal is emitted when an entry
+		 * is added to or removed from the accel group.
+		 * 
+		 * Widgets like {@link AccelLabel} which display an associated
+		 * accelerator should connect to this signal, and rebuild
+		 * their visual representation if the #accel_closure is theirs.
+		 */
+		connect(signal: "accel-changed", callback: (owner: this, keyval: number, modifier: Gdk.ModifierType, accel_closure: GObject.Closure) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -676,6 +698,14 @@ declare namespace imports.gi.Gtk {
 	 * use {@link AccelMap} instead.
 	 */
 	interface IAccelMap {
+
+		/**
+		 * Notifies of a change in the global accelerator map.
+		 * The path is also used as the detail for the signal,
+		 * so it is possible to connect to
+		 * changed::`accel_path`.
+		 */
+		connect(signal: "changed", callback: (owner: this, accel_path: string, accel_key: number, accel_mods: Gdk.ModifierType) => void): number;
 
 	}
 
@@ -1301,6 +1331,11 @@ declare namespace imports.gi.Gtk {
 		 * Reenable activation signals from the action
 		 */
 		unblock_activate(): void;
+		/**
+		 * The "activate" signal is emitted when the action is activated.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1629,6 +1664,46 @@ declare namespace imports.gi.Gtk {
 		 * @returns the translation of #string
 		 */
 		translate_string(string: string): string;
+		/**
+		 * The ::connect-proxy signal is emitted after connecting a proxy to
+		 * an action in the group. Note that the proxy may have been connected
+		 * to a different action before.
+		 * 
+		 * This is intended for simple customizations for which a custom action
+		 * class would be too clumsy, e.g. showing tooltips for menuitems in the
+		 * statusbar.
+		 * 
+		 * {@link UIManager} proxies the signal and provides global notification
+		 * just before any action is connected to a proxy, which is probably more
+		 * convenient to use.
+		 */
+		connect(signal: "connect-proxy", callback: (owner: this, action: Action, proxy: Widget) => void): number;
+		/**
+		 * The ::disconnect-proxy signal is emitted after disconnecting a proxy
+		 * from an action in the group.
+		 * 
+		 * {@link UIManager} proxies the signal and provides global notification
+		 * just before any action is connected to a proxy, which is probably more
+		 * convenient to use.
+		 */
+		connect(signal: "disconnect-proxy", callback: (owner: this, action: Action, proxy: Widget) => void): number;
+		/**
+		 * The ::post-activate signal is emitted just after the #action in the
+		 * #action_group is activated
+		 * 
+		 * This is intended for {@link UIManager} to proxy the signal and provide global
+		 * notification just after any action is activated.
+		 */
+		connect(signal: "post-activate", callback: (owner: this, action: Action) => void): number;
+		/**
+		 * The ::pre-activate signal is emitted just before the #action in the
+		 * #action_group is activated
+		 * 
+		 * This is intended for {@link UIManager} to proxy the signal and provide global
+		 * notification just before any action is activated.
+		 */
+		connect(signal: "pre-activate", callback: (owner: this, action: Action) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1877,6 +1952,16 @@ declare namespace imports.gi.Gtk {
 		 * changed the #GtkAdjustment:value property.
 		 */
 		value_changed(): void;
+		/**
+		 * Emitted when one or more of the {@link Adjustment} properties have been
+		 * changed, other than the #GtkAdjustment:value property.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the {@link Adjustment}:value property has been changed.
+		 */
+		connect(signal: "value-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2125,6 +2210,13 @@ declare namespace imports.gi.Gtk {
 		 * @param setting the new value for {@link AppChooserButton}:show-dialog-item
 		 */
 		set_show_dialog_item(setting: boolean): void;
+		/**
+		 * Emitted when a custom item, previously added with
+		 * gtk_app_chooser_button_append_custom_item(), is activated from the
+		 * dropdown menu.
+		 */
+		connect(signal: "custom-item-activated", callback: (owner: this, item_name: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2358,6 +2450,26 @@ declare namespace imports.gi.Gtk {
 		 * @param setting the new value for {@link AppChooserWidget}:show-recommended
 		 */
 		set_show_recommended(setting: boolean): void;
+		/**
+		 * Emitted when an application item is activated from the widget's list.
+		 * 
+		 * This usually happens when the user double clicks an item, or an item
+		 * is selected and the user presses one of the keys Space, Shift+Space,
+		 * Return or Enter.
+		 */
+		connect(signal: "application-activated", callback: (owner: this, application: Gio.AppInfo) => void): number;
+		/**
+		 * Emitted when an application item is selected from the widget's list.
+		 */
+		connect(signal: "application-selected", callback: (owner: this, application: Gio.AppInfo) => void): number;
+		/**
+		 * Emitted when a context menu is about to popup over an application item.
+		 * Clients can insert menu items into the provided {@link Menu} object in the
+		 * callback of this signal; the context menu will be shown over the item
+		 * if at least one item has been added to the menu.
+		 */
+		connect(signal: "populate-popup", callback: (owner: this, menu: Menu, application: Gio.AppInfo) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2719,6 +2831,26 @@ declare namespace imports.gi.Gtk {
 		 * @param cookie a cookie that was returned by gtk_application_inhibit()
 		 */
 		uninhibit(cookie: number): void;
+		/**
+		 * Emitted when the session manager is about to end the session, only
+		 * if {@link Application}::register-session is %TRUE. Applications can
+		 * connect to this signal and call gtk_application_inhibit() with
+		 * %GTK_APPLICATION_INHIBIT_LOGOUT to delay the end of the session
+		 * until state has been saved.
+		 */
+		connect(signal: "query-end", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when a {@link Window} is added to #application through
+		 * gtk_application_add_window().
+		 */
+		connect(signal: "window-added", callback: (owner: this, window: Window) => void): number;
+		/**
+		 * Emitted when a {@link Window} is removed from #application,
+		 * either as a side-effect of being destroyed or explicitly
+		 * through gtk_application_remove_window().
+		 */
+		connect(signal: "window-removed", callback: (owner: this, window: Window) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3372,6 +3504,40 @@ declare namespace imports.gi.Gtk {
 		 * affects the future page flow of the assistant.
 		 */
 		update_buttons_state(): void;
+		/**
+		 * The ::apply signal is emitted when the apply button is clicked.
+		 * 
+		 * The default behavior of the {@link Assistant} is to switch to the page
+		 * after the current page, unless the current page is the last one.
+		 * 
+		 * A handler for the ::apply signal should carry out the actions for
+		 * which the wizard has collected data. If the action takes a long time
+		 * to complete, you might consider putting a page of type
+		 * %GTK_ASSISTANT_PAGE_PROGRESS after the confirmation page and handle
+		 * this operation within the #GtkAssistant::prepare signal of the progress
+		 * page.
+		 */
+		connect(signal: "apply", callback: (owner: this) => void): number;
+		/**
+		 * The ::cancel signal is emitted when then the cancel button is clicked.
+		 */
+		connect(signal: "cancel", callback: (owner: this) => void): number;
+		/**
+		 * The ::close signal is emitted either when the close button of
+		 * a summary page is clicked, or when the apply button in the last
+		 * page in the flow (of type %GTK_ASSISTANT_PAGE_CONFIRM) is clicked.
+		 */
+		connect(signal: "close", callback: (owner: this) => void): number;
+		connect(signal: "escape", callback: (owner: this) => void): number;
+		/**
+		 * The ::prepare signal is emitted when a new page is set as the
+		 * assistant's current page, before making the new page visible.
+		 * 
+		 * A handler for this signal can do any preparations which are
+		 * necessary before showing #page.
+		 */
+		connect(signal: "prepare", callback: (owner: this, page: Widget) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4409,6 +4575,34 @@ declare namespace imports.gi.Gtk {
 		 * @param use_underline %TRUE if underlines in the text indicate mnemonics
 		 */
 		set_use_underline(use_underline: boolean): void;
+		/**
+		 * The ::activate signal on GtkButton is an action signal and
+		 * emitting it causes the button to animate press then release.
+		 * Applications should never connect to this signal, but use the
+		 * {@link Button}::clicked signal.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the button has been activated (pressed and released).
+		 */
+		connect(signal: "clicked", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the pointer enters the button.
+		 */
+		connect(signal: "enter", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the pointer leaves the button.
+		 */
+		connect(signal: "leave", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the button is pressed.
+		 */
+		connect(signal: "pressed", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the button is released.
+		 */
+		connect(signal: "released", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4733,6 +4927,36 @@ declare namespace imports.gi.Gtk {
 		 * @param day the day number to unmark between 1 and 31.
 		 */
 		unmark_day(day: number): void;
+		/**
+		 * Emitted when the user selects a day.
+		 */
+		connect(signal: "day-selected", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the user double-clicks a day.
+		 */
+		connect(signal: "day-selected-double-click", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the user clicks a button to change the selected month on a
+		 * calendar.
+		 */
+		connect(signal: "month-changed", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the user switched to the next month.
+		 */
+		connect(signal: "next-month", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when user switched to the next year.
+		 */
+		connect(signal: "next-year", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the user switched to the previous month.
+		 */
+		connect(signal: "prev-month", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when user switched to the previous year.
+		 */
+		connect(signal: "prev-year", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5247,6 +5471,32 @@ declare namespace imports.gi.Gtk {
 		 * @param canceled whether editing was canceled.
 		 */
 		stop_editing(canceled: boolean): void;
+		/**
+		 * Indicates that editing has started on #renderer and that #editable
+		 * should be added to the owning cell-layouting widget at #cell_area.
+		 */
+		connect(signal: "add-editable", callback: (owner: this, renderer: CellRenderer, editable: CellEditable, cell_area: Gdk.Rectangle, path: string) => void): number;
+		/**
+		 * This signal is emitted whenever applying attributes to #area from #model
+		 */
+		connect(signal: "apply-attributes", callback: (owner: this, model: TreeModel, iter: TreeIter, is_expander: boolean, is_expanded: boolean) => void): number;
+		/**
+		 * Indicates that focus changed on this #area. This signal
+		 * is emitted either as a result of focus handling or event
+		 * handling.
+		 * 
+		 * It's possible that the signal is emitted even if the
+		 * currently focused renderer did not change, this is
+		 * because focus may change to the same renderer in the
+		 * same cell area for a different row of data.
+		 */
+		connect(signal: "focus-changed", callback: (owner: this, renderer: CellRenderer, path: string) => void): number;
+		/**
+		 * Indicates that editing finished on #renderer and that #editable
+		 * should be removed from the owning cell-layouting widget.
+		 */
+		connect(signal: "remove-editable", callback: (owner: this, renderer: CellRenderer, editable: CellEditable) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6077,6 +6327,47 @@ declare namespace imports.gi.Gtk {
 		 * @param canceled %TRUE if the editing has been canceled
 		 */
 		stop_editing(canceled: boolean): void;
+		/**
+		 * This signal gets emitted when the user cancels the process of editing a
+		 * cell.  For example, an editable cell renderer could be written to cancel
+		 * editing when the user presses Escape.
+		 * 
+		 * See also: gtk_cell_renderer_stop_editing().
+		 */
+		connect(signal: "editing-canceled", callback: (owner: this) => void): number;
+		/**
+		 * This signal gets emitted when a cell starts to be edited.
+		 * The intended use of this signal is to do special setup
+		 * on #editable, e.g. adding a {@link EntryCompletion} or setting
+		 * up additional columns in a #GtkComboBox.
+		 * 
+		 * See gtk_cell_editable_start_editing() for information on the lifecycle of
+		 * the #editable and a way to do setup that doesn’t depend on the #renderer.
+		 * 
+		 * Note that GTK+ doesn't guarantee that cell renderers will
+		 * continue to use the same kind of widget for editing in future
+		 * releases, therefore you should check the type of #editable
+		 * before doing any specific setup, as in the following example:
+		 * |[<!-- language="C" -->
+		 * static void
+		 * text_editing_started (GtkCellRenderer *cell,
+		 *                       GtkCellEditable *editable,
+		 *                       const gchar     *path,
+		 *                       gpointer         data)
+		 * {
+		 *   if (GTK_IS_ENTRY (editable))
+		 *     {
+		 *       GtkEntry *entry = GTK_ENTRY (editable);
+		 *       
+		 *       // ... create a GtkEntryCompletion
+		 *       
+		 *       gtk_entry_set_completion (entry, completion);
+		 *     }
+		 * }
+		 * ]|
+		 */
+		connect(signal: "editing-started", callback: (owner: this, editable: CellEditable, path: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6153,6 +6444,15 @@ declare namespace imports.gi.Gtk {
 		 */
 		keycode: number;
 
+		/**
+		 * Gets emitted when the user has removed the accelerator.
+		 */
+		connect(signal: "accel-cleared", callback: (owner: this, path_string: string) => void): number;
+		/**
+		 * Gets emitted when the user has selected a new accelerator.
+		 */
+		connect(signal: "accel-edited", callback: (owner: this, path_string: string, accel_key: number, accel_mods: Gdk.ModifierType, hardware_keycode: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6204,6 +6504,21 @@ declare namespace imports.gi.Gtk {
 		 * this column to its combo box.
 		 */
 		text_column: number;
+
+		/**
+		 * This signal is emitted each time after the user selected an item in
+		 * the combo box, either by using the mouse or the arrow keys.  Contrary
+		 * to GtkComboBox, GtkCellRendererCombo::changed is not emitted for
+		 * changes made to a selected item in the entry.  The argument #new_iter
+		 * corresponds to the newly selected item in the combo box and it is relative
+		 * to the GtkTreeModel set via the model property on GtkCellRendererCombo.
+		 * 
+		 * Note that as soon as you change the model displayed in the tree view,
+		 * the tree view will immediately cease the editing operating.  This
+		 * means that you most probably want to refrain from changing the model
+		 * until the combo cell renderer emits the edited or editing_canceled signal.
+		 */
+		connect(signal: "changed", callback: (owner: this, path_string: string, new_iter: TreeIter) => void): number;
 
 	}
 
@@ -6596,6 +6911,14 @@ declare namespace imports.gi.Gtk {
 		 * @param number_of_rows Number of rows of text each cell renderer is allocated, or -1
 		 */
 		set_fixed_height_from_font(number_of_rows: number): void;
+		/**
+		 * This signal is emitted after #renderer has been edited.
+		 * 
+		 * It is the responsibility of the application to update the model
+		 * and store #new_text at the position indicated by #path.
+		 */
+		connect(signal: "edited", callback: (owner: this, path: string, new_text: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6675,6 +6998,15 @@ declare namespace imports.gi.Gtk {
 		 * @param radio %TRUE to make the toggle look like a radio button
 		 */
 		set_radio(radio: boolean): void;
+		/**
+		 * The ::toggled signal is emitted when the cell is toggled.
+		 * 
+		 * It is the responsibility of the application to update the model
+		 * with the correct value to store at #path.  Often this is simply the
+		 * opposite of the value currently stored at #path.
+		 */
+		connect(signal: "toggled", callback: (owner: this, path: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7034,6 +7366,14 @@ declare namespace imports.gi.Gtk {
 		 * Emits the {@link CheckMenuItem}::toggled signal.
 		 */
 		toggled(): void;
+		/**
+		 * This signal is emitted when the state of the check box is changed.
+		 * 
+		 * A signal handler can use gtk_check_menu_item_get_active()
+		 * to discover the new state.
+		 */
+		connect(signal: "toggled", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7429,6 +7769,13 @@ declare namespace imports.gi.Gtk {
 		 * @returns %TRUE is there is an URI list available, %FALSE otherwise.
 		 */
 		wait_is_uris_available(): boolean;
+		/**
+		 * The ::owner-change signal is emitted when GTK+ receives an
+		 * event that indicates that the ownership of the selection
+		 * associated with #clipboard has changed.
+		 */
+		connect(signal: "owner-change", callback: (owner: this, event: Gdk.EventOwnerChange) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7639,6 +7986,17 @@ declare namespace imports.gi.Gtk {
 		 * @param use_alpha %TRUE if color button should use alpha channel, %FALSE if not
 		 */
 		set_use_alpha(use_alpha: boolean): void;
+		/**
+		 * The ::color-set signal is emitted when the user selects a color.
+		 * When handling this signal, use gtk_color_button_get_rgba() to
+		 * find out which color was just selected.
+		 * 
+		 * Note that this signal is only emitted when the user
+		 * changes the color. If you need to react to programmatic color changes
+		 * as well, use the notify::color signal.
+		 */
+		connect(signal: "color-set", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7890,6 +8248,12 @@ declare namespace imports.gi.Gtk {
 		 * @param rgba a #GdkRGBA to set the previous color with
 		 */
 		set_previous_rgba(rgba: Gdk.RGBA): void;
+		/**
+		 * This signal is emitted when the color changes in the {@link ColorSelection}
+		 * according to its update policy.
+		 */
+		connect(signal: "color-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8323,6 +8687,73 @@ declare namespace imports.gi.Gtk {
 		 * @param width Preferred number of columns
 		 */
 		set_wrap_width(width: number): void;
+		/**
+		 * The changed signal is emitted when the active
+		 * item is changed. The can be due to the user selecting
+		 * a different item from the list, or due to a
+		 * call to gtk_combo_box_set_active_iter().
+		 * It will also be emitted while typing into the entry of a combo box
+		 * with an entry.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		/**
+		 * For combo boxes that are created with an entry (See GtkComboBox:has-entry).
+		 * 
+		 * A signal which allows you to change how the text displayed in a combo box's
+		 * entry is displayed.
+		 * 
+		 * Connect a signal handler which returns an allocated string representing
+		 * #path. That string will then be used to set the text in the combo box's entry.
+		 * The default signal handler uses the text from the GtkComboBox::entry-text-column
+		 * model column.
+		 * 
+		 * Here's an example signal handler which fetches data from the model and
+		 * displays it in the entry.
+		 * |[<!-- language="C" -->
+		 * static gchar*
+		 * format_entry_text_callback (GtkComboBox *combo,
+		 *                             const gchar *path,
+		 *                             gpointer     user_data)
+		 * {
+		 *   GtkTreeIter iter;
+		 *   GtkTreeModel model;
+		 *   gdouble      value;
+		 * 
+		 *   model = gtk_combo_box_get_model (combo);
+		 * 
+		 *   gtk_tree_model_get_iter_from_string (model, &iter, path);
+		 *   gtk_tree_model_get (model, &iter,
+		 *                       THE_DOUBLE_VALUE_COLUMN, &value,
+		 *                       -1);
+		 * 
+		 *   return g_strdup_printf ("%g", value);
+		 * }
+		 * ]|
+		 */
+		connect(signal: "format-entry-text", callback: (owner: this, path: string) => string): number;
+		/**
+		 * The ::move-active signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to move the active selection.
+		 */
+		connect(signal: "move-active", callback: (owner: this, scroll_type: ScrollType) => void): number;
+		/**
+		 * The ::popdown signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to popdown the combo box list.
+		 * 
+		 * The default bindings for this signal are Alt+Up and Escape.
+		 */
+		connect(signal: "popdown", callback: (owner: this) => boolean): number;
+		/**
+		 * The ::popup signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to popup the combo box list.
+		 * 
+		 * The default binding for this signal is Alt+Down.
+		 */
+		connect(signal: "popup", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8928,6 +9359,11 @@ declare namespace imports.gi.Gtk {
 		 * Removes a focus chain explicitly set with gtk_container_set_focus_chain().
 		 */
 		unset_focus_chain(): void;
+		connect(signal: "add", callback: (owner: this, object: Widget) => void): number;
+		connect(signal: "check-resize", callback: (owner: this) => void): number;
+		connect(signal: "remove", callback: (owner: this, object: Widget) => void): number;
+		connect(signal: "set-focus-child", callback: (owner: this, object: Widget) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9244,6 +9680,21 @@ declare namespace imports.gi.Gtk {
 		 * @returns a new string representing the #provider.
 		 */
 		to_string(): string;
+		/**
+		 * Signals that a parsing error occurred. the #path, #line and #position
+		 * describe the actual location of the error as accurately as possible.
+		 * 
+		 * Parsing errors are never fatal, so the parsing will resume after
+		 * the error. Errors may however cause parts of the given
+		 * data or even all of it to not be parsed at all. So it is a useful idea
+		 * to check that the parsing succeeds by connecting to this signal.
+		 * 
+		 * Note that this signal may be emitted at any time as the css provider
+		 * may opt to defer parsing parts or all of the input to a later time
+		 * than when a loading function was called.
+		 */
+		connect(signal: "parsing-error", callback: (owner: this, section: CssSection, error: GLib.Error) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9505,6 +9956,23 @@ declare namespace imports.gi.Gtk {
 		 * @param setting %TRUE for sensitive
 		 */
 		set_response_sensitive(response_id: number, setting: boolean): void;
+		/**
+		 * The ::close signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user uses a keybinding to close
+		 * the dialog.
+		 * 
+		 * The default binding for this signal is the Escape key.
+		 */
+		connect(signal: "close", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when an action widget is clicked, the dialog receives a
+		 * delete event, or the application programmer calls gtk_dialog_response().
+		 * On a delete event, the response ID is #GTK_RESPONSE_DELETE_EVENT.
+		 * Otherwise, it depends on which action widget was clicked.
+		 */
+		connect(signal: "response", callback: (owner: this, response_id: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10682,6 +11150,146 @@ declare namespace imports.gi.Gtk {
 		 * default invisible char is used again.
 		 */
 		unset_invisible_char(): void;
+		/**
+		 * The ::activate signal is emitted when the user hits
+		 * the Enter key.
+		 * 
+		 * While this signal is used as a
+		 * [keybinding signal][GtkBindingSignal],
+		 * it is also commonly used by applications to intercept
+		 * activation of entries.
+		 * 
+		 * The default bindings for this signal are all forms of the Enter key.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+		/**
+		 * The ::backspace signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * The default bindings for this signal are
+		 * Backspace and Shift-Backspace.
+		 */
+		connect(signal: "backspace", callback: (owner: this) => void): number;
+		/**
+		 * The ::copy-clipboard signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to copy the selection to the clipboard.
+		 * 
+		 * The default bindings for this signal are
+		 * Ctrl-c and Ctrl-Insert.
+		 */
+		connect(signal: "copy-clipboard", callback: (owner: this) => void): number;
+		/**
+		 * The ::cut-clipboard signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to cut the selection to the clipboard.
+		 * 
+		 * The default bindings for this signal are
+		 * Ctrl-x and Shift-Delete.
+		 */
+		connect(signal: "cut-clipboard", callback: (owner: this) => void): number;
+		/**
+		 * The ::delete-from-cursor signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates a text deletion.
+		 * 
+		 * If the #type is %GTK_DELETE_CHARS, GTK+ deletes the selection
+		 * if there is one, otherwise it deletes the requested number
+		 * of characters.
+		 * 
+		 * The default bindings for this signal are
+		 * Delete for deleting a character and Ctrl-Delete for
+		 * deleting a word.
+		 */
+		connect(signal: "delete-from-cursor", callback: (owner: this, _type: DeleteType, count: number) => void): number;
+		/**
+		 * The ::icon-press signal is emitted when an activatable icon
+		 * is clicked.
+		 */
+		connect(signal: "icon-press", callback: (owner: this, icon_pos: EntryIconPosition, event: Gdk.Event) => void): number;
+		/**
+		 * The ::icon-release signal is emitted on the button release from a
+		 * mouse click over an activatable icon.
+		 */
+		connect(signal: "icon-release", callback: (owner: this, icon_pos: EntryIconPosition, event: Gdk.Event) => void): number;
+		/**
+		 * The ::insert-at-cursor signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates the insertion of a
+		 * fixed string at the cursor.
+		 * 
+		 * This signal has no default bindings.
+		 */
+		connect(signal: "insert-at-cursor", callback: (owner: this, string: string) => void): number;
+		/**
+		 * The ::insert-emoji signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to present the Emoji chooser for the #entry.
+		 * 
+		 * The default bindings for this signal are Ctrl-. and Ctrl-;
+		 */
+		connect(signal: "insert-emoji", callback: (owner: this) => void): number;
+		/**
+		 * The ::move-cursor signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates a cursor movement.
+		 * If the cursor is not visible in #entry, this signal causes
+		 * the viewport to be moved instead.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control the cursor
+		 * programmatically.
+		 * 
+		 * The default bindings for this signal come in two variants,
+		 * the variant with the Shift modifier extends the selection,
+		 * the variant without the Shift modifer does not.
+		 * There are too many key combinations to list them all here.
+		 * - Arrow keys move by individual characters/lines
+		 * - Ctrl-arrow key combinations move by words/paragraphs
+		 * - Home/End keys move to the ends of the buffer
+		 */
+		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, count: number, extend_selection: boolean) => void): number;
+		/**
+		 * The ::paste-clipboard signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to paste the contents of the clipboard
+		 * into the text view.
+		 * 
+		 * The default bindings for this signal are
+		 * Ctrl-v and Shift-Insert.
+		 */
+		connect(signal: "paste-clipboard", callback: (owner: this) => void): number;
+		/**
+		 * The ::populate-popup signal gets emitted before showing the
+		 * context menu of the entry.
+		 * 
+		 * If you need to add items to the context menu, connect
+		 * to this signal and append your items to the #widget, which
+		 * will be a {@link Menu} in this case.
+		 * 
+		 * If #GtkEntry:populate-all is %TRUE, this signal will
+		 * also be emitted to populate touch popups. In this case,
+		 * #widget will be a different container, e.g. a #GtkToolbar.
+		 * The signal handler should not make assumptions about the
+		 * type of #widget.
+		 */
+		connect(signal: "populate-popup", callback: (owner: this, widget: Widget) => void): number;
+		/**
+		 * If an input method is used, the typed text will not immediately
+		 * be committed to the buffer. So if you are interested in the text,
+		 * connect to this signal.
+		 */
+		connect(signal: "preedit-changed", callback: (owner: this, preedit: string) => void): number;
+		/**
+		 * The ::toggle-overwrite signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to toggle the overwrite mode of the entry.
+		 * 
+		 * The default bindings for this signal is Insert.
+		 */
+		connect(signal: "toggle-overwrite", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10906,6 +11514,15 @@ declare namespace imports.gi.Gtk {
 		 * @param n_chars the number of characters in #text, or -1
 		 */
 		set_text(chars: string, n_chars: number): void;
+		/**
+		 * This signal is emitted after text is deleted from the buffer.
+		 */
+		connect(signal: "deleted-text", callback: (owner: this, position: number, n_chars: number) => void): number;
+		/**
+		 * This signal is emitted after text is inserted into the buffer.
+		 */
+		connect(signal: "inserted-text", callback: (owner: this, position: number, chars: string, n_chars: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11161,6 +11778,49 @@ declare namespace imports.gi.Gtk {
 		 * @param column the column in the model of #completion to get strings from
 		 */
 		set_text_column(column: number): void;
+		/**
+		 * Gets emitted when an action is activated.
+		 */
+		connect(signal: "action-activated", callback: (owner: this, index: number) => void): number;
+		/**
+		 * Gets emitted when a match from the cursor is on a match
+		 * of the list. The default behaviour is to replace the contents
+		 * of the entry with the contents of the text column in the row
+		 * pointed to by #iter.
+		 * 
+		 * Note that #model is the model that was passed to
+		 * gtk_entry_completion_set_model().
+		 */
+		connect(signal: "cursor-on-match", callback: (owner: this, model: TreeModel, iter: TreeIter) => boolean): number;
+		/**
+		 * Gets emitted when the inline autocompletion is triggered.
+		 * The default behaviour is to make the entry display the
+		 * whole prefix and select the newly inserted part.
+		 * 
+		 * Applications may connect to this signal in order to insert only a
+		 * smaller part of the #prefix into the entry - e.g. the entry used in
+		 * the {@link FileChooser} inserts only the part of the prefix up to the
+		 * next '/'.
+		 */
+		connect(signal: "insert-prefix", callback: (owner: this, prefix: string) => boolean): number;
+		/**
+		 * Gets emitted when a match from the list is selected.
+		 * The default behaviour is to replace the contents of the
+		 * entry with the contents of the text column in the row
+		 * pointed to by #iter.
+		 * 
+		 * Note that #model is the model that was passed to
+		 * gtk_entry_completion_set_model().
+		 */
+		connect(signal: "match-selected", callback: (owner: this, model: TreeModel, iter: TreeIter) => boolean): number;
+		/**
+		 * Gets emitted when the filter model has zero
+		 * number of rows in completion_complete method.
+		 * (In other words when GtkEntryCompletion is out of
+		 *  suggestions)
+		 */
+		connect(signal: "no-matches", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11414,6 +12074,19 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_im_context(): IMContext;
 		set_im_context(im_context: IMContext): void;
+		connect(signal: "focus-in", callback: (owner: this) => void): number;
+		connect(signal: "focus-out", callback: (owner: this) => void): number;
+		connect(signal: "im-update", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted whenever a key is pressed.
+		 */
+		connect(signal: "key-pressed", callback: (owner: this, keyval: number, keycode: number, state: Gdk.ModifierType) => boolean): number;
+		/**
+		 * This signal is emitted whenever a key is released.
+		 */
+		connect(signal: "key-released", callback: (owner: this, keyval: number, keycode: number, state: Gdk.ModifierType) => void): number;
+		connect(signal: "modifiers", callback: (owner: this, object: Gdk.ModifierType) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11438,6 +12111,19 @@ declare namespace imports.gi.Gtk {
 	 * use {@link EventControllerMotion} instead.
 	 */
 	interface IEventControllerMotion {
+
+		/**
+		 * Signals that the pointer has entered the widget.
+		 */
+		connect(signal: "enter", callback: (owner: this, _x: number, _y: number) => void): number;
+		/**
+		 * Signals that pointer has left the widget.
+		 */
+		connect(signal: "leave", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the pointer moves inside the widget.
+		 */
+		connect(signal: "motion", callback: (owner: this, _x: number, _y: number) => void): number;
 
 	}
 
@@ -11483,6 +12169,29 @@ declare namespace imports.gi.Gtk {
 		 * @param flags behavior flags
 		 */
 		set_flags(flags: EventControllerScrollFlags): void;
+		/**
+		 * Emitted after scroll is finished if the #GTK_EVENT_CONTROLLER_SCROLL_KINETIC
+		 * flag is set. #vel_x and #vel_y express the initial velocity that was
+		 * imprinted by the scroll events. #vel_x and #vel_y are expressed in
+		 * pixels/ms.
+		 */
+		connect(signal: "decelerate", callback: (owner: this, vel_x: number, vel_y: number) => void): number;
+		/**
+		 * Signals that the widget should scroll by the
+		 * amount specified by #dx and #dy.
+		 */
+		connect(signal: "scroll", callback: (owner: this, dx: number, dy: number) => void): number;
+		/**
+		 * Signals that a new scrolling operation has begun. It will
+		 * only be emitted on devices capable of it.
+		 */
+		connect(signal: "scroll-begin", callback: (owner: this) => void): number;
+		/**
+		 * Signals that a new scrolling operation has finished. It will
+		 * only be emitted on devices capable of it.
+		 */
+		connect(signal: "scroll-end", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11683,6 +12392,8 @@ declare namespace imports.gi.Gtk {
 		 * @param use_underline %TRUE if underlines in the text indicate mnemonics
 		 */
 		set_use_underline(use_underline: boolean): void;
+		connect(signal: "activate", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11864,6 +12575,14 @@ declare namespace imports.gi.Gtk {
 		 * @param n_chars the new width, in characters.
 		 */
 		set_width_chars(n_chars: number): void;
+		/**
+		 * The ::file-set signal is emitted when the user selects a file.
+		 * 
+		 * Note that this signal is only emitted when the user
+		 * changes the file.
+		 */
+		connect(signal: "file-set", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -12355,6 +13074,135 @@ declare namespace imports.gi.Gtk {
 	interface IFileChooserWidget {
 		search_mode: boolean;
 		readonly subtitle: string;
+
+		/**
+		 * The ::desktop-folder signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to make the file chooser show the user's Desktop
+		 * folder in the file list.
+		 * 
+		 * The default binding for this signal is `Alt + D`.
+		 */
+		connect(signal: "desktop-folder", callback: (owner: this) => void): number;
+		/**
+		 * The ::down-folder signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to make the file chooser go to a child of the current folder
+		 * in the file hierarchy. The subfolder that will be used is displayed in the
+		 * path bar widget of the file chooser. For example, if the path bar is showing
+		 * "/foo/bar/baz", with bar currently displayed, then this will cause the file
+		 * chooser to switch to the "baz" subfolder.
+		 * 
+		 * The default binding for this signal is `Alt + Down`.
+		 */
+		connect(signal: "down-folder", callback: (owner: this) => void): number;
+		/**
+		 * The ::home-folder signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to make the file chooser show the user's home
+		 * folder in the file list.
+		 * 
+		 * The default binding for this signal is `Alt + Home`.
+		 */
+		connect(signal: "home-folder", callback: (owner: this) => void): number;
+		/**
+		 * The ::location-popup signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to make the file chooser show a "Location" prompt which
+		 * the user can use to manually type the name of the file he wishes to select.
+		 * 
+		 * The default bindings for this signal are `Control + L` with a #path string
+		 * of "" (the empty string).  It is also bound to `/` with a #path string of
+		 * "`/`" (a slash):  this lets you type `/` and immediately type a path name.
+		 * On Unix systems, this is bound to `~` (tilde) with a #path string of "~"
+		 * itself for access to home directories.
+		 */
+		connect(signal: "location-popup", callback: (owner: this, path: string) => void): number;
+		/**
+		 * The ::location-popup-on-paste signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to make the file chooser show a "Location" prompt when the user
+		 * pastes into a {@link FileChooserWidget}.
+		 * 
+		 * The default binding for this signal is `Control + V`.
+		 */
+		connect(signal: "location-popup-on-paste", callback: (owner: this) => void): number;
+		/**
+		 * The ::location-toggle-popup signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to toggle the visibility of a "Location" prompt which the user
+		 * can use to manually type the name of the file he wishes to select.
+		 * 
+		 * The default binding for this signal is `Control + L`.
+		 */
+		connect(signal: "location-toggle-popup", callback: (owner: this) => void): number;
+		/**
+		 * The ::places-shortcut signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to move the focus to the places sidebar.
+		 * 
+		 * The default binding for this signal is `Alt + P`.
+		 */
+		connect(signal: "places-shortcut", callback: (owner: this) => void): number;
+		/**
+		 * The ::quick-bookmark signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to make the file chooser switch to the bookmark specified
+		 * in the #bookmark_index parameter. For example, if you have three bookmarks,
+		 * you can pass 0, 1, 2 to this signal to switch to each of them, respectively.
+		 * 
+		 * The default binding for this signal is `Alt + 1`, `Alt + 2`,
+		 * etc. until `Alt + 0`.  Note that in the default binding, that
+		 * `Alt + 1` is actually defined to switch to the bookmark at index
+		 * 0, and so on successively; `Alt + 0` is defined to switch to the
+		 * bookmark at index 10.
+		 */
+		connect(signal: "quick-bookmark", callback: (owner: this, bookmark_index: number) => void): number;
+		/**
+		 * The ::recent-shortcut signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to make the file chooser show the Recent location.
+		 * 
+		 * The default binding for this signal is `Alt + R`.
+		 */
+		connect(signal: "recent-shortcut", callback: (owner: this) => void): number;
+		/**
+		 * The ::search-shortcut signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to make the file chooser show the search entry.
+		 * 
+		 * The default binding for this signal is `Alt + S`.
+		 */
+		connect(signal: "search-shortcut", callback: (owner: this) => void): number;
+		/**
+		 * The ::show-hidden signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to make the file chooser display hidden files.
+		 * 
+		 * The default binding for this signal is `Control + H`.
+		 */
+		connect(signal: "show-hidden", callback: (owner: this) => void): number;
+		/**
+		 * The ::up-folder signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * This is used to make the file chooser go to the parent of the current folder
+		 * in the file hierarchy.
+		 * 
+		 * The default binding for this signal is `Alt + Up`.
+		 */
+		connect(signal: "up-folder", callback: (owner: this) => void): number;
 
 	}
 
@@ -12932,6 +13780,71 @@ declare namespace imports.gi.Gtk {
 		 * @param child a child of #box
 		 */
 		unselect_child(child: FlowBoxChild): void;
+		/**
+		 * The ::activate-cursor-child signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user activates the #box.
+		 */
+		connect(signal: "activate-cursor-child", callback: (owner: this) => void): number;
+		/**
+		 * The ::child-activated signal is emitted when a child has been
+		 * activated by the user.
+		 */
+		connect(signal: "child-activated", callback: (owner: this, child: FlowBoxChild) => void): number;
+		/**
+		 * The ::move-cursor signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates a cursor movement.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control the cursor
+		 * programmatically.
+		 * 
+		 * The default bindings for this signal come in two variants,
+		 * the variant with the Shift modifier extends the selection,
+		 * the variant without the Shift modifer does not.
+		 * There are too many key combinations to list them all here.
+		 * - Arrow keys move by individual children
+		 * - Home/End keys move to the ends of the box
+		 * - PageUp/PageDown keys move vertically by pages
+		 */
+		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, count: number) => boolean): number;
+		/**
+		 * The ::select-all signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to select all children of the box, if
+		 * the selection mode permits it.
+		 * 
+		 * The default bindings for this signal is Ctrl-a.
+		 */
+		connect(signal: "select-all", callback: (owner: this) => void): number;
+		/**
+		 * The ::selected-children-changed signal is emitted when the
+		 * set of selected children changes.
+		 * 
+		 * Use gtk_flow_box_selected_foreach() or
+		 * gtk_flow_box_get_selected_children() to obtain the
+		 * selected children.
+		 */
+		connect(signal: "selected-children-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::toggle-cursor-child signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which toggles the selection of the child that has the focus.
+		 * 
+		 * The default binding for this signal is Ctrl-Space.
+		 */
+		connect(signal: "toggle-cursor-child", callback: (owner: this) => void): number;
+		/**
+		 * The ::unselect-all signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to unselect all children of the box, if
+		 * the selection mode permits it.
+		 * 
+		 * The default bindings for this signal is Ctrl-Shift-a.
+		 */
+		connect(signal: "unselect-all", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13048,6 +13961,17 @@ declare namespace imports.gi.Gtk {
 		 * @returns %TRUE if #child is selected
 		 */
 		is_selected(): boolean;
+		/**
+		 * The ::activate signal is emitted when the user activates
+		 * a child widget in a {@link FlowBox}, either by clicking or
+		 * double-clicking, or by using the Space or Enter key.
+		 * 
+		 * While this signal is used as a
+		 * [keybinding signal][GtkBindingSignal],
+		 * it can be used by applications for their own purposes.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13186,6 +14110,17 @@ declare namespace imports.gi.Gtk {
 		 * @param use_size If %TRUE, font name will be written using the selected size.
 		 */
 		set_use_size(use_size: boolean): void;
+		/**
+		 * The ::font-set signal is emitted when the user selects a font.
+		 * When handling this signal, use gtk_font_chooser_get_font()
+		 * to find out which font was just selected.
+		 * 
+		 * Note that this signal is only emitted when the user
+		 * changes the font. If you need to react to programmatic font changes
+		 * as well, use the notify::font signal.
+		 */
+		connect(signal: "font-set", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13829,6 +14764,39 @@ declare namespace imports.gi.Gtk {
 		 * @param use_es whether to use OpenGL or OpenGL ES
 		 */
 		set_use_es(use_es: boolean): void;
+		/**
+		 * The ::create-context signal is emitted when the widget is being
+		 * realized, and allows you to override how the GL context is
+		 * created. This is useful when you want to reuse an existing GL
+		 * context, or if you want to try creating different kinds of GL
+		 * options.
+		 * 
+		 * If context creation fails then the signal handler can use
+		 * gtk_gl_area_set_error() to register a more detailed error
+		 * of how the construction failed.
+		 */
+		connect(signal: "create-context", callback: (owner: this) => Gdk.GLContext): number;
+		/**
+		 * The ::render signal is emitted every time the contents
+		 * of the {@link GLArea} should be redrawn.
+		 * 
+		 * The #context is bound to the #area prior to emitting this function,
+		 * and the buffers are painted to the window once the emission terminates.
+		 */
+		connect(signal: "render", callback: (owner: this, context: Gdk.GLContext) => boolean): number;
+		/**
+		 * The ::resize signal is emitted once when the widget is realized, and
+		 * then each time the widget is changed while realized. This is useful
+		 * in order to keep GL state up to date with the widget size, like for
+		 * instance camera properties which may depend on the width/height ratio.
+		 * 
+		 * The GL context for the area is guaranteed to be current when this signal
+		 * is emitted.
+		 * 
+		 * The default handler sets up the GL viewport.
+		 */
+		connect(signal: "resize", callback: (owner: this, width: number, height: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14158,6 +15126,49 @@ declare namespace imports.gi.Gtk {
 		 * Separates #gesture into an isolated group.
 		 */
 		ungroup(): void;
+		/**
+		 * This signal is emitted when the gesture is recognized. This means the
+		 * number of touch sequences matches {@link Gesture}:n-points, and the #GtkGesture::check
+		 * handler(s) returned #TRUE.
+		 * 
+		 * Note: These conditions may also happen when an extra touch (eg. a third touch
+		 * on a 2-touches gesture) is lifted, in that situation #sequence won't pertain
+		 * to the current set of active touches, so don't rely on this being true.
+		 */
+		connect(signal: "begin", callback: (owner: this, sequence: Gdk.EventSequence) => void): number;
+		/**
+		 * This signal is emitted whenever a sequence is cancelled. This usually
+		 * happens on active touches when gtk_event_controller_reset() is called
+		 * on #gesture (manually, due to grabs...), or the individual #sequence
+		 * was claimed by parent widgets' controllers (see gtk_gesture_set_sequence_state()).
+		 * 
+		 * #gesture must forget everything about #sequence as a reaction to this signal.
+		 */
+		connect(signal: "cancel", callback: (owner: this, sequence: Gdk.EventSequence) => void): number;
+		/**
+		 * This signal is emitted when #gesture either stopped recognizing the event
+		 * sequences as something to be handled (the {@link Gesture}::check handler returned
+		 * %FALSE), or the number of touch sequences became higher or lower than
+		 * #GtkGesture:n-points.
+		 * 
+		 * Note: #sequence might not pertain to the group of sequences that were
+		 * previously triggering recognition on #gesture (ie. a just pressed touch
+		 * sequence that exceeds #GtkGesture:n-points). This situation may be detected
+		 * by checking through gtk_gesture_handles_sequence().
+		 */
+		connect(signal: "end", callback: (owner: this, sequence: Gdk.EventSequence) => void): number;
+		/**
+		 * This signal is emitted whenever a sequence state changes. See
+		 * gtk_gesture_set_sequence_state() to know more about the expectable
+		 * sequence lifetimes.
+		 */
+		connect(signal: "sequence-state-changed", callback: (owner: this, sequence: Gdk.EventSequence, state: EventSequenceState) => void): number;
+		/**
+		 * This signal is emitted whenever an event is handled while the gesture is
+		 * recognized. #sequence is guaranteed to pertain to the set of active touches.
+		 */
+		connect(signal: "update", callback: (owner: this, sequence: Gdk.EventSequence) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14284,6 +15295,19 @@ declare namespace imports.gi.Gtk {
 		 * @returns %TRUE if the gesture is active
 		 */
 		get_start_point(_x: number, _y: number): boolean;
+		/**
+		 * This signal is emitted whenever dragging starts.
+		 */
+		connect(signal: "drag-begin", callback: (owner: this, start_x: number, start_y: number) => void): number;
+		/**
+		 * This signal is emitted whenever the dragging is finished.
+		 */
+		connect(signal: "drag-end", callback: (owner: this, offset_x: number, offset_y: number) => void): number;
+		/**
+		 * This signal is emitted whenever the dragging point moves.
+		 */
+		connect(signal: "drag-update", callback: (owner: this, offset_x: number, offset_y: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14316,6 +15340,17 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IGestureLongPress {
 		delay_factor: number;
+
+		/**
+		 * This signal is emitted whenever a press moved too far, or was released
+		 * before {@link GestureLongPress}::pressed happened.
+		 */
+		connect(signal: "cancelled", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted whenever a press goes unmoved/unreleased longer than
+		 * what the GTK+ defaults tell.
+		 */
+		connect(signal: "pressed", callback: (owner: this, _x: number, _y: number) => void): number;
 
 	}
 
@@ -14371,6 +15406,23 @@ declare namespace imports.gi.Gtk {
 		 * @param rect rectangle to receive coordinates on
 		 */
 		set_area(rect: Gdk.Rectangle): void;
+		/**
+		 * This signal is emitted whenever a button or touch press happens.
+		 */
+		connect(signal: "pressed", callback: (owner: this, n_press: number, _x: number, _y: number) => void): number;
+		/**
+		 * This signal is emitted when a button or touch is released. #n_press
+		 * will report the number of press that is paired to this event, note
+		 * that {@link GestureMultiPress}::stopped may have been emitted between the
+		 * press and its release, #n_press will only start over at the next press.
+		 */
+		connect(signal: "released", callback: (owner: this, n_press: number, _x: number, _y: number) => void): number;
+		/**
+		 * This signal is emitted whenever any time/distance threshold has
+		 * been exceeded.
+		 */
+		connect(signal: "stopped", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14421,6 +15473,12 @@ declare namespace imports.gi.Gtk {
 		 * @param orientation expected orientation
 		 */
 		set_orientation(orientation: Orientation): void;
+		/**
+		 * This signal is emitted once a panning gesture along the
+		 * expected axis is detected.
+		 */
+		connect(signal: "pan", callback: (owner: this, direction: PanDirection, offset: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14468,6 +15526,12 @@ declare namespace imports.gi.Gtk {
 		 * @returns the angle delta in radians
 		 */
 		get_angle_delta(): number;
+		/**
+		 * This signal is emitted when the angle between both tracked points
+		 * changes.
+		 */
+		connect(signal: "angle-changed", callback: (owner: this, angle: number, angle_delta: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14620,6 +15684,11 @@ declare namespace imports.gi.Gtk {
 		 * @returns The current stylus tool
 		 */
 		get_device_tool(): Gdk.DeviceTool;
+		connect(signal: "down", callback: (owner: this, object: number, p0: number) => void): number;
+		connect(signal: "motion", callback: (owner: this, object: number, p0: number) => void): number;
+		connect(signal: "proximity", callback: (owner: this, object: number, p0: number) => void): number;
+		connect(signal: "up", callback: (owner: this, object: number, p0: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14656,6 +15725,12 @@ declare namespace imports.gi.Gtk {
 		 * @returns whether velocity could be calculated
 		 */
 		get_velocity(velocity_x: number, velocity_y: number): boolean;
+		/**
+		 * This signal is emitted when the recognized gesture is finished, velocity
+		 * and direction are a product of previously recorded events.
+		 */
+		connect(signal: "swipe", callback: (owner: this, velocity_x: number, velocity_y: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14698,6 +15773,12 @@ declare namespace imports.gi.Gtk {
 		 * @returns the scale delta
 		 */
 		get_scale_delta(): number;
+		/**
+		 * This signal is emitted whenever the distance between both tracked
+		 * sequences changes.
+		 */
+		connect(signal: "scale-changed", callback: (owner: this, scale: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15070,6 +16151,9 @@ declare namespace imports.gi.Gtk {
 		 * @param ring_width Width of the hue ring
 		 */
 		set_metrics(size: number, ring_width: number): void;
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		connect(signal: "move", callback: (owner: this, object: DirectionType) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15297,6 +16381,17 @@ declare namespace imports.gi.Gtk {
 		 *   in the future.
 		 */
 		set_snap_edge(edge: PositionType): void;
+		/**
+		 * This signal is emitted when the contents of the
+		 * handlebox are reattached to the main window.
+		 */
+		connect(signal: "child-attached", callback: (owner: this, widget: Widget) => void): number;
+		/**
+		 * This signal is emitted when the contents of the
+		 * handlebox are detached from the main window.
+		 */
+		connect(signal: "child-detached", callback: (owner: this, widget: Widget) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15678,6 +16773,42 @@ declare namespace imports.gi.Gtk {
 		 * @param use_preedit whether the IM context should use the preedit string.
 		 */
 		set_use_preedit(use_preedit: boolean): void;
+		/**
+		 * The ::commit signal is emitted when a complete input sequence
+		 * has been entered by the user. This can be a single character
+		 * immediately after a key press or the final result of preediting.
+		 */
+		connect(signal: "commit", callback: (owner: this, _str: string) => void): number;
+		/**
+		 * The ::delete-surrounding signal is emitted when the input method
+		 * needs to delete all or part of the context surrounding the cursor.
+		 */
+		connect(signal: "delete-surrounding", callback: (owner: this, offset: number, n_chars: number) => boolean): number;
+		/**
+		 * The ::preedit-changed signal is emitted whenever the preedit sequence
+		 * currently being entered has changed.  It is also emitted at the end of
+		 * a preedit sequence, in which case
+		 * gtk_im_context_get_preedit_string() returns the empty string.
+		 */
+		connect(signal: "preedit-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::preedit-end signal is emitted when a preediting sequence
+		 * has been completed or canceled.
+		 */
+		connect(signal: "preedit-end", callback: (owner: this) => void): number;
+		/**
+		 * The ::preedit-start signal is emitted when a new preediting sequence
+		 * starts.
+		 */
+		connect(signal: "preedit-start", callback: (owner: this) => void): number;
+		/**
+		 * The ::retrieve-surrounding signal is emitted when the input method
+		 * requires the context surrounding the cursor.  The callback should set
+		 * the input method surrounding context by calling the
+		 * gtk_im_context_set_surrounding() method.
+		 */
+		connect(signal: "retrieve-surrounding", callback: (owner: this) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -16643,6 +17774,13 @@ declare namespace imports.gi.Gtk {
 		 * @param n_elements number of elements in #path.
 		 */
 		set_search_path(path: string[], n_elements: number): void;
+		/**
+		 * Emitted when the current icon theme is switched or GTK+ detects
+		 * that a change has occurred in the contents of the current
+		 * icon theme.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17354,6 +18492,98 @@ declare namespace imports.gi.Gtk {
 		 * method sets {@link IconView}:reorderable to %FALSE.
 		 */
 		unset_model_drag_source(): void;
+		/**
+		 * A [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user activates the currently
+		 * focused item.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control activation
+		 * programmatically.
+		 * 
+		 * The default bindings for this signal are Space, Return and Enter.
+		 */
+		connect(signal: "activate-cursor-item", callback: (owner: this) => boolean): number;
+		/**
+		 * The ::item-activated signal is emitted when the method
+		 * gtk_icon_view_item_activated() is called, when the user double
+		 * clicks an item with the "activate-on-single-click" property set
+		 * to %FALSE, or when the user single clicks an item when the
+		 * "activate-on-single-click" property set to %TRUE. It is also
+		 * emitted when a non-editable item is selected and one of the keys:
+		 * Space, Return or Enter is pressed.
+		 */
+		connect(signal: "item-activated", callback: (owner: this, path: TreePath) => void): number;
+		/**
+		 * The ::move-cursor signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates a cursor movement.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control the cursor
+		 * programmatically.
+		 * 
+		 * The default bindings for this signal include
+		 * - Arrow keys which move by individual steps
+		 * - Home/End keys which move to the first/last item
+		 * - PageUp/PageDown which move by "pages"
+		 * All of these will extend the selection when combined with
+		 * the Shift modifier.
+		 */
+		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, count: number) => boolean): number;
+		/**
+		 * A [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user selects all items.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control selection
+		 * programmatically.
+		 * 
+		 * The default binding for this signal is Ctrl-a.
+		 */
+		connect(signal: "select-all", callback: (owner: this) => void): number;
+		/**
+		 * A [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user selects the item that is currently
+		 * focused.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control selection
+		 * programmatically.
+		 * 
+		 * There is no default binding for this signal.
+		 */
+		connect(signal: "select-cursor-item", callback: (owner: this) => void): number;
+		/**
+		 * The ::selection-changed signal is emitted when the selection
+		 * (i.e. the set of selected items) changes.
+		 */
+		connect(signal: "selection-changed", callback: (owner: this) => void): number;
+		/**
+		 * A [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user toggles whether the currently
+		 * focused item is selected or not. The exact effect of this
+		 * depend on the selection mode.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control selection
+		 * programmatically.
+		 * 
+		 * There is no default binding for this signal is Ctrl-Space.
+		 */
+		connect(signal: "toggle-cursor-item", callback: (owner: this) => void): number;
+		/**
+		 * A [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user unselects all items.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control selection
+		 * programmatically.
+		 * 
+		 * The default binding for this signal is Ctrl-Shift-a.
+		 */
+		connect(signal: "unselect-all", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -18168,6 +19398,22 @@ declare namespace imports.gi.Gtk {
 		 * @param setting %TRUE to include a close button
 		 */
 		set_show_close_button(setting: boolean): void;
+		/**
+		 * The ::close signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user uses a keybinding to dismiss
+		 * the info bar.
+		 * 
+		 * The default binding for this signal is the Escape key.
+		 */
+		connect(signal: "close", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when an action widget is clicked or the application programmer
+		 * calls gtk_dialog_response(). The #response_id depends on which action
+		 * widget was clicked.
+		 */
+		connect(signal: "response", callback: (owner: this, response_id: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -18822,6 +20068,60 @@ declare namespace imports.gi.Gtk {
 		 * @param yalign the new yalign value, between 0 and 1
 		 */
 		set_yalign(yalign: number): void;
+		/**
+		 * A [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user activates a link in the label.
+		 * 
+		 * Applications may also emit the signal with g_signal_emit_by_name()
+		 * if they need to control activation of URIs programmatically.
+		 * 
+		 * The default bindings for this signal are all forms of the Enter key.
+		 */
+		connect(signal: "activate-current-link", callback: (owner: this) => void): number;
+		/**
+		 * The signal which gets emitted to activate a URI.
+		 * Applications may connect to it to override the default behaviour,
+		 * which is to call gtk_show_uri_on_window().
+		 */
+		connect(signal: "activate-link", callback: (owner: this, uri: string) => boolean): number;
+		/**
+		 * The ::copy-clipboard signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to copy the selection to the clipboard.
+		 * 
+		 * The default binding for this signal is Ctrl-c.
+		 */
+		connect(signal: "copy-clipboard", callback: (owner: this) => void): number;
+		/**
+		 * The ::move-cursor signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates a cursor movement.
+		 * If the cursor is not visible in #entry, this signal causes
+		 * the viewport to be moved instead.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control the cursor
+		 * programmatically.
+		 * 
+		 * The default bindings for this signal come in two variants,
+		 * the variant with the Shift modifier extends the selection,
+		 * the variant without the Shift modifer does not.
+		 * There are too many key combinations to list them all here.
+		 * - Arrow keys move by individual characters/lines
+		 * - Ctrl-arrow key combinations move by words/paragraphs
+		 * - Home/End keys move to the ends of the buffer
+		 */
+		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, count: number, extend_selection: boolean) => void): number;
+		/**
+		 * The ::populate-popup signal gets emitted before showing the
+		 * context menu of the label. Note that only selectable labels
+		 * have context menus.
+		 * 
+		 * If you need to add items to the context menu, connect
+		 * to this signal and append your menuitems to the #menu.
+		 */
+		connect(signal: "populate-popup", callback: (owner: this, menu: Menu) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19291,6 +20591,16 @@ declare namespace imports.gi.Gtk {
 		 *     {@link LevelBar}:min-value and #GtkLevelBar:max-value
 		 */
 		set_value(value: number): void;
+		/**
+		 * Emitted when an offset specified on the bar changes value as an
+		 * effect to gtk_level_bar_add_offset_value() being called.
+		 * 
+		 * The signal supports detailed connections; you can connect to the
+		 * detailed signal "changed::x" in order to only receive callbacks when
+		 * the value of offset "x" changes.
+		 */
+		connect(signal: "offset-changed", callback: (owner: this, name: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19470,6 +20780,19 @@ declare namespace imports.gi.Gtk {
 		 * @param visited the new “visited” state
 		 */
 		set_visited(visited: boolean): void;
+		/**
+		 * The ::activate-link signal is emitted each time the {@link LinkButton}
+		 * has been clicked.
+		 * 
+		 * The default handler will call gtk_show_uri_on_window() with the URI stored inside
+		 * the #GtkLinkButton:uri property.
+		 * 
+		 * To override the default behavior, you can connect to the ::activate-link
+		 * signal and stop the propagation of the signal by returning %TRUE from
+		 * your handler.
+		 */
+		connect(signal: "activate-link", callback: (owner: this) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19773,6 +21096,44 @@ declare namespace imports.gi.Gtk {
 		 * @param _row the row to unselected
 		 */
 		unselect_row(_row: ListBoxRow): void;
+		connect(signal: "activate-cursor-row", callback: (owner: this) => void): number;
+		connect(signal: "move-cursor", callback: (owner: this, object: MovementStep, p0: number) => void): number;
+		/**
+		 * The ::row-activated signal is emitted when a row has been activated by the user.
+		 */
+		connect(signal: "row-activated", callback: (owner: this, _row: ListBoxRow) => void): number;
+		/**
+		 * The ::row-selected signal is emitted when a new row is selected, or
+		 * (with a %NULL #row) when the selection is cleared.
+		 * 
+		 * When the #box is using #GTK_SELECTION_MULTIPLE, this signal will not
+		 * give you the full picture of selection changes, and you should use
+		 * the {@link ListBox}::selected-rows-changed signal instead.
+		 */
+		connect(signal: "row-selected", callback: (owner: this, _row: ListBoxRow) => void): number;
+		/**
+		 * The ::select-all signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to select all children of the box, if the selection
+		 * mode permits it.
+		 * 
+		 * The default bindings for this signal is Ctrl-a.
+		 */
+		connect(signal: "select-all", callback: (owner: this) => void): number;
+		/**
+		 * The ::selected-rows-changed signal is emitted when the
+		 * set of selected rows changes.
+		 */
+		connect(signal: "selected-rows-changed", callback: (owner: this) => void): number;
+		connect(signal: "toggle-cursor-row", callback: (owner: this) => void): number;
+		/**
+		 * The ::unselect-all signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to unselect all children of the box, if the selection
+		 * mode permits it.
+		 * 
+		 * The default bindings for this signal is Ctrl-Shift-a.
+		 */
+		connect(signal: "unselect-all", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19928,6 +21289,14 @@ declare namespace imports.gi.Gtk {
 		 * @param selectable %TRUE to mark the row as selectable
 		 */
 		set_selectable(selectable: boolean): void;
+		/**
+		 * This is a keybinding signal, which will cause this row to be activated.
+		 * 
+		 * If you want to be notified when the user activates a row (by key or not),
+		 * use the {@link ListBox}::row-activated signal on the row’s parent #GtkListBox.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -20845,6 +22214,33 @@ declare namespace imports.gi.Gtk {
 		 *   inherit the title of the parent menu item, if any
 		 */
 		set_title(title: string): void;
+		connect(signal: "move-scroll", callback: (owner: this, scroll_type: ScrollType) => void): number;
+		/**
+		 * Emitted when the position of #menu is finalized after being popped up
+		 * using gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), or
+		 * gtk_menu_popup_at_pointer ().
+		 * 
+		 * #menu might be flipped over the anchor rectangle in order to keep it
+		 * on-screen, in which case #flipped_x and #flipped_y will be set to %TRUE
+		 * accordingly.
+		 * 
+		 * #flipped_rect is the ideal position of #menu after any possible flipping,
+		 * but before any possible sliding. #final_rect is #flipped_rect, but possibly
+		 * translated in the case that flipping is still ineffective in keeping #menu
+		 * on-screen.
+		 * 
+		 * ![](popup-slide.png)
+		 * 
+		 * The blue menu is #menu's ideal position, the green menu is #flipped_rect,
+		 * and the red menu is #final_rect.
+		 * 
+		 * See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+		 * gtk_menu_popup_at_pointer (), {@link Menu}:anchor-hints,
+		 * #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and
+		 * #GtkMenu:menu-type-hint.
+		 */
+		connect(signal: "popped-up", callback: (owner: this, flipped_rect: any, final_rect: any, flipped_x: boolean, flipped_y: boolean) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -21464,6 +22860,21 @@ declare namespace imports.gi.Gtk {
 		 * @param requisition the requisition to use as signal data.
 		 */
 		toggle_size_request(requisition: number): void;
+		/**
+		 * Emitted when the item is activated.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the item is activated, but also if the menu item has a
+		 * submenu. For normal applications, the relevant signal is
+		 * {@link MenuItem}::activate.
+		 */
+		connect(signal: "activate-item", callback: (owner: this) => void): number;
+		connect(signal: "deselect", callback: (owner: this) => void): number;
+		connect(signal: "select", callback: (owner: this) => void): number;
+		connect(signal: "toggle-size-allocate", callback: (owner: this, object: number) => void): number;
+		connect(signal: "toggle-size-request", callback: (owner: this, object: any) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -21726,6 +23137,50 @@ declare namespace imports.gi.Gtk {
 		 *     focus on popup
 		 */
 		set_take_focus(take_focus: boolean): void;
+		/**
+		 * An action signal that activates the current menu item within
+		 * the menu shell.
+		 */
+		connect(signal: "activate-current", callback: (owner: this, force_hide: boolean) => void): number;
+		/**
+		 * An action signal which cancels the selection within the menu shell.
+		 * Causes the {@link MenuShell}::selection-done signal to be emitted.
+		 */
+		connect(signal: "cancel", callback: (owner: this) => void): number;
+		/**
+		 * A keybinding signal which moves the focus in the
+		 * given #direction.
+		 */
+		connect(signal: "cycle-focus", callback: (owner: this, direction: DirectionType) => void): number;
+		/**
+		 * This signal is emitted when a menu shell is deactivated.
+		 */
+		connect(signal: "deactivate", callback: (owner: this) => void): number;
+		/**
+		 * The ::insert signal is emitted when a new {@link MenuItem} is added to
+		 * a #GtkMenuShell.  A separate signal is used instead of
+		 * GtkContainer::add because of the need for an additional position
+		 * parameter.
+		 * 
+		 * The inverse of this signal is the GtkContainer::removed signal.
+		 */
+		connect(signal: "insert", callback: (owner: this, child: Widget, position: number) => void): number;
+		/**
+		 * An keybinding signal which moves the current menu item
+		 * in the direction specified by #direction.
+		 */
+		connect(signal: "move-current", callback: (owner: this, direction: MenuDirectionType) => void): number;
+		/**
+		 * The ::move-selected signal is emitted to move the selection to
+		 * another item.
+		 */
+		connect(signal: "move-selected", callback: (owner: this, distance: number) => boolean): number;
+		/**
+		 * This signal is emitted when a selection has been
+		 * completed within a menu shell.
+		 */
+		connect(signal: "selection-done", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -21817,6 +23272,18 @@ declare namespace imports.gi.Gtk {
 		 * @param menu the {@link Menu} associated with #GtkMenuToolButton
 		 */
 		set_menu(menu: Widget): void;
+		/**
+		 * The ::show-menu signal is emitted before the menu is shown.
+		 * 
+		 * It can be used to populate the menu on demand, using
+		 * gtk_menu_tool_button_set_menu().
+		 * 
+		 * Note that even if you populate the menu dynamically in this way,
+		 * you must set an empty menu on the {@link MenuToolButton} beforehand,
+		 * since the arrow is made insensitive if the menu is not set.
+		 */
+		connect(signal: "show-menu", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -22521,6 +23988,16 @@ declare namespace imports.gi.Gtk {
 		 * Multiple calls while the dialog is visible will be ignored.
 		 */
 		show(): void;
+		/**
+		 * Emitted when the user responds to the dialog.
+		 * 
+		 * When this is called the dialog has been hidden.
+		 * 
+		 * If you call gtk_native_dialog_hide() before the user responds to
+		 * the dialog this signal will not be emitted.
+		 */
+		connect(signal: "response", callback: (owner: this, response_id: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -22954,6 +24431,42 @@ declare namespace imports.gi.Gtk {
 		 * @param reorderable whether the tab is reorderable or not
 		 */
 		set_tab_reorderable(child: Widget, reorderable: boolean): void;
+		connect(signal: "change-current-page", callback: (owner: this, object: number) => boolean): number;
+		/**
+		 * The ::create-window signal is emitted when a detachable
+		 * tab is dropped on the root window.
+		 * 
+		 * A handler for this signal can create a window containing
+		 * a notebook where the tab will be attached. It is also
+		 * responsible for moving/resizing the window and adding the
+		 * necessary properties to the notebook (e.g. the
+		 * {@link Notebook}:group-name ).
+		 */
+		connect(signal: "create-window", callback: (owner: this, page: Widget, _x: number, _y: number) => Notebook): number;
+		connect(signal: "focus-tab", callback: (owner: this, object: NotebookTab) => boolean): number;
+		connect(signal: "move-focus-out", callback: (owner: this, object: DirectionType) => void): number;
+		/**
+		 * the ::page-added signal is emitted in the notebook
+		 * right after a page is added to the notebook.
+		 */
+		connect(signal: "page-added", callback: (owner: this, child: Widget, page_num: number) => void): number;
+		/**
+		 * the ::page-removed signal is emitted in the notebook
+		 * right after a page is removed from the notebook.
+		 */
+		connect(signal: "page-removed", callback: (owner: this, child: Widget, page_num: number) => void): number;
+		/**
+		 * the ::page-reordered signal is emitted in the notebook
+		 * right after a page has been reordered.
+		 */
+		connect(signal: "page-reordered", callback: (owner: this, child: Widget, page_num: number) => void): number;
+		connect(signal: "reorder-tab", callback: (owner: this, object: DirectionType, p0: boolean) => boolean): number;
+		connect(signal: "select-page", callback: (owner: this, object: boolean) => boolean): number;
+		/**
+		 * Emitted when the user or a function changes the current page.
+		 */
+		connect(signal: "switch-page", callback: (owner: this, page: Widget, page_num: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -23335,6 +24848,23 @@ declare namespace imports.gi.Gtk {
 		 * @param pass_through whether the child should pass the input through
 		 */
 		set_overlay_pass_through(widget: Widget, pass_through: boolean): void;
+		/**
+		 * The ::get-child-position signal is emitted to determine
+		 * the position and size of any overlay child widgets. A
+		 * handler for this signal should fill #allocation with
+		 * the desired position and size for #widget, relative to
+		 * the 'main' child of #overlay.
+		 * 
+		 * The default handler for this signal uses the #widget's
+		 * halign and valign properties to determine the position
+		 * and gives the widget its natural size (except that an
+		 * alignment of %GTK_ALIGN_FILL will cause the overlay to
+		 * be full-width/height). If the main child is a
+		 * {@link ScrolledWindow}, the overlays are placed relative
+		 * to its contents.
+		 */
+		connect(signal: "get-child-position", callback: (owner: this, widget: Widget, allocation: Gdk.Rectangle) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -23824,6 +25354,59 @@ declare namespace imports.gi.Gtk {
 		 * @param wide the new value for the {@link Paned}:wide-handle property
 		 */
 		set_wide_handle(wide: boolean): void;
+		/**
+		 * The ::accept-position signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to accept the current position of the handle when
+		 * moving it using key bindings.
+		 * 
+		 * The default binding for this signal is Return or Space.
+		 */
+		connect(signal: "accept-position", callback: (owner: this) => boolean): number;
+		/**
+		 * The ::cancel-position signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to cancel moving the position of the handle using key
+		 * bindings. The position of the handle will be reset to the value prior to
+		 * moving it.
+		 * 
+		 * The default binding for this signal is Escape.
+		 */
+		connect(signal: "cancel-position", callback: (owner: this) => boolean): number;
+		/**
+		 * The ::cycle-child-focus signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to cycle the focus between the children of the paned.
+		 * 
+		 * The default binding is f6.
+		 */
+		connect(signal: "cycle-child-focus", callback: (owner: this, reversed: boolean) => boolean): number;
+		/**
+		 * The ::cycle-handle-focus signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to cycle whether the paned should grab focus to allow
+		 * the user to change position of the handle by using key bindings.
+		 * 
+		 * The default binding for this signal is f8.
+		 */
+		connect(signal: "cycle-handle-focus", callback: (owner: this, reversed: boolean) => boolean): number;
+		/**
+		 * The ::move-handle signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to move the handle when the user is using key bindings
+		 * to move it.
+		 */
+		connect(signal: "move-handle", callback: (owner: this, scroll_type: ScrollType) => boolean): number;
+		/**
+		 * The ::toggle-handle-focus is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to accept the current position of the handle and then
+		 * move focus to the next widget in the focus chain.
+		 * 
+		 * The default binding is Tab.
+		 */
+		connect(signal: "toggle-handle-focus", callback: (owner: this) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -24154,6 +25737,126 @@ declare namespace imports.gi.Gtk {
 		 * @param show_trash whether to show an item for the Trash location
 		 */
 		set_show_trash(show_trash: boolean): void;
+		/**
+		 * The places sidebar emits this signal when it needs to ask the application
+		 * to pop up a menu to ask the user for which drag action to perform.
+		 */
+		connect(signal: "drag-action-ask", callback: (owner: this, actions: number) => number): number;
+		/**
+		 * When the user starts a drag-and-drop operation and the sidebar needs
+		 * to ask the application for which drag action to perform, then the
+		 * sidebar will emit this signal.
+		 * 
+		 * The application can evaluate the #context for customary actions, or
+		 * it can check the type of the files indicated by #source_file_list against the
+		 * possible actions for the destination #dest_file.
+		 * 
+		 * The drag action to use must be the return value of the signal handler.
+		 */
+		connect(signal: "drag-action-requested", callback: (owner: this, context: Gdk.DragContext, dest_file: Gio.File, source_file_list: GLib.List) => number): number;
+		/**
+		 * The places sidebar emits this signal when the user completes a
+		 * drag-and-drop operation and one of the sidebar's items is the
+		 * destination.  This item is in the #dest_file, and the
+		 * #source_file_list has the list of files that are dropped into it and
+		 * which should be copied/moved/etc. based on the specified #action.
+		 */
+		connect(signal: "drag-perform-drop", callback: (owner: this, dest_file: Gio.File, source_file_list: GLib.List, action: number) => void): number;
+		/**
+		 * The places sidebar emits this signal when it starts a new operation
+		 * because the user clicked on some location that needs mounting.
+		 * In this way the application using the {@link PlacesSidebar} can track the
+		 * progress of the operation and, for example, show a notification.
+		 */
+		connect(signal: "mount", callback: (owner: this, mount_operation: Gio.MountOperation) => void): number;
+		/**
+		 * The places sidebar emits this signal when the user selects a location
+		 * in it.  The calling application should display the contents of that
+		 * location; for example, a file manager should show a list of files in
+		 * the specified location.
+		 */
+		connect(signal: "open-location", callback: (owner: this, location: Gio.File, open_flags: PlacesOpenFlags) => void): number;
+		/**
+		 * The places sidebar emits this signal when the user invokes a contextual
+		 * popup on one of its items. In the signal handler, the application may
+		 * add extra items to the menu as appropriate. For example, a file manager
+		 * may want to add a "Properties" command to the menu.
+		 * 
+		 * It is not necessary to store the #selected_item for each menu item;
+		 * during their callbacks, the application can use gtk_places_sidebar_get_location()
+		 * to get the file to which the item refers.
+		 * 
+		 * The #selected_item argument may be %NULL in case the selection refers to
+		 * a volume. In this case, #selected_volume will be non-%NULL. In this case,
+		 * the calling application will have to g_object_ref() the #selected_volume and
+		 * keep it around to use it in the callback.
+		 * 
+		 * The #container and all its contents are destroyed after the user
+		 * dismisses the popup. The popup is re-created (and thus, this signal is
+		 * emitted) every time the user activates the contextual menu.
+		 * 
+		 * Before 3.18, the #container always was a {@link Menu}, and you were expected
+		 * to add your items as #GtkMenuItems. Since 3.18, the popup may be implemented
+		 * as a #GtkPopover, in which case #container will be something else, e.g. a
+		 * #GtkBox, to which you may add #GtkModelButtons or other widgets, such as
+		 * #GtkEntries, #GtkSpinButtons, etc. If your application can deal with this
+		 * situation, you can set #GtkPlacesSidebar::populate-all to %TRUE to request
+		 * that this signal is emitted for populating popovers as well.
+		 */
+		connect(signal: "populate-popup", callback: (owner: this, container: Widget, selected_item: Gio.File, selected_volume: Gio.Volume) => void): number;
+		/**
+		 * The places sidebar emits this signal when it needs the calling
+		 * application to present an way to connect directly to a network server.
+		 * For example, the application may bring up a dialog box asking for
+		 * a URL like "sftp://ftp.example.com".  It is up to the application to create
+		 * the corresponding mount by using, for example, g_file_mount_enclosing_volume().
+		 */
+		connect(signal: "show-connect-to-server", callback: (owner: this) => void): number;
+		/**
+		 * The places sidebar emits this signal when it needs the calling
+		 * application to present an way to directly enter a location.
+		 * For example, the application may bring up a dialog box asking for
+		 * a URL like "http://http.example.com".
+		 */
+		connect(signal: "show-enter-location", callback: (owner: this) => void): number;
+		/**
+		 * The places sidebar emits this signal when it needs the calling
+		 * application to present an error message.  Most of these messages
+		 * refer to mounting or unmounting media, for example, when a drive
+		 * cannot be started for some reason.
+		 */
+		connect(signal: "show-error-message", callback: (owner: this, primary: string, secondary: string) => void): number;
+		/**
+		 * The places sidebar emits this signal when it needs the calling
+		 * application to present a way to show other locations e.g. drives
+		 * and network access points.
+		 * For example, the application may bring up a page showing persistent
+		 * volumes and discovered network addresses.
+		 */
+		connect(signal: "show-other-locations", callback: (owner: this) => void): number;
+		/**
+		 * The places sidebar emits this signal when it needs the calling
+		 * application to present a way to show other locations e.g. drives
+		 * and network access points.
+		 * For example, the application may bring up a page showing persistent
+		 * volumes and discovered network addresses.
+		 */
+		connect(signal: "show-other-locations-with-flags", callback: (owner: this, open_flags: PlacesOpenFlags) => void): number;
+		/**
+		 * The places sidebar emits this signal when it needs the calling
+		 * application to present a way to show the starred files. In GNOME,
+		 * starred files are implemented by setting the nao:predefined-tag-favorite
+		 * tag in the tracker database.
+		 */
+		connect(signal: "show-starred-location", callback: (owner: this, open_flags: PlacesOpenFlags) => void): number;
+		/**
+		 * The places sidebar emits this signal when it starts a new operation
+		 * because the user for example ejected some drive or unmounted a mount.
+		 * In this way the application using the {@link PlacesSidebar} can track the
+		 * progress of the operation and, for example, show a notification.
+		 */
+		connect(signal: "unmount", callback: (owner: this, mount_operation: Gio.MountOperation) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -24256,6 +25959,11 @@ declare namespace imports.gi.Gtk {
 		 * @returns the window of the socket, or %NULL
 		 */
 		get_socket_window(): Gdk.Window;
+		/**
+		 * Gets emitted when the plug becomes embedded in a socket.
+		 */
+		connect(signal: "embedded", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -24494,6 +26202,12 @@ declare namespace imports.gi.Gtk {
 		 * @param transitions_enabled Whether transitions are enabled
 		 */
 		set_transitions_enabled(transitions_enabled: boolean): void;
+		/**
+		 * This signal is emitted when the popover is dismissed either through
+		 * API or user interaction.
+		 */
+		connect(signal: "closed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -25331,6 +27045,161 @@ declare namespace imports.gi.Gtk {
 		 * @param full_page %TRUE to set up the {@link PrintContext} for the full page
 		 */
 		set_use_full_page(full_page: boolean): void;
+		/**
+		 * Emitted after the user has finished changing print settings
+		 * in the dialog, before the actual rendering starts.
+		 * 
+		 * A typical use for ::begin-print is to use the parameters from the
+		 * {@link PrintContext} and paginate the document accordingly, and then
+		 * set the number of pages with gtk_print_operation_set_n_pages().
+		 */
+		connect(signal: "begin-print", callback: (owner: this, context: PrintContext) => void): number;
+		/**
+		 * Emitted when displaying the print dialog. If you return a
+		 * widget in a handler for this signal it will be added to a custom
+		 * tab in the print dialog. You typically return a container widget
+		 * with multiple widgets in it.
+		 * 
+		 * The print dialog owns the returned widget, and its lifetime is not
+		 * controlled by the application. However, the widget is guaranteed
+		 * to stay around until the {@link PrintOperation}::custom-widget-apply
+		 * signal is emitted on the operation. Then you can read out any
+		 * information you need from the widgets.
+		 */
+		connect(signal: "create-custom-widget", callback: (owner: this) => GObject.Object): number;
+		/**
+		 * Emitted right before {@link PrintOperation}::begin-print if you added
+		 * a custom widget in the #GtkPrintOperation::create-custom-widget handler.
+		 * When you get this signal you should read the information from the
+		 * custom widgets, as the widgets are not guaraneed to be around at a
+		 * later time.
+		 */
+		connect(signal: "custom-widget-apply", callback: (owner: this, widget: Widget) => void): number;
+		/**
+		 * Emitted when the print operation run has finished doing
+		 * everything required for printing.
+		 * 
+		 * #result gives you information about what happened during the run.
+		 * If #result is %GTK_PRINT_OPERATION_RESULT_ERROR then you can call
+		 * gtk_print_operation_get_error() for more information.
+		 * 
+		 * If you enabled print status tracking then
+		 * gtk_print_operation_is_finished() may still return %FALSE
+		 * after {@link PrintOperation}::done was emitted.
+		 */
+		connect(signal: "done", callback: (owner: this, result: PrintOperationResult) => void): number;
+		/**
+		 * Emitted for every page that is printed. The signal handler
+		 * must render the #page_nr's page onto the cairo context obtained
+		 * from #context using gtk_print_context_get_cairo_context().
+		 * |[<!-- language="C" -->
+		 * static void
+		 * draw_page (GtkPrintOperation *operation,
+		 *            GtkPrintContext   *context,
+		 *            gint               page_nr,
+		 *            gpointer           user_data)
+		 * {
+		 *   cairo_t *cr;
+		 *   PangoLayout *layout;
+		 *   gdouble width, text_height;
+		 *   gint layout_height;
+		 *   PangoFontDescription *desc;
+		 *   
+		 *   cr = gtk_print_context_get_cairo_context (context);
+		 *   width = gtk_print_context_get_width (context);
+		 *   
+		 *   cairo_rectangle (cr, 0, 0, width, HEADER_HEIGHT);
+		 *   
+		 *   cairo_set_source_rgb (cr, 0.8, 0.8, 0.8);
+		 *   cairo_fill (cr);
+		 *   
+		 *   layout = gtk_print_context_create_pango_layout (context);
+		 *   
+		 *   desc = pango_font_description_from_string ("sans 14");
+		 *   pango_layout_set_font_description (layout, desc);
+		 *   pango_font_description_free (desc);
+		 *   
+		 *   pango_layout_set_text (layout, "some text", -1);
+		 *   pango_layout_set_width (layout, width * PANGO_SCALE);
+		 *   pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
+		 *      		      
+		 *   pango_layout_get_size (layout, NULL, &layout_height);
+		 *   text_height = (gdouble)layout_height / PANGO_SCALE;
+		 *   
+		 *   cairo_move_to (cr, width / 2,  (HEADER_HEIGHT - text_height) / 2);
+		 *   pango_cairo_show_layout (cr, layout);
+		 *   
+		 *   g_object_unref (layout);
+		 * }
+		 * ]|
+		 * 
+		 * Use gtk_print_operation_set_use_full_page() and
+		 * gtk_print_operation_set_unit() before starting the print operation
+		 * to set up the transformation of the cairo context according to your
+		 * needs.
+		 */
+		connect(signal: "draw-page", callback: (owner: this, context: PrintContext, page_nr: number) => void): number;
+		/**
+		 * Emitted after all pages have been rendered.
+		 * A handler for this signal can clean up any resources that have
+		 * been allocated in the {@link PrintOperation}::begin-print handler.
+		 */
+		connect(signal: "end-print", callback: (owner: this, context: PrintContext) => void): number;
+		/**
+		 * Emitted after the {@link PrintOperation}::begin-print signal, but before
+		 * the actual rendering starts. It keeps getting emitted until a connected
+		 * signal handler returns %TRUE.
+		 * 
+		 * The ::paginate signal is intended to be used for paginating a document
+		 * in small chunks, to avoid blocking the user interface for a long
+		 * time. The signal handler should update the number of pages using
+		 * gtk_print_operation_set_n_pages(), and return %TRUE if the document
+		 * has been completely paginated.
+		 * 
+		 * If you don't need to do pagination in chunks, you can simply do
+		 * it all in the ::begin-print handler, and set the number of pages
+		 * from there.
+		 */
+		connect(signal: "paginate", callback: (owner: this, context: PrintContext) => boolean): number;
+		/**
+		 * Gets emitted when a preview is requested from the native dialog.
+		 * 
+		 * The default handler for this signal uses an external viewer
+		 * application to preview.
+		 * 
+		 * To implement a custom print preview, an application must return
+		 * %TRUE from its handler for this signal. In order to use the
+		 * provided #context for the preview implementation, it must be
+		 * given a suitable cairo context with gtk_print_context_set_cairo_context().
+		 * 
+		 * The custom preview implementation can use
+		 * gtk_print_operation_preview_is_selected() and
+		 * gtk_print_operation_preview_render_page() to find pages which
+		 * are selected for print and render them. The preview must be
+		 * finished by calling gtk_print_operation_preview_end_preview()
+		 * (typically in response to the user clicking a close button).
+		 */
+		connect(signal: "preview", callback: (owner: this, preview: PrintOperationPreview, context: PrintContext, parent: Window) => boolean): number;
+		/**
+		 * Emitted once for every page that is printed, to give
+		 * the application a chance to modify the page setup. Any changes
+		 * done to #setup will be in force only for printing this page.
+		 */
+		connect(signal: "request-page-setup", callback: (owner: this, context: PrintContext, page_nr: number, setup: PageSetup) => void): number;
+		/**
+		 * Emitted at between the various phases of the print operation.
+		 * See {@link PrintStatus} for the phases that are being discriminated.
+		 * Use gtk_print_operation_get_status() to find out the current
+		 * status.
+		 */
+		connect(signal: "status-changed", callback: (owner: this) => void): number;
+		/**
+		 * Emitted after change of selected printer. The actual page setup and
+		 * print settings are passed to the custom widget, which can actualize
+		 * itself according to this change.
+		 */
+		connect(signal: "update-custom-widget", callback: (owner: this, widget: Widget, setup: PageSetup, settings: PrintSettings) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -26182,6 +28051,13 @@ declare namespace imports.gi.Gtk {
 		 * @param group a list representing a radio group, or %NULL
 		 */
 		set_group(group: GLib.SList): void;
+		/**
+		 * The ::changed signal is emitted on every member of a radio group when the
+		 * active member is changed. The signal gets emitted after the ::activate signals
+		 * for the previous and current active members.
+		 */
+		connect(signal: "changed", callback: (owner: this, current: RadioAction) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -26260,6 +28136,16 @@ declare namespace imports.gi.Gtk {
 		 *     button group, such as one returned from gtk_radio_button_get_group(), or %NULL.
 		 */
 		set_group(group: GLib.SList): void;
+		/**
+		 * Emitted when the group of radio buttons that a radio button belongs
+		 * to changes. This is emitted when a radio button switches from
+		 * being alone to being part of a group of 2 or more buttons, or
+		 * vice-versa, and when a button is moved from one group of 2 or
+		 * more buttons to a different one, but not when the composition
+		 * of the group that a button belongs to changes.
+		 */
+		connect(signal: "group-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -26476,6 +28362,8 @@ declare namespace imports.gi.Gtk {
 		 * @param group the new group, or %NULL.
 		 */
 		set_group(group: GLib.SList): void;
+		connect(signal: "group-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -26908,6 +28796,35 @@ declare namespace imports.gi.Gtk {
 		 * @param value new value of the range
 		 */
 		set_value(value: number): void;
+		/**
+		 * Emitted before clamping a value, to give the application a
+		 * chance to adjust the bounds.
+		 */
+		connect(signal: "adjust-bounds", callback: (owner: this, value: number) => void): number;
+		/**
+		 * The {@link Range}::change-value signal is emitted when a scroll action is
+		 * performed on a range.  It allows an application to determine the
+		 * type of scroll event that occurred and the resultant new value.
+		 * The application can handle the event itself and return %TRUE to
+		 * prevent further processing.  Or, by returning %FALSE, it can pass
+		 * the event to other handlers until the default GTK+ handler is
+		 * reached.
+		 * 
+		 * The value parameter is unrounded.  An application that overrides
+		 * the GtkRange::change-value signal is responsible for clamping the
+		 * value to the desired number of decimal digits; the default GTK+
+		 * handler clamps the value based on #GtkRange:round-digits.
+		 */
+		connect(signal: "change-value", callback: (owner: this, scroll: ScrollType, value: number) => boolean): number;
+		/**
+		 * Virtual function that moves the slider. Used for keybindings.
+		 */
+		connect(signal: "move-slider", callback: (owner: this, step: ScrollType) => void): number;
+		/**
+		 * Emitted when the range value changes.
+		 */
+		connect(signal: "value-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -27579,6 +29496,13 @@ declare namespace imports.gi.Gtk {
 		 *   removed by the recently used resources list, and %FALSE otherwise
 		 */
 		remove_item(uri: string): boolean;
+		/**
+		 * Emitted when the current recently used resources manager changes
+		 * its contents, either by calling gtk_recent_manager_add_item() or
+		 * by another application.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -27889,6 +29813,28 @@ declare namespace imports.gi.Gtk {
 		 * @param pos the position in which the current value is displayed
 		 */
 		set_value_pos(pos: PositionType): void;
+		/**
+		 * Signal which allows you to change how the scale value is displayed.
+		 * Connect a signal handler which returns an allocated string representing
+		 * #value. That string will then be used to display the scale's value.
+		 * 
+		 * If no user-provided handlers are installed, the value will be displayed on
+		 * its own, rounded according to the value of the {@link Scale}:digits property.
+		 * 
+		 * Here's an example signal handler which displays a value 1.0 as
+		 * with "-->1.0<--".
+		 * |[<!-- language="C" -->
+		 * static gchar*
+		 * format_value_callback (GtkScale *scale,
+		 *                        gdouble   value)
+		 * {
+		 *   return g_strdup_printf ("-->\%0.*g<--",
+		 *                           gtk_scale_get_digits (scale), value);
+		 *  }
+		 * ]|
+		 */
+		connect(signal: "format-value", callback: (owner: this, value: number) => string): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -28091,6 +30037,28 @@ declare namespace imports.gi.Gtk {
 		 * @param value new value of the scale button
 		 */
 		set_value(value: number): void;
+		/**
+		 * The ::popdown signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to popdown the scale widget.
+		 * 
+		 * The default binding for this signal is Escape.
+		 */
+		connect(signal: "popdown", callback: (owner: this) => void): number;
+		/**
+		 * The ::popup signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to popup the scale widget.
+		 * 
+		 * The default bindings for this signal are Space, Enter and Return.
+		 */
+		connect(signal: "popup", callback: (owner: this) => void): number;
+		/**
+		 * The ::value-changed signal is emitted when the value field has
+		 * changed.
+		 */
+		connect(signal: "value-changed", callback: (owner: this, value: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -28525,6 +30493,49 @@ declare namespace imports.gi.Gtk {
 		 * gtk_scrolled_window_get_placement().
 		 */
 		unset_placement(): void;
+		/**
+		 * The ::edge-overshot signal is emitted whenever user initiated scrolling
+		 * makes the scrolled window firmly surpass (i.e. with some edge resistance)
+		 * the lower or upper limits defined by the adjustment in that orientation.
+		 * 
+		 * A similar behavior without edge resistance is provided by the
+		 * {@link ScrolledWindow}::edge-reached signal.
+		 * 
+		 * Note: The #pos argument is LTR/RTL aware, so callers should be aware too
+		 * if intending to provide behavior on horizontal edges.
+		 */
+		connect(signal: "edge-overshot", callback: (owner: this, pos: PositionType) => void): number;
+		/**
+		 * The ::edge-reached signal is emitted whenever user-initiated scrolling
+		 * makes the scrolled window exactly reach the lower or upper limits
+		 * defined by the adjustment in that orientation.
+		 * 
+		 * A similar behavior with edge resistance is provided by the
+		 * {@link ScrolledWindow}::edge-overshot signal.
+		 * 
+		 * Note: The #pos argument is LTR/RTL aware, so callers should be aware too
+		 * if intending to provide behavior on horizontal edges.
+		 */
+		connect(signal: "edge-reached", callback: (owner: this, pos: PositionType) => void): number;
+		/**
+		 * The ::move-focus-out signal is a
+		 * [keybinding signal][GtkBindingSignal] which gets
+		 * emitted when focus is moved away from the scrolled window by a
+		 * keybinding. The {@link Widget}::move-focus signal is emitted with
+		 * #direction_type on this scrolled window’s toplevel parent in the
+		 * container hierarchy. The default bindings for this signal are
+		 * `Ctrl + Tab` to move forward and `Ctrl + Shift + Tab` to move backward.
+		 */
+		connect(signal: "move-focus-out", callback: (owner: this, direction_type: DirectionType) => void): number;
+		/**
+		 * The ::scroll-child signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when a keybinding that scrolls is pressed.
+		 * The horizontal or vertical adjustment is updated which triggers a
+		 * signal that the scrolled window’s child may listen to and scroll itself.
+		 */
+		connect(signal: "scroll-child", callback: (owner: this, scroll: ScrollType, horizontal: boolean) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -28796,6 +30807,44 @@ declare namespace imports.gi.Gtk {
 		 *     otherwise.
 		 */
 		handle_event(event: Gdk.Event): boolean;
+		/**
+		 * The ::next-match signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates a move to the next match
+		 * for the current search string.
+		 * 
+		 * Applications should connect to it, to implement moving between
+		 * matches.
+		 * 
+		 * The default bindings for this signal is Ctrl-g.
+		 */
+		connect(signal: "next-match", callback: (owner: this) => void): number;
+		/**
+		 * The ::previous-match signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates a move to the previous match
+		 * for the current search string.
+		 * 
+		 * Applications should connect to it, to implement moving between
+		 * matches.
+		 * 
+		 * The default bindings for this signal is Ctrl-Shift-g.
+		 */
+		connect(signal: "previous-match", callback: (owner: this) => void): number;
+		/**
+		 * The {@link SearchEntry}::search-changed signal is emitted with a short
+		 * delay of 150 milliseconds after the last change to the entry text.
+		 */
+		connect(signal: "search-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::stop-search signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user stops a search via keyboard input.
+		 * 
+		 * Applications should connect to it, to implement hiding the search
+		 * entry in this case.
+		 * 
+		 * The default bindings for this signal is Escape.
+		 */
+		connect(signal: "stop-search", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29592,6 +31641,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		view_name: string;
 
+		connect(signal: "change-current-page", callback: (owner: this, object: number) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29730,6 +31781,24 @@ declare namespace imports.gi.Gtk {
 		 */
 		view_name: string;
 		readonly window: Window;
+
+		/**
+		 * The ::close signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user uses a keybinding to close
+		 * the window.
+		 * 
+		 * The default binding for this signal is the Escape key.
+		 */
+		connect(signal: "close", callback: (owner: this) => void): number;
+		/**
+		 * The ::search signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user uses a keybinding to start a search.
+		 * 
+		 * The default binding for this signal is Control-F.
+		 */
+		connect(signal: "search", callback: (owner: this) => void): number;
 
 	}
 
@@ -29971,6 +32040,18 @@ declare namespace imports.gi.Gtk {
 		 * available, or %NULL
 		 */
 		get_plug_window(): Gdk.Window;
+		/**
+		 * This signal is emitted when a client is successfully
+		 * added to the socket.
+		 */
+		connect(signal: "plug-added", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when a client is removed from the socket.
+		 * The default action is to destroy the {@link Socket} widget, so if you
+		 * want to reuse it you must add a signal handler that returns %TRUE.
+		 */
+		connect(signal: "plug-removed", callback: (owner: this) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -30211,6 +32292,61 @@ declare namespace imports.gi.Gtk {
 		 * Manually force an update of the spin button.
 		 */
 		update(): void;
+		/**
+		 * The ::change-value signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates a value change.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control the cursor
+		 * programmatically.
+		 * 
+		 * The default bindings for this signal are Up/Down and PageUp and/PageDown.
+		 */
+		connect(signal: "change-value", callback: (owner: this, scroll: ScrollType) => void): number;
+		/**
+		 * The ::input signal can be used to influence the conversion of
+		 * the users input into a double value. The signal handler is
+		 * expected to use gtk_entry_get_text() to retrieve the text of
+		 * the entry and set #new_value to the new value.
+		 * 
+		 * The default conversion uses g_strtod().
+		 */
+		connect(signal: "input", callback: (owner: this, new_value: number) => number): number;
+		/**
+		 * The ::output signal can be used to change to formatting
+		 * of the value that is displayed in the spin buttons entry.
+		 * |[<!-- language="C" -->
+		 * // show leading zeros
+		 * static gboolean
+		 * on_output (GtkSpinButton *spin,
+		 *            gpointer       data)
+		 * {
+		 *    GtkAdjustment *adjustment;
+		 *    gchar *text;
+		 *    int value;
+		 * 
+		 *    adjustment = gtk_spin_button_get_adjustment (spin);
+		 *    value = (int)gtk_adjustment_get_value (adjustment);
+		 *    text = g_strdup_printf ("%02d", value);
+		 *    gtk_entry_set_text (GTK_ENTRY (spin), text);
+		 *    g_free (text);
+		 * 
+		 *    return TRUE;
+		 * }
+		 * ]|
+		 */
+		connect(signal: "output", callback: (owner: this) => boolean): number;
+		/**
+		 * The ::value-changed signal is emitted when the value represented by
+		 * #spinbutton changes. Also see the {@link SpinButton}::output signal.
+		 */
+		connect(signal: "value-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::wrapped signal is emitted right after the spinbutton wraps
+		 * from its maximum to minimum value or vice-versa.
+		 */
+		connect(signal: "wrapped", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -31113,6 +33249,74 @@ declare namespace imports.gi.Gtk {
 		 * @param visible %TRUE to show the status icon, %FALSE to hide it
 		 */
 		set_visible(visible: boolean): void;
+		/**
+		 * Gets emitted when the user activates the status icon.
+		 * If and how status icons can activated is platform-dependent.
+		 * 
+		 * Unlike most G_SIGNAL_ACTION signals, this signal is meant to
+		 * be used by applications and should be wrapped by language bindings.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+		/**
+		 * The ::button-press-event signal will be emitted when a button
+		 * (typically from a mouse) is pressed.
+		 * 
+		 * Whether this event is emitted is platform-dependent.  Use the ::activate
+		 * and ::popup-menu signals in preference.
+		 */
+		connect(signal: "button-press-event", callback: (owner: this, event: Gdk.EventButton) => boolean): number;
+		/**
+		 * The ::button-release-event signal will be emitted when a button
+		 * (typically from a mouse) is released.
+		 * 
+		 * Whether this event is emitted is platform-dependent.  Use the ::activate
+		 * and ::popup-menu signals in preference.
+		 */
+		connect(signal: "button-release-event", callback: (owner: this, event: Gdk.EventButton) => boolean): number;
+		/**
+		 * Gets emitted when the user brings up the context menu
+		 * of the status icon. Whether status icons can have context
+		 * menus and how these are activated is platform-dependent.
+		 * 
+		 * The #button and #activate_time parameters should be
+		 * passed as the last to arguments to gtk_menu_popup().
+		 * 
+		 * Unlike most G_SIGNAL_ACTION signals, this signal is meant to
+		 * be used by applications and should be wrapped by language bindings.
+		 */
+		connect(signal: "popup-menu", callback: (owner: this, button: number, activate_time: number) => void): number;
+		/**
+		 * Emitted when the hover timeout has expired with the
+		 * cursor hovering above #status_icon; or emitted when #status_icon got
+		 * focus in keyboard mode.
+		 * 
+		 * Using the given coordinates, the signal handler should determine
+		 * whether a tooltip should be shown for #status_icon. If this is
+		 * the case %TRUE should be returned, %FALSE otherwise. Note that if
+		 * #keyboard_mode is %TRUE, the values of #x and #y are undefined and
+		 * should not be used.
+		 * 
+		 * The signal handler is free to manipulate #tooltip with the therefore
+		 * destined function calls.
+		 * 
+		 * Whether this signal is emitted is platform-dependent.
+		 * For plain text tooltips, use {@link StatusIcon}:tooltip-text in preference.
+		 */
+		connect(signal: "query-tooltip", callback: (owner: this, _x: number, _y: number, keyboard_mode: boolean, tooltip: Tooltip) => boolean): number;
+		/**
+		 * The ::scroll-event signal is emitted when a button in the 4 to 7
+		 * range is pressed. Wheel mice are usually configured to generate
+		 * button press events for buttons 4 and 5 when the wheel is turned.
+		 * 
+		 * Whether this event is emitted is platform-dependent.
+		 */
+		connect(signal: "scroll-event", callback: (owner: this, event: Gdk.EventScroll) => boolean): number;
+		/**
+		 * Gets emitted when the size available for the image
+		 * changes, e.g. because the notification area got resized.
+		 */
+		connect(signal: "size-changed", callback: (owner: this, size: number) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -31270,6 +33474,15 @@ declare namespace imports.gi.Gtk {
 		 * @param context_id a context identifier
 		 */
 		remove_all(context_id: number): void;
+		/**
+		 * Is emitted whenever a new message is popped off a statusbar's stack.
+		 */
+		connect(signal: "text-popped", callback: (owner: this, context_id: number, text: string) => void): number;
+		/**
+		 * Is emitted whenever a new message gets pushed onto a statusbar's stack.
+		 */
+		connect(signal: "text-pushed", callback: (owner: this, context_id: number, text: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -31503,6 +33716,21 @@ declare namespace imports.gi.Gtk {
 		 * @param state_type a state
 		 */
 		set_background(window: Gdk.Window, state_type: StateType): void;
+		/**
+		 * Emitted when the style has been initialized for a particular
+		 * visual. Connecting to this signal is probably seldom
+		 * useful since most of the time applications and widgets only
+		 * deal with styles that have been already realized.
+		 */
+		connect(signal: "realize", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the aspects of the style specific to a particular visual
+		 * is being cleaned up. A connection to this signal can be useful
+		 * if a widget wants to cache objects as object data on {@link Style}.
+		 * This signal provides a convenient place to free such cached objects.
+		 */
+		connect(signal: "unrealize", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -32085,6 +34313,17 @@ declare namespace imports.gi.Gtk {
 		 * @returns a newly allocated string representing #context
 		 */
 		to_string(flags: StyleContextPrintFlags): string;
+		/**
+		 * The ::changed signal is emitted when there is a change in the
+		 * {@link StyleContext}.
+		 * 
+		 * For a #GtkStyleContext returned by gtk_widget_get_style_context(), the
+		 * #GtkWidget::style-updated signal/vfunc might be more convenient to use.
+		 * 
+		 * This signal is useful when using the theming layer standalone.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -32370,6 +34609,30 @@ declare namespace imports.gi.Gtk {
 		 * @param state the new state
 		 */
 		set_state(state: boolean): void;
+		/**
+		 * The ::activate signal on GtkSwitch is an action signal and
+		 * emitting it causes the switch to animate.
+		 * Applications should never connect to this signal, but use the
+		 * notify::active signal.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+		/**
+		 * The ::state-set signal on GtkSwitch is emitted to change the underlying
+		 * state. It is emitted when the user changes the switch position. The
+		 * default handler keeps the state in sync with the {@link Switch}:active
+		 * property.
+		 * 
+		 * To implement delayed state change, applications can connect to this signal,
+		 * initiate the change of the underlying state, and call gtk_switch_set_state()
+		 * when the underlying state change is complete. The signal handler should
+		 * return %TRUE to prevent the default handler from running.
+		 * 
+		 * Visually, the underlying state is represented by the trough color of
+		 * the switch, while the #GtkSwitch:active property is represented by the
+		 * position of the switch.
+		 */
+		connect(signal: "state-set", callback: (owner: this, state: boolean) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -33454,6 +35717,149 @@ declare namespace imports.gi.Gtk {
 		 * @param format a #GdkAtom representing a registered rich text format.
 		 */
 		unregister_serialize_format(format: Gdk.Atom): void;
+		/**
+		 * The ::apply-tag signal is emitted to apply a tag to a
+		 * range of text in a {@link TextBuffer}.
+		 * Applying actually occurs in the default handler.
+		 * 
+		 * Note that if your handler runs before the default handler it must not
+		 * invalidate the #start and #end iters (or has to revalidate them).
+		 * 
+		 * See also:
+		 * gtk_text_buffer_apply_tag(),
+		 * gtk_text_buffer_insert_with_tags(),
+		 * gtk_text_buffer_insert_range().
+		 */
+		connect(signal: "apply-tag", callback: (owner: this, tag: TextTag, start: TextIter, _end: TextIter) => void): number;
+		/**
+		 * The ::begin-user-action signal is emitted at the beginning of a single
+		 * user-visible operation on a {@link TextBuffer}.
+		 * 
+		 * See also:
+		 * gtk_text_buffer_begin_user_action(),
+		 * gtk_text_buffer_insert_interactive(),
+		 * gtk_text_buffer_insert_range_interactive(),
+		 * gtk_text_buffer_delete_interactive(),
+		 * gtk_text_buffer_backspace(),
+		 * gtk_text_buffer_delete_selection().
+		 */
+		connect(signal: "begin-user-action", callback: (owner: this) => void): number;
+		/**
+		 * The ::changed signal is emitted when the content of a {@link TextBuffer}
+		 * has changed.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::delete-range signal is emitted to delete a range
+		 * from a {@link TextBuffer}.
+		 * 
+		 * Note that if your handler runs before the default handler it must not
+		 * invalidate the #start and #end iters (or has to revalidate them).
+		 * The default signal handler revalidates the #start and #end iters to
+		 * both point to the location where text was deleted. Handlers
+		 * which run after the default handler (see g_signal_connect_after())
+		 * do not have access to the deleted text.
+		 * 
+		 * See also: gtk_text_buffer_delete().
+		 */
+		connect(signal: "delete-range", callback: (owner: this, start: TextIter, _end: TextIter) => void): number;
+		/**
+		 * The ::end-user-action signal is emitted at the end of a single
+		 * user-visible operation on the {@link TextBuffer}.
+		 * 
+		 * See also:
+		 * gtk_text_buffer_end_user_action(),
+		 * gtk_text_buffer_insert_interactive(),
+		 * gtk_text_buffer_insert_range_interactive(),
+		 * gtk_text_buffer_delete_interactive(),
+		 * gtk_text_buffer_backspace(),
+		 * gtk_text_buffer_delete_selection(),
+		 * gtk_text_buffer_backspace().
+		 */
+		connect(signal: "end-user-action", callback: (owner: this) => void): number;
+		/**
+		 * The ::insert-child-anchor signal is emitted to insert a
+		 * {@link TextChildAnchor} in a #GtkTextBuffer.
+		 * Insertion actually occurs in the default handler.
+		 * 
+		 * Note that if your handler runs before the default handler it must
+		 * not invalidate the #location iter (or has to revalidate it).
+		 * The default signal handler revalidates it to be placed after the
+		 * inserted #anchor.
+		 * 
+		 * See also: gtk_text_buffer_insert_child_anchor().
+		 */
+		connect(signal: "insert-child-anchor", callback: (owner: this, location: TextIter, anchor: TextChildAnchor) => void): number;
+		/**
+		 * The ::insert-pixbuf signal is emitted to insert a #GdkPixbuf
+		 * in a {@link TextBuffer}. Insertion actually occurs in the default handler.
+		 * 
+		 * Note that if your handler runs before the default handler it must not
+		 * invalidate the #location iter (or has to revalidate it).
+		 * The default signal handler revalidates it to be placed after the
+		 * inserted #pixbuf.
+		 * 
+		 * See also: gtk_text_buffer_insert_pixbuf().
+		 */
+		connect(signal: "insert-pixbuf", callback: (owner: this, location: TextIter, pixbuf: GdkPixbuf.Pixbuf) => void): number;
+		/**
+		 * The ::insert-text signal is emitted to insert text in a {@link TextBuffer}.
+		 * Insertion actually occurs in the default handler.
+		 * 
+		 * Note that if your handler runs before the default handler it must not
+		 * invalidate the #location iter (or has to revalidate it).
+		 * The default signal handler revalidates it to point to the end of the
+		 * inserted text.
+		 * 
+		 * See also:
+		 * gtk_text_buffer_insert(),
+		 * gtk_text_buffer_insert_range().
+		 */
+		connect(signal: "insert-text", callback: (owner: this, location: TextIter, text: string, len: number) => void): number;
+		/**
+		 * The ::mark-deleted signal is emitted as notification
+		 * after a {@link TextMark} is deleted.
+		 * 
+		 * See also:
+		 * gtk_text_buffer_delete_mark().
+		 */
+		connect(signal: "mark-deleted", callback: (owner: this, mark: TextMark) => void): number;
+		/**
+		 * The ::mark-set signal is emitted as notification
+		 * after a {@link TextMark} is set.
+		 * 
+		 * See also:
+		 * gtk_text_buffer_create_mark(),
+		 * gtk_text_buffer_move_mark().
+		 */
+		connect(signal: "mark-set", callback: (owner: this, location: TextIter, mark: TextMark) => void): number;
+		/**
+		 * The ::modified-changed signal is emitted when the modified bit of a
+		 * {@link TextBuffer} flips.
+		 * 
+		 * See also:
+		 * gtk_text_buffer_set_modified().
+		 */
+		connect(signal: "modified-changed", callback: (owner: this) => void): number;
+		/**
+		 * The paste-done signal is emitted after paste operation has been completed.
+		 * This is useful to properly scroll the view to the end of the pasted text.
+		 * See gtk_text_buffer_paste_clipboard() for more details.
+		 */
+		connect(signal: "paste-done", callback: (owner: this, clipboard: Clipboard) => void): number;
+		/**
+		 * The ::remove-tag signal is emitted to remove all occurrences of #tag from
+		 * a range of text in a {@link TextBuffer}.
+		 * Removal actually occurs in the default handler.
+		 * 
+		 * Note that if your handler runs before the default handler it must not
+		 * invalidate the #start and #end iters (or has to revalidate them).
+		 * 
+		 * See also:
+		 * gtk_text_buffer_remove_tag().
+		 */
+		connect(signal: "remove-tag", callback: (owner: this, tag: TextTag, start: TextIter, _end: TextIter) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -33842,6 +36248,12 @@ declare namespace imports.gi.Gtk {
 		 * @param priority the new priority
 		 */
 		set_priority(priority: number): void;
+		/**
+		 * The ::event signal is emitted when an event occurs on a region of the
+		 * buffer marked with this tag.
+		 */
+		connect(signal: "event", callback: (owner: this, object: GObject.Object, event: Gdk.Event, iter: TextIter) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -33921,6 +36333,10 @@ declare namespace imports.gi.Gtk {
 		 * @param tag a {@link TextTag}
 		 */
 		remove(tag: TextTag): void;
+		connect(signal: "tag-added", callback: (owner: this, tag: TextTag) => void): number;
+		connect(signal: "tag-changed", callback: (owner: this, tag: TextTag, size_changed: boolean) => void): number;
+		connect(signal: "tag-removed", callback: (owner: this, tag: TextTag) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -34701,6 +37117,176 @@ declare namespace imports.gi.Gtk {
 		 * @param buffer_y buffer y coordinate return location or %NULL
 		 */
 		window_to_buffer_coords(win: TextWindowType, window_x: number, window_y: number, buffer_x: number, buffer_y: number): void;
+		/**
+		 * The ::backspace signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user asks for it.
+		 * 
+		 * The default bindings for this signal are
+		 * Backspace and Shift-Backspace.
+		 */
+		connect(signal: "backspace", callback: (owner: this) => void): number;
+		/**
+		 * The ::copy-clipboard signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to copy the selection to the clipboard.
+		 * 
+		 * The default bindings for this signal are
+		 * Ctrl-c and Ctrl-Insert.
+		 */
+		connect(signal: "copy-clipboard", callback: (owner: this) => void): number;
+		/**
+		 * The ::cut-clipboard signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to cut the selection to the clipboard.
+		 * 
+		 * The default bindings for this signal are
+		 * Ctrl-x and Shift-Delete.
+		 */
+		connect(signal: "cut-clipboard", callback: (owner: this) => void): number;
+		/**
+		 * The ::delete-from-cursor signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates a text deletion.
+		 * 
+		 * If the #type is %GTK_DELETE_CHARS, GTK+ deletes the selection
+		 * if there is one, otherwise it deletes the requested number
+		 * of characters.
+		 * 
+		 * The default bindings for this signal are
+		 * Delete for deleting a character, Ctrl-Delete for
+		 * deleting a word and Ctrl-Backspace for deleting a word
+		 * backwords.
+		 */
+		connect(signal: "delete-from-cursor", callback: (owner: this, _type: DeleteType, count: number) => void): number;
+		/**
+		 * The ::extend-selection signal is emitted when the selection needs to be
+		 * extended at #location.
+		 */
+		connect(signal: "extend-selection", callback: (owner: this, granularity: TextExtendSelection, location: TextIter, start: TextIter, _end: TextIter) => boolean): number;
+		/**
+		 * The ::insert-at-cursor signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates the insertion of a
+		 * fixed string at the cursor.
+		 * 
+		 * This signal has no default bindings.
+		 */
+		connect(signal: "insert-at-cursor", callback: (owner: this, string: string) => void): number;
+		/**
+		 * The ::insert-emoji signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to present the Emoji chooser for the #text_view.
+		 * 
+		 * The default bindings for this signal are Ctrl-. and Ctrl-;
+		 */
+		connect(signal: "insert-emoji", callback: (owner: this) => void): number;
+		/**
+		 * The ::move-cursor signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates a cursor movement.
+		 * If the cursor is not visible in #text_view, this signal causes
+		 * the viewport to be moved instead.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control the cursor
+		 * programmatically.
+		 * 
+		 * The default bindings for this signal come in two variants,
+		 * the variant with the Shift modifier extends the selection,
+		 * the variant without the Shift modifer does not.
+		 * There are too many key combinations to list them all here.
+		 * - Arrow keys move by individual characters/lines
+		 * - Ctrl-arrow key combinations move by words/paragraphs
+		 * - Home/End keys move to the ends of the buffer
+		 * - PageUp/PageDown keys move vertically by pages
+		 * - Ctrl-PageUp/PageDown keys move horizontally by pages
+		 */
+		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, count: number, extend_selection: boolean) => void): number;
+		/**
+		 * The ::move-viewport signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which can be bound to key combinations to allow the user
+		 * to move the viewport, i.e. change what part of the text view
+		 * is visible in a containing scrolled window.
+		 * 
+		 * There are no default bindings for this signal.
+		 */
+		connect(signal: "move-viewport", callback: (owner: this, step: ScrollStep, count: number) => void): number;
+		/**
+		 * The ::paste-clipboard signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to paste the contents of the clipboard
+		 * into the text view.
+		 * 
+		 * The default bindings for this signal are
+		 * Ctrl-v and Shift-Insert.
+		 */
+		connect(signal: "paste-clipboard", callback: (owner: this) => void): number;
+		/**
+		 * The ::populate-popup signal gets emitted before showing the
+		 * context menu of the text view.
+		 * 
+		 * If you need to add items to the context menu, connect
+		 * to this signal and append your items to the #popup, which
+		 * will be a {@link Menu} in this case.
+		 * 
+		 * If #GtkTextView:populate-all is %TRUE, this signal will
+		 * also be emitted to populate touch popups. In this case,
+		 * #popup will be a different container, e.g. a #GtkToolbar.
+		 * 
+		 * The signal handler should not make assumptions about the
+		 * type of #widget, but check whether #popup is a #GtkMenu
+		 * or #GtkToolbar or another kind of container.
+		 */
+		connect(signal: "populate-popup", callback: (owner: this, popup: Widget) => void): number;
+		/**
+		 * If an input method is used, the typed text will not immediately
+		 * be committed to the buffer. So if you are interested in the text,
+		 * connect to this signal.
+		 * 
+		 * This signal is only emitted if the text at the given position
+		 * is actually editable.
+		 */
+		connect(signal: "preedit-changed", callback: (owner: this, preedit: string) => void): number;
+		/**
+		 * The ::select-all signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to select or unselect the complete
+		 * contents of the text view.
+		 * 
+		 * The default bindings for this signal are Ctrl-a and Ctrl-/
+		 * for selecting and Shift-Ctrl-a and Ctrl-\ for unselecting.
+		 */
+		connect(signal: "select-all", callback: (owner: this, select: boolean) => void): number;
+		/**
+		 * The ::set-anchor signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user initiates setting the "anchor"
+		 * mark. The "anchor" mark gets placed at the same position as the
+		 * "insert" mark.
+		 * 
+		 * This signal has no default bindings.
+		 */
+		connect(signal: "set-anchor", callback: (owner: this) => void): number;
+		/**
+		 * The ::toggle-cursor-visible signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to toggle the {@link TextView}:cursor-visible
+		 * property.
+		 * 
+		 * The default binding for this signal is F7.
+		 */
+		connect(signal: "toggle-cursor-visible", callback: (owner: this) => void): number;
+		/**
+		 * The ::toggle-overwrite signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted to toggle the overwrite mode of the text view.
+		 * 
+		 * The default bindings for this signal is Insert.
+		 */
+		connect(signal: "toggle-overwrite", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -35047,6 +37633,12 @@ declare namespace imports.gi.Gtk {
 		 * Emits the “toggled” signal on the toggle action.
 		 */
 		toggled(): void;
+		/**
+		 * Should be connected if you wish to perform an action
+		 * whenever the {@link ToggleAction} state is changed.
+		 */
+		connect(signal: "toggled", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -35143,6 +37735,12 @@ declare namespace imports.gi.Gtk {
 		 * application ever to call this function.
 		 */
 		toggled(): void;
+		/**
+		 * Should be connected if you wish to perform an action whenever the
+		 * {@link ToggleButton}'s state is changed.
+		 */
+		connect(signal: "toggled", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -35277,6 +37875,11 @@ declare namespace imports.gi.Gtk {
 		 * @param is_active whether #button should be active
 		 */
 		set_active(is_active: boolean): void;
+		/**
+		 * Emitted whenever the toggle tool button changes state.
+		 */
+		connect(signal: "toggled", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -35426,6 +38029,12 @@ declare namespace imports.gi.Gtk {
 		 * @param use_underline whether the button label has the form “_Open”
 		 */
 		set_use_underline(use_underline: boolean): void;
+		/**
+		 * This signal is emitted when the tool button is clicked with the mouse
+		 * or activated with the keyboard.
+		 */
+		connect(signal: "clicked", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -35705,6 +38314,41 @@ declare namespace imports.gi.Gtk {
 		 * to notify children, when some aspect of their configuration changes.
 		 */
 		toolbar_reconfigured(): void;
+		/**
+		 * This signal is emitted when the toolbar needs information from #tool_item
+		 * about whether the item should appear in the toolbar overflow menu. In
+		 * response the tool item should either
+		 * 
+		 * - call gtk_tool_item_set_proxy_menu_item() with a %NULL
+		 *   pointer and return %TRUE to indicate that the item should not appear
+		 *   in the overflow menu
+		 * 
+		 * - call gtk_tool_item_set_proxy_menu_item() with a new menu
+		 *   item and return %TRUE, or
+		 * 
+		 * - return %FALSE to indicate that the signal was not handled by the item.
+		 *   This means that the item will not appear in the overflow menu unless
+		 *   a later handler installs a menu item.
+		 * 
+		 * The toolbar may cache the result of this signal. When the tool item changes
+		 * how it will respond to this signal it must call gtk_tool_item_rebuild_menu()
+		 * to invalidate the cache and ensure that the toolbar rebuilds its overflow
+		 * menu.
+		 */
+		connect(signal: "create-menu-proxy", callback: (owner: this) => boolean): number;
+		/**
+		 * This signal is emitted when some property of the toolbar that the
+		 * item is a child of changes. For custom subclasses of {@link ToolItem},
+		 * the default handler of this signal use the functions
+		 * - gtk_tool_shell_get_orientation()
+		 * - gtk_tool_shell_get_style()
+		 * - gtk_tool_shell_get_icon_size()
+		 * - gtk_tool_shell_get_relief_style()
+		 * to find out what the toolbar should look like and change
+		 * themselves accordingly.
+		 */
+		connect(signal: "toolbar-reconfigured", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -36251,6 +38895,31 @@ declare namespace imports.gi.Gtk {
 		 * user preferences will be used to determine the toolbar style.
 		 */
 		unset_style(): void;
+		/**
+		 * A keybinding signal used internally by GTK+. This signal can't
+		 * be used in application code
+		 */
+		connect(signal: "focus-home-or-end", callback: (owner: this, focus_home: boolean) => boolean): number;
+		/**
+		 * Emitted when the orientation of the toolbar changes.
+		 */
+		connect(signal: "orientation-changed", callback: (owner: this, orientation: Orientation) => void): number;
+		/**
+		 * Emitted when the user right-clicks the toolbar or uses the
+		 * keybinding to display a popup menu.
+		 * 
+		 * Application developers should handle this signal if they want
+		 * to display a context menu on the toolbar. The context-menu should
+		 * appear at the coordinates given by #x and #y. The mouse button
+		 * number is given by the #button parameter. If the menu was popped
+		 * up using the keybaord, #button is -1.
+		 */
+		connect(signal: "popup-context-menu", callback: (owner: this, _x: number, _y: number, button: number) => boolean): number;
+		/**
+		 * Emitted when the style of the toolbar changes.
+		 */
+		connect(signal: "style-changed", callback: (owner: this, style: ToolbarStyle) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -36977,6 +39646,14 @@ declare namespace imports.gi.Gtk {
 		 * @param end_path The initial node of the range.
 		 */
 		unselect_range(start_path: TreePath, end_path: TreePath): void;
+		/**
+		 * Emitted whenever the selection has (possibly) changed. Please note that
+		 * this signal is mostly a hint.  It may only be emitted once when a range
+		 * of rows are selected, and it may occasionally be emitted when nothing
+		 * has happened.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -38248,6 +40925,66 @@ declare namespace imports.gi.Gtk {
 		 * {@link TreeView}:reorderable to %FALSE.
 		 */
 		unset_rows_drag_source(): void;
+		/**
+		 * The number of columns of the treeview has changed.
+		 */
+		connect(signal: "columns-changed", callback: (owner: this) => void): number;
+		/**
+		 * The position of the cursor (focused cell) has changed.
+		 */
+		connect(signal: "cursor-changed", callback: (owner: this) => void): number;
+		connect(signal: "expand-collapse-cursor-row", callback: (owner: this, object: boolean, p0: boolean, p1: boolean) => boolean): number;
+		/**
+		 * The {@link TreeView}::move-cursor signal is a [keybinding
+		 * signal][GtkBindingSignal] which gets emitted when the user
+		 * presses one of the cursor keys.
+		 * 
+		 * Applications should not connect to it, but may emit it with
+		 * g_signal_emit_by_name() if they need to control the cursor
+		 * programmatically. In contrast to gtk_tree_view_set_cursor() and
+		 * gtk_tree_view_set_cursor_on_cell() when moving horizontally
+		 * #GtkTreeView::move-cursor does not reset the current selection.
+		 */
+		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, direction: number) => boolean): number;
+		/**
+		 * The "row-activated" signal is emitted when the method
+		 * gtk_tree_view_row_activated() is called, when the user double
+		 * clicks a treeview row with the "activate-on-single-click"
+		 * property set to %FALSE, or when the user single clicks a row when
+		 * the "activate-on-single-click" property set to %TRUE. It is also
+		 * emitted when a non-editable row is selected and one of the keys:
+		 * Space, Shift+Space, Return or Enter is pressed.
+		 * 
+		 * For selection handling refer to the
+		 * [tree widget conceptual overview][TreeWidget]
+		 * as well as {@link TreeSelection}.
+		 */
+		connect(signal: "row-activated", callback: (owner: this, path: TreePath, column: TreeViewColumn) => void): number;
+		/**
+		 * The given row has been collapsed (child nodes are hidden).
+		 */
+		connect(signal: "row-collapsed", callback: (owner: this, iter: TreeIter, path: TreePath) => void): number;
+		/**
+		 * The given row has been expanded (child nodes are shown).
+		 */
+		connect(signal: "row-expanded", callback: (owner: this, iter: TreeIter, path: TreePath) => void): number;
+		connect(signal: "select-all", callback: (owner: this) => boolean): number;
+		connect(signal: "select-cursor-parent", callback: (owner: this) => boolean): number;
+		connect(signal: "select-cursor-row", callback: (owner: this, object: boolean) => boolean): number;
+		connect(signal: "start-interactive-search", callback: (owner: this) => boolean): number;
+		/**
+		 * The given row is about to be collapsed (hide its children nodes). Use this
+		 * signal if you need to control the collapsibility of individual rows.
+		 */
+		connect(signal: "test-collapse-row", callback: (owner: this, iter: TreeIter, path: TreePath) => boolean): number;
+		/**
+		 * The given row is about to be expanded (show its children nodes). Use this
+		 * signal if you need to control the expandability of individual rows.
+		 */
+		connect(signal: "test-expand-row", callback: (owner: this, iter: TreeIter, path: TreePath) => boolean): number;
+		connect(signal: "toggle-cursor-row", callback: (owner: this) => boolean): number;
+		connect(signal: "unselect-all", callback: (owner: this) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -38751,6 +41488,8 @@ declare namespace imports.gi.Gtk {
 		 * @param widget A child {@link Widget}, or %NULL.
 		 */
 		set_widget(widget: Widget): void;
+		connect(signal: "clicked", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -38988,6 +41727,48 @@ declare namespace imports.gi.Gtk {
 		 * @param add_tearoffs whether tearoff menu items are added
 		 */
 		set_add_tearoffs(add_tearoffs: boolean): void;
+		/**
+		 * The ::actions-changed signal is emitted whenever the set of actions
+		 * changes.
+		 */
+		connect(signal: "actions-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::add-widget signal is emitted for each generated menubar and toolbar.
+		 * It is not emitted for generated popup menus, which can be obtained by
+		 * gtk_ui_manager_get_widget().
+		 */
+		connect(signal: "add-widget", callback: (owner: this, widget: Widget) => void): number;
+		/**
+		 * The ::connect-proxy signal is emitted after connecting a proxy to
+		 * an action in the group.
+		 * 
+		 * This is intended for simple customizations for which a custom action
+		 * class would be too clumsy, e.g. showing tooltips for menuitems in the
+		 * statusbar.
+		 */
+		connect(signal: "connect-proxy", callback: (owner: this, action: Action, proxy: Widget) => void): number;
+		/**
+		 * The ::disconnect-proxy signal is emitted after disconnecting a proxy
+		 * from an action in the group.
+		 */
+		connect(signal: "disconnect-proxy", callback: (owner: this, action: Action, proxy: Widget) => void): number;
+		/**
+		 * The ::post-activate signal is emitted just after the #action
+		 * is activated.
+		 * 
+		 * This is intended for applications to get notification
+		 * just after any action is activated.
+		 */
+		connect(signal: "post-activate", callback: (owner: this, action: Action) => void): number;
+		/**
+		 * The ::pre-activate signal is emitted just before the #action
+		 * is activated.
+		 * 
+		 * This is intended for applications to get notification
+		 * just before any action is activated.
+		 */
+		connect(signal: "pre-activate", callback: (owner: this, action: Action) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -42700,6 +45481,644 @@ declare namespace imports.gi.Gtk {
 		 * @param flags State flags to turn off
 		 */
 		unset_state_flags(flags: StateFlags): void;
+		connect(signal: "accel-closures-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::button-press-event signal will be emitted when a button
+		 * (typically from a mouse) is pressed.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the
+		 * widget needs to enable the #GDK_BUTTON_PRESS_MASK mask.
+		 * 
+		 * This signal will be sent to the grab widget if there is one.
+		 */
+		connect(signal: "button-press-event", callback: (owner: this, event: Gdk.EventButton) => boolean): number;
+		/**
+		 * The ::button-release-event signal will be emitted when a button
+		 * (typically from a mouse) is released.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the
+		 * widget needs to enable the #GDK_BUTTON_RELEASE_MASK mask.
+		 * 
+		 * This signal will be sent to the grab widget if there is one.
+		 */
+		connect(signal: "button-release-event", callback: (owner: this, event: Gdk.EventButton) => boolean): number;
+		/**
+		 * Determines whether an accelerator that activates the signal
+		 * identified by #signal_id can currently be activated.
+		 * This signal is present to allow applications and derived
+		 * widgets to override the default {@link Widget} handling
+		 * for determining whether an accelerator can be activated.
+		 */
+		connect(signal: "can-activate-accel", callback: (owner: this, signal_id: number) => boolean): number;
+		/**
+		 * The ::child-notify signal is emitted for each
+		 * [child property][child-properties]  that has
+		 * changed on an object. The signal's detail holds the property name.
+		 */
+		connect(signal: "child-notify", callback: (owner: this, child_property: GObject.ParamSpec) => void): number;
+		/**
+		 * The ::composited-changed signal is emitted when the composited
+		 * status of #widgets screen changes.
+		 * See gdk_screen_is_composited().
+		 */
+		connect(signal: "composited-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::configure-event signal will be emitted when the size, position or
+		 * stacking of the #widget's window has changed.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
+		 * automatically for all new windows.
+		 */
+		connect(signal: "configure-event", callback: (owner: this, event: Gdk.EventConfigure) => boolean): number;
+		/**
+		 * Emitted when a redirected window belonging to #widget gets drawn into.
+		 * The region/area members of the event shows what area of the redirected
+		 * drawable was drawn into.
+		 */
+		connect(signal: "damage-event", callback: (owner: this, event: Gdk.EventExpose) => boolean): number;
+		/**
+		 * The ::delete-event signal is emitted if a user requests that
+		 * a toplevel window is closed. The default handler for this signal
+		 * destroys the window. Connecting gtk_widget_hide_on_delete() to
+		 * this signal will cause the window to be hidden instead, so that
+		 * it can later be shown again without reconstructing it.
+		 */
+		connect(signal: "delete-event", callback: (owner: this, event: Gdk.Event) => boolean): number;
+		/**
+		 * Signals that all holders of a reference to the widget should release
+		 * the reference that they hold. May result in finalization of the widget
+		 * if all references are released.
+		 * 
+		 * This signal is not suitable for saving widget state.
+		 */
+		connect(signal: "destroy", callback: (owner: this) => void): number;
+		/**
+		 * The ::destroy-event signal is emitted when a #GdkWindow is destroyed.
+		 * You rarely get this signal, because most widgets disconnect themselves
+		 * from their window before they destroy it, so no widget owns the
+		 * window at destroy time.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
+		 * automatically for all new windows.
+		 */
+		connect(signal: "destroy-event", callback: (owner: this, event: Gdk.Event) => boolean): number;
+		/**
+		 * The ::direction-changed signal is emitted when the text direction
+		 * of a widget changes.
+		 */
+		connect(signal: "direction-changed", callback: (owner: this, previous_direction: TextDirection) => void): number;
+		/**
+		 * The ::drag-begin signal is emitted on the drag source when a drag is
+		 * started. A typical reason to connect to this signal is to set up a
+		 * custom drag icon with e.g. gtk_drag_source_set_icon_pixbuf().
+		 * 
+		 * Note that some widgets set up a drag icon in the default handler of
+		 * this signal, so you may have to use g_signal_connect_after() to
+		 * override what the default handler did.
+		 */
+		connect(signal: "drag-begin", callback: (owner: this, context: Gdk.DragContext) => void): number;
+		/**
+		 * The ::drag-data-delete signal is emitted on the drag source when a drag
+		 * with the action %GDK_ACTION_MOVE is successfully completed. The signal
+		 * handler is responsible for deleting the data that has been dropped. What
+		 * "delete" means depends on the context of the drag operation.
+		 */
+		connect(signal: "drag-data-delete", callback: (owner: this, context: Gdk.DragContext) => void): number;
+		/**
+		 * The ::drag-data-get signal is emitted on the drag source when the drop
+		 * site requests the data which is dragged. It is the responsibility of
+		 * the signal handler to fill #data with the data in the format which
+		 * is indicated by #info. See gtk_selection_data_set() and
+		 * gtk_selection_data_set_text().
+		 */
+		connect(signal: "drag-data-get", callback: (owner: this, context: Gdk.DragContext, data: SelectionData, info: number, time: number) => void): number;
+		/**
+		 * The ::drag-data-received signal is emitted on the drop site when the
+		 * dragged data has been received. If the data was received in order to
+		 * determine whether the drop will be accepted, the handler is expected
+		 * to call gdk_drag_status() and not finish the drag.
+		 * If the data was received in response to a {@link Widget}::drag-drop signal
+		 * (and this is the last target to be received), the handler for this
+		 * signal is expected to process the received data and then call
+		 * gtk_drag_finish(), setting the #success parameter depending on
+		 * whether the data was processed successfully.
+		 * 
+		 * Applications must create some means to determine why the signal was emitted
+		 * and therefore whether to call gdk_drag_status() or gtk_drag_finish().
+		 * 
+		 * The handler may inspect the selected action with
+		 * gdk_drag_context_get_selected_action() before calling
+		 * gtk_drag_finish(), e.g. to implement %GDK_ACTION_ASK as
+		 * shown in the following example:
+		 * |[<!-- language="C" -->
+		 * void
+		 * drag_data_received (GtkWidget          *widget,
+		 *                     GdkDragContext     *context,
+		 *                     gint                x,
+		 *                     gint                y,
+		 *                     GtkSelectionData   *data,
+		 *                     guint               info,
+		 *                     guint               time)
+		 * {
+		 *   if ((data->length >= 0) && (data->format == 8))
+		 *     {
+		 *       GdkDragAction action;
+		 * 
+		 *       // handle data here
+		 * 
+		 *       action = gdk_drag_context_get_selected_action (context);
+		 *       if (action == GDK_ACTION_ASK)
+		 *         {
+		 *           GtkWidget *dialog;
+		 *           gint response;
+		 * 
+		 *           dialog = gtk_message_dialog_new (NULL,
+		 *                                            GTK_DIALOG_MODAL |
+		 *                                            GTK_DIALOG_DESTROY_WITH_PARENT,
+		 *                                            GTK_MESSAGE_INFO,
+		 *                                            GTK_BUTTONS_YES_NO,
+		 *                                            "Move the data ?\n");
+		 *           response = gtk_dialog_run (GTK_DIALOG (dialog));
+		 *           gtk_widget_destroy (dialog);
+		 * 
+		 *           if (response == GTK_RESPONSE_YES)
+		 *             action = GDK_ACTION_MOVE;
+		 *           else
+		 *             action = GDK_ACTION_COPY;
+		 *          }
+		 * 
+		 *       gtk_drag_finish (context, TRUE, action == GDK_ACTION_MOVE, time);
+		 *     }
+		 *   else
+		 *     gtk_drag_finish (context, FALSE, FALSE, time);
+		 *  }
+		 * ]|
+		 */
+		connect(signal: "drag-data-received", callback: (owner: this, context: Gdk.DragContext, _x: number, _y: number, data: SelectionData, info: number, time: number) => void): number;
+		/**
+		 * The ::drag-drop signal is emitted on the drop site when the user drops
+		 * the data onto the widget. The signal handler must determine whether
+		 * the cursor position is in a drop zone or not. If it is not in a drop
+		 * zone, it returns %FALSE and no further processing is necessary.
+		 * Otherwise, the handler returns %TRUE. In this case, the handler must
+		 * ensure that gtk_drag_finish() is called to let the source know that
+		 * the drop is done. The call to gtk_drag_finish() can be done either
+		 * directly or in a {@link Widget}::drag-data-received handler which gets
+		 * triggered by calling gtk_drag_get_data() to receive the data for one
+		 * or more of the supported targets.
+		 */
+		connect(signal: "drag-drop", callback: (owner: this, context: Gdk.DragContext, _x: number, _y: number, time: number) => boolean): number;
+		/**
+		 * The ::drag-end signal is emitted on the drag source when a drag is
+		 * finished.  A typical reason to connect to this signal is to undo
+		 * things done in {@link Widget}::drag-begin.
+		 */
+		connect(signal: "drag-end", callback: (owner: this, context: Gdk.DragContext) => void): number;
+		/**
+		 * The ::drag-failed signal is emitted on the drag source when a drag has
+		 * failed. The signal handler may hook custom code to handle a failed DnD
+		 * operation based on the type of error, it returns %TRUE is the failure has
+		 * been already handled (not showing the default "drag operation failed"
+		 * animation), otherwise it returns %FALSE.
+		 */
+		connect(signal: "drag-failed", callback: (owner: this, context: Gdk.DragContext, result: DragResult) => boolean): number;
+		/**
+		 * The ::drag-leave signal is emitted on the drop site when the cursor
+		 * leaves the widget. A typical reason to connect to this signal is to
+		 * undo things done in {@link Widget}::drag-motion, e.g. undo highlighting
+		 * with gtk_drag_unhighlight().
+		 * 
+		 * 
+		 * Likewise, the #GtkWidget::drag-leave signal is also emitted before the
+		 * ::drag-drop signal, for instance to allow cleaning up of a preview item
+		 * created in the #GtkWidget::drag-motion signal handler.
+		 */
+		connect(signal: "drag-leave", callback: (owner: this, context: Gdk.DragContext, time: number) => void): number;
+		/**
+		 * The ::drag-motion signal is emitted on the drop site when the user
+		 * moves the cursor over the widget during a drag. The signal handler
+		 * must determine whether the cursor position is in a drop zone or not.
+		 * If it is not in a drop zone, it returns %FALSE and no further processing
+		 * is necessary. Otherwise, the handler returns %TRUE. In this case, the
+		 * handler is responsible for providing the necessary information for
+		 * displaying feedback to the user, by calling gdk_drag_status().
+		 * 
+		 * If the decision whether the drop will be accepted or rejected can't be
+		 * made based solely on the cursor position and the type of the data, the
+		 * handler may inspect the dragged data by calling gtk_drag_get_data() and
+		 * defer the gdk_drag_status() call to the {@link Widget}::drag-data-received
+		 * handler. Note that you must pass #GTK_DEST_DEFAULT_DROP,
+		 * #GTK_DEST_DEFAULT_MOTION or #GTK_DEST_DEFAULT_ALL to gtk_drag_dest_set()
+		 * when using the drag-motion signal that way.
+		 * 
+		 * Also note that there is no drag-enter signal. The drag receiver has to
+		 * keep track of whether he has received any drag-motion signals since the
+		 * last #GtkWidget::drag-leave and if not, treat the drag-motion signal as
+		 * an "enter" signal. Upon an "enter", the handler will typically highlight
+		 * the drop site with gtk_drag_highlight().
+		 * |[<!-- language="C" -->
+		 * static void
+		 * drag_motion (GtkWidget      *widget,
+		 *              GdkDragContext *context,
+		 *              gint            x,
+		 *              gint            y,
+		 *              guint           time)
+		 * {
+		 *   GdkAtom target;
+		 * 
+		 *   PrivateData *private_data = GET_PRIVATE_DATA (widget);
+		 * 
+		 *   if (!private_data->drag_highlight)
+		 *    {
+		 *      private_data->drag_highlight = 1;
+		 *      gtk_drag_highlight (widget);
+		 *    }
+		 * 
+		 *   target = gtk_drag_dest_find_target (widget, context, NULL);
+		 *   if (target == GDK_NONE)
+		 *     gdk_drag_status (context, 0, time);
+		 *   else
+		 *    {
+		 *      private_data->pending_status
+		 *         = gdk_drag_context_get_suggested_action (context);
+		 *      gtk_drag_get_data (widget, context, target, time);
+		 *    }
+		 * 
+		 *   return TRUE;
+		 * }
+		 * 
+		 * static void
+		 * drag_data_received (GtkWidget        *widget,
+		 *                     GdkDragContext   *context,
+		 *                     gint              x,
+		 *                     gint              y,
+		 *                     GtkSelectionData *selection_data,
+		 *                     guint             info,
+		 *                     guint             time)
+		 * {
+		 *   PrivateData *private_data = GET_PRIVATE_DATA (widget);
+		 * 
+		 *   if (private_data->suggested_action)
+		 *    {
+		 *      private_data->suggested_action = 0;
+		 * 
+		 *      // We are getting this data due to a request in drag_motion,
+		 *      // rather than due to a request in drag_drop, so we are just
+		 *      // supposed to call gdk_drag_status(), not actually paste in
+		 *      // the data.
+		 * 
+		 *      str = gtk_selection_data_get_text (selection_data);
+		 *      if (!data_is_acceptable (str))
+		 *        gdk_drag_status (context, 0, time);
+		 *      else
+		 *        gdk_drag_status (context,
+		 *                         private_data->suggested_action,
+		 *                         time);
+		 *    }
+		 *   else
+		 *    {
+		 *      // accept the drop
+		 *    }
+		 * }
+		 * ]|
+		 */
+		connect(signal: "drag-motion", callback: (owner: this, context: Gdk.DragContext, _x: number, _y: number, time: number) => boolean): number;
+		/**
+		 * This signal is emitted when a widget is supposed to render itself.
+		 * The #widget's top left corner must be painted at the origin of
+		 * the passed in context and be sized to the values returned by
+		 * gtk_widget_get_allocated_width() and
+		 * gtk_widget_get_allocated_height().
+		 * 
+		 * Signal handlers connected to this signal can modify the cairo
+		 * context passed as #cr in any way they like and don't need to
+		 * restore it. The signal emission takes care of calling cairo_save()
+		 * before and cairo_restore() after invoking the handler.
+		 * 
+		 * The signal handler will get a #cr with a clip region already set to the
+		 * widget's dirty region, i.e. to the area that needs repainting.  Complicated
+		 * widgets that want to avoid redrawing themselves completely can get the full
+		 * extents of the clip region with gdk_cairo_get_clip_rectangle(), or they can
+		 * get a finer-grained representation of the dirty region with
+		 * cairo_copy_clip_rectangle_list().
+		 */
+		connect(signal: "draw", callback: (owner: this, cr: cairo.Context) => boolean): number;
+		/**
+		 * The ::enter-notify-event will be emitted when the pointer enters
+		 * the #widget's window.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_ENTER_NOTIFY_MASK mask.
+		 * 
+		 * This signal will be sent to the grab widget if there is one.
+		 */
+		connect(signal: "enter-notify-event", callback: (owner: this, event: Gdk.EventCrossing) => boolean): number;
+		/**
+		 * The GTK+ main loop will emit three signals for each GDK event delivered
+		 * to a widget: one generic ::event signal, another, more specific,
+		 * signal that matches the type of event delivered (e.g.
+		 * {@link Widget}::key-press-event) and finally a generic
+		 * #GtkWidget::event-after signal.
+		 */
+		connect(signal: "event", callback: (owner: this, event: Gdk.Event) => boolean): number;
+		/**
+		 * After the emission of the {@link Widget}::event signal and (optionally)
+		 * the second more specific signal, ::event-after will be emitted
+		 * regardless of the previous two signals handlers return values.
+		 */
+		connect(signal: "event-after", callback: (owner: this, event: Gdk.Event) => void): number;
+		connect(signal: "focus", callback: (owner: this, direction: DirectionType) => boolean): number;
+		/**
+		 * The ::focus-in-event signal will be emitted when the keyboard focus
+		 * enters the #widget's window.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_FOCUS_CHANGE_MASK mask.
+		 */
+		connect(signal: "focus-in-event", callback: (owner: this, event: Gdk.EventFocus) => boolean): number;
+		/**
+		 * The ::focus-out-event signal will be emitted when the keyboard focus
+		 * leaves the #widget's window.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_FOCUS_CHANGE_MASK mask.
+		 */
+		connect(signal: "focus-out-event", callback: (owner: this, event: Gdk.EventFocus) => boolean): number;
+		/**
+		 * Emitted when a pointer or keyboard grab on a window belonging
+		 * to #widget gets broken.
+		 * 
+		 * On X11, this happens when the grab window becomes unviewable
+		 * (i.e. it or one of its ancestors is unmapped), or if the same
+		 * application grabs the pointer or keyboard again.
+		 */
+		connect(signal: "grab-broken-event", callback: (owner: this, event: Gdk.EventGrabBroken) => boolean): number;
+		connect(signal: "grab-focus", callback: (owner: this) => void): number;
+		/**
+		 * The ::grab-notify signal is emitted when a widget becomes
+		 * shadowed by a GTK+ grab (not a pointer or keyboard grab) on
+		 * another widget, or when it becomes unshadowed due to a grab
+		 * being removed.
+		 * 
+		 * A widget is shadowed by a gtk_grab_add() when the topmost
+		 * grab widget in the grab stack of its window group is not
+		 * its ancestor.
+		 */
+		connect(signal: "grab-notify", callback: (owner: this, was_grabbed: boolean) => void): number;
+		/**
+		 * The ::hide signal is emitted when #widget is hidden, for example with
+		 * gtk_widget_hide().
+		 */
+		connect(signal: "hide", callback: (owner: this) => void): number;
+		/**
+		 * The ::hierarchy-changed signal is emitted when the
+		 * anchored state of a widget changes. A widget is
+		 * “anchored” when its toplevel
+		 * ancestor is a {@link Window}. This signal is emitted when
+		 * a widget changes from un-anchored to anchored or vice-versa.
+		 */
+		connect(signal: "hierarchy-changed", callback: (owner: this, previous_toplevel: Widget) => void): number;
+		/**
+		 * The ::key-press-event signal is emitted when a key is pressed. The signal
+		 * emission will reoccur at the key-repeat rate when the key is kept pressed.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_KEY_PRESS_MASK mask.
+		 * 
+		 * This signal will be sent to the grab widget if there is one.
+		 */
+		connect(signal: "key-press-event", callback: (owner: this, event: Gdk.EventKey) => boolean): number;
+		/**
+		 * The ::key-release-event signal is emitted when a key is released.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_KEY_RELEASE_MASK mask.
+		 * 
+		 * This signal will be sent to the grab widget if there is one.
+		 */
+		connect(signal: "key-release-event", callback: (owner: this, event: Gdk.EventKey) => boolean): number;
+		/**
+		 * Gets emitted if keyboard navigation fails.
+		 * See gtk_widget_keynav_failed() for details.
+		 */
+		connect(signal: "keynav-failed", callback: (owner: this, direction: DirectionType) => boolean): number;
+		/**
+		 * The ::leave-notify-event will be emitted when the pointer leaves
+		 * the #widget's window.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_LEAVE_NOTIFY_MASK mask.
+		 * 
+		 * This signal will be sent to the grab widget if there is one.
+		 */
+		connect(signal: "leave-notify-event", callback: (owner: this, event: Gdk.EventCrossing) => boolean): number;
+		/**
+		 * The ::map signal is emitted when #widget is going to be mapped, that is
+		 * when the widget is visible (which is controlled with
+		 * gtk_widget_set_visible()) and all its parents up to the toplevel widget
+		 * are also visible. Once the map has occurred, {@link Widget}::map-event will
+		 * be emitted.
+		 * 
+		 * The ::map signal can be used to determine whether a widget will be drawn,
+		 * for instance it can resume an animation that was stopped during the
+		 * emission of #GtkWidget::unmap.
+		 */
+		connect(signal: "map", callback: (owner: this) => void): number;
+		/**
+		 * The ::map-event signal will be emitted when the #widget's window is
+		 * mapped. A window is mapped when it becomes visible on the screen.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
+		 * automatically for all new windows.
+		 */
+		connect(signal: "map-event", callback: (owner: this, event: Gdk.EventAny) => boolean): number;
+		/**
+		 * The default handler for this signal activates #widget if #group_cycling
+		 * is %FALSE, or just makes #widget grab focus if #group_cycling is %TRUE.
+		 */
+		connect(signal: "mnemonic-activate", callback: (owner: this, group_cycling: boolean) => boolean): number;
+		/**
+		 * The ::motion-notify-event signal is emitted when the pointer moves
+		 * over the widget's #GdkWindow.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget
+		 * needs to enable the #GDK_POINTER_MOTION_MASK mask.
+		 * 
+		 * This signal will be sent to the grab widget if there is one.
+		 */
+		connect(signal: "motion-notify-event", callback: (owner: this, event: Gdk.EventMotion) => boolean): number;
+		connect(signal: "move-focus", callback: (owner: this, direction: DirectionType) => void): number;
+		/**
+		 * The ::parent-set signal is emitted when a new parent
+		 * has been set on a widget.
+		 */
+		connect(signal: "parent-set", callback: (owner: this, old_parent: Widget) => void): number;
+		/**
+		 * This signal gets emitted whenever a widget should pop up a context
+		 * menu. This usually happens through the standard key binding mechanism;
+		 * by pressing a certain key while a widget is focused, the user can cause
+		 * the widget to pop up a menu.  For example, the {@link Entry} widget creates
+		 * a menu with clipboard commands. See the
+		 * [Popup Menu Migration Checklist][checklist-popup-menu]
+		 * for an example of how to use this signal.
+		 */
+		connect(signal: "popup-menu", callback: (owner: this) => boolean): number;
+		/**
+		 * The ::property-notify-event signal will be emitted when a property on
+		 * the #widget's window has been changed or deleted.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_PROPERTY_CHANGE_MASK mask.
+		 */
+		connect(signal: "property-notify-event", callback: (owner: this, event: Gdk.EventProperty) => boolean): number;
+		/**
+		 * To receive this signal the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_PROXIMITY_IN_MASK mask.
+		 * 
+		 * This signal will be sent to the grab widget if there is one.
+		 */
+		connect(signal: "proximity-in-event", callback: (owner: this, event: Gdk.EventProximity) => boolean): number;
+		/**
+		 * To receive this signal the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_PROXIMITY_OUT_MASK mask.
+		 * 
+		 * This signal will be sent to the grab widget if there is one.
+		 */
+		connect(signal: "proximity-out-event", callback: (owner: this, event: Gdk.EventProximity) => boolean): number;
+		/**
+		 * Emitted when {@link Widget}:has-tooltip is %TRUE and the hover timeout
+		 * has expired with the cursor hovering "above" #widget; or emitted when #widget got
+		 * focus in keyboard mode.
+		 * 
+		 * Using the given coordinates, the signal handler should determine
+		 * whether a tooltip should be shown for #widget. If this is the case
+		 * %TRUE should be returned, %FALSE otherwise.  Note that if
+		 * #keyboard_mode is %TRUE, the values of #x and #y are undefined and
+		 * should not be used.
+		 * 
+		 * The signal handler is free to manipulate #tooltip with the therefore
+		 * destined function calls.
+		 */
+		connect(signal: "query-tooltip", callback: (owner: this, _x: number, _y: number, keyboard_mode: boolean, tooltip: Tooltip) => boolean): number;
+		/**
+		 * The ::realize signal is emitted when #widget is associated with a
+		 * #GdkWindow, which means that gtk_widget_realize() has been called or the
+		 * widget has been mapped (that is, it is going to be drawn).
+		 */
+		connect(signal: "realize", callback: (owner: this) => void): number;
+		/**
+		 * The ::screen-changed signal gets emitted when the
+		 * screen of a widget has changed.
+		 */
+		connect(signal: "screen-changed", callback: (owner: this, previous_screen: Gdk.Screen) => void): number;
+		/**
+		 * The ::scroll-event signal is emitted when a button in the 4 to 7
+		 * range is pressed. Wheel mice are usually configured to generate
+		 * button press events for buttons 4 and 5 when the wheel is turned.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_SCROLL_MASK mask.
+		 * 
+		 * This signal will be sent to the grab widget if there is one.
+		 */
+		connect(signal: "scroll-event", callback: (owner: this, event: Gdk.EventScroll) => boolean): number;
+		/**
+		 * The ::selection-clear-event signal will be emitted when the
+		 * the #widget's window has lost ownership of a selection.
+		 */
+		connect(signal: "selection-clear-event", callback: (owner: this, event: Gdk.EventSelection) => boolean): number;
+		connect(signal: "selection-get", callback: (owner: this, data: SelectionData, info: number, time: number) => void): number;
+		connect(signal: "selection-notify-event", callback: (owner: this, event: Gdk.EventSelection) => boolean): number;
+		connect(signal: "selection-received", callback: (owner: this, data: SelectionData, time: number) => void): number;
+		/**
+		 * The ::selection-request-event signal will be emitted when
+		 * another client requests ownership of the selection owned by
+		 * the #widget's window.
+		 */
+		connect(signal: "selection-request-event", callback: (owner: this, event: Gdk.EventSelection) => boolean): number;
+		/**
+		 * The ::show signal is emitted when #widget is shown, for example with
+		 * gtk_widget_show().
+		 */
+		connect(signal: "show", callback: (owner: this) => void): number;
+		connect(signal: "show-help", callback: (owner: this, help_type: WidgetHelpType) => boolean): number;
+		connect(signal: "size-allocate", callback: (owner: this, allocation: Allocation) => void): number;
+		/**
+		 * The ::state-changed signal is emitted when the widget state changes.
+		 * See gtk_widget_get_state().
+		 */
+		connect(signal: "state-changed", callback: (owner: this, state: StateType) => void): number;
+		/**
+		 * The ::state-flags-changed signal is emitted when the widget state
+		 * changes, see gtk_widget_get_state_flags().
+		 */
+		connect(signal: "state-flags-changed", callback: (owner: this, flags: StateFlags) => void): number;
+		/**
+		 * The ::style-set signal is emitted when a new style has been set
+		 * on a widget. Note that style-modifying functions like
+		 * gtk_widget_modify_base() also cause this signal to be emitted.
+		 * 
+		 * Note that this signal is emitted for changes to the deprecated
+		 * {@link Style}. To track changes to the #GtkStyleContext associated
+		 * with a widget, use the #GtkWidget::style-updated signal.
+		 */
+		connect(signal: "style-set", callback: (owner: this, previous_style: Style) => void): number;
+		/**
+		 * The ::style-updated signal is a convenience signal that is emitted when the
+		 * {@link StyleContext}::changed signal is emitted on the #widget's associated
+		 * #GtkStyleContext as returned by gtk_widget_get_style_context().
+		 * 
+		 * Note that style-modifying functions like gtk_widget_override_color() also
+		 * cause this signal to be emitted.
+		 */
+		connect(signal: "style-updated", callback: (owner: this) => void): number;
+		connect(signal: "touch-event", callback: (owner: this, object: Gdk.Event) => boolean): number;
+		/**
+		 * The ::unmap signal is emitted when #widget is going to be unmapped, which
+		 * means that either it or any of its parents up to the toplevel widget have
+		 * been set as hidden.
+		 * 
+		 * As ::unmap indicates that a widget will not be shown any longer, it can be
+		 * used to, for example, stop an animation on the widget.
+		 */
+		connect(signal: "unmap", callback: (owner: this) => void): number;
+		/**
+		 * The ::unmap-event signal will be emitted when the #widget's window is
+		 * unmapped. A window is unmapped when it becomes invisible on the screen.
+		 * 
+		 * To receive this signal, the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
+		 * automatically for all new windows.
+		 */
+		connect(signal: "unmap-event", callback: (owner: this, event: Gdk.EventAny) => boolean): number;
+		/**
+		 * The ::unrealize signal is emitted when the #GdkWindow associated with
+		 * #widget is destroyed, which means that gtk_widget_unrealize() has been
+		 * called or the widget has been unmapped (that is, it is going to be
+		 * hidden).
+		 */
+		connect(signal: "unrealize", callback: (owner: this) => void): number;
+		/**
+		 * The ::visibility-notify-event will be emitted when the #widget's
+		 * window is obscured or unobscured.
+		 * 
+		 * To receive this signal the #GdkWindow associated to the widget needs
+		 * to enable the #GDK_VISIBILITY_NOTIFY_MASK mask.
+		 */
+		connect(signal: "visibility-notify-event", callback: (owner: this, event: Gdk.EventVisibility) => boolean): number;
+		/**
+		 * The ::window-state-event will be emitted when the state of the
+		 * toplevel window associated to the #widget changes.
+		 * 
+		 * To receive this signal the #GdkWindow associated to the widget
+		 * needs to enable the #GDK_STRUCTURE_MASK mask. GDK will enable
+		 * this mask automatically for all new windows.
+		 */
+		connect(signal: "window-state-event", callback: (owner: this, event: Gdk.EventWindowState) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -44565,6 +47984,42 @@ declare namespace imports.gi.Gtk {
 		 * on {@link Widget}.
 		 */
 		unstick(): void;
+		/**
+		 * The ::activate-default signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user activates the default widget
+		 * of #window.
+		 */
+		connect(signal: "activate-default", callback: (owner: this) => void): number;
+		/**
+		 * The ::activate-focus signal is a
+		 * [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user activates the currently
+		 * focused widget of #window.
+		 */
+		connect(signal: "activate-focus", callback: (owner: this) => void): number;
+		/**
+		 * The ::enable-debugging signal is a [keybinding signal][GtkBindingSignal]
+		 * which gets emitted when the user enables or disables interactive
+		 * debugging. When #toggle is %TRUE, interactive debugging is toggled
+		 * on or off, when it is %FALSE, the debugger will be pointed at the
+		 * widget under the pointer.
+		 * 
+		 * The default bindings for this signal are Ctrl-Shift-I
+		 * and Ctrl-Shift-D.
+		 */
+		connect(signal: "enable-debugging", callback: (owner: this, toggle: boolean) => boolean): number;
+		/**
+		 * The ::keys-changed signal gets emitted when the set of accelerators
+		 * or mnemonics that are associated with #window changes.
+		 */
+		connect(signal: "keys-changed", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted whenever the currently focused widget in
+		 * this window changes.
+		 */
+		connect(signal: "set-focus", callback: (owner: this, widget: Widget) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -53291,6 +56746,36 @@ declare namespace imports.gi.Gtk {
 		 *   %NULL if editing was initiated programmatically
 		 */
 		start_editing(event: Gdk.Event): void;
+		/**
+		 * This signal is a sign for the cell renderer to update its
+		 * value from the #cell_editable.
+		 * 
+		 * Implementations of {@link CellEditable} are responsible for
+		 * emitting this signal when they are done editing, e.g.
+		 * #GtkEntry emits this signal when the user presses Enter. Typical things to
+		 * do in a handler for ::editing-done are to capture the edited value,
+		 * disconnect the #cell_editable from signals on the #GtkCellRenderer, etc.
+		 * 
+		 * gtk_cell_editable_editing_done() is a convenience method
+		 * for emitting #GtkCellEditable::editing-done.
+		 */
+		connect(signal: "editing-done", callback: (owner: this) => void): number;
+		/**
+		 * This signal is meant to indicate that the cell is finished
+		 * editing, and the #cell_editable widget is being removed and may
+		 * subsequently be destroyed.
+		 * 
+		 * Implementations of {@link CellEditable} are responsible for
+		 * emitting this signal when they are done editing. It must
+		 * be emitted after the #GtkCellEditable::editing-done signal,
+		 * to give the cell renderer a chance to update the cell's value
+		 * before the widget is removed.
+		 * 
+		 * gtk_cell_editable_remove_widget() is a convenience method
+		 * for emitting #GtkCellEditable::remove-widget.
+		 */
+		connect(signal: "remove-widget", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -53593,6 +57078,14 @@ declare namespace imports.gi.Gtk {
 		 * @param use_alpha %TRUE if color chooser should use alpha channel, %FALSE if not
 		 */
 		set_use_alpha(use_alpha: boolean): void;
+		/**
+		 * Emitted when a color is activated from the color chooser.
+		 * This usually happens when the user clicks a color swatch,
+		 * or a color is selected and the user presses one of the keys
+		 * Space, Shift+Space, Return or Enter.
+		 */
+		connect(signal: "color-activated", callback: (owner: this, color: Gdk.RGBA) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -53731,6 +57224,40 @@ declare namespace imports.gi.Gtk {
 		 * @param position the position of the cursor
 		 */
 		set_position(position: number): void;
+		/**
+		 * The ::changed signal is emitted at the end of a single
+		 * user-visible operation on the contents of the {@link Editable}.
+		 * 
+		 * E.g., a paste operation that replaces the contents of the
+		 * selection will cause only one signal emission (even though it
+		 * is implemented by first deleting the selection, then inserting
+		 * the new content, and may cause multiple ::notify::text signals
+		 * to be emitted).
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when text is deleted from
+		 * the widget by the user. The default handler for
+		 * this signal will normally be responsible for deleting
+		 * the text, so by connecting to this signal and then
+		 * stopping the signal with g_signal_stop_emission(), it
+		 * is possible to modify the range of deleted text, or
+		 * prevent it from being deleted entirely. The #start_pos
+		 * and #end_pos parameters are interpreted as for
+		 * gtk_editable_delete_text().
+		 */
+		connect(signal: "delete-text", callback: (owner: this, start_pos: number, end_pos: number) => void): number;
+		/**
+		 * This signal is emitted when text is inserted into
+		 * the widget by the user. The default handler for
+		 * this signal will normally be responsible for inserting
+		 * the text, so by connecting to this signal and then
+		 * stopping the signal with g_signal_stop_emission(), it
+		 * is possible to modify the inserted text, or prevent
+		 * it from being inserted entirely.
+		 */
+		connect(signal: "insert-text", callback: (owner: this, new_text: string, new_text_length: number, position: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -54455,6 +57982,140 @@ declare namespace imports.gi.Gtk {
 		 * @param uri the URI to unselect
 		 */
 		unselect_uri(uri: string): void;
+		/**
+		 * This signal gets emitted whenever it is appropriate to present a
+		 * confirmation dialog when the user has selected a file name that
+		 * already exists.  The signal only gets emitted when the file
+		 * chooser is in %GTK_FILE_CHOOSER_ACTION_SAVE mode.
+		 * 
+		 * Most applications just need to turn on the
+		 * {@link FileChooser}:do-overwrite-confirmation property (or call the
+		 * gtk_file_chooser_set_do_overwrite_confirmation() function), and
+		 * they will automatically get a stock confirmation dialog.
+		 * Applications which need to customize this behavior should do
+		 * that, and also connect to the #GtkFileChooser::confirm-overwrite
+		 * signal.
+		 * 
+		 * A signal handler for this signal must return a
+		 * #GtkFileChooserConfirmation value, which indicates the action to
+		 * take.  If the handler determines that the user wants to select a
+		 * different filename, it should return
+		 * %GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN.  If it determines
+		 * that the user is satisfied with his choice of file name, it
+		 * should return %GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME.
+		 * On the other hand, if it determines that the stock confirmation
+		 * dialog should be used, it should return
+		 * %GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM. The following example
+		 * illustrates this.
+		 * 
+		 * ## Custom confirmation ## {#gtkfilechooser-confirmation}
+		 * 
+		 * |[<!-- language="C" -->
+		 * static GtkFileChooserConfirmation
+		 * confirm_overwrite_callback (GtkFileChooser *chooser, gpointer data)
+		 * {
+		 *   char *uri;
+		 * 
+		 *   uri = gtk_file_chooser_get_uri (chooser);
+		 * 
+		 *   if (is_uri_read_only (uri))
+		 *     {
+		 *       if (user_wants_to_replace_read_only_file (uri))
+		 *         return GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME;
+		 *       else
+		 *         return GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN;
+		 *     } else
+		 *       return GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM; // fall back to the default dialog
+		 * }
+		 * 
+		 * ...
+		 * 
+		 * chooser = gtk_file_chooser_dialog_new (...);
+		 * 
+		 * gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
+		 * g_signal_connect (chooser, "confirm-overwrite",
+		 *                   G_CALLBACK (confirm_overwrite_callback), NULL);
+		 * 
+		 * if (gtk_dialog_run (chooser) == GTK_RESPONSE_ACCEPT)
+		 *         save_to_file (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+		 * 
+		 * gtk_widget_destroy (chooser);
+		 * ]|
+		 */
+		connect(signal: "confirm-overwrite", callback: (owner: this) => FileChooserConfirmation): number;
+		/**
+		 * This signal is emitted when the current folder in a {@link FileChooser}
+		 * changes.  This can happen due to the user performing some action that
+		 * changes folders, such as selecting a bookmark or visiting a folder on the
+		 * file list.  It can also happen as a result of calling a function to
+		 * explicitly change the current folder in a file chooser.
+		 * 
+		 * Normally you do not need to connect to this signal, unless you need to keep
+		 * track of which folder a file chooser is showing.
+		 * 
+		 * See also:  gtk_file_chooser_set_current_folder(),
+		 * gtk_file_chooser_get_current_folder(),
+		 * gtk_file_chooser_set_current_folder_uri(),
+		 * gtk_file_chooser_get_current_folder_uri().
+		 */
+		connect(signal: "current-folder-changed", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when the user "activates" a file in the file
+		 * chooser.  This can happen by double-clicking on a file in the file list, or
+		 * by pressing `Enter`.
+		 * 
+		 * Normally you do not need to connect to this signal.  It is used internally
+		 * by {@link FileChooserDialog} to know when to activate the default button in the
+		 * dialog.
+		 * 
+		 * See also: gtk_file_chooser_get_filename(),
+		 * gtk_file_chooser_get_filenames(), gtk_file_chooser_get_uri(),
+		 * gtk_file_chooser_get_uris().
+		 */
+		connect(signal: "file-activated", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when there is a change in the set of selected files
+		 * in a {@link FileChooser}.  This can happen when the user modifies the selection
+		 * with the mouse or the keyboard, or when explicitly calling functions to
+		 * change the selection.
+		 * 
+		 * Normally you do not need to connect to this signal, as it is easier to wait
+		 * for the file chooser to finish running, and then to get the list of
+		 * selected files using the functions mentioned below.
+		 * 
+		 * See also: gtk_file_chooser_select_filename(),
+		 * gtk_file_chooser_unselect_filename(), gtk_file_chooser_get_filename(),
+		 * gtk_file_chooser_get_filenames(), gtk_file_chooser_select_uri(),
+		 * gtk_file_chooser_unselect_uri(), gtk_file_chooser_get_uri(),
+		 * gtk_file_chooser_get_uris().
+		 */
+		connect(signal: "selection-changed", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when the preview in a file chooser should be
+		 * regenerated.  For example, this can happen when the currently selected file
+		 * changes.  You should use this signal if you want your file chooser to have
+		 * a preview widget.
+		 * 
+		 * Once you have installed a preview widget with
+		 * gtk_file_chooser_set_preview_widget(), you should update it when this
+		 * signal is emitted.  You can use the functions
+		 * gtk_file_chooser_get_preview_filename() or
+		 * gtk_file_chooser_get_preview_uri() to get the name of the file to preview.
+		 * Your widget may not be able to preview all kinds of files; your callback
+		 * must call gtk_file_chooser_set_preview_widget_active() to inform the file
+		 * chooser about whether the preview was generated successfully or not.
+		 * 
+		 * Please see the example code in
+		 * [Using a Preview Widget][gtkfilechooser-preview].
+		 * 
+		 * See also: gtk_file_chooser_set_preview_widget(),
+		 * gtk_file_chooser_set_preview_widget_active(),
+		 * gtk_file_chooser_set_use_preview_label(),
+		 * gtk_file_chooser_get_preview_filename(),
+		 * gtk_file_chooser_get_preview_uri().
+		 */
+		connect(signal: "update-preview", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -54787,6 +58448,14 @@ declare namespace imports.gi.Gtk {
 		 * @param show_preview_entry whether to show the editable preview entry or not
 		 */
 		set_show_preview_entry(show_preview_entry: boolean): void;
+		/**
+		 * Emitted when a font is activated.
+		 * This usually happens when the user double clicks an item,
+		 * or an item is selected and the user presses one of the keys
+		 * Space, Shift+Space, Return or Enter.
+		 */
+		connect(signal: "font-activated", callback: (owner: this, fontname: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -54882,6 +58551,23 @@ declare namespace imports.gi.Gtk {
 		 * @param page_nr the page to render
 		 */
 		render_page(page_nr: number): void;
+		/**
+		 * The ::got-page-size signal is emitted once for each page
+		 * that gets rendered to the preview.
+		 * 
+		 * A handler for this signal should update the #context
+		 * according to #page_setup and set up a suitable cairo
+		 * context, using gtk_print_context_set_cairo_context().
+		 */
+		connect(signal: "got-page-size", callback: (owner: this, context: PrintContext, page_setup: PageSetup) => void): number;
+		/**
+		 * The ::ready signal gets emitted once per preview operation,
+		 * before the first page is rendered.
+		 * 
+		 * A handler for this signal can be used for setup tasks.
+		 */
+		connect(signal: "ready", callback: (owner: this, context: PrintContext) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -55146,6 +58832,21 @@ declare namespace imports.gi.Gtk {
 		 * @param uri a URI
 		 */
 		unselect_uri(uri: string): void;
+		/**
+		 * This signal is emitted when the user "activates" a recent item
+		 * in the recent chooser.  This can happen by double-clicking on an item
+		 * in the recently used resources list, or by pressing
+		 * `Enter`.
+		 */
+		connect(signal: "item-activated", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when there is a change in the set of
+		 * selected recently used resources.  This can happen when a user
+		 * modifies the selection with the mouse or the keyboard, or when
+		 * explicitly calling functions to change the selection.
+		 */
+		connect(signal: "selection-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -55803,6 +59504,45 @@ declare namespace imports.gi.Gtk {
 		 * @param iter the {@link TreeIter}-struct
 		 */
 		unref_node(iter: TreeIter): void;
+		/**
+		 * This signal is emitted when a row in the model has changed.
+		 */
+		connect(signal: "row-changed", callback: (owner: this, path: TreePath, iter: TreeIter) => void): number;
+		/**
+		 * This signal is emitted when a row has been deleted.
+		 * 
+		 * Note that no iterator is passed to the signal handler,
+		 * since the row is already deleted.
+		 * 
+		 * This should be called by models after a row has been removed.
+		 * The location pointed to by #path should be the location that
+		 * the row previously was at. It may not be a valid location anymore.
+		 */
+		connect(signal: "row-deleted", callback: (owner: this, path: TreePath) => void): number;
+		/**
+		 * This signal is emitted when a row has gotten the first child
+		 * row or lost its last child row.
+		 */
+		connect(signal: "row-has-child-toggled", callback: (owner: this, path: TreePath, iter: TreeIter) => void): number;
+		/**
+		 * This signal is emitted when a new row has been inserted in
+		 * the model.
+		 * 
+		 * Note that the row may still be empty at this point, since
+		 * it is a common pattern to first insert an empty row, and
+		 * then fill it with the desired values.
+		 */
+		connect(signal: "row-inserted", callback: (owner: this, path: TreePath, iter: TreeIter) => void): number;
+		/**
+		 * This signal is emitted when the children of a node in the
+		 * {@link TreeModel} have been reordered.
+		 * 
+		 * Note that this signal is not emitted
+		 * when rows are reordered by DND, since this is implemented
+		 * by removing and then reinserting the row.
+		 */
+		connect(signal: "rows-reordered", callback: (owner: this, path: TreePath, iter: TreeIter, new_order: any) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -56077,6 +59817,13 @@ declare namespace imports.gi.Gtk {
 		 * Emits a {@link TreeSortable}::sort-column-changed signal on #sortable.
 		 */
 		sort_column_changed(): void;
+		/**
+		 * The ::sort-column-changed signal is emitted when the sort column
+		 * or sort order of #sortable is changed. The signal is emitted before
+		 * the contents of #sortable are resorted.
+		 */
+		connect(signal: "sort-column-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

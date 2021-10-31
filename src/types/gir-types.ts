@@ -78,7 +78,7 @@ export interface ClassNode extends Node {
     "constructor": FunctionNode[];
     "function": FunctionNode[];
     "field": ParameterNode[];
-    "glib-signal": Node[];
+    "glib:signal": FunctionNode[];
     "method": FunctionNode[];
     "virtual-method": FunctionNode[];
     "property": ParameterNode[];

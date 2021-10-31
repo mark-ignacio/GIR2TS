@@ -4,6 +4,12 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IAppInfoMonitor {
 
+		/**
+		 * Signal emitted when the app info database for changes (ie: newly installed
+		 * or removed applications).
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -102,6 +108,21 @@ declare namespace imports.gi.Gio {
 		 * @param variable the environment variable to remove
 		 */
 		unsetenv(variable: string): void;
+		/**
+		 * The ::launch-failed signal is emitted when a #GAppInfo launch
+		 * fails. The startup notification id is provided, so that the launcher
+		 * can cancel the startup notification.
+		 */
+		connect(signal: "launch-failed", callback: (owner: this, startup_notify_id: string) => void): number;
+		/**
+		 * The ::launched signal is emitted when a #GAppInfo is successfully
+		 * launched. The #platform_data is an GVariant dictionary mapping
+		 * strings to variants (ie a{sv}), which contains additional,
+		 * platform-specific data about this launch. On UNIX, at least the
+		 * "pid" and "startup-notification-id" keys will be present.
+		 */
+		connect(signal: "launched", callback: (owner: this, info: AppInfo, platform_data: GLib.Variant) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -727,6 +748,85 @@ declare namespace imports.gi.Gio {
 		 * @param _id id of a previously sent notification
 		 */
 		withdraw_notification(_id: string): void;
+		/**
+		 * The ::activate signal is emitted on the primary instance when an
+		 * activation occurs. See g_application_activate().
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+		/**
+		 * The ::command-line signal is emitted on the primary instance when
+		 * a commandline is not handled locally. See g_application_run() and
+		 * the #GApplicationCommandLine documentation for more information.
+		 */
+		connect(signal: "command-line", callback: (owner: this, command_line: ApplicationCommandLine) => number): number;
+		/**
+		 * The ::handle-local-options signal is emitted on the local instance
+		 * after the parsing of the commandline options has occurred.
+		 * 
+		 * You can add options to be recognised during commandline option
+		 * parsing using g_application_add_main_option_entries() and
+		 * g_application_add_option_group().
+		 * 
+		 * Signal handlers can inspect #options (along with values pointed to
+		 * from the #arg_data of an installed #GOptionEntrys) in order to
+		 * decide to perform certain actions, including direct local handling
+		 * (which may be useful for options like --version).
+		 * 
+		 * In the event that the application is marked
+		 * %G_APPLICATION_HANDLES_COMMAND_LINE the "normal processing" will
+		 * send the #options dictionary to the primary instance where it can be
+		 * read with g_application_command_line_get_options_dict().  The signal
+		 * handler can modify the dictionary before returning, and the
+		 * modified dictionary will be sent.
+		 * 
+		 * In the event that %G_APPLICATION_HANDLES_COMMAND_LINE is not set,
+		 * "normal processing" will treat the remaining uncollected command
+		 * line arguments as filenames or URIs.  If there are no arguments,
+		 * the application is activated by g_application_activate().  One or
+		 * more arguments results in a call to g_application_open().
+		 * 
+		 * If you want to handle the local commandline arguments for yourself
+		 * by converting them to calls to g_application_open() or
+		 * g_action_group_activate_action() then you must be sure to register
+		 * the application first.  You should probably not call
+		 * g_application_activate() for yourself, however: just return -1 and
+		 * allow the default handler to do it for you.  This will ensure that
+		 * the `--gapplication-service` switch works properly (i.e. no activation
+		 * in that case).
+		 * 
+		 * Note that this signal is emitted from the default implementation of
+		 * local_command_line().  If you override that function and don't
+		 * chain up then this signal will never be emitted.
+		 * 
+		 * You can override local_command_line() if you need more powerful
+		 * capabilities than what is provided here, but this should not
+		 * normally be required.
+		 */
+		connect(signal: "handle-local-options", callback: (owner: this, options: GLib.VariantDict) => number): number;
+		/**
+		 * The ::name-lost signal is emitted only on the registered primary instance
+		 * when a new instance has taken over. This can only happen if the application
+		 * is using the %G_APPLICATION_ALLOW_REPLACEMENT flag.
+		 * 
+		 * The default handler for this signal calls g_application_quit().
+		 */
+		connect(signal: "name-lost", callback: (owner: this) => boolean): number;
+		/**
+		 * The ::open signal is emitted on the primary instance when there are
+		 * files to open. See g_application_open() for more information.
+		 */
+		connect(signal: "open", callback: (owner: this, files: File[], n_files: number, hint: string) => void): number;
+		/**
+		 * The ::shutdown signal is emitted only on the registered primary instance
+		 * immediately after the main loop terminates.
+		 */
+		connect(signal: "shutdown", callback: (owner: this) => void): number;
+		/**
+		 * The ::startup signal is emitted on the primary instance immediately
+		 * after registration. See g_application_register().
+		 */
+		connect(signal: "startup", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1716,6 +1816,61 @@ declare namespace imports.gi.Gio {
 		 * @returns the new #GSource.
 		 */
 		source_new(): GLib.Source;
+		/**
+		 * Emitted when the operation has been cancelled.
+		 * 
+		 * Can be used by implementations of cancellable operations. If the
+		 * operation is cancelled from another thread, the signal will be
+		 * emitted in the thread that cancelled the operation, not the
+		 * thread that is running the operation.
+		 * 
+		 * Note that disconnecting from this signal (or any signal) in a
+		 * multi-threaded program is prone to race conditions. For instance
+		 * it is possible that a signal handler may be invoked even after
+		 * a call to g_signal_handler_disconnect() for that handler has
+		 * already returned.
+		 * 
+		 * There is also a problem when cancellation happens right before
+		 * connecting to the signal. If this happens the signal will
+		 * unexpectedly not be emitted, and checking before connecting to
+		 * the signal leaves a race condition where this is still happening.
+		 * 
+		 * In order to make it safe and easy to connect handlers there
+		 * are two helper functions: g_cancellable_connect() and
+		 * g_cancellable_disconnect() which protect against problems
+		 * like this.
+		 * 
+		 * An example of how to us this:
+		 * |[<!-- language="C" -->
+		 *     // Make sure we don't do unnecessary work if already cancelled
+		 *     if (g_cancellable_set_error_if_cancelled (cancellable, error))
+		 *       return;
+		 * 
+		 *     // Set up all the data needed to be able to handle cancellation
+		 *     // of the operation
+		 *     my_data = my_data_new (...);
+		 * 
+		 *     id = 0;
+		 *     if (cancellable)
+		 *       id = g_cancellable_connect (cancellable,
+		 *     			      G_CALLBACK (cancelled_handler)
+		 *     			      data, NULL);
+		 * 
+		 *     // cancellable operation here...
+		 * 
+		 *     g_cancellable_disconnect (cancellable, id);
+		 * 
+		 *     // cancelled_handler is never called after this, it is now safe
+		 *     // to free the data
+		 *     my_data_free (my_data);
+		 * ]|
+		 * 
+		 * Note that the cancelled signal is emitted in the thread that
+		 * the user cancelled from, which may be the main thread. So, the
+		 * cancellable signal should not do something that can block.
+		 */
+		connect(signal: "cancelled", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2067,6 +2222,16 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if the peer is authorized, %FALSE if not.
 		 */
 		authorize_authenticated_peer(stream: IOStream, credentials: Credentials): boolean;
+		/**
+		 * Emitted to check if #mechanism is allowed to be used.
+		 */
+		connect(signal: "allow-mechanism", callback: (owner: this, mechanism: string) => boolean): number;
+		/**
+		 * Emitted to check if a peer that is successfully authenticated
+		 * is authorized.
+		 */
+		connect(signal: "authorize-authenticated-peer", callback: (owner: this, stream: IOStream, credentials: Credentials) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3055,6 +3220,26 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if the subtree was unregistered, %FALSE otherwise
 		 */
 		unregister_subtree(registration_id: number): boolean;
+		/**
+		 * Emitted when the connection is closed.
+		 * 
+		 * The cause of this event can be
+		 * 
+		 * - If g_dbus_connection_close() is called. In this case
+		 *   #remote_peer_vanished is set to %FALSE and #error is %NULL.
+		 * 
+		 * - If the remote peer closes the connection. In this case
+		 *   #remote_peer_vanished is set to %TRUE and #error is set.
+		 * 
+		 * - If the remote peer sends invalid or malformed data. In this
+		 *   case #remote_peer_vanished is set to %FALSE and #error is set.
+		 * 
+		 * Upon receiving this signal, you should give up your reference to
+		 * #connection. You are guaranteed that this signal is emitted only
+		 * once.
+		 */
+		connect(signal: "closed", callback: (owner: this, remote_peer_vanished: boolean, error: GLib.Error) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3350,6 +3535,43 @@ declare namespace imports.gi.Gio {
 		 * @param connection A #GDBusConnection.
 		 */
 		unexport_from_connection(connection: DBusConnection): void;
+		/**
+		 * Emitted when a method is invoked by a remote caller and used to
+		 * determine if the method call is authorized.
+		 * 
+		 * Note that this signal is emitted in a thread dedicated to
+		 * handling the method call so handlers are allowed to perform
+		 * blocking IO. This means that it is appropriate to call e.g.
+		 * [polkit_authority_check_authorization_sync()](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#polkit-authority-check-authorization-sync)
+		 * with the
+		 * [POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#POLKIT-CHECK-AUTHORIZATION-FLAGS-ALLOW-USER-INTERACTION:CAPS)
+		 * flag set.
+		 * 
+		 * If %FALSE is returned then no further handlers are run and the
+		 * signal handler must take a reference to #invocation and finish
+		 * handling the call (e.g. return an error via
+		 * g_dbus_method_invocation_return_error()).
+		 * 
+		 * Otherwise, if %TRUE is returned, signal emission continues. If no
+		 * handlers return %FALSE, then the method is dispatched. If
+		 * #interface has an enclosing #GDBusObjectSkeleton, then the
+		 * #GDBusObjectSkeleton::authorize-method signal handlers run before
+		 * the handlers for this signal.
+		 * 
+		 * The default class handler just returns %TRUE.
+		 * 
+		 * Please note that the common case is optimized: if no signals
+		 * handlers are connected and the default class handler isn't
+		 * overridden (for both #interface and the enclosing
+		 * #GDBusObjectSkeleton, if any) and #GDBusInterfaceSkeleton:g-flags does
+		 * not have the
+		 * %G_DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD
+		 * flags set, no dedicated thread is ever used and the call will be
+		 * handled in the same thread as the object that #interface belongs
+		 * to was exported in.
+		 */
+		connect(signal: "g-authorize-method", callback: (owner: this, invocation: DBusMethodInvocation) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4088,6 +4310,32 @@ declare namespace imports.gi.Gio {
 		 * exists. Free with g_free().
 		 */
 		get_name_owner(): string;
+		/**
+		 * Emitted when one or more D-Bus properties on proxy changes. The
+		 * local cache has already been updated when this signal fires. Note
+		 * that both #changed_properties and #invalidated_properties are
+		 * guaranteed to never be %NULL (either may be empty though).
+		 * 
+		 * This signal exists purely as a convenience to avoid having to
+		 * connect signals to all interface proxies managed by #manager.
+		 * 
+		 * This signal is emitted in the
+		 * [thread-default main context][g-main-context-push-thread-default]
+		 * that #manager was constructed in.
+		 */
+		connect(signal: "interface-proxy-properties-changed", callback: (owner: this, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string[]) => void): number;
+		/**
+		 * Emitted when a D-Bus signal is received on #interface_proxy.
+		 * 
+		 * This signal exists purely as a convenience to avoid having to
+		 * connect signals to all interface proxies managed by #manager.
+		 * 
+		 * This signal is emitted in the
+		 * [thread-default main context][g-main-context-push-thread-default]
+		 * that #manager was constructed in.
+		 */
+		connect(signal: "interface-proxy-signal", callback: (owner: this, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4474,6 +4722,18 @@ declare namespace imports.gi.Gio {
 		 * @param object_path A valid D-Bus object path.
 		 */
 		set_object_path(object_path: string): void;
+		/**
+		 * Emitted when a method is invoked by a remote caller and used to
+		 * determine if the method call is authorized.
+		 * 
+		 * This signal is like #GDBusInterfaceSkeleton's
+		 * #GDBusInterfaceSkeleton::g-authorize-method signal,
+		 * except that it is for the enclosing object.
+		 * 
+		 * The default class handler just returns %TRUE.
+		 */
+		connect(signal: "authorize-method", callback: (owner: this, _interface: DBusInterfaceSkeleton, invocation: DBusMethodInvocation) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4845,6 +5105,26 @@ declare namespace imports.gi.Gio {
 		 *    or %NULL to unset.
 		 */
 		set_interface_info(info: DBusInterfaceInfo): void;
+		/**
+		 * Emitted when one or more D-Bus properties on #proxy changes. The
+		 * local cache has already been updated when this signal fires. Note
+		 * that both #changed_properties and #invalidated_properties are
+		 * guaranteed to never be %NULL (either may be empty though).
+		 * 
+		 * If the proxy has the flag
+		 * %G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES set, then
+		 * #invalidated_properties will always be empty.
+		 * 
+		 * This signal corresponds to the
+		 * `PropertiesChanged` D-Bus signal on the
+		 * `org.freedesktop.DBus.Properties` interface.
+		 */
+		connect(signal: "g-properties-changed", callback: (owner: this, changed_properties: GLib.Variant, invalidated_properties: string[]) => void): number;
+		/**
+		 * Emitted when a signal from the remote object and interface that #proxy is for, has been received.
+		 */
+		connect(signal: "g-signal", callback: (owner: this, sender_name: string, signal_name: string, parameters: GLib.Variant) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5083,6 +5363,31 @@ declare namespace imports.gi.Gio {
 		 * Stops #server.
 		 */
 		stop(): void;
+		/**
+		 * Emitted when a new authenticated connection has been made. Use
+		 * g_dbus_connection_get_peer_credentials() to figure out what
+		 * identity (if any), was authenticated.
+		 * 
+		 * If you want to accept the connection, take a reference to the
+		 * #connection object and return %TRUE. When you are done with the
+		 * connection call g_dbus_connection_close() and give up your
+		 * reference. Note that the other peer may disconnect at any time -
+		 * a typical thing to do when accepting a connection is to listen to
+		 * the #GDBusConnection::closed signal.
+		 * 
+		 * If #GDBusServer:flags contains %G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
+		 * then the signal is emitted in a new thread dedicated to the
+		 * connection. Otherwise the signal is emitted in the
+		 * [thread-default main context][g-main-context-push-thread-default]
+		 * of the thread that #server was constructed in.
+		 * 
+		 * You are guaranteed that signal handlers for this signal runs
+		 * before incoming messages on #connection are processed. This means
+		 * that it's suitable to call g_dbus_connection_register_object() or
+		 * similar from the signal handler.
+		 */
+		connect(signal: "new-connection", callback: (owner: this, connection: DBusConnection) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6944,6 +7249,38 @@ declare namespace imports.gi.Gio {
 		 *     to poll for changes
 		 */
 		set_rate_limit(limit_msecs: number): void;
+		/**
+		 * Emitted when #file has been changed.
+		 * 
+		 * If using %G_FILE_MONITOR_WATCH_MOVES on a directory monitor, and
+		 * the information is available (and if supported by the backend),
+		 * #event_type may be %G_FILE_MONITOR_EVENT_RENAMED,
+		 * %G_FILE_MONITOR_EVENT_MOVED_IN or %G_FILE_MONITOR_EVENT_MOVED_OUT.
+		 * 
+		 * In all cases #file will be a child of the monitored directory.  For
+		 * renames, #file will be the old name and #other_file is the new
+		 * name.  For "moved in" events, #file is the name of the file that
+		 * appeared and #other_file is the old name that it was moved from (in
+		 * another directory).  For "moved out" events, #file is the name of
+		 * the file that used to be in this directory and #other_file is the
+		 * name of the file at its new location.
+		 * 
+		 * It makes sense to treat %G_FILE_MONITOR_EVENT_MOVED_IN as
+		 * equivalent to %G_FILE_MONITOR_EVENT_CREATED and
+		 * %G_FILE_MONITOR_EVENT_MOVED_OUT as equivalent to
+		 * %G_FILE_MONITOR_EVENT_DELETED, with extra information.
+		 * %G_FILE_MONITOR_EVENT_RENAMED is equivalent to a delete/create
+		 * pair.  This is exactly how the events will be reported in the case
+		 * that the %G_FILE_MONITOR_WATCH_MOVES flag is not in use.
+		 * 
+		 * If using the deprecated flag %G_FILE_MONITOR_SEND_MOVED flag and #event_type is
+		 * #G_FILE_MONITOR_EVENT_MOVED, #file will be set to a #GFile containing the
+		 * old path, and #other_file will be set to a #GFile containing the new path.
+		 * 
+		 * In all the other cases, #other_file will be set to #NULL.
+		 */
+		connect(signal: "changed", callback: (owner: this, file: File, other_file: File, event_type: FileMonitorEvent) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7081,6 +7418,11 @@ declare namespace imports.gi.Gio {
 		 * @param dirs_only a #gboolean.
 		 */
 		set_dirs_only(dirs_only: boolean): void;
+		/**
+		 * Emitted when the file name completion information comes available.
+		 */
+		connect(signal: "got-completion-data", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9275,6 +9617,30 @@ declare namespace imports.gi.Gio {
 		 * @returns a new #GMenuLinkIter
 		 */
 		iterate_item_links(item_index: number): MenuLinkIter;
+		/**
+		 * Emitted when a change has occurred to the menu.
+		 * 
+		 * The only changes that can occur to a menu is that items are removed
+		 * or added.  Items may not change (except by being removed and added
+		 * back in the same location).  This signal is capable of describing
+		 * both of those changes (at the same time).
+		 * 
+		 * The signal means that starting at the index #position, #removed
+		 * items were removed and #added items were added in their place.  If
+		 * #removed is zero then only items were added.  If #added is zero
+		 * then only items were removed.
+		 * 
+		 * As an example, if the menu contains items a, b, c, d (in that
+		 * order) and the signal (2, 1, 3) occurs then the new composition of
+		 * the menu will be a, b, _, _, _, d (with each _ representing some
+		 * new item).
+		 * 
+		 * Signal handlers may query the model (particularly the added items)
+		 * and expect to see the results of the modification that is being
+		 * reported.  The signal is emitted after the modification.
+		 */
+		connect(signal: "items-changed", callback: (owner: this, position: number, removed: number, added: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9551,6 +9917,70 @@ declare namespace imports.gi.Gio {
 		 * @param username input username.
 		 */
 		set_username(username: string): void;
+		/**
+		 * Emitted by the backend when e.g. a device becomes unavailable
+		 * while a mount operation is in progress.
+		 * 
+		 * Implementations of GMountOperation should handle this signal
+		 * by dismissing open password dialogs.
+		 */
+		connect(signal: "aborted", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when a mount operation asks the user for a password.
+		 * 
+		 * If the message contains a line break, the first line should be
+		 * presented as a heading. For example, it may be used as the
+		 * primary text in a #GtkMessageDialog.
+		 */
+		connect(signal: "ask-password", callback: (owner: this, message: string, default_user: string, default_domain: string, flags: AskPasswordFlags) => void): number;
+		/**
+		 * Emitted when asking the user a question and gives a list of
+		 * choices for the user to choose from.
+		 * 
+		 * If the message contains a line break, the first line should be
+		 * presented as a heading. For example, it may be used as the
+		 * primary text in a #GtkMessageDialog.
+		 */
+		connect(signal: "ask-question", callback: (owner: this, message: string, choices: string[]) => void): number;
+		/**
+		 * Emitted when the user has replied to the mount operation.
+		 */
+		connect(signal: "reply", callback: (owner: this, result: MountOperationResult) => void): number;
+		/**
+		 * Emitted when one or more processes are blocking an operation
+		 * e.g. unmounting/ejecting a #GMount or stopping a #GDrive.
+		 * 
+		 * Note that this signal may be emitted several times to update the
+		 * list of blocking processes as processes close files. The
+		 * application should only respond with g_mount_operation_reply() to
+		 * the latest signal (setting #GMountOperation:choice to the choice
+		 * the user made).
+		 * 
+		 * If the message contains a line break, the first line should be
+		 * presented as a heading. For example, it may be used as the
+		 * primary text in a #GtkMessageDialog.
+		 */
+		connect(signal: "show-processes", callback: (owner: this, message: string, processes: GLib.Pid[], choices: string[]) => void): number;
+		/**
+		 * Emitted when an unmount operation has been busy for more than some time
+		 * (typically 1.5 seconds).
+		 * 
+		 * When unmounting or ejecting a volume, the kernel might need to flush
+		 * pending data in its buffers to the volume stable storage, and this operation
+		 * can take a considerable amount of time. This signal may be emitted several
+		 * times as long as the unmount operation is outstanding, and then one
+		 * last time when the operation is completed, with #bytes_left set to zero.
+		 * 
+		 * Implementations of GMountOperation should handle this signal by
+		 * showing an UI notification, and then dismiss it, or show another notification
+		 * of completion, when #bytes_left reaches zero.
+		 * 
+		 * If the message contains a line break, the first line should be
+		 * presented as a heading. For example, it may be used as the
+		 * primary text in a #GtkMessageDialog.
+		 */
+		connect(signal: "show-unmount-progress", callback: (owner: this, message: string, time_left: number, bytes_left: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11238,6 +11668,12 @@ declare namespace imports.gi.Gio {
 		 * itself as the default resolver for all later code to use.
 		 */
 		set_default(): void;
+		/**
+		 * Emitted when the resolver notices that the system resolver
+		 * configuration has changed.
+		 */
+		connect(signal: "reload", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11920,6 +12356,69 @@ declare namespace imports.gi.Gio {
 		 *     %FALSE if the key was not writable
 		 */
 		set_value(key: string, value: GLib.Variant): boolean;
+		/**
+		 * The "change-event" signal is emitted once per change event that
+		 * affects this settings object.  You should connect to this signal
+		 * only if you are interested in viewing groups of changes before they
+		 * are split out into multiple emissions of the "changed" signal.
+		 * For most use cases it is more appropriate to use the "changed" signal.
+		 * 
+		 * In the event that the change event applies to one or more specified
+		 * keys, #keys will be an array of #GQuark of length #n_keys.  In the
+		 * event that the change event applies to the #GSettings object as a
+		 * whole (ie: potentially every key has been changed) then #keys will
+		 * be %NULL and #n_keys will be 0.
+		 * 
+		 * The default handler for this signal invokes the "changed" signal
+		 * for each affected key.  If any other connected handler returns
+		 * %TRUE then this default functionality will be suppressed.
+		 */
+		connect(signal: "change-event", callback: (owner: this, keys: GLib.Quark[], n_keys: number) => boolean): number;
+		/**
+		 * The "changed" signal is emitted when a key has potentially changed.
+		 * You should call one of the g_settings_get() calls to check the new
+		 * value.
+		 * 
+		 * This signal supports detailed connections.  You can connect to the
+		 * detailed signal "changed::x" in order to only receive callbacks
+		 * when key "x" changes.
+		 * 
+		 * Note that #settings only emits this signal if you have read #key at
+		 * least once while a signal handler was already connected for #key.
+		 */
+		connect(signal: "changed", callback: (owner: this, key: string) => void): number;
+		/**
+		 * The "writable-change-event" signal is emitted once per writability
+		 * change event that affects this settings object.  You should connect
+		 * to this signal if you are interested in viewing groups of changes
+		 * before they are split out into multiple emissions of the
+		 * "writable-changed" signal.  For most use cases it is more
+		 * appropriate to use the "writable-changed" signal.
+		 * 
+		 * In the event that the writability change applies only to a single
+		 * key, #key will be set to the #GQuark for that key.  In the event
+		 * that the writability change affects the entire settings object,
+		 * #key will be 0.
+		 * 
+		 * The default handler for this signal invokes the "writable-changed"
+		 * and "changed" signals for each affected key.  This is done because
+		 * changes in writability might also imply changes in value (if for
+		 * example, a new mandatory setting is introduced).  If any other
+		 * connected handler returns %TRUE then this default functionality
+		 * will be suppressed.
+		 */
+		connect(signal: "writable-change-event", callback: (owner: this, key: number) => boolean): number;
+		/**
+		 * The "writable-changed" signal is emitted when the writability of a
+		 * key has potentially changed.  You should call
+		 * g_settings_is_writable() in order to determine the new status.
+		 * 
+		 * This signal supports detailed connections.  You can connect to the
+		 * detailed signal "writable-changed::x" in order to only receive
+		 * callbacks when the writability of "x" changes.
+		 */
+		connect(signal: "writable-changed", callback: (owner: this, key: string) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -12590,6 +13089,59 @@ declare namespace imports.gi.Gio {
 		 * @param state_hint a #GVariant representing the state hint
 		 */
 		set_state_hint(state_hint: GLib.Variant): void;
+		/**
+		 * Indicates that the action was just activated.
+		 * 
+		 * #parameter will always be of the expected type, i.e. the parameter type
+		 * specified when the action was created. If an incorrect type is given when
+		 * activating the action, this signal is not emitted.
+		 * 
+		 * Since GLib 2.40, if no handler is connected to this signal then the
+		 * default behaviour for boolean-stated actions with a %NULL parameter
+		 * type is to toggle them via the #GSimpleAction::change-state signal.
+		 * For stateful actions where the state type is equal to the parameter
+		 * type, the default is to forward them directly to
+		 * #GSimpleAction::change-state.  This should allow almost all users
+		 * of #GSimpleAction to connect only one handler or the other.
+		 */
+		connect(signal: "activate", callback: (owner: this, parameter: GLib.Variant) => void): number;
+		/**
+		 * Indicates that the action just received a request to change its
+		 * state.
+		 * 
+		 * #value will always be of the correct state type, i.e. the type of the
+		 * initial state passed to g_simple_action_new_stateful(). If an incorrect
+		 * type is given when requesting to change the state, this signal is not
+		 * emitted.
+		 * 
+		 * If no handler is connected to this signal then the default
+		 * behaviour is to call g_simple_action_set_state() to set the state
+		 * to the requested value. If you connect a signal handler then no
+		 * default action is taken. If the state should change then you must
+		 * call g_simple_action_set_state() from the handler.
+		 * 
+		 * An example of a 'change-state' handler:
+		 * |[<!-- language="C" -->
+		 * static void
+		 * change_volume_state (GSimpleAction *action,
+		 *                      GVariant      *value,
+		 *                      gpointer       user_data)
+		 * {
+		 *   gint requested;
+		 * 
+		 *   requested = g_variant_get_int32 (value);
+		 * 
+		 *   // Volume only goes from 0 to 10
+		 *   if (0 <= requested && requested <= 10)
+		 *     g_simple_action_set_state (action, value);
+		 * }
+		 * ]|
+		 * 
+		 * The handler need not set the state to the requested value.
+		 * It could set it to any value at all, or take some other action.
+		 */
+		connect(signal: "change-state", callback: (owner: this, value: GLib.Variant) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14907,6 +15459,59 @@ declare namespace imports.gi.Gio {
 		 * @param flags the validation flags
 		 */
 		set_tls_validation_flags(flags: TlsCertificateFlags): void;
+		/**
+		 * Emitted when #client's activity on #connectable changes state.
+		 * Among other things, this can be used to provide progress
+		 * information about a network connection in the UI. The meanings of
+		 * the different #event values are as follows:
+		 * 
+		 * - %G_SOCKET_CLIENT_RESOLVING: #client is about to look up #connectable
+		 *   in DNS. #connection will be %NULL.
+		 * 
+		 * - %G_SOCKET_CLIENT_RESOLVED:  #client has successfully resolved
+		 *   #connectable in DNS. #connection will be %NULL.
+		 * 
+		 * - %G_SOCKET_CLIENT_CONNECTING: #client is about to make a connection
+		 *   to a remote host; either a proxy server or the destination server
+		 *   itself. #connection is the #GSocketConnection, which is not yet
+		 *   connected.  Since GLib 2.40, you can access the remote
+		 *   address via g_socket_connection_get_remote_address().
+		 * 
+		 * - %G_SOCKET_CLIENT_CONNECTED: #client has successfully connected
+		 *   to a remote host. #connection is the connected #GSocketConnection.
+		 * 
+		 * - %G_SOCKET_CLIENT_PROXY_NEGOTIATING: #client is about to negotiate
+		 *   with a proxy to get it to connect to #connectable. #connection is
+		 *   the #GSocketConnection to the proxy server.
+		 * 
+		 * - %G_SOCKET_CLIENT_PROXY_NEGOTIATED: #client has negotiated a
+		 *   connection to #connectable through a proxy server. #connection is
+		 *   the stream returned from g_proxy_connect(), which may or may not
+		 *   be a #GSocketConnection.
+		 * 
+		 * - %G_SOCKET_CLIENT_TLS_HANDSHAKING: #client is about to begin a TLS
+		 *   handshake. #connection is a #GTlsClientConnection.
+		 * 
+		 * - %G_SOCKET_CLIENT_TLS_HANDSHAKED: #client has successfully completed
+		 *   the TLS handshake. #connection is a #GTlsClientConnection.
+		 * 
+		 * - %G_SOCKET_CLIENT_COMPLETE: #client has either successfully connected
+		 *   to #connectable (in which case #connection is the #GSocketConnection
+		 *   that it will be returning to the caller) or has failed (in which
+		 *   case #connection is %NULL and the client is about to return an error).
+		 * 
+		 * Each event except %G_SOCKET_CLIENT_COMPLETE may be emitted
+		 * multiple times (or not at all) for a given connectable (in
+		 * particular, if #client ends up attempting to connect to more than
+		 * one address). However, if #client emits the #GSocketClient::event
+		 * signal at all for a given connectable, then it will always emit
+		 * it with %G_SOCKET_CLIENT_COMPLETE when it is done.
+		 * 
+		 * Note that there may be additional #GSocketClientEvent values in
+		 * the future; unrecognized #event values should be ignored.
+		 */
+		connect(signal: "event", callback: (owner: this, event: SocketClientEvent, connectable: SocketConnectable, connection: IOStream) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15311,6 +15916,14 @@ declare namespace imports.gi.Gio {
 		 * @param listen_backlog an integer
 		 */
 		set_backlog(listen_backlog: number): void;
+		/**
+		 * Emitted when #listener's activity on #socket changes state.
+		 * Note that when #listener is used to listen on both IPv4 and
+		 * IPv6, a separate set of signals will be emitted for each, and
+		 * the order they happen in is undefined.
+		 */
+		connect(signal: "event", callback: (owner: this, event: SocketListenerEvent, socket: Socket) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15391,6 +16004,17 @@ declare namespace imports.gi.Gio {
 		 * when a new socket is added.
 		 */
 		stop(): void;
+		/**
+		 * The ::incoming signal is emitted when a new incoming connection
+		 * to #service needs to be handled. The handler must initiate the
+		 * handling of #connection, but may not block; in essence,
+		 * asynchronous operations must be used.
+		 * 
+		 * #connection will be unreffed once the signal handler returns,
+		 * so you need to ref it yourself if you are planning to use it.
+		 */
+		connect(signal: "incoming", callback: (owner: this, connection: SocketConnection, source_object: GObject.Object) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17392,6 +18016,14 @@ declare namespace imports.gi.Gio {
 	interface IThreadedSocketService {
 		max_threads: number;
 
+		/**
+		 * The ::run signal is emitted in a worker thread in response to an
+		 * incoming connection. This thread is dedicated to handling
+		 * #connection and may perform blocking IO. The signal handler need
+		 * not return until the connection is closed.
+		 */
+		connect(signal: "run", callback: (owner: this, connection: SocketConnection, source_object: GObject.Object) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -18108,6 +18740,43 @@ declare namespace imports.gi.Gio {
 		 * @param use_system_certdb whether to use the system certificate database
 		 */
 		set_use_system_certdb(use_system_certdb: boolean): void;
+		/**
+		 * Emitted during the TLS handshake after the peer certificate has
+		 * been received. You can examine #peer_cert's certification path by
+		 * calling g_tls_certificate_get_issuer() on it.
+		 * 
+		 * For a client-side connection, #peer_cert is the server's
+		 * certificate, and the signal will only be emitted if the
+		 * certificate was not acceptable according to #conn's
+		 * #GTlsClientConnection:validation_flags. If you would like the
+		 * certificate to be accepted despite #errors, return %TRUE from the
+		 * signal handler. Otherwise, if no handler accepts the certificate,
+		 * the handshake will fail with %G_TLS_ERROR_BAD_CERTIFICATE.
+		 * 
+		 * For a server-side connection, #peer_cert is the certificate
+		 * presented by the client, if this was requested via the server's
+		 * #GTlsServerConnection:authentication_mode. On the server side,
+		 * the signal is always emitted when the client presents a
+		 * certificate, and the certificate will only be accepted if a
+		 * handler returns %TRUE.
+		 * 
+		 * Note that if this signal is emitted as part of asynchronous I/O
+		 * in the main thread, then you should not attempt to interact with
+		 * the user before returning from the signal handler. If you want to
+		 * let the user decide whether or not to accept the certificate, you
+		 * would have to return %FALSE from the signal handler on the first
+		 * attempt, and then after the connection attempt returns a
+		 * %G_TLS_ERROR_BAD_CERTIFICATE, you can interact with the user, and
+		 * if the user decides to accept the certificate, remember that fact,
+		 * create a new connection, and return %TRUE from the signal handler
+		 * the next time.
+		 * 
+		 * If you are doing I/O in another thread, you do not
+		 * need to worry about this, and can simply block in the signal
+		 * handler until the UI thread returns an answer.
+		 */
+		connect(signal: "accept-certificate", callback: (owner: this, peer_cert: TlsCertificate, errors: TlsCertificateFlags) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19184,6 +19853,15 @@ declare namespace imports.gi.Gio {
 		 *     poll for changes.
 		 */
 		set_rate_limit(limit_msec: number): void;
+		/**
+		 * Emitted when the unix mount points have changed.
+		 */
+		connect(signal: "mountpoints-changed", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the unix mounts have changed.
+		 */
+		connect(signal: "mounts-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19569,6 +20247,58 @@ declare namespace imports.gi.Gio {
 		 * @returns a #GList of #GVolume objects.
 		 */
 		get_volumes(): GLib.List;
+		/**
+		 * Emitted when a drive changes.
+		 */
+		connect(signal: "drive-changed", callback: (owner: this, drive: Drive) => void): number;
+		/**
+		 * Emitted when a drive is connected to the system.
+		 */
+		connect(signal: "drive-connected", callback: (owner: this, drive: Drive) => void): number;
+		/**
+		 * Emitted when a drive is disconnected from the system.
+		 */
+		connect(signal: "drive-disconnected", callback: (owner: this, drive: Drive) => void): number;
+		/**
+		 * Emitted when the eject button is pressed on #drive.
+		 */
+		connect(signal: "drive-eject-button", callback: (owner: this, drive: Drive) => void): number;
+		/**
+		 * Emitted when the stop button is pressed on #drive.
+		 */
+		connect(signal: "drive-stop-button", callback: (owner: this, drive: Drive) => void): number;
+		/**
+		 * Emitted when a mount is added.
+		 */
+		connect(signal: "mount-added", callback: (owner: this, mount: Mount) => void): number;
+		/**
+		 * Emitted when a mount changes.
+		 */
+		connect(signal: "mount-changed", callback: (owner: this, mount: Mount) => void): number;
+		/**
+		 * May be emitted when a mount is about to be removed.
+		 * 
+		 * This signal depends on the backend and is only emitted if
+		 * GIO was used to unmount.
+		 */
+		connect(signal: "mount-pre-unmount", callback: (owner: this, mount: Mount) => void): number;
+		/**
+		 * Emitted when a mount is removed.
+		 */
+		connect(signal: "mount-removed", callback: (owner: this, mount: Mount) => void): number;
+		/**
+		 * Emitted when a mountable volume is added to the system.
+		 */
+		connect(signal: "volume-added", callback: (owner: this, volume: Volume) => void): number;
+		/**
+		 * Emitted when mountable volume is changed.
+		 */
+		connect(signal: "volume-changed", callback: (owner: this, volume: Volume) => void): number;
+		/**
+		 * Emitted when a mountable volume is removed from the system.
+		 */
+		connect(signal: "volume-removed", callback: (owner: this, volume: Volume) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -24036,6 +24766,27 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if the action exists, else %FALSE
 		 */
 		query_action(action_name: string, enabled: boolean, parameter_type: GLib.VariantType, state_type: GLib.VariantType, state_hint: GLib.Variant, state: GLib.Variant): boolean;
+		/**
+		 * Signals that a new action was just added to the group.
+		 * This signal is emitted after the action has been added
+		 * and is now visible.
+		 */
+		connect(signal: "action-added", callback: (owner: this, action_name: string) => void): number;
+		/**
+		 * Signals that the enabled status of the named action has changed.
+		 */
+		connect(signal: "action-enabled-changed", callback: (owner: this, action_name: string, enabled: boolean) => void): number;
+		/**
+		 * Signals that an action is just about to be removed from the group.
+		 * This signal is emitted before the action is removed, so the action
+		 * is still visible and can be queried from the signal handler.
+		 */
+		connect(signal: "action-removed", callback: (owner: this, action_name: string) => void): number;
+		/**
+		 * Signals that the state of the named action has changed.
+		 */
+		connect(signal: "action-state-changed", callback: (owner: this, action_name: string, value: GLib.Variant) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -25174,6 +25925,15 @@ declare namespace imports.gi.Gio {
 		 * @returns A string owned by #object. Do not free.
 		 */
 		get_object_path(): string;
+		/**
+		 * Emitted when #interface is added to #object.
+		 */
+		connect(signal: "interface-added", callback: (owner: this, _interface: DBusInterface) => void): number;
+		/**
+		 * Emitted when #interface is removed from #object.
+		 */
+		connect(signal: "interface-removed", callback: (owner: this, _interface: DBusInterface) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -25228,6 +25988,29 @@ declare namespace imports.gi.Gio {
 		 *   g_object_unref().
 		 */
 		get_objects(): GLib.List;
+		/**
+		 * Emitted when #interface is added to #object.
+		 * 
+		 * This signal exists purely as a convenience to avoid having to
+		 * connect signals to all objects managed by #manager.
+		 */
+		connect(signal: "interface-added", callback: (owner: this, object: DBusObject, _interface: DBusInterface) => void): number;
+		/**
+		 * Emitted when #interface has been removed from #object.
+		 * 
+		 * This signal exists purely as a convenience to avoid having to
+		 * connect signals to all objects managed by #manager.
+		 */
+		connect(signal: "interface-removed", callback: (owner: this, object: DBusObject, _interface: DBusInterface) => void): number;
+		/**
+		 * Emitted when #object is added to #manager.
+		 */
+		connect(signal: "object-added", callback: (owner: this, object: DBusObject) => void): number;
+		/**
+		 * Emitted when #object is removed from #manager.
+		 */
+		connect(signal: "object-removed", callback: (owner: this, object: DBusObject) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -25757,6 +26540,28 @@ declare namespace imports.gi.Gio {
 		 *     %FALSE otherwise.
 		 */
 		stop_finish(result: AsyncResult): boolean;
+		/**
+		 * Emitted when the drive's state has changed.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when the #GDrive have been
+		 * disconnected. If the recipient is holding references to the
+		 * object they should release them so the object can be
+		 * finalized.
+		 */
+		connect(signal: "disconnected", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the physical eject button (if any) of a drive has
+		 * been pressed.
+		 */
+		connect(signal: "eject-button", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the physical stop button (if any) of a drive has
+		 * been pressed.
+		 */
+		connect(signal: "stop-button", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -26309,6 +27114,43 @@ declare namespace imports.gi.Gio {
 		 * case #error will be set
 		 */
 		shutdown_finish(result: AsyncResult): boolean;
+		/**
+		 * Emitted during the TLS handshake after the peer certificate has
+		 * been received. You can examine #peer_cert's certification path by
+		 * calling g_tls_certificate_get_issuer() on it.
+		 * 
+		 * For a client-side connection, #peer_cert is the server's
+		 * certificate, and the signal will only be emitted if the
+		 * certificate was not acceptable according to #conn's
+		 * #GDtlsClientConnection:validation_flags. If you would like the
+		 * certificate to be accepted despite #errors, return %TRUE from the
+		 * signal handler. Otherwise, if no handler accepts the certificate,
+		 * the handshake will fail with %G_TLS_ERROR_BAD_CERTIFICATE.
+		 * 
+		 * For a server-side connection, #peer_cert is the certificate
+		 * presented by the client, if this was requested via the server's
+		 * #GDtlsServerConnection:authentication_mode. On the server side,
+		 * the signal is always emitted when the client presents a
+		 * certificate, and the certificate will only be accepted if a
+		 * handler returns %TRUE.
+		 * 
+		 * Note that if this signal is emitted as part of asynchronous I/O
+		 * in the main thread, then you should not attempt to interact with
+		 * the user before returning from the signal handler. If you want to
+		 * let the user decide whether or not to accept the certificate, you
+		 * would have to return %FALSE from the signal handler on the first
+		 * attempt, and then after the connection attempt returns a
+		 * %G_TLS_ERROR_BAD_CERTIFICATE, you can interact with the user, and
+		 * if the user decides to accept the certificate, remember that fact,
+		 * create a new connection, and return %TRUE from the signal handler
+		 * the next time.
+		 * 
+		 * If you are doing I/O in another thread, you do not
+		 * need to worry about this, and can simply block in the signal
+		 * handler until the UI thread returns an answer.
+		 */
+		connect(signal: "accept-certificate", callback: (owner: this, peer_cert: TlsCertificate, errors: TlsCertificateFlags) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -28977,6 +29819,16 @@ declare namespace imports.gi.Gio {
 		 * @param added the number of items added
 		 */
 		items_changed(position: number, removed: number, added: number): void;
+		/**
+		 * This signal is emitted whenever items were added to or removed
+		 * from #list. At #position, #removed items were removed and #added
+		 * items were added in their place.
+		 * 
+		 * Note: If #removed != #added, the positions of all later items
+		 * in the model change.
+		 */
+		connect(signal: "items-changed", callback: (owner: this, position: number, removed: number, added: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29097,6 +29949,14 @@ declare namespace imports.gi.Gio {
 	 * use {@link MemoryMonitor} instead.
 	 */
 	interface IMemoryMonitor {
+
+		/**
+		 * Emitted when the system is running low on free memory. The signal
+		 * handler should then take the appropriate action depending on the
+		 * warning level. See the #GMemoryMonitorWarningLevel documentation for
+		 * details.
+		 */
+		connect(signal: "low-memory-warning", callback: (owner: this, level: MemoryMonitorWarningLevel) => void): number;
 
 	}
 
@@ -29431,6 +30291,26 @@ declare namespace imports.gi.Gio {
 		 * will need to emit the #GMount::changed signal on #mount manually.
 		 */
 		unshadow(): void;
+		/**
+		 * Emitted when the mount has been changed.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		/**
+		 * This signal may be emitted when the #GMount is about to be
+		 * unmounted.
+		 * 
+		 * This signal depends on the backend and is only emitted if
+		 * GIO was used to unmount.
+		 */
+		connect(signal: "pre-unmount", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when the #GMount have been
+		 * unmounted. If the recipient is holding references to the
+		 * object they should release them so the object can be
+		 * finalized.
+		 */
+		connect(signal: "unmounted", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29600,6 +30480,11 @@ declare namespace imports.gi.Gio {
 		 * @returns whether the connection is metered
 		 */
 		get_network_metered(): boolean;
+		/**
+		 * Emitted when the network configuration changes.
+		 */
+		connect(signal: "network-changed", callback: (owner: this, network_available: boolean) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -30833,6 +31718,17 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if the volume should be automatically mounted
 		 */
 		should_automount(): boolean;
+		/**
+		 * Emitted when the volume has been changed.
+		 */
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when the #GVolume have been removed. If
+		 * the recipient is holding references to the object they should
+		 * release them so the object can be finalized.
+		 */
+		connect(signal: "removed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

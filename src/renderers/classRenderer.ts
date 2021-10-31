@@ -6,6 +6,7 @@ import { BuildConstructorNode, NeedNewLine } from "../utils/utils";
 import { renderDocString } from "./docStringRenderer";
 import { ignored_property_names } from "../consts";
 import { renderProperty } from "./propertyRenderer";
+import { renderSignal } from "./signalRenderer";
 
 /*
     Render class as a TS interface with construct signature.
@@ -21,6 +22,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     const ctors: FunctionNode[] = [];
     const static_funcs: FunctionNode[] = [];
     const fields: ParameterNode[] = [];
+    const signals: FunctionNode[] = [];
     let exclude_method_list: string[] = [];
     let exclude_self = false;
     let exclude_all_members = false;
@@ -66,6 +68,12 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     if (class_node.method) {
         for (let m of class_node.method) {
             methods.push(m);
+        }
+    }
+
+    if (class_node["glib:signal"]) {
+        for (const signal of class_node["glib:signal"]) {
+            signals.push(signal);
         }
     }
 
@@ -137,6 +145,13 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
 
     if (method_str_list.length > 0) {
         body += method_str_list.join('\n');
+    }
+
+    if (signals.length > 0) {
+        body+= "\n";
+        for (const signal of signals) {
+            body+= renderSignal(signal, ns_name, false, 1);
+        }
     }
 
     body = ` {\n` +

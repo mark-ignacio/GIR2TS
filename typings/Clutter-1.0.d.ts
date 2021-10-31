@@ -3481,6 +3481,225 @@ declare namespace imports.gi.Clutter {
 		 * @param flags the flags to unset
 		 */
 		unset_flags(flags: ActorFlags): void;
+		/**
+		 * The ::allocation-changed signal is emitted when the
+		 * {@link Actor}:allocation property changes. Usually, application
+		 * code should just use the notifications for the :allocation property
+		 * but if you want to track the allocation flags as well, for instance
+		 * to know whether the absolute origin of #actor changed, then you might
+		 * want use this signal instead.
+		 */
+		connect(signal: "allocation-changed", callback: (owner: this, box: ActorBox, flags: AllocationFlags) => void): number;
+		/**
+		 * The ::button-press-event signal is emitted each time a mouse button
+		 * is pressed on #actor.
+		 */
+		connect(signal: "button-press-event", callback: (owner: this, event: ButtonEvent) => boolean): number;
+		/**
+		 * The ::button-release-event signal is emitted each time a mouse button
+		 * is released on #actor.
+		 */
+		connect(signal: "button-release-event", callback: (owner: this, event: ButtonEvent) => boolean): number;
+		/**
+		 * The ::captured-event signal is emitted when an event is captured
+		 * by Clutter. This signal will be emitted starting from the top-level
+		 * container (the {@link Stage}) to the actor which received the event
+		 * going down the hierarchy. This signal can be used to intercept every
+		 * event before the specialized events (like
+		 * ClutterActor::button-press-event or ::key-released-event) are
+		 * emitted.
+		 */
+		connect(signal: "captured-event", callback: (owner: this, event: Event) => boolean): number;
+		/**
+		 * The ::destroy signal notifies that all references held on the
+		 * actor which emitted it should be released.
+		 * 
+		 * The ::destroy signal should be used by all holders of a reference
+		 * on #actor.
+		 * 
+		 * This signal might result in the finalization of the {@link Actor}
+		 * if all references are released.
+		 * 
+		 * Composite actors and actors implementing the #ClutterContainer
+		 * interface should override the default implementation of the
+		 * class handler of this signal and call clutter_actor_destroy() on
+		 * their children. When overriding the default class handler, it is
+		 * required to chain up to the parent's implementation.
+		 */
+		connect(signal: "destroy", callback: (owner: this) => void): number;
+		/**
+		 * The ::enter-event signal is emitted when the pointer enters the #actor
+		 */
+		connect(signal: "enter-event", callback: (owner: this, event: CrossingEvent) => boolean): number;
+		/**
+		 * The ::event signal is emitted each time an event is received
+		 * by the #actor. This signal will be emitted on every actor,
+		 * following the hierarchy chain, until it reaches the top-level
+		 * container (the {@link Stage}).
+		 */
+		connect(signal: "event", callback: (owner: this, event: Event) => boolean): number;
+		/**
+		 * The ::hide signal is emitted when an actor is no longer rendered
+		 * on the stage.
+		 */
+		connect(signal: "hide", callback: (owner: this) => void): number;
+		/**
+		 * The ::key-focus-in signal is emitted when #actor receives key focus.
+		 */
+		connect(signal: "key-focus-in", callback: (owner: this) => void): number;
+		/**
+		 * The ::key-focus-out signal is emitted when #actor loses key focus.
+		 */
+		connect(signal: "key-focus-out", callback: (owner: this) => void): number;
+		/**
+		 * The ::key-press-event signal is emitted each time a keyboard button
+		 * is pressed while #actor has key focus (see clutter_stage_set_key_focus()).
+		 */
+		connect(signal: "key-press-event", callback: (owner: this, event: KeyEvent) => boolean): number;
+		/**
+		 * The ::key-release-event signal is emitted each time a keyboard button
+		 * is released while #actor has key focus (see
+		 * clutter_stage_set_key_focus()).
+		 */
+		connect(signal: "key-release-event", callback: (owner: this, event: KeyEvent) => boolean): number;
+		/**
+		 * The ::leave-event signal is emitted when the pointer leaves the #actor.
+		 */
+		connect(signal: "leave-event", callback: (owner: this, event: CrossingEvent) => boolean): number;
+		/**
+		 * The ::motion-event signal is emitted each time the mouse pointer is
+		 * moved over #actor.
+		 */
+		connect(signal: "motion-event", callback: (owner: this, event: MotionEvent) => boolean): number;
+		/**
+		 * The ::paint signal is emitted each time an actor is being painted.
+		 * 
+		 * Subclasses of {@link Actor} should override the #ClutterActorClass.paint
+		 * virtual function paint themselves in that function.
+		 * 
+		 * It is strongly discouraged to connect a signal handler to
+		 * the #ClutterActor::paint signal; if you want to change the paint
+		 * sequence of an existing #ClutterActor instance, either create a new
+		 * #ClutterActor class and override the #ClutterActorClass.paint virtual
+		 * function, or use a #ClutterEffect. The #ClutterActor::paint signal
+		 * will be removed in a future version of Clutter.
+		 */
+		connect(signal: "paint", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when the parent of the actor changes.
+		 */
+		connect(signal: "parent-set", callback: (owner: this, old_parent: Actor) => void): number;
+		/**
+		 * The ::pick signal is emitted each time an actor is being painted
+		 * in "pick mode". The pick mode is used to identify the actor during
+		 * the event handling phase, or by clutter_stage_get_actor_at_pos().
+		 * The actor should paint its shape using the passed #pick_color.
+		 * 
+		 * Subclasses of {@link Actor} should override the class signal handler
+		 * and paint themselves in that function.
+		 * 
+		 * It is possible to connect a handler to the ::pick signal in order
+		 * to set up some custom aspect of a paint in pick mode.
+		 */
+		connect(signal: "pick", callback: (owner: this, color: Color) => void): number;
+		/**
+		 * The ::queue_redraw signal is emitted when clutter_actor_queue_redraw()
+		 * is called on #origin.
+		 * 
+		 * The default implementation for {@link Actor} chains up to the
+		 * parent actor and queues a redraw on the parent, thus "bubbling"
+		 * the redraw queue up through the actor graph. The default
+		 * implementation for #ClutterStage queues a clutter_stage_ensure_redraw()
+		 * in a main loop idle handler.
+		 * 
+		 * Note that the #origin actor may be the stage, or a container; it
+		 * does not have to be a leaf node in the actor graph.
+		 * 
+		 * Toolkits embedding a #ClutterStage which require a redraw and
+		 * relayout cycle can stop the emission of this signal using the
+		 * GSignal API, redraw the UI and then call clutter_stage_ensure_redraw()
+		 * themselves, like:
+		 * 
+		 * |[<!-- language="C" -->
+		 *   static void
+		 *   on_redraw_complete (gpointer data)
+		 *   {
+		 *     ClutterStage *stage = data;
+		 * 
+		 *     // execute the Clutter drawing pipeline
+		 *     clutter_stage_ensure_redraw (stage);
+		 *   }
+		 * 
+		 *   static void
+		 *   on_stage_queue_redraw (ClutterStage *stage)
+		 *   {
+		 *     // this prevents the default handler to run
+		 *     g_signal_stop_emission_by_name (stage, "queue-redraw");
+		 * 
+		 *     // queue a redraw with the host toolkit and call
+		 *     // a function when the redraw has been completed
+		 *     queue_a_redraw (G_CALLBACK (on_redraw_complete), stage);
+		 *   }
+		 * ]|
+		 * 
+		 * Note: This signal is emitted before the Clutter paint
+		 * pipeline is executed. If you want to know when the pipeline has
+		 * been completed you should use clutter_threads_add_repaint_func()
+		 * or clutter_threads_add_repaint_func_full().
+		 */
+		connect(signal: "queue-redraw", callback: (owner: this, origin: Actor) => void): number;
+		/**
+		 * The ::queue_layout signal is emitted when clutter_actor_queue_relayout()
+		 * is called on an actor.
+		 * 
+		 * The default implementation for {@link Actor} chains up to the
+		 * parent actor and queues a relayout on the parent, thus "bubbling"
+		 * the relayout queue up through the actor graph.
+		 * 
+		 * The main purpose of this signal is to allow relayout to be propagated
+		 * properly in the presence of #ClutterClone actors. Applications will
+		 * not normally need to connect to this signal.
+		 */
+		connect(signal: "queue-relayout", callback: (owner: this) => void): number;
+		/**
+		 * The ::realize signal is emitted each time an actor is being
+		 * realized.
+		 */
+		connect(signal: "realize", callback: (owner: this) => void): number;
+		/**
+		 * The ::scroll-event signal is emitted each time the mouse is
+		 * scrolled on #actor
+		 */
+		connect(signal: "scroll-event", callback: (owner: this, event: ScrollEvent) => boolean): number;
+		/**
+		 * The ::show signal is emitted when an actor is visible and
+		 * rendered on the stage.
+		 */
+		connect(signal: "show", callback: (owner: this) => void): number;
+		/**
+		 * The ::touch-event signal is emitted each time a touch
+		 * begin/end/update/cancel event.
+		 */
+		connect(signal: "touch-event", callback: (owner: this, event: Event) => boolean): number;
+		/**
+		 * The ::transition-stopped signal is emitted once a transition
+		 * is stopped; a transition is stopped once it reached its total
+		 * duration (including eventual repeats), it has been stopped
+		 * using clutter_timeline_stop(), or it has been removed from the
+		 * transitions applied on #actor, using clutter_actor_remove_transition().
+		 */
+		connect(signal: "transition-stopped", callback: (owner: this, name: string, is_finished: boolean) => void): number;
+		/**
+		 * The ::transitions-completed signal is emitted once all transitions
+		 * involving #actor are complete.
+		 */
+		connect(signal: "transitions-completed", callback: (owner: this) => void): number;
+		/**
+		 * The ::unrealize signal is emitted each time an actor is being
+		 * unrealized.
+		 */
+		connect(signal: "unrealize", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3985,6 +4204,20 @@ declare namespace imports.gi.Clutter {
 		 * @param interval a {@link Interval}
 		 */
 		update_interval(property_name: string, interval: Interval): void;
+		/**
+		 * The ::completed signal is emitted once the animation has
+		 * been completed.
+		 * 
+		 * The #animation instance is guaranteed to be valid for the entire
+		 * duration of the signal emission chain.
+		 */
+		connect(signal: "completed", callback: (owner: this) => void): number;
+		/**
+		 * The ::started signal is emitted once the animation has been
+		 * started
+		 */
+		connect(signal: "started", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4270,6 +4503,22 @@ declare namespace imports.gi.Clutter {
 		 *   actually involved; the terminology is conventional).
 		 */
 		set_resolution(dpi: number): void;
+		/**
+		 * The ::font-changed signal is emitted each time the font options
+		 * have been changed through {@link Settings}.
+		 */
+		connect(signal: "font-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::resolution-changed signal is emitted each time the font
+		 * resolutions has been changed through {@link Settings}.
+		 */
+		connect(signal: "resolution-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::settings-changed signal is emitted each time the {@link Settings}
+		 * properties have been changed.
+		 */
+		connect(signal: "settings-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4365,6 +4614,17 @@ declare namespace imports.gi.Clutter {
 		 * @param alpha a {@link Alpha} or %NULL to unset a previously set alpha
 		 */
 		set_alpha(alpha: Alpha): void;
+		/**
+		 * The ::apply signal is emitted each time the behaviour is applied
+		 * to an actor.
+		 */
+		connect(signal: "applied", callback: (owner: this, actor: Actor) => void): number;
+		/**
+		 * The ::removed signal is emitted each time a behaviour is not applied
+		 * to an actor anymore.
+		 */
+		connect(signal: "removed", callback: (owner: this, actor: Actor) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4680,6 +4940,12 @@ declare namespace imports.gi.Clutter {
 		 * @param path the new path to follow
 		 */
 		set_path(path: Path): void;
+		/**
+		 * This signal is emitted each time a node defined inside the path
+		 * is reached.
+		 */
+		connect(signal: "knot-reached", callback: (owner: this, knot_num: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5884,6 +6150,32 @@ declare namespace imports.gi.Clutter {
 		 * @param height the new height of the surface
 		 */
 		set_surface_size(width: number, height: number): void;
+		/**
+		 * The ::create-surface signal is emitted when a {@link CairoTexture}
+		 * news its surface (re)created, which happens either when the Cairo
+		 * context is created with clutter_cairo_texture_create() or
+		 * clutter_cairo_texture_create_region(), or when the surface is resized
+		 * through clutter_cairo_texture_set_surface_size().
+		 * 
+		 * The first signal handler that returns a non-%NULL, valid surface will
+		 * stop any further signal emission, and the returned surface will be
+		 * the one used.
+		 */
+		connect(signal: "create-surface", callback: (owner: this, width: number, height: number) => cairo.Surface): number;
+		/**
+		 * The ::draw signal is emitted each time a {@link CairoTexture} has
+		 * been invalidated.
+		 * 
+		 * The passed Cairo context passed will be clipped to the invalidated
+		 * area.
+		 * 
+		 * It is safe to connect multiple callbacks to this signals; the state
+		 * of the Cairo context passed to each callback is automatically saved
+		 * and restored, so it's not necessary to call cairo_save() and
+		 * cairo_restore().
+		 */
+		connect(signal: "draw", callback: (owner: this, cr: cairo.Context) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5981,6 +6273,16 @@ declare namespace imports.gi.Clutter {
 		 *   caused a content invalidation, and %FALSE otherwise
 		 */
 		set_size(width: number, height: number): boolean;
+		/**
+		 * The {@link Canvas}::draw signal is emitted each time a canvas is
+		 * invalidated.
+		 * 
+		 * It is safe to connect multiple handlers to this signal: each
+		 * handler invocation will be automatically protected by cairo_save()
+		 * and cairo_restore() pairs.
+		 */
+		connect(signal: "draw", callback: (owner: this, cr: cairo.Context, width: number, height: number) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6142,6 +6444,31 @@ declare namespace imports.gi.Clutter {
 		 * amount of time has passed.
 		 */
 		release(): void;
+		/**
+		 * The ::clicked signal is emitted when the {@link Actor} to which
+		 * a #ClutterClickAction has been applied should respond to a
+		 * pointer button press and release events
+		 */
+		connect(signal: "clicked", callback: (owner: this, actor: Actor) => void): number;
+		/**
+		 * The ::long-press signal is emitted during the long press gesture
+		 * handling.
+		 * 
+		 * This signal can be emitted multiple times with different states.
+		 * 
+		 * The %CLUTTER_LONG_PRESS_QUERY state will be emitted on button presses,
+		 * and its return value will determine whether the long press handling
+		 * should be initiated. If the signal handlers will return %TRUE, the
+		 * %CLUTTER_LONG_PRESS_QUERY state will be followed either by a signal
+		 * emission with the %CLUTTER_LONG_PRESS_ACTIVATE state if the long press
+		 * constraints were respected, or by a signal emission with the
+		 * %CLUTTER_LONG_PRESS_CANCEL state if the long press was cancelled.
+		 * 
+		 * It is possible to forcibly cancel a long press detection using
+		 * clutter_click_action_release().
+		 */
+		connect(signal: "long-press", callback: (owner: this, actor: Actor, state: LongPressState) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6489,6 +6816,17 @@ declare namespace imports.gi.Clutter {
 		 *   be modified or freed
 		 */
 		peek_devices(): GLib.SList;
+		/**
+		 * The ::device-added signal is emitted each time a device has been
+		 * added to the {@link DeviceManager}
+		 */
+		connect(signal: "device-added", callback: (owner: this, device: InputDevice) => void): number;
+		/**
+		 * The ::device-removed signal is emitted each time a device has been
+		 * removed from the {@link DeviceManager}
+		 */
+		connect(signal: "device-removed", callback: (owner: this, device: InputDevice) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6655,6 +6993,56 @@ declare namespace imports.gi.Clutter {
 		 *   -1 to use the default drag threshold from {@link Settings}
 		 */
 		set_drag_threshold(x_threshold: number, y_threshold: number): void;
+		/**
+		 * The ::drag-begin signal is emitted when the {@link DragAction}
+		 * starts the dragging
+		 * 
+		 * The emission of this signal can be delayed by using the
+		 * #ClutterDragAction:x-drag-threshold and
+		 * #ClutterDragAction:y-drag-threshold properties
+		 */
+		connect(signal: "drag-begin", callback: (owner: this, actor: Actor, event_x: number, event_y: number, modifiers: ModifierType) => void): number;
+		/**
+		 * The ::drag-end signal is emitted at the end of the dragging,
+		 * when the pointer button's is released
+		 * 
+		 * This signal is emitted if and only if the {@link DragAction}::drag-begin
+		 * signal has been emitted first
+		 */
+		connect(signal: "drag-end", callback: (owner: this, actor: Actor, event_x: number, event_y: number, modifiers: ModifierType) => void): number;
+		/**
+		 * The ::drag-motion signal is emitted for each motion event after
+		 * the {@link DragAction}::drag-begin signal has been emitted.
+		 * 
+		 * The components of the distance between the press event and the
+		 * latest motion event are computed in the actor's coordinate space,
+		 * to take into account eventual transformations. If you want the
+		 * stage coordinates of the latest motion event you can use
+		 * clutter_drag_action_get_motion_coords().
+		 * 
+		 * The default handler of the signal will call clutter_actor_move_by()
+		 * either on #actor or, if set, of #ClutterDragAction:drag-handle using
+		 * the #delta_x and #delta_y components of the dragging motion. If you
+		 * want to override the default behaviour, you can connect to the
+		 * #ClutterDragAction::drag-progress signal and return %FALSE from the
+		 * handler.
+		 */
+		connect(signal: "drag-motion", callback: (owner: this, actor: Actor, delta_x: number, delta_y: number) => void): number;
+		/**
+		 * The ::drag-progress signal is emitted for each motion event after
+		 * the {@link DragAction}::drag-begin signal has been emitted.
+		 * 
+		 * The components of the distance between the press event and the
+		 * latest motion event are computed in the actor's coordinate space,
+		 * to take into account eventual transformations. If you want the
+		 * stage coordinates of the latest motion event you can use
+		 * clutter_drag_action_get_motion_coords().
+		 * 
+		 * The default handler will emit #ClutterDragAction::drag-motion,
+		 * if #ClutterDragAction::drag-progress emission returns %TRUE.
+		 */
+		connect(signal: "drag-progress", callback: (owner: this, actor: Actor, delta_x: number, delta_y: number) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6681,6 +7069,41 @@ declare namespace imports.gi.Clutter {
 	 * use {@link DropAction} instead.
 	 */
 	interface IDropAction {
+
+		/**
+		 * The ::can-drop signal is emitted when the dragged actor is dropped
+		 * on #actor. The return value of the ::can-drop signal will determine
+		 * whether or not the {@link DropAction}::drop signal is going to be
+		 * emitted on #action.
+		 * 
+		 * The default implementation of #ClutterDropAction returns %TRUE for
+		 * this signal.
+		 */
+		connect(signal: "can-drop", callback: (owner: this, actor: Actor, event_x: number, event_y: number) => boolean): number;
+		/**
+		 * The ::drop signal is emitted when the dragged actor is dropped
+		 * on #actor. This signal is only emitted if at least an handler of
+		 * {@link DropAction}::can-drop returns %TRUE.
+		 */
+		connect(signal: "drop", callback: (owner: this, actor: Actor, event_x: number, event_y: number) => void): number;
+		/**
+		 * The ::drop-cancel signal is emitted when the drop is refused
+		 * by an emission of the {@link DropAction}::can-drop signal.
+		 * 
+		 * After the ::drop-cancel signal is fired the active drag is
+		 * terminated.
+		 */
+		connect(signal: "drop-cancel", callback: (owner: this, actor: Actor, event_x: number, event_y: number) => void): number;
+		/**
+		 * The ::over-in signal is emitted when the dragged actor crosses
+		 * into #actor.
+		 */
+		connect(signal: "over-in", callback: (owner: this, actor: Actor) => void): number;
+		/**
+		 * The ::over-out signal is emitted when the dragged actor crosses
+		 * outside #actor.
+		 */
+		connect(signal: "over-out", callback: (owner: this, actor: Actor) => void): number;
 
 	}
 
@@ -7109,6 +7532,33 @@ declare namespace imports.gi.Clutter {
 		 * @param edge the %ClutterGestureTriggerEdge
 		 */
 		set_threshold_trigger_edge(edge: GestureTriggerEdge): void;
+		/**
+		 * The ::gesture_begin signal is emitted when the {@link Actor} to which
+		 * a #ClutterGestureAction has been applied starts receiving a gesture.
+		 */
+		connect(signal: "gesture-begin", callback: (owner: this, actor: Actor) => boolean): number;
+		/**
+		 * The ::gesture-cancel signal is emitted when the ongoing gesture gets
+		 * cancelled from the {@link GestureAction}::gesture-progress signal handler.
+		 * 
+		 * This signal is emitted if and only if the #ClutterGestureAction::gesture-begin
+		 * signal has been emitted first.
+		 */
+		connect(signal: "gesture-cancel", callback: (owner: this, actor: Actor) => void): number;
+		/**
+		 * The ::gesture-end signal is emitted at the end of the gesture gesture,
+		 * when the pointer's button is released
+		 * 
+		 * This signal is emitted if and only if the {@link GestureAction}::gesture-begin
+		 * signal has been emitted first.
+		 */
+		connect(signal: "gesture-end", callback: (owner: this, actor: Actor) => void): number;
+		/**
+		 * The ::gesture-progress signal is emitted for each motion event after
+		 * the {@link GestureAction}::gesture-begin signal has been emitted.
+		 */
+		connect(signal: "gesture-progress", callback: (owner: this, actor: Actor) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8302,6 +8752,32 @@ declare namespace imports.gi.Clutter {
 		 * @param container a {@link Container} using #manager
 		 */
 		set_container(container: Container): void;
+		/**
+		 * The ::layout-changed signal is emitted each time a layout manager
+		 * has been changed. Every {@link Actor} using the #manager instance
+		 * as a layout manager should connect a handler to the ::layout-changed
+		 * signal and queue a relayout on themselves:
+		 * 
+		 * |[
+		 *   static void layout_changed (ClutterLayoutManager *manager,
+		 *                               ClutterActor         *self)
+		 *   {
+		 *     clutter_actor_queue_relayout (self);
+		 *   }
+		 *   ...
+		 *     self->manager = g_object_ref_sink (manager);
+		 *     g_signal_connect (self->manager, "layout-changed",
+		 *                       G_CALLBACK (layout_changed),
+		 *                       self);
+		 * ]|
+		 * 
+		 * Sub-classes of #ClutterLayoutManager that implement a layout that
+		 * can be controlled or changed using parameters should emit the
+		 * ::layout-changed signal whenever one of the parameters changes,
+		 * by using clutter_layout_manager_layout_changed().
+		 */
+		connect(signal: "layout-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8634,6 +9110,33 @@ declare namespace imports.gi.Clutter {
 		 * @param types an array of #GType types
 		 */
 		set_types(n_columns: number, types: GObject.Type[]): void;
+		/**
+		 * The ::filter-changed signal is emitted when a new filter has been applied
+		 */
+		connect(signal: "filter-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::row-added signal is emitted when a new row has been added.
+		 * The data on the row has already been set when the ::row-added signal
+		 * has been emitted.
+		 */
+		connect(signal: "row-added", callback: (owner: this, iter: ModelIter) => void): number;
+		/**
+		 * The ::row-removed signal is emitted when a row has been changed.
+		 * The data on the row has already been updated when the ::row-changed
+		 * signal has been emitted.
+		 */
+		connect(signal: "row-changed", callback: (owner: this, iter: ModelIter) => void): number;
+		/**
+		 * The ::row-removed signal is emitted when a row has been removed.
+		 * The data on the row pointed by the passed iterator is still valid
+		 * when the ::row-removed signal has been emitted.
+		 */
+		connect(signal: "row-removed", callback: (owner: this, iter: ModelIter) => void): number;
+		/**
+		 * The ::sort-changed signal is emitted after the model has been sorted
+		 */
+		connect(signal: "sort-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9131,6 +9634,19 @@ declare namespace imports.gi.Clutter {
 		 * @param axis the axis to constraint the panning to
 		 */
 		set_pan_axis(axis: PanAxis): void;
+		/**
+		 * The ::pan signal is emitted to keep track of the motion during
+		 * a pan gesture. #is_interpolated is set to %TRUE during the
+		 * interpolation phase of the pan, after the drag has ended and
+		 * the :interpolate property was set to %TRUE.
+		 */
+		connect(signal: "pan", callback: (owner: this, actor: Actor, is_interpolated: boolean) => boolean): number;
+		/**
+		 * The ::pan-stopped signal is emitted at the end of the interpolation
+		 * phase of the pan action, only when :interpolate is set to %TRUE.
+		 */
+		connect(signal: "pan-stopped", callback: (owner: this, actor: Actor) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9489,6 +10005,13 @@ declare namespace imports.gi.Clutter {
 		 * @param path a {@link Path}
 		 */
 		set_path(path: Path): void;
+		/**
+		 * The ::node-reached signal is emitted each time a
+		 * {@link PathConstraint}:offset value results in the actor
+		 * passing a #ClutterPathNode
+		 */
+		connect(signal: "node-reached", callback: (owner: this, actor: Actor, index: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9666,6 +10189,13 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IRotateAction {
 
+		/**
+		 * The ::rotate signal is emitted when a rotate gesture is
+		 * recognized on the attached actor and when the gesture is
+		 * cancelled (in this case with an angle value of 0).
+		 */
+		connect(signal: "rotate", callback: (owner: this, actor: Actor, angle: number) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9786,6 +10316,30 @@ declare namespace imports.gi.Clutter {
 		 * Stops and rewinds a playing {@link Score} instance.
 		 */
 		stop(): void;
+		/**
+		 * The ::completed signal is emitted each time a {@link Score} terminates.
+		 */
+		connect(signal: "completed", callback: (owner: this) => void): number;
+		/**
+		 * The ::paused signal is emitted each time a {@link Score}
+		 * is paused.
+		 */
+		connect(signal: "paused", callback: (owner: this) => void): number;
+		/**
+		 * The ::started signal is emitted each time a {@link Score} starts playing.
+		 */
+		connect(signal: "started", callback: (owner: this) => void): number;
+		/**
+		 * The ::timeline-completed signal is emitted each time a timeline
+		 * inside a {@link Score} terminates.
+		 */
+		connect(signal: "timeline-completed", callback: (owner: this, timeline: Timeline) => void): number;
+		/**
+		 * The ::timeline-started signal is emitted each time a new timeline
+		 * inside a {@link Score} starts playing.
+		 */
+		connect(signal: "timeline-started", callback: (owner: this, timeline: Timeline) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11032,6 +11586,47 @@ declare namespace imports.gi.Clutter {
 		 * Shows the cursor on the stage window
 		 */
 		show_cursor(): void;
+		/**
+		 * The ::activate signal is emitted when the stage receives key focus
+		 * from the underlying window system.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+		/**
+		 * The ::after-paint signal is emitted after the stage is painted,
+		 * but before the results are displayed on the screen.
+		 */
+		connect(signal: "after-paint", callback: (owner: this) => void): number;
+		/**
+		 * The ::deactivate signal is emitted when the stage loses key focus
+		 * from the underlying window system.
+		 */
+		connect(signal: "deactivate", callback: (owner: this) => void): number;
+		/**
+		 * The ::delete-event signal is emitted when the user closes a
+		 * {@link Stage} window using the window controls.
+		 * 
+		 * Clutter by default will call clutter_main_quit() if #stage is
+		 * the default stage, and clutter_actor_destroy() for any other
+		 * stage.
+		 * 
+		 * It is possible to override the default behaviour by connecting
+		 * a new handler and returning %TRUE there.
+		 * 
+		 * This signal is emitted only on Clutter backends that
+		 * embed #ClutterStage in native windows. It is not emitted for
+		 * backends that use a static frame buffer.
+		 */
+		connect(signal: "delete-event", callback: (owner: this, event: Event) => boolean): number;
+		/**
+		 * The ::fullscreen signal is emitted when the stage is made fullscreen.
+		 */
+		connect(signal: "fullscreen", callback: (owner: this) => void): number;
+		/**
+		 * The ::unfullscreen signal is emitted when the stage leaves a fullscreen
+		 * state.
+		 */
+		connect(signal: "unfullscreen", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11122,6 +11717,17 @@ declare namespace imports.gi.Clutter {
 		 * @param stage a {@link Stage}
 		 */
 		set_default_stage(stage: Stage): void;
+		/**
+		 * The ::stage-added signal is emitted each time a new {@link Stage}
+		 * has been added to the stage manager.
+		 */
+		connect(signal: "stage-added", callback: (owner: this, stage: Stage) => void): number;
+		/**
+		 * The ::stage-removed signal is emitted each time a {@link Stage}
+		 * has been removed from the stage manager.
+		 */
+		connect(signal: "stage-removed", callback: (owner: this, stage: Stage) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11369,6 +11975,13 @@ declare namespace imports.gi.Clutter {
 		 *   and it should not be unreferenced
 		 */
 		warp_to_state(target_state_name: string): Timeline;
+		/**
+		 * The ::completed signal is emitted when a {@link State} reaches
+		 * the target state specified by clutter_state_set_state() or
+		 * clutter_state_warp_to_state().
+		 */
+		connect(signal: "completed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11395,6 +12008,17 @@ declare namespace imports.gi.Clutter {
 	 * use {@link SwipeAction} instead.
 	 */
 	interface ISwipeAction {
+
+		/**
+		 * The ::swept signal is emitted when a swipe gesture is recognized on the
+		 * attached actor.
+		 */
+		connect(signal: "swept", callback: (owner: this, actor: Actor, direction: SwipeDirection) => void): number;
+		/**
+		 * The ::swipe signal is emitted when a swipe gesture is recognized on the
+		 * attached actor.
+		 */
+		connect(signal: "swipe", callback: (owner: this, actor: Actor, direction: SwipeDirection) => boolean): number;
 
 	}
 
@@ -11634,6 +12258,11 @@ declare namespace imports.gi.Clutter {
 	 * use {@link TapAction} instead.
 	 */
 	interface ITapAction {
+
+		/**
+		 * The ::tap signal is emitted when the tap gesture is complete.
+		 */
+		connect(signal: "tap", callback: (owner: this, actor: Actor) => void): number;
 
 	}
 
@@ -12365,6 +12994,39 @@ declare namespace imports.gi.Clutter {
 		 * @param setting %TRUE if the text should be parsed for markup.
 		 */
 		set_use_markup(setting: boolean): void;
+		/**
+		 * The ::activate signal is emitted each time the actor is 'activated'
+		 * by the user, normally by pressing the 'Enter' key. The signal is
+		 * emitted only if {@link Text}:activatable is set to %TRUE.
+		 */
+		connect(signal: "activate", callback: (owner: this) => void): number;
+		/**
+		 * The ::cursor-changed signal is emitted whenever the cursor
+		 * position or size changes.
+		 */
+		connect(signal: "cursor-changed", callback: (owner: this) => void): number;
+		/**
+		 * The ::cursor-event signal is emitted whenever the cursor position
+		 * changes inside a {@link Text} actor. Inside #geometry it is stored
+		 * the current position and size of the cursor, relative to the actor
+		 * itself.
+		 */
+		connect(signal: "cursor-event", callback: (owner: this, geometry: Geometry) => void): number;
+		/**
+		 * This signal is emitted when text is deleted from the actor by
+		 * the user. It is emitted before #self text changes.
+		 */
+		connect(signal: "delete-text", callback: (owner: this, start_pos: number, end_pos: number) => void): number;
+		/**
+		 * This signal is emitted when text is inserted into the actor by
+		 * the user. It is emitted before #self text changes.
+		 */
+		connect(signal: "insert-text", callback: (owner: this, new_text: string, new_text_length: number, position: any) => void): number;
+		/**
+		 * The ::text-changed signal is emitted after #actor's text changes
+		 */
+		connect(signal: "text-changed", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -12530,6 +13192,15 @@ declare namespace imports.gi.Clutter {
 		 * @param n_chars the number of characters in #text, or -1
 		 */
 		set_text(chars: string, n_chars: number): void;
+		/**
+		 * This signal is emitted after text is deleted from the buffer.
+		 */
+		connect(signal: "deleted-text", callback: (owner: this, position: number, n_chars: number) => void): number;
+		/**
+		 * This signal is emitted after text is inserted into the buffer.
+		 */
+		connect(signal: "inserted-text", callback: (owner: this, position: number, chars: string, n_chars: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -12855,6 +13526,24 @@ declare namespace imports.gi.Clutter {
 		 *    underlying image data
 		 */
 		set_sync_size(sync_size: boolean): void;
+		/**
+		 * The ::load-finished signal is emitted when a texture load has
+		 * completed. If there was an error during loading, #error will
+		 * be set, otherwise it will be %NULL
+		 */
+		connect(signal: "load-finished", callback: (owner: this, error: GLib.Error) => void): number;
+		/**
+		 * The ::pixbuf-change signal is emitted each time the pixbuf
+		 * used by #texture changes.
+		 */
+		connect(signal: "pixbuf-change", callback: (owner: this) => void): number;
+		/**
+		 * The ::size-change signal is emitted each time the size of the
+		 * pixbuf used by #texture changes.  The new size is given as
+		 * argument to the callback.
+		 */
+		connect(signal: "size-change", callback: (owner: this, width: number, height: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13368,6 +14057,74 @@ declare namespace imports.gi.Clutter {
 		 * Stops the {@link Timeline} and moves to frame 0
 		 */
 		stop(): void;
+		/**
+		 * The {@link Timeline}::completed signal is emitted when the timeline's
+		 * elapsed time reaches the value of the #ClutterTimeline:duration
+		 * property.
+		 * 
+		 * This signal will be emitted even if the #ClutterTimeline is set to be
+		 * repeating.
+		 * 
+		 * If you want to get notification on whether the #ClutterTimeline has
+		 * been stopped or has finished its run, including its eventual repeats,
+		 * you should use the #ClutterTimeline::stopped signal instead.
+		 */
+		connect(signal: "completed", callback: (owner: this) => void): number;
+		/**
+		 * The ::marker-reached signal is emitted each time a timeline
+		 * reaches a marker set with
+		 * clutter_timeline_add_marker_at_time(). This signal is detailed
+		 * with the name of the marker as well, so it is possible to connect
+		 * a callback to the ::marker-reached signal for a specific marker
+		 * with:
+		 * 
+		 * <informalexample><programlisting>
+		 *   clutter_timeline_add_marker_at_time (timeline, "foo", 500);
+		 *   clutter_timeline_add_marker_at_time (timeline, "bar", 750);
+		 * 
+		 *   g_signal_connect (timeline, "marker-reached",
+		 *                     G_CALLBACK (each_marker_reached), NULL);
+		 *   g_signal_connect (timeline, "marker-reached::foo",
+		 *                     G_CALLBACK (foo_marker_reached), NULL);
+		 *   g_signal_connect (timeline, "marker-reached::bar",
+		 *                     G_CALLBACK (bar_marker_reached), NULL);
+		 * </programlisting></informalexample>
+		 * 
+		 * In the example, the first callback will be invoked for both
+		 * the "foo" and "bar" marker, while the second and third callbacks
+		 * will be invoked for the "foo" or "bar" markers, respectively.
+		 */
+		connect(signal: "marker-reached", callback: (owner: this, marker_name: string, msecs: number) => void): number;
+		/**
+		 * The ::new-frame signal is emitted for each timeline running
+		 * timeline before a new frame is drawn to give animations a chance
+		 * to update the scene.
+		 */
+		connect(signal: "new-frame", callback: (owner: this, msecs: number) => void): number;
+		/**
+		 * The ::paused signal is emitted when clutter_timeline_pause() is invoked.
+		 */
+		connect(signal: "paused", callback: (owner: this) => void): number;
+		/**
+		 * The ::started signal is emitted when the timeline starts its run.
+		 * This might be as soon as clutter_timeline_start() is invoked or
+		 * after the delay set in the ClutterTimeline:delay property has
+		 * expired.
+		 */
+		connect(signal: "started", callback: (owner: this) => void): number;
+		/**
+		 * The {@link Timeline}::stopped signal is emitted when the timeline
+		 * has been stopped, either because clutter_timeline_stop() has been
+		 * called, or because it has been exhausted.
+		 * 
+		 * This is different from the #ClutterTimeline::completed signal,
+		 * which gets emitted after every repeat finishes.
+		 * 
+		 * If the #ClutterTimeline has is marked as infinitely repeating,
+		 * this signal will never be emitted.
+		 */
+		connect(signal: "stopped", callback: (owner: this, is_finished: boolean) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13628,6 +14385,18 @@ declare namespace imports.gi.Clutter {
 		 * @param axis the axis to constraint the zooming to
 		 */
 		set_zoom_axis(axis: ZoomAxis): void;
+		/**
+		 * The ::zoom signal is emitted for each series of touch events that
+		 * change the distance and focal point between the touch points.
+		 * 
+		 * The default handler of the signal will call
+		 * clutter_actor_set_scale() on #actor using the ratio of the first
+		 * distance between the touch points and the current distance. To
+		 * override the default behaviour, connect to this signal and return
+		 * %FALSE.
+		 */
+		connect(signal: "zoom", callback: (owner: this, actor: Actor, focal_point: Point, factor: number) => boolean): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17294,6 +18063,23 @@ declare namespace imports.gi.Clutter {
 		 * be normally used by applications.
 		 */
 		sort_depth_order(): void;
+		/**
+		 * The ::actor-added signal is emitted each time an actor
+		 * has been added to #container.
+		 */
+		connect(signal: "actor-added", callback: (owner: this, actor: Actor) => void): number;
+		/**
+		 * The ::actor-removed signal is emitted each time an actor
+		 * is removed from #container.
+		 */
+		connect(signal: "actor-removed", callback: (owner: this, actor: Actor) => void): number;
+		/**
+		 * The ::child-notify signal is emitted each time a property is
+		 * being set through the clutter_container_child_set() and
+		 * clutter_container_child_set_property() calls.
+		 */
+		connect(signal: "child-notify", callback: (owner: this, actor: Actor, pspec: GObject.ParamSpec) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17353,6 +18139,17 @@ declare namespace imports.gi.Clutter {
 		 * actor state.
 		 */
 		invalidate(): void;
+		/**
+		 * This signal is emitted each time a {@link Content} implementation is
+		 * assigned to a #ClutterActor.
+		 */
+		connect(signal: "attached", callback: (owner: this, actor: Actor) => void): number;
+		/**
+		 * This signal is emitted each time a {@link Content} implementation is
+		 * removed from a #ClutterActor.
+		 */
+		connect(signal: "detached", callback: (owner: this, actor: Actor) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17514,6 +18311,15 @@ declare namespace imports.gi.Clutter {
 		 * @param uri the URI of the media stream
 		 */
 		set_uri(uri: string): void;
+		/**
+		 * The ::eos signal is emitted each time the media stream ends.
+		 */
+		connect(signal: "eos", callback: (owner: this) => void): number;
+		/**
+		 * The ::error signal is emitted each time an error occurred.
+		 */
+		connect(signal: "error", callback: (owner: this, error: GLib.Error) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

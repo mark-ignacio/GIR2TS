@@ -16,6 +16,8 @@ declare namespace imports.gi.Cvc {
 		set_balance(value: number): void;
 		set_fade(value: number): void;
 		set_lfe(value: number): void;
+		connect(signal: "volume-changed", callback: (owner: this, object: boolean) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -99,6 +101,22 @@ declare namespace imports.gi.Cvc {
 		set_default_sink(stream: MixerStream): boolean;
 		set_default_source(stream: MixerStream): boolean;
 		set_headset_port(_id: number, choices: HeadsetPortChoice): void;
+		connect(signal: "active-input-update", callback: (owner: this, object: number) => void): number;
+		connect(signal: "active-output-update", callback: (owner: this, object: number) => void): number;
+		connect(signal: "audio-device-selection-needed", callback: (owner: this, object: number, p0: boolean, p1: number) => void): number;
+		connect(signal: "card-added", callback: (owner: this, object: number) => void): number;
+		connect(signal: "card-removed", callback: (owner: this, object: number) => void): number;
+		connect(signal: "default-sink-changed", callback: (owner: this, object: number) => void): number;
+		connect(signal: "default-source-changed", callback: (owner: this, object: number) => void): number;
+		connect(signal: "input-added", callback: (owner: this, object: number) => void): number;
+		connect(signal: "input-removed", callback: (owner: this, object: number) => void): number;
+		connect(signal: "output-added", callback: (owner: this, object: number) => void): number;
+		connect(signal: "output-removed", callback: (owner: this, object: number) => void): number;
+		connect(signal: "state-changed", callback: (owner: this, object: number) => void): number;
+		connect(signal: "stream-added", callback: (owner: this, object: number) => void): number;
+		connect(signal: "stream-changed", callback: (owner: this, object: number) => void): number;
+		connect(signal: "stream-removed", callback: (owner: this, object: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -273,6 +291,9 @@ declare namespace imports.gi.Cvc {
 		set_ports(ports: GLib.List): boolean;
 		set_sysfs_path(sysfs_path: string): boolean;
 		set_volume(volume: number): boolean;
+		connect(signal: "monitor-suspend", callback: (owner: this) => void): number;
+		connect(signal: "monitor-update", callback: (owner: this, object: number) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

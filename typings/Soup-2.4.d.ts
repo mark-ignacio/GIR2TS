@@ -664,6 +664,16 @@ declare namespace imports.gi.Soup {
 		 * @param auth the {@link Auth} to use
 		 */
 		use_auth(uri: URI, auth: Auth): void;
+		/**
+		 * Emitted when the manager requires the application to
+		 * provide authentication credentials.
+		 * 
+		 * {@link Session} connects to this signal and emits its own
+		 * #SoupSession::authenticate signal when it is emitted, so
+		 * you shouldn't need to use this signal directly.
+		 */
+		connect(signal: "authenticate", callback: (owner: this, msg: Message, auth: Auth, retrying: boolean) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1006,6 +1016,17 @@ declare namespace imports.gi.Soup {
 		 * @param cookie the stringified cookie to set
 		 */
 		set_cookie_with_first_party(uri: URI, first_party: URI, cookie: string): void;
+		/**
+		 * Emitted when #jar changes. If a cookie has been added,
+		 * #new_cookie will contain the newly-added cookie and
+		 * #old_cookie will be %NULL. If a cookie has been deleted,
+		 * #old_cookie will contain the to-be-deleted cookie and
+		 * #new_cookie will be %NULL. If a cookie has been changed,
+		 * #old_cookie will contain its old value, and #new_cookie its
+		 * new value.
+		 */
+		connect(signal: "changed", callback: (owner: this, old_cookie: Cookie, new_cookie: Cookie) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1142,6 +1163,26 @@ declare namespace imports.gi.Soup {
 		 * @param include_subdomains %TRUE if the policy applies on sub domains
 		 */
 		set_session_policy(domain: string, include_subdomains: boolean): void;
+		/**
+		 * Emitted when #hsts_enforcer changes. If a policy has been added,
+		 * #new_policy will contain the newly-added policy and
+		 * #old_policy will be %NULL. If a policy has been deleted,
+		 * #old_policy will contain the to-be-deleted policy and
+		 * #new_policy will be %NULL. If a policy has been changed,
+		 * #old_policy will contain its old value, and #new_policy its
+		 * new value.
+		 * 
+		 * Note that you shouldn't modify the policies from a callback to
+		 * this signal.
+		 */
+		connect(signal: "changed", callback: (owner: this, old_policy: HSTSPolicy, new_policy: HSTSPolicy) => void): number;
+		/**
+		 * Emitted when #hsts_enforcer has upgraded the protocol
+		 * for #message to HTTPS as a result of matching its domain with
+		 * a HSTS policy.
+		 */
+		connect(signal: "hsts-enforced", callback: (owner: this, message: Message) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1620,6 +1661,157 @@ declare namespace imports.gi.Soup {
 		wrote_chunk(): void;
 		wrote_headers(): void;
 		wrote_informational(): void;
+		/**
+		 * This signal is emitted after {@link Message}::got-headers, and
+		 * before the first #SoupMessage::got-chunk. If content
+		 * sniffing is disabled, or no content sniffing will be
+		 * performed, due to the sniffer deciding to trust the
+		 * Content-Type sent by the server, this signal is emitted
+		 * immediately after #SoupMessage::got-headers, and #type is
+		 * %NULL.
+		 * 
+		 * If the #SoupContentSniffer feature is enabled, and the
+		 * sniffer decided to perform sniffing, the first
+		 * #SoupMessage::got-chunk emission may be delayed, so that the
+		 * sniffer has enough data to correctly sniff the content. It
+		 * notified the library user that the content has been
+		 * sniffed, and allows it to change the header contents in the
+		 * message, if desired.
+		 * 
+		 * After this signal is emitted, the data that was spooled so
+		 * that sniffing could be done is delivered on the first
+		 * emission of #SoupMessage::got-chunk.
+		 */
+		connect(signal: "content-sniffed", callback: (owner: this, _type: string, params: GLib.HashTable) => void): number;
+		/**
+		 * Emitted when all HTTP processing is finished for a message.
+		 * (After {@link Message}::got_body for client-side messages, or
+		 * after #SoupMessage::wrote_body for server-side messages.)
+		 */
+		connect(signal: "finished", callback: (owner: this) => void): number;
+		/**
+		 * Emitted after receiving the complete message body. (For a
+		 * server-side message, this means it has received the request
+		 * body. For a client-side message, this means it has received
+		 * the response body and is nearly done with the message.)
+		 * 
+		 * See also soup_message_add_header_handler() and
+		 * soup_message_add_status_code_handler(), which can be used
+		 * to connect to a subset of emissions of this signal.
+		 */
+		connect(signal: "got-body", callback: (owner: this) => void): number;
+		/**
+		 * Emitted after receiving a chunk of a message body. Note
+		 * that "chunk" in this context means any subpiece of the
+		 * body, not necessarily the specific HTTP 1.1 chunks sent by
+		 * the other side.
+		 * 
+		 * If you cancel or requeue #msg while processing this signal,
+		 * then the current HTTP I/O will be stopped after this signal
+		 * emission finished, and #msg's connection will be closed.
+		 */
+		connect(signal: "got-chunk", callback: (owner: this, chunk: Buffer) => void): number;
+		/**
+		 * Emitted after receiving all message headers for a message.
+		 * (For a client-side message, this is after receiving the
+		 * Status-Line and response headers; for a server-side
+		 * message, it is after receiving the Request-Line and request
+		 * headers.)
+		 * 
+		 * See also soup_message_add_header_handler() and
+		 * soup_message_add_status_code_handler(), which can be used
+		 * to connect to a subset of emissions of this signal.
+		 * 
+		 * If you cancel or requeue #msg while processing this signal,
+		 * then the current HTTP I/O will be stopped after this signal
+		 * emission finished, and #msg's connection will be closed.
+		 * (If you need to requeue a message--eg, after handling
+		 * authentication or redirection--it is usually better to
+		 * requeue it from a {@link Message}::got_body handler rather
+		 * than a #SoupMessage::got_headers handler, so that the
+		 * existing HTTP connection can be reused.)
+		 */
+		connect(signal: "got-headers", callback: (owner: this) => void): number;
+		/**
+		 * Emitted after receiving a 1xx (Informational) response for
+		 * a (client-side) message. The response_headers will be
+		 * filled in with the headers associated with the
+		 * informational response; however, those header values will
+		 * be erased after this signal is done.
+		 * 
+		 * If you cancel or requeue #msg while processing this signal,
+		 * then the current HTTP I/O will be stopped after this signal
+		 * emission finished, and #msg's connection will be closed.
+		 */
+		connect(signal: "got-informational", callback: (owner: this) => void): number;
+		/**
+		 * Emitted to indicate that some network-related event
+		 * related to #msg has occurred. This essentially proxies the
+		 * #GSocketClient::event signal, but only for events that
+		 * occur while #msg "owns" the connection; if #msg is sent on
+		 * an existing persistent connection, then this signal will
+		 * not be emitted. (If you want to force the message to be
+		 * sent on a new connection, set the
+		 * %SOUP_MESSAGE_NEW_CONNECTION flag on it.)
+		 * 
+		 * See #GSocketClient::event for more information on what
+		 * the different values of #event correspond to, and what
+		 * #connection will be in each case.
+		 */
+		connect(signal: "network-event", callback: (owner: this, event: Gio.SocketClientEvent, connection: Gio.IOStream) => void): number;
+		/**
+		 * Emitted when a request that was already sent once is now
+		 * being sent again (eg, because the first attempt received a
+		 * redirection response, or because we needed to use
+		 * authentication).
+		 */
+		connect(signal: "restarted", callback: (owner: this) => void): number;
+		/**
+		 * Emitted just before a message is sent.
+		 */
+		connect(signal: "starting", callback: (owner: this) => void): number;
+		/**
+		 * Emitted immediately after writing the complete body for a
+		 * message. (For a client-side message, this means that
+		 * libsoup is done writing and is now waiting for the response
+		 * from the server. For a server-side message, this means that
+		 * libsoup has finished writing the response and is nearly
+		 * done with the message.)
+		 */
+		connect(signal: "wrote-body", callback: (owner: this) => void): number;
+		/**
+		 * Emitted immediately after writing a portion of the message
+		 * body to the network.
+		 * 
+		 * Unlike {@link Message}::wrote_chunk, this is emitted after
+		 * every successful write() call, not only after finishing a
+		 * complete "chunk".
+		 */
+		connect(signal: "wrote-body-data", callback: (owner: this, chunk: Buffer) => void): number;
+		/**
+		 * Emitted immediately after writing a body chunk for a message.
+		 * 
+		 * Note that this signal is not parallel to
+		 * {@link Message}::got_chunk; it is emitted only when a complete
+		 * chunk (added with soup_message_body_append() or
+		 * soup_message_body_append_buffer()) has been written. To get
+		 * more useful continuous progress information, use
+		 * #SoupMessage::wrote_body_data.
+		 */
+		connect(signal: "wrote-chunk", callback: (owner: this) => void): number;
+		/**
+		 * Emitted immediately after writing the headers for a
+		 * message. (For a client-side message, this is after writing
+		 * the request headers; for a server-side message, it is after
+		 * writing the response headers.)
+		 */
+		connect(signal: "wrote-headers", callback: (owner: this) => void): number;
+		/**
+		 * Emitted immediately after writing a 1xx (Informational)
+		 * response for a (server-side) message.
+		 */
+		connect(signal: "wrote-informational", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2452,6 +2644,50 @@ declare namespace imports.gi.Soup {
 		 * @param msg a {@link Message} associated with #server.
 		 */
 		unpause_message(msg: Message): void;
+		/**
+		 * Emitted when processing has failed for a message; this
+		 * could mean either that it could not be read (if
+		 * {@link Server}::request_read has not been emitted for it yet),
+		 * or that the response could not be written back (if
+		 * #SoupServer::request_read has been emitted but
+		 * #SoupServer::request_finished has not been).
+		 * 
+		 * #message is in an undefined state when this signal is
+		 * emitted; the signal exists primarily to allow the server to
+		 * free any state that it may have allocated in
+		 * #SoupServer::request_started.
+		 */
+		connect(signal: "request-aborted", callback: (owner: this, message: Message, client: ClientContext) => void): number;
+		/**
+		 * Emitted when the server has finished writing a response to
+		 * a request.
+		 */
+		connect(signal: "request-finished", callback: (owner: this, message: Message, client: ClientContext) => void): number;
+		/**
+		 * Emitted when the server has successfully read a request.
+		 * #message will have all of its request-side information
+		 * filled in, and if the message was authenticated, #client
+		 * will have information about that. This signal is emitted
+		 * before any (non-early) handlers are called for the message,
+		 * and if it sets the message's #status_code, then normal
+		 * handler processing will be skipped.
+		 */
+		connect(signal: "request-read", callback: (owner: this, message: Message, client: ClientContext) => void): number;
+		/**
+		 * Emitted when the server has started reading a new request.
+		 * #message will be completely blank; not even the
+		 * Request-Line will have been read yet. About the only thing
+		 * you can usefully do with it is connect to its signals.
+		 * 
+		 * If the request is read successfully, this will eventually
+		 * be followed by a {@link Server}::request_read signal. If a
+		 * response is then sent, the request processing will end with
+		 * a #SoupServer::request_finished signal. If a network error
+		 * occurs, the processing will instead end with
+		 * #SoupServer::request_aborted.
+		 */
+		connect(signal: "request-started", callback: (owner: this, message: Message, client: ClientContext) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3175,6 +3411,88 @@ declare namespace imports.gi.Soup {
 		 * @returns whether #msg would be redirected
 		 */
 		would_redirect(msg: Message): boolean;
+		/**
+		 * Emitted when the session requires authentication. If
+		 * credentials are available call soup_auth_authenticate() on
+		 * #auth. If these credentials fail, the signal will be
+		 * emitted again, with #retrying set to %TRUE, which will
+		 * continue until you return without calling
+		 * soup_auth_authenticate() on #auth.
+		 * 
+		 * Note that this may be emitted before #msg's body has been
+		 * fully read.
+		 * 
+		 * If you call soup_session_pause_message() on #msg before
+		 * returning, then you can authenticate #auth asynchronously
+		 * (as long as you g_object_ref() it to make sure it doesn't
+		 * get destroyed), and then unpause #msg when you are ready
+		 * for it to continue.
+		 */
+		connect(signal: "authenticate", callback: (owner: this, msg: Message, auth: Auth, retrying: boolean) => void): number;
+		/**
+		 * Emitted when a new connection is created. This is an
+		 * internal signal intended only to be used for debugging
+		 * purposes, and may go away in the future.
+		 */
+		connect(signal: "connection-created", callback: (owner: this, connection: GObject.Object) => void): number;
+		/**
+		 * Emitted when a request is queued on #session. (Note that
+		 * "queued" doesn't just mean soup_session_queue_message();
+		 * soup_session_send_message() implicitly queues the message
+		 * as well.)
+		 * 
+		 * When sending a request, first {@link Session}::request_queued
+		 * is emitted, indicating that the session has become aware of
+		 * the request.
+		 * 
+		 * Once a connection is available to send the request on, the
+		 * session emits #SoupSession::request_started. Then, various
+		 * #SoupMessage signals are emitted as the message is
+		 * processed. If the message is requeued, it will emit
+		 * #SoupMessage::restarted, which will then be followed by
+		 * another #SoupSession::request_started and another set of
+		 * #SoupMessage signals when the message is re-sent.
+		 * 
+		 * Eventually, the message will emit #SoupMessage::finished.
+		 * Normally, this signals the completion of message
+		 * processing. However, it is possible that the application
+		 * will requeue the message from the "finished" handler (or
+		 * equivalently, from the soup_session_queue_message()
+		 * callback). In that case, the process will loop back to
+		 * #SoupSession::request_started.
+		 * 
+		 * Eventually, a message will reach "finished" and not be
+		 * requeued. At that point, the session will emit
+		 * #SoupSession::request_unqueued to indicate that it is done
+		 * with the message.
+		 * 
+		 * To sum up: #SoupSession::request_queued and
+		 * #SoupSession::request_unqueued are guaranteed to be emitted
+		 * exactly once, but #SoupSession::request_started and
+		 * #SoupMessage::finished (and all of the other #SoupMessage
+		 * signals) may be invoked multiple times for a given message.
+		 */
+		connect(signal: "request-queued", callback: (owner: this, msg: Message) => void): number;
+		/**
+		 * Emitted just before a request is sent. See
+		 * {@link Session}::request_queued for a detailed description of
+		 * the message lifecycle within a session.
+		 */
+		connect(signal: "request-started", callback: (owner: this, msg: Message, socket: Socket) => void): number;
+		/**
+		 * Emitted when a request is removed from #session's queue,
+		 * indicating that #session is done with it. See
+		 * {@link Session}::request_queued for a detailed description of the
+		 * message lifecycle within a session.
+		 */
+		connect(signal: "request-unqueued", callback: (owner: this, msg: Message) => void): number;
+		/**
+		 * Emitted when an SSL tunnel is being created on a proxy
+		 * connection. This is an internal signal intended only to be
+		 * used for debugging purposes, and may go away in the future.
+		 */
+		connect(signal: "tunneling", callback: (owner: this, connection: GObject.Object) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3462,6 +3780,36 @@ declare namespace imports.gi.Soup {
 		 * return value is %SOUP_SOCKET_ERROR.)
 		 */
 		write(buffer: number[], len: number, nwrote: number, cancellable: Gio.Cancellable): SocketIOStatus;
+		/**
+		 * Emitted when the socket is disconnected, for whatever
+		 * reason.
+		 */
+		connect(signal: "disconnected", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when a network-related event occurs. See
+		 * #GSocketClient::event for more details.
+		 */
+		connect(signal: "event", callback: (owner: this, event: Gio.SocketClientEvent, connection: Gio.IOStream) => void): number;
+		/**
+		 * Emitted when a listening socket (set up with
+		 * soup_socket_listen()) receives a new connection.
+		 * 
+		 * You must ref the #new if you want to keep it; otherwise it
+		 * will be destroyed after the signal is emitted.
+		 */
+		connect(signal: "new-connection", callback: (owner: this, _new: Socket) => void): number;
+		/**
+		 * Emitted when an async socket is readable. See
+		 * soup_socket_read(), soup_socket_read_until() and
+		 * {@link Socket}:non-blocking.
+		 */
+		connect(signal: "readable", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when an async socket is writable. See
+		 * soup_socket_write() and {@link Socket}:non-blocking.
+		 */
+		connect(signal: "writable", callback: (owner: this) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3654,6 +4002,43 @@ declare namespace imports.gi.Soup {
 		 * @param max_incoming_payload_size the maximum payload size
 		 */
 		set_max_incoming_payload_size(max_incoming_payload_size: number): void;
+		/**
+		 * Emitted when the connection has completely closed, either
+		 * due to an orderly close from the peer, one initiated via
+		 * soup_websocket_connection_close() or a fatal error
+		 * condition that caused a close.
+		 * 
+		 * This signal will be emitted once.
+		 */
+		connect(signal: "closed", callback: (owner: this) => void): number;
+		/**
+		 * This signal will be emitted during an orderly close.
+		 */
+		connect(signal: "closing", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when an error occurred on the WebSocket. This may
+		 * be fired multiple times. Fatal errors will be followed by
+		 * the {@link WebsocketConnection}::closed signal being emitted.
+		 */
+		connect(signal: "error", callback: (owner: this, error: GLib.Error) => void): number;
+		/**
+		 * Emitted when we receive a message from the peer.
+		 * 
+		 * As a convenience, the #message data will always be
+		 * NUL-terminated, but the NUL byte will not be included in
+		 * the length count.
+		 */
+		connect(signal: "message", callback: (owner: this, _type: number, message: GLib.Bytes) => void): number;
+		/**
+		 * Emitted when we receive a Pong frame (solicited or
+		 * unsolicited) from the peer.
+		 * 
+		 * As a convenience, the #message data will always be
+		 * NUL-terminated, but the NUL byte will not be included in
+		 * the length count.
+		 */
+		connect(signal: "pong", callback: (owner: this, message: GLib.Bytes) => void): number;
+
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
