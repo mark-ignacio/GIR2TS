@@ -80,7 +80,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * will be performed so that the pixbuf is oriented correctly.
 		 * @returns A newly-created pixbuf
 		 */
-		apply_embedded_orientation(): Pixbuf;
+		apply_embedded_orientation(): Pixbuf | null;
 		/**
 		 * Creates a transformation of the source image #src by scaling by
 		 * #scale_x and #scale_y then translating by #offset_x and #offset_y.
@@ -152,7 +152,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param color2 the color of the other check
 		 * @returns the new pixbuf
 		 */
-		composite_color_simple(dest_width: number, dest_height: number, interp_type: InterpType, overall_alpha: number, check_size: number, color1: number, color2: number): Pixbuf;
+		composite_color_simple(dest_width: number, dest_height: number, interp_type: InterpType, overall_alpha: number, check_size: number, color1: number, color2: number): Pixbuf | null;
 		/**
 		 * Creates a new `GdkPixbuf` with a copy of the information in the specified
 		 * `pixbuf`.
@@ -161,7 +161,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * use gdk_pixbuf_copy_options() for this.
 		 * @returns A newly-created pixbuf
 		 */
-		copy(): Pixbuf;
+		copy(): Pixbuf | null;
 		/**
 		 * Copies a rectangular area from `src_pixbuf` to `dest_pixbuf`.
 		 * 
@@ -206,7 +206,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param horizontal `TRUE` to flip horizontally, `FALSE` to flip vertically
 		 * @returns the new pixbuf
 		 */
-		flip(horizontal: boolean): Pixbuf;
+		flip(horizontal: boolean): Pixbuf | null;
 		/**
 		 * Queries the number of bits per color sample in a pixbuf.
 		 * @returns Number of bits per color sample.
@@ -256,7 +256,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param key a nul-terminated string.
 		 * @returns the value associated with `key`
 		 */
-		get_option(key: string): string;
+		get_option(key: string): string | null;
 		/**
 		 * Returns a `GHashTable` with a list of all the options that may have been
 		 * attached to the `pixbuf` when it was loaded, or that may have been
@@ -355,7 +355,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param angle the angle to rotate by
 		 * @returns the new pixbuf
 		 */
-		rotate_simple(angle: PixbufRotation): Pixbuf;
+		rotate_simple(angle: PixbufRotation): Pixbuf | null;
 		/**
 		 * Modifies saturation and optionally pixelates `src`, placing the result in
 		 * `dest`.
@@ -658,7 +658,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param interp_type the interpolation type for the transformation.
 		 * @returns the new pixbuf
 		 */
-		scale_simple(dest_width: number, dest_height: number, interp_type: InterpType): Pixbuf;
+		scale_simple(dest_width: number, dest_height: number, interp_type: InterpType): Pixbuf | null;
 		/**
 		 * Attaches a key/value pair as an option to a `GdkPixbuf`.
 		 * 
@@ -845,7 +845,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param height Height of image in pixels, must be > 0
 		 * @returns A newly-created pixel buffer
 		 */
-		public static new(colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number): Pixbuf;
+		public static new(colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number): Pixbuf | null;
 		/**
 		 * Creates a new #GdkPixbuf out of in-memory readonly image data.
 		 * 
@@ -905,7 +905,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 *   name encoding
 		 * @returns A newly-created pixbuf
 		 */
-		public static new_from_file(filename: string): Pixbuf;
+		public static new_from_file(filename: string): Pixbuf | null;
 		/**
 		 * Creates a new pixbuf by loading an image from a file.
 		 * 
@@ -936,7 +936,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param preserve_aspect_ratio `TRUE` to preserve the image's aspect ratio
 		 * @returns A newly-created pixbuf
 		 */
-		public static new_from_file_at_scale(filename: string, width: number, height: number, preserve_aspect_ratio: boolean): Pixbuf;
+		public static new_from_file_at_scale(filename: string, width: number, height: number, preserve_aspect_ratio: boolean): Pixbuf | null;
 		/**
 		 * Creates a new pixbuf by loading an image from a file.
 		 * 
@@ -962,7 +962,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param height The height the image should have or -1 to not constrain the height
 		 * @returns A newly-created pixbuf
 		 */
-		public static new_from_file_at_size(filename: string, width: number, height: number): Pixbuf;
+		public static new_from_file_at_size(filename: string, width: number, height: number): Pixbuf | null;
 		/**
 		 * Creates a `GdkPixbuf` from a flat representation that is suitable for
 		 * storing as inline data in a program.
@@ -1014,7 +1014,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param resource_path the path of the resource file
 		 * @returns A newly-created pixbuf
 		 */
-		public static new_from_resource(resource_path: string): Pixbuf;
+		public static new_from_resource(resource_path: string): Pixbuf | null;
 		/**
 		 * Creates a new pixbuf by loading an image from an resource.
 		 * 
@@ -1035,7 +1035,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param preserve_aspect_ratio `TRUE` to preserve the image's aspect ratio
 		 * @returns A newly-created pixbuf
 		 */
-		public static new_from_resource_at_scale(resource_path: string, width: number, height: number, preserve_aspect_ratio: boolean): Pixbuf;
+		public static new_from_resource_at_scale(resource_path: string, width: number, height: number, preserve_aspect_ratio: boolean): Pixbuf | null;
 		/**
 		 * Creates a new pixbuf by loading an image from an input stream.
 		 * 
@@ -1053,7 +1053,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @returns A newly-created pixbuf
 		 */
-		public static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable | null): Pixbuf;
+		public static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable | null): Pixbuf | null;
 		/**
 		 * Creates a new pixbuf by loading an image from an input stream.
 		 * 
@@ -1083,14 +1083,14 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @returns A newly-created pixbuf
 		 */
-		public static new_from_stream_at_scale(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable | null): Pixbuf;
+		public static new_from_stream_at_scale(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable | null): Pixbuf | null;
 		/**
 		 * Finishes an asynchronous pixbuf creation operation started with
 		 * gdk_pixbuf_new_from_stream_async().
 		 * @param async_result a `GAsyncResult`
 		 * @returns the newly created pixbuf
 		 */
-		public static new_from_stream_finish(async_result: Gio.AsyncResult): Pixbuf;
+		public static new_from_stream_finish(async_result: Gio.AsyncResult): Pixbuf | null;
 		/**
 		 * Creates a new pixbuf by parsing XPM data in memory.
 		 * 
@@ -1120,7 +1120,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @returns A `GdkPixbufFormat` describing
 		 *   the image format of the file
 		 */
-		public static get_file_info(filename: string): PixbufFormat;
+		public static get_file_info(filename: string): PixbufFormat | null;
 		/**
 		 * Asynchronously parses an image file far enough to determine its
 		 * format and size.
@@ -1143,7 +1143,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @returns A `GdkPixbufFormat` describing the
 		 *   image format of the file
 		 */
-		public static get_file_info_finish(async_result: Gio.AsyncResult): PixbufFormat;
+		public static get_file_info_finish(async_result: Gio.AsyncResult): PixbufFormat | null;
 		/**
 		 * Obtains the available information about the image formats supported
 		 * by GdkPixbuf.
@@ -1334,7 +1334,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 *   name encoding
 		 * @returns A newly-created animation
 		 */
-		public static new_from_file(filename: string): PixbufAnimation;
+		public static new_from_file(filename: string): PixbufAnimation | null;
 		/**
 		 * Creates a new pixbuf animation by loading an image from an resource.
 		 * 
@@ -1343,7 +1343,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param resource_path the path of the resource file
 		 * @returns A newly-created animation
 		 */
-		public static new_from_resource(resource_path: string): PixbufAnimation;
+		public static new_from_resource(resource_path: string): PixbufAnimation | null;
 		/**
 		 * Creates a new animation by loading it from an input stream.
 		 * 
@@ -1361,14 +1361,14 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param cancellable optional `GCancellable` object
 		 * @returns A newly-created animation
 		 */
-		public static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable | null): PixbufAnimation;
+		public static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable | null): PixbufAnimation | null;
 		/**
 		 * Finishes an asynchronous pixbuf animation creation operation started with
 		 * [func#GdkPixbuf.PixbufAnimation.new_from_stream_async].
 		 * @param async_result a #GAsyncResult
 		 * @returns the newly created animation
 		 */
-		public static new_from_stream_finish(async_result: Gio.AsyncResult): PixbufAnimation;
+		public static new_from_stream_finish(async_result: Gio.AsyncResult): PixbufAnimation | null;
 		/**
 		 * Creates a new animation by asynchronously loading an image from an input stream.
 		 * 
@@ -1510,13 +1510,13 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @returns The animation that the loader is
 		 *   currently loading
 		 */
-		get_animation(): PixbufAnimation;
+		get_animation(): PixbufAnimation | null;
 		/**
 		 * Obtains the available information about the format of the
 		 * currently loading image file.
 		 * @returns A {@link Format}
 		 */
-		get_format(): PixbufFormat;
+		get_format(): PixbufFormat | null;
 		/**
 		 * Queries the #GdkPixbuf that a pixbuf loader is currently creating.
 		 * 
@@ -1536,7 +1536,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @returns The pixbuf that the loader is
 		 *   creating
 		 */
-		get_pixbuf(): Pixbuf;
+		get_pixbuf(): Pixbuf | null;
 		/**
 		 * Causes the image to be scaled while it is loaded.
 		 * 

@@ -4396,7 +4396,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param key The user-data key to query
 	 * @returns A pointer to the user data
 	 */
-	function blob_get_user_data(blob: blob_t, key: user_data_key_t): any;
+	function blob_get_user_data(blob: blob_t, key: user_data_key_t): any | null;
 
 	/**
 	 * Tests whether a blob is immutable.
@@ -4724,7 +4724,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param key The user-data key to query
 	 * @returns A pointer to the user data
 	 */
-	function buffer_get_user_data(buffer: buffer_t, key: user_data_key_t): any;
+	function buffer_get_user_data(buffer: buffer_t, key: user_data_key_t): any | null;
 
 	/**
 	 * Sets unset buffer segment properties based on buffer Unicode
@@ -5266,7 +5266,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param key The user-data key to query
 	 * @returns A pointer to the user data
 	 */
-	function face_get_user_data(_face: face_t, key: user_data_key_t): any;
+	function face_get_user_data(_face: face_t, key: user_data_key_t): any | null;
 
 	/**
 	 * Tests whether the given face object is immutable.
@@ -5459,7 +5459,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param key The user-data key to query
 	 * @returns A pointer to the user data
 	 */
-	function font_funcs_get_user_data(ffuncs: font_funcs_t, key: user_data_key_t): any;
+	function font_funcs_get_user_data(ffuncs: font_funcs_t, key: user_data_key_t): any | null;
 
 	/**
 	 * Tests whether a font-functions structure is immutable.
@@ -5966,7 +5966,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param key The user-data key to query
 	 * @returns Pointer to the user data
 	 */
-	function font_get_user_data(font: font_t, key: user_data_key_t): any;
+	function font_get_user_data(font: font_t, key: user_data_key_t): any | null;
 
 	/**
 	 * Fetches the extents for a specified font, for vertical
@@ -6270,7 +6270,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @returns the FT_Face found or %NULL
 	 */
-	function ft_font_get_face(font: font_t): any;
+	function ft_font_get_face(font: font_t): any | null;
 
 	/**
 	 * Fetches the FT_Load_Glyph load flags of the specified #hb_font_t.
@@ -6288,7 +6288,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @returns the FT_Face associated with #font or %NULL
 	 */
-	function ft_font_lock_face(font: font_t): any;
+	function ft_font_lock_face(font: font_t): any | null;
 
 	/**
 	 * Configures the font-functions structure of the specified
@@ -6377,7 +6377,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font An #hb_font_t
 	 * @returns Graphite2 font associated with #font.
 	 */
-	function graphite2_font_get_gr_font(font: font_t): any;
+	function graphite2_font_get_gr_font(font: font_t): any | null;
 
 	/**
 	 * Converts #str representing a BCP 47 language tag to the corresponding
@@ -6475,7 +6475,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param key The user-data key to query
 	 * @returns A pointer to the user data
 	 */
-	function map_get_user_data(map: map_t, key: user_data_key_t): any;
+	function map_get_user_data(map: map_t, key: user_data_key_t): any | null;
 
 	/**
 	 * Tests whether #key is an element of #map.
@@ -6527,7 +6527,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param layers The array of layers found
 	 * @returns Total number of layers available for the glyph index queried
 	 */
-	function ot_color_glyph_get_layers(_face: face_t, glyph: codepoint_t, start_offset: number, layers: ot_color_layer_t[]): number;
+	function ot_color_glyph_get_layers(_face: face_t, glyph: codepoint_t, start_offset: number, layers: ot_color_layer_t[] | null): number;
 
 	/**
 	 * Fetches the PNG image for a glyph. This function takes a font object, not a face object,
@@ -7279,7 +7279,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @returns 
 	 * The #hb_language_t corresponding to #tag.
 	 */
-	function ot_tag_to_language(tag: tag_t): language_t;
+	function ot_tag_to_language(tag: tag_t): language_t | null;
 
 	/**
 	 * Converts a script tag to an #hb_script_t.
@@ -7580,7 +7580,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param key The user-data key to query
 	 * @returns A pointer to the user data
 	 */
-	function set_get_user_data(set: set_t, key: user_data_key_t): any;
+	function set_get_user_data(set: set_t, key: user_data_key_t): any | null;
 
 	/**
 	 * Tests whether #codepoint belongs to #set.
@@ -7843,7 +7843,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param key The user-data key to query
 	 * @returns A pointer to the user data
 	 */
-	function shape_plan_get_user_data(shape_plan: shape_plan_t, key: user_data_key_t): any;
+	function shape_plan_get_user_data(shape_plan: shape_plan_t, key: user_data_key_t): any | null;
 
 	/**
 	 * Increases the reference count on the given shaping plan.
@@ -7985,7 +7985,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param key The user-data key to query
 	 * @returns A pointer to the user data
 	 */
-	function unicode_funcs_get_user_data(ufuncs: unicode_funcs_t, key: user_data_key_t): any;
+	function unicode_funcs_get_user_data(ufuncs: unicode_funcs_t, key: user_data_key_t): any | null;
 
 	/**
 	 * Tests whether the specified Unicode-functions structure

@@ -68,7 +68,7 @@ declare namespace imports.gi.GLib {
 		 * blocks until data becomes available.
 		 * @returns data from the queue
 		 */
-		public pop(): any;
+		public pop(): any | null;
 		/**
 		 * Pops data from the #queue. If #queue is empty, this function
 		 * blocks until data becomes available.
@@ -76,7 +76,7 @@ declare namespace imports.gi.GLib {
 		 * This function must be called while holding the #queue's lock.
 		 * @returns data from the queue.
 		 */
-		public pop_unlocked(): any;
+		public pop_unlocked(): any | null;
 		/**
 		 * Pushes the #data into the #queue. #data must not be %NULL.
 		 * @param data #data to push into the #queue
@@ -217,7 +217,7 @@ declare namespace imports.gi.GLib {
 		 * @returns data from the queue or %NULL, when no data is
 		 *     received before #end_time.
 		 */
-		public timed_pop(end_time: TimeVal): any;
+		public timed_pop(end_time: TimeVal): any | null;
 		/**
 		 * Pops data from the #queue. If the queue is empty, blocks until
 		 * #end_time or until data becomes available.
@@ -232,7 +232,7 @@ declare namespace imports.gi.GLib {
 		 * @returns data from the queue or %NULL, when no data is
 		 *     received before #end_time.
 		 */
-		public timed_pop_unlocked(end_time: TimeVal): any;
+		public timed_pop_unlocked(end_time: TimeVal): any | null;
 		/**
 		 * Pops data from the #queue. If the queue is empty, blocks for
 		 * #timeout microseconds, or until data becomes available.
@@ -242,7 +242,7 @@ declare namespace imports.gi.GLib {
 		 * @returns data from the queue or %NULL, when no data is
 		 *     received before the timeout.
 		 */
-		public timeout_pop(timeout: number): any;
+		public timeout_pop(timeout: number): any | null;
 		/**
 		 * Pops data from the #queue. If the queue is empty, blocks for
 		 * #timeout microseconds, or until data becomes available.
@@ -254,14 +254,14 @@ declare namespace imports.gi.GLib {
 		 * @returns data from the queue or %NULL, when no data is
 		 *     received before the timeout.
 		 */
-		public timeout_pop_unlocked(timeout: number): any;
+		public timeout_pop_unlocked(timeout: number): any | null;
 		/**
 		 * Tries to pop data from the #queue. If no data is available,
 		 * %NULL is returned.
 		 * @returns data from the queue or %NULL, when no data is
 		 *     available immediately.
 		 */
-		public try_pop(): any;
+		public try_pop(): any | null;
 		/**
 		 * Tries to pop data from the #queue. If no data is available,
 		 * %NULL is returned.
@@ -270,7 +270,7 @@ declare namespace imports.gi.GLib {
 		 * @returns data from the queue or %NULL, when no data is
 		 *     available immediately.
 		 */
-		public try_pop_unlocked(): any;
+		public try_pop_unlocked(): any | null;
 		/**
 		 * Releases the queue's lock.
 		 * 
@@ -991,7 +991,7 @@ declare namespace imports.gi.GLib {
 		 * @returns 
 		 *          a pointer to the byte data, or %NULL
 		 */
-		public get_data(): number[];
+		public get_data(): number[] | null;
 		/**
 		 * Gets a pointer to a region in #bytes.
 		 * 
@@ -1018,7 +1018,7 @@ declare namespace imports.gi.GLib {
 		 * @param n_elements the number of elements in the region
 		 * @returns the requested region, or %NULL in case of an error
 		 */
-		public get_region(element_size: number, offset: number, n_elements: number): any;
+		public get_region(element_size: number, offset: number, n_elements: number): any | null;
 		/**
 		 * Get the size of the byte data in the #GBytes.
 		 * 
@@ -1117,7 +1117,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GChecksum, or %NULL.
 		 *   Use g_checksum_free() to free the memory allocated by it.
 		 */
-		public static new(checksum_type: ChecksumType): Checksum;
+		public static new(checksum_type: ChecksumType): Checksum | null;
 		/**
 		 * Copies a #GChecksum. If #checksum has been closed, by calling
 		 * g_checksum_get_string() or g_checksum_get_digest(), the copied
@@ -1729,7 +1729,7 @@ declare namespace imports.gi.GLib {
 		 * @param seconds the number of seconds past the minute
 		 * @returns a new #GDateTime, or %NULL
 		 */
-		public static new(tz: TimeZone, year: number, month: number, day: number, hour: number, minute: number, seconds: number): DateTime;
+		public static new(tz: TimeZone, year: number, month: number, day: number, hour: number, minute: number, seconds: number): DateTime | null;
 		/**
 		 * Creates a #GDateTime corresponding to the given
 		 * [ISO 8601 formatted string](https://en.wikipedia.org/wiki/ISO_8601)
@@ -1779,7 +1779,7 @@ declare namespace imports.gi.GLib {
 		 *                          timezone, or %NULL.
 		 * @returns a new #GDateTime, or %NULL
 		 */
-		public static new_from_iso8601(text: string, default_tz: TimeZone | null): DateTime;
+		public static new_from_iso8601(text: string, default_tz: TimeZone | null): DateTime | null;
 		/**
 		 * Creates a #GDateTime corresponding to the given #GTimeVal #tv in the
 		 * local time zone.
@@ -1796,7 +1796,7 @@ declare namespace imports.gi.GLib {
 		 * @param tv a #GTimeVal
 		 * @returns a new #GDateTime, or %NULL
 		 */
-		public static new_from_timeval_local(tv: TimeVal): DateTime;
+		public static new_from_timeval_local(tv: TimeVal): DateTime | null;
 		/**
 		 * Creates a #GDateTime corresponding to the given #GTimeVal #tv in UTC.
 		 * 
@@ -1811,7 +1811,7 @@ declare namespace imports.gi.GLib {
 		 * @param tv a #GTimeVal
 		 * @returns a new #GDateTime, or %NULL
 		 */
-		public static new_from_timeval_utc(tv: TimeVal): DateTime;
+		public static new_from_timeval_utc(tv: TimeVal): DateTime | null;
 		/**
 		 * Creates a #GDateTime corresponding to the given Unix time #t in the
 		 * local time zone.
@@ -1827,7 +1827,7 @@ declare namespace imports.gi.GLib {
 		 * @param _t the Unix time
 		 * @returns a new #GDateTime, or %NULL
 		 */
-		public static new_from_unix_local(_t: number): DateTime;
+		public static new_from_unix_local(_t: number): DateTime | null;
 		/**
 		 * Creates a #GDateTime corresponding to the given Unix time #t in UTC.
 		 * 
@@ -1842,7 +1842,7 @@ declare namespace imports.gi.GLib {
 		 * @param _t the Unix time
 		 * @returns a new #GDateTime, or %NULL
 		 */
-		public static new_from_unix_utc(_t: number): DateTime;
+		public static new_from_unix_utc(_t: number): DateTime | null;
 		/**
 		 * Creates a new #GDateTime corresponding to the given date and time in
 		 * the local time zone.
@@ -1857,7 +1857,7 @@ declare namespace imports.gi.GLib {
 		 * @param seconds the number of seconds past the minute
 		 * @returns a #GDateTime, or %NULL
 		 */
-		public static new_local(year: number, month: number, day: number, hour: number, minute: number, seconds: number): DateTime;
+		public static new_local(year: number, month: number, day: number, hour: number, minute: number, seconds: number): DateTime | null;
 		/**
 		 * Creates a #GDateTime corresponding to this exact instant in the given
 		 * time zone #tz.  The time is as accurate as the system allows, to a
@@ -1871,7 +1871,7 @@ declare namespace imports.gi.GLib {
 		 * @param tz a #GTimeZone
 		 * @returns a new #GDateTime, or %NULL
 		 */
-		public static new_now(tz: TimeZone): DateTime;
+		public static new_now(tz: TimeZone): DateTime | null;
 		/**
 		 * Creates a #GDateTime corresponding to this exact instant in the local
 		 * time zone.
@@ -1880,7 +1880,7 @@ declare namespace imports.gi.GLib {
 		 * zone returned by g_time_zone_new_local().
 		 * @returns a new #GDateTime, or %NULL
 		 */
-		public static new_now_local(): DateTime;
+		public static new_now_local(): DateTime | null;
 		/**
 		 * Creates a #GDateTime corresponding to this exact instant in UTC.
 		 * 
@@ -1888,7 +1888,7 @@ declare namespace imports.gi.GLib {
 		 * zone returned by g_time_zone_new_utc().
 		 * @returns a new #GDateTime, or %NULL
 		 */
-		public static new_now_utc(): DateTime;
+		public static new_now_utc(): DateTime | null;
 		/**
 		 * Creates a new #GDateTime corresponding to the given date and time in
 		 * UTC.
@@ -1903,14 +1903,14 @@ declare namespace imports.gi.GLib {
 		 * @param seconds the number of seconds past the minute
 		 * @returns a #GDateTime, or %NULL
 		 */
-		public static new_utc(year: number, month: number, day: number, hour: number, minute: number, seconds: number): DateTime;
+		public static new_utc(year: number, month: number, day: number, hour: number, minute: number, seconds: number): DateTime | null;
 		/**
 		 * Creates a copy of #datetime and adds the specified timespan to the copy.
 		 * @param timespan a #GTimeSpan
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public add(timespan: TimeSpan): DateTime;
+		public add(timespan: TimeSpan): DateTime | null;
 		/**
 		 * Creates a copy of #datetime and adds the specified number of days to the
 		 * copy. Add negative values to subtract days.
@@ -1918,7 +1918,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public add_days(days: number): DateTime;
+		public add_days(days: number): DateTime | null;
 		/**
 		 * Creates a new #GDateTime adding the specified values to the current date and
 		 * time in #datetime. Add negative values to subtract.
@@ -1931,7 +1931,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public add_full(years: number, months: number, days: number, hours: number, minutes: number, seconds: number): DateTime;
+		public add_full(years: number, months: number, days: number, hours: number, minutes: number, seconds: number): DateTime | null;
 		/**
 		 * Creates a copy of #datetime and adds the specified number of hours.
 		 * Add negative values to subtract hours.
@@ -1939,7 +1939,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public add_hours(hours: number): DateTime;
+		public add_hours(hours: number): DateTime | null;
 		/**
 		 * Creates a copy of #datetime adding the specified number of minutes.
 		 * Add negative values to subtract minutes.
@@ -1947,7 +1947,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public add_minutes(minutes: number): DateTime;
+		public add_minutes(minutes: number): DateTime | null;
 		/**
 		 * Creates a copy of #datetime and adds the specified number of months to the
 		 * copy. Add negative values to subtract months.
@@ -1960,7 +1960,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public add_months(months: number): DateTime;
+		public add_months(months: number): DateTime | null;
 		/**
 		 * Creates a copy of #datetime and adds the specified number of seconds.
 		 * Add negative values to subtract seconds.
@@ -1968,7 +1968,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public add_seconds(seconds: number): DateTime;
+		public add_seconds(seconds: number): DateTime | null;
 		/**
 		 * Creates a copy of #datetime and adds the specified number of weeks to the
 		 * copy. Add negative values to subtract weeks.
@@ -1976,7 +1976,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public add_weeks(weeks: number): DateTime;
+		public add_weeks(weeks: number): DateTime | null;
 		/**
 		 * Creates a copy of #datetime and adds the specified number of years to the
 		 * copy. Add negative values to subtract years.
@@ -1987,7 +1987,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public add_years(years: number): DateTime;
+		public add_years(years: number): DateTime | null;
 		/**
 		 * A comparison function for #GDateTimes that is suitable
 		 * as a #GCompareFunc. Both #GDateTimes must be non-%NULL.
@@ -2121,7 +2121,7 @@ declare namespace imports.gi.GLib {
 		 *    as a format specifier not being supported in the current locale). The
 		 *    string should be freed with g_free().
 		 */
-		public format(format: string): string;
+		public format(format: string): string | null;
 		/**
 		 * Format #datetime in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601),
 		 * including the date, time and time zone, and return that as a UTF-8 encoded
@@ -2132,7 +2132,7 @@ declare namespace imports.gi.GLib {
 		 *   ISO 8601 format or %NULL in the case that there was an error. The string
 		 *   should be freed with g_free().
 		 */
-		public format_iso8601(): string;
+		public format_iso8601(): string | null;
 		/**
 		 * Retrieves the day of the month represented by #datetime in the gregorian
 		 * calendar.
@@ -2306,7 +2306,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public to_local(): DateTime;
+		public to_local(): DateTime | null;
 		/**
 		 * Stores the instant in time that #datetime represents into #tv.
 		 * 
@@ -2336,7 +2336,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public to_timezone(tz: TimeZone): DateTime;
+		public to_timezone(tz: TimeZone): DateTime | null;
 		/**
 		 * Gives the Unix time corresponding to #datetime, rounding down to the
 		 * nearest second.
@@ -2355,7 +2355,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the newly created #GDateTime which
 		 *   should be freed with g_date_time_unref(), or %NULL
 		 */
-		public to_utc(): DateTime;
+		public to_utc(): DateTime | null;
 		/**
 		 * Atomically decrements the reference count of #datetime by one.
 		 * 
@@ -3386,7 +3386,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the locale from the file, or %NULL if the key was not
 		 *   found or the entry in the file was was untranslated
 		 */
-		public get_locale_for_key(group_name: string, key: string, locale: string | null): string;
+		public get_locale_for_key(group_name: string, key: string, locale: string | null): string | null;
 		/**
 		 * Returns the value associated with #key under #group_name
 		 * translated in the given #locale if available.  If #locale is
@@ -3434,7 +3434,7 @@ declare namespace imports.gi.GLib {
 		 * Returns the name of the start group of the file.
 		 * @returns The start group of the key file.
 		 */
-		public get_start_group(): string;
+		public get_start_group(): string | null;
 		/**
 		 * Returns the string value associated with #key under #group_name.
 		 * Unlike g_key_file_get_value(), this function handles escape sequences
@@ -4369,7 +4369,7 @@ declare namespace imports.gi.GLib {
 		 *     the markup context and will be freed when
 		 *     g_markup_parse_context_free() is called.
 		 */
-		public get_user_data(): any;
+		public get_user_data(): any | null;
 		/**
 		 * Feed some data to the #GMarkupParseContext.
 		 * 
@@ -4402,7 +4402,7 @@ declare namespace imports.gi.GLib {
 		 * interface.
 		 * @returns the user data passed to g_markup_parse_context_push()
 		 */
-		public pop(): any;
+		public pop(): any | null;
 		/**
 		 * Temporarily redirects markup data to a sub-parser.
 		 * 
@@ -4580,7 +4580,7 @@ declare namespace imports.gi.GLib {
 		 * @param string_to_expand the string to expand
 		 * @returns the expanded string, or %NULL if an error occurred
 		 */
-		public expand_references(string_to_expand: string): string;
+		public expand_references(string_to_expand: string): string | null;
 		/**
 		 * Retrieves the text matching the #match_num'th capturing
 		 * parentheses. 0 is the full text of the match, 1 is the first paren
@@ -4602,7 +4602,7 @@ declare namespace imports.gi.GLib {
 		 * @returns The matched substring, or %NULL if an error
 		 *     occurred. You have to free the string yourself
 		 */
-		public fetch(match_num: number): string;
+		public fetch(match_num: number): string | null;
 		/**
 		 * Bundles up pointers to each of the matching substrings from a match
 		 * and stores them in an array of gchar pointers. The first element in
@@ -4638,7 +4638,7 @@ declare namespace imports.gi.GLib {
 		 * @returns The matched substring, or %NULL if an error
 		 *     occurred. You have to free the string yourself
 		 */
-		public fetch_named(name: string): string;
+		public fetch_named(name: string): string | null;
 		/**
 		 * Retrieves the position in bytes of the capturing parentheses named #name.
 		 * 
@@ -5015,7 +5015,7 @@ declare namespace imports.gi.GLib {
 		 *          is %G_ONCE_STATUS_READY
 		 */
 		public retval: any;
-		public impl(_func: ThreadFunc, _arg: any | null): any;
+		public impl(_func: ThreadFunc, _arg: any | null): any | null;
 	}
 
 	/**
@@ -5525,7 +5525,7 @@ declare namespace imports.gi.GLib {
 		 * created, for example).
 		 * @returns the thread-local value
 		 */
-		public get(): any;
+		public get(): any | null;
 		/**
 		 * Sets the thread local variable #key to have the value #value in the
 		 * current thread.
@@ -5737,7 +5737,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the data of the first element in the queue, or %NULL
 		 *     if the queue is empty
 		 */
-		public peek_head(): any;
+		public peek_head(): any | null;
 		/**
 		 * Returns the first link in #queue.
 		 * @returns the first link in #queue, or %NULL if #queue is empty
@@ -5749,7 +5749,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the data for the #n'th element of #queue,
 		 *     or %NULL if #n is off the end of #queue
 		 */
-		public peek_nth(_n: number): any;
+		public peek_nth(_n: number): any | null;
 		/**
 		 * Returns the link at the given position
 		 * @param _n the position of the link
@@ -5762,7 +5762,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the data of the last element in the queue, or %NULL
 		 *     if the queue is empty
 		 */
-		public peek_tail(): any;
+		public peek_tail(): any | null;
 		/**
 		 * Returns the last link in #queue.
 		 * @returns the last link in #queue, or %NULL if #queue is empty
@@ -5773,7 +5773,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the data of the first element in the queue, or %NULL
 		 *     if the queue is empty
 		 */
-		public pop_head(): any;
+		public pop_head(): any | null;
 		/**
 		 * Removes and returns the first element of the queue.
 		 * @returns the #GList element at the head of the queue, or %NULL
@@ -5785,7 +5785,7 @@ declare namespace imports.gi.GLib {
 		 * @param _n the position of the element
 		 * @returns the element's data, or %NULL if #n is off the end of #queue
 		 */
-		public pop_nth(_n: number): any;
+		public pop_nth(_n: number): any | null;
 		/**
 		 * Removes and returns the link at the given position.
 		 * @param _n the link's position
@@ -5797,7 +5797,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the data of the last element in the queue, or %NULL
 		 *     if the queue is empty
 		 */
-		public pop_tail(): any;
+		public pop_tail(): any | null;
 		/**
 		 * Removes and returns the last element of the queue.
 		 * @returns the #GList element at the tail of the queue, or %NULL
@@ -6271,7 +6271,7 @@ declare namespace imports.gi.GLib {
 		 * @returns a #GRegex structure or %NULL if an error occurred. Call
 		 *   g_regex_unref() when you are done with it
 		 */
-		public static new(pattern: string, compile_options: RegexCompileFlags, match_options: RegexMatchFlags): Regex;
+		public static new(pattern: string, compile_options: RegexCompileFlags, match_options: RegexMatchFlags): Regex | null;
 		/**
 		 * Returns the number of capturing subpatterns in the pattern.
 		 * @returns the number of capturing subpatterns
@@ -6841,7 +6841,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the value of #symbol in the current scope, or %NULL
 		 *     if #symbol is not bound in the current scope
 		 */
-		public lookup_symbol(symbol: string): any;
+		public lookup_symbol(symbol: string): any | null;
 		/**
 		 * Parses the next token, without removing it from the input stream.
 		 * The token data is placed in the #next_token, #next_value, #next_line,
@@ -6881,7 +6881,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the value of #symbol in the given scope, or %NULL
 		 *     if #symbol is not bound in the given scope.
 		 */
-		public scope_lookup_symbol(scope_id: number, symbol: string): any;
+		public scope_lookup_symbol(scope_id: number, symbol: string): any | null;
 		/**
 		 * Removes a symbol from a scope.
 		 * @param scope_id the scope id
@@ -7195,7 +7195,7 @@ declare namespace imports.gi.GLib {
 		 *     first item found equal to #data according to #cmp_func and
 		 *     #cmp_data, or %NULL if no such item exists
 		 */
-		public lookup(data: any | null, cmp_func: CompareDataFunc, cmp_data: any | null): SequenceIter;
+		public lookup(data: any | null, cmp_func: CompareDataFunc, cmp_data: any | null): SequenceIter | null;
 		/**
 		 * Like g_sequence_lookup(), but uses a #GSequenceIterCompareFunc
 		 * instead of a #GCompareDataFunc as the compare function.
@@ -7214,7 +7214,7 @@ declare namespace imports.gi.GLib {
 		 *     the first item found equal to #data according to #iter_cmp
 		 *     and #cmp_data, or %NULL if no such item exists
 		 */
-		public lookup_iter(data: any | null, iter_cmp: SequenceIterCompareFunc, cmp_data: any | null): SequenceIter;
+		public lookup_iter(data: any | null, iter_cmp: SequenceIterCompareFunc, cmp_data: any | null): SequenceIter | null;
 		/**
 		 * Adds a new item to the front of #seq
 		 * @param data the data for the new item
@@ -7489,7 +7489,7 @@ declare namespace imports.gi.GLib {
 		 *               source is associated, or %NULL if the context has not
 		 *               yet been added to a source.
 		 */
-		public get_context(): MainContext;
+		public get_context(): MainContext | null;
 		/**
 		 * This function ignores #source and is otherwise the same as
 		 * g_get_current_time().
@@ -7514,7 +7514,7 @@ declare namespace imports.gi.GLib {
 		 * name may be #NULL if it has never been set with g_source_set_name().
 		 * @returns the name of the source
 		 */
-		public get_name(): string;
+		public get_name(): string | null;
 		/**
 		 * Gets the priority of a source.
 		 * @returns the priority of the source
@@ -8070,7 +8070,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the character data of #string
 		 *          (i.e. %NULL if #free_segment is %TRUE)
 		 */
-		public free(free_segment: boolean): string;
+		public free(free_segment: boolean): string | null;
 		/**
 		 * Transfers ownership of the contents of #string to a newly allocated
 		 * #GBytes.  The #GString structure itself is deallocated, and it is
@@ -8536,7 +8536,7 @@ declare namespace imports.gi.GLib {
 		 * want to keep the GThread alive beyond the g_thread_join() call.
 		 * @returns the return value of the thread
 		 */
-		public join(): any;
+		public join(): any | null;
 		/**
 		 * Increase the reference count on #thread.
 		 * @returns a new reference to #thread
@@ -8746,7 +8746,7 @@ declare namespace imports.gi.GLib {
 		 * @returns a newly allocated string containing an ISO 8601 date,
 		 *    or %NULL if #time_ was too large
 		 */
-		public to_iso8601(): string;
+		public to_iso8601(): string | null;
 	}
 
 	/**
@@ -8836,7 +8836,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the requested timezone, or %NULL on
 		 *     failure
 		 */
-		public static new_identifier(identifier: string | null): TimeZone;
+		public static new_identifier(identifier: string | null): TimeZone | null;
 		/**
 		 * Creates a #GTimeZone corresponding to local time.  The local time
 		 * zone may change between invocations to this function; for example,
@@ -9161,7 +9161,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the value corresponding to the key, or %NULL
 		 *     if the key was not found
 		 */
-		public lookup(key: any | null): any;
+		public lookup(key: any | null): any | null;
 		/**
 		 * Looks up a key in the #GTree, returning the original key and the
 		 * associated value. This is useful if you need to free the memory
@@ -9179,7 +9179,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the tree node corresponding to
 		 *          the key, or %NULL if the key was not found
 		 */
-		public lookup_node(key: any | null): TreeNode;
+		public lookup_node(key: any | null): TreeNode | null;
 		/**
 		 * Gets the lower bound node corresponding to the given key,
 		 * or %NULL if the tree is empty or all the nodes in the tree
@@ -9192,7 +9192,7 @@ declare namespace imports.gi.GLib {
 		 *          the lower bound, or %NULL if the tree is empty or has only
 		 *          keys strictly lower than the searched key.
 		 */
-		public lower_bound(key: any | null): TreeNode;
+		public lower_bound(key: any | null): TreeNode | null;
 		/**
 		 * Gets the number of nodes in a #GTree.
 		 * @returns the number of nodes in #tree
@@ -9203,13 +9203,13 @@ declare namespace imports.gi.GLib {
 		 * for an empty tree.
 		 * @returns the first node in the tree
 		 */
-		public node_first(): TreeNode;
+		public node_first(): TreeNode | null;
 		/**
 		 * Returns the last in-order node of the tree, or %NULL
 		 * for an empty tree.
 		 * @returns the last node in the tree
 		 */
-		public node_last(): TreeNode;
+		public node_last(): TreeNode | null;
 		/**
 		 * Increments the reference count of #tree by one.
 		 * 
@@ -9274,7 +9274,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the value corresponding to the found key, or %NULL
 		 *     if the key was not found
 		 */
-		public search(search_func: CompareFunc): any;
+		public search(search_func: CompareFunc): any | null;
 		/**
 		 * Searches a #GTree using #search_func.
 		 * 
@@ -9289,7 +9289,7 @@ declare namespace imports.gi.GLib {
 		 * @returns the node corresponding to the
 		 *          found key, or %NULL if the key was not found
 		 */
-		public search_node(search_func: CompareFunc): TreeNode;
+		public search_node(search_func: CompareFunc): TreeNode | null;
 		/**
 		 * Removes a key and its associated value from a #GTree without calling
 		 * the key and value destroy functions.
@@ -9329,7 +9329,7 @@ declare namespace imports.gi.GLib {
 		 *          upper bound, or %NULL if the tree is empty or has only keys
 		 *          lower than or equal to the searched key.
 		 */
-		public upper_bound(key: any | null): TreeNode;
+		public upper_bound(key: any | null): TreeNode | null;
 	}
 
 	/**
@@ -9342,24 +9342,24 @@ declare namespace imports.gi.GLib {
 		 * Gets the key stored at a particular tree node.
 		 * @returns the key at the node.
 		 */
-		public key(): any;
+		public key(): any | null;
 		/**
 		 * Returns the next in-order node of the tree, or %NULL
 		 * if the passed node was already the last one.
 		 * @returns the next node in the tree
 		 */
-		public next(): TreeNode;
+		public next(): TreeNode | null;
 		/**
 		 * Returns the previous in-order node of the tree, or %NULL
 		 * if the passed node was already the first one.
 		 * @returns the previous node in the tree
 		 */
-		public previous(): TreeNode;
+		public previous(): TreeNode | null;
 		/**
 		 * Gets the value stored at a particular tree node.
 		 * @returns the value at the node.
 		 */
-		public value(): any;
+		public value(): any | null;
 	}
 
 	/**
@@ -9485,7 +9485,7 @@ declare namespace imports.gi.GLib {
 		 * further parsing this information.
 		 * @returns #uri's authentication parameters.
 		 */
-		public get_auth_params(): string;
+		public get_auth_params(): string | null;
 		/**
 		 * Gets #uri's flags set upon construction.
 		 * @returns #uri's flags.
@@ -9496,7 +9496,7 @@ declare namespace imports.gi.GLib {
 		 * the flags with which #uri was created.
 		 * @returns #uri's fragment.
 		 */
-		public get_fragment(): string;
+		public get_fragment(): string | null;
 		/**
 		 * Gets #uri's host. This will never have `%`-encoded characters,
 		 * unless it is non-UTF-8 (which can only be the case if #uri was
@@ -9509,14 +9509,14 @@ declare namespace imports.gi.GLib {
 		 * `fe80::1234%``25em1` if the string is still encoded).
 		 * @returns #uri's host.
 		 */
-		public get_host(): string;
+		public get_host(): string | null;
 		/**
 		 * Gets #uri's password, which may contain `%`-encoding, depending on
 		 * the flags with which #uri was created. (If #uri was not created
 		 * with %G_URI_FLAGS_HAS_PASSWORD then this will be %NULL.)
 		 * @returns #uri's password.
 		 */
-		public get_password(): string;
+		public get_password(): string | null;
 		/**
 		 * Gets #uri's path, which may contain `%`-encoding, depending on the
 		 * flags with which #uri was created.
@@ -9536,7 +9536,7 @@ declare namespace imports.gi.GLib {
 		 * #GUriParamsIter or g_uri_parse_params() may be useful.
 		 * @returns #uri's query.
 		 */
-		public get_query(): string;
+		public get_query(): string | null;
 		/**
 		 * Gets #uri's scheme. Note that this will always be all-lowercase,
 		 * regardless of the string or strings that #uri was created from.
@@ -9550,13 +9550,13 @@ declare namespace imports.gi.GLib {
 		 * %G_URI_FLAGS_HAS_AUTH_PARAMS, this is the same as g_uri_get_userinfo().
 		 * @returns #uri's user.
 		 */
-		public get_user(): string;
+		public get_user(): string | null;
 		/**
 		 * Gets #uri's userinfo, which may contain `%`-encoding, depending on
 		 * the flags with which #uri was created.
 		 * @returns #uri's userinfo.
 		 */
-		public get_userinfo(): string;
+		public get_userinfo(): string | null;
 		/**
 		 * Parses #uri_ref according to #flags and, if it is a
 		 * [relative URI][relative-absolute-uris], resolves it relative to #base_uri.
@@ -10664,7 +10664,7 @@ declare namespace imports.gi.GLib {
 		 * serialized data).
 		 * @returns the serialized form of #value, or %NULL
 		 */
-		public get_data(): any;
+		public get_data(): any | null;
 		/**
 		 * Returns a pointer to the serialized form of a #GVariant instance.
 		 * The semantics of this function are exactly the same as
@@ -10754,7 +10754,7 @@ declare namespace imports.gi.GLib {
 		 * value is Nothing, then this function returns %NULL.
 		 * @returns the contents of #value, or %NULL
 		 */
-		public get_maybe(): Variant;
+		public get_maybe(): Variant | null;
 		/**
 		 * Gets a #GVariant instance that has the same value as #value and is
 		 * trusted to be in normal form.
@@ -11840,7 +11840,7 @@ declare namespace imports.gi.GLib {
 		 * ]|
 		 * @returns a #GVariant, or %NULL
 		 */
-		public next_value(): Variant;
+		public next_value(): Variant | null;
 	}
 
 	/**
@@ -16020,7 +16020,7 @@ declare namespace imports.gi.GLib {
 		 * @param data the data to duplicate
 		 * @returns a duplicate of data
 		 */
-		(data: any | null): any;
+		(data: any | null): any | null;
 	}
 
 	/**
@@ -16801,7 +16801,7 @@ declare namespace imports.gi.GLib {
 		 * @param data data passed to the thread
 		 * @returns the return value of the thread
 		 */
-		(data: any | null): any;
+		(data: any | null): any | null;
 	}
 
 	/**
@@ -17871,7 +17871,7 @@ declare namespace imports.gi.GLib {
 	 * @param atomic a pointer to a #gpointer-sized value
 	 * @returns the value of the pointer
 	 */
-	function atomic_pointer_get(atomic: any): any;
+	function atomic_pointer_get(atomic: any): any | null;
 
 	/**
 	 * Performs an atomic bitwise 'or' of the value of #atomic and #val,
@@ -18426,7 +18426,7 @@ declare namespace imports.gi.GLib {
 	 *   version mismatch. The returned string is owned by GLib and must
 	 *   not be modified or freed.
 	 */
-	function check_version(required_major: number, required_minor: number, required_micro: number): string;
+	function check_version(required_major: number, required_minor: number, required_micro: number): string | null;
 
 	/**
 	 * Gets the length in bytes of digests of type #checksum_type
@@ -18628,7 +18628,7 @@ declare namespace imports.gi.GLib {
 	 *   #checksum_type. The returned string should be freed with g_free() when
 	 *   done using it.
 	 */
-	function compute_checksum_for_bytes(checksum_type: ChecksumType, data: Bytes): string;
+	function compute_checksum_for_bytes(checksum_type: ChecksumType, data: Bytes): string | null;
 
 	/**
 	 * Computes the checksum for a binary #data of #length. This is a
@@ -18644,7 +18644,7 @@ declare namespace imports.gi.GLib {
 	 *   #checksum_type. The returned string should be freed with g_free() when
 	 *   done using it.
 	 */
-	function compute_checksum_for_data(checksum_type: ChecksumType, data: number[], length: number): string;
+	function compute_checksum_for_data(checksum_type: ChecksumType, data: number[], length: number): string | null;
 
 	/**
 	 * Computes the checksum of a string.
@@ -18657,7 +18657,7 @@ declare namespace imports.gi.GLib {
 	 *   or %NULL if g_checksum_new() fails for #checksum_type. The returned string
 	 *   should be freed with g_free() when done using it.
 	 */
-	function compute_checksum_for_string(checksum_type: ChecksumType, _str: string, length: number): string;
+	function compute_checksum_for_string(checksum_type: ChecksumType, _str: string, length: number): string | null;
 
 	/**
 	 * Computes the HMAC for a binary #data. This is a
@@ -18840,7 +18840,7 @@ declare namespace imports.gi.GLib {
 	 * @returns the data element, or %NULL if it
 	 *          is not found.
 	 */
-	function datalist_get_data(datalist: Data, key: string): any;
+	function datalist_get_data(datalist: Data, key: string): any | null;
 
 	/**
 	 * Gets flags values packed in together with the datalist.
@@ -18871,7 +18871,7 @@ declare namespace imports.gi.GLib {
 	 *     associated with #key_id in #datalist, or %NULL if not set.
 	 *     If #dup_func is %NULL, the value is returned unmodified.
 	 */
-	function datalist_id_dup_data(datalist: Data, key_id: Quark, dup_func: DuplicateFunc | null): any;
+	function datalist_id_dup_data(datalist: Data, key_id: Quark, dup_func: DuplicateFunc | null): any | null;
 
 	/**
 	 * Retrieves the data element corresponding to #key_id.
@@ -18880,7 +18880,7 @@ declare namespace imports.gi.GLib {
 	 * @returns the data element, or %NULL if
 	 *          it is not found.
 	 */
-	function datalist_id_get_data(datalist: Data, key_id: Quark): any;
+	function datalist_id_get_data(datalist: Data, key_id: Quark): any | null;
 
 	/**
 	 * Removes an element, without calling its destroy notification
@@ -18890,7 +18890,7 @@ declare namespace imports.gi.GLib {
 	 * @returns the data previously stored at #key_id,
 	 *          or %NULL if none.
 	 */
-	function datalist_id_remove_no_notify(datalist: Data, key_id: Quark): any;
+	function datalist_id_remove_no_notify(datalist: Data, key_id: Quark): any | null;
 
 	/**
 	 * Compares the member that is associated with #key_id in
@@ -18995,7 +18995,7 @@ declare namespace imports.gi.GLib {
 	 * @returns the data element corresponding to
 	 *          the #GQuark, or %NULL if it is not found.
 	 */
-	function dataset_id_get_data(dataset_location: any, key_id: Quark): any;
+	function dataset_id_get_data(dataset_location: any, key_id: Quark): any | null;
 
 	/**
 	 * Removes an element, without calling its destroy notification
@@ -19005,7 +19005,7 @@ declare namespace imports.gi.GLib {
 	 * @returns the data previously stored at #key_id,
 	 *          or %NULL if none.
 	 */
-	function dataset_id_remove_no_notify(dataset_location: any, key_id: Quark): any;
+	function dataset_id_remove_no_notify(dataset_location: any, key_id: Quark): any | null;
 
 	/**
 	 * Sets the data element associated with the given #GQuark id, and also
@@ -19693,7 +19693,7 @@ declare namespace imports.gi.GLib {
 	 * @returns a newly-allocated
 	 *   string with the absolute path, or %NULL
 	 */
-	function find_program_in_path(program: string): string;
+	function find_program_in_path(program: string): string | null;
 
 	/**
 	 * Formats a size (for example the size of a file) into a human readable
@@ -19775,7 +19775,7 @@ declare namespace imports.gi.GLib {
 	 * @returns human-readable application
 	 *   name. May return %NULL
 	 */
-	function get_application_name(): string;
+	function get_application_name(): string | null;
 
 	/**
 	 * Obtains the character set for the [current locale][setlocale]; you
@@ -20038,7 +20038,7 @@ declare namespace imports.gi.GLib {
 	 * @returns The associated value for the requested key or %NULL if
 	 *   this information is not provided.
 	 */
-	function get_os_info(key_name: string): string;
+	function get_os_info(key_name: string): string | null;
 
 	/**
 	 * Gets the name of the program. This name should not be localized,
@@ -20053,7 +20053,7 @@ declare namespace imports.gi.GLib {
 	 *   or %NULL if it has not been set yet. The returned string belongs
 	 *   to GLib and must not be modified or freed.
 	 */
-	function get_prgname(): string;
+	function get_prgname(): string | null;
 
 	/**
 	 * Gets the real name of the user. This usually comes from the user's
@@ -20366,7 +20366,7 @@ declare namespace imports.gi.GLib {
 	 * @param key the key to look up
 	 * @returns the associated value, or %NULL if the key is not found
 	 */
-	function hash_table_lookup(hash_table: GLib.HashTable, key: any | null): any;
+	function hash_table_lookup(hash_table: GLib.HashTable, key: any | null): any | null;
 
 	/**
 	 * Looks up a key in the #GHashTable, returning the original key and the
@@ -20569,7 +20569,7 @@ declare namespace imports.gi.GLib {
 	 * @returns an ASCII hostname, which must be freed,
 	 *    or %NULL if #hostname is in some way invalid.
 	 */
-	function hostname_to_ascii(hostname: string): string;
+	function hostname_to_ascii(hostname: string): string | null;
 
 	/**
 	 * Converts #hostname to its canonical presentation form; a UTF-8
@@ -20583,7 +20583,7 @@ declare namespace imports.gi.GLib {
 	 * @returns a UTF-8 hostname, which must be freed,
 	 *    or %NULL if #hostname is in some way invalid.
 	 */
-	function hostname_to_unicode(hostname: string): string;
+	function hostname_to_unicode(hostname: string): string | null;
 
 	/**
 	 * Same as the standard UNIX routine iconv(), but
@@ -21433,7 +21433,7 @@ declare namespace imports.gi.GLib {
 	 * @returns the thread-default #GMainContext, or
 	 * %NULL if the thread-default context is the global default context.
 	 */
-	function main_context_get_thread_default(): MainContext;
+	function main_context_get_thread_default(): MainContext | null;
 
 	/**
 	 * Gets the thread-default #GMainContext for this thread, as with
@@ -21451,7 +21451,7 @@ declare namespace imports.gi.GLib {
 	 * Returns the currently firing source for this thread.
 	 * @returns The currently firing source or %NULL.
 	 */
-	function main_current_source(): Source;
+	function main_current_source(): Source | null;
 
 	/**
 	 * Returns the depth of the stack of calls to
@@ -21565,7 +21565,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_bytes the number of bytes to allocate
 	 * @returns a pointer to the allocated memory
 	 */
-	function malloc(n_bytes: number): any;
+	function malloc(n_bytes: number): any | null;
 
 	/**
 	 * Allocates #n_bytes bytes of memory, initialized to 0's.
@@ -21573,7 +21573,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_bytes the number of bytes to allocate
 	 * @returns a pointer to the allocated memory
 	 */
-	function malloc0(n_bytes: number): any;
+	function malloc0(n_bytes: number): any | null;
 
 	/**
 	 * This function is similar to g_malloc0(), allocating (#n_blocks * #n_block_bytes) bytes,
@@ -21582,7 +21582,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_block_bytes the size of each block in bytes
 	 * @returns a pointer to the allocated memory
 	 */
-	function malloc0_n(n_blocks: number, n_block_bytes: number): any;
+	function malloc0_n(n_blocks: number, n_block_bytes: number): any | null;
 
 	/**
 	 * This function is similar to g_malloc(), allocating (#n_blocks * #n_block_bytes) bytes,
@@ -21591,7 +21591,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_block_bytes the size of each block in bytes
 	 * @returns a pointer to the allocated memory
 	 */
-	function malloc_n(n_blocks: number, n_block_bytes: number): any;
+	function malloc_n(n_blocks: number, n_block_bytes: number): any | null;
 
 	/**
 	 * Collects the attributes of the element from the data passed to the
@@ -21729,7 +21729,7 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to the newly-allocated copy of the memory, or %NULL if #mem
 	 *  is %NULL.
 	 */
-	function memdup(mem: any | null, byte_size: number): any;
+	function memdup(mem: any | null, byte_size: number): any | null;
 
 	/**
 	 * Allocates #byte_size bytes of memory, and copies #byte_size bytes into it
@@ -21742,7 +21742,7 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to the newly-allocated copy of the memory,
 	 *    or %NULL if #mem is %NULL.
 	 */
-	function memdup2(mem: any | null, byte_size: number): any;
+	function memdup2(mem: any | null, byte_size: number): any | null;
 
 	/**
 	 * Create a directory if it doesn't already exist. Create intermediate
@@ -21775,7 +21775,7 @@ declare namespace imports.gi.GLib {
 	 *     modified to hold the directory name.  In case of errors, %NULL is
 	 *     returned and %errno will be set.
 	 */
-	function mkdtemp(tmpl: string): string;
+	function mkdtemp(tmpl: string): string | null;
 
 	/**
 	 * Creates a temporary directory. See the mkdtemp() documentation
@@ -21799,7 +21799,7 @@ declare namespace imports.gi.GLib {
 	 *     modified to hold the directory name. In case of errors, %NULL is
 	 *     returned, and %errno will be set.
 	 */
-	function mkdtemp_full(tmpl: string, mode: number): string;
+	function mkdtemp_full(tmpl: string, mode: number): string | null;
 
 	/**
 	 * Opens a temporary file. See the mkstemp() documentation
@@ -22060,7 +22060,7 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer into #file_name after the
 	 *     root component
 	 */
-	function path_skip_root(file_name: string): string;
+	function path_skip_root(file_name: string): string | null;
 
 	/**
 	 * Matches a string against a compiled pattern. Passing the correct
@@ -22500,7 +22500,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_bytes new size of the memory in bytes
 	 * @returns the new address of the allocated memory
 	 */
-	function realloc(mem: any | null, n_bytes: number): any;
+	function realloc(mem: any | null, n_bytes: number): any | null;
 
 	/**
 	 * This function is similar to g_realloc(), allocating (#n_blocks * #n_block_bytes) bytes,
@@ -22510,7 +22510,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_block_bytes the size of each block in bytes
 	 * @returns the new address of the allocated memory
 	 */
-	function realloc_n(mem: any | null, n_blocks: number, n_block_bytes: number): any;
+	function realloc_n(mem: any | null, n_blocks: number, n_block_bytes: number): any | null;
 
 	/**
 	 * Compares the current value of #rc with #val.
@@ -22736,7 +22736,7 @@ declare namespace imports.gi.GLib {
 	 * @param iter a #GSequenceIter
 	 * @returns the data that #iter points to
 	 */
-	function sequence_get(iter: SequenceIter): any;
+	function sequence_get(iter: SequenceIter): any | null;
 
 	/**
 	 * Inserts a new item just before the item pointed to by #iter.
@@ -23015,7 +23015,7 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to the allocated memory block, which will
 	 *   be %NULL if and only if #mem_size is 0
 	 */
-	function slice_alloc(block_size: number): any;
+	function slice_alloc(block_size: number): any | null;
 
 	/**
 	 * Allocates a block of memory via g_slice_alloc() and initializes
@@ -23026,7 +23026,7 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to the allocated block, which will be %NULL if and only
 	 *    if #mem_size is 0
 	 */
-	function slice_alloc0(block_size: number): any;
+	function slice_alloc0(block_size: number): any | null;
 
 	/**
 	 * Allocates a block of memory from the slice allocator
@@ -23038,7 +23038,7 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to the allocated memory block, which will be %NULL if and
 	 *    only if #mem_size is 0
 	 */
-	function slice_copy(block_size: number, mem_block: any | null): any;
+	function slice_copy(block_size: number, mem_block: any | null): any | null;
 
 	/**
 	 * Frees a block of memory.
@@ -23969,7 +23969,7 @@ declare namespace imports.gi.GLib {
 	 * @param str_array a %NULL-terminated array of strings
 	 * @returns a new %NULL-terminated array of strings.
 	 */
-	function strdupv(str_array: string | null): string[];
+	function strdupv(str_array: string | null): string[] | null;
 
 	/**
 	 * Returns a string corresponding to the given error code, e.g. "no
@@ -25372,14 +25372,14 @@ declare namespace imports.gi.GLib {
 	 * @param stack_p a #GTrashStack
 	 * @returns the element at the top of the stack
 	 */
-	function trash_stack_peek(stack_p: TrashStack): any;
+	function trash_stack_peek(stack_p: TrashStack): any | null;
 
 	/**
 	 * Pops a piece of memory off a #GTrashStack.
 	 * @param stack_p a #GTrashStack
 	 * @returns the element at the top of the stack
 	 */
-	function trash_stack_pop(stack_p: TrashStack): any;
+	function trash_stack_pop(stack_p: TrashStack): any | null;
 
 	/**
 	 * Pushes a piece of memory onto a #GTrashStack.
@@ -25394,7 +25394,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_bytes number of bytes to allocate.
 	 * @returns the allocated memory, or %NULL.
 	 */
-	function try_malloc(n_bytes: number): any;
+	function try_malloc(n_bytes: number): any | null;
 
 	/**
 	 * Attempts to allocate #n_bytes, initialized to 0's, and returns %NULL on
@@ -25402,7 +25402,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_bytes number of bytes to allocate
 	 * @returns the allocated memory, or %NULL
 	 */
-	function try_malloc0(n_bytes: number): any;
+	function try_malloc0(n_bytes: number): any | null;
 
 	/**
 	 * This function is similar to g_try_malloc0(), allocating (#n_blocks * #n_block_bytes) bytes,
@@ -25411,7 +25411,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_block_bytes the size of each block in bytes
 	 * @returns the allocated memory, or %NULL
 	 */
-	function try_malloc0_n(n_blocks: number, n_block_bytes: number): any;
+	function try_malloc0_n(n_blocks: number, n_block_bytes: number): any | null;
 
 	/**
 	 * This function is similar to g_try_malloc(), allocating (#n_blocks * #n_block_bytes) bytes,
@@ -25420,7 +25420,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_block_bytes the size of each block in bytes
 	 * @returns the allocated memory, or %NULL.
 	 */
-	function try_malloc_n(n_blocks: number, n_block_bytes: number): any;
+	function try_malloc_n(n_blocks: number, n_block_bytes: number): any | null;
 
 	/**
 	 * Attempts to realloc #mem to a new size, #n_bytes, and returns %NULL
@@ -25432,7 +25432,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_bytes number of bytes to allocate.
 	 * @returns the allocated memory, or %NULL.
 	 */
-	function try_realloc(mem: any | null, n_bytes: number): any;
+	function try_realloc(mem: any | null, n_bytes: number): any | null;
 
 	/**
 	 * This function is similar to g_try_realloc(), allocating (#n_blocks * #n_block_bytes) bytes,
@@ -25442,7 +25442,7 @@ declare namespace imports.gi.GLib {
 	 * @param n_block_bytes the size of each block in bytes
 	 * @returns the allocated memory, or %NULL.
 	 */
-	function try_realloc_n(mem: any | null, n_blocks: number, n_block_bytes: number): any;
+	function try_realloc_n(mem: any | null, n_blocks: number, n_block_bytes: number): any | null;
 
 	/**
 	 * Convert a string from UCS-4 to UTF-16. A 0 character will be
@@ -25963,7 +25963,7 @@ declare namespace imports.gi.GLib {
 	 * @returns passwd entry, or %NULL on error; free the returned
 	 *    value with g_free()
 	 */
-	function unix_get_passwd_entry(user_name: string): any;
+	function unix_get_passwd_entry(user_name: string): any | null;
 
 	/**
 	 * Similar to the UNIX pipe() call, but on modern systems like Linux
@@ -26303,7 +26303,7 @@ declare namespace imports.gi.GLib {
 	 * @returns The ‘scheme’ component of the URI, or
 	 *     %NULL on error. The returned string should be freed when no longer needed.
 	 */
-	function uri_parse_scheme(uri: string): string;
+	function uri_parse_scheme(uri: string): string | null;
 
 	/**
 	 * Gets the scheme portion of a URI string.
@@ -26321,7 +26321,7 @@ declare namespace imports.gi.GLib {
 	 *     %NULL on error. The returned string is normalized to all-lowercase, and
 	 *     interned via g_intern_string(), so it does not need to be freed.
 	 */
-	function uri_peek_scheme(uri: string): string;
+	function uri_peek_scheme(uri: string): string | null;
 
 	/**
 	 * Parses #uri_ref according to #flags and, if it is a
@@ -26439,7 +26439,7 @@ declare namespace imports.gi.GLib {
 	 * needed.  As a special case if %NULL is given for #escaped_string, this
 	 * function will return %NULL.
 	 */
-	function uri_unescape_segment(escaped_string: string | null, escaped_string_end: string | null, illegal_characters: string | null): string;
+	function uri_unescape_segment(escaped_string: string | null, escaped_string_end: string | null, illegal_characters: string | null): string | null;
 
 	/**
 	 * Unescapes a whole escaped string.
@@ -26455,7 +26455,7 @@ declare namespace imports.gi.GLib {
 	 * @returns an unescaped version of #escaped_string.
 	 * The returned string should be freed when no longer needed.
 	 */
-	function uri_unescape_string(escaped_string: string, illegal_characters: string | null): string;
+	function uri_unescape_string(escaped_string: string, illegal_characters: string | null): string | null;
 
 	/**
 	 * Pauses the current thread for the given number of microseconds.
@@ -26589,7 +26589,7 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to the found character or %NULL if #end is
 	 *    set and is reached
 	 */
-	function utf8_find_next_char(_p: string, _end: string | null): string;
+	function utf8_find_next_char(_p: string, _end: string | null): string | null;
 
 	/**
 	 * Given a position #p with a UTF-8 encoded string #str, find the start
@@ -26603,7 +26603,7 @@ declare namespace imports.gi.GLib {
 	 * @param _p pointer to some position within #str
 	 * @returns a pointer to the found character or %NULL.
 	 */
-	function utf8_find_prev_char(_str: string, _p: string): string;
+	function utf8_find_prev_char(_str: string, _p: string): string | null;
 
 	/**
 	 * Converts a sequence of bytes encoded as UTF-8 to a Unicode character.
@@ -26686,7 +26686,7 @@ declare namespace imports.gi.GLib {
 	 *   is the normalized form of #str, or %NULL if #str
 	 *   is not valid UTF-8.
 	 */
-	function utf8_normalize(_str: string, len: number, mode: NormalizeMode): string;
+	function utf8_normalize(_str: string, len: number, mode: NormalizeMode): string | null;
 
 	/**
 	 * Converts from an integer character offset to a pointer to a position
@@ -26743,7 +26743,7 @@ declare namespace imports.gi.GLib {
 	 *     otherwise, a pointer to the start of the leftmost occurrence
 	 *     of the character in the string.
 	 */
-	function utf8_strchr(_p: string, len: number, _c: string): string;
+	function utf8_strchr(_p: string, len: number, _c: string): string | null;
 
 	/**
 	 * Converts all Unicode characters in the string that have a case
@@ -26797,7 +26797,7 @@ declare namespace imports.gi.GLib {
 	 *     otherwise, a pointer to the start of the rightmost occurrence
 	 *     of the character in the string.
 	 */
-	function utf8_strrchr(_p: string, len: number, _c: string): string;
+	function utf8_strrchr(_p: string, len: number, _c: string): string | null;
 
 	/**
 	 * Reverses a UTF-8 string. #str must be valid UTF-8 encoded text.

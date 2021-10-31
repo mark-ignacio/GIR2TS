@@ -70,7 +70,7 @@ declare namespace imports.gi.Soup {
 		 * is resolved before fetching its name or address.
 		 * @returns the hostname, or %NULL if it is not known.
 		 */
-		get_name(): string;
+		get_name(): string | null;
 		/**
 		 * Returns the physical address associated with #addr as a string.
 		 * (Eg, "127.0.0.1"). If the address is not yet known, returns %NULL.
@@ -81,7 +81,7 @@ declare namespace imports.gi.Soup {
 		 * is resolved before fetching its name or address.
 		 * @returns the physical address, or %NULL
 		 */
-		get_physical(): string;
+		get_physical(): string | null;
 		/**
 		 * Returns the port associated with #addr.
 		 * @returns the port
@@ -98,7 +98,7 @@ declare namespace imports.gi.Soup {
 		 * @param len return location for sockaddr length
 		 * @returns the sockaddr, or %NULL
 		 */
-		get_sockaddr(len: number): any;
+		get_sockaddr(len: number): any | null;
 		/**
 		 * A hash function (for #GHashTable) that corresponds to
 		 * soup_address_equal_by_ip(), qv
@@ -191,7 +191,7 @@ declare namespace imports.gi.Soup {
 		 * @param _port the port number (usually %SOUP_ADDRESS_ANY_PORT)
 		 * @returns the new {@link Address}
 		 */
-		public static new_any(family: AddressFamily, _port: number): Address;
+		public static new_any(family: AddressFamily, _port: number): Address | null;
 		/**
 		 * Returns a {@link Address} equivalent to #sa (or %NULL if #sa's
 		 * address family isn't supported)
@@ -199,7 +199,7 @@ declare namespace imports.gi.Soup {
 		 * @param len size of #sa
 		 * @returns the new {@link Address}
 		 */
-		public static new_from_sockaddr(sa: any | null, len: number): Address;
+		public static new_from_sockaddr(sa: any | null, len: number): Address | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -346,7 +346,7 @@ declare namespace imports.gi.Soup {
 		 * @returns the new {@link Auth}, or %NULL if it could
 		 * not be created
 		 */
-		public static new(_type: GObject.Type, msg: Message, auth_header: string): Auth;
+		public static new(_type: GObject.Type, msg: Message, auth_header: string): Auth | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -413,7 +413,7 @@ declare namespace imports.gi.Soup {
 		 * @returns the username that #msg has authenticated
 		 * as, if in fact it has authenticated. %NULL otherwise.
 		 */
-		accepts(msg: Message): string;
+		accepts(msg: Message): string | null;
 		/**
 		 * Adds #path to #domain, such that requests under #path on #domain's
 		 * server will require authentication (unless overridden by
@@ -1003,7 +1003,7 @@ declare namespace imports.gi.Soup {
 		 * @returns the cookies, in string form, or %NULL if
 		 * there are no cookies for #uri.
 		 */
-		get_cookies(uri: URI, for_http: boolean): string;
+		get_cookies(uri: URI, for_http: boolean): string | null;
 		/**
 		 * Gets whether #jar stores cookies persistenly.
 		 * @returns %TRUE if #jar storage is persistent or %FALSE otherwise.
@@ -1937,7 +1937,7 @@ declare namespace imports.gi.Soup {
 		 * @returns the new {@link Message} (or %NULL if #uri
 		 * could not be parsed).
 		 */
-		public static new(method: string, uri_string: string): Message;
+		public static new(method: string, uri_string: string): Message | null;
 		/**
 		 * Creates a new empty {@link Message}, which will connect to #uri
 		 * @param method the HTTP method for the created request
@@ -1966,7 +1966,7 @@ declare namespace imports.gi.Soup {
 		 * containing the headers for the part currently being processed or
 		 * %NULL if the headers failed to parse.
 		 */
-		get_headers(): MessageHeaders;
+		get_headers(): MessageHeaders | null;
 		/**
 		 * Obtains an input stream for the next part. When dealing with a
 		 * multipart response the input stream needs to be wrapped in a
@@ -1983,7 +1983,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a new #GInputStream, or
 		 * %NULL if there are no more parts
 		 */
-		next_part(cancellable: Gio.Cancellable | null): Gio.InputStream;
+		next_part(cancellable: Gio.Cancellable | null): Gio.InputStream | null;
 		/**
 		 * Obtains a #GInputStream for the next request. See
 		 * soup_multipart_input_stream_next_part() for details on the
@@ -2001,7 +2001,7 @@ declare namespace imports.gi.Soup {
 		 * #GInputStream for reading the next part or %NULL if there are no
 		 * more parts.
 		 */
-		next_part_finish(result: Gio.AsyncResult): Gio.InputStream;
+		next_part_finish(result: Gio.AsyncResult): Gio.InputStream | null;
 		connect(signal: "notify::message", callback: (owner: this, ...args: any) => number): number;
 
 	}
@@ -2076,7 +2076,7 @@ declare namespace imports.gi.Soup {
 		 * @returns the type of the data represented by
 		 *   #request, or %NULL if not known.
 		 */
-		get_content_type(): string;
+		get_content_type(): string | null;
 		/**
 		 * Gets #request's {@link Session}
 		 * @returns #request's {@link Session}
@@ -2484,7 +2484,7 @@ declare namespace imports.gi.Soup {
 		 * @returns #server's #GMainContext,
 		 * which may be %NULL
 		 */
-		get_async_context(): GLib.MainContext;
+		get_async_context(): GLib.MainContext | null;
 		/**
 		 * Gets #server's listening socket, if you are using the old API.
 		 * 
@@ -2788,7 +2788,7 @@ declare namespace imports.gi.Soup {
 		 * certain legacy properties, this may also return %NULL if an error
 		 * occurs.
 		 */
-		public static new(optname1: string): Server;
+		public static new(optname1: string): Server | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3162,7 +3162,7 @@ declare namespace imports.gi.Soup {
 		 * @returns #session's #GMainContext,
 		 * which may be %NULL
 		 */
-		get_async_context(): GLib.MainContext;
+		get_async_context(): GLib.MainContext | null;
 		/**
 		 * Gets the first feature in #session of type #feature_type. For
 		 * features where there may be more than one feature of a given type,
@@ -3171,7 +3171,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a {@link SessionFeature}, or
 		 * %NULL. The feature is owned by #session.
 		 */
-		get_feature(feature_type: GObject.Type): SessionFeature;
+		get_feature(feature_type: GObject.Type): SessionFeature | null;
 		/**
 		 * Gets the first feature in #session of type #feature_type, provided
 		 * that it is not disabled for #msg. As with
@@ -3185,7 +3185,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a {@link SessionFeature}, or %NULL. The
 		 * feature is owned by #session.
 		 */
-		get_feature_for_message(feature_type: GObject.Type, msg: Message): SessionFeature;
+		get_feature_for_message(feature_type: GObject.Type, msg: Message): SessionFeature | null;
 		/**
 		 * Generates a list of #session's features of type #feature_type. (If
 		 * you want to see all features, you can pass %SOUP_TYPE_SESSION_FEATURE
@@ -4060,12 +4060,12 @@ declare namespace imports.gi.Soup {
 		 * Get the origin of the WebSocket.
 		 * @returns the origin, or %NULL
 		 */
-		get_origin(): string;
+		get_origin(): string | null;
 		/**
 		 * Get the protocol chosen via negotiation with the peer.
 		 * @returns the chosen protocol, or %NULL
 		 */
-		get_protocol(): string;
+		get_protocol(): string | null;
 		/**
 		 * Get the current state of the WebSocket.
 		 * @returns the state
@@ -4224,13 +4224,13 @@ declare namespace imports.gi.Soup {
 		 * doesn't include any parameter in the request, this function returns %NULL.
 		 * @returns a new allocated string with the parameters
 		 */
-		get_request_params(): string;
+		get_request_params(): string | null;
 		/**
 		 * Get the parameters strings to be included in the response header. If the extension
 		 * doesn't include any parameter in the response, this function returns %NULL.
 		 * @returns a new allocated string with the parameters
 		 */
-		get_response_params(): string;
+		get_response_params(): string | null;
 		/**
 		 * Process a message after it's received. If the payload isn't changed the given
 		 * #payload is just returned, otherwise g_bytes_unref() is called on the given
@@ -4467,7 +4467,7 @@ declare namespace imports.gi.Soup {
 		 * soup_buffer_new_with_owner().
 		 * @returns the owner pointer
 		 */
-		public get_owner(): any;
+		public get_owner(): any | null;
 		/**
 		 * Creates a new {@link Buffer} containing #length bytes "copied" from
 		 * #parent starting at #offset. (Normally this will not actually copy
@@ -4517,7 +4517,7 @@ declare namespace imports.gi.Soup {
 		 * associated with the remote end of a connection, it may be
 		 * %NULL if you used soup_server_accept_iostream().
 		 */
-		public get_address(): Address;
+		public get_address(): Address | null;
 		/**
 		 * Checks whether the request associated with #client has been
 		 * authenticated, and if so returns the {@link AuthDomain} that
@@ -4525,7 +4525,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a {@link AuthDomain}, or
 		 * %NULL if the request was not authenticated.
 		 */
-		public get_auth_domain(): AuthDomain;
+		public get_auth_domain(): AuthDomain | null;
 		/**
 		 * Checks whether the request associated with #client has been
 		 * authenticated, and if so returns the username that the client
@@ -4533,7 +4533,7 @@ declare namespace imports.gi.Soup {
 		 * @returns the authenticated-as user, or %NULL if
 		 * the request was not authenticated.
 		 */
-		public get_auth_user(): string;
+		public get_auth_user(): string | null;
 		/**
 		 * Retrieves the #GSocket that #client is associated with.
 		 * 
@@ -4546,7 +4546,7 @@ declare namespace imports.gi.Soup {
 		 * @returns the #GSocket that #client is
 		 * associated with, %NULL if you used soup_server_accept_iostream().
 		 */
-		public get_gsocket(): Gio.Socket;
+		public get_gsocket(): Gio.Socket | null;
 		/**
 		 * Retrieves the IP address associated with the remote end of a
 		 * connection.
@@ -4554,7 +4554,7 @@ declare namespace imports.gi.Soup {
 		 * end of a connection, it may be %NULL if you used
 		 * soup_server_accept_iostream().
 		 */
-		public get_host(): string;
+		public get_host(): string | null;
 		/**
 		 * Retrieves the #GSocketAddress associated with the local end
 		 * of a connection.
@@ -4562,7 +4562,7 @@ declare namespace imports.gi.Soup {
 		 * associated with the local end of a connection, it may be
 		 * %NULL if you used soup_server_accept_iostream().
 		 */
-		public get_local_address(): Gio.SocketAddress;
+		public get_local_address(): Gio.SocketAddress | null;
 		/**
 		 * Retrieves the #GSocketAddress associated with the remote end
 		 * of a connection.
@@ -4570,7 +4570,7 @@ declare namespace imports.gi.Soup {
 		 * associated with the remote end of a connection, it may be
 		 * %NULL if you used soup_server_accept_iostream().
 		 */
-		public get_remote_address(): Gio.SocketAddress;
+		public get_remote_address(): Gio.SocketAddress | null;
 		/**
 		 * Retrieves the {@link Socket} that #client is associated with.
 		 * 
@@ -4770,7 +4770,7 @@ declare namespace imports.gi.Soup {
 		 * time, which is owned by #cookie and should not be modified or
 		 * freed.
 		 */
-		public get_expires(): Date;
+		public get_expires(): Date | null;
 		/**
 		 * Gets #cookie's HttpOnly attribute
 		 * @returns #cookie's HttpOnly attribute
@@ -4946,7 +4946,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a new {@link Date}, or %NULL if #date_string
 		 * could not be parsed.
 		 */
-		public static new_from_string(date_string: string): Date;
+		public static new_from_string(date_string: string): Date | null;
 		/**
 		 * Creates a {@link Date} corresponding to #when
 		 * @param when a <type>time_t</type>
@@ -5142,7 +5142,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a new {@link HSTSPolicy}, or %NULL if no valid
 		 * "Strict-Transport-Security" response header was found.
 		 */
-		public static new_from_response(msg: Message): HSTSPolicy;
+		public static new_from_response(msg: Message): HSTSPolicy | null;
 		/**
 		 * Full version of #soup_hsts_policy_new(), to use with an existing
 		 * expiration date. See #soup_hsts_policy_new() for details.
@@ -5335,7 +5335,7 @@ declare namespace imports.gi.Soup {
 		 * @param offset an offset
 		 * @returns a {@link Buffer}, or %NULL.
 		 */
-		public get_chunk(offset: number): Buffer;
+		public get_chunk(offset: number): Buffer | null;
 		/**
 		 * Handles the {@link MessageBody} part of receiving a chunk of data from
 		 * the network. Normally this means appending #chunk to #body, exactly
@@ -5488,7 +5488,7 @@ declare namespace imports.gi.Soup {
 		 * @param name header name
 		 * @returns as with soup_message_headers_get_list().
 		 */
-		public get(name: string): string;
+		public get(name: string): string | null;
 		/**
 		 * Looks up the "Content-Disposition" header in #hdrs, parses it, and
 		 * returns its value in *#disposition and *#params. #params can be
@@ -5535,7 +5535,7 @@ declare namespace imports.gi.Soup {
 		 * header or it cannot be parsed (in which case *#params will be
 		 * unchanged).
 		 */
-		public get_content_type(): string;
+		public get_content_type(): string | null;
 		/**
 		 * Gets the message body encoding that #hdrs declare. This may not
 		 * always correspond to the encoding used on the wire; eg, a HEAD
@@ -5572,7 +5572,7 @@ declare namespace imports.gi.Soup {
 		 * @param name header name
 		 * @returns the header's value or %NULL if not found.
 		 */
-		public get_list(name: string): string;
+		public get_list(name: string): string | null;
 		/**
 		 * Gets the value of header #name in #hdrs. Use this for headers whose
 		 * values are <emphasis>not</emphasis> comma-delimited lists, and
@@ -5586,7 +5586,7 @@ declare namespace imports.gi.Soup {
 		 * @param name header name
 		 * @returns the header's value or %NULL if not found.
 		 */
-		public get_one(name: string): string;
+		public get_one(name: string): string | null;
 		/**
 		 * Parses #hdrs's Range header and returns an array of the requested
 		 * byte ranges. The returned array must be freed with
@@ -5816,7 +5816,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a new {@link Multipart} (or %NULL if the
 		 * message couldn't be parsed or wasn't multipart).
 		 */
-		public static new_from_message(headers: MessageHeaders, body: MessageBody): Multipart;
+		public static new_from_message(headers: MessageHeaders, body: MessageBody): Multipart | null;
 		/**
 		 * Adds a new MIME part containing #body to #multipart, using
 		 * "Content-Disposition: form-data", as per the HTML forms
@@ -5951,7 +5951,7 @@ declare namespace imports.gi.Soup {
 		public send_async: {(request: Request, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;};
 		public send_finish: {(request: Request, result: Gio.AsyncResult): Gio.InputStream;};
 		public get_content_length: {(request: Request): number;};
-		public get_content_type: {(request: Request): string;};
+		public get_content_type: {(request: Request): string | null;};
 	}
 
 	interface RequestDataClass {}
@@ -6131,7 +6131,7 @@ declare namespace imports.gi.Soup {
 		 * @returns a {@link URI}, or %NULL if the given string
 		 *  was found to be invalid.
 		 */
-		public static new(uri_string: string | null): URI;
+		public static new(uri_string: string | null): URI | null;
 		/**
 		 * Parses #uri_string relative to #base.
 		 * @param base a base URI
@@ -6353,8 +6353,8 @@ declare namespace imports.gi.Soup {
 		public constructor();
 		public readonly name: string;
 		public configure: {(extension: WebsocketExtension, connection_type: WebsocketConnectionType, params: GLib.HashTable | null): boolean;};
-		public get_request_params: {(extension: WebsocketExtension): string;};
-		public get_response_params: {(extension: WebsocketExtension): string;};
+		public get_request_params: {(extension: WebsocketExtension): string | null;};
+		public get_response_params: {(extension: WebsocketExtension): string | null;};
 		public process_outgoing_message: {(extension: WebsocketExtension, payload: GLib.Bytes): GLib.Bytes;};
 		public process_incoming_message: {(extension: WebsocketExtension, payload: GLib.Bytes): GLib.Bytes;};
 		public _libsoup_reserved1: {(): void;};
@@ -7684,7 +7684,7 @@ declare namespace imports.gi.Soup {
 		 * #username is not a valid user. #domain will free the password when
 		 * it is done with it.
 		 */
-		(domain: AuthDomainDigest, msg: Message, username: string): string;
+		(domain: AuthDomainDigest, msg: Message, username: string): string | null;
 	}
 
 	/**
@@ -7784,7 +7784,7 @@ declare namespace imports.gi.Soup {
 		 * @param max_len the maximum length that will be read, or 0.
 		 * @returns the new buffer (or %NULL)
 		 */
-		(msg: Message, max_len: number): Buffer;
+		(msg: Message, max_len: number): Buffer | null;
 	}
 
 	/**
@@ -8090,7 +8090,7 @@ declare namespace imports.gi.Soup {
 	 * not be parsed, or contained an illegal "domain" attribute for a
 	 * cookie originating from #origin.
 	 */
-	function cookie_parse(header: string, origin: URI): Cookie;
+	function cookie_parse(header: string, origin: URI): Cookie | null;
 
 	/**
 	 * Frees #cookies.
@@ -8188,7 +8188,7 @@ declare namespace imports.gi.Soup {
 	 * #file_control_name) from #msg, which you can free with
 	 * g_hash_table_destroy(). On error, it will return %NULL.
 	 */
-	function form_decode_multipart(msg: Message, file_control_name: string | null): GLib.HashTable;
+	function form_decode_multipart(msg: Message, file_control_name: string | null): GLib.HashTable | null;
 
 	/**
 	 * Encodes the given field names and values into a value of type
@@ -8424,7 +8424,7 @@ declare namespace imports.gi.Soup {
 	 * soup_header_free_param_list() or %NULL if there are duplicate
 	 * elements.
 	 */
-	function header_parse_param_list_strict(header: string): GLib.HashTable;
+	function header_parse_param_list_strict(header: string): GLib.HashTable | null;
 
 	/**
 	 * Parses a header whose content is a list of items with optional
@@ -8471,7 +8471,7 @@ declare namespace imports.gi.Soup {
 	 * soup_header_free_param_list() or %NULL if there are duplicate
 	 * elements.
 	 */
-	function header_parse_semi_param_list_strict(header: string): GLib.HashTable;
+	function header_parse_semi_param_list_strict(header: string): GLib.HashTable | null;
 
 	/**
 	 * Parses the headers of an HTTP request or response in #str and
@@ -8687,7 +8687,7 @@ declare namespace imports.gi.Soup {
 	 * @returns a new #GValueArray, or %NULL if an error
 	 * occurred.
 	 */
-	function value_array_from_args(args: any[]): GObject.ValueArray;
+	function value_array_from_args(args: any[]): GObject.ValueArray | null;
 
 	/**
 	 * Gets the #index_ element of #array and stores its value into the
@@ -9037,7 +9037,7 @@ declare namespace imports.gi.Soup {
 	 * @returns the text of the methodCall, or %NULL on
 	 * error
 	 */
-	function xmlrpc_build_method_call(method_name: string, params: GObject.Value[], n_params: number): string;
+	function xmlrpc_build_method_call(method_name: string, params: GObject.Value[], n_params: number): string | null;
 
 	/**
 	 * This creates a (successful) XML-RPC methodResponse and returns it
@@ -9050,7 +9050,7 @@ declare namespace imports.gi.Soup {
 	 * @returns the text of the methodResponse, or %NULL
 	 * on error
 	 */
-	function xmlrpc_build_method_response(value: GObject.Value): string;
+	function xmlrpc_build_method_response(value: GObject.Value): string | null;
 
 	/**
 	 * This creates an XML-RPC methodCall and returns it as a string.

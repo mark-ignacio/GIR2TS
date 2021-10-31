@@ -503,7 +503,7 @@ declare namespace imports.gi.Gtk {
 		 *     #n_entries {@link AccelGroupEntry} elements, or %NULL. The array
 		 *     is owned by GTK+ and must not be freed.
 		 */
-		query(accel_key: number, accel_mods: Gdk.ModifierType): AccelGroupEntry[];
+		query(accel_key: number, accel_mods: Gdk.ModifierType): AccelGroupEntry[] | null;
 		/**
 		 * Undoes the last call to gtk_accel_group_lock() on this #accel_group.
 		 */
@@ -566,7 +566,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the {@link AccelGroup} to which #closure
 		 *     is connected, or %NULL
 		 */
-		public static from_accel_closure(closure: GObject.Closure): AccelGroup;
+		public static from_accel_closure(closure: GObject.Closure): AccelGroup | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -589,7 +589,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_accel_label_set_accel_widget().
 		 * @returns the object monitored by the accelerator label, or %NULL.
 		 */
-		get_accel_widget(): Widget;
+		get_accel_widget(): Widget | null;
 		/**
 		 * Returns the width needed to display the accelerator key(s).
 		 * This is used by menus to align all of the {@link MenuItem} widgets, and shouldn't
@@ -961,7 +961,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns pointer to the {@link Widget}
 		 *     corresponding to the #GtkAccessible, or %NULL.
 		 */
-		get_widget(): Widget;
+		get_widget(): Widget | null;
 		/**
 		 * Sets the {@link Widget} corresponding to the #GtkAccessible.
 		 * 
@@ -1463,7 +1463,7 @@ declare namespace imports.gi.Gtk {
 		 * Retrieves the center bar widget of the bar.
 		 * @returns the center {@link Widget} or %NULL.
 		 */
-		get_center_widget(): Widget;
+		get_center_widget(): Widget | null;
 		/**
 		 * Adds #child to #action_bar, packed with reference to the
 		 * end of the #action_bar.
@@ -2237,7 +2237,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the text to display at the top of the dialog,
 		 *     or %NULL, in which case a default text is displayed
 		 */
-		get_heading(): string;
+		get_heading(): string | null;
 		/**
 		 * Returns the current value of the {@link AppChooserButton}:show-default-item
 		 * property.
@@ -2352,7 +2352,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the text to display at the top of the dialog, or %NULL, in which
 		 *     case a default text is displayed
 		 */
-		get_heading(): string;
+		get_heading(): string | null;
 		/**
 		 * Returns the {@link AppChooserWidget} of this dialog.
 		 * @returns the {@link AppChooserWidget} of #self
@@ -2694,14 +2694,14 @@ declare namespace imports.gi.Gtk {
 		 * @returns the active window, or %NULL if
 		 *   there isn't one.
 		 */
-		get_active_window(): Window;
+		get_active_window(): Window | null;
 		/**
 		 * Returns the menu model that has been set with
 		 * gtk_application_set_app_menu().
 		 * @returns the application menu of #application
 		 *   or %NULL if no application menu has been set.
 		 */
-		get_app_menu(): Gio.MenuModel;
+		get_app_menu(): Gio.MenuModel | null;
 		/**
 		 * Gets a menu from automatically loaded resources.
 		 * See [Automatic resources][automatic-resources]
@@ -2726,7 +2726,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the window with ID #id, or
 		 *   %NULL if there is no window with this ID
 		 */
-		get_window_by_id(_id: number): Window;
+		get_window_by_id(_id: number): Window | null;
 		/**
 		 * Gets a list of the {@link Windows} associated with #application.
 		 * 
@@ -3078,7 +3078,7 @@ declare namespace imports.gi.Gtk {
 		 * a prior call to gtk_application_window_set_help_overlay().
 		 * @returns the help overlay associated with #window, or %NULL
 		 */
-		get_help_overlay(): ShortcutsWindow;
+		get_help_overlay(): ShortcutsWindow | null;
 		/**
 		 * Returns the unique ID of the window. If the window has not yet been added to
 		 * a {@link Application}, returns `0`.
@@ -3433,7 +3433,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the child widget, or %NULL
 		 *     if #page_num is out of bounds
 		 */
-		get_nth_page(page_num: number): Widget;
+		get_nth_page(page_num: number): Widget | null;
 		/**
 		 * Gets whether #page is complete.
 		 * @param page a page of #assistant
@@ -3699,7 +3699,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the child of #bin, or %NULL if it does
 		 * not have a child.
 		 */
-		get_child(): Widget;
+		get_child(): Widget | null;
 		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
 
 	}
@@ -3759,7 +3759,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the center widget
 		 *   or %NULL in case no center widget is set.
 		 */
-		get_center_widget(): Widget;
+		get_center_widget(): Widget | null;
 		/**
 		 * Returns whether the box is homogeneous (all children are the
 		 * same size). See gtk_box_set_homogeneous().
@@ -4156,7 +4156,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the application being used by the builder,
 		 *     or %NULL
 		 */
-		get_application(): Application;
+		get_application(): Application | null;
 		/**
 		 * Gets the object named #name. Note that this function does not
 		 * increment the reference count of the returned object.
@@ -4164,7 +4164,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the object named #name or %NULL if
 		 *    it could not be found in the object tree.
 		 */
-		get_object(name: string): GObject.Object;
+		get_object(name: string): GObject.Object | null;
 		/**
 		 * Gets all objects that have been constructed by #builder. Note that
 		 * this function does not increment the reference counts of the returned
@@ -4199,7 +4199,7 @@ declare namespace imports.gi.Gtk {
 		 * @param callback_name The name of the callback
 		 * @returns The callback symbol in #builder for #callback_name, or %NULL
 		 */
-		lookup_callback_symbol(callback_name: string): GObject.Callback;
+		lookup_callback_symbol(callback_name: string): GObject.Callback | null;
 		/**
 		 * Sets the application associated with #builder.
 		 * 
@@ -4571,7 +4571,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a {@link Widget} or %NULL in case
 		 *     there is no image
 		 */
-		get_image(): Widget;
+		get_image(): Widget | null;
 		/**
 		 * Gets the position of the image relative to the text
 		 * inside the button.
@@ -5435,7 +5435,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the {@link CellRenderer} for which #renderer
 		 *    is a sibling, or %NULL.
 		 */
-		get_focus_from_sibling(renderer: CellRenderer): CellRenderer;
+		get_focus_from_sibling(renderer: CellRenderer): CellRenderer | null;
 		/**
 		 * Gets the focus sibling cell renderers for #renderer.
 		 * @param renderer the {@link CellRenderer} expected to have focus
@@ -6488,7 +6488,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A new {@link CellEditable} for editing this
 		 *   #cell, or %NULL if editing is not possible
 		 */
-		start_editing(event: Gdk.Event | null, widget: Widget, path: string, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): CellEditable;
+		start_editing(event: Gdk.Event | null, widget: Widget, path: string, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): CellEditable | null;
 		/**
 		 * Informs the cell renderer that the editing is stopped.
 		 * If #canceled is %TRUE, the cell renderer will emit the
@@ -7379,7 +7379,7 @@ declare namespace imports.gi.Gtk {
 		 * %NULL is returned.
 		 * @returns the currently displayed row or %NULL
 		 */
-		get_displayed_row(): TreePath;
+		get_displayed_row(): TreePath | null;
 		/**
 		 * Gets whether #cell_view is configured to draw all of its
 		 * cells in a sensitive state.
@@ -7399,7 +7399,7 @@ declare namespace imports.gi.Gtk {
 		 * returned.
 		 * @returns a {@link TreeModel} used or %NULL
 		 */
-		get_model(): TreeModel;
+		get_model(): TreeModel | null;
 		/**
 		 * Sets #requisition to the size needed by #cell_view to display
 		 * the model row pointed to by #path.
@@ -7762,7 +7762,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the owner of the clipboard, if any;
 		 *     otherwise %NULL.
 		 */
-		get_owner(): GObject.Object;
+		get_owner(): GObject.Object | null;
 		/**
 		 * Gets the selection that this clipboard is for.
 		 * @returns the selection
@@ -7928,7 +7928,7 @@ declare namespace imports.gi.Gtk {
 		 *               this value must be freed with gtk_selection_data_free()
 		 *               when you are finished with it.
 		 */
-		wait_for_contents(target: Gdk.Atom): SelectionData;
+		wait_for_contents(target: Gdk.Atom): SelectionData | null;
 		/**
 		 * Requests the contents of the clipboard as image and converts
 		 * the result to a #GdkPixbuf. This function waits for
@@ -7941,7 +7941,7 @@ declare namespace imports.gi.Gtk {
 		 *     was empty or if the contents of the clipboard could not be
 		 *     converted into an image.)
 		 */
-		wait_for_image(): GdkPixbuf.Pixbuf;
+		wait_for_image(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Requests the contents of the clipboard as rich text.  This function
 		 * waits for the data to be received using the main loop, so events,
@@ -7956,7 +7956,7 @@ declare namespace imports.gi.Gtk {
 		 *               if the contents of the clipboard could not be
 		 *               converted into text form.)
 		 */
-		wait_for_rich_text(buffer: TextBuffer, format: Gdk.Atom): number[];
+		wait_for_rich_text(buffer: TextBuffer, format: Gdk.Atom): number[] | null;
 		/**
 		 * Returns a list of targets that are present on the clipboard, or %NULL
 		 * if there aren’t any targets available. The returned list must be
@@ -7979,7 +7979,7 @@ declare namespace imports.gi.Gtk {
 		 *               clipboard was empty or if the contents of the
 		 *               clipboard could not be converted into text form.)
 		 */
-		wait_for_text(): string;
+		wait_for_text(): string | null;
 		/**
 		 * Requests the contents of the clipboard as URIs. This function waits
 		 * for the data to be received using the main loop, so events,
@@ -7991,7 +7991,7 @@ declare namespace imports.gi.Gtk {
 		 *     in particular if the clipboard was empty or if the contents of
 		 *     the clipboard could not be converted into URI form.)
 		 */
-		wait_for_uris(): string[];
+		wait_for_uris(): string[] | null;
 		/**
 		 * Test to see if there is an image available to be pasted
 		 * This is done by requesting the TARGETS atom and checking
@@ -8758,7 +8758,7 @@ declare namespace imports.gi.Gtk {
 		 * is returned.
 		 * @returns the ID of the active row, or %NULL
 		 */
-		get_active_id(): string;
+		get_active_id(): string | null;
 		/**
 		 * Sets #iter to point to the currently active item, if any item is active.
 		 * Otherwise, #iter is left unchanged.
@@ -9526,21 +9526,21 @@ declare namespace imports.gi.Gtk {
 		 *          focus inside #container when the #container is focused,
 		 *          or %NULL if none is set.
 		 */
-		get_focus_child(): Widget;
+		get_focus_child(): Widget | null;
 		/**
 		 * Retrieves the horizontal focus adjustment for the container. See
 		 * gtk_container_set_focus_hadjustment ().
 		 * @returns the horizontal focus adjustment, or %NULL if
 		 *   none has been set.
 		 */
-		get_focus_hadjustment(): Adjustment;
+		get_focus_hadjustment(): Adjustment | null;
 		/**
 		 * Retrieves the vertical focus adjustment for the container. See
 		 * gtk_container_set_focus_vadjustment().
 		 * @returns the vertical focus adjustment, or
 		 *   %NULL if none has been set.
 		 */
-		get_focus_vadjustment(): Adjustment;
+		get_focus_vadjustment(): Adjustment | null;
 		/**
 		 * Returns a newly created widget path representing all the widget hierarchy
 		 * from the toplevel down to and including #child.
@@ -10151,7 +10151,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the #widget button that uses the given
 		 *     #response_id, or %NULL.
 		 */
-		get_widget_for_response(response_id: number): Widget;
+		get_widget_for_response(response_id: number): Widget | null;
 		/**
 		 * Emits the {@link Dialog}::response signal with the given response ID.
 		 * Used to indicate that the user has responded to the dialog in some way;
@@ -10844,7 +10844,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the attribute list, or %NULL
 		 *     if none was set.
 		 */
-		get_attributes(): Pango.AttrList;
+		get_attributes(): Pango.AttrList | null;
 		/**
 		 * Get the {@link EntryBuffer} object which holds the text for
 		 * this widget.
@@ -10873,7 +10873,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the horizontal cursor adjustment, or %NULL
 		 *   if none has been set.
 		 */
-		get_cursor_hadjustment(): Adjustment;
+		get_cursor_hadjustment(): Adjustment | null;
 		/**
 		 * Gets the value set by gtk_entry_set_has_frame().
 		 * @returns whether the entry has a beveled frame
@@ -10918,7 +10918,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A #GIcon, or %NULL if no icon is set
 		 *     or if the icon is not a #GIcon
 		 */
-		get_icon_gicon(icon_pos: EntryIconPosition): Gio.Icon;
+		get_icon_gicon(icon_pos: EntryIconPosition): Gio.Icon | null;
 		/**
 		 * Retrieves the icon name used for the icon, or %NULL if there is
 		 * no icon or if the icon was set by some other method (e.g., by
@@ -10927,7 +10927,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns An icon name, or %NULL if no icon is set or if the icon
 		 *          wasn’t set from an icon name
 		 */
-		get_icon_name(icon_pos: EntryIconPosition): string;
+		get_icon_name(icon_pos: EntryIconPosition): string | null;
 		/**
 		 * Retrieves the image used for the icon.
 		 * 
@@ -10938,7 +10938,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A #GdkPixbuf, or %NULL if no icon is
 		 *     set for this position.
 		 */
-		get_icon_pixbuf(icon_pos: EntryIconPosition): GdkPixbuf.Pixbuf;
+		get_icon_pixbuf(icon_pos: EntryIconPosition): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Returns whether the icon appears sensitive or insensitive.
 		 * @param icon_pos Icon position
@@ -10969,7 +10969,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the tooltip text, or %NULL. Free the returned
 		 *     string with g_free() when done.
 		 */
-		get_icon_tooltip_markup(icon_pos: EntryIconPosition): string;
+		get_icon_tooltip_markup(icon_pos: EntryIconPosition): string | null;
 		/**
 		 * Gets the contents of the tooltip on the icon at the specified
 		 * position in #entry.
@@ -10977,14 +10977,14 @@ declare namespace imports.gi.Gtk {
 		 * @returns the tooltip text, or %NULL. Free the returned
 		 *     string with g_free() when done.
 		 */
-		get_icon_tooltip_text(icon_pos: EntryIconPosition): string;
+		get_icon_tooltip_text(icon_pos: EntryIconPosition): string | null;
 		/**
 		 * This function returns the entry’s {@link Entry}:inner-border property. See
 		 * gtk_entry_set_inner_border() for more information.
 		 * @returns the entry’s {@link Border}, or
 		 *   %NULL if none was set.
 		 */
-		get_inner_border(): Border;
+		get_inner_border(): Border | null;
 		/**
 		 * Gets the value of the {@link Entry}:input-hints property.
 		 * @returns 
@@ -11084,7 +11084,7 @@ declare namespace imports.gi.Gtk {
 		 * any.
 		 * @returns the tabstops, or %NULL if none was set.
 		 */
-		get_tabs(): Pango.TabArray;
+		get_tabs(): Pango.TabArray | null;
 		/**
 		 * Retrieves the contents of the entry widget.
 		 * See also gtk_editable_get_chars().
@@ -12005,7 +12005,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The common prefix all rows starting with
 		 *   #key or %NULL if no row matches #key.
 		 */
-		compute_prefix(key: string): string;
+		compute_prefix(key: string): string | null;
 		/**
 		 * Deletes the action at #index_ from #completion’s action list.
 		 * 
@@ -12047,7 +12047,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A {@link TreeModel}, or %NULL if none
 		 *     is currently being used
 		 */
-		get_model(): TreeModel;
+		get_model(): TreeModel | null;
 		/**
 		 * Returns whether the completions should be presented in a popup window.
 		 * @returns %TRUE if popup completion is turned on
@@ -12701,7 +12701,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The text of the label widget. This string is owned
 		 *     by the widget and must not be modified or freed.
 		 */
-		get_label(): string;
+		get_label(): string | null;
 		/**
 		 * Returns whether the label widget will fill all available
 		 * horizontal space allocated to #expander.
@@ -12715,7 +12715,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the label widget,
 		 *     or %NULL if there is none
 		 */
-		get_label_widget(): Widget;
+		get_label_widget(): Widget | null;
 		/**
 		 * Returns whether the expander will resize the toplevel widget
 		 * containing the expander upon resizing and collpasing.
@@ -13274,13 +13274,13 @@ declare namespace imports.gi.Gtk {
 		 * @returns The custom label, or %NULL for the default. This string
 		 * is owned by GTK+ and should not be modified or freed
 		 */
-		get_accept_label(): string;
+		get_accept_label(): string | null;
 		/**
 		 * Retrieves the custom label text for the cancel button.
 		 * @returns The custom label, or %NULL for the default. This string
 		 * is owned by GTK+ and should not be modified or freed
 		 */
-		get_cancel_label(): string;
+		get_cancel_label(): string | null;
 		/**
 		 * Sets the custom label text for the accept button.
 		 * 
@@ -13727,7 +13727,7 @@ declare namespace imports.gi.Gtk {
 		 *   or %NULL. This value is owned by GTK+ and must not
 		 *   be modified or freed.
 		 */
-		get_name(): string;
+		get_name(): string | null;
 		/**
 		 * Gets the fields that need to be filled in for the {@link FileFilterInfo}
 		 * passed to gtk_file_filter_filter()
@@ -13984,7 +13984,7 @@ declare namespace imports.gi.Gtk {
 		 *     always be a {@link FlowBoxChild} or %NULL in case no child widget
 		 *     with the given index exists.
 		 */
-		get_child_at_index(idx: number): FlowBoxChild;
+		get_child_at_index(idx: number): FlowBoxChild | null;
 		/**
 		 * Gets the child in the (#x, #y) position.
 		 * @param _x the x coordinate of the child
@@ -13993,7 +13993,7 @@ declare namespace imports.gi.Gtk {
 		 *     always be a {@link FlowBoxChild} or %NULL in case no child widget
 		 *     exists for the given x and y coordinates.
 		 */
-		get_child_at_pos(_x: number, _y: number): FlowBoxChild;
+		get_child_at_pos(_x: number, _y: number): FlowBoxChild | null;
 		/**
 		 * Gets the horizontal spacing.
 		 * @returns the horizontal spacing
@@ -14890,7 +14890,7 @@ declare namespace imports.gi.Gtk {
 		 *               a {@link Label}. This string is owned by GTK+ and
 		 *               must not be modified or freed.
 		 */
-		get_label(): string;
+		get_label(): string | null;
 		/**
 		 * Retrieves the X and Y alignment of the frame’s label. See
 		 * gtk_frame_set_label_align().
@@ -14907,7 +14907,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the label widget, or %NULL if
 		 * there is none.
 		 */
-		get_label_widget(): Widget;
+		get_label_widget(): Widget | null;
 		/**
 		 * Retrieves the shadow type of the frame. See
 		 * gtk_frame_set_shadow_type().
@@ -15109,7 +15109,7 @@ declare namespace imports.gi.Gtk {
 		 * Gets the current error set on the #area.
 		 * @returns the #GError or %NULL
 		 */
-		get_error(): GLib.Error;
+		get_error(): GLib.Error | null;
 		/**
 		 * Returns whether the area has an alpha component.
 		 * @returns %TRUE if the #area has an alpha component, %FALSE otherwise
@@ -15419,7 +15419,7 @@ declare namespace imports.gi.Gtk {
 		 * on #gesture, or %NULL if the gesture is not being interacted.
 		 * @returns a #GdkDevice, or %NULL
 		 */
-		get_device(): Gdk.Device;
+		get_device(): Gdk.Device | null;
 		/**
 		 * Returns all gestures in the group of #gesture
 		 * @returns The list
@@ -15435,12 +15435,12 @@ declare namespace imports.gi.Gtk {
 		 * @param sequence a #GdkEventSequence
 		 * @returns The last event from #sequence
 		 */
-		get_last_event(sequence: Gdk.EventSequence | null): Gdk.Event;
+		get_last_event(sequence: Gdk.EventSequence | null): Gdk.Event | null;
 		/**
 		 * Returns the #GdkEventSequence that was last updated on #gesture.
 		 * @returns The last updated sequence
 		 */
-		get_last_updated_sequence(): Gdk.EventSequence;
+		get_last_updated_sequence(): Gdk.EventSequence | null;
 		/**
 		 * If #sequence is currently being interpreted by #gesture, this
 		 * function returns %TRUE and fills in #x and #y with the last coordinates
@@ -15471,7 +15471,7 @@ declare namespace imports.gi.Gtk {
 		 * information.
 		 * @returns the user defined window, or %NULL if none
 		 */
-		get_window(): Gdk.Window;
+		get_window(): Gdk.Window | null;
 		/**
 		 * Adds #gesture to the same group than #group_gesture. Gestures
 		 * are by default isolated in their own groups.
@@ -16052,7 +16052,7 @@ declare namespace imports.gi.Gtk {
 		 * This is only meaningful if gtk_gesture_is_active() returns %TRUE.
 		 * @returns the current sequence
 		 */
-		get_current_sequence(): Gdk.EventSequence;
+		get_current_sequence(): Gdk.EventSequence | null;
 		/**
 		 * Gets whether a gesture is exclusive. For more information, see
 		 * gtk_gesture_single_set_exclusive().
@@ -16146,7 +16146,7 @@ declare namespace imports.gi.Gtk {
 		 * signal handlers.
 		 * @returns The current stylus tool
 		 */
-		get_device_tool(): Gdk.DeviceTool;
+		get_device_tool(): Gdk.DeviceTool | null;
 		connect(signal: "down", callback: (owner: this, object: number, p0: number) => void): number;
 		connect(signal: "motion", callback: (owner: this, object: number, p0: number) => void): number;
 		connect(signal: "proximity", callback: (owner: this, object: number, p0: number) => void): number;
@@ -16318,7 +16318,7 @@ declare namespace imports.gi.Gtk {
 		 * @param top the top edge of the cell
 		 * @returns the child at the given position, or %NULL
 		 */
-		get_child_at(left: number, top: number): Widget;
+		get_child_at(left: number, top: number): Widget | null;
 		/**
 		 * Returns whether all columns of #grid have the same width.
 		 * @returns whether all columns of #grid have the same width.
@@ -16970,7 +16970,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the custom title widget
 		 *    of the header, or %NULL if none has been set explicitly.
 		 */
-		get_custom_title(): Widget;
+		get_custom_title(): Widget | null;
 		/**
 		 * Gets the decoration layout set with
 		 * gtk_header_bar_set_decoration_layout().
@@ -16996,14 +16996,14 @@ declare namespace imports.gi.Gtk {
 		 *    been set explicitly. The returned string is owned by the widget
 		 *    and must not be modified or freed.
 		 */
-		get_subtitle(): string;
+		get_subtitle(): string | null;
 		/**
 		 * Retrieves the title of the header. See gtk_header_bar_set_title().
 		 * @returns the title of the header, or %NULL if none has
 		 *    been set explicitly. The returned string is owned by the widget
 		 *    and must not be modified or freed.
 		 */
-		get_title(): string;
+		get_title(): string | null;
 		/**
 		 * Adds #child to #bar, packed with reference to the
 		 * end of the #bar.
@@ -17706,7 +17706,7 @@ declare namespace imports.gi.Gtk {
 		 *     you want to keep it around, you must use g_object_ref().
 		 *     The returned image must not be modified.
 		 */
-		get_builtin_pixbuf(): GdkPixbuf.Pixbuf;
+		get_builtin_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * This function is deprecated and always returns %NULL.
 		 * @returns %NULL
@@ -17730,7 +17730,7 @@ declare namespace imports.gi.Gtk {
 		 *     The return value is owned by GTK+ and should not be modified
 		 *     or freed.
 		 */
-		get_filename(): string;
+		get_filename(): string | null;
 		/**
 		 * Checks if the icon is symbolic or not. This currently uses only
 		 * the file name and not the file contents for determining this.
@@ -17987,7 +17987,7 @@ declare namespace imports.gi.Gtk {
 		 * containing information about the icon, or %NULL if the icon wasn’t
 		 * found.
 		 */
-		choose_icon(icon_names: string[], size: number, flags: IconLookupFlags): IconInfo;
+		choose_icon(icon_names: string[], size: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Looks up a named icon for a particular window scale and returns
 		 * a {@link IconInfo} containing information such as the filename of the
@@ -18007,7 +18007,7 @@ declare namespace imports.gi.Gtk {
 		 *     containing information about the icon, or %NULL if the
 		 *     icon wasn’t found.
 		 */
-		choose_icon_for_scale(icon_names: string[], size: number, scale: number, flags: IconLookupFlags): IconInfo;
+		choose_icon_for_scale(icon_names: string[], size: number, scale: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Gets the name of an icon that is representative of the
 		 * current theme (for instance, to use when presenting
@@ -18015,7 +18015,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the name of an example icon or %NULL.
 		 *     Free with g_free().
 		 */
-		get_example_icon_name(): string;
+		get_example_icon_name(): string | null;
 		/**
 		 * Returns an array of integers describing the sizes at which
 		 * the icon is available without scaling. A size of -1 means
@@ -18095,7 +18095,7 @@ declare namespace imports.gi.Gtk {
 		 *     you must not modify the icon. Use g_object_unref() to release
 		 *     your reference to the icon. %NULL if the icon isn’t found.
 		 */
-		load_icon(icon_name: string, size: number, flags: IconLookupFlags): GdkPixbuf.Pixbuf;
+		load_icon(icon_name: string, size: number, flags: IconLookupFlags): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Looks up an icon in an icon theme for a particular window scale,
 		 * scales it to the given size and renders it into a pixbuf. This is a
@@ -18120,7 +18120,7 @@ declare namespace imports.gi.Gtk {
 		 *     you must not modify the icon. Use g_object_unref() to release
 		 *     your reference to the icon. %NULL if the icon isn’t found.
 		 */
-		load_icon_for_scale(icon_name: string, size: number, scale: number, flags: IconLookupFlags): GdkPixbuf.Pixbuf;
+		load_icon_for_scale(icon_name: string, size: number, scale: number, flags: IconLookupFlags): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Looks up an icon in an icon theme for a particular window scale,
 		 * scales it to the given size and renders it into a cairo surface. This is a
@@ -18143,7 +18143,7 @@ declare namespace imports.gi.Gtk {
 		 *     release your reference to the icon. %NULL if the icon isn’t
 		 *     found.
 		 */
-		load_surface(icon_name: string, size: number, scale: number, for_window: Gdk.Window | null, flags: IconLookupFlags): cairo.Surface;
+		load_surface(icon_name: string, size: number, scale: number, for_window: Gdk.Window | null, flags: IconLookupFlags): cairo.Surface | null;
 		/**
 		 * Looks up an icon and returns a {@link IconInfo} containing information
 		 * such as the filename of the icon. The icon can then be rendered
@@ -18161,7 +18161,7 @@ declare namespace imports.gi.Gtk {
 		 *     information about the icon, or %NULL if the icon wasn’t
 		 *     found. Unref with g_object_unref()
 		 */
-		lookup_by_gicon(icon: Gio.Icon, size: number, flags: IconLookupFlags): IconInfo;
+		lookup_by_gicon(icon: Gio.Icon, size: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Looks up an icon and returns a {@link IconInfo} containing information
 		 * such as the filename of the icon. The icon can then be rendered into
@@ -18174,7 +18174,7 @@ declare namespace imports.gi.Gtk {
 		 *     information about the icon, or %NULL if the icon wasn’t
 		 *     found. Unref with g_object_unref()
 		 */
-		lookup_by_gicon_for_scale(icon: Gio.Icon, size: number, scale: number, flags: IconLookupFlags): IconInfo;
+		lookup_by_gicon_for_scale(icon: Gio.Icon, size: number, scale: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Looks up a named icon and returns a {@link IconInfo} containing
 		 * information such as the filename of the icon. The icon
@@ -18194,7 +18194,7 @@ declare namespace imports.gi.Gtk {
 		 *     containing information about the icon, or %NULL if the
 		 *     icon wasn’t found.
 		 */
-		lookup_icon(icon_name: string, size: number, flags: IconLookupFlags): IconInfo;
+		lookup_icon(icon_name: string, size: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Looks up a named icon for a particular window scale and returns a
 		 * {@link IconInfo} containing information such as the filename of the
@@ -18209,7 +18209,7 @@ declare namespace imports.gi.Gtk {
 		 *     containing information about the icon, or %NULL if the
 		 *     icon wasn’t found.
 		 */
-		lookup_icon_for_scale(icon_name: string, size: number, scale: number, flags: IconLookupFlags): IconInfo;
+		lookup_icon_for_scale(icon_name: string, size: number, scale: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Prepends a directory to the search path.
 		 * See gtk_icon_theme_set_search_path().
@@ -18643,7 +18643,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A {@link TreeModel}, or %NULL if none is
 		 *     currently being used.
 		 */
-		get_model(): TreeModel;
+		get_model(): TreeModel | null;
 		/**
 		 * Finds the path at the point (#x, #y), relative to bin_window coordinates.
 		 * See gtk_icon_view_get_item_at_pos(), if you are also interested in
@@ -18655,7 +18655,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The {@link TreePath} corresponding
 		 * to the icon or %NULL if no icon exists at that position.
 		 */
-		get_path_at_pos(_x: number, _y: number): TreePath;
+		get_path_at_pos(_x: number, _y: number): TreePath | null;
 		/**
 		 * Returns the column with pixbufs for #icon_view.
 		 * @returns the pixbuf column, or -1 if it’s unset.
@@ -19198,7 +19198,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the displayed animation, or %NULL if
 		 * the image is empty
 		 */
-		get_animation(): GdkPixbuf.PixbufAnimation;
+		get_animation(): GdkPixbuf.PixbufAnimation | null;
 		/**
 		 * Gets the #GIcon and size being displayed by the {@link Image}.
 		 * The storage type of the image must be %GTK_IMAGE_EMPTY or
@@ -19245,7 +19245,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the displayed pixbuf, or %NULL if
 		 * the image is empty
 		 */
-		get_pixbuf(): GdkPixbuf.Pixbuf;
+		get_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Gets the pixel size used for named icons.
 		 * @returns the pixel size used for named icons.
@@ -20208,7 +20208,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the attribute list, or %NULL
 		 *     if none was set.
 		 */
-		get_attributes(): Pango.AttrList;
+		get_attributes(): Pango.AttrList | null;
 		/**
 		 * Returns the URI for the currently active link in the label.
 		 * The active link is the one under the mouse pointer or, in a
@@ -20300,7 +20300,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the target of the label’s mnemonic,
 		 *     or %NULL if none has been set and the default algorithm will be used.
 		 */
-		get_mnemonic_widget(): Widget;
+		get_mnemonic_widget(): Widget | null;
 		/**
 		 * Gets the value set by gtk_label_set_selectable().
 		 * @returns %TRUE if the user can copy text from the label
@@ -21475,14 +21475,14 @@ declare namespace imports.gi.Gtk {
 		 * @param index_ the index of the row
 		 * @returns the child {@link Widget} or %NULL
 		 */
-		get_row_at_index(index_: number): ListBoxRow;
+		get_row_at_index(index_: number): ListBoxRow | null;
 		/**
 		 * Gets the row at the #y position.
 		 * @param _y position
 		 * @returns the row or %NULL
 		 *   in case no row exists for the given y coordinate.
 		 */
-		get_row_at_y(_y: number): ListBoxRow;
+		get_row_at_y(_y: number): ListBoxRow | null;
 		/**
 		 * Gets the selected row.
 		 * 
@@ -21811,7 +21811,7 @@ declare namespace imports.gi.Gtk {
 		 * set already, and if so to update the state of it.
 		 * @returns the current header, or %NULL if none
 		 */
-		get_header(): Widget;
+		get_header(): Widget | null;
 		/**
 		 * Gets the current index of the #row in its {@link ListBox} container.
 		 * @returns the index of the #row, or -1 if the #row is not in a listbox
@@ -23072,7 +23072,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the parent {@link Widget} to use to line up with menu.
 		 * @returns a {@link Widget} value or %NULL
 		 */
-		get_align_widget(): Widget;
+		get_align_widget(): Widget | null;
 		/**
 		 * Returns the direction the popup will be pointing at when popped up.
 		 * @returns a {@link ArrowType} value
@@ -23082,21 +23082,21 @@ declare namespace imports.gi.Gtk {
 		 * Returns the #GMenuModel used to generate the popup.
 		 * @returns a #GMenuModel or %NULL
 		 */
-		get_menu_model(): Gio.MenuModel;
+		get_menu_model(): Gio.MenuModel | null;
 		/**
 		 * Returns the {@link Popover} that pops out of the button.
 		 * If the button is not using a #GtkPopover, this function
 		 * returns %NULL.
 		 * @returns a {@link Popover} or %NULL
 		 */
-		get_popover(): Popover;
+		get_popover(): Popover | null;
 		/**
 		 * Returns the {@link Menu} that pops out of the button.
 		 * If the button does not use a #GtkMenu, this function
 		 * returns %NULL.
 		 * @returns a {@link Menu} or %NULL
 		 */
-		get_popup(): Menu;
+		get_popup(): Menu | null;
 		/**
 		 * Returns whether a {@link Popover} or a #GtkMenu will be constructed
 		 * from the menu model.
@@ -23342,7 +23342,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the accelerator path corresponding to
 		 *     this menu item’s functionality, or %NULL if not set
 		 */
-		get_accel_path(): string;
+		get_accel_path(): string | null;
 		/**
 		 * Sets #text on the #menu_item label
 		 * @returns The text in the #menu_item label. This is the internal
@@ -23369,7 +23369,7 @@ declare namespace imports.gi.Gtk {
 		 * See gtk_menu_item_set_submenu().
 		 * @returns submenu for this menu item, or %NULL if none
 		 */
-		get_submenu(): Widget;
+		get_submenu(): Widget | null;
 		/**
 		 * Checks if an underline in the text indicates the next character
 		 * should be used for the mnemonic accelerator key.
@@ -24531,14 +24531,14 @@ declare namespace imports.gi.Gtk {
 		 *    been set explicitly. The returned string is owned by the widget
 		 *    and must not be modified or freed.
 		 */
-		get_title(): string;
+		get_title(): string | null;
 		/**
 		 * Fetches the transient parent for this window. See
 		 * gtk_native_dialog_set_transient_for().
 		 * @returns the transient parent for this window,
 		 * or %NULL if no transient parent has been set.
 		 */
-		get_transient_for(): Window;
+		get_transient_for(): Window | null;
 		/**
 		 * Determines whether the dialog is visible.
 		 * @returns %TRUE if the dialog is visible
@@ -24720,7 +24720,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The action widget with the given
 		 * #pack_type or %NULL when this action widget has not been set
 		 */
-		get_action_widget(pack_type: PackType): Widget;
+		get_action_widget(pack_type: PackType): Widget | null;
 		/**
 		 * Returns the page number of the current page.
 		 * @returns the index (starting from 0) of the current
@@ -24732,7 +24732,7 @@ declare namespace imports.gi.Gtk {
 		 * Gets the current group name for #notebook.
 		 * @returns the group name, or %NULL if none is set
 		 */
-		get_group_name(): string;
+		get_group_name(): string | null;
 		/**
 		 * Retrieves the menu label widget of the page containing #child.
 		 * @param child a widget contained in a page of #notebook
@@ -24740,7 +24740,7 @@ declare namespace imports.gi.Gtk {
 		 * notebook page does not have a menu label other than the default (the tab
 		 * label).
 		 */
-		get_menu_label(child: Widget): Widget;
+		get_menu_label(child: Widget): Widget | null;
 		/**
 		 * Retrieves the text of the menu label for the page containing
 		 * #child.
@@ -24750,7 +24750,7 @@ declare namespace imports.gi.Gtk {
 		 * widget is not a {@link Label}. The string is owned by the widget and must not be
 		 * freed.
 		 */
-		get_menu_label_text(child: Widget): string;
+		get_menu_label_text(child: Widget): string | null;
 		/**
 		 * Gets the number of pages in a notebook.
 		 * @returns the number of pages in the notebook
@@ -24763,7 +24763,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the child widget, or %NULL if #page_num
 		 * is out of bounds
 		 */
-		get_nth_page(page_num: number): Widget;
+		get_nth_page(page_num: number): Widget | null;
 		/**
 		 * Returns whether the tab label area has arrows for scrolling.
 		 * See gtk_notebook_set_scrollable().
@@ -24800,7 +24800,7 @@ declare namespace imports.gi.Gtk {
 		 * @param child the page
 		 * @returns the tab label
 		 */
-		get_tab_label(child: Widget): Widget;
+		get_tab_label(child: Widget): Widget | null;
 		/**
 		 * Retrieves the text of the tab label for the page containing
 		 * #child.
@@ -24809,7 +24809,7 @@ declare namespace imports.gi.Gtk {
 		 * widget is not a {@link Label}. The string is owned by the widget and must not be
 		 * freed.
 		 */
-		get_tab_label_text(child: Widget): string;
+		get_tab_label_text(child: Widget): string | null;
 		/**
 		 * Gets the edge at which the tabs for switching pages in the
 		 * notebook are drawn.
@@ -25265,13 +25265,13 @@ declare namespace imports.gi.Gtk {
 		 * a reference to the returned #GIcon.
 		 * @returns a #GIcon, or %NULL
 		 */
-		get_background_gicon(): Gio.Icon;
+		get_background_gicon(): Gio.Icon | null;
 		/**
 		 * Returns the icon name used as the base background image,
 		 * or %NULL if there’s none.
 		 * @returns an icon name, or %NULL
 		 */
-		get_background_icon_name(): string;
+		get_background_icon_name(): string | null;
 		/**
 		 * Returns the value currently displayed by #self.
 		 * @returns the currently displayed value
@@ -25281,7 +25281,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the currently displayed label of the icon, or %NULL.
 		 * @returns the currently displayed label
 		 */
-		get_label(): string;
+		get_label(): string | null;
 		/**
 		 * Returns the {@link StyleContext} used by the icon for theming,
 		 * or %NULL if there’s none.
@@ -25289,7 +25289,7 @@ declare namespace imports.gi.Gtk {
 		 *     This object is internal to GTK+ and should not be unreffed.
 		 *     Use g_object_ref() if you want to keep it around
 		 */
-		get_style_context(): StyleContext;
+		get_style_context(): StyleContext | null;
 		/**
 		 * Updates the icon to use #icon as the base background image.
 		 * If #icon is %NULL, #self will go back using style information
@@ -25409,7 +25409,7 @@ declare namespace imports.gi.Gtk {
 		 * needed.
 		 * @returns A #GdkPixbuf pointer, or %NULL.
 		 */
-		get_pixbuf(): GdkPixbuf.Pixbuf;
+		get_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Retrieves a snapshot of the contained widget in the form of
 		 * a #cairo_surface_t.  If you need to keep this around over window
@@ -25417,7 +25417,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A #cairo_surface_t pointer to the offscreen
 		 *     surface, or %NULL.
 		 */
-		get_surface(): cairo.Surface;
+		get_surface(): cairo.Surface | null;
 		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
 
 	}
@@ -25961,12 +25961,12 @@ declare namespace imports.gi.Gtk {
 		 * Obtains the first child of the paned widget.
 		 * @returns first child, or %NULL if it is not set.
 		 */
-		get_child1(): Widget;
+		get_child1(): Widget | null;
 		/**
 		 * Obtains the second child of the paned widget.
 		 * @returns second child, or %NULL if it is not set.
 		 */
-		get_child2(): Widget;
+		get_child2(): Widget | null;
 		/**
 		 * Returns the #GdkWindow of the handle. This function is
 		 * useful when handling button or motion events because it
@@ -26224,7 +26224,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GFile with the selected location, or
 		 * %NULL if nothing is visually selected.
 		 */
-		get_location(): Gio.File;
+		get_location(): Gio.File | null;
 		/**
 		 * This function queries the bookmarks added by the user to the places sidebar,
 		 * and returns one of them.  This function is used by {@link FileChooser} to implement
@@ -26234,7 +26234,7 @@ declare namespace imports.gi.Gtk {
 		 * %NULL if no such index exist.  Note that the indices start at 0, even though
 		 * the file chooser starts them with the keyboard shortcut "Alt-1".
 		 */
-		get_nth_bookmark(_n: number): Gio.File;
+		get_nth_bookmark(_n: number): Gio.File | null;
 		/**
 		 * Gets the open flags.
 		 * @returns the {@link PlacesOpenFlags} of #sidebar
@@ -26633,7 +26633,7 @@ declare namespace imports.gi.Gtk {
 		 * Retrieves the socket the plug is embedded in.
 		 * @returns the window of the socket, or %NULL
 		 */
-		get_socket_window(): Gdk.Window;
+		get_socket_window(): Gdk.Window | null;
 		/**
 		 * Gets emitted when the plug becomes embedded in a socket.
 		 */
@@ -26780,7 +26780,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the default widget,
 		 * or %NULL if there is none
 		 */
-		get_default_widget(): Widget;
+		get_default_widget(): Widget | null;
 		/**
 		 * Returns whether the popover is modal, see gtk_popover_set_modal to
 		 * see the implications of this.
@@ -28538,7 +28538,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns text, or %NULL; this string is owned by the widget
 		 * and should not be modified or freed.
 		 */
-		get_text(): string;
+		get_text(): string | null;
 		/**
 		 * Indicates that some progress has been made, but you don’t know how much.
 		 * Causes the progress bar to enter “activity mode,” where a block
@@ -30037,7 +30037,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the name of the filter, or %NULL.  The returned string
 		 *   is owned by the filter object and should not be freed.
 		 */
-		get_name(): string;
+		get_name(): string | null;
 		/**
 		 * Gets the fields that need to be filled in for the {@link RecentFilterInfo}
 		 * passed to gtk_recent_filter_filter()
@@ -30212,7 +30212,7 @@ declare namespace imports.gi.Gtk {
 		 *   not registered in the recently used resources list. Free with
 		 *   gtk_recent_info_unref().
 		 */
-		lookup_item(uri: string): RecentInfo;
+		lookup_item(uri: string): RecentInfo | null;
 		/**
 		 * Changes the location of a recently used resource from #uri to #new_uri.
 		 * 
@@ -30514,7 +30514,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the #PangoLayout for this scale,
 		 *     or %NULL if the {@link Scale}:draw-value property is %FALSE.
 		 */
-		get_layout(): Pango.Layout;
+		get_layout(): Pango.Layout | null;
 		/**
 		 * Obtains the coordinates where the scale will draw the
 		 * #PangoLayout representing the text in the scale. Remember
@@ -32375,7 +32375,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a {@link Settings} object. If there is
 		 * no default screen, then returns %NULL.
 		 */
-		public static get_default(): Settings;
+		public static get_default(): Settings | null;
 		/**
 		 * Gets the {@link Settings} object for #screen, creating it if necessary.
 		 * @param screen a #GdkScreen.
@@ -32403,13 +32403,13 @@ declare namespace imports.gi.Gtk {
 		 * Retrieves the current accelerator of #self.
 		 * @returns the current accelerator.
 		 */
-		get_accelerator(): string;
+		get_accelerator(): string | null;
 		/**
 		 * Retrieves the text that is displayed when no accelerator is set.
 		 * @returns the current text displayed when no
 		 * accelerator is set.
 		 */
-		get_disabled_text(): string;
+		get_disabled_text(): string | null;
 		/**
 		 * Sets the accelerator to be displayed by #self.
 		 * @param accelerator the new accelerator
@@ -32947,7 +32947,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the window of the plug if
 		 * available, or %NULL
 		 */
-		get_plug_window(): Gdk.Window;
+		get_plug_window(): Gdk.Window | null;
 		/**
 		 * This signal is emitted when a client is successfully
 		 * added to the socket.
@@ -33542,7 +33542,7 @@ declare namespace imports.gi.Gtk {
 		 * @param name the name of the child to find
 		 * @returns the requested child of the {@link Stack}
 		 */
-		get_child_by_name(name: string): Widget;
+		get_child_by_name(name: string): Widget | null;
 		/**
 		 * Gets whether #stack is horizontally homogeneous.
 		 * See gtk_stack_set_hhomogeneous().
@@ -33590,13 +33590,13 @@ declare namespace imports.gi.Gtk {
 		 * there are no visible children.
 		 * @returns the visible child of the {@link Stack}
 		 */
-		get_visible_child(): Widget;
+		get_visible_child(): Widget | null;
 		/**
 		 * Returns the name of the currently visible child of #stack, or
 		 * %NULL if there is no visible child.
 		 * @returns the name of the visible child of the {@link Stack}
 		 */
-		get_visible_child_name(): string;
+		get_visible_child_name(): string | null;
 		/**
 		 * Sets the {@link Stack} to be horizontally homogeneous or not.
 		 * If it is homogeneous, the #GtkStack will request the same
@@ -33764,7 +33764,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the associated {@link Stack} or
 		 *     %NULL if none has been set explicitly
 		 */
-		get_stack(): Stack;
+		get_stack(): Stack | null;
 		/**
 		 * Set the {@link Stack} associated with this #GtkStackSidebar.
 		 * 
@@ -33828,7 +33828,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the stack, or %NULL if
 		 *    none has been set explicitly.
 		 */
-		get_stack(): Stack;
+		get_stack(): Stack | null;
 		/**
 		 * Sets the stack to control.
 		 * @param stack a {@link Stack}
@@ -33986,7 +33986,7 @@ declare namespace imports.gi.Gtk {
 		 * If this function fails, #icon is left unchanged;
 		 * @returns the displayed icon, or %NULL if the image is empty
 		 */
-		get_gicon(): Gio.Icon;
+		get_gicon(): Gio.Icon | null;
 		/**
 		 * Returns the current value of the has-tooltip property.
 		 * See {@link StatusIcon}:has-tooltip for more information.
@@ -34001,7 +34001,7 @@ declare namespace imports.gi.Gtk {
 		 * be freed or modified.
 		 * @returns name of the displayed icon, or %NULL if the image is empty.
 		 */
-		get_icon_name(): string;
+		get_icon_name(): string | null;
 		/**
 		 * Gets the #GdkPixbuf being displayed by the {@link StatusIcon}.
 		 * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
@@ -34011,7 +34011,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the displayed pixbuf,
 		 *     or %NULL if the image is empty.
 		 */
-		get_pixbuf(): GdkPixbuf.Pixbuf;
+		get_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Returns the #GdkScreen associated with #status_icon.
 		 * @returns a #GdkScreen.
@@ -34038,7 +34038,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns stock id of the displayed stock icon,
 		 *   or %NULL if the image is empty.
 		 */
-		get_stock(): string;
+		get_stock(): string | null;
 		/**
 		 * Gets the type of representation being used by the {@link StatusIcon}
 		 * to store image data. If the #GtkStatusIcon has no image data,
@@ -34056,13 +34056,13 @@ declare namespace imports.gi.Gtk {
 		 * @returns the tooltip text, or %NULL. You should free the
 		 *   returned string with g_free() when done.
 		 */
-		get_tooltip_markup(): string;
+		get_tooltip_markup(): string | null;
 		/**
 		 * Gets the contents of the tooltip for #status_icon.
 		 * @returns the tooltip text, or %NULL. You should free the
 		 *   returned string with g_free() when done.
 		 */
-		get_tooltip_text(): string;
+		get_tooltip_text(): string | null;
 		/**
 		 * Returns whether the status icon is visible or not.
 		 * Note that being visible does not guarantee that
@@ -34883,7 +34883,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GdkFrameClock, or %NULL
 		 *  if #context does not have an attached frame clock.
 		 */
-		get_frame_clock(): Gdk.FrameClock;
+		get_frame_clock(): Gdk.FrameClock | null;
 		/**
 		 * Returns the sides where rendered elements connect visually with others.
 		 * @returns the junction sides
@@ -34910,7 +34910,7 @@ declare namespace imports.gi.Gtk {
 		 * See that function for details.
 		 * @returns the parent context or %NULL
 		 */
-		get_parent(): StyleContext;
+		get_parent(): StyleContext | null;
 		/**
 		 * Returns the widget path used for style matching.
 		 * @returns A {@link WidgetPath}
@@ -34962,7 +34962,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns %NULL or the section where a value
 		 * for #property was defined
 		 */
-		get_section(property: string): CssSection;
+		get_section(property: string): CssSection | null;
 		/**
 		 * Returns the state used for style matching.
 		 * 
@@ -35052,7 +35052,7 @@ declare namespace imports.gi.Gtk {
 		 * @param stock_id an icon name
 		 * @returns The looked up %GtkIconSet, or %NULL
 		 */
-		lookup_icon_set(stock_id: string): IconSet;
+		lookup_icon_set(stock_id: string): IconSet | null;
 		/**
 		 * Notifies a state change on #context, so if the current style makes use
 		 * of transition animations, one will be started so all rendered elements
@@ -36276,7 +36276,7 @@ declare namespace imports.gi.Gtk {
 		 * @param name a mark name
 		 * @returns a {@link TextMark}, or %NULL
 		 */
-		get_mark(name: string): TextMark;
+		get_mark(name: string): TextMark | null;
 		/**
 		 * Indicates whether the buffer has been modified since the last call
 		 * to gtk_text_buffer_set_modified() set the modification flag to
@@ -36965,7 +36965,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the mark name; returns NULL for anonymous marks.
 		 * @returns mark name
 		 */
-		get_name(): string;
+		get_name(): string | null;
 		/**
 		 * Returns %TRUE if the mark is visible (i.e. a cursor is displayed
 		 * for it).
@@ -37379,7 +37379,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The tag, or %NULL if none by that
 		 * name is in the table.
 		 */
-		lookup(name: string): TextTag;
+		lookup(name: string): TextTag | null;
 		/**
 		 * Remove a tag from the table. If a {@link TextBuffer} has #table as its tag table,
 		 * the tag is removed from the buffer. The table’s reference to the tag is
@@ -37819,7 +37819,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns copy of default tab array, or %NULL if
 		 *    “standard" tabs are used; must be freed with pango_tab_array_free().
 		 */
-		get_tabs(): Pango.TabArray;
+		get_tabs(): Pango.TabArray | null;
 		/**
 		 * Gets the top margin for text in the #text_view.
 		 * @returns top margin in pixels
@@ -37847,7 +37847,7 @@ declare namespace imports.gi.Gtk {
 		 * @param win window to get
 		 * @returns a #GdkWindow, or %NULL
 		 */
-		get_window(win: TextWindowType): Gdk.Window;
+		get_window(win: TextWindowType): Gdk.Window | null;
 		/**
 		 * Usually used to find out which window an event corresponds to.
 		 * 
@@ -38535,7 +38535,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the #GdkScreen to which #engine currently rendering to.
 		 * @returns a #GdkScreen, or %NULL.
 		 */
-		get_screen(): Gdk.Screen;
+		get_screen(): Gdk.Screen | null;
 		/**
 		 * returns the state used when rendering.
 		 * @returns the state flags
@@ -38633,7 +38633,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A theming engine, or %NULL if
 		 * the engine #name doesn’t exist.
 		 */
-		public static load(name: string): ThemingEngine;
+		public static load(name: string): ThemingEngine | null;
 		/**
 		 * Registers a property so it can be used in the CSS file format,
 		 * on the CSS file the property will look like
@@ -39025,28 +39025,28 @@ declare namespace imports.gi.Gtk {
 		 * @returns the icon name or %NULL if the tool button has
 		 * no themed icon
 		 */
-		get_icon_name(): string;
+		get_icon_name(): string | null;
 		/**
 		 * Return the widget used as icon widget on #button.
 		 * See gtk_tool_button_set_icon_widget().
 		 * @returns The widget used as icon
 		 *     on #button, or %NULL.
 		 */
-		get_icon_widget(): Widget;
+		get_icon_widget(): Widget | null;
 		/**
 		 * Returns the label used by the tool button, or %NULL if the tool button
 		 * doesn’t have a label. or uses a the label from a stock item. The returned
 		 * string is owned by GTK+, and must not be modified or freed.
 		 * @returns The label, or %NULL
 		 */
-		get_label(): string;
+		get_label(): string | null;
 		/**
 		 * Returns the widget used as label on #button.
 		 * See gtk_tool_button_set_label_widget().
 		 * @returns The widget used as label
 		 *     on #button, or %NULL.
 		 */
-		get_label_widget(): Widget;
+		get_label_widget(): Widget | null;
 		/**
 		 * Returns the name of the stock item. See gtk_tool_button_set_stock_id().
 		 * The returned string is owned by GTK+ and must not be freed or modifed.
@@ -39245,7 +39245,7 @@ declare namespace imports.gi.Gtk {
 		 *     gtk_tool_item_set_proxy_menu_item(), if the #menu_item_ids
 		 *     match.
 		 */
-		get_proxy_menu_item(menu_item_id: string): Widget;
+		get_proxy_menu_item(menu_item_id: string): Widget | null;
 		/**
 		 * Returns the relief style of #tool_item. See gtk_button_set_relief().
 		 * Custom subclasses of {@link ToolItem} should call this function in the handler
@@ -39661,7 +39661,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the {@link ToolItemGroup} at position
 		 * or %NULL if there is no such group
 		 */
-		get_drop_group(_x: number, _y: number): ToolItemGroup;
+		get_drop_group(_x: number, _y: number): ToolItemGroup | null;
 		/**
 		 * Gets the item at position (x, y).
 		 * See gtk_tool_palette_get_drop_group().
@@ -39669,7 +39669,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _y the y position
 		 * @returns the {@link ToolItem} at position or %NULL if there is no such item
 		 */
-		get_drop_item(_x: number, _y: number): ToolItem;
+		get_drop_item(_x: number, _y: number): ToolItem | null;
 		/**
 		 * Gets whether #group is exclusive or not.
 		 * See gtk_tool_palette_set_exclusive().
@@ -39923,7 +39923,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The #n'th {@link ToolItem} on #toolbar,
 		 *     or %NULL if there isn’t an #n'th item.
 		 */
-		get_nth_item(_n: number): ToolItem;
+		get_nth_item(_n: number): ToolItem | null;
 		/**
 		 * Returns the relief style of buttons on #toolbar. See
 		 * gtk_button_set_relief().
@@ -40253,7 +40253,7 @@ declare namespace imports.gi.Gtk {
 		 * @param child_path A {@link TreePath} to convert.
 		 * @returns A newly allocated {@link TreePath}, or %NULL.
 		 */
-		convert_child_path_to_path(child_path: TreePath): TreePath;
+		convert_child_path_to_path(child_path: TreePath): TreePath | null;
 		/**
 		 * Sets #child_iter to point to the row pointed to by #filter_iter.
 		 * @param child_iter An uninitialized {@link TreeIter}.
@@ -40268,7 +40268,7 @@ declare namespace imports.gi.Gtk {
 		 * @param filter_path A {@link TreePath} to convert.
 		 * @returns A newly allocated {@link TreePath}, or %NULL.
 		 */
-		convert_path_to_child_path(filter_path: TreePath): TreePath;
+		convert_path_to_child_path(filter_path: TreePath): TreePath | null;
 		/**
 		 * Returns a pointer to the child model of #filter.
 		 * @returns A pointer to a {@link TreeModel}.
@@ -40465,7 +40465,7 @@ declare namespace imports.gi.Gtk {
 		 * @param child_path A {@link TreePath} to convert
 		 * @returns A newly allocated {@link TreePath}, or %NULL
 		 */
-		convert_child_path_to_path(child_path: TreePath): TreePath;
+		convert_child_path_to_path(child_path: TreePath): TreePath | null;
 		/**
 		 * Sets #child_iter to point to the row pointed to by #sorted_iter.
 		 * @param child_iter An uninitialized {@link TreeIter}
@@ -40481,7 +40481,7 @@ declare namespace imports.gi.Gtk {
 		 * @param sorted_path A {@link TreePath} to convert
 		 * @returns A newly allocated {@link TreePath}, or %NULL
 		 */
-		convert_path_to_child_path(sorted_path: TreePath): TreePath;
+		convert_path_to_child_path(sorted_path: TreePath): TreePath | null;
 		/**
 		 * Returns the model the {@link TreeModelSort} is sorting.
 		 * @returns the "child model" being sorted
@@ -40677,7 +40677,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the user data for the selection function.
 		 * @returns The user data.
 		 */
-		get_user_data(): any;
+		get_user_data(): any | null;
 		/**
 		 * Returns %TRUE if the row at #iter is currently selected.
 		 * @param iter A valid {@link TreeIter}
@@ -41305,7 +41305,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A #GdkWindow, or %NULL when #tree_view
 		 * hasn’t been realized yet.
 		 */
-		get_bin_window(): Gdk.Window;
+		get_bin_window(): Gdk.Window | null;
 		/**
 		 * Fills the bounding rectangle in bin_window coordinates for the cell at the
 		 * row specified by #path and the column specified by #column.  If #path is
@@ -41327,7 +41327,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The {@link TreeViewColumn}, or %NULL if the
 		 * position is outside the range of columns.
 		 */
-		get_column(_n: number): TreeViewColumn;
+		get_column(_n: number): TreeViewColumn | null;
 		/**
 		 * Returns a #GList of all the {@link TreeViewColumn} s currently in #tree_view.
 		 * The returned list must be freed with g_list_free ().
@@ -41434,7 +41434,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A {@link TreeModel}, or %NULL if
 		 * none is currently being used.
 		 */
-		get_model(): TreeModel;
+		get_model(): TreeModel | null;
 		/**
 		 * Queries the number of columns in the given #tree_view.
 		 * @returns The number of columns in the #tree_view
@@ -42414,7 +42414,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The tree view wherein #column has
 		 *     been inserted if any, %NULL otherwise.
 		 */
-		get_tree_view(): Widget;
+		get_tree_view(): Widget | null;
 		/**
 		 * Returns %TRUE if #tree_column is visible.
 		 * @returns whether the column is visible or not.  If it is visible, then
@@ -42427,7 +42427,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The {@link Widget} in the column
 		 *     header, or %NULL
 		 */
-		get_widget(): Widget;
+		get_widget(): Widget | null;
 		/**
 		 * Returns the current size of #tree_column in pixels.
 		 * @returns The current width of #tree_column.
@@ -44029,7 +44029,7 @@ declare namespace imports.gi.Gtk {
 		 * drag-and-drop.
 		 * @returns the {@link TargetList}, or %NULL if none
 		 */
-		drag_dest_get_target_list(): TargetList;
+		drag_dest_get_target_list(): TargetList | null;
 		/**
 		 * Returns whether the widget has been configured to always
 		 * emit {@link Widget}::drag-motion signals.
@@ -44170,7 +44170,7 @@ declare namespace imports.gi.Gtk {
 		 * drag-and-drop.
 		 * @returns the {@link TargetList}, or %NULL if none
 		 */
-		drag_source_get_target_list(): TargetList;
+		drag_source_get_target_list(): TargetList | null;
 		/**
 		 * Sets up a widget so that GTK+ will start a drag operation when the user
 		 * clicks and drags on the widget. The widget must have a window.
@@ -44308,7 +44308,7 @@ declare namespace imports.gi.Gtk {
 		 * @param prefix The “prefix” of the action group.
 		 * @returns A #GActionGroup or %NULL.
 		 */
-		get_action_group(prefix: string): Gio.ActionGroup;
+		get_action_group(prefix: string): Gio.ActionGroup | null;
 		/**
 		 * Returns the baseline that has currently been allocated to #widget.
 		 * This function is intended to be used when implementing handlers
@@ -44377,7 +44377,7 @@ declare namespace imports.gi.Gtk {
 		 * @param widget_type ancestor type
 		 * @returns the ancestor widget, or %NULL if not found
 		 */
-		get_ancestor(widget_type: GObject.Type): Widget;
+		get_ancestor(widget_type: GObject.Type): Widget | null;
 		/**
 		 * Determines whether the application intends to draw on the widget in
 		 * an {@link Widget}::draw handler.
@@ -44524,13 +44524,13 @@ declare namespace imports.gi.Gtk {
 		 * Gets the font map that has been set with gtk_widget_set_font_map().
 		 * @returns A #PangoFontMap, or %NULL
 		 */
-		get_font_map(): Pango.FontMap;
+		get_font_map(): Pango.FontMap | null;
 		/**
 		 * Returns the #cairo_font_options_t used for Pango rendering. When not set,
 		 * the defaults font options for the #GdkScreen will be used.
 		 * @returns the #cairo_font_options_t or %NULL if not set
 		 */
-		get_font_options(): cairo.FontOptions;
+		get_font_options(): cairo.FontOptions | null;
 		/**
 		 * Obtains the frame clock for a widget. The frame clock is a global
 		 * “ticker” that can be used to drive animations and repaints.  The
@@ -44556,7 +44556,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GdkFrameClock,
 		 * or %NULL if widget is unrealized
 		 */
-		get_frame_clock(): Gdk.FrameClock;
+		get_frame_clock(): Gdk.FrameClock | null;
 		/**
 		 * Gets the value of the {@link Widget}:halign property.
 		 * 
@@ -44709,13 +44709,13 @@ declare namespace imports.gi.Gtk {
 		 * Returns the parent container of #widget.
 		 * @returns the parent container of #widget, or %NULL
 		 */
-		get_parent(): Widget;
+		get_parent(): Widget | null;
 		/**
 		 * Gets #widget’s parent window, or %NULL if it does not have one.
 		 * @returns the parent window of #widget, or %NULL
 		 * if it does not have a parent window.
 		 */
-		get_parent_window(): Gdk.Window;
+		get_parent_window(): Gdk.Window | null;
 		/**
 		 * Returns the {@link WidgetPath} representing #widget, if the widget
 		 * is not connected to a toplevel widget, a partial path will be
@@ -44991,13 +44991,13 @@ declare namespace imports.gi.Gtk {
 		 * @returns the tooltip text, or %NULL. You should free the
 		 *   returned string with g_free() when done.
 		 */
-		get_tooltip_markup(): string;
+		get_tooltip_markup(): string | null;
 		/**
 		 * Gets the contents of the tooltip for #widget.
 		 * @returns the tooltip text, or %NULL. You should free the
 		 *   returned string with g_free() when done.
 		 */
-		get_tooltip_text(): string;
+		get_tooltip_text(): string | null;
 		/**
 		 * Returns the {@link Window} of the current tooltip. This can be the
 		 * GtkWindow created by default, or the custom tooltip window set
@@ -45095,7 +45095,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the widget’s window if it is realized, %NULL otherwise
 		 * @returns #widget’s window.
 		 */
-		// get_window(): Gdk.Window;
+		// get_window(): Gdk.Window | null;
 		/**
 		 * Makes #widget the current grabbed widget.
 		 * 
@@ -45775,7 +45775,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a new pixbuf, or %NULL if the
 		 *     stock ID wasn’t known
 		 */
-		render_icon(stock_id: string, size: number, detail: string | null): GdkPixbuf.Pixbuf;
+		render_icon(stock_id: string, size: number, detail: string | null): GdkPixbuf.Pixbuf | null;
 		/**
 		 * A convenience function that uses the theme engine and style
 		 * settings for #widget to look up #stock_id and render it to
@@ -45793,7 +45793,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a new pixbuf, or %NULL if the
 		 *     stock ID wasn’t known
 		 */
-		render_icon_pixbuf(stock_id: string, size: number): GdkPixbuf.Pixbuf;
+		render_icon_pixbuf(stock_id: string, size: number): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Moves a widget from one {@link Container} to another, handling reference
 		 * count issues to avoid destroying the widget.
@@ -48004,14 +48004,14 @@ declare namespace imports.gi.Gtk {
 		 * Gets the {@link Application} associated with the window (if any).
 		 * @returns a {@link Application}, or %NULL
 		 */
-		get_application(): Application;
+		get_application(): Application | null;
 		/**
 		 * Fetches the attach widget for this window. See
 		 * gtk_window_set_attached_to().
 		 * @returns the widget where the window
 		 * is attached, or %NULL if the window is not attached to any widget.
 		 */
-		get_attached_to(): Widget;
+		get_attached_to(): Widget | null;
 		/**
 		 * Returns whether the window has been set to have decorations
 		 * such as a title bar via gtk_window_set_decorated().
@@ -48034,7 +48034,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the default widget, or %NULL
 		 * if there is none.
 		 */
-		get_default_widget(): Widget;
+		get_default_widget(): Widget | null;
 		/**
 		 * Returns whether the window has been set to have a close button
 		 * via gtk_window_set_deletable().
@@ -48056,7 +48056,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the currently focused widget,
 		 * or %NULL if there is none.
 		 */
-		get_focus(): Widget;
+		get_focus(): Widget | null;
 		/**
 		 * Gets the value set by gtk_window_set_focus_on_map().
 		 * @returns %TRUE if window should receive the input focus when
@@ -48099,7 +48099,7 @@ declare namespace imports.gi.Gtk {
 		 * the icon list).
 		 * @returns icon for window or %NULL if none
 		 */
-		get_icon(): GdkPixbuf.Pixbuf;
+		get_icon(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Retrieves the list of icons set by gtk_window_set_icon_list().
 		 * The list is copied, but the reference count on each
@@ -48113,7 +48113,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the icon name or %NULL if the window has
 		 * no themed icon
 		 */
-		get_icon_name(): string;
+		get_icon_name(): string | null;
 		/**
 		 * Returns the mnemonic modifier for this window. See
 		 * gtk_window_set_mnemonic_modifier().
@@ -48202,7 +48202,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the role of the window if set, or %NULL. The
 		 * returned is owned by the widget and must not be modified or freed.
 		 */
-		get_role(): string;
+		get_role(): string | null;
 		/**
 		 * Returns the #GdkScreen associated with #window.
 		 * @returns a #GdkScreen.
@@ -48285,7 +48285,7 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * return location for height, or %NULL
 		 */
-		get_size(): [ width: number, height: number ];
+		get_size(): [ width: number | null, height: number | null ];
 		/**
 		 * Gets the value set by gtk_window_set_skip_pager_hint().
 		 * @returns %TRUE if window shouldn’t be in pager
@@ -48302,20 +48302,20 @@ declare namespace imports.gi.Gtk {
 		 * been set explicitly. The returned string is owned by the widget
 		 * and must not be modified or freed.
 		 */
-		get_title(): string;
+		get_title(): string | null;
 		/**
 		 * Returns the custom titlebar that has been set with
 		 * gtk_window_set_titlebar().
 		 * @returns the custom titlebar, or %NULL
 		 */
-		get_titlebar(): Widget;
+		get_titlebar(): Widget | null;
 		/**
 		 * Fetches the transient parent for this window. See
 		 * gtk_window_set_transient_for().
 		 * @returns the transient parent for this
 		 * window, or %NULL if no transient parent has been set.
 		 */
-		get_transient_for(): Window;
+		get_transient_for(): Window | null;
 		/**
 		 * Gets the type hint for this window. See gtk_window_set_type_hint().
 		 * @returns the type hint for #window.
@@ -49466,7 +49466,7 @@ declare namespace imports.gi.Gtk {
 		 * @param device a #GdkDevice
 		 * @returns The grab widget, or %NULL
 		 */
-		get_current_device_grab(device: Gdk.Device): Widget;
+		get_current_device_grab(device: Gdk.Device): Widget | null;
 		/**
 		 * Gets the current grab widget of the given group,
 		 * see gtk_grab_add().
@@ -49711,7 +49711,7 @@ declare namespace imports.gi.Gtk {
 	class ActionableInterface {
 		public constructor();
 		public readonly g_iface: GObject.TypeInterface;
-		public get_action_name: {(actionable: Actionable): string;};
+		public get_action_name: {(actionable: Actionable): string | null;};
 		public set_action_name: {(actionable: Actionable, action_name: string | null): void;};
 		public get_action_target_value: {(actionable: Actionable): GLib.Variant;};
 		public set_action_target_value: {(actionable: Actionable, target_value: GLib.Variant | null): void;};
@@ -50351,7 +50351,7 @@ declare namespace imports.gi.Gtk {
 		public clear_attributes: {(cell_layout: CellLayout, cell: CellRenderer): void;};
 		public reorder: {(cell_layout: CellLayout, cell: CellRenderer, position: number): void;};
 		public get_cells: {(cell_layout: CellLayout): GLib.List;};
-		public get_area: {(cell_layout: CellLayout): CellArea;};
+		public get_area: {(cell_layout: CellLayout): CellArea | null;};
 	}
 
 	interface CellRendererAccelClass {}
@@ -50383,7 +50383,7 @@ declare namespace imports.gi.Gtk {
 		public get_size: {(cell: CellRenderer, widget: Widget, cell_area: Gdk.Rectangle | null): [ x_offset: number | null, y_offset: number | null, width: number | null, height: number | null ];};
 		public render: {(cell: CellRenderer, cr: cairo.Context, widget: Widget, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): void;};
 		public activate: {(cell: CellRenderer, event: Gdk.Event, widget: Widget, path: string, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): boolean;};
-		public start_editing: {(cell: CellRenderer, event: Gdk.Event | null, widget: Widget, path: string, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): CellEditable;};
+		public start_editing: {(cell: CellRenderer, event: Gdk.Event | null, widget: Widget, path: string, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): CellEditable | null;};
 		public editing_canceled: {(cell: CellRenderer): void;};
 		public editing_started: {(cell: CellRenderer, editable: CellEditable, path: string): void;};
 		public _gtk_reserved2: {(): void;};
@@ -50742,7 +50742,7 @@ declare namespace imports.gi.Gtk {
 		 *     property or %NULL if #class has no child property with that
 		 *     name.
 		 */
-		public find_child_property(property_name: string): GObject.ParamSpec;
+		public find_child_property(property_name: string): GObject.ParamSpec | null;
 		/**
 		 * Modifies a subclass of {@link ContainerClass} to automatically add and
 		 * remove the border-width setting on GtkContainer.  This allows the
@@ -50848,7 +50848,7 @@ declare namespace imports.gi.Gtk {
 		 * a different file.
 		 * @returns the parent section or %NULL if none
 		 */
-		public get_parent(): CssSection;
+		public get_parent(): CssSection | null;
 		/**
 		 * Gets the type of information that #section describes.
 		 * @returns the type of #section
@@ -51253,13 +51253,13 @@ declare namespace imports.gi.Gtk {
 		public constructor();
 		public readonly base_iface: GObject.TypeInterface;
 		public readonly padding: any[];
-		public get_font_family: {(fontchooser: FontChooser): Pango.FontFamily;};
-		public get_font_face: {(fontchooser: FontChooser): Pango.FontFace;};
+		public get_font_family: {(fontchooser: FontChooser): Pango.FontFamily | null;};
+		public get_font_face: {(fontchooser: FontChooser): Pango.FontFace | null;};
 		public get_font_size: {(fontchooser: FontChooser): number;};
 		public set_filter_func: {(fontchooser: FontChooser, filter: FontFilterFunc | null, destroy: GLib.DestroyNotify): void;};
 		public font_activated: {(chooser: FontChooser, fontname: string): void;};
 		public set_font_map: {(fontchooser: FontChooser, fontmap: Pango.FontMap | null): void;};
-		public get_font_map: {(fontchooser: FontChooser): Pango.FontMap;};
+		public get_font_map: {(fontchooser: FontChooser): Pango.FontMap | null;};
 	}
 
 	interface FontChooserWidgetClass {}
@@ -53376,7 +53376,7 @@ declare namespace imports.gi.Gtk {
 		 *   In case of error, #error will be set either with a
 		 *   %GTK_RECENT_MANAGER_ERROR or a %G_IO_ERROR
 		 */
-		public create_app_info(app_name: string | null): Gio.AppInfo;
+		public create_app_info(app_name: string | null): Gio.AppInfo | null;
 		/**
 		 * Checks whether the resource pointed by #info still exists.
 		 * At the moment this check is done only on resources pointing
@@ -53436,7 +53436,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GIcon containing the icon, or %NULL.
 		 *   Use g_object_unref() when finished using the icon
 		 */
-		public get_gicon(): Gio.Icon;
+		public get_gicon(): Gio.Icon | null;
 		/**
 		 * Returns all groups registered for the recently used item #info.
 		 * The array of returned group names will be %NULL terminated, so
@@ -53452,7 +53452,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GdkPixbuf containing the icon,
 		 *     or %NULL. Use g_object_unref() when finished using the icon.
 		 */
-		public get_icon(size: number): GdkPixbuf.Pixbuf;
+		public get_icon(size: number): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Gets the MIME type of the resource.
 		 * @returns the MIME type of the resource. The returned string
@@ -53495,7 +53495,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a newly allocated UTF-8 string containing the
 		 *   resource’s URI or %NULL. Use g_free() when done using it.
 		 */
-		public get_uri_display(): string;
+		public get_uri_display(): string | null;
 		/**
 		 * Gets the timestamp (seconds from system’s Epoch) when the meta-data
 		 * for the resource was last visited.
@@ -53802,7 +53802,7 @@ declare namespace imports.gi.Gtk {
 		 *   %NULL.  If the result is non-%NULL it must be freed with
 		 *   g_object_unref().
 		 */
-		public get_pixbuf(): GdkPixbuf.Pixbuf;
+		public get_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Retrieves the selection #GdkAtom of the selection data.
 		 * @returns the selection #GdkAtom of the selection data.
@@ -53829,7 +53829,7 @@ declare namespace imports.gi.Gtk {
 		 *   allocated string containing the converted text, otherwise %NULL.
 		 *   If the result is non-%NULL it must be freed with g_free().
 		 */
-		public get_text(): string;
+		public get_text(): string | null;
 		/**
 		 * Gets the contents of the selection data as array of URIs.
 		 * @returns if
@@ -54295,9 +54295,9 @@ declare namespace imports.gi.Gtk {
 	class StyleProviderIface {
 		public constructor();
 		public readonly g_iface: GObject.TypeInterface;
-		public get_style: {(provider: StyleProvider, path: WidgetPath): StyleProperties;};
+		public get_style: {(provider: StyleProvider, path: WidgetPath): StyleProperties | null;};
 		public get_style_property: {(provider: StyleProvider, path: WidgetPath, state: StateFlags, pspec: GObject.ParamSpec, value: GObject.Value): boolean;};
-		public get_icon_factory: {(provider: StyleProvider, path: WidgetPath): IconFactory;};
+		public get_icon_factory: {(provider: StyleProvider, path: WidgetPath): IconFactory | null;};
 	}
 
 	interface SwitchAccessibleClass {}
@@ -56369,7 +56369,7 @@ declare namespace imports.gi.Gtk {
 		 * or %NULL if the path pointed to is no longer valid.
 		 * @returns a current path, or %NULL
 		 */
-		public get_path(): TreePath;
+		public get_path(): TreePath | null;
 		/**
 		 * Returns %TRUE if the #reference is non-%NULL and refers to
 		 * a current valid path.
@@ -56958,14 +56958,14 @@ declare namespace imports.gi.Gtk {
 		 * @param pos position to get the widget name for, -1 for the path head
 		 * @returns The widget name, or %NULL if none was set.
 		 */
-		public iter_get_name(pos: number): string;
+		public iter_get_name(pos: number): string | null;
 		/**
 		 * Returns the object name that is at position #pos in the widget
 		 * hierarchy defined in #path.
 		 * @param pos position to get the object name for, -1 for the path head
 		 * @returns the name or %NULL
 		 */
-		public iter_get_object_name(pos: number): string;
+		public iter_get_object_name(pos: number): string | null;
 		/**
 		 * Returns the object #GType that is at position #pos in the widget
 		 * hierarchy defined in #path.
@@ -57288,7 +57288,7 @@ declare namespace imports.gi.Gtk {
 		 * See gtk_actionable_set_action_name() for more information.
 		 * @returns the action name, or %NULL if none is set
 		 */
-		get_action_name(): string;
+		get_action_name(): string | null;
 		/**
 		 * Gets the current target value of #actionable.
 		 * 
@@ -57747,7 +57747,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GAppInfo for the currently selected
 		 *     application, or %NULL if none is selected. Free with g_object_unref()
 		 */
-		get_app_info(): Gio.AppInfo;
+		get_app_info(): Gio.AppInfo | null;
 		/**
 		 * Returns the current value of the {@link AppChooser}:content-type property.
 		 * @returns the content type of #self. Free with g_free()
@@ -58057,7 +58057,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the cell area used by #cell_layout,
 		 * or %NULL in case no cell area is used.
 		 */
-		get_area(): CellArea;
+		get_area(): CellArea | null;
 		/**
 		 * Returns the cell renderers which have been added to #cell_layout.
 		 * @returns 
@@ -58641,7 +58641,7 @@ declare namespace imports.gi.Gtk {
 		 * was requested from it; for example, as would be for calling
 		 * gtk_file_chooser_set_current_folder() on a nonexistent folder.
 		 */
-		get_current_folder(): string;
+		get_current_folder(): string | null;
 		/**
 		 * Gets the current folder of #chooser as #GFile.
 		 * See gtk_file_chooser_get_current_folder_uri().
@@ -58665,7 +58665,7 @@ declare namespace imports.gi.Gtk {
 		 * as would be for calling gtk_file_chooser_set_current_folder_uri() on a
 		 * nonexistent folder.
 		 */
-		get_current_folder_uri(): string;
+		get_current_folder_uri(): string | null;
 		/**
 		 * Gets the current name in the file selector, as entered by the user in the
 		 * text entry for “Name”.
@@ -58693,7 +58693,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_file_chooser_set_extra_widget().
 		 * @returns the current extra widget, or %NULL
 		 */
-		get_extra_widget(): Widget;
+		get_extra_widget(): Widget | null;
 		/**
 		 * Gets the #GFile for the currently selected file in
 		 * the file selector. If multiple files are selected,
@@ -58717,7 +58717,7 @@ declare namespace imports.gi.Gtk {
 		 *  or %NULL if no file is selected, or the selected file can't
 		 *  be represented with a local filename. Free with g_free().
 		 */
-		get_filename(): string;
+		get_filename(): string | null;
 		/**
 		 * Lists all the selected files and subfolders in the current folder of
 		 * #chooser. The returned names are full absolute paths. If files in the current
@@ -58742,7 +58742,7 @@ declare namespace imports.gi.Gtk {
 		 * Gets the current filter; see gtk_file_chooser_set_filter().
 		 * @returns the current filter, or %NULL
 		 */
-		get_filter(): FileFilter;
+		get_filter(): FileFilter | null;
 		/**
 		 * Gets whether only local files can be selected in the
 		 * file selector. See gtk_file_chooser_set_local_only()
@@ -58755,7 +58755,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the #GFile for the file to preview,
 		 *     or %NULL if no file is selected. Free with g_object_unref().
 		 */
-		get_preview_file(): Gio.File;
+		get_preview_file(): Gio.File | null;
 		/**
 		 * Gets the filename that should be previewed in a custom preview
 		 * widget. See gtk_file_chooser_set_preview_widget().
@@ -58763,20 +58763,20 @@ declare namespace imports.gi.Gtk {
 		 *  no file is selected, or if the selected file cannot be represented
 		 *  as a local filename. Free with g_free()
 		 */
-		get_preview_filename(): string;
+		get_preview_filename(): string | null;
 		/**
 		 * Gets the URI that should be previewed in a custom preview
 		 * widget. See gtk_file_chooser_set_preview_widget().
 		 * @returns the URI for the file to preview,
 		 *     or %NULL if no file is selected. Free with g_free().
 		 */
-		get_preview_uri(): string;
+		get_preview_uri(): string | null;
 		/**
 		 * Gets the current preview widget; see
 		 * gtk_file_chooser_set_preview_widget().
 		 * @returns the current preview widget, or %NULL
 		 */
-		get_preview_widget(): Widget;
+		get_preview_widget(): Widget | null;
 		/**
 		 * Gets whether the preview widget set by gtk_file_chooser_set_preview_widget()
 		 * should be shown for the current filename. See
@@ -58808,7 +58808,7 @@ declare namespace imports.gi.Gtk {
 		 *    %TRUE (the default) a local URI will be returned for any FUSE locations.
 		 *    Free with g_free()
 		 */
-		get_uri(): string;
+		get_uri(): string | null;
 		/**
 		 * Lists all the selected files and subfolders in the current folder of
 		 * #chooser. The returned names are full absolute URIs.
@@ -58840,7 +58840,7 @@ declare namespace imports.gi.Gtk {
 		 * folder URIs, or %NULL if there are no shortcut folders.  Free the
 		 * returned list with g_slist_free(), and the URIs with g_free().
 		 */
-		list_shortcut_folder_uris(): GLib.SList;
+		list_shortcut_folder_uris(): GLib.SList | null;
 		/**
 		 * Queries the list of shortcut folders in the file chooser, as set by
 		 * gtk_file_chooser_add_shortcut_folder().
@@ -58849,7 +58849,7 @@ declare namespace imports.gi.Gtk {
 		 * Free the returned list with g_slist_free(), and the filenames with
 		 * g_free().
 		 */
-		list_shortcut_folders(): GLib.SList;
+		list_shortcut_folders(): GLib.SList | null;
 		/**
 		 * Removes a 'choice' that has been added with gtk_file_chooser_add_choice().
 		 * @param _id the ID of the choice to remove
@@ -59546,7 +59546,7 @@ declare namespace imports.gi.Gtk {
 		 *     of the current font, or %NULL if  no font is selected. You must
 		 *     free this string with g_free().
 		 */
-		get_font(): string;
+		get_font(): string | null;
 		/**
 		 * Gets the currently-selected font.
 		 * 
@@ -59561,7 +59561,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A #PangoFontDescription for the
 		 *     current font, or %NULL if  no font is selected.
 		 */
-		get_font_desc(): Pango.FontDescription;
+		get_font_desc(): Pango.FontDescription | null;
 		/**
 		 * Gets the #PangoFontFace representing the selected font group
 		 * details (i.e. family, slant, weight, width, etc).
@@ -59571,7 +59571,7 @@ declare namespace imports.gi.Gtk {
 		 *     selected font group details, or %NULL. The returned object is owned by
 		 *     #fontchooser and must not be modified or freed.
 		 */
-		get_font_face(): Pango.FontFace;
+		get_font_face(): Pango.FontFace | null;
 		/**
 		 * Gets the #PangoFontFamily representing the selected font family.
 		 * Font families are a collection of font faces.
@@ -59581,7 +59581,7 @@ declare namespace imports.gi.Gtk {
 		 *     selected font family, or %NULL. The returned object is owned by #fontchooser
 		 *     and must not be modified or freed.
 		 */
-		get_font_family(): Pango.FontFamily;
+		get_font_family(): Pango.FontFamily | null;
 		/**
 		 * Gets the currently-selected font features.
 		 * @returns the currently selected font features
@@ -59592,7 +59592,7 @@ declare namespace imports.gi.Gtk {
 		 * or %NULL if it does not have one.
 		 * @returns a #PangoFontMap, or %NULL
 		 */
-		get_font_map(): Pango.FontMap;
+		get_font_map(): Pango.FontMap | null;
 		/**
 		 * The selected font size.
 		 * @returns A n integer representing the selected font size,
@@ -60264,7 +60264,7 @@ declare namespace imports.gi.Gtk {
 		 * @param path {@link WidgetPath} to query
 		 * @returns The icon factory to use for #path, or %NULL
 		 */
-		get_icon_factory(path: WidgetPath): IconFactory;
+		get_icon_factory(path: WidgetPath): IconFactory | null;
 		/**
 		 * Returns the style settings affecting a widget defined by #path, or %NULL if
 		 * #provider doesn’t contemplate styling #path.
@@ -60272,7 +60272,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a {@link StyleProperties} containing the
 		 * style settings affecting #path
 		 */
-		get_style(path: WidgetPath): StyleProperties;
+		get_style(path: WidgetPath): StyleProperties | null;
 		/**
 		 * Looks up a widget style property as defined by #provider for
 		 * the widget represented by #path.
@@ -64862,7 +64862,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns Newly allocated string with Pango markup
 		 *     with details for the specified day or %NULL.
 		 */
-		(calendar: Calendar, year: number, month: number, day: number): string;
+		(calendar: Calendar, year: number, month: number, day: number): string | null;
 	}
 
 	/**
@@ -65479,7 +65479,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a newly-allocated array of guint8 which contains
 		 * the serialized data, or %NULL if an error occurred
 		 */
-		(register_buffer: TextBuffer, content_buffer: TextBuffer, start: TextIter, _end: TextIter, length: number): number;
+		(register_buffer: TextBuffer, content_buffer: TextBuffer, start: TextIter, _end: TextIter, length: number): number | null;
 	}
 
 	interface TextCharPredicate {
@@ -66029,7 +66029,7 @@ declare namespace imports.gi.Gtk {
 	 * @param set_name unique binding set name
 	 * @returns %NULL or the specified binding set
 	 */
-	function binding_set_find(set_name: string): BindingSet;
+	function binding_set_find(set_name: string): BindingSet | null;
 
 	/**
 	 * GTK+ maintains a global list of binding sets. Each binding set has
@@ -66124,7 +66124,7 @@ declare namespace imports.gi.Gtk {
 	 *   The returned string is owned by GTK+ and should not be modified
 	 *   or freed.
 	 */
-	function check_version(required_major: number, required_minor: number, required_micro: number): string;
+	function check_version(required_major: number, required_minor: number, required_micro: number): string | null;
 
 	function css_provider_error_quark(): GLib.Quark;
 
@@ -66213,7 +66213,7 @@ declare namespace imports.gi.Gtk {
 	 *     within a single application, a pointer to the source widget.
 	 *     Otherwise, %NULL.
 	 */
-	function drag_get_source_widget(context: Gdk.DragContext): Widget;
+	function drag_get_source_widget(context: Gdk.DragContext): Widget | null;
 
 	/**
 	 * Sets the icon for a particular drag to the default
@@ -66363,14 +66363,14 @@ declare namespace imports.gi.Gtk {
 	 *     %NULL if there is no current event. The returned event must be
 	 *     freed with gdk_event_free().
 	 */
-	function get_current_event(): Gdk.Event;
+	function get_current_event(): Gdk.Event | null;
 
 	/**
 	 * If there is a current event and it has a device, return that
 	 * device, otherwise return %NULL.
 	 * @returns a #GdkDevice, or %NULL
 	 */
-	function get_current_event_device(): Gdk.Device;
+	function get_current_event_device(): Gdk.Device | null;
 
 	/**
 	 * If there is a current event and it has a state field, place
@@ -66420,7 +66420,7 @@ declare namespace imports.gi.Gtk {
 	 * @returns the widget that originally
 	 *     received #event, or %NULL
 	 */
-	function get_event_widget(event: Gdk.Event): Widget;
+	function get_event_widget(event: Gdk.Event): Widget | null;
 
 	/**
 	 * Returns the interface age as passed to `libtool`
@@ -66512,7 +66512,7 @@ declare namespace imports.gi.Gtk {
 	 * @returns The widget which currently
 	 *     has the grab or %NULL if no grab is active
 	 */
-	function grab_get_current(): Widget;
+	function grab_get_current(): Widget | null;
 
 	/**
 	 * Looks up the icon size associated with #name.
@@ -67290,7 +67290,7 @@ declare namespace imports.gi.Gtk {
 	 *     must call g_object_ref() on the returned value if you want to
 	 *     keep a reference to it.
 	 */
-	function rc_get_style_by_paths(settings: Settings, widget_path: string | null, class_path: string | null, _type: GObject.Type): Style;
+	function rc_get_style_by_paths(settings: Settings, widget_path: string | null, class_path: string | null, _type: GObject.Type): Style | null;
 
 	/**
 	 * Returns the standard directory in which themes should
@@ -68130,7 +68130,7 @@ declare namespace imports.gi.Gtk {
 	 * @param widget_type Type of a aearched for label sibling widget.
 	 * @returns a valid widget if any is found or %NULL.
 	 */
-	function test_find_widget(widget: Widget, label_pattern: string, widget_type: GObject.Type): Widget;
+	function test_find_widget(widget: Widget, label_pattern: string, widget_type: GObject.Type): Widget | null;
 
 	/**
 	 * This function is used to initialize a GTK+ test program.

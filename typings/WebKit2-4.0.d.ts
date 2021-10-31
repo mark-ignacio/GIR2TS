@@ -182,7 +182,7 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns the #WebKitBackForwardListItem
 		 *    preceding the current item or %NULL.
 		 */
-		get_back_item(): BackForwardListItem;
+		get_back_item(): BackForwardListItem | null;
 		get_back_list(): GLib.List;
 		get_back_list_with_limit(limit: number): GLib.List;
 		/**
@@ -190,13 +190,13 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns a #WebKitBackForwardListItem
 		 *    or %NULL if #back_forward_list is empty.
 		 */
-		get_current_item(): BackForwardListItem;
+		get_current_item(): BackForwardListItem | null;
 		/**
 		 * Returns the item that follows the current item.
 		 * @returns the #WebKitBackForwardListItem
 		 *    following the current item or %NULL.
 		 */
-		get_forward_item(): BackForwardListItem;
+		get_forward_item(): BackForwardListItem | null;
 		get_forward_list(): GLib.List;
 		get_forward_list_with_limit(limit: number): GLib.List;
 		get_length(): number;
@@ -206,7 +206,7 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns the #WebKitBackForwardListItem
 		 *    located at the specified index relative to the current item or %NULL.
 		 */
-		get_nth_item(index: number): BackForwardListItem;
+		get_nth_item(index: number): BackForwardListItem | null;
 		/**
 		 * This signal is emitted when #back_forward_list changes. This happens
 		 * when the current item is updated, a new item is added or one or more
@@ -1264,7 +1264,7 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns a #GHashTable with the form
 		 *    text fields, or %NULL if the form doesn't contain text fields.
 		 */
-		get_text_fields(): GLib.HashTable;
+		get_text_fields(): GLib.HashTable | null;
 		/**
 		 * Get lists with the names and values of the text fields contained in
 		 * the form associated to #request. Note that names and values may be
@@ -1532,7 +1532,7 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * location to store the position of cursor in preedit string
 		 */
-		get_preedit(): [ text: string, underlines: GLib.List, cursor_offset: number ];
+		get_preedit(): [ text: string | null, underlines: GLib.List | null, cursor_offset: number | null ];
 		/**
 		 * Notify #context that cursor area changed in input associated.
 		 * @param _x the x coordinate of cursor location
@@ -1790,7 +1790,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Obtains the tag identifier for the notification.
 		 * @returns the tag for the notification
 		 */
-		get_tag(): string;
+		get_tag(): string | null;
 		/**
 		 * Obtains the title for the notification.
 		 * @returns the title for the notification
@@ -3891,7 +3891,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Get the #message list of file descritpor
 		 * @returns the message list of file descriptors
 		 */
-		get_fd_list(): Gio.UnixFDList;
+		get_fd_list(): Gio.UnixFDList | null;
 		/**
 		 * Get the #message name
 		 * @returns the message name
@@ -3901,7 +3901,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Get the #message parameters
 		 * @returns the message parameters
 		 */
-		get_parameters(): GLib.Variant;
+		get_parameters(): GLib.Variant | null;
 		/**
 		 * Send a reply to #message. If #reply is floating, it's consumed.
 		 * You can only send a reply to a #WebKitUserMessage that has been
@@ -4933,7 +4933,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Get the #WebKitInputMethodContext currently in use by #web_view, or %NULL if no input method is being used.
 		 * @returns a #WebKitInputMethodContext, or %NULL
 		 */
-		get_input_method_context(): InputMethodContext;
+		get_input_method_context(): InputMethodContext | null;
 		/**
 		 * Get the #WebKitWebInspector associated to #web_view
 		 * @returns the #WebKitWebInspector of #web_view
@@ -6184,13 +6184,13 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns the base directory for Website cache, or %NULL if
 		 *    #WebKitWebsiteDataManager:base-cache-directory was not provided or #manager is ephemeral.
 		 */
-		get_base_cache_directory(): string;
+		get_base_cache_directory(): string | null;
 		/**
 		 * Get the #WebKitWebsiteDataManager:base-data-directory property.
 		 * @returns the base directory for Website data, or %NULL if
 		 *    #WebKitWebsiteDataManager:base-data-directory was not provided or #manager is ephemeral.
 		 */
-		get_base_data_directory(): string;
+		get_base_data_directory(): string | null;
 		/**
 		 * Get the #WebKitCookieManager of #manager.
 		 * @returns a #WebKitCookieManager
@@ -6200,27 +6200,27 @@ declare namespace imports.gi.WebKit2 {
 		 * Get the #WebKitWebsiteDataManager:disk-cache-directory property.
 		 * @returns the directory where HTTP disk cache is stored or %NULL if #manager is ephemeral.
 		 */
-		get_disk_cache_directory(): string;
+		get_disk_cache_directory(): string | null;
 		/**
 		 * Get the #WebKitWebsiteDataManager:dom-cache-directory property.
 		 * @returns the directory where DOM cache is stored or %NULL if #manager is ephemeral.
 		 */
-		get_dom_cache_directory(): string;
+		get_dom_cache_directory(): string | null;
 		/**
 		 * Get the #WebKitWebsiteDataManager:hsts-cache-directory property.
 		 * @returns the directory where the HSTS cache is stored or %NULL if #manager is ephemeral.
 		 */
-		get_hsts_cache_directory(): string;
+		get_hsts_cache_directory(): string | null;
 		/**
 		 * Get the #WebKitWebsiteDataManager:indexeddb-directory property.
 		 * @returns the directory where IndexedDB databases are stored or %NULL if #manager is ephemeral.
 		 */
-		get_indexeddb_directory(): string;
+		get_indexeddb_directory(): string | null;
 		/**
 		 * Get the #WebKitWebsiteDataManager:itp-directory property.
 		 * @returns the directory where Intelligent Tracking Prevention data is stored or %NULL if #manager is ephemeral.
 		 */
-		get_itp_directory(): string;
+		get_itp_directory(): string | null;
 		/**
 		 * Get whether Intelligent Tracking Prevention (ITP) is enabled or not.
 		 * @returns %TRUE if ITP is enabled, or %FALSE otherwise.
@@ -6248,12 +6248,12 @@ declare namespace imports.gi.WebKit2 {
 		 * Get the #WebKitWebsiteDataManager:local-storage-directory property.
 		 * @returns the directory where local storage data is stored or %NULL if #manager is ephemeral.
 		 */
-		get_local_storage_directory(): string;
+		get_local_storage_directory(): string | null;
 		/**
 		 * Get the #WebKitWebsiteDataManager:offline-application-cache-directory property.
 		 * @returns the directory where offline web application cache is stored or %NULL if #manager is ephemeral.
 		 */
-		get_offline_application_cache_directory(): string;
+		get_offline_application_cache_directory(): string | null;
 		/**
 		 * Get whether persistent credential storage is enabled or not.
 		 * See also webkit_website_data_manager_set_persistent_credential_storage_enabled().
@@ -6264,7 +6264,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Get the #WebKitWebsiteDataManager:service-worker-registrations-directory property.
 		 * @returns the directory where service worker registrations are stored or %NULL if #manager is ephemeral.
 		 */
-		get_service_worker_registrations_directory(): string;
+		get_service_worker_registrations_directory(): string | null;
 		/**
 		 * Get the TLS errors policy of #manager
 		 * @returns a #WebKitTLSErrorsPolicy
@@ -6274,7 +6274,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Get the #WebKitWebsiteDataManager:websql-directory property.
 		 * @returns the directory where WebSQL databases are stored or %NULL if #manager is ephemeral.
 		 */
-		get_websql_directory(): string;
+		get_websql_directory(): string | null;
 		/**
 		 * Get whether a #WebKitWebsiteDataManager is ephemeral. See #WebKitWebsiteDataManager:is-ephemeral for more details.
 		 * @returns %TRUE if #manager is ephemeral or %FALSE otherwise.
@@ -6968,7 +6968,7 @@ declare namespace imports.gi.WebKit2 {
 		public committed: {(context: InputMethodContext, text: string): void;};
 		public delete_surrounding: {(context: InputMethodContext, offset: number, n_chars: number): void;};
 		public set_enable_preedit: {(context: InputMethodContext, enabled: boolean): void;};
-		public get_preedit: {(context: InputMethodContext): [ text: string, underlines: GLib.List, cursor_offset: number ];};
+		public get_preedit: {(context: InputMethodContext): [ text: string | null, underlines: GLib.List | null, cursor_offset: number | null ];};
 		public filter_key_event: {(context: InputMethodContext, key_event: Gdk.EventKey): boolean;};
 		public notify_focus_in: {(context: InputMethodContext): void;};
 		public notify_focus_out: {(context: InputMethodContext): void;};
@@ -7511,7 +7511,7 @@ declare namespace imports.gi.WebKit2 {
 		 * if its protocol does not require a host component.
 		 * @returns The host of the #WebKitSecurityOrigin
 		 */
-		public get_host(): string;
+		public get_host(): string | null;
 		/**
 		 * Gets the port of #origin. This function will always return 0 if the
 		 * port is the default port for the given protocol. For example,
@@ -7525,7 +7525,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Gets the protocol of #origin.
 		 * @returns The protocol of the #WebKitSecurityOrigin
 		 */
-		public get_protocol(): string;
+		public get_protocol(): string | null;
 		/**
 		 * This function returns %FALSE. #WebKitSecurityOrigin is now a simple
 		 * wrapper around a &lt;protocol, host, port&gt; triplet, and no longer
@@ -7545,7 +7545,7 @@ declare namespace imports.gi.WebKit2 {
 		 * %NULL.
 		 * @returns a URI representing #origin.
 		 */
-		public to_string(): string;
+		public to_string(): string | null;
 		/**
 		 * Atomically decrements the reference count of #origin by one.
 		 * If the reference count drops to 0, all memory allocated by
@@ -9213,7 +9213,7 @@ declare namespace imports.gi.WebKit2 {
 	 * @returns #uri suitable for display, or %NULL in
 	 *    case of error.
 	 */
-	function uri_for_display(uri: string): string;
+	function uri_for_display(uri: string): string | null;
 
 	function user_content_filter_error_quark(): GLib.Quark;
 

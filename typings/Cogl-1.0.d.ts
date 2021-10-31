@@ -179,7 +179,7 @@ declare namespace imports.gi.Cogl {
 		 * @returns For convenience it returns the
 		 *                                given #offscreen
 		 */
-		public static ref(offscreen: any | null): any;
+		public static ref(offscreen: any | null): any | null;
 		/**
 		 * Decreases the reference count for the #offscreen buffer and frees it when
 		 * the count reaches 0.
@@ -1471,7 +1471,7 @@ declare namespace imports.gi.Cogl {
 		 * @param texture a {@link Texture}.
 		 * @returns the #texture pointer.
 		 */
-		public static ref(texture: any | null): any;
+		public static ref(texture: any | null): any | null;
 		/**
 		 * Decrement the reference count for a cogl texture.
 		 * @param texture a {@link Texture}.
@@ -2869,7 +2869,7 @@ declare namespace imports.gi.Cogl {
 	 * modifying such materials is undefined.</note>
 	 * @returns The current source material.
 	 */
-	function get_source(): any;
+	function get_source(): any | null;
 
 	/**
 	 * Stores the current viewport in #v. #v[0] and #v[1] get the x and y
@@ -3699,7 +3699,7 @@ declare namespace imports.gi.Cogl {
 	 * @param texture a {@link Texture}.
 	 * @returns the #texture pointer.
 	 */
-	function texture_ref(texture: any | null): any;
+	function texture_ref(texture: any | null): any | null;
 
 	/**
 	 * Decrement the reference count for a cogl texture.

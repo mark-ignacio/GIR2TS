@@ -70,7 +70,7 @@ declare namespace imports.gi.Pango {
 		 *   been set (which is the same as the identity matrix). The returned
 		 *   matrix is owned by Pango and must not be modified or freed.
 		 */
-		get_matrix(): Matrix;
+		get_matrix(): Matrix | null;
 		/**
 		 * Get overall metric information for a particular font description.
 		 * 
@@ -132,7 +132,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the newly allocated `PangoFont`
 		 *   that was loaded, or %NULL if no font matched.
 		 */
-		load_font(desc: FontDescription): Font;
+		load_font(desc: FontDescription): Font | null;
 		/**
 		 * Load a set of fonts in the context that can be used to render
 		 * a font matching #desc.
@@ -141,7 +141,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the newly allocated
 		 *   `PangoFontset` loaded, or %NULL if no font matched.
 		 */
-		load_fontset(desc: FontDescription, language: Language): Fontset;
+		load_fontset(desc: FontDescription, language: Language): Fontset | null;
 		/**
 		 * Sets the base direction for the context.
 		 * 
@@ -344,7 +344,7 @@ declare namespace imports.gi.Pango {
 		 * @param n_bytes the size of #bytes in bytes
 		 * @returns a newly allocated `PangoCoverage`
 		 */
-		public static from_bytes(bytes: number[], n_bytes: number): Coverage;
+		public static from_bytes(bytes: number[], n_bytes: number): Coverage | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -405,7 +405,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the `PangoFontMap`
 		 *   for the font
 		 */
-		get_font_map(): FontMap;
+		get_font_map(): FontMap | null;
 		/**
 		 * Gets the logical and ink extents of a glyph within a font.
 		 * 
@@ -432,7 +432,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the `hb_font_t` object
 		 *   backing the font
 		 */
-		get_hb_font(): HarfBuzz.font_t;
+		get_hb_font(): HarfBuzz.font_t | null;
 		/**
 		 * Gets overall metric information for a font.
 		 * 
@@ -557,7 +557,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the `PangoFontFace`,
 		 *   or %NULL if no face with the given name exists.
 		 */
-		get_face(name: string | null): FontFace;
+		get_face(name: string | null): FontFace | null;
 		/**
 		 * Gets the name of the family.
 		 * 
@@ -691,7 +691,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the newly allocated `PangoFont`
 		 *   loaded, or %NULL if no font matched.
 		 */
-		load_font(context: Context, desc: FontDescription): Font;
+		load_font(context: Context, desc: FontDescription): Font | null;
 		/**
 		 * Load a set of fonts in the fontmap that can be used to render
 		 * a font matching #desc.
@@ -701,7 +701,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the newly allocated
 		 *   `PangoFontset` loaded, or %NULL if no font matched.
 		 */
-		load_fontset(context: Context, desc: FontDescription, language: Language): Fontset;
+		load_fontset(context: Context, desc: FontDescription, language: Language): Fontset | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -838,7 +838,7 @@ declare namespace imports.gi.Pango {
 		 * Gets the attribute list for the layout, if any.
 		 * @returns a `PangoAttrList`
 		 */
-		get_attributes(): AttrList;
+		get_attributes(): AttrList | null;
 		/**
 		 * Gets whether to calculate the base direction for the layout
 		 * according to its contents.
@@ -918,7 +918,7 @@ declare namespace imports.gi.Pango {
 		 *   layout's font description, or %NULL if the font description
 		 *   from the layout's context is inherited.
 		 */
-		get_font_description(): FontDescription;
+		get_font_description(): FontDescription | null;
 		/**
 		 * Gets the height of layout used for ellipsization.
 		 * 
@@ -957,7 +957,7 @@ declare namespace imports.gi.Pango {
 		 *   and retained, but will become invalid if changes are made to the
 		 *   `PangoLayout`.
 		 */
-		get_line(line: number): LayoutLine;
+		get_line(line: number): LayoutLine | null;
 		/**
 		 * Retrieves the count of lines for the #layout.
 		 * @returns the line count
@@ -976,7 +976,7 @@ declare namespace imports.gi.Pango {
 		 *   and retained, but will become invalid if changes are made to the
 		 *   `PangoLayout`. No changes should be made to the line.
 		 */
-		get_line_readonly(line: number): LayoutLine;
+		get_line_readonly(line: number): LayoutLine | null;
 		/**
 		 * Gets the line spacing factor of #layout.
 		 * 
@@ -1110,7 +1110,7 @@ declare namespace imports.gi.Pango {
 		 * The return value should be freed with [method#Pango.TabArray.free].
 		 * @returns a copy of the tabs for this layout
 		 */
-		get_tabs(): TabArray;
+		get_tabs(): TabArray | null;
 		/**
 		 * Gets the text in the layout.
 		 * 
@@ -1700,7 +1700,7 @@ declare namespace imports.gi.Pango {
 		 *   specified part, or %NULL if it hasn't been set and should be
 		 *   inherited from the environment.
 		 */
-		get_color(part: RenderPart): Color;
+		get_color(part: RenderPart): Color | null;
 		/**
 		 * Gets the layout currently being rendered using #renderer.
 		 * 
@@ -1712,7 +1712,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the layout, or %NULL if
 		 *   no layout is being rendered using #renderer at this time.
 		 */
-		get_layout(): Layout;
+		get_layout(): Layout | null;
 		/**
 		 * Gets the layout line currently being rendered using #renderer.
 		 * 
@@ -1724,7 +1724,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the layout line, or %NULL
 		 *   if no layout line is being rendered using #renderer at this time.
 		 */
-		get_layout_line(): LayoutLine;
+		get_layout_line(): LayoutLine | null;
 		/**
 		 * Gets the transformation matrix that will be applied when
 		 * rendering.
@@ -1734,7 +1734,7 @@ declare namespace imports.gi.Pango {
 		 *   been set (which is the same as the identity matrix). The returned
 		 *   matrix is owned by Pango and must not be modified or freed.
 		 */
-		get_matrix(): Matrix;
+		get_matrix(): Matrix | null;
 		/**
 		 * Informs Pango that the way that the rendering is done
 		 * for #part has changed.
@@ -1984,7 +1984,7 @@ declare namespace imports.gi.Pango {
 		 *   attribute of the given type, or %NULL if no attribute
 		 *   of that type applies to the current location.
 		 */
-		public get(_type: AttrType): Attribute;
+		public get(_type: AttrType): Attribute | null;
 		/**
 		 * Gets a list of all attributes at the current position of the
 		 * iterator.
@@ -2099,7 +2099,7 @@ declare namespace imports.gi.Pango {
 		 *   which should be freed with [method#Pango.AttrList.unref].
 		 *   Returns %NULL if #list was %NULL.
 		 */
-		public copy(): AttrList;
+		public copy(): AttrList | null;
 		/**
 		 * Checks whether #list and #other_list contain the same
 		 * attributes and whether those attributes apply to the
@@ -2123,7 +2123,7 @@ declare namespace imports.gi.Pango {
 		 *   `PangoAttrList` or %NULL if no attributes of the
 		 *   given types were found
 		 */
-		public filter(_func: AttrFilterFunc, data: any | null): AttrList;
+		public filter(_func: AttrFilterFunc, data: any | null): AttrList | null;
 		/**
 		 * Gets a list of all attributes in #list.
 		 * @returns 
@@ -2374,7 +2374,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the newly allocated `PangoColor`,
 		 *   which should be freed with [method#Pango.Color.free]
 		 */
-		public copy(): Color;
+		public copy(): Color | null;
 		/**
 		 * Frees a color allocated by [method#Pango.Color.copy].
 		 */
@@ -2439,7 +2439,7 @@ declare namespace imports.gi.Pango {
 		public get_coverage: {(font: Font, language: Language): Coverage;};
 		public get_glyph_extents: {(font: Font | null, glyph: Glyph, ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;};
 		public get_metrics: {(font: Font | null, language: Language | null): FontMetrics;};
-		public get_font_map: {(font: Font | null): FontMap;};
+		public get_font_map: {(font: Font | null): FontMap | null;};
 		public describe_absolute: {(font: Font): FontDescription;};
 		public get_features: {(font: Font, features: HarfBuzz.feature_t[]): void;};
 		public create_hb_font: {(font: Font): HarfBuzz.font_t;};
@@ -2485,7 +2485,7 @@ declare namespace imports.gi.Pango {
 		 *   which should be freed with [method#Pango.FontDescription.free],
 		 *   or %NULL if #desc was %NULL.
 		 */
-		public copy(): FontDescription;
+		public copy(): FontDescription | null;
 		/**
 		 * Make a copy of a `PangoFontDescription`, but don't duplicate
 		 * allocated fields.
@@ -2498,7 +2498,7 @@ declare namespace imports.gi.Pango {
 		 *   which should be freed with [method#Pango.FontDescription.free],
 		 *   or %NULL if #desc was %NULL.
 		 */
-		public copy_static(): FontDescription;
+		public copy_static(): FontDescription | null;
 		/**
 		 * Compares two font descriptions for equality.
 		 * 
@@ -2523,7 +2523,7 @@ declare namespace imports.gi.Pango {
 		 *   description, or %NULL if not previously set. This has the same
 		 *   life-time as the font description itself and should not be freed.
 		 */
-		public get_family(): string;
+		public get_family(): string | null;
 		/**
 		 * Gets the gravity field of a font description.
 		 * 
@@ -2599,7 +2599,7 @@ declare namespace imports.gi.Pango {
 		 *   description, or %NULL if not previously set. This has the same
 		 *   life-time as the font description itself and should not be freed.
 		 */
-		public get_variations(): string;
+		public get_variations(): string | null;
 		/**
 		 * Gets the weight field of a font description.
 		 * 
@@ -2826,7 +2826,7 @@ declare namespace imports.gi.Pango {
 		public get_name: {(family: FontFamily): string;};
 		public is_monospace: {(family: FontFamily): boolean;};
 		public is_variable: {(family: FontFamily): boolean;};
-		public get_face: {(family: FontFamily, name: string | null): FontFace;};
+		public get_face: {(family: FontFamily, name: string | null): FontFace | null;};
 		public _pango_reserved2: {(): void;};
 	}
 
@@ -2842,9 +2842,9 @@ declare namespace imports.gi.Pango {
 		 * can handle fonts of this fonts loaded with this fontmap.
 		 */
 		public readonly shape_engine_type: string;
-		public load_font: {(fontmap: FontMap, context: Context, desc: FontDescription): Font;};
+		public load_font: {(fontmap: FontMap, context: Context, desc: FontDescription): Font | null;};
 		public list_families: {(fontmap: FontMap): [ FontFamily[], number ];};
-		public load_fontset: {(fontmap: FontMap, context: Context, desc: FontDescription, language: Language): Fontset;};
+		public load_fontset: {(fontmap: FontMap, context: Context, desc: FontDescription, language: Language): Fontset | null;};
 		public get_serial: {(fontmap: FontMap): number;};
 		public changed: {(fontmap: FontMap): void;};
 		public get_family: {(fontmap: FontMap, name: string): FontFamily;};
@@ -2954,7 +2954,7 @@ declare namespace imports.gi.Pango {
 		 * Increase the reference count of a font metrics structure by one.
 		 * @returns #metrics
 		 */
-		public ref(): FontMetrics;
+		public ref(): FontMetrics | null;
 		/**
 		 * Decrease the reference count of a font metrics structure by one.
 		 * If the result is zero, frees the structure and any associated memory.
@@ -3075,7 +3075,7 @@ declare namespace imports.gi.Pango {
 		 * Make a deep copy of an existing `PangoGlyphItem` structure.
 		 * @returns the newly allocated `PangoGlyphItem`
 		 */
-		public copy(): GlyphItem;
+		public copy(): GlyphItem | null;
 		/**
 		 * Frees a `PangoGlyphItem` and resources to which it points.
 		 */
@@ -3189,7 +3189,7 @@ declare namespace imports.gi.Pango {
 		 * Make a shallow copy of an existing `PangoGlyphItemIter` structure.
 		 * @returns the newly allocated `PangoGlyphItemIter`
 		 */
-		public copy(): GlyphItemIter;
+		public copy(): GlyphItemIter | null;
 		/**
 		 * Frees a `PangoGlyphItem`Iter.
 		 */
@@ -3266,7 +3266,7 @@ declare namespace imports.gi.Pango {
 		 * Copy a glyph string and associated storage.
 		 * @returns the newly allocated `PangoGlyphString`
 		 */
-		public copy(): GlyphString;
+		public copy(): GlyphString | null;
 		/**
 		 * Compute the logical and ink extents of a glyph string.
 		 * 
@@ -3436,7 +3436,7 @@ declare namespace imports.gi.Pango {
 		 * Copy an existing `PangoItem` structure.
 		 * @returns the newly allocated `PangoItem`
 		 */
-		public copy(): Item;
+		public copy(): Item | null;
 		/**
 		 * Free a `PangoItem` and all associated memory.
 		 */
@@ -3528,7 +3528,7 @@ declare namespace imports.gi.Pango {
 		 *   any information about this particular language tag (also the case
 		 *   if #language is %NULL).
 		 */
-		public get_scripts(num_scripts: number | null): Script[];
+		public get_scripts(num_scripts: number | null): Script[] | null;
 		/**
 		 * Determines if #script is one of the scripts used to
 		 * write #language.
@@ -3597,7 +3597,7 @@ declare namespace imports.gi.Pango {
 		 * Copies a `PangoLayoutIter`.
 		 * @returns the newly allocated `PangoLayoutIter`
 		 */
-		public copy(): LayoutIter;
+		public copy(): LayoutIter | null;
 		/**
 		 * Frees an iterator that's no longer in use.
 		 */
@@ -3709,7 +3709,7 @@ declare namespace imports.gi.Pango {
 		 * plan to modify the contents of the run (glyphs, glyph widths, etc.).
 		 * @returns the current run
 		 */
-		public get_run(): LayoutRun;
+		public get_run(): LayoutRun | null;
 		/**
 		 * Gets the extents of the current run in layout coordinates.
 		 * 
@@ -3732,7 +3732,7 @@ declare namespace imports.gi.Pango {
 		 * @returns the current run, that
 		 *   should not be modified
 		 */
-		public get_run_readonly(): LayoutRun;
+		public get_run_readonly(): LayoutRun | null;
 		/**
 		 * Moves #iter forward to the next character in visual order.
 		 * 
@@ -4028,7 +4028,7 @@ declare namespace imports.gi.Pango {
 		 * Copies a `PangoMatrix`.
 		 * @returns the newly allocated `PangoMatrix`
 		 */
-		public copy(): Matrix;
+		public copy(): Matrix | null;
 		/**
 		 * Free a `PangoMatrix`.
 		 */
@@ -5638,7 +5638,7 @@ declare namespace imports.gi.Pango {
 		 * Type of a function that can duplicate user data for an attribute.
 		 * @returns new copy of #user_data.
 		 */
-		(): any;
+		(): any | null;
 	}
 
 	/**
@@ -6010,7 +6010,7 @@ declare namespace imports.gi.Pango {
 	 *   may be %NULL), or %NULL if #type is a built-in Pango
 	 *   attribute type or invalid.
 	 */
-	function attr_type_get_name(_type: AttrType): string;
+	function attr_type_get_name(_type: AttrType): string | null;
 
 	/**
 	 * Allocate a new attribute type ID.
@@ -6378,7 +6378,7 @@ declare namespace imports.gi.Pango {
 	 * @param language a string representing a language tag
 	 * @returns a `PangoLanguage`
 	 */
-	function language_from_string(language: string | null): Language;
+	function language_from_string(language: string | null): Language | null;
 
 	/**
 	 * Returns the `PangoLanguage` for the current locale of the process.
@@ -6427,7 +6427,7 @@ declare namespace imports.gi.Pango {
 	 * @returns a %NULL-terminated array
 	 *   of `PangoLanguage`*
 	 */
-	function language_get_preferred(): Language;
+	function language_get_preferred(): Language | null;
 
 	/**
 	 * Return the bidirectional embedding levels of the input paragraph.
@@ -6705,7 +6705,7 @@ declare namespace imports.gi.Pango {
 	 * @returns a `PangoLanguage` that is representative
 	 *   of the script
 	 */
-	function script_get_sample_language(script: Script): Language;
+	function script_get_sample_language(script: Script): Language | null;
 
 	/**
 	 * Convert the characters in #text into glyphs.
@@ -6896,7 +6896,7 @@ declare namespace imports.gi.Pango {
 	 *   mismatch.  The returned string is owned by Pango and should not
 	 *   be modified or freed.
 	 */
-	function version_check(required_major: number, required_minor: number, required_micro: number): string;
+	function version_check(required_major: number, required_minor: number, required_micro: number): string | null;
 
 	/**
 	 * Returns the version of Pango available at run-time.

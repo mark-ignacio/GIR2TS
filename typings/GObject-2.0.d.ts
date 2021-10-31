@@ -40,7 +40,7 @@ declare namespace imports.gi.GObject {
 		 * @returns the source #GObject, or %NULL if the
 		 *     source does not exist any more.
 		 */
-		dup_source(): Object;
+		dup_source(): Object | null;
 		/**
 		 * Retrieves the #GObject instance used as the target of the binding.
 		 * 
@@ -50,7 +50,7 @@ declare namespace imports.gi.GObject {
 		 * @returns the target #GObject, or %NULL if the
 		 *     target does not exist any more.
 		 */
-		dup_target(): Object;
+		dup_target(): Object | null;
 		/**
 		 * Retrieves the flags passed when constructing the #GBinding.
 		 * @returns the #GBindingFlags used by the #GBinding
@@ -69,7 +69,7 @@ declare namespace imports.gi.GObject {
 		 * @returns the source #GObject, or %NULL if the
 		 *     source does not exist any more.
 		 */
-		get_source(): Object;
+		get_source(): Object | null;
 		/**
 		 * Retrieves the name of the property of #GBinding:source used as the source
 		 * of the binding.
@@ -89,7 +89,7 @@ declare namespace imports.gi.GObject {
 		 * @returns the target #GObject, or %NULL if the
 		 *     target does not exist any more.
 		 */
-		get_target(): Object;
+		get_target(): Object | null;
 		/**
 		 * Retrieves the name of the property of #GBinding:target used as the target
 		 * of the binding.
@@ -447,7 +447,7 @@ declare namespace imports.gi.GObject {
 		 *     If #dup_func is %NULL, the value is returned
 		 *     unmodified.
 		 */
-		dup_data(key: string, dup_func: GLib.DuplicateFunc | null): any;
+		dup_data(key: string, dup_func: GLib.DuplicateFunc | null): any | null;
 		/**
 		 * This is a variant of g_object_get_qdata() which returns
 		 * a 'duplicate' of the value. #dup_func defines the
@@ -470,7 +470,7 @@ declare namespace imports.gi.GObject {
 		 *     If #dup_func is %NULL, the value is returned
 		 *     unmodified.
 		 */
-		dup_qdata(quark: GLib.Quark, dup_func: GLib.DuplicateFunc | null): any;
+		dup_qdata(quark: GLib.Quark, dup_func: GLib.DuplicateFunc | null): any | null;
 		/**
 		 * This function is intended for #GObject implementations to re-enforce
 		 * a [floating][floating-ref] object reference. Doing this is seldom
@@ -526,7 +526,7 @@ declare namespace imports.gi.GObject {
 		 * @returns the data if found,
 		 *          or %NULL if no such data exists.
 		 */
-		get_data(key: string): any;
+		get_data(key: string): any | null;
 		/**
 		 * Gets a property of an object.
 		 * 
@@ -554,7 +554,7 @@ declare namespace imports.gi.GObject {
 		 * @param quark A #GQuark, naming the user data pointer
 		 * @returns The user data pointer set, or %NULL
 		 */
-		get_qdata(quark: GLib.Quark): any;
+		get_qdata(quark: GLib.Quark): any | null;
 		/**
 		 * Gets properties of an object.
 		 * 
@@ -829,7 +829,7 @@ declare namespace imports.gi.GObject {
 		 * @returns the data if found, or %NULL
 		 *          if no such data exists.
 		 */
-		steal_data(key: string): any;
+		steal_data(key: string): any | null;
 		/**
 		 * This function gets back user data pointers stored via
 		 * g_object_set_qdata() and removes the #data from object
@@ -869,7 +869,7 @@ declare namespace imports.gi.GObject {
 		 * @param quark A #GQuark, naming the user data pointer
 		 * @returns The user data pointer set, or %NULL
 		 */
-		steal_qdata(quark: GLib.Quark): any;
+		steal_qdata(quark: GLib.Quark): any | null;
 		/**
 		 * If #object is floating, sink it.  Otherwise, do nothing.
 		 * 
@@ -1155,7 +1155,7 @@ declare namespace imports.gi.GObject {
 		 * Get the short description of a #GParamSpec.
 		 * @returns the short description of #pspec.
 		 */
-		get_blurb(): string;
+		get_blurb(): string | null;
 		/**
 		 * Gets the default value of #pspec as a pointer to a #GValue.
 		 * 
@@ -1186,7 +1186,7 @@ declare namespace imports.gi.GObject {
 		 * @param quark a #GQuark, naming the user data pointer
 		 * @returns the user data pointer set, or %NULL
 		 */
-		get_qdata(quark: GLib.Quark): any;
+		get_qdata(quark: GLib.Quark): any | null;
 		/**
 		 * If the paramspec redirects operations to another paramspec,
 		 * returns that paramspec. Redirect is used typically for
@@ -1198,7 +1198,7 @@ declare namespace imports.gi.GObject {
 		 * @returns paramspec to which requests on this
 		 *          paramspec should be redirected, or %NULL if none.
 		 */
-		get_redirect_target(): ParamSpec;
+		get_redirect_target(): ParamSpec | null;
 		/**
 		 * Increments the reference count of #pspec.
 		 * @returns the #GParamSpec that was passed into this function
@@ -1250,7 +1250,7 @@ declare namespace imports.gi.GObject {
 		 * @param quark a #GQuark, naming the user data pointer
 		 * @returns the user data pointer set, or %NULL
 		 */
-		steal_qdata(quark: GLib.Quark): any;
+		steal_qdata(quark: GLib.Quark): any | null;
 		/**
 		 * Decrements the reference count of a #pspec.
 		 */
@@ -2973,7 +2973,7 @@ declare namespace imports.gi.GObject {
 		 * @returns The found #GParamSpec, or %NULL if no
 		 * matching #GParamSpec was found.
 		 */
-		public lookup(param_name: string, owner_type: GObject.Type, walk_ancestors: boolean): ParamSpec;
+		public lookup(param_name: string, owner_type: GObject.Type, walk_ancestors: boolean): ParamSpec | null;
 		/**
 		 * Removes a #GParamSpec from the pool.
 		 * @param pspec the #GParamSpec to remove
@@ -3185,7 +3185,7 @@ declare namespace imports.gi.GObject {
 		 * @returns the offset, in bytes
 		 */
 		public get_instance_private_offset(): number;
-		public get_private(private_type: GObject.Type): any;
+		public get_private(private_type: GObject.Type): any | null;
 		/**
 		 * This is a convenience function often needed in class initializers.
 		 * It returns the class structure of the immediate parent type of the
@@ -3299,7 +3299,7 @@ declare namespace imports.gi.GObject {
 	class TypeInstance {
 		public constructor();
 		public readonly g_class: TypeClass;
-		public get_private(private_type: GObject.Type): any;
+		public get_private(private_type: GObject.Type): any | null;
 	}
 
 	/**
@@ -3459,7 +3459,7 @@ declare namespace imports.gi.GObject {
 		 * return_value);
 		 * @returns boxed contents of #value
 		 */
-		public dup_boxed(): any;
+		public dup_boxed(): any | null;
 		/**
 		 * Get the contents of a %G_TYPE_OBJECT derived #GValue, increasing
 		 * its reference count. If the contents of the #GValue are %NULL, then
@@ -3486,7 +3486,7 @@ declare namespace imports.gi.GObject {
 		 * @returns variant contents of #value (may be %NULL);
 		 *    should be unreffed using g_variant_unref() when no longer needed
 		 */
-		public dup_variant(): GLib.Variant;
+		public dup_variant(): GLib.Variant | null;
 		/**
 		 * Determines if #value will fit inside the size of a pointer value.
 		 * This is an internal function introduced mainly for C marshallers.
@@ -3502,7 +3502,7 @@ declare namespace imports.gi.GObject {
 		 * Get the contents of a %G_TYPE_BOXED derived #GValue.
 		 * @returns boxed contents of #value
 		 */
-		public get_boxed(): any;
+		public get_boxed(): any | null;
 		/**
 		 * Do not use this function; it is broken on platforms where the %char
 		 * type is unsigned, such as ARM and PowerPC.  See g_value_get_schar().
@@ -3565,7 +3565,7 @@ declare namespace imports.gi.GObject {
 		 * Get the contents of a pointer #GValue.
 		 * @returns pointer contents of #value
 		 */
-		public get_pointer(): any;
+		public get_pointer(): any | null;
 		/**
 		 * Get the contents of a %G_TYPE_CHAR #GValue.
 		 * @returns signed 8 bit integer contents of #value
@@ -3600,7 +3600,7 @@ declare namespace imports.gi.GObject {
 		 * Get the contents of a variant #GValue.
 		 * @returns variant contents of #value (may be %NULL)
 		 */
-		public get_variant(): GLib.Variant;
+		public get_variant(): GLib.Variant | null;
 		/**
 		 * Initializes #value with the default value of #type.
 		 * @param g_type Type the #GValue should hold values of.
@@ -3624,7 +3624,7 @@ declare namespace imports.gi.GObject {
 		 * This is an internal function introduced mainly for C marshallers.
 		 * @returns the value contents as pointer
 		 */
-		public peek_pointer(): any;
+		public peek_pointer(): any | null;
 		/**
 		 * Clears the current value in #value and resets it to the default value
 		 * (as if the value had just been initialized).
@@ -5736,7 +5736,7 @@ declare namespace imports.gi.GObject {
 	 * @returns the #GEnumValue for #value, or %NULL
 	 *          if #value is not a member of the enumeration
 	 */
-	function enum_get_value(enum_class: EnumClass, value: number): EnumValue;
+	function enum_get_value(enum_class: EnumClass, value: number): EnumValue | null;
 
 	/**
 	 * Looks up a #GEnumValue by name.
@@ -5746,7 +5746,7 @@ declare namespace imports.gi.GObject {
 	 *          or %NULL if the enumeration doesn't have a member
 	 *          with that name
 	 */
-	function enum_get_value_by_name(enum_class: EnumClass, name: string): EnumValue;
+	function enum_get_value_by_name(enum_class: EnumClass, name: string): EnumValue | null;
 
 	/**
 	 * Looks up a #GEnumValue by nickname.
@@ -5756,7 +5756,7 @@ declare namespace imports.gi.GObject {
 	 *          or %NULL if the enumeration doesn't have a member
 	 *          with that nickname
 	 */
-	function enum_get_value_by_nick(enum_class: EnumClass, nick: string): EnumValue;
+	function enum_get_value_by_nick(enum_class: EnumClass, nick: string): EnumValue | null;
 
 	/**
 	 * Registers a new static enumeration type with the name #name.
@@ -5802,7 +5802,7 @@ declare namespace imports.gi.GObject {
 	 * @returns the first #GFlagsValue which is set in
 	 *          #value, or %NULL if none is set
 	 */
-	function flags_get_first_value(flags_class: FlagsClass, value: number): FlagsValue;
+	function flags_get_first_value(flags_class: FlagsClass, value: number): FlagsValue | null;
 
 	/**
 	 * Looks up a #GFlagsValue by name.
@@ -5811,7 +5811,7 @@ declare namespace imports.gi.GObject {
 	 * @returns the #GFlagsValue with name #name,
 	 *          or %NULL if there is no flag with that name
 	 */
-	function flags_get_value_by_name(flags_class: FlagsClass, name: string): FlagsValue;
+	function flags_get_value_by_name(flags_class: FlagsClass, name: string): FlagsValue | null;
 
 	/**
 	 * Looks up a #GFlagsValue by nickname.
@@ -5820,7 +5820,7 @@ declare namespace imports.gi.GObject {
 	 * @returns the #GFlagsValue with nickname #nick,
 	 *          or %NULL if there is no flag with that nickname
 	 */
-	function flags_get_value_by_nick(flags_class: FlagsClass, nick: string): FlagsValue;
+	function flags_get_value_by_nick(flags_class: FlagsClass, nick: string): FlagsValue | null;
 
 	/**
 	 * Registers a new static flags type with the name #name.
@@ -6452,7 +6452,7 @@ declare namespace imports.gi.GObject {
 	 * @returns the invocation hint of the innermost
 	 *     signal emission, or %NULL if not found.
 	 */
-	function signal_get_invocation_hint(_instance: Object): SignalInvocationHint;
+	function signal_get_invocation_hint(_instance: Object): SignalInvocationHint | null;
 
 	/**
 	 * Blocks a handler of an instance so it will not be called during any
@@ -6667,7 +6667,7 @@ declare namespace imports.gi.GObject {
 	 * @param signal_id the signal's identifying number.
 	 * @returns the signal name, or %NULL if the signal number was invalid.
 	 */
-	function signal_name(signal_id: number): string;
+	function signal_name(signal_id: number): string | null;
 
 	/**
 	 * Creates a new signal. (This is usually done in the class initializer.)
@@ -7241,7 +7241,7 @@ declare namespace imports.gi.GObject {
 	 * @param quark a #GQuark id to identify the data
 	 * @returns the data, or %NULL if no data was found
 	 */
-	function type_get_qdata(_type: GObject.Type, quark: GLib.Quark): any;
+	function type_get_qdata(_type: GObject.Type, quark: GLib.Quark): any | null;
 
 	/**
 	 * Returns an opaque serial number that represents the state of the set

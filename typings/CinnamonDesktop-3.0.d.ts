@@ -930,7 +930,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	 * @returns the passwd struct corresponding to the
 	 * session user (or, as a last resort, the user returned by getuid())
 	 */
-	function desktop_get_session_user_pwent(): any;
+	function desktop_get_session_user_pwent(): any | null;
 
 	/**
 	 * Prepends a terminal (either the one configured as default in
