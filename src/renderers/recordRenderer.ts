@@ -6,6 +6,7 @@ import { GetTypeInfo } from "../utils/paramUtils";
 import { renderMethod } from "./methodRenderer";
 import { ClassModifier, FunctionModifier, ParamModifier } from "../types/modifier-types";
 import { ignored_property_names } from "../consts";
+import { renderProperty } from "./propertyRenderer";
 
 function getAllMethods(object: RecordNode): FunctionNode[] {
     let methods: FunctionNode[] = [];
@@ -16,28 +17,6 @@ function getAllMethods(object: RecordNode): FunctionNode[] {
         methods = methods.concat(object['virtual-method']);
     }
     return methods;
-}
-
-export function renderProperty(prop_node: ParameterNode, ns_name: string, modifiers?: ParamModifier, include_access_modifier: boolean = true, indent: number = 0, exclude?: boolean): string {
-    let prop_name = prop_node.$.name;
-    if (prop_name === 'constructor') {
-        prop_name += '_'; // Append an underscore.
-    }
-    prop_name = prop_name.replace(/-/g, '_');
-
-    let result = renderDocString(modifiers?.doc ?? prop_node.doc?.[0]?._ ?? null, undefined, undefined, indent, ns_name);
-    result += "\t".repeat(indent);
-    if (exclude)
-        result += "// ";
-    result += (include_access_modifier) ? 'public ' : "";
-    if (prop_node?.$?.writable != 1)
-        result+= "readonly ";
-    result += modifiers?.newName ?? prop_name;
-    result += modifiers?.optional ? "?: " : ": ";
-    if (prop_name == "x_align")
-        console.log(modifiers)
-    result += GetTypeInfo(prop_node, modifiers).type + ';';
-    return result;
 }
 
 function renderCallbackField(cb_node: FunctionNode, ns_name: string, indent: number, exclude: boolean): string {
@@ -105,10 +84,12 @@ export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclu
     }
 
     let result = renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
+    result += `interface ${rec_node.$.name} {}\n`;
+
     const genericModifier = modifier?.generic ?? "";
+    result += `class ${rec_node.$.name}${genericModifier} {\n`;
+
     const constructor_modifier = modifier?.function?.["constructor"];
-    result += `interface ${rec_node.$.name} {}\n`
-    result += `class ${rec_node.$.name}${genericModifier} {\n`
     result += `${renderMethod(BuildConstructorNode(rec_node.$.name), ns_name, constructor_modifier, { indentNum: 1, isConstructor: true })}\n`;
     result += `${body}}`;
     return result

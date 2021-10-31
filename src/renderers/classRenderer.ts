@@ -4,8 +4,8 @@ import { ExcludeClass } from "../types/exclude-types";
 import { renderMethod } from "./methodRenderer";
 import { BuildConstructorNode, NeedNewLine } from "../utils/utils";
 import { renderDocString } from "./docStringRenderer";
-import { renderProperty } from "./recordRenderer";
 import { ignored_property_names } from "../consts";
+import { renderProperty } from "./propertyRenderer";
 
 /*
     Render class as a TS interface with construct signature.

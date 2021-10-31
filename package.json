@@ -2,7 +2,7 @@
   "name": "gir2ts",
   "main": "./dist/generate.js",
   "scripts": {
-    "start": "node ./dist/generate.js --girdir=../gir/ --modifiersdir=../modifiers/ --overridesdir=../exceptions/ --outdir=../typings/",
+    "generate": "node ./dist/generate.js --girdir=../gir/ --modifiersdir=../modifiers/ --overridesdir=../exceptions/ --outdir=../typings/",
     "build": "npm run clean && webpack",
     "watch": "npm run clean && webpack --watch",
     "validate": "tsc -p tsconfig.json",
