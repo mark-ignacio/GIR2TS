@@ -282,10 +282,8 @@ declare namespace imports.gi.GObject {
 		 * this method are not thread-safe: they cannot safely be used in one
 		 * thread if the object's last g_object_unref() might happen in another
 		 * thread. Use #GWeakRef if thread-safety is required.
-		 * @param weak_pointer_location The memory address
-		 *    of a pointer.
 		 */
-		add_weak_pointer(weak_pointer_location: any): void;
+		add_weak_pointer(): void;
 		/**
 		 * Creates a binding between #source_property on #source and #target_property
 		 * on #target.
@@ -680,10 +678,8 @@ declare namespace imports.gi.GObject {
 		 * Removes a weak reference from #object that was previously added
 		 * using g_object_add_weak_pointer(). The #weak_pointer_location has
 		 * to match the one used with g_object_add_weak_pointer().
-		 * @param weak_pointer_location The memory address
-		 *    of a pointer.
 		 */
-		remove_weak_pointer(weak_pointer_location: any): void;
+		remove_weak_pointer(): void;
 		/**
 		 * Compares the user data for the key #key on #object with
 		 * #oldval, and if they are the same, replaces #oldval with
@@ -705,11 +701,10 @@ declare namespace imports.gi.GObject {
 		 * @param oldval the old value to compare against
 		 * @param newval the new value
 		 * @param destroy a destroy notify for the new value
-		 * @param old_destroy destroy notify for the existing value
 		 * @returns %TRUE if the existing value for #key was replaced
 		 *  by #newval, %FALSE otherwise.
 		 */
-		replace_data(key: string, oldval: any | null, newval: any | null, destroy: GLib.DestroyNotify | null, old_destroy: GLib.DestroyNotify | null): boolean;
+		replace_data(key: string, oldval: any | null, newval: any | null, destroy: GLib.DestroyNotify | null): boolean;
 		/**
 		 * Compares the user data for the key #quark on #object with
 		 * #oldval, and if they are the same, replaces #oldval with
@@ -728,11 +723,10 @@ declare namespace imports.gi.GObject {
 		 * @param oldval the old value to compare against
 		 * @param newval the new value
 		 * @param destroy a destroy notify for the new value
-		 * @param old_destroy destroy notify for the existing value
 		 * @returns %TRUE if the existing value for #quark was replaced
 		 *  by #newval, %FALSE otherwise.
 		 */
-		replace_qdata(quark: GLib.Quark, oldval: any | null, newval: any | null, destroy: GLib.DestroyNotify | null, old_destroy: GLib.DestroyNotify | null): boolean;
+		replace_qdata(quark: GLib.Quark, oldval: any | null, newval: any | null, destroy: GLib.DestroyNotify | null): boolean;
 		/**
 		 * Releases all references to other objects. This can be used to break
 		 * reference cycles.
@@ -1128,14 +1122,13 @@ declare namespace imports.gi.GObject {
 		 * already been loaded, g_type_default_interface_peek().
 		 * @param g_iface any interface vtable for the
 		 *  interface, or the default vtable for the interface
-		 * @param n_properties_p location to store number of properties returned.
 		 * @returns a
 		 *          pointer to an array of pointers to #GParamSpec
 		 *          structures. The paramspecs are owned by GLib, but the
 		 *          array should be freed with g_free() when you are done with
 		 *          it.
 		 */
-		public static interface_list_properties(g_iface: TypeInterface, n_properties_p: number): ParamSpec[];
+		public static interface_list_properties(g_iface: TypeInterface): ParamSpec[];
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2452,16 +2445,13 @@ declare namespace imports.gi.GObject {
 		public invalidate(): void;
 		/**
 		 * Invokes the closure, i.e. executes the callback represented by the #closure.
-		 * @param return_value a #GValue to store the return
-		 *                value. May be %NULL if the callback of #closure
-		 *                doesn't return a value.
 		 * @param n_param_values the length of the #param_values array
 		 * @param param_values an array of
 		 *                #GValues holding the arguments on which to
 		 *                invoke the callback of #closure
 		 * @param invocation_hint a context-dependent invocation hint
 		 */
-		public invoke(return_value: Value | null, n_param_values: number, param_values: Value[], invocation_hint: any | null): void;
+		public invoke(n_param_values: number, param_values: Value[], invocation_hint: any | null): void;
 		/**
 		 * Increments the reference count on a closure to force it staying
 		 * alive while the caller holds a pointer to it.
@@ -2869,11 +2859,10 @@ declare namespace imports.gi.GObject {
 		public install_property(property_id: number, pspec: ParamSpec): void;
 		/**
 		 * Get an array of #GParamSpec* for all properties of a class.
-		 * @param n_properties return location for the length of the returned array
 		 * @returns an array of
 		 *          #GParamSpec* which should be freed after use
 		 */
-		public list_properties(n_properties: number): ParamSpec[];
+		public list_properties(): ParamSpec[];
 		/**
 		 * Registers #property_id as referring to a property with the name
 		 * #name in a parent class or in an interface implemented by #oclass.
@@ -2958,12 +2947,11 @@ declare namespace imports.gi.GObject {
 		 * Gets an array of all #GParamSpecs owned by #owner_type in
 		 * the pool.
 		 * @param owner_type the owner to look for
-		 * @param n_pspecs_p return location for the length of the returned array
 		 * @returns a newly
 		 *          allocated array containing pointers to all #GParamSpecs
 		 *          owned by #owner_type in the pool
 		 */
-		public list(owner_type: GObject.Type, n_pspecs_p: number): ParamSpec[];
+		public list(owner_type: GObject.Type): ParamSpec[];
 		/**
 		 * Gets an #GList of all #GParamSpecs owned by #owner_type in
 		 * the pool.
@@ -5732,12 +5720,11 @@ declare namespace imports.gi.GObject {
 	 * }
 	 * ]|
 	 * @param g_enum_type the type identifier of the type being completed
-	 * @param info the #GTypeInfo struct to be filled in
 	 * @param const_values An array of #GEnumValue structs for the possible
 	 *  enumeration values. The array is terminated by a struct with all
 	 *  members being 0.
 	 */
-	function enum_complete_type_info(g_enum_type: GObject.Type, info: TypeInfo, const_values: EnumValue): void;
+	function enum_complete_type_info(g_enum_type: GObject.Type, const_values: EnumValue): void;
 
 	/**
 	 * Returns the #GEnumValue for a value.
@@ -5799,12 +5786,11 @@ declare namespace imports.gi.GObject {
 	 * function of a #GTypePlugin implementation, see the example for
 	 * g_enum_complete_type_info() above.
 	 * @param g_flags_type the type identifier of the type being completed
-	 * @param info the #GTypeInfo struct to be filled in
 	 * @param const_values An array of #GFlagsValue structs for the possible
 	 *  enumeration values. The array is terminated by a struct with all
 	 *  members being 0.
 	 */
-	function flags_complete_type_info(g_flags_type: GObject.Type, info: TypeInfo, const_values: FlagsValue): void;
+	function flags_complete_type_info(g_flags_type: GObject.Type, const_values: FlagsValue): void;
 
 	/**
 	 * Returns the first #GFlagsValue which is set in #value.
@@ -6454,11 +6440,8 @@ declare namespace imports.gi.GObject {
 	 *  is being emitted on. The rest are any arguments to be passed to the signal.
 	 * @param signal_id the signal id
 	 * @param detail the detail
-	 * @param return_value Location to
-	 * store the return value of the signal emission. This must be provided if the
-	 * specified signal returns a value, but may be ignored otherwise.
 	 */
-	function signal_emitv(instance_and_params: Value[], signal_id: number, detail: GLib.Quark, return_value: Value): void;
+	function signal_emitv(instance_and_params: Value[], signal_id: number, detail: GLib.Quark): void;
 
 	/**
 	 * Returns the invocation hint of the innermost signal emission of instance.
@@ -6652,10 +6635,9 @@ declare namespace imports.gi.GObject {
 	 * created. Further information about the signals can be acquired through
 	 * g_signal_query().
 	 * @param itype Instance or interface type.
-	 * @param n_ids Location to store the number of signal ids for #itype.
 	 * @returns Newly allocated array of signal IDs.
 	 */
-	function signal_list_ids(itype: GObject.Type, n_ids: number): number[];
+	function signal_list_ids(itype: GObject.Type): number[];
 
 	/**
 	 * Given the name of the signal and the type of object it connects to, gets
@@ -6857,12 +6839,10 @@ declare namespace imports.gi.GObject {
 	 * and #detail quark.
 	 * @param detailed_signal a string of the form "signal-name::detail".
 	 * @param itype The interface/instance type that introduced "signal-name".
-	 * @param signal_id_p Location to store the signal id.
-	 * @param detail_p Location to store the detail quark.
 	 * @param force_detail_quark %TRUE forces creation of a #GQuark for the detail.
 	 * @returns Whether the signal name could successfully be parsed and #signal_id_p and #detail_p contain valid return values.
 	 */
-	function signal_parse_name(detailed_signal: string, itype: GObject.Type, signal_id_p: number, detail_p: GLib.Quark, force_detail_quark: boolean): boolean;
+	function signal_parse_name(detailed_signal: string, itype: GObject.Type, force_detail_quark: boolean): boolean;
 
 	/**
 	 * Queries the signal system for in-depth information about a
@@ -6872,10 +6852,8 @@ declare namespace imports.gi.GObject {
 	 * is 0. All members filled into the #GSignalQuery structure should
 	 * be considered constant and have to be left untouched.
 	 * @param signal_id The signal id of the signal to query information for.
-	 * @param query A user provided structure that is
-	 *  filled in with constant values upon success.
 	 */
-	function signal_query(signal_id: number, query: SignalQuery): void;
+	function signal_query(signal_id: number): void;
 
 	/**
 	 * Deletes an emission hook.
@@ -7063,12 +7041,10 @@ declare namespace imports.gi.GObject {
 	 * Return a newly allocated and 0-terminated array of type IDs, listing
 	 * the child types of #type.
 	 * @param _type the parent type
-	 * @param n_children location to store the length of
-	 *     the returned array, or %NULL
 	 * @returns Newly allocated
 	 *     and 0-terminated array of child types, free with g_free()
 	 */
-	function type_children(_type: GObject.Type, n_children: number | null): GObject.Type[];
+	function type_children(_type: GObject.Type): GObject.Type[];
 
 	function type_class_adjust_private_offset(g_class: any | null, private_size_or_offset: number): void;
 
@@ -7340,24 +7316,20 @@ declare namespace imports.gi.GObject {
 	/**
 	 * Returns the prerequisites of an interfaces type.
 	 * @param interface_type an interface type
-	 * @param n_prerequisites location to return the number
-	 *     of prerequisites, or %NULL
 	 * @returns a
 	 *     newly-allocated zero-terminated array of #GType containing
 	 *     the prerequisites of #interface_type
 	 */
-	function type_interface_prerequisites(interface_type: GObject.Type, n_prerequisites: number | null): GObject.Type[];
+	function type_interface_prerequisites(interface_type: GObject.Type): GObject.Type[];
 
 	/**
 	 * Return a newly allocated and 0-terminated array of type IDs, listing
 	 * the interface types that #type conforms to.
 	 * @param _type the type to list interface types for
-	 * @param n_interfaces location to store the length of
-	 *     the returned array, or %NULL
 	 * @returns Newly allocated
 	 *     and 0-terminated array of interface types, free with g_free()
 	 */
-	function type_interfaces(_type: GObject.Type, n_interfaces: number | null): GObject.Type[];
+	function type_interfaces(_type: GObject.Type): GObject.Type[];
 
 	/**
 	 * If #is_a_type is a derivable type, check whether #type is a
@@ -7422,10 +7394,8 @@ declare namespace imports.gi.GObject {
 	 * #GTypeQuery structure should be considered constant and have to be
 	 * left untouched.
 	 * @param _type #GType of a static, classed type
-	 * @param query a user provided structure that is
-	 *     filled in with constant values upon success
 	 */
-	function type_query(_type: GObject.Type, query: TypeQuery): void;
+	function type_query(_type: GObject.Type): void;
 
 	/**
 	 * Registers #type_name as the name of a new dynamic type derived from

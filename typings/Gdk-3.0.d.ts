@@ -140,14 +140,10 @@ declare namespace imports.gi.Gdk {
 		 * Note that depending on the capabilities of the windowing system and
 		 * on the cursor, GDK may not be able to obtain the image data. In this
 		 * case, %NULL is returned.
-		 * @param x_hot Location to store the hotspot x position,
-		 *   or %NULL
-		 * @param y_hot Location to store the hotspot y position,
-		 *   or %NULL
 		 * @returns a #cairo_surface_t
 		 *   representing #cursor, or %NULL
 		 */
-		get_surface(x_hot: number | null, y_hot: number | null): cairo.Surface;
+		get_surface(): cairo.Surface;
 		/**
 		 * Adds a reference to #cursor.
 		 * @returns Same #cursor that was passed in
@@ -373,10 +369,9 @@ declare namespace imports.gi.Gdk {
 		 * and locates the value in the array for a given axis use.
 		 * @param axes pointer to an array of axes
 		 * @param use the use to look for
-		 * @param value location to store the found value.
 		 * @returns %TRUE if the given axis use was found, otherwise %FALSE
 		 */
-		get_axis(axes: number[], use: AxisUse, value: number): boolean;
+		get_axis(axes: number[], use: AxisUse): boolean;
 		/**
 		 * Returns the axis use for #index_.
 		 * @param index_ the index of the axis.
@@ -389,10 +384,9 @@ declare namespace imports.gi.Gdk {
 		 * by gdk_device_list_axes()
 		 * @param axes pointer to an array of axes
 		 * @param axis_label {@link Atom} with the axis label.
-		 * @param value location to store the found value.
 		 * @returns %TRUE if the given axis use was found, otherwise %FALSE.
 		 */
-		get_axis_value(axes: number[], axis_label: Atom, value: number): boolean;
+		get_axis_value(axes: number[], axis_label: Atom): boolean;
 		/**
 		 * Returns the device type for #device.
 		 * @returns the {@link DeviceType} for #device.
@@ -424,24 +418,17 @@ declare namespace imports.gi.Gdk {
 		 * @param window the window with respect to which which the event coordinates will be reported
 		 * @param start starting timestamp for range of events to return
 		 * @param stop ending timestamp for the range of events to return
-		 * @param events 
-		 *   location to store a newly-allocated array of {@link TimeCoord}, or
-		 *   %NULL
-		 * @param n_events location to store the length of
-		 *   #events, or %NULL
 		 * @returns %TRUE if the windowing system supports motion history and
 		 *  at least one event was found.
 		 */
-		get_history(window: Window, start: number, stop: number, events: TimeCoord[] | null, n_events: number | null): boolean;
+		get_history(window: Window, start: number, stop: number): boolean;
 		/**
 		 * If #index_ has a valid keyval, this function will return %TRUE
 		 * and fill in #keyval and #modifiers with the keyval settings.
 		 * @param index_ the index of the macro button to get.
-		 * @param keyval return value for the keyval.
-		 * @param modifiers return value for modifiers.
 		 * @returns %TRUE if keyval is set for #index.
 		 */
-		get_key(index_: number, keyval: number, modifiers: ModifierType): boolean;
+		get_key(index_: number): boolean;
 		/**
 		 * Gets information about which window the given pointer device is in, based on events
 		 * that have been received so far from the display server. If another application
@@ -476,23 +463,27 @@ declare namespace imports.gi.Gdk {
 		 * coordinates are those of its master pointer, This function
 		 * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
 		 * unless there is an ongoing grab on them, see gdk_device_grab().
-		 * @param screen location to store the {@link Screen}
+		 * @returns location to store the {@link Screen}
 		 *          the #device is on, or %NULL.
-		 * @param _x location to store root window X coordinate of #device, or %NULL.
-		 * @param _y location to store root window Y coordinate of #device, or %NULL.
+		 * 
+		 * location to store root window X coordinate of #device, or %NULL.
+		 * 
+		 * location to store root window Y coordinate of #device, or %NULL.
 		 */
-		get_position(screen: Screen | null, _x: number | null, _y: number | null): void;
+		get_position(): [ screen: Screen | null, x: number | null, y: number | null ];
 		/**
 		 * Gets the current location of #device in double precision. As a slave device's
 		 * coordinates are those of its master pointer, this function
 		 * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
 		 * unless there is an ongoing grab on them. See gdk_device_grab().
-		 * @param screen location to store the {@link Screen}
+		 * @returns location to store the {@link Screen}
 		 *          the #device is on, or %NULL.
-		 * @param _x location to store root window X coordinate of #device, or %NULL.
-		 * @param _y location to store root window Y coordinate of #device, or %NULL.
+		 * 
+		 * location to store root window X coordinate of #device, or %NULL.
+		 * 
+		 * location to store root window Y coordinate of #device, or %NULL.
 		 */
-		get_position_double(screen: Screen | null, _x: number | null, _y: number | null): void;
+		get_position_double(): [ screen: Screen | null, x: number | null, y: number | null ];
 		/**
 		 * Returns the product ID of this device, or %NULL if this information couldn't
 		 * be obtained. This ID is retrieved from the device, and is thus constant for
@@ -519,9 +510,8 @@ declare namespace imports.gi.Gdk {
 		 * @param window a {@link Window}.
 		 * @param axes an array of doubles to store the values of
 		 * the axes of #device in, or %NULL.
-		 * @param mask location to store the modifiers, or %NULL.
 		 */
-		get_state(window: Window, axes: number[] | null, mask: ModifierType | null): void;
+		get_state(window: Window, axes: number[] | null): void;
 		/**
 		 * Returns the vendor ID of this device, or %NULL if this information couldn't
 		 * be obtained. This ID is retrieved from the device, and is thus constant for
@@ -559,14 +549,10 @@ declare namespace imports.gi.Gdk {
 		 * As a slave device coordinates are those of its master pointer, This
 		 * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
 		 * unless there is an ongoing grab on them, see gdk_device_grab().
-		 * @param win_x return location for the X coordinate of the device location,
-		 *         relative to the window origin, or %NULL.
-		 * @param win_y return location for the Y coordinate of the device location,
-		 *         relative to the window origin, or %NULL.
 		 * @returns the {@link Window} under the
 		 * device position, or %NULL.
 		 */
-		get_window_at_position(win_x: number | null, win_y: number | null): Window;
+		get_window_at_position(): Window;
 		/**
 		 * Obtains the window underneath #device, returning the location of the device in #win_x and #win_y in
 		 * double precision. Returns %NULL if the window tree under #device is not known to GDK (for example,
@@ -575,14 +561,10 @@ declare namespace imports.gi.Gdk {
 		 * As a slave device coordinates are those of its master pointer, This
 		 * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
 		 * unless there is an ongoing grab on them, see gdk_device_grab().
-		 * @param win_x return location for the X coordinate of the device location,
-		 *         relative to the window origin, or %NULL.
-		 * @param win_y return location for the Y coordinate of the device location,
-		 *         relative to the window origin, or %NULL.
 		 * @returns the {@link Window} under the
 		 *   device position, or %NULL.
 		 */
-		get_window_at_position_double(win_x: number | null, win_y: number | null): Window;
+		get_window_at_position_double(): Window;
 		/**
 		 * Grabs the device so that all events coming from this device are passed to
 		 * this application until the device is ungrabbed with gdk_device_ungrab(),
@@ -752,14 +734,10 @@ declare namespace imports.gi.Gdk {
 		 * This is not public API and must not be used by applications.
 		 * @param display the display for which to get the grab information
 		 * @param device device to get the grab information from
-		 * @param grab_window location to store current grab window
-		 * @param owner_events location to store boolean indicating whether
-		 *   the #owner_events flag to gdk_keyboard_grab() or
-		 *   gdk_pointer_grab() was %TRUE.
 		 * @returns %TRUE if this application currently has the
 		 *  keyboard grabbed.
 		 */
-		public static grab_info_libgtk_only(display: Display, device: Device, grab_window: Window, owner_events: boolean): boolean;
+		public static grab_info_libgtk_only(display: Display, device: Device): boolean;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1081,10 +1059,11 @@ declare namespace imports.gi.Gdk {
 		get_event(): Event;
 		/**
 		 * Gets the maximal size to use for cursors on #display.
-		 * @param width the return location for the maximal cursor width
-		 * @param height the return location for the maximal cursor height
+		 * @returns the return location for the maximal cursor width
+		 * 
+		 * the return location for the maximal cursor height
 		 */
-		get_maximal_cursor_size(width: number, height: number): void;
+		get_maximal_cursor_size(): [ width: number, height: number ];
 		/**
 		 * Gets a monitor associated with this display.
 		 * @param monitor_num number of the monitor
@@ -1130,13 +1109,16 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Gets the current location of the pointer and the current modifier
 		 * mask for a given display.
-		 * @param screen location to store the screen that the
+		 * @returns location to store the screen that the
 		 *          cursor is on, or %NULL.
-		 * @param _x location to store root window X coordinate of pointer, or %NULL.
-		 * @param _y location to store root window Y coordinate of pointer, or %NULL.
-		 * @param mask location to store current modifier mask, or %NULL
+		 * 
+		 * location to store root window X coordinate of pointer, or %NULL.
+		 * 
+		 * location to store root window Y coordinate of pointer, or %NULL.
+		 * 
+		 * location to store current modifier mask, or %NULL
 		 */
-		get_pointer(screen: Screen | null, _x: number | null, _y: number | null, mask: ModifierType | null): void;
+		get_pointer(): [ screen: Screen | null, x: number | null, y: number | null, mask: ModifierType | null ];
 		/**
 		 * Gets the primary monitor for the display.
 		 * 
@@ -1159,14 +1141,10 @@ declare namespace imports.gi.Gdk {
 		 * of the pointer in that window in #win_x, #win_y for #screen. Returns %NULL
 		 * if the window under the mouse pointer is not known to GDK (for example,
 		 * belongs to another application).
-		 * @param win_x return location for x coordinate of the pointer location relative
-		 *    to the window origin, or %NULL
-		 * @param win_y return location for y coordinate of the pointer location relative
-		 *  &    to the window origin, or %NULL
 		 * @returns the window under the mouse
 		 *   pointer, or %NULL
 		 */
-		get_window_at_pointer(win_x: number | null, win_y: number | null): Window;
+		get_window_at_pointer(): Window;
 		/**
 		 * Returns whether the display has events that are waiting
 		 * to be processed.
@@ -1815,14 +1793,15 @@ declare namespace imports.gi.Gdk {
 		 * predicts a presentation time that is a multiple of the refresh
 		 * interval after the last presentation time, and later than #base_time.
 		 * @param base_time base time for determining a presentaton time
-		 * @param refresh_interval_return a location to store the
+		 * @returns a location to store the
 		 * determined refresh interval, or %NULL. A default refresh interval of
 		 * 1/60th of a second will be stored if no history is present.
-		 * @param presentation_time_return a location to store the next
+		 * 
+		 * a location to store the next
 		 *  candidate presentation time after the given base time.
 		 *  0 will be will be stored if no history is present.
 		 */
-		get_refresh_info(base_time: number, refresh_interval_return: number | null, presentation_time_return: number): void;
+		get_refresh_info(base_time: number): [ refresh_interval_return: number | null, presentation_time_return: number ];
 		/**
 		 * Retrieves a {@link FrameTimings} object holding timing information
 		 * for the current frame or a recent frame. The #GdkFrameTimings
@@ -1977,10 +1956,11 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Retrieves the major and minor version requested by calling
 		 * gdk_gl_context_set_required_version().
-		 * @param major return location for the major version to request
-		 * @param minor return location for the minor version to request
+		 * @returns return location for the major version to request
+		 * 
+		 * return location for the minor version to request
 		 */
-		get_required_version(major: number, minor: number): void;
+		get_required_version(): [ major: number, minor: number ];
 		/**
 		 * Retrieves the {@link GLContext} that this #context share data with.
 		 * @returns a {@link GLContext} or %NULL
@@ -1995,10 +1975,11 @@ declare namespace imports.gi.Gdk {
 		 * Retrieves the OpenGL version of the #context.
 		 * 
 		 * The #context must be realized prior to calling this function.
-		 * @param major return location for the major version
-		 * @param minor return location for the minor version
+		 * @returns return location for the major version
+		 * 
+		 * return location for the minor version
 		 */
-		get_version(major: number, minor: number): void;
+		get_version(): [ major: number, minor: number ];
 		/**
 		 * Retrieves the {@link Window} used by the #context.
 		 * @returns a {@link Window} or %NULL
@@ -2183,9 +2164,8 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * This function is useful when matching key events against
 		 * accelerators.
-		 * @param state pointer to the modifier mask to change
 		 */
-		add_virtual_modifiers(state: ModifierType): void;
+		add_virtual_modifiers(): void;
 		/**
 		 * Returns whether the Caps Lock modifer is locked.
 		 * @returns %TRUE if Caps Lock is on
@@ -2206,14 +2186,9 @@ declare namespace imports.gi.Gdk {
 		 * this list of entries is selected by considering the effective
 		 * keyboard group and level. See gdk_keymap_translate_keyboard_state().
 		 * @param hardware_keycode a keycode
-		 * @param keys return
-		 *     location for array of {@link KeymapKey}, or %NULL
-		 * @param keyvals return
-		 *     location for array of keyvals, or %NULL
-		 * @param n_entries length of #keys and #keyvals
 		 * @returns %TRUE if there were any entries
 		 */
-		get_entries_for_keycode(hardware_keycode: number, keys: KeymapKey[] | null, keyvals: number[] | null, n_entries: number): boolean;
+		get_entries_for_keycode(hardware_keycode: number): boolean;
 		/**
 		 * Obtains a list of keycode/group/level combinations that will
 		 * generate #keyval. Groups and levels are two kinds of keyboard mode;
@@ -2227,12 +2202,9 @@ declare namespace imports.gi.Gdk {
 		 * The returned array should be freed
 		 * with g_free().
 		 * @param keyval a keyval, such as %GDK_KEY_a, %GDK_KEY_Up, %GDK_KEY_Return, etc.
-		 * @param keys return location
-		 *     for an array of {@link KeymapKey}
-		 * @param n_keys return location for number of elements in returned array
 		 * @returns %TRUE if keys were found and returned
 		 */
-		get_entries_for_keyval(keyval: number, keys: KeymapKey[], n_keys: number): boolean;
+		get_entries_for_keyval(keyval: number): boolean;
 		/**
 		 * Returns the modifier mask the #keymap’s windowing system backend
 		 * uses for a particular purpose.
@@ -2285,13 +2257,12 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * This function is useful when matching key events against
 		 * accelerators.
-		 * @param state pointer to the modifier state to map
 		 * @returns %FALSE if two virtual modifiers were mapped to the
 		 *     same non-virtual modifier. Note that %FALSE is also returned
 		 *     if a virtual modifier is mapped to a non-virtual modifier that
 		 *     was already set in #state.
 		 */
-		map_virtual_modifiers(state: ModifierType): boolean;
+		map_virtual_modifiers(): boolean;
 		/**
 		 * Translates the contents of a {@link EventKey} into a keyval, effective
 		 * group, and level. Modifiers that affected the translation and
@@ -2343,15 +2314,9 @@ declare namespace imports.gi.Gdk {
 		 * @param hardware_keycode a keycode
 		 * @param state a modifier state
 		 * @param group active keyboard group
-		 * @param keyval return location for keyval, or %NULL
-		 * @param effective_group return location for effective
-		 *     group, or %NULL
-		 * @param level return location for level, or %NULL
-		 * @param consumed_modifiers return location for modifiers
-		 *     that were used to determine the group or level, or %NULL
 		 * @returns %TRUE if there was a keyval bound to the keycode/state/group
 		 */
-		translate_keyboard_state(hardware_keycode: number, state: ModifierType, group: number, keyval: number | null, effective_group: number | null, level: number | null, consumed_modifiers: ModifierType | null): boolean;
+		translate_keyboard_state(hardware_keycode: number, state: ModifierType, group: number): boolean;
 		/**
 		 * The ::direction-changed signal gets emitted when the direction of
 		 * the keymap changes.
@@ -2424,9 +2389,8 @@ declare namespace imports.gi.Gdk {
 		 * Retrieves the size and position of an individual monitor within the
 		 * display coordinate space. The returned geometry is in  ”application pixels”,
 		 * not in ”device pixels” (see gdk_monitor_get_scale_factor()).
-		 * @param geometry a {@link Rectangle} to be filled with the monitor geometry
 		 */
-		get_geometry(geometry: Rectangle): void;
+		get_geometry(): void;
 		/**
 		 * Gets the height in millimeters of the monitor.
 		 * @returns the physical height of the monitor
@@ -2490,10 +2454,8 @@ declare namespace imports.gi.Gdk {
 		 * Note that not all backends may have a concept of workarea. This
 		 * function will return the monitor geometry if a workarea is not
 		 * available, or does not apply.
-		 * @param workarea a {@link Rectangle} to be filled with
-		 *     the monitor workarea
 		 */
-		get_workarea(workarea: Rectangle): void;
+		get_workarea(): void;
 		/**
 		 * Gets whether this monitor should be considered primary
 		 * (see gdk_display_get_primary_monitor()).
@@ -2617,10 +2579,8 @@ declare namespace imports.gi.Gdk {
 		 * Note that the size of the entire screen area can be retrieved via
 		 * gdk_screen_get_width() and gdk_screen_get_height().
 		 * @param monitor_num the monitor number
-		 * @param dest a {@link Rectangle} to be filled with
-		 *     the monitor geometry
 		 */
-		get_monitor_geometry(monitor_num: number, dest: Rectangle | null): void;
+		get_monitor_geometry(monitor_num: number): void;
 		/**
 		 * Gets the height in millimeters of the specified monitor.
 		 * @param monitor_num number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
@@ -2671,10 +2631,8 @@ declare namespace imports.gi.Gdk {
 		 * Monitor numbers start at 0. To obtain the number of monitors of
 		 * #screen, use gdk_screen_get_n_monitors().
 		 * @param monitor_num the monitor number
-		 * @param dest a {@link Rectangle} to be filled with
-		 *     the monitor workarea
 		 */
-		get_monitor_workarea(monitor_num: number, dest: Rectangle | null): void;
+		get_monitor_workarea(monitor_num: number): void;
 		/**
 		 * Returns the number of monitors which #screen consists of.
 		 * @returns number of monitors which #screen consists of
@@ -3075,11 +3033,13 @@ declare namespace imports.gi.Gdk {
 		 * The “shift” is the number of bits left we must shift a primary for it
 		 * to be in position (according to the "mask"). Finally, "precision" refers
 		 * to how much precision the pixel value contains for a particular primary.
-		 * @param mask A pointer to a #guint32 to be filled in, or %NULL
-		 * @param shift A pointer to a #gint to be filled in, or %NULL
-		 * @param precision A pointer to a #gint to be filled in, or %NULL
+		 * @returns A pointer to a #guint32 to be filled in, or %NULL
+		 * 
+		 * A pointer to a #gint to be filled in, or %NULL
+		 * 
+		 * A pointer to a #gint to be filled in, or %NULL
 		 */
-		get_blue_pixel_details(mask: number | null, shift: number | null, precision: number | null): void;
+		get_blue_pixel_details(): [ mask: number | null, shift: number | null, precision: number | null ];
 		/**
 		 * Returns the byte order of this visual.
 		 * 
@@ -3107,22 +3067,26 @@ declare namespace imports.gi.Gdk {
 		 * The “shift” is the number of bits left we must shift a primary for it
 		 * to be in position (according to the "mask"). Finally, "precision" refers
 		 * to how much precision the pixel value contains for a particular primary.
-		 * @param mask A pointer to a #guint32 to be filled in, or %NULL
-		 * @param shift A pointer to a #gint to be filled in, or %NULL
-		 * @param precision A pointer to a #gint to be filled in, or %NULL
+		 * @returns A pointer to a #guint32 to be filled in, or %NULL
+		 * 
+		 * A pointer to a #gint to be filled in, or %NULL
+		 * 
+		 * A pointer to a #gint to be filled in, or %NULL
 		 */
-		get_green_pixel_details(mask: number | null, shift: number | null, precision: number | null): void;
+		get_green_pixel_details(): [ mask: number | null, shift: number | null, precision: number | null ];
 		/**
 		 * Obtains values that are needed to calculate red pixel values in TrueColor
 		 * and DirectColor. The “mask” is the significant bits within the pixel.
 		 * The “shift” is the number of bits left we must shift a primary for it
 		 * to be in position (according to the "mask"). Finally, "precision" refers
 		 * to how much precision the pixel value contains for a particular primary.
-		 * @param mask A pointer to a #guint32 to be filled in, or %NULL
-		 * @param shift A pointer to a #gint to be filled in, or %NULL
-		 * @param precision A pointer to a #gint to be filled in, or %NULL
+		 * @returns A pointer to a #guint32 to be filled in, or %NULL
+		 * 
+		 * A pointer to a #gint to be filled in, or %NULL
+		 * 
+		 * A pointer to a #gint to be filled in, or %NULL
 		 */
-		get_red_pixel_details(mask: number | null, shift: number | null, precision: number | null): void;
+		get_red_pixel_details(): [ mask: number | null, shift: number | null, precision: number | null ];
 		/**
 		 * Gets the screen to which this visual belongs
 		 * @returns the screen to which this visual belongs.
@@ -3390,10 +3354,11 @@ declare namespace imports.gi.Gdk {
 		 * See also: gdk_window_coords_to_parent()
 		 * @param parent_x X coordinate in parent’s coordinate system
 		 * @param parent_y Y coordinate in parent’s coordinate system
-		 * @param _x return location for X coordinate in child’s coordinate system
-		 * @param _y return location for Y coordinate in child’s coordinate system
+		 * @returns return location for X coordinate in child’s coordinate system
+		 * 
+		 * return location for Y coordinate in child’s coordinate system
 		 */
-		coords_from_parent(parent_x: number, parent_y: number, _x: number | null, _y: number | null): void;
+		coords_from_parent(parent_x: number, parent_y: number): [ x: number | null, y: number | null ];
 		/**
 		 * Transforms window coordinates from a child window to its parent
 		 * window, where the parent window is the normal parent as returned by
@@ -3413,12 +3378,13 @@ declare namespace imports.gi.Gdk {
 		 * See also: gdk_window_coords_from_parent()
 		 * @param _x X coordinate in child’s coordinate system
 		 * @param _y Y coordinate in child’s coordinate system
-		 * @param parent_x return location for X coordinate
+		 * @returns return location for X coordinate
 		 * in parent’s coordinate system, or %NULL
-		 * @param parent_y return location for Y coordinate
+		 * 
+		 * return location for Y coordinate
 		 * in parent’s coordinate system, or %NULL
 		 */
-		coords_to_parent(_x: number, _y: number, parent_x: number | null, parent_y: number | null): void;
+		coords_to_parent(_x: number, _y: number): [ parent_x: number | null, parent_y: number | null ];
 		/**
 		 * Creates a new {@link GLContext} matching the
 		 * framebuffer format to the visual of the #GdkWindow. The context
@@ -3679,10 +3645,9 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Returns the decorations set on the GdkWindow with
 		 * gdk_window_set_decorations().
-		 * @param decorations The window decorations will be written here
 		 * @returns %TRUE if the window has decorations set, %FALSE otherwise.
 		 */
-		get_decorations(decorations: WMDecoration): boolean;
+		get_decorations(): boolean;
 		/**
 		 * Retrieves a {@link Cursor} pointer for the #device currently set on the
 		 * specified #GdkWindow, or %NULL.  If the return value is %NULL then
@@ -3708,27 +3673,21 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Use gdk_window_get_device_position_double() if you need subpixel precision.
 		 * @param device pointer {@link Device} to query to.
-		 * @param _x return location for the X coordinate of #device, or %NULL.
-		 * @param _y return location for the Y coordinate of #device, or %NULL.
-		 * @param mask return location for the modifier mask, or %NULL.
 		 * @returns The window underneath #device
 		 * (as with gdk_device_get_window_at_position()), or %NULL if the
 		 * window is not known to GDK.
 		 */
-		get_device_position(device: Device, _x: number | null, _y: number | null, mask: ModifierType | null): Window;
+		get_device_position(device: Device): Window;
 		/**
 		 * Obtains the current device position in doubles and modifier state.
 		 * The position is given in coordinates relative to the upper left
 		 * corner of #window.
 		 * @param device pointer {@link Device} to query to.
-		 * @param _x return location for the X coordinate of #device, or %NULL.
-		 * @param _y return location for the Y coordinate of #device, or %NULL.
-		 * @param mask return location for the modifier mask, or %NULL.
 		 * @returns The window underneath #device
 		 * (as with gdk_device_get_window_at_position()), or %NULL if the
 		 * window is not known to GDK.
 		 */
-		get_device_position_double(device: Device, _x: number | null, _y: number | null, mask: ModifierType | null): Window;
+		get_device_position_double(device: Device): Window;
 		/**
 		 * Gets the {@link Display} associated with a #GdkWindow.
 		 * @returns the {@link Display} associated with #window
@@ -3736,12 +3695,9 @@ declare namespace imports.gi.Gdk {
 		get_display(): Display;
 		/**
 		 * Finds out the DND protocol supported by a window.
-		 * @param target location of the window
-		 *    where the drop should happen. This may be #window or a proxy window,
-		 *    or %NULL if #window does not support Drag and Drop.
 		 * @returns the supported DND protocol.
 		 */
-		get_drag_protocol(target: Window | null): DragProtocol;
+		get_drag_protocol(): DragProtocol;
 		/**
 		 * Obtains the parent of #window, as known to GDK. Works like
 		 * gdk_window_get_parent() for normal windows, but returns the
@@ -3791,9 +3747,8 @@ declare namespace imports.gi.Gdk {
 		 * titlebar/borders if any. The frame position is given in root window
 		 * coordinates. To get the position of the window itself (rather than
 		 * the frame) in root window coordinates, use gdk_window_get_origin().
-		 * @param rect rectangle to fill with bounding box of the window frame
 		 */
-		get_frame_extents(rect: Rectangle): void;
+		get_frame_extents(): void;
 		/**
 		 * Obtains the {@link FullscreenMode} of the #window.
 		 * @returns The {@link FullscreenMode} applied to the window when fullscreen.
@@ -3820,12 +3775,15 @@ declare namespace imports.gi.Gdk {
 		 * the X server and because these functions support the full 32-bit
 		 * coordinate space, whereas gdk_window_get_geometry() is restricted to
 		 * the 16-bit coordinates of X11.
-		 * @param _x return location for X coordinate of window (relative to its parent)
-		 * @param _y return location for Y coordinate of window (relative to its parent)
-		 * @param width return location for width of window
-		 * @param height return location for height of window
+		 * @returns return location for X coordinate of window (relative to its parent)
+		 * 
+		 * return location for Y coordinate of window (relative to its parent)
+		 * 
+		 * return location for width of window
+		 * 
+		 * return location for height of window
 		 */
-		get_geometry(_x: number | null, _y: number | null, width: number | null, height: number | null): void;
+		get_geometry(): [ x: number | null, y: number | null, width: number | null, height: number | null ];
 		/**
 		 * Returns the group leader window for #window. See gdk_window_set_group().
 		 * @returns the group leader window for #window
@@ -3851,11 +3809,9 @@ declare namespace imports.gi.Gdk {
 		 * (Compare with gdk_window_get_position() and
 		 * gdk_window_get_geometry() which return the position of a window
 		 * relative to its parent window.)
-		 * @param _x return location for X coordinate
-		 * @param _y return location for Y coordinate
 		 * @returns not meaningful, ignore
 		 */
-		get_origin(_x: number | null, _y: number | null): number;
+		get_origin(): number;
 		/**
 		 * Obtains the parent of #window, as known to GDK. Does not query the
 		 * X server; thus this returns the parent as passed to gdk_window_new(),
@@ -3883,17 +3839,11 @@ declare namespace imports.gi.Gdk {
 		 * Obtains the current pointer position and modifier state.
 		 * The position is given in coordinates relative to the upper left
 		 * corner of #window.
-		 * @param _x return location for X coordinate of pointer or %NULL to not
-		 *      return the X coordinate
-		 * @param _y return location for Y coordinate of pointer or %NULL to not
-		 *      return the Y coordinate
-		 * @param mask return location for modifier mask or %NULL to not return the
-		 *      modifier mask
 		 * @returns the window containing the
 		 * pointer (as with gdk_window_at_pointer()), or %NULL if the window
 		 * containing the pointer isn’t known to GDK
 		 */
-		get_pointer(_x: number | null, _y: number | null, mask: ModifierType | null): Window;
+		get_pointer(): Window;
 		/**
 		 * Obtains the position of the window as reported in the
 		 * most-recently-processed {@link EventConfigure}. Contrast with
@@ -3902,10 +3852,11 @@ declare namespace imports.gi.Gdk {
 		 * received or processed.
 		 * 
 		 * The position coordinates are relative to the window’s parent window.
-		 * @param _x X coordinate of window
-		 * @param _y Y coordinate of window
+		 * @returns X coordinate of window
+		 * 
+		 * Y coordinate of window
 		 */
-		get_position(_x: number | null, _y: number | null): void;
+		get_position(): [ x: number | null, y: number | null ];
 		/**
 		 * Obtains the position of a window position in root
 		 * window coordinates. This is similar to
@@ -3913,17 +3864,19 @@ declare namespace imports.gi.Gdk {
 		 * in any position in the window, not just the origin.
 		 * @param _x X coordinate in window
 		 * @param _y Y coordinate in window
-		 * @param root_x return location for X coordinate
-		 * @param root_y return location for Y coordinate
+		 * @returns return location for X coordinate
+		 * 
+		 * return location for Y coordinate
 		 */
-		get_root_coords(_x: number, _y: number, root_x: number, root_y: number): void;
+		get_root_coords(_x: number, _y: number): [ root_x: number, root_y: number ];
 		/**
 		 * Obtains the top-left corner of the window manager frame in root
 		 * window coordinates.
-		 * @param _x return location for X position of window frame
-		 * @param _y return location for Y position of window frame
+		 * @returns return location for X position of window frame
+		 * 
+		 * return location for Y position of window frame
 		 */
-		get_root_origin(_x: number, _y: number): void;
+		get_root_origin(): [ x: number, y: number ];
 		/**
 		 * Returns the internal scale factor that maps from window coordiantes
 		 * to the actual device pixels. On traditional systems this is 1, but
@@ -3996,9 +3949,8 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Retrieves the user data for #window, which is normally the widget
 		 * that #window belongs to. See gdk_window_set_user_data().
-		 * @param data return location for user data
 		 */
-		get_user_data(data: any): void;
+		get_user_data(): void;
 		/**
 		 * Computes the region of the #window that is potentially visible.
 		 * This does not necessarily take into account if the window is
@@ -5028,7 +4980,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * See also {@link Window}::to-embedder.
 		 */
-		connect(signal: "from-embedder", callback: (owner: this, embedder_x: number, embedder_y: number, offscreen_x: number, offscreen_y: number) => void): number;
+		connect(signal: "from-embedder", callback: (owner: this, embedder_x: number, embedder_y: number) => [ offscreen_x: number, offscreen_y: number ]): number;
 		/**
 		 * Emitted when the position of #window is finalized after being moved to a
 		 * destination rectangle.
@@ -5054,7 +5006,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * See also {@link Window}::from-embedder.
 		 */
-		connect(signal: "to-embedder", callback: (owner: this, offscreen_x: number, offscreen_y: number, embedder_x: number, embedder_y: number) => void): number;
+		connect(signal: "to-embedder", callback: (owner: this, offscreen_x: number, offscreen_y: number) => [ embedder_x: number, embedder_y: number ]): number;
 
 		connect(signal: "notify::cursor", callback: (owner: this, ...args: any) => number): number;
 
@@ -5091,11 +5043,9 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * NOTE: For multihead-aware widgets or applications use
 		 * gdk_display_get_window_at_pointer() instead.
-		 * @param win_x return location for origin of the window under the pointer
-		 * @param win_y return location for origin of the window under the pointer
 		 * @returns window under the mouse pointer
 		 */
-		public static at_pointer(win_x: number | null, win_y: number | null): Window;
+		public static at_pointer(): Window;
 		/**
 		 * Constrains a desired width and height according to a
 		 * set of geometry hints (such as minimum and maximum size).
@@ -5103,10 +5053,11 @@ declare namespace imports.gi.Gdk {
 		 * @param flags a mask indicating what portions of #geometry are set
 		 * @param width desired width of window
 		 * @param height desired height of the window
-		 * @param new_width location to store resulting width
-		 * @param new_height location to store resulting height
+		 * @returns location to store resulting width
+		 * 
+		 * location to store resulting height
 		 */
-		public static constrain_size(geometry: Geometry, flags: WindowHints, width: number, height: number, new_width: number, new_height: number): void;
+		public static constrain_size(geometry: Geometry, flags: WindowHints, width: number, height: number): [ new_width: number, new_height: number ];
 		/**
 		 * Calls gdk_window_process_updates() for all windows (see {@link Window})
 		 * in the application.
@@ -6735,11 +6686,9 @@ declare namespace imports.gi.Gdk {
 		 * the rectangles intersect, but not in the intersecting area itself,
 		 * pass %NULL for #dest.
 		 * @param src2 a {@link Rectangle}
-		 * @param dest return location for the
-		 * intersection of #src1 and #src2, or %NULL
 		 * @returns %TRUE if the rectangles intersect.
 		 */
-		public intersect(src2: Rectangle, dest: Rectangle | null): boolean;
+		public intersect(src2: Rectangle): boolean;
 		/**
 		 * Calculates the union of two rectangles.
 		 * The union of rectangles #src1 and #src2 is the smallest rectangle which
@@ -6749,9 +6698,8 @@ declare namespace imports.gi.Gdk {
 		 * Note that this function does not ignore 'empty' rectangles (ie. with
 		 * zero width or height).
 		 * @param src2 a {@link Rectangle}
-		 * @param dest return location for the union of #src1 and #src2
 		 */
-		public union(src2: Rectangle, dest: Rectangle): void;
+		public union(src2: Rectangle): void;
 	}
 
 	/**
@@ -9431,27 +9379,23 @@ declare namespace imports.gi.Gdk {
 		 * direction for positive angles is from the positive X axis towards the positive
 		 * Y axis.
 		 * @param event2 second {@link Event}
-		 * @param angle return location for the relative angle between both events
 		 * @returns %TRUE if the angle could be calculated.
 		 */
-		_get_angle(event2: Event, angle: number): boolean;
+		_get_angle(event2: Event): boolean;
 		/**
 		 * If both events contain X/Y information, the center of both coordinates
 		 * will be returned in #x and #y.
 		 * @param event2 second {@link Event}
-		 * @param _x return location for the X coordinate of the center
-		 * @param _y return location for the Y coordinate of the center
 		 * @returns %TRUE if the center could be calculated.
 		 */
-		_get_center(event2: Event, _x: number, _y: number): boolean;
+		_get_center(event2: Event): boolean;
 		/**
 		 * If both events have X/Y information, the distance between both coordinates
 		 * (as in a straight line going from #event1 to #event2) will be returned.
 		 * @param event2 second {@link Event}
-		 * @param distance return location for the distance
 		 * @returns %TRUE if the distance could be calculated.
 		 */
-		_get_distance(event2: Event, distance: number): boolean;
+		_get_distance(event2: Event): boolean;
 		/**
 		 * Copies a {@link Event}, copying or incrementing the reference count of the
 		 * resources associated with it (e.g. #GdkWindow’s and strings).
@@ -9470,29 +9414,24 @@ declare namespace imports.gi.Gdk {
 		 * Extract the axis value for a particular axis use from
 		 * an event structure.
 		 * @param axis_use the axis use to look for
-		 * @param value location to store the value found
 		 * @returns %TRUE if the specified axis was found, otherwise %FALSE
 		 */
-		get_axis(axis_use: AxisUse, value: number): boolean;
+		get_axis(axis_use: AxisUse): boolean;
 		/**
 		 * Extract the button number from an event.
-		 * @param button location to store mouse button number
 		 * @returns %TRUE if the event delivered a button number
 		 */
-		get_button(button: number): boolean;
+		get_button(): boolean;
 		/**
 		 * Extracts the click count from an event.
-		 * @param click_count location to store click count
 		 * @returns %TRUE if the event delivered a click count
 		 */
-		get_click_count(click_count: number): boolean;
+		get_click_count(): boolean;
 		/**
 		 * Extract the event window relative x/y coordinates from an event.
-		 * @param x_win location to put event window x coordinate
-		 * @param y_win location to put event window y coordinate
 		 * @returns %TRUE if the event delivered event window coordinates
 		 */
-		get_coords(x_win: number | null, y_win: number | null): boolean;
+		get_coords(): boolean;
 		/**
 		 * If the event contains a “device” field, this function will return
 		 * it, else it will return %NULL.
@@ -9527,16 +9466,14 @@ declare namespace imports.gi.Gdk {
 		 * Extracts the hardware keycode from an event.
 		 * 
 		 * Also see gdk_event_get_scancode().
-		 * @param keycode location to store the keycode
 		 * @returns %TRUE if the event delivered a hardware keycode
 		 */
-		get_keycode(keycode: number): boolean;
+		get_keycode(): boolean;
 		/**
 		 * Extracts the keyval from an event.
-		 * @param keyval location to store the keyval
 		 * @returns %TRUE if the event delivered a key symbol
 		 */
-		get_keyval(keyval: number): boolean;
+		get_keyval(): boolean;
 		/**
 		 * #event: a {@link Event}
 		 * Returns whether this event is an 'emulated' pointer event (typically
@@ -9546,11 +9483,9 @@ declare namespace imports.gi.Gdk {
 		get_pointer_emulated(): boolean;
 		/**
 		 * Extract the root window relative x/y coordinates from an event.
-		 * @param x_root location to put root window x coordinate
-		 * @param y_root location to put root window y coordinate
 		 * @returns %TRUE if the event delivered root window coordinates
 		 */
-		get_root_coords(x_root: number | null, y_root: number | null): boolean;
+		get_root_coords(): boolean;
 		/**
 		 * Gets the keyboard low-level scancode of a key event.
 		 * 
@@ -9575,12 +9510,10 @@ declare namespace imports.gi.Gdk {
 		 * Retrieves the scroll deltas from a {@link Event}
 		 * 
 		 * See also: gdk_event_get_scroll_direction()
-		 * @param delta_x return location for X delta
-		 * @param delta_y return location for Y delta
 		 * @returns %TRUE if the event contains smooth scroll information
 		 *   and %FALSE otherwise
 		 */
-		get_scroll_deltas(delta_x: number, delta_y: number): boolean;
+		get_scroll_deltas(): boolean;
 		/**
 		 * Extracts the scroll direction from an event.
 		 * 
@@ -9620,11 +9553,10 @@ declare namespace imports.gi.Gdk {
 		 *       vscroll_factor = y_scroll;
 		 *     }
 		 * ]|
-		 * @param direction location to store the scroll direction
 		 * @returns %TRUE if the event delivered a scroll direction
 		 *   and %FALSE otherwise
 		 */
-		get_scroll_direction(direction: ScrollDirection): boolean;
+		get_scroll_direction(): boolean;
 		/**
 		 * Returns the {@link Seat} this event was generated for.
 		 * @returns The {@link Seat} of this event
@@ -9648,10 +9580,9 @@ declare namespace imports.gi.Gdk {
 		 * stores an empty state (0). Returns %TRUE if there was a state field
 		 * in the event. #event may be %NULL, in which case it’s treated
 		 * as if the event had no state field.
-		 * @param state return location for state
 		 * @returns %TRUE if there was a state field in the event
 		 */
-		get_state(state: ModifierType): boolean;
+		get_state(): boolean;
 		/**
 		 * Returns the time stamp from #event, if there is one; otherwise
 		 * returns #GDK_CURRENT_TIME. If #event is %NULL, returns #GDK_CURRENT_TIME.
@@ -9948,11 +9879,10 @@ declare namespace imports.gi.Gdk {
 	 * It rounds the clip extents to integer coordinates and returns
 	 * a boolean indicating if a clip area exists.
 	 * @param cr a cairo context
-	 * @param rect return location for the clip, or %NULL
 	 * @returns %TRUE if a clip rectangle exists, %FALSE if all of #cr is
 	 *     clipped and all drawing can be skipped
 	 */
-	function cairo_get_clip_rectangle(cr: cairo.Context, rect: Rectangle | null): boolean;
+	function cairo_get_clip_rectangle(cr: cairo.Context): boolean;
 
 	/**
 	 * Retrieves the {@link DrawingContext} that created the Cairo
@@ -10051,10 +9981,9 @@ declare namespace imports.gi.Gdk {
 	 * (White in the four forms is “\#fff”, “\#ffffff”, “\#fffffffff”
 	 * and “\#ffffffffffff”).
 	 * @param spec the string specifying the color
-	 * @param color the {@link Color} to fill in
 	 * @returns %TRUE if the parsing succeeded
 	 */
-	function color_parse(spec: string, color: Color): boolean;
+	function color_parse(spec: string): boolean;
 
 	/**
 	 * Disables multidevice support in GDK. This call must happen prior
@@ -10170,10 +10099,11 @@ declare namespace imports.gi.Gdk {
 	 * @param screen the screen where the destination window is sought
 	 * @param x_root the x position of the pointer in root coordinates
 	 * @param y_root the y position of the pointer in root coordinates
-	 * @param dest_window location to store the destination window in
-	 * @param protocol location to store the DND protocol in
+	 * @returns location to store the destination window in
+	 * 
+	 * location to store the DND protocol in
 	 */
-	function drag_find_window_for_screen(context: DragContext, drag_window: Window, screen: Screen, x_root: number, y_root: number, dest_window: Window, protocol: DragProtocol): void;
+	function drag_find_window_for_screen(context: DragContext, drag_window: Window, screen: Screen, x_root: number, y_root: number): [ dest_window: Window, protocol: DragProtocol ];
 
 	/**
 	 * Returns the selection atom for the current source window.
@@ -10353,31 +10283,27 @@ declare namespace imports.gi.Gdk {
 	 * Y axis.
 	 * @param event1 first {@link Event}
 	 * @param event2 second {@link Event}
-	 * @param angle return location for the relative angle between both events
 	 * @returns %TRUE if the angle could be calculated.
 	 */
-	function events_get_angle(event1: Event, event2: Event, angle: number): boolean;
+	function events_get_angle(event1: Event, event2: Event): boolean;
 
 	/**
 	 * If both events contain X/Y information, the center of both coordinates
 	 * will be returned in #x and #y.
 	 * @param event1 first {@link Event}
 	 * @param event2 second {@link Event}
-	 * @param _x return location for the X coordinate of the center
-	 * @param _y return location for the Y coordinate of the center
 	 * @returns %TRUE if the center could be calculated.
 	 */
-	function events_get_center(event1: Event, event2: Event, _x: number, _y: number): boolean;
+	function events_get_center(event1: Event, event2: Event): boolean;
 
 	/**
 	 * If both events have X/Y information, the distance between both coordinates
 	 * (as in a straight line going from #event1 to #event2) will be returned.
 	 * @param event1 first {@link Event}
 	 * @param event2 second {@link Event}
-	 * @param distance return location for the distance
 	 * @returns %TRUE if the distance could be calculated.
 	 */
-	function events_get_distance(event1: Event, event2: Event, distance: number): boolean;
+	function events_get_distance(event1: Event, event2: Event): boolean;
 
 	/**
 	 * Checks if any events are ready to be processed for any display.
@@ -10443,10 +10369,8 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * GTK+ initializes GDK in gtk_init() and so this function is not usually
 	 * needed by GTK+ applications.
-	 * @param argc the number of command line arguments.
-	 * @param argv the array of command line arguments.
 	 */
-	function init(argc: number, argv: string[]): void;
+	function init(): void;
 
 	/**
 	 * Initializes the GDK library and connects to the windowing system,
@@ -10457,11 +10381,9 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * GTK+ initializes GDK in gtk_init() and so this function is not usually
 	 * needed by GTK+ applications.
-	 * @param argc the number of command line arguments.
-	 * @param argv the array of command line arguments.
 	 * @returns %TRUE if initialization succeeded.
 	 */
-	function init_check(argc: number, argv: string[]): boolean;
+	function init_check(): boolean;
 
 	/**
 	 * Grabs the keyboard so that all events are passed to this
@@ -10496,10 +10418,11 @@ declare namespace imports.gi.Gdk {
 	 * Obtains the upper- and lower-case versions of the keyval #symbol.
 	 * Examples of keyvals are #GDK_KEY_a, #GDK_KEY_Enter, #GDK_KEY_F1, etc.
 	 * @param symbol a keyval
-	 * @param lower return location for lowercase version of #symbol
-	 * @param upper return location for uppercase version of #symbol
+	 * @returns return location for lowercase version of #symbol
+	 * 
+	 * return location for uppercase version of #symbol
 	 */
-	function keyval_convert_case(symbol: number, lower: number, upper: number): void;
+	function keyval_convert_case(symbol: number): [ lower: number, upper: number ];
 
 	/**
 	 * Converts a key name to a key value.
@@ -10745,10 +10668,8 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * You shouldn’t call this function explicitly if you are using
 	 * gtk_init(), gtk_init_check(), gdk_init(), or gdk_init_check().
-	 * @param argc the number of command line arguments.
-	 * @param argv the array of command line arguments.
 	 */
-	function parse_args(argc: number, argv: string[]): void;
+	function parse_args(): void;
 
 	/**
 	 * Transfers image data from a #cairo_surface_t and converts it to an RGB(A)
@@ -10930,23 +10851,10 @@ declare namespace imports.gi.Gdk {
 	 *   when rounded up).
 	 * @param pdelete if %TRUE, delete the property after retrieving the
 	 *   data.
-	 * @param actual_property_type location to store the
-	 *   actual type of the property.
-	 * @param actual_format location to store the actual return format of the
-	 *   data; either 8, 16 or 32 bits.
-	 * @param actual_length location to store the length of the retrieved data, in
-	 *   bytes.  Data returned in the 32 bit format is stored
-	 *   in a long variable, so the actual number of 32 bit
-	 *   elements should be be calculated via
-	 *   #actual_length / sizeof(glong) to ensure portability to
-	 *   64 bit systems.
-	 * @param data location
-	 *   to store a pointer to the data. The retrieved data should be
-	 *   freed with g_free() when you are finished using it.
 	 * @returns %TRUE if data was successfully received and stored
 	 *   in #data, otherwise %FALSE.
 	 */
-	function property_get(window: Window, property: Atom, _type: Atom, offset: number, length: number, pdelete: number, actual_property_type: Atom, actual_format: number, actual_length: number, data: number[]): boolean;
+	function property_get(window: Window, property: Atom, _type: Atom, offset: number, length: number, pdelete: number): boolean;
 
 	/**
 	 * This function returns the available bit depths for the default
@@ -10955,11 +10863,12 @@ declare namespace imports.gi.Gdk {
 	 * visual, removing duplicates.
 	 * 
 	 * The array returned by this function should not be freed.
-	 * @param depths return
+	 * @returns return
 	 *     location for available depths
-	 * @param count return location for number of available depths
+	 * 
+	 * return location for number of available depths
 	 */
-	function query_depths(depths: number[], count: number): void;
+	function query_depths(): [ number[], number ];
 
 	/**
 	 * This function returns the available visual types for the default
@@ -10968,11 +10877,12 @@ declare namespace imports.gi.Gdk {
 	 * visual, removing duplicates.
 	 * 
 	 * The array returned by this function should not be freed.
-	 * @param visual_types return
+	 * @returns return
 	 *     location for the available visual types
-	 * @param count return location for the number of available visual types
+	 * 
+	 * return location for the number of available visual types
 	 */
-	function query_visual_types(visual_types: VisualType[], count: number): void;
+	function query_visual_types(): [ VisualType[], number ];
 
 	/**
 	 * Retrieves the contents of a selection in a given
@@ -11235,12 +11145,9 @@ declare namespace imports.gi.Gdk {
 	 * @param format the format of the property
 	 * @param text the text to convert
 	 * @param length the length of #text, in bytes
-	 * @param list location to store the list
-	 *            of strings or %NULL. The list should be freed with
-	 *            g_strfreev().
 	 * @returns the number of strings in the resulting list
 	 */
-	function text_property_to_utf8_list_for_display(display: Display, encoding: Atom, format: number, text: number[], length: number, list: string[]): number;
+	function text_property_to_utf8_list_for_display(display: Display, encoding: Atom, format: number, text: number[], length: number): number;
 
 	/**
 	 * A wrapper for the common usage of gdk_threads_add_idle_full()

@@ -282,14 +282,12 @@ declare namespace imports.gi.WebKit2 {
 		finish(): void;
 		/**
 		 * Gets the bounding box of the color input element.
-		 * @param rect a #GdkRectangle to fill in with the element area
 		 */
-		get_element_rectangle(rect: Gdk.Rectangle): void;
+		get_element_rectangle(): void;
 		/**
 		 * Gets the current #GdkRGBA color of #request
-		 * @param rgba a #GdkRGBA to fill in with the current color.
 		 */
-		get_rgba(rgba: Gdk.RGBA): void;
+		get_rgba(): void;
 		/**
 		 * Sets the current #GdkRGBA color of #request
 		 * @param rgba a pointer #GdkRGBA
@@ -1272,13 +1270,9 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * If this function returns %FALSE, then both #field_names and
 		 * #field_values will be empty.
-		 * @param field_names 
-		 *    names of the text fields in the form
-		 * @param field_values 
-		 *    values of the text fields in the form
 		 * @returns %TRUE if the form contains text fields, or %FALSE otherwise
 		 */
-		list_text_fields(field_names: string[] | null, field_values: string[] | null): boolean;
+		list_text_fields(): boolean;
 		/**
 		 * Continue the form submission.
 		 */
@@ -1530,11 +1524,13 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Get the current preedit string for the #context, and a list of WebKitInputMethodUnderline to apply to the string.
 		 * The string will be displayed inserted at #cursor_offset.
-		 * @param text location to store the preedit string
-		 * @param underlines location to store the underlines as a #GList of #WebKitInputMethodUnderline
-		 * @param cursor_offset location to store the position of cursor in preedit string
+		 * @returns location to store the preedit string
+		 * 
+		 * location to store the underlines as a #GList of #WebKitInputMethodUnderline
+		 * 
+		 * location to store the position of cursor in preedit string
 		 */
-		get_preedit(text: string, underlines: GLib.List, cursor_offset: number): void;
+		get_preedit(): [ text: string, underlines: GLib.List, cursor_offset: number ];
 		/**
 		 * Notify #context that cursor area changed in input associated.
 		 * @param _x the x coordinate of cursor location
@@ -4626,12 +4622,11 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Finish an asynchronous operation started with webkit_web_resource_get_data().
 		 * @param result a #GAsyncResult
-		 * @param length return location for the length of the resource data
 		 * @returns a
 		 *    string with the data of #resource, or %NULL in case of error. if #length
 		 *    is not %NULL, the size of the data will be assigned to it.
 		 */
-		get_data_finish(result: Gio.AsyncResult, length: number | null): number[];
+		get_data_finish(result: Gio.AsyncResult): number[];
 		/**
 		 * Retrieves the #WebKitURIResponse of the resource load operation.
 		 * This method returns %NULL if called before the response
@@ -4890,9 +4885,8 @@ declare namespace imports.gi.WebKit2 {
 		 * Gets the color that is used to draw the #web_view background before
 		 * the actual contents are rendered.
 		 * For more information see also webkit_web_view_set_background_color()
-		 * @param rgba a #GdkRGBA to fill in with the background color
 		 */
-		get_background_color(rgba: Gdk.RGBA): void;
+		get_background_color(): void;
 		/**
 		 * Gets the web context of #web_view.
 		 * @returns the #WebKitWebContext of the view
@@ -5029,12 +5023,10 @@ declare namespace imports.gi.WebKit2 {
 		 * may safely be used to determine the security status of the current page only
 		 * if the current #WebKitTLSErrorsPolicy is #WEBKIT_TLS_ERRORS_POLICY_FAIL, in
 		 * which case subresources that fail certificate verification will be blocked.
-		 * @param certificate return location for a #GTlsCertificate
-		 * @param errors return location for a #GTlsCertificateFlags the verification status of #certificate
 		 * @returns %TRUE if the #web_view connection uses HTTPS and a response has been received
 		 *    from the server, or %FALSE otherwise.
 		 */
-		get_tls_info(certificate: Gio.TlsCertificate, errors: Gio.TlsCertificateFlags): boolean;
+		get_tls_info(): boolean;
 		/**
 		 * Returns the current active URI of #web_view. The active URI might change during
 		 * a load operation:
@@ -6447,9 +6439,8 @@ declare namespace imports.gi.WebKit2 {
 		get_fullscreen(): boolean;
 		/**
 		 * Get the geometry the window should have on the screen when shown.
-		 * @param geometry return location for the window geometry
 		 */
-		get_geometry(geometry: Gdk.Rectangle): void;
+		get_geometry(): void;
 		/**
 		 * Get whether the window should have the locationbar visible or not.
 		 * @returns %TRUE if locationbar should be visible or %FALSE otherwise.
@@ -6518,11 +6509,13 @@ declare namespace imports.gi.WebKit2 {
 		public get_name(): string;
 		/**
 		 * Get the application version previously set with webkit_application_info_set_version().
-		 * @param major return location for the major version number
-		 * @param minor return location for the minor version number
-		 * @param micro return location for the micro version number
+		 * @returns return location for the major version number
+		 * 
+		 * return location for the minor version number
+		 * 
+		 * return location for the micro version number
 		 */
-		public get_version(major: number, minor: number | null, micro: number | null): void;
+		public get_version(): [ major: number, minor: number | null, micro: number | null ];
 		/**
 		 * Atomically increments the reference count of #info by one. This
 		 * function is MT-safe and may be called from any thread.
@@ -6971,7 +6964,7 @@ declare namespace imports.gi.WebKit2 {
 		public committed: {(context: InputMethodContext, text: string): void;};
 		public delete_surrounding: {(context: InputMethodContext, offset: number, n_chars: number): void;};
 		public set_enable_preedit: {(context: InputMethodContext, enabled: boolean): void;};
-		public get_preedit: {(context: InputMethodContext, text: string, underlines: GLib.List, cursor_offset: number): void;};
+		public get_preedit: {(context: InputMethodContext): [ text: string, underlines: GLib.List, cursor_offset: number ];};
 		public filter_key_event: {(context: InputMethodContext, key_event: Gdk.EventKey): boolean;};
 		public notify_focus_in: {(context: InputMethodContext): void;};
 		public notify_focus_out: {(context: InputMethodContext): void;};

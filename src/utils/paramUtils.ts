@@ -53,14 +53,18 @@ function convertToJSType(native_type?: string): string {
 export interface TypeInfo {
     type: string;
     docString: string | null;
+    /** Should only be used when processing tuple return types */
+    name: string | null;
 }
 
 export function GetTypeInfo(param_node: ParameterNode, modifier?: ParamModifier): TypeInfo {
     let type: string | null = null;
     let doc: string | null = "";
+    let name: string | null = null;
     if (param_node?.type?.[0]) {
         type = convertToJSType(param_node.type[0].$.name);
         doc = param_node.doc?.[0]?._ ?? null;
+        name = param_node?.$?.name ?? null;
     } else if (param_node.array && param_node.array[0].type) {
         type = convertToJSType(param_node.array[0].type[0].$.name) + '[]';
         doc = param_node.doc?.[0]?._ ?? null;
@@ -71,7 +75,8 @@ export function GetTypeInfo(param_node: ParameterNode, modifier?: ParamModifier)
         console.log("can't get param type", JSON.stringify(param_node, null, 4))
         return {
             type: modifier?.type ?? "any",
-            docString: modifier?.doc ?? doc
+            docString: modifier?.doc ?? doc,
+            name: null
         };
     }
 
@@ -80,6 +85,7 @@ export function GetTypeInfo(param_node: ParameterNode, modifier?: ParamModifier)
         finalType+= " | null";
     return {
         type: finalType,
-        docString: modifier?.doc ?? doc
+        docString: modifier?.doc ?? doc,
+        name: name
     };
 }

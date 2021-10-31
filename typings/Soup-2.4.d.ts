@@ -860,12 +860,10 @@ declare namespace imports.gi.Soup {
 		 * headers.
 		 * @param msg the message to sniff
 		 * @param buffer a buffer containing the start of #msg's response body
-		 * @param params return
-		 *   location for Content-Type parameters (eg, "charset"), or %NULL
 		 * @returns the sniffed Content-Type of #buffer; this will never be %NULL,
 		 *   but may be "application/octet-stream".
 		 */
-		sniff(msg: Message, buffer: Buffer, params: GLib.HashTable | null): string;
+		sniff(msg: Message, buffer: Buffer): string;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1511,11 +1509,9 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * <note><para>This is only meaningful with messages processed by a {@link Session} and is
 		 * not useful for messages received by a #SoupServer</para></note>
-		 * @param certificate #msg's TLS certificate
-		 * @param errors the verification status of #certificate
 		 * @returns %TRUE if #msg used/attempted https, %FALSE if not
 		 */
-		get_https_status(certificate: Gio.TlsCertificate, errors: Gio.TlsCertificateFlags): boolean;
+		get_https_status(): boolean;
 		get_is_top_level_navigation(): boolean;
 		/**
 		 * Retrieves the {@link MessagePriority}. If not set this value defaults
@@ -3820,14 +3816,13 @@ declare namespace imports.gi.Soup {
 		 * @param buffer buffer to read
 		 *   into
 		 * @param len size of #buffer in bytes
-		 * @param nread on return, the number of bytes read into #buffer
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns a {@link SocketIOStatus}, as described above (or
 		 * %SOUP_SOCKET_EOF if the socket is no longer connected, or
 		 * %SOUP_SOCKET_ERROR on any other error, in which case #error will
 		 * also be set).
 		 */
-		read(buffer: number[], len: number, nread: number, cancellable: Gio.Cancellable | null): SocketIOStatus;
+		read(buffer: number[], len: number, cancellable: Gio.Cancellable | null): SocketIOStatus;
 		/**
 		 * Like soup_socket_read(), but reads no further than the first
 		 * occurrence of #boundary. (If the boundary is found, it will be
@@ -3846,13 +3841,12 @@ declare namespace imports.gi.Soup {
 		 * @param len size of #buffer in bytes
 		 * @param boundary boundary to read until
 		 * @param boundary_len length of #boundary in bytes
-		 * @param nread on return, the number of bytes read into #buffer
 		 * @param got_boundary on return, whether or not the data in #buffer
 		 * ends with the boundary string
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns as for soup_socket_read()
 		 */
-		read_until(buffer: number[], len: number, boundary: any | null, boundary_len: number, nread: number, got_boundary: boolean, cancellable: Gio.Cancellable | null): SocketIOStatus;
+		read_until(buffer: number[], len: number, boundary: any | null, boundary_len: number, got_boundary: boolean, cancellable: Gio.Cancellable | null): SocketIOStatus;
 		/**
 		 * Starts using SSL on #socket, expecting to find a host named
 		 * #ssl_host.
@@ -3882,13 +3876,12 @@ declare namespace imports.gi.Soup {
 		 * #SoupSocket:non-blocking.)
 		 * @param buffer data to write
 		 * @param len size of #buffer, in bytes
-		 * @param nwrote on return, number of bytes written
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns a {@link SocketIOStatus}, as described above (or
 		 * %SOUP_SOCKET_EOF or %SOUP_SOCKET_ERROR. #error will be set if the
 		 * return value is %SOUP_SOCKET_ERROR.)
 		 */
-		write(buffer: number[], len: number, nwrote: number, cancellable: Gio.Cancellable | null): SocketIOStatus;
+		write(buffer: number[], len: number, cancellable: Gio.Cancellable | null): SocketIOStatus;
 		/**
 		 * Emitted when the socket is disconnected, for whatever
 		 * reason.
@@ -4244,22 +4237,20 @@ declare namespace imports.gi.Soup {
 		 * #payload and a new #GBytes is returned with the new data.
 		 * 
 		 * Extensions using reserved bits of the header will reset them in #header.
-		 * @param header the message header
 		 * @param payload the payload data
 		 * @returns the message payload data, or %NULL in case of error
 		 */
-		process_incoming_message(header: number, payload: GLib.Bytes): GLib.Bytes;
+		process_incoming_message(payload: GLib.Bytes): GLib.Bytes;
 		/**
 		 * Process a message before it's sent. If the payload isn't changed the given
 		 * #payload is just returned, otherwise g_bytes_unref() is called on the given
 		 * #payload and a new #GBytes is returned with the new data.
 		 * 
 		 * Extensions using reserved bits of the header will change them in #header.
-		 * @param header the message header
 		 * @param payload the payload data
 		 * @returns the message payload data, or %NULL in case of error
 		 */
-		process_outgoing_message(header: number, payload: GLib.Bytes): GLib.Bytes;
+		process_outgoing_message(payload: GLib.Bytes): GLib.Bytes;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4465,11 +4456,12 @@ declare namespace imports.gi.Soup {
 		 * This function exists for use by language bindings, because it's not
 		 * currently possible to get the right effect by annotating the fields
 		 * of {@link Buffer}.
-		 * @param data the pointer
+		 * @returns the pointer
 		 * to the buffer data is stored here
-		 * @param length the length of the buffer data is stored here
+		 * 
+		 * the length of the buffer data is stored here
 		 */
-		public get_data(data: number[], length: number): void;
+		public get_data(): [ number[], number ];
 		/**
 		 * Gets the "owner" object for a buffer created with
 		 * soup_buffer_new_with_owner().
@@ -4636,7 +4628,7 @@ declare namespace imports.gi.Soup {
 	interface ContentSnifferClass {}
 	class ContentSnifferClass {
 		public constructor();
-		public sniff: {(sniffer: ContentSniffer, msg: Message, buffer: Buffer, params: GLib.HashTable | null): string;};
+		public sniff: {(sniffer: ContentSniffer, msg: Message, buffer: Buffer): string;};
 		public get_buffer_size: {(sniffer: ContentSniffer): number;};
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
@@ -5067,9 +5059,8 @@ declare namespace imports.gi.Soup {
 		public to_time_t(): number;
 		/**
 		 * Converts #date to a #GTimeVal.
-		 * @param time a #GTimeVal structure in which to store the converted time.
 		 */
-		public to_timeval(time: GLib.TimeVal): void;
+		public to_timeval(): void;
 	}
 
 	interface HSTSEnforcerClass {}
@@ -5514,15 +5505,11 @@ declare namespace imports.gi.Soup {
 		 * Content-Disposition is also used in "multipart/form-data", however
 		 * this is handled automatically by {@link Multipart} and the associated
 		 * form methods.
-		 * @param disposition return location for the
-		 * disposition-type, or %NULL
-		 * @param params return
-		 * location for the Content-Disposition parameters, or %NULL
 		 * @returns %TRUE if #hdrs contains a "Content-Disposition"
 		 * header, %FALSE if not (in which case *#disposition and *#params
 		 * will be unchanged).
 		 */
-		public get_content_disposition(disposition: string, params: GLib.HashTable): boolean;
+		public get_content_disposition(): boolean;
 		/**
 		 * Gets the message body length that #hdrs declare. This will only
 		 * be non-0 if soup_message_headers_get_encoding() returns
@@ -5534,27 +5521,20 @@ declare namespace imports.gi.Soup {
 		 * Parses #hdrs's Content-Range header and returns it in #start,
 		 * #end, and #total_length. If the total length field in the header
 		 * was specified as "*", then #total_length will be set to -1.
-		 * @param start return value for the start of the range
-		 * @param _end return value for the end of the range
-		 * @param total_length return value for the total length of the
-		 * resource, or %NULL if you don't care.
 		 * @returns %TRUE if #hdrs contained a "Content-Range" header
 		 * containing a byte range which could be parsed, %FALSE otherwise.
 		 */
-		public get_content_range(start: number, _end: number, total_length: number | null): boolean;
+		public get_content_range(): boolean;
 		/**
 		 * Looks up the "Content-Type" header in #hdrs, parses it, and returns
 		 * its value in *#content_type and *#params. #params can be %NULL if you
 		 * are only interested in the content type itself.
-		 * @param params 
-		 *   return location for the Content-Type parameters (eg, "charset"), or
-		 *   %NULL
 		 * @returns a string with the value of the
 		 * "Content-Type" header or %NULL if #hdrs does not contain that
 		 * header or it cannot be parsed (in which case *#params will be
 		 * unchanged).
 		 */
-		public get_content_type(params: GLib.HashTable | null): string;
+		public get_content_type(): string;
 		/**
 		 * Gets the message body encoding that #hdrs declare. This may not
 		 * always correspond to the encoding used on the wire; eg, a HEAD
@@ -5637,14 +5617,11 @@ declare namespace imports.gi.Soup {
 		 * actually requested by the client.
 		 * </para></note>
 		 * @param total_length the total_length of the response body
-		 * @param ranges return location for an array
-		 * of {@link Range}
-		 * @param length the length of the returned array
 		 * @returns %TRUE if #hdrs contained a syntactically-valid
 		 * "Range" header, %FALSE otherwise (in which case #range and #length
 		 * will not be set).
 		 */
-		public get_ranges(total_length: number, ranges: Range[], length: number): boolean;
+		public get_ranges(total_length: number): boolean;
 		/**
 		 * Checks whether the list-valued header #name is present in #hdrs,
 		 * and contains a case-insensitive match for #token.
@@ -5791,14 +5768,10 @@ declare namespace imports.gi.Soup {
 		 * iterated by #iter. If #iter has already yielded the last header,
 		 * then soup_message_headers_iter_next() will return %FALSE and #name
 		 * and #value will be unchanged.
-		 * @param name pointer to a variable to return
-		 * the header name in
-		 * @param value pointer to a variable to return
-		 * the header value in
 		 * @returns %TRUE if another name and value were returned, %FALSE
 		 * if the end of the headers has been reached.
 		 */
-		public next(name: string, value: string): boolean;
+		public next(): boolean;
 	}
 
 	interface MessageQueue {}
@@ -5884,14 +5857,10 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Gets the indicated body part from #multipart.
 		 * @param part the part number to get (counting from 0)
-		 * @param headers return location for the MIME part
-		 * headers
-		 * @param body return location for the MIME part
-		 * body
 		 * @returns %TRUE on success, %FALSE if #part is out of range (in
 		 * which case #headers and #body won't be set)
 		 */
-		public get_part(part: number, headers: MessageHeaders, body: Buffer): boolean;
+		public get_part(part: number): boolean;
 		/**
 		 * Serializes #multipart to #dest_headers and #dest_body.
 		 * @param dest_headers the headers of the HTTP message to serialize #multipart to
@@ -5928,7 +5897,7 @@ declare namespace imports.gi.Soup {
 		public constructor();
 		public readonly base: GObject.TypeInterface;
 		public get_proxy_async: {(proxy_resolver: ProxyResolver, msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: ProxyResolverCallback): void;};
-		public get_proxy_sync: {(proxy_resolver: ProxyResolver, msg: Message, cancellable: Gio.Cancellable | null, addr: Address): number;};
+		public get_proxy_sync: {(proxy_resolver: ProxyResolver, msg: Message, cancellable: Gio.Cancellable | null): number;};
 	}
 
 	interface ProxyURIResolverInterface {}
@@ -5936,7 +5905,7 @@ declare namespace imports.gi.Soup {
 		public constructor();
 		public readonly base: GObject.TypeInterface;
 		public get_proxy_uri_async: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, async_context: GLib.MainContext | null, cancellable: Gio.Cancellable | null, callback: ProxyURIResolverCallback): void;};
-		public get_proxy_uri_sync: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, cancellable: Gio.Cancellable | null, proxy_uri: URI): number;};
+		public get_proxy_uri_sync: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, cancellable: Gio.Cancellable | null): number;};
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -6385,8 +6354,8 @@ declare namespace imports.gi.Soup {
 		public configure: {(extension: WebsocketExtension, connection_type: WebsocketConnectionType, params: GLib.HashTable | null): boolean;};
 		public get_request_params: {(extension: WebsocketExtension): string;};
 		public get_response_params: {(extension: WebsocketExtension): string;};
-		public process_outgoing_message: {(extension: WebsocketExtension, header: number, payload: GLib.Bytes): GLib.Bytes;};
-		public process_incoming_message: {(extension: WebsocketExtension, header: number, payload: GLib.Bytes): GLib.Bytes;};
+		public process_outgoing_message: {(extension: WebsocketExtension, payload: GLib.Bytes): GLib.Bytes;};
+		public process_incoming_message: {(extension: WebsocketExtension, payload: GLib.Bytes): GLib.Bytes;};
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -6468,7 +6437,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface IProxyResolver {
 		get_proxy_async(msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: ProxyResolverCallback): void;
-		get_proxy_sync(msg: Message, cancellable: Gio.Cancellable | null, addr: Address): number;
+		get_proxy_sync(msg: Message, cancellable: Gio.Cancellable | null): number;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6503,11 +6472,10 @@ declare namespace imports.gi.Soup {
 		 * proxy, else it will be set to %NULL.
 		 * @param uri the {@link URI} you want a proxy for
 		 * @param cancellable a #GCancellable, or %NULL
-		 * @param proxy_uri on return, will contain the proxy URI
 		 * @returns %SOUP_STATUS_OK if successful, or a transport-level
 		 * error.
 		 */
-		get_proxy_uri_sync(uri: URI, cancellable: Gio.Cancellable | null, proxy_uri: URI): number;
+		get_proxy_uri_sync(uri: URI, cancellable: Gio.Cancellable | null): number;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8214,15 +8182,12 @@ declare namespace imports.gi.Soup {
 	 * and soup_multipart_get_part().
 	 * @param msg a {@link Message} containing a "multipart/form-data" request body
 	 * @param file_control_name the name of the HTML file upload control, or %NULL
-	 * @param filename return location for the name of the uploaded file, or %NULL
-	 * @param content_type return location for the MIME type of the uploaded file, or %NULL
-	 * @param file return location for the uploaded file data, or %NULL
 	 * @returns 
 	 * a hash table containing the name/value pairs (other than
 	 * #file_control_name) from #msg, which you can free with
 	 * g_hash_table_destroy(). On error, it will return %NULL.
 	 */
-	function form_decode_multipart(msg: Message, file_control_name: string | null, filename: string | null, content_type: string | null, file: Buffer | null): GLib.HashTable;
+	function form_decode_multipart(msg: Message, file_control_name: string | null): GLib.HashTable;
 
 	/**
 	 * Encodes the given field names and values into a value of type
@@ -8469,12 +8434,10 @@ declare namespace imports.gi.Soup {
 	 * items with qvalue 0. Either way, those items will be removed from
 	 * the main list.
 	 * @param header a header value
-	 * @param unacceptable on
-	 * return, will contain a list of unacceptable values
 	 * @returns a #GSList of
 	 * acceptable values (as allocated strings), highest-qvalue first.
 	 */
-	function header_parse_quality_list(header: string, unacceptable: GLib.SList | null): GLib.SList;
+	function header_parse_quality_list(header: string): GLib.SList;
 
 	/**
 	 * Parses a header which is a semicolon-delimited list of something
@@ -8532,16 +8495,10 @@ declare namespace imports.gi.Soup {
 	 * @param _str the headers (up to, but not including, the trailing blank line)
 	 * @param len length of #str
 	 * @param req_headers {@link MessageHeaders} to store the header values in
-	 * @param req_method if non-%NULL, will be filled in with the
-	 * request method
-	 * @param req_path if non-%NULL, will be filled in with the
-	 * request path
-	 * @param ver if non-%NULL, will be filled in with the HTTP
-	 * version
 	 * @returns %SOUP_STATUS_OK if the headers could be parsed, or an
 	 * HTTP error to be returned to the client if they could not be.
 	 */
-	function headers_parse_request(_str: string, len: number, req_headers: MessageHeaders, req_method: string | null, req_path: string | null, ver: HTTPVersion | null): number;
+	function headers_parse_request(_str: string, len: number, req_headers: MessageHeaders): number;
 
 	/**
 	 * Parses the headers of an HTTP response in #str and stores the
@@ -8551,40 +8508,26 @@ declare namespace imports.gi.Soup {
 	 * @param _str the headers (up to, but not including, the trailing blank line)
 	 * @param len length of #str
 	 * @param headers {@link MessageHeaders} to store the header values in
-	 * @param ver if non-%NULL, will be filled in with the HTTP
-	 * version
-	 * @param status_code if non-%NULL, will be filled in with
-	 * the status code
-	 * @param reason_phrase if non-%NULL, will be filled in with
-	 * the reason phrase
 	 * @returns success or failure.
 	 */
-	function headers_parse_response(_str: string, len: number, headers: MessageHeaders, ver: HTTPVersion | null, status_code: number | null, reason_phrase: string | null): boolean;
+	function headers_parse_response(_str: string, len: number, headers: MessageHeaders): boolean;
 
 	/**
 	 * Parses the HTTP Status-Line string in #status_line into #ver,
 	 * #status_code, and #reason_phrase. #status_line must be terminated by
 	 * either "\0" or "\r\n".
 	 * @param status_line an HTTP Status-Line
-	 * @param ver if non-%NULL, will be filled in with the HTTP
-	 * version
-	 * @param status_code if non-%NULL, will be filled in with
-	 * the status code
-	 * @param reason_phrase if non-%NULL, will be filled in with
-	 * the reason phrase
 	 * @returns %TRUE if #status_line was parsed successfully.
 	 */
-	function headers_parse_status_line(status_line: string, ver: HTTPVersion | null, status_code: number | null, reason_phrase: string | null): boolean;
+	function headers_parse_status_line(status_line: string): boolean;
 
 	function http_error_quark(): GLib.Quark;
 
 	/**
 	 * Initializes #iter for iterating #hdrs.
-	 * @param iter a pointer to a %SoupMessageHeadersIter
-	 * structure
 	 * @param hdrs a %SoupMessageHeaders
 	 */
-	function message_headers_iter_init(iter: MessageHeadersIter, hdrs: MessageHeaders): void;
+	function message_headers_iter_init(hdrs: MessageHeaders): void;
 
 	function request_error_quark(): GLib.Quark;
 
@@ -8931,12 +8874,10 @@ declare namespace imports.gi.Soup {
 	 *   WebSocket handshake
 	 * @param supported_extensions list
 	 *   of supported extension types
-	 * @param accepted_extensions a
-	 *   #GList of {@link WebsocketExtension} objects
 	 * @returns %TRUE if #msg contains a completed valid WebSocket
 	 *   handshake, %FALSE and an error if not.
 	 */
-	function websocket_client_verify_handshake_with_extensions(msg: Message, supported_extensions: GObject.TypeClass[] | null, accepted_extensions: GLib.List | null): boolean;
+	function websocket_client_verify_handshake_with_extensions(msg: Message, supported_extensions: GObject.TypeClass[] | null): boolean;
 
 	function websocket_error_get_quark(): GLib.Quark;
 
@@ -9049,12 +8990,10 @@ declare namespace imports.gi.Soup {
 	 *   protocols.
 	 * @param supported_extensions list
 	 *   of supported extension types
-	 * @param accepted_extensions a
-	 *   #GList of {@link WebsocketExtension} objects
 	 * @returns %TRUE if #msg contained a valid WebSocket handshake
 	 *   request and was updated to contain a handshake response. %FALSE if not.
 	 */
-	function websocket_server_process_handshake_with_extensions(msg: Message, expected_origin: string | null, protocols: string[] | null, supported_extensions: GObject.TypeClass[] | null, accepted_extensions: GLib.List | null): boolean;
+	function websocket_server_process_handshake_with_extensions(msg: Message, expected_origin: string | null, protocols: string[] | null, supported_extensions: GObject.TypeClass[] | null): boolean;
 
 	/**
 	 * This creates an XML-RPC fault response and returns it as a string.
@@ -9170,10 +9109,9 @@ declare namespace imports.gi.Soup {
 	 * you don't know the types of the parameters.
 	 * @param method_call the XML-RPC methodCall string
 	 * @param length the length of #method_call, or -1 if it is NUL-terminated
-	 * @param method_name on return, the methodName from #method_call
 	 * @returns success or failure.
 	 */
-	function xmlrpc_extract_method_call(method_call: string, length: number, method_name: string): boolean;
+	function xmlrpc_extract_method_call(method_call: string, length: number): boolean;
 
 	/**
 	 * Parses #method_response and extracts the return value into
@@ -9242,11 +9180,9 @@ declare namespace imports.gi.Soup {
 	 * know in advance what the types of the parameters will be.
 	 * @param method_call the XML-RPC methodCall string
 	 * @param length the length of #method_call, or -1 if it is NUL-terminated
-	 * @param method_name on return, the methodName from #method_call
-	 * @param params on return, the parameters from #method_call
 	 * @returns success or failure.
 	 */
-	function xmlrpc_parse_method_call(method_call: string, length: number, method_name: string, params: GObject.ValueArray): boolean;
+	function xmlrpc_parse_method_call(method_call: string, length: number): boolean;
 
 	/**
 	 * Parses #method_response and returns the return value in #value. If
@@ -9258,21 +9194,19 @@ declare namespace imports.gi.Soup {
 	 * will be unset.)
 	 * @param method_response the XML-RPC methodResponse string
 	 * @param length the length of #method_response, or -1 if it is NUL-terminated
-	 * @param value on return, the return value from #method_call
 	 * @returns %TRUE if a return value was parsed, %FALSE if the
 	 * response could not be parsed, or contained a fault.
 	 */
-	function xmlrpc_parse_method_response(method_response: string, length: number, value: GObject.Value): boolean;
+	function xmlrpc_parse_method_response(method_response: string, length: number): boolean;
 
 	/**
 	 * Parses #method_call and return the method name. Method parameters can be
 	 * parsed later using soup_xmlrpc_params_parse().
 	 * @param method_call the XML-RPC methodCall string
 	 * @param length the length of #method_call, or -1 if it is NUL-terminated
-	 * @param params on success, a new {@link XMLRPCParams}
 	 * @returns method's name, or %NULL on error.
 	 */
-	function xmlrpc_parse_request(method_call: string, length: number, params: XMLRPCParams): string;
+	function xmlrpc_parse_request(method_call: string, length: number): string;
 
 	/**
 	 * Parses #method_response and returns the return value. If

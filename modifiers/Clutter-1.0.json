@@ -59,16 +59,6 @@
                     }
                 }
             },
-            "Stage": {
-                "function": {
-                    "get_minimum_size":{
-                        "return_type": {
-                            "type": "number[]",
-                            "doc": "width (Number) — return location for the minimum width, in pixels,\nor null\nheight (Number) — return location for the minimum height, in pixels,\nor null"
-                        }
-                    }
-                }
-            },
             "Point": {
                 "function": {
                     "constructor": {

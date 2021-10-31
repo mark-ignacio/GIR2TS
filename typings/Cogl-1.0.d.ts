@@ -27,11 +27,9 @@ declare namespace imports.gi.Cogl {
 		 * Parses an image file enough to extract the width and height
 		 * of the bitmap.
 		 * @param filename the file to check
-		 * @param width return location for the bitmap width, or %NULL
-		 * @param height return location for the bitmap height, or %NULL
 		 * @returns %TRUE if the image was successfully parsed
 		 */
-		public static get_size_from_file(filename: string, width: number, height: number): Bool;
+		public static get_size_from_file(filename: string): Bool;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -401,11 +399,13 @@ declare namespace imports.gi.Cogl {
 		 * 
 		 * The #hue value is in the 0 .. 360 range. The #luminance and
 		 * #saturation values are in the 0 .. 1 range.
-		 * @param hue return location for the hue value or %NULL
-		 * @param saturation return location for the saturation value or %NULL
-		 * @param luminance return location for the luminance value or %NULL
+		 * @returns return location for the hue value or %NULL
+		 * 
+		 * return location for the saturation value or %NULL
+		 * 
+		 * return location for the luminance value or %NULL
 		 */
-		public to_hsl(hue: number, saturation: number, luminance: number): void;
+		public to_hsl(): [ hue: number, saturation: number, luminance: number ];
 		/**
 		 * Converts a pre-multiplied color to a non-premultiplied color. For
 		 * example, semi-transparent red is (0.5, 0, 0, 0.5) when premultiplied
@@ -441,9 +441,8 @@ declare namespace imports.gi.Cogl {
 		public get_ambient(ambient: Color): void;
 		/**
 		 * Retrieves the current material color.
-		 * @param color The location to store the color
 		 */
-		public get_color(color: Color): void;
+		public get_color(): void;
 		/**
 		 * Retrieves the current diffuse color for #material
 		 * @param diffuse The location to store the diffuse color
@@ -1084,12 +1083,11 @@ declare namespace imports.gi.Cogl {
 		 * technically save a copy of the inverse transform within the given
 		 * #CoglMatrix so that subsequent requests for the inverse transform may
 		 * avoid costly inversion calculations.</note>
-		 * @param inverse The destination for a 4x4 inverse transformation matrix
 		 * @returns %TRUE if the inverse was successfully calculated or %FALSE
 		 *   for degenerate transformations that can't be inverted (in this case the
 		 *   #inverse matrix will simply be initialized with the identity matrix)
 		 */
-		public get_inverse(inverse: Matrix): Bool;
+		public get_inverse(): Bool;
 		/**
 		 * Initializes #matrix with the contents of #array
 		 * @param array A linear array of 16 floats (column-major order)
@@ -1221,12 +1219,8 @@ declare namespace imports.gi.Cogl {
 		/**
 		 * Transforms a point whos position is given and returned as four float
 		 * components.
-		 * @param _x The X component of your points position
-		 * @param _y The Y component of your points position
-		 * @param _z The Z component of your points position
-		 * @param _w The W component of your points position
 		 */
-		public transform_point(_x: number, _y: number, _z: number, _w: number): void;
+		public transform_point(): void;
 		/**
 		 * Multiplies #matrix with a transform matrix that translates along
 		 * the X, Y and Z axis.
@@ -1348,14 +1342,10 @@ declare namespace imports.gi.Cogl {
 		 * 
 		 * If the texture is spliced the data for the first sub texture will be
 		 * queried.
-		 * @param out_gl_handle pointer to return location for the
-		 *   textures GL handle, or %NULL.
-		 * @param out_gl_target pointer to return location for the
-		 *   GL target type, or %NULL.
 		 * @returns %TRUE if the handle was successfully retrieved, %FALSE
 		 *   if the handle was invalid
 		 */
-		get_gl_texture(out_gl_handle: number | null, out_gl_target: number | null): Bool;
+		get_gl_texture(): Bool;
 		/**
 		 * Queries the height of a cogl texture.
 		 * @returns the height of the GPU side texture in pixels
@@ -2686,12 +2676,11 @@ declare namespace imports.gi.Cogl {
 	/**
 	 * Converts a color expressed in HLS (hue, luminance and saturation)
 	 * values into a {@link Color}.
-	 * @param color return location for a {@link Color}
 	 * @param hue hue value, in the 0 .. 360 range
 	 * @param saturation saturation value, in the 0 .. 1 range
 	 * @param luminance luminance value, in the 0 .. 1 range
 	 */
-	function color_init_from_hsl(color: Color, hue: number, saturation: number, luminance: number): void;
+	function color_init_from_hsl(hue: number, saturation: number, luminance: number): void;
 
 	/**
 	 * Create a new cogl program object that can be used to replace parts of the GL
@@ -2810,12 +2799,15 @@ declare namespace imports.gi.Cogl {
 	 * Gets the number of bitplanes used for each of the color components
 	 * in the color buffer. Pass %NULL for any of the arguments if the
 	 * value is not required.
-	 * @param red Return location for the number of red bits or %NULL
-	 * @param green Return location for the number of green bits or %NULL
-	 * @param blue Return location for the number of blue bits or %NULL
-	 * @param alpha Return location for the number of alpha bits or %NULL
+	 * @returns Return location for the number of red bits or %NULL
+	 * 
+	 * Return location for the number of green bits or %NULL
+	 * 
+	 * Return location for the number of blue bits or %NULL
+	 * 
+	 * Return location for the number of alpha bits or %NULL
 	 */
-	function get_bitmasks(red: number, green: number, blue: number, alpha: number): void;
+	function get_bitmasks(): [ red: number, green: number, blue: number, alpha: number ];
 
 	/**
 	 * Queries if depth testing has been enabled via cogl_set_depth_test_enable()
@@ -2831,9 +2823,8 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Stores the current model-view matrix in #matrix.
-	 * @param matrix return location for the model-view matrix
 	 */
-	function get_modelview_matrix(matrix: Matrix): void;
+	function get_modelview_matrix(): void;
 
 	/**
 	 * Retrieves the #GOptionGroup used by Cogl to parse the command
@@ -2859,9 +2850,8 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Stores the current projection matrix in #matrix.
-	 * @param matrix return location for the projection matrix
 	 */
-	function get_projection_matrix(matrix: Matrix): void;
+	function get_projection_matrix(): void;
 
 	/**
 	 * Returns the current source material as previously set using
@@ -2880,10 +2870,8 @@ declare namespace imports.gi.Cogl {
 	 * Stores the current viewport in #v. #v[0] and #v[1] get the x and y
 	 * position of the viewport and #v[2] and #v[3] get the width and
 	 * height.
-	 * @param _v pointer to a 4 element array
-	 *   of #float<!-- -->s to receive the viewport dimensions.
 	 */
-	function get_viewport(_v: number[]): void;
+	function get_viewport(): void;
 
 	function gtype_matrix_get_type(): GObject.Type;
 

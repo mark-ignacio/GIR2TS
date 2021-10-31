@@ -28,10 +28,9 @@ declare namespace imports.gi.GModule {
 		 * Gets a symbol pointer from a module, such as one exported
 		 * by #G_MODULE_EXPORT. Note that a valid symbol can be %NULL.
 		 * @param symbol_name the name of the symbol to find
-		 * @param symbol returns the pointer to the symbol value
 		 * @returns %TRUE on success
 		 */
-		public symbol(symbol_name: string, symbol: any): boolean;
+		public symbol(symbol_name: string): boolean;
 	}
 
 	/**

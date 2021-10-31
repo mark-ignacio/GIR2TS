@@ -1143,9 +1143,9 @@ declare namespace imports.gi.Atk {
 		public add_focus_handler: {(component: Component, handler: FocusHandler): number;};
 		public contains: {(component: Component, _x: number, _y: number, coord_type: CoordType): boolean;};
 		public ref_accessible_at_point: {(component: Component, _x: number, _y: number, coord_type: CoordType): Object;};
-		public get_extents: {(component: Component, _x: number | null, _y: number | null, width: number | null, height: number | null, coord_type: CoordType): void;};
-		public get_position: {(component: Component, _x: number | null, _y: number | null, coord_type: CoordType): void;};
-		public get_size: {(component: Component, width: number | null, height: number | null): void;};
+		public get_extents: {(component: Component, coord_type: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];};
+		public get_position: {(component: Component, coord_type: CoordType): [ x: number | null, y: number | null ];};
+		public get_size: {(component: Component): [ width: number | null, height: number | null ];};
 		public grab_focus: {(component: Component): boolean;};
 		public remove_focus_handler: {(component: Component, handler_id: number): void;};
 		public set_extents: {(component: Component, _x: number, _y: number, width: number, height: number, coord_type: CoordType): boolean;};
@@ -1225,9 +1225,9 @@ declare namespace imports.gi.Atk {
 	interface ImageIface {}
 	class ImageIface {
 		public constructor();
-		public get_image_position: {(image: Image, _x: number | null, _y: number | null, coord_type: CoordType): void;};
+		public get_image_position: {(image: Image, coord_type: CoordType): [ x: number | null, y: number | null ];};
 		public get_image_description: {(image: Image): string;};
-		public get_image_size: {(image: Image, width: number | null, height: number | null): void;};
+		public get_image_size: {(image: Image): [ width: number | null, height: number | null ];};
 		public set_image_description: {(image: Image, description: string): boolean;};
 		public get_image_locale: {(image: Image): string;};
 	}
@@ -1510,10 +1510,10 @@ declare namespace imports.gi.Atk {
 		public constructor();
 		public get_column_span: {(cell: TableCell): number;};
 		public get_column_header_cells: {(cell: TableCell): Object[];};
-		public get_position: {(cell: TableCell, _row: number, column: number): boolean;};
+		public get_position: {(cell: TableCell): boolean;};
 		public get_row_span: {(cell: TableCell): number;};
 		public get_row_header_cells: {(cell: TableCell): Object[];};
-		public get_row_column_span: {(cell: TableCell, _row: number, column: number, row_span: number, column_span: number): boolean;};
+		public get_row_column_span: {(cell: TableCell): boolean;};
 		public get_table: {(cell: TableCell): Object;};
 	}
 
@@ -1562,18 +1562,18 @@ declare namespace imports.gi.Atk {
 	class TextIface {
 		public constructor();
 		public get_text: {(text: Text, start_offset: number, end_offset: number): string;};
-		public get_text_after_offset: {(text: Text, offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;};
-		public get_text_at_offset: {(text: Text, offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;};
+		public get_text_after_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
+		public get_text_at_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
 		public get_character_at_offset: {(text: Text, offset: number): string;};
-		public get_text_before_offset: {(text: Text, offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;};
+		public get_text_before_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
 		public get_caret_offset: {(text: Text): number;};
-		public get_run_attributes: {(text: Text, offset: number, start_offset: number, end_offset: number): AttributeSet;};
+		public get_run_attributes: {(text: Text, offset: number): AttributeSet;};
 		public get_default_attributes: {(text: Text): AttributeSet;};
-		public get_character_extents: {(text: Text, offset: number, _x: number | null, _y: number | null, width: number | null, height: number | null, coords: CoordType): void;};
+		public get_character_extents: {(text: Text, offset: number, coords: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];};
 		public get_character_count: {(text: Text): number;};
 		public get_offset_at_point: {(text: Text, _x: number, _y: number, coords: CoordType): number;};
 		public get_n_selections: {(text: Text): number;};
-		public get_selection: {(text: Text, selection_num: number, start_offset: number, end_offset: number): string;};
+		public get_selection: {(text: Text, selection_num: number): string;};
 		public add_selection: {(text: Text, start_offset: number, end_offset: number): boolean;};
 		public remove_selection: {(text: Text, selection_num: number): boolean;};
 		public set_selection: {(text: Text, selection_num: number, start_offset: number, end_offset: number): boolean;};
@@ -1582,9 +1582,9 @@ declare namespace imports.gi.Atk {
 		public text_caret_moved: {(text: Text, location: number): void;};
 		public text_selection_changed: {(text: Text): void;};
 		public text_attributes_changed: {(text: Text): void;};
-		public get_range_extents: {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle): void;};
+		public get_range_extents: {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType): void;};
 		public get_bounded_ranges: {(text: Text, rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType): TextRange[];};
-		public get_string_at_offset: {(text: Text, offset: number, granularity: TextGranularity, start_offset: number, end_offset: number): string;};
+		public get_string_at_offset: {(text: Text, offset: number, granularity: TextGranularity): string;};
 		public scroll_substring_to: {(text: Text, start_offset: number, end_offset: number, _type: ScrollType): boolean;};
 		public scroll_substring_to_point: {(text: Text, start_offset: number, end_offset: number, coords: CoordType, _x: number, _y: number): boolean;};
 	}
@@ -1652,12 +1652,12 @@ declare namespace imports.gi.Atk {
 	interface ValueIface {}
 	class ValueIface {
 		public constructor();
-		public get_current_value: {(obj: Value, value: GObject.Value): void;};
-		public get_maximum_value: {(obj: Value, value: GObject.Value): void;};
-		public get_minimum_value: {(obj: Value, value: GObject.Value): void;};
+		public get_current_value: {(obj: Value): void;};
+		public get_maximum_value: {(obj: Value): void;};
+		public get_minimum_value: {(obj: Value): void;};
 		public set_current_value: {(obj: Value, value: GObject.Value): boolean;};
-		public get_minimum_increment: {(obj: Value, value: GObject.Value): void;};
-		public get_value_and_text: {(obj: Value, value: number, text: string | null): void;};
+		public get_minimum_increment: {(obj: Value): void;};
+		public get_value_and_text: {(obj: Value): [ value: number, text: string | null ];};
 		public get_range: {(obj: Value): Range;};
 		public get_increment: {(obj: Value): number;};
 		public get_sub_ranges: {(obj: Value): GLib.SList;};
@@ -1829,14 +1829,17 @@ declare namespace imports.gi.Atk {
 		 * 
 		 * If the extent can not be obtained (e.g. a non-embedded plug or missing
 		 * support), all of x, y, width, height are set to -1.
-		 * @param _x address of #gint to put x coordinate
-		 * @param _y address of #gint to put y coordinate
-		 * @param width address of #gint to put width
-		 * @param height address of #gint to put height
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
+		 * @returns address of #gint to put x coordinate
+		 * 
+		 * address of #gint to put y coordinate
+		 * 
+		 * address of #gint to put width
+		 * 
+		 * address of #gint to put height
 		 */
-		get_extents(_x: number | null, _y: number | null, width: number | null, height: number | null, coord_type: CoordType): void;
+		get_extents(coord_type: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];
 		/**
 		 * Gets the layer of the component.
 		 * @returns an {@link Layer} which is the layer of the component
@@ -1856,21 +1859,23 @@ declare namespace imports.gi.Atk {
 		 * 
 		 * If the position can not be obtained (e.g. a non-embedded plug or missing
 		 * support), x and y are set to -1.
-		 * @param _x address of #gint to put x coordinate position
-		 * @param _y address of #gint to put y coordinate position
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
+		 * @returns address of #gint to put x coordinate position
+		 * 
+		 * address of #gint to put y coordinate position
 		 */
-		// get_position(_x: number | null, _y: number | null, coord_type: CoordType): void;
+		// get_position(coord_type: CoordType): [ x: number | null, y: number | null ];
 		/**
 		 * Gets the size of the #component in terms of width and height.
 		 * 
 		 * If the size can not be obtained (e.g. a non-embedded plug or missing
 		 * support), width and height are set to -1.
-		 * @param width address of #gint to put width of #component
-		 * @param height address of #gint to put height of #component
+		 * @returns address of #gint to put width of #component
+		 * 
+		 * address of #gint to put height of #component
 		 */
-		get_size(width: number | null, height: number | null): void;
+		get_size(): [ width: number | null, height: number | null ];
 		/**
 		 * Grabs focus for this #component.
 		 * @returns %TRUE if successful, %FALSE otherwise.
@@ -2319,12 +2324,13 @@ declare namespace imports.gi.Atk {
 		 * 
 		 * If the position can not be obtained (e.g. missing support), x and y are set
 		 * to -1.
-		 * @param _x address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained.
-		 * @param _y address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained.
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
+		 * @returns address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained.
+		 * 
+		 * address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained.
 		 */
-		get_image_position(_x: number | null, _y: number | null, coord_type: CoordType): void;
+		get_image_position(coord_type: CoordType): [ x: number | null, y: number | null ];
 		/**
 		 * Get the width and height in pixels for the specified image.
 		 * The values of #width and #height are returned as -1 if the
@@ -2332,10 +2338,11 @@ declare namespace imports.gi.Atk {
 		 * 
 		 * If the size can not be obtained (e.g. missing support), x and y are set
 		 * to -1.
-		 * @param width filled with the image width, or -1 if the value cannot be obtained.
-		 * @param height filled with the image height, or -1 if the value cannot be obtained.
+		 * @returns filled with the image width, or -1 if the value cannot be obtained.
+		 * 
+		 * filled with the image height, or -1 if the value cannot be obtained.
 		 */
-		get_image_size(width: number | null, height: number | null): void;
+		get_image_size(): [ width: number | null, height: number | null ];
 		/**
 		 * Sets the textual description for this image.
 		 * @param description a string description to set for #image
@@ -2885,24 +2892,18 @@ declare namespace imports.gi.Atk {
 		get_column_span(): number;
 		/**
 		 * Retrieves the tabular position of this cell.
-		 * @param _row the row of the given cell.
-		 * @param column the column of the given cell.
 		 * @returns TRUE if successful; FALSE otherwise.
 		 */
-		get_position(_row: number, column: number): boolean;
+		get_position(): boolean;
 		/**
 		 * Gets the row and column indexes and span of this cell accessible.
 		 * 
 		 * Note: If the object does not implement this function, then, by default, atk
 		 * will implement this function by calling get_row_span and get_column_span
 		 * on the object.
-		 * @param _row the row index of the given cell.
-		 * @param column the column index of the given cell.
-		 * @param row_span the number of rows occupied by this cell.
-		 * @param column_span the number of columns occupied by this cell.
 		 * @returns TRUE if successful; FALSE otherwise.
 		 */
-		get_row_column_span(_row: number, column: number, row_span: number, column_span: number): boolean;
+		get_row_column_span(): boolean;
 		/**
 		 * Returns the row headers as an array of cell accessibles.
 		 * @returns a GPtrArray of AtkObjects
@@ -2988,13 +2989,16 @@ declare namespace imports.gi.Atk {
 		 * Get the bounding box containing the glyph representing the character at
 		 *     a particular text offset.
 		 * @param offset The offset of the text character for which bounding information is required.
-		 * @param _x Pointer for the x coordinate of the bounding box
-		 * @param _y Pointer for the y coordinate of the bounding box
-		 * @param width Pointer for the width of the bounding box
-		 * @param height Pointer for the height of the bounding box
 		 * @param coords specify whether coordinates are relative to the screen or widget window
+		 * @returns Pointer for the x coordinate of the bounding box
+		 * 
+		 * Pointer for the y coordinate of the bounding box
+		 * 
+		 * Pointer for the width of the bounding box
+		 * 
+		 * Pointer for the height of the bounding box
 		 */
-		get_character_extents(offset: number, _x: number | null, _y: number | null, width: number | null, height: number | null, coords: CoordType): void;
+		get_character_extents(offset: number, coords: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];
 		/**
 		 * Creates an {@link AttributeSet} which consists of the default values of
 		 * attributes for the text. See the enum AtkTextAttribute for types of text
@@ -3032,9 +3036,8 @@ declare namespace imports.gi.Atk {
 		 * @param end_offset The offset of the text character after the last character
 		 *        for which boundary information is required.
 		 * @param coord_type Specify whether coordinates are relative to the screen or widget window.
-		 * @param rect A pointer to a AtkTextRectangle which is filled in by this function.
 		 */
-		get_range_extents(start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle): void;
+		get_range_extents(start_offset: number, end_offset: number, coord_type: CoordType): void;
 		/**
 		 * Creates an {@link AttributeSet} which consists of the attributes explicitly
 		 * set at the position #offset in the text. #start_offset and #end_offset are
@@ -3045,13 +3048,11 @@ declare namespace imports.gi.Atk {
 		 * returned.
 		 * @param offset the character offset at which to get the attributes, -1 means the offset of
 		 * the character to be inserted at the caret location.
-		 * @param start_offset the address to put the start offset of the range
-		 * @param end_offset the address to put the end offset of the range
 		 * @returns an {@link AttributeSet} which contains the attributes
 		 *         explicitly set at #offset. This #AtkAttributeSet should be freed by
 		 *         a call to atk_attribute_set_free().
 		 */
-		get_run_attributes(offset: number, start_offset: number, end_offset: number): AttributeSet;
+		get_run_attributes(offset: number): AttributeSet;
 		/**
 		 * Gets the text from the specified selection.
 		 * @param selection_num The selection number.  The selected regions are
@@ -3059,13 +3060,10 @@ declare namespace imports.gi.Atk {
 		 * start of the text.  The selected region closest to the beginning
 		 * of the text region is assigned the number 0, etc.  Note that adding,
 		 * moving or deleting a selected region can change the numbering.
-		 * @param start_offset passes back the starting character offset of the selected region
-		 * @param end_offset passes back the ending character offset (offset immediately past)
-		 * of the selected region
 		 * @returns a newly allocated string containing the selected text. Use g_free()
 		 *          to free the returned string.
 		 */
-		get_selection(selection_num: number, start_offset: number, end_offset: number): string;
+		get_selection(selection_num: number): string;
 		/**
 		 * Gets a portion of the text exposed through an {@link Text} according to a given #offset
 		 * and a specific #granularity, along with the start and end offsets defining the
@@ -3099,16 +3097,12 @@ declare namespace imports.gi.Atk {
 		 * of the following paragraph after the offset.
 		 * @param offset position
 		 * @param granularity An {@link TextGranularity}
-		 * @param start_offset the starting character offset of the returned string, or -1
-		 *                in the case of error (e.g. invalid offset, not implemented)
-		 * @param end_offset the offset of the first character after the returned string,
-		 *              or -1 in the case of error (e.g. invalid offset, not implemented)
 		 * @returns a newly allocated string containing the text at
 		 *          the #offset bounded by the specified #granularity. Use g_free()
 		 *          to free the returned string.  Returns %NULL if the offset is invalid
 		 *          or no implementation is available.
 		 */
-		get_string_at_offset(offset: number, granularity: TextGranularity, start_offset: number, end_offset: number): string;
+		get_string_at_offset(offset: number, granularity: TextGranularity): string;
 		/**
 		 * Gets the specified text.
 		 * @param start_offset a starting character offset within #text
@@ -3122,14 +3116,11 @@ declare namespace imports.gi.Atk {
 		 * Gets the specified text.
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
-		 * @param start_offset the starting character offset of the returned string
-		 * @param end_offset the offset of the first character after the
-		 *              returned substring
 		 * @returns a newly allocated string containing the text after #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
 		 */
-		get_text_after_offset(offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;
+		get_text_after_offset(offset: number, boundary_type: TextBoundary): string;
 		/**
 		 * Gets the specified text.
 		 * 
@@ -3157,26 +3148,20 @@ declare namespace imports.gi.Atk {
 		 * start after the offset.
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
-		 * @param start_offset the starting character offset of the returned string
-		 * @param end_offset the offset of the first character after the
-		 *              returned substring
 		 * @returns a newly allocated string containing the text at #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
 		 */
-		get_text_at_offset(offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;
+		get_text_at_offset(offset: number, boundary_type: TextBoundary): string;
 		/**
 		 * Gets the specified text.
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
-		 * @param start_offset the starting character offset of the returned string
-		 * @param end_offset the offset of the first character after the
-		 *              returned substring
 		 * @returns a newly allocated string containing the text before #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
 		 */
-		get_text_before_offset(offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;
+		get_text_before_offset(offset: number, boundary_type: TextBoundary): string;
 		/**
 		 * Removes the specified selection.
 		 * @param selection_num The selection number.  The selected regions are
@@ -3332,9 +3317,8 @@ declare namespace imports.gi.Atk {
 	interface IValue {
 		/**
 		 * Gets the value of this object.
-		 * @param value a #GValue representing the current accessible value
 		 */
-		get_current_value(value: GObject.Value): void;
+		get_current_value(): void;
 		/**
 		 * Gets the minimum increment by which the value of this object may be
 		 * changed.  If zero, the minimum increment is undefined, which may
@@ -3346,21 +3330,18 @@ declare namespace imports.gi.Atk {
 		get_increment(): number;
 		/**
 		 * Gets the maximum value of this object.
-		 * @param value a #GValue representing the maximum accessible value
 		 */
-		get_maximum_value(value: GObject.Value): void;
+		get_maximum_value(): void;
 		/**
 		 * Gets the minimum increment by which the value of this object may be changed.  If zero,
 		 * the minimum increment is undefined, which may mean that it is limited only by the
 		 * floating point precision of the platform.
-		 * @param value a #GValue representing the minimum increment by which the accessible value may be changed
 		 */
-		get_minimum_increment(value: GObject.Value): void;
+		get_minimum_increment(): void;
 		/**
 		 * Gets the minimum value of this object.
-		 * @param value a #GValue representing the minimum accessible value
 		 */
-		get_minimum_value(value: GObject.Value): void;
+		get_minimum_value(): void;
 		/**
 		 * Gets the range of this object.
 		 * @returns a newly allocated {@link Range}
@@ -3380,11 +3361,12 @@ declare namespace imports.gi.Atk {
 		 * Gets the current value and the human readable text alternative of
 		 * #obj. #text is a newly created string, that must be freed by the
 		 * caller. Can be NULL if no descriptor is available.
-		 * @param value address of #gdouble to put the current value of #obj
-		 * @param text address of #gchar to put the human
+		 * @returns address of #gdouble to put the current value of #obj
+		 * 
+		 * address of #gchar to put the human
 		 * readable text alternative for #value
 		 */
-		get_value_and_text(value: number, text: string | null): void;
+		get_value_and_text(): [ value: number, text: string | null ];
 		/**
 		 * Sets the value of this object.
 		 * @param value a #GValue which is the desired new accessible value.

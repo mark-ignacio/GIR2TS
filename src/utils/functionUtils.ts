@@ -39,13 +39,13 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
             if (param_node.$.name === '...' || param_node.$.name === 'user_data') continue;
             let param_name = param_node.$.name;
 
-            /*if (param_node.$.direction == "out") {
+            if (param_node.$.direction == "out") {
                 return_params.push(param_node);
                 continue;
             }
 
             if (param_node.$["caller-allocates"] == 0)
-                continue;*/
+                continue;
 
             if (modifier?.param?.[param_name]?.skip)
                 continue;
@@ -76,11 +76,28 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
         }
     }
 
+    // Tuple return type
+    if (return_params.length > 1 && return_type == "void") {
+        let tupleReturnTypes: TypeInfo[] = [];
+        for (const outParam of return_params) {
+            const typeInfo = GetTypeInfo(outParam);
+            tupleReturnTypes.push(typeInfo);
+        }
+        returnDoc = `${tupleReturnTypes.map(x => x.docString).join("\n\n")}`;
+        if (tupleReturnTypes.every(x => x.name != null)) {
+            return_type = `[ ${tupleReturnTypes.map(x => `${x.name}: ${x.type}`).join(", ")} ]`;
+        }
+        else {
+            return_type = `[ ${tupleReturnTypes.map(x => x.type).join(", ")} ]`;
+        } 
+    }
+
     return {
         name: func_name,
         return_type: (constructor) ? undefined : {
             type: modifier?.return_type?.type ?? ((modifier?.return_type?.type_extension?.length ?? 0 > 1) ? `${return_type} | ${(modifier?.return_type?.type_extension?.join(" | "))}` : return_type),
-            docString: modifier?.return_type?.doc ?? returnDoc
+            docString: modifier?.return_type?.doc ?? returnDoc,
+            name: null
         },
         params: params,
         doc: modifier?.doc ?? doc

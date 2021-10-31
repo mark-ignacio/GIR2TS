@@ -284,11 +284,10 @@ declare namespace imports.gi.GdkPixbuf {
 		 * 
 		 * Please see the section on [image data](#image-data) for information
 		 * about how the pixel data is stored in memory.
-		 * @param length The length of the binary data.
 		 * @returns A pointer to the pixbuf's
 		 * pixel data.
 		 */
-		get_pixels_with_length(length: number): number[];
+		get_pixels_with_length(): number[];
 		/**
 		 * Queries the rowstride of a pixbuf, which is the number of bytes between
 		 * the start of a row and the start of the next row.
@@ -470,14 +469,11 @@ declare namespace imports.gi.GdkPixbuf {
 		 * domain.
 		 * 
 		 * See `gdk_pixbuf_save()` for more details.
-		 * @param buffer location to receive a pointer
-		 *   to the new buffer.
-		 * @param buffer_size location to receive the size of the new buffer.
 		 * @param _type name of file format.
 		 * @param error return location for error, or `NULL`
 		 * @returns whether an error was set
 		 */
-		save_to_buffer(buffer: number[], buffer_size: number, _type: string, error: GLib.Error | null): boolean;
+		save_to_buffer(_type: string, error: GLib.Error | null): boolean;
 		/**
 		 * Vector version of `gdk_pixbuf_save_to_buffer()`.
 		 * 
@@ -485,15 +481,12 @@ declare namespace imports.gi.GdkPixbuf {
 		 * "tiff", "png", "ico" or "bmp".
 		 * 
 		 * See [method#GdkPixbuf.Pixbuf.save_to_buffer] for more details.
-		 * @param buffer 
-		 *   location to receive a pointer to the new buffer.
-		 * @param buffer_size location to receive the size of the new buffer.
 		 * @param _type name of file format.
 		 * @param option_keys name of options to set
 		 * @param option_values values for named options
 		 * @returns whether an error was set
 		 */
-		save_to_bufferv(buffer: number[], buffer_size: number, _type: string, option_keys: string[] | null, option_values: string[] | null): boolean;
+		save_to_bufferv(_type: string, option_keys: string[] | null, option_values: string[] | null): boolean;
 		/**
 		 * Saves pixbuf in format `type` by feeding the produced data to a
 		 * callback.
@@ -1124,12 +1117,10 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Parses an image file far enough to determine its format and size.
 		 * @param filename The name of the file to identify.
-		 * @param width Return location for the width of the image
-		 * @param height Return location for the height of the image
 		 * @returns A `GdkPixbufFormat` describing
 		 *   the image format of the file
 		 */
-		public static get_file_info(filename: string, width: number | null, height: number | null): PixbufFormat;
+		public static get_file_info(filename: string): PixbufFormat;
 		/**
 		 * Asynchronously parses an image file far enough to determine its
 		 * format and size.
@@ -1149,12 +1140,10 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Finishes an asynchronous pixbuf parsing operation started with
 		 * gdk_pixbuf_get_file_info_async().
 		 * @param async_result a `GAsyncResult`
-		 * @param width Return location for the width of the image, or `NULL`
-		 * @param height Return location for the height of the image, or `NULL`
 		 * @returns A `GdkPixbufFormat` describing the
 		 *   image format of the file
 		 */
-		public static get_file_info_finish(async_result: Gio.AsyncResult, width: number, height: number): PixbufFormat;
+		public static get_file_info_finish(async_result: Gio.AsyncResult): PixbufFormat;
 		/**
 		 * Obtains the available information about the image formats supported
 		 * by GdkPixbuf.
@@ -2440,11 +2429,10 @@ declare namespace imports.gi.GdkPixbuf {
 		 * will fail with the same error.
 		 * @param buf bytes to be written.
 		 * @param count number of bytes in #buf.
-		 * @param error A location to return an error.
 		 * @param data user data passed to gdk_pixbuf_save_to_callback().
 		 * @returns `TRUE` if successful, `FALSE` otherwise
 		 */
-		(buf: number[], count: number, error: GLib.Error, data: any | null): boolean;
+		(buf: number[], count: number, data: any | null): boolean;
 	}
 
 	function pixbuf_error_quark(): GLib.Quark;

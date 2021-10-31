@@ -173,7 +173,8 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
                 ],
                 return_type: {
                     docString: "",
-                    type: "number"
+                    type: "number",
+                    name: null
                 }
             }, ns_name, false, 1);
         }

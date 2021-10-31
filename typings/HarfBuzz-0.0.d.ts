@@ -79,10 +79,11 @@ declare namespace imports.gi.HarfBuzz {
 		 * Converts a #hb_feature_t into a %NULL-terminated string in the format
 		 * understood by hb_feature_from_string(). The client in responsible for
 		 * allocating big enough size for #buf, 128 bytes is more than enough.
-		 * @param buf output string
-		 * @param size the allocated size of #buf
+		 * @returns output string
+		 * 
+		 * the allocated size of #buf
 		 */
-		public _string(buf: string[], size: number): void;
+		public _string(): [ string[], number ];
 	}
 
 	/**
@@ -496,10 +497,11 @@ declare namespace imports.gi.HarfBuzz {
 		 * Converts an #hb_variation_t into a %NULL-terminated string in the format
 		 * understood by hb_variation_from_string(). The client in responsible for
 		 * allocating big enough size for #buf, 128 bytes is more than enough.
-		 * @param buf output string
-		 * @param size the allocated size of #buf
+		 * @returns output string
+		 * 
+		 * the allocated size of #buf
 		 */
-		public _string(buf: string[], size: number): void;
+		public _string(): [ string[], number ];
 	}
 
 	/**
@@ -3604,10 +3606,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * This method should retrieve the extents for a font.
 		 * @param font #hb_font_t to work upon
 		 * @param font_data #font user data pointer
-		 * @param extents The font extents retrieved
 		 * @returns 
 		 */
-		(font: font_t, font_data: any | null, extents: font_extents_t): bool_t;
+		(font: font_t, font_data: any | null): bool_t;
 	}
 
 	/**
@@ -3645,10 +3646,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param count The number of glyph IDs in the sequence queried
 		 * @param first_glyph The first glyph ID to query
 		 * @param glyph_stride The stride between successive glyph IDs
-		 * @param first_advance The first advance retrieved
 		 * @param advance_stride The stride between successive advances
 		 */
-		(font: font_t, font_data: any | null, count: number, first_glyph: codepoint_t, glyph_stride: number, first_advance: position_t, advance_stride: number): void;
+		(font: font_t, font_data: any | null, count: number, first_glyph: codepoint_t, glyph_stride: number, advance_stride: number): void;
 	}
 
 	/**
@@ -3669,11 +3669,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font_data #font user data pointer
 		 * @param glyph The glyph ID to query
 		 * @param point_index The contour-point index to query
-		 * @param _x The X value retrieved for the contour point
-		 * @param _y The Y value retrieved for the contour point
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any | null, glyph: codepoint_t, point_index: number, _x: position_t, _y: position_t): bool_t;
+		(font: font_t, font_data: any | null, glyph: codepoint_t, point_index: number): bool_t;
 	}
 
 	/**
@@ -3691,10 +3689,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font #hb_font_t to work upon
 		 * @param font_data #font user data pointer
 		 * @param glyph The glyph ID to query
-		 * @param extents The #hb_glyph_extents_t retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any | null, glyph: codepoint_t, extents: glyph_extents_t): bool_t;
+		(font: font_t, font_data: any | null, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3713,10 +3710,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font_data #font user data pointer
 		 * @param name The name string to query
 		 * @param len The length of the name queried
-		 * @param glyph The glyph ID retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any | null, name: string[], len: number, glyph: codepoint_t): bool_t;
+		(font: font_t, font_data: any | null, name: string[], len: number): bool_t;
 	}
 
 	/**
@@ -3735,10 +3731,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font_data #font user data pointer
 		 * @param unicode The Unicode code point to query
 		 * @param variation_selector The  variation-selector code point to query
-		 * @param glyph The glyph ID retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any | null, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t;
+		(font: font_t, font_data: any | null, unicode: codepoint_t, variation_selector: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3773,11 +3768,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font #hb_font_t to work upon
 		 * @param font_data #font user data pointer
 		 * @param glyph The glyph ID to query
-		 * @param name Name string retrieved for the glyph ID
-		 * @param size Length of the glyph-name string retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any | null, glyph: codepoint_t, name: string[], size: number): bool_t;
+		(font: font_t, font_data: any | null, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3797,11 +3790,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font #hb_font_t to work upon
 		 * @param font_data #font user data pointer
 		 * @param glyph The glyph ID to query
-		 * @param _x The X coordinate of the origin
-		 * @param _y The Y coordinate of the origin
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any | null, glyph: codepoint_t, _x: position_t, _y: position_t): bool_t;
+		(font: font_t, font_data: any | null, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3819,10 +3810,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font #hb_font_t to work upon
 		 * @param font_data #font user data pointer
 		 * @param unicode The Unicode code point to query
-		 * @param glyph The glyph ID retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any | null, unicode: codepoint_t, glyph: codepoint_t): bool_t;
+		(font: font_t, font_data: any | null, unicode: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3844,11 +3834,10 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param count number of code points to query
 		 * @param first_unicode The first Unicode code point to query
 		 * @param unicode_stride The stride between successive code points
-		 * @param first_glyph The first glyph ID retrieved
 		 * @param glyph_stride The stride between successive glyph IDs
 		 * @returns the number of code points processed
 		 */
-		(font: font_t, font_data: any | null, count: number, first_unicode: codepoint_t, unicode_stride: number, first_glyph: codepoint_t, glyph_stride: number): number;
+		(font: font_t, font_data: any | null, count: number, first_unicode: codepoint_t, unicode_stride: number, glyph_stride: number): number;
 	}
 
 	/**
@@ -3869,10 +3858,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font_data #font user data pointer
 		 * @param unicode The Unicode code point to query
 		 * @param variation_selector The  variation-selector code point to query
-		 * @param glyph The glyph ID retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any | null, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t;
+		(font: font_t, font_data: any | null, unicode: codepoint_t, variation_selector: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3928,10 +3916,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param ufuncs A Unicode-functions structure
 		 * @param _a The first code point to compose
 		 * @param _b The second code point to compose
-		 * @param _ab The composed code point
 		 * @returns %true is #a,#b composed, %false otherwise
 		 */
-		(ufuncs: unicode_funcs_t, _a: codepoint_t, _b: codepoint_t, _ab: codepoint_t): bool_t;
+		(ufuncs: unicode_funcs_t, _a: codepoint_t, _b: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3980,11 +3967,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * #hb_bool_t indicating the success of the composition.
 		 * @param ufuncs A Unicode-functions structure
 		 * @param _ab The code point to decompose
-		 * @param _a The first decomposed code point
-		 * @param _b The second decomposed code point
 		 * @returns %true if #ab decomposed, %false otherwise
 		 */
-		(ufuncs: unicode_funcs_t, _ab: codepoint_t, _a: codepoint_t, _b: codepoint_t): bool_t;
+		(ufuncs: unicode_funcs_t, _ab: codepoint_t): bool_t;
 	}
 
 	/**
@@ -4246,25 +4231,17 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face #hb_face_t to work upon
 	 * @param feature_type The #hb_aat_layout_feature_type_t of the requested feature type
 	 * @param start_offset offset of the first feature type to retrieve
-	 * @param selector_count Input = the maximum number of selectors to return;
-	 *                  Output = the actual number of selectors returned (may be zero)
-	 * @param selectors 
-	 *             A buffer pointer. The selectors available for the feature type queries.
-	 * @param default_index The index of the feature's default selector, if any
 	 * @returns Number of all available feature selectors
 	 */
-	function aat_layout_feature_type_get_selector_infos(_face: face_t, feature_type: aat_layout_feature_type_t, start_offset: number, selector_count: number | null, selectors: aat_layout_feature_selector_info_t[] | null, default_index: number | null): number;
+	function aat_layout_feature_type_get_selector_infos(_face: face_t, feature_type: aat_layout_feature_type_t, start_offset: number): number;
 
 	/**
 	 * Fetches a list of the AAT feature types included in the specified face.
 	 * @param _face #hb_face_t to work upon
 	 * @param start_offset offset of the first feature type to retrieve
-	 * @param feature_count Input = the maximum number of feature types to return;
-	 *                 Output = the actual number of feature types returned (may be zero)
-	 * @param features Array of feature types found
 	 * @returns Number of all available feature types.
 	 */
-	function aat_layout_get_feature_types(_face: face_t, start_offset: number, feature_count: number | null, features: aat_layout_feature_type_t[]): number;
+	function aat_layout_get_feature_types(_face: face_t, start_offset: number): number;
 
 	/**
 	 * Tests whether the specified face includes any positioning information
@@ -4376,10 +4353,9 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Fetches the data from a blob.
 	 * @param blob a blob.
-	 * @param length The length in bytes of the data retrieved
 	 * @returns the byte data of #blob.
 	 */
-	function blob_get_data(blob: blob_t, length: number): string[];
+	function blob_get_data(blob: blob_t): string[];
 
 	/**
 	 * Tries to make blob data writable (possibly copying it) and
@@ -4388,11 +4364,10 @@ declare namespace imports.gi.HarfBuzz {
 	 * Fails if blob has been made immutable, or if memory allocation
 	 * fails.
 	 * @param blob a blob.
-	 * @param length output length of the writable data.
 	 * @returns Writable blob data,
 	 * or %NULL if failed.
 	 */
-	function blob_get_data_writable(blob: blob_t, length: number): string[];
+	function blob_get_data_writable(blob: blob_t): string[];
 
 	/**
 	 * Returns the singleton empty blob.
@@ -4586,13 +4561,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param buf string to deserialize
 	 * @param buf_len the size of #buf, or -1 if it is %NULL-terminated
-	 * @param end_ptr output pointer to the character after last
-	 *                               consumed one.
 	 * @param font font for getting glyph IDs
 	 * @param format the #hb_buffer_serialize_format_t of the input #buf
 	 * @returns %true if #buf is not fully consumed, %false otherwise.
 	 */
-	function buffer_deserialize_glyphs(buffer: buffer_t, buf: string[], buf_len: number, end_ptr: string | null, font: font_t | null, format: buffer_serialize_format_t): bool_t;
+	function buffer_deserialize_glyphs(buffer: buffer_t, buf: string[], buf_len: number, font: font_t | null, format: buffer_serialize_format_t): bool_t;
 
 	/**
 	 * Deserializes Unicode #buffer from textual representation in the format
@@ -4600,12 +4573,10 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param buf string to deserialize
 	 * @param buf_len the size of #buf, or -1 if it is %NULL-terminated
-	 * @param end_ptr output pointer to the character after last
-	 *                               consumed one.
 	 * @param format the #hb_buffer_serialize_format_t of the input #buf
 	 * @returns %true if #buf is not fully consumed, %false otherwise.
 	 */
-	function buffer_deserialize_unicode(buffer: buffer_t, buf: string[], buf_len: number, end_ptr: string | null, format: buffer_serialize_format_t): bool_t;
+	function buffer_deserialize_unicode(buffer: buffer_t, buf: string[], buf_len: number, format: buffer_serialize_format_t): bool_t;
 
 	/**
 	 * Deallocate the #buffer.
@@ -4668,12 +4639,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * Returns #buffer glyph information array.  Returned pointer
 	 * is valid as long as #buffer contents are not modified.
 	 * @param buffer An #hb_buffer_t
-	 * @param length The output-array length.
 	 * @returns 
 	 * The #buffer glyph information array.
 	 * The value valid as long as buffer has not been modified.
 	 */
-	function buffer_get_glyph_infos(buffer: buffer_t, length: number): glyph_info_t[];
+	function buffer_get_glyph_infos(buffer: buffer_t): glyph_info_t[];
 
 	/**
 	 * Returns #buffer glyph position array.  Returned pointer
@@ -4684,12 +4654,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * within a buffer message callback (see hb_buffer_set_message_func()),
 	 * in which case %NULL is returned.
 	 * @param buffer An #hb_buffer_t
-	 * @param length The output length
 	 * @returns 
 	 * The #buffer glyph position array.
 	 * The value valid as long as buffer has not been modified.
 	 */
-	function buffer_get_glyph_positions(buffer: buffer_t, length: number): glyph_position_t[];
+	function buffer_get_glyph_positions(buffer: buffer_t): glyph_position_t[];
 
 	/**
 	 * See hb_buffer_set_invisible_glyph().
@@ -4732,9 +4701,8 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Sets #props to the #hb_segment_properties_t of #buffer.
 	 * @param buffer An #hb_buffer_t
-	 * @param props The output #hb_segment_properties_t
 	 */
-	function buffer_get_segment_properties(buffer: buffer_t, props: segment_properties_t): void;
+	function buffer_get_segment_properties(buffer: buffer_t): void;
 
 	/**
 	 * Fetches the Unicode-functions structure of a buffer.
@@ -4851,10 +4819,6 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param start the first item in #buffer to serialize.
 	 * @param _end the last item in #buffer to serialize.
-	 * @param buf output string to
-	 *       write serialized buffer into.
-	 * @param buf_size the size of #buf.
-	 * @param buf_consumed if not %NULL, will be set to the number of byes written into #buf.
 	 * @param font the #hb_font_t used to shape this buffer, needed to
 	 *        read glyph names and extents. If %NULL, and empty font will be used.
 	 * @param format the #hb_buffer_serialize_format_t to use for formatting the output.
@@ -4862,7 +4826,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *         to serialize.
 	 * @returns The number of serialized items.
 	 */
-	function buffer_serialize(buffer: buffer_t, start: number, _end: number, buf: number[], buf_size: number, buf_consumed: number | null, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
+	function buffer_serialize(buffer: buffer_t, start: number, _end: number, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
 
 	/**
 	 * Parses a string into an #hb_buffer_serialize_format_t. Does not check if
@@ -4929,10 +4893,6 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param start the first item in #buffer to serialize.
 	 * @param _end the last item in #buffer to serialize.
-	 * @param buf output string to
-	 *       write serialized buffer into.
-	 * @param buf_size the size of #buf.
-	 * @param buf_consumed if not %NULL, will be set to the number of byes written into #buf.
 	 * @param font the #hb_font_t used to shape this buffer, needed to
 	 *        read glyph names and extents. If %NULL, and empty font will be used.
 	 * @param format the #hb_buffer_serialize_format_t to use for formatting the output.
@@ -4940,7 +4900,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *         to serialize.
 	 * @returns The number of serialized items.
 	 */
-	function buffer_serialize_glyphs(buffer: buffer_t, start: number, _end: number, buf: number[], buf_size: number, buf_consumed: number | null, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
+	function buffer_serialize_glyphs(buffer: buffer_t, start: number, _end: number, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
 
 	/**
 	 * Returns a list of supported buffer serialization formats.
@@ -4985,16 +4945,12 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param start the first item in #buffer to serialize.
 	 * @param _end the last item in #buffer to serialize.
-	 * @param buf output string to
-	 *       write serialized buffer into.
-	 * @param buf_size the size of #buf.
-	 * @param buf_consumed if not %NULL, will be set to the number of byes written into #buf.
 	 * @param format the #hb_buffer_serialize_format_t to use for formatting the output.
 	 * @param flags the #hb_buffer_serialize_flags_t that control what glyph properties
 	 *         to serialize.
 	 * @returns The number of serialized items.
 	 */
-	function buffer_serialize_unicode(buffer: buffer_t, start: number, _end: number, buf: number[], buf_size: number, buf_consumed: number | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
+	function buffer_serialize_unicode(buffer: buffer_t, start: number, _end: number, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
 
 	/**
 	 * Sets the cluster level of a buffer. The #hb_buffer_cluster_level_t
@@ -5286,12 +5242,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * begin at the offset provided
 	 * @param _face A face object
 	 * @param start_offset The index of first table tag to retrieve
-	 * @param table_count Input = the maximum number of table tags to return;
-	 *                Output = the actual number of table tags returned (may be zero)
-	 * @param table_tags The array of table tags found
 	 * @returns Total number of tables, or zero if it is not possible to list
 	 */
-	function face_get_table_tags(_face: face_t, start_offset: number, table_count: number, table_tags: tag_t[]): number;
+	function face_get_table_tags(_face: face_t, start_offset: number): number;
 
 	/**
 	 * Fetches the units-per-em (upem) value of the specified face object.
@@ -5422,20 +5375,20 @@ declare namespace imports.gi.HarfBuzz {
 	 * </informaltable>
 	 * @param _str a string to parse
 	 * @param len length of #str, or -1 if string is %NULL terminated
-	 * @param feature the #hb_feature_t to initialize with the parsed values
 	 * @returns %true if #str is successfully parsed, %false otherwise
 	 */
-	function feature_from_string(_str: number[], len: number, feature: feature_t): bool_t;
+	function feature_from_string(_str: number[], len: number): bool_t;
 
 	/**
 	 * Converts a #hb_feature_t into a %NULL-terminated string in the format
 	 * understood by hb_feature_from_string(). The client in responsible for
 	 * allocating big enough size for #buf, 128 bytes is more than enough.
 	 * @param feature an #hb_feature_t to convert
-	 * @param buf output string
-	 * @param size the allocated size of #buf
+	 * @returns output string
+	 * 
+	 * the allocated size of #buf
 	 */
-	function feature_to_string(feature: feature_t, buf: string[], size: number): void;
+	function feature_to_string(feature: feature_t): [ string[], number ];
 
 	/**
 	 * Adds the origin coordinates to an (X,Y) point coordinate, in
@@ -5446,12 +5399,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
 	 * @param direction The direction of the text segment
-	 * @param _x Input = The original X coordinate
-	 *     Output = The X coordinate plus the X-coordinate of the origin
-	 * @param _y Input = The original Y coordinate
-	 *     Output = The Y coordinate plus the Y-coordinate of the origin
 	 */
-	function font_add_glyph_origin_for_direction(font: font_t, glyph: codepoint_t, direction: direction_t, _x: position_t, _y: position_t): void;
+	function font_add_glyph_origin_for_direction(font: font_t, glyph: codepoint_t, direction: direction_t): void;
 
 	/**
 	 * Constructs a new font object from the specified face.
@@ -5695,9 +5644,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * or vertical) depending on the value of #direction.
 	 * @param font #hb_font_t to work upon
 	 * @param direction The direction of the text segment
-	 * @param extents The #hb_font_extents_t retrieved
 	 */
-	function font_get_extents_for_direction(font: font_t, direction: direction_t, extents: font_extents_t): void;
+	function font_get_extents_for_direction(font: font_t, direction: direction_t): void;
 
 	/**
 	 * Fetches the face associated with the specified font object.
@@ -5715,10 +5663,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @param unicode The Unicode code point to query
 	 * @param variation_selector A variation-selector code point
-	 * @param glyph The glyph ID retrieved
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_glyph(font: font_t, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t;
+	function font_get_glyph(font: font_t, unicode: codepoint_t, variation_selector: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the advance for a glyph ID from the specified font,
@@ -5729,10 +5676,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
 	 * @param direction The direction of the text segment
-	 * @param _x The horizontal advance retrieved
-	 * @param _y The vertical advance retrieved
+	 * @returns The horizontal advance retrieved
+	 * 
+	 * The vertical advance retrieved
 	 */
-	function font_get_glyph_advance_for_direction(font: font_t, glyph: codepoint_t, direction: direction_t, _x: position_t, _y: position_t): void;
+	function font_get_glyph_advance_for_direction(font: font_t, glyph: codepoint_t, direction: direction_t): [ x: position_t, y: position_t ];
 
 	/**
 	 * Fetches the advances for a sequence of glyph IDs in the specified
@@ -5745,10 +5693,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param count The number of glyph IDs in the sequence queried
 	 * @param first_glyph The first glyph ID to query
 	 * @param glyph_stride The stride between successive glyph IDs
-	 * @param first_advance The first advance retrieved
-	 * @param advance_stride The stride between successive advances
+	 * @returns The first advance retrieved
+	 * 
+	 * The stride between successive advances
 	 */
-	function font_get_glyph_advances_for_direction(font: font_t, direction: direction_t, count: number, first_glyph: codepoint_t, glyph_stride: number, first_advance: position_t, advance_stride: number): void;
+	function font_get_glyph_advances_for_direction(font: font_t, direction: direction_t, count: number, first_glyph: codepoint_t, glyph_stride: number): [ first_advance: position_t, advance_stride: number ];
 
 	/**
 	 * Fetches the (x,y) coordinates of a specified contour-point index
@@ -5756,11 +5705,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
 	 * @param point_index The contour-point index to query
-	 * @param _x The X value retrieved for the contour point
-	 * @param _y The Y value retrieved for the contour point
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_glyph_contour_point(font: font_t, glyph: codepoint_t, point_index: number, _x: position_t, _y: position_t): bool_t;
+	function font_get_glyph_contour_point(font: font_t, glyph: codepoint_t, point_index: number): bool_t;
 
 	/**
 	 * Fetches the (X,Y) coordinates of a specified contour-point index
@@ -5773,21 +5720,18 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param glyph The glyph ID to query
 	 * @param point_index The contour-point index to query
 	 * @param direction The direction of the text segment
-	 * @param _x The X value retrieved for the contour point
-	 * @param _y The Y value retrieved for the contour point
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_glyph_contour_point_for_origin(font: font_t, glyph: codepoint_t, point_index: number, direction: direction_t, _x: position_t, _y: position_t): bool_t;
+	function font_get_glyph_contour_point_for_origin(font: font_t, glyph: codepoint_t, point_index: number, direction: direction_t): bool_t;
 
 	/**
 	 * Fetches the #hb_glyph_extents_t data for a glyph ID
 	 * in the specified font.
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
-	 * @param extents The #hb_glyph_extents_t retrieved
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_glyph_extents(font: font_t, glyph: codepoint_t, extents: glyph_extents_t): bool_t;
+	function font_get_glyph_extents(font: font_t, glyph: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the #hb_glyph_extents_t data for a glyph ID
@@ -5799,10 +5743,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
 	 * @param direction The direction of the text segment
-	 * @param extents The #hb_glyph_extents_t retrieved
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_glyph_extents_for_origin(font: font_t, glyph: codepoint_t, direction: direction_t, extents: glyph_extents_t): bool_t;
+	function font_get_glyph_extents_for_origin(font: font_t, glyph: codepoint_t, direction: direction_t): bool_t;
 
 	/**
 	 * Fetches the glyph ID that corresponds to a name string in the specified #font.
@@ -5811,10 +5754,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @param name The name string to query
 	 * @param len The length of the name queried
-	 * @param glyph The glyph ID retrieved
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_glyph_from_name(font: font_t, name: string[], len: number, glyph: codepoint_t): bool_t;
+	function font_get_glyph_from_name(font: font_t, name: string[], len: number): bool_t;
 
 	/**
 	 * Fetches the advance for a glyph ID in the specified font,
@@ -5832,10 +5774,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param count The number of glyph IDs in the sequence queried
 	 * @param first_glyph The first glyph ID to query
 	 * @param glyph_stride The stride between successive glyph IDs
-	 * @param first_advance The first advance retrieved
 	 * @param advance_stride The stride between successive advances
 	 */
-	function font_get_glyph_h_advances(font: font_t, count: number, first_glyph: codepoint_t, glyph_stride: number, first_advance: position_t, advance_stride: number): void;
+	function font_get_glyph_h_advances(font: font_t, count: number, first_glyph: codepoint_t, glyph_stride: number, advance_stride: number): void;
 
 	/**
 	 * Fetches the kerning-adjustment value for a glyph-pair in
@@ -5855,11 +5796,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * in the specified font, for horizontal text segments.
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
-	 * @param _x The X coordinate of the origin
-	 * @param _y The Y coordinate of the origin
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_glyph_h_origin(font: font_t, glyph: codepoint_t, _x: position_t, _y: position_t): bool_t;
+	function font_get_glyph_h_origin(font: font_t, glyph: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the kerning-adjustment value for a glyph-pair in the specified font.
@@ -5870,20 +5809,19 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param first_glyph The glyph ID of the first glyph in the glyph pair to query
 	 * @param second_glyph The glyph ID of the second glyph in the glyph pair to query
 	 * @param direction The direction of the text segment
-	 * @param _x The horizontal kerning-adjustment value retrieved
-	 * @param _y The vertical kerning-adjustment value retrieved
+	 * @returns The horizontal kerning-adjustment value retrieved
+	 * 
+	 * The vertical kerning-adjustment value retrieved
 	 */
-	function font_get_glyph_kerning_for_direction(font: font_t, first_glyph: codepoint_t, second_glyph: codepoint_t, direction: direction_t, _x: position_t, _y: position_t): void;
+	function font_get_glyph_kerning_for_direction(font: font_t, first_glyph: codepoint_t, second_glyph: codepoint_t, direction: direction_t): [ x: position_t, y: position_t ];
 
 	/**
 	 * Fetches the glyph-name string for a glyph ID in the specified #font.
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
-	 * @param name Name string retrieved for the glyph ID
-	 * @param size Length of the glyph-name string retrieved
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_glyph_name(font: font_t, glyph: codepoint_t, name: string[], size: number): bool_t;
+	function font_get_glyph_name(font: font_t, glyph: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the (X,Y) coordinates of the origin for a glyph in
@@ -5894,10 +5832,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
 	 * @param direction The direction of the text segment
-	 * @param _x The X coordinate retrieved for the origin
-	 * @param _y The Y coordinate retrieved for the origin
+	 * @returns The X coordinate retrieved for the origin
+	 * 
+	 * The Y coordinate retrieved for the origin
 	 */
-	function font_get_glyph_origin_for_direction(font: font_t, glyph: codepoint_t, direction: direction_t, _x: position_t, _y: position_t): void;
+	function font_get_glyph_origin_for_direction(font: font_t, glyph: codepoint_t, direction: direction_t): [ x: position_t, y: position_t ];
 
 	/**
 	 * Fetches the advance for a glyph ID in the specified font,
@@ -5915,10 +5854,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param count The number of glyph IDs in the sequence queried
 	 * @param first_glyph The first glyph ID to query
 	 * @param glyph_stride The stride between successive glyph IDs
-	 * @param first_advance The first advance retrieved
-	 * @param advance_stride The stride between successive advances
+	 * @returns The first advance retrieved
+	 * 
+	 * The stride between successive advances
 	 */
-	function font_get_glyph_v_advances(font: font_t, count: number, first_glyph: codepoint_t, glyph_stride: number, first_advance: position_t, advance_stride: number): void;
+	function font_get_glyph_v_advances(font: font_t, count: number, first_glyph: codepoint_t, glyph_stride: number): [ first_advance: position_t, advance_stride: number ];
 
 	/**
 	 * Fetches the kerning-adjustment value for a glyph-pair in
@@ -5938,20 +5878,17 @@ declare namespace imports.gi.HarfBuzz {
 	 * in the specified font, for vertical text segments.
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
-	 * @param _x The X coordinate of the origin
-	 * @param _y The Y coordinate of the origin
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_glyph_v_origin(font: font_t, glyph: codepoint_t, _x: position_t, _y: position_t): bool_t;
+	function font_get_glyph_v_origin(font: font_t, glyph: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the extents for a specified font, for horizontal
 	 * text segments.
 	 * @param font #hb_font_t to work upon
-	 * @param extents The font extents retrieved
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_h_extents(font: font_t, extents: font_extents_t): bool_t;
+	function font_get_h_extents(font: font_t): bool_t;
 
 	/**
 	 * Fetches the nominal glyph ID for a Unicode code point in the
@@ -5962,10 +5899,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * support, user hb_font_get_variation_glyph() or use hb_font_get_glyph().
 	 * @param font #hb_font_t to work upon
 	 * @param unicode The Unicode code point to query
-	 * @param glyph The glyph ID retrieved
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_nominal_glyph(font: font_t, unicode: codepoint_t, glyph: codepoint_t): bool_t;
+	function font_get_nominal_glyph(font: font_t, unicode: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the nominal glyph IDs for a sequence of Unicode code points. Glyph
@@ -5974,11 +5910,10 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param count number of code points to query
 	 * @param first_unicode The first Unicode code point to query
 	 * @param unicode_stride The stride between successive code points
-	 * @param first_glyph The first glyph ID retrieved
 	 * @param glyph_stride The stride between successive glyph IDs
 	 * @returns the number of code points processed
 	 */
-	function font_get_nominal_glyphs(font: font_t, count: number, first_unicode: codepoint_t, unicode_stride: number, first_glyph: codepoint_t, glyph_stride: number): number;
+	function font_get_nominal_glyphs(font: font_t, count: number, first_unicode: codepoint_t, unicode_stride: number, glyph_stride: number): number;
 
 	/**
 	 * Fetches the parent font of #font.
@@ -5990,10 +5925,11 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Fetches the horizontal and vertical points-per-em (ppem) of a font.
 	 * @param font #hb_font_t to work upon
-	 * @param x_ppem Horizontal ppem value
-	 * @param y_ppem Vertical ppem value
+	 * @returns Horizontal ppem value
+	 * 
+	 * Vertical ppem value
 	 */
-	function font_get_ppem(font: font_t, x_ppem: number, y_ppem: number): void;
+	function font_get_ppem(font: font_t): [ x_ppem: number, y_ppem: number ];
 
 	/**
 	 * Fetches the "point size" of a font. Used in CoreText to
@@ -6006,10 +5942,11 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Fetches the horizontal and vertical scale of a font.
 	 * @param font #hb_font_t to work upon
-	 * @param x_scale Horizontal scale value
-	 * @param y_scale Vertical scale value
+	 * @returns Horizontal scale value
+	 * 
+	 * Vertical scale value
 	 */
-	function font_get_scale(font: font_t, x_scale: number, y_scale: number): void;
+	function font_get_scale(font: font_t): [ x_scale: number, y_scale: number ];
 
 	/**
 	 * Fetches the user-data object associated with the specified key,
@@ -6024,10 +5961,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * Fetches the extents for a specified font, for vertical
 	 * text segments.
 	 * @param font #hb_font_t to work upon
-	 * @param extents The font extents retrieved
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_v_extents(font: font_t, extents: font_extents_t): bool_t;
+	function font_get_v_extents(font: font_t): bool_t;
 
 	/**
 	 * Fetches the list of normalized variation coordinates currently
@@ -6048,10 +5984,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @param unicode The Unicode code point to query
 	 * @param variation_selector The  variation-selector code point to query
-	 * @param glyph The glyph ID retrieved
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_get_variation_glyph(font: font_t, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t;
+	function font_get_variation_glyph(font: font_t, unicode: codepoint_t, variation_selector: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the glyph ID from #font that matches the specified string.
@@ -6061,10 +5996,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @param _s string to query
 	 * @param len The length of the string #s
-	 * @param glyph The glyph ID corresponding to the string requested
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_glyph_from_string(font: font_t, _s: number[], len: number, glyph: codepoint_t): bool_t;
+	function font_glyph_from_string(font: font_t, _s: number[], len: number): bool_t;
 
 	/**
 	 * Fetches the name of the specified glyph ID in #font and returns
@@ -6074,10 +6008,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * generated, with `DDD` being the glyph ID.
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
-	 * @param _s The string containing the glyph name
-	 * @param size Length of string #s
+	 * @returns The string containing the glyph name
+	 * 
+	 * Length of string #s
 	 */
-	function font_glyph_to_string(font: font_t, glyph: codepoint_t, _s: string[], size: number): void;
+	function font_glyph_to_string(font: font_t, glyph: codepoint_t): [ string[], number ];
 
 	/**
 	 * Tests whether a font object is immutable.
@@ -6213,12 +6148,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @param glyph The glyph ID to query
 	 * @param direction The direction of the text segment
-	 * @param _x Input = The original X coordinate
-	 *     Output = The X coordinate minus the X-coordinate of the origin
-	 * @param _y Input = The original Y coordinate
-	 *     Output = The Y coordinate minus the Y-coordinate of the origin
 	 */
-	function font_subtract_glyph_origin_for_direction(font: font_t, glyph: codepoint_t, direction: direction_t, _x: position_t, _y: position_t): void;
+	function font_subtract_glyph_origin_for_direction(font: font_t, glyph: codepoint_t, direction: direction_t): void;
 
 	/**
 	 * Creates an #hb_face_t face object from the specified FT_Face.
@@ -6581,12 +6512,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face #hb_face_t to work upon
 	 * @param glyph The glyph index to query
 	 * @param start_offset offset of the first layer to retrieve
-	 * @param layer_count Input = the maximum number of layers to return;
-	 *         Output = the actual number of layers returned (may be zero)
-	 * @param layers The array of layers found
 	 * @returns Total number of layers available for the glyph index queried
 	 */
-	function ot_color_glyph_get_layers(_face: face_t, glyph: codepoint_t, start_offset: number, layer_count: number | null, layers: ot_color_layer_t[]): number;
+	function ot_color_glyph_get_layers(_face: face_t, glyph: codepoint_t, start_offset: number): number;
 
 	/**
 	 * Fetches the PNG image for a glyph. This function takes a font object, not a face object,
@@ -6657,12 +6585,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face #hb_face_t to work upon
 	 * @param palette_index the index of the color palette to query
 	 * @param start_offset offset of the first color to retrieve
-	 * @param color_count Input = the maximum number of colors to return;
-	 *               Output = the actual number of colors returned (may be zero)
-	 * @param colors The array of #hb_color_t records found
 	 * @returns the total number of colors in the palette
 	 */
-	function ot_color_palette_get_colors(_face: face_t, palette_index: number, start_offset: number, color_count: number | null, colors: color_t[]): number;
+	function ot_color_palette_get_colors(_face: face_t, palette_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches the number of color palettes in a face.
@@ -6709,9 +6634,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param scripts The array of scripts to collect features for
 	 * @param languages The array of languages to collect features for
 	 * @param features The array of features to collect
-	 * @param feature_indexes The array of feature indexes found for the query
 	 */
-	function ot_layout_collect_features(_face: face_t, table_tag: tag_t, scripts: tag_t, languages: tag_t, features: tag_t, feature_indexes: set_t): void;
+	function ot_layout_collect_features(_face: face_t, table_tag: tag_t, scripts: tag_t, languages: tag_t, features: tag_t): void;
 
 	/**
 	 * Fetches a list of all feature-lookup indexes in the specified face's GSUB
@@ -6724,9 +6648,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param scripts The array of scripts to collect lookups for
 	 * @param languages The array of languages to collect lookups for
 	 * @param features The array of features to collect lookups for
-	 * @param lookup_indexes The array of lookup indexes found for the query
 	 */
-	function ot_layout_collect_lookups(_face: face_t, table_tag: tag_t, scripts: tag_t, languages: tag_t, features: tag_t, lookup_indexes: set_t): void;
+	function ot_layout_collect_lookups(_face: face_t, table_tag: tag_t, scripts: tag_t, languages: tag_t, features: tag_t): void;
 
 	/**
 	 * Fetches a list of the characters defined as having a variant under the specified
@@ -6735,14 +6658,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param table_tag table tag to query, "GSUB" or "GPOS".
 	 * @param feature_index index of feature to query.
 	 * @param start_offset offset of the first character to retrieve
-	 * @param char_count Input = the maximum number of characters to return;
-	 *              Output = the actual number of characters returned (may be zero)
-	 * @param characters A buffer pointer.
-	 *              The Unicode codepoints of the characters for which this feature provides
-	 *               glyph variants.
 	 * @returns Number of total sample characters in the cvXX feature.
 	 */
-	function ot_layout_feature_get_characters(_face: face_t, table_tag: tag_t, feature_index: number, start_offset: number, char_count: number | null, characters: codepoint_t[]): number;
+	function ot_layout_feature_get_characters(_face: face_t, table_tag: tag_t, feature_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches a list of all lookups enumerated for the specified feature, in
@@ -6752,12 +6670,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param feature_index The index of the requested feature
 	 * @param start_offset offset of the first lookup to retrieve
-	 * @param lookup_count Input = the maximum number of lookups to return;
-	 *                Output = the actual number of lookups returned (may be zero)
-	 * @param lookup_indexes The array of lookup indexes found for the query
 	 * @returns Total number of lookups.
 	 */
-	function ot_layout_feature_get_lookups(_face: face_t, table_tag: tag_t, feature_index: number, start_offset: number, lookup_count: number | null, lookup_indexes: number[]): number;
+	function ot_layout_feature_get_lookups(_face: face_t, table_tag: tag_t, feature_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches name indices from feature parameters for "Stylistic Set" ('ssXX') or
@@ -6765,20 +6680,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face #hb_face_t to work upon
 	 * @param table_tag table tag to query, "GSUB" or "GPOS".
 	 * @param feature_index index of feature to query.
-	 * @param label_id The ‘name’ table name ID that specifies a string
-	 *            for a user-interface label for this feature. (May be NULL.)
-	 * @param tooltip_id The ‘name’ table name ID that specifies a string
-	 *              that an application can use for tooltip text for this
-	 *              feature. (May be NULL.)
-	 * @param sample_id The ‘name’ table name ID that specifies sample text
-	 *             that illustrates the effect of this feature. (May be NULL.)
-	 * @param num_named_parameters Number of named parameters. (May be zero.)
-	 * @param first_param_id The first ‘name’ table name ID used to specify
-	 *                  strings for user-interface labels for the feature
-	 *                  parameters. (Must be zero if numParameters is zero.)
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_layout_feature_get_name_ids(_face: face_t, table_tag: tag_t, feature_index: number, label_id: ot_name_id_t | null, tooltip_id: ot_name_id_t | null, sample_id: ot_name_id_t | null, num_named_parameters: number | null, first_param_id: ot_name_id_t | null): bool_t;
+	function ot_layout_feature_get_name_ids(_face: face_t, table_tag: tag_t, feature_index: number): bool_t;
 
 	/**
 	 * Fetches a list of all lookups enumerated for the specified feature, in
@@ -6789,12 +6693,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param feature_index The index of the feature to query
 	 * @param variations_index The index of the feature variation to query
 	 * @param start_offset offset of the first lookup to retrieve
-	 * @param lookup_count Input = the maximum number of lookups to return;
-	 *                Output = the actual number of lookups returned (may be zero)
-	 * @param lookup_indexes The array of lookups found for the query
 	 * @returns Total number of lookups.
 	 */
-	function ot_layout_feature_with_variations_get_lookups(_face: face_t, table_tag: tag_t, feature_index: number, variations_index: number, start_offset: number, lookup_count: number | null, lookup_indexes: number[]): number;
+	function ot_layout_feature_with_variations_get_lookups(_face: face_t, table_tag: tag_t, feature_index: number, variations_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches a list of all attachment points for the specified glyph in the GDEF
@@ -6804,12 +6705,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face The #hb_face_t to work on
 	 * @param glyph The #hb_codepoint_t code point to query
 	 * @param start_offset offset of the first attachment point to retrieve
-	 * @param point_count Input = the maximum number of attachment points to return;
-	 *               Output = the actual number of attachment points returned (may be zero)
-	 * @param point_array The array of attachment points found for the query
 	 * @returns Total number of attachment points for #glyph.
 	 */
-	function ot_layout_get_attach_points(_face: face_t, glyph: codepoint_t, start_offset: number, point_count: number | null, point_array: number[]): number;
+	function ot_layout_get_attach_points(_face: face_t, glyph: codepoint_t, start_offset: number): number;
 
 	/**
 	 * Fetches a baseline value from the face.
@@ -6818,10 +6716,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param direction text direction.
 	 * @param script_tag script tag.
 	 * @param language_tag language tag, currently unused.
-	 * @param coord baseline value if found.
 	 * @returns %true if found baseline value in the font.
 	 */
-	function ot_layout_get_baseline(font: font_t, baseline_tag: ot_layout_baseline_tag_t, direction: direction_t, script_tag: tag_t, language_tag: tag_t, coord: position_t): bool_t;
+	function ot_layout_get_baseline(font: font_t, baseline_tag: ot_layout_baseline_tag_t, direction: direction_t, script_tag: tag_t, language_tag: tag_t): bool_t;
 
 	/**
 	 * Fetches the GDEF class of the requested glyph in the specified face.
@@ -6837,10 +6734,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * glyph class in the face's GDEF table.
 	 * @param _face The #hb_face_t to work on
 	 * @param klass The #hb_ot_layout_glyph_class_t GDEF class to retrieve
-	 * @param glyphs The #hb_set_t set of all glyphs belonging to the requested
-	 *          class.
 	 */
-	function ot_layout_get_glyphs_in_class(_face: face_t, klass: ot_layout_glyph_class_t, glyphs: set_t): void;
+	function ot_layout_get_glyphs_in_class(_face: face_t, klass: ot_layout_glyph_class_t): void;
 
 	/**
 	 * Fetches a list of the caret positions defined for a ligature glyph in the GDEF
@@ -6849,12 +6744,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param direction The #hb_direction_t text direction to use
 	 * @param glyph The #hb_codepoint_t code point to query
 	 * @param start_offset offset of the first caret position to retrieve
-	 * @param caret_count Input = the maximum number of caret positions to return;
-	 *               Output = the actual number of caret positions returned (may be zero)
-	 * @param caret_array The array of caret positions found for the query
 	 * @returns Total number of ligature caret positions for #glyph.
 	 */
-	function ot_layout_get_ligature_carets(font: font_t, direction: direction_t, glyph: codepoint_t, start_offset: number, caret_count: number | null, caret_array: position_t[]): number;
+	function ot_layout_get_ligature_carets(font: font_t, direction: direction_t, glyph: codepoint_t, start_offset: number): number;
 
 	/**
 	 * Fetches optical-size feature data (i.e., the `size` feature from GPOS). Note that
@@ -6866,14 +6758,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * For more information on this distinction, see the [`size` feature documentation](
 	 * https://docs.microsoft.com/en-us/typography/opentype/spec/features_pt#tag-size).
 	 * @param _face #hb_face_t to work upon
-	 * @param design_size The design size of the face
-	 * @param subfamily_id The identifier of the face within the font subfamily
-	 * @param subfamily_name_id The ‘name’ table name ID of the face within the font subfamily
-	 * @param range_start The minimum size of the recommended size range for the face
-	 * @param range_end The maximum size of the recommended size range for the face
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_layout_get_size_params(_face: face_t, design_size: number, subfamily_id: number, subfamily_name_id: ot_name_id_t, range_start: number, range_end: number): bool_t;
+	function ot_layout_get_size_params(_face: face_t): bool_t;
 
 	/**
 	 * Tests whether a face has any glyph classes defined in its GDEF table.
@@ -6904,10 +6791,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param script_index The index of the requested script tag
 	 * @param language_index The index of the requested language tag
 	 * @param feature_tag #hb_tag_t of the feature tag requested
-	 * @param feature_index The index of the requested feature
 	 * @returns %true if the feature is found, %false otherwise
 	 */
-	function ot_layout_language_find_feature(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, feature_tag: tag_t, feature_index: number): bool_t;
+	function ot_layout_language_find_feature(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, feature_tag: tag_t): bool_t;
 
 	/**
 	 * Fetches a list of all features in the specified face's GSUB table
@@ -6918,12 +6804,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param script_index The index of the requested script tag
 	 * @param language_index The index of the requested language tag
 	 * @param start_offset offset of the first feature tag to retrieve
-	 * @param feature_count Input = the maximum number of feature tags to return;
-	 *                 Output: the actual number of feature tags returned (may be zero)
-	 * @param feature_indexes The array of feature indexes found for the query
 	 * @returns Total number of features.
 	 */
-	function ot_layout_language_get_feature_indexes(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number, feature_count: number | null, feature_indexes: number[]): number;
+	function ot_layout_language_get_feature_indexes(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches a list of all features in the specified face's GSUB table
@@ -6934,12 +6817,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param script_index The index of the requested script tag
 	 * @param language_index The index of the requested language tag
 	 * @param start_offset offset of the first feature tag to retrieve
-	 * @param feature_count Input = the maximum number of feature tags to return;
-	 *                 Output = the actual number of feature tags returned (may be zero)
-	 * @param feature_tags The array of #hb_tag_t feature tags found for the query
 	 * @returns Total number of feature tags.
 	 */
-	function ot_layout_language_get_feature_tags(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number, feature_count: number | null, feature_tags: tag_t[]): number;
+	function ot_layout_language_get_feature_tags(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches the tag of a requested feature index in the given face's GSUB or GPOS table,
@@ -6948,11 +6828,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param language_index The index of the requested language tag
-	 * @param feature_index The index of the requested feature
-	 * @param feature_tag The #hb_tag_t of the requested feature
 	 * @returns %true if the feature is found, %false otherwise
 	 */
-	function ot_layout_language_get_required_feature(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, feature_index: number, feature_tag: tag_t): bool_t;
+	function ot_layout_language_get_required_feature(_face: face_t, table_tag: tag_t, script_index: number, language_index: number): bool_t;
 
 	/**
 	 * Fetches the index of a requested feature in the given face's GSUB or GPOS table,
@@ -6961,10 +6839,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param language_index The index of the requested language tag
-	 * @param feature_index The index of the requested feature
 	 * @returns %true if the feature is found, %false otherwise
 	 */
-	function ot_layout_language_get_required_feature_index(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, feature_index: number): bool_t;
+	function ot_layout_language_get_required_feature_index(_face: face_t, table_tag: tag_t, script_index: number, language_index: number): bool_t;
 
 	/**
 	 * Fetches a list of all glyphs affected by the specified lookup in the
@@ -6972,12 +6849,15 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param lookup_index The index of the feature lookup to query
-	 * @param glyphs_before Array of glyphs preceding the substitution range
-	 * @param glyphs_input Array of input glyphs that would be substituted by the lookup
-	 * @param glyphs_after Array of glyphs following the substitution range
-	 * @param glyphs_output Array of glyphs that would be the substituted output of the lookup
+	 * @returns Array of glyphs preceding the substitution range
+	 * 
+	 * Array of input glyphs that would be substituted by the lookup
+	 * 
+	 * Array of glyphs following the substitution range
+	 * 
+	 * Array of glyphs that would be the substituted output of the lookup
 	 */
-	function ot_layout_lookup_collect_glyphs(_face: face_t, table_tag: tag_t, lookup_index: number, glyphs_before: set_t, glyphs_input: set_t, glyphs_after: set_t, glyphs_output: set_t): void;
+	function ot_layout_lookup_collect_glyphs(_face: face_t, table_tag: tag_t, lookup_index: number): [ glyphs_before: set_t, glyphs_input: set_t, glyphs_after: set_t, glyphs_output: set_t ];
 
 	/**
 	 * Fetches alternates of a glyph from a given GSUB lookup index.
@@ -6985,22 +6865,17 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param lookup_index index of the feature lookup to query.
 	 * @param glyph a glyph id.
 	 * @param start_offset starting offset.
-	 * @param alternate_count Input = the maximum number of alternate glyphs to return;
-	 *                   Output = the actual number of alternate glyphs returned (may be zero).
-	 * @param alternate_glyphs A glyphs buffer.
-	 *                    Alternate glyphs associated with the glyph id.
 	 * @returns Total number of alternates found in the specific lookup index for the given glyph id.
 	 */
-	function ot_layout_lookup_get_glyph_alternates(_face: face_t, lookup_index: number, glyph: codepoint_t, start_offset: number, alternate_count: number | null, alternate_glyphs: codepoint_t[]): number;
+	function ot_layout_lookup_get_glyph_alternates(_face: face_t, lookup_index: number, glyph: codepoint_t, start_offset: number): number;
 
 	/**
 	 * Compute the transitive closure of glyphs needed for a
 	 * specified lookup.
 	 * @param _face #hb_face_t to work upon
 	 * @param lookup_index index of the feature lookup to query
-	 * @param glyphs Array of glyphs comprising the transitive closure of the lookup
 	 */
-	function ot_layout_lookup_substitute_closure(_face: face_t, lookup_index: number, glyphs: set_t): void;
+	function ot_layout_lookup_substitute_closure(_face: face_t, lookup_index: number): void;
 
 	/**
 	 * Tests whether a specified lookup in the specified face would
@@ -7020,9 +6895,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * provided lookups.
 	 * @param _face #hb_face_t to work upon
 	 * @param lookups The set of lookups to query
-	 * @param glyphs Array of glyphs comprising the transitive closure of the lookups
 	 */
-	function ot_layout_lookups_substitute_closure(_face: face_t, lookups: set_t, glyphs: set_t): void;
+	function ot_layout_lookups_substitute_closure(_face: face_t, lookups: set_t): void;
 
 	/**
 	 * Fetches the index of a given language tag in the specified face's GSUB table
@@ -7043,12 +6917,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param start_offset offset of the first language tag to retrieve
-	 * @param language_count Input = the maximum number of language tags to return;
-	 *                  Output = the actual number of language tags returned (may be zero)
-	 * @param language_tags Array of language tags found in the table
 	 * @returns Total number of language tags.
 	 */
-	function ot_layout_script_get_language_tags(_face: face_t, table_tag: tag_t, script_index: number, start_offset: number, language_count: number | null, language_tags: tag_t[]): number;
+	function ot_layout_script_get_language_tags(_face: face_t, table_tag: tag_t, script_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches the index of a given language tag in the specified face's GSUB table
@@ -7058,21 +6929,18 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param script_index The index of the requested script tag
 	 * @param language_count The number of languages in the specified script
 	 * @param language_tags The array of language tags
-	 * @param language_index The index of the requested language
 	 * @returns %true if the language tag is found, %false otherwise
 	 */
-	function ot_layout_script_select_language(_face: face_t, table_tag: tag_t, script_index: number, language_count: number, language_tags: tag_t, language_index: number): bool_t;
+	function ot_layout_script_select_language(_face: face_t, table_tag: tag_t, script_index: number, language_count: number, language_tags: tag_t): bool_t;
 
 	/**
 	 * Deprecated since 2.0.0
 	 * @param _face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_tags Array of #hb_tag_t script tags
-	 * @param script_index The index of the requested script tag
-	 * @param chosen_script #hb_tag_t of the script tag requested
 	 * @returns 
 	 */
-	function ot_layout_table_choose_script(_face: face_t, table_tag: tag_t, script_tags: tag_t, script_index: number, chosen_script: tag_t): bool_t;
+	function ot_layout_table_choose_script(_face: face_t, table_tag: tag_t, script_tags: tag_t): bool_t;
 
 	/**
 	 * Fetches a list of feature variations in the specified face's GSUB table
@@ -7081,10 +6949,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param coords The variation coordinates to query
 	 * @param num_coords The number of variation coordinates
-	 * @param variations_index The array of feature variations found for the query
 	 * @returns %true if feature variations were found, %false otherwise.
 	 */
-	function ot_layout_table_find_feature_variations(_face: face_t, table_tag: tag_t, coords: number, num_coords: number, variations_index: number): bool_t;
+	function ot_layout_table_find_feature_variations(_face: face_t, table_tag: tag_t, coords: number, num_coords: number): bool_t;
 
 	/**
 	 * Fetches the index if a given script tag in the specified face's GSUB table
@@ -7092,22 +6959,18 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_tag #hb_tag_t of the script tag requested
-	 * @param script_index The index of the requested script tag
 	 * @returns %true if the script is found, %false otherwise
 	 */
-	function ot_layout_table_find_script(_face: face_t, table_tag: tag_t, script_tag: tag_t, script_index: number): bool_t;
+	function ot_layout_table_find_script(_face: face_t, table_tag: tag_t, script_tag: tag_t): bool_t;
 
 	/**
 	 * Fetches a list of all feature tags in the given face's GSUB or GPOS table.
 	 * @param _face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param start_offset offset of the first feature tag to retrieve
-	 * @param feature_count Input = the maximum number of feature tags to return;
-	 *                 Output = the actual number of feature tags returned (may be zero)
-	 * @param feature_tags Array of feature tags found in the table
 	 * @returns Total number of feature tags.
 	 */
-	function ot_layout_table_get_feature_tags(_face: face_t, table_tag: tag_t, start_offset: number, feature_count: number | null, feature_tags: tag_t[]): number;
+	function ot_layout_table_get_feature_tags(_face: face_t, table_tag: tag_t, start_offset: number): number;
 
 	/**
 	 * Fetches the total number of lookups enumerated in the specified
@@ -7124,12 +6987,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param start_offset offset of the first script tag to retrieve
-	 * @param script_count Input = the maximum number of script tags to return;
-	 *                Output = the actual number of script tags returned (may be zero)
-	 * @param script_tags The array of #hb_tag_t script tags found for the query
 	 * @returns Total number of script tags.
 	 */
-	function ot_layout_table_get_script_tags(_face: face_t, table_tag: tag_t, start_offset: number, script_count: number | null, script_tags: tag_t[]): number;
+	function ot_layout_table_get_script_tags(_face: face_t, table_tag: tag_t, start_offset: number): number;
 
 	/**
 	 * Selects an OpenType script for #table_tag from the #script_tags array.
@@ -7142,12 +7002,10 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_count Number of script tags in the array
 	 * @param script_tags Array of #hb_tag_t script tags
-	 * @param script_index The index of the requested script
-	 * @param chosen_script #hb_tag_t of the requested script
 	 * @returns %true if one of the requested scripts is selected, %false if a fallback
 	 * script is selected or if no scripts are selected.
 	 */
-	function ot_layout_table_select_script(_face: face_t, table_tag: tag_t, script_count: number, script_tags: tag_t, script_index: number | null, chosen_script: tag_t | null): bool_t;
+	function ot_layout_table_select_script(_face: face_t, table_tag: tag_t, script_count: number, script_tags: tag_t): bool_t;
 
 	/**
 	 * Fetches the specified math constant. For most constants, the value returned
@@ -7177,13 +7035,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param glyph The index of the glyph to stretch
 	 * @param direction direction of the stretching (horizontal or vertical)
 	 * @param start_offset offset of the first glyph part to retrieve
-	 * @param parts_count Input = maximum number of glyph parts to return;
-	 *               Output = actual number of parts returned
-	 * @param parts the glyph parts returned
-	 * @param italics_correction italics correction of the glyph assembly
 	 * @returns the total number of parts in the glyph assembly
 	 */
-	function ot_math_get_glyph_assembly(font: font_t, glyph: codepoint_t, direction: direction_t, start_offset: number, parts_count: number, parts: ot_math_glyph_part_t[], italics_correction: position_t): number;
+	function ot_math_get_glyph_assembly(font: font_t, glyph: codepoint_t, direction: direction_t, start_offset: number): number;
 
 	/**
 	 * Fetches an italics-correction value (if one exists) for the specified
@@ -7239,12 +7093,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param glyph The index of the glyph to stretch
 	 * @param direction The direction of the stretching (horizontal or vertical)
 	 * @param start_offset offset of the first variant to retrieve
-	 * @param variants_count Input = the maximum number of variants to return;
-	 *                           Output = the actual number of variants returned
-	 * @param variants array of variants returned
 	 * @returns the total number of size variants available or zero
 	 */
-	function ot_math_get_glyph_variants(font: font_t, glyph: codepoint_t, direction: direction_t, start_offset: number, variants_count: number, variants: ot_math_glyph_variant_t[]): number;
+	function ot_math_get_glyph_variants(font: font_t, glyph: codepoint_t, direction: direction_t, start_offset: number): number;
 
 	/**
 	 * Fetches the MathVariants table for the specified font and returns the
@@ -7280,11 +7131,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * Fetches all available feature types.
 	 * @param _face a face object
 	 * @param start_offset iteration's start offset
-	 * @param entries_count buffer size as input, filled size as output
-	 * @param entries entries tags buffer
 	 * @returns Number of all available feature types.
 	 */
-	function ot_meta_get_entry_tags(_face: face_t, start_offset: number, entries_count: number | null, entries: ot_meta_tag_t[]): number;
+	function ot_meta_get_entry_tags(_face: face_t, start_offset: number): number;
 
 	/**
 	 * It fetches metadata entry of a given tag from a font.
@@ -7298,10 +7147,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * Fetches metrics value corresponding to #metrics_tag from #font.
 	 * @param font an #hb_font_t object.
 	 * @param metrics_tag tag of metrics value you like to fetch.
-	 * @param position result of metrics value from the font.
 	 * @returns Whether found the requested metrics in the font.
 	 */
-	function ot_metrics_get_position(font: font_t, metrics_tag: ot_metrics_tag_t, position: position_t | null): bool_t;
+	function ot_metrics_get_position(font: font_t, metrics_tag: ot_metrics_tag_t): bool_t;
 
 	/**
 	 * Fetches metrics value corresponding to #metrics_tag from #font with the
@@ -7338,12 +7186,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face font face.
 	 * @param name_id OpenType name identifier to fetch.
 	 * @param language language to fetch the name for.
-	 * @param text_size input size of #text buffer, and output size of
-	 *                                   text written to buffer.
-	 * @param text buffer to write fetched name into.
 	 * @returns full length of the requested string, or 0 if not found.
 	 */
-	function ot_name_get_utf16(_face: face_t, name_id: ot_name_id_t, language: language_t, text_size: number | null, text: number[]): number;
+	function ot_name_get_utf16(_face: face_t, name_id: ot_name_id_t, language: language_t): number;
 
 	/**
 	 * Fetches a font name from the OpenType 'name' table.
@@ -7353,12 +7198,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face font face.
 	 * @param name_id OpenType name identifier to fetch.
 	 * @param language language to fetch the name for.
-	 * @param text_size input size of #text buffer, and output size of
-	 *                                   text written to buffer.
-	 * @param text buffer to write fetched name into.
 	 * @returns full length of the requested string, or 0 if not found.
 	 */
-	function ot_name_get_utf32(_face: face_t, name_id: ot_name_id_t, language: language_t, text_size: number | null, text: number[]): number;
+	function ot_name_get_utf32(_face: face_t, name_id: ot_name_id_t, language: language_t): number;
 
 	/**
 	 * Fetches a font name from the OpenType 'name' table.
@@ -7368,22 +7210,18 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face font face.
 	 * @param name_id OpenType name identifier to fetch.
 	 * @param language language to fetch the name for.
-	 * @param text_size input size of #text buffer, and output size of
-	 *                                   text written to buffer.
-	 * @param text buffer to write fetched name into.
 	 * @returns full length of the requested string, or 0 if not found.
 	 */
-	function ot_name_get_utf8(_face: face_t, name_id: ot_name_id_t, language: language_t, text_size: number | null, text: string[]): number;
+	function ot_name_get_utf8(_face: face_t, name_id: ot_name_id_t, language: language_t): number;
 
 	/**
 	 * Enumerates all available name IDs and language combinations. Returned
 	 * array is owned by the #face and should not be modified.  It can be
 	 * used as long as #face is alive.
 	 * @param _face font face.
-	 * @param num_entries number of returned entries.
 	 * @returns Array of available name entries.
 	 */
-	function ot_name_list_names(_face: face_t, num_entries: number | null): ot_name_entry_t[];
+	function ot_name_list_names(_face: face_t): ot_name_entry_t[];
 
 	/**
 	 * Computes the transitive closure of glyphs needed for a specified
@@ -7393,18 +7231,16 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer The input buffer to compute from
 	 * @param features The features enabled on the buffer
 	 * @param num_features The number of features enabled on the buffer
-	 * @param glyphs The #hb_set_t set of glyphs comprising the transitive closure of the query
 	 */
-	function ot_shape_glyphs_closure(font: font_t, buffer: buffer_t, features: feature_t[], num_features: number, glyphs: set_t): void;
+	function ot_shape_glyphs_closure(font: font_t, buffer: buffer_t, features: feature_t[], num_features: number): void;
 
 	/**
 	 * Computes the complete set of GSUB or GPOS lookups that are applicable
 	 * under a given #shape_plan.
 	 * @param shape_plan #hb_shape_plan_t to query
 	 * @param table_tag GSUB or GPOS
-	 * @param lookup_indexes The #hb_set_t set of lookups returned
 	 */
-	function ot_shape_plan_collect_lookups(shape_plan: shape_plan_t, table_tag: tag_t, lookup_indexes: set_t): void;
+	function ot_shape_plan_collect_lookups(shape_plan: shape_plan_t, table_tag: tag_t): void;
 
 	function ot_tag_from_language(language: language_t): tag_t;
 
@@ -7429,27 +7265,25 @@ declare namespace imports.gi.HarfBuzz {
 	 * Converts an #hb_script_t and an #hb_language_t to script and language tags.
 	 * @param script an #hb_script_t to convert.
 	 * @param language an #hb_language_t to convert.
-	 * @param script_count maximum number of script tags to retrieve (IN)
-	 * and actual number of script tags retrieved (OUT)
-	 * @param script_tags array of size at least #script_count to store the
+	 * @returns array of size at least #script_count to store the
 	 * script tag results
-	 * @param language_count maximum number of language tags to retrieve
-	 * (IN) and actual number of language tags retrieved (OUT)
-	 * @param language_tags array of size at least #language_count to store
+	 * 
+	 * array of size at least #language_count to store
 	 * the language tag results
 	 */
-	function ot_tags_from_script_and_language(script: script_t, language: language_t, script_count: number, script_tags: tag_t | null, language_count: number, language_tags: tag_t | null): void;
+	function ot_tags_from_script_and_language(script: script_t, language: language_t): [ script_tags: tag_t | null, language_tags: tag_t | null ];
 
 	/**
 	 * Converts a script tag and a language tag to an #hb_script_t and an
 	 * #hb_language_t.
 	 * @param script_tag a script tag
 	 * @param language_tag a language tag
-	 * @param script the #hb_script_t corresponding to #script_tag.
-	 * @param language the #hb_language_t corresponding to #script_tag and
+	 * @returns the #hb_script_t corresponding to #script_tag.
+	 * 
+	 * the #hb_language_t corresponding to #script_tag and
 	 * #language_tag.
 	 */
-	function ot_tags_to_script_and_language(script_tag: tag_t, language_tag: tag_t, script: script_t | null, language: language_t | null): void;
+	function ot_tags_to_script_and_language(script_tag: tag_t, language_tag: tag_t): [ script: script_t | null, language: language_t | null ];
 
 	/**
 	 * Fetches the variation-axis information corresponding to the specified axis tag
@@ -7457,32 +7291,27 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face #hb_face_t to work upon
 	 * @param axis_tag The #hb_tag_t of the variation axis to query
 	 * @param axis_index The index of the variation axis
-	 * @param axis_info The #hb_ot_var_axis_info_t of the axis tag queried
 	 * @returns 
 	 */
-	function ot_var_find_axis(_face: face_t, axis_tag: tag_t, axis_index: number, axis_info: ot_var_axis_t): bool_t;
+	function ot_var_find_axis(_face: face_t, axis_tag: tag_t, axis_index: number): bool_t;
 
 	/**
 	 * Fetches the variation-axis information corresponding to the specified axis tag
 	 * in the specified face.
 	 * @param _face #hb_face_t to work upon
 	 * @param axis_tag The #hb_tag_t of the variation axis to query
-	 * @param axis_info The #hb_ot_var_axis_info_t of the axis tag queried
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_var_find_axis_info(_face: face_t, axis_tag: tag_t, axis_info: ot_var_axis_info_t): bool_t;
+	function ot_var_find_axis_info(_face: face_t, axis_tag: tag_t): bool_t;
 
 	/**
 	 * Fetches a list of all variation axes in the specified face. The list returned will begin
 	 * at the offset provided.
 	 * @param _face #hb_face_t to work upon
 	 * @param start_offset offset of the first lookup to retrieve
-	 * @param axes_count Input = the maximum number of variation axes to return;
-	 *                Output = the actual number of variation axes returned (may be zero)
-	 * @param axes_array The array of variation axes found
 	 * @returns 
 	 */
-	function ot_var_get_axes(_face: face_t, start_offset: number, axes_count: number | null, axes_array: ot_var_axis_t[]): number;
+	function ot_var_get_axes(_face: face_t, start_offset: number): number;
 
 	/**
 	 * Fetches the number of OpenType variation axes included in the face.
@@ -7496,12 +7325,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * at the offset provided.
 	 * @param _face #hb_face_t to work upon
 	 * @param start_offset offset of the first lookup to retrieve
-	 * @param axes_count Input = the maximum number of variation axes to return;
-	 *                Output = the actual number of variation axes returned (may be zero)
-	 * @param axes_array The array of variation axes found
 	 * @returns the number of variation axes in the face
 	 */
-	function ot_var_get_axis_infos(_face: face_t, start_offset: number, axes_count: number | null, axes_array: ot_var_axis_info_t[]): number;
+	function ot_var_get_axis_infos(_face: face_t, start_offset: number): number;
 
 	/**
 	 * Fetches the number of named instances included in the face.
@@ -7522,12 +7348,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * named instance in the face.
 	 * @param _face The #hb_face_t to work on
 	 * @param instance_index The index of the named instance to query
-	 * @param coords_length Input = the maximum number of coordinates to return;
-	 *                 Output = the actual number of coordinates returned (may be zero)
-	 * @param coords The array of coordinates found for the query
 	 * @returns the number of variation axes in the face
 	 */
-	function ot_var_named_instance_get_design_coords(_face: face_t, instance_index: number, coords_length: number | null, coords: number[]): number;
+	function ot_var_named_instance_get_design_coords(_face: face_t, instance_index: number): number;
 
 	/**
 	 * Fetches the `name` table Name ID that provides display names for
@@ -7557,19 +7380,19 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face The #hb_face_t to work on
 	 * @param coords_length The length of the coordinate array
 	 * @param design_coords The design-space coordinates to normalize
-	 * @param normalized_coords The normalized coordinates
 	 */
-	function ot_var_normalize_coords(_face: face_t, coords_length: number, design_coords: number, normalized_coords: number): void;
+	function ot_var_normalize_coords(_face: face_t, coords_length: number, design_coords: number): void;
 
 	/**
 	 * Normalizes all of the coordinates in the given list of variation axes.
 	 * @param _face The #hb_face_t to work on
 	 * @param variations The array of variations to normalize
 	 * @param variations_length The number of variations to normalize
-	 * @param coords The array of normalized coordinates
-	 * @param coords_length The length of the coordinate array
+	 * @returns The array of normalized coordinates
+	 * 
+	 * The length of the coordinate array
 	 */
-	function ot_var_normalize_variations(_face: face_t, variations: variation_t, variations_length: number, coords: number[], coords_length: number): void;
+	function ot_var_normalize_variations(_face: face_t, variations: variation_t, variations_length: number): [ number[], number ];
 
 	/**
 	 * Converts an ISO 15924 script tag to a corresponding #hb_script_t.
@@ -7778,11 +7601,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * Set #codepoint to #HB_SET_VALUE_INVALID to get started.
 	 * @param set A set
-	 * @param codepoint Input = Code point to query
-	 *             Output = Code point retrieved
 	 * @returns %true if there was a next value, %false otherwise
 	 */
-	function set_next(set: set_t, codepoint: codepoint_t): bool_t;
+	function set_next(set: set_t): bool_t;
 
 	/**
 	 * Fetches the next consecutive range of elements in #set that
@@ -7790,23 +7611,18 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * Set #last to #HB_SET_VALUE_INVALID to get started.
 	 * @param set A set
-	 * @param first The first code point in the range
-	 * @param last Input = The current last code point in the range
-	 *         Output = The last code point in the range
 	 * @returns %true if there was a next range, %false otherwise
 	 */
-	function set_next_range(set: set_t, first: codepoint_t, last: codepoint_t): bool_t;
+	function set_next_range(set: set_t): bool_t;
 
 	/**
 	 * Fetches the previous element in #set that is lower than current value of #codepoint.
 	 * 
 	 * Set #codepoint to #HB_SET_VALUE_INVALID to get started.
 	 * @param set A set
-	 * @param codepoint Input = Code point to query
-	 *             Output = Code point retrieved
 	 * @returns %true if there was a previous value, %false otherwise
 	 */
-	function set_previous(set: set_t, codepoint: codepoint_t): bool_t;
+	function set_previous(set: set_t): bool_t;
 
 	/**
 	 * Fetches the previous consecutive range of elements in #set that
@@ -7814,12 +7630,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * Set #first to #HB_SET_VALUE_INVALID to get started.
 	 * @param set A set
-	 * @param first Input = The current first code point in the range
-	 *         Output = The first code point in the range
-	 * @param last The last code point in the range
 	 * @returns %true if there was a previous range, %false otherwise
 	 */
-	function set_previous_range(set: set_t, first: codepoint_t, last: codepoint_t): bool_t;
+	function set_previous_range(set: set_t): bool_t;
 
 	/**
 	 * Increases the reference count on a set.
@@ -8044,9 +7857,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * Converts an #hb_tag_t to a string and returns it in #buf.
 	 * Strings will be four characters long.
 	 * @param tag #hb_tag_t to convert
-	 * @param buf Converted string
 	 */
-	function tag_to_string(tag: tag_t, buf: number[]): void;
+	function tag_to_string(tag: tag_t): void;
 
 	/**
 	 * Retrieves the Canonical Combining Class (ccc) property
@@ -8066,10 +7878,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param ufuncs The Unicode-functions structure
 	 * @param _a The first Unicode code point to compose
 	 * @param _b The second Unicode code point to compose
-	 * @param _ab The composition of #a, #b
 	 * @returns %true if #a and #b composed, %false otherwise
 	 */
-	function unicode_compose(ufuncs: unicode_funcs_t, _a: codepoint_t, _b: codepoint_t, _ab: codepoint_t): bool_t;
+	function unicode_compose(ufuncs: unicode_funcs_t, _a: codepoint_t, _b: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the decomposition of a Unicode code point.
@@ -8078,21 +7889,18 @@ declare namespace imports.gi.HarfBuzz {
 	 * Unicode-functions structure #ufuncs.
 	 * @param ufuncs The Unicode-functions structure
 	 * @param _ab Unicode code point to decompose
-	 * @param _a The first code point of the decomposition of #ab
-	 * @param _b The second code point of the decomposition of #ab
 	 * @returns %true if #ab was decomposed, %false otherwise
 	 */
-	function unicode_decompose(ufuncs: unicode_funcs_t, _ab: codepoint_t, _a: codepoint_t, _b: codepoint_t): bool_t;
+	function unicode_decompose(ufuncs: unicode_funcs_t, _ab: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the compatibility decomposition of a Unicode
 	 * code point. Deprecated.
 	 * @param ufuncs The Unicode-functions structure
 	 * @param _u Code point to decompose
-	 * @param decomposed Compatibility decomposition of #u
 	 * @returns length of #decomposed.
 	 */
-	function unicode_decompose_compatibility(ufuncs: unicode_funcs_t, _u: codepoint_t, decomposed: codepoint_t): number;
+	function unicode_decompose_compatibility(ufuncs: unicode_funcs_t, _u: codepoint_t): number;
 
 	/**
 	 * Don't use. Not used by HarfBuzz.
@@ -8282,19 +8090,19 @@ declare namespace imports.gi.HarfBuzz {
 	 * number. For example `wght=500`, or `slnt=-7.5`.
 	 * @param _str a string to parse
 	 * @param len length of #str, or -1 if string is %NULL terminated
-	 * @param variation the #hb_variation_t to initialize with the parsed values
 	 * @returns %true if #str is successfully parsed, %false otherwise
 	 */
-	function variation_from_string(_str: number[], len: number, variation: variation_t): bool_t;
+	function variation_from_string(_str: number[], len: number): bool_t;
 
 	/**
 	 * Converts an #hb_variation_t into a %NULL-terminated string in the format
 	 * understood by hb_variation_from_string(). The client in responsible for
 	 * allocating big enough size for #buf, 128 bytes is more than enough.
 	 * @param variation an #hb_variation_t to convert
-	 * @param buf output string
-	 * @param size the allocated size of #buf
+	 * @returns output string
+	 * 
+	 * the allocated size of #buf
 	 */
-	function variation_to_string(variation: variation_t, buf: string[], size: number): void;
+	function variation_to_string(variation: variation_t): [ string[], number ];
 
 }

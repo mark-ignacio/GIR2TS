@@ -581,12 +581,11 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * #params can be %NULL or contain optional parameters to influence the
 		 * allocation.
-		 * @param buffer a location for a {@link Buffer}
 		 * @param params parameters.
 		 * @returns a {@link FlowReturn} such as %GST_FLOW_FLUSHING when the pool is
 		 * inactive.
 		 */
-		acquire_buffer(buffer: Buffer, params: BufferPoolAcquireParams | null): FlowReturn;
+		acquire_buffer(params: BufferPoolAcquireParams | null): FlowReturn;
 		/**
 		 * Get a copy of the current configuration of the pool. This configuration
 		 * can either be modified and used for the gst_buffer_pool_set_config() call
@@ -736,11 +735,9 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the #allocator and #params from #config.
 		 * @param config a {@link BufferPool} configuration
-		 * @param allocator a {@link Allocator}, or %NULL
-		 * @param params {@link AllocationParams}, or %NULL
 		 * @returns %TRUE, if the values are set.
 		 */
-		public static config_get_allocator(config: Structure, allocator: Allocator | null, params: AllocationParams | null): boolean;
+		public static config_get_allocator(config: Structure): boolean;
 		/**
 		 * Parse an available #config and get the option at #index of the options API
 		 * array.
@@ -752,13 +749,9 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the configuration values from #config.
 		 * @param config a {@link BufferPool} configuration
-		 * @param caps the caps of buffers
-		 * @param size the size of each buffer, not including prefix and padding
-		 * @param min_buffers the minimum amount of buffers to allocate.
-		 * @param max_buffers the maximum amount of buffers to allocate or 0 for unlimited.
 		 * @returns %TRUE if all parameters could be fetched.
 		 */
-		public static config_get_params(config: Structure, caps: Caps | null, size: number | null, min_buffers: number | null, max_buffers: number | null): boolean;
+		public static config_get_params(config: Structure): boolean;
 		/**
 		 * Check if #config contains #option.
 		 * @param config a {@link BufferPool} configuration
@@ -975,9 +968,8 @@ declare namespace imports.gi.Gst {
 		 * Warning: NEVER read or write anything to the returned fd but only use it
 		 * for getting notifications via g_poll() or similar and then use the normal
 		 * GstBus API, e.g. gst_bus_pop().
-		 * @param fd A GPollFD to fill
 		 */
-		get_pollfd(fd: GLib.PollFD): void;
+		get_pollfd(): void;
 		/**
 		 * Check if there are pending messages on the bus that
 		 * should be handled.
@@ -1248,13 +1240,12 @@ declare namespace imports.gi.Gst {
 		 * clocks.
 		 * @param slave a time on the slave
 		 * @param master a time on the master
-		 * @param r_squared a pointer to hold the result
 		 * @returns %TRUE if enough observations were added to run the
 		 * regression algorithm.
 		 * 
 		 * MT safe.
 		 */
-		add_observation(slave: ClockTime, master: ClockTime, r_squared: number): boolean;
+		add_observation(slave: ClockTime, master: ClockTime): boolean;
 		/**
 		 * Add a clock observation to the internal slaving algorithm the same as
 		 * gst_clock_add_observation(), and return the result of the master clock
@@ -1264,14 +1255,9 @@ declare namespace imports.gi.Gst {
 		 * with the values, or some modified version of them.
 		 * @param slave a time on the slave
 		 * @param master a time on the master
-		 * @param r_squared a pointer to hold the result
-		 * @param internal a location to store the internal time
-		 * @param external a location to store the external time
-		 * @param rate_num a location to store the rate numerator
-		 * @param rate_denom a location to store the rate denominator
 		 * @returns 
 		 */
-		add_observation_unapplied(slave: ClockTime, master: ClockTime, r_squared: number, internal: ClockTime | null, external: ClockTime | null, rate_num: ClockTime | null, rate_denom: ClockTime | null): boolean;
+		add_observation_unapplied(slave: ClockTime, master: ClockTime): boolean;
 		/**
 		 * Converts the given #internal clock time to the external time, adjusting for the
 		 * rate and reference time set with gst_clock_set_calibration() and making sure
@@ -1308,12 +1294,15 @@ declare namespace imports.gi.Gst {
 		 * caller is not interested in the values.
 		 * 
 		 * MT safe.
-		 * @param internal a location to store the internal time
-		 * @param external a location to store the external time
-		 * @param rate_num a location to store the rate numerator
-		 * @param rate_denom a location to store the rate denominator
+		 * @returns a location to store the internal time
+		 * 
+		 * a location to store the external time
+		 * 
+		 * a location to store the rate numerator
+		 * 
+		 * a location to store the rate denominator
 		 */
-		get_calibration(internal: ClockTime | null, external: ClockTime | null, rate_num: ClockTime | null, rate_denom: ClockTime | null): void;
+		get_calibration(): [ internal: ClockTime | null, external: ClockTime | null, rate_num: ClockTime | null, rate_denom: ClockTime | null ];
 		/**
 		 * Gets the current internal time of the given clock. The time is returned
 		 * unadjusted for the offset and the rate.
@@ -1705,8 +1694,6 @@ declare namespace imports.gi.Gst {
 		 * Negative values indicate how much time was spent waiting on the clock
 		 * before this function returned.
 		 * @param _id The {@link ClockID} to wait on
-		 * @param jitter a pointer that will contain the jitter,
-		 *     can be %NULL.
 		 * @returns the result of the blocking wait. #GST_CLOCK_EARLY will be returned
 		 * if the current clock time is past the time of #id, #GST_CLOCK_OK if
 		 * #id was scheduled in time. #GST_CLOCK_UNSCHEDULED if #id was
@@ -1714,7 +1701,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * MT safe.
 		 */
-		public static id_wait(_id: ClockID, jitter: ClockTimeDiff | null): ClockReturn;
+		public static id_wait(_id: ClockID): ClockReturn;
 		/**
 		 * Register a callback on the given {@link ClockID} #id with the given
 		 * function and user_data. When passing a #GstClockID with an invalid
@@ -1851,10 +1838,9 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Gets the value for this {@link ControlSource} at a given timestamp.
 		 * @param timestamp the time for which the value should be returned
-		 * @param value the value
 		 * @returns %FALSE if the value couldn't be returned, %TRUE otherwise.
 		 */
-		control_source_get_value(timestamp: ClockTime, value: number): boolean;
+		control_source_get_value(timestamp: ClockTime): boolean;
 		/**
 		 * Gets an array of values for for this {@link ControlSource}. Values that are
 		 * undefined contain NANs.
@@ -2827,10 +2813,6 @@ declare namespace imports.gi.Gst {
 		 * some sink elements might not be able to complete their state change because
 		 * an element is not producing data to complete the preroll. When setting the
 		 * element to playing, the preroll will complete and playback will start.
-		 * @param state a pointer to {@link State} to hold the state.
-		 *     Can be %NULL.
-		 * @param pending a pointer to {@link State} to hold the pending
-		 *     state. Can be %NULL.
 		 * @param timeout a {@link ClockTime} to specify the timeout for an async
 		 *           state change or %GST_CLOCK_TIME_NONE for infinite timeout.
 		 * @returns %GST_STATE_CHANGE_SUCCESS if the element has no more pending state
@@ -2840,7 +2822,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * MT safe.
 		 */
-		get_state(state: State | null, pending: State | null, timeout: ClockTime): StateChangeReturn;
+		get_state(timeout: ClockTime): StateChangeReturn;
 		/**
 		 * Retrieves a pad from #element by name. This version only retrieves
 		 * already-existing (i.e. 'static') pads.
@@ -3090,10 +3072,9 @@ declare namespace imports.gi.Gst {
 		 * @param src_format a {@link Format} to convert from.
 		 * @param src_val a value to convert.
 		 * @param dest_format the {@link Format} to convert to.
-		 * @param dest_val a pointer to the result.
 		 * @returns %TRUE if the query could be performed.
 		 */
-		query_convert(src_format: Format, src_val: number, dest_format: Format, dest_val: number): boolean;
+		query_convert(src_format: Format, src_val: number, dest_format: Format): boolean;
 		/**
 		 * Queries an element (usually top-level pipeline or playbin element) for the
 		 * total stream duration in nanoseconds. This query will only work once the
@@ -3104,10 +3085,9 @@ declare namespace imports.gi.Gst {
 		 * message on the pipeline bus, in which case you should re-query the duration
 		 * using this function.
 		 * @param format the {@link Format} requested
-		 * @param duration A location in which to store the total duration, or %NULL.
 		 * @returns %TRUE if the query could be performed.
 		 */
-		query_duration(format: Format, duration: number | null): boolean;
+		query_duration(format: Format): boolean;
 		/**
 		 * Queries an element (usually top-level pipeline or playbin element) for the
 		 * stream position in nanoseconds. This will be a value between 0 and the
@@ -3119,11 +3099,9 @@ declare namespace imports.gi.Gst {
 		 * If one repeatedly calls this function one can also create a query and reuse
 		 * it in gst_element_query().
 		 * @param format the {@link Format} requested
-		 * @param cur a location in which to store the current
-		 *     position, or %NULL.
 		 * @returns %TRUE if the query could be performed.
 		 */
-		query_position(format: Format, cur: number | null): boolean;
+		query_position(format: Format): boolean;
 		/**
 		 * Makes the element free the previously requested pad as obtained
 		 * with gst_element_request_pad().
@@ -4307,12 +4285,10 @@ declare namespace imports.gi.Gst {
 		 * #newobj is increased.
 		 * 
 		 * Either #newobj and the value pointed to by #oldobj may be %NULL.
-		 * @param oldobj pointer to a place of
-		 *     a {@link Object} to replace
 		 * @param newobj a new {@link Object}
 		 * @returns %TRUE if #newobj was different from #oldobj
 		 */
-		public static replace(oldobj: Object | null, newobj: Object | null): boolean;
+		public static replace(newobj: Object | null): boolean;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4624,13 +4600,11 @@ declare namespace imports.gi.Gst {
 		 * This is a lowlevel function. Usually gst_pad_pull_range() is used.
 		 * @param offset The start offset of the buffer
 		 * @param size The length of the buffer
-		 * @param buffer a pointer to hold the {@link Buffer},
-		 *     returns #GST_FLOW_ERROR if %NULL.
 		 * @returns a {@link FlowReturn} from the pad.
 		 * 
 		 * MT safe.
 		 */
-		get_range(offset: number, size: number, buffer: Buffer): FlowReturn;
+		get_range(offset: number, size: number): FlowReturn;
 		/**
 		 * If there is a single internal link of the given pad, this function will
 		 * return it. Otherwise, it will return NULL.
@@ -4851,26 +4825,21 @@ declare namespace imports.gi.Gst {
 		 * @param src_format a {@link Format} to convert from.
 		 * @param src_val a value to convert.
 		 * @param dest_format the {@link Format} to convert to.
-		 * @param dest_val a pointer to the result.
 		 * @returns %TRUE if the query could be performed.
 		 */
-		peer_query_convert(src_format: Format, src_val: number, dest_format: Format, dest_val: number): boolean;
+		peer_query_convert(src_format: Format, src_val: number, dest_format: Format): boolean;
 		/**
 		 * Queries the peer pad of a given sink pad for the total stream duration.
 		 * @param format the {@link Format} requested
-		 * @param duration a location in which to store the total
-		 *     duration, or %NULL.
 		 * @returns %TRUE if the query could be performed.
 		 */
-		peer_query_duration(format: Format, duration: number | null): boolean;
+		peer_query_duration(format: Format): boolean;
 		/**
 		 * Queries the peer of a given sink pad for the stream position.
 		 * @param format the {@link Format} requested
-		 * @param cur a location in which to store the current
-		 *     position, or %NULL.
 		 * @returns %TRUE if the query could be performed.
 		 */
-		peer_query_position(format: Format, cur: number | null): boolean;
+		peer_query_position(format: Format): boolean;
 		/**
 		 * Checks if all internally linked pads of #pad accepts the caps in #query and
 		 * returns the intersection of the results.
@@ -4921,13 +4890,11 @@ declare namespace imports.gi.Gst {
 		 * bytes. The caller should check the result buffer size to get the result size.
 		 * @param offset The start offset of the buffer
 		 * @param size The length of the buffer
-		 * @param buffer a pointer to hold the {@link Buffer}, returns
-		 *     GST_FLOW_ERROR if %NULL.
 		 * @returns a {@link FlowReturn} from the peer pad.
 		 * 
 		 * MT safe.
 		 */
-		pull_range(offset: number, size: number, buffer: Buffer): FlowReturn;
+		pull_range(offset: number, size: number): FlowReturn;
 		/**
 		 * Pushes a buffer to the peer of #pad.
 		 * 
@@ -5027,10 +4994,9 @@ declare namespace imports.gi.Gst {
 		 * @param src_format a {@link Format} to convert from.
 		 * @param src_val a value to convert.
 		 * @param dest_format the {@link Format} to convert to.
-		 * @param dest_val a pointer to the result.
 		 * @returns %TRUE if the query could be performed.
 		 */
-		query_convert(src_format: Format, src_val: number, dest_format: Format, dest_val: number): boolean;
+		query_convert(src_format: Format, src_val: number, dest_format: Format): boolean;
 		/**
 		 * Invokes the default query handler for the given pad.
 		 * The query is sent to all pads internally linked to #pad. Note that
@@ -5045,18 +5011,15 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Queries a pad for the total stream duration.
 		 * @param format the {@link Format} requested
-		 * @param duration a location in which to store the total
-		 *     duration, or %NULL.
 		 * @returns %TRUE if the query could be performed.
 		 */
-		query_duration(format: Format, duration: number | null): boolean;
+		query_duration(format: Format): boolean;
 		/**
 		 * Queries a pad for the stream position.
 		 * @param format the {@link Format} requested
-		 * @param cur A location in which to store the current position, or %NULL.
 		 * @returns %TRUE if the query could be performed.
 		 */
-		query_position(format: Format, cur: number | null): boolean;
+		query_position(format: Format): boolean;
 		/**
 		 * Remove the probe with #id from #pad.
 		 * 
@@ -6254,11 +6217,9 @@ declare namespace imports.gi.Gst {
 		 * @param parent the parent of #pad
 		 * @param offset The start offset of the buffer
 		 * @param size The length of the buffer
-		 * @param buffer a pointer to hold the {@link Buffer},
-		 *     returns #GST_FLOW_ERROR if %NULL.
 		 * @returns a {@link FlowReturn} from the pad.
 		 */
-		public static getrange_default(pad: Pad, parent: Object, offset: number, size: number, buffer: Buffer): FlowReturn;
+		public static getrange_default(pad: Pad, parent: Object, offset: number, size: number): FlowReturn;
 		/**
 		 * Invoke the default iterate internal links function of the proxy pad.
 		 * @param pad the {@link Pad} to get the internal links of.
@@ -7406,11 +7367,10 @@ declare namespace imports.gi.Gst {
 		 * Concatenates copies of #value1 and #value2 into a list.  Values that are not
 		 * of type #GST_TYPE_LIST are treated as if they were lists of length 1.
 		 * #dest will be initialized to the type #GST_TYPE_LIST.
-		 * @param dest an uninitialized #GValue to take the result
 		 * @param value1 a #GValue
 		 * @param value2 a #GValue
 		 */
-		public static concat(dest: GObject.Value, value1: GObject.Value, value2: GObject.Value): void;
+		public static concat(value1: GObject.Value, value2: GObject.Value): void;
 		/**
 		 * Gets the number of values contained in #value.
 		 * @param value a #GValue of type #GST_TYPE_LIST
@@ -7439,11 +7399,10 @@ declare namespace imports.gi.Gst {
 		 * The result will be put into #dest and will either be a list that will not
 		 * contain any duplicates, or a non-list type (if #value1 and #value2
 		 * were equal).
-		 * @param dest an uninitialized #GValue to take the result
 		 * @param value1 a #GValue
 		 * @param value2 a #GValue
 		 */
-		public static merge(dest: GObject.Value, value1: GObject.Value, value2: GObject.Value): void;
+		public static merge(value1: GObject.Value, value2: GObject.Value): void;
 		/**
 		 * Prepends #prepend_value to the GstValueList in #value.
 		 * @param value a #GValue of type #GST_TYPE_LIST
@@ -7890,23 +7849,21 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Copy #size bytes starting from #offset in #buffer to #dest.
 		 * @param offset the offset to extract
-		 * @param dest 
-		 *     the destination address
-		 * @param size the size to extract
 		 * @returns The amount of bytes extracted. This value can be lower than #size
 		 *    when #buffer did not contain enough data.
 		 */
-		public extract(offset: number, dest: number[], size: number): number;
+		public extract(offset: number): number;
 		/**
 		 * Extracts a copy of at most #size bytes the data at #offset into
 		 * newly-allocated memory. #dest must be freed using g_free() when done.
 		 * @param offset the offset to extract
 		 * @param size the size to extract
-		 * @param dest A pointer where
+		 * @returns A pointer where
 		 *  the destination array will be written. Might be %NULL if the size is 0.
-		 * @param dest_size A location where the size of #dest can be written
+		 * 
+		 * A location where the size of #dest can be written
 		 */
-		public extract_dup(offset: number, size: number, dest: number[], dest_size: number): void;
+		public extract_dup(offset: number, size: number): [ number[], number ];
 		/**
 		 * Copy #size bytes from #src to #buffer at #offset.
 		 * @param offset the offset to fill
@@ -7929,13 +7886,10 @@ declare namespace imports.gi.Gst {
 		 * #size can be -1 to get all the memory blocks after #idx.
 		 * @param offset an offset
 		 * @param size a size
-		 * @param idx pointer to index
-		 * @param length pointer to length
-		 * @param skip pointer to skip
 		 * @returns %TRUE when #size bytes starting from #offset could be found in
 		 * #buffer and #idx, #length and #skip will be filled.
 		 */
-		public find_memory(offset: number, size: number, idx: number, length: number, skip: number): boolean;
+		public find_memory(offset: number, size: number): boolean;
 		/**
 		 * Call #func with #user_data for each meta in #buffer.
 		 * 
@@ -8012,11 +7966,9 @@ declare namespace imports.gi.Gst {
 		 * the size and #offset and the amount of extra padding on the last
 		 * memory block.  #offset and #maxsize can be used to resize the
 		 * buffer memory blocks with gst_buffer_resize().
-		 * @param offset a pointer to the offset
-		 * @param maxsize a pointer to the maxsize
 		 * @returns total size of the memory blocks in #buffer.
 		 */
-		public get_sizes(offset: number | null, maxsize: number | null): number;
+		public get_sizes(): number;
 		/**
 		 * Get the total size of #length memory blocks stating from #idx in #buffer.
 		 * 
@@ -8028,11 +7980,9 @@ declare namespace imports.gi.Gst {
 		 * gst_buffer_resize_range().
 		 * @param idx an index
 		 * @param length a length
-		 * @param offset a pointer to the offset
-		 * @param maxsize a pointer to the maxsize
 		 * @returns total size of #length memory blocks starting at #idx in #buffer.
 		 */
-		public get_sizes_range(idx: number, length: number, offset: number | null, maxsize: number | null): number;
+		public get_sizes_range(idx: number, length: number): number;
 		/**
 		 * Gives the status of a specific flag on a buffer.
 		 * @param flags the {@link BufferFlags} flag to check.
@@ -8075,23 +8025,21 @@ declare namespace imports.gi.Gst {
 		 * to %NULL, the first metadata is returned.
 		 * 
 		 * #state will be updated with an opaque state pointer
-		 * @param state an opaque state pointer
 		 * @returns The next {@link Meta} or %NULL
 		 * when there are no more items.
 		 */
-		public iterate_meta(state: any): Meta;
+		public iterate_meta(): Meta;
 		/**
 		 * Retrieve the next {@link Meta} of type #meta_api_type after the current one
 		 * according to #state. If #state points to %NULL, the first metadata of
 		 * type #meta_api_type is returned.
 		 * 
 		 * #state will be updated with an opaque state pointer
-		 * @param state an opaque state pointer
 		 * @param meta_api_type only return {@link Meta} of this type
 		 * @returns The next {@link Meta} of type
 		 * #meta_api_type or %NULL when there are no more items.
 		 */
-		public iterate_meta_filtered(state: any, meta_api_type: GObject.Type): Meta;
+		public iterate_meta_filtered(meta_api_type: GObject.Type): Meta;
 		/**
 		 * This function fills #info with the {@link MapInfo} of all merged memory
 		 * blocks in #buffer.
@@ -8106,11 +8054,10 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * The memory in #info should be unmapped with gst_buffer_unmap() after
 		 * usage.
-		 * @param info info about the mapping
 		 * @param flags flags for the mapping
 		 * @returns %TRUE if the map succeeded and #info contains valid data.
 		 */
-		public map(info: MapInfo, flags: MapFlags): boolean;
+		public map(flags: MapFlags): boolean;
 		/**
 		 * This function fills #info with the {@link MapInfo} of #length merged memory blocks
 		 * starting at #idx in #buffer. When #length is -1, all memory blocks starting
@@ -8127,12 +8074,11 @@ declare namespace imports.gi.Gst {
 		 * The memory in #info should be unmapped with gst_buffer_unmap() after usage.
 		 * @param idx an index
 		 * @param length a length
-		 * @param info info about the mapping
 		 * @param flags flags for the mapping
 		 * @returns %TRUE if the map succeeded and #info contains valid
 		 * data.
 		 */
-		public map_range(idx: number, length: number, info: MapInfo, flags: MapFlags): boolean;
+		public map_range(idx: number, length: number, flags: MapFlags): boolean;
 		/**
 		 * Compare #size bytes starting from #offset in #buffer with the memory in #mem.
 		 * @param offset the offset in #buffer
@@ -8406,7 +8352,7 @@ declare namespace imports.gi.Gst {
 		public set_config: {(pool: BufferPool, config: Structure): boolean;};
 		public start: {(pool: BufferPool): boolean;};
 		public stop: {(pool: BufferPool): boolean;};
-		public acquire_buffer: {(pool: BufferPool, buffer: Buffer, params: BufferPoolAcquireParams | null): FlowReturn;};
+		public acquire_buffer: {(pool: BufferPool, params: BufferPoolAcquireParams | null): FlowReturn;};
 		public alloc_buffer: {(pool: BufferPool, buffer: Buffer, params: BufferPoolAcquireParams): FlowReturn;};
 		public reset_buffer: {(pool: BufferPool, buffer: Buffer): void;};
 		public release_buffer: {(pool: BufferPool, buffer: Buffer): void;};
@@ -9703,7 +9649,7 @@ declare namespace imports.gi.Gst {
 		public no_more_pads: {(element: Element): void;};
 		public request_new_pad: {(element: Element, templ: PadTemplate, name: string | null, caps: Caps | null): Pad;};
 		public release_pad: {(element: Element, pad: Pad): void;};
-		public get_state: {(element: Element, state: State | null, pending: State | null, timeout: ClockTime): StateChangeReturn;};
+		public get_state: {(element: Element, timeout: ClockTime): StateChangeReturn;};
 		public set_state: {(element: Element, state: State): StateChangeReturn;};
 		public change_state: {(element: Element, transition: StateChange): StateChangeReturn;};
 		public state_changed: {(element: Element, oldstate: State, newstate: State, pending: State): void;};
@@ -10418,173 +10364,184 @@ declare namespace imports.gi.Gst {
 		public has_name_id(name: GLib.Quark): boolean;
 		/**
 		 * Get the format, minsize, maxsize and async-flag in the buffersize event.
-		 * @param format A pointer to store the format in
-		 * @param minsize A pointer to store the minsize in
-		 * @param maxsize A pointer to store the maxsize in
-		 * @param async A pointer to store the async-flag in
+		 * @returns A pointer to store the format in
+		 * 
+		 * A pointer to store the minsize in
+		 * 
+		 * A pointer to store the maxsize in
+		 * 
+		 * A pointer to store the async-flag in
 		 */
-		public parse_buffer_size(format: Format, minsize: number, maxsize: number, async: boolean): void;
+		public parse_buffer_size(): [ format: Format, minsize: number, maxsize: number, async: boolean ];
 		/**
 		 * Get the caps from #event. The caps remains valid as long as #event remains
 		 * valid.
-		 * @param caps A pointer to the caps
 		 */
-		public parse_caps(caps: Caps): void;
+		public parse_caps(): void;
 		/**
 		 * Parse the FLUSH_STOP event and retrieve the #reset_time member.
-		 * @param reset_time if time should be reset
 		 */
-		public parse_flush_stop(reset_time: boolean): void;
+		public parse_flush_stop(): void;
 		/**
 		 * Extract timestamp and duration from a new GAP event.
-		 * @param timestamp location where to store the
+		 * @returns location where to store the
 		 *     start time (pts) of the gap, or %NULL
-		 * @param duration location where to store the duration of
+		 * 
+		 * location where to store the duration of
 		 *     the gap, or %NULL
 		 */
-		public parse_gap(timestamp: ClockTime | null, duration: ClockTime | null): void;
-		public parse_group_id(group_id: number): boolean;
+		public parse_gap(): [ timestamp: ClockTime | null, duration: ClockTime | null ];
+		public parse_group_id(): boolean;
 		/**
 		 * Extract rate and flags from an instant-rate-change event.
-		 * @param rate_multiplier location in which to store the rate
+		 * @returns location in which to store the rate
 		 *     multiplier of the instant-rate-change event, or %NULL
-		 * @param new_flags location in which to store the new
+		 * 
+		 * location in which to store the new
 		 *     segment flags of the instant-rate-change event, or %NULL
 		 */
-		public parse_instant_rate_change(rate_multiplier: number | null, new_flags: SegmentFlags | null): void;
+		public parse_instant_rate_change(): [ rate_multiplier: number | null, new_flags: SegmentFlags | null ];
 		/**
 		 * Extract the rate multiplier and running times from an instant-rate-sync-time event.
-		 * @param rate_multiplier location where to store the rate of
+		 * @returns location where to store the rate of
 		 *     the instant-rate-sync-time event, or %NULL
-		 * @param running_time location in which to store the running time
+		 * 
+		 * location in which to store the running time
 		 *     of the instant-rate-sync-time event, or %NULL
-		 * @param upstream_running_time location in which to store the
+		 * 
+		 * location in which to store the
 		 *     upstream running time of the instant-rate-sync-time event, or %NULL
 		 */
-		public parse_instant_rate_sync_time(rate_multiplier: number | null, running_time: ClockTime | null, upstream_running_time: ClockTime | null): void;
+		public parse_instant_rate_sync_time(): [ rate_multiplier: number | null, running_time: ClockTime | null, upstream_running_time: ClockTime | null ];
 		/**
 		 * Get the latency in the latency event.
-		 * @param latency A pointer to store the latency in.
 		 */
-		public parse_latency(latency: ClockTime): void;
+		public parse_latency(): void;
 		/**
 		 * Parses an event containing protection system specific information and stores
 		 * the results in #system_id, #data and #origin. The data stored in #system_id,
 		 * #origin and #data are valid until #event is released.
-		 * @param system_id pointer to store the UUID
+		 * @returns pointer to store the UUID
 		 * string uniquely identifying a content protection system.
-		 * @param data pointer to store a {@link Buffer}
+		 * 
+		 * pointer to store a {@link Buffer}
 		 * holding protection system specific information.
-		 * @param origin pointer to store a value that
+		 * 
+		 * pointer to store a value that
 		 * indicates where the protection information carried by #event was extracted
 		 * from.
 		 */
-		public parse_protection(system_id: string | null, data: Buffer | null, origin: string | null): void;
+		public parse_protection(): [ system_id: string | null, data: Buffer | null, origin: string | null ];
 		/**
 		 * Get the type, proportion, diff and timestamp in the qos event. See
 		 * gst_event_new_qos() for more information about the different QoS values.
 		 * 
 		 * #timestamp will be adjusted for any pad offsets of pads it was passing through.
-		 * @param _type A pointer to store the QoS type in
-		 * @param proportion A pointer to store the proportion in
-		 * @param diff A pointer to store the diff in
-		 * @param timestamp A pointer to store the timestamp in
+		 * @returns A pointer to store the QoS type in
+		 * 
+		 * A pointer to store the proportion in
+		 * 
+		 * A pointer to store the diff in
+		 * 
+		 * A pointer to store the timestamp in
 		 */
-		public parse_qos(_type: QOSType, proportion: number, diff: ClockTimeDiff, timestamp: ClockTime): void;
+		public parse_qos(): [ type: QOSType, proportion: number, diff: ClockTimeDiff, timestamp: ClockTime ];
 		/**
 		 * Parses a seek #event and stores the results in the given result locations.
-		 * @param rate result location for the rate
-		 * @param format result location for the stream format
-		 * @param flags result location for the {@link SeekFlags}
-		 * @param start_type result location for the {@link SeekType} of the start position
-		 * @param start result location for the start position expressed in #format
-		 * @param stop_type result location for the {@link SeekType} of the stop position
-		 * @param stop result location for the stop position expressed in #format
+		 * @returns result location for the rate
+		 * 
+		 * result location for the stream format
+		 * 
+		 * result location for the {@link SeekFlags}
+		 * 
+		 * result location for the #GstSeekType of the start position
+		 * 
+		 * result location for the start position expressed in #format
+		 * 
+		 * result location for the #GstSeekType of the stop position
+		 * 
+		 * result location for the stop position expressed in #format
 		 */
-		public parse_seek(rate: number, format: Format, flags: SeekFlags, start_type: SeekType, start: number, stop_type: SeekType, stop: number): void;
+		public parse_seek(): [ rate: number, format: Format, flags: SeekFlags, start_type: SeekType, start: number, stop_type: SeekType, stop: number ];
 		/**
 		 * Retrieve the trickmode interval that may have been set on a
 		 * seek event with gst_event_set_seek_trickmode_interval().
-		 * @param interval
 		 */
-		public parse_seek_trickmode_interval(interval: ClockTime): void;
+		public parse_seek_trickmode_interval(): void;
 		/**
 		 * Parses a segment #event and stores the result in the given #segment location.
 		 * #segment remains valid only until the #event is freed. Don't modify the segment
 		 * and make a copy if you want to modify it or store it for later use.
-		 * @param segment a pointer to a {@link Segment}
 		 */
-		public parse_segment(segment: Segment): void;
+		public parse_segment(): void;
 		/**
 		 * Extracts the position and format from the segment done message.
-		 * @param format Result location for the format, or %NULL
-		 * @param position Result location for the position, or %NULL
+		 * @returns Result location for the format, or %NULL
+		 * 
+		 * Result location for the position, or %NULL
 		 */
-		public parse_segment_done(format: Format | null, position: number | null): void;
+		public parse_segment_done(): [ format: Format | null, position: number | null ];
 		/**
 		 * Parse the SELECT_STREAMS event and retrieve the contained streams.
-		 * @param streams the streams
 		 */
-		public parse_select_streams(streams: GLib.List): void;
+		public parse_select_streams(): void;
 		/**
 		 * Parse the sink-message event. Unref #msg after usage.
-		 * @param msg a pointer to store the {@link Message} in.
 		 */
-		public parse_sink_message(msg: Message): void;
+		public parse_sink_message(): void;
 		/**
 		 * Parse the step event.
-		 * @param format a pointer to store the format in
-		 * @param amount a pointer to store the amount in
-		 * @param rate a pointer to store the rate in
-		 * @param flush a pointer to store the flush boolean in
-		 * @param intermediate a pointer to store the intermediate
+		 * @returns a pointer to store the format in
+		 * 
+		 * a pointer to store the amount in
+		 * 
+		 * a pointer to store the rate in
+		 * 
+		 * a pointer to store the flush boolean in
+		 * 
+		 * a pointer to store the intermediate
 		 *     boolean in
 		 */
-		public parse_step(format: Format | null, amount: number | null, rate: number | null, flush: boolean | null, intermediate: boolean | null): void;
+		public parse_step(): [ format: Format | null, amount: number | null, rate: number | null, flush: boolean | null, intermediate: boolean | null ];
 		/**
 		 * Parse a stream-start #event and extract the {@link Stream} from it.
-		 * @param stream address of variable to store the stream
 		 */
-		public parse_stream(stream: Stream): void;
+		public parse_stream(): void;
 		/**
 		 * Retrieve new {@link StreamCollection} from STREAM_COLLECTION event #event.
-		 * @param collection pointer to store the collection
 		 */
-		public parse_stream_collection(collection: StreamCollection): void;
-		public parse_stream_flags(flags: StreamFlags): void;
+		public parse_stream_collection(): void;
+		public parse_stream_flags(): void;
 		/**
 		 * Parse a stream-group-done #event and store the result in the given
 		 * #group_id location.
-		 * @param group_id address of variable to store the group id into
 		 */
-		public parse_stream_group_done(group_id: number): void;
+		public parse_stream_group_done(): void;
 		/**
 		 * Parse a stream-id #event and store the result in the given #stream_id
 		 * location. The string stored in #stream_id must not be modified and will
 		 * remain valid only until #event gets freed. Make a copy if you want to
 		 * modify it or store it for later use.
-		 * @param stream_id pointer to store the stream-id
 		 */
-		public parse_stream_start(stream_id: string): void;
+		public parse_stream_start(): void;
 		/**
 		 * Parses a tag #event and stores the results in the given #taglist location.
 		 * No reference to the taglist will be returned, it remains valid only until
 		 * the #event is freed. Don't modify or free the taglist, make a copy if you
 		 * want to modify it or store it for later use.
-		 * @param taglist pointer to metadata list
 		 */
-		public parse_tag(taglist: TagList): void;
+		public parse_tag(): void;
 		/**
 		 * Parse a TOC #event and store the results in the given #toc and #updated locations.
-		 * @param toc pointer to {@link Toc} structure.
-		 * @param updated pointer to store TOC updated flag.
+		 * @returns pointer to {@link Toc} structure.
+		 * 
+		 * pointer to store TOC updated flag.
 		 */
-		public parse_toc(toc: Toc, updated: boolean): void;
+		public parse_toc(): [ toc: Toc, updated: boolean ];
 		/**
 		 * Parse a TOC select #event and store the results in the given #uid location.
-		 * @param uid storage for the selection UID.
 		 */
-		public parse_toc_select(uid: string | null): void;
+		public parse_toc_select(): void;
 		/**
 		 * All streams that have the same group id are supposed to be played
 		 * together, i.e. all streams inside a container file should have the
@@ -10852,12 +10809,11 @@ declare namespace imports.gi.Gst {
 		 * This function will return %FALSE if an error happened to the iterator
 		 * or if the element wasn't found.
 		 * @param _func the compare function to use
-		 * @param elem pointer to a #GValue where to store the result
 		 * @returns Returns %TRUE if the element was found, else %FALSE.
 		 * 
 		 * MT safe.
 		 */
-		public find_custom(_func: GLib.CompareFunc, elem: GObject.Value): boolean;
+		public find_custom(_func: GLib.CompareFunc): boolean;
 		/**
 		 * Folds #func over the elements of #iter. That is to say, #func will be called
 		 * as #func (object, #ret, #user_data) for each object in #it. The normal use
@@ -10914,12 +10870,11 @@ declare namespace imports.gi.Gst {
 		 * get the newly updated list.
 		 * 
 		 * A return value of %GST_ITERATOR_ERROR indicates an unrecoverable fatal error.
-		 * @param elem pointer to hold next element
 		 * @returns The result of the iteration. Unset #elem after usage.
 		 * 
 		 * MT safe.
 		 */
-		public next(elem: GObject.Value): IteratorResult;
+		public next(): IteratorResult;
 		/**
 		 * Pushes #other iterator onto #it. All calls performed on #it are
 		 * forwarded to #other. If #other returns %GST_ITERATOR_DONE, it is
@@ -11073,11 +11028,9 @@ declare namespace imports.gi.Gst {
 		public copy(offset: number, size: number): Memory;
 		/**
 		 * Get the current #size, #offset and #maxsize of #mem.
-		 * @param offset pointer to offset
-		 * @param maxsize pointer to maxsize
 		 * @returns the current size of #mem
 		 */
-		public get_sizes(offset: number | null, maxsize: number | null): number;
+		public get_sizes(): number;
 		/**
 		 * Initializes a newly allocated #mem with the given parameters. This function
 		 * will call gst_mini_object_init() with the default memory parameters.
@@ -11098,10 +11051,9 @@ declare namespace imports.gi.Gst {
 		 * efficiently by performing gst_memory_share() on the parent object from
 		 * the returned #offset.
 		 * @param mem2 a {@link Memory}
-		 * @param offset a pointer to a result offset
 		 * @returns %TRUE if the memory is contiguous and of a common parent.
 		 */
-		public is_span(mem2: Memory, offset: number): boolean;
+		public is_span(mem2: Memory): boolean;
 		/**
 		 * Check if #mem if allocated with an allocator for #mem_type.
 		 * @param mem_type a memory type
@@ -11115,12 +11067,11 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * This function takes ownership of old #mem and returns a reference to a new
 		 * #GstMemory.
-		 * @param info pointer for info
 		 * @param flags mapping flags
 		 * @returns a {@link Memory} object mapped
 		 * with #flags or %NULL when a mapping is not possible.
 		 */
-		public make_mapped(info: MapInfo, flags: MapFlags): Memory;
+		public make_mapped(flags: MapFlags): Memory;
 		/**
 		 * Fill #info with the pointer and sizes of the memory in #mem that can be
 		 * accessed according to #flags.
@@ -11134,11 +11085,10 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * For each gst_memory_map() call, a corresponding gst_memory_unmap() call
 		 * should be done.
-		 * @param info pointer for info
 		 * @param flags mapping flags
 		 * @returns %TRUE if the map operation was successful.
 		 */
-		public map(info: MapInfo, flags: MapFlags): boolean;
+		public map(flags: MapFlags): boolean;
 		/**
 		 * Resize the memory region. #mem should be writable and offset + size should be
 		 * less than the maxsize of #mem.
@@ -11807,77 +11757,74 @@ declare namespace imports.gi.Gst {
 		 * Extract the running_time from the async_done message.
 		 * 
 		 * MT safe.
-		 * @param running_time Result location for the running_time or %NULL
 		 */
-		public parse_async_done(running_time: ClockTime | null): void;
+		public parse_async_done(): void;
 		/**
 		 * Extracts the buffering percent from the GstMessage. see also
 		 * gst_message_new_buffering().
 		 * 
 		 * MT safe.
-		 * @param percent Return location for the percent.
 		 */
-		public parse_buffering(percent: number | null): void;
+		public parse_buffering(): void;
 		/**
 		 * Extracts the buffering stats values from #message.
-		 * @param mode a buffering mode, or %NULL
-		 * @param avg_in the average input rate, or %NULL
-		 * @param avg_out the average output rate, or %NULL
-		 * @param buffering_left amount of buffering time left in
+		 * @returns a buffering mode, or %NULL
+		 * 
+		 * the average input rate, or %NULL
+		 * 
+		 * the average output rate, or %NULL
+		 * 
+		 * amount of buffering time left in
 		 *     milliseconds, or %NULL
 		 */
-		public parse_buffering_stats(mode: BufferingMode | null, avg_in: number | null, avg_out: number | null, buffering_left: number | null): void;
+		public parse_buffering_stats(): [ mode: BufferingMode | null, avg_in: number | null, avg_out: number | null, buffering_left: number | null ];
 		/**
 		 * Extracts the lost clock from the GstMessage.
 		 * The clock object returned remains valid until the message is freed.
 		 * 
 		 * MT safe.
-		 * @param clock a pointer to hold the lost clock
 		 */
-		public parse_clock_lost(clock: Clock | null): void;
+		public parse_clock_lost(): void;
 		/**
 		 * Extracts the clock and ready flag from the GstMessage.
 		 * The clock object returned remains valid until the message is freed.
 		 * 
 		 * MT safe.
-		 * @param clock a pointer to  hold a clock
+		 * @returns a pointer to  hold a clock
 		 *     object, or %NULL
-		 * @param ready a pointer to hold the ready flag, or %NULL
+		 * 
+		 * a pointer to hold the ready flag, or %NULL
 		 */
-		public parse_clock_provide(clock: Clock | null, ready: boolean | null): void;
+		public parse_clock_provide(): [ clock: Clock | null, ready: boolean | null ];
 		/**
 		 * Parse a context type from an existing GST_MESSAGE_NEED_CONTEXT message.
-		 * @param context_type the context type, or %NULL
 		 * @returns a #gboolean indicating if the parsing succeeded.
 		 */
-		public parse_context_type(context_type: string | null): boolean;
+		public parse_context_type(): boolean;
 		/**
 		 * Parses a device-added message. The device-added message is produced by
 		 * {@link DeviceProvider} or a #GstDeviceMonitor. It announces the appearance
 		 * of monitored devices.
-		 * @param device A location where to store a
-		 *  pointer to the new {@link Device}, or %NULL
 		 */
-		public parse_device_added(device: Device | null): void;
+		public parse_device_added(): void;
 		/**
 		 * Parses a device-changed message. The device-changed message is produced by
 		 * {@link DeviceProvider} or a #GstDeviceMonitor. It announces the
 		 * disappearance of monitored devices. * It announce that a device properties has
 		 * changed and #device represents the new modified version of #changed_device.
-		 * @param device A location where to store a
+		 * @returns A location where to store a
 		 *  pointer to the updated version of the {@link Device}, or %NULL
-		 * @param changed_device A location where to store a
-		 *  pointer to the old version of the {@link Device}, or %NULL
+		 * 
+		 * A location where to store a
+		 *  pointer to the old version of the #GstDevice, or %NULL
 		 */
-		public parse_device_changed(device: Device | null, changed_device: Device | null): void;
+		public parse_device_changed(): [ device: Device | null, changed_device: Device | null ];
 		/**
 		 * Parses a device-removed message. The device-removed message is produced by
 		 * {@link DeviceProvider} or a #GstDeviceMonitor. It announces the
 		 * disappearance of monitored devices.
-		 * @param device A location where to store a
-		 *  pointer to the removed {@link Device}, or %NULL
 		 */
-		public parse_device_removed(device: Device | null): void;
+		public parse_device_removed(): void;
 		/**
 		 * Extracts the GError and debug string from the GstMessage. The values returned
 		 * in the output arguments are copies; the caller must free them when done.
@@ -11904,85 +11851,82 @@ declare namespace imports.gi.Gst {
 		 * ]|
 		 * 
 		 * MT safe.
-		 * @param gerror location for the GError
-		 * @param _debug location for the debug message,
+		 * @returns location for the GError
+		 * 
+		 * location for the debug message,
 		 *     or %NULL
 		 */
-		public parse_error(gerror: GLib.Error | null, _debug: string | null): void;
+		public parse_error(): [ gerror: GLib.Error | null, debug: string | null ];
 		/**
 		 * Returns the optional details structure, may be NULL if none.
 		 * The returned structure must not be freed.
-		 * @param structure A pointer to the returned details
 		 */
-		public parse_error_details(structure: Structure): void;
+		public parse_error_details(): void;
 		/**
 		 * Extract the group from the STREAM_START message.
-		 * @param group_id Result location for the group id or
-		 *      %NULL
 		 * @returns %TRUE if the message had a group id set, %FALSE otherwise
 		 * 
 		 * MT safe.
 		 */
-		public parse_group_id(group_id: number | null): boolean;
+		public parse_group_id(): boolean;
 		/**
 		 * Extract the context from the HAVE_CONTEXT message.
 		 * 
 		 * MT safe.
-		 * @param context Result location for the
-		 *      context or %NULL
 		 */
-		public parse_have_context(context: Context | null): void;
+		public parse_have_context(): void;
 		/**
 		 * Extracts the GError and debug string from the GstMessage. The values returned
 		 * in the output arguments are copies; the caller must free them when done.
 		 * 
 		 * MT safe.
-		 * @param gerror location for the GError
-		 * @param _debug location for the debug message,
+		 * @returns location for the GError
+		 * 
+		 * location for the debug message,
 		 *     or %NULL
 		 */
-		public parse_info(gerror: GLib.Error | null, _debug: string | null): void;
+		public parse_info(): [ gerror: GLib.Error | null, debug: string | null ];
 		/**
 		 * Returns the optional details structure, may be NULL if none
 		 * The returned structure must not be freed.
-		 * @param structure A pointer to the returned details structure
 		 */
-		public parse_info_details(structure: Structure): void;
+		public parse_info_details(): void;
 		/**
 		 * Parses the rate_multiplier from the instant-rate-request message.
-		 * @param rate_multiplier return location for the rate, or %NULL
 		 */
-		public parse_instant_rate_request(rate_multiplier: number | null): void;
+		public parse_instant_rate_request(): void;
 		/**
 		 * Extracts the new clock from the GstMessage.
 		 * The clock object returned remains valid until the message is freed.
 		 * 
 		 * MT safe.
-		 * @param clock a pointer to hold the selected
-		 *     new clock
 		 */
-		public parse_new_clock(clock: Clock | null): void;
+		public parse_new_clock(): void;
 		/**
 		 * Parses the progress #type, #code and #text.
-		 * @param _type location for the type
-		 * @param code location for the code
-		 * @param text location for the text
+		 * @returns location for the type
+		 * 
+		 * location for the code
+		 * 
+		 * location for the text
 		 */
-		public parse_progress(_type: ProgressType | null, code: string | null, text: string | null): void;
+		public parse_progress(): [ type: ProgressType | null, code: string | null, text: string | null ];
 		/**
 		 * Parses a property-notify message. These will be posted on the bus only
 		 * when set up with gst_element_add_property_notify_watch() or
 		 * gst_element_add_property_deep_notify_watch().
-		 * @param object location where to store a
+		 * @returns location where to store a
 		 *     pointer to the object whose property got changed, or %NULL
-		 * @param property_name return location for
+		 * 
+		 * return location for
 		 *     the name of the property that got changed, or %NULL
-		 * @param property_value return location for
+		 * 
+		 * return location for
 		 *     the new value of the property that got changed, or %NULL. This will
 		 *     only be set if the property notify watch was told to include the value
 		 *     when it was set up
 		 */
-		public parse_property_notify(object: Object | null, property_name: string | null, property_value: GObject.Value | null): void;
+		public parse_property_notify(): [ object: Object | null, property_name: string | null, property_value: GObject.Value | null ];
 		/**
 		 * Extract the timestamps and live status from the QoS message.
 		 * 
@@ -11991,17 +11935,21 @@ declare namespace imports.gi.Gst {
 		 * values.
 		 * 
 		 * MT safe.
-		 * @param live if the message was generated by a live element
-		 * @param running_time the running time of the buffer that
+		 * @returns if the message was generated by a live element
+		 * 
+		 * the running time of the buffer that
 		 *     generated the message
-		 * @param stream_time the stream time of the buffer that
+		 * 
+		 * the stream time of the buffer that
 		 *     generated the message
-		 * @param timestamp the timestamps of the buffer that
+		 * 
+		 * the timestamps of the buffer that
 		 *     generated the message
-		 * @param duration the duration of the buffer that
+		 * 
+		 * the duration of the buffer that
 		 *     generated the message
 		 */
-		public parse_qos(live: boolean | null, running_time: number | null, stream_time: number | null, timestamp: number | null, duration: number | null): void;
+		public parse_qos(): [ live: boolean | null, running_time: number | null, stream_time: number | null, timestamp: number | null, duration: number | null ];
 		/**
 		 * Extract the QoS stats representing the history of the current continuous
 		 * pipeline playback period.
@@ -12010,73 +11958,78 @@ declare namespace imports.gi.Gst {
 		 * invalid. Values of -1 for either #processed or #dropped mean unknown values.
 		 * 
 		 * MT safe.
-		 * @param format Units of the 'processed' and 'dropped' fields.
+		 * @returns Units of the 'processed' and 'dropped' fields.
 		 *     Video sinks and video filters will use GST_FORMAT_BUFFERS (frames).
 		 *     Audio sinks and audio filters will likely use GST_FORMAT_DEFAULT
 		 *     (samples).
-		 * @param processed Total number of units correctly processed
+		 * 
+		 * Total number of units correctly processed
 		 *     since the last state change to READY or a flushing operation.
-		 * @param dropped Total number of units dropped since the last
+		 * 
+		 * Total number of units dropped since the last
 		 *     state change to READY or a flushing operation.
 		 */
-		public parse_qos_stats(format: Format | null, processed: number | null, dropped: number | null): void;
+		public parse_qos_stats(): [ format: Format | null, processed: number | null, dropped: number | null ];
 		/**
 		 * Extract the QoS values that have been calculated/analysed from the QoS data
 		 * 
 		 * MT safe.
-		 * @param jitter The difference of the running-time against
+		 * @returns The difference of the running-time against
 		 *     the deadline.
-		 * @param proportion Long term prediction of the ideal rate
+		 * 
+		 * Long term prediction of the ideal rate
 		 *     relative to normal rate to get optimal quality.
-		 * @param quality An element dependent integer value that
+		 * 
+		 * An element dependent integer value that
 		 *     specifies the current quality level of the element. The default
 		 *     maximum quality is 1000000.
 		 */
-		public parse_qos_values(jitter: number | null, proportion: number | null, quality: number | null): void;
+		public parse_qos_values(): [ jitter: number | null, proportion: number | null, quality: number | null ];
 		/**
 		 * Parses the location and/or structure from the entry with the given index.
 		 * The index must be between 0 and gst_message_get_num_redirect_entries() - 1.
 		 * Returned pointers are valid for as long as this message exists.
 		 * @param entry_index index of the entry to parse
-		 * @param location return location for
+		 * @returns return location for
 		 *     the pointer to the entry's location string, or %NULL
-		 * @param tag_list return location for
+		 * 
+		 * return location for
 		 *     the pointer to the entry's tag list, or %NULL
-		 * @param entry_struct return location
+		 * 
+		 * return location
 		 *     for the pointer to the entry's structure, or %NULL
 		 */
-		public parse_redirect_entry(entry_index: number, location: string | null, tag_list: TagList | null, entry_struct: Structure | null): void;
+		public parse_redirect_entry(entry_index: number): [ location: string | null, tag_list: TagList | null, entry_struct: Structure | null ];
 		/**
 		 * Extract the requested state from the request_state message.
 		 * 
 		 * MT safe.
-		 * @param state Result location for the requested state or %NULL
 		 */
-		public parse_request_state(state: State | null): void;
+		public parse_request_state(): void;
 		/**
 		 * Extract the running-time from the RESET_TIME message.
 		 * 
 		 * MT safe.
-		 * @param running_time Result location for the running_time or
-		 *      %NULL
 		 */
-		public parse_reset_time(running_time: ClockTime | null): void;
+		public parse_reset_time(): void;
 		/**
 		 * Extracts the position and format from the segment done message.
 		 * 
 		 * MT safe.
-		 * @param format Result location for the format, or %NULL
-		 * @param position Result location for the position, or %NULL
+		 * @returns Result location for the format, or %NULL
+		 * 
+		 * Result location for the position, or %NULL
 		 */
-		public parse_segment_done(format: Format | null, position: number | null): void;
+		public parse_segment_done(): [ format: Format | null, position: number | null ];
 		/**
 		 * Extracts the position and format from the segment start message.
 		 * 
 		 * MT safe.
-		 * @param format Result location for the format, or %NULL
-		 * @param position Result location for the position, or %NULL
+		 * @returns Result location for the format, or %NULL
+		 * 
+		 * Result location for the position, or %NULL
 		 */
-		public parse_segment_start(format: Format | null, position: number | null): void;
+		public parse_segment_start(): [ format: Format | null, position: number | null ];
 		/**
 		 * Extracts the old and new states from the GstMessage.
 		 * 
@@ -12100,69 +12053,81 @@ declare namespace imports.gi.Gst {
 		 * ]|
 		 * 
 		 * MT safe.
-		 * @param oldstate the previous state, or %NULL
-		 * @param newstate the new (current) state, or %NULL
-		 * @param pending the pending (target) state, or %NULL
+		 * @returns the previous state, or %NULL
+		 * 
+		 * the new (current) state, or %NULL
+		 * 
+		 * the pending (target) state, or %NULL
 		 */
-		public parse_state_changed(oldstate: State | null, newstate: State | null, pending: State | null): void;
+		public parse_state_changed(): [ oldstate: State | null, newstate: State | null, pending: State | null ];
 		/**
 		 * Extract the values the step_done message.
 		 * 
 		 * MT safe.
-		 * @param format result location for the format
-		 * @param amount result location for the amount
-		 * @param rate result location for the rate
-		 * @param flush result location for the flush flag
-		 * @param intermediate result location for the intermediate flag
-		 * @param duration result location for the duration
-		 * @param eos result location for the EOS flag
+		 * @returns result location for the format
+		 * 
+		 * result location for the amount
+		 * 
+		 * result location for the rate
+		 * 
+		 * result location for the flush flag
+		 * 
+		 * result location for the intermediate flag
+		 * 
+		 * result location for the duration
+		 * 
+		 * result location for the EOS flag
 		 */
-		public parse_step_done(format: Format | null, amount: number | null, rate: number | null, flush: boolean | null, intermediate: boolean | null, duration: number | null, eos: boolean | null): void;
+		public parse_step_done(): [ format: Format | null, amount: number | null, rate: number | null, flush: boolean | null, intermediate: boolean | null, duration: number | null, eos: boolean | null ];
 		/**
 		 * Extract the values from step_start message.
 		 * 
 		 * MT safe.
-		 * @param active result location for the active flag
-		 * @param format result location for the format
-		 * @param amount result location for the amount
-		 * @param rate result location for the rate
-		 * @param flush result location for the flush flag
-		 * @param intermediate result location for the intermediate flag
+		 * @returns result location for the active flag
+		 * 
+		 * result location for the format
+		 * 
+		 * result location for the amount
+		 * 
+		 * result location for the rate
+		 * 
+		 * result location for the flush flag
+		 * 
+		 * result location for the intermediate flag
 		 */
-		public parse_step_start(active: boolean | null, format: Format | null, amount: number | null, rate: number | null, flush: boolean | null, intermediate: boolean | null): void;
+		public parse_step_start(): [ active: boolean | null, format: Format | null, amount: number | null, rate: number | null, flush: boolean | null, intermediate: boolean | null ];
 		/**
 		 * Parses a stream-collection message.
-		 * @param collection A location where to store a
-		 *  pointer to the {@link StreamCollection}, or %NULL
 		 */
-		public parse_stream_collection(collection: StreamCollection | null): void;
+		public parse_stream_collection(): void;
 		/**
 		 * Extracts the stream status type and owner the GstMessage. The returned
 		 * owner remains valid for as long as the reference to #message is valid and
 		 * should thus not be unreffed.
 		 * 
 		 * MT safe.
-		 * @param _type A pointer to hold the status type
-		 * @param owner The owner element of the message source
+		 * @returns A pointer to hold the status type
+		 * 
+		 * The owner element of the message source
 		 */
-		public parse_stream_status(_type: StreamStatusType, owner: Element): void;
+		public parse_stream_status(): [ type: StreamStatusType, owner: Element ];
 		/**
 		 * Parses a streams-selected message.
-		 * @param collection A location where to store a
-		 *  pointer to the {@link StreamCollection}, or %NULL
 		 */
-		public parse_streams_selected(collection: StreamCollection | null): void;
+		public parse_streams_selected(): void;
 		/**
 		 * Extracts the change type and completion status from the GstMessage.
 		 * 
 		 * MT safe.
-		 * @param _type A pointer to hold the change type
-		 * @param owner The owner element of the
+		 * @returns A pointer to hold the change type
+		 * 
+		 * The owner element of the
 		 *     message source
-		 * @param busy a pointer to hold whether the change is in
+		 * 
+		 * a pointer to hold whether the change is in
 		 *     progress or has been completed
 		 */
-		public parse_structure_change(_type: StructureChangeType, owner: Element | null, busy: boolean | null): void;
+		public parse_structure_change(): [ type: StructureChangeType, owner: Element | null, busy: boolean | null ];
 		/**
 		 * Extracts the tag list from the GstMessage. The tag list returned in the
 		 * output argument is a copy; the caller must free it when done.
@@ -12186,35 +12151,35 @@ declare namespace imports.gi.Gst {
 		 * ]|
 		 * 
 		 * MT safe.
-		 * @param tag_list return location for the tag-list.
 		 */
-		public parse_tag(tag_list: TagList): void;
+		public parse_tag(): void;
 		/**
 		 * Extract the TOC from the {@link Message}. The TOC returned in the
 		 * output argument is a copy; the caller must free it with
 		 * gst_toc_unref() when done.
 		 * 
 		 * MT safe.
-		 * @param toc return location for the TOC.
-		 * @param updated return location for the updated flag.
+		 * @returns return location for the TOC.
+		 * 
+		 * return location for the updated flag.
 		 */
-		public parse_toc(toc: Toc, updated: boolean): void;
+		public parse_toc(): [ toc: Toc, updated: boolean ];
 		/**
 		 * Extracts the GError and debug string from the GstMessage. The values returned
 		 * in the output arguments are copies; the caller must free them when done.
 		 * 
 		 * MT safe.
-		 * @param gerror location for the GError
-		 * @param _debug location for the debug message,
+		 * @returns location for the GError
+		 * 
+		 * location for the debug message,
 		 *     or %NULL
 		 */
-		public parse_warning(gerror: GLib.Error | null, _debug: string | null): void;
+		public parse_warning(): [ gerror: GLib.Error | null, debug: string | null ];
 		/**
 		 * Returns the optional details structure, may be NULL if none
 		 * The returned structure must not be freed.
-		 * @param structure A pointer to the returned details structure
 		 */
-		public parse_warning_details(structure: Structure): void;
+		public parse_warning_details(): void;
 		/**
 		 * Configures the buffering stats values in #message.
 		 * @param mode a buffering mode
@@ -13097,7 +13062,7 @@ declare namespace imports.gi.Gst {
 		public rename_preset: {(preset: Preset, old_name: string, new_name: string): boolean;};
 		public delete_preset: {(preset: Preset, name: string): boolean;};
 		public set_meta: {(preset: Preset, name: string, tag: string, value: string | null): boolean;};
-		public get_meta: {(preset: Preset, name: string, tag: string, value: string): boolean;};
+		public get_meta: {(preset: Preset, name: string, tag: string): boolean;};
 	}
 
 	/**
@@ -13475,10 +13440,9 @@ declare namespace imports.gi.Gst {
 		 * #index will contain the index where the requested API and the parameters
 		 * can be found.
 		 * @param api the metadata API
-		 * @param index the index
 		 * @returns %TRUE when #api is in the list of metadata.
 		 */
-		public find_allocation_meta(api: GObject.Type, index: number | null): boolean;
+		public find_allocation_meta(api: GObject.Type): boolean;
 		/**
 		 * Retrieve the number of values currently stored in the
 		 * meta API array of the query's structure.
@@ -13545,14 +13509,12 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the caps from #query. The caps remains valid as long as #query remains
 		 * valid.
-		 * @param caps A pointer to the caps
 		 */
-		public parse_accept_caps(caps: Caps): void;
+		public parse_accept_caps(): void;
 		/**
 		 * Parse the result from #query and store in #result.
-		 * @param result location for the result
 		 */
-		public parse_accept_caps_result(result: boolean | null): void;
+		public parse_accept_caps_result(): void;
 		/**
 		 * Parse an allocation query, writing the requested caps in #caps and
 		 * whether a pool is needed in #need_pool, if the respective parameters
@@ -13560,143 +13522,151 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Pool details can be retrieved using gst_query_get_n_allocation_pools() and
 		 * gst_query_parse_nth_allocation_pool().
-		 * @param caps The {@link Caps}
-		 * @param need_pool Whether a {@link BufferPool} is needed
+		 * @returns The {@link Caps}
+		 * 
+		 * Whether a #GstBufferPool is needed
 		 */
-		public parse_allocation(caps: Caps | null, need_pool: boolean | null): void;
+		public parse_allocation(): [ caps: Caps | null, need_pool: boolean | null ];
 		/**
 		 * Get the results of a bitrate query. See also gst_query_set_bitrate().
-		 * @param nominal_bitrate The resulting bitrate in bits per second
 		 */
-		public parse_bitrate(nominal_bitrate: number | null): void;
+		public parse_bitrate(): void;
 		/**
 		 * Get the percentage of buffered data. This is a value between 0 and 100.
 		 * The #busy indicator is %TRUE when the buffering is in progress.
-		 * @param busy if buffering is busy, or %NULL
-		 * @param percent a buffering percent, or %NULL
+		 * @returns if buffering is busy, or %NULL
+		 * 
+		 * a buffering percent, or %NULL
 		 */
-		public parse_buffering_percent(busy: boolean | null, percent: number | null): void;
+		public parse_buffering_percent(): [ busy: boolean | null, percent: number | null ];
 		/**
 		 * Parse an available query, writing the format into #format, and
 		 * other results into the passed parameters, if the respective parameters
 		 * are non-%NULL
-		 * @param format the format to set for the #segment_start
+		 * @returns the format to set for the #segment_start
 		 *     and #segment_end values, or %NULL
-		 * @param start the start to set, or %NULL
-		 * @param stop the stop to set, or %NULL
-		 * @param estimated_total estimated total amount of download
+		 * 
+		 * the start to set, or %NULL
+		 * 
+		 * the stop to set, or %NULL
+		 * 
+		 * estimated total amount of download
 		 *     time remaining in milliseconds, or %NULL
 		 */
-		public parse_buffering_range(format: Format | null, start: number | null, stop: number | null, estimated_total: number | null): void;
+		public parse_buffering_range(): [ format: Format | null, start: number | null, stop: number | null, estimated_total: number | null ];
 		/**
 		 * Extracts the buffering stats values from #query.
-		 * @param mode a buffering mode, or %NULL
-		 * @param avg_in the average input rate, or %NULL
-		 * @param avg_out the average output rat, or %NULL
-		 * @param buffering_left amount of buffering time left in
+		 * @returns a buffering mode, or %NULL
+		 * 
+		 * the average input rate, or %NULL
+		 * 
+		 * the average output rat, or %NULL
+		 * 
+		 * amount of buffering time left in
 		 *     milliseconds, or %NULL
 		 */
-		public parse_buffering_stats(mode: BufferingMode | null, avg_in: number | null, avg_out: number | null, buffering_left: number | null): void;
+		public parse_buffering_stats(): [ mode: BufferingMode | null, avg_in: number | null, avg_out: number | null, buffering_left: number | null ];
 		/**
 		 * Get the filter from the caps #query. The caps remains valid as long as
 		 * #query remains valid.
-		 * @param filter A pointer to the caps filter
 		 */
-		public parse_caps(filter: Caps): void;
+		public parse_caps(): void;
 		/**
 		 * Get the caps result from #query. The caps remains valid as long as
 		 * #query remains valid.
-		 * @param caps A pointer to the caps
 		 */
-		public parse_caps_result(caps: Caps): void;
+		public parse_caps_result(): void;
 		/**
 		 * Get the context from the context #query. The context remains valid as long as
 		 * #query remains valid.
-		 * @param context A pointer to store the {@link Context}
 		 */
-		public parse_context(context: Context): void;
+		public parse_context(): void;
 		/**
 		 * Parse a context type from an existing GST_QUERY_CONTEXT query.
-		 * @param context_type the context type, or %NULL
 		 * @returns a #gboolean indicating if the parsing succeeded.
 		 */
-		public parse_context_type(context_type: string | null): boolean;
+		public parse_context_type(): boolean;
 		/**
 		 * Parse a convert query answer. Any of #src_format, #src_value, #dest_format,
 		 * and #dest_value may be %NULL, in which case that value is omitted.
-		 * @param src_format the storage for the {@link Format} of the
+		 * @returns the storage for the {@link Format} of the
 		 *     source value, or %NULL
-		 * @param src_value the storage for the source value, or %NULL
-		 * @param dest_format the storage for the {@link Format} of the
+		 * 
+		 * the storage for the source value, or %NULL
+		 * 
+		 * the storage for the #GstFormat of the
 		 *     destination value, or %NULL
-		 * @param dest_value the storage for the destination value,
+		 * 
+		 * the storage for the destination value,
 		 *     or %NULL
 		 */
-		public parse_convert(src_format: Format | null, src_value: number | null, dest_format: Format | null, dest_value: number | null): void;
+		public parse_convert(): [ src_format: Format | null, src_value: number | null, dest_format: Format | null, dest_value: number | null ];
 		/**
 		 * Parse a duration query answer. Write the format of the duration into #format,
 		 * and the value into #duration, if the respective variables are non-%NULL.
-		 * @param format the storage for the {@link Format} of the duration
+		 * @returns the storage for the {@link Format} of the duration
 		 *     value, or %NULL.
-		 * @param duration the storage for the total duration, or %NULL.
+		 * 
+		 * the storage for the total duration, or %NULL.
 		 */
-		public parse_duration(format: Format | null, duration: number | null): void;
+		public parse_duration(): [ format: Format | null, duration: number | null ];
 		/**
 		 * Parse a latency query answer.
-		 * @param live storage for live or %NULL
-		 * @param min_latency the storage for the min latency or %NULL
-		 * @param max_latency the storage for the max latency or %NULL
+		 * @returns storage for live or %NULL
+		 * 
+		 * the storage for the min latency or %NULL
+		 * 
+		 * the storage for the max latency or %NULL
 		 */
-		public parse_latency(live: boolean | null, min_latency: ClockTime | null, max_latency: ClockTime | null): void;
+		public parse_latency(): [ live: boolean | null, min_latency: ClockTime | null, max_latency: ClockTime | null ];
 		/**
 		 * Parse the number of formats in the formats #query.
-		 * @param n_formats the number of formats in this query.
 		 */
-		public parse_n_formats(n_formats: number | null): void;
+		public parse_n_formats(): void;
 		/**
 		 * Parse an available query and get the metadata API
 		 * at #index of the metadata API array.
 		 * @param index position in the metadata API array to read
-		 * @param params API specific parameters
 		 * @returns a #GType of the metadata API at #index.
 		 */
-		public parse_nth_allocation_meta(index: number, params: Structure | null): GObject.Type;
+		public parse_nth_allocation_meta(index: number): GObject.Type;
 		/**
 		 * Parse an available query and get the allocator and its params
 		 * at #index of the allocator array.
 		 * @param index position in the allocator array to read
-		 * @param allocator variable to hold the result
-		 * @param params parameters for the allocator
+		 * @returns variable to hold the result
+		 * 
+		 * parameters for the allocator
 		 */
-		public parse_nth_allocation_param(index: number, allocator: Allocator | null, params: AllocationParams | null): void;
+		public parse_nth_allocation_param(index: number): [ allocator: Allocator | null, params: AllocationParams | null ];
 		/**
 		 * Get the pool parameters in #query.
 		 * 
 		 * Unref #pool with gst_object_unref() when it's not needed any more.
 		 * @param index index to parse
-		 * @param pool the {@link BufferPool}
-		 * @param size the buffer size
-		 * @param min_buffers the min buffers
-		 * @param max_buffers the max buffers
+		 * @returns the {@link BufferPool}
+		 * 
+		 * the buffer size
+		 * 
+		 * the min buffers
+		 * 
+		 * the max buffers
 		 */
-		public parse_nth_allocation_pool(index: number, pool: BufferPool | null, size: number | null, min_buffers: number | null, max_buffers: number | null): void;
+		public parse_nth_allocation_pool(index: number): [ pool: BufferPool | null, size: number | null, min_buffers: number | null, max_buffers: number | null ];
 		/**
 		 * Parse an available query and get the start and stop values stored
 		 * at the #index of the buffered ranges array.
 		 * @param index position in the buffered-ranges array to read
-		 * @param start the start position to set, or %NULL
-		 * @param stop the stop position to set, or %NULL
 		 * @returns a #gboolean indicating if the parsing succeeded.
 		 */
-		public parse_nth_buffering_range(index: number, start: number | null, stop: number | null): boolean;
+		public parse_nth_buffering_range(index: number): boolean;
 		/**
 		 * Parse the format query and retrieve the #nth format from it into
 		 * #format. If the list contains less elements than #nth, #format will be
 		 * set to GST_FORMAT_UNDEFINED.
 		 * @param nth the nth format to retrieve.
-		 * @param format a pointer to store the nth format
 		 */
-		public parse_nth_format(nth: number, format: Format | null): void;
+		public parse_nth_format(nth: number): void;
 		/**
 		 * Parse an available query and get the scheduling mode
 		 * at #index of the scheduling modes array.
@@ -13707,67 +13677,71 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Parse a position query, writing the format into #format, and the position
 		 * into #cur, if the respective parameters are non-%NULL.
-		 * @param format the storage for the {@link Format} of the
+		 * @returns the storage for the {@link Format} of the
 		 *     position values (may be %NULL)
-		 * @param cur the storage for the current position (may be %NULL)
+		 * 
+		 * the storage for the current position (may be %NULL)
 		 */
-		public parse_position(format: Format | null, cur: number | null): void;
+		public parse_position(): [ format: Format | null, cur: number | null ];
 		/**
 		 * Set the scheduling properties.
-		 * @param flags {@link SchedulingFlags}
-		 * @param minsize the suggested minimum size of pull requests
-		 * @param maxsize the suggested maximum size of pull requests:
-		 * @param align the suggested alignment of pull requests
+		 * @returns {@link SchedulingFlags}
+		 * 
+		 * the suggested minimum size of pull requests
+		 * 
+		 * the suggested maximum size of pull requests:
+		 * 
+		 * the suggested alignment of pull requests
 		 */
-		public parse_scheduling(flags: SchedulingFlags | null, minsize: number | null, maxsize: number | null, align: number | null): void;
+		public parse_scheduling(): [ flags: SchedulingFlags | null, minsize: number | null, maxsize: number | null, align: number | null ];
 		/**
 		 * Parse a seeking query, writing the format into #format, and
 		 * other results into the passed parameters, if the respective parameters
 		 * are non-%NULL
-		 * @param format the format to set for the #segment_start
+		 * @returns the format to set for the #segment_start
 		 *     and #segment_end values, or %NULL
-		 * @param seekable the seekable flag to set, or %NULL
-		 * @param segment_start the segment_start to set, or %NULL
-		 * @param segment_end the segment_end to set, or %NULL
+		 * 
+		 * the seekable flag to set, or %NULL
+		 * 
+		 * the segment_start to set, or %NULL
+		 * 
+		 * the segment_end to set, or %NULL
 		 */
-		public parse_seeking(format: Format | null, seekable: boolean | null, segment_start: number | null, segment_end: number | null): void;
+		public parse_seeking(): [ format: Format | null, seekable: boolean | null, segment_start: number | null, segment_end: number | null ];
 		/**
 		 * Parse a segment query answer. Any of #rate, #format, #start_value, and
 		 * #stop_value may be %NULL, which will cause this value to be omitted.
 		 * 
 		 * See gst_query_set_segment() for an explanation of the function arguments.
-		 * @param rate the storage for the rate of the segment, or %NULL
-		 * @param format the storage for the {@link Format} of the values,
+		 * @returns the storage for the rate of the segment, or %NULL
+		 * 
+		 * the storage for the {@link Format} of the values,
 		 *     or %NULL
-		 * @param start_value the storage for the start value, or %NULL
-		 * @param stop_value the storage for the stop value, or %NULL
+		 * 
+		 * the storage for the start value, or %NULL
+		 * 
+		 * the storage for the stop value, or %NULL
 		 */
-		public parse_segment(rate: number | null, format: Format | null, start_value: number | null, stop_value: number | null): void;
+		public parse_segment(): [ rate: number | null, format: Format | null, start_value: number | null, stop_value: number | null ];
 		/**
 		 * Parse an URI query, writing the URI into #uri as a newly
 		 * allocated string, if the respective parameters are non-%NULL.
 		 * Free the string with g_free() after usage.
-		 * @param uri the storage for the current URI
-		 *     (may be %NULL)
 		 */
-		public parse_uri(uri: string | null): void;
+		public parse_uri(): void;
 		/**
 		 * Parse an URI query, writing the URI into #uri as a newly
 		 * allocated string, if the respective parameters are non-%NULL.
 		 * Free the string with g_free() after usage.
-		 * @param uri the storage for the redirect URI
-		 *     (may be %NULL)
 		 */
-		public parse_uri_redirection(uri: string | null): void;
+		public parse_uri_redirection(): void;
 		/**
 		 * Parse an URI query, and set #permanent to %TRUE if there is a redirection
 		 * and it should be considered permanent. If a redirection is permanent,
 		 * applications should update their internal storage of the URI, otherwise
 		 * they should make all future requests to the original URI.
-		 * @param permanent if the URI redirection is permanent
-		 *     (may be %NULL)
 		 */
-		public parse_uri_redirection_permanent(permanent: boolean | null): void;
+		public parse_uri_redirection_permanent(): void;
 		/**
 		 * Remove the metadata API at #index of the metadata API array.
 		 * @param index position in the metadata API array to remove
@@ -14238,13 +14212,11 @@ declare namespace imports.gi.Gst {
 		 * @param format the format of the segment.
 		 * @param start the start position in the segment
 		 * @param stop the stop position in the segment
-		 * @param clip_start the clipped start position in the segment
-		 * @param clip_stop the clipped stop position in the segment
 		 * @returns %TRUE if the given #start and #stop times fall partially or
 		 *     completely in #segment, %FALSE if the values are completely outside
 		 *     of the segment.
 		 */
-		public clip(format: Format, start: number, stop: number, clip_start: number | null, clip_stop: number | null): boolean;
+		public clip(format: Format, start: number, stop: number): boolean;
 		/**
 		 * Create a copy of given #segment.
 		 * 
@@ -14292,10 +14264,9 @@ declare namespace imports.gi.Gst {
 		 * @param start the seek start value
 		 * @param stop_type the seek method
 		 * @param stop the seek stop value
-		 * @param update boolean holding whether position was updated.
 		 * @returns %TRUE if the seek could be performed.
 		 */
-		public do_seek(rate: number, format: Format, flags: SeekFlags, start_type: SeekType, start: number, stop_type: SeekType, stop: number, update: boolean | null): boolean;
+		public do_seek(rate: number, format: Format, flags: SeekFlags, start_type: SeekType, start: number, stop_type: SeekType, stop: number): boolean;
 		/**
 		 * Free the allocated segment #segment.
 		 */
@@ -14353,10 +14324,9 @@ declare namespace imports.gi.Gst {
 		 * position.
 		 * @param format the format of the segment.
 		 * @param running_time the running-time
-		 * @param position the resulting position in the segment
 		 * @returns a 1 or -1 on success, 0 on failure.
 		 */
-		public position_from_running_time_full(format: Format, running_time: number, position: number): number;
+		public position_from_running_time_full(format: Format, running_time: number): number;
 		/**
 		 * Convert #stream_time into a position in the segment so that
 		 * gst_segment_to_stream_time() with that position returns #stream_time.
@@ -14384,10 +14354,9 @@ declare namespace imports.gi.Gst {
 		 * to get the real negative segment position.
 		 * @param format the format of the segment.
 		 * @param stream_time the stream-time
-		 * @param position the resulting position in the segment
 		 * @returns a 1 or -1 on success, 0 on failure.
 		 */
-		public position_from_stream_time_full(format: Format, stream_time: number, position: number): number;
+		public position_from_stream_time_full(format: Format, stream_time: number): number;
 		/**
 		 * Adjust the start/stop and base values of #segment such that the next valid
 		 * buffer will be one with #running_time.
@@ -14440,10 +14409,9 @@ declare namespace imports.gi.Gst {
 		 * to get the real negative running time.
 		 * @param format the format of the segment.
 		 * @param position the position in the segment
-		 * @param running_time result running-time
 		 * @returns a 1 or -1 on success, 0 on failure.
 		 */
-		public to_running_time_full(format: Format, position: number, running_time: number | null): number;
+		public to_running_time_full(format: Format, position: number): number;
 		/**
 		 * Translate #position to stream time using the currently configured
 		 * segment. The #position value must be between #segment start and
@@ -14479,10 +14447,9 @@ declare namespace imports.gi.Gst {
 		 * to get the real negative stream time.
 		 * @param format the format of the segment.
 		 * @param position the position in the segment
-		 * @param stream_time result stream-time
 		 * @returns a 1 or -1 on success, 0 on failure.
 		 */
-		public to_stream_time_full(format: Format, position: number, stream_time: number): number;
+		public to_stream_time_full(format: Format, position: number): number;
 	}
 
 	/**
@@ -14693,12 +14660,11 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: gst_structure_free
 		 * @param string a string representation of a {@link Structure}.
-		 * @param _end pointer to store the end of the string in.
 		 * @returns a new {@link Structure} or %NULL
 		 *     when the string could not be parsed. Free with
 		 *     gst_structure_free() after use.
 		 */
-		public static from_string(string: string, _end: string | null): Structure;
+		public static from_string(string: string): Structure;
 		/**
 		 * Creates a new {@link Structure} with the given name.  Parses the
 		 * list of variable arguments and sets fields to the values listed.
@@ -14889,34 +14855,31 @@ declare namespace imports.gi.Gst {
 		 * allocated #GValueArray and return it through #array. Be aware that this is
 		 * slower then getting the #GValue directly.
 		 * @param fieldname the name of a field
-		 * @param array a pointer to a #GValueArray
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a %GST_TYPE_ARRAY,
 		 * this function returns %FALSE.
 		 */
-		public get_array(fieldname: string, array: GObject.ValueArray): boolean;
+		public get_array(fieldname: string): boolean;
 		/**
 		 * Sets the boolean pointed to by #value corresponding to the value of the
 		 * given field.  Caller is responsible for making sure the field exists
 		 * and has the correct type.
 		 * @param fieldname the name of a field
-		 * @param value a pointer to a #gboolean to set
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a boolean, this
 		 * function returns %FALSE.
 		 */
-		public get_boolean(fieldname: string, value: boolean): boolean;
+		public get_boolean(fieldname: string): boolean;
 		/**
 		 * Sets the clock time pointed to by #value corresponding to the clock time
 		 * of the given field.  Caller is responsible for making sure the field exists
 		 * and has the correct type.
 		 * @param fieldname the name of a field
-		 * @param value a pointer to a {@link ClockTime} to set
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a {@link ClockTime}, this
 		 * function returns %FALSE.
 		 */
-		public get_clock_time(fieldname: string, value: ClockTime): boolean;
+		public get_clock_time(fieldname: string): boolean;
 		/**
 		 * Sets the date pointed to by #value corresponding to the date of the
 		 * given field.  Caller is responsible for making sure the field exists
@@ -14927,12 +14890,11 @@ declare namespace imports.gi.Gst {
 		 * inconsistent with e.g. gst_structure_get_string() which doesn't return a
 		 * copy of the string).
 		 * @param fieldname the name of a field
-		 * @param value a pointer to a #GDate to set
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a data, this function
 		 * returns %FALSE.
 		 */
-		public get_date(fieldname: string, value: GLib.Date): boolean;
+		public get_date(fieldname: string): boolean;
 		/**
 		 * Sets the datetime pointed to by #value corresponding to the datetime of the
 		 * given field. Caller is responsible for making sure the field exists
@@ -14943,35 +14905,32 @@ declare namespace imports.gi.Gst {
 		 * (note: this is inconsistent with e.g. gst_structure_get_string()
 		 * which doesn't return a copy of the string).
 		 * @param fieldname the name of a field
-		 * @param value a pointer to a {@link DateTime} to set
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a data, this function
 		 * returns %FALSE.
 		 */
-		public get_date_time(fieldname: string, value: DateTime): boolean;
+		public get_date_time(fieldname: string): boolean;
 		/**
 		 * Sets the double pointed to by #value corresponding to the value of the
 		 * given field.  Caller is responsible for making sure the field exists
 		 * and has the correct type.
 		 * @param fieldname the name of a field
-		 * @param value a pointer to a gdouble to set
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a double, this
 		 * function returns %FALSE.
 		 */
-		public get_double(fieldname: string, value: number): boolean;
+		public get_double(fieldname: string): boolean;
 		/**
 		 * Sets the int pointed to by #value corresponding to the value of the
 		 * given field.  Caller is responsible for making sure the field exists,
 		 * has the correct type and that the enumtype is correct.
 		 * @param fieldname the name of a field
 		 * @param enumtype the enum type of a field
-		 * @param value a pointer to an int to set
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain an enum of the given
 		 * type, this function returns %FALSE.
 		 */
-		public get_enum(fieldname: string, enumtype: GObject.Type, value: number): boolean;
+		public get_enum(fieldname: string, enumtype: GObject.Type): boolean;
 		/**
 		 * Finds the field with the given name, and returns the type of the
 		 * value it contains.  If the field is not found, G_TYPE_INVALID is
@@ -14984,59 +14943,52 @@ declare namespace imports.gi.Gst {
 		 * Read the GstFlagSet flags and mask out of the structure into the
 		 * provided pointers.
 		 * @param fieldname the name of a field
-		 * @param value_flags a pointer to a guint for the flags field
-		 * @param value_mask a pointer to a guint for the mask field
 		 * @returns %TRUE if the values could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a GstFlagSet, this
 		 * function returns %FALSE.
 		 */
-		public get_flagset(fieldname: string, value_flags: number | null, value_mask: number | null): boolean;
+		public get_flagset(fieldname: string): boolean;
 		/**
 		 * Sets the integers pointed to by #value_numerator and #value_denominator
 		 * corresponding to the value of the given field.  Caller is responsible
 		 * for making sure the field exists and has the correct type.
 		 * @param fieldname the name of a field
-		 * @param value_numerator a pointer to an int to set
-		 * @param value_denominator a pointer to an int to set
 		 * @returns %TRUE if the values could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a GstFraction, this
 		 * function returns %FALSE.
 		 */
-		public get_fraction(fieldname: string, value_numerator: number, value_denominator: number): boolean;
+		public get_fraction(fieldname: string): boolean;
 		/**
 		 * Sets the int pointed to by #value corresponding to the value of the
 		 * given field.  Caller is responsible for making sure the field exists
 		 * and has the correct type.
 		 * @param fieldname the name of a field
-		 * @param value a pointer to an int to set
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain an int, this function
 		 * returns %FALSE.
 		 */
-		public get_int(fieldname: string, value: number): boolean;
+		public get_int(fieldname: string): boolean;
 		/**
 		 * Sets the #gint64 pointed to by #value corresponding to the value of the
 		 * given field. Caller is responsible for making sure the field exists
 		 * and has the correct type.
 		 * @param fieldname the name of a field
-		 * @param value a pointer to a #gint64 to set
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a #gint64, this function
 		 * returns %FALSE.
 		 */
-		public get_int64(fieldname: string, value: number): boolean;
+		public get_int64(fieldname: string): boolean;
 		/**
 		 * This is useful in language bindings where unknown #GValue types are not
 		 * supported. This function will convert the %GST_TYPE_LIST into a newly
 		 * allocated GValueArray and return it through #array. Be aware that this is
 		 * slower then getting the #GValue directly.
 		 * @param fieldname the name of a field
-		 * @param array a pointer to a #GValueArray
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a %GST_TYPE_LIST, this
 		 * function returns %FALSE.
 		 */
-		public get_list(fieldname: string, array: GObject.ValueArray): boolean;
+		public get_list(fieldname: string): boolean;
 		/**
 		 * Get the name of #structure as a string.
 		 * @returns the name of the structure.
@@ -15064,23 +15016,21 @@ declare namespace imports.gi.Gst {
 		 * given field.  Caller is responsible for making sure the field exists
 		 * and has the correct type.
 		 * @param fieldname the name of a field
-		 * @param value a pointer to a uint to set
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a uint, this function
 		 * returns %FALSE.
 		 */
-		public get_uint(fieldname: string, value: number): boolean;
+		public get_uint(fieldname: string): boolean;
 		/**
 		 * Sets the #guint64 pointed to by #value corresponding to the value of the
 		 * given field. Caller is responsible for making sure the field exists
 		 * and has the correct type.
 		 * @param fieldname the name of a field
-		 * @param value a pointer to a #guint64 to set
 		 * @returns %TRUE if the value could be set correctly. If there was no field
 		 * with #fieldname or the existing field did not contain a #guint64, this function
 		 * returns %FALSE.
 		 */
-		public get_uint64(fieldname: string, value: number): boolean;
+		public get_uint64(fieldname: string): boolean;
 		/**
 		 * Parses the variable arguments and reads fields from #structure accordingly.
 		 * valist-variant of gst_structure_get(). Look at the documentation of
@@ -15466,21 +15416,19 @@ declare namespace imports.gi.Gst {
 		 * Copies the contents for the given tag into the value, merging multiple values
 		 * into one if multiple values are associated with the tag.
 		 * @param tag tag to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_boolean(tag: string, value: boolean): boolean;
+		public get_boolean(tag: string): boolean;
 		/**
 		 * Gets the value that is at the given index for the given tag in the given
 		 * list.
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_boolean_index(tag: string, index: number, value: boolean): boolean;
+		public get_boolean_index(tag: string, index: number): boolean;
 		/**
 		 * Copies the first date for the given tag in the taglist into the variable
 		 * pointed to by #value. Free the date with g_date_free() when it is no longer
@@ -15488,12 +15436,10 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: g_date_free
 		 * @param tag tag to read out
-		 * @param value address of a GDate pointer
-		 *     variable to store the result into
 		 * @returns %TRUE, if a date was copied, %FALSE if the tag didn't exist in the
 		 *              given list or if it was %NULL.
 		 */
-		public get_date(tag: string, value: GLib.Date): boolean;
+		public get_date(tag: string): boolean;
 		/**
 		 * Gets the date that is at the given index for the given tag in the given
 		 * list and copies it into the variable pointed to by #value. Free the date
@@ -15502,11 +15448,10 @@ declare namespace imports.gi.Gst {
 		 * Free-function: g_date_free
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list or if it was %NULL.
 		 */
-		public get_date_index(tag: string, index: number, value: GLib.Date): boolean;
+		public get_date_index(tag: string, index: number): boolean;
 		/**
 		 * Copies the first datetime for the given tag in the taglist into the variable
 		 * pointed to by #value. Unref the date with gst_date_time_unref() when
@@ -15514,12 +15459,10 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: gst_date_time_unref
 		 * @param tag tag to read out
-		 * @param value address of a {@link DateTime}
-		 *     pointer variable to store the result into
 		 * @returns %TRUE, if a datetime was copied, %FALSE if the tag didn't exist in
 		 *              the given list or if it was %NULL.
 		 */
-		public get_date_time(tag: string, value: DateTime): boolean;
+		public get_date_time(tag: string): boolean;
 		/**
 		 * Gets the datetime that is at the given index for the given tag in the given
 		 * list and copies it into the variable pointed to by #value. Unref the datetime
@@ -15528,106 +15471,95 @@ declare namespace imports.gi.Gst {
 		 * Free-function: gst_date_time_unref
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list or if it was %NULL.
 		 */
-		public get_date_time_index(tag: string, index: number, value: DateTime): boolean;
+		public get_date_time_index(tag: string, index: number): boolean;
 		/**
 		 * Copies the contents for the given tag into the value, merging multiple values
 		 * into one if multiple values are associated with the tag.
 		 * @param tag tag to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_double(tag: string, value: number): boolean;
+		public get_double(tag: string): boolean;
 		/**
 		 * Gets the value that is at the given index for the given tag in the given
 		 * list.
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_double_index(tag: string, index: number, value: number): boolean;
+		public get_double_index(tag: string, index: number): boolean;
 		/**
 		 * Copies the contents for the given tag into the value, merging multiple values
 		 * into one if multiple values are associated with the tag.
 		 * @param tag tag to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_float(tag: string, value: number): boolean;
+		public get_float(tag: string): boolean;
 		/**
 		 * Gets the value that is at the given index for the given tag in the given
 		 * list.
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_float_index(tag: string, index: number, value: number): boolean;
+		public get_float_index(tag: string, index: number): boolean;
 		/**
 		 * Copies the contents for the given tag into the value, merging multiple values
 		 * into one if multiple values are associated with the tag.
 		 * @param tag tag to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_int(tag: string, value: number): boolean;
+		public get_int(tag: string): boolean;
 		/**
 		 * Copies the contents for the given tag into the value, merging multiple values
 		 * into one if multiple values are associated with the tag.
 		 * @param tag tag to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_int64(tag: string, value: number): boolean;
+		public get_int64(tag: string): boolean;
 		/**
 		 * Gets the value that is at the given index for the given tag in the given
 		 * list.
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_int64_index(tag: string, index: number, value: number): boolean;
+		public get_int64_index(tag: string, index: number): boolean;
 		/**
 		 * Gets the value that is at the given index for the given tag in the given
 		 * list.
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_int_index(tag: string, index: number, value: number): boolean;
+		public get_int_index(tag: string, index: number): boolean;
 		/**
 		 * Copies the contents for the given tag into the value, merging multiple values
 		 * into one if multiple values are associated with the tag.
 		 * @param tag tag to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_pointer(tag: string, value: any): boolean;
+		public get_pointer(tag: string): boolean;
 		/**
 		 * Gets the value that is at the given index for the given tag in the given
 		 * list.
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_pointer_index(tag: string, index: number, value: any): boolean;
+		public get_pointer_index(tag: string, index: number): boolean;
 		/**
 		 * Copies the first sample for the given tag in the taglist into the variable
 		 * pointed to by #sample. Free the sample with gst_sample_unref() when it is
@@ -15637,12 +15569,10 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: gst_sample_unref
 		 * @param tag tag to read out
-		 * @param sample address of a GstSample
-		 *     pointer variable to store the result into
 		 * @returns %TRUE, if a sample was returned, %FALSE if the tag didn't exist in
 		 *              the given list or if it was %NULL.
 		 */
-		public get_sample(tag: string, sample: Sample): boolean;
+		public get_sample(tag: string): boolean;
 		/**
 		 * Gets the sample that is at the given index for the given tag in the given
 		 * list and copies it into the variable pointed to by #sample. Free the sample
@@ -15653,12 +15583,10 @@ declare namespace imports.gi.Gst {
 		 * Free-function: gst_sample_unref
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param sample address of a GstSample
-		 *     pointer variable to store the result into
 		 * @returns %TRUE, if a sample was copied, %FALSE if the tag didn't exist in the
 		 *              given list or if it was %NULL.
 		 */
-		public get_sample_index(tag: string, index: number, sample: Sample): boolean;
+		public get_sample_index(tag: string, index: number): boolean;
 		/**
 		 * Gets the scope of #list.
 		 * @returns The scope of #list
@@ -15677,11 +15605,10 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: g_free
 		 * @param tag tag to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_string(tag: string, value: string): boolean;
+		public get_string(tag: string): boolean;
 		/**
 		 * Gets the value that is at the given index for the given tag in the given
 		 * list.
@@ -15693,11 +15620,10 @@ declare namespace imports.gi.Gst {
 		 * Free-function: g_free
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_string_index(tag: string, index: number, value: string): boolean;
+		public get_string_index(tag: string, index: number): boolean;
 		/**
 		 * Checks how many value are stored in this tag list for the given tag.
 		 * @param tag the tag to query
@@ -15708,40 +15634,36 @@ declare namespace imports.gi.Gst {
 		 * Copies the contents for the given tag into the value, merging multiple values
 		 * into one if multiple values are associated with the tag.
 		 * @param tag tag to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_uint(tag: string, value: number): boolean;
+		public get_uint(tag: string): boolean;
 		/**
 		 * Copies the contents for the given tag into the value, merging multiple values
 		 * into one if multiple values are associated with the tag.
 		 * @param tag tag to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_uint64(tag: string, value: number): boolean;
+		public get_uint64(tag: string): boolean;
 		/**
 		 * Gets the value that is at the given index for the given tag in the given
 		 * list.
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_uint64_index(tag: string, index: number, value: number): boolean;
+		public get_uint64_index(tag: string, index: number): boolean;
 		/**
 		 * Gets the value that is at the given index for the given tag in the given
 		 * list.
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public get_uint_index(tag: string, index: number, value: number): boolean;
+		public get_uint_index(tag: string, index: number): boolean;
 		/**
 		 * Gets the value that is at the given index for the given tag in the given
 		 * list.
@@ -15799,11 +15721,10 @@ declare namespace imports.gi.Gst {
 		 * be non-%NULL and non-empty.
 		 * @param tag tag to read out
 		 * @param index number of entry to read out
-		 * @param value location for the result
 		 * @returns %TRUE, if a value was set, %FALSE if the tag didn't exist in the
 		 *              given list.
 		 */
-		public peek_string_index(tag: string, index: number, value: string): boolean;
+		public peek_string_index(tag: string, index: number): boolean;
 		/**
 		 * Removes the given tag from the taglist.
 		 * @param tag tag to remove
@@ -15992,14 +15913,10 @@ declare namespace imports.gi.Gst {
 		 * appropriate storages. Loops are e.g. used by sampled instruments. GStreamer
 		 * is not automatically applying the loop. The application can process this
 		 * meta data and use it e.g. to send a seek-event to loop a section.
-		 * @param loop_type the storage for the loop_type
-		 *             value, leave %NULL if not need.
-		 * @param repeat_count the storage for the repeat_count
-		 *                value, leave %NULL if not need.
 		 * @returns %TRUE if all non-%NULL storage pointers were filled with appropriate
 		 * values, %FALSE otherwise.
 		 */
-		public get_loop(loop_type: TocLoopType | null, repeat_count: number | null): boolean;
+		public get_loop(): boolean;
 		/**
 		 * Gets the parent {@link TocEntry} of #entry.
 		 * @returns The parent {@link TocEntry} of #entry
@@ -16008,14 +15925,10 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get #start and #stop values from the #entry and write them into appropriate
 		 * storages.
-		 * @param start the storage for the start value, leave
-		 *   %NULL if not need.
-		 * @param stop the storage for the stop value, leave
-		 *   %NULL if not need.
 		 * @returns %TRUE if all non-%NULL storage pointers were filled with appropriate
 		 * values, %FALSE otherwise.
 		 */
-		public get_start_stop_times(start: number | null, stop: number | null): boolean;
+		public get_start_stop_times(): boolean;
 		/**
 		 * Gets the sub-entries of #entry.
 		 * @returns A #GList of {@link TocEntry} of #entry
@@ -16123,11 +16036,10 @@ declare namespace imports.gi.Gst {
 		 * the stream. The returned memory is valid until the typefinding function
 		 * returns and must not be freed.
 		 * @param offset The offset
-		 * @param size The number of bytes to return
 		 * @returns the
 		 *     requested data, or %NULL if that data is not available.
 		 */
-		public peek(offset: number, size: number): number[];
+		public peek(offset: number): number[];
 		/**
 		 * If a {@link TypeFindFunction} calls this function it suggests the caps with the
 		 * given probability. A #GstTypeFindFunction may supply different suggestions
@@ -16565,9 +16477,8 @@ declare namespace imports.gi.Gst {
 		 * Gets a single property using the GstChildProxy mechanism.
 		 * You are responsible for freeing it by calling g_value_unset()
 		 * @param name name of the property
-		 * @param value a #GValue that should take the result.
 		 */
-		get_property(name: string, value: GObject.Value): void;
+		get_property(name: string): void;
 		/**
 		 * Gets properties of the parent object and its children.
 		 * @param first_property_name name of the first property to get
@@ -16579,15 +16490,11 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * MT safe.
 		 * @param name name of the property to look up
-		 * @param target pointer to a #GObject that
-		 *     takes the real object to set property on
-		 * @param pspec pointer to take the #GParamSpec
-		 *     describing the property
 		 * @returns %TRUE if #target and #pspec could be found. %FALSE otherwise. In that
 		 * case the values for #pspec and #target are not modified. Unref #target after
 		 * usage. For plain GObjects #target is the same as #object.
 		 */
-		lookup(name: string, target: GObject.Object | null, pspec: GObject.ParamSpec | null): boolean;
+		lookup(name: string): boolean;
 		/**
 		 * Sets properties of the parent object and its children.
 		 * @param first_property_name name of the first property to set
@@ -16659,11 +16566,10 @@ declare namespace imports.gi.Gst {
 		 * something like e.g. "comment". Returned values need to be released when done.
 		 * @param name preset name
 		 * @param tag meta data item name
-		 * @param value value
 		 * @returns %TRUE for success, %FALSE if e.g. there is no preset with that #name
 		 * or no value for the given #tag
 		 */
-		get_meta(name: string, tag: string, value: string): boolean;
+		get_meta(name: string, tag: string): boolean;
 		/**
 		 * Get a copy of preset names as a %NULL terminated string array.
 		 * @returns 
@@ -20211,10 +20117,9 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * When #meta is set to %NULL, the item will be removed from the buffer.
 		 * @param buffer a {@link Buffer}
-		 * @param meta a pointer to a {@link Meta}
 		 * @returns %FALSE when gst_buffer_foreach_meta() should stop
 		 */
-		(buffer: Buffer, meta: Meta): boolean;
+		(buffer: Buffer): boolean;
 	}
 
 	/**
@@ -20241,11 +20146,10 @@ declare namespace imports.gi.Gst {
 		 * When #buffer has been made writable, the new buffer reference can be assigned
 		 * to #buffer. This function is responsible for unreffing the old buffer when
 		 * removing or modifying.
-		 * @param buffer pointer the buffer
 		 * @param idx the index of #buffer
 		 * @returns %FALSE when gst_buffer_list_foreach() should stop
 		 */
-		(buffer: Buffer, idx: number): boolean;
+		(idx: number): boolean;
 	}
 
 	/**
@@ -21464,14 +21368,9 @@ declare namespace imports.gi.Gst {
 	 * @param xy Pairs of (x,y) values
 	 * @param temp Temporary scratch space used by the function
 	 * @param _n number of (x,y) pairs
-	 * @param m_num numerator of calculated slope
-	 * @param m_denom denominator of calculated slope
-	 * @param _b Offset at Y-axis
-	 * @param xbase Offset at X-axis
-	 * @param r_squared R-squared
 	 * @returns %TRUE if the linear regression was successfully calculated
 	 */
-	function calculate_linear_regression(xy: ClockTime, temp: ClockTime, _n: number, m_num: ClockTime, m_denom: ClockTime, _b: ClockTime, xbase: ClockTime, r_squared: number): boolean;
+	function calculate_linear_regression(xy: ClockTime, temp: ClockTime, _n: number): boolean;
 
 	/**
 	 * Creates a {@link CapsFeatures} from a string representation.
@@ -22020,12 +21919,11 @@ declare namespace imports.gi.Gst {
 	 * alternatives such as g_vasprintf().
 	 * 
 	 * Free #result with g_free().
-	 * @param result the resulting string
 	 * @param format a printf style format string
 	 * @param args the va_list of printf arguments for #format
 	 * @returns the length of the string allocated into #result or -1 on any error
 	 */
-	function info_vasprintf(result: string, format: string, args: any[]): number;
+	function info_vasprintf(format: string, args: any[]): number;
 
 	/**
 	 * Initializes the GStreamer library, setting up internal path lists,
@@ -22046,10 +21944,8 @@ declare namespace imports.gi.Gst {
 	 * functions in other glib-style libraries, such as gtk_init\(\). In
 	 * particular, unknown command line options cause this function to
 	 * abort program execution.
-	 * @param argc pointer to application's argc
-	 * @param argv pointer to application's argv
 	 */
-	function init(argc: number | null, argv: string[] | null): void;
+	function init(): void;
 
 	/**
 	 * Initializes the GStreamer library, setting up internal path lists,
@@ -22058,11 +21954,9 @@ declare namespace imports.gi.Gst {
 	 * This function will return %FALSE if GStreamer could not be initialized
 	 * for some reason.  If you want your program to fail fatally,
 	 * use gst_init() instead.
-	 * @param argc pointer to application's argc
-	 * @param argv pointer to application's argv
 	 * @returns %TRUE if GStreamer could be initialized.
 	 */
-	function init_check(argc: number | null, argv: string[] | null): boolean;
+	function init_check(): boolean;
 
 	/**
 	 * Returns a #GOptionGroup with GStreamer's argument specifications. The
@@ -22110,13 +22004,11 @@ declare namespace imports.gi.Gst {
 	 * message is unreffed, the new one is reffed).
 	 * 
 	 * Either #new_message or the #GstMessage pointed to by #old_message may be %NULL.
-	 * @param old_message pointer to a
-	 *     pointer to a {@link Message} to be replaced.
 	 * @param new_message pointer to a {@link Message} that will
 	 *     replace the message pointed to by #old_message.
 	 * @returns %TRUE if #new_message was different from #old_message
 	 */
-	function message_replace(old_message: Message | null, new_message: Message | null): boolean;
+	function message_replace(new_message: Message | null): boolean;
 
 	/**
 	 * Get a printable name for the given message type. Do not modify or free.
@@ -22182,21 +22074,17 @@ declare namespace imports.gi.Gst {
 	 * #newdata is increased.
 	 * 
 	 * Either #newdata and the value pointed to by #olddata may be %NULL.
-	 * @param olddata pointer to a pointer to a
-	 *     mini-object to be replaced
 	 * @param newdata pointer to new mini-object
 	 * @returns %TRUE if #newdata was different from #olddata
 	 */
-	function mini_object_replace(olddata: MiniObject | null, newdata: MiniObject | null): boolean;
+	function mini_object_replace(newdata: MiniObject | null): boolean;
 
 	/**
 	 * Replace the current {@link MiniObject} pointer to by #olddata with %NULL and
 	 * return the old value.
-	 * @param olddata pointer to a pointer to a mini-object to
-	 *     be stolen
 	 * @returns the {@link MiniObject} at #oldata
 	 */
-	function mini_object_steal(olddata: MiniObject): MiniObject;
+	function mini_object_steal(): MiniObject;
 
 	/**
 	 * Modifies a pointer to point to a new mini-object. The modification
@@ -22205,12 +22093,10 @@ declare namespace imports.gi.Gst {
 	 * takes ownership of #newdata.
 	 * 
 	 * Either #newdata and the value pointed to by #olddata may be %NULL.
-	 * @param olddata pointer to a pointer to a mini-object to
-	 *     be replaced
 	 * @param newdata pointer to new mini-object
 	 * @returns %TRUE if #newdata was different from #olddata
 	 */
-	function mini_object_take(olddata: MiniObject, newdata: MiniObject): boolean;
+	function mini_object_take(newdata: MiniObject): boolean;
 
 	/**
 	 * Return the name of a pad mode, for use in debug messages mostly.
@@ -22600,12 +22486,10 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * It is a programming error if both #newstr and the value pointed to by
 	 * #oldstr_ptr refer to the same, non-%NULL structure.
-	 * @param oldstr_ptr pointer to a place of
-	 *     a {@link Structure} to take
 	 * @param newstr a new {@link Structure}
 	 * @returns %TRUE if #newstr was different from #oldstr_ptr
 	 */
-	function structure_take(oldstr_ptr: Structure | null, newstr: Structure | null): boolean;
+	function structure_take(newstr: Structure | null): boolean;
 
 	/**
 	 * Checks if the given type is already registered.
@@ -22657,30 +22541,27 @@ declare namespace imports.gi.Gst {
 	 * merging multiple values into one if multiple values are associated
 	 * with the tag.
 	 * You must g_value_unset() the value after use.
-	 * @param dest uninitialized #GValue to copy into
 	 * @param list list to get the tag from
 	 * @param tag tag to read out
 	 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
 	 *          given list.
 	 */
-	function tag_list_copy_value(dest: GObject.Value, list: TagList, tag: string): boolean;
+	function tag_list_copy_value(list: TagList, tag: string): boolean;
 
 	/**
 	 * This is a convenience function for the func argument of gst_tag_register().
 	 * It concatenates all given strings using a comma. The tag must be registered
 	 * as a G_TYPE_STRING or this function will fail.
-	 * @param dest uninitialized GValue to store result in
 	 * @param src GValue to copy from
 	 */
-	function tag_merge_strings_with_comma(dest: GObject.Value, src: GObject.Value): void;
+	function tag_merge_strings_with_comma(src: GObject.Value): void;
 
 	/**
 	 * This is a convenience function for the func argument of gst_tag_register().
 	 * It creates a copy of the first value from the list.
-	 * @param dest uninitialized GValue to store result in
 	 * @param src GValue to copy from
 	 */
-	function tag_merge_use_first(dest: GObject.Value, src: GObject.Value): void;
+	function tag_merge_use_first(src: GObject.Value): void;
 
 	/**
 	 * Registers a new tag type for the use with GStreamer's type system. If a type
@@ -22781,10 +22662,9 @@ declare namespace imports.gi.Gst {
 	 * Checks if #type is plugin API. See gst_type_mark_as_plugin_api() for
 	 * details.
 	 * @param _type a GType
-	 * @param flags What {@link PluginAPIFlags} the plugin was marked with
 	 * @returns %TRUE if #type is plugin API or %FALSE otherwise.
 	 */
-	function type_is_plugin_api(_type: GObject.Type, flags: PluginAPIFlags): boolean;
+	function type_is_plugin_api(_type: GObject.Type): boolean;
 
 	/**
 	 * Marks #type as plugin API. This should be called in `class_init` of
@@ -22954,10 +22834,11 @@ declare namespace imports.gi.Gst {
 	 * Transforms a #gdouble to a fraction and simplifies
 	 * the result.
 	 * @param src #gdouble to transform
-	 * @param dest_n pointer to a #gint to hold the result numerator
-	 * @param dest_d pointer to a #gint to hold the result denominator
+	 * @returns pointer to a #gint to hold the result numerator
+	 * 
+	 * pointer to a #gint to hold the result denominator
 	 */
-	function util_double_to_fraction(src: number, dest_n: number, dest_d: number): void;
+	function util_double_to_fraction(src: number): [ dest_n: number, dest_d: number ];
 
 	/**
 	 * Dumps the buffer memory into a hex representation. Useful for debugging.
@@ -22979,11 +22860,9 @@ declare namespace imports.gi.Gst {
 	 * @param a_d Denominator of first value
 	 * @param b_n Numerator of second value
 	 * @param b_d Denominator of second value
-	 * @param res_n Pointer to #gint to hold the result numerator
-	 * @param res_d Pointer to #gint to hold the result denominator
 	 * @returns %FALSE on overflow, %TRUE otherwise.
 	 */
-	function util_fraction_add(a_n: number, a_d: number, b_n: number, b_d: number, res_n: number, res_d: number): boolean;
+	function util_fraction_add(a_n: number, a_d: number, b_n: number, b_d: number): boolean;
 
 	/**
 	 * Compares the fractions #a_n/#a_d and #b_n/#b_d and returns
@@ -23003,19 +22882,16 @@ declare namespace imports.gi.Gst {
 	 * @param a_d Denominator of first value
 	 * @param b_n Numerator of second value
 	 * @param b_d Denominator of second value
-	 * @param res_n Pointer to #gint to hold the result numerator
-	 * @param res_d Pointer to #gint to hold the result denominator
 	 * @returns %FALSE on overflow, %TRUE otherwise.
 	 */
-	function util_fraction_multiply(a_n: number, a_d: number, b_n: number, b_d: number, res_n: number, res_d: number): boolean;
+	function util_fraction_multiply(a_n: number, a_d: number, b_n: number, b_d: number): boolean;
 
 	/**
 	 * Transforms a fraction to a #gdouble.
 	 * @param src_n Fraction numerator as #gint
 	 * @param src_d Fraction denominator #gint
-	 * @param dest pointer to a #gdouble for the result
 	 */
-	function util_fraction_to_double(src_n: number, src_d: number, dest: number): void;
+	function util_fraction_to_double(src_n: number, src_d: number): void;
 
 	function util_gdouble_to_guint64(value: number): number;
 
@@ -23025,10 +22901,9 @@ declare namespace imports.gi.Gst {
 	 * properties which are otherwise not an accessible type.
 	 * @param object the object to set the array to
 	 * @param name the name of the property to set
-	 * @param array a return #GValueArray
 	 * @returns 
 	 */
-	function util_get_object_array(object: GObject.Object, name: string, array: GObject.ValueArray): boolean;
+	function util_get_object_array(object: GObject.Object, name: string): boolean;
 
 	/**
 	 * Get a timestamp as GstClockTime to be used for interval measurements.
@@ -23124,10 +22999,9 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * Note that this function is dangerous as it does not return any indication
 	 * if the conversion worked or not.
-	 * @param value the value to set
 	 * @param value_str the string to get the value from
 	 */
-	function util_set_value_from_string(value: GObject.Value, value_str: string): void;
+	function util_set_value_from_string(value_str: string): void;
 
 	/**
 	 * Scale #val by the rational number #num / #denom, avoiding overflows and
@@ -23287,12 +23161,10 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Tries to deserialize a string into the type specified by the given GValue.
 	 * If the operation succeeds, %TRUE is returned, %FALSE otherwise.
-	 * @param dest #GValue to fill with contents of
-	 *     deserialization
 	 * @param src string to deserialize
 	 * @returns %TRUE on success
 	 */
-	function value_deserialize(dest: GObject.Value, src: string): boolean;
+	function value_deserialize(src: string): boolean;
 
 	/**
 	 * Fixate #src into a new value #dest.
@@ -23455,25 +23327,20 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Initialises the target value to be of the same type as source and then copies
 	 * the contents from source to target.
-	 * @param dest the target value
 	 * @param src the source value
 	 */
-	function value_init_and_copy(dest: GObject.Value, src: GObject.Value): void;
+	function value_init_and_copy(src: GObject.Value): void;
 
 	/**
 	 * Calculates the intersection of two values.  If the values have
 	 * a non-empty intersection, the value representing the intersection
 	 * is placed in #dest, unless %NULL.  If the intersection is non-empty,
 	 * #dest is not modified.
-	 * @param dest 
-	 *   a uninitialized #GValue that will hold the calculated
-	 *   intersection value. May be %NULL if the resulting set if not
-	 *   needed.
 	 * @param value1 a value to intersect
 	 * @param value2 another value to intersect
 	 * @returns %TRUE if the intersection is non-empty
 	 */
-	function value_intersect(dest: GObject.Value | null, value1: GObject.Value, value2: GObject.Value): boolean;
+	function value_intersect(value1: GObject.Value, value2: GObject.Value): boolean;
 
 	/**
 	 * Tests if the given GValue, if available in a GstStructure (or any other
@@ -23624,33 +23491,31 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Subtracts #subtrahend from #minuend and stores the result in #dest.
 	 * Note that this means subtraction as in sets, not as in mathematics.
-	 * @param dest the destination value
-	 *     for the result if the subtraction is not empty. May be %NULL,
-	 *     in which case the resulting set will not be computed, which can
-	 *     give a fair speedup.
 	 * @param minuend the value to subtract from
 	 * @param subtrahend the value to subtract
 	 * @returns %TRUE if the subtraction is not empty
 	 */
-	function value_subtract(dest: GObject.Value | null, minuend: GObject.Value, subtrahend: GObject.Value): boolean;
+	function value_subtract(minuend: GObject.Value, subtrahend: GObject.Value): boolean;
 
 	/**
 	 * Creates a GValue corresponding to the union of #value1 and #value2.
-	 * @param dest the destination value
 	 * @param value1 a value to union
 	 * @param value2 another value to union
 	 * @returns %TRUE if the union succeeded.
 	 */
-	function value_union(dest: GObject.Value, value1: GObject.Value, value2: GObject.Value): boolean;
+	function value_union(value1: GObject.Value, value2: GObject.Value): boolean;
 
 	/**
 	 * Gets the version number of the GStreamer library.
-	 * @param major pointer to a guint to store the major version number
-	 * @param minor pointer to a guint to store the minor version number
-	 * @param micro pointer to a guint to store the micro version number
-	 * @param nano pointer to a guint to store the nano version number
+	 * @returns pointer to a guint to store the major version number
+	 * 
+	 * pointer to a guint to store the minor version number
+	 * 
+	 * pointer to a guint to store the micro version number
+	 * 
+	 * pointer to a guint to store the nano version number
 	 */
-	function version(major: number, minor: number, micro: number, nano: number): void;
+	function version(): [ major: number, minor: number, micro: number, nano: number ];
 
 	/**
 	 * This function returns a string that is useful for describing this version
