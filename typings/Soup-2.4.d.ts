@@ -2779,7 +2779,7 @@ declare namespace imports.gi.Soup {
 	interface Server extends ServerMixin {}
 
 	class Server {
-		public constructor(options?: Partial<SeverOptions>);
+		public constructor(options?: Partial<ServerOptions>);
 		/**
 		 * Creates a new {@link Server}. This is exactly equivalent to calling
 		 * g_object_new() and specifying %SOUP_TYPE_SERVER as the type.

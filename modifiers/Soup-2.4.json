@@ -29,7 +29,7 @@
                         "newParam": [
                             {
                                 "name": "options",
-                                "type": "Partial<SeverOptions>",
+                                "type": "Partial<ServerOptions>",
                                 "optional": true,
                                 "docs": ""
                             }
