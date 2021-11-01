@@ -41,6 +41,7 @@ export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclu
     let props: ParameterNode[] = [];
     let callback_fields: FunctionNode[] = [];
     let methods = getAllMethods(rec_node);
+    let exclude_all_members = exclude?.members ?? false;
 
     if (rec_node.field)
         for (let f of rec_node.field) {
@@ -59,26 +60,26 @@ export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclu
             if (JSON.stringify(construct) == undefined || construct == null)
                 continue;
             const func_name = construct.$.name;
-            const excluded = exclude?.static?.includes(func_name) ?? false;
+            const excluded = (exclude?.static?.includes(func_name) ?? false) || exclude_all_members;
             const modifierFunc = modifier?.function?.[func_name]
             body += renderConstructorField(construct, ns_name, 1, excluded, modifierFunc) + "\n";
         }
     }
 
     for (let f of props) {
-        const excluded = exclude?.prop?.includes(f.$.name) ?? false;
+        const excluded = (exclude?.prop?.includes(f.$.name) ?? false) || exclude_all_members;
         body += renderProperty(f, ns_name, modifier?.prop?.[f.$.name], true, 1, excluded) + '\n';
     }
 
     for (let c of callback_fields) {
         const func_name = c.$.name;
-        const excluded = exclude?.callback?.includes(func_name) ?? false;
+        const excluded = (exclude?.callback?.includes(func_name) ?? false) || exclude_all_members;
         body += renderCallbackField(c, ns_name, 1, excluded) + '\n';
     }
 
     for (let m of methods) {
         const func_name = m.$.name;
-        const excluded = exclude?.method?.includes(func_name) ?? false;
+        const excluded = (exclude?.method?.includes(func_name) ?? false) || exclude_all_members;
         const modifierFunc = modifier?.function?.[func_name]
         body += renderMethod(m, ns_name, modifierFunc, { indentNum: 1, exclude: excluded }) + '\n';
     }

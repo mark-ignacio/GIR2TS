@@ -60,11 +60,11 @@ function renderNamespace(ns_node: NamespaceNode, ns_name: string, exclude?: Excl
         }
     if (ns_node.enumeration)
         for (let enum_node of ns_node.enumeration) {
-            body += '\n\t' + (renderEnumeration(enum_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
+            body += '\n\t' + (renderEnumeration(enum_node, ns_name, modifiers?.amend?.enumeration?.[enum_node.$.name]) + '\n').replace(/\n/gm, "\n\t");
         }
     if (ns_node.bitfield)
         for (let bf_node of ns_node.bitfield) {
-            body += '\n\t' + (renderEnumeration(bf_node, ns_name) + '\n').replace(/\n/gm, "\n\t");
+            body += '\n\t' + (renderEnumeration(bf_node, ns_name, modifiers?.amend?.enumeration?.[bf_node.$.name]) + '\n').replace(/\n/gm, "\n\t");
         }
     if (ns_node.callback)
         for (let cb_node of ns_node.callback) {

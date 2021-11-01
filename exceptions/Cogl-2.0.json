@@ -1,0 +1,11 @@
+{
+    "$schema": "./schema.json",
+    "exclude": {
+        "class": {
+            "GLES2Vtable": {
+                "members": true
+            }
+        },
+        "function": []
+    }
+}

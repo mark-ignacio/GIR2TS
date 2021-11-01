@@ -6,6 +6,9 @@ export interface ModifierDesc {
         function: {
             [func: string]: FunctionModifier;
         }
+        enumeration?: {
+            [enumV: string]: EnumModifier;
+        }
     }
 }
 
@@ -18,6 +21,18 @@ export interface ClassModifier {
     prop: {
         [prop: string]: ParamModifier;
     }
+}
+
+export interface EnumModifier {
+    doc?: string;
+    items: {
+        [val: string]: EnumValueModifier;
+    }
+}
+
+export interface EnumValueModifier {
+    name?: string;
+    value?: string;
 }
 
 export interface FunctionModifier {

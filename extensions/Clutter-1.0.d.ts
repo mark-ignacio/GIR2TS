@@ -249,6 +249,26 @@ declare namespace imports.gi.Clutter {
 
   export class PaintContext { }
 
+  export enum InputContentPurpose {
+    NORMAL = 0,
+    ALPHA = 1,
+    DIGITS = 2,
+    NUMBER = 3,
+    PHONE = 4,
+    URL = 5,
+    EMAIL = 6,
+    NAME = 7,
+    PASSWORD = 8,
+    DATE = 9,
+    TIME = 10,
+    DATETIME = 11,
+    TERMINAL = 12,
+  }
+
+  export enum InputContentHintFlags {
+    
+  }
+
   // CONSTS
 
   const BUTTON_MIDDLE: number;

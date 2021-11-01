@@ -47,6 +47,42 @@
                     "additionalProperties" : {
                         "$ref": "./function-schema.json"
                     }
+                },
+                "enumeration": {
+                    "description": "Enum modifiers",
+                    "type" : "object",
+                    "additionalProperties" : {
+                        "description": "Enum Name",
+                        "type" : "object",
+                        "properties": {
+                            "doc": {
+                                "description": "Docstring override",
+                                "type" : "string"
+                            },
+                            "items": {
+                                "description": "values to amend",
+                                "type" : "object",
+                                "additionalProperties" : {
+                                    "description": "Enum value modifier",
+                                    "type" : "object",
+                                    "properties": {
+                                        "doc": {
+                                            "description": "Docstring override",
+                                            "type" : "string"
+                                        },
+                                        "name": {
+                                            "description": "Modify name",
+                                            "type" : "string"
+                                        },
+                                        "value": {
+                                            "description": "Modify value",
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
