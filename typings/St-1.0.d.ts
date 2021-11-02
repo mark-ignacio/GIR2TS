@@ -3,12 +3,48 @@ declare namespace imports.gi.St {
 	 * use {@link Adjustment} instead.
 	 */
 	interface IAdjustment {
+		/**
+		 * If the adjustment is used as #ClutterAnimatable for a
+		 * #ClutterPropertyTransition, this property is used to determine which
+		 * monitor should drive the animation.
+		 */
+		actor: Clutter.Actor;
+		/**
+		 * The minimum value of the adjustment.
+		 */
 		lower: number;
+		/**
+		 * The page increment of the adjustment.
+		 */
 		page_increment: number;
+		/**
+		 * The page size of the adjustment.
+		 * 
+		 * Note that the page-size is irrelevant and should be set to zero if the
+		 * adjustment is used for a simple scalar value.
+		 */
 		page_size: number;
+		/**
+		 * The step increment of the adjustment.
+		 */
 		step_increment: number;
+		/**
+		 * The maximum value of the adjustment.
+		 * 
+		 * Note that values will be restricted by `upper - page-size` if
+		 * {@link Adjustment}:page-size is non-zero.
+		 */
 		upper: number;
+		/**
+		 * The value of the adjustment.
+		 */
 		value: number;
+		/**
+		 * Add a #ClutterTransition for the adjustment. If the transition stops, it will
+		 * be automatically removed if #ClutterTransition:remove-on-complete is %TRUE.
+		 * @param name a unique name for the transition
+		 * @param transition a #ClutterTransition
+		 */
 		add_transition(name: string, transition: Clutter.Transition): void;
 		/**
 		 * Adjusts the adjustment using delta values from a scroll event.
@@ -20,8 +56,24 @@ declare namespace imports.gi.St {
 		 *   or similar.
 		 */
 		adjust_for_scroll_event(delta: number): void;
+		/**
+		 * Set {@link Adjustment}:value to a value clamped between #lower and #upper. The
+		 * clamping described by st_adjustment_set_value() still applies.
+		 * @param lower the lower value
+		 * @param upper the upper value
+		 */
 		clamp_page(lower: number, upper: number): void;
+		/**
+		 * Get the #ClutterTransition for #name previously added with
+		 * st_adjustment_add_transition() or %NULL if not found.
+		 * @param name a transition name
+		 * @returns a #ClutterTransition
+		 */
 		get_transition(name: string): Clutter.Transition | null;
+		/**
+		 * Gets the current value of the adjustment. See st_adjustment_set_value().
+		 * @returns The current value of the adjustment
+		 */
 		get_value(): number;
 		/**
 		 * Gets all of #adjustment's values at once.
@@ -37,15 +89,36 @@ declare namespace imports.gi.St {
 		 * 
 		 * the page size
 		 */
-		get_values(): [ value: number, lower: number, upper: number, step_increment: number, page_increment: number, page_size: number ];
+		get_values(): [ value: number | null, lower: number | null, upper: number | null, step_increment: number | null, page_increment: number | null, page_size: number | null ];
 		remove_transition(name: string): void;
+		/**
+		 * Sets the {@link Adjustment} value. The value is clamped to lie between
+		 * #StAdjustment:lower and #StAdjustment:upper - #StAdjustment:page-size.
+		 * @param value the new value
+		 */
 		set_value(value: number): void;
+		/**
+		 * Sets all properties of the adjustment at once.
+		 * 
+		 * Use this function to avoid multiple emissions of the #GObject::notify and
+		 * {@link Adjustment}::changed signals. See st_adjustment_set_lower() for an
+		 * alternative way of compressing multiple emissions of #GObject::notify into
+		 * one.
+		 * @param value the new value
+		 * @param lower the new minimum value
+		 * @param upper the new maximum value
+		 * @param step_increment the new step increment
+		 * @param page_increment the new page increment
+		 * @param page_size the new page size
+		 */
 		set_values(value: number, lower: number, upper: number, step_increment: number, page_increment: number, page_size: number): void;
 		/**
-		 * Emitted when any of the adjustment values have changed
+		 * Emitted when any of the adjustment properties have changed, except for
+		 * {@link Adjustment}:value.
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
+		connect(signal: "notify::actor", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::lower", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::page_increment", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::page_size", callback: (owner: this, ...args: any) => number): number;
@@ -64,7 +137,18 @@ declare namespace imports.gi.St {
 
 	class Adjustment {
 		public constructor();
-		public static new(value: number, lower: number, upper: number, step_increment: number, page_increment: number, page_size: number): Adjustment;
+		/**
+		 * Creates a new {@link Adjustment}
+		 * @param actor a #ClutterActor
+		 * @param value the initial value
+		 * @param lower the minimum value
+		 * @param upper the maximum value
+		 * @param step_increment the step increment
+		 * @param page_increment the page increment
+		 * @param page_size the page size
+		 * @returns a new {@link Adjustment}
+		 */
+		public static new(actor: Clutter.Actor | null, value: number, lower: number, upper: number, step_increment: number, page_increment: number, page_size: number): Adjustment;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -76,25 +160,10 @@ declare namespace imports.gi.St {
 		 */
 		child: Clutter.Actor;
 		/**
-		 * Whether the child should fill the horizontal allocation
-		 */
-		x_fill: boolean;
-		/**
-		 * Whether the child should fill the vertical allocation
-		 */
-		y_fill: boolean;
-		/**
-		 * Retrieves a pointer to the child of #bin.
+		 * Gets the #ClutterActor child for #bin.
 		 * @returns a #ClutterActor, or %NULL
 		 */
-		get_child(): Clutter.Actor;
-		/**
-		 * Retrieves the horizontal and vertical fill settings
-		 * @returns return location for the horizontal fill, or %NULL
-		 * 
-		 * return location for the vertical fill, or %NULL
-		 */
-		get_fill(): [ x_fill: boolean, y_fill: boolean ];
+		get_child(): Clutter.Actor | null;
 		/**
 		 * Sets #child as the child of #bin.
 		 * 
@@ -102,16 +171,7 @@ declare namespace imports.gi.St {
 		 * @param child a #ClutterActor, or %NULL
 		 */
 		set_child(child: Clutter.Actor | null): void;
-		/**
-		 * Sets whether the child of #bin should fill out the horizontal
-		 * and/or vertical allocation of the parent
-		 * @param x_fill %TRUE if the child should fill horizontally the #bin
-		 * @param y_fill %TRUE if the child should fill vertically the #bin
-		 */
-		set_fill(x_fill: boolean, y_fill: boolean): void;
 		connect(signal: "notify::child", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::x_fill", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::y_fill", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -136,12 +196,16 @@ declare namespace imports.gi.St {
 	 */
 	interface IBorderImage {
 		/**
-		 * Check if two border_image objects are identical.
-		 * @param other a different {@link Border_Image}
+		 * Check if two {@link BorderImage} objects are identical.
+		 * @param other a different {@link BorderImage}
 		 * @returns %TRUE if the two border image objects are identical
 		 */
 		equal(other: BorderImage): boolean;
 		get_borders(border_top: number, border_right: number, border_bottom: number, border_left: number): void;
+		/**
+		 * Get the #GFile for #image.
+		 * @returns a #GFile
+		 */
 		get_file(): Gio.File;
 	}
 
@@ -154,6 +218,16 @@ declare namespace imports.gi.St {
 
 	class BorderImage {
 		public constructor();
+		/**
+		 * Creates a new {@link BorderImage}.
+		 * @param file a #GFile
+		 * @param border_top the top border
+		 * @param border_right the right border
+		 * @param border_bottom the bottom border
+		 * @param border_left the left border
+		 * @param scale_factor the scale factor
+		 * @returns a new {@link BorderImage}.
+		 */
 		public static new(file: Gio.File, border_top: number, border_right: number, border_bottom: number, border_left: number, scale_factor: number): BorderImage;
 	}
 
@@ -161,25 +235,33 @@ declare namespace imports.gi.St {
 	 * use {@link BoxLayout} instead.
 	 */
 	interface IBoxLayout {
+		/**
+		 * A convenience property for the #ClutterBoxLayout:pack-start property of the
+		 * internal layout for {@link BoxLayout}.
+		 */
 		pack_start: boolean;
+		/**
+		 * A convenience property for the #ClutterBoxLayout:vertical property of the
+		 * internal layout for {@link BoxLayout}.
+		 */
 		vertical: boolean;
 		/**
-		 * Get the value of the {@link BoxLayout}::pack-start property.
+		 * Get the value of the {@link BoxLayout}:pack-start property.
 		 * @returns %TRUE if pack-start is enabled
 		 */
 		get_pack_start(): boolean;
 		/**
-		 * Get the value of the {@link BoxLayout}::vertical property.
+		 * Get the value of the {@link BoxLayout}:vertical property.
 		 * @returns %TRUE if the layout is vertical
 		 */
 		get_vertical(): boolean;
 		/**
-		 * Set the value of the {@link BoxLayout}::pack-start property.
+		 * Set the value of the {@link BoxLayout}:pack-start property.
 		 * @param pack_start %TRUE if the layout should use pack-start
 		 */
 		set_pack_start(pack_start: boolean): void;
 		/**
-		 * Set the value of the {@link BoxLayout}::vertical property
+		 * Set the value of the {@link BoxLayout}:vertical property
 		 * @param vertical %TRUE if the layout should be vertical
 		 */
 		set_vertical(vertical: boolean): void;
@@ -209,52 +291,39 @@ declare namespace imports.gi.St {
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
-	 * use {@link BoxLayoutChild} instead.
-	 */
-	interface IBoxLayoutChild {
-		expand: boolean;
-		x_align: Align;
-		x_fill: boolean;
-		y_align: Align;
-		y_fill: boolean;
-
-		connect(signal: "notify::expand", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::x_align", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::x_fill", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::y_align", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::y_fill", callback: (owner: this, ...args: any) => number): number;
-
-	}
-
-	/** This construct is only for enabling class multi-inheritance,
-	 * use {@link BoxLayoutChild} instead.
-	 */
-	type BoxLayoutChildMixin = IBoxLayoutChild & Clutter.IChildMeta;
-
-	/**
-	 * The contents of this structure are private and should only be accessed
-	 * through the public API.
-	 */
-	interface BoxLayoutChild extends BoxLayoutChildMixin {}
-
-	class BoxLayoutChild {
-		public constructor();
-	}
-
-	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Button} instead.
 	 */
 	interface IButton {
+		/**
+		 * Which buttons will trigger the {@link Button}::clicked signal.
+		 */
 		button_mask: ButtonMask;
+		/**
+		 * If {@link Button}:toggle-mode is %TRUE, indicates if the #StButton is toggled
+		 * "on" or "off".
+		 * 
+		 * When the value is %TRUE, the #StButton will have the `checked` CSS
+		 * pseudo-class set.
+		 */
 		checked: boolean;
+		/**
+		 * The label of the {@link Button}.
+		 */
 		label: string;
+		/**
+		 * In contrast to {@link Button}:checked, this property indicates whether the
+		 * #StButton is being actively pressed, rather than just in the "on" state.
+		 */
 		readonly pressed: boolean;
+		/**
+		 * Whether the {@link Button} is operating in toggle mode (on/off).
+		 */
 		toggle_mode: boolean;
 		/**
 		 * If this widget is holding a pointer grab, this function will
-		 * will ungrab it, and reset the pressed state.  The effect is
+		 * will ungrab it, and reset the {@link Button}:pressed state.  The effect is
 		 * similar to if the user had released the mouse button, but without
-		 * emitting the clicked signal.
+		 * emitting the #StButton::clicked signal.
 		 * 
 		 * This function is useful if for example you want to do something
 		 * after the user is holding the mouse button for a given period of
@@ -269,13 +338,14 @@ declare namespace imports.gi.St {
 		 */
 		get_button_mask(): ButtonMask;
 		/**
-		 * Get the state of the button that is in toggle mode.
+		 * Get the {@link Button}:checked property of a #StButton that is in toggle mode.
 		 * @returns %TRUE if the button is checked, or %FALSE if not
 		 */
 		get_checked(): boolean;
 		/**
-		 * Get the text displayed on the button
-		 * @returns the text for the button. This must not be freed by the application
+		 * Get the text displayed on the button. If the label is empty, an empty string
+		 * will be returned instead of %NULL.
+		 * @returns the text for the button
 		 */
 		get_label(): string;
 		/**
@@ -289,16 +359,16 @@ declare namespace imports.gi.St {
 		 */
 		set_button_mask(mask: ButtonMask): void;
 		/**
-		 * Sets the pressed state of the button. This is only really useful if the
-		 * button has #toggle-mode mode set to %TRUE.
+		 * Set the {@link Button}:checked property of the button. This is only really useful
+		 * if the button has #StButton:toggle-mode property set to %TRUE.
 		 * @param checked %TRUE or %FALSE
 		 */
 		set_checked(checked: boolean): void;
 		/**
-		 * Sets the text displayed on the button
+		 * Sets the text displayed on the button.
 		 * @param text text to set the label to
 		 */
-		set_label(text: string): void;
+		set_label(text: string | null): void;
 		/**
 		 * Enables or disables toggle mode for the button. In toggle mode, the active
 		 * state will be "toggled" when the user clicks the button.
@@ -346,14 +416,30 @@ declare namespace imports.gi.St {
 	 */
 	interface IClipboard {
 		/**
-		 * Request the data from the clipboard in text form. #callback is executed
-		 * when the data is retreived.
+		 * Request the data from the clipboard in #GBytes form. #callback is executed
+		 * when the data is retrieved.
 		 * @param _type The type of clipboard data you want
-		 * @param callback function to be called when the text is retreived
+		 * @param mimetype The mimetype to get content for
+		 * @param callback function to be called when the type is retrieved
+		 */
+		get_content(_type: ClipboardType, mimetype: string, callback: ClipboardContentCallbackFunc): void;
+		/**
+		 * Gets a list of the mimetypes supported by the default {@link Clipboard}.
+		 * @param _type
+		 * @returns the supported mimetypes
+		 */
+		get_mimetypes(_type: ClipboardType): GLib.List;
+		/**
+		 * Request the data from the clipboard in text form. #callback is executed
+		 * when the data is retrieved.
+		 * @param _type The type of clipboard data you want
+		 * @param callback function to be called when the text is retrieved
 		 */
 		get_text(_type: ClipboardType, callback: ClipboardCallbackFunc): void;
 		/**
-		 * Sets the clipboard content.
+		 * Sets the clipboard content to #bytes.
+		 * 
+		 * #mimetype is a semi-colon separated list of mime-type strings.
 		 * @param _type The type of clipboard that you want to set
 		 * @param mimetype content mimetype
 		 * @param bytes content data
@@ -386,6 +472,12 @@ declare namespace imports.gi.St {
 		 * unrefferenced or freed.
 		 */
 		public static get_default(): Clipboard;
+		/**
+		 * Sets the #MetaSelection of the default {@link Clipboard}.
+		 * 
+		 * This function is called during the initialization of GNOME Shell.
+		 * @param selection
+		 */
 		public static set_selection(selection: Meta.Selection): void;
 	}
 
@@ -395,22 +487,39 @@ declare namespace imports.gi.St {
 	interface IDrawingArea {
 		/**
 		 * Gets the Cairo context to paint to. This function must only be called
-		 * from a signal hander for the ::repaint signal.
+		 * from a signal handler or virtual function for the {@link DrawingArea}::repaint
+		 * signal.
+		 * 
+		 * JavaScript code must call the special dispose function before returning from
+		 * the signal handler or virtual function to avoid leaking memory:
+		 * 
+		 * |[<!-- language="JavaScript" -->
+		 * function onRepaint(area) {
+		 *     let cr = area.get_context();
+		 * 
+		 *     // Draw to the context
+		 * 
+		 *     cr.$dispose();
+		 * }
+		 * 
+		 * let area = new St.DrawingArea();
+		 * area.connect('repaint', onRepaint);
+		 * ]|
 		 * @returns the Cairo context for the paint operation
 		 */
 		get_context(): cairo.Context;
 		/**
 		 * Gets the size of the cairo surface being painted to, which is equal
 		 * to the size of the content area of the widget. This function must
-		 * only be called from a signal hander for the ::repaint signal.
+		 * only be called from a signal handler for the {@link DrawingArea}::repaint signal.
 		 * @returns location to store the width of the painted area
 		 * 
 		 * location to store the height of the painted area
 		 */
-		get_surface_size(): [ width: number, height: number ];
+		get_surface_size(): [ width: number | null, height: number | null ];
 		/**
-		 * Will cause the actor to emit a ::repaint signal before it is next
-		 * drawn to the scene. Useful if some parameters for the area being
+		 * Will cause the actor to emit a {@link DrawingArea}::repaint signal before it is
+		 * next drawn to the scene. Useful if some parameters for the area being
 		 * drawn other than the size or style have changed. Note that
 		 * clutter_actor_queue_redraw() will simply result in the same
 		 * contents being drawn to the scene again.
@@ -435,53 +544,97 @@ declare namespace imports.gi.St {
 	 * use {@link Entry} instead.
 	 */
 	interface IEntry {
+		/**
+		 * The internal #ClutterText actor supporting the {@link Entry}.
+		 */
 		readonly clutter_text: Clutter.Text;
+		/**
+		 * A #ClutterActor to display when the entry is empty and unfocused. Setting
+		 * this will replace the actor displaying {@link Entry}:hint-text.
+		 */
 		hint_actor: Clutter.Actor;
+		/**
+		 * The text to display when the entry is empty and unfocused. Setting this
+		 * will replace the actor of {@link Entry}::hint-actor.
+		 */
 		hint_text: string;
+		/**
+		 * The #ClutterInputContentHintFlags providing additional hints (beyond
+		 * {@link Entry}:input-purpose) that allow input methods to fine-tune their
+		 * behaviour.
+		 */
 		input_hints: Clutter.InputContentHintFlags;
+		/**
+		 * The #ClutterInputContentPurpose that helps on-screen keyboards and similar
+		 * input methods to decide which keys should be presented to the user.
+		 */
 		input_purpose: Clutter.InputContentPurpose;
+		/**
+		 * The #ClutterActor acting as the primary icon at the start of the {@link Entry}.
+		 */
 		primary_icon: Clutter.Actor;
+		/**
+		 * The #ClutterActor acting as the secondary icon at the end of the {@link Entry}.
+		 */
 		secondary_icon: Clutter.Actor;
+		/**
+		 * The current text value of the {@link Entry}.
+		 */
 		text: string;
 		/**
-		 * Retrieve the internal #ClutterText so that extra parameters can be set
-		 * @returns the #ClutterText used by {@link Entry}. The entry is
-		 * owned by the #StEntry and should not be unref'ed by the application.
+		 * Retrieve the internal #ClutterText so that extra parameters can be set.
+		 * @returns the #ClutterText used by #entry
 		 */
 		get_clutter_text(): Clutter.Actor;
-		get_hint_actor(): Clutter.Actor;
 		/**
-		 * Gets the text that is displayed when the entry is empty and unfocused
-		 * @returns the current value of the hint property. This string is owned by the
-		 * {@link Entry} and should not be freed or modified.
+		 * Get the value of the {@link Entry}:hint-actor property.
+		 * @returns a #ClutterActor
 		 */
-		get_hint_text(): string;
+		get_hint_actor(): Clutter.Actor | null;
+		/**
+		 * Gets the text that is displayed when the entry is empty and unfocused or
+		 * %NULL if the {@link Entry}:hint-actor was set to an actor that is not a #StLabel.
+		 * 
+		 * Unlike st_entry_get_text() this function may return %NULL if
+		 * #StEntry:hint-actor is not a #StLabel.
+		 * @returns the current value of the hint property
+		 */
+		get_hint_text(): string | null;
 		/**
 		 * Gets the value of the {@link Entry}:input-hints property.
-		 * @returns 
+		 * @returns the input hints for the entry
 		 */
 		get_input_hints(): Clutter.InputContentHintFlags;
 		/**
 		 * Gets the value of the {@link Entry}:input-purpose property.
-		 * @returns 
+		 * @returns the input purpose of the entry
 		 */
 		get_input_purpose(): Clutter.InputContentPurpose;
-		get_primary_icon(): Clutter.Actor;
-		get_secondary_icon(): Clutter.Actor;
 		/**
-		 * Get the text displayed on the entry
-		 * @returns the text for the entry. This must not be freed by the application
+		 * Get the value of the {@link Entry}:primary-icon property.
+		 * @returns a #ClutterActor
+		 */
+		get_primary_icon(): Clutter.Actor | null;
+		/**
+		 * Get the value of the {@link Entry}:secondary-icon property.
+		 * @returns a #ClutterActor
+		 */
+		get_secondary_icon(): Clutter.Actor | null;
+		/**
+		 * Get the text displayed on the entry. If #entry is empty, an empty string will
+		 * be returned instead of %NULL.
+		 * @returns the text for the entry
 		 */
 		get_text(): string;
 		/**
-		 * Set the hint actor of the entry to #hint_actor
+		 * Set the hint actor of the entry to #hint_actor.
 		 * @param hint_actor a #ClutterActor
 		 */
 		set_hint_actor(hint_actor: Clutter.Actor | null): void;
 		/**
 		 * Sets the text to display when the entry is empty and unfocused. When the
-		 * entry is displaying the hint, it has a pseudo class of "indeterminate".
-		 * A value of NULL unsets the hint.
+		 * entry is displaying the hint, it has a pseudo class of `indeterminate`.
+		 * A value of %NULL unsets the hint.
 		 * @param text text to set as the entry hint
 		 */
 		set_hint_text(text: string | null): void;
@@ -499,26 +652,27 @@ declare namespace imports.gi.St {
 		 */
 		set_input_purpose(purpose: Clutter.InputContentPurpose): void;
 		/**
-		 * Set the primary icon of the entry to #icon
+		 * Set the primary icon of the entry to #icon.
 		 * @param icon a #ClutterActor
 		 */
 		set_primary_icon(icon: Clutter.Actor | null): void;
 		/**
-		 * Set the secondary icon of the entry to #icon
+		 * Set the secondary icon of the entry to #icon.
 		 * @param icon an #ClutterActor
 		 */
 		set_secondary_icon(icon: Clutter.Actor | null): void;
 		/**
-		 * Sets the text displayed on the entry
+		 * Sets the text displayed on the entry. If #text is %NULL, the #ClutterText
+		 * will instead be set to an empty string.
 		 * @param text text to set the entry to
 		 */
 		set_text(text: string | null): void;
 		/**
-		 * Emitted when the primary icon is clicked
+		 * Emitted when the primary icon is clicked.
 		 */
 		connect(signal: "primary-icon-clicked", callback: (owner: this) => void): number;
 		/**
-		 * Emitted when the secondary icon is clicked
+		 * Emitted when the secondary icon is clicked.
 		 */
 		connect(signal: "secondary-icon-clicked", callback: (owner: this) => void): number;
 
@@ -543,11 +697,11 @@ declare namespace imports.gi.St {
 	class Entry {
 		public constructor();
 		/**
-		 * Create a new {@link Entry} with the specified entry
+		 * Create a new {@link Entry} with the specified text.
 		 * @param text text to set the entry to
 		 * @returns a new {@link Entry}
 		 */
-		public static new(text: string): Widget;
+		public static new(text: string | null): Widget;
 		/**
 		 * This function is for private use by libgnome-shell.
 		 * Do not ever use.
@@ -658,6 +812,13 @@ declare namespace imports.gi.St {
 
 	class GenericAccessible {
 		public constructor();
+		/**
+		 * Create a new {@link GenericAccessible} for #actor.
+		 * 
+		 * This is useful only for custom widgets that need a proxy for #AtkObject.
+		 * @param actor a #Clutter Actor
+		 * @returns a new #AtkObject
+		 */
 		public static new_for_actor(actor: Clutter.Actor): Atk.Object;
 	}
 
@@ -665,10 +826,27 @@ declare namespace imports.gi.St {
 	 * use {@link Icon} instead.
 	 */
 	interface IIcon {
+		/**
+		 * The fallback #GIcon to display if {@link Icon}:gicon fails to load.
+		 */
 		fallback_gicon: Gio.Icon;
+		/**
+		 * The fallback icon name of the {@link Icon}. See st_icon_set_fallback_icon_name()
+		 * for details.
+		 */
 		fallback_icon_name: string;
+		/**
+		 * The #GIcon being displayed by this {@link Icon}.
+		 */
 		gicon: Gio.Icon;
+		/**
+		 * The name of the icon if the icon being displayed is a #GThemedIcon.
+		 */
 		icon_name: string;
+		/**
+		 * The size of the icon, if greater than `0`. Other the icon size is derived
+		 * from the current style.
+		 */
 		icon_size: number;
 		/**
 		 * Gets the currently set fallback #GIcon.
@@ -685,13 +863,13 @@ declare namespace imports.gi.St {
 		 * Gets the current #GIcon in use.
 		 * @returns The current #GIcon, if set, otherwise %NULL
 		 */
-		get_gicon(): Gio.Icon;
+		get_gicon(): Gio.Icon | null;
 		/**
-		 * This is a convenience method to get the icon name of the #GThemedIcon that
-		 * is currently set.
-		 * @returns The name of the icon or %NULL if no icon is set
+		 * This is a convenience method to get the icon name of the current icon, if it
+		 * is currenyly a #GThemedIcon, or %NULL otherwise.
+		 * @returns The name of the icon or %NULL
 		 */
-		get_icon_name(): string;
+		get_icon_name(): string | null;
 		/**
 		 * Gets the explicit size set using st_icon_set_icon_size() for the icon.
 		 * This is not necessarily the size that the icon will be displayed at.
@@ -755,7 +933,7 @@ declare namespace imports.gi.St {
 	class Icon {
 		public constructor();
 		/**
-		 * Create a newly allocated {@link Icon}
+		 * Create a newly allocated {@link Icon}.
 		 * @returns A newly allocated {@link Icon}
 		 */
 		public static new(): Clutter.Actor;
@@ -776,7 +954,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImageContent} instead.
 	 */
-	type ImageContentMixin = IImageContent & Clutter.IImage & Clutter.IContent;
+	type ImageContentMixin = IImageContent & Clutter.IImage & Clutter.IContent & Gio.IIcon & Gio.ILoadableIcon;
 
 	interface ImageContent extends ImageContentMixin {}
 
@@ -784,6 +962,9 @@ declare namespace imports.gi.St {
 		public constructor();
 		/**
 		 * Creates a new {@link ImageContent}, a simple content for sized images.
+		 * 
+		 * See #ClutterImage for setting the actual image to display or #StIcon for
+		 * displaying icons.
 		 * @param width The preferred width to be used when drawing the content
 		 * @param height The preferred width to be used when drawing the content
 		 * @returns the newly created {@link ImageContent} content
@@ -796,24 +977,32 @@ declare namespace imports.gi.St {
 	 * use {@link Label} instead.
 	 */
 	interface ILabel {
+		/**
+		 * The internal #ClutterText actor supporting the label
+		 */
 		readonly clutter_text: Clutter.Text;
+		/**
+		 * The current text being display in the {@link Label}.
+		 */
 		text: string;
 		/**
-		 * Retrieve the internal #ClutterText so that extra parameters can be set
-		 * @returns ethe #ClutterText used by {@link Label}. The label
-		 * is owned by the #StLabel and should not be unref'ed by the application.
+		 * Retrieve the internal #ClutterText used by #label so that extra parameters
+		 * can be set.
+		 * @returns the #ClutterText used by {@link Label}. The actor
+		 * is owned by the #StLabel and should not be destroyed by the application.
 		 */
 		get_clutter_text(): Clutter.Actor;
 		/**
-		 * Get the text displayed on the label
-		 * @returns the text for the label. This must not be freed by the application
+		 * Get the text displayed on the label.
+		 * @returns the text for the label. This must not be freed by
+		 * the application
 		 */
 		get_text(): string;
 		/**
-		 * Sets the text displayed on the label
+		 * Sets the text displayed by the label.
 		 * @param text text to set the label to
 		 */
-		set_text(text: string): void;
+		set_text(text: string | null): void;
 		connect(signal: "notify::clutter_text", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
 
@@ -833,37 +1022,46 @@ declare namespace imports.gi.St {
 	class Label {
 		public constructor();
 		/**
-		 * Create a new {@link Label} with the specified label
+		 * Create a new {@link Label} with the label specified by #text.
 		 * @param text text to set the label to
 		 * @returns a new {@link Label}
 		 */
-		public static new(text: string): Widget;
+		public static new(text: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PasswordEntry} instead.
 	 */
 	interface IPasswordEntry {
+		/**
+		 * Whether the text in the entry is masked for privacy.
+		 */
 		password_visible: boolean;
+		/**
+		 * Whether to display an icon button to toggle the masking enabled by the
+		 * {@link PasswordEntry}:password-visible property.
+		 */
 		show_peek_icon: boolean;
 		/**
 		 * Gets whether the text is masked in the password entry.
-		 * @returns 
+		 * @returns %TRUE if visible
 		 */
 		get_password_visible(): boolean;
 		/**
 		 * Gets whether peek-icon is shown or hidden in the password entry.
-		 * @returns 
+		 * @returns %TRUE if visible
 		 */
 		get_show_peek_icon(): boolean;
 		/**
 		 * Sets whether to show or hide text in the password entry.
-		 * @param value #TRUE to show the password in the entry, #FALSE otherwise
+		 * @param value %TRUE to show the password in the entry, #FALSE otherwise
 		 */
 		set_password_visible(value: boolean): void;
 		/**
-		 * Sets whether to show or hide the peek-icon in the password entry.
-		 * @param value #TRUE to show the peek-icon in the entry, #FALSE otherwise
+		 * Sets whether to show or hide the peek-icon in the password entry. If %TRUE,
+		 * a icon button for temporarily unmasking the password will be shown at the
+		 * end of the entry.
+		 * @param value %TRUE to show the peek-icon in the entry
 		 */
 		set_show_peek_icon(value: boolean): void;
 		connect(signal: "notify::password_visible", callback: (owner: this, ...args: any) => number): number;
@@ -891,16 +1089,27 @@ declare namespace imports.gi.St {
 	 * use {@link ScrollBar} instead.
 	 */
 	interface IScrollBar {
+		/**
+		 * The {@link Adjustment} controlling the #StScrollBar.
+		 */
 		adjustment: Adjustment;
+		/**
+		 * Whether the {@link ScrollBar} is vertical. If %FALSE it is horizontal.
+		 */
 		vertical: boolean;
 		/**
-		 * Gets the adjustment object that stores the current position
-		 * of the scrollbar.
-		 * @returns the adjustment
+		 * Gets the {@link Adjustment} that controls the current position of #bar.
+		 * @returns an {@link Adjustment}
 		 */
 		get_adjustment(): Adjustment;
 		set_adjustment(adjustment: Adjustment): void;
+		/**
+		 * Emitted when the {@link ScrollBar} begins scrolling.
+		 */
 		connect(signal: "scroll-start", callback: (owner: this) => void): number;
+		/**
+		 * Emitted when the {@link ScrollBar} finishes scrolling.
+		 */
 		connect(signal: "scroll-stop", callback: (owner: this) => void): number;
 
 		connect(signal: "notify::adjustment", callback: (owner: this, ...args: any) => number): number;
@@ -924,33 +1133,78 @@ declare namespace imports.gi.St {
 	 * use {@link ScrollView} instead.
 	 */
 	interface IScrollView {
+		content_padding: Clutter.Margin;
+		/**
+		 * Whether to enable automatic mouse wheel scrolling.
+		 */
 		enable_mouse_scrolling: boolean;
+		/**
+		 * The horizontal {@link ScrollBar} for the #StScrollView.
+		 */
 		readonly hscroll: ScrollBar;
+		/**
+		 * The {@link PolicyType} for when to show the horizontal #StScrollBar.
+		 */
 		hscrollbar_policy: PolicyType;
+		/**
+		 * Whether the horizontal {@link ScrollBar} is visible.
+		 */
 		readonly hscrollbar_visible: boolean;
+		/**
+		 * Whether scrollbars are painted on top of the content.
+		 */
 		overlay_scrollbars: boolean;
+		/**
+		 * The vertical {@link ScrollBar} for the #StScrollView.
+		 */
 		readonly vscroll: ScrollBar;
+		/**
+		 * The {@link PolicyType} for when to show the vertical #StScrollBar.
+		 */
 		vscrollbar_policy: PolicyType;
+		/**
+		 * Whether the vertical {@link ScrollBar} is visible.
+		 */
 		readonly vscrollbar_visible: boolean;
+		/**
+		 * Get the step increment of the horizontal plane.
+		 * @returns the horizontal step increment
+		 */
 		get_column_size(): number;
 		/**
-		 * Gets the horizontal scrollbar of the scrollbiew
-		 * @returns the horizontal {@link ScrollBar}
+		 * Gets the horizontal {@link ScrollBar} of the #StScrollView.
+		 * @returns the horizontal scrollbar
 		 */
 		get_hscroll_bar(): Clutter.Actor;
+		/**
+		 * Get whether automatic mouse wheel scrolling is enabled or disabled.
+		 * @returns %TRUE if enabled, %FALSE otherwise
+		 */
 		get_mouse_scrolling(): boolean;
 		/**
-		 * Gets the value set by st_scroll_view_set_overlay_scrollbars().
-		 * @returns 
+		 * Gets whether scrollbars are painted on top of the content.
+		 * @returns %TRUE if enabled, %FALSE otherwise
 		 */
 		get_overlay_scrollbars(): boolean;
+		/**
+		 * Get the step increment of the vertical plane.
+		 * @returns the vertical step increment
+		 */
 		get_row_size(): number;
 		/**
-		 * Gets the vertical scrollbar of the scrollbiew
+		 * Gets the vertical scrollbar of the {@link ScrollView}.
 		 * @returns the vertical {@link ScrollBar}
 		 */
 		get_vscroll_bar(): Clutter.Actor;
+		/**
+		 * Set the step increment of the horizontal plane to #column_size.
+		 * @param column_size horizontal step increment
+		 */
 		set_column_size(column_size: number): void;
+		/**
+		 * Sets automatic mouse wheel scrolling to enabled or disabled.
+		 * @param enabled %TRUE or %FALSE
+		 */
 		set_mouse_scrolling(enabled: boolean): void;
 		/**
 		 * Sets whether scrollbars are painted on top of the content.
@@ -963,14 +1217,18 @@ declare namespace imports.gi.St {
 		 * @param vscroll Whether to enable vertical scrolling
 		 */
 		set_policy(hscroll: PolicyType, vscroll: PolicyType): void;
+		/**
+		 * Set the step increment of the vertical plane to #row_size.
+		 * @param row_size vertical step increment
+		 */
 		set_row_size(row_size: number): void;
 		/**
-		 * Sets the height of the fade area area in pixels. A value of 0
+		 * Sets the fade effects in all four edges of the view. A value of 0
 		 * disables the effect.
-		 * @param vfade_offset The length of the veritcal fade effect, in pixels.
-		 * @param hfade_offset The length of the horizontal fade effect, in pixels.
+		 * @param fade_margins a #ClutterMargin defining the vertical fade effects, in pixels.
 		 */
-		update_fade_effect(vfade_offset: number, hfade_offset: number): void;
+		update_fade_effect(fade_margins: Clutter.Margin): void;
+		connect(signal: "notify::content_padding", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::enable_mouse_scrolling", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::hscroll", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::hscrollbar_policy", callback: (owner: this, ...args: any) => number): number;
@@ -995,6 +1253,10 @@ declare namespace imports.gi.St {
 
 	class ScrollView {
 		public constructor();
+		/**
+		 * Create a new {@link ScrollView}.
+		 * @returns a new {@link ScrollView}
+		 */
 		public static new(): Widget;
 	}
 
@@ -1002,13 +1264,22 @@ declare namespace imports.gi.St {
 	 * use {@link ScrollViewFade} instead.
 	 */
 	interface IScrollViewFade {
+		/**
+		 * Whether faded edges should extend beyond the faded area of the {@link ScrollViewFade}.
+		 */
+		extend_fade_area: boolean;
+		/**
+		 * Whether the faded area should extend to the edges of the {@link ScrollViewFade}.
+		 */
 		fade_edges: boolean;
-		hfade_offset: number;
-		vfade_offset: number;
+		/**
+		 * The margins widths that are faded.
+		 */
+		fade_margins: Clutter.Margin;
 
+		connect(signal: "notify::extend_fade_area", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::fade_edges", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hfade_offset", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::vfade_offset", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::fade_margins", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -1021,6 +1292,10 @@ declare namespace imports.gi.St {
 
 	class ScrollViewFade {
 		public constructor();
+		/**
+		 * Create a new {@link ScrollViewFade}.
+		 * @returns a new {@link ScrollViewFade}
+		 */
 		public static new(): Clutter.Effect;
 	}
 
@@ -1028,13 +1303,38 @@ declare namespace imports.gi.St {
 	 * use {@link Settings} instead.
 	 */
 	interface ISettings {
+		/**
+		 * The threshold before a drag operation begins.
+		 */
 		readonly drag_threshold: number;
+		/**
+		 * Whether animations are enabled.
+		 */
 		readonly enable_animations: boolean;
+		/**
+		 * The current font name.
+		 */
 		readonly font_name: string;
+		/**
+		 * The current GTK icon theme
+		 */
 		readonly gtk_icon_theme: string;
+		/**
+		 * The current GTK theme.
+		 */
 		readonly gtk_theme: string;
+		/**
+		 * Whether the accessibility magnifier is active.
+		 */
 		readonly magnifier_active: boolean;
+		/**
+		 * Whether pasting from the `PRIMARY` selection is supported (eg. middle-click
+		 * paste).
+		 */
 		readonly primary_paste: boolean;
+		/**
+		 * The slow-down factor applied to all animation durations.
+		 */
 		slow_down_factor: number;
 		inhibit_animations(): void;
 		uninhibit_animations(): void;
@@ -1059,8 +1359,8 @@ declare namespace imports.gi.St {
 	class Settings {
 		public constructor();
 		/**
-		 * Gets the {@link Settings}
-		 * @returns a settings object
+		 * Gets the global {@link Settings} object.
+		 * @returns the global {@link Settings} object
 		 */
 		public static get(): Settings;
 	}
@@ -1070,18 +1370,17 @@ declare namespace imports.gi.St {
 	 */
 	interface ITextureCache {
 		/**
-		 * Create a #ClutterActor which tracks the #cairo_surface_t value of a GObject property
+		 * Create a #GIcon which tracks the #cairo_surface_t value of a GObject property
 		 * named by #property_name.  Unlike other methods in StTextureCache, the underlying
 		 * #CoglTexture is not shared by default with other invocations to this method.
 		 * 
 		 * If the source object is destroyed, the texture will continue to show the last
 		 * value of the property.
-		 * @param object A #GObject with a property #property_name of type #GdkPixbuf
+		 * @param object A #GObject with a property #property_name of type #cairo_surface_t
 		 * @param property_name Name of a property
-		 * @param size
-		 * @returns A new {@link Widget}
+		 * @returns A new #GIcon
 		 */
-		bind_cairo_surface_property(object: GObject.Object, property_name: string, size: number): Widget;
+		bind_cairo_surface_property(object: GObject.Object, property_name: string): Gio.Icon;
 		/**
 		 * Load an arbitrary texture, caching it.  The string chosen for #key
 		 * should be of the form "type-prefix:type-uuid".  For example,
@@ -1094,6 +1393,12 @@ declare namespace imports.gi.St {
 		 * @returns A newly-referenced handle to the texture
 		 */
 		load(key: string, policy: TextureCachePolicy, load: TextureCacheLoader, data: any | null): Cogl.Texture;
+		/**
+		 * Create a #GIcon from #surface.
+		 * @param surface A #cairo_surface_t
+		 * @returns A new #GIcon
+		 */
+		load_cairo_surface_to_gicon(surface: cairo.Surface): Gio.Icon;
 		/**
 		 * Asynchronously load an image.   Initially, the returned texture will have a natural
 		 * size of zero.  At some later point, either the image will be loaded successfully
@@ -1130,7 +1435,7 @@ declare namespace imports.gi.St {
 		 * This method returns a new #ClutterActor for a given #GIcon. If the
 		 * icon isn't loaded already, the texture will be filled
 		 * asynchronously.
-		 * @param theme_node The {@link ThemeNode} to use for colors, or NULL
+		 * @param theme_node The {@link ThemeNode} to use for colors, or %NULL
 		 *                            if the icon must not be recolored
 		 * @param icon the #GIcon to load
 		 * @param size Size of themed
@@ -1138,7 +1443,7 @@ declare namespace imports.gi.St {
 		 * @param resource_scale Resource scale factor
 		 * @returns A new #ClutterActor for the icon, or %NULL if not found
 		 */
-		load_gicon(theme_node: ThemeNode | null, icon: Gio.Icon, size: number, paint_scale: number, resource_scale: number): Clutter.Actor;
+		load_gicon(theme_node: ThemeNode | null, icon: Gio.Icon, size: number, paint_scale: number, resource_scale: number): Clutter.Actor | null;
 		/**
 		 * This function reads a single image file which contains multiple images internally.
 		 * The image file will be divided using #grid_width and #grid_height;
@@ -1153,9 +1458,19 @@ declare namespace imports.gi.St {
 		 * @returns A new #ClutterActor
 		 */
 		load_sliced_image(file: Gio.File, grid_width: number, grid_height: number, paint_scale: number, resource_scale: number, load_callback: GLib.Func | null): Clutter.Actor;
+		/**
+		 * Rescan the current icon theme, if necessary.
+		 * @returns %TRUE if the icon theme has changed and needed to be reloaded.
+		 */
 		rescan_icon_theme(): boolean;
+		/**
+		 * Emitted when the icon theme is changed.
+		 */
 		connect(signal: "icon-theme-changed", callback: (owner: this) => void): number;
-		connect(signal: "texture-file-changed", callback: (owner: this, object: Gio.File) => void): number;
+		/**
+		 * Emitted when the source file of a texture is changed.
+		 */
+		connect(signal: "texture-file-changed", callback: (owner: this, file: Gio.File) => void): number;
 
 	}
 
@@ -1190,8 +1505,23 @@ declare namespace imports.gi.St {
 		 * this is associated with the CSS "user" stylesheet.
 		 */
 		theme_stylesheet: Gio.File;
+		/**
+		 * Get a list of the stylesheet files loaded with st_theme_load_stylesheet().
+		 * @returns the list of stylesheet files
+		 *          that were loaded with st_theme_load_stylesheet()
+		 */
 		get_custom_stylesheets(): GLib.SList;
+		/**
+		 * Load the stylesheet associated with #file.
+		 * @param file a #GFile
+		 * @returns %TRUE if successful
+		 */
 		load_stylesheet(file: Gio.File): boolean;
+		/**
+		 * Unload the stylesheet associated with #file. If #file was not loaded this
+		 * function does nothing.
+		 * @param file a #GFile
+		 */
 		unload_stylesheet(file: Gio.File): void;
 		connect(signal: "custom-stylesheets-changed", callback: (owner: this) => void): number;
 
@@ -1218,7 +1548,7 @@ declare namespace imports.gi.St {
 	 */
 	interface IThemeContext {
 		/**
-		 * The scaling factor used or high dpi scaling.
+		 * The scaling factor used for HiDPI scaling.
 		 */
 		scale_factor: number;
 		/**
@@ -1235,7 +1565,7 @@ declare namespace imports.gi.St {
 		get_root_node(): ThemeNode;
 		/**
 		 * Return the current scale factor of #context.
-		 * @returns a scale factor
+		 * @returns an integer scale factor
 		 */
 		get_scale_factor(): number;
 		/**
@@ -1253,8 +1583,8 @@ declare namespace imports.gi.St {
 		/**
 		 * Sets the default font for the theme context. This is the font that
 		 * is inherited by the root node of the tree of theme nodes. If the
-		 * font is not overriden, then this font will be used. If the font is
-		 * partially modified (for example, with 'font-size: 110%', then that
+		 * font is not overridden, then this font will be used. If the font is
+		 * partially modified (for example, with 'font-size: 110%'), then that
 		 * modification is based on this font.
 		 * @param font the default font for theme context
 		 */
@@ -1262,10 +1592,14 @@ declare namespace imports.gi.St {
 		/**
 		 * Sets the default set of theme stylesheets for the context. This theme will
 		 * be used for the root node and for nodes descending from it, unless some other
-		 * style is explicitely specified.
-		 * @param theme
+		 * style is explicitly specified.
+		 * @param theme a {@link Theme}
 		 */
 		set_theme(theme: Theme): void;
+		/**
+		 * Emitted when the icon theme, font, resolution, scale factor or the current
+		 * theme's custom stylesheets change.
+		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
 		connect(signal: "notify::scale_factor", callback: (owner: this, ...args: any) => number): number;
@@ -1286,7 +1620,7 @@ declare namespace imports.gi.St {
 		 * This can be useful in testing scenarios, or if using StThemeContext
 		 * with something other than #ClutterActor objects, but you generally
 		 * should use st_theme_context_get_for_stage() instead.
-		 * @returns 
+		 * @returns a new {@link ThemeContext}
 		 */
 		public static new(): ThemeContext;
 		/**
@@ -1338,21 +1672,13 @@ declare namespace imports.gi.St {
 		 * the same CSS rules and have the same style properties. However, two
 		 * nodes that have ended up with identical style properties do not
 		 * necessarily compare equal.
-		 * In detail, #node_a and #node_b are considered equal iff
-		 * <itemizedlist>
-		 *   <listitem>
-		 *     <para>they share the same #StTheme and #StThemeContext</para>
-		 *   </listitem>
-		 *   <listitem>
-		 *     <para>they have the same parent</para>
-		 *   </listitem>
-		 *   <listitem>
-		 *     <para>they have the same element type</para>
-		 *   </listitem>
-		 *   <listitem>
-		 *     <para>their id, class, pseudo-class and inline-style match</para>
-		 *   </listitem>
-		 * </itemizedlist>
+		 * 
+		 * In detail, #node_a and #node_b are considered equal if and only if:
+		 * 
+		 * - they share the same #StTheme and #StThemeContext
+		 * - they have the same parent
+		 * - they have the same element type
+		 * - their id, class, pseudo-class and inline-style match
 		 * @param node_b second {@link ThemeNode}
 		 * @returns %TRUE if #node_a equals #node_b
 		 */
@@ -1362,7 +1688,7 @@ declare namespace imports.gi.St {
 		 * used to optimize having to relayout when the style applied to a Clutter
 		 * actor changes colors without changing the geometry.
 		 * @param other a different {@link ThemeNode}
-		 * @returns 
+		 * @returns %TRUE if equal, %FALSE otherwise
 		 */
 		geometry_equal(other: ThemeNode): boolean;
 		/**
@@ -1379,10 +1705,10 @@ declare namespace imports.gi.St {
 		get_background_image(): Gio.File;
 		/**
 		 * Gets the value for the -st-background-image-shadow style property
-		 * @returns the node's background image shadow, or %NULL
-		 *   if node has no such shadow
+		 * @returns the node's background image shadow, or
+		 *   %NULL if node has no such shadow
 		 */
-		get_background_image_shadow(): Shadow;
+		get_background_image_shadow(): Shadow | null;
 		/**
 		 * Gets the box used to paint the actor's background, including the area
 		 * occupied by properties which paint outside the actor's assigned allocation.
@@ -1402,14 +1728,24 @@ declare namespace imports.gi.St {
 		 *   if there is no border image.
 		 */
 		get_border_image(): BorderImage;
+		/**
+		 * Get the border radius for #node at #corner, in physical pixels.
+		 * @param corner a {@link Corner}
+		 * @returns the border radius in physical pixels
+		 */
 		get_border_radius(corner: Corner): number;
+		/**
+		 * Get the border width for #node on #side, in physical pixels.
+		 * @param side a {@link Corner}
+		 * @returns the border width in physical pixels
+		 */
 		get_border_width(side: Side): number;
 		/**
 		 * Gets the value for the box-shadow style property
 		 * @returns the node's shadow, or %NULL
 		 *   if node has no shadow
 		 */
-		get_box_shadow(): Shadow;
+		get_box_shadow(): Shadow | null;
 		/**
 		 * Generically looks up a property containing a single color value. When
 		 * specific getters (like st_theme_node_get_background_color()) exist, they
@@ -1448,21 +1784,44 @@ declare namespace imports.gi.St {
 		 *  found, a warning will be logged and 0 will be returned.
 		 */
 		get_double(property_name: string): number;
+		/**
+		 * Get the list of element classes for #node.
+		 * @returns the element's classes
+		 */
 		get_element_classes(): string[];
+		/**
+		 * Get the unique element ID for #node.
+		 * @returns the element's ID
+		 */
 		get_element_id(): string;
+		/**
+		 * Get the element #GType for #node.
+		 * @returns the element type
+		 */
 		get_element_type(): GObject.Type;
+		/**
+		 * Get the current font of #node as a #PangoFontDescription
+		 * @returns the current font
+		 */
 		get_font(): Pango.FontDescription;
+		/**
+		 * Get the CSS font-features for #node.
+		 * @returns font-features as a string
+		 */
 		get_font_features(): string;
 		/**
 		 * Gets #node's foreground color.
 		 * @param color location to store the color
 		 */
 		get_foreground_color(color: Clutter.Color): void;
+		/**
+		 * Get the height for #node, in physical pixels.
+		 * @returns the height in physical pixels
+		 */
 		get_height(): number;
 		/**
-		 * Gets the total horizonal padding (left + right padding)
-		 * @returns the total horizonal padding
-		 *   in pixels
+		 * Gets the total horizontal padding (left + right padding), in physical pixels.
+		 * @returns the total horizontal padding in physical pixels
 		 */
 		get_horizontal_padding(): number;
 		/**
@@ -1471,6 +1830,11 @@ declare namespace imports.gi.St {
 		 * @returns the icon colors to use for this theme node
 		 */
 		get_icon_colors(): IconColors;
+		/**
+		 * Get the icon style for #node (eg. symbolic, regular). This corresponds to the
+		 * special `-st-icon-style` CSS property.
+		 * @returns the icon style for #node
+		 */
 		get_icon_style(): IconStyle;
 		/**
 		 * Generically looks up a property containing a single length value. When
@@ -1482,28 +1846,61 @@ declare namespace imports.gi.St {
 		 * this does not print a warning if the property is not found; it just
 		 * returns 0.
 		 * 
-		 * See also st_theme_node_lookup_length(), which provides more options.
+		 * See also st_theme_node_lookup_length(), which provides more options. The
+		 * returned value is in physical pixels, as opposed to logical pixels.
 		 * @param property_name The name of the length property
 		 * @returns the length, in pixels, or 0 if the property was not found.
 		 */
 		get_length(property_name: string): number;
 		/**
-		 * Gets the value for the letter-spacing style property, in pixels.
+		 * Gets the value for the letter-spacing style property, in physical pixels.
 		 * @returns the value of the letter-spacing property, if
 		 *   found, or zero if such property has not been found.
 		 */
 		get_letter_spacing(): number;
+		/**
+		 * Get the margin for #node on #side, in physical pixels. This corresponds to
+		 * the CSS properties such as `margin-top`.
+		 * @param side a {@link Side}
+		 * @returns the margin size in physical pixels
+		 */
 		get_margin(side: Side): number;
+		/**
+		 * Get the maximum height for #node, in physical pixels.
+		 * @returns the maximum height in physical pixels
+		 */
 		get_max_height(): number;
+		/**
+		 * Get the maximum width for #node, in physical pixels.
+		 * @returns the maximum width in physical pixels
+		 */
 		get_max_width(): number;
+		/**
+		 * Get the minimum height for #node, in physical pixels.
+		 * @returns the minimum height in physical pixels
+		 */
 		get_min_height(): number;
+		/**
+		 * Get the minimum width for #node, in physical pixels.
+		 * @returns the minimum width in physical pixels
+		 */
 		get_min_width(): number;
 		/**
 		 * Gets the color of #node's outline.
 		 * @param color location to store the color
 		 */
 		get_outline_color(color: Clutter.Color): void;
+		/**
+		 * Get the width of the outline for #node, in physical pixels.
+		 * @returns the width in physical pixels
+		 */
 		get_outline_width(): number;
+		/**
+		 * Get the padding for #node on #side, in physical pixels. This corresponds to
+		 * the CSS properties such as `padding-top`.
+		 * @param side a {@link Side}
+		 * @returns the padding size in physical pixels
+		 */
 		get_padding(side: Side): number;
 		/**
 		 * Gets the box used to paint the actor, including the area occupied
@@ -1516,10 +1913,14 @@ declare namespace imports.gi.St {
 		get_paint_box(allocation: Clutter.ActorBox, paint_box: Clutter.ActorBox): void;
 		/**
 		 * Gets the parent themed element node.
-		 * @returns the parent {@link ThemeNode}, or %NULL if this
-		 *  is the root node of the tree of theme elements.
+		 * @returns the parent {@link ThemeNode}, or %NULL if
+		 *  this is the root node of the tree of theme elements.
 		 */
-		get_parent(): ThemeNode;
+		get_parent(): ThemeNode | null;
+		/**
+		 * Get the list of pseudo-classes for #node (eg. `:focused`).
+		 * @returns the element's pseudo-classes
+		 */
 		get_pseudo_classes(): string[];
 		/**
 		 * Generically looks up a property containing a set of shadow values. When
@@ -1532,17 +1933,26 @@ declare namespace imports.gi.St {
 		 * 
 		 * See also st_theme_node_lookup_shadow (), which provides more options.
 		 * @param property_name The name of the shadow property
-		 * @returns the shadow, or %NULL if the property was not found.
+		 * @returns the shadow, or %NULL if the property was
+		 *   not found.
 		 */
-		get_shadow(property_name: string): Shadow;
+		get_shadow(property_name: string): Shadow | null;
+		/**
+		 * Get the text alignment of #node.
+		 * @returns the alignment of text for #node
+		 */
 		get_text_align(): TextAlign;
+		/**
+		 * Get the text decoration for #node (eg. underline, line-through, etc).
+		 * @returns the text decoration for #node
+		 */
 		get_text_decoration(): TextDecoration;
 		/**
 		 * Gets the value for the text-shadow style property
 		 * @returns the node's text-shadow, or %NULL
 		 *   if node has no text-shadow
 		 */
-		get_text_shadow(): Shadow;
+		get_text_shadow(): Shadow | null;
 		/**
 		 * Gets the theme stylesheet set that styles this node
 		 * @returns the theme stylesheet set
@@ -1566,14 +1976,21 @@ declare namespace imports.gi.St {
 		 *  If #property_name is not found, a warning will be logged and %NULL
 		 *  will be returned.
 		 */
-		get_url(property_name: string): Gio.File;
+		get_url(property_name: string): Gio.File | null;
 		/**
-		 * Gets the total vertical padding (top + bottom padding)
-		 * @returns the total vertical padding
-		 *   in pixels
+		 * Gets the total vertical padding (top + bottom padding), in physical pixels.
+		 * @returns the total vertical padding in physical pixels
 		 */
 		get_vertical_padding(): number;
+		/**
+		 * Get the width for #node, in physical pixels.
+		 * @returns the width in physical pixels
+		 */
 		get_width(): number;
+		/**
+		 * Converts #node to a hash value.
+		 * @returns a hash value corresponding to #node
+		 */
 		hash(): number;
 		invalidate_background_image(): void;
 		invalidate_border_image(): void;
@@ -1646,8 +2063,8 @@ declare namespace imports.gi.St {
 		 *   value of 'inherit' it will be inherited even if %FALSE is passed
 		 *   in for #inherit; this only affects the default behavior for inheritance.
 		 * @returns %TRUE if the property was found in the properties for this
-		 * theme node (or in the properties of parent nodes when inheriting.), %FALSE
-		 * if the property was not found, or was explicitly set to 'none'.
+		 *   theme node (or in the properties of parent nodes when inheriting.), %FALSE
+		 *   if the property was not found, or was explicitly set to 'none'.
 		 */
 		lookup_shadow(property_name: string, inherit: boolean): boolean;
 		/**
@@ -1687,6 +2104,11 @@ declare namespace imports.gi.St {
 		 *   two nodes potentially paint differently.
 		 */
 		paint_equal(other: ThemeNode | null): boolean;
+		/**
+		 * Serialize #node to a string of its #GType name, CSS ID, classes and
+		 * pseudo-classes.
+		 * @returns the serialized theme node
+		 */
 		to_string(): string;
 	}
 
@@ -1700,7 +2122,7 @@ declare namespace imports.gi.St {
 	class ThemeNode {
 		public constructor();
 		/**
-		 * Creates a new {@link ThemeNode}. Once created, a node is immutable. Of any
+		 * Creates a new {@link ThemeNode}. Once created, a node is immutable. If any
 		 * of the attributes of the node (like the #element_class) change the node
 		 * and its child nodes must be destroyed and recreated.
 		 * @param context the context representing global state for this themed tree
@@ -1717,7 +2139,7 @@ declare namespace imports.gi.St {
 		 * @param pseudo_class a whitespace-separated list of pseudo-classes
 		 *   (like 'hover' or 'visited') to match CSS rules against
 		 * @param inline_style
-		 * @returns the theme node
+		 * @returns a new {@link ThemeNode}
 		 */
 		public static new(context: ThemeContext, parent_node: ThemeNode | null, theme: Theme | null, element_type: GObject.Type, element_id: string | null, element_class: string | null, pseudo_class: string | null, inline_style: string): ThemeNode;
 	}
@@ -1726,6 +2148,9 @@ declare namespace imports.gi.St {
 	 * use {@link Viewport} instead.
 	 */
 	interface IViewport {
+		clip_to_view: boolean;
+
+		connect(signal: "notify::clip_to_view", callback: (owner: this, ...args: any) => number): number;
 
 	}
 
@@ -1762,6 +2187,9 @@ declare namespace imports.gi.St {
 		 * adjust it manually in any case.
 		 */
 		hover: boolean;
+		/**
+		 * An actor that labels this widget.
+		 */
 		label_actor: Clutter.Actor;
 		/**
 		 * The pseudo-class of the actor. Typical values include "hover", "active",
@@ -1814,7 +2242,8 @@ declare namespace imports.gi.St {
 		 */
 		add_style_pseudo_class(pseudo_class: string): void;
 		/**
-		 * Ensures that #widget has read its style information.
+		 * Ensures that #widget has read its style information and propagated any
+		 * changes to its children.
 		 */
 		ensure_style(): void;
 		/**
@@ -1856,18 +2285,11 @@ declare namespace imports.gi.St {
 		 */
 		get_label_actor(): Clutter.Actor;
 		/**
-		 * Retrieves the resource scale for this {@link Widget}, if available.
-		 * 
-		 * The resource scale refers to the scale the actor should use for its resources.
-		 * @returns 
-		 */
-		get_resource_scale(): boolean;
-		/**
 		 * Get the current inline style string. See st_widget_set_style().
-		 * @returns The inline style string, or %NULL. The string is owned by the
-		 * {@link Widget} and should not be modified or freed.
+		 * @returns The inline style string, or %NULL. The
+		 *   string is owned by the {@link Widget} and should not be modified or freed.
 		 */
-		get_style(): string;
+		get_style(): string | null;
 		/**
 		 * Get the current style class name
 		 * @returns the class name string. The string is owned by the {@link Widget} and
@@ -1899,7 +2321,7 @@ declare namespace imports.gi.St {
 		 */
 		get_theme_node(): ThemeNode;
 		/**
-		 * Returns the current value of the track-hover property. See
+		 * Returns the current value of the {@link Widget}:track-hover property. See
 		 * st_widget_set_track_hover() for more information.
 		 * @returns current value of track-hover on #widget
 		 */
@@ -1972,7 +2394,7 @@ declare namespace imports.gi.St {
 		 */
 		peek_theme_node(): ThemeNode;
 		/**
-		 * Asks the widget to pop-up a context menu.
+		 * Asks the widget to pop-up a context menu by emitting {@link Widget}::popup-menu.
 		 */
 		popup_menu(): void;
 		/**
@@ -2111,15 +2533,9 @@ declare namespace imports.gi.St {
 		 */
 		sync_hover(): void;
 		/**
-		 * Emitted when the user has requested a context menu (eg, via a
-		 * keybinding)
+		 * Emitted when the user has requested a context menu (eg, via a keybinding)
 		 */
 		connect(signal: "popup-menu", callback: (owner: this) => void): number;
-		/**
-		 * Emitted when the paint scale that the widget will be painted as
-		 * changed.
-		 */
-		connect(signal: "resource-scale-changed", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the style information that the widget derives from the
 		 * theme changes
@@ -2186,16 +2602,6 @@ declare namespace imports.gi.St {
 
 	interface BorderImageClass {}
 	class BorderImageClass {
-		public constructor();
-	}
-
-	interface BoxLayoutChildClass {}
-	class BoxLayoutChildClass {
-		public constructor();
-	}
-
-	interface BoxLayoutChildPrivate {}
-	class BoxLayoutChildPrivate {
 		public constructor();
 	}
 
@@ -2295,6 +2701,11 @@ declare namespace imports.gi.St {
 		 * @returns a newly created {@link IconColors}.
 		 */
 		public copy(): IconColors;
+		/**
+		 * Check if two {@link IconColors} objects are identical.
+		 * @param other another {@link IconColors}
+		 * @returns %TRUE if the {@link IconColors} are equal
+		 */
 		public equal(other: IconColors): boolean;
 		/**
 		 * Atomically increments the reference count of #colors by one.
@@ -2461,6 +2872,10 @@ declare namespace imports.gi.St {
 		 * @param paint_opacity the opacity at which the shadow is painted
 		 */
 		public paint(framebuffer: Cogl.Framebuffer, actor_box: Clutter.ActorBox, paint_opacity: number): void;
+		/**
+		 * Update #helper from #source.
+		 * @param source a #ClutterActor
+		 */
 		public update(source: Clutter.Actor): void;
 	}
 
@@ -2533,7 +2948,6 @@ declare namespace imports.gi.St {
 		public constructor();
 		public style_changed: {(self: Widget): void;};
 		public popup_menu: {(self: Widget): void;};
-		public resource_scale_changed: {(self: Widget): void;};
 		public navigate_focus: {(self: Widget, from: Clutter.Actor | null, direction: DirectionType): boolean;};
 		public get_accessible_type: {(): GObject.Type;};
 		public get_focus_chain: {(widget: Widget): GLib.List;};
@@ -2543,9 +2957,59 @@ declare namespace imports.gi.St {
 	 * use {@link Scrollable} instead.
 	 */
 	interface IScrollable {
+		/**
+		 * The horizontal {@link Adjustment} used by the #StScrollable.
+		 * 
+		 * Implementations should override this property to provide read-write
+		 * access to the #StAdjustment.
+		 * 
+		 * JavaScript code may override this as demonstrated below:
+		 * 
+		 * |[<!-- language="JavaScript" -->
+		 * var MyScrollable = GObject.registerClass({
+		 *     Properties: {
+		 *         'hadjustment': GObject.ParamSpec.override(
+		 *             'hadjustment',
+		 *             St.Scrollable
+		 *         )
+		 *     }
+		 * }, class MyScrollable extends St.Scrollable {
+		 * 
+		 *     get hadjustment() {
+		 *         return this._hadjustment || null;
+		 *     }
+		 * 
+		 *     set hadjustment(adjustment) {
+		 *         if (this.hadjustment === adjustment)
+		 *             return;
+		 * 
+		 *         this._hadjustment = adjustment;
+		 *         this.notify('hadjustment');
+		 *     }
+		 * });
+		 * ]|
+		 */
 		hadjustment: Adjustment;
+		/**
+		 * The vertical {@link Adjustment} used by the #StScrollable.
+		 * 
+		 * Implementations should override this property to provide read-write
+		 * access to the #StAdjustment.
+		 * 
+		 * See #StScrollable:hadjustment for an example of how to override this
+		 * property in JavaScript code.
+		 */
 		vadjustment: Adjustment;
 		get_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
+		/**
+		 * This method should be implemented by classes implementing the {@link Scrollable}
+		 * interface.
+		 * 
+		 * JavaScript code should do this by overriding the `vfunc_set_adjustments()`
+		 * method.
+		 * @param hadjustment the horizontal {@link Adjustment}
+		 * @param vadjustment the vertical {@link Adjustment}
+		 */
 		set_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
 		connect(signal: "notify::hadjustment", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::vadjustment", callback: (owner: this, ...args: any) => number): number;
@@ -2583,32 +3047,97 @@ declare namespace imports.gi.St {
 		CLIPBOARD = 1
 	}
 
+	/**
+	 * Used to target a particular corner of a {@link ThemeNode} element.
+	 */
 	enum Corner {
+		/**
+		 * The top-right corner.
+		 */
 		TOPLEFT = 0,
+		/**
+		 * The top-right corner.
+		 */
 		TOPRIGHT = 1,
+		/**
+		 * The bottom-right corner.
+		 */
 		BOTTOMRIGHT = 2,
+		/**
+		 * The bottom-left corner.
+		 */
 		BOTTOMLEFT = 3
 	}
 
+	/**
+	 * Enumeration for focus direction.
+	 */
 	enum DirectionType {
+		/**
+		 * Move forward.
+		 */
 		TAB_FORWARD = 0,
+		/**
+		 * Move backward.
+		 */
 		TAB_BACKWARD = 1,
+		/**
+		 * Move up.
+		 */
 		UP = 2,
+		/**
+		 * Move down.
+		 */
 		DOWN = 3,
+		/**
+		 * Move left.
+		 */
 		LEFT = 4,
+		/**
+		 * Move right.
+		 */
 		RIGHT = 5
 	}
 
+	/**
+	 * Used to specify options when rendering gradients.
+	 */
 	enum GradientType {
+		/**
+		 * No gradient.
+		 */
 		NONE = 0,
+		/**
+		 * A vertical gradient.
+		 */
 		VERTICAL = 1,
+		/**
+		 * A horizontal gradient.
+		 */
 		HORIZONTAL = 2,
+		/**
+		 * Lookup the style requested in the icon name.
+		 */
 		RADIAL = 3
 	}
 
+	/**
+	 * Used to specify options when looking up icons.
+	 */
 	enum IconStyle {
+		/**
+		 * Lookup the style requested in the icon name.
+		 */
 		REQUESTED = 0,
+		/**
+		 * Try to always load regular icons, even when symbolic
+		 *   icon names are given.
+		 */
 		REGULAR = 1,
+		/**
+		 * Try to always load symbolic icons, even when regular
+		 *   icon names are given.
+		 */
 		SYMBOLIC = 2
 	}
 
@@ -2619,16 +3148,43 @@ declare namespace imports.gi.St {
 		EXTERNAL = 3
 	}
 
+	/**
+	 * Used to target a particular side of a {@link ThemeNode} element.
+	 */
 	enum Side {
+		/**
+		 * The top side.
+		 */
 		TOP = 0,
+		/**
+		 * The right side.
+		 */
 		RIGHT = 1,
+		/**
+		 * The bottom side.
+		 */
 		BOTTOM = 2,
+		/**
+		 * The left side.
+		 */
 		LEFT = 3
 	}
 
+	/**
+	 * Used to align text in a label.
+	 */
 	enum TextAlign {
+		/**
+		 * Text is aligned at the beginning of the label.
+		 */
 		LEFT = 0,
+		/**
+		 * Text is aligned in the middle of the label.
+		 */
 		CENTER = 1,
+		/**
+		 * Text is aligned at the end of the label.
+		 */
 		RIGHT = 2,
 		JUSTIFY = 3
 	}
@@ -2639,7 +3195,7 @@ declare namespace imports.gi.St {
 	}
 
 	/**
-	 * A mask representing which mouse buttons an StButton responds to.
+	 * A mask representing which mouse buttons an {@link Button} responds to.
 	 */
 	enum ButtonMask {
 		/**
@@ -2656,10 +3212,25 @@ declare namespace imports.gi.St {
 		THREE = 4
 	}
 
+	/**
+	 * Flags used to determine the decoration of text.
+	 * 
+	 * Not that neither %ST_TEXT_DECORATION_OVERLINE or %ST_TEXT_DECORATION_BLINK
+	 * are implemented, currently.
+	 */
 	enum TextDecoration {
 		UNDERLINE = 1,
+		/**
+		 * Text is overlined
+		 */
 		OVERLINE = 2,
+		/**
+		 * Text is striked out
+		 */
 		LINE_THROUGH = 4,
+		/**
+		 * Text blinks
+		 */
 		BLINK = 8
 	}
 
@@ -2673,6 +3244,18 @@ declare namespace imports.gi.St {
 		 * @param text text from the clipboard
 		 */
 		(clipboard: Clipboard, text: string): void;
+	}
+
+	/**
+	 * Callback function called when content is retrieved from the clipboard.
+	 */
+	interface ClipboardContentCallbackFunc {
+		/**
+		 * Callback function called when content is retrieved from the clipboard.
+		 * @param clipboard A {@link Clipboard}
+		 * @param bytes content from the clipboard
+		 */
+		(clipboard: Clipboard, bytes: GLib.Bytes): void;
 	}
 
 	interface EntryCursorFunc {
