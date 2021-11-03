@@ -225,7 +225,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Context} instead.
 	 */
-	type ContextMixin = IContext & GObject.IObject;
+	type ContextMixin = IContext & GObject.Object;
 
 	/**
 	 * A `PangoContext` stores global information used to control the
@@ -313,7 +313,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Coverage} instead.
 	 */
-	type CoverageMixin = ICoverage & GObject.IObject;
+	type CoverageMixin = ICoverage & GObject.Object;
 
 	/**
 	 * A `PangoCoverage` structure is a map from Unicode characters
@@ -462,7 +462,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Font} instead.
 	 */
-	type FontMixin = IFont & GObject.IObject;
+	type FontMixin = IFont & GObject.Object;
 
 	/**
 	 * A `PangoFont` is used to represent a font in a
@@ -533,7 +533,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontFace} instead.
 	 */
-	type FontFaceMixin = IFontFace & GObject.IObject;
+	type FontFaceMixin = IFontFace & GObject.Object;
 
 	/**
 	 * A `PangoFontFace` is used to represent a group of fonts with
@@ -610,7 +610,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontFamily} instead.
 	 */
-	type FontFamilyMixin = IFontFamily & GObject.IObject;
+	type FontFamilyMixin = IFontFamily & GObject.Object;
 
 	/**
 	 * A `PangoFontFamily` is used to represent a family of related
@@ -707,7 +707,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontMap} instead.
 	 */
-	type FontMapMixin = IFontMap & GObject.IObject;
+	type FontMapMixin = IFontMap & GObject.Object;
 
 	/**
 	 * A `PangoFontMap` represents the set of fonts available for a
@@ -752,7 +752,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Fontset} instead.
 	 */
-	type FontsetMixin = IFontset & GObject.IObject;
+	type FontsetMixin = IFontset & GObject.Object;
 
 	/**
 	 * A `PangoFontset` represents a set of `PangoFont` to use when rendering text.
@@ -787,7 +787,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontsetSimple} instead.
 	 */
-	type FontsetSimpleMixin = IFontsetSimple & IFontset;
+	type FontsetSimpleMixin = IFontsetSimple & Fontset;
 
 	/**
 	 * `PangoFontsetSimple` is a implementation of the abstract
@@ -1502,7 +1502,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Layout} instead.
 	 */
-	type LayoutMixin = ILayout & GObject.IObject;
+	type LayoutMixin = ILayout & GObject.Object;
 
 	/**
 	 * A `PangoLayout` structure represents an entire paragraph of text.
@@ -1784,7 +1784,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Renderer} instead.
 	 */
-	type RendererMixin = IRenderer & GObject.IObject;
+	type RendererMixin = IRenderer & GObject.Object;
 
 	/**
 	 * `PangoRenderer` is a base class for objects that can render text

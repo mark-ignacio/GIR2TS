@@ -26,7 +26,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DisplayAdapter} instead.
 	 */
-	type DisplayAdapterMixin = IDisplayAdapter & GObject.IObject;
+	type DisplayAdapterMixin = IDisplayAdapter & GObject.Object;
 
 	interface DisplayAdapter extends DisplayAdapterMixin {}
 
@@ -46,7 +46,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NullAdapter} instead.
 	 */
-	type NullAdapterMixin = INullAdapter & Caribou.IDisplayAdapter;
+	type NullAdapterMixin = INullAdapter & Caribou.DisplayAdapter;
 
 	interface NullAdapter extends NullAdapterMixin {}
 
@@ -65,7 +65,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link XAdapter} instead.
 	 */
-	type XAdapterMixin = IXAdapter & Caribou.IDisplayAdapter;
+	type XAdapterMixin = IXAdapter & Caribou.DisplayAdapter;
 
 	interface XAdapter extends XAdapterMixin {}
 
@@ -98,7 +98,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyboardModel} instead.
 	 */
-	type KeyboardModelMixin = IKeyboardModel & GObject.IObject & Caribou.IIKeyboardObject;
+	type KeyboardModelMixin = IKeyboardModel & GObject.Object & Caribou.IKeyboardObject;
 
 	interface KeyboardModel extends KeyboardModelMixin {}
 
@@ -122,7 +122,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyboardService} instead.
 	 */
-	type KeyboardServiceMixin = IKeyboardService & GObject.IObject;
+	type KeyboardServiceMixin = IKeyboardService & GObject.Object;
 
 	interface KeyboardService extends KeyboardServiceMixin {}
 
@@ -149,7 +149,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GroupModel} instead.
 	 */
-	type GroupModelMixin = IGroupModel & GObject.IObject & Caribou.IIKeyboardObject;
+	type GroupModelMixin = IGroupModel & GObject.Object & Caribou.IKeyboardObject;
 
 	interface GroupModel extends GroupModelMixin {}
 
@@ -175,7 +175,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LevelModel} instead.
 	 */
-	type LevelModelMixin = ILevelModel & Caribou.IScannableGroup & Caribou.IIKeyboardObject;
+	type LevelModelMixin = ILevelModel & Caribou.ScannableGroup & Caribou.IKeyboardObject;
 
 	interface LevelModel extends LevelModelMixin {}
 
@@ -194,7 +194,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RowModel} instead.
 	 */
-	type RowModelMixin = IRowModel & Caribou.IScannableGroup & Caribou.IIScannableItem & Caribou.IIKeyboardObject;
+	type RowModelMixin = IRowModel & Caribou.ScannableGroup & Caribou.IScannableItem & Caribou.IKeyboardObject;
 
 	interface RowModel extends RowModelMixin {}
 
@@ -258,7 +258,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyModel} instead.
 	 */
-	type KeyModelMixin = IKeyModel & GObject.IObject & Caribou.IIScannableItem & Caribou.IIKeyboardObject;
+	type KeyModelMixin = IKeyModel & GObject.Object & Caribou.IScannableItem & Caribou.IKeyboardObject;
 
 	interface KeyModel extends KeyModelMixin {}
 
@@ -278,7 +278,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColumnModel} instead.
 	 */
-	type ColumnModelMixin = IColumnModel & Caribou.IScannableGroup & Caribou.IIScannableItem & Caribou.IIKeyboardObject;
+	type ColumnModelMixin = IColumnModel & Caribou.ScannableGroup & Caribou.IScannableItem & Caribou.IKeyboardObject;
 
 	interface ColumnModel extends ColumnModelMixin {}
 
@@ -338,7 +338,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scanner} instead.
 	 */
-	type ScannerMixin = IScanner & GObject.IObject;
+	type ScannerMixin = IScanner & GObject.Object;
 
 	interface Scanner extends ScannerMixin {}
 
@@ -358,7 +358,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScannableGroup} instead.
 	 */
-	type ScannableGroupMixin = IScannableGroup & GObject.IObject & Caribou.IIScannableGroup;
+	type ScannableGroupMixin = IScannableGroup & GObject.Object & Caribou.IScannableGroup;
 
 	interface ScannableGroup extends ScannableGroupMixin {}
 

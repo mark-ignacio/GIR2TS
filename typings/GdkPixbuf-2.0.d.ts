@@ -688,7 +688,7 @@ declare namespace imports.gi.GdkPixbuf {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Pixbuf} instead.
 	 */
-	type PixbufMixin = IPixbuf & GObject.IObject & Gio.IIcon & Gio.ILoadableIcon;
+	type PixbufMixin = IPixbuf & GObject.Object & Gio.Icon & Gio.LoadableIcon;
 
 	/**
 	 * A pixel buffer.
@@ -1300,7 +1300,7 @@ declare namespace imports.gi.GdkPixbuf {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufAnimation} instead.
 	 */
-	type PixbufAnimationMixin = IPixbufAnimation & GObject.IObject;
+	type PixbufAnimationMixin = IPixbufAnimation & GObject.Object;
 
 	/**
 	 * An opaque object representing an animation.
@@ -1462,7 +1462,7 @@ declare namespace imports.gi.GdkPixbuf {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufAnimationIter} instead.
 	 */
-	type PixbufAnimationIterMixin = IPixbufAnimationIter & GObject.IObject;
+	type PixbufAnimationIterMixin = IPixbufAnimationIter & GObject.Object;
 
 	/**
 	 * An opaque object representing an iterator which points to a
@@ -1609,7 +1609,7 @@ declare namespace imports.gi.GdkPixbuf {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufLoader} instead.
 	 */
-	type PixbufLoaderMixin = IPixbufLoader & GObject.IObject;
+	type PixbufLoaderMixin = IPixbufLoader & GObject.Object;
 
 	/**
 	 * Incremental image loader.
@@ -1718,7 +1718,7 @@ declare namespace imports.gi.GdkPixbuf {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufNonAnim} instead.
 	 */
-	type PixbufNonAnimMixin = IPixbufNonAnim & IPixbufAnimation;
+	type PixbufNonAnimMixin = IPixbufNonAnim & PixbufAnimation;
 
 	interface PixbufNonAnim extends PixbufNonAnimMixin {}
 
@@ -1759,7 +1759,7 @@ declare namespace imports.gi.GdkPixbuf {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufSimpleAnim} instead.
 	 */
-	type PixbufSimpleAnimMixin = IPixbufSimpleAnim & IPixbufAnimation;
+	type PixbufSimpleAnimMixin = IPixbufSimpleAnim & PixbufAnimation;
 
 	/**
 	 * An opaque struct representing a simple animation.
@@ -1788,7 +1788,7 @@ declare namespace imports.gi.GdkPixbuf {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufSimpleAnimIter} instead.
 	 */
-	type PixbufSimpleAnimIterMixin = IPixbufSimpleAnimIter & IPixbufAnimationIter;
+	type PixbufSimpleAnimIterMixin = IPixbufSimpleAnimIter & PixbufAnimationIter;
 
 	interface PixbufSimpleAnimIter extends PixbufSimpleAnimIterMixin {}
 

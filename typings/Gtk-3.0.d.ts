@@ -337,7 +337,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AboutDialog} instead.
 	 */
-	type AboutDialogMixin = IAboutDialog & IDialog & Atk.IImplementorIface & IBuildable;
+	type AboutDialogMixin = IAboutDialog & Dialog & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The GtkAboutDialog offers a simple way to display information about
@@ -531,7 +531,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AccelGroup} instead.
 	 */
-	type AccelGroupMixin = IAccelGroup & GObject.IObject;
+	type AccelGroupMixin = IAccelGroup & GObject.Object;
 
 	/**
 	 * A {@link AccelGroup} represents a group of keyboard accelerators,
@@ -640,7 +640,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AccelLabel} instead.
 	 */
-	type AccelLabelMixin = IAccelLabel & ILabel & Atk.IImplementorIface & IBuildable;
+	type AccelLabelMixin = IAccelLabel & Label & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link AccelLabel} widget is a subclass of #GtkLabel that also displays an
@@ -734,7 +734,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AccelMap} instead.
 	 */
-	type AccelMapMixin = IAccelMap & GObject.IObject;
+	type AccelMapMixin = IAccelMap & GObject.Object;
 
 	/**
 	 * Accelerator maps are used to define runtime configurable accelerators.
@@ -979,7 +979,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Accessible} instead.
 	 */
-	type AccessibleMixin = IAccessible & Atk.IObject;
+	type AccessibleMixin = IAccessible & Atk.Object;
 
 	/**
 	 * The {@link Accessible} class is the base class for accessible
@@ -1383,7 +1383,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
 	 */
-	type ActionMixin = IAction & GObject.IObject & IBuildable;
+	type ActionMixin = IAction & GObject.Object & Buildable;
 
 	/**
 	 * > In GTK+ 3.10, GtkAction has been deprecated. Use #GAction
@@ -1486,7 +1486,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActionBar} instead.
 	 */
-	type ActionBarMixin = IActionBar & IBin & Atk.IImplementorIface & IBuildable;
+	type ActionBarMixin = IActionBar & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkActionBar is designed to present contextual actions. It is
@@ -1756,7 +1756,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActionGroup} instead.
 	 */
-	type ActionGroupMixin = IActionGroup & GObject.IObject & IBuildable;
+	type ActionGroupMixin = IActionGroup & GObject.Object & Buildable;
 
 	/**
 	 * Actions are organised into groups. An action group is essentially a
@@ -2021,7 +2021,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Adjustment} instead.
 	 */
-	type AdjustmentMixin = IAdjustment & GObject.IInitiallyUnowned;
+	type AdjustmentMixin = IAdjustment & GObject.InitiallyUnowned;
 
 	/**
 	 * The {@link Adjustment} object represents a value which has an associated lower
@@ -2151,7 +2151,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Alignment} instead.
 	 */
-	type AlignmentMixin = IAlignment & IBin & Atk.IImplementorIface & IBuildable;
+	type AlignmentMixin = IAlignment & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Alignment} widget controls the alignment and size of its child widget.
@@ -2293,7 +2293,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppChooserButton} instead.
 	 */
-	type AppChooserButtonMixin = IAppChooserButton & IComboBox & Atk.IImplementorIface & IAppChooser & IBuildable & ICellEditable & ICellLayout;
+	type AppChooserButtonMixin = IAppChooserButton & ComboBox & Atk.ImplementorIface & AppChooser & Buildable & CellEditable & CellLayout;
 
 	/**
 	 * The {@link AppChooserButton} is a widget that lets the user select
@@ -2372,7 +2372,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppChooserDialog} instead.
 	 */
-	type AppChooserDialogMixin = IAppChooserDialog & IDialog & Atk.IImplementorIface & IAppChooser & IBuildable;
+	type AppChooserDialogMixin = IAppChooserDialog & Dialog & Atk.ImplementorIface & AppChooser & Buildable;
 
 	/**
 	 * {@link AppChooserDialog} shows a #GtkAppChooserWidget inside a #GtkDialog.
@@ -2556,7 +2556,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppChooserWidget} instead.
 	 */
-	type AppChooserWidgetMixin = IAppChooserWidget & IBox & Atk.IImplementorIface & IAppChooser & IBuildable & IOrientable;
+	type AppChooserWidgetMixin = IAppChooserWidget & Box & Atk.ImplementorIface & AppChooser & Buildable & Orientable;
 
 	/**
 	 * {@link AppChooserWidget} is a widget for selecting applications.
@@ -2943,7 +2943,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Application} instead.
 	 */
-	type ApplicationMixin = IApplication & Gio.IApplication & Gio.IActionGroup & Gio.IActionMap;
+	type ApplicationMixin = IApplication & Gio.Application & Gio.ActionGroup & Gio.ActionMap;
 
 	/**
 	 * {@link Application} is a class that handles many important aspects
@@ -3114,7 +3114,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ApplicationWindow} instead.
 	 */
-	type ApplicationWindowMixin = IApplicationWindow & IWindow & Atk.IImplementorIface & Gio.IActionGroup & Gio.IActionMap & IBuildable;
+	type ApplicationWindowMixin = IApplicationWindow & Window & Atk.ImplementorIface & Gio.ActionGroup & Gio.ActionMap & Buildable;
 
 	/**
 	 * {@link ApplicationWindow} is a #GtkWindow subclass that offers some
@@ -3255,7 +3255,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Arrow} instead.
 	 */
-	type ArrowMixin = IArrow & IMisc & Atk.IImplementorIface & IBuildable;
+	type ArrowMixin = IArrow & Misc & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkArrow should be used to draw simple arrows that need to point in
@@ -3302,7 +3302,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ArrowAccessible} instead.
 	 */
-	type ArrowAccessibleMixin = IArrowAccessible & IWidgetAccessible & Atk.IComponent & Atk.IImage;
+	type ArrowAccessibleMixin = IArrowAccessible & WidgetAccessible & Atk.Component & Atk.Image;
 
 	interface ArrowAccessible extends ArrowAccessibleMixin {}
 
@@ -3343,7 +3343,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AspectFrame} instead.
 	 */
-	type AspectFrameMixin = IAspectFrame & IFrame & Atk.IImplementorIface & IBuildable;
+	type AspectFrameMixin = IAspectFrame & Frame & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link AspectFrame} is useful when you want
@@ -3644,7 +3644,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Assistant} instead.
 	 */
-	type AssistantMixin = IAssistant & IWindow & Atk.IImplementorIface & IBuildable;
+	type AssistantMixin = IAssistant & Window & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A {@link Assistant} is a widget used to represent a generally complex
@@ -3707,7 +3707,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bin} instead.
 	 */
-	type BinMixin = IBin & IContainer & Atk.IImplementorIface & IBuildable;
+	type BinMixin = IBin & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Bin} widget is a container with just one child.
@@ -3733,7 +3733,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BooleanCellAccessible} instead.
 	 */
-	type BooleanCellAccessibleMixin = IBooleanCellAccessible & IRendererCellAccessible & Atk.IAction & Atk.IComponent & Atk.ITableCell;
+	type BooleanCellAccessibleMixin = IBooleanCellAccessible & RendererCellAccessible & Atk.Action & Atk.Component & Atk.TableCell;
 
 	interface BooleanCellAccessible extends BooleanCellAccessibleMixin {}
 
@@ -3894,7 +3894,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Box} instead.
 	 */
-	type BoxMixin = IBox & IContainer & Atk.IImplementorIface & IBuildable & IOrientable;
+	type BoxMixin = IBox & Container & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The GtkBox widget arranges child widgets into a single row or column,
@@ -4253,7 +4253,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Builder} instead.
 	 */
-	type BuilderMixin = IBuilder & GObject.IObject;
+	type BuilderMixin = IBuilder & GObject.Object;
 
 	/**
 	 * A GtkBuilder is an auxiliary object that reads textual descriptions
@@ -4732,7 +4732,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Button} instead.
 	 */
-	type ButtonMixin = IButton & IBin & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ButtonMixin = IButton & Bin & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * The {@link Button} widget is generally used to trigger a callback function that is
@@ -4825,7 +4825,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ButtonAccessible} instead.
 	 */
-	type ButtonAccessibleMixin = IButtonAccessible & IContainerAccessible & Atk.IAction & Atk.IComponent & Atk.IImage;
+	type ButtonAccessibleMixin = IButtonAccessible & ContainerAccessible & Atk.Action & Atk.Component & Atk.Image;
 
 	interface ButtonAccessible extends ButtonAccessibleMixin {}
 
@@ -4894,7 +4894,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ButtonBox} instead.
 	 */
-	type ButtonBoxMixin = IButtonBox & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ButtonBoxMixin = IButtonBox & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	interface ButtonBox extends ButtonBoxMixin {}
 
@@ -5103,7 +5103,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Calendar} instead.
 	 */
-	type CalendarMixin = ICalendar & IWidget & Atk.IImplementorIface & IBuildable;
+	type CalendarMixin = ICalendar & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link Calendar} is a widget that displays a Gregorian calendar, one month
@@ -5149,7 +5149,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellAccessible} instead.
 	 */
-	type CellAccessibleMixin = ICellAccessible & IAccessible & Atk.IAction & Atk.IComponent & Atk.ITableCell;
+	type CellAccessibleMixin = ICellAccessible & Accessible & Atk.Action & Atk.Component & Atk.TableCell;
 
 	interface CellAccessible extends CellAccessibleMixin {}
 
@@ -5652,7 +5652,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellArea} instead.
 	 */
-	type CellAreaMixin = ICellArea & GObject.IInitiallyUnowned & IBuildable & ICellLayout;
+	type CellAreaMixin = ICellArea & GObject.InitiallyUnowned & Buildable & CellLayout;
 
 	/**
 	 * The {@link CellArea} is an abstract class for #GtkCellLayout widgets
@@ -6024,7 +6024,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellAreaBox} instead.
 	 */
-	type CellAreaBoxMixin = ICellAreaBox & ICellArea & IBuildable & ICellLayout & IOrientable;
+	type CellAreaBoxMixin = ICellAreaBox & CellArea & Buildable & CellLayout & Orientable;
 
 	/**
 	 * The {@link CellAreaBox} renders cell renderers into a row or a column
@@ -6248,7 +6248,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellAreaContext} instead.
 	 */
-	type CellAreaContextMixin = ICellAreaContext & GObject.IObject;
+	type CellAreaContextMixin = ICellAreaContext & GObject.Object;
 
 	/**
 	 * The {@link CellAreaContext} object is created by a given #GtkCellArea
@@ -6562,7 +6562,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRenderer} instead.
 	 */
-	type CellRendererMixin = ICellRenderer & GObject.IInitiallyUnowned;
+	type CellRendererMixin = ICellRenderer & GObject.InitiallyUnowned;
 
 	/**
 	 * The {@link CellRenderer} is a base class of a set of objects used for
@@ -6652,7 +6652,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererAccel} instead.
 	 */
-	type CellRendererAccelMixin = ICellRendererAccel & ICellRendererText;
+	type CellRendererAccelMixin = ICellRendererAccel & CellRendererText;
 
 	/**
 	 * {@link CellRendererAccel} displays a keyboard accelerator (i.e. a key
@@ -6723,7 +6723,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererCombo} instead.
 	 */
-	type CellRendererComboMixin = ICellRendererCombo & ICellRendererText;
+	type CellRendererComboMixin = ICellRendererCombo & CellRendererText;
 
 	/**
 	 * {@link CellRendererCombo} renders text in a cell like #GtkCellRendererText from
@@ -6804,7 +6804,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererPixbuf} instead.
 	 */
-	type CellRendererPixbufMixin = ICellRendererPixbuf & ICellRenderer;
+	type CellRendererPixbufMixin = ICellRendererPixbuf & CellRenderer;
 
 	/**
 	 * A {@link CellRendererPixbuf} can be used to render an image in a cell. It allows
@@ -6892,7 +6892,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererProgress} instead.
 	 */
-	type CellRendererProgressMixin = ICellRendererProgress & ICellRenderer & IOrientable;
+	type CellRendererProgressMixin = ICellRendererProgress & CellRenderer & Orientable;
 
 	/**
 	 * {@link CellRendererProgress} renders a numeric value as a progress par in a cell.
@@ -6938,7 +6938,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererSpin} instead.
 	 */
-	type CellRendererSpinMixin = ICellRendererSpin & ICellRendererText;
+	type CellRendererSpinMixin = ICellRendererSpin & CellRendererText;
 
 	/**
 	 * {@link CellRendererSpin} renders text in a cell like #GtkCellRendererText from
@@ -6993,7 +6993,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererSpinner} instead.
 	 */
-	type CellRendererSpinnerMixin = ICellRendererSpinner & ICellRenderer;
+	type CellRendererSpinnerMixin = ICellRendererSpinner & CellRenderer;
 
 	/**
 	 * GtkCellRendererSpinner renders a spinning animation in a cell, very
@@ -7194,7 +7194,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererText} instead.
 	 */
-	type CellRendererTextMixin = ICellRendererText & ICellRenderer;
+	type CellRendererTextMixin = ICellRendererText & CellRenderer;
 
 	/**
 	 * A {@link CellRendererText} renders a given text in its cell, using the font, color and
@@ -7288,7 +7288,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererToggle} instead.
 	 */
-	type CellRendererToggleMixin = ICellRendererToggle & ICellRenderer;
+	type CellRendererToggleMixin = ICellRendererToggle & CellRenderer;
 
 	/**
 	 * {@link CellRendererToggle} renders a toggle button in a cell. The
@@ -7466,7 +7466,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellView} instead.
 	 */
-	type CellViewMixin = ICellView & IWidget & Atk.IImplementorIface & IBuildable & ICellLayout & IOrientable;
+	type CellViewMixin = ICellView & Widget & Atk.ImplementorIface & Buildable & CellLayout & Orientable;
 
 	/**
 	 * A {@link CellView} displays a single row of a #GtkTreeModel using a #GtkCellArea
@@ -7546,7 +7546,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CheckButton} instead.
 	 */
-	type CheckButtonMixin = ICheckButton & IToggleButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type CheckButtonMixin = ICheckButton & ToggleButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link CheckButton} places a discrete #GtkToggleButton next to a widget,
@@ -7671,7 +7671,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CheckMenuItem} instead.
 	 */
-	type CheckMenuItemMixin = ICheckMenuItem & IMenuItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type CheckMenuItemMixin = ICheckMenuItem & MenuItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link CheckMenuItem} is a menu item that maintains the state of a boolean
@@ -7729,7 +7729,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CheckMenuItemAccessible} instead.
 	 */
-	type CheckMenuItemAccessibleMixin = ICheckMenuItemAccessible & IMenuItemAccessible & Atk.IAction & Atk.IComponent & Atk.ISelection;
+	type CheckMenuItemAccessibleMixin = ICheckMenuItemAccessible & MenuItemAccessible & Atk.Action & Atk.Component & Atk.Selection;
 
 	interface CheckMenuItemAccessible extends CheckMenuItemAccessibleMixin {}
 
@@ -8068,7 +8068,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clipboard} instead.
 	 */
-	type ClipboardMixin = IClipboard & GObject.IObject;
+	type ClipboardMixin = IClipboard & GObject.Object;
 
 	/**
 	 * The {@link Clipboard} object represents a clipboard of data shared
@@ -8297,7 +8297,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorButton} instead.
 	 */
-	type ColorButtonMixin = IColorButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable & IColorChooser;
+	type ColorButtonMixin = IColorButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable & ColorChooser;
 
 	/**
 	 * The {@link ColorButton} is a button which displays the currently selected
@@ -8351,7 +8351,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorChooserDialog} instead.
 	 */
-	type ColorChooserDialogMixin = IColorChooserDialog & IDialog & Atk.IImplementorIface & IBuildable & IColorChooser;
+	type ColorChooserDialogMixin = IColorChooserDialog & Dialog & Atk.ImplementorIface & Buildable & ColorChooser;
 
 	/**
 	 * The {@link ColorChooserDialog} widget is a dialog for choosing
@@ -8388,7 +8388,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorChooserWidget} instead.
 	 */
-	type ColorChooserWidgetMixin = IColorChooserWidget & IBox & Atk.IImplementorIface & IBuildable & IColorChooser & IOrientable;
+	type ColorChooserWidgetMixin = IColorChooserWidget & Box & Atk.ImplementorIface & Buildable & ColorChooser & Orientable;
 
 	/**
 	 * The {@link ColorChooserWidget} widget lets the user select a
@@ -8564,7 +8564,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorSelection} instead.
 	 */
-	type ColorSelectionMixin = IColorSelection & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ColorSelectionMixin = IColorSelection & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	interface ColorSelection extends ColorSelectionMixin {}
 
@@ -8625,7 +8625,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorSelectionDialog} instead.
 	 */
-	type ColorSelectionDialogMixin = IColorSelectionDialog & IDialog & Atk.IImplementorIface & IBuildable;
+	type ColorSelectionDialogMixin = IColorSelectionDialog & Dialog & Atk.ImplementorIface & Buildable;
 
 	interface ColorSelectionDialog extends ColorSelectionDialogMixin {}
 
@@ -9083,7 +9083,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ComboBox} instead.
 	 */
-	type ComboBoxMixin = IComboBox & IBin & Atk.IImplementorIface & IBuildable & ICellEditable & ICellLayout;
+	type ComboBoxMixin = IComboBox & Bin & Atk.ImplementorIface & Buildable & CellEditable & CellLayout;
 
 	/**
 	 * A GtkComboBox is a widget that allows the user to choose from a list of
@@ -9194,7 +9194,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ComboBoxAccessible} instead.
 	 */
-	type ComboBoxAccessibleMixin = IComboBoxAccessible & IContainerAccessible & Atk.IAction & Atk.IComponent & Atk.ISelection;
+	type ComboBoxAccessibleMixin = IComboBoxAccessible & ContainerAccessible & Atk.Action & Atk.Component & Atk.Selection;
 
 	interface ComboBoxAccessible extends ComboBoxAccessibleMixin {}
 
@@ -9287,7 +9287,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ComboBoxText} instead.
 	 */
-	type ComboBoxTextMixin = IComboBoxText & IComboBox & Atk.IImplementorIface & IBuildable & ICellEditable & ICellLayout;
+	type ComboBoxTextMixin = IComboBoxText & ComboBox & Atk.ImplementorIface & Buildable & CellEditable & CellLayout;
 
 	/**
 	 * A GtkComboBoxText is a simple variant of {@link ComboBox} that hides
@@ -9691,7 +9691,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Container} instead.
 	 */
-	type ContainerMixin = IContainer & IWidget & Atk.IImplementorIface & IBuildable;
+	type ContainerMixin = IContainer & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GTK+ user interface is constructed by nesting widgets inside widgets.
@@ -9912,7 +9912,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContainerAccessible} instead.
 	 */
-	type ContainerAccessibleMixin = IContainerAccessible & IWidgetAccessible & Atk.IComponent;
+	type ContainerAccessibleMixin = IContainerAccessible & WidgetAccessible & Atk.Component;
 
 	interface ContainerAccessible extends ContainerAccessibleMixin {}
 
@@ -9936,7 +9936,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContainerCellAccessible} instead.
 	 */
-	type ContainerCellAccessibleMixin = IContainerCellAccessible & ICellAccessible & Atk.IAction & Atk.IComponent & Atk.ITableCell;
+	type ContainerCellAccessibleMixin = IContainerCellAccessible & CellAccessible & Atk.Action & Atk.Component & Atk.TableCell;
 
 	interface ContainerCellAccessible extends ContainerCellAccessibleMixin {}
 
@@ -10022,7 +10022,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CssProvider} instead.
 	 */
-	type CssProviderMixin = ICssProvider & GObject.IObject & IStyleProvider;
+	type CssProviderMixin = ICssProvider & GObject.Object & StyleProvider;
 
 	/**
 	 * GtkCssProvider is an object implementing the {@link StyleProvider} interface.
@@ -10303,7 +10303,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Dialog} instead.
 	 */
-	type DialogMixin = IDialog & IWindow & Atk.IImplementorIface & IBuildable;
+	type DialogMixin = IDialog & Window & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * Dialog boxes are a convenient way to prompt the user for a small amount
@@ -10492,7 +10492,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DrawingArea} instead.
 	 */
-	type DrawingAreaMixin = IDrawingArea & IWidget & Atk.IImplementorIface & IBuildable;
+	type DrawingAreaMixin = IDrawingArea & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link DrawingArea} widget is used for creating custom user interface
@@ -11675,7 +11675,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Entry} instead.
 	 */
-	type EntryMixin = IEntry & IWidget & Atk.IImplementorIface & IBuildable & ICellEditable & IEditable;
+	type EntryMixin = IEntry & Widget & Atk.ImplementorIface & Buildable & CellEditable & Editable;
 
 	/**
 	 * The {@link Entry} widget is a single line text entry
@@ -11778,7 +11778,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryAccessible} instead.
 	 */
-	type EntryAccessibleMixin = IEntryAccessible & IWidgetAccessible & Atk.IAction & Atk.IComponent & Atk.IEditableText & Atk.IText;
+	type EntryAccessibleMixin = IEntryAccessible & WidgetAccessible & Atk.Action & Atk.Component & Atk.EditableText & Atk.Text;
 
 	interface EntryAccessible extends EntryAccessibleMixin {}
 
@@ -11912,7 +11912,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryBuffer} instead.
 	 */
-	type EntryBufferMixin = IEntryBuffer & GObject.IObject;
+	type EntryBufferMixin = IEntryBuffer & GObject.Object;
 
 	/**
 	 * The {@link EntryBuffer} class contains the actual text displayed in a
@@ -12220,7 +12220,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryCompletion} instead.
 	 */
-	type EntryCompletionMixin = IEntryCompletion & GObject.IObject & IBuildable & ICellLayout;
+	type EntryCompletionMixin = IEntryCompletion & GObject.Object & Buildable & CellLayout;
 
 	/**
 	 * {@link EntryCompletion} is an auxiliary object to be used in conjunction with
@@ -12293,7 +12293,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryIconAccessible} instead.
 	 */
-	type EntryIconAccessibleMixin = IEntryIconAccessible & Atk.IObject & Atk.IAction & Atk.IComponent;
+	type EntryIconAccessibleMixin = IEntryIconAccessible & Atk.Object & Atk.Action & Atk.Component;
 
 	interface EntryIconAccessible extends EntryIconAccessibleMixin {}
 
@@ -12379,7 +12379,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventBox} instead.
 	 */
-	type EventBoxMixin = IEventBox & IBin & Atk.IImplementorIface & IBuildable;
+	type EventBoxMixin = IEventBox & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link EventBox} widget is a subclass of #GtkBin which also has its
@@ -12450,7 +12450,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventController} instead.
 	 */
-	type EventControllerMixin = IEventController & GObject.IObject;
+	type EventControllerMixin = IEventController & GObject.Object;
 
 	/**
 	 * {@link EventController} is a base, low-level implementation for event
@@ -12493,7 +12493,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventControllerKey} instead.
 	 */
-	type EventControllerKeyMixin = IEventControllerKey & IEventController;
+	type EventControllerKeyMixin = IEventControllerKey & EventController;
 
 	/**
 	 * {@link EventControllerKey} is an event controller meant for situations
@@ -12531,7 +12531,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventControllerMotion} instead.
 	 */
-	type EventControllerMotionMixin = IEventControllerMotion & IEventController;
+	type EventControllerMotionMixin = IEventControllerMotion & EventController;
 
 	/**
 	 * {@link EventControllerMotion} is an event controller meant for situations
@@ -12600,7 +12600,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventControllerScroll} instead.
 	 */
-	type EventControllerScrollMixin = IEventControllerScroll & IEventController;
+	type EventControllerScrollMixin = IEventControllerScroll & EventController;
 
 	/**
 	 * {@link EventControllerScroll} is an event controller meant to handle
@@ -12812,7 +12812,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Expander} instead.
 	 */
-	type ExpanderMixin = IExpander & IBin & Atk.IImplementorIface & IBuildable;
+	type ExpanderMixin = IExpander & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A {@link Expander} allows the user to hide or show its child by clicking
@@ -12932,7 +12932,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ExpanderAccessible} instead.
 	 */
-	type ExpanderAccessibleMixin = IExpanderAccessible & IContainerAccessible & Atk.IAction & Atk.IComponent;
+	type ExpanderAccessibleMixin = IExpanderAccessible & ContainerAccessible & Atk.Action & Atk.Component;
 
 	interface ExpanderAccessible extends ExpanderAccessibleMixin {}
 
@@ -13004,7 +13004,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserButton} instead.
 	 */
-	type FileChooserButtonMixin = IFileChooserButton & IBox & Atk.IImplementorIface & IBuildable & IFileChooser & IOrientable;
+	type FileChooserButtonMixin = IFileChooserButton & Box & Atk.ImplementorIface & Buildable & FileChooser & Orientable;
 
 	/**
 	 * The {@link FileChooserButton} is a widget that lets the user select a
@@ -13080,7 +13080,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserDialog} instead.
 	 */
-	type FileChooserDialogMixin = IFileChooserDialog & IDialog & Atk.IImplementorIface & IBuildable & IFileChooser;
+	type FileChooserDialogMixin = IFileChooserDialog & Dialog & Atk.ImplementorIface & Buildable & FileChooser;
 
 	/**
 	 * {@link FileChooserDialog} is a dialog box suitable for use with
@@ -13311,7 +13311,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserNative} instead.
 	 */
-	type FileChooserNativeMixin = IFileChooserNative & INativeDialog & IFileChooser;
+	type FileChooserNativeMixin = IFileChooserNative & NativeDialog & FileChooser;
 
 	/**
 	 * {@link FileChooserNative} is an abstraction of a dialog box suitable
@@ -13631,7 +13631,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserWidget} instead.
 	 */
-	type FileChooserWidgetMixin = IFileChooserWidget & IBox & Atk.IImplementorIface & IBuildable & IFileChooser & IOrientable;
+	type FileChooserWidgetMixin = IFileChooserWidget & Box & Atk.ImplementorIface & Buildable & FileChooser & Orientable;
 
 	/**
 	 * {@link FileChooserWidget} is a widget for choosing files.
@@ -13667,7 +13667,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserWidgetAccessible} instead.
 	 */
-	type FileChooserWidgetAccessibleMixin = IFileChooserWidgetAccessible & IContainerAccessible & Atk.IAction & Atk.IComponent;
+	type FileChooserWidgetAccessibleMixin = IFileChooserWidgetAccessible & ContainerAccessible & Atk.Action & Atk.Component;
 
 	interface FileChooserWidgetAccessible extends FileChooserWidgetAccessibleMixin {}
 
@@ -13757,7 +13757,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileFilter} instead.
 	 */
-	type FileFilterMixin = IFileFilter & GObject.IInitiallyUnowned & IBuildable;
+	type FileFilterMixin = IFileFilter & GObject.InitiallyUnowned & Buildable;
 
 	/**
 	 * A GtkFileFilter can be used to restrict the files being shown in a
@@ -13853,7 +13853,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Fixed} instead.
 	 */
-	type FixedMixin = IFixed & IContainer & Atk.IImplementorIface & IBuildable;
+	type FixedMixin = IFixed & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Fixed} widget is a container which can place child widgets
@@ -14283,7 +14283,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBox} instead.
 	 */
-	type FlowBoxMixin = IFlowBox & IContainer & Atk.IImplementorIface & IBuildable & IOrientable;
+	type FlowBoxMixin = IFlowBox & Container & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A GtkFlowBox positions child widgets in sequence according to its
@@ -14351,7 +14351,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBoxAccessible} instead.
 	 */
-	type FlowBoxAccessibleMixin = IFlowBoxAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection;
+	type FlowBoxAccessibleMixin = IFlowBoxAccessible & ContainerAccessible & Atk.Component & Atk.Selection;
 
 	interface FlowBoxAccessible extends FlowBoxAccessibleMixin {}
 
@@ -14410,7 +14410,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBoxChild} instead.
 	 */
-	type FlowBoxChildMixin = IFlowBoxChild & IBin & Atk.IImplementorIface & IBuildable;
+	type FlowBoxChildMixin = IFlowBoxChild & Bin & Atk.ImplementorIface & Buildable;
 
 	interface FlowBoxChild extends FlowBoxChildMixin {}
 
@@ -14434,7 +14434,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBoxChildAccessible} instead.
 	 */
-	type FlowBoxChildAccessibleMixin = IFlowBoxChildAccessible & IContainerAccessible & Atk.IComponent;
+	type FlowBoxChildAccessibleMixin = IFlowBoxChildAccessible & ContainerAccessible & Atk.Component;
 
 	interface FlowBoxChildAccessible extends FlowBoxChildAccessibleMixin {}
 
@@ -14567,7 +14567,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontButton} instead.
 	 */
-	type FontButtonMixin = IFontButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable & IFontChooser;
+	type FontButtonMixin = IFontButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable & FontChooser;
 
 	/**
 	 * The {@link FontButton} is a button which displays the currently selected
@@ -14605,7 +14605,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontChooserDialog} instead.
 	 */
-	type FontChooserDialogMixin = IFontChooserDialog & IDialog & Atk.IImplementorIface & IBuildable & IFontChooser;
+	type FontChooserDialogMixin = IFontChooserDialog & Dialog & Atk.ImplementorIface & Buildable & FontChooser;
 
 	/**
 	 * The {@link FontChooserDialog} widget is a dialog for selecting a font.
@@ -14651,7 +14651,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontChooserWidget} instead.
 	 */
-	type FontChooserWidgetMixin = IFontChooserWidget & IBox & Atk.IImplementorIface & IBuildable & IFontChooser & IOrientable;
+	type FontChooserWidgetMixin = IFontChooserWidget & Box & Atk.ImplementorIface & Buildable & FontChooser & Orientable;
 
 	/**
 	 * The {@link FontChooserWidget} widget lists the available fonts,
@@ -14785,7 +14785,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontSelection} instead.
 	 */
-	type FontSelectionMixin = IFontSelection & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type FontSelectionMixin = IFontSelection & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	interface FontSelection extends FontSelectionMixin {}
 
@@ -14856,7 +14856,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontSelectionDialog} instead.
 	 */
-	type FontSelectionDialogMixin = IFontSelectionDialog & IDialog & Atk.IImplementorIface & IBuildable;
+	type FontSelectionDialogMixin = IFontSelectionDialog & Dialog & Atk.ImplementorIface & Buildable;
 
 	interface FontSelectionDialog extends FontSelectionDialogMixin {}
 
@@ -14958,7 +14958,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Frame} instead.
 	 */
-	type FrameMixin = IFrame & IBin & Atk.IImplementorIface & IBuildable;
+	type FrameMixin = IFrame & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The frame widget is a bin that surrounds its child with a decorative
@@ -15027,7 +15027,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FrameAccessible} instead.
 	 */
-	type FrameAccessibleMixin = IFrameAccessible & IContainerAccessible & Atk.IComponent;
+	type FrameAccessibleMixin = IFrameAccessible & ContainerAccessible & Atk.Component;
 
 	interface FrameAccessible extends FrameAccessibleMixin {}
 
@@ -15264,7 +15264,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GLArea} instead.
 	 */
-	type GLAreaMixin = IGLArea & IWidget & Atk.IImplementorIface & IBuildable;
+	type GLAreaMixin = IGLArea & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link GLArea} is a widget that allows drawing with OpenGL.
@@ -15635,7 +15635,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Gesture} instead.
 	 */
-	type GestureMixin = IGesture & IEventController;
+	type GestureMixin = IGesture & EventController;
 
 	/**
 	 * {@link Gesture} is the base object for gesture recognition, although this
@@ -15770,7 +15770,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureDrag} instead.
 	 */
-	type GestureDragMixin = IGestureDrag & IGestureSingle;
+	type GestureDragMixin = IGestureDrag & GestureSingle;
 
 	/**
 	 * {@link GestureDrag} is a #GtkGesture implementation that recognizes drag
@@ -15816,7 +15816,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureLongPress} instead.
 	 */
-	type GestureLongPressMixin = IGestureLongPress & IGestureSingle;
+	type GestureLongPressMixin = IGestureLongPress & GestureSingle;
 
 	/**
 	 * {@link GestureLongPress} is a #GtkGesture implementation able to recognize
@@ -15887,7 +15887,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureMultiPress} instead.
 	 */
-	type GestureMultiPressMixin = IGestureMultiPress & IGestureSingle;
+	type GestureMultiPressMixin = IGestureMultiPress & GestureSingle;
 
 	/**
 	 * {@link GestureMultiPress} is a #GtkGesture implementation able to recognize
@@ -15945,7 +15945,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GesturePan} instead.
 	 */
-	type GesturePanMixin = IGesturePan & IGestureDrag;
+	type GesturePanMixin = IGesturePan & GestureDrag;
 
 	/**
 	 * {@link GesturePan} is a #GtkGesture implementation able to recognize
@@ -15998,7 +15998,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureRotate} instead.
 	 */
-	type GestureRotateMixin = IGestureRotate & IGesture;
+	type GestureRotateMixin = IGestureRotate & Gesture;
 
 	/**
 	 * {@link GestureRotate} is a #GtkGesture implementation able to recognize
@@ -16095,7 +16095,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureSingle} instead.
 	 */
-	type GestureSingleMixin = IGestureSingle & IGesture;
+	type GestureSingleMixin = IGestureSingle & Gesture;
 
 	/**
 	 * {@link GestureSingle} is a subclass of #GtkGesture, optimized (although
@@ -16157,7 +16157,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureStylus} instead.
 	 */
-	type GestureStylusMixin = IGestureStylus & IGestureSingle;
+	type GestureStylusMixin = IGestureStylus & GestureSingle;
 
 	/**
 	 * {@link GestureStylus} is a #GtkGesture implementation specific to stylus
@@ -16197,7 +16197,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureSwipe} instead.
 	 */
-	type GestureSwipeMixin = IGestureSwipe & IGestureSingle;
+	type GestureSwipeMixin = IGestureSwipe & GestureSingle;
 
 	/**
 	 * {@link GestureSwipe} is a #GtkGesture implementation able to recognize
@@ -16245,7 +16245,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureZoom} instead.
 	 */
-	type GestureZoomMixin = IGestureZoom & IGesture;
+	type GestureZoomMixin = IGestureZoom & Gesture;
 
 	/**
 	 * {@link GestureZoom} is a #GtkGesture implementation able to recognize
@@ -16443,7 +16443,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Grid} instead.
 	 */
-	type GridMixin = IGrid & IContainer & Atk.IImplementorIface & IBuildable & IOrientable;
+	type GridMixin = IGrid & Container & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * GtkGrid is a container which arranges its child widgets in
@@ -16487,7 +16487,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HBox} instead.
 	 */
-	type HBoxMixin = IHBox & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HBoxMixin = IHBox & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * {@link HBox} is a container that organizes child widgets into a single row.
@@ -16535,7 +16535,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HButtonBox} instead.
 	 */
-	type HButtonBoxMixin = IHButtonBox & IButtonBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HButtonBoxMixin = IHButtonBox & ButtonBox & Atk.ImplementorIface & Buildable & Orientable;
 
 	interface HButtonBox extends HButtonBoxMixin {}
 
@@ -16561,7 +16561,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HPaned} instead.
 	 */
-	type HPanedMixin = IHPaned & IPaned & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HPanedMixin = IHPaned & Paned & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The HPaned widget is a container widget with two
@@ -16635,7 +16635,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HSV} instead.
 	 */
-	type HSVMixin = IHSV & IWidget & Atk.IImplementorIface & IBuildable;
+	type HSVMixin = IHSV & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link HSV} is the “color wheel” part of a complete color selector widget.
@@ -16686,7 +16686,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HScale} instead.
 	 */
-	type HScaleMixin = IHScale & IScale & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HScaleMixin = IHScale & Scale & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link HScale} widget is used to allow the user to select a value using
@@ -16738,7 +16738,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HScrollbar} instead.
 	 */
-	type HScrollbarMixin = IHScrollbar & IScrollbar & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HScrollbarMixin = IHScrollbar & Scrollbar & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link HScrollbar} widget is a widget arranged horizontally creating a
@@ -16775,7 +16775,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HSeparator} instead.
 	 */
-	type HSeparatorMixin = IHSeparator & ISeparator & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HSeparatorMixin = IHSeparator & Separator & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link HSeparator} widget is a horizontal separator, used to group the
@@ -16888,7 +16888,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HandleBox} instead.
 	 */
-	type HandleBoxMixin = IHandleBox & IBin & Atk.IImplementorIface & IBuildable;
+	type HandleBoxMixin = IHandleBox & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link HandleBox} widget allows a portion of a window to be "torn
@@ -17096,7 +17096,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HeaderBar} instead.
 	 */
-	type HeaderBarMixin = IHeaderBar & IContainer & Atk.IImplementorIface & IBuildable;
+	type HeaderBarMixin = IHeaderBar & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkHeaderBar is similar to a horizontal {@link Box}. It allows children to
@@ -17136,7 +17136,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HeaderBarAccessible} instead.
 	 */
-	type HeaderBarAccessibleMixin = IHeaderBarAccessible & IContainerAccessible & Atk.IComponent;
+	type HeaderBarAccessibleMixin = IHeaderBarAccessible & ContainerAccessible & Atk.Component;
 
 	interface HeaderBarAccessible extends HeaderBarAccessibleMixin {}
 
@@ -17314,7 +17314,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMContext} instead.
 	 */
-	type IMContextMixin = IIMContext & GObject.IObject;
+	type IMContextMixin = IIMContext & GObject.Object;
 
 	/**
 	 * {@link IMContext} defines the interface for GTK+ input methods. An input method
@@ -17422,7 +17422,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMContextSimple} instead.
 	 */
-	type IMContextSimpleMixin = IIMContextSimple & IIMContext;
+	type IMContextSimpleMixin = IIMContextSimple & IMContext;
 
 	/**
 	 * GtkIMContextSimple is a simple input method context supporting table-based
@@ -17485,7 +17485,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMMulticontext} instead.
 	 */
-	type IMMulticontextMixin = IIMMulticontext & IIMContext;
+	type IMMulticontextMixin = IIMMulticontext & IMContext;
 
 	interface IMMulticontext extends IMMulticontextMixin {}
 
@@ -17547,7 +17547,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconFactory} instead.
 	 */
-	type IconFactoryMixin = IIconFactory & GObject.IObject & IBuildable;
+	type IconFactoryMixin = IIconFactory & GObject.Object & Buildable;
 
 	/**
 	 * An icon factory manages a collection of {@link IconSet}; a #GtkIconSet manages a
@@ -17925,7 +17925,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconInfo} instead.
 	 */
-	type IconInfoMixin = IIconInfo & GObject.IObject;
+	type IconInfoMixin = IIconInfo & GObject.Object;
 
 	/**
 	 * Contains information found when looking up an icon in
@@ -18272,7 +18272,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconTheme} instead.
 	 */
-	type IconThemeMixin = IIconTheme & GObject.IObject;
+	type IconThemeMixin = IIconTheme & GObject.Object;
 
 	/**
 	 * {@link IconTheme} provides a facility for looking up icons by name
@@ -19077,7 +19077,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconView} instead.
 	 */
-	type IconViewMixin = IIconView & IContainer & Atk.IImplementorIface & IBuildable & ICellLayout & IScrollable;
+	type IconViewMixin = IIconView & Container & Atk.ImplementorIface & Buildable & CellLayout & Scrollable;
 
 	/**
 	 * {@link IconView} provides an alternative view on a #GtkTreeModel.
@@ -19136,7 +19136,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconViewAccessible} instead.
 	 */
-	type IconViewAccessibleMixin = IIconViewAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection;
+	type IconViewAccessibleMixin = IIconViewAccessible & ContainerAccessible & Atk.Component & Atk.Selection;
 
 	interface IconViewAccessible extends IconViewAccessibleMixin {}
 
@@ -19348,7 +19348,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Image} instead.
 	 */
-	type ImageMixin = IImage & IMisc & Atk.IImplementorIface & IBuildable;
+	type ImageMixin = IImage & Misc & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Image} widget displays an image. Various kinds of object
@@ -19584,7 +19584,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImageAccessible} instead.
 	 */
-	type ImageAccessibleMixin = IImageAccessible & IWidgetAccessible & Atk.IComponent & Atk.IImage;
+	type ImageAccessibleMixin = IImageAccessible & WidgetAccessible & Atk.Component & Atk.Image;
 
 	interface ImageAccessible extends ImageAccessibleMixin {}
 
@@ -19602,7 +19602,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImageCellAccessible} instead.
 	 */
-	type ImageCellAccessibleMixin = IImageCellAccessible & IRendererCellAccessible & Atk.IAction & Atk.IComponent & Atk.IImage & Atk.ITableCell;
+	type ImageCellAccessibleMixin = IImageCellAccessible & RendererCellAccessible & Atk.Action & Atk.Component & Atk.Image & Atk.TableCell;
 
 	interface ImageCellAccessible extends ImageCellAccessibleMixin {}
 
@@ -19693,7 +19693,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImageMenuItem} instead.
 	 */
-	type ImageMenuItemMixin = IImageMenuItem & IMenuItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ImageMenuItemMixin = IImageMenuItem & MenuItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A GtkImageMenuItem is a menu item which has an icon next to the text label.
@@ -19935,7 +19935,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InfoBar} instead.
 	 */
-	type InfoBarMixin = IInfoBar & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type InfoBarMixin = IInfoBar & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * {@link InfoBar} is a widget that can be used to show messages to
@@ -20056,7 +20056,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Invisible} instead.
 	 */
-	type InvisibleMixin = IInvisible & IWidget & Atk.IImplementorIface & IBuildable;
+	type InvisibleMixin = IInvisible & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Invisible} widget is used internally in GTK+, and is probably not
@@ -20668,7 +20668,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Label} instead.
 	 */
-	type LabelMixin = ILabel & IMisc & Atk.IImplementorIface & IBuildable;
+	type LabelMixin = ILabel & Misc & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Label} widget displays a small amount of text. As the name
@@ -20892,7 +20892,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LabelAccessible} instead.
 	 */
-	type LabelAccessibleMixin = ILabelAccessible & IWidgetAccessible & Atk.IComponent & Atk.IHypertext & Atk.IText;
+	type LabelAccessibleMixin = ILabelAccessible & WidgetAccessible & Atk.Component & Atk.Hypertext & Atk.Text;
 
 	interface LabelAccessible extends LabelAccessibleMixin {}
 
@@ -20987,7 +20987,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Layout} instead.
 	 */
-	type LayoutMixin = ILayout & IContainer & Atk.IImplementorIface & IBuildable & IScrollable;
+	type LayoutMixin = ILayout & Container & Atk.ImplementorIface & Buildable & Scrollable;
 
 	/**
 	 * {@link Layout} is similar to #GtkDrawingArea in that it’s a “blank slate” and
@@ -21157,7 +21157,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LevelBar} instead.
 	 */
-	type LevelBarMixin = ILevelBar & IWidget & Atk.IImplementorIface & IBuildable & IOrientable;
+	type LevelBarMixin = ILevelBar & Widget & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link LevelBar} is a bar widget that can be used
@@ -21283,7 +21283,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LevelBarAccessible} instead.
 	 */
-	type LevelBarAccessibleMixin = ILevelBarAccessible & IWidgetAccessible & Atk.IComponent & Atk.IValue;
+	type LevelBarAccessibleMixin = ILevelBarAccessible & WidgetAccessible & Atk.Component & Atk.Value;
 
 	interface LevelBarAccessible extends LevelBarAccessibleMixin {}
 
@@ -21352,7 +21352,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LinkButton} instead.
 	 */
-	type LinkButtonMixin = ILinkButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type LinkButtonMixin = ILinkButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A GtkLinkButton is a {@link Button} with a hyperlink, similar to the one
@@ -21405,7 +21405,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LinkButtonAccessible} instead.
 	 */
-	type LinkButtonAccessibleMixin = ILinkButtonAccessible & IButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IHyperlinkImpl & Atk.IImage;
+	type LinkButtonAccessibleMixin = ILinkButtonAccessible & ButtonAccessible & Atk.Action & Atk.Component & Atk.HyperlinkImpl & Atk.Image;
 
 	interface LinkButtonAccessible extends LinkButtonAccessibleMixin {}
 
@@ -21696,7 +21696,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBox} instead.
 	 */
-	type ListBoxMixin = IListBox & IContainer & Atk.IImplementorIface & IBuildable;
+	type ListBoxMixin = IListBox & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GtkListBox is a vertical container that contains GtkListBoxRow
@@ -21759,7 +21759,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBoxAccessible} instead.
 	 */
-	type ListBoxAccessibleMixin = IListBoxAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection;
+	type ListBoxAccessibleMixin = IListBoxAccessible & ContainerAccessible & Atk.Component & Atk.Selection;
 
 	interface ListBoxAccessible extends ListBoxAccessibleMixin {}
 
@@ -21862,7 +21862,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBoxRow} instead.
 	 */
-	type ListBoxRowMixin = IListBoxRow & IBin & Atk.IImplementorIface & IActionable & IBuildable;
+	type ListBoxRowMixin = IListBoxRow & Bin & Atk.ImplementorIface & Actionable & Buildable;
 
 	interface ListBoxRow extends ListBoxRowMixin {}
 
@@ -21885,7 +21885,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBoxRowAccessible} instead.
 	 */
-	type ListBoxRowAccessibleMixin = IListBoxRowAccessible & IContainerAccessible & Atk.IComponent;
+	type ListBoxRowAccessibleMixin = IListBoxRowAccessible & ContainerAccessible & Atk.Component;
 
 	interface ListBoxRowAccessible extends ListBoxRowAccessibleMixin {}
 
@@ -22092,7 +22092,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListStore} instead.
 	 */
-	type ListStoreMixin = IListStore & GObject.IObject & IBuildable & ITreeDragDest & ITreeDragSource & ITreeModel & ITreeSortable;
+	type ListStoreMixin = IListStore & GObject.Object & Buildable & TreeDragDest & TreeDragSource & TreeModel & TreeSortable;
 
 	/**
 	 * The {@link ListStore} object is a list model for use with a #GtkTreeView
@@ -22290,7 +22290,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LockButton} instead.
 	 */
-	type LockButtonMixin = ILockButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type LockButtonMixin = ILockButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * GtkLockButton is a widget that can be used in control panels or
@@ -22346,7 +22346,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LockButtonAccessible} instead.
 	 */
-	type LockButtonAccessibleMixin = ILockButtonAccessible & IButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IImage;
+	type LockButtonAccessibleMixin = ILockButtonAccessible & ButtonAccessible & Atk.Action & Atk.Component & Atk.Image;
 
 	interface LockButtonAccessible extends LockButtonAccessibleMixin {}
 
@@ -22827,7 +22827,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Menu} instead.
 	 */
-	type MenuMixin = IMenu & IMenuShell & Atk.IImplementorIface & IBuildable;
+	type MenuMixin = IMenu & MenuShell & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A {@link Menu} is a #GtkMenuShell that implements a drop down menu
@@ -22945,7 +22945,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuAccessible} instead.
 	 */
-	type MenuAccessibleMixin = IMenuAccessible & IMenuShellAccessible & Atk.IComponent & Atk.ISelection;
+	type MenuAccessibleMixin = IMenuAccessible & MenuShellAccessible & Atk.Component & Atk.Selection;
 
 	interface MenuAccessible extends MenuAccessibleMixin {}
 
@@ -22999,7 +22999,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuBar} instead.
 	 */
-	type MenuBarMixin = IMenuBar & IMenuShell & Atk.IImplementorIface & IBuildable;
+	type MenuBarMixin = IMenuBar & MenuShell & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link MenuBar} is a subclass of #GtkMenuShell which contains one or
@@ -23181,7 +23181,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuButton} instead.
 	 */
-	type MenuButtonMixin = IMenuButton & IToggleButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type MenuButtonMixin = IMenuButton & ToggleButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * The {@link MenuButton} widget is used to display a popup when clicked on.
@@ -23291,7 +23291,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuButtonAccessible} instead.
 	 */
-	type MenuButtonAccessibleMixin = IMenuButtonAccessible & IToggleButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IImage;
+	type MenuButtonAccessibleMixin = IMenuButtonAccessible & ToggleButtonAccessible & Atk.Action & Atk.Component & Atk.Image;
 
 	interface MenuButtonAccessible extends MenuButtonAccessibleMixin {}
 
@@ -23478,7 +23478,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuItem} instead.
 	 */
-	type MenuItemMixin = IMenuItem & IBin & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type MenuItemMixin = IMenuItem & Bin & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * The {@link MenuItem} widget and the derived widgets are the only valid
@@ -23567,7 +23567,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuItemAccessible} instead.
 	 */
-	type MenuItemAccessibleMixin = IMenuItemAccessible & IContainerAccessible & Atk.IAction & Atk.IComponent & Atk.ISelection;
+	type MenuItemAccessibleMixin = IMenuItemAccessible & ContainerAccessible & Atk.Action & Atk.Component & Atk.Selection;
 
 	interface MenuItemAccessible extends MenuItemAccessibleMixin {}
 
@@ -23787,7 +23787,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuShell} instead.
 	 */
-	type MenuShellMixin = IMenuShell & IContainer & Atk.IImplementorIface & IBuildable;
+	type MenuShellMixin = IMenuShell & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A {@link MenuShell} is the abstract base class used to derive the
@@ -23834,7 +23834,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuShellAccessible} instead.
 	 */
-	type MenuShellAccessibleMixin = IMenuShellAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection;
+	type MenuShellAccessibleMixin = IMenuShellAccessible & ContainerAccessible & Atk.Component & Atk.Selection;
 
 	interface MenuShellAccessible extends MenuShellAccessibleMixin {}
 
@@ -23892,7 +23892,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuToolButton} instead.
 	 */
-	type MenuToolButtonMixin = IMenuToolButton & IToolButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type MenuToolButtonMixin = IMenuToolButton & ToolButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link MenuToolButton} is a #GtkToolItem that contains a button and
@@ -24044,7 +24044,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MessageDialog} instead.
 	 */
-	type MessageDialogMixin = IMessageDialog & IDialog & Atk.IImplementorIface & IBuildable;
+	type MessageDialogMixin = IMessageDialog & Dialog & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link MessageDialog} presents a dialog with some message text. It’s simply a
@@ -24222,7 +24222,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Misc} instead.
 	 */
-	type MiscMixin = IMisc & IWidget & Atk.IImplementorIface & IBuildable;
+	type MiscMixin = IMisc & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Misc} widget is an abstract widget which is not useful itself, but
@@ -24315,7 +24315,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ModelButton} instead.
 	 */
-	type ModelButtonMixin = IModelButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ModelButtonMixin = IModelButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * GtkModelButton is a button class that can use a #GAction as its model.
@@ -24471,7 +24471,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MountOperation} instead.
 	 */
-	type MountOperationMixin = IMountOperation & Gio.IMountOperation;
+	type MountOperationMixin = IMountOperation & Gio.MountOperation;
 
 	/**
 	 * This should not be accessed directly. Use the accessor functions below.
@@ -24640,7 +24640,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NativeDialog} instead.
 	 */
-	type NativeDialogMixin = INativeDialog & GObject.IObject;
+	type NativeDialogMixin = INativeDialog & GObject.Object;
 
 	/**
 	 * Native dialogs are platform dialogs that don't use {@link Dialog} or
@@ -25117,7 +25117,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Notebook} instead.
 	 */
-	type NotebookMixin = INotebook & IContainer & Atk.IImplementorIface & IBuildable;
+	type NotebookMixin = INotebook & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Notebook} widget is a #GtkContainer whose children are pages that
@@ -25223,7 +25223,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NotebookAccessible} instead.
 	 */
-	type NotebookAccessibleMixin = INotebookAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection;
+	type NotebookAccessibleMixin = INotebookAccessible & ContainerAccessible & Atk.Component & Atk.Selection;
 
 	interface NotebookAccessible extends NotebookAccessibleMixin {}
 
@@ -25241,7 +25241,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NotebookPageAccessible} instead.
 	 */
-	type NotebookPageAccessibleMixin = INotebookPageAccessible & Atk.IObject & Atk.IComponent;
+	type NotebookPageAccessibleMixin = INotebookPageAccessible & Atk.Object & Atk.Component;
 
 	interface NotebookPageAccessible extends NotebookPageAccessibleMixin {}
 
@@ -25361,7 +25361,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NumerableIcon} instead.
 	 */
-	type NumerableIconMixin = INumerableIcon & Gio.IEmblemedIcon & Gio.IIcon;
+	type NumerableIconMixin = INumerableIcon & Gio.EmblemedIcon & Gio.Icon;
 
 	/**
 	 * GtkNumerableIcon is a subclass of #GEmblemedIcon that can
@@ -25425,7 +25425,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OffscreenWindow} instead.
 	 */
-	type OffscreenWindowMixin = IOffscreenWindow & IWindow & Atk.IImplementorIface & IBuildable;
+	type OffscreenWindowMixin = IOffscreenWindow & Window & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkOffscreenWindow is strictly intended to be used for obtaining
@@ -25523,7 +25523,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Overlay} instead.
 	 */
-	type OverlayMixin = IOverlay & IBin & Atk.IImplementorIface & IBuildable;
+	type OverlayMixin = IOverlay & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkOverlay is a container which contains a single main child, on top
@@ -25603,7 +25603,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PadController} instead.
 	 */
-	type PadControllerMixin = IPadController & IEventController;
+	type PadControllerMixin = IPadController & EventController;
 
 	/**
 	 * {@link PadController} is an event controller for the pads found in drawing
@@ -25835,7 +25835,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PageSetup} instead.
 	 */
-	type PageSetupMixin = IPageSetup & GObject.IObject;
+	type PageSetupMixin = IPageSetup & GObject.Object;
 
 	/**
 	 * A GtkPageSetup object stores the page size, orientation and margins.
@@ -26075,7 +26075,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Paned} instead.
 	 */
-	type PanedMixin = IPaned & IContainer & Atk.IImplementorIface & IBuildable & IOrientable;
+	type PanedMixin = IPaned & Container & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * {@link Paned} has two panes, arranged either
@@ -26165,7 +26165,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PanedAccessible} instead.
 	 */
-	type PanedAccessibleMixin = IPanedAccessible & IContainerAccessible & Atk.IComponent & Atk.IValue;
+	type PanedAccessibleMixin = IPanedAccessible & ContainerAccessible & Atk.Component & Atk.Value;
 
 	interface PanedAccessible extends PanedAccessibleMixin {}
 
@@ -26537,7 +26537,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PlacesSidebar} instead.
 	 */
-	type PlacesSidebarMixin = IPlacesSidebar & IScrolledWindow & Atk.IImplementorIface & IBuildable;
+	type PlacesSidebarMixin = IPlacesSidebar & ScrolledWindow & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link PlacesSidebar} is a widget that displays a list of frequently-used places in the
@@ -26648,7 +26648,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plug} instead.
 	 */
-	type PlugMixin = IPlug & IWindow & Atk.IImplementorIface & IBuildable;
+	type PlugMixin = IPlug & Window & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * Together with {@link Socket}, #GtkPlug provides the ability to embed
@@ -26701,7 +26701,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PlugAccessible} instead.
 	 */
-	type PlugAccessibleMixin = IPlugAccessible & IWindowAccessible & Atk.IComponent & Atk.IWindow;
+	type PlugAccessibleMixin = IPlugAccessible & WindowAccessible & Atk.Component & Atk.Window;
 
 	interface PlugAccessible extends PlugAccessibleMixin {}
 
@@ -26899,7 +26899,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Popover} instead.
 	 */
-	type PopoverMixin = IPopover & IBin & Atk.IImplementorIface & IBuildable;
+	type PopoverMixin = IPopover & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkPopover is a bubble-like context window, primarily meant to
@@ -27002,7 +27002,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PopoverAccessible} instead.
 	 */
-	type PopoverAccessibleMixin = IPopoverAccessible & IContainerAccessible & Atk.IComponent;
+	type PopoverAccessibleMixin = IPopoverAccessible & ContainerAccessible & Atk.Component;
 
 	interface PopoverAccessible extends PopoverAccessibleMixin {}
 
@@ -27035,7 +27035,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PopoverMenu} instead.
 	 */
-	type PopoverMenuMixin = IPopoverMenu & IPopover & Atk.IImplementorIface & IBuildable;
+	type PopoverMenuMixin = IPopoverMenu & Popover & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkPopoverMenu is a subclass of {@link Popover} that treats its
@@ -27200,7 +27200,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintContext} instead.
 	 */
-	type PrintContextMixin = IPrintContext & GObject.IObject;
+	type PrintContextMixin = IPrintContext & GObject.Object;
 
 	/**
 	 * A GtkPrintContext encapsulates context information that is required when
@@ -27908,7 +27908,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintOperation} instead.
 	 */
-	type PrintOperationMixin = IPrintOperation & GObject.IObject & IPrintOperationPreview;
+	type PrintOperationMixin = IPrintOperation & GObject.Object & PrintOperationPreview;
 
 	/**
 	 * GtkPrintOperation is the high-level, portable printing API.
@@ -28418,7 +28418,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintSettings} instead.
 	 */
-	type PrintSettingsMixin = IPrintSettings & GObject.IObject;
+	type PrintSettingsMixin = IPrintSettings & GObject.Object;
 
 	/**
 	 * A GtkPrintSettings object represents the settings of a print dialog in
@@ -28610,7 +28610,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProgressBar} instead.
 	 */
-	type ProgressBarMixin = IProgressBar & IWidget & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ProgressBarMixin = IProgressBar & Widget & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link ProgressBar} is typically used to display the progress of a long
@@ -28674,7 +28674,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProgressBarAccessible} instead.
 	 */
-	type ProgressBarAccessibleMixin = IProgressBarAccessible & IWidgetAccessible & Atk.IComponent & Atk.IValue;
+	type ProgressBarAccessibleMixin = IProgressBarAccessible & WidgetAccessible & Atk.Component & Atk.Value;
 
 	interface ProgressBarAccessible extends ProgressBarAccessibleMixin {}
 
@@ -28775,7 +28775,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioAction} instead.
 	 */
-	type RadioActionMixin = IRadioAction & IToggleAction & IBuildable;
+	type RadioActionMixin = IRadioAction & ToggleAction & Buildable;
 
 	/**
 	 * A {@link RadioAction} is similar to #GtkRadioMenuItem. A number of radio
@@ -28865,7 +28865,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioButton} instead.
 	 */
-	type RadioButtonMixin = IRadioButton & ICheckButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type RadioButtonMixin = IRadioButton & CheckButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A single radio button performs the same basic function as a {@link CheckButton},
@@ -29023,7 +29023,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioButtonAccessible} instead.
 	 */
-	type RadioButtonAccessibleMixin = IRadioButtonAccessible & IToggleButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IImage;
+	type RadioButtonAccessibleMixin = IRadioButtonAccessible & ToggleButtonAccessible & Atk.Action & Atk.Component & Atk.Image;
 
 	interface RadioButtonAccessible extends RadioButtonAccessibleMixin {}
 
@@ -29085,7 +29085,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioMenuItem} instead.
 	 */
-	type RadioMenuItemMixin = IRadioMenuItem & ICheckMenuItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type RadioMenuItemMixin = IRadioMenuItem & CheckMenuItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A radio menu item is a check menu item that belongs to a group. At each
@@ -29192,7 +29192,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioMenuItemAccessible} instead.
 	 */
-	type RadioMenuItemAccessibleMixin = IRadioMenuItemAccessible & ICheckMenuItemAccessible & Atk.IAction & Atk.IComponent & Atk.ISelection;
+	type RadioMenuItemAccessibleMixin = IRadioMenuItemAccessible & CheckMenuItemAccessible & Atk.Action & Atk.Component & Atk.Selection;
 
 	interface RadioMenuItemAccessible extends RadioMenuItemAccessibleMixin {}
 
@@ -29219,7 +29219,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioToolButton} instead.
 	 */
-	type RadioToolButtonMixin = IRadioToolButton & IToggleToolButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type RadioToolButtonMixin = IRadioToolButton & ToggleToolButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link RadioToolButton} is a #GtkToolItem that contains a radio button,
@@ -29557,7 +29557,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Range} instead.
 	 */
-	type RangeMixin = IRange & IWidget & Atk.IImplementorIface & IBuildable & IOrientable;
+	type RangeMixin = IRange & Widget & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * {@link Range} is the common base class for widgets which visualize an
@@ -29584,7 +29584,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RangeAccessible} instead.
 	 */
-	type RangeAccessibleMixin = IRangeAccessible & IWidgetAccessible & Atk.IComponent & Atk.IValue;
+	type RangeAccessibleMixin = IRangeAccessible & WidgetAccessible & Atk.Component & Atk.Value;
 
 	interface RangeAccessible extends RangeAccessibleMixin {}
 
@@ -29659,7 +29659,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RcStyle} instead.
 	 */
-	type RcStyleMixin = IRcStyle & GObject.IObject;
+	type RcStyleMixin = IRcStyle & GObject.Object;
 
 	/**
 	 * The {@link RcStyle}-struct is used to represent a set
@@ -29707,7 +29707,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentAction} instead.
 	 */
-	type RecentActionMixin = IRecentAction & IAction & IBuildable & IRecentChooser;
+	type RecentActionMixin = IRecentAction & Action & Buildable & RecentChooser;
 
 	/**
 	 * A {@link RecentAction} represents a list of recently used files, which
@@ -29763,7 +29763,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentChooserDialog} instead.
 	 */
-	type RecentChooserDialogMixin = IRecentChooserDialog & IDialog & Atk.IImplementorIface & IBuildable & IRecentChooser;
+	type RecentChooserDialogMixin = IRecentChooserDialog & Dialog & Atk.ImplementorIface & Buildable & RecentChooser;
 
 	/**
 	 * {@link RecentChooserDialog} is a dialog box suitable for displaying the recently
@@ -29864,7 +29864,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentChooserMenu} instead.
 	 */
-	type RecentChooserMenuMixin = IRecentChooserMenu & IMenu & Atk.IImplementorIface & IActivatable & IBuildable & IRecentChooser;
+	type RecentChooserMenuMixin = IRecentChooserMenu & Menu & Atk.ImplementorIface & Activatable & Buildable & RecentChooser;
 
 	/**
 	 * {@link RecentChooserMenu} is a widget suitable for displaying recently used files
@@ -29930,7 +29930,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentChooserWidget} instead.
 	 */
-	type RecentChooserWidgetMixin = IRecentChooserWidget & IBox & Atk.IImplementorIface & IBuildable & IOrientable & IRecentChooser;
+	type RecentChooserWidgetMixin = IRecentChooserWidget & Box & Atk.ImplementorIface & Buildable & Orientable & RecentChooser;
 
 	/**
 	 * {@link RecentChooserWidget} is a widget suitable for selecting recently used
@@ -30061,7 +30061,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentFilter} instead.
 	 */
-	type RecentFilterMixin = IRecentFilter & GObject.IInitiallyUnowned & IBuildable;
+	type RecentFilterMixin = IRecentFilter & GObject.InitiallyUnowned & Buildable;
 
 	/**
 	 * A {@link RecentFilter} can be used to restrict the files being shown
@@ -30253,7 +30253,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentManager} instead.
 	 */
-	type RecentManagerMixin = IRecentManager & GObject.IObject;
+	type RecentManagerMixin = IRecentManager & GObject.Object;
 
 	/**
 	 * {@link RecentManager} provides a facility for adding, removing and
@@ -30354,7 +30354,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RendererCellAccessible} instead.
 	 */
-	type RendererCellAccessibleMixin = IRendererCellAccessible & ICellAccessible & Atk.IAction & Atk.IComponent & Atk.ITableCell;
+	type RendererCellAccessibleMixin = IRendererCellAccessible & CellAccessible & Atk.Action & Atk.Component & Atk.TableCell;
 
 	interface RendererCellAccessible extends RendererCellAccessibleMixin {}
 
@@ -30430,7 +30430,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Revealer} instead.
 	 */
-	type RevealerMixin = IRevealer & IBin & Atk.IImplementorIface & IBuildable;
+	type RevealerMixin = IRevealer & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The GtkRevealer widget is a container which animates
@@ -30599,7 +30599,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scale} instead.
 	 */
-	type ScaleMixin = IScale & IRange & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ScaleMixin = IScale & Range & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A GtkScale is a slider control used to select a numeric value.
@@ -30716,7 +30716,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScaleAccessible} instead.
 	 */
-	type ScaleAccessibleMixin = IScaleAccessible & IRangeAccessible & Atk.IComponent & Atk.IValue;
+	type ScaleAccessibleMixin = IScaleAccessible & RangeAccessible & Atk.Component & Atk.Value;
 
 	interface ScaleAccessible extends ScaleAccessibleMixin {}
 
@@ -30828,7 +30828,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScaleButton} instead.
 	 */
-	type ScaleButtonMixin = IScaleButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable & IOrientable;
+	type ScaleButtonMixin = IScaleButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable & Orientable;
 
 	/**
 	 * {@link ScaleButton} provides a button which pops up a scale widget.
@@ -30873,7 +30873,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScaleButtonAccessible} instead.
 	 */
-	type ScaleButtonAccessibleMixin = IScaleButtonAccessible & IButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IImage & Atk.IValue;
+	type ScaleButtonAccessibleMixin = IScaleButtonAccessible & ButtonAccessible & Atk.Action & Atk.Component & Atk.Image & Atk.Value;
 
 	interface ScaleButtonAccessible extends ScaleButtonAccessibleMixin {}
 
@@ -30894,7 +30894,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scrollbar} instead.
 	 */
-	type ScrollbarMixin = IScrollbar & IRange & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ScrollbarMixin = IScrollbar & Range & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link Scrollbar} widget is a horizontal or vertical scrollbar,
@@ -31325,7 +31325,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrolledWindow} instead.
 	 */
-	type ScrolledWindowMixin = IScrolledWindow & IBin & Atk.IImplementorIface & IBuildable;
+	type ScrolledWindowMixin = IScrolledWindow & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkScrolledWindow is a container that accepts a single child widget, makes
@@ -31434,7 +31434,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrolledWindowAccessible} instead.
 	 */
-	type ScrolledWindowAccessibleMixin = IScrolledWindowAccessible & IContainerAccessible & Atk.IComponent;
+	type ScrolledWindowAccessibleMixin = IScrolledWindowAccessible & ContainerAccessible & Atk.Component;
 
 	interface ScrolledWindowAccessible extends ScrolledWindowAccessibleMixin {}
 
@@ -31532,7 +31532,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SearchBar} instead.
 	 */
-	type SearchBarMixin = ISearchBar & IBin & Atk.IImplementorIface & IBuildable;
+	type SearchBarMixin = ISearchBar & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link SearchBar} is a container made to have a search entry (possibly
@@ -31637,7 +31637,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SearchEntry} instead.
 	 */
-	type SearchEntryMixin = ISearchEntry & IEntry & Atk.IImplementorIface & IBuildable & ICellEditable & IEditable;
+	type SearchEntryMixin = ISearchEntry & Entry & Atk.ImplementorIface & Buildable & CellEditable & Editable;
 
 	/**
 	 * {@link SearchEntry} is a subclass of #GtkEntry that has been
@@ -31690,7 +31690,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Separator} instead.
 	 */
-	type SeparatorMixin = ISeparator & IWidget & Atk.IImplementorIface & IBuildable & IOrientable;
+	type SeparatorMixin = ISeparator & Widget & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * GtkSeparator is a horizontal or vertical separator widget, depending on the
@@ -31728,7 +31728,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SeparatorMenuItem} instead.
 	 */
-	type SeparatorMenuItemMixin = ISeparatorMenuItem & IMenuItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type SeparatorMenuItemMixin = ISeparatorMenuItem & MenuItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * The {@link SeparatorMenuItem} is a separator used to group
@@ -31775,7 +31775,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SeparatorToolItem} instead.
 	 */
-	type SeparatorToolItemMixin = ISeparatorToolItem & IToolItem & Atk.IImplementorIface & IActivatable & IBuildable;
+	type SeparatorToolItemMixin = ISeparatorToolItem & ToolItem & Atk.ImplementorIface & Activatable & Buildable;
 
 	/**
 	 * A {@link SeparatorToolItem} is a #GtkToolItem that separates groups of other
@@ -32325,7 +32325,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
-	type SettingsMixin = ISettings & GObject.IObject & IStyleProvider;
+	type SettingsMixin = ISettings & GObject.Object & StyleProvider;
 
 	/**
 	 * GtkSettings provide a mechanism to share global settings between
@@ -32428,7 +32428,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutLabel} instead.
 	 */
-	type ShortcutLabelMixin = IShortcutLabel & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ShortcutLabelMixin = IShortcutLabel & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * {@link ShortcutLabel} is a widget that represents a single keyboard shortcut or gesture
@@ -32478,7 +32478,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsGroup} instead.
 	 */
-	type ShortcutsGroupMixin = IShortcutsGroup & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ShortcutsGroupMixin = IShortcutsGroup & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A GtkShortcutsGroup represents a group of related keyboard shortcuts
@@ -32539,7 +32539,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsSection} instead.
 	 */
-	type ShortcutsSectionMixin = IShortcutsSection & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ShortcutsSectionMixin = IShortcutsSection & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A GtkShortcutsSection collects all the keyboard shortcuts and gestures
@@ -32649,7 +32649,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsShortcut} instead.
 	 */
-	type ShortcutsShortcutMixin = IShortcutsShortcut & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ShortcutsShortcutMixin = IShortcutsShortcut & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A GtkShortcutsShortcut represents a single keyboard shortcut or gesture
@@ -32710,7 +32710,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsWindow} instead.
 	 */
-	type ShortcutsWindowMixin = IShortcutsWindow & IWindow & Atk.IImplementorIface & IBuildable;
+	type ShortcutsWindowMixin = IShortcutsWindow & Window & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GtkShortcutsWindow shows brief information about the keyboard shortcuts
@@ -32828,7 +32828,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SizeGroup} instead.
 	 */
-	type SizeGroupMixin = ISizeGroup & GObject.IObject & IBuildable;
+	type SizeGroupMixin = ISizeGroup & GObject.Object & Buildable;
 
 	/**
 	 * {@link SizeGroup} provides a mechanism for grouping a number of widgets
@@ -32967,7 +32967,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Socket} instead.
 	 */
-	type SocketMixin = ISocket & IContainer & Atk.IImplementorIface & IBuildable;
+	type SocketMixin = ISocket & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * Together with {@link Plug}, #GtkSocket provides the ability to embed
@@ -33043,7 +33043,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketAccessible} instead.
 	 */
-	type SocketAccessibleMixin = ISocketAccessible & IContainerAccessible & Atk.IComponent;
+	type SocketAccessibleMixin = ISocketAccessible & ContainerAccessible & Atk.Component;
 
 	interface SocketAccessible extends SocketAccessibleMixin {}
 
@@ -33274,7 +33274,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SpinButton} instead.
 	 */
-	type SpinButtonMixin = ISpinButton & IEntry & Atk.IImplementorIface & IBuildable & ICellEditable & IEditable & IOrientable;
+	type SpinButtonMixin = ISpinButton & Entry & Atk.ImplementorIface & Buildable & CellEditable & Editable & Orientable;
 
 	/**
 	 * A {@link SpinButton} is an ideal way to allow the user to set the value of
@@ -33427,7 +33427,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SpinButtonAccessible} instead.
 	 */
-	type SpinButtonAccessibleMixin = ISpinButtonAccessible & IEntryAccessible & Atk.IAction & Atk.IComponent & Atk.IEditableText & Atk.IText & Atk.IValue;
+	type SpinButtonAccessibleMixin = ISpinButtonAccessible & EntryAccessible & Atk.Action & Atk.Component & Atk.EditableText & Atk.Text & Atk.Value;
 
 	interface SpinButtonAccessible extends SpinButtonAccessibleMixin {}
 
@@ -33455,7 +33455,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Spinner} instead.
 	 */
-	type SpinnerMixin = ISpinner & IWidget & Atk.IImplementorIface & IBuildable;
+	type SpinnerMixin = ISpinner & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GtkSpinner widget displays an icon-size spinning animation.
@@ -33491,7 +33491,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SpinnerAccessible} instead.
 	 */
-	type SpinnerAccessibleMixin = ISpinnerAccessible & IWidgetAccessible & Atk.IComponent & Atk.IImage;
+	type SpinnerAccessibleMixin = ISpinnerAccessible & WidgetAccessible & Atk.Component & Atk.Image;
 
 	interface SpinnerAccessible extends SpinnerAccessibleMixin {}
 
@@ -33704,7 +33704,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stack} instead.
 	 */
-	type StackMixin = IStack & IContainer & Atk.IImplementorIface & IBuildable;
+	type StackMixin = IStack & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The GtkStack widget is a container which only shows
@@ -33745,7 +33745,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StackAccessible} instead.
 	 */
-	type StackAccessibleMixin = IStackAccessible & IContainerAccessible & Atk.IComponent;
+	type StackAccessibleMixin = IStackAccessible & ContainerAccessible & Atk.Component;
 
 	interface StackAccessible extends StackAccessibleMixin {}
 
@@ -33780,7 +33780,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StackSidebar} instead.
 	 */
-	type StackSidebarMixin = IStackSidebar & IBin & Atk.IImplementorIface & IBuildable;
+	type StackSidebarMixin = IStackSidebar & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GtkStackSidebar enables you to quickly and easily provide a
@@ -33843,7 +33843,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StackSwitcher} instead.
 	 */
-	type StackSwitcherMixin = IStackSwitcher & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type StackSwitcherMixin = IStackSwitcher & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The GtkStackSwitcher widget acts as a controller for a
@@ -34271,7 +34271,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StatusIcon} instead.
 	 */
-	type StatusIconMixin = IStatusIcon & GObject.IObject;
+	type StatusIconMixin = IStatusIcon & GObject.Object;
 
 	/**
 	 * The “system tray” or notification area is normally used for transient icons
@@ -34434,7 +34434,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Statusbar} instead.
 	 */
-	type StatusbarMixin = IStatusbar & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type StatusbarMixin = IStatusbar & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A {@link Statusbar} is usually placed along the bottom of an application's
@@ -34492,7 +34492,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StatusbarAccessible} instead.
 	 */
-	type StatusbarAccessibleMixin = IStatusbarAccessible & IContainerAccessible & Atk.IComponent;
+	type StatusbarAccessibleMixin = IStatusbarAccessible & ContainerAccessible & Atk.Component;
 
 	interface StatusbarAccessible extends StatusbarAccessibleMixin {}
 
@@ -34698,7 +34698,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Style} instead.
 	 */
-	type StyleMixin = IStyle & GObject.IObject;
+	type StyleMixin = IStyle & GObject.Object;
 
 	/**
 	 * A {@link Style} object encapsulates the information that provides the look and
@@ -35294,7 +35294,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StyleContext} instead.
 	 */
-	type StyleContextMixin = IStyleContext & GObject.IObject;
+	type StyleContextMixin = IStyleContext & GObject.Object;
 
 	/**
 	 * {@link StyleContext} is an object that stores styling information affecting
@@ -35485,7 +35485,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StyleProperties} instead.
 	 */
-	type StylePropertiesMixin = IStyleProperties & GObject.IObject & IStyleProvider;
+	type StylePropertiesMixin = IStyleProperties & GObject.Object & StyleProvider;
 
 	/**
 	 * GtkStyleProperties provides the storage for style information
@@ -35604,7 +35604,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Switch} instead.
 	 */
-	type SwitchMixin = ISwitch & IWidget & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type SwitchMixin = ISwitch & Widget & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * {@link Switch} is a widget that has two states: on or off. The user can control
@@ -35645,7 +35645,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SwitchAccessible} instead.
 	 */
-	type SwitchAccessibleMixin = ISwitchAccessible & IWidgetAccessible & Atk.IAction & Atk.IComponent;
+	type SwitchAccessibleMixin = ISwitchAccessible & WidgetAccessible & Atk.Action & Atk.Component;
 
 	interface SwitchAccessible extends SwitchAccessibleMixin {}
 
@@ -35794,7 +35794,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Table} instead.
 	 */
-	type TableMixin = ITable & IContainer & Atk.IImplementorIface & IBuildable;
+	type TableMixin = ITable & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Table} functions allow the programmer to arrange widgets in rows and
@@ -35854,7 +35854,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TearoffMenuItem} instead.
 	 */
-	type TearoffMenuItemMixin = ITearoffMenuItem & IMenuItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type TearoffMenuItemMixin = ITearoffMenuItem & MenuItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link TearoffMenuItem} is a special #GtkMenuItem which is used to
@@ -36845,7 +36845,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextBuffer} instead.
 	 */
-	type TextBufferMixin = ITextBuffer & GObject.IObject;
+	type TextBufferMixin = ITextBuffer & GObject.Object;
 
 	/**
 	 * You may wish to begin by reading the
@@ -36875,7 +36875,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextCellAccessible} instead.
 	 */
-	type TextCellAccessibleMixin = ITextCellAccessible & IRendererCellAccessible & Atk.IAction & Atk.IComponent & Atk.ITableCell & Atk.IText;
+	type TextCellAccessibleMixin = ITextCellAccessible & RendererCellAccessible & Atk.Action & Atk.Component & Atk.TableCell & Atk.Text;
 
 	interface TextCellAccessible extends TextCellAccessibleMixin {}
 
@@ -36908,7 +36908,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextChildAnchor} instead.
 	 */
-	type TextChildAnchorMixin = ITextChildAnchor & GObject.IObject;
+	type TextChildAnchorMixin = ITextChildAnchor & GObject.Object;
 
 	/**
 	 * A {@link TextChildAnchor} is a spot in the buffer where child widgets can
@@ -36989,7 +36989,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextMark} instead.
 	 */
-	type TextMarkMixin = ITextMark & GObject.IObject;
+	type TextMarkMixin = ITextMark & GObject.Object;
 
 	/**
 	 * You may wish to begin by reading the
@@ -37314,7 +37314,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextTag} instead.
 	 */
-	type TextTagMixin = ITextTag & GObject.IObject;
+	type TextTagMixin = ITextTag & GObject.Object;
 
 	/**
 	 * You may wish to begin by reading the
@@ -37397,7 +37397,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextTagTable} instead.
 	 */
-	type TextTagTableMixin = ITextTagTable & GObject.IObject & IBuildable;
+	type TextTagTableMixin = ITextTagTable & GObject.Object & Buildable;
 
 	/**
 	 * You may wish to begin by reading the
@@ -38367,7 +38367,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextView} instead.
 	 */
-	type TextViewMixin = ITextView & IContainer & Atk.IImplementorIface & IBuildable & IScrollable;
+	type TextViewMixin = ITextView & Container & Atk.ImplementorIface & Buildable & Scrollable;
 
 	/**
 	 * You may wish to begin by reading the
@@ -38433,7 +38433,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextViewAccessible} instead.
 	 */
-	type TextViewAccessibleMixin = ITextViewAccessible & IContainerAccessible & Atk.IComponent & Atk.IEditableText & Atk.IStreamableContent & Atk.IText;
+	type TextViewAccessibleMixin = ITextViewAccessible & ContainerAccessible & Atk.Component & Atk.EditableText & Atk.StreamableContent & Atk.Text;
 
 	interface TextViewAccessible extends TextViewAccessibleMixin {}
 
@@ -38609,7 +38609,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThemingEngine} instead.
 	 */
-	type ThemingEngineMixin = IThemingEngine & GObject.IObject;
+	type ThemingEngineMixin = IThemingEngine & GObject.Object;
 
 	/**
 	 * {@link ThemingEngine} was the object used for rendering themed content
@@ -38723,7 +38723,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleAction} instead.
 	 */
-	type ToggleActionMixin = IToggleAction & IAction & IBuildable;
+	type ToggleActionMixin = IToggleAction & Action & Buildable;
 
 	/**
 	 * A {@link ToggleAction} corresponds roughly to a #GtkCheckMenuItem. It has an
@@ -38829,7 +38829,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleButton} instead.
 	 */
-	type ToggleButtonMixin = IToggleButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ToggleButtonMixin = IToggleButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link ToggleButton} is a #GtkButton which will remain “pressed-in” when
@@ -38929,7 +38929,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleButtonAccessible} instead.
 	 */
-	type ToggleButtonAccessibleMixin = IToggleButtonAccessible & IButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IImage;
+	type ToggleButtonAccessibleMixin = IToggleButtonAccessible & ButtonAccessible & Atk.Action & Atk.Component & Atk.Image;
 
 	interface ToggleButtonAccessible extends ToggleButtonAccessibleMixin {}
 
@@ -38970,7 +38970,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleToolButton} instead.
 	 */
-	type ToggleToolButtonMixin = IToggleToolButton & IToolButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ToggleToolButtonMixin = IToggleToolButton & ToolButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link ToggleToolButton} is a #GtkToolItem that contains a toggle
@@ -39132,7 +39132,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolButton} instead.
 	 */
-	type ToolButtonMixin = IToolButton & IToolItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ToolButtonMixin = IToolButton & ToolItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * {@link ToolButtons} are #GtkToolItems containing buttons.
@@ -39450,7 +39450,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolItem} instead.
 	 */
-	type ToolItemMixin = IToolItem & IBin & Atk.IImplementorIface & IActivatable & IBuildable;
+	type ToolItemMixin = IToolItem & Bin & Atk.ImplementorIface & Activatable & Buildable;
 
 	/**
 	 * {@link ToolItems} are widgets that can appear on a toolbar. To
@@ -39591,7 +39591,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolItemGroup} instead.
 	 */
-	type ToolItemGroupMixin = IToolItemGroup & IContainer & Atk.IImplementorIface & IBuildable & IToolShell;
+	type ToolItemGroupMixin = IToolItemGroup & Container & Atk.ImplementorIface & Buildable & ToolShell;
 
 	/**
 	 * A {@link ToolItemGroup} is used together with #GtkToolPalette to add
@@ -39772,7 +39772,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolPalette} instead.
 	 */
-	type ToolPaletteMixin = IToolPalette & IContainer & Atk.IImplementorIface & IBuildable & IOrientable & IScrollable;
+	type ToolPaletteMixin = IToolPalette & Container & Atk.ImplementorIface & Buildable & Orientable & Scrollable;
 
 	/**
 	 * A {@link ToolPalette} allows you to add #GtkToolItems to a palette-like
@@ -40037,7 +40037,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Toolbar} instead.
 	 */
-	type ToolbarMixin = IToolbar & IContainer & Atk.IImplementorIface & IBuildable & IOrientable & IToolShell;
+	type ToolbarMixin = IToolbar & Container & Atk.ImplementorIface & Buildable & Orientable & ToolShell;
 
 	/**
 	 * A toolbar is created with a call to gtk_toolbar_new().
@@ -40149,7 +40149,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Tooltip} instead.
 	 */
-	type TooltipMixin = ITooltip & GObject.IObject;
+	type TooltipMixin = ITooltip & GObject.Object;
 
 	/**
 	 * Basic tooltips can be realized simply by using gtk_widget_set_tooltip_text()
@@ -40211,7 +40211,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToplevelAccessible} instead.
 	 */
-	type ToplevelAccessibleMixin = IToplevelAccessible & Atk.IObject;
+	type ToplevelAccessibleMixin = IToplevelAccessible & Atk.Object;
 
 	interface ToplevelAccessible extends ToplevelAccessibleMixin {}
 
@@ -40358,7 +40358,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeModelFilter} instead.
 	 */
-	type TreeModelFilterMixin = ITreeModelFilter & GObject.IObject & ITreeDragSource & ITreeModel;
+	type TreeModelFilterMixin = ITreeModelFilter & GObject.Object & TreeDragSource & TreeModel;
 
 	/**
 	 * A {@link TreeModelFilter} is a tree model which wraps another tree model,
@@ -40510,7 +40510,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeModelSort} instead.
 	 */
-	type TreeModelSortMixin = ITreeModelSort & GObject.IObject & ITreeDragSource & ITreeModel & ITreeSortable;
+	type TreeModelSortMixin = ITreeModelSort & GObject.Object & TreeDragSource & TreeModel & TreeSortable;
 
 	/**
 	 * The {@link TreeModelSort} is a model which implements the #GtkTreeSortable
@@ -40776,7 +40776,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeSelection} instead.
 	 */
-	type TreeSelectionMixin = ITreeSelection & GObject.IObject;
+	type TreeSelectionMixin = ITreeSelection & GObject.Object;
 
 	/**
 	 * The {@link TreeSelection} object is a helper object to manage the selection
@@ -41037,7 +41037,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeStore} instead.
 	 */
-	type TreeStoreMixin = ITreeStore & GObject.IObject & IBuildable & ITreeDragDest & ITreeDragSource & ITreeModel & ITreeSortable;
+	type TreeStoreMixin = ITreeStore & GObject.Object & Buildable & TreeDragDest & TreeDragSource & TreeModel & TreeSortable;
 
 	/**
 	 * The {@link TreeStore} object is a list model for use with a #GtkTreeView
@@ -42106,7 +42106,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeView} instead.
 	 */
-	type TreeViewMixin = ITreeView & IContainer & Atk.IImplementorIface & IBuildable & IScrollable;
+	type TreeViewMixin = ITreeView & Container & Atk.ImplementorIface & Buildable & Scrollable;
 
 	/**
 	 * Widget that displays any object that implements the {@link TreeModel} interface.
@@ -42211,7 +42211,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeViewAccessible} instead.
 	 */
-	type TreeViewAccessibleMixin = ITreeViewAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection & Atk.ITable & ICellAccessibleParent;
+	type TreeViewAccessibleMixin = ITreeViewAccessible & ContainerAccessible & Atk.Component & Atk.Selection & Atk.Table & CellAccessibleParent;
 
 	interface TreeViewAccessible extends TreeViewAccessibleMixin {}
 
@@ -42630,7 +42630,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeViewColumn} instead.
 	 */
-	type TreeViewColumnMixin = ITreeViewColumn & GObject.IInitiallyUnowned & IBuildable & ICellLayout;
+	type TreeViewColumnMixin = ITreeViewColumn & GObject.InitiallyUnowned & Buildable & CellLayout;
 
 	/**
 	 * The GtkTreeViewColumn object represents a visible column in a {@link TreeView} widget.
@@ -42912,7 +42912,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UIManager} instead.
 	 */
-	type UIManagerMixin = IUIManager & GObject.IObject & IBuildable;
+	type UIManagerMixin = IUIManager & GObject.Object & Buildable;
 
 	/**
 	 * A {@link UIManager} constructs a user interface (menus and toolbars) from
@@ -43165,7 +43165,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VBox} instead.
 	 */
-	type VBoxMixin = IVBox & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VBoxMixin = IVBox & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A {@link VBox} is a container that organizes child widgets into a single column.
@@ -43220,7 +43220,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VButtonBox} instead.
 	 */
-	type VButtonBoxMixin = IVButtonBox & IButtonBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VButtonBoxMixin = IVButtonBox & ButtonBox & Atk.ImplementorIface & Buildable & Orientable;
 
 	interface VButtonBox extends VButtonBoxMixin {}
 
@@ -43246,7 +43246,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VPaned} instead.
 	 */
-	type VPanedMixin = IVPaned & IPaned & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VPanedMixin = IVPaned & Paned & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The VPaned widget is a container widget with two
@@ -43280,7 +43280,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VScale} instead.
 	 */
-	type VScaleMixin = IVScale & IScale & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VScaleMixin = IVScale & Scale & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link VScale} widget is used to allow the user to select a value using
@@ -43331,7 +43331,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VScrollbar} instead.
 	 */
-	type VScrollbarMixin = IVScrollbar & IScrollbar & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VScrollbarMixin = IVScrollbar & Scrollbar & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link VScrollbar} widget is a widget arranged vertically creating a
@@ -43368,7 +43368,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VSeparator} instead.
 	 */
-	type VSeparatorMixin = IVSeparator & ISeparator & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VSeparatorMixin = IVSeparator & Separator & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link VSeparator} widget is a vertical separator, used to group the
@@ -43443,7 +43443,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Viewport} instead.
 	 */
-	type ViewportMixin = IViewport & IBin & Atk.IImplementorIface & IBuildable & IScrollable;
+	type ViewportMixin = IViewport & Bin & Atk.ImplementorIface & Buildable & Scrollable;
 
 	/**
 	 * The {@link Viewport} widget acts as an adaptor class, implementing
@@ -43499,7 +43499,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VolumeButton} instead.
 	 */
-	type VolumeButtonMixin = IVolumeButton & IScaleButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable & IOrientable;
+	type VolumeButtonMixin = IVolumeButton & ScaleButton & Atk.ImplementorIface & Actionable & Activatable & Buildable & Orientable;
 
 	/**
 	 * {@link VolumeButton} is a subclass of #GtkScaleButton that has
@@ -47327,7 +47327,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Widget} instead.
 	 */
-	type WidgetMixin = IWidget & GObject.IInitiallyUnowned & Atk.IImplementorIface & IBuildable;
+	type WidgetMixin = IWidget & GObject.InitiallyUnowned & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkWidget is the base class all widgets in GTK+ derive from. It manages the
@@ -47776,7 +47776,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WidgetAccessible} instead.
 	 */
-	type WidgetAccessibleMixin = IWidgetAccessible & IAccessible & Atk.IComponent;
+	type WidgetAccessibleMixin = IWidgetAccessible & Accessible & Atk.Component;
 
 	interface WidgetAccessible extends WidgetAccessibleMixin {}
 
@@ -49265,7 +49265,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Window} instead.
 	 */
-	type WindowMixin = IWindow & IBin & Atk.IImplementorIface & IBuildable;
+	type WindowMixin = IWindow & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GtkWindow is a toplevel window which can contain other widgets.
@@ -49444,7 +49444,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowAccessible} instead.
 	 */
-	type WindowAccessibleMixin = IWindowAccessible & IContainerAccessible & Atk.IComponent & Atk.IWindow;
+	type WindowAccessibleMixin = IWindowAccessible & ContainerAccessible & Atk.Component & Atk.Window;
 
 	interface WindowAccessible extends WindowAccessibleMixin {}
 
@@ -49489,7 +49489,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowGroup} instead.
 	 */
-	type WindowGroupMixin = IWindowGroup & GObject.IObject;
+	type WindowGroupMixin = IWindowGroup & GObject.Object;
 
 	/**
 	 * A {@link WindowGroup} restricts the effect of grabs to windows

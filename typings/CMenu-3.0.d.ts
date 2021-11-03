@@ -184,7 +184,7 @@ declare namespace imports.gi.CMenu {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesktopAppInfo} instead.
 	 */
-	type DesktopAppInfoMixin = IDesktopAppInfo & GObject.IObject & Gio.IAppInfo;
+	type DesktopAppInfoMixin = IDesktopAppInfo & GObject.Object & Gio.AppInfo;
 
 	interface DesktopAppInfo extends DesktopAppInfoMixin {}
 
@@ -268,7 +268,7 @@ declare namespace imports.gi.CMenu {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Tree} instead.
 	 */
-	type TreeMixin = ITree & GObject.IObject;
+	type TreeMixin = ITree & GObject.Object;
 
 	interface Tree extends TreeMixin {}
 

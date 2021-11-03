@@ -73,7 +73,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppLaunchContext} instead.
 	 */
-	type AppLaunchContextMixin = IAppLaunchContext & Gio.IAppLaunchContext;
+	type AppLaunchContextMixin = IAppLaunchContext & Gio.AppLaunchContext;
 
 	/**
 	 * GdkAppLaunchContext is an implementation of #GAppLaunchContext that
@@ -162,7 +162,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Cursor} instead.
 	 */
-	type CursorMixin = ICursor & GObject.IObject;
+	type CursorMixin = ICursor & GObject.Object;
 
 	/**
 	 * A {@link Cursor} represents a cursor. Its contents are private.
@@ -709,7 +709,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Device} instead.
 	 */
-	type DeviceMixin = IDevice & GObject.IObject;
+	type DeviceMixin = IDevice & GObject.Object;
 
 	/**
 	 * The {@link Device} object represents a single input device, such
@@ -806,7 +806,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceManager} instead.
 	 */
-	type DeviceManagerMixin = IDeviceManager & GObject.IObject;
+	type DeviceManagerMixin = IDeviceManager & GObject.Object;
 
 	/**
 	 * In addition to a single pointer and keyboard for user interface input,
@@ -973,7 +973,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceTool} instead.
 	 */
-	type DeviceToolMixin = IDeviceTool & GObject.IObject;
+	type DeviceToolMixin = IDeviceTool & GObject.Object;
 
 	interface DeviceTool extends DeviceToolMixin {}
 
@@ -1366,7 +1366,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Display} instead.
 	 */
-	type DisplayMixin = IDisplay & GObject.IObject;
+	type DisplayMixin = IDisplay & GObject.Object;
 
 	/**
 	 * {@link Display} objects purpose are two fold:
@@ -1461,7 +1461,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DisplayManager} instead.
 	 */
-	type DisplayManagerMixin = IDisplayManager & GObject.IObject;
+	type DisplayManagerMixin = IDisplayManager & GObject.Object;
 
 	/**
 	 * The purpose of the {@link DisplayManager} singleton object is to offer
@@ -1654,7 +1654,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DragContext} instead.
 	 */
-	type DragContextMixin = IDragContext & GObject.IObject;
+	type DragContextMixin = IDragContext & GObject.Object;
 
 	interface DragContext extends DragContextMixin {}
 
@@ -1709,7 +1709,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DrawingContext} instead.
 	 */
-	type DrawingContextMixin = IDrawingContext & GObject.IObject;
+	type DrawingContextMixin = IDrawingContext & GObject.Object;
 
 	/**
 	 * {@link DrawingContext} is an object that represents the current drawing
@@ -1879,7 +1879,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FrameClock} instead.
 	 */
-	type FrameClockMixin = IFrameClock & GObject.IObject;
+	type FrameClockMixin = IFrameClock & GObject.Object;
 
 	/**
 	 * A {@link FrameClock} tells the application when to update and repaint a
@@ -2076,7 +2076,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GLContext} instead.
 	 */
-	type GLContextMixin = IGLContext & GObject.IObject;
+	type GLContextMixin = IGLContext & GObject.Object;
 
 	/**
 	 * {@link GLContext} is an object representing the platform-specific
@@ -2339,7 +2339,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Keymap} instead.
 	 */
-	type KeymapMixin = IKeymap & GObject.IObject;
+	type KeymapMixin = IKeymap & GObject.Object;
 
 	/**
 	 * A {@link Keymap} defines the translation from keyboard state
@@ -2483,7 +2483,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Monitor} instead.
 	 */
-	type MonitorMixin = IMonitor & GObject.IObject;
+	type MonitorMixin = IMonitor & GObject.Object;
 
 	/**
 	 * GdkMonitor objects represent the individual outputs that are
@@ -2834,7 +2834,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Screen} instead.
 	 */
-	type ScreenMixin = IScreen & GObject.IObject;
+	type ScreenMixin = IScreen & GObject.Object;
 
 	/**
 	 * {@link Screen} objects are the GDK representation of the screen on
@@ -3011,7 +3011,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Seat} instead.
 	 */
-	type SeatMixin = ISeat & GObject.IObject;
+	type SeatMixin = ISeat & GObject.Object;
 
 	/**
 	 * The {@link Seat} object represents a collection of input devices
@@ -3109,7 +3109,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Visual} instead.
 	 */
-	type VisualMixin = IVisual & GObject.IObject;
+	type VisualMixin = IVisual & GObject.Object;
 
 	/**
 	 * A {@link Visual} contains information about
@@ -5023,7 +5023,7 @@ declare namespace imports.gi.Gdk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Window} instead.
 	 */
-	type WindowMixin = IWindow & GObject.IObject;
+	type WindowMixin = IWindow & GObject.Object;
 
 	interface Window extends WindowMixin {}
 

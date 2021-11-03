@@ -9,7 +9,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
 	 */
-	type ActionMixin = IAction & IActorMeta;
+	type ActionMixin = IAction & ActorMeta;
 
 	/**
 	 * The {@link Action} structure contains only private data and
@@ -3800,7 +3800,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Actor} instead.
 	 */
-	type ActorMixin = IActor & GObject.IInitiallyUnowned & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type ActorMixin = IActor & GObject.InitiallyUnowned & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * Base class for actors.
@@ -3874,7 +3874,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActorMeta} instead.
 	 */
-	type ActorMetaMixin = IActorMeta & GObject.IInitiallyUnowned;
+	type ActorMetaMixin = IActorMeta & GObject.InitiallyUnowned;
 
 	/**
 	 * The {@link ActorMeta} structure contains only
@@ -3960,7 +3960,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AlignConstraint} instead.
 	 */
-	type AlignConstraintMixin = IAlignConstraint & IConstraint;
+	type AlignConstraintMixin = IAlignConstraint & Constraint;
 
 	/**
 	 * {@link AlignConstraint} is an opaque structure
@@ -4060,7 +4060,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Alpha} instead.
 	 */
-	type AlphaMixin = IAlpha & GObject.IInitiallyUnowned & IScriptable;
+	type AlphaMixin = IAlpha & GObject.InitiallyUnowned & Scriptable;
 
 	/**
 	 * {@link Alpha} combines a #ClutterTimeline and a function.
@@ -4337,7 +4337,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Animation} instead.
 	 */
-	type AnimationMixin = IAnimation & GObject.IObject & IScriptable;
+	type AnimationMixin = IAnimation & GObject.Object & Scriptable;
 
 	/**
 	 * The {@link Animation} structure contains only private data and should
@@ -4516,7 +4516,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Animator} instead.
 	 */
-	type AnimatorMixin = IAnimator & GObject.IObject & IScriptable;
+	type AnimatorMixin = IAnimator & GObject.Object & Scriptable;
 
 	/**
 	 * The {@link Animator} structure contains only private data and
@@ -4641,7 +4641,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Backend} instead.
 	 */
-	type BackendMixin = IBackend & GObject.IObject;
+	type BackendMixin = IBackend & GObject.Object;
 
 	/**
 	 * {@link Backend} is an opaque structure whose
@@ -4749,7 +4749,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Behaviour} instead.
 	 */
-	type BehaviourMixin = IBehaviour & GObject.IObject & IScriptable;
+	type BehaviourMixin = IBehaviour & GObject.Object & Scriptable;
 
 	/**
 	 * {@link Behaviour}-struct contains only private data and should
@@ -4794,7 +4794,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourDepth} instead.
 	 */
-	type BehaviourDepthMixin = IBehaviourDepth & IBehaviour & IScriptable;
+	type BehaviourDepthMixin = IBehaviourDepth & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourDepth} structure contains only private data
@@ -4968,7 +4968,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourEllipse} instead.
 	 */
-	type BehaviourEllipseMixin = IBehaviourEllipse & IBehaviour & IScriptable;
+	type BehaviourEllipseMixin = IBehaviourEllipse & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourEllipse} struct contains only private data
@@ -5037,7 +5037,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourOpacity} instead.
 	 */
-	type BehaviourOpacityMixin = IBehaviourOpacity & IBehaviour & IScriptable;
+	type BehaviourOpacityMixin = IBehaviourOpacity & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourOpacity} structure contains only private data and
@@ -5093,7 +5093,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourPath} instead.
 	 */
-	type BehaviourPathMixin = IBehaviourPath & IBehaviour & IScriptable;
+	type BehaviourPathMixin = IBehaviourPath & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourPath} structure contains only private data
@@ -5246,7 +5246,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourRotate} instead.
 	 */
-	type BehaviourRotateMixin = IBehaviourRotate & IBehaviour & IScriptable;
+	type BehaviourRotateMixin = IBehaviourRotate & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourRotate} struct contains only private data and
@@ -5329,7 +5329,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourScale} instead.
 	 */
-	type BehaviourScaleMixin = IBehaviourScale & IBehaviour & IScriptable;
+	type BehaviourScaleMixin = IBehaviourScale & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourScale} struct contains only private data and
@@ -5417,7 +5417,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BinLayout} instead.
 	 */
-	type BinLayoutMixin = IBinLayout & ILayoutManager;
+	type BinLayoutMixin = IBinLayout & LayoutManager;
 
 	/**
 	 * The {@link BinLayout} structure contains only private data
@@ -5496,7 +5496,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BindConstraint} instead.
 	 */
-	type BindConstraintMixin = IBindConstraint & IConstraint;
+	type BindConstraintMixin = IBindConstraint & Constraint;
 
 	/**
 	 * {@link BindConstraint} is an opaque structure
@@ -5666,7 +5666,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BindingPool} instead.
 	 */
-	type BindingPoolMixin = IBindingPool & GObject.IObject;
+	type BindingPoolMixin = IBindingPool & GObject.Object;
 
 	/**
 	 * Container of key bindings. The {@link BindingPool} struct is
@@ -5725,7 +5725,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BlurEffect} instead.
 	 */
-	type BlurEffectMixin = IBlurEffect & IOffscreenEffect;
+	type BlurEffectMixin = IBlurEffect & OffscreenEffect;
 
 	/**
 	 * {@link BlurEffect} is an opaque structure
@@ -5866,7 +5866,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Box} instead.
 	 */
-	type BoxMixin = IBox & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type BoxMixin = IBox & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Box} structure contains only private data and should
@@ -6107,7 +6107,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BoxLayout} instead.
 	 */
-	type BoxLayoutMixin = IBoxLayout & ILayoutManager;
+	type BoxLayoutMixin = IBoxLayout & LayoutManager;
 
 	/**
 	 * The {@link BoxLayout} structure contains only private data
@@ -6212,7 +6212,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BrightnessContrastEffect} instead.
 	 */
-	type BrightnessContrastEffectMixin = IBrightnessContrastEffect & IOffscreenEffect;
+	type BrightnessContrastEffectMixin = IBrightnessContrastEffect & OffscreenEffect;
 
 	/**
 	 * {@link BrightnessContrastEffect} is an opaque structure
@@ -6378,7 +6378,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CairoTexture} instead.
 	 */
-	type CairoTextureMixin = ICairoTexture & ITexture & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type CairoTextureMixin = ICairoTexture & Texture & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link CairoTexture} struct contains only private data.
@@ -6490,7 +6490,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Canvas} instead.
 	 */
-	type CanvasMixin = ICanvas & GObject.IObject & IContent;
+	type CanvasMixin = ICanvas & GObject.Object & Content;
 
 	/**
 	 * The {@link Canvas} structure contains
@@ -6554,7 +6554,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ChildMeta} instead.
 	 */
-	type ChildMetaMixin = IChildMeta & GObject.IObject;
+	type ChildMetaMixin = IChildMeta & GObject.Object;
 
 	/**
 	 * Base interface for container specific state for child actors. A child
@@ -6687,7 +6687,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ClickAction} instead.
 	 */
-	type ClickActionMixin = IClickAction & IAction;
+	type ClickActionMixin = IClickAction & Action;
 
 	/**
 	 * The {@link ClickAction} structure contains
@@ -6714,7 +6714,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ClipNode} instead.
 	 */
-	type ClipNodeMixin = IClipNode & IPaintNode;
+	type ClipNodeMixin = IClipNode & PaintNode;
 
 	/**
 	 * The {@link TextNode} structure is an opaque
@@ -6758,7 +6758,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clone} instead.
 	 */
-	type CloneMixin = IClone & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type CloneMixin = IClone & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Clone} structure contains only private data
@@ -6786,7 +6786,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorNode} instead.
 	 */
-	type ColorNodeMixin = IColorNode & IPipelineNode;
+	type ColorNodeMixin = IColorNode & PipelineNode;
 
 	/**
 	 * The {@link TextNode} structure is an opaque
@@ -6831,7 +6831,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorizeEffect} instead.
 	 */
-	type ColorizeEffectMixin = IColorizeEffect & IOffscreenEffect;
+	type ColorizeEffectMixin = IColorizeEffect & OffscreenEffect;
 
 	/**
 	 * {@link ColorizeEffect} is an opaque structure
@@ -6860,7 +6860,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Constraint} instead.
 	 */
-	type ConstraintMixin = IConstraint & IActorMeta;
+	type ConstraintMixin = IConstraint & ActorMeta;
 
 	/**
 	 * The {@link Constraint} structure contains only
@@ -6943,7 +6943,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeformEffect} instead.
 	 */
-	type DeformEffectMixin = IDeformEffect & IOffscreenEffect;
+	type DeformEffectMixin = IDeformEffect & OffscreenEffect;
 
 	/**
 	 * The {@link DeformEffect} structure contains
@@ -6982,7 +6982,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesaturateEffect} instead.
 	 */
-	type DesaturateEffectMixin = IDesaturateEffect & IOffscreenEffect;
+	type DesaturateEffectMixin = IDesaturateEffect & OffscreenEffect;
 
 	/**
 	 * {@link DesaturateEffect} is an opaque structure
@@ -7058,7 +7058,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceManager} instead.
 	 */
-	type DeviceManagerMixin = IDeviceManager & GObject.IObject;
+	type DeviceManagerMixin = IDeviceManager & GObject.Object;
 
 	/**
 	 * The {@link DeviceManager} structure contains only private data
@@ -7284,7 +7284,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DragAction} instead.
 	 */
-	type DragActionMixin = IDragAction & IAction;
+	type DragActionMixin = IDragAction & Action;
 
 	/**
 	 * The {@link DragAction} structure contains only
@@ -7346,7 +7346,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DropAction} instead.
 	 */
-	type DropActionMixin = IDropAction & IAction;
+	type DropActionMixin = IDropAction & Action;
 
 	/**
 	 * The {@link DropAction} structure contains only
@@ -7412,7 +7412,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Effect} instead.
 	 */
-	type EffectMixin = IEffect & IActorMeta;
+	type EffectMixin = IEffect & ActorMeta;
 
 	/**
 	 * The {@link Effect} structure contains only private data and should
@@ -7434,7 +7434,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FixedLayout} instead.
 	 */
-	type FixedLayoutMixin = IFixedLayout & ILayoutManager;
+	type FixedLayoutMixin = IFixedLayout & LayoutManager;
 
 	/**
 	 * The {@link FixedLayout} structure contains only private data and
@@ -7600,7 +7600,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowLayout} instead.
 	 */
-	type FlowLayoutMixin = IFlowLayout & ILayoutManager;
+	type FlowLayoutMixin = IFlowLayout & LayoutManager;
 
 	/**
 	 * The {@link FlowLayout} structure contains only private data
@@ -7813,7 +7813,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureAction} instead.
 	 */
-	type GestureActionMixin = IGestureAction & IAction;
+	type GestureActionMixin = IGestureAction & Action;
 
 	/**
 	 * The {@link GestureAction} structure contains
@@ -7990,7 +7990,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GridLayout} instead.
 	 */
-	type GridLayoutMixin = IGridLayout & ILayoutManager;
+	type GridLayoutMixin = IGridLayout & LayoutManager;
 
 	/**
 	 * The {@link GridLayout} structure contains only private data
@@ -8032,7 +8032,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Group} instead.
 	 */
-	type GroupMixin = IGroup & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type GroupMixin = IGroup & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Group} structure contains only private data
@@ -8140,7 +8140,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Image} instead.
 	 */
-	type ImageMixin = IImage & GObject.IObject & IContent;
+	type ImageMixin = IImage & GObject.Object & Content;
 
 	/**
 	 * The {@link Image} structure contains
@@ -8503,7 +8503,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InputDevice} instead.
 	 */
-	type InputDeviceMixin = IInputDevice & GObject.IObject;
+	type InputDeviceMixin = IInputDevice & GObject.Object;
 
 	/**
 	 * Generic representation of an input device. The actual contents of this
@@ -8676,7 +8676,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Interval} instead.
 	 */
-	type IntervalMixin = IInterval & GObject.IInitiallyUnowned & IScriptable;
+	type IntervalMixin = IInterval & GObject.InitiallyUnowned & Scriptable;
 
 	/**
 	 * The {@link Interval} structure contains only private data and should
@@ -8841,7 +8841,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyframeTransition} instead.
 	 */
-	type KeyframeTransitionMixin = IKeyframeTransition & IPropertyTransition & IScriptable;
+	type KeyframeTransitionMixin = IKeyframeTransition & PropertyTransition & Scriptable;
 
 	/**
 	 * The `ClutterKeyframeTransition` structure contains only private
@@ -9053,7 +9053,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LayoutManager} instead.
 	 */
-	type LayoutManagerMixin = ILayoutManager & GObject.IInitiallyUnowned;
+	type LayoutManagerMixin = ILayoutManager & GObject.InitiallyUnowned;
 
 	/**
 	 * The {@link LayoutManager} structure contains only private data
@@ -9090,7 +9090,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LayoutMeta} instead.
 	 */
-	type LayoutMetaMixin = ILayoutMeta & IChildMeta;
+	type LayoutMetaMixin = ILayoutMeta & ChildMeta;
 
 	/**
 	 * Sub-class of {@link ChildMeta} specific for layout managers
@@ -9115,7 +9115,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListModel} instead.
 	 */
-	type ListModelMixin = IListModel & IModel & IScriptable;
+	type ListModelMixin = IListModel & Model & Scriptable;
 
 	/**
 	 * The {@link ListModel} struct contains only private data.
@@ -9417,7 +9417,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Model} instead.
 	 */
-	type ModelMixin = IModel & GObject.IObject & IScriptable;
+	type ModelMixin = IModel & GObject.Object & Scriptable;
 
 	/**
 	 * Base class for list models. The {@link Model} structure contains
@@ -9546,7 +9546,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ModelIter} instead.
 	 */
-	type ModelIterMixin = IModelIter & GObject.IObject;
+	type ModelIterMixin = IModelIter & GObject.Object;
 
 	/**
 	 * Base class for list models iters. The {@link ModelIter} structure
@@ -9630,7 +9630,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OffscreenEffect} instead.
 	 */
-	type OffscreenEffectMixin = IOffscreenEffect & IEffect;
+	type OffscreenEffectMixin = IOffscreenEffect & Effect;
 
 	/**
 	 * The {@link OffscreenEffect} structure contains only private data
@@ -9699,7 +9699,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PageTurnEffect} instead.
 	 */
-	type PageTurnEffectMixin = IPageTurnEffect & IDeformEffect;
+	type PageTurnEffectMixin = IPageTurnEffect & DeformEffect;
 
 	/**
 	 * {@link PageTurnEffect} is an opaque structure
@@ -9931,7 +9931,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PanAction} instead.
 	 */
-	type PanActionMixin = IPanAction & IGestureAction;
+	type PanActionMixin = IPanAction & GestureAction;
 
 	/**
 	 * The {@link PanAction} structure contains
@@ -9964,7 +9964,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecColor} instead.
 	 */
-	type ParamSpecColorMixin = IParamSpecColor & GObject.IParamSpec;
+	type ParamSpecColorMixin = IParamSpecColor & GObject.ParamSpec;
 
 	/**
 	 * A #GParamSpec subclass for defining properties holding
@@ -10002,7 +10002,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecFixed} instead.
 	 */
-	type ParamSpecFixedMixin = IParamSpecFixed & GObject.IParamSpec;
+	type ParamSpecFixedMixin = IParamSpecFixed & GObject.ParamSpec;
 
 	/**
 	 * #GParamSpec subclass for fixed point based properties
@@ -10023,7 +10023,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUnit} instead.
 	 */
-	type ParamSpecUnitMixin = IParamSpecUnit & GObject.IParamSpec;
+	type ParamSpecUnitMixin = IParamSpecUnit & GObject.ParamSpec;
 
 	interface ParamSpecUnit extends ParamSpecUnitMixin {}
 
@@ -10225,7 +10225,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Path} instead.
 	 */
-	type PathMixin = IPath & GObject.IInitiallyUnowned;
+	type PathMixin = IPath & GObject.InitiallyUnowned;
 
 	/**
 	 * The {@link Path} struct contains only private data and should
@@ -10308,7 +10308,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PathConstraint} instead.
 	 */
-	type PathConstraintMixin = IPathConstraint & IConstraint;
+	type PathConstraintMixin = IPathConstraint & Constraint;
 
 	/**
 	 * {@link PathConstraint} is an opaque structure
@@ -10337,7 +10337,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PipelineNode} instead.
 	 */
-	type PipelineNodeMixin = IPipelineNode & IPaintNode;
+	type PipelineNodeMixin = IPipelineNode & PaintNode;
 
 	/**
 	 * The {@link TextNode} structure is an opaque
@@ -10377,7 +10377,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PropertyTransition} instead.
 	 */
-	type PropertyTransitionMixin = IPropertyTransition & ITransition & IScriptable;
+	type PropertyTransitionMixin = IPropertyTransition & Transition & Scriptable;
 
 	/**
 	 * The {@link PropertyTransition} structure contains
@@ -10458,7 +10458,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Rectangle} instead.
 	 */
-	type RectangleMixin = IRectangle & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type RectangleMixin = IRectangle & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Rectangle} structure contains only private data
@@ -10499,7 +10499,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RotateAction} instead.
 	 */
-	type RotateActionMixin = IRotateAction & IGestureAction;
+	type RotateActionMixin = IRotateAction & GestureAction;
 
 	/**
 	 * The {@link RotateAction} structure contains
@@ -10645,7 +10645,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Score} instead.
 	 */
-	type ScoreMixin = IScore & GObject.IObject;
+	type ScoreMixin = IScore & GObject.Object;
 
 	/**
 	 * The {@link Score} structure contains only private data
@@ -10866,7 +10866,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Script} instead.
 	 */
-	type ScriptMixin = IScript & GObject.IObject;
+	type ScriptMixin = IScript & GObject.Object;
 
 	/**
 	 * The {@link Script} structure contains only private data
@@ -10929,7 +10929,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrollActor} instead.
 	 */
-	type ScrollActorMixin = IScrollActor & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type ScrollActorMixin = IScrollActor & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link ScrollActor} structure contains only
@@ -11038,7 +11038,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
-	type SettingsMixin = ISettings & GObject.IObject;
+	type SettingsMixin = ISettings & GObject.Object;
 
 	/**
 	 * `ClutterSettings` is an opaque structure whose
@@ -11177,7 +11177,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Shader} instead.
 	 */
-	type ShaderMixin = IShader & GObject.IObject;
+	type ShaderMixin = IShader & GObject.Object;
 
 	/**
 	 * The {@link Shader} structure contains only private data
@@ -11298,7 +11298,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShaderEffect} instead.
 	 */
-	type ShaderEffectMixin = IShaderEffect & IOffscreenEffect;
+	type ShaderEffectMixin = IShaderEffect & OffscreenEffect;
 
 	/**
 	 * The {@link ShaderEffect} structure contains
@@ -11444,7 +11444,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SnapConstraint} instead.
 	 */
-	type SnapConstraintMixin = ISnapConstraint & IConstraint;
+	type SnapConstraintMixin = ISnapConstraint & Constraint;
 
 	/**
 	 * {@link SnapConstraint} is an opaque structure
@@ -11973,7 +11973,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stage} instead.
 	 */
-	type StageMixin = IStage & IGroup & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type StageMixin = IStage & Group & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Stage} structure contains only private data
@@ -12076,7 +12076,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StageManager} instead.
 	 */
-	type StageManagerMixin = IStageManager & GObject.IObject;
+	type StageManagerMixin = IStageManager & GObject.Object;
 
 	/**
 	 * The {@link StageManager} structure is private.
@@ -12333,7 +12333,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link State} instead.
 	 */
-	type StateMixin = IState & GObject.IObject & IScriptable;
+	type StateMixin = IState & GObject.Object & Scriptable;
 
 	/**
 	 * The {@link State} structure contains only
@@ -12371,7 +12371,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SwipeAction} instead.
 	 */
-	type SwipeActionMixin = ISwipeAction & IGestureAction;
+	type SwipeActionMixin = ISwipeAction & GestureAction;
 
 	/**
 	 * The {@link SwipeAction} structure contains
@@ -12593,7 +12593,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TableLayout} instead.
 	 */
-	type TableLayoutMixin = ITableLayout & ILayoutManager;
+	type TableLayoutMixin = ITableLayout & LayoutManager;
 
 	/**
 	 * The {@link TableLayout} structure contains only private data
@@ -12625,7 +12625,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TapAction} instead.
 	 */
-	type TapActionMixin = ITapAction & IGestureAction;
+	type TapActionMixin = ITapAction & GestureAction;
 
 	/**
 	 * The {@link TapAction} structure contains
@@ -13416,7 +13416,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Text} instead.
 	 */
-	type TextMixin = IText & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type TextMixin = IText & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Text} struct contains only private data.
@@ -13594,7 +13594,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextBuffer} instead.
 	 */
-	type TextBufferMixin = ITextBuffer & GObject.IObject;
+	type TextBufferMixin = ITextBuffer & GObject.Object;
 
 	/**
 	 * The {@link TextBuffer} structure contains private
@@ -13628,7 +13628,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextNode} instead.
 	 */
-	type TextNodeMixin = ITextNode & IPaintNode;
+	type TextNodeMixin = ITextNode & PaintNode;
 
 	/**
 	 * The {@link TextNode} structure is an opaque
@@ -13952,7 +13952,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Texture} instead.
 	 */
-	type TextureMixin = ITexture & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type TextureMixin = ITexture & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Texture} structure contains only private data
@@ -14042,7 +14042,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextureNode} instead.
 	 */
-	type TextureNodeMixin = ITextureNode & IPipelineNode;
+	type TextureNodeMixin = ITextureNode & PipelineNode;
 
 	/**
 	 * The {@link TextNode} structure is an opaque
@@ -14537,7 +14537,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Timeline} instead.
 	 */
-	type TimelineMixin = ITimeline & GObject.IObject & IScriptable;
+	type TimelineMixin = ITimeline & GObject.Object & Scriptable;
 
 	/**
 	 * The {@link Timeline} structure contains only private data
@@ -14704,7 +14704,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Transition} instead.
 	 */
-	type TransitionMixin = ITransition & ITimeline & IScriptable;
+	type TransitionMixin = ITransition & Timeline & Scriptable;
 
 	/**
 	 * The {@link Transition} structure contains private
@@ -14748,7 +14748,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TransitionGroup} instead.
 	 */
-	type TransitionGroupMixin = ITransitionGroup & ITransition & IScriptable;
+	type TransitionGroupMixin = ITransitionGroup & Transition & Scriptable;
 
 	/**
 	 * The {@link TransitionGroup} structure contains
@@ -14815,7 +14815,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ZoomAction} instead.
 	 */
-	type ZoomActionMixin = IZoomAction & IGestureAction;
+	type ZoomActionMixin = IZoomAction & GestureAction;
 
 	/**
 	 * The {@link ZoomAction} structure contains only

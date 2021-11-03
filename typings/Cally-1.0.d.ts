@@ -40,7 +40,7 @@ declare namespace imports.gi.Cally {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Actor} instead.
 	 */
-	type ActorMixin = IActor & Atk.IGObjectAccessible & Atk.IAction & Atk.IComponent;
+	type ActorMixin = IActor & Atk.GObjectAccessible & Atk.Action & Atk.Component;
 
 	/**
 	 * The <structname>CallyActor</structname> structure contains only private
@@ -68,7 +68,7 @@ declare namespace imports.gi.Cally {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clone} instead.
 	 */
-	type CloneMixin = IClone & IActor & Atk.IAction & Atk.IComponent;
+	type CloneMixin = IClone & Actor & Atk.Action & Atk.Component;
 
 	/**
 	 * The <structname>CallyClone</structname> structure contains only private
@@ -97,7 +97,7 @@ declare namespace imports.gi.Cally {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Group} instead.
 	 */
-	type GroupMixin = IGroup & IActor & Atk.IAction & Atk.IComponent;
+	type GroupMixin = IGroup & Actor & Atk.Action & Atk.Component;
 
 	/**
 	 * The <structname>CallyGroup</structname> structure contains only
@@ -125,7 +125,7 @@ declare namespace imports.gi.Cally {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Rectangle} instead.
 	 */
-	type RectangleMixin = IRectangle & IActor & Atk.IAction & Atk.IComponent;
+	type RectangleMixin = IRectangle & Actor & Atk.Action & Atk.Component;
 
 	/**
 	 * The <structname>CallyRectangle</structname> structure contains only private
@@ -154,7 +154,7 @@ declare namespace imports.gi.Cally {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Root} instead.
 	 */
-	type RootMixin = IRoot & Atk.IGObjectAccessible;
+	type RootMixin = IRoot & Atk.GObjectAccessible;
 
 	/**
 	 * The <structname>CallyRoot</structname> structure contains only private
@@ -181,7 +181,7 @@ declare namespace imports.gi.Cally {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stage} instead.
 	 */
-	type StageMixin = IStage & IGroup & Atk.IAction & Atk.IComponent & Atk.IWindow;
+	type StageMixin = IStage & Group & Atk.Action & Atk.Component & Atk.Window;
 
 	/**
 	 * The <structname>CallyStage</structname> structure contains only
@@ -210,7 +210,7 @@ declare namespace imports.gi.Cally {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Text} instead.
 	 */
-	type TextMixin = IText & IActor & Atk.IAction & Atk.IComponent & Atk.IEditableText & Atk.IText;
+	type TextMixin = IText & Actor & Atk.Action & Atk.Component & Atk.EditableText & Atk.Text;
 
 	/**
 	 * The <structname>CallyText</structname> structure contains only private
@@ -239,7 +239,7 @@ declare namespace imports.gi.Cally {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Texture} instead.
 	 */
-	type TextureMixin = ITexture & IActor & Atk.IAction & Atk.IComponent;
+	type TextureMixin = ITexture & Actor & Atk.Action & Atk.Component;
 
 	/**
 	 * The <structname>CallyTexture</structname> structure contains only
@@ -268,7 +268,7 @@ declare namespace imports.gi.Cally {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Util} instead.
 	 */
-	type UtilMixin = IUtil & Atk.IUtil;
+	type UtilMixin = IUtil & Atk.Util;
 
 	/**
 	 * The <structname>CallyUtil</structname> structure contains only

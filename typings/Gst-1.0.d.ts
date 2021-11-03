@@ -80,7 +80,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Allocator} instead.
 	 */
-	type AllocatorMixin = IAllocator & IObject;
+	type AllocatorMixin = IAllocator & Object;
 
 	/**
 	 * Memory is usually created by allocators with a gst_allocator_alloc()
@@ -436,7 +436,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bin} instead.
 	 */
-	type BinMixin = IBin & IElement & IChildProxy;
+	type BinMixin = IBin & Element & ChildProxy;
 
 	/**
 	 * {@link Bin} is an element that can contain other #GstElement, allowing them to be
@@ -673,7 +673,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BufferPool} instead.
 	 */
-	type BufferPoolMixin = IBufferPool & IObject;
+	type BufferPoolMixin = IBufferPool & Object;
 
 	/**
 	 * A {@link BufferPool} is an object that can be used to pre-allocate and recycle
@@ -1167,7 +1167,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bus} instead.
 	 */
-	type BusMixin = IBus & IObject;
+	type BusMixin = IBus & Object;
 
 	/**
 	 * The {@link Bus} is an object responsible for delivering #GstMessage packets in
@@ -1536,7 +1536,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clock} instead.
 	 */
-	type ClockMixin = IClock & IObject;
+	type ClockMixin = IClock & Object;
 
 	/**
 	 * GStreamer uses a global clock to synchronize the plugins in a pipeline.
@@ -1811,7 +1811,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ControlBinding} instead.
 	 */
-	type ControlBindingMixin = IControlBinding & IObject;
+	type ControlBindingMixin = IControlBinding & Object;
 
 	/**
 	 * A base class for value mapping objects that attaches control sources to gobject
@@ -1861,7 +1861,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ControlSource} instead.
 	 */
-	type ControlSourceMixin = IControlSource & IObject;
+	type ControlSourceMixin = IControlSource & Object;
 
 	/**
 	 * The {@link ControlSource} is a base class for control value sources that could
@@ -1963,7 +1963,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Device} instead.
 	 */
-	type DeviceMixin = IDevice & IObject;
+	type DeviceMixin = IDevice & Object;
 
 	/**
 	 * {@link Device} are objects representing a device, they contain
@@ -2060,7 +2060,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceMonitor} instead.
 	 */
-	type DeviceMonitorMixin = IDeviceMonitor & IObject;
+	type DeviceMonitorMixin = IDeviceMonitor & Object;
 
 	/**
 	 * Applications should create a {@link DeviceMonitor} when they want
@@ -2260,7 +2260,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceProvider} instead.
 	 */
-	type DeviceProviderMixin = IDeviceProvider & IObject;
+	type DeviceProviderMixin = IDeviceProvider & Object;
 
 	/**
 	 * A {@link DeviceProvider} subclass is provided by a plugin that handles devices
@@ -2341,7 +2341,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceProviderFactory} instead.
 	 */
-	type DeviceProviderFactoryMixin = IDeviceProviderFactory & IPluginFeature;
+	type DeviceProviderFactoryMixin = IDeviceProviderFactory & PluginFeature;
 
 	/**
 	 * {@link DeviceProviderFactory} is used to create instances of device providers. A
@@ -2415,7 +2415,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DynamicTypeFactory} instead.
 	 */
-	type DynamicTypeFactoryMixin = IDynamicTypeFactory & IPluginFeature;
+	type DynamicTypeFactoryMixin = IDynamicTypeFactory & PluginFeature;
 
 	/**
 	 * {@link DynamicTypeFactory} is used to represent a type that can be
@@ -3374,7 +3374,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Element} instead.
 	 */
-	type ElementMixin = IElement & IObject;
+	type ElementMixin = IElement & Object;
 
 	/**
 	 * GstElement is the abstract base class needed to construct an element that
@@ -3568,7 +3568,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ElementFactory} instead.
 	 */
-	type ElementFactoryMixin = IElementFactory & IPluginFeature;
+	type ElementFactoryMixin = IElementFactory & PluginFeature;
 
 	/**
 	 * {@link ElementFactory} is used to create instances of elements. A
@@ -3762,7 +3762,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GhostPad} instead.
 	 */
-	type GhostPadMixin = IGhostPad & IProxyPad;
+	type GhostPadMixin = IGhostPad & ProxyPad;
 
 	/**
 	 * GhostPads are useful when organizing pipelines with {@link Bin} like elements.
@@ -4177,7 +4177,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Object} instead.
 	 */
-	type ObjectMixin = IObject & GObject.IInitiallyUnowned;
+	type ObjectMixin = IObject & GObject.InitiallyUnowned;
 
 	/**
 	 * {@link Object} provides a root for the object hierarchy tree filed in by the
@@ -5253,7 +5253,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Pad} instead.
 	 */
-	type PadMixin = IPad & IObject;
+	type PadMixin = IPad & Object;
 
 	/**
 	 * A {@link Element} is linked to other elements via "pads", which are extremely
@@ -5435,7 +5435,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PadTemplate} instead.
 	 */
-	type PadTemplateMixin = IPadTemplate & IObject;
+	type PadTemplateMixin = IPadTemplate & Object;
 
 	/**
 	 * Padtemplates describe the possible media types a pad or an elementfactory can
@@ -5543,7 +5543,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamArray} instead.
 	 */
-	type ParamArrayMixin = IParamArray & GObject.IParamSpec;
+	type ParamArrayMixin = IParamArray & GObject.ParamSpec;
 
 	/**
 	 * A fundamental type that describes a #GParamSpec for arrays of
@@ -5565,7 +5565,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamFraction} instead.
 	 */
-	type ParamFractionMixin = IParamFraction & GObject.IParamSpec;
+	type ParamFractionMixin = IParamFraction & GObject.ParamSpec;
 
 	/**
 	 * A fundamental type that describes a #GParamSpec for fractional
@@ -5753,7 +5753,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Pipeline} instead.
 	 */
-	type PipelineMixin = IPipeline & IBin & IChildProxy;
+	type PipelineMixin = IPipeline & Bin & ChildProxy;
 
 	/**
 	 * A {@link Pipeline} is a special #GstBin used as the toplevel container for
@@ -5963,7 +5963,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plugin} instead.
 	 */
-	type PluginMixin = IPlugin & IObject;
+	type PluginMixin = IPlugin & Object;
 
 	/**
 	 * GStreamer is extensible, so {@link Element} instances can be loaded at runtime.
@@ -6125,7 +6125,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PluginFeature} instead.
 	 */
-	type PluginFeatureMixin = IPluginFeature & IObject;
+	type PluginFeatureMixin = IPluginFeature & Object;
 
 	/**
 	 * This is a base class for anything that can be added to a {@link Plugin}.
@@ -6189,7 +6189,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyPad} instead.
 	 */
-	type ProxyPadMixin = IProxyPad & IPad;
+	type ProxyPadMixin = IProxyPad & Pad;
 
 	interface ProxyPad extends ProxyPadMixin {}
 
@@ -6407,7 +6407,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Registry} instead.
 	 */
-	type RegistryMixin = IRegistry & IObject;
+	type RegistryMixin = IRegistry & Object;
 
 	/**
 	 * One registry holds the metadata of a set of plugins.
@@ -6584,7 +6584,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stream} instead.
 	 */
-	type StreamMixin = IStream & IObject;
+	type StreamMixin = IStream & Object;
 
 	/**
 	 * A high-level object representing a single stream. It might be backed, or
@@ -6655,7 +6655,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StreamCollection} instead.
 	 */
-	type StreamCollectionMixin = IStreamCollection & IObject;
+	type StreamCollectionMixin = IStreamCollection & Object;
 
 	/**
 	 * A collection of {@link Stream} that are available.
@@ -6702,7 +6702,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SystemClock} instead.
 	 */
-	type SystemClockMixin = ISystemClock & IClock;
+	type SystemClockMixin = ISystemClock & Clock;
 
 	/**
 	 * The GStreamer core provides a GstSystemClock based on the system time.
@@ -6901,7 +6901,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Task} instead.
 	 */
-	type TaskMixin = ITask & IObject;
+	type TaskMixin = ITask & Object;
 
 	/**
 	 * {@link Task} is used by #GstElement and #GstPad to provide the data passing
@@ -7017,7 +7017,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TaskPool} instead.
 	 */
-	type TaskPoolMixin = ITaskPool & IObject;
+	type TaskPoolMixin = ITaskPool & Object;
 
 	/**
 	 * This object provides an abstraction for creating threads. The default
@@ -7050,7 +7050,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Tracer} instead.
 	 */
-	type TracerMixin = ITracer & IObject;
+	type TracerMixin = ITracer & Object;
 
 	/**
 	 * Tracing modules will subclass {@link Tracer} and register through
@@ -7090,7 +7090,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TracerFactory} instead.
 	 */
-	type TracerFactoryMixin = ITracerFactory & IPluginFeature;
+	type TracerFactoryMixin = ITracerFactory & PluginFeature;
 
 	/**
 	 * Use gst_tracer_factory_get_list() to get a list of tracer factories known to
@@ -7131,7 +7131,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TracerRecord} instead.
 	 */
-	type TracerRecordMixin = ITracerRecord & IObject;
+	type TracerRecordMixin = ITracerRecord & Object;
 
 	/**
 	 * Tracing modules will create instances of this class to announce the data they
@@ -7203,7 +7203,7 @@ declare namespace imports.gi.Gst {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TypeFindFactory} instead.
 	 */
-	type TypeFindFactoryMixin = ITypeFindFactory & IPluginFeature;
+	type TypeFindFactoryMixin = ITypeFindFactory & PluginFeature;
 
 	/**
 	 * These functions allow querying information about registered typefind

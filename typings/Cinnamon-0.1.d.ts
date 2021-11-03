@@ -120,7 +120,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link App} instead.
 	 */
-	type AppMixin = IApp & GObject.IObject;
+	type AppMixin = IApp & GObject.Object;
 
 	interface App extends AppMixin {}
 
@@ -174,7 +174,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppSystem} instead.
 	 */
-	type AppSystemMixin = IAppSystem & GObject.IObject;
+	type AppSystemMixin = IAppSystem & GObject.Object;
 
 	interface AppSystem extends AppSystemMixin {}
 
@@ -201,7 +201,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DocSystem} instead.
 	 */
-	type DocSystemMixin = IDocSystem & GObject.IObject;
+	type DocSystemMixin = IDocSystem & GObject.Object;
 
 	interface DocSystem extends DocSystemMixin {}
 
@@ -220,7 +220,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EmbeddedWindow} instead.
 	 */
-	type EmbeddedWindowMixin = IEmbeddedWindow & Gtk.IWindow & Atk.IImplementorIface & Gtk.IBuildable;
+	type EmbeddedWindowMixin = IEmbeddedWindow & Gtk.Window & Atk.ImplementorIface & Gtk.Buildable;
 
 	interface EmbeddedWindow extends EmbeddedWindowMixin {}
 
@@ -285,7 +285,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GenericContainer} instead.
 	 */
-	type GenericContainerMixin = IGenericContainer & St.IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type GenericContainerMixin = IGenericContainer & St.Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	interface GenericContainer extends GenericContainerMixin {}
 
@@ -536,7 +536,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Global} instead.
 	 */
-	type GlobalMixin = IGlobal & GObject.IObject;
+	type GlobalMixin = IGlobal & GObject.Object;
 
 	interface Global extends GlobalMixin {}
 
@@ -563,7 +563,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GtkEmbed} instead.
 	 */
-	type GtkEmbedMixin = IGtkEmbed & ClutterX11.ITexturePixmap & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type GtkEmbedMixin = IGtkEmbed & ClutterX11.TexturePixmap & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	interface GtkEmbed extends GtkEmbedMixin {}
 
@@ -697,7 +697,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PerfLog} instead.
 	 */
-	type PerfLogMixin = IPerfLog & GObject.IObject;
+	type PerfLogMixin = IPerfLog & GObject.Object;
 
 	interface PerfLog extends PerfLogMixin {}
 
@@ -810,7 +810,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Recorder} instead.
 	 */
-	type RecorderMixin = IRecorder & GObject.IObject;
+	type RecorderMixin = IRecorder & GObject.Object;
 
 	interface Recorder extends RecorderMixin {}
 
@@ -865,7 +865,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Screenshot} instead.
 	 */
-	type ScreenshotMixin = IScreenshot & GObject.IObject;
+	type ScreenshotMixin = IScreenshot & GObject.Object;
 
 	interface Screenshot extends ScreenshotMixin {}
 
@@ -884,7 +884,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Slicer} instead.
 	 */
-	type SlicerMixin = ISlicer & St.IBin & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type SlicerMixin = ISlicer & St.Bin & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	interface Slicer extends SlicerMixin {}
 
@@ -902,7 +902,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stack} instead.
 	 */
-	type StackMixin = IStack & St.IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type StackMixin = IStack & St.Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	interface Stack extends StackMixin {}
 
@@ -934,7 +934,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TrayIcon} instead.
 	 */
-	type TrayIconMixin = ITrayIcon & IGtkEmbed & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type TrayIconMixin = ITrayIcon & GtkEmbed & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	interface TrayIcon extends TrayIconMixin {}
 
@@ -961,7 +961,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TrayManager} instead.
 	 */
-	type TrayManagerMixin = ITrayManager & GObject.IObject;
+	type TrayManagerMixin = ITrayManager & GObject.Object;
 
 	interface TrayManager extends TrayManagerMixin {}
 
@@ -1028,7 +1028,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WM} instead.
 	 */
-	type WMMixin = IWM & GObject.IObject;
+	type WMMixin = IWM & GObject.Object;
 
 	interface WM extends WMMixin {}
 
@@ -1080,7 +1080,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowTracker} instead.
 	 */
-	type WindowTrackerMixin = IWindowTracker & GObject.IObject;
+	type WindowTrackerMixin = IWindowTracker & GObject.Object;
 
 	interface WindowTracker extends WindowTrackerMixin {}
 
@@ -1114,7 +1114,7 @@ declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link XFixesCursor} instead.
 	 */
-	type XFixesCursorMixin = IXFixesCursor & GObject.IObject;
+	type XFixesCursorMixin = IXFixesCursor & GObject.Object;
 
 	interface XFixesCursor extends XFixesCursorMixin {}
 

@@ -93,7 +93,7 @@ declare namespace imports.gi.ClutterX11 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TexturePixmap} instead.
 	 */
-	type TexturePixmapMixin = ITexturePixmap & Clutter.ITexture & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type TexturePixmapMixin = ITexturePixmap & Clutter.Texture & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * The {@link TexturePixmap} structure contains only private data

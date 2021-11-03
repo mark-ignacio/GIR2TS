@@ -121,7 +121,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Binding} instead.
 	 */
-	type BindingMixin = IBinding & IObject;
+	type BindingMixin = IBinding & Object;
 
 	/**
 	 * #GBinding is the representation of a binding between a property on a
@@ -219,7 +219,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InitiallyUnowned} instead.
 	 */
-	type InitiallyUnownedMixin = IInitiallyUnowned & IObject;
+	type InitiallyUnownedMixin = IInitiallyUnowned & Object;
 
 	/**
 	 * A type for objects that have an initially floating reference.
@@ -1336,7 +1336,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecBoolean} instead.
 	 */
-	type ParamSpecBooleanMixin = IParamSpecBoolean & IParamSpec;
+	type ParamSpecBooleanMixin = IParamSpecBoolean & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for boolean properties.
@@ -1357,7 +1357,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecBoxed} instead.
 	 */
-	type ParamSpecBoxedMixin = IParamSpecBoxed & IParamSpec;
+	type ParamSpecBoxedMixin = IParamSpecBoxed & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for boxed properties.
@@ -1394,7 +1394,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecChar} instead.
 	 */
-	type ParamSpecCharMixin = IParamSpecChar & IParamSpec;
+	type ParamSpecCharMixin = IParamSpecChar & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for character properties.
@@ -1437,7 +1437,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecDouble} instead.
 	 */
-	type ParamSpecDoubleMixin = IParamSpecDouble & IParamSpec;
+	type ParamSpecDoubleMixin = IParamSpecDouble & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for double properties.
@@ -1469,7 +1469,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecEnum} instead.
 	 */
-	type ParamSpecEnumMixin = IParamSpecEnum & IParamSpec;
+	type ParamSpecEnumMixin = IParamSpecEnum & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for enum
@@ -1502,7 +1502,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecFlags} instead.
 	 */
-	type ParamSpecFlagsMixin = IParamSpecFlags & IParamSpec;
+	type ParamSpecFlagsMixin = IParamSpecFlags & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for flags
@@ -1546,7 +1546,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecFloat} instead.
 	 */
-	type ParamSpecFloatMixin = IParamSpecFloat & IParamSpec;
+	type ParamSpecFloatMixin = IParamSpecFloat & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for float properties.
@@ -1573,7 +1573,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecGType} instead.
 	 */
-	type ParamSpecGTypeMixin = IParamSpecGType & IParamSpec;
+	type ParamSpecGTypeMixin = IParamSpecGType & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for #GType properties.
@@ -1610,7 +1610,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecInt} instead.
 	 */
-	type ParamSpecIntMixin = IParamSpecInt & IParamSpec;
+	type ParamSpecIntMixin = IParamSpecInt & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for integer properties.
@@ -1647,7 +1647,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecInt64} instead.
 	 */
-	type ParamSpecInt64Mixin = IParamSpecInt64 & IParamSpec;
+	type ParamSpecInt64Mixin = IParamSpecInt64 & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for 64bit integer properties.
@@ -1684,7 +1684,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecLong} instead.
 	 */
-	type ParamSpecLongMixin = IParamSpecLong & IParamSpec;
+	type ParamSpecLongMixin = IParamSpecLong & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for long integer properties.
@@ -1705,7 +1705,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecObject} instead.
 	 */
-	type ParamSpecObjectMixin = IParamSpecObject & IParamSpec;
+	type ParamSpecObjectMixin = IParamSpecObject & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for object properties.
@@ -1726,7 +1726,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecOverride} instead.
 	 */
-	type ParamSpecOverrideMixin = IParamSpecOverride & IParamSpec;
+	type ParamSpecOverrideMixin = IParamSpecOverride & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that redirects operations to
@@ -1757,7 +1757,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecParam} instead.
 	 */
-	type ParamSpecParamMixin = IParamSpecParam & IParamSpec;
+	type ParamSpecParamMixin = IParamSpecParam & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for %G_TYPE_PARAM
@@ -1779,7 +1779,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecPointer} instead.
 	 */
-	type ParamSpecPointerMixin = IParamSpecPointer & IParamSpec;
+	type ParamSpecPointerMixin = IParamSpecPointer & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for pointer properties.
@@ -1831,7 +1831,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecString} instead.
 	 */
-	type ParamSpecStringMixin = IParamSpecString & IParamSpec;
+	type ParamSpecStringMixin = IParamSpecString & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for string
@@ -1869,7 +1869,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUChar} instead.
 	 */
-	type ParamSpecUCharMixin = IParamSpecUChar & IParamSpec;
+	type ParamSpecUCharMixin = IParamSpecUChar & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for unsigned character properties.
@@ -1906,7 +1906,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUInt} instead.
 	 */
-	type ParamSpecUIntMixin = IParamSpecUInt & IParamSpec;
+	type ParamSpecUIntMixin = IParamSpecUInt & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for unsigned integer properties.
@@ -1943,7 +1943,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUInt64} instead.
 	 */
-	type ParamSpecUInt64Mixin = IParamSpecUInt64 & IParamSpec;
+	type ParamSpecUInt64Mixin = IParamSpecUInt64 & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for unsigned 64bit integer properties.
@@ -1980,7 +1980,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecULong} instead.
 	 */
-	type ParamSpecULongMixin = IParamSpecULong & IParamSpec;
+	type ParamSpecULongMixin = IParamSpecULong & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for unsigned long integer properties.
@@ -2007,7 +2007,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUnichar} instead.
 	 */
-	type ParamSpecUnicharMixin = IParamSpecUnichar & IParamSpec;
+	type ParamSpecUnicharMixin = IParamSpecUnichar & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for unichar (unsigned integer) properties.
@@ -2039,7 +2039,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecValueArray} instead.
 	 */
-	type ParamSpecValueArrayMixin = IParamSpecValueArray & IParamSpec;
+	type ParamSpecValueArrayMixin = IParamSpecValueArray & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for #GValueArray properties.
@@ -2071,7 +2071,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecVariant} instead.
 	 */
-	type ParamSpecVariantMixin = IParamSpecVariant & IParamSpec;
+	type ParamSpecVariantMixin = IParamSpecVariant & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for #GVariant properties.
@@ -2206,7 +2206,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TypeModule} instead.
 	 */
-	type TypeModuleMixin = ITypeModule & IObject & ITypePlugin;
+	type TypeModuleMixin = ITypeModule & Object & TypePlugin;
 
 	/**
 	 * #GTypeModule provides a simple implementation of the #GTypePlugin

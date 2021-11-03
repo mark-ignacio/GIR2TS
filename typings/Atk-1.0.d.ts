@@ -14,7 +14,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GObjectAccessible} instead.
 	 */
-	type GObjectAccessibleMixin = IGObjectAccessible & IObject;
+	type GObjectAccessibleMixin = IGObjectAccessible & Object;
 
 	/**
 	 * This object class is derived from AtkObject. It can be used as a
@@ -117,7 +117,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Hyperlink} instead.
 	 */
-	type HyperlinkMixin = IHyperlink & GObject.IObject & IAction;
+	type HyperlinkMixin = IHyperlink & GObject.Object & Action;
 
 	/**
 	 * An ATK object which encapsulates a link or set of links (for
@@ -161,7 +161,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Misc} instead.
 	 */
-	type MiscMixin = IMisc & GObject.IObject;
+	type MiscMixin = IMisc & GObject.Object;
 
 	/**
 	 * A set of utility functions for thread locking. This interface and
@@ -188,7 +188,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NoOpObject} instead.
 	 */
-	type NoOpObjectMixin = INoOpObject & IObject & IAction & IComponent & IDocument & IEditableText & IHypertext & IImage & ISelection & ITable & ITableCell & IText & IValue & IWindow;
+	type NoOpObjectMixin = INoOpObject & Object & Action & Component & Document & EditableText & Hypertext & Image & Selection & Table & TableCell & Text & Value & Window;
 
 	/**
 	 * An AtkNoOpObject is an AtkObject which purports to implement all
@@ -219,7 +219,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NoOpObjectFactory} instead.
 	 */
-	type NoOpObjectFactoryMixin = INoOpObjectFactory & IObjectFactory;
+	type NoOpObjectFactoryMixin = INoOpObjectFactory & ObjectFactory;
 
 	/**
 	 * The AtkObjectFactory which creates an AtkNoOpObject. An instance of
@@ -545,7 +545,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Object} instead.
 	 */
-	type ObjectMixin = IObject & GObject.IObject;
+	type ObjectMixin = IObject & GObject.Object;
 
 	/**
 	 * This class is the primary class for accessibility support via the
@@ -606,7 +606,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ObjectFactory} instead.
 	 */
-	type ObjectFactoryMixin = IObjectFactory & GObject.IObject;
+	type ObjectFactoryMixin = IObjectFactory & GObject.Object;
 
 	/**
 	 * This class is the base object class for a factory used to create an
@@ -655,7 +655,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plug} instead.
 	 */
-	type PlugMixin = IPlug & IObject & IComponent;
+	type PlugMixin = IPlug & Object & Component;
 
 	/**
 	 * See {@link Socket}
@@ -711,7 +711,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Registry} instead.
 	 */
-	type RegistryMixin = IRegistry & GObject.IObject;
+	type RegistryMixin = IRegistry & GObject.Object;
 
 	/**
 	 * The AtkRegistry is normally used to create appropriate ATK "peers"
@@ -767,7 +767,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Relation} instead.
 	 */
-	type RelationMixin = IRelation & GObject.IObject;
+	type RelationMixin = IRelation & GObject.Object;
 
 	/**
 	 * An AtkRelation describes a relation between an object and one or
@@ -866,7 +866,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RelationSet} instead.
 	 */
-	type RelationSetMixin = IRelationSet & GObject.IObject;
+	type RelationSetMixin = IRelationSet & GObject.Object;
 
 	/**
 	 * The AtkRelationSet held by an object establishes its relationships
@@ -917,7 +917,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Socket} instead.
 	 */
-	type SocketMixin = ISocket & IObject & IComponent;
+	type SocketMixin = ISocket & Object & Component;
 
 	/**
 	 * Together with {@link Plug}, #AtkSocket provides the ability to embed
@@ -1044,7 +1044,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StateSet} instead.
 	 */
-	type StateSetMixin = IStateSet & GObject.IObject;
+	type StateSetMixin = IStateSet & GObject.Object;
 
 	/**
 	 * An AtkStateSet is a read-only representation of the full set of {@link States}
@@ -1072,7 +1072,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Util} instead.
 	 */
-	type UtilMixin = IUtil & GObject.IObject;
+	type UtilMixin = IUtil & GObject.Object;
 
 	/**
 	 * A set of ATK utility functions which are used to support event

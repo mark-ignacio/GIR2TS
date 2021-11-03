@@ -52,7 +52,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BG} instead.
 	 */
-	type BGMixin = IBG & GObject.IObject;
+	type BGMixin = IBG & GObject.Object;
 
 	interface BG extends BGMixin {}
 
@@ -165,7 +165,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BGCrossfade} instead.
 	 */
-	type BGCrossfadeMixin = IBGCrossfade & GObject.IObject;
+	type BGCrossfadeMixin = IBGCrossfade & GObject.Object;
 
 	interface BGCrossfade extends BGCrossfadeMixin {}
 
@@ -250,7 +250,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesktopThumbnailFactory} instead.
 	 */
-	type DesktopThumbnailFactoryMixin = IDesktopThumbnailFactory & GObject.IObject;
+	type DesktopThumbnailFactoryMixin = IDesktopThumbnailFactory & GObject.Object;
 
 	interface DesktopThumbnailFactory extends DesktopThumbnailFactoryMixin {}
 
@@ -282,7 +282,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PnpIds} instead.
 	 */
-	type PnpIdsMixin = IPnpIds & GObject.IObject;
+	type PnpIdsMixin = IPnpIds & GObject.Object;
 
 	interface PnpIds extends PnpIdsMixin {}
 
@@ -321,7 +321,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RRConfig} instead.
 	 */
-	type RRConfigMixin = IRRConfig & GObject.IObject;
+	type RRConfigMixin = IRRConfig & GObject.Object;
 
 	interface RRConfig extends RRConfigMixin {}
 
@@ -358,7 +358,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RRLabeler} instead.
 	 */
-	type RRLabelerMixin = IRRLabeler & GObject.IObject;
+	type RRLabelerMixin = IRRLabeler & GObject.Object;
 
 	interface RRLabeler extends RRLabelerMixin {}
 
@@ -409,7 +409,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RROutputInfo} instead.
 	 */
-	type RROutputInfoMixin = IRROutputInfo & GObject.IObject;
+	type RROutputInfoMixin = IRROutputInfo & GObject.Object;
 
 	interface RROutputInfo extends RROutputInfoMixin {}
 
@@ -532,7 +532,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RRScreen} instead.
 	 */
-	type RRScreenMixin = IRRScreen & GObject.IObject & Gio.IInitable;
+	type RRScreenMixin = IRRScreen & GObject.Object & Gio.Initable;
 
 	interface RRScreen extends RRScreenMixin {}
 
@@ -611,7 +611,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WallClock} instead.
 	 */
-	type WallClockMixin = IWallClock & GObject.IObject;
+	type WallClockMixin = IWallClock & GObject.Object;
 
 	interface WallClock extends WallClockMixin {}
 
@@ -696,7 +696,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link XkbInfo} instead.
 	 */
-	type XkbInfoMixin = IXkbInfo & GObject.IObject;
+	type XkbInfoMixin = IXkbInfo & GObject.Object;
 
 	interface XkbInfo extends XkbInfoMixin {}
 

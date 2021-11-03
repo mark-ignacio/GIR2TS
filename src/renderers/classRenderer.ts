@@ -41,11 +41,11 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     }
 
     if (class_node.$.parent) {
-        ifaces.push(transformExtension(class_node.$.parent));
+        ifaces.push(class_node.$.parent);
     }
     if (class_node.implements) {
         for (let iface of class_node.implements) {
-            ifaces.push(transformExtension(iface.$.name));
+            ifaces.push(iface.$.name);
         }
     }
 

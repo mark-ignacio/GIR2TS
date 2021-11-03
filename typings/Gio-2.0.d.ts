@@ -15,7 +15,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppInfoMonitor} instead.
 	 */
-	type AppInfoMonitorMixin = IAppInfoMonitor & GObject.IObject;
+	type AppInfoMonitorMixin = IAppInfoMonitor & GObject.Object;
 
 	/**
 	 * #GAppInfoMonitor is a very simple object used for monitoring the app
@@ -128,7 +128,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppLaunchContext} instead.
 	 */
-	type AppLaunchContextMixin = IAppLaunchContext & GObject.IObject;
+	type AppLaunchContextMixin = IAppLaunchContext & GObject.Object;
 
 	/**
 	 * Integrating the launch with the launching application. This is used to
@@ -840,7 +840,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Application} instead.
 	 */
-	type ApplicationMixin = IApplication & GObject.IObject & IActionGroup & IActionMap;
+	type ApplicationMixin = IApplication & GObject.Object & ActionGroup & ActionMap;
 
 	/**
 	 * A #GApplication is the foundation of an application.  It wraps some
@@ -1220,7 +1220,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ApplicationCommandLine} instead.
 	 */
-	type ApplicationCommandLineMixin = IApplicationCommandLine & GObject.IObject;
+	type ApplicationCommandLineMixin = IApplicationCommandLine & GObject.Object;
 
 	/**
 	 * #GApplicationCommandLine represents a command-line invocation of
@@ -1499,7 +1499,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BufferedInputStream} instead.
 	 */
-	type BufferedInputStreamMixin = IBufferedInputStream & IFilterInputStream & ISeekable;
+	type BufferedInputStreamMixin = IBufferedInputStream & FilterInputStream & Seekable;
 
 	/**
 	 * Buffered input stream implements #GFilterInputStream and provides
@@ -1576,7 +1576,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BufferedOutputStream} instead.
 	 */
-	type BufferedOutputStreamMixin = IBufferedOutputStream & IFilterOutputStream & ISeekable;
+	type BufferedOutputStreamMixin = IBufferedOutputStream & FilterOutputStream & Seekable;
 
 	/**
 	 * Buffered output stream implements #GFilterOutputStream and provides
@@ -1633,7 +1633,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BytesIcon} instead.
 	 */
-	type BytesIconMixin = IBytesIcon & GObject.IObject & IIcon & ILoadableIcon;
+	type BytesIconMixin = IBytesIcon & GObject.Object & Icon & LoadableIcon;
 
 	/**
 	 * #GBytesIcon specifies an image held in memory in a common format (usually
@@ -1891,7 +1891,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Cancellable} instead.
 	 */
-	type CancellableMixin = ICancellable & GObject.IObject;
+	type CancellableMixin = ICancellable & GObject.Object;
 
 	/**
 	 * GCancellable is a thread-safe operation cancellation stack used
@@ -1953,7 +1953,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CharsetConverter} instead.
 	 */
-	type CharsetConverterMixin = ICharsetConverter & GObject.IObject & IConverter & IInitable;
+	type CharsetConverterMixin = ICharsetConverter & GObject.Object & Converter & Initable;
 
 	/**
 	 * #GCharsetConverter is an implementation of #GConverter based on
@@ -1989,7 +1989,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ConverterInputStream} instead.
 	 */
-	type ConverterInputStreamMixin = IConverterInputStream & IFilterInputStream & IPollableInputStream;
+	type ConverterInputStreamMixin = IConverterInputStream & FilterInputStream & PollableInputStream;
 
 	/**
 	 * Converter input stream implements #GInputStream and allows
@@ -2028,7 +2028,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ConverterOutputStream} instead.
 	 */
-	type ConverterOutputStreamMixin = IConverterOutputStream & IFilterOutputStream & IPollableOutputStream;
+	type ConverterOutputStreamMixin = IConverterOutputStream & FilterOutputStream & PollableOutputStream;
 
 	/**
 	 * Converter output stream implements #GOutputStream and allows
@@ -2134,7 +2134,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Credentials} instead.
 	 */
-	type CredentialsMixin = ICredentials & GObject.IObject;
+	type CredentialsMixin = ICredentials & GObject.Object;
 
 	/**
 	 * The #GCredentials type is a reference-counted wrapper for native
@@ -2194,7 +2194,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusActionGroup} instead.
 	 */
-	type DBusActionGroupMixin = IDBusActionGroup & GObject.IObject & IActionGroup & IRemoteActionGroup;
+	type DBusActionGroupMixin = IDBusActionGroup & GObject.Object & ActionGroup & RemoteActionGroup;
 
 	/**
 	 * #GDBusActionGroup is an implementation of the #GActionGroup
@@ -2260,7 +2260,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusAuthObserver} instead.
 	 */
-	type DBusAuthObserverMixin = IDBusAuthObserver & GObject.IObject;
+	type DBusAuthObserverMixin = IDBusAuthObserver & GObject.Object;
 
 	/**
 	 * The #GDBusAuthObserver type provides a mechanism for participating
@@ -3268,7 +3268,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusConnection} instead.
 	 */
-	type DBusConnectionMixin = IDBusConnection & GObject.IObject & IAsyncInitable & IInitable;
+	type DBusConnectionMixin = IDBusConnection & GObject.Object & AsyncInitable & Initable;
 
 	/**
 	 * The #GDBusConnection type is used for D-Bus connections to remote
@@ -3602,7 +3602,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusInterfaceSkeleton} instead.
 	 */
-	type DBusInterfaceSkeletonMixin = IDBusInterfaceSkeleton & GObject.IObject & IDBusInterface;
+	type DBusInterfaceSkeletonMixin = IDBusInterfaceSkeleton & GObject.Object & DBusInterface;
 
 	/**
 	 * Abstract base class for D-Bus interfaces on the service side.
@@ -3623,7 +3623,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusMenuModel} instead.
 	 */
-	type DBusMenuModelMixin = IDBusMenuModel & IMenuModel;
+	type DBusMenuModelMixin = IDBusMenuModel & MenuModel;
 
 	/**
 	 * #GDBusMenuModel is an implementation of #GMenuModel that can be used
@@ -3979,7 +3979,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusMessage} instead.
 	 */
-	type DBusMessageMixin = IDBusMessage & GObject.IObject;
+	type DBusMessageMixin = IDBusMessage & GObject.Object;
 
 	/**
 	 * A type for representing D-Bus messages that can be sent or received
@@ -4252,7 +4252,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusMethodInvocation} instead.
 	 */
-	type DBusMethodInvocationMixin = IDBusMethodInvocation & GObject.IObject;
+	type DBusMethodInvocationMixin = IDBusMethodInvocation & GObject.Object;
 
 	/**
 	 * Instances of the #GDBusMethodInvocation class are used when
@@ -4376,7 +4376,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusObjectManagerClient} instead.
 	 */
-	type DBusObjectManagerClientMixin = IDBusObjectManagerClient & GObject.IObject & IAsyncInitable & IDBusObjectManager & IInitable;
+	type DBusObjectManagerClientMixin = IDBusObjectManagerClient & GObject.Object & AsyncInitable & DBusObjectManager & Initable;
 
 	/**
 	 * #GDBusObjectManagerClient is used to create, monitor and delete object
@@ -4628,7 +4628,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusObjectManagerServer} instead.
 	 */
-	type DBusObjectManagerServerMixin = IDBusObjectManagerServer & GObject.IObject & IDBusObjectManager;
+	type DBusObjectManagerServerMixin = IDBusObjectManagerServer & GObject.Object & DBusObjectManager;
 
 	/**
 	 * #GDBusObjectManagerServer is used to export #GDBusObject instances using
@@ -4698,7 +4698,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusObjectProxy} instead.
 	 */
-	type DBusObjectProxyMixin = IDBusObjectProxy & GObject.IObject & IDBusObject;
+	type DBusObjectProxyMixin = IDBusObjectProxy & GObject.Object & DBusObject;
 
 	/**
 	 * A #GDBusObjectProxy is an object used to represent a remote object
@@ -4782,7 +4782,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusObjectSkeleton} instead.
 	 */
-	type DBusObjectSkeletonMixin = IDBusObjectSkeleton & GObject.IObject & IDBusObject;
+	type DBusObjectSkeletonMixin = IDBusObjectSkeleton & GObject.Object & DBusObject;
 
 	/**
 	 * A #GDBusObjectSkeleton instance is essentially a group of D-Bus
@@ -5180,7 +5180,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusProxy} instead.
 	 */
-	type DBusProxyMixin = IDBusProxy & GObject.IObject & IAsyncInitable & IDBusInterface & IInitable;
+	type DBusProxyMixin = IDBusProxy & GObject.Object & AsyncInitable & DBusInterface & Initable;
 
 	/**
 	 * #GDBusProxy is a base class used for proxies to access a D-Bus
@@ -5450,7 +5450,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusServer} instead.
 	 */
-	type DBusServerMixin = IDBusServer & GObject.IObject & IInitable;
+	type DBusServerMixin = IDBusServer & GObject.Object & Initable;
 
 	/**
 	 * #GDBusServer is a helper for listening to and accepting D-Bus
@@ -5824,7 +5824,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DataInputStream} instead.
 	 */
-	type DataInputStreamMixin = IDataInputStream & IBufferedInputStream & ISeekable;
+	type DataInputStreamMixin = IDataInputStream & BufferedInputStream & Seekable;
 
 	/**
 	 * Data input stream implements #GInputStream and includes functions for
@@ -5924,7 +5924,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DataOutputStream} instead.
 	 */
-	type DataOutputStreamMixin = IDataOutputStream & IFilterOutputStream & ISeekable;
+	type DataOutputStreamMixin = IDataOutputStream & FilterOutputStream & Seekable;
 
 	/**
 	 * Data output stream implements #GOutputStream and includes functions for
@@ -6154,7 +6154,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesktopAppInfo} instead.
 	 */
-	type DesktopAppInfoMixin = IDesktopAppInfo & GObject.IObject & IAppInfo;
+	type DesktopAppInfoMixin = IDesktopAppInfo & GObject.Object & AppInfo;
 
 	/**
 	 * #GDesktopAppInfo is an implementation of #GAppInfo based on
@@ -6266,7 +6266,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Emblem} instead.
 	 */
-	type EmblemMixin = IEmblem & GObject.IObject & IIcon;
+	type EmblemMixin = IEmblem & GObject.Object & Icon;
 
 	/**
 	 * #GEmblem is an implementation of #GIcon that supports
@@ -6327,7 +6327,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EmblemedIcon} instead.
 	 */
-	type EmblemedIconMixin = IEmblemedIcon & GObject.IObject & IIcon;
+	type EmblemedIconMixin = IEmblemedIcon & GObject.Object & Icon;
 
 	/**
 	 * #GEmblemedIcon is an implementation of #GIcon that supports
@@ -6528,7 +6528,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileEnumerator} instead.
 	 */
-	type FileEnumeratorMixin = IFileEnumerator & GObject.IObject;
+	type FileEnumeratorMixin = IFileEnumerator & GObject.Object;
 
 	/**
 	 * #GFileEnumerator allows you to operate on a set of #GFiles,
@@ -6623,7 +6623,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileIOStream} instead.
 	 */
-	type FileIOStreamMixin = IFileIOStream & IIOStream & ISeekable;
+	type FileIOStreamMixin = IFileIOStream & IOStream & Seekable;
 
 	/**
 	 * GFileIOStream provides io streams that both read and write to the same
@@ -6673,7 +6673,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileIcon} instead.
 	 */
-	type FileIconMixin = IFileIcon & GObject.IObject & IIcon & ILoadableIcon;
+	type FileIconMixin = IFileIcon & GObject.Object & Icon & LoadableIcon;
 
 	/**
 	 * #GFileIcon specifies an icon by pointing to an image file
@@ -7162,7 +7162,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileInfo} instead.
 	 */
-	type FileInfoMixin = IFileInfo & GObject.IObject;
+	type FileInfoMixin = IFileInfo & GObject.Object;
 
 	/**
 	 * Functionality for manipulating basic metadata for files. #GFileInfo
@@ -7250,7 +7250,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileInputStream} instead.
 	 */
-	type FileInputStreamMixin = IFileInputStream & IInputStream & ISeekable;
+	type FileInputStreamMixin = IFileInputStream & InputStream & Seekable;
 
 	/**
 	 * GFileInputStream provides input streams that take their
@@ -7345,7 +7345,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileMonitor} instead.
 	 */
-	type FileMonitorMixin = IFileMonitor & GObject.IObject;
+	type FileMonitorMixin = IFileMonitor & GObject.Object;
 
 	/**
 	 * Monitors a file or directory for changes.
@@ -7428,7 +7428,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileOutputStream} instead.
 	 */
-	type FileOutputStreamMixin = IFileOutputStream & IOutputStream & ISeekable;
+	type FileOutputStreamMixin = IFileOutputStream & OutputStream & Seekable;
 
 	/**
 	 * GFileOutputStream provides output streams that write their
@@ -7487,7 +7487,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FilenameCompleter} instead.
 	 */
-	type FilenameCompleterMixin = IFilenameCompleter & GObject.IObject;
+	type FilenameCompleterMixin = IFilenameCompleter & GObject.Object;
 
 	/**
 	 * Completes partial file and directory names given a partial string by
@@ -7537,7 +7537,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FilterInputStream} instead.
 	 */
-	type FilterInputStreamMixin = IFilterInputStream & IInputStream;
+	type FilterInputStreamMixin = IFilterInputStream & InputStream;
 
 	/**
 	 * Base class for input stream implementations that perform some
@@ -7583,7 +7583,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FilterOutputStream} instead.
 	 */
-	type FilterOutputStreamMixin = IFilterOutputStream & IOutputStream;
+	type FilterOutputStreamMixin = IFilterOutputStream & OutputStream;
 
 	/**
 	 * Base class for output stream implementations that perform some
@@ -7637,7 +7637,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IOModule} instead.
 	 */
-	type IOModuleMixin = IIOModule & GObject.ITypeModule & GObject.ITypePlugin;
+	type IOModuleMixin = IIOModule & GObject.TypeModule & GObject.TypePlugin;
 
 	/**
 	 * Provides an interface and default functions for loading and unloading
@@ -7821,7 +7821,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IOStream} instead.
 	 */
-	type IOStreamMixin = IIOStream & GObject.IObject;
+	type IOStreamMixin = IIOStream & GObject.Object;
 
 	/**
 	 * GIOStream represents an object that has both read and write streams.
@@ -8042,7 +8042,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InetAddress} instead.
 	 */
-	type InetAddressMixin = IInetAddress & GObject.IObject;
+	type InetAddressMixin = IInetAddress & GObject.Object;
 
 	/**
 	 * #GInetAddress represents an IPv4 or IPv6 internet address. Use
@@ -8146,7 +8146,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InetAddressMask} instead.
 	 */
-	type InetAddressMaskMixin = IInetAddressMask & GObject.IObject & IInitable;
+	type InetAddressMaskMixin = IInetAddressMask & GObject.Object & Initable;
 
 	/**
 	 * #GInetAddressMask represents a range of IPv4 or IPv6 addresses
@@ -8222,7 +8222,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InetSocketAddress} instead.
 	 */
-	type InetSocketAddressMixin = IInetSocketAddress & ISocketAddress & ISocketConnectable;
+	type InetSocketAddressMixin = IInetSocketAddress & SocketAddress & SocketConnectable;
 
 	/**
 	 * An IPv4 or IPv6 socket address; that is, the combination of a
@@ -8579,7 +8579,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InputStream} instead.
 	 */
-	type InputStreamMixin = IInputStream & GObject.IObject;
+	type InputStreamMixin = IInputStream & GObject.Object;
 
 	/**
 	 * #GInputStream has functions to read from a stream (g_input_stream_read()),
@@ -8714,7 +8714,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListStore} instead.
 	 */
-	type ListStoreMixin = IListStore & GObject.IObject & IListModel;
+	type ListStoreMixin = IListStore & GObject.Object & ListModel;
 
 	/**
 	 * #GListStore is a simple implementation of #GListModel that stores all
@@ -8757,7 +8757,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MemoryInputStream} instead.
 	 */
-	type MemoryInputStreamMixin = IMemoryInputStream & IInputStream & IPollableInputStream & ISeekable;
+	type MemoryInputStreamMixin = IMemoryInputStream & InputStream & PollableInputStream & Seekable;
 
 	/**
 	 * #GMemoryInputStream is a class for using arbitrary
@@ -8877,7 +8877,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MemoryOutputStream} instead.
 	 */
-	type MemoryOutputStreamMixin = IMemoryOutputStream & IOutputStream & IPollableOutputStream & ISeekable;
+	type MemoryOutputStreamMixin = IMemoryOutputStream & OutputStream & PollableOutputStream & Seekable;
 
 	/**
 	 * #GMemoryOutputStream is a class for using arbitrary
@@ -9098,7 +9098,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Menu} instead.
 	 */
-	type MenuMixin = IMenu & IMenuModel;
+	type MenuMixin = IMenu & MenuModel;
 
 	/**
 	 * #GMenu is a simple implementation of #GMenuModel.
@@ -9180,7 +9180,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuAttributeIter} instead.
 	 */
-	type MenuAttributeIterMixin = IMenuAttributeIter & GObject.IObject;
+	type MenuAttributeIterMixin = IMenuAttributeIter & GObject.Object;
 
 	/**
 	 * #GMenuAttributeIter is an opaque structure type.  You must access it
@@ -9421,7 +9421,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuItem} instead.
 	 */
-	type MenuItemMixin = IMenuItem & GObject.IObject;
+	type MenuItemMixin = IMenuItem & GObject.Object;
 
 	/**
 	 * #GMenuItem is an opaque structure type.  You must access it using the
@@ -9587,7 +9587,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuLinkIter} instead.
 	 */
-	type MenuLinkIterMixin = IMenuLinkIter & GObject.IObject;
+	type MenuLinkIterMixin = IMenuLinkIter & GObject.Object;
 
 	/**
 	 * #GMenuLinkIter is an opaque structure type.  You must access it using
@@ -9739,7 +9739,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuModel} instead.
 	 */
-	type MenuModelMixin = IMenuModel & GObject.IObject;
+	type MenuModelMixin = IMenuModel & GObject.Object;
 
 	/**
 	 * #GMenuModel represents the contents of a menu -- an ordered list of
@@ -10089,7 +10089,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MountOperation} instead.
 	 */
-	type MountOperationMixin = IMountOperation & GObject.IObject;
+	type MountOperationMixin = IMountOperation & GObject.Object;
 
 	/**
 	 * #GMountOperation provides a mechanism for interacting with the user.
@@ -10135,7 +10135,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NativeSocketAddress} instead.
 	 */
-	type NativeSocketAddressMixin = INativeSocketAddress & ISocketAddress & ISocketConnectable;
+	type NativeSocketAddressMixin = INativeSocketAddress & SocketAddress & SocketConnectable;
 
 	/**
 	 * A socket address of some unknown native type.
@@ -10163,7 +10163,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NativeVolumeMonitor} instead.
 	 */
-	type NativeVolumeMonitorMixin = INativeVolumeMonitor & IVolumeMonitor;
+	type NativeVolumeMonitorMixin = INativeVolumeMonitor & VolumeMonitor;
 
 	interface NativeVolumeMonitor extends NativeVolumeMonitorMixin {}
 
@@ -10203,7 +10203,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NetworkAddress} instead.
 	 */
-	type NetworkAddressMixin = INetworkAddress & GObject.IObject & ISocketConnectable;
+	type NetworkAddressMixin = INetworkAddress & GObject.Object & SocketConnectable;
 
 	/**
 	 * #GNetworkAddress provides an easy way to resolve a hostname and
@@ -10341,7 +10341,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NetworkService} instead.
 	 */
-	type NetworkServiceMixin = INetworkService & GObject.IObject & ISocketConnectable;
+	type NetworkServiceMixin = INetworkService & GObject.Object & SocketConnectable;
 
 	/**
 	 * Like #GNetworkAddress does with hostnames, #GNetworkService
@@ -10497,7 +10497,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Notification} instead.
 	 */
-	type NotificationMixin = INotification & GObject.IObject;
+	type NotificationMixin = INotification & GObject.Object;
 
 	/**
 	 * #GNotification is a mechanism for creating a notification to be shown
@@ -11085,7 +11085,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OutputStream} instead.
 	 */
-	type OutputStreamMixin = IOutputStream & GObject.IObject;
+	type OutputStreamMixin = IOutputStream & GObject.Object;
 
 	/**
 	 * #GOutputStream has functions to write to a stream (g_output_stream_write()),
@@ -11244,7 +11244,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Permission} instead.
 	 */
-	type PermissionMixin = IPermission & GObject.IObject;
+	type PermissionMixin = IPermission & GObject.Object;
 
 	/**
 	 * A #GPermission represents the status of the caller's permission to
@@ -11317,7 +11317,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PropertyAction} instead.
 	 */
-	type PropertyActionMixin = IPropertyAction & GObject.IObject & IAction;
+	type PropertyActionMixin = IPropertyAction & GObject.Object & Action;
 
 	/**
 	 * A #GPropertyAction is a way to get a #GAction with a state value
@@ -11466,7 +11466,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyAddress} instead.
 	 */
-	type ProxyAddressMixin = IProxyAddress & IInetSocketAddress & ISocketConnectable;
+	type ProxyAddressMixin = IProxyAddress & InetSocketAddress & SocketConnectable;
 
 	/**
 	 * Support for proxied #GInetSocketAddress.
@@ -11522,7 +11522,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyAddressEnumerator} instead.
 	 */
-	type ProxyAddressEnumeratorMixin = IProxyAddressEnumerator & ISocketAddressEnumerator;
+	type ProxyAddressEnumeratorMixin = IProxyAddressEnumerator & SocketAddressEnumerator;
 
 	/**
 	 * #GProxyAddressEnumerator is a wrapper around #GSocketAddressEnumerator which
@@ -11802,7 +11802,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Resolver} instead.
 	 */
-	type ResolverMixin = IResolver & GObject.IObject;
+	type ResolverMixin = IResolver & GObject.Object;
 
 	/**
 	 * #GResolver provides cancellable synchronous and asynchronous DNS
@@ -12555,7 +12555,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
-	type SettingsMixin = ISettings & GObject.IObject;
+	type SettingsMixin = ISettings & GObject.Object;
 
 	/**
 	 * The #GSettings class provides a convenient API for storing and retrieving
@@ -13096,7 +13096,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SettingsBackend} instead.
 	 */
-	type SettingsBackendMixin = ISettingsBackend & GObject.IObject;
+	type SettingsBackendMixin = ISettingsBackend & GObject.Object;
 
 	/**
 	 * The #GSettingsBackend interface defines a generic interface for
@@ -13286,7 +13286,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimpleAction} instead.
 	 */
-	type SimpleActionMixin = ISimpleAction & GObject.IObject & IAction;
+	type SimpleActionMixin = ISimpleAction & GObject.Object & Action;
 
 	/**
 	 * A #GSimpleAction is the obvious simple implementation of the #GAction
@@ -13368,7 +13368,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimpleActionGroup} instead.
 	 */
-	type SimpleActionGroupMixin = ISimpleActionGroup & GObject.IObject & IActionGroup & IActionMap;
+	type SimpleActionGroupMixin = ISimpleActionGroup & GObject.Object & ActionGroup & ActionMap;
 
 	/**
 	 * #GSimpleActionGroup is a hash table filled with #GAction objects,
@@ -13529,7 +13529,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimpleAsyncResult} instead.
 	 */
-	type SimpleAsyncResultMixin = ISimpleAsyncResult & GObject.IObject & IAsyncResult;
+	type SimpleAsyncResultMixin = ISimpleAsyncResult & GObject.Object & AsyncResult;
 
 	/**
 	 * As of GLib 2.46, #GSimpleAsyncResult is deprecated in favor of
@@ -13782,7 +13782,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimpleIOStream} instead.
 	 */
-	type SimpleIOStreamMixin = ISimpleIOStream & IIOStream;
+	type SimpleIOStreamMixin = ISimpleIOStream & IOStream;
 
 	/**
 	 * GSimpleIOStream creates a #GIOStream from an arbitrary #GInputStream and
@@ -13818,7 +13818,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimplePermission} instead.
 	 */
-	type SimplePermissionMixin = ISimplePermission & IPermission;
+	type SimplePermissionMixin = ISimplePermission & Permission;
 
 	/**
 	 * #GSimplePermission is a trivial implementation of #GPermission that
@@ -13932,7 +13932,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimpleProxyResolver} instead.
 	 */
-	type SimpleProxyResolverMixin = ISimpleProxyResolver & GObject.IObject & IProxyResolver;
+	type SimpleProxyResolverMixin = ISimpleProxyResolver & GObject.Object & ProxyResolver;
 
 	/**
 	 * #GSimpleProxyResolver is a simple #GProxyResolver implementation
@@ -14979,7 +14979,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Socket} instead.
 	 */
-	type SocketMixin = ISocket & GObject.IObject & IDatagramBased & IInitable;
+	type SocketMixin = ISocket & GObject.Object & DatagramBased & Initable;
 
 	/**
 	 * A #GSocket is a low-level networking primitive. It is a more or less
@@ -15119,7 +15119,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketAddress} instead.
 	 */
-	type SocketAddressMixin = ISocketAddress & GObject.IObject & ISocketConnectable;
+	type SocketAddressMixin = ISocketAddress & GObject.Object & SocketConnectable;
 
 	/**
 	 * #GSocketAddress is the equivalent of struct sockaddr in the BSD
@@ -15192,7 +15192,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketAddressEnumerator} instead.
 	 */
-	type SocketAddressEnumeratorMixin = ISocketAddressEnumerator & GObject.IObject;
+	type SocketAddressEnumeratorMixin = ISocketAddressEnumerator & GObject.Object;
 
 	/**
 	 * #GSocketAddressEnumerator is an enumerator type for #GSocketAddress
@@ -15673,7 +15673,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketClient} instead.
 	 */
-	type SocketClientMixin = ISocketClient & GObject.IObject;
+	type SocketClientMixin = ISocketClient & GObject.Object;
 
 	/**
 	 * #GSocketClient is a lightweight high-level utility class for connecting to
@@ -15771,7 +15771,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketConnection} instead.
 	 */
-	type SocketConnectionMixin = ISocketConnection & IIOStream;
+	type SocketConnectionMixin = ISocketConnection & IOStream;
 
 	/**
 	 * #GSocketConnection is a #GIOStream for a connected socket. They
@@ -15856,7 +15856,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketControlMessage} instead.
 	 */
-	type SocketControlMessageMixin = ISocketControlMessage & GObject.IObject;
+	type SocketControlMessageMixin = ISocketControlMessage & GObject.Object;
 
 	/**
 	 * A #GSocketControlMessage is a special-purpose utility message that
@@ -16084,7 +16084,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketListener} instead.
 	 */
-	type SocketListenerMixin = ISocketListener & GObject.IObject;
+	type SocketListenerMixin = ISocketListener & GObject.Object;
 
 	/**
 	 * A #GSocketListener is an object that keeps track of a set
@@ -16177,7 +16177,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketService} instead.
 	 */
-	type SocketServiceMixin = ISocketService & ISocketListener;
+	type SocketServiceMixin = ISocketService & SocketListener;
 
 	/**
 	 * A #GSocketService is an object that represents a service that
@@ -16497,7 +16497,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Subprocess} instead.
 	 */
-	type SubprocessMixin = ISubprocess & GObject.IObject & IInitable;
+	type SubprocessMixin = ISubprocess & GObject.Object & Initable;
 
 	/**
 	 * #GSubprocess allows the creation of and interaction with child
@@ -16849,7 +16849,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SubprocessLauncher} instead.
 	 */
-	type SubprocessLauncherMixin = ISubprocessLauncher & GObject.IObject;
+	type SubprocessLauncherMixin = ISubprocessLauncher & GObject.Object;
 
 	/**
 	 * This class contains a set of options for launching child processes,
@@ -17246,7 +17246,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Task} instead.
 	 */
-	type TaskMixin = ITask & GObject.IObject & IAsyncResult;
+	type TaskMixin = ITask & GObject.Object & AsyncResult;
 
 	/**
 	 * A #GTask represents and manages a cancellable "task".
@@ -17855,7 +17855,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TcpConnection} instead.
 	 */
-	type TcpConnectionMixin = ITcpConnection & ISocketConnection;
+	type TcpConnectionMixin = ITcpConnection & SocketConnection;
 
 	/**
 	 * This is the subclass of #GSocketConnection that is created
@@ -17884,7 +17884,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TcpWrapperConnection} instead.
 	 */
-	type TcpWrapperConnectionMixin = ITcpWrapperConnection & ITcpConnection;
+	type TcpWrapperConnectionMixin = ITcpWrapperConnection & TcpConnection;
 
 	/**
 	 * A #GTcpWrapperConnection can be used to wrap a #GIOStream that is
@@ -17967,7 +17967,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TestDBus} instead.
 	 */
-	type TestDBusMixin = ITestDBus & GObject.IObject;
+	type TestDBusMixin = ITestDBus & GObject.Object;
 
 	/**
 	 * A helper class for testing code which uses D-Bus without touching the user's
@@ -18119,7 +18119,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThemedIcon} instead.
 	 */
-	type ThemedIconMixin = IThemedIcon & GObject.IObject & IIcon;
+	type ThemedIconMixin = IThemedIcon & GObject.Object & Icon;
 
 	/**
 	 * #GThemedIcon is an implementation of #GIcon that supports icon themes.
@@ -18191,7 +18191,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThreadedSocketService} instead.
 	 */
-	type ThreadedSocketServiceMixin = IThreadedSocketService & ISocketService;
+	type ThreadedSocketServiceMixin = IThreadedSocketService & SocketService;
 
 	/**
 	 * A #GThreadedSocketService is a simple subclass of #GSocketService
@@ -18443,7 +18443,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsCertificate} instead.
 	 */
-	type TlsCertificateMixin = ITlsCertificate & GObject.IObject;
+	type TlsCertificateMixin = ITlsCertificate & GObject.Object;
 
 	/**
 	 * A certificate used for TLS authentication and encryption.
@@ -18970,7 +18970,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsConnection} instead.
 	 */
-	type TlsConnectionMixin = ITlsConnection & IIOStream;
+	type TlsConnectionMixin = ITlsConnection & IOStream;
 
 	/**
 	 * #GTlsConnection is the base TLS connection class type, which wraps
@@ -19226,7 +19226,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsDatabase} instead.
 	 */
-	type TlsDatabaseMixin = ITlsDatabase & GObject.IObject;
+	type TlsDatabaseMixin = ITlsDatabase & GObject.Object;
 
 	/**
 	 * #GTlsDatabase is used to look up certificates and other information
@@ -19413,7 +19413,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsInteraction} instead.
 	 */
-	type TlsInteractionMixin = ITlsInteraction & GObject.IObject;
+	type TlsInteractionMixin = ITlsInteraction & GObject.Object;
 
 	/**
 	 * #GTlsInteraction provides a mechanism for the TLS connection and database
@@ -19529,7 +19529,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsPassword} instead.
 	 */
-	type TlsPasswordMixin = ITlsPassword & GObject.IObject;
+	type TlsPasswordMixin = ITlsPassword & GObject.Object;
 
 	/**
 	 * Holds a password used in TLS.
@@ -19668,7 +19668,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixConnection} instead.
 	 */
-	type UnixConnectionMixin = IUnixConnection & ISocketConnection;
+	type UnixConnectionMixin = IUnixConnection & SocketConnection;
 
 	/**
 	 * This is the subclass of #GSocketConnection that is created
@@ -19707,7 +19707,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixCredentialsMessage} instead.
 	 */
-	type UnixCredentialsMessageMixin = IUnixCredentialsMessage & ISocketControlMessage;
+	type UnixCredentialsMessageMixin = IUnixCredentialsMessage & SocketControlMessage;
 
 	/**
 	 * This #GSocketControlMessage contains a #GCredentials instance.  It
@@ -19835,7 +19835,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixFDList} instead.
 	 */
-	type UnixFDListMixin = IUnixFDList & GObject.IObject;
+	type UnixFDListMixin = IUnixFDList & GObject.Object;
 
 	/**
 	 * A #GUnixFDList contains a list of file descriptors.  It owns the file
@@ -19928,7 +19928,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixFDMessage} instead.
 	 */
-	type UnixFDMessageMixin = IUnixFDMessage & ISocketControlMessage;
+	type UnixFDMessageMixin = IUnixFDMessage & SocketControlMessage;
 
 	/**
 	 * This #GSocketControlMessage contains a #GUnixFDList.
@@ -20000,7 +20000,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixInputStream} instead.
 	 */
-	type UnixInputStreamMixin = IUnixInputStream & IInputStream & IFileDescriptorBased & IPollableInputStream;
+	type UnixInputStreamMixin = IUnixInputStream & InputStream & FileDescriptorBased & PollableInputStream;
 
 	/**
 	 * #GUnixInputStream implements #GInputStream for reading from a UNIX
@@ -20059,7 +20059,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixMountMonitor} instead.
 	 */
-	type UnixMountMonitorMixin = IUnixMountMonitor & GObject.IObject;
+	type UnixMountMonitorMixin = IUnixMountMonitor & GObject.Object;
 
 	/**
 	 * Watches #GUnixMounts for changes.
@@ -20128,7 +20128,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixOutputStream} instead.
 	 */
-	type UnixOutputStreamMixin = IUnixOutputStream & IOutputStream & IFileDescriptorBased & IPollableOutputStream;
+	type UnixOutputStreamMixin = IUnixOutputStream & OutputStream & FileDescriptorBased & PollableOutputStream;
 
 	/**
 	 * #GUnixOutputStream implements #GOutputStream for writing to a UNIX
@@ -20205,7 +20205,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixSocketAddress} instead.
 	 */
-	type UnixSocketAddressMixin = IUnixSocketAddress & ISocketAddress & ISocketConnectable;
+	type UnixSocketAddressMixin = IUnixSocketAddress & SocketAddress & SocketConnectable;
 
 	/**
 	 * Support for UNIX-domain (also known as local) sockets.
@@ -20383,7 +20383,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Vfs} instead.
 	 */
-	type VfsMixin = IVfs & GObject.IObject;
+	type VfsMixin = IVfs & GObject.Object;
 
 	/**
 	 * Entry point for using GIO functionality.
@@ -20504,7 +20504,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VolumeMonitor} instead.
 	 */
-	type VolumeMonitorMixin = IVolumeMonitor & GObject.IObject;
+	type VolumeMonitorMixin = IVolumeMonitor & GObject.Object;
 
 	/**
 	 * #GVolumeMonitor is for listing the user interesting devices and volumes
@@ -20603,7 +20603,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ZlibCompressor} instead.
 	 */
-	type ZlibCompressorMixin = IZlibCompressor & GObject.IObject & IConverter;
+	type ZlibCompressorMixin = IZlibCompressor & GObject.Object & Converter;
 
 	/**
 	 * #GZlibCompressor is an implementation of #GConverter that
@@ -20651,7 +20651,7 @@ declare namespace imports.gi.Gio {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ZlibDecompressor} instead.
 	 */
-	type ZlibDecompressorMixin = IZlibDecompressor & GObject.IObject & IConverter;
+	type ZlibDecompressorMixin = IZlibDecompressor & GObject.Object & Converter;
 
 	/**
 	 * #GZlibDecompressor is an implementation of #GConverter that

@@ -45,7 +45,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Adjustment} instead.
 	 */
-	type AdjustmentMixin = IAdjustment & GObject.IObject;
+	type AdjustmentMixin = IAdjustment & GObject.Object;
 
 	/**
 	 * Class for handling an interval between to values. The contents of
@@ -130,7 +130,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BackgroundEffect} instead.
 	 */
-	type BackgroundEffectMixin = IBackgroundEffect & Clutter.IOffscreenEffect;
+	type BackgroundEffectMixin = IBackgroundEffect & Clutter.OffscreenEffect;
 
 	interface BackgroundEffect extends BackgroundEffectMixin {}
 
@@ -214,7 +214,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bin} instead.
 	 */
-	type BinMixin = IBin & IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type BinMixin = IBin & Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * The {@link Bin} struct contains only private data
@@ -247,7 +247,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BorderImage} instead.
 	 */
-	type BorderImageMixin = IBorderImage & GObject.IObject;
+	type BorderImageMixin = IBorderImage & GObject.Object;
 
 	interface BorderImage extends BorderImageMixin {}
 
@@ -307,7 +307,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BoxLayout} instead.
 	 */
-	type BoxLayoutMixin = IBoxLayout & IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable & IScrollable;
+	type BoxLayoutMixin = IBoxLayout & Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable & Scrollable;
 
 	/**
 	 * The contents of this structure are private and should only be accessed
@@ -345,7 +345,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BoxLayoutChild} instead.
 	 */
-	type BoxLayoutChildMixin = IBoxLayoutChild & Clutter.IChildMeta;
+	type BoxLayoutChildMixin = IBoxLayoutChild & Clutter.ChildMeta;
 
 	/**
 	 * The contents of this structure are private and should only be accessed
@@ -438,7 +438,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Button} instead.
 	 */
-	type ButtonMixin = IButton & IBin & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type ButtonMixin = IButton & Bin & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * The contents of this structure is private and should only be accessed using
@@ -483,7 +483,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clipboard} instead.
 	 */
-	type ClipboardMixin = IClipboard & GObject.IObject;
+	type ClipboardMixin = IClipboard & GObject.Object;
 
 	/**
 	 * The contents of this structure is private and should only be accessed using
@@ -535,7 +535,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DrawingArea} instead.
 	 */
-	type DrawingAreaMixin = IDrawingArea & IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type DrawingAreaMixin = IDrawingArea & Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	interface DrawingArea extends DrawingAreaMixin {}
 
@@ -617,7 +617,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Entry} instead.
 	 */
-	type EntryMixin = IEntry & IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type EntryMixin = IEntry & Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * The contents of this structure is private and should only be accessed using
@@ -664,7 +664,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FocusManager} instead.
 	 */
-	type FocusManagerMixin = IFocusManager & GObject.IObject;
+	type FocusManagerMixin = IFocusManager & GObject.Object;
 
 	/**
 	 * The {@link FocusManager} struct contains only private data
@@ -691,7 +691,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Group} instead.
 	 */
-	type GroupMixin = IGroup & IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type GroupMixin = IGroup & Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * The {@link Group} struct contains only private data
@@ -717,7 +717,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMText} instead.
 	 */
-	type IMTextMixin = IIMText & Clutter.IText & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type IMTextMixin = IIMText & Clutter.Text & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	interface IMText extends IMTextMixin {}
 
@@ -779,7 +779,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Icon} instead.
 	 */
-	type IconMixin = IIcon & IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type IconMixin = IIcon & Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * The contents of this structure are private and should only be accessed
@@ -826,7 +826,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Label} instead.
 	 */
-	type LabelMixin = ILabel & IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type LabelMixin = ILabel & Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * The contents of this structure is private and should only be accessed using
@@ -882,7 +882,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Polygon} instead.
 	 */
-	type PolygonMixin = IPolygon & Clutter.IActor & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type PolygonMixin = IPolygon & Clutter.Actor & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	interface Polygon extends PolygonMixin {}
 
@@ -914,7 +914,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrollBar} instead.
 	 */
-	type ScrollBarMixin = IScrollBar & IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type ScrollBarMixin = IScrollBar & Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * The contents of this structure are private and should only be accessed
@@ -977,7 +977,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrollView} instead.
 	 */
-	type ScrollViewMixin = IScrollView & IBin & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type ScrollViewMixin = IScrollView & Bin & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * The contents of this structure are private and should only be accessed
@@ -1003,7 +1003,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrollViewFade} instead.
 	 */
-	type ScrollViewFadeMixin = IScrollViewFade & Clutter.IOffscreenEffect;
+	type ScrollViewFadeMixin = IScrollViewFade & Clutter.OffscreenEffect;
 
 	interface ScrollViewFade extends ScrollViewFadeMixin {}
 
@@ -1025,7 +1025,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
-	type SettingsMixin = ISettings & GObject.IObject;
+	type SettingsMixin = ISettings & GObject.Object;
 
 	interface Settings extends SettingsMixin {}
 
@@ -1180,7 +1180,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Table} instead.
 	 */
-	type TableMixin = ITable & IWidget & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type TableMixin = ITable & Widget & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * The contents of this structure is private and should only be accessed using
@@ -1230,7 +1230,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TableChild} instead.
 	 */
-	type TableChildMixin = ITableChild & Clutter.IChildMeta;
+	type TableChildMixin = ITableChild & Clutter.ChildMeta;
 
 	/**
 	 * The contents of the this structure are private and should only be accessed
@@ -1371,7 +1371,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextureCache} instead.
 	 */
-	type TextureCacheMixin = ITextureCache & GObject.IObject;
+	type TextureCacheMixin = ITextureCache & GObject.Object;
 
 	interface TextureCache extends TextureCacheMixin {}
 
@@ -1426,7 +1426,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Theme} instead.
 	 */
-	type ThemeMixin = ITheme & GObject.IObject;
+	type ThemeMixin = ITheme & GObject.Object;
 
 	interface Theme extends ThemeMixin {}
 
@@ -1492,7 +1492,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThemeContext} instead.
 	 */
-	type ThemeContextMixin = IThemeContext & GObject.IObject;
+	type ThemeContextMixin = IThemeContext & GObject.Object;
 
 	interface ThemeContext extends ThemeContextMixin {}
 
@@ -1877,7 +1877,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThemeNode} instead.
 	 */
-	type ThemeNodeMixin = IThemeNode & GObject.IObject;
+	type ThemeNodeMixin = IThemeNode & GObject.Object;
 
 	interface ThemeNode extends ThemeNodeMixin {}
 
@@ -2345,7 +2345,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Widget} instead.
 	 */
-	type WidgetMixin = IWidget & Clutter.IActor & Atk.IImplementorIface & Clutter.IAnimatable & Clutter.IContainer & Clutter.IScriptable;
+	type WidgetMixin = IWidget & Clutter.Actor & Atk.ImplementorIface & Clutter.Animatable & Clutter.Container & Clutter.Scriptable;
 
 	/**
 	 * Base class for stylable actors. The contents of the {@link Widget}
@@ -2370,7 +2370,7 @@ declare namespace imports.gi.St {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WidgetAccessible} instead.
 	 */
-	type WidgetAccessibleMixin = IWidgetAccessible & Atk.IGObjectAccessible & Atk.IAction & Atk.IComponent;
+	type WidgetAccessibleMixin = IWidgetAccessible & Atk.GObjectAccessible & Atk.Action & Atk.Component;
 
 	interface WidgetAccessible extends WidgetAccessibleMixin {}
 

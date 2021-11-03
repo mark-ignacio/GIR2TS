@@ -167,7 +167,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Address} instead.
 	 */
-	type AddressMixin = IAddress & GObject.IObject & Gio.ISocketConnectable;
+	type AddressMixin = IAddress & GObject.Object & Gio.SocketConnectable;
 
 	interface Address extends AddressMixin {}
 
@@ -322,7 +322,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Auth} instead.
 	 */
-	type AuthMixin = IAuth & GObject.IObject;
+	type AuthMixin = IAuth & GObject.Object;
 
 	/**
 	 * The abstract base class for handling authentication. Specific HTTP
@@ -359,7 +359,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthBasic} instead.
 	 */
-	type AuthBasicMixin = IAuthBasic & IAuth;
+	type AuthBasicMixin = IAuthBasic & Auth;
 
 	interface AuthBasic extends AuthBasicMixin {}
 
@@ -377,7 +377,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthDigest} instead.
 	 */
-	type AuthDigestMixin = IAuthDigest & IAuth;
+	type AuthDigestMixin = IAuthDigest & Auth;
 
 	interface AuthDigest extends AuthDigestMixin {}
 
@@ -537,7 +537,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthDomain} instead.
 	 */
-	type AuthDomainMixin = IAuthDomain & GObject.IObject;
+	type AuthDomainMixin = IAuthDomain & GObject.Object;
 
 	interface AuthDomain extends AuthDomainMixin {}
 
@@ -580,7 +580,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthDomainBasic} instead.
 	 */
-	type AuthDomainBasicMixin = IAuthDomainBasic & IAuthDomain;
+	type AuthDomainBasicMixin = IAuthDomainBasic & AuthDomain;
 
 	interface AuthDomainBasic extends AuthDomainBasicMixin {}
 
@@ -632,7 +632,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthDomainDigest} instead.
 	 */
-	type AuthDomainDigestMixin = IAuthDomainDigest & IAuthDomain;
+	type AuthDomainDigestMixin = IAuthDomainDigest & AuthDomain;
 
 	interface AuthDomainDigest extends AuthDomainDigestMixin {}
 
@@ -706,7 +706,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthManager} instead.
 	 */
-	type AuthManagerMixin = IAuthManager & GObject.IObject & ISessionFeature;
+	type AuthManagerMixin = IAuthManager & GObject.Object & SessionFeature;
 
 	interface AuthManager extends AuthManagerMixin {}
 
@@ -724,7 +724,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthNTLM} instead.
 	 */
-	type AuthNTLMMixin = IAuthNTLM & IAuth;
+	type AuthNTLMMixin = IAuthNTLM & Auth;
 
 	interface AuthNTLM extends AuthNTLMMixin {}
 
@@ -742,7 +742,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthNegotiate} instead.
 	 */
-	type AuthNegotiateMixin = IAuthNegotiate & IAuth;
+	type AuthNegotiateMixin = IAuthNegotiate & Auth;
 
 	interface AuthNegotiate extends AuthNegotiateMixin {}
 
@@ -808,7 +808,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Cache} instead.
 	 */
-	type CacheMixin = ICache & GObject.IObject & ISessionFeature;
+	type CacheMixin = ICache & GObject.Object & SessionFeature;
 
 	interface Cache extends CacheMixin {}
 
@@ -836,7 +836,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContentDecoder} instead.
 	 */
-	type ContentDecoderMixin = IContentDecoder & GObject.IObject & ISessionFeature;
+	type ContentDecoderMixin = IContentDecoder & GObject.Object & SessionFeature;
 
 	interface ContentDecoder extends ContentDecoderMixin {}
 
@@ -869,7 +869,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContentSniffer} instead.
 	 */
-	type ContentSnifferMixin = IContentSniffer & GObject.IObject & ISessionFeature;
+	type ContentSnifferMixin = IContentSniffer & GObject.Object & SessionFeature;
 
 	interface ContentSniffer extends ContentSnifferMixin {}
 
@@ -1063,7 +1063,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CookieJar} instead.
 	 */
-	type CookieJarMixin = ICookieJar & GObject.IObject & ISessionFeature;
+	type CookieJarMixin = ICookieJar & GObject.Object & SessionFeature;
 
 	interface CookieJar extends CookieJarMixin {}
 
@@ -1090,7 +1090,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CookieJarDB} instead.
 	 */
-	type CookieJarDBMixin = ICookieJarDB & ICookieJar & ISessionFeature;
+	type CookieJarDBMixin = ICookieJarDB & CookieJar & SessionFeature;
 
 	interface CookieJarDB extends CookieJarDBMixin {}
 
@@ -1125,7 +1125,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CookieJarText} instead.
 	 */
-	type CookieJarTextMixin = ICookieJarText & ICookieJar & ISessionFeature;
+	type CookieJarTextMixin = ICookieJarText & CookieJar & SessionFeature;
 
 	interface CookieJarText extends CookieJarTextMixin {}
 
@@ -1223,7 +1223,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HSTSEnforcer} instead.
 	 */
-	type HSTSEnforcerMixin = IHSTSEnforcer & GObject.IObject & ISessionFeature;
+	type HSTSEnforcerMixin = IHSTSEnforcer & GObject.Object & SessionFeature;
 
 	interface HSTSEnforcer extends HSTSEnforcerMixin {}
 
@@ -1254,7 +1254,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HSTSEnforcerDB} instead.
 	 */
-	type HSTSEnforcerDBMixin = IHSTSEnforcerDB & IHSTSEnforcer & ISessionFeature;
+	type HSTSEnforcerDBMixin = IHSTSEnforcerDB & HSTSEnforcer & SessionFeature;
 
 	interface HSTSEnforcerDB extends HSTSEnforcerDBMixin {}
 
@@ -1342,7 +1342,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Logger} instead.
 	 */
-	type LoggerMixin = ILogger & GObject.IObject & ISessionFeature;
+	type LoggerMixin = ILogger & GObject.Object & SessionFeature;
 
 	interface Logger extends LoggerMixin {}
 
@@ -1882,7 +1882,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Message} instead.
 	 */
-	type MessageMixin = IMessage & GObject.IObject;
+	type MessageMixin = IMessage & GObject.Object;
 
 	/**
 	 * Represents an HTTP message being sent or received.
@@ -2009,7 +2009,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MultipartInputStream} instead.
 	 */
-	type MultipartInputStreamMixin = IMultipartInputStream & Gio.IFilterInputStream & Gio.IPollableInputStream;
+	type MultipartInputStreamMixin = IMultipartInputStream & Gio.FilterInputStream & Gio.PollableInputStream;
 
 	interface MultipartInputStream extends MultipartInputStreamMixin {}
 
@@ -2038,7 +2038,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyResolverDefault} instead.
 	 */
-	type ProxyResolverDefaultMixin = IProxyResolverDefault & GObject.IObject & IProxyURIResolver & ISessionFeature;
+	type ProxyResolverDefaultMixin = IProxyResolverDefault & GObject.Object & ProxyURIResolver & SessionFeature;
 
 	interface ProxyResolverDefault extends ProxyResolverDefaultMixin {}
 
@@ -2123,7 +2123,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Request} instead.
 	 */
-	type RequestMixin = IRequest & GObject.IObject & Gio.IInitable;
+	type RequestMixin = IRequest & GObject.Object & Gio.Initable;
 
 	/**
 	 * A request to retrieve a particular URI.
@@ -2144,7 +2144,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RequestData} instead.
 	 */
-	type RequestDataMixin = IRequestData & IRequest & Gio.IInitable;
+	type RequestDataMixin = IRequestData & Request & Gio.Initable;
 
 	interface RequestData extends RequestDataMixin {}
 
@@ -2166,7 +2166,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RequestFile} instead.
 	 */
-	type RequestFileMixin = IRequestFile & IRequest & Gio.IInitable;
+	type RequestFileMixin = IRequestFile & Request & Gio.Initable;
 
 	interface RequestFile extends RequestFileMixin {}
 
@@ -2188,7 +2188,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RequestHTTP} instead.
 	 */
-	type RequestHTTPMixin = IRequestHTTP & IRequest & Gio.IInitable;
+	type RequestHTTPMixin = IRequestHTTP & Request & Gio.Initable;
 
 	interface RequestHTTP extends RequestHTTPMixin {}
 
@@ -2207,7 +2207,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Requester} instead.
 	 */
-	type RequesterMixin = IRequester & GObject.IObject & ISessionFeature;
+	type RequesterMixin = IRequester & GObject.Object & SessionFeature;
 
 	interface Requester extends RequesterMixin {}
 
@@ -2774,7 +2774,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Server} instead.
 	 */
-	type ServerMixin = IServer & GObject.IObject;
+	type ServerMixin = IServer & GObject.Object;
 
 	interface Server extends ServerMixin {}
 
@@ -3603,7 +3603,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Session} instead.
 	 */
-	type SessionMixin = ISession & GObject.IObject;
+	type SessionMixin = ISession & GObject.Object;
 
 	interface Session extends SessionMixin {}
 
@@ -3632,7 +3632,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SessionAsync} instead.
 	 */
-	type SessionAsyncMixin = ISessionAsync & ISession;
+	type SessionAsyncMixin = ISessionAsync & Session;
 
 	interface SessionAsync extends SessionAsyncMixin {}
 
@@ -3661,7 +3661,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SessionSync} instead.
 	 */
-	type SessionSyncMixin = ISessionSync & ISession;
+	type SessionSyncMixin = ISessionSync & Session;
 
 	interface SessionSync extends SessionSyncMixin {}
 
@@ -3933,7 +3933,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Socket} instead.
 	 */
-	type SocketMixin = ISocket & GObject.IObject & Gio.IInitable;
+	type SocketMixin = ISocket & GObject.Object & Gio.Initable;
 
 	interface Socket extends SocketMixin {}
 
@@ -4172,7 +4172,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsocketConnection} instead.
 	 */
-	type WebsocketConnectionMixin = IWebsocketConnection & GObject.IObject;
+	type WebsocketConnectionMixin = IWebsocketConnection & GObject.Object;
 
 	/**
 	 * A class representing a WebSocket connection.
@@ -4256,7 +4256,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsocketExtension} instead.
 	 */
-	type WebsocketExtensionMixin = IWebsocketExtension & GObject.IObject;
+	type WebsocketExtensionMixin = IWebsocketExtension & GObject.Object;
 
 	interface WebsocketExtension extends WebsocketExtensionMixin {}
 
@@ -4274,7 +4274,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsocketExtensionDeflate} instead.
 	 */
-	type WebsocketExtensionDeflateMixin = IWebsocketExtensionDeflate & IWebsocketExtension;
+	type WebsocketExtensionDeflateMixin = IWebsocketExtensionDeflate & WebsocketExtension;
 
 	interface WebsocketExtensionDeflate extends WebsocketExtensionDeflateMixin {}
 
@@ -4292,7 +4292,7 @@ declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsocketExtensionManager} instead.
 	 */
-	type WebsocketExtensionManagerMixin = IWebsocketExtensionManager & GObject.IObject & ISessionFeature;
+	type WebsocketExtensionManagerMixin = IWebsocketExtensionManager & GObject.Object & SessionFeature;
 
 	interface WebsocketExtensionManager extends WebsocketExtensionManagerMixin {}
 

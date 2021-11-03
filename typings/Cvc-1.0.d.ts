@@ -23,7 +23,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ChannelMap} instead.
 	 */
-	type ChannelMapMixin = IChannelMap & GObject.IObject;
+	type ChannelMapMixin = IChannelMap & GObject.Object;
 
 	interface ChannelMap extends ChannelMapMixin {}
 
@@ -70,7 +70,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerCard} instead.
 	 */
-	type MixerCardMixin = IMixerCard & GObject.IObject;
+	type MixerCardMixin = IMixerCard & GObject.Object;
 
 	interface MixerCard extends MixerCardMixin {}
 
@@ -132,7 +132,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerControl} instead.
 	 */
-	type MixerControlMixin = IMixerControl & GObject.IObject;
+	type MixerControlMixin = IMixerControl & GObject.Object;
 
 	interface MixerControl extends MixerControlMixin {}
 
@@ -154,7 +154,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerEventRole} instead.
 	 */
-	type MixerEventRoleMixin = IMixerEventRole & IMixerStream;
+	type MixerEventRoleMixin = IMixerEventRole & MixerStream;
 
 	interface MixerEventRole extends MixerEventRoleMixin {}
 
@@ -173,7 +173,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSink} instead.
 	 */
-	type MixerSinkMixin = IMixerSink & IMixerStream;
+	type MixerSinkMixin = IMixerSink & MixerStream;
 
 	interface MixerSink extends MixerSinkMixin {}
 
@@ -192,7 +192,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSinkInput} instead.
 	 */
-	type MixerSinkInputMixin = IMixerSinkInput & IMixerStream;
+	type MixerSinkInputMixin = IMixerSinkInput & MixerStream;
 
 	interface MixerSinkInput extends MixerSinkInputMixin {}
 
@@ -211,7 +211,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSource} instead.
 	 */
-	type MixerSourceMixin = IMixerSource & IMixerStream;
+	type MixerSourceMixin = IMixerSource & MixerStream;
 
 	interface MixerSource extends MixerSourceMixin {}
 
@@ -230,7 +230,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSourceOutput} instead.
 	 */
-	type MixerSourceOutputMixin = IMixerSourceOutput & IMixerStream;
+	type MixerSourceOutputMixin = IMixerSourceOutput & MixerStream;
 
 	interface MixerSourceOutput extends MixerSourceOutputMixin {}
 
@@ -330,7 +330,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerStream} instead.
 	 */
-	type MixerStreamMixin = IMixerStream & GObject.IObject;
+	type MixerStreamMixin = IMixerStream & GObject.Object;
 
 	interface MixerStream extends MixerStreamMixin {}
 
@@ -406,7 +406,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerUIDevice} instead.
 	 */
-	type MixerUIDeviceMixin = IMixerUIDevice & GObject.IObject;
+	type MixerUIDeviceMixin = IMixerUIDevice & GObject.Object;
 
 	interface MixerUIDevice extends MixerUIDeviceMixin {}
 

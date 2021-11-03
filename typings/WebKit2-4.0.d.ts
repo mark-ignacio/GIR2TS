@@ -106,7 +106,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthenticationRequest} instead.
 	 */
-	type AuthenticationRequestMixin = IAuthenticationRequest & GObject.IObject;
+	type AuthenticationRequestMixin = IAuthenticationRequest & GObject.Object;
 
 	interface AuthenticationRequest extends AuthenticationRequestMixin {}
 
@@ -165,7 +165,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AutomationSession} instead.
 	 */
-	type AutomationSessionMixin = IAutomationSession & GObject.IObject;
+	type AutomationSessionMixin = IAutomationSession & GObject.Object;
 
 	interface AutomationSession extends AutomationSessionMixin {}
 
@@ -221,7 +221,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BackForwardList} instead.
 	 */
-	type BackForwardListMixin = IBackForwardList & GObject.IObject;
+	type BackForwardListMixin = IBackForwardList & GObject.Object;
 
 	interface BackForwardList extends BackForwardListMixin {}
 
@@ -253,7 +253,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BackForwardListItem} instead.
 	 */
-	type BackForwardListItemMixin = IBackForwardListItem & GObject.IInitiallyUnowned;
+	type BackForwardListItemMixin = IBackForwardListItem & GObject.InitiallyUnowned;
 
 	interface BackForwardListItem extends BackForwardListItemMixin {}
 
@@ -310,7 +310,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorChooserRequest} instead.
 	 */
-	type ColorChooserRequestMixin = IColorChooserRequest & GObject.IObject;
+	type ColorChooserRequestMixin = IColorChooserRequest & GObject.Object;
 
 	interface ColorChooserRequest extends ColorChooserRequestMixin {}
 
@@ -410,7 +410,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContextMenu} instead.
 	 */
-	type ContextMenuMixin = IContextMenu & GObject.IObject;
+	type ContextMenuMixin = IContextMenu & GObject.Object;
 
 	interface ContextMenu extends ContextMenuMixin {}
 
@@ -483,7 +483,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContextMenuItem} instead.
 	 */
-	type ContextMenuItemMixin = IContextMenuItem & GObject.IInitiallyUnowned;
+	type ContextMenuItemMixin = IContextMenuItem & GObject.InitiallyUnowned;
 
 	interface ContextMenuItem extends ContextMenuItemMixin {}
 
@@ -674,7 +674,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CookieManager} instead.
 	 */
-	type CookieManagerMixin = ICookieManager & GObject.IObject;
+	type CookieManagerMixin = ICookieManager & GObject.Object;
 
 	interface CookieManager extends CookieManagerMixin {}
 
@@ -692,7 +692,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceInfoPermissionRequest} instead.
 	 */
-	type DeviceInfoPermissionRequestMixin = IDeviceInfoPermissionRequest & GObject.IObject & IPermissionRequest;
+	type DeviceInfoPermissionRequestMixin = IDeviceInfoPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface DeviceInfoPermissionRequest extends DeviceInfoPermissionRequestMixin {}
 
@@ -858,7 +858,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Download} instead.
 	 */
-	type DownloadMixin = IDownload & GObject.IObject;
+	type DownloadMixin = IDownload & GObject.Object;
 
 	interface Download extends DownloadMixin {}
 
@@ -916,7 +916,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EditorState} instead.
 	 */
-	type EditorStateMixin = IEditorState & GObject.IObject;
+	type EditorStateMixin = IEditorState & GObject.Object;
 
 	interface EditorState extends EditorStateMixin {}
 
@@ -981,7 +981,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FaviconDatabase} instead.
 	 */
-	type FaviconDatabaseMixin = IFaviconDatabase & GObject.IObject;
+	type FaviconDatabaseMixin = IFaviconDatabase & GObject.Object;
 
 	interface FaviconDatabase extends FaviconDatabaseMixin {}
 
@@ -1095,7 +1095,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserRequest} instead.
 	 */
-	type FileChooserRequestMixin = IFileChooserRequest & GObject.IObject;
+	type FileChooserRequestMixin = IFileChooserRequest & GObject.Object;
 
 	interface FileChooserRequest extends FileChooserRequestMixin {}
 
@@ -1244,7 +1244,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FindController} instead.
 	 */
-	type FindControllerMixin = IFindController & GObject.IObject;
+	type FindControllerMixin = IFindController & GObject.Object;
 
 	interface FindController extends FindControllerMixin {}
 
@@ -1284,7 +1284,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FormSubmissionRequest} instead.
 	 */
-	type FormSubmissionRequestMixin = IFormSubmissionRequest & GObject.IObject;
+	type FormSubmissionRequestMixin = IFormSubmissionRequest & GObject.Object;
 
 	interface FormSubmissionRequest extends FormSubmissionRequestMixin {}
 
@@ -1341,7 +1341,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GeolocationManager} instead.
 	 */
-	type GeolocationManagerMixin = IGeolocationManager & GObject.IObject;
+	type GeolocationManagerMixin = IGeolocationManager & GObject.Object;
 
 	interface GeolocationManager extends GeolocationManagerMixin {}
 
@@ -1359,7 +1359,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GeolocationPermissionRequest} instead.
 	 */
-	type GeolocationPermissionRequestMixin = IGeolocationPermissionRequest & GObject.IObject & IPermissionRequest;
+	type GeolocationPermissionRequestMixin = IGeolocationPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface GeolocationPermissionRequest extends GeolocationPermissionRequestMixin {}
 
@@ -1492,7 +1492,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HitTestResult} instead.
 	 */
-	type HitTestResultMixin = IHitTestResult & GObject.IObject;
+	type HitTestResultMixin = IHitTestResult & GObject.Object;
 
 	interface HitTestResult extends HitTestResultMixin {}
 
@@ -1607,7 +1607,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InputMethodContext} instead.
 	 */
-	type InputMethodContextMixin = IInputMethodContext & GObject.IObject;
+	type InputMethodContextMixin = IInputMethodContext & GObject.Object;
 
 	interface InputMethodContext extends InputMethodContextMixin {}
 
@@ -1629,7 +1629,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InstallMissingMediaPluginsPermissionRequest} instead.
 	 */
-	type InstallMissingMediaPluginsPermissionRequestMixin = IInstallMissingMediaPluginsPermissionRequest & GObject.IObject & IPermissionRequest;
+	type InstallMissingMediaPluginsPermissionRequestMixin = IInstallMissingMediaPluginsPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface InstallMissingMediaPluginsPermissionRequest extends InstallMissingMediaPluginsPermissionRequestMixin {}
 
@@ -1647,7 +1647,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MediaKeySystemPermissionRequest} instead.
 	 */
-	type MediaKeySystemPermissionRequestMixin = IMediaKeySystemPermissionRequest & GObject.IObject & IPermissionRequest;
+	type MediaKeySystemPermissionRequestMixin = IMediaKeySystemPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface MediaKeySystemPermissionRequest extends MediaKeySystemPermissionRequestMixin {}
 
@@ -1739,7 +1739,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NavigationPolicyDecision} instead.
 	 */
-	type NavigationPolicyDecisionMixin = INavigationPolicyDecision & IPolicyDecision;
+	type NavigationPolicyDecisionMixin = INavigationPolicyDecision & PolicyDecision;
 
 	interface NavigationPolicyDecision extends NavigationPolicyDecisionMixin {}
 
@@ -1818,7 +1818,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Notification} instead.
 	 */
-	type NotificationMixin = INotification & GObject.IObject;
+	type NotificationMixin = INotification & GObject.Object;
 
 	interface Notification extends NotificationMixin {}
 
@@ -1836,7 +1836,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NotificationPermissionRequest} instead.
 	 */
-	type NotificationPermissionRequestMixin = INotificationPermissionRequest & GObject.IObject & IPermissionRequest;
+	type NotificationPermissionRequestMixin = INotificationPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface NotificationPermissionRequest extends NotificationPermissionRequestMixin {}
 
@@ -1895,7 +1895,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OptionMenu} instead.
 	 */
-	type OptionMenuMixin = IOptionMenu & GObject.IObject;
+	type OptionMenuMixin = IOptionMenu & GObject.Object;
 
 	interface OptionMenu extends OptionMenuMixin {}
 
@@ -1921,7 +1921,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plugin} instead.
 	 */
-	type PluginMixin = IPlugin & GObject.IObject;
+	type PluginMixin = IPlugin & GObject.Object;
 
 	interface Plugin extends PluginMixin {}
 
@@ -1939,7 +1939,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PointerLockPermissionRequest} instead.
 	 */
-	type PointerLockPermissionRequestMixin = IPointerLockPermissionRequest & GObject.IObject & IPermissionRequest;
+	type PointerLockPermissionRequestMixin = IPointerLockPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface PointerLockPermissionRequest extends PointerLockPermissionRequestMixin {}
 
@@ -1980,7 +1980,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PolicyDecision} instead.
 	 */
-	type PolicyDecisionMixin = IPolicyDecision & GObject.IObject;
+	type PolicyDecisionMixin = IPolicyDecision & GObject.Object;
 
 	interface PolicyDecision extends PolicyDecisionMixin {}
 
@@ -2036,7 +2036,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintCustomWidget} instead.
 	 */
-	type PrintCustomWidgetMixin = IPrintCustomWidget & GObject.IObject;
+	type PrintCustomWidgetMixin = IPrintCustomWidget & GObject.Object;
 
 	interface PrintCustomWidget extends PrintCustomWidgetMixin {}
 
@@ -2152,7 +2152,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintOperation} instead.
 	 */
-	type PrintOperationMixin = IPrintOperation & GObject.IObject;
+	type PrintOperationMixin = IPrintOperation & GObject.Object;
 
 	interface PrintOperation extends PrintOperationMixin {}
 
@@ -2209,7 +2209,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ResponsePolicyDecision} instead.
 	 */
-	type ResponsePolicyDecisionMixin = IResponsePolicyDecision & IPolicyDecision;
+	type ResponsePolicyDecisionMixin = IResponsePolicyDecision & PolicyDecision;
 
 	interface ResponsePolicyDecision extends ResponsePolicyDecisionMixin {}
 
@@ -2306,7 +2306,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SecurityManager} instead.
 	 */
-	type SecurityManagerMixin = ISecurityManager & GObject.IObject;
+	type SecurityManagerMixin = ISecurityManager & GObject.Object;
 
 	interface SecurityManager extends SecurityManagerMixin {}
 
@@ -3348,7 +3348,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
-	type SettingsMixin = ISettings & GObject.IObject;
+	type SettingsMixin = ISettings & GObject.Object;
 
 	interface Settings extends SettingsMixin {}
 
@@ -3421,7 +3421,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link URIRequest} instead.
 	 */
-	type URIRequestMixin = IURIRequest & GObject.IObject;
+	type URIRequestMixin = IURIRequest & GObject.Object;
 
 	interface URIRequest extends URIRequestMixin {}
 
@@ -3505,7 +3505,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link URIResponse} instead.
 	 */
-	type URIResponseMixin = IURIResponse & GObject.IObject;
+	type URIResponseMixin = IURIResponse & GObject.Object;
 
 	interface URIResponse extends URIResponseMixin {}
 
@@ -3554,7 +3554,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link URISchemeRequest} instead.
 	 */
-	type URISchemeRequestMixin = IURISchemeRequest & GObject.IObject;
+	type URISchemeRequestMixin = IURISchemeRequest & GObject.Object;
 
 	interface URISchemeRequest extends URISchemeRequestMixin {}
 
@@ -3676,7 +3676,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserContentFilterStore} instead.
 	 */
-	type UserContentFilterStoreMixin = IUserContentFilterStore & GObject.IObject;
+	type UserContentFilterStoreMixin = IUserContentFilterStore & GObject.Object;
 
 	interface UserContentFilterStore extends UserContentFilterStoreMixin {}
 
@@ -3833,7 +3833,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserContentManager} instead.
 	 */
-	type UserContentManagerMixin = IUserContentManager & GObject.IObject;
+	type UserContentManagerMixin = IUserContentManager & GObject.Object;
 
 	interface UserContentManager extends UserContentManagerMixin {}
 
@@ -3861,7 +3861,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserMediaPermissionRequest} instead.
 	 */
-	type UserMediaPermissionRequestMixin = IUserMediaPermissionRequest & GObject.IObject & IPermissionRequest;
+	type UserMediaPermissionRequestMixin = IUserMediaPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface UserMediaPermissionRequest extends UserMediaPermissionRequestMixin {}
 
@@ -3918,7 +3918,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserMessage} instead.
 	 */
-	type UserMessageMixin = IUserMessage & GObject.IInitiallyUnowned;
+	type UserMessageMixin = IUserMessage & GObject.InitiallyUnowned;
 
 	interface UserMessage extends UserMessageMixin {}
 
@@ -4421,7 +4421,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebContext} instead.
 	 */
-	type WebContextMixin = IWebContext & GObject.IObject;
+	type WebContextMixin = IWebContext & GObject.Object;
 
 	interface WebContext extends WebContextMixin {}
 
@@ -4591,7 +4591,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebInspector} instead.
 	 */
-	type WebInspectorMixin = IWebInspector & GObject.IObject;
+	type WebInspectorMixin = IWebInspector & GObject.Object;
 
 	interface WebInspector extends WebInspectorMixin {}
 
@@ -4706,7 +4706,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebResource} instead.
 	 */
-	type WebResourceMixin = IWebResource & GObject.IObject;
+	type WebResourceMixin = IWebResource & GObject.Object;
 
 	interface WebResource extends WebResourceMixin {}
 
@@ -5978,7 +5978,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebView} instead.
 	 */
-	type WebViewMixin = IWebView & IWebViewBase & Atk.IImplementorIface & Gtk.IBuildable;
+	type WebViewMixin = IWebView & WebViewBase & Atk.ImplementorIface & Gtk.Buildable;
 
 	interface WebView extends WebViewMixin {}
 
@@ -6048,7 +6048,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebViewBase} instead.
 	 */
-	type WebViewBaseMixin = IWebViewBase & Gtk.IContainer & Atk.IImplementorIface & Gtk.IBuildable;
+	type WebViewBaseMixin = IWebViewBase & Gtk.Container & Atk.ImplementorIface & Gtk.Buildable;
 
 	interface WebViewBase extends WebViewBaseMixin {}
 
@@ -6075,7 +6075,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsiteDataAccessPermissionRequest} instead.
 	 */
-	type WebsiteDataAccessPermissionRequestMixin = IWebsiteDataAccessPermissionRequest & GObject.IObject & IPermissionRequest;
+	type WebsiteDataAccessPermissionRequestMixin = IWebsiteDataAccessPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface WebsiteDataAccessPermissionRequest extends WebsiteDataAccessPermissionRequestMixin {}
 
@@ -6349,7 +6349,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsiteDataManager} instead.
 	 */
-	type WebsiteDataManagerMixin = IWebsiteDataManager & GObject.IObject;
+	type WebsiteDataManagerMixin = IWebsiteDataManager & GObject.Object;
 
 	interface WebsiteDataManager extends WebsiteDataManagerMixin {}
 
@@ -6389,7 +6389,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsitePolicies} instead.
 	 */
-	type WebsitePoliciesMixin = IWebsitePolicies & GObject.IObject;
+	type WebsitePoliciesMixin = IWebsitePolicies & GObject.Object;
 
 	interface WebsitePolicies extends WebsitePoliciesMixin {}
 
@@ -6489,7 +6489,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowProperties} instead.
 	 */
-	type WindowPropertiesMixin = IWindowProperties & GObject.IObject;
+	type WindowPropertiesMixin = IWindowProperties & GObject.Object;
 
 	interface WindowProperties extends WindowPropertiesMixin {}
 
