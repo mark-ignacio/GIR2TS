@@ -52,7 +52,7 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
             if (modifier?.param?.[param_name]?.skip)
                 continue;
 
-            if (js_reserved_words.indexOf(param_name) !== -1) { // if clashes with JS reserved word.
+            if (js_reserved_words.includes(param_name)) { // if clashes with JS reserved word.
                 param_name = '_' + param_name;
             }
             let { type, docString } = GetTypeInfo(param_node);

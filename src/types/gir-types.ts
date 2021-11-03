@@ -105,4 +105,5 @@ export interface NamespaceNode extends Node {
     "function": FunctionNode[];
     "union": ClassNode[];
     "alias": ParameterNode[];
+    "constant": NodeWithType[];
 }

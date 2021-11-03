@@ -418,39 +418,39 @@ declare namespace imports.gi.St {
 		/**
 		 * Request the data from the clipboard in #GBytes form. #callback is executed
 		 * when the data is retrieved.
-		 * @param _type The type of clipboard data you want
+		 * @param type The type of clipboard data you want
 		 * @param mimetype The mimetype to get content for
 		 * @param callback function to be called when the type is retrieved
 		 */
-		get_content(_type: ClipboardType, mimetype: string, callback: ClipboardContentCallbackFunc): void;
+		get_content(type: ClipboardType, mimetype: string, callback: ClipboardContentCallbackFunc): void;
 		/**
 		 * Gets a list of the mimetypes supported by the default {@link Clipboard}.
-		 * @param _type
+		 * @param type
 		 * @returns the supported mimetypes
 		 */
-		get_mimetypes(_type: ClipboardType): GLib.List;
+		get_mimetypes(type: ClipboardType): GLib.List;
 		/**
 		 * Request the data from the clipboard in text form. #callback is executed
 		 * when the data is retrieved.
-		 * @param _type The type of clipboard data you want
+		 * @param type The type of clipboard data you want
 		 * @param callback function to be called when the text is retrieved
 		 */
-		get_text(_type: ClipboardType, callback: ClipboardCallbackFunc): void;
+		get_text(type: ClipboardType, callback: ClipboardCallbackFunc): void;
 		/**
 		 * Sets the clipboard content to #bytes.
 		 * 
 		 * #mimetype is a semi-colon separated list of mime-type strings.
-		 * @param _type The type of clipboard that you want to set
+		 * @param type The type of clipboard that you want to set
 		 * @param mimetype content mimetype
 		 * @param bytes content data
 		 */
-		set_content(_type: ClipboardType, mimetype: string, bytes: GLib.Bytes): void;
+		set_content(type: ClipboardType, mimetype: string, bytes: GLib.Bytes): void;
 		/**
 		 * Sets text as the current contents of the clipboard.
-		 * @param _type The type of clipboard that you want to set
+		 * @param type The type of clipboard that you want to set
 		 * @param text text to copy to the clipboard
 		 */
-		set_text(_type: ClipboardType, text: string): void;
+		set_text(type: ClipboardType, text: string): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -705,9 +705,9 @@ declare namespace imports.gi.St {
 		/**
 		 * This function is for private use by libgnome-shell.
 		 * Do not ever use.
-		 * @param _func
+		 * @param func
 		 */
-		public static set_cursor_func(_func: EntryCursorFunc): void;
+		public static set_cursor_func(func: EntryCursorFunc): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1699,9 +1699,9 @@ declare namespace imports.gi.St {
 		/**
 		 * The #start and #end arguments will only be set if #type is not #ST_GRADIENT_NONE.
 		 * @param start Color at start of gradient
-		 * @param _end Color at end of gradient
+		 * @param end Color at end of gradient
 		 */
-		get_background_gradient(start: Clutter.Color, _end: Clutter.Color): void;
+		get_background_gradient(start: Clutter.Color, end: Clutter.Color): void;
 		get_background_image(): Gio.File;
 		/**
 		 * Gets the value for the -st-background-image-shadow style property

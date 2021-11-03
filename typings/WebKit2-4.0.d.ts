@@ -1535,12 +1535,12 @@ declare namespace imports.gi.WebKit2 {
 		get_preedit(): [ text: string | null, underlines: GLib.List | null, cursor_offset: number | null ];
 		/**
 		 * Notify #context that cursor area changed in input associated.
-		 * @param _x the x coordinate of cursor location
-		 * @param _y the y coordinate of cursor location
+		 * @param x the x coordinate of cursor location
+		 * @param y the y coordinate of cursor location
 		 * @param width the width of cursor area
 		 * @param height the height of cursor area
 		 */
-		notify_cursor_area(_x: number, _y: number, width: number, height: number): void;
+		notify_cursor_area(x: number, y: number, width: number, height: number): void;
 		/**
 		 * Notify #context that input associated has gained focus.
 		 */
@@ -4869,9 +4869,9 @@ declare namespace imports.gi.WebKit2 {
 		 * webkit_web_view_can_execute_editing_command() to check whether
 		 * it's possible to execute the command.
 		 * @param command the command to execute
-		 * @param _argument the command argument
+		 * @param argument the command argument
 		 */
-		execute_editing_command_with_argument(command: string, _argument: string): void;
+		execute_editing_command_with_argument(command: string, argument: string): void;
 		/**
 		 * Get the presentation type of #WebKitWebView when created for automation.
 		 * @returns a #WebKitAutomationBrowsingContextPresentation.
@@ -6972,7 +6972,7 @@ declare namespace imports.gi.WebKit2 {
 		public filter_key_event: {(context: InputMethodContext, key_event: Gdk.EventKey): boolean;};
 		public notify_focus_in: {(context: InputMethodContext): void;};
 		public notify_focus_out: {(context: InputMethodContext): void;};
-		public notify_cursor_area: {(context: InputMethodContext, _x: number, _y: number, width: number, height: number): void;};
+		public notify_cursor_area: {(context: InputMethodContext, x: number, y: number, width: number, height: number): void;};
 		public notify_surrounding: {(context: InputMethodContext, text: string, length: number, cursor_index: number, selection_index: number): void;};
 		public reset: {(context: InputMethodContext): void;};
 		public _webkit_reserved0: {(): void;};
@@ -7493,11 +7493,11 @@ declare namespace imports.gi.WebKit2 {
 		 * port.
 		 * @param protocol The protocol for the new origin
 		 * @param host The host for the new origin
-		 * @param _port The port number for the new origin, or 0 to indicate the
+		 * @param port The port number for the new origin, or 0 to indicate the
 		 *        default port for #protocol
 		 * @returns A #WebKitSecurityOrigin.
 		 */
-		public static new(protocol: string, host: string, _port: number): SecurityOrigin;
+		public static new(protocol: string, host: string, port: number): SecurityOrigin;
 		/**
 		 * Create a new security origin from the provided URI. Components of
 		 * #uri other than protocol, host, and port do not affect the created
@@ -7854,7 +7854,7 @@ declare namespace imports.gi.WebKit2 {
 		public run_as_modal: {(web_view: WebView): void;};
 		public close: {(web_view: WebView): void;};
 		public script_dialog: {(web_view: WebView, dialog: ScriptDialog): boolean;};
-		public decide_policy: {(web_view: WebView, decision: PolicyDecision, _type: PolicyDecisionType): boolean;};
+		public decide_policy: {(web_view: WebView, decision: PolicyDecision, type: PolicyDecisionType): boolean;};
 		public permission_request: {(web_view: WebView, permission_request: PermissionRequest): boolean;};
 		public mouse_target_changed: {(web_view: WebView, hit_test_result: HitTestResult, modifiers: number): void;};
 		public print: {(web_view: WebView, print_operation: PrintOperation): boolean;};
@@ -9222,5 +9222,165 @@ declare namespace imports.gi.WebKit2 {
 	function user_media_permission_is_for_video_device(request: UserMediaPermissionRequest): boolean;
 
 	function user_message_error_quark(): GLib.Quark;
+
+	/**
+	 * The copy clipboard command. Copies the current selection inside
+	 * a #WebKitWebView to the clipboard.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * possible to copy to the clipboard when there is an active selection
+	 * inside the #WebKitWebView.
+	 * @returns The copy clipboard command. Copies the current selection inside
+	 * a #WebKitWebView to the clipboard.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * possible to copy to the clipboard when there is an active selection
+	 * inside the #WebKitWebView.
+	 */
+	const EDITING_COMMAND_COPY: string;
+
+	/**
+	 * The create link command. Creates a link element that is inserted at
+	 * the current cursor position. If there's a selection, the selected text
+	 * will be used as the link text, otherwise the URL itself will be used.
+	 * It receives the link URL as argument. This command should be executed
+	 * with webkit_web_view_execute_editing_command_with_argument()
+	 * @returns The create link command. Creates a link element that is inserted at
+	 * the current cursor position. If there's a selection, the selected text
+	 * will be used as the link text, otherwise the URL itself will be used.
+	 * It receives the link URL as argument. This command should be executed
+	 * with webkit_web_view_execute_editing_command_with_argument()
+	 */
+	const EDITING_COMMAND_CREATE_LINK: string;
+
+	/**
+	 * The cut clipboard command. Copies the current selection inside
+	 * a #WebKitWebView to the clipboard and deletes the selected content.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * possible to cut to the clipboard when the #WebKitWebView content is
+	 * editable and there is an active selection.
+	 * @returns The cut clipboard command. Copies the current selection inside
+	 * a #WebKitWebView to the clipboard and deletes the selected content.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * possible to cut to the clipboard when the #WebKitWebView content is
+	 * editable and there is an active selection.
+	 */
+	const EDITING_COMMAND_CUT: string;
+
+	/**
+	 * The insert image command. Creates an image element that is inserted at
+	 * the current cursor position. It receives an URI as argument,
+	 * that is used as the image source. This command should be executed with
+	 * webkit_web_view_execute_editing_command_with_argument().
+	 * @returns The insert image command. Creates an image element that is inserted at
+	 * the current cursor position. It receives an URI as argument,
+	 * that is used as the image source. This command should be executed with
+	 * webkit_web_view_execute_editing_command_with_argument().
+	 */
+	const EDITING_COMMAND_INSERT_IMAGE: string;
+
+	/**
+	 * The paste clipboard command. Pastes the contents of the clipboard to
+	 * a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * to paste from the clipboard when the #WebKitWebView content is editable
+	 * and clipboard is not empty.
+	 * @returns The paste clipboard command. Pastes the contents of the clipboard to
+	 * a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * to paste from the clipboard when the #WebKitWebView content is editable
+	 * and clipboard is not empty.
+	 */
+	const EDITING_COMMAND_PASTE: string;
+
+	/**
+	 * The paste as plaintext clipboard command. Pastes the contents of the
+	 * clipboard to a #WebKitWebView, with formatting removed.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * to paste from the clipboard when the #WebKitWebView content is editable
+	 * and clipboard is not empty.
+	 * @returns The paste as plaintext clipboard command. Pastes the contents of the
+	 * clipboard to a #WebKitWebView, with formatting removed.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * to paste from the clipboard when the #WebKitWebView content is editable
+	 * and clipboard is not empty.
+	 */
+	const EDITING_COMMAND_PASTE_AS_PLAIN_TEXT: string;
+
+	/**
+	 * The redo command. Redoes a previously undone editing command in
+	 * a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * to redo a command when it has been previously undone.
+	 * @returns The redo command. Redoes a previously undone editing command in
+	 * a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * to redo a command when it has been previously undone.
+	 */
+	const EDITING_COMMAND_REDO: string;
+
+	/**
+	 * The select all command. Selects all the content of the current text field in
+	 * a #WebKitWebView.
+	 * It is always possible to select all text, no matter whether the
+	 * #WebKitWebView content is editable or not. You can still check it
+	 * with webkit_web_view_can_execute_editing_command().
+	 * @returns The select all command. Selects all the content of the current text field in
+	 * a #WebKitWebView.
+	 * It is always possible to select all text, no matter whether the
+	 * #WebKitWebView content is editable or not. You can still check it
+	 * with webkit_web_view_can_execute_editing_command().
+	 */
+	const EDITING_COMMAND_SELECT_ALL: string;
+
+	/**
+	 * The undo command. Undoes the last editing command in a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * to undo a command after a previously executed editing operation.
+	 * @returns The undo command. Undoes the last editing command in a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * to undo a command after a previously executed editing operation.
+	 */
+	const EDITING_COMMAND_UNDO: string;
+
+	/**
+	 * Like webkit_get_major_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like webkit_get_major_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MAJOR_VERSION: number;
+
+	/**
+	 * Like webkit_get_micro_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like webkit_get_micro_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MICRO_VERSION: number;
+
+	/**
+	 * Like webkit_get_minor_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like webkit_get_minor_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MINOR_VERSION: number;
 
 }

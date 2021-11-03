@@ -11,6 +11,8 @@ import { renderClassAsInterface } from "./renderers/classRenderer";
 import { renderFreeFunction } from "./renderers/freeFuncRenderer";
 import { renderCallback } from "./renderers/freeCallbackRenderer";
 import { renderEnumeration } from "./renderers/enumRenderer";
+import { RenderConstant } from "./renderers/constantRenderer";
+import { js_reserved_words } from "./consts";
 
 
 function renderNodeAsBlankInterface(node: Node, ns_name: string) {
@@ -91,6 +93,19 @@ function renderNamespace(ns_node: NamespaceNode, ns_name: string, exclude?: Excl
                 ns_name,
                 exc,
                 modifiers?.amend?.function?.[func_node.$.name]
+            ) + '\n').replace(/\n/gm, "\n\t");
+        }
+    if (ns_node.constant)
+        for (let constant of ns_node.constant) {
+            let exclude = false;
+            // reserved or starts with number
+            if (js_reserved_words.includes(constant.$?.name) || constant.$?.name.match(/^\d/))
+                exclude = true;
+
+            body += '\n\t' + (RenderConstant(
+                constant,
+                ns_name,
+                exclude,
             ) + '\n').replace(/\n/gm, "\n\t");
         }
 

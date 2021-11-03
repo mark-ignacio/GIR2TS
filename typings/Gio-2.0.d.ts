@@ -188,12 +188,12 @@ declare namespace imports.gi.Gio {
 		 * @param long_name the long name of an option used to specify it in a commandline
 		 * @param short_name the short name of an option
 		 * @param flags flags from #GOptionFlags
-		 * @param _arg the type of the option, as a #GOptionArg
+		 * @param arg the type of the option, as a #GOptionArg
 		 * @param description the description for the option in `--help` output
 		 * @param arg_description the placeholder to use for the extra argument
 		 *    parsed by the option in `--help` output
 		 */
-		add_main_option(long_name: string, short_name: string, flags: GLib.OptionFlags, _arg: GLib.OptionArg, description: string, arg_description: string | null): void;
+		add_main_option(long_name: string, short_name: string, flags: GLib.OptionFlags, arg: GLib.OptionArg, description: string, arg_description: string | null): void;
 		/**
 		 * Adds main option entries to be handled by #application.
 		 * 
@@ -597,10 +597,10 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If #notification is no longer relevant, it can be withdrawn with
 		 * g_application_withdraw_notification().
-		 * @param _id id of the notification, or %NULL
+		 * @param id id of the notification, or %NULL
 		 * @param notification the #GNotification to send
 		 */
-		send_notification(_id: string | null, notification: Notification): void;
+		send_notification(id: string | null, notification: Notification): void;
 		/**
 		 * This used to be how actions were associated with a #GApplication.
 		 * Now there is #GActionMap for that.
@@ -745,9 +745,9 @@ declare namespace imports.gi.Gio {
 		 * Note that notifications are dismissed when the user clicks on one
 		 * of the buttons in a notification or triggers its default action, so
 		 * there is no need to explicitly withdraw the notification in that case.
-		 * @param _id id of a previously sent notification
+		 * @param id id of a previously sent notification
 		 */
-		withdraw_notification(_id: string): void;
+		withdraw_notification(id: string): void;
 		/**
 		 * The ::activate signal is emitted on the primary instance when an
 		 * activation occurs. See g_application_activate().
@@ -1050,10 +1050,10 @@ declare namespace imports.gi.Gio {
 		 * This differs from g_file_new_for_commandline_arg() in that it
 		 * resolves relative pathnames using the current working directory of
 		 * the invoking process rather than the local process.
-		 * @param _arg an argument from #cmdline
+		 * @param arg an argument from #cmdline
 		 * @returns a new #GFile
 		 */
-		create_file_for_arg(_arg: string): File;
+		create_file_for_arg(arg: string): File;
 		/**
 		 * Gets the list of arguments that was passed on the command line.
 		 * 
@@ -3904,9 +3904,9 @@ declare namespace imports.gi.Gio {
 		set_member(value: string | null): void;
 		/**
 		 * Sets #message to be of #type.
-		 * @param _type A 8-bit unsigned integer (typically a value from the #GDBusMessageType enumeration).
+		 * @param type A 8-bit unsigned integer (typically a value from the #GDBusMessageType enumeration).
 		 */
-		set_message_type(_type: DBusMessageType): void;
+		set_message_type(type: DBusMessageType): void;
 		/**
 		 * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_NUM_UNIX_FDS header field.
 		 * @param value The value to set.
@@ -5813,9 +5813,9 @@ declare namespace imports.gi.Gio {
 		 * Note that using G_DATA_STREAM_NEWLINE_TYPE_ANY is slightly unsafe. If a read
 		 * chunk ends in "CR" we must read an additional byte to know if this is "CR" or
 		 * "CR LF", and this might block if there is no more data available.
-		 * @param _type the type of new line return as #GDataStreamNewlineType.
+		 * @param type the type of new line return as #GDataStreamNewlineType.
 		 */
-		set_newline_type(_type: DataStreamNewlineType): void;
+		set_newline_type(type: DataStreamNewlineType): void;
 		connect(signal: "notify::byte_order", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::newline_type", callback: (owner: this, ...args: any) => number): number;
 
@@ -5886,11 +5886,11 @@ declare namespace imports.gi.Gio {
 		put_int64(data: number, cancellable: Cancellable | null): boolean;
 		/**
 		 * Puts a string into the output stream.
-		 * @param _str a string.
+		 * @param str a string.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns %TRUE if #string was successfully added to the #stream.
 		 */
-		put_string(_str: string, cancellable: Cancellable | null): boolean;
+		put_string(str: string, cancellable: Cancellable | null): boolean;
 		/**
 		 * Puts an unsigned 16-bit integer into the output stream.
 		 * @param data a #guint16.
@@ -6972,10 +6972,10 @@ declare namespace imports.gi.Gio {
 		 * Sets the #attribute to contain the given value, if possible. To unset the
 		 * attribute, use %G_FILE_ATTRIBUTE_TYPE_INVALID for #type.
 		 * @param attribute a file attribute key.
-		 * @param _type a #GFileAttributeType
+		 * @param type a #GFileAttributeType
 		 * @param value_p pointer to the value
 		 */
-		set_attribute(attribute: string, _type: FileAttributeType, value_p: any): void;
+		set_attribute(attribute: string, type: FileAttributeType, value_p: any): void;
 		/**
 		 * Sets the #attribute to contain the given #attr_value,
 		 * if possible.
@@ -7087,9 +7087,9 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets the file type in a #GFileInfo to #type.
 		 * See %G_FILE_ATTRIBUTE_STANDARD_TYPE.
-		 * @param _type a #GFileType.
+		 * @param type a #GFileType.
 		 */
-		set_file_type(_type: FileType): void;
+		set_file_type(type: FileType): void;
 		/**
 		 * Sets the icon for a given #GFileInfo.
 		 * See %G_FILE_ATTRIBUTE_STANDARD_ICON.
@@ -8235,21 +8235,21 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Creates a new #GInetSocketAddress for #address and #port.
 		 * @param address a #GInetAddress
-		 * @param _port a port number
+		 * @param port a port number
 		 * @returns a new #GInetSocketAddress
 		 */
-		public static new(address: InetAddress, _port: number): SocketAddress;
+		public static new(address: InetAddress, port: number): SocketAddress;
 		/**
 		 * Creates a new #GInetSocketAddress for #address and #port.
 		 * 
 		 * If #address is an IPv6 address, it can also contain a scope ID
 		 * (separated from the address by a `%`).
 		 * @param address the string form of an IP address
-		 * @param _port a port number
+		 * @param port a port number
 		 * @returns a new #GInetSocketAddress,
 		 * or %NULL if #address cannot be parsed.
 		 */
-		public static new_from_string(address: string, _port: number): SocketAddress | null;
+		public static new_from_string(address: string, port: number): SocketAddress | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10231,10 +10231,10 @@ declare namespace imports.gi.Gio {
 		 * g_network_address_new_loopback() to create a #GNetworkAddress that
 		 * is guaranteed to resolve to both addresses.
 		 * @param hostname the hostname
-		 * @param _port the port
+		 * @param port the port
 		 * @returns the new #GNetworkAddress
 		 */
-		public static new(hostname: string, _port: number): NetworkAddress;
+		public static new(hostname: string, port: number): NetworkAddress;
 		/**
 		 * Creates a new #GSocketConnectable for connecting to the local host
 		 * over a loopback connection to the given #port. This is intended for
@@ -10248,10 +10248,10 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * g_network_address_get_hostname() will always return `localhost` for
 		 * a #GNetworkAddress created with this constructor.
-		 * @param _port the port
+		 * @param port the port
 		 * @returns the new #GNetworkAddress
 		 */
-		public static new_loopback(_port: number): NetworkAddress;
+		public static new_loopback(port: number): NetworkAddress;
 		/**
 		 * Creates a new #GSocketConnectable for connecting to the given
 		 * #hostname and #port. May fail and return %NULL in case
@@ -11483,7 +11483,7 @@ declare namespace imports.gi.Gio {
 		 * #GProxyAddress:destination-protocol fields; use g_object_new()
 		 * directly if you want to set those.)
 		 * @param inetaddr The proxy server #GInetAddress.
-		 * @param _port The proxy server port.
+		 * @param port The proxy server port.
 		 * @param protocol The proxy protocol to support, in lower case (e.g. socks, http).
 		 * @param dest_hostname The destination hostname the proxy should tunnel to.
 		 * @param dest_port The destination port to tunnel to.
@@ -11493,7 +11493,7 @@ declare namespace imports.gi.Gio {
 		 *     (or %NULL).
 		 * @returns a new #GProxyAddress
 		 */
-		public static new(inetaddr: InetAddress, _port: number, protocol: string, dest_hostname: string, dest_port: number, username: string | null, password: string | null): SocketAddress;
+		public static new(inetaddr: InetAddress, port: number, protocol: string, dest_hostname: string, dest_port: number, username: string | null, password: string | null): SocketAddress;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13447,11 +13447,11 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Calling this function takes a reference to #simple for as long as
 		 * is needed to run the job and report its completion.
-		 * @param _func a #GSimpleAsyncThreadFunc.
+		 * @param func a #GSimpleAsyncThreadFunc.
 		 * @param io_priority the io priority of the request.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 */
-		run_in_thread(_func: SimpleAsyncThreadFunc, io_priority: number, cancellable: Cancellable | null): void;
+		run_in_thread(func: SimpleAsyncThreadFunc, io_priority: number, cancellable: Cancellable | null): void;
 		/**
 		 * Sets a #GCancellable to check before dispatching results.
 		 * 
@@ -15053,12 +15053,12 @@ declare namespace imports.gi.Gio {
 		 * system, so you can use protocols not listed in #GSocketProtocol if you
 		 * know the protocol number used for it.
 		 * @param family the socket family to use, e.g. %G_SOCKET_FAMILY_IPV4.
-		 * @param _type the socket type to use.
+		 * @param type the socket type to use.
 		 * @param protocol the id of the protocol to use, or 0 for default.
 		 * @returns a #GSocket or %NULL on error.
 		 *     Free the returned object with g_object_unref().
 		 */
-		public static new(family: SocketFamily, _type: SocketType, protocol: SocketProtocol): Socket;
+		public static new(family: SocketFamily, type: SocketType, protocol: SocketProtocol): Socket;
 		/**
 		 * Creates a new #GSocket from a native file descriptor
 		 * or winsock SOCKET handle.
@@ -15564,9 +15564,9 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * It doesn't make sense to specify a type of %G_SOCKET_TYPE_DATAGRAM,
 		 * as GSocketClient is used for connection oriented services.
-		 * @param _type a #GSocketType
+		 * @param type a #GSocketType
 		 */
-		set_socket_type(_type: SocketType): void;
+		set_socket_type(type: SocketType): void;
 		/**
 		 * Sets the I/O timeout for sockets created by #client. #timeout is a
 		 * time in seconds, or 0 for no timeout (the default).
@@ -15801,11 +15801,11 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If no type is registered, the #GSocketConnection base type is returned.
 		 * @param family a #GSocketFamily
-		 * @param _type a #GSocketType
+		 * @param type a #GSocketType
 		 * @param protocol_id a protocol id
 		 * @returns a #GType
 		 */
-		public static factory_lookup_type(family: SocketFamily, _type: SocketType, protocol_id: number): GObject.Type;
+		public static factory_lookup_type(family: SocketFamily, type: SocketType, protocol_id: number): GObject.Type;
 		/**
 		 * Looks up the #GType to be used when creating socket connections on
 		 * sockets with the specified #family, #type and #protocol.
@@ -15813,10 +15813,10 @@ declare namespace imports.gi.Gio {
 		 * If no type is registered, the #GSocketConnection base type is returned.
 		 * @param g_type a #GType, inheriting from %G_TYPE_SOCKET_CONNECTION
 		 * @param family a #GSocketFamily
-		 * @param _type a #GSocketType
+		 * @param type a #GSocketType
 		 * @param protocol a protocol id
 		 */
-		public static factory_register_type(g_type: GObject.Type, family: SocketFamily, _type: SocketType, protocol: number): void;
+		public static factory_register_type(g_type: GObject.Type, family: SocketFamily, type: SocketType, protocol: number): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15893,12 +15893,12 @@ declare namespace imports.gi.Gio {
 		 * If there is no implementation for this kind of control message, %NULL
 		 * will be returned.
 		 * @param level a socket level
-		 * @param _type a socket control message type for the given #level
+		 * @param type a socket control message type for the given #level
 		 * @param size the size of the data in bytes
 		 * @param data pointer to the message data
 		 * @returns the deserialized message or %NULL
 		 */
-		public static deserialize(level: number, _type: number, size: number, data: number[]): SocketControlMessage;
+		public static deserialize(level: number, type: number, size: number, data: number[]): SocketControlMessage;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15998,12 +15998,12 @@ declare namespace imports.gi.Gio {
 		 * be done automatically when you drop your final reference to #listener, as
 		 * references may be held internally.
 		 * @param address a #GSocketAddress
-		 * @param _type a #GSocketType
+		 * @param type a #GSocketType
 		 * @param protocol a #GSocketProtocol
 		 * @param source_object Optional #GObject identifying this source
 		 * @returns %TRUE on success, %FALSE on error.
 		 */
-		add_address(address: SocketAddress, _type: SocketType, protocol: SocketProtocol, source_object: GObject.Object | null): boolean;
+		add_address(address: SocketAddress, type: SocketType, protocol: SocketProtocol, source_object: GObject.Object | null): boolean;
 		/**
 		 * Listens for TCP connections on any available port number for both
 		 * IPv6 and IPv4 (if each is available).
@@ -16032,11 +16032,11 @@ declare namespace imports.gi.Gio {
 		 * Call g_socket_listener_close() to stop listening on #port; this will not
 		 * be done automatically when you drop your final reference to #listener, as
 		 * references may be held internally.
-		 * @param _port an IP port number (non-zero)
+		 * @param port an IP port number (non-zero)
 		 * @param source_object Optional #GObject identifying this source
 		 * @returns %TRUE on success, %FALSE on error.
 		 */
-		add_inet_port(_port: number, source_object: GObject.Object | null): boolean;
+		add_inet_port(port: number, source_object: GObject.Object | null): boolean;
 		/**
 		 * Adds #socket to the set of sockets that we try to accept
 		 * new clients from. The socket must be bound to a local
@@ -18671,10 +18671,10 @@ declare namespace imports.gi.Gio {
 		 * will be available though.  That could happen if TLS connection does not
 		 * support #type or the binding data is not available yet due to additional
 		 * negotiation or input required.
-		 * @param _type #GTlsChannelBindingType type of data to fetch
+		 * @param type #GTlsChannelBindingType type of data to fetch
 		 * @returns %TRUE on success, %FALSE otherwise
 		 */
-		get_channel_binding_data(_type: TlsChannelBindingType): boolean;
+		get_channel_binding_data(type: TlsChannelBindingType): boolean;
 		/**
 		 * Returns the name of the current TLS ciphersuite, or %NULL if the
 		 * connection has not handshaked or has been closed. Beware that the TLS
@@ -20278,10 +20278,10 @@ declare namespace imports.gi.Gio {
 		 * its listening socket.
 		 * @param path the name
 		 * @param path_len the length of #path, or -1
-		 * @param _type a #GUnixSocketAddressType
+		 * @param type a #GUnixSocketAddressType
 		 * @returns a new #GUnixSocketAddress
 		 */
-		public static new_with_type(path: string[], path_len: number, _type: UnixSocketAddressType): SocketAddress;
+		public static new_with_type(path: string[], path_len: number, type: UnixSocketAddressType): SocketAddress;
 		/**
 		 * Checks if abstract UNIX domain socket names are supported.
 		 * @returns %TRUE if supported, %FALSE otherwise
@@ -21744,7 +21744,7 @@ declare namespace imports.gi.Gio {
 		public shutdown_finish: {(conn: DtlsConnection, result: AsyncResult): boolean;};
 		public set_advertised_protocols: {(conn: DtlsConnection, protocols: string[] | null): void;};
 		public get_negotiated_protocol: {(conn: DtlsConnection): string | null;};
-		public get_binding_data: {(conn: DtlsConnection, _type: TlsChannelBindingType, data: number[]): boolean;};
+		public get_binding_data: {(conn: DtlsConnection, type: TlsChannelBindingType, data: number[]): boolean;};
 	}
 
 	/**
@@ -21818,10 +21818,10 @@ declare namespace imports.gi.Gio {
 		 * Adds a new attribute with #name to the #list, setting
 		 * its #type and #flags.
 		 * @param name the name of the attribute to add.
-		 * @param _type the #GFileAttributeType for the attribute.
+		 * @param type the #GFileAttributeType for the attribute.
 		 * @param flags #GFileAttributeInfoFlags for the attribute.
 		 */
-		public add(name: string, _type: FileAttributeType, flags: FileAttributeInfoFlags): void;
+		public add(name: string, type: FileAttributeType, flags: FileAttributeInfoFlags): void;
 		/**
 		 * Makes a duplicate of a file attribute info list.
 		 * @returns a copy of the given #list.
@@ -21883,11 +21883,11 @@ declare namespace imports.gi.Gio {
 		 * using "*" and namespace is anything.)
 		 * 
 		 * TODO: this is awkwardly worded.
-		 * @param _ns a string containing a file attribute namespace.
+		 * @param ns a string containing a file attribute namespace.
 		 * @returns %TRUE if the matcher matches all of the entries
 		 * in the given #ns, %FALSE otherwise.
 		 */
-		public enumerate_namespace(_ns: string): boolean;
+		public enumerate_namespace(ns: string): boolean;
 		/**
 		 * Gets the next matched attribute from a #GFileAttributeMatcher.
 		 * @returns a string containing the next attribute or, %NULL if
@@ -21985,7 +21985,7 @@ declare namespace imports.gi.Gio {
 		public constructor();
 		public tell: {(stream: FileIOStream): number;};
 		public can_seek: {(stream: FileIOStream): boolean;};
-		public seek: {(stream: FileIOStream, offset: number, _type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
+		public seek: {(stream: FileIOStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
 		public can_truncate: {(stream: FileIOStream): boolean;};
 		public truncate_fn: {(stream: FileIOStream, size: number, cancellable: Cancellable | null): boolean;};
 		public query_info: {(stream: FileIOStream, attributes: string, cancellable: Cancellable | null): FileInfo;};
@@ -22059,7 +22059,7 @@ declare namespace imports.gi.Gio {
 		public query_writable_namespaces: {(file: File, cancellable: Cancellable | null): FileAttributeInfoList;};
 		public _query_writable_namespaces_async: {(): void;};
 		public _query_writable_namespaces_finish: {(): void;};
-		public set_attribute: {(file: File, attribute: string, _type: FileAttributeType, value_p: any | null, flags: FileQueryInfoFlags, cancellable: Cancellable | null): boolean;};
+		public set_attribute: {(file: File, attribute: string, type: FileAttributeType, value_p: any | null, flags: FileQueryInfoFlags, cancellable: Cancellable | null): boolean;};
 		public set_attributes_from_info: {(file: File, info: FileInfo, flags: FileQueryInfoFlags, cancellable: Cancellable | null): boolean;};
 		public set_attributes_async: {(file: File, info: FileInfo, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public set_attributes_finish: {(file: File, result: AsyncResult): boolean;};
@@ -22137,7 +22137,7 @@ declare namespace imports.gi.Gio {
 		public constructor();
 		public tell: {(stream: FileInputStream): number;};
 		public can_seek: {(stream: FileInputStream): boolean;};
-		public seek: {(stream: FileInputStream, offset: number, _type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
+		public seek: {(stream: FileInputStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
 		public query_info: {(stream: FileInputStream, attributes: string, cancellable: Cancellable | null): FileInfo;};
 		public query_info_async: {(stream: FileInputStream, attributes: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public query_info_finish: {(stream: FileInputStream, result: AsyncResult): FileInfo;};
@@ -22175,7 +22175,7 @@ declare namespace imports.gi.Gio {
 		public constructor();
 		public tell: {(stream: FileOutputStream): number;};
 		public can_seek: {(stream: FileOutputStream): boolean;};
-		public seek: {(stream: FileOutputStream, offset: number, _type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
+		public seek: {(stream: FileOutputStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
 		public can_truncate: {(stream: FileOutputStream): boolean;};
 		public truncate_fn: {(stream: FileOutputStream, size: number, cancellable: Cancellable | null): boolean;};
 		public query_info: {(stream: FileOutputStream, attributes: string, cancellable: Cancellable | null): FileInfo;};
@@ -22283,9 +22283,9 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets the required type for #extension_point to #type.
 		 * All implementations must henceforth have this type.
-		 * @param _type the #GType to require
+		 * @param type the #GType to require
 		 */
-		public set_required_type(_type: GObject.Type): void;
+		public set_required_type(type: GObject.Type): void;
 	}
 
 	interface IOModuleClass {}
@@ -22326,11 +22326,11 @@ declare namespace imports.gi.Gio {
 		 * Used from an I/O job to send a callback to be run in the thread
 		 * that the job was started from, waiting for the result (and thus
 		 * blocking the I/O job).
-		 * @param _func a #GSourceFunc callback that will be called in the original thread
+		 * @param func a #GSourceFunc callback that will be called in the original thread
 		 * @param notify a #GDestroyNotify for #user_data, or %NULL
 		 * @returns The return value of #func
 		 */
-		public send_to_mainloop(_func: GLib.SourceFunc, notify: GLib.DestroyNotify | null): boolean;
+		public send_to_mainloop(func: GLib.SourceFunc, notify: GLib.DestroyNotify | null): boolean;
 		/**
 		 * Used from an I/O job to send a callback to be run asynchronously in
 		 * the thread that the job was started from. The callback will be run
@@ -22341,10 +22341,10 @@ declare namespace imports.gi.Gio {
 		 * on to this function you have to ensure that it is not freed before
 		 * #func is called, either by passing %NULL as #notify to
 		 * g_io_scheduler_push_job() or by using refcounting for #user_data.
-		 * @param _func a #GSourceFunc callback that will be called in the original thread
+		 * @param func a #GSourceFunc callback that will be called in the original thread
 		 * @param notify a #GDestroyNotify for #user_data, or %NULL
 		 */
-		public send_to_mainloop_async(_func: GLib.SourceFunc, notify: GLib.DestroyNotify | null): void;
+		public send_to_mainloop_async(func: GLib.SourceFunc, notify: GLib.DestroyNotify | null): void;
 	}
 
 	interface IOStreamAdapter {}
@@ -23307,7 +23307,7 @@ declare namespace imports.gi.Gio {
 		public readonly g_iface: GObject.TypeInterface;
 		public tell: {(seekable: Seekable): number;};
 		public can_seek: {(seekable: Seekable): boolean;};
-		public seek: {(seekable: Seekable, offset: number, _type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
+		public seek: {(seekable: Seekable, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
 		public can_truncate: {(seekable: Seekable): boolean;};
 		public truncate_fn: {(seekable: Seekable, offset: number, cancellable: Cancellable | null): boolean;};
 	}
@@ -23844,7 +23844,7 @@ declare namespace imports.gi.Gio {
 		public get_level: {(message: SocketControlMessage): number;};
 		public get_type: {(message: SocketControlMessage): number;};
 		public serialize: {(message: SocketControlMessage, data: any): void;};
-		public deserialize: {(level: number, _type: number, size: number, data: any): SocketControlMessage;};
+		public deserialize: {(level: number, type: number, size: number, data: any): SocketControlMessage;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -23927,12 +23927,12 @@ declare namespace imports.gi.Gio {
 		 * You should not need to use this; normally #GSrvTargets are
 		 * created by #GResolver.
 		 * @param hostname the host that the service is running on
-		 * @param _port the port that the service is running on
+		 * @param port the port that the service is running on
 		 * @param priority the target's priority
 		 * @param weight the target's weight
 		 * @returns a new #GSrvTarget.
 		 */
-		public static new(hostname: string, _port: number, priority: number, weight: number): SrvTarget;
+		public static new(hostname: string, port: number, priority: number, weight: number): SrvTarget;
 		/**
 		 * Copies #target
 		 * @returns a copy of #target
@@ -24114,7 +24114,7 @@ declare namespace imports.gi.Gio {
 		public handshake: {(conn: TlsConnection, cancellable: Cancellable | null): boolean;};
 		public handshake_async: {(conn: TlsConnection, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public handshake_finish: {(conn: TlsConnection, result: AsyncResult): boolean;};
-		public get_binding_data: {(conn: TlsConnection, _type: TlsChannelBindingType, data: number[]): boolean;};
+		public get_binding_data: {(conn: TlsConnection, type: TlsChannelBindingType, data: number[]): boolean;};
 		public get_negotiated_protocol: {(conn: TlsConnection): string | null;};
 	}
 
@@ -27058,10 +27058,10 @@ declare namespace imports.gi.Gio {
 		 * will be available though.  That could happen if TLS connection does not
 		 * support #type or the binding data is not available yet due to additional
 		 * negotiation or input required.
-		 * @param _type #GTlsChannelBindingType type of data to fetch
+		 * @param type #GTlsChannelBindingType type of data to fetch
 		 * @returns %TRUE on success, %FALSE otherwise
 		 */
-		get_channel_binding_data(_type: TlsChannelBindingType): boolean;
+		get_channel_binding_data(type: TlsChannelBindingType): boolean;
 		/**
 		 * Returns the name of the current DTLS ciphersuite, or %NULL if the
 		 * connection has not handshaked or has been closed. Beware that the TLS
@@ -29129,7 +29129,7 @@ declare namespace imports.gi.Gio {
 		 * triggering the cancellable object from another thread. If the operation
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 		 * @param attribute a string containing the attribute's name
-		 * @param _type The type of the attribute
+		 * @param type The type of the attribute
 		 * @param value_p a pointer to the value (or the pointer
 		 *     itself if the type is a pointer type)
 		 * @param flags a set of #GFileQueryInfoFlags
@@ -29137,7 +29137,7 @@ declare namespace imports.gi.Gio {
 		 *     %NULL to ignore
 		 * @returns %TRUE if the attribute was set, %FALSE otherwise.
 		 */
-		set_attribute(attribute: string, _type: FileAttributeType, value_p: any | null, flags: FileQueryInfoFlags, cancellable: Cancellable | null): boolean;
+		set_attribute(attribute: string, type: FileAttributeType, value_p: any | null, flags: FileQueryInfoFlags, cancellable: Cancellable | null): boolean;
 		/**
 		 * Sets #attribute of type %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING to #value.
 		 * If #attribute is of a different type, this operation will fail,
@@ -29598,11 +29598,11 @@ declare namespace imports.gi.Gio {
 		 * g_application_command_line_create_file_for_arg() may be more useful
 		 * for you there.  It is also always possible to use this function with
 		 * #GOptionContext arguments of type %G_OPTION_ARG_FILENAME.
-		 * @param _arg a command line string
+		 * @param arg a command line string
 		 * @returns a new #GFile.
 		 *    Free the returned object with g_object_unref().
 		 */
-		public static new_for_commandline_arg(_arg: string): File;
+		public static new_for_commandline_arg(arg: string): File;
 		/**
 		 * Creates a #GFile with the given argument from the command line.
 		 * 
@@ -29615,11 +29615,11 @@ declare namespace imports.gi.Gio {
 		 * other than the invocation of the current process.
 		 * 
 		 * See also g_application_command_line_create_file_for_arg().
-		 * @param _arg a command line string
+		 * @param arg a command line string
 		 * @param cwd the current working directory of the commandline
 		 * @returns a new #GFile
 		 */
-		public static new_for_commandline_arg_and_cwd(_arg: string, cwd: string): File;
+		public static new_for_commandline_arg_and_cwd(arg: string, cwd: string): File;
 		/**
 		 * Constructs a #GFile for a given path. This operation never
 		 * fails, but the returned object might not support any I/O
@@ -29803,11 +29803,11 @@ declare namespace imports.gi.Gio {
 		 * If your application or library provides one or more #GIcon
 		 * implementations you need to ensure that each #GType is registered
 		 * with the type system prior to calling g_icon_new_for_string().
-		 * @param _str A string obtained via g_icon_to_string().
+		 * @param str A string obtained via g_icon_to_string().
 		 * @returns An object implementing the #GIcon
 		 *          interface or %NULL if #error is set.
 		 */
-		public static new_for_string(_str: string): Icon;
+		public static new_for_string(str: string): Icon;
 	}
 
 
@@ -31223,13 +31223,13 @@ declare namespace imports.gi.Gio {
 		 * triggering the cancellable object from another thread. If the operation
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 		 * @param offset a #goffset.
-		 * @param _type a #GSeekType.
+		 * @param type a #GSeekType.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns %TRUE if successful. If an error
 		 *     has occurred, this function will return %FALSE and set #error
 		 *     appropriately if present.
 		 */
-		seek(offset: number, _type: GLib.SeekType, cancellable: Cancellable | null): boolean;
+		seek(offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;
 		/**
 		 * Tells the current position within the stream.
 		 * @returns the (positive or zero) offset from the beginning of the
@@ -35847,11 +35847,11 @@ declare namespace imports.gi.Gio {
 	/**
 	 * Checks if a content type can be executable. Note that for instance
 	 * things like text files can be executables (i.e. scripts and batch files).
-	 * @param _type a content type string
+	 * @param type a content type string
 	 * @returns %TRUE if the file type corresponds to a type that
 	 *     can be executable, %FALSE otherwise.
 	 */
-	function content_type_can_be_executable(_type: string): boolean;
+	function content_type_can_be_executable(type: string): boolean;
 
 	/**
 	 * Compares two content types for equality.
@@ -35872,11 +35872,11 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Gets the human readable description of the content type.
-	 * @param _type a content type string
+	 * @param type a content type string
 	 * @returns a short description of the content type #type. Free the
 	 *     returned string with g_free()
 	 */
-	function content_type_get_description(_type: string): string;
+	function content_type_get_description(type: string): string;
 
 	/**
 	 * Gets the generic icon name for a content type.
@@ -35884,19 +35884,19 @@ declare namespace imports.gi.Gio {
 	 * See the
 	 * [shared-mime-info](http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec)
 	 * specification for more on the generic icon name.
-	 * @param _type a content type string
+	 * @param type a content type string
 	 * @returns the registered generic icon name for the given #type,
 	 *     or %NULL if unknown. Free with g_free()
 	 */
-	function content_type_get_generic_icon_name(_type: string): string | null;
+	function content_type_get_generic_icon_name(type: string): string | null;
 
 	/**
 	 * Gets the icon for a content type.
-	 * @param _type a content type string
+	 * @param type a content type string
 	 * @returns #GIcon corresponding to the content type. Free the returned
 	 *     object with g_object_unref()
 	 */
-	function content_type_get_icon(_type: string): Icon;
+	function content_type_get_icon(type: string): Icon;
 
 	/**
 	 * Get the list of directories which MIME data is loaded from. See
@@ -35909,19 +35909,19 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Gets the mime type for the content type, if one is registered.
-	 * @param _type a content type string
+	 * @param type a content type string
 	 * @returns the registered mime type for the
 	 *     given #type, or %NULL if unknown; free with g_free().
 	 */
-	function content_type_get_mime_type(_type: string): string | null;
+	function content_type_get_mime_type(type: string): string | null;
 
 	/**
 	 * Gets the symbolic icon for a content type.
-	 * @param _type a content type string
+	 * @param type a content type string
 	 * @returns symbolic #GIcon corresponding to the content type.
 	 *     Free the returned object with g_object_unref()
 	 */
-	function content_type_get_symbolic_icon(_type: string): Icon;
+	function content_type_get_symbolic_icon(type: string): Icon;
 
 	/**
 	 * Guesses the content type based on example data. If the function is
@@ -35957,32 +35957,32 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Determines if #type is a subset of #supertype.
-	 * @param _type a content type string
+	 * @param type a content type string
 	 * @param supertype a content type string
 	 * @returns %TRUE if #type is a kind of #supertype,
 	 *     %FALSE otherwise.
 	 */
-	function content_type_is_a(_type: string, supertype: string): boolean;
+	function content_type_is_a(type: string, supertype: string): boolean;
 
 	/**
 	 * Determines if #type is a subset of #mime_type.
 	 * Convenience wrapper around g_content_type_is_a().
-	 * @param _type a content type string
+	 * @param type a content type string
 	 * @param mime_type a mime type string
 	 * @returns %TRUE if #type is a kind of #mime_type,
 	 *     %FALSE otherwise.
 	 */
-	function content_type_is_mime_type(_type: string, mime_type: string): boolean;
+	function content_type_is_mime_type(type: string, mime_type: string): boolean;
 
 	/**
 	 * Checks if the content type is the generic "unknown" type.
 	 * On UNIX this is the "application/octet-stream" mimetype,
 	 * while on win32 it is "*" and on OSX it is a dynamic type
 	 * or octet-stream.
-	 * @param _type a content type string
+	 * @param type a content type string
 	 * @returns %TRUE if the type is the unknown type.
 	 */
-	function content_type_is_unknown(_type: string): boolean;
+	function content_type_is_unknown(type: string): boolean;
 
 	/**
 	 * Set the list of directories used by GIO to load the MIME database.
@@ -36231,10 +36231,10 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * This is a language binding friendly version of g_dbus_escape_object_path_bytestring().
-	 * @param _s the string to escape
+	 * @param s the string to escape
 	 * @returns an escaped version of #s. Free with g_free().
 	 */
-	function dbus_escape_object_path(_s: string): string;
+	function dbus_escape_object_path(s: string): string;
 
 	/**
 	 * Escapes #bytes for use in a D-Bus object path component.
@@ -36304,12 +36304,12 @@ declare namespace imports.gi.Gio {
 	 * See the g_dbus_gvariant_to_gvalue() function for how to convert a
 	 * #GVariant to a #GValue.
 	 * @param gvalue A #GValue to convert to a #GVariant
-	 * @param _type A #GVariantType
+	 * @param type A #GVariantType
 	 * @returns A #GVariant (never floating) of
 	 *     #GVariantType #type holding the data from #gvalue or an empty #GVariant
 	 *     in case of failure. Free with g_variant_unref().
 	 */
-	function dbus_gvalue_to_gvariant(gvalue: GObject.Value, _type: GLib.VariantType): GLib.Variant;
+	function dbus_gvalue_to_gvariant(gvalue: GObject.Value, type: GLib.VariantType): GLib.Variant;
 
 	/**
 	 * Converts a #GVariant to a #GValue. If #value is floating, it is consumed.
@@ -36409,12 +36409,12 @@ declare namespace imports.gi.Gio {
 	 * Encoding alphanumeric characters which do not need to be
 	 * encoded is not allowed (e.g `_63` is not valid, the string
 	 * should contain `c` instead).
-	 * @param _s the string to unescape
+	 * @param s the string to unescape
 	 * @returns an
 	 *   unescaped version of #s, or %NULL if #s is not a string returned
 	 *   from g_dbus_escape_object_path(). Free with g_free().
 	 */
-	function dbus_unescape_object_path(_s: string): number[] | null;
+	function dbus_unescape_object_path(s: string): number[] | null;
 
 	/**
 	 * Creates a new #GDtlsClientConnection wrapping #base_socket which is
@@ -36450,11 +36450,11 @@ declare namespace imports.gi.Gio {
 	 * g_application_command_line_create_file_for_arg() may be more useful
 	 * for you there.  It is also always possible to use this function with
 	 * #GOptionContext arguments of type %G_OPTION_ARG_FILENAME.
-	 * @param _arg a command line string
+	 * @param arg a command line string
 	 * @returns a new #GFile.
 	 *    Free the returned object with g_object_unref().
 	 */
-	function file_new_for_commandline_arg(_arg: string): File;
+	function file_new_for_commandline_arg(arg: string): File;
 
 	/**
 	 * Creates a #GFile with the given argument from the command line.
@@ -36468,11 +36468,11 @@ declare namespace imports.gi.Gio {
 	 * other than the invocation of the current process.
 	 * 
 	 * See also g_application_command_line_create_file_for_arg().
-	 * @param _arg a command line string
+	 * @param arg a command line string
 	 * @param cwd the current working directory of the commandline
 	 * @returns a new #GFile
 	 */
-	function file_new_for_commandline_arg_and_cwd(_arg: string, cwd: string): File;
+	function file_new_for_commandline_arg_and_cwd(arg: string, cwd: string): File;
 
 	/**
 	 * Constructs a #GFile for a given path. This operation never
@@ -36546,11 +36546,11 @@ declare namespace imports.gi.Gio {
 	 * If your application or library provides one or more #GIcon
 	 * implementations you need to ensure that each #GType is registered
 	 * with the type system prior to calling g_icon_new_for_string().
-	 * @param _str A string obtained via g_icon_to_string().
+	 * @param str A string obtained via g_icon_to_string().
 	 * @returns An object implementing the #GIcon
 	 *          interface or %NULL if #error is set.
 	 */
-	function icon_new_for_string(_str: string): Icon;
+	function icon_new_for_string(str: string): Icon;
 
 	/**
 	 * Helper function for constructing #GInitable object. This is
@@ -36591,12 +36591,12 @@ declare namespace imports.gi.Gio {
 	 * If #type has already been registered as an extension for this
 	 * extension point, the existing #GIOExtension object is returned.
 	 * @param extension_point_name the name of the extension point
-	 * @param _type the #GType to register as extension
+	 * @param type the #GType to register as extension
 	 * @param extension_name the name for the extension
 	 * @param priority the priority for the extension
 	 * @returns a #GIOExtension object for #GType
 	 */
-	function io_extension_point_implement(extension_point_name: string, _type: GObject.Type, extension_name: string, priority: number): IOExtension;
+	function io_extension_point_implement(extension_point_name: string, type: GObject.Type, extension_name: string, priority: number): IOExtension;
 
 	/**
 	 * Looks up an existing extension point.
@@ -37376,5 +37376,1545 @@ declare namespace imports.gi.Gio {
 	 *     a #GList of the UNIX mounts.
 	 */
 	function unix_mounts_get(): GLib.List;
+
+	/**
+	 * The value returned by handlers of the signals generated by
+	 * the `gdbus-codegen` tool to indicate that a method call has been
+	 * handled by an implementation. It is equal to %TRUE, but using
+	 * this macro is sometimes more readable.
+	 * 
+	 * In code that needs to be backwards-compatible with older GLib,
+	 * use %TRUE instead, often written like this:
+	 * 
+	 * |[
+	 *   g_dbus_method_invocation_return_error (invocation, ...);
+	 *   return TRUE;    // handled
+	 * ]|
+	 * @returns The value returned by handlers of the signals generated by
+	 * the `gdbus-codegen` tool to indicate that a method call has been
+	 * handled by an implementation. It is equal to %TRUE, but using
+	 * this macro is sometimes more readable.
+	 * 
+	 * In code that needs to be backwards-compatible with older GLib,
+	 * use %TRUE instead, often written like this:
+	 * 
+	 * |[
+	 *   g_dbus_method_invocation_return_error (invocation, ...);
+	 *   return TRUE;    // handled
+	 * ]|
+	 */
+	const DBUS_METHOD_INVOCATION_HANDLED: boolean;
+
+	/**
+	 * The value returned by handlers of the signals generated by
+	 * the `gdbus-codegen` tool to indicate that a method call has not been
+	 * handled by an implementation. It is equal to %FALSE, but using
+	 * this macro is sometimes more readable.
+	 * 
+	 * In code that needs to be backwards-compatible with older GLib,
+	 * use %FALSE instead.
+	 * @returns The value returned by handlers of the signals generated by
+	 * the `gdbus-codegen` tool to indicate that a method call has not been
+	 * handled by an implementation. It is equal to %FALSE, but using
+	 * this macro is sometimes more readable.
+	 * 
+	 * In code that needs to be backwards-compatible with older GLib,
+	 * use %FALSE instead.
+	 */
+	const DBUS_METHOD_INVOCATION_UNHANDLED: boolean;
+
+	/**
+	 * Extension point for default handler to URI association. See
+	 * [Extending GIO][extending-gio].
+	 * @returns Extension point for default handler to URI association. See
+	 * [Extending GIO][extending-gio].
+	 */
+	const DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME: string;
+
+	/**
+	 * The string used to obtain a Unix device path with g_drive_get_identifier().
+	 * @returns The string used to obtain a Unix device path with g_drive_get_identifier().
+	 */
+	const DRIVE_IDENTIFIER_KIND_UNIX_DEVICE: string;
+
+	/**
+	 * A key in the "access" namespace for checking deletion privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to delete the file.
+	 * @returns A key in the "access" namespace for checking deletion privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to delete the file.
+	 */
+	const FILE_ATTRIBUTE_ACCESS_CAN_DELETE: string;
+
+	/**
+	 * A key in the "access" namespace for getting execution privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to execute the file.
+	 * @returns A key in the "access" namespace for getting execution privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to execute the file.
+	 */
+	const FILE_ATTRIBUTE_ACCESS_CAN_EXECUTE: string;
+
+	/**
+	 * A key in the "access" namespace for getting read privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to read the file.
+	 * @returns A key in the "access" namespace for getting read privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to read the file.
+	 */
+	const FILE_ATTRIBUTE_ACCESS_CAN_READ: string;
+
+	/**
+	 * A key in the "access" namespace for checking renaming privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to rename the file.
+	 * @returns A key in the "access" namespace for checking renaming privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to rename the file.
+	 */
+	const FILE_ATTRIBUTE_ACCESS_CAN_RENAME: string;
+
+	/**
+	 * A key in the "access" namespace for checking trashing privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to move the file to
+	 * the trash.
+	 * @returns A key in the "access" namespace for checking trashing privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to move the file to
+	 * the trash.
+	 */
+	const FILE_ATTRIBUTE_ACCESS_CAN_TRASH: string;
+
+	/**
+	 * A key in the "access" namespace for getting write privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to write to the file.
+	 * @returns A key in the "access" namespace for getting write privileges.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * 
+	 * This attribute will be %TRUE if the user is able to write to the file.
+	 */
+	const FILE_ATTRIBUTE_ACCESS_CAN_WRITE: string;
+
+	/**
+	 * A key in the "dos" namespace for checking if the file's archive flag
+	 * is set.
+	 * 
+	 * This attribute is %TRUE if the archive flag is set.
+	 * 
+	 * This attribute is only available for DOS file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "dos" namespace for checking if the file's archive flag
+	 * is set.
+	 * 
+	 * This attribute is %TRUE if the archive flag is set.
+	 * 
+	 * This attribute is only available for DOS file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_DOS_IS_ARCHIVE: string;
+
+	/**
+	 * A key in the "dos" namespace for checking if the file is a NTFS mount point
+	 * (a volume mount or a junction point).
+	 * 
+	 * This attribute is %TRUE if file is a reparse point of type
+	 * [IO_REPARSE_TAG_MOUNT_POINT](https://msdn.microsoft.com/en-us/library/dd541667.aspx).
+	 * 
+	 * This attribute is only available for DOS file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "dos" namespace for checking if the file is a NTFS mount point
+	 * (a volume mount or a junction point).
+	 * 
+	 * This attribute is %TRUE if file is a reparse point of type
+	 * [IO_REPARSE_TAG_MOUNT_POINT](https://msdn.microsoft.com/en-us/library/dd541667.aspx).
+	 * 
+	 * This attribute is only available for DOS file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_DOS_IS_MOUNTPOINT: string;
+
+	/**
+	 * A key in the "dos" namespace for checking if the file's backup flag
+	 * is set.
+	 * 
+	 * This attribute is %TRUE if the backup flag is set.
+	 * 
+	 * This attribute is only available for DOS file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "dos" namespace for checking if the file's backup flag
+	 * is set.
+	 * 
+	 * This attribute is %TRUE if the backup flag is set.
+	 * 
+	 * This attribute is only available for DOS file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_DOS_IS_SYSTEM: string;
+
+	/**
+	 * A key in the "dos" namespace for getting the file NTFS reparse tag.
+	 * 
+	 * This value is 0 for files that are not reparse points.
+	 * 
+	 * See the [Reparse Tags](https://msdn.microsoft.com/en-us/library/dd541667.aspx)
+	 * page for possible reparse tag values.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "dos" namespace for getting the file NTFS reparse tag.
+	 * 
+	 * This value is 0 for files that are not reparse points.
+	 * 
+	 * See the [Reparse Tags](https://msdn.microsoft.com/en-us/library/dd541667.aspx)
+	 * page for possible reparse tag values.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_DOS_REPARSE_POINT_TAG: string;
+
+	/**
+	 * A key in the "etag" namespace for getting the value of the file's
+	 * entity tag.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "etag" namespace for getting the value of the file's
+	 * entity tag.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_ETAG_VALUE: string;
+
+	/**
+	 * A key in the "filesystem" namespace for getting the number of bytes
+	 * of free space left on the file system.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 * @returns A key in the "filesystem" namespace for getting the number of bytes
+	 * of free space left on the file system.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 */
+	const FILE_ATTRIBUTE_FILESYSTEM_FREE: string;
+
+	/**
+	 * A key in the "filesystem" namespace for checking if the file system
+	 * is read only.
+	 * 
+	 * Is set to %TRUE if the file system is read only.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "filesystem" namespace for checking if the file system
+	 * is read only.
+	 * 
+	 * Is set to %TRUE if the file system is read only.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_FILESYSTEM_READONLY: string;
+
+	/**
+	 * A key in the "filesystem" namespace for checking if the file system
+	 * is remote.
+	 * 
+	 * Is set to %TRUE if the file system is remote.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "filesystem" namespace for checking if the file system
+	 * is remote.
+	 * 
+	 * Is set to %TRUE if the file system is remote.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_FILESYSTEM_REMOTE: string;
+
+	/**
+	 * A key in the "filesystem" namespace for getting the total size (in
+	 * bytes) of the file system, used in g_file_query_filesystem_info().
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 * @returns A key in the "filesystem" namespace for getting the total size (in
+	 * bytes) of the file system, used in g_file_query_filesystem_info().
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 */
+	const FILE_ATTRIBUTE_FILESYSTEM_SIZE: string;
+
+	/**
+	 * A key in the "filesystem" namespace for getting the file system's type.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "filesystem" namespace for getting the file system's type.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_FILESYSTEM_TYPE: string;
+
+	/**
+	 * A key in the "filesystem" namespace for getting the number of bytes
+	 * used by data on the file system.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 * @returns A key in the "filesystem" namespace for getting the number of bytes
+	 * used by data on the file system.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 */
+	const FILE_ATTRIBUTE_FILESYSTEM_USED: string;
+
+	/**
+	 * A key in the "filesystem" namespace for hinting a file manager
+	 * application whether it should preview (e.g. thumbnail) files on the
+	 * file system.
+	 * 
+	 * The value for this key contain a #GFilesystemPreviewType.
+	 * @returns A key in the "filesystem" namespace for hinting a file manager
+	 * application whether it should preview (e.g. thumbnail) files on the
+	 * file system.
+	 * 
+	 * The value for this key contain a #GFilesystemPreviewType.
+	 */
+	const FILE_ATTRIBUTE_FILESYSTEM_USE_PREVIEW: string;
+
+	/**
+	 * A key in the "gvfs" namespace that gets the name of the current
+	 * GVFS backend in use.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "gvfs" namespace that gets the name of the current
+	 * GVFS backend in use.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_GVFS_BACKEND: string;
+
+	/**
+	 * A key in the "id" namespace for getting a file identifier.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * 
+	 * An example use would be during listing files, to avoid recursive
+	 * directory scanning.
+	 * @returns A key in the "id" namespace for getting a file identifier.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * 
+	 * An example use would be during listing files, to avoid recursive
+	 * directory scanning.
+	 */
+	const FILE_ATTRIBUTE_ID_FILE: string;
+
+	/**
+	 * A key in the "id" namespace for getting the file system identifier.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * 
+	 * An example use would be during drag and drop to see if the source
+	 * and target are on the same filesystem (default to move) or not (default
+	 * to copy).
+	 * @returns A key in the "id" namespace for getting the file system identifier.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * 
+	 * An example use would be during drag and drop to see if the source
+	 * and target are on the same filesystem (default to move) or not (default
+	 * to copy).
+	 */
+	const FILE_ATTRIBUTE_ID_FILESYSTEM: string;
+
+	/**
+	 * A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) can be ejected.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) can be ejected.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_CAN_EJECT: string;
+
+	/**
+	 * A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) is mountable.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) is mountable.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_CAN_MOUNT: string;
+
+	/**
+	 * A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) can be polled.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) can be polled.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_CAN_POLL: string;
+
+	/**
+	 * A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) can be started.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) can be started.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_CAN_START: string;
+
+	/**
+	 * A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) can be started degraded.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) can be started degraded.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_CAN_START_DEGRADED: string;
+
+	/**
+	 * A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) can be stopped.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) can be stopped.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_CAN_STOP: string;
+
+	/**
+	 * A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE)  is unmountable.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE)  is unmountable.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_CAN_UNMOUNT: string;
+
+	/**
+	 * A key in the "mountable" namespace for getting the HAL UDI for the mountable
+	 * file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "mountable" namespace for getting the HAL UDI for the mountable
+	 * file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_HAL_UDI: string;
+
+	/**
+	 * A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) is automatically polled for media.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "mountable" namespace for checking if a file (of
+	 * type G_FILE_TYPE_MOUNTABLE) is automatically polled for media.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_IS_MEDIA_CHECK_AUTOMATIC: string;
+
+	/**
+	 * A key in the "mountable" namespace for getting the #GDriveStartStopType.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "mountable" namespace for getting the #GDriveStartStopType.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_START_STOP_TYPE: string;
+
+	/**
+	 * A key in the "mountable" namespace for getting the unix device.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "mountable" namespace for getting the unix device.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE: string;
+
+	/**
+	 * A key in the "mountable" namespace for getting the unix device file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "mountable" namespace for getting the unix device file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE_FILE: string;
+
+	/**
+	 * A key in the "owner" namespace for getting the file owner's group.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "owner" namespace for getting the file owner's group.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_OWNER_GROUP: string;
+
+	/**
+	 * A key in the "owner" namespace for getting the user name of the
+	 * file's owner.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "owner" namespace for getting the user name of the
+	 * file's owner.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_OWNER_USER: string;
+
+	/**
+	 * A key in the "owner" namespace for getting the real name of the
+	 * user that owns the file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "owner" namespace for getting the real name of the
+	 * user that owns the file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_OWNER_USER_REAL: string;
+
+	/**
+	 * A key in the "preview" namespace for getting a #GIcon that can be
+	 * used to get preview of the file.
+	 * 
+	 * For example, it may be a low resolution thumbnail without metadata.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_OBJECT.
+	 * 
+	 * The value for this key should contain a #GIcon.
+	 * @returns A key in the "preview" namespace for getting a #GIcon that can be
+	 * used to get preview of the file.
+	 * 
+	 * For example, it may be a low resolution thumbnail without metadata.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_OBJECT.
+	 * 
+	 * The value for this key should contain a #GIcon.
+	 */
+	const FILE_ATTRIBUTE_PREVIEW_ICON: string;
+
+	/**
+	 * A key in the "recent" namespace for getting time, when the metadata for the
+	 * file in `recent:///` was last changed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_INT64.
+	 * @returns A key in the "recent" namespace for getting time, when the metadata for the
+	 * file in `recent:///` was last changed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_INT64.
+	 */
+	const FILE_ATTRIBUTE_RECENT_MODIFIED: string;
+
+	/**
+	 * A key in the "selinux" namespace for getting the file's SELinux
+	 * context.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * 
+	 * Note that this attribute is only available if GLib has been built
+	 * with SELinux support.
+	 * @returns A key in the "selinux" namespace for getting the file's SELinux
+	 * context.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * 
+	 * Note that this attribute is only available if GLib has been built
+	 * with SELinux support.
+	 */
+	const FILE_ATTRIBUTE_SELINUX_CONTEXT: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the amount of disk space
+	 * that is consumed by the file (in bytes).
+	 * 
+	 * This will generally be larger than the file size (due to block size
+	 * overhead) but can occasionally be smaller (for example, for sparse files).
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 * @returns A key in the "standard" namespace for getting the amount of disk space
+	 * that is consumed by the file (in bytes).
+	 * 
+	 * This will generally be larger than the file size (due to block size
+	 * overhead) but can occasionally be smaller (for example, for sparse files).
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_ALLOCATED_SIZE: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the content type of the file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * 
+	 * The value for this key should contain a valid content type.
+	 * @returns A key in the "standard" namespace for getting the content type of the file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * 
+	 * The value for this key should contain a valid content type.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the copy name of the file.
+	 * 
+	 * The copy name is an optional version of the name. If available it's always
+	 * in UTF8, and corresponds directly to the original filename (only transcoded to
+	 * UTF8). This is useful if you want to copy the file to another filesystem that
+	 * might have a different encoding. If the filename is not a valid string in the
+	 * encoding selected for the filesystem it is in then the copy name will not be set.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "standard" namespace for getting the copy name of the file.
+	 * 
+	 * The copy name is an optional version of the name. If available it's always
+	 * in UTF8, and corresponds directly to the original filename (only transcoded to
+	 * UTF8). This is useful if you want to copy the file to another filesystem that
+	 * might have a different encoding. If the filename is not a valid string in the
+	 * encoding selected for the filesystem it is in then the copy name will not be set.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_COPY_NAME: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the description of the file.
+	 * 
+	 * The description is a utf8 string that describes the file, generally containing
+	 * the filename, but can also contain further information. Example descriptions
+	 * could be "filename (on hostname)" for a remote file or "filename (in trash)"
+	 * for a file in the trash. This is useful for instance as the window title
+	 * when displaying a directory or for a bookmarks menu.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "standard" namespace for getting the description of the file.
+	 * 
+	 * The description is a utf8 string that describes the file, generally containing
+	 * the filename, but can also contain further information. Example descriptions
+	 * could be "filename (on hostname)" for a remote file or "filename (in trash)"
+	 * for a file in the trash. This is useful for instance as the window title
+	 * when displaying a directory or for a bookmarks menu.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_DESCRIPTION: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the display name of the file.
+	 * 
+	 * A display name is guaranteed to be in UTF-8 and can thus be displayed in
+	 * the UI. It is guaranteed to be set on every file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "standard" namespace for getting the display name of the file.
+	 * 
+	 * A display name is guaranteed to be in UTF-8 and can thus be displayed in
+	 * the UI. It is guaranteed to be set on every file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME: string;
+
+	/**
+	 * A key in the "standard" namespace for edit name of the file.
+	 * 
+	 * An edit name is similar to the display name, but it is meant to be
+	 * used when you want to rename the file in the UI. The display name
+	 * might contain information you don't want in the new filename (such as
+	 * "(invalid unicode)" if the filename was in an invalid encoding).
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "standard" namespace for edit name of the file.
+	 * 
+	 * An edit name is similar to the display name, but it is meant to be
+	 * used when you want to rename the file in the UI. The display name
+	 * might contain information you don't want in the new filename (such as
+	 * "(invalid unicode)" if the filename was in an invalid encoding).
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_EDIT_NAME: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the fast content type.
+	 * 
+	 * The fast content type isn't as reliable as the regular one, as it
+	 * only uses the filename to guess it, but it is faster to calculate than the
+	 * regular content type.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "standard" namespace for getting the fast content type.
+	 * 
+	 * The fast content type isn't as reliable as the regular one, as it
+	 * only uses the filename to guess it, but it is faster to calculate than the
+	 * regular content type.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the icon for the file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_OBJECT.
+	 * 
+	 * The value for this key should contain a #GIcon.
+	 * @returns A key in the "standard" namespace for getting the icon for the file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_OBJECT.
+	 * 
+	 * The value for this key should contain a #GIcon.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_ICON: string;
+
+	/**
+	 * A key in the "standard" namespace for checking if a file is a backup file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "standard" namespace for checking if a file is a backup file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_IS_BACKUP: string;
+
+	/**
+	 * A key in the "standard" namespace for checking if a file is hidden.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "standard" namespace for checking if a file is hidden.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_IS_HIDDEN: string;
+
+	/**
+	 * A key in the "standard" namespace for checking if the file is a symlink.
+	 * Typically the actual type is something else, if we followed the symlink
+	 * to get the type.
+	 * 
+	 * On Windows NTFS mountpoints are considered to be symlinks as well.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "standard" namespace for checking if the file is a symlink.
+	 * Typically the actual type is something else, if we followed the symlink
+	 * to get the type.
+	 * 
+	 * On Windows NTFS mountpoints are considered to be symlinks as well.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_IS_SYMLINK: string;
+
+	/**
+	 * A key in the "standard" namespace for checking if a file is virtual.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "standard" namespace for checking if a file is virtual.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_IS_VIRTUAL: string;
+
+	/**
+	 * A key in the "standard" namespace for checking if a file is
+	 * volatile. This is meant for opaque, non-POSIX-like backends to
+	 * indicate that the URI is not persistent. Applications should look
+	 * at %G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET for the persistent URI.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "standard" namespace for checking if a file is
+	 * volatile. This is meant for opaque, non-POSIX-like backends to
+	 * indicate that the URI is not persistent. Applications should look
+	 * at %G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET for the persistent URI.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_IS_VOLATILE: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the name of the file.
+	 * 
+	 * The name is the on-disk filename which may not be in any known encoding,
+	 * and can thus not be generally displayed as is. It is guaranteed to be set on
+	 * every file.
+	 * 
+	 * Use %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME if you need to display the
+	 * name in a user interface.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING.
+	 * @returns A key in the "standard" namespace for getting the name of the file.
+	 * 
+	 * The name is the on-disk filename which may not be in any known encoding,
+	 * and can thus not be generally displayed as is. It is guaranteed to be set on
+	 * every file.
+	 * 
+	 * Use %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME if you need to display the
+	 * name in a user interface.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_NAME: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the file's size (in bytes).
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 * @returns A key in the "standard" namespace for getting the file's size (in bytes).
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_SIZE: string;
+
+	/**
+	 * A key in the "standard" namespace for setting the sort order of a file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_INT32.
+	 * 
+	 * An example use would be in file managers, which would use this key
+	 * to set the order files are displayed. Files with smaller sort order
+	 * should be sorted first, and files without sort order as if sort order
+	 * was zero.
+	 * @returns A key in the "standard" namespace for setting the sort order of a file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_INT32.
+	 * 
+	 * An example use would be in file managers, which would use this key
+	 * to set the order files are displayed. Files with smaller sort order
+	 * should be sorted first, and files without sort order as if sort order
+	 * was zero.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_SORT_ORDER: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the symbolic icon for the file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_OBJECT.
+	 * 
+	 * The value for this key should contain a #GIcon.
+	 * @returns A key in the "standard" namespace for getting the symbolic icon for the file.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_OBJECT.
+	 * 
+	 * The value for this key should contain a #GIcon.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the symlink target, if the file
+	 * is a symlink.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING.
+	 * @returns A key in the "standard" namespace for getting the symlink target, if the file
+	 * is a symlink.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET: string;
+
+	/**
+	 * A key in the "standard" namespace for getting the target URI for the file, in
+	 * the case of %G_FILE_TYPE_SHORTCUT or %G_FILE_TYPE_MOUNTABLE files.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "standard" namespace for getting the target URI for the file, in
+	 * the case of %G_FILE_TYPE_SHORTCUT or %G_FILE_TYPE_MOUNTABLE files.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_TARGET_URI: string;
+
+	/**
+	 * A key in the "standard" namespace for storing file types.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * 
+	 * The value for this key should contain a #GFileType.
+	 * @returns A key in the "standard" namespace for storing file types.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * 
+	 * The value for this key should contain a #GFileType.
+	 */
+	const FILE_ATTRIBUTE_STANDARD_TYPE: string;
+
+	/**
+	 * A key in the "thumbnail" namespace for checking if thumbnailing failed.
+	 * 
+	 * This attribute is %TRUE if thumbnailing failed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "thumbnail" namespace for checking if thumbnailing failed.
+	 * 
+	 * This attribute is %TRUE if thumbnailing failed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_THUMBNAILING_FAILED: string;
+
+	/**
+	 * A key in the "thumbnail" namespace for checking whether the thumbnail is outdated.
+	 * 
+	 * This attribute is %TRUE if the thumbnail is up-to-date with the file it represents,
+	 * and %FALSE if the file has been modified since the thumbnail was generated.
+	 * 
+	 * If %G_FILE_ATTRIBUTE_THUMBNAILING_FAILED is %TRUE and this attribute is %FALSE,
+	 * it indicates that thumbnailing may be attempted again and may succeed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "thumbnail" namespace for checking whether the thumbnail is outdated.
+	 * 
+	 * This attribute is %TRUE if the thumbnail is up-to-date with the file it represents,
+	 * and %FALSE if the file has been modified since the thumbnail was generated.
+	 * 
+	 * If %G_FILE_ATTRIBUTE_THUMBNAILING_FAILED is %TRUE and this attribute is %FALSE,
+	 * it indicates that thumbnailing may be attempted again and may succeed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_THUMBNAIL_IS_VALID: string;
+
+	/**
+	 * A key in the "thumbnail" namespace for getting the path to the thumbnail
+	 * image.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING.
+	 * @returns A key in the "thumbnail" namespace for getting the path to the thumbnail
+	 * image.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING.
+	 */
+	const FILE_ATTRIBUTE_THUMBNAIL_PATH: string;
+
+	/**
+	 * A key in the "time" namespace for getting the time the file was last
+	 * accessed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64, and
+	 * contains the time since the file was last accessed, in seconds since the
+	 * UNIX epoch.
+	 * @returns A key in the "time" namespace for getting the time the file was last
+	 * accessed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64, and
+	 * contains the time since the file was last accessed, in seconds since the
+	 * UNIX epoch.
+	 */
+	const FILE_ATTRIBUTE_TIME_ACCESS: string;
+
+	/**
+	 * A key in the "time" namespace for getting the microseconds of the time
+	 * the file was last accessed.
+	 * 
+	 * This should be used in conjunction with %G_FILE_ATTRIBUTE_TIME_ACCESS.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "time" namespace for getting the microseconds of the time
+	 * the file was last accessed.
+	 * 
+	 * This should be used in conjunction with %G_FILE_ATTRIBUTE_TIME_ACCESS.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_TIME_ACCESS_USEC: string;
+
+	/**
+	 * A key in the "time" namespace for getting the time the file was last
+	 * changed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64,
+	 * and contains the time since the file was last changed, in seconds since
+	 * the UNIX epoch.
+	 * 
+	 * This corresponds to the traditional UNIX ctime.
+	 * @returns A key in the "time" namespace for getting the time the file was last
+	 * changed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64,
+	 * and contains the time since the file was last changed, in seconds since
+	 * the UNIX epoch.
+	 * 
+	 * This corresponds to the traditional UNIX ctime.
+	 */
+	const FILE_ATTRIBUTE_TIME_CHANGED: string;
+
+	/**
+	 * A key in the "time" namespace for getting the microseconds of the time
+	 * the file was last changed.
+	 * 
+	 * This should be used in conjunction with %G_FILE_ATTRIBUTE_TIME_CHANGED.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "time" namespace for getting the microseconds of the time
+	 * the file was last changed.
+	 * 
+	 * This should be used in conjunction with %G_FILE_ATTRIBUTE_TIME_CHANGED.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_TIME_CHANGED_USEC: string;
+
+	/**
+	 * A key in the "time" namespace for getting the time the file was created.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64,
+	 * and contains the time since the file was created, in seconds since the UNIX
+	 * epoch.
+	 * 
+	 * This may correspond to Linux `stx_btime`, FreeBSD `st_birthtim`, NetBSD
+	 * `st_birthtime` or NTFS `ctime`.
+	 * @returns A key in the "time" namespace for getting the time the file was created.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64,
+	 * and contains the time since the file was created, in seconds since the UNIX
+	 * epoch.
+	 * 
+	 * This may correspond to Linux `stx_btime`, FreeBSD `st_birthtim`, NetBSD
+	 * `st_birthtime` or NTFS `ctime`.
+	 */
+	const FILE_ATTRIBUTE_TIME_CREATED: string;
+
+	/**
+	 * A key in the "time" namespace for getting the microseconds of the time
+	 * the file was created.
+	 * 
+	 * This should be used in conjunction with %G_FILE_ATTRIBUTE_TIME_CREATED.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "time" namespace for getting the microseconds of the time
+	 * the file was created.
+	 * 
+	 * This should be used in conjunction with %G_FILE_ATTRIBUTE_TIME_CREATED.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_TIME_CREATED_USEC: string;
+
+	/**
+	 * A key in the "time" namespace for getting the time the file was last
+	 * modified.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64, and
+	 * contains the time since the file was modified, in seconds since the UNIX
+	 * epoch.
+	 * @returns A key in the "time" namespace for getting the time the file was last
+	 * modified.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64, and
+	 * contains the time since the file was modified, in seconds since the UNIX
+	 * epoch.
+	 */
+	const FILE_ATTRIBUTE_TIME_MODIFIED: string;
+
+	/**
+	 * A key in the "time" namespace for getting the microseconds of the time
+	 * the file was last modified.
+	 * 
+	 * This should be used in conjunction with %G_FILE_ATTRIBUTE_TIME_MODIFIED.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "time" namespace for getting the microseconds of the time
+	 * the file was last modified.
+	 * 
+	 * This should be used in conjunction with %G_FILE_ATTRIBUTE_TIME_MODIFIED.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_TIME_MODIFIED_USEC: string;
+
+	/**
+	 * A key in the "trash" namespace for getting the deletion date and time
+	 * of a file inside the `trash:///` folder.
+	 * 
+	 * The format of the returned string is `YYYY-MM-DDThh:mm:ss`.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 * @returns A key in the "trash" namespace for getting the deletion date and time
+	 * of a file inside the `trash:///` folder.
+	 * 
+	 * The format of the returned string is `YYYY-MM-DDThh:mm:ss`.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
+	 */
+	const FILE_ATTRIBUTE_TRASH_DELETION_DATE: string;
+
+	/**
+	 * A key in the "trash" namespace for getting the number of (toplevel) items
+	 * that are present in the `trash:///` folder.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "trash" namespace for getting the number of (toplevel) items
+	 * that are present in the `trash:///` folder.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_TRASH_ITEM_COUNT: string;
+
+	/**
+	 * A key in the "trash" namespace for getting the original path of a file
+	 * inside the `trash:///` folder before it was trashed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING.
+	 * @returns A key in the "trash" namespace for getting the original path of a file
+	 * inside the `trash:///` folder before it was trashed.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING.
+	 */
+	const FILE_ATTRIBUTE_TRASH_ORIG_PATH: string;
+
+	/**
+	 * A key in the "unix" namespace for getting the number of blocks allocated
+	 * for the file.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 * @returns A key in the "unix" namespace for getting the number of blocks allocated
+	 * for the file.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 */
+	const FILE_ATTRIBUTE_UNIX_BLOCKS: string;
+
+	/**
+	 * A key in the "unix" namespace for getting the block size for the file
+	 * system.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "unix" namespace for getting the block size for the file
+	 * system.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_UNIX_BLOCK_SIZE: string;
+
+	/**
+	 * A key in the "unix" namespace for getting the device id of the device the
+	 * file is located on (see stat() documentation).
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "unix" namespace for getting the device id of the device the
+	 * file is located on (see stat() documentation).
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_UNIX_DEVICE: string;
+
+	/**
+	 * A key in the "unix" namespace for getting the group ID for the file.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "unix" namespace for getting the group ID for the file.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_UNIX_GID: string;
+
+	/**
+	 * A key in the "unix" namespace for getting the inode of the file.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 * @returns A key in the "unix" namespace for getting the inode of the file.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
+	 */
+	const FILE_ATTRIBUTE_UNIX_INODE: string;
+
+	/**
+	 * A key in the "unix" namespace for checking if the file represents a
+	 * UNIX mount point.
+	 * 
+	 * This attribute is %TRUE if the file is a UNIX mount point.
+	 * 
+	 * Since 2.58, `/` is considered to be a mount point.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 * @returns A key in the "unix" namespace for checking if the file represents a
+	 * UNIX mount point.
+	 * 
+	 * This attribute is %TRUE if the file is a UNIX mount point.
+	 * 
+	 * Since 2.58, `/` is considered to be a mount point.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+	 */
+	const FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT: string;
+
+	/**
+	 * A key in the "unix" namespace for getting the mode of the file
+	 * (e.g. whether the file is a regular file, symlink, etc).
+	 * 
+	 * See the documentation for `lstat()`: this attribute is equivalent to
+	 * the `st_mode` member of `struct stat`, and includes both the file type
+	 * and permissions.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "unix" namespace for getting the mode of the file
+	 * (e.g. whether the file is a regular file, symlink, etc).
+	 * 
+	 * See the documentation for `lstat()`: this attribute is equivalent to
+	 * the `st_mode` member of `struct stat`, and includes both the file type
+	 * and permissions.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_UNIX_MODE: string;
+
+	/**
+	 * A key in the "unix" namespace for getting the number of hard links
+	 * for a file.
+	 * 
+	 * See the documentation for `lstat()`.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "unix" namespace for getting the number of hard links
+	 * for a file.
+	 * 
+	 * See the documentation for `lstat()`.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_UNIX_NLINK: string;
+
+	/**
+	 * A key in the "unix" namespace for getting the device ID for the file
+	 * (if it is a special file).
+	 * 
+	 * See the documentation for `lstat()`.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "unix" namespace for getting the device ID for the file
+	 * (if it is a special file).
+	 * 
+	 * See the documentation for `lstat()`.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_UNIX_RDEV: string;
+
+	/**
+	 * A key in the "unix" namespace for getting the user ID for the file.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 * @returns A key in the "unix" namespace for getting the user ID for the file.
+	 * 
+	 * This attribute is only available for UNIX file systems.
+	 * 
+	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT32.
+	 */
+	const FILE_ATTRIBUTE_UNIX_UID: string;
+
+	/**
+	 * Extension point for memory usage monitoring functionality.
+	 * See [Extending GIO][extending-gio].
+	 * @returns Extension point for memory usage monitoring functionality.
+	 * See [Extending GIO][extending-gio].
+	 */
+	const MEMORY_MONITOR_EXTENSION_POINT_NAME: string;
+
+	/**
+	 * The menu item attribute which holds the action name of the item.  Action
+	 * names are namespaced with an identifier for the action group in which the
+	 * action resides. For example, "win." for window-specific actions and "app."
+	 * for application-wide actions.
+	 * 
+	 * See also g_menu_model_get_item_attribute() and g_menu_item_set_attribute().
+	 * @returns The menu item attribute which holds the action name of the item.  Action
+	 * names are namespaced with an identifier for the action group in which the
+	 * action resides. For example, "win." for window-specific actions and "app."
+	 * for application-wide actions.
+	 * 
+	 * See also g_menu_model_get_item_attribute() and g_menu_item_set_attribute().
+	 */
+	const MENU_ATTRIBUTE_ACTION: string;
+
+	/**
+	 * The menu item attribute that holds the namespace for all action names in
+	 * menus that are linked from this item.
+	 * @returns The menu item attribute that holds the namespace for all action names in
+	 * menus that are linked from this item.
+	 */
+	const MENU_ATTRIBUTE_ACTION_NAMESPACE: string;
+
+	/**
+	 * The menu item attribute which holds the icon of the item.
+	 * 
+	 * The icon is stored in the format returned by g_icon_serialize().
+	 * 
+	 * This attribute is intended only to represent 'noun' icons such as
+	 * favicons for a webpage, or application icons.  It should not be used
+	 * for 'verbs' (ie: stock icons).
+	 * @returns The menu item attribute which holds the icon of the item.
+	 * 
+	 * The icon is stored in the format returned by g_icon_serialize().
+	 * 
+	 * This attribute is intended only to represent 'noun' icons such as
+	 * favicons for a webpage, or application icons.  It should not be used
+	 * for 'verbs' (ie: stock icons).
+	 */
+	const MENU_ATTRIBUTE_ICON: string;
+
+	/**
+	 * The menu item attribute which holds the label of the item.
+	 * @returns The menu item attribute which holds the label of the item.
+	 */
+	const MENU_ATTRIBUTE_LABEL: string;
+
+	/**
+	 * The menu item attribute which holds the target with which the item's action
+	 * will be activated.
+	 * 
+	 * See also g_menu_item_set_action_and_target()
+	 * @returns The menu item attribute which holds the target with which the item's action
+	 * will be activated.
+	 * 
+	 * See also g_menu_item_set_action_and_target()
+	 */
+	const MENU_ATTRIBUTE_TARGET: string;
+
+	/**
+	 * The name of the link that associates a menu item with a section.  The linked
+	 * menu will usually be shown in place of the menu item, using the item's label
+	 * as a header.
+	 * 
+	 * See also g_menu_item_set_link().
+	 * @returns The name of the link that associates a menu item with a section.  The linked
+	 * menu will usually be shown in place of the menu item, using the item's label
+	 * as a header.
+	 * 
+	 * See also g_menu_item_set_link().
+	 */
+	const MENU_LINK_SECTION: string;
+
+	/**
+	 * The name of the link that associates a menu item with a submenu.
+	 * 
+	 * See also g_menu_item_set_link().
+	 * @returns The name of the link that associates a menu item with a submenu.
+	 * 
+	 * See also g_menu_item_set_link().
+	 */
+	const MENU_LINK_SUBMENU: string;
+
+	const NATIVE_VOLUME_MONITOR_EXTENSION_POINT_NAME: string;
+
+	/**
+	 * Extension point for network status monitoring functionality.
+	 * See [Extending GIO][extending-gio].
+	 * @returns Extension point for network status monitoring functionality.
+	 * See [Extending GIO][extending-gio].
+	 */
+	const NETWORK_MONITOR_EXTENSION_POINT_NAME: string;
+
+	/**
+	 * Extension point for power profile usage monitoring functionality.
+	 * See [Extending GIO][extending-gio].
+	 * @returns Extension point for power profile usage monitoring functionality.
+	 * See [Extending GIO][extending-gio].
+	 */
+	const POWER_PROFILE_MONITOR_EXTENSION_POINT_NAME: string;
+
+	/**
+	 * Extension point for proxy functionality.
+	 * See [Extending GIO][extending-gio].
+	 * @returns Extension point for proxy functionality.
+	 * See [Extending GIO][extending-gio].
+	 */
+	const PROXY_EXTENSION_POINT_NAME: string;
+
+	/**
+	 * Extension point for proxy resolving functionality.
+	 * See [Extending GIO][extending-gio].
+	 * @returns Extension point for proxy resolving functionality.
+	 * See [Extending GIO][extending-gio].
+	 */
+	const PROXY_RESOLVER_EXTENSION_POINT_NAME: string;
+
+	/**
+	 * Extension point for #GSettingsBackend functionality.
+	 * @returns Extension point for #GSettingsBackend functionality.
+	 */
+	const SETTINGS_BACKEND_EXTENSION_POINT_NAME: string;
+
+	/**
+	 * Extension point for TLS functionality via #GTlsBackend.
+	 * See [Extending GIO][extending-gio].
+	 * @returns Extension point for TLS functionality via #GTlsBackend.
+	 * See [Extending GIO][extending-gio].
+	 */
+	const TLS_BACKEND_EXTENSION_POINT_NAME: string;
+
+	/**
+	 * The purpose used to verify the client certificate in a TLS connection.
+	 * Used by TLS servers.
+	 * @returns The purpose used to verify the client certificate in a TLS connection.
+	 * Used by TLS servers.
+	 */
+	const TLS_DATABASE_PURPOSE_AUTHENTICATE_CLIENT: string;
+
+	/**
+	 * The purpose used to verify the server certificate in a TLS connection. This
+	 * is the most common purpose in use. Used by TLS clients.
+	 * @returns The purpose used to verify the server certificate in a TLS connection. This
+	 * is the most common purpose in use. Used by TLS clients.
+	 */
+	const TLS_DATABASE_PURPOSE_AUTHENTICATE_SERVER: string;
+
+	/**
+	 * Extension point for #GVfs functionality.
+	 * See [Extending GIO][extending-gio].
+	 * @returns Extension point for #GVfs functionality.
+	 * See [Extending GIO][extending-gio].
+	 */
+	const VFS_EXTENSION_POINT_NAME: string;
+
+	/**
+	 * The string used to obtain the volume class with g_volume_get_identifier().
+	 * 
+	 * Known volume classes include `device`, `network`, and `loop`. Other
+	 * classes may be added in the future.
+	 * 
+	 * This is intended to be used by applications to classify #GVolume
+	 * instances into different sections - for example a file manager or
+	 * file chooser can use this information to show `network` volumes under
+	 * a "Network" heading and `device` volumes under a "Devices" heading.
+	 * @returns The string used to obtain the volume class with g_volume_get_identifier().
+	 * 
+	 * Known volume classes include `device`, `network`, and `loop`. Other
+	 * classes may be added in the future.
+	 * 
+	 * This is intended to be used by applications to classify #GVolume
+	 * instances into different sections - for example a file manager or
+	 * file chooser can use this information to show `network` volumes under
+	 * a "Network" heading and `device` volumes under a "Devices" heading.
+	 */
+	const VOLUME_IDENTIFIER_KIND_CLASS: string;
+
+	/**
+	 * The string used to obtain a Hal UDI with g_volume_get_identifier().
+	 * @returns The string used to obtain a Hal UDI with g_volume_get_identifier().
+	 */
+	const VOLUME_IDENTIFIER_KIND_HAL_UDI: string;
+
+	/**
+	 * The string used to obtain a filesystem label with g_volume_get_identifier().
+	 * @returns The string used to obtain a filesystem label with g_volume_get_identifier().
+	 */
+	const VOLUME_IDENTIFIER_KIND_LABEL: string;
+
+	/**
+	 * The string used to obtain a NFS mount with g_volume_get_identifier().
+	 * @returns The string used to obtain a NFS mount with g_volume_get_identifier().
+	 */
+	const VOLUME_IDENTIFIER_KIND_NFS_MOUNT: string;
+
+	/**
+	 * The string used to obtain a Unix device path with g_volume_get_identifier().
+	 * @returns The string used to obtain a Unix device path with g_volume_get_identifier().
+	 */
+	const VOLUME_IDENTIFIER_KIND_UNIX_DEVICE: string;
+
+	/**
+	 * The string used to obtain a UUID with g_volume_get_identifier().
+	 * @returns The string used to obtain a UUID with g_volume_get_identifier().
+	 */
+	const VOLUME_IDENTIFIER_KIND_UUID: string;
+
+	/**
+	 * Extension point for volume monitor functionality.
+	 * See [Extending GIO][extending-gio].
+	 * @returns Extension point for volume monitor functionality.
+	 * See [Extending GIO][extending-gio].
+	 */
+	const VOLUME_MONITOR_EXTENSION_POINT_NAME: string;
 
 }
