@@ -24,16 +24,6 @@
                                 "skip": true
                             }
                         }
-                    },
-                    "constructor": {
-                        "newParam": [
-                            {
-                                "name": "options",
-                                "type": "Partial<ServerOptions>",
-                                "optional": true,
-                                "docs": ""
-                            }
-                        ]
                     }
                 }
             }

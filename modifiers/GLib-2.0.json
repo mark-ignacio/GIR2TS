@@ -6,6 +6,11 @@
                 "generic": "<UnpackType = any, DeepUnpackType = UnpackType, RecursiveUnpackType = UnpackType>",
                 "function": {
                     "constructor": {
+                        "param": {
+                            "options?": {
+                                "skip": true
+                            }
+                        },
                         "newParam": [
                             {
                                 "type": "string",

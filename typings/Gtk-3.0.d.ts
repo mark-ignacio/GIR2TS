@@ -334,6 +334,26 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AboutDialogInitOptionsMixin = DialogInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IAboutDialog,
+		"artists" |
+		"authors" |
+		"comments" |
+		"copyright" |
+		"documenters" |
+		"license" |
+		"license_type" |
+		"logo" |
+		"logo_icon_name" |
+		"program_name" |
+		"translator_credits" |
+		"version" |
+		"website" |
+		"website_label" |
+		"wrap_license">;
+
+	export interface AboutDialogInitOptions extends AboutDialogInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AboutDialog} instead.
 	 */
@@ -381,7 +401,7 @@ declare namespace imports.gi.Gtk {
 	interface AboutDialog extends AboutDialogMixin {}
 
 	class AboutDialog {
-		public constructor();
+		public constructor(options?: Partial<AboutDialogInitOptions>);
 		/**
 		 * Creates a new {@link AboutDialog}.
 		 * @returns a newly created {@link AboutDialog}
@@ -528,6 +548,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AccelGroupInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IAccelGroup,
+		"is_locked" |
+		"modifier_mask">;
+
+	export interface AccelGroupInitOptions extends AccelGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AccelGroup} instead.
 	 */
@@ -553,7 +580,7 @@ declare namespace imports.gi.Gtk {
 	interface AccelGroup extends AccelGroupMixin {}
 
 	class AccelGroup {
-		public constructor();
+		public constructor(options?: Partial<AccelGroupInitOptions>);
 		/**
 		 * Creates a new {@link AccelGroup}.
 		 * @returns a new {@link AccelGroup} object
@@ -637,6 +664,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AccelLabelInitOptionsMixin = LabelInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IAccelLabel,
+		"accel_closure" |
+		"accel_widget" |
+		"label">;
+
+	export interface AccelLabelInitOptions extends AccelLabelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AccelLabel} instead.
 	 */
@@ -707,7 +742,7 @@ declare namespace imports.gi.Gtk {
 	interface AccelLabel extends AccelLabelMixin {}
 
 	class AccelLabel {
-		public constructor();
+		public constructor(options?: Partial<AccelLabelInitOptions>);
 		/**
 		 * Creates a new {@link AccelLabel}.
 		 * @param string the label string. Must be non-%NULL.
@@ -730,6 +765,9 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "changed", callback: (owner: this, accel_path: string, accel_key: number, accel_mods: Gdk.ModifierType) => void): number;
 
 	}
+
+	type AccelMapInitOptionsMixin = GObject.ObjectInitOptions
+	export interface AccelMapInitOptions extends AccelMapInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AccelMap} instead.
@@ -794,7 +832,7 @@ declare namespace imports.gi.Gtk {
 	interface AccelMap extends AccelMapMixin {}
 
 	class AccelMap {
-		public constructor();
+		public constructor(options?: Partial<AccelMapInitOptions>);
 		/**
 		 * Registers a new accelerator with the global accelerator map.
 		 * This function should only be called once per #accel_path
@@ -976,6 +1014,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AccessibleInitOptionsMixin = Atk.ObjectInitOptions & 
+	Pick<IAccessible,
+		"widget">;
+
+	export interface AccessibleInitOptions extends AccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Accessible} instead.
 	 */
@@ -997,7 +1041,7 @@ declare namespace imports.gi.Gtk {
 	interface Accessible extends AccessibleMixin {}
 
 	class Accessible {
-		public constructor();
+		public constructor(options?: Partial<AccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1380,6 +1424,28 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ActionInitOptionsMixin = GObject.ObjectInitOptions & BuildableInitOptions & 
+	Pick<IAction,
+		"action_group" |
+		"always_show_image" |
+		"gicon" |
+		"hide_if_empty" |
+		"icon_name" |
+		"is_important" |
+		"label" |
+		"name" |
+		"sensitive" |
+		"short_label" |
+		"stock_id" |
+		"tooltip" |
+		"visible" |
+		"visible_horizontal" |
+		"visible_overflown" |
+		"visible_vertical" |
+		"object">;
+
+	export interface ActionInitOptions extends ActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
 	 */
@@ -1437,7 +1503,7 @@ declare namespace imports.gi.Gtk {
 	interface Action extends ActionMixin {}
 
 	class Action {
-		public constructor();
+		public constructor(options?: Partial<ActionInitOptions>);
 		/**
 		 * Creates a new {@link Action} object. To add the action to a
 		 * #GtkActionGroup and set the accelerator for the action,
@@ -1483,6 +1549,9 @@ declare namespace imports.gi.Gtk {
 		set_center_widget(center_widget: Widget | null): void;
 	}
 
+	type ActionBarInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions
+	export interface ActionBarInitOptions extends ActionBarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActionBar} instead.
 	 */
@@ -1505,7 +1574,7 @@ declare namespace imports.gi.Gtk {
 	interface ActionBar extends ActionBarMixin {}
 
 	class ActionBar {
-		public constructor();
+		public constructor(options?: Partial<ActionBarInitOptions>);
 		/**
 		 * Creates a new {@link ActionBar} widget.
 		 * @returns a new {@link ActionBar}
@@ -1753,6 +1822,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ActionGroupInitOptionsMixin = GObject.ObjectInitOptions & BuildableInitOptions & 
+	Pick<IActionGroup,
+		"accel_group" |
+		"name" |
+		"sensitive" |
+		"visible">;
+
+	export interface ActionGroupInitOptions extends ActionGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActionGroup} instead.
 	 */
@@ -1813,7 +1891,7 @@ declare namespace imports.gi.Gtk {
 	interface ActionGroup extends ActionGroupMixin {}
 
 	class ActionGroup {
-		public constructor();
+		public constructor(options?: Partial<ActionGroupInitOptions>);
 		/**
 		 * Creates a new {@link ActionGroup} object. The name of the action group
 		 * is used when associating [keybindings][Action-Accel]
@@ -2018,6 +2096,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AdjustmentInitOptionsMixin = GObject.InitiallyUnownedInitOptions & 
+	Pick<IAdjustment,
+		"lower" |
+		"page_increment" |
+		"page_size" |
+		"step_increment" |
+		"upper" |
+		"value">;
+
+	export interface AdjustmentInitOptions extends AdjustmentInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Adjustment} instead.
 	 */
@@ -2035,7 +2124,7 @@ declare namespace imports.gi.Gtk {
 	interface Adjustment extends AdjustmentMixin {}
 
 	class Adjustment {
-		public constructor();
+		public constructor(options?: Partial<AdjustmentInitOptions>);
 		/**
 		 * Creates a new {@link Adjustment}.
 		 * @param value the initial value
@@ -2148,6 +2237,20 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AlignmentInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IAlignment,
+		"bottom_padding" |
+		"left_padding" |
+		"right_padding" |
+		"top_padding" |
+		"xalign" |
+		"xscale" |
+		"yalign" |
+		"yscale" |
+		"bin">;
+
+	export interface AlignmentInitOptions extends AlignmentInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Alignment} instead.
 	 */
@@ -2175,7 +2278,7 @@ declare namespace imports.gi.Gtk {
 	interface Alignment extends AlignmentMixin {}
 
 	class Alignment {
-		public constructor();
+		public constructor(options?: Partial<AlignmentInitOptions>);
 		/**
 		 * Creates a new {@link Alignment}.
 		 * @param xalign the horizontal alignment of the child widget, from 0 (left) to 1
@@ -2290,6 +2393,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AppChooserButtonInitOptionsMixin = ComboBoxInitOptions & Atk.ImplementorIfaceInitOptions & AppChooserInitOptions & BuildableInitOptions & CellEditableInitOptions & CellLayoutInitOptions & 
+	Pick<IAppChooserButton,
+		"heading" |
+		"show_default_item" |
+		"show_dialog_item">;
+
+	export interface AppChooserButtonInitOptions extends AppChooserButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppChooserButton} instead.
 	 */
@@ -2322,7 +2433,7 @@ declare namespace imports.gi.Gtk {
 	interface AppChooserButton extends AppChooserButtonMixin {}
 
 	class AppChooserButton {
-		public constructor();
+		public constructor(options?: Partial<AppChooserButtonInitOptions>);
 		/**
 		 * Creates a new {@link AppChooserButton} for applications
 		 * that can handle content of the given type.
@@ -2369,6 +2480,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AppChooserDialogInitOptionsMixin = DialogInitOptions & Atk.ImplementorIfaceInitOptions & AppChooserInitOptions & BuildableInitOptions & 
+	Pick<IAppChooserDialog,
+		"gfile" |
+		"heading">;
+
+	export interface AppChooserDialogInitOptions extends AppChooserDialogInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppChooserDialog} instead.
 	 */
@@ -2388,7 +2506,7 @@ declare namespace imports.gi.Gtk {
 	interface AppChooserDialog extends AppChooserDialogMixin {}
 
 	class AppChooserDialog {
-		public constructor();
+		public constructor(options?: Partial<AppChooserDialogInitOptions>);
 		/**
 		 * Creates a new {@link AppChooserDialog} for the provided #GFile,
 		 * to allow the user to select an application for it.
@@ -2553,6 +2671,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AppChooserWidgetInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & AppChooserInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IAppChooserWidget,
+		"default_text" |
+		"show_all" |
+		"show_default" |
+		"show_fallback" |
+		"show_other" |
+		"show_recommended">;
+
+	export interface AppChooserWidgetInitOptions extends AppChooserWidgetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppChooserWidget} instead.
 	 */
@@ -2584,7 +2713,7 @@ declare namespace imports.gi.Gtk {
 	interface AppChooserWidget extends AppChooserWidgetMixin {}
 
 	class AppChooserWidget {
-		public constructor();
+		public constructor(options?: Partial<AppChooserWidgetInitOptions>);
 		/**
 		 * Creates a new {@link AppChooserWidget} for applications
 		 * that can handle content of the given type.
@@ -2940,6 +3069,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ApplicationInitOptionsMixin = Gio.ApplicationInitOptions & Gio.ActionGroupInitOptions & Gio.ActionMapInitOptions & 
+	Pick<IApplication,
+		"active_window" |
+		"app_menu" |
+		"menubar" |
+		"register_session" |
+		"screensaver_active">;
+
+	export interface ApplicationInitOptions extends ApplicationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Application} instead.
 	 */
@@ -3026,7 +3165,7 @@ declare namespace imports.gi.Gtk {
 	interface Application extends ApplicationMixin {}
 
 	class Application {
-		public constructor();
+		public constructor(options?: Partial<ApplicationInitOptions>);
 		/**
 		 * Creates a new {@link Application} instance.
 		 * 
@@ -3110,6 +3249,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::show_menubar", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type ApplicationWindowInitOptionsMixin = WindowInitOptions & Atk.ImplementorIfaceInitOptions & Gio.ActionGroupInitOptions & Gio.ActionMapInitOptions & BuildableInitOptions & 
+	Pick<IApplicationWindow,
+		"show_menubar">;
+
+	export interface ApplicationWindowInitOptions extends ApplicationWindowInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ApplicationWindow} instead.
@@ -3224,7 +3369,7 @@ declare namespace imports.gi.Gtk {
 	interface ApplicationWindow extends ApplicationWindowMixin {}
 
 	class ApplicationWindow {
-		public constructor();
+		public constructor(options?: Partial<ApplicationWindowInitOptions>);
 		/**
 		 * Creates a new {@link ApplicationWindow}.
 		 * @param application a {@link Application}
@@ -3251,6 +3396,14 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::misc", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type ArrowInitOptionsMixin = MiscInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IArrow,
+		"arrow_type" |
+		"shadow_type" |
+		"misc">;
+
+	export interface ArrowInitOptions extends ArrowInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Arrow} instead.
@@ -3282,7 +3435,7 @@ declare namespace imports.gi.Gtk {
 	interface Arrow extends ArrowMixin {}
 
 	class Arrow {
-		public constructor();
+		public constructor(options?: Partial<ArrowInitOptions>);
 		/**
 		 * Creates a new {@link Arrow} widget.
 		 * @param arrow_type a valid {@link ArrowType}.
@@ -3299,6 +3452,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ArrowAccessibleInitOptionsMixin = WidgetAccessibleInitOptions & Atk.ComponentInitOptions & Atk.ImageInitOptions
+	export interface ArrowAccessibleInitOptions extends ArrowAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ArrowAccessible} instead.
 	 */
@@ -3307,7 +3463,7 @@ declare namespace imports.gi.Gtk {
 	interface ArrowAccessible extends ArrowAccessibleMixin {}
 
 	class ArrowAccessible {
-		public constructor();
+		public constructor(options?: Partial<ArrowAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3340,6 +3496,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AspectFrameInitOptionsMixin = FrameInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IAspectFrame,
+		"obey_child" |
+		"ratio" |
+		"xalign" |
+		"yalign" |
+		"frame">;
+
+	export interface AspectFrameInitOptions extends AspectFrameInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AspectFrame} instead.
 	 */
@@ -3361,7 +3527,7 @@ declare namespace imports.gi.Gtk {
 	interface AspectFrame extends AspectFrameMixin {}
 
 	class AspectFrame {
-		public constructor();
+		public constructor(options?: Partial<AspectFrameInitOptions>);
 		/**
 		 * Create a new {@link AspectFrame}.
 		 * @param label Label text.
@@ -3641,6 +3807,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AssistantInitOptionsMixin = WindowInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IAssistant,
+		"use_header_bar">;
+
+	export interface AssistantInitOptions extends AssistantInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Assistant} instead.
 	 */
@@ -3679,7 +3851,7 @@ declare namespace imports.gi.Gtk {
 	interface Assistant extends AssistantMixin {}
 
 	class Assistant {
-		public constructor();
+		public constructor(options?: Partial<AssistantInitOptions>);
 		/**
 		 * Creates a new {@link Assistant}.
 		 * @returns a newly created {@link Assistant}
@@ -3704,6 +3876,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type BinInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IBin,
+		"container">;
+
+	export interface BinInitOptions extends BinInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bin} instead.
 	 */
@@ -3720,7 +3898,7 @@ declare namespace imports.gi.Gtk {
 	interface Bin extends BinMixin {}
 
 	class Bin {
-		public constructor();
+		public constructor(options?: Partial<BinInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3730,6 +3908,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type BooleanCellAccessibleInitOptionsMixin = RendererCellAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.TableCellInitOptions
+	export interface BooleanCellAccessibleInitOptions extends BooleanCellAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BooleanCellAccessible} instead.
 	 */
@@ -3738,7 +3919,7 @@ declare namespace imports.gi.Gtk {
 	interface BooleanCellAccessible extends BooleanCellAccessibleMixin {}
 
 	class BooleanCellAccessible {
-		public constructor();
+		public constructor(options?: Partial<BooleanCellAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3891,6 +4072,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type BoxInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IBox,
+		"baseline_position" |
+		"homogeneous" |
+		"spacing" |
+		"container">;
+
+	export interface BoxInitOptions extends BoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Box} instead.
 	 */
@@ -3948,7 +4138,7 @@ declare namespace imports.gi.Gtk {
 	interface Box extends BoxMixin {}
 
 	class Box {
-		public constructor();
+		public constructor(options?: Partial<BoxInitOptions>);
 		/**
 		 * Creates a new {@link Box}.
 		 * @param orientation the box’s orientation.
@@ -4250,6 +4440,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type BuilderInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IBuilder,
+		"translation_domain">;
+
+	export interface BuilderInitOptions extends BuilderInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Builder} instead.
 	 */
@@ -4442,7 +4638,7 @@ declare namespace imports.gi.Gtk {
 	interface Builder extends BuilderMixin {}
 
 	class Builder {
-		public constructor();
+		public constructor(options?: Partial<BuilderInitOptions>);
 		/**
 		 * Creates a new empty builder object.
 		 * 
@@ -4729,6 +4925,20 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ButtonInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IButton,
+		"always_show_image" |
+		"image" |
+		"image_position" |
+		"label" |
+		"relief" |
+		"use_stock" |
+		"use_underline" |
+		"xalign" |
+		"yalign">;
+
+	export interface ButtonInitOptions extends ButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Button} instead.
 	 */
@@ -4761,7 +4971,7 @@ declare namespace imports.gi.Gtk {
 	interface Button extends ButtonMixin {}
 
 	class Button {
-		public constructor();
+		public constructor(options?: Partial<ButtonInitOptions>);
 		/**
 		 * Creates a new {@link Button} widget. To add a child widget to the button,
 		 * use gtk_container_add().
@@ -4822,6 +5032,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ButtonAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.ImageInitOptions
+	export interface ButtonAccessibleInitOptions extends ButtonAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ButtonAccessible} instead.
 	 */
@@ -4830,7 +5043,7 @@ declare namespace imports.gi.Gtk {
 	interface ButtonAccessible extends ButtonAccessibleMixin {}
 
 	class ButtonAccessible {
-		public constructor();
+		public constructor(options?: Partial<ButtonAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4891,6 +5104,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ButtonBoxInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IButtonBox,
+		"layout_style" |
+		"box">;
+
+	export interface ButtonBoxInitOptions extends ButtonBoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ButtonBox} instead.
 	 */
@@ -4899,7 +5119,7 @@ declare namespace imports.gi.Gtk {
 	interface ButtonBox extends ButtonBoxMixin {}
 
 	class ButtonBox {
-		public constructor();
+		public constructor(options?: Partial<ButtonBoxInitOptions>);
 		/**
 		 * Creates a new {@link ButtonBox}.
 		 * @param orientation the box's orientation.
@@ -5100,6 +5320,22 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CalendarInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<ICalendar,
+		"day" |
+		"detail_height_rows" |
+		"detail_width_chars" |
+		"month" |
+		"no_month_change" |
+		"show_day_names" |
+		"show_details" |
+		"show_heading" |
+		"show_week_numbers" |
+		"year" |
+		"widget">;
+
+	export interface CalendarInitOptions extends CalendarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Calendar} instead.
 	 */
@@ -5131,7 +5367,7 @@ declare namespace imports.gi.Gtk {
 	interface Calendar extends CalendarMixin {}
 
 	class Calendar {
-		public constructor();
+		public constructor(options?: Partial<CalendarInitOptions>);
 		/**
 		 * Creates a new calendar, with the current date being selected.
 		 * @returns a newly {@link Calendar} widget
@@ -5146,6 +5382,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellAccessibleInitOptionsMixin = AccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.TableCellInitOptions
+	export interface CellAccessibleInitOptions extends CellAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellAccessible} instead.
 	 */
@@ -5154,7 +5393,7 @@ declare namespace imports.gi.Gtk {
 	interface CellAccessible extends CellAccessibleMixin {}
 
 	class CellAccessible {
-		public constructor();
+		public constructor(options?: Partial<CellAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5649,6 +5888,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellAreaInitOptionsMixin = GObject.InitiallyUnownedInitOptions & BuildableInitOptions & CellLayoutInitOptions & 
+	Pick<ICellArea,
+		"edit_widget" |
+		"edited_cell" |
+		"focus_cell">;
+
+	export interface CellAreaInitOptions extends CellAreaInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellArea} instead.
 	 */
@@ -5972,7 +6219,7 @@ declare namespace imports.gi.Gtk {
 	interface CellArea extends CellAreaMixin {}
 
 	class CellArea {
-		public constructor();
+		public constructor(options?: Partial<CellAreaInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6021,6 +6268,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellAreaBoxInitOptionsMixin = CellAreaInitOptions & BuildableInitOptions & CellLayoutInitOptions & OrientableInitOptions & 
+	Pick<ICellAreaBox,
+		"spacing">;
+
+	export interface CellAreaBoxInitOptions extends CellAreaBoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellAreaBox} instead.
 	 */
@@ -6048,7 +6301,7 @@ declare namespace imports.gi.Gtk {
 	interface CellAreaBox extends CellAreaBoxMixin {}
 
 	class CellAreaBox {
-		public constructor();
+		public constructor(options?: Partial<CellAreaBoxInitOptions>);
 		/**
 		 * Creates a new {@link CellAreaBox}.
 		 * @returns a newly created {@link CellAreaBox}
@@ -6245,6 +6498,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellAreaContextInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ICellAreaContext,
+		"area" |
+		"minimum_height" |
+		"minimum_width" |
+		"natural_height" |
+		"natural_width">;
+
+	export interface CellAreaContextInitOptions extends CellAreaContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellAreaContext} instead.
 	 */
@@ -6265,7 +6528,7 @@ declare namespace imports.gi.Gtk {
 	interface CellAreaContext extends CellAreaContextMixin {}
 
 	class CellAreaContext {
-		public constructor();
+		public constructor(options?: Partial<CellAreaContextInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6559,6 +6822,26 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellRendererInitOptionsMixin = GObject.InitiallyUnownedInitOptions & 
+	Pick<ICellRenderer,
+		"cell_background_gdk" |
+		"cell_background_rgba" |
+		"cell_background_set" |
+		"editing" |
+		"height" |
+		"is_expanded" |
+		"is_expander" |
+		"mode" |
+		"sensitive" |
+		"visible" |
+		"width" |
+		"xalign" |
+		"xpad" |
+		"yalign" |
+		"ypad">;
+
+	export interface CellRendererInitOptions extends CellRendererInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRenderer} instead.
 	 */
@@ -6604,7 +6887,7 @@ declare namespace imports.gi.Gtk {
 	interface CellRenderer extends CellRendererMixin {}
 
 	class CellRenderer {
-		public constructor();
+		public constructor(options?: Partial<CellRendererInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6649,6 +6932,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellRendererAccelInitOptionsMixin = CellRendererTextInitOptions & 
+	Pick<ICellRendererAccel,
+		"accel_key" |
+		"accel_mode" |
+		"accel_mods" |
+		"keycode">;
+
+	export interface CellRendererAccelInitOptions extends CellRendererAccelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererAccel} instead.
 	 */
@@ -6664,7 +6956,7 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererAccel extends CellRendererAccelMixin {}
 
 	class CellRendererAccel {
-		public constructor();
+		public constructor(options?: Partial<CellRendererAccelInitOptions>);
 		/**
 		 * Creates a new {@link CellRendererAccel}.
 		 * @returns the new cell renderer
@@ -6720,6 +7012,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellRendererComboInitOptionsMixin = CellRendererTextInitOptions & 
+	Pick<ICellRendererCombo,
+		"has_entry" |
+		"model" |
+		"text_column">;
+
+	export interface CellRendererComboInitOptions extends CellRendererComboInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererCombo} instead.
 	 */
@@ -6742,7 +7042,7 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererCombo extends CellRendererComboMixin {}
 
 	class CellRendererCombo {
-		public constructor();
+		public constructor(options?: Partial<CellRendererComboInitOptions>);
 		/**
 		 * Creates a new {@link CellRendererCombo}.
 		 * Adjust how text is drawn using object properties.
@@ -6801,6 +7101,21 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellRendererPixbufInitOptionsMixin = CellRendererInitOptions & 
+	Pick<ICellRendererPixbuf,
+		"follow_state" |
+		"gicon" |
+		"icon_name" |
+		"pixbuf" |
+		"pixbuf_expander_closed" |
+		"pixbuf_expander_open" |
+		"stock_detail" |
+		"stock_id" |
+		"stock_size" |
+		"surface">;
+
+	export interface CellRendererPixbufInitOptions extends CellRendererPixbufInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererPixbuf} instead.
 	 */
@@ -6823,7 +7138,7 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererPixbuf extends CellRendererPixbufMixin {}
 
 	class CellRendererPixbuf {
-		public constructor();
+		public constructor(options?: Partial<CellRendererPixbufInitOptions>);
 		/**
 		 * Creates a new {@link CellRendererPixbuf}. Adjust rendering
 		 * parameters using object properties. Object properties can be set
@@ -6889,6 +7204,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellRendererProgressInitOptionsMixin = CellRendererInitOptions & OrientableInitOptions & 
+	Pick<ICellRendererProgress,
+		"inverted" |
+		"pulse" |
+		"text" |
+		"text_xalign" |
+		"text_yalign" |
+		"value">;
+
+	export interface CellRendererProgressInitOptions extends CellRendererProgressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererProgress} instead.
 	 */
@@ -6903,7 +7229,7 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererProgress extends CellRendererProgressMixin {}
 
 	class CellRendererProgress {
-		public constructor();
+		public constructor(options?: Partial<CellRendererProgressInitOptions>);
 		/**
 		 * Creates a new {@link CellRendererProgress}.
 		 * @returns the new cell renderer
@@ -6935,6 +7261,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellRendererSpinInitOptionsMixin = CellRendererTextInitOptions & 
+	Pick<ICellRendererSpin,
+		"adjustment" |
+		"climb_rate" |
+		"digits">;
+
+	export interface CellRendererSpinInitOptions extends CellRendererSpinInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererSpin} instead.
 	 */
@@ -6958,7 +7292,7 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererSpin extends CellRendererSpinMixin {}
 
 	class CellRendererSpin {
-		public constructor();
+		public constructor(options?: Partial<CellRendererSpinInitOptions>);
 		/**
 		 * Creates a new {@link CellRendererSpin}.
 		 * @returns a new {@link CellRendererSpin}
@@ -6990,6 +7324,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellRendererSpinnerInitOptionsMixin = CellRendererInitOptions & 
+	Pick<ICellRendererSpinner,
+		"active" |
+		"pulse" |
+		"size">;
+
+	export interface CellRendererSpinnerInitOptions extends CellRendererSpinnerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererSpinner} instead.
 	 */
@@ -7010,7 +7352,7 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererSpinner extends CellRendererSpinnerMixin {}
 
 	class CellRendererSpinner {
-		public constructor();
+		public constructor(options?: Partial<CellRendererSpinnerInitOptions>);
 		/**
 		 * Returns a new cell renderer which will show a spinner to indicate
 		 * activity.
@@ -7191,6 +7533,56 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellRendererTextInitOptionsMixin = CellRendererInitOptions & 
+	Pick<ICellRendererText,
+		"align_set" |
+		"alignment" |
+		"attributes" |
+		"background_gdk" |
+		"background_rgba" |
+		"background_set" |
+		"editable" |
+		"editable_set" |
+		"ellipsize" |
+		"ellipsize_set" |
+		"family" |
+		"family_set" |
+		"font" |
+		"font_desc" |
+		"foreground_gdk" |
+		"foreground_rgba" |
+		"foreground_set" |
+		"language" |
+		"language_set" |
+		"max_width_chars" |
+		"placeholder_text" |
+		"rise" |
+		"rise_set" |
+		"scale" |
+		"scale_set" |
+		"single_paragraph_mode" |
+		"size" |
+		"size_points" |
+		"size_set" |
+		"stretch" |
+		"stretch_set" |
+		"strikethrough" |
+		"strikethrough_set" |
+		"style" |
+		"style_set" |
+		"text" |
+		"underline" |
+		"underline_set" |
+		"variant" |
+		"variant_set" |
+		"weight" |
+		"weight_set" |
+		"width_chars" |
+		"wrap_mode" |
+		"wrap_width">;
+
+	export interface CellRendererTextInitOptions extends CellRendererTextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererText} instead.
 	 */
@@ -7207,7 +7599,7 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererText extends CellRendererTextMixin {}
 
 	class CellRendererText {
-		public constructor();
+		public constructor(options?: Partial<CellRendererTextInitOptions>);
 		/**
 		 * Creates a new {@link CellRendererText}. Adjust how text is drawn using
 		 * object properties. Object properties can be
@@ -7285,6 +7677,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellRendererToggleInitOptionsMixin = CellRendererInitOptions & 
+	Pick<ICellRendererToggle,
+		"activatable" |
+		"active" |
+		"inconsistent" |
+		"indicator_size" |
+		"radio">;
+
+	export interface CellRendererToggleInitOptions extends CellRendererToggleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererToggle} instead.
 	 */
@@ -7299,7 +7701,7 @@ declare namespace imports.gi.Gtk {
 	interface CellRendererToggle extends CellRendererToggleMixin {}
 
 	class CellRendererToggle {
-		public constructor();
+		public constructor(options?: Partial<CellRendererToggleInitOptions>);
 		/**
 		 * Creates a new {@link CellRendererToggle}. Adjust rendering
 		 * parameters using object properties. Object properties can be set
@@ -7463,6 +7865,19 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellViewInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & CellLayoutInitOptions & OrientableInitOptions & 
+	Pick<ICellView,
+		"background_gdk" |
+		"background_rgba" |
+		"background_set" |
+		"cell_area" |
+		"cell_area_context" |
+		"draw_sensitive" |
+		"fit_model" |
+		"model">;
+
+	export interface CellViewInitOptions extends CellViewInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellView} instead.
 	 */
@@ -7490,7 +7905,7 @@ declare namespace imports.gi.Gtk {
 	interface CellView extends CellViewMixin {}
 
 	class CellView {
-		public constructor();
+		public constructor(options?: Partial<CellViewInitOptions>);
 		/**
 		 * Creates a new {@link CellView} widget.
 		 * @returns A newly created {@link CellView} widget.
@@ -7543,6 +7958,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CheckButtonInitOptionsMixin = ToggleButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<ICheckButton,
+		"toggle_button">;
+
+	export interface CheckButtonInitOptions extends CheckButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CheckButton} instead.
 	 */
@@ -7580,7 +8001,7 @@ declare namespace imports.gi.Gtk {
 	interface CheckButton extends CheckButtonMixin {}
 
 	class CheckButton {
-		public constructor();
+		public constructor(options?: Partial<CheckButtonInitOptions>);
 		/**
 		 * Creates a new {@link CheckButton}.
 		 * @returns a {@link Widget}.
@@ -7668,6 +8089,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CheckMenuItemInitOptionsMixin = MenuItemInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<ICheckMenuItem,
+		"active" |
+		"draw_as_radio" |
+		"inconsistent" |
+		"menu_item">;
+
+	export interface CheckMenuItemInitOptions extends CheckMenuItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CheckMenuItem} instead.
 	 */
@@ -7696,7 +8126,7 @@ declare namespace imports.gi.Gtk {
 	interface CheckMenuItem extends CheckMenuItemMixin {}
 
 	class CheckMenuItem {
-		public constructor();
+		public constructor(options?: Partial<CheckMenuItemInitOptions>);
 		/**
 		 * Creates a new {@link CheckMenuItem}.
 		 * @returns a new {@link CheckMenuItem}.
@@ -7726,6 +8156,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CheckMenuItemAccessibleInitOptionsMixin = MenuItemAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions
+	export interface CheckMenuItemAccessibleInitOptions extends CheckMenuItemAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CheckMenuItemAccessible} instead.
 	 */
@@ -7734,7 +8167,7 @@ declare namespace imports.gi.Gtk {
 	interface CheckMenuItemAccessible extends CheckMenuItemAccessibleMixin {}
 
 	class CheckMenuItemAccessible {
-		public constructor();
+		public constructor(options?: Partial<CheckMenuItemAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8065,6 +8498,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ClipboardInitOptionsMixin = GObject.ObjectInitOptions
+	export interface ClipboardInitOptions extends ClipboardInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clipboard} instead.
 	 */
@@ -8132,7 +8568,7 @@ declare namespace imports.gi.Gtk {
 	interface Clipboard extends ClipboardMixin {}
 
 	class Clipboard {
-		public constructor();
+		public constructor(options?: Partial<ClipboardInitOptions>);
 		/**
 		 * Returns the clipboard object for the given selection.
 		 * See gtk_clipboard_get_for_display() for complete details.
@@ -8294,6 +8730,18 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ColorButtonInitOptionsMixin = ButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & ColorChooserInitOptions & 
+	Pick<IColorButton,
+		"alpha" |
+		"color" |
+		"rgba" |
+		"show_editor" |
+		"title" |
+		"use_alpha" |
+		"button">;
+
+	export interface ColorButtonInitOptions extends ColorButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorButton} instead.
 	 */
@@ -8312,7 +8760,7 @@ declare namespace imports.gi.Gtk {
 	interface ColorButton extends ColorButtonMixin {}
 
 	class ColorButton {
-		public constructor();
+		public constructor(options?: Partial<ColorButtonInitOptions>);
 		/**
 		 * Creates a new color button.
 		 * 
@@ -8348,6 +8796,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ColorChooserDialogInitOptionsMixin = DialogInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & ColorChooserInitOptions & 
+	Pick<IColorChooserDialog,
+		"show_editor">;
+
+	export interface ColorChooserDialogInitOptions extends ColorChooserDialogInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorChooserDialog} instead.
 	 */
@@ -8360,7 +8814,7 @@ declare namespace imports.gi.Gtk {
 	interface ColorChooserDialog extends ColorChooserDialogMixin {}
 
 	class ColorChooserDialog {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserDialogInitOptions>);
 		/**
 		 * Creates a new {@link ColorChooserDialog}.
 		 * @param title Title of the dialog, or %NULL
@@ -8384,6 +8838,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::show_editor", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type ColorChooserWidgetInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & ColorChooserInitOptions & OrientableInitOptions & 
+	Pick<IColorChooserWidget,
+		"show_editor">;
+
+	export interface ColorChooserWidgetInitOptions extends ColorChooserWidgetInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorChooserWidget} instead.
@@ -8415,7 +8875,7 @@ declare namespace imports.gi.Gtk {
 	interface ColorChooserWidget extends ColorChooserWidgetMixin {}
 
 	class ColorChooserWidget {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserWidgetInitOptions>);
 		/**
 		 * Creates a new {@link ColorChooserWidget}.
 		 * @returns a new {@link ColorChooserWidget}
@@ -8561,6 +9021,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ColorSelectionInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IColorSelection,
+		"current_alpha" |
+		"current_color" |
+		"current_rgba" |
+		"has_opacity_control" |
+		"has_palette">;
+
+	export interface ColorSelectionInitOptions extends ColorSelectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorSelection} instead.
 	 */
@@ -8569,7 +9039,7 @@ declare namespace imports.gi.Gtk {
 	interface ColorSelection extends ColorSelectionMixin {}
 
 	class ColorSelection {
-		public constructor();
+		public constructor(options?: Partial<ColorSelectionInitOptions>);
 		/**
 		 * Creates a new GtkColorSelection.
 		 * @returns a new {@link ColorSelection}
@@ -8622,6 +9092,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ColorSelectionDialogInitOptionsMixin = DialogInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IColorSelectionDialog,
+		"cancel_button" |
+		"color_selection" |
+		"help_button" |
+		"ok_button">;
+
+	export interface ColorSelectionDialogInitOptions extends ColorSelectionDialogInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorSelectionDialog} instead.
 	 */
@@ -8630,7 +9109,7 @@ declare namespace imports.gi.Gtk {
 	interface ColorSelectionDialog extends ColorSelectionDialogMixin {}
 
 	class ColorSelectionDialog {
-		public constructor();
+		public constructor(options?: Partial<ColorSelectionDialogInitOptions>);
 		/**
 		 * Creates a new {@link ColorSelectionDialog}.
 		 * @param title a string containing the title text for the dialog.
@@ -9080,6 +9559,27 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ComboBoxInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & CellEditableInitOptions & CellLayoutInitOptions & 
+	Pick<IComboBox,
+		"active" |
+		"active_id" |
+		"add_tearoffs" |
+		"button_sensitivity" |
+		"cell_area" |
+		"column_span_column" |
+		"entry_text_column" |
+		"has_entry" |
+		"has_frame" |
+		"id_column" |
+		"model" |
+		"popup_fixed_width" |
+		"popup_shown" |
+		"row_span_column" |
+		"tearoff_title" |
+		"wrap_width">;
+
+	export interface ComboBoxInitOptions extends ComboBoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ComboBox} instead.
 	 */
@@ -9144,7 +9644,7 @@ declare namespace imports.gi.Gtk {
 	interface ComboBox extends ComboBoxMixin {}
 
 	class ComboBox {
-		public constructor();
+		public constructor(options?: Partial<ComboBoxInitOptions>);
 		/**
 		 * Creates a new empty {@link ComboBox}.
 		 * @returns A new {@link ComboBox}.
@@ -9191,6 +9691,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ComboBoxAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions
+	export interface ComboBoxAccessibleInitOptions extends ComboBoxAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ComboBoxAccessible} instead.
 	 */
@@ -9199,7 +9702,7 @@ declare namespace imports.gi.Gtk {
 	interface ComboBoxAccessible extends ComboBoxAccessibleMixin {}
 
 	class ComboBoxAccessible {
-		public constructor();
+		public constructor(options?: Partial<ComboBoxAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9284,6 +9787,9 @@ declare namespace imports.gi.Gtk {
 		remove_all(): void;
 	}
 
+	type ComboBoxTextInitOptionsMixin = ComboBoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & CellEditableInitOptions & CellLayoutInitOptions
+	export interface ComboBoxTextInitOptions extends ComboBoxTextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ComboBoxText} instead.
 	 */
@@ -9346,7 +9852,7 @@ declare namespace imports.gi.Gtk {
 	interface ComboBoxText extends ComboBoxTextMixin {}
 
 	class ComboBoxText {
-		public constructor();
+		public constructor(options?: Partial<ComboBoxTextInitOptions>);
 		/**
 		 * Creates a new {@link ComboBoxText}, which is a #GtkComboBox just displaying
 		 * strings.
@@ -9688,6 +10194,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ContainerInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IContainer,
+		"border_width" |
+		"resize_mode" |
+		"widget">;
+
+	export interface ContainerInitOptions extends ContainerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Container} instead.
 	 */
@@ -9899,7 +10413,7 @@ declare namespace imports.gi.Gtk {
 	interface Container extends ContainerMixin {}
 
 	class Container {
-		public constructor();
+		public constructor(options?: Partial<ContainerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9909,6 +10423,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ContainerAccessibleInitOptionsMixin = WidgetAccessibleInitOptions & Atk.ComponentInitOptions
+	export interface ContainerAccessibleInitOptions extends ContainerAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContainerAccessible} instead.
 	 */
@@ -9917,7 +10434,7 @@ declare namespace imports.gi.Gtk {
 	interface ContainerAccessible extends ContainerAccessibleMixin {}
 
 	class ContainerAccessible {
-		public constructor();
+		public constructor(options?: Partial<ContainerAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9933,6 +10450,9 @@ declare namespace imports.gi.Gtk {
 		remove_child(child: CellAccessible): void;
 	}
 
+	type ContainerCellAccessibleInitOptionsMixin = CellAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.TableCellInitOptions
+	export interface ContainerCellAccessibleInitOptions extends ContainerCellAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContainerCellAccessible} instead.
 	 */
@@ -9941,7 +10461,7 @@ declare namespace imports.gi.Gtk {
 	interface ContainerCellAccessible extends ContainerCellAccessibleMixin {}
 
 	class ContainerCellAccessible {
-		public constructor();
+		public constructor(options?: Partial<ContainerCellAccessibleInitOptions>);
 		public static new(): ContainerCellAccessible;
 	}
 
@@ -10019,6 +10539,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CssProviderInitOptionsMixin = GObject.ObjectInitOptions & StyleProviderInitOptions
+	export interface CssProviderInitOptions extends CssProviderInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CssProvider} instead.
 	 */
@@ -10052,7 +10575,7 @@ declare namespace imports.gi.Gtk {
 	interface CssProvider extends CssProviderMixin {}
 
 	class CssProvider {
-		public constructor();
+		public constructor(options?: Partial<CssProviderInitOptions>);
 		/**
 		 * Returns a newly created {@link CssProvider}.
 		 * @returns A new {@link CssProvider}
@@ -10300,6 +10823,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type DialogInitOptionsMixin = WindowInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IDialog,
+		"use_header_bar" |
+		"window">;
+
+	export interface DialogInitOptions extends DialogInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Dialog} instead.
 	 */
@@ -10428,7 +10958,7 @@ declare namespace imports.gi.Gtk {
 	interface Dialog extends DialogMixin {}
 
 	class Dialog {
-		public constructor();
+		public constructor(options?: Partial<DialogInitOptions>);
 		/**
 		 * Creates a new dialog box.
 		 * 
@@ -10488,6 +11018,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type DrawingAreaInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IDrawingArea,
+		"widget">;
+
+	export interface DrawingAreaInitOptions extends DrawingAreaInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DrawingArea} instead.
@@ -10582,7 +11118,7 @@ declare namespace imports.gi.Gtk {
 	interface DrawingArea extends DrawingAreaMixin {}
 
 	class DrawingArea {
-		public constructor();
+		public constructor(options?: Partial<DrawingAreaInitOptions>);
 		/**
 		 * Creates a new drawing area.
 		 * @returns a new {@link DrawingArea}
@@ -11672,6 +12208,62 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EntryInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & CellEditableInitOptions & EditableInitOptions & 
+	Pick<IEntry,
+		"activates_default" |
+		"attributes" |
+		"buffer" |
+		"caps_lock_warning" |
+		"completion" |
+		"cursor_position" |
+		"editable" |
+		"enable_emoji_completion" |
+		"has_frame" |
+		"im_module" |
+		"inner_border" |
+		"input_hints" |
+		"input_purpose" |
+		"invisible_char" |
+		"invisible_char_set" |
+		"max_length" |
+		"max_width_chars" |
+		"overwrite_mode" |
+		"placeholder_text" |
+		"populate_all" |
+		"primary_icon_activatable" |
+		"primary_icon_gicon" |
+		"primary_icon_name" |
+		"primary_icon_pixbuf" |
+		"primary_icon_sensitive" |
+		"primary_icon_stock" |
+		"primary_icon_storage_type" |
+		"primary_icon_tooltip_markup" |
+		"primary_icon_tooltip_text" |
+		"progress_fraction" |
+		"progress_pulse_step" |
+		"scroll_offset" |
+		"secondary_icon_activatable" |
+		"secondary_icon_gicon" |
+		"secondary_icon_name" |
+		"secondary_icon_pixbuf" |
+		"secondary_icon_sensitive" |
+		"secondary_icon_stock" |
+		"secondary_icon_storage_type" |
+		"secondary_icon_tooltip_markup" |
+		"secondary_icon_tooltip_text" |
+		"selection_bound" |
+		"shadow_type" |
+		"show_emoji_icon" |
+		"tabs" |
+		"text" |
+		"text_length" |
+		"truncate_multiline" |
+		"visibility" |
+		"width_chars" |
+		"xalign">;
+
+	export interface EntryInitOptions extends EntryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Entry} instead.
 	 */
@@ -11754,7 +12346,7 @@ declare namespace imports.gi.Gtk {
 	interface Entry extends EntryMixin {}
 
 	class Entry {
-		public constructor();
+		public constructor(options?: Partial<EntryInitOptions>);
 		/**
 		 * Creates a new entry.
 		 * @returns a new {@link Entry}.
@@ -11775,6 +12367,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EntryAccessibleInitOptionsMixin = WidgetAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.EditableTextInitOptions & Atk.TextInitOptions
+	export interface EntryAccessibleInitOptions extends EntryAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryAccessible} instead.
 	 */
@@ -11783,7 +12378,7 @@ declare namespace imports.gi.Gtk {
 	interface EntryAccessible extends EntryAccessibleMixin {}
 
 	class EntryAccessible {
-		public constructor();
+		public constructor(options?: Partial<EntryAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11909,6 +12504,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EntryBufferInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IEntryBuffer,
+		"length" |
+		"max_length" |
+		"text">;
+
+	export interface EntryBufferInitOptions extends EntryBufferInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryBuffer} instead.
 	 */
@@ -11930,7 +12533,7 @@ declare namespace imports.gi.Gtk {
 	interface EntryBuffer extends EntryBufferMixin {}
 
 	class EntryBuffer {
-		public constructor();
+		public constructor(options?: Partial<EntryBufferInitOptions>);
 		/**
 		 * Create a new GtkEntryBuffer object.
 		 * 
@@ -12217,6 +12820,20 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EntryCompletionInitOptionsMixin = GObject.ObjectInitOptions & BuildableInitOptions & CellLayoutInitOptions & 
+	Pick<IEntryCompletion,
+		"cell_area" |
+		"inline_completion" |
+		"inline_selection" |
+		"minimum_key_length" |
+		"model" |
+		"popup_completion" |
+		"popup_set_width" |
+		"popup_single_match" |
+		"text_column">;
+
+	export interface EntryCompletionInitOptions extends EntryCompletionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryCompletion} instead.
 	 */
@@ -12267,7 +12884,7 @@ declare namespace imports.gi.Gtk {
 	interface EntryCompletion extends EntryCompletionMixin {}
 
 	class EntryCompletion {
-		public constructor();
+		public constructor(options?: Partial<EntryCompletionInitOptions>);
 		/**
 		 * Creates a new {@link EntryCompletion} object.
 		 * @returns A newly created {@link EntryCompletion} object
@@ -12290,6 +12907,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EntryIconAccessibleInitOptionsMixin = Atk.ObjectInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions
+	export interface EntryIconAccessibleInitOptions extends EntryIconAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryIconAccessible} instead.
 	 */
@@ -12298,7 +12918,7 @@ declare namespace imports.gi.Gtk {
 	interface EntryIconAccessible extends EntryIconAccessibleMixin {}
 
 	class EntryIconAccessible {
-		public constructor();
+		public constructor(options?: Partial<EntryIconAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -12376,6 +12996,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EventBoxInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IEventBox,
+		"above_child" |
+		"visible_window" |
+		"bin">;
+
+	export interface EventBoxInitOptions extends EventBoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventBox} instead.
 	 */
@@ -12389,7 +13017,7 @@ declare namespace imports.gi.Gtk {
 	interface EventBox extends EventBoxMixin {}
 
 	class EventBox {
-		public constructor();
+		public constructor(options?: Partial<EventBoxInitOptions>);
 		/**
 		 * Creates a new {@link EventBox}.
 		 * @returns a new {@link EventBox}
@@ -12447,6 +13075,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EventControllerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IEventController,
+		"propagation_phase" |
+		"widget">;
+
+	export interface EventControllerInitOptions extends EventControllerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventController} instead.
 	 */
@@ -12460,7 +13095,7 @@ declare namespace imports.gi.Gtk {
 	interface EventController extends EventControllerMixin {}
 
 	class EventController {
-		public constructor();
+		public constructor(options?: Partial<EventControllerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -12490,6 +13125,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EventControllerKeyInitOptionsMixin = EventControllerInitOptions
+	export interface EventControllerKeyInitOptions extends EventControllerKeyInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventControllerKey} instead.
 	 */
@@ -12504,7 +13142,7 @@ declare namespace imports.gi.Gtk {
 	interface EventControllerKey extends EventControllerKeyMixin {}
 
 	class EventControllerKey {
-		public constructor();
+		public constructor(options?: Partial<EventControllerKeyInitOptions>);
 		public static new(widget: Widget): EventController;
 	}
 
@@ -12528,6 +13166,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EventControllerMotionInitOptionsMixin = EventControllerInitOptions
+	export interface EventControllerMotionInitOptions extends EventControllerMotionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventControllerMotion} instead.
 	 */
@@ -12542,7 +13183,7 @@ declare namespace imports.gi.Gtk {
 	interface EventControllerMotion extends EventControllerMotionMixin {}
 
 	class EventControllerMotion {
-		public constructor();
+		public constructor(options?: Partial<EventControllerMotionInitOptions>);
 		/**
 		 * Creates a new event controller that will handle motion events
 		 * for the given #widget.
@@ -12597,6 +13238,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EventControllerScrollInitOptionsMixin = EventControllerInitOptions & 
+	Pick<IEventControllerScroll,
+		"flags">;
+
+	export interface EventControllerScrollInitOptions extends EventControllerScrollInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventControllerScroll} instead.
 	 */
@@ -12641,7 +13288,7 @@ declare namespace imports.gi.Gtk {
 	interface EventControllerScroll extends EventControllerScrollMixin {}
 
 	class EventControllerScroll {
-		public constructor();
+		public constructor(options?: Partial<EventControllerScrollInitOptions>);
 		/**
 		 * Creates a new event controller that will handle scroll events
 		 * for the given #widget.
@@ -12809,6 +13456,20 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ExpanderInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IExpander,
+		"expanded" |
+		"label" |
+		"label_fill" |
+		"label_widget" |
+		"resize_toplevel" |
+		"spacing" |
+		"use_markup" |
+		"use_underline" |
+		"bin">;
+
+	export interface ExpanderInitOptions extends ExpanderInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Expander} instead.
 	 */
@@ -12901,7 +13562,7 @@ declare namespace imports.gi.Gtk {
 	interface Expander extends ExpanderMixin {}
 
 	class Expander {
-		public constructor();
+		public constructor(options?: Partial<ExpanderInitOptions>);
 		/**
 		 * Creates a new expander using #label as the text of the label.
 		 * @param label the text of the label
@@ -12929,6 +13590,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ExpanderAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions
+	export interface ExpanderAccessibleInitOptions extends ExpanderAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ExpanderAccessible} instead.
 	 */
@@ -12937,7 +13601,7 @@ declare namespace imports.gi.Gtk {
 	interface ExpanderAccessible extends ExpanderAccessibleMixin {}
 
 	class ExpanderAccessible {
-		public constructor();
+		public constructor(options?: Partial<ExpanderAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13001,6 +13665,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FileChooserButtonInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & FileChooserInitOptions & OrientableInitOptions & 
+	Pick<IFileChooserButton,
+		"title" |
+		"width_chars">;
+
+	export interface FileChooserButtonInitOptions extends FileChooserButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserButton} instead.
 	 */
@@ -13045,7 +13716,7 @@ declare namespace imports.gi.Gtk {
 	interface FileChooserButton extends FileChooserButtonMixin {}
 
 	class FileChooserButton {
-		public constructor();
+		public constructor(options?: Partial<FileChooserButtonInitOptions>);
 		/**
 		 * Creates a new file-selecting button widget.
 		 * @param title the title of the browse dialog.
@@ -13076,6 +13747,9 @@ declare namespace imports.gi.Gtk {
 	interface IFileChooserDialog {
 
 	}
+
+	type FileChooserDialogInitOptionsMixin = DialogInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & FileChooserInitOptions
+	export interface FileChooserDialogInitOptions extends FileChooserDialogInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserDialog} instead.
@@ -13242,7 +13916,7 @@ declare namespace imports.gi.Gtk {
 	interface FileChooserDialog extends FileChooserDialogMixin {}
 
 	class FileChooserDialog {
-		public constructor();
+		public constructor(options?: Partial<FileChooserDialogInitOptions>);
 		/**
 		 * Creates a new {@link FileChooserDialog}.  This function is analogous to
 		 * gtk_dialog_new_with_buttons().
@@ -13307,6 +13981,13 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::cancel_label", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type FileChooserNativeInitOptionsMixin = NativeDialogInitOptions & FileChooserInitOptions & 
+	Pick<IFileChooserNative,
+		"accept_label" |
+		"cancel_label">;
+
+	export interface FileChooserNativeInitOptions extends FileChooserNativeInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserNative} instead.
@@ -13474,7 +14155,7 @@ declare namespace imports.gi.Gtk {
 	interface FileChooserNative extends FileChooserNativeMixin {}
 
 	class FileChooserNative {
-		public constructor();
+		public constructor(options?: Partial<FileChooserNativeInitOptions>);
 		/**
 		 * Creates a new {@link FileChooserNative}.
 		 * @param title Title of the native, or %NULL
@@ -13628,6 +14309,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FileChooserWidgetInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & FileChooserInitOptions & OrientableInitOptions & 
+	Pick<IFileChooserWidget,
+		"search_mode" |
+		"subtitle">;
+
+	export interface FileChooserWidgetInitOptions extends FileChooserWidgetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserWidget} instead.
 	 */
@@ -13646,7 +14334,7 @@ declare namespace imports.gi.Gtk {
 	interface FileChooserWidget extends FileChooserWidgetMixin {}
 
 	class FileChooserWidget {
-		public constructor();
+		public constructor(options?: Partial<FileChooserWidgetInitOptions>);
 		/**
 		 * Creates a new {@link FileChooserWidget}. This is a file chooser widget that can
 		 * be embedded in custom windows, and it is the same widget that is used by
@@ -13664,6 +14352,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FileChooserWidgetAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions
+	export interface FileChooserWidgetAccessibleInitOptions extends FileChooserWidgetAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserWidgetAccessible} instead.
 	 */
@@ -13672,7 +14363,7 @@ declare namespace imports.gi.Gtk {
 	interface FileChooserWidgetAccessible extends FileChooserWidgetAccessibleMixin {}
 
 	class FileChooserWidgetAccessible {
-		public constructor();
+		public constructor(options?: Partial<FileChooserWidgetAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13754,6 +14445,9 @@ declare namespace imports.gi.Gtk {
 		to_gvariant(): GLib.Variant;
 	}
 
+	type FileFilterInitOptionsMixin = GObject.InitiallyUnownedInitOptions & BuildableInitOptions
+	export interface FileFilterInitOptions extends FileFilterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileFilter} instead.
 	 */
@@ -13803,7 +14497,7 @@ declare namespace imports.gi.Gtk {
 	interface FileFilter extends FileFilterMixin {}
 
 	class FileFilter {
-		public constructor();
+		public constructor(options?: Partial<FileFilterInitOptions>);
 		/**
 		 * Creates a new {@link FileFilter} with no rules added to it.
 		 * Such a filter doesn’t accept any files, so is not
@@ -13849,6 +14543,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type FixedInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IFixed,
+		"container">;
+
+	export interface FixedInitOptions extends FixedInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Fixed} instead.
@@ -13900,7 +14600,7 @@ declare namespace imports.gi.Gtk {
 	interface Fixed extends FixedMixin {}
 
 	class Fixed {
-		public constructor();
+		public constructor(options?: Partial<FixedInitOptions>);
 		/**
 		 * Creates a new {@link Fixed}.
 		 * @returns a new {@link Fixed}.
@@ -14280,6 +14980,19 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FlowBoxInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IFlowBox,
+		"activate_on_single_click" |
+		"column_spacing" |
+		"homogeneous" |
+		"max_children_per_line" |
+		"min_children_per_line" |
+		"row_spacing" |
+		"selection_mode" |
+		"container">;
+
+	export interface FlowBoxInitOptions extends FlowBoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBox} instead.
 	 */
@@ -14333,7 +15046,7 @@ declare namespace imports.gi.Gtk {
 	interface FlowBox extends FlowBoxMixin {}
 
 	class FlowBox {
-		public constructor();
+		public constructor(options?: Partial<FlowBoxInitOptions>);
 		/**
 		 * Creates a GtkFlowBox.
 		 * @returns a new {@link FlowBox} container
@@ -14348,6 +15061,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FlowBoxAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions
+	export interface FlowBoxAccessibleInitOptions extends FlowBoxAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBoxAccessible} instead.
 	 */
@@ -14356,7 +15072,7 @@ declare namespace imports.gi.Gtk {
 	interface FlowBoxAccessible extends FlowBoxAccessibleMixin {}
 
 	class FlowBoxAccessible {
-		public constructor();
+		public constructor(options?: Partial<FlowBoxAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14407,6 +15123,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FlowBoxChildInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions
+	export interface FlowBoxChildInitOptions extends FlowBoxChildInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBoxChild} instead.
 	 */
@@ -14415,7 +15134,7 @@ declare namespace imports.gi.Gtk {
 	interface FlowBoxChild extends FlowBoxChildMixin {}
 
 	class FlowBoxChild {
-		public constructor();
+		public constructor(options?: Partial<FlowBoxChildInitOptions>);
 		/**
 		 * Creates a new {@link FlowBoxChild}, to be used as a child
 		 * of a #GtkFlowBox.
@@ -14431,6 +15150,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FlowBoxChildAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions
+	export interface FlowBoxChildAccessibleInitOptions extends FlowBoxChildAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBoxChildAccessible} instead.
 	 */
@@ -14439,7 +15161,7 @@ declare namespace imports.gi.Gtk {
 	interface FlowBoxChildAccessible extends FlowBoxChildAccessibleMixin {}
 
 	class FlowBoxChildAccessible {
-		public constructor();
+		public constructor(options?: Partial<FlowBoxChildAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14564,6 +15286,18 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FontButtonInitOptionsMixin = ButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & FontChooserInitOptions & 
+	Pick<IFontButton,
+		"font_name" |
+		"show_size" |
+		"show_style" |
+		"title" |
+		"use_font" |
+		"use_size" |
+		"button">;
+
+	export interface FontButtonInitOptions extends FontButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontButton} instead.
 	 */
@@ -14581,7 +15315,7 @@ declare namespace imports.gi.Gtk {
 	interface FontButton extends FontButtonMixin {}
 
 	class FontButton {
-		public constructor();
+		public constructor(options?: Partial<FontButtonInitOptions>);
 		/**
 		 * Creates a new font picker widget.
 		 * @returns a new font picker widget.
@@ -14602,6 +15336,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FontChooserDialogInitOptionsMixin = DialogInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & FontChooserInitOptions
+	export interface FontChooserDialogInitOptions extends FontChooserDialogInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontChooserDialog} instead.
 	 */
@@ -14620,7 +15357,7 @@ declare namespace imports.gi.Gtk {
 	interface FontChooserDialog extends FontChooserDialogMixin {}
 
 	class FontChooserDialog {
-		public constructor();
+		public constructor(options?: Partial<FontChooserDialogInitOptions>);
 		/**
 		 * Creates a new {@link FontChooserDialog}.
 		 * @param title Title of the dialog, or %NULL
@@ -14647,6 +15384,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::tweak_action", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type FontChooserWidgetInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & FontChooserInitOptions & OrientableInitOptions & 
+	Pick<IFontChooserWidget,
+		"tweak_action">;
+
+	export interface FontChooserWidgetInitOptions extends FontChooserWidgetInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontChooserWidget} instead.
@@ -14675,7 +15418,7 @@ declare namespace imports.gi.Gtk {
 	interface FontChooserWidget extends FontChooserWidgetMixin {}
 
 	class FontChooserWidget {
-		public constructor();
+		public constructor(options?: Partial<FontChooserWidgetInitOptions>);
 		/**
 		 * Creates a new {@link FontChooserWidget}.
 		 * @returns a new {@link FontChooserWidget}
@@ -14782,6 +15525,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FontSelectionInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IFontSelection,
+		"font_name" |
+		"preview_text">;
+
+	export interface FontSelectionInitOptions extends FontSelectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontSelection} instead.
 	 */
@@ -14790,7 +15540,7 @@ declare namespace imports.gi.Gtk {
 	interface FontSelection extends FontSelectionMixin {}
 
 	class FontSelection {
-		public constructor();
+		public constructor(options?: Partial<FontSelectionInitOptions>);
 		/**
 		 * Creates a new {@link FontSelection}.
 		 * @returns a new {@link FontSelection}
@@ -14853,6 +15603,9 @@ declare namespace imports.gi.Gtk {
 		set_preview_text(text: string): void;
 	}
 
+	type FontSelectionDialogInitOptionsMixin = DialogInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions
+	export interface FontSelectionDialogInitOptions extends FontSelectionDialogInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontSelectionDialog} instead.
 	 */
@@ -14861,7 +15614,7 @@ declare namespace imports.gi.Gtk {
 	interface FontSelectionDialog extends FontSelectionDialogMixin {}
 
 	class FontSelectionDialog {
-		public constructor();
+		public constructor(options?: Partial<FontSelectionDialogInitOptions>);
 		/**
 		 * Creates a new {@link FontSelectionDialog}.
 		 * @param title the title of the dialog window
@@ -14955,6 +15708,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FrameInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IFrame,
+		"label" |
+		"label_widget" |
+		"label_xalign" |
+		"label_yalign" |
+		"shadow_type" |
+		"bin">;
+
+	export interface FrameInitOptions extends FrameInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Frame} instead.
 	 */
@@ -15007,7 +15771,7 @@ declare namespace imports.gi.Gtk {
 	interface Frame extends FrameMixin {}
 
 	class Frame {
-		public constructor();
+		public constructor(options?: Partial<FrameInitOptions>);
 		/**
 		 * Creates a new {@link Frame}, with optional label #label.
 		 * If #label is %NULL, the label is omitted.
@@ -15024,6 +15788,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FrameAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions
+	export interface FrameAccessibleInitOptions extends FrameAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FrameAccessible} instead.
 	 */
@@ -15032,7 +15799,7 @@ declare namespace imports.gi.Gtk {
 	interface FrameAccessible extends FrameAccessibleMixin {}
 
 	class FrameAccessible {
-		public constructor();
+		public constructor(options?: Partial<FrameAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15261,6 +16028,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GLAreaInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IGLArea,
+		"auto_render" |
+		"context" |
+		"has_alpha" |
+		"has_depth_buffer" |
+		"has_stencil_buffer" |
+		"use_es">;
+
+	export interface GLAreaInitOptions extends GLAreaInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GLArea} instead.
 	 */
@@ -15370,7 +16148,7 @@ declare namespace imports.gi.Gtk {
 	interface GLArea extends GLAreaMixin {}
 
 	class GLArea {
-		public constructor();
+		public constructor(options?: Partial<GLAreaInitOptions>);
 		/**
 		 * Creates a new {@link GLArea} widget.
 		 * @returns a new {@link GLArea}
@@ -15632,6 +16410,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GestureInitOptionsMixin = EventControllerInitOptions & 
+	Pick<IGesture,
+		"n_points" |
+		"window">;
+
+	export interface GestureInitOptions extends GestureInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Gesture} instead.
 	 */
@@ -15731,7 +16516,7 @@ declare namespace imports.gi.Gtk {
 	interface Gesture extends GestureMixin {}
 
 	class Gesture {
-		public constructor();
+		public constructor(options?: Partial<GestureInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15767,6 +16552,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GestureDragInitOptionsMixin = GestureSingleInitOptions
+	export interface GestureDragInitOptions extends GestureDragInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureDrag} instead.
 	 */
@@ -15783,7 +16571,7 @@ declare namespace imports.gi.Gtk {
 	interface GestureDrag extends GestureDragMixin {}
 
 	class GestureDrag {
-		public constructor();
+		public constructor(options?: Partial<GestureDragInitOptions>);
 		/**
 		 * Returns a newly created {@link Gesture} that recognizes drags.
 		 * @param widget a {@link Widget}
@@ -15813,6 +16601,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GestureLongPressInitOptionsMixin = GestureSingleInitOptions & 
+	Pick<IGestureLongPress,
+		"delay_factor">;
+
+	export interface GestureLongPressInitOptions extends GestureLongPressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureLongPress} instead.
 	 */
@@ -15830,7 +16624,7 @@ declare namespace imports.gi.Gtk {
 	interface GestureLongPress extends GestureLongPressMixin {}
 
 	class GestureLongPress {
-		public constructor();
+		public constructor(options?: Partial<GestureLongPressInitOptions>);
 		/**
 		 * Returns a newly created {@link Gesture} that recognizes long presses.
 		 * @param widget a {@link Widget}
@@ -15884,6 +16678,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GestureMultiPressInitOptionsMixin = GestureSingleInitOptions
+	export interface GestureMultiPressInitOptions extends GestureMultiPressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureMultiPress} instead.
 	 */
@@ -15904,7 +16701,7 @@ declare namespace imports.gi.Gtk {
 	interface GestureMultiPress extends GestureMultiPressMixin {}
 
 	class GestureMultiPress {
-		public constructor();
+		public constructor(options?: Partial<GestureMultiPressInitOptions>);
 		/**
 		 * Returns a newly created {@link Gesture} that recognizes single and multiple
 		 * presses.
@@ -15942,6 +16739,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GesturePanInitOptionsMixin = GestureDragInitOptions & 
+	Pick<IGesturePan,
+		"orientation">;
+
+	export interface GesturePanInitOptions extends GesturePanInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GesturePan} instead.
 	 */
@@ -15966,7 +16769,7 @@ declare namespace imports.gi.Gtk {
 	interface GesturePan extends GesturePanMixin {}
 
 	class GesturePan {
-		public constructor();
+		public constructor(options?: Partial<GesturePanInitOptions>);
 		/**
 		 * Returns a newly created {@link Gesture} that recognizes pan gestures.
 		 * @param widget a {@link Widget}
@@ -15995,6 +16798,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GestureRotateInitOptionsMixin = GestureInitOptions
+	export interface GestureRotateInitOptions extends GestureRotateInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureRotate} instead.
 	 */
@@ -16008,7 +16814,7 @@ declare namespace imports.gi.Gtk {
 	interface GestureRotate extends GestureRotateMixin {}
 
 	class GestureRotate {
-		public constructor();
+		public constructor(options?: Partial<GestureRotateInitOptions>);
 		/**
 		 * Returns a newly created {@link Gesture} that recognizes 2-touch
 		 * rotation gestures.
@@ -16092,6 +16898,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GestureSingleInitOptionsMixin = GestureInitOptions & 
+	Pick<IGestureSingle,
+		"button" |
+		"exclusive" |
+		"touch_only">;
+
+	export interface GestureSingleInitOptions extends GestureSingleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureSingle} instead.
 	 */
@@ -16114,7 +16928,7 @@ declare namespace imports.gi.Gtk {
 	interface GestureSingle extends GestureSingleMixin {}
 
 	class GestureSingle {
-		public constructor();
+		public constructor(options?: Partial<GestureSingleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -16154,6 +16968,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GestureStylusInitOptionsMixin = GestureSingleInitOptions
+	export interface GestureStylusInitOptions extends GestureStylusInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureStylus} instead.
 	 */
@@ -16166,7 +16983,7 @@ declare namespace imports.gi.Gtk {
 	interface GestureStylus extends GestureStylusMixin {}
 
 	class GestureStylus {
-		public constructor();
+		public constructor(options?: Partial<GestureStylusInitOptions>);
 		/**
 		 * Creates a new {@link GestureStylus}.
 		 * @param widget a {@link Widget}
@@ -16194,6 +17011,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GestureSwipeInitOptionsMixin = GestureSingleInitOptions
+	export interface GestureSwipeInitOptions extends GestureSwipeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureSwipe} instead.
 	 */
@@ -16214,7 +17034,7 @@ declare namespace imports.gi.Gtk {
 	interface GestureSwipe extends GestureSwipeMixin {}
 
 	class GestureSwipe {
-		public constructor();
+		public constructor(options?: Partial<GestureSwipeInitOptions>);
 		/**
 		 * Returns a newly created {@link Gesture} that recognizes swipes.
 		 * @param widget a {@link Widget}
@@ -16242,6 +17062,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GestureZoomInitOptionsMixin = GestureInitOptions
+	export interface GestureZoomInitOptions extends GestureZoomInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureZoom} instead.
 	 */
@@ -16256,7 +17079,7 @@ declare namespace imports.gi.Gtk {
 	interface GestureZoom extends GestureZoomMixin {}
 
 	class GestureZoom {
-		public constructor();
+		public constructor(options?: Partial<GestureZoomInitOptions>);
 		/**
 		 * Returns a newly created {@link Gesture} that recognizes zoom
 		 * in/out gestures (usually known as pinch/zoom).
@@ -16440,6 +17263,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type GridInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IGrid,
+		"baseline_row" |
+		"column_homogeneous" |
+		"column_spacing" |
+		"row_homogeneous" |
+		"row_spacing">;
+
+	export interface GridInitOptions extends GridInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Grid} instead.
 	 */
@@ -16466,7 +17299,7 @@ declare namespace imports.gi.Gtk {
 	interface Grid extends GridMixin {}
 
 	class Grid {
-		public constructor();
+		public constructor(options?: Partial<GridInitOptions>);
 		/**
 		 * Creates a new grid widget.
 		 * @returns the new {@link Grid}
@@ -16483,6 +17316,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::box", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type HBoxInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IHBox,
+		"box">;
+
+	export interface HBoxInitOptions extends HBoxInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HBox} instead.
@@ -16512,7 +17351,7 @@ declare namespace imports.gi.Gtk {
 	interface HBox extends HBoxMixin {}
 
 	class HBox {
-		public constructor();
+		public constructor(options?: Partial<HBoxInitOptions>);
 		/**
 		 * Creates a new {@link HBox}.
 		 * @param homogeneous %TRUE if all children are to be given equal space allotments.
@@ -16532,6 +17371,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type HButtonBoxInitOptionsMixin = ButtonBoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IHButtonBox,
+		"button_box">;
+
+	export interface HButtonBoxInitOptions extends HButtonBoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HButtonBox} instead.
 	 */
@@ -16540,7 +17385,7 @@ declare namespace imports.gi.Gtk {
 	interface HButtonBox extends HButtonBoxMixin {}
 
 	class HButtonBox {
-		public constructor();
+		public constructor(options?: Partial<HButtonBoxInitOptions>);
 		/**
 		 * Creates a new horizontal button box.
 		 * @returns a new button box {@link Widget}.
@@ -16558,6 +17403,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type HPanedInitOptionsMixin = PanedInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IHPaned,
+		"paned">;
+
+	export interface HPanedInitOptions extends HPanedInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HPaned} instead.
 	 */
@@ -16574,7 +17425,7 @@ declare namespace imports.gi.Gtk {
 	interface HPaned extends HPanedMixin {}
 
 	class HPaned {
-		public constructor();
+		public constructor(options?: Partial<HPanedInitOptions>);
 		/**
 		 * Create a new {@link HPaned}
 		 * @returns the new {@link HPaned}
@@ -16632,6 +17483,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type HSVInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions
+	export interface HSVInitOptions extends HSVInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HSV} instead.
 	 */
@@ -16650,7 +17504,7 @@ declare namespace imports.gi.Gtk {
 	interface HSV extends HSVMixin {}
 
 	class HSV {
-		public constructor();
+		public constructor(options?: Partial<HSVInitOptions>);
 		/**
 		 * Creates a new HSV color selector.
 		 * @returns A newly-created HSV color selector.
@@ -16683,6 +17537,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type HScaleInitOptionsMixin = ScaleInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IHScale,
+		"scale">;
+
+	export interface HScaleInitOptions extends HScaleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HScale} instead.
 	 */
@@ -16700,7 +17560,7 @@ declare namespace imports.gi.Gtk {
 	interface HScale extends HScaleMixin {}
 
 	class HScale {
-		public constructor();
+		public constructor(options?: Partial<HScaleInitOptions>);
 		/**
 		 * Creates a new {@link HScale}.
 		 * @param adjustment the {@link Adjustment} which sets the range of
@@ -16735,6 +17595,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type HScrollbarInitOptionsMixin = ScrollbarInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IHScrollbar,
+		"scrollbar">;
+
+	export interface HScrollbarInitOptions extends HScrollbarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HScrollbar} instead.
 	 */
@@ -16753,7 +17619,7 @@ declare namespace imports.gi.Gtk {
 	interface HScrollbar extends HScrollbarMixin {}
 
 	class HScrollbar {
-		public constructor();
+		public constructor(options?: Partial<HScrollbarInitOptions>);
 		/**
 		 * Creates a new horizontal scrollbar.
 		 * @param adjustment the {@link Adjustment} to use, or %NULL to create a new adjustment
@@ -16771,6 +17637,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::separator", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type HSeparatorInitOptionsMixin = SeparatorInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IHSeparator,
+		"separator">;
+
+	export interface HSeparatorInitOptions extends HSeparatorInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HSeparator} instead.
@@ -16792,7 +17664,7 @@ declare namespace imports.gi.Gtk {
 	interface HSeparator extends HSeparatorMixin {}
 
 	class HSeparator {
-		public constructor();
+		public constructor(options?: Partial<HSeparatorInitOptions>);
 		/**
 		 * Creates a new {@link HSeparator}.
 		 * @returns a new {@link HSeparator}.
@@ -16885,6 +17757,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type HandleBoxInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IHandleBox,
+		"child_detached" |
+		"handle_position" |
+		"shadow_type" |
+		"snap_edge" |
+		"snap_edge_set" |
+		"bin">;
+
+	export interface HandleBoxInitOptions extends HandleBoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HandleBox} instead.
 	 */
@@ -16920,7 +17803,7 @@ declare namespace imports.gi.Gtk {
 	interface HandleBox extends HandleBoxMixin {}
 
 	class HandleBox {
-		public constructor();
+		public constructor(options?: Partial<HandleBoxInitOptions>);
 		/**
 		 * Create a new handle box.
 		 * @returns a new {@link HandleBox}.
@@ -17093,6 +17976,20 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type HeaderBarInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IHeaderBar,
+		"custom_title" |
+		"decoration_layout" |
+		"decoration_layout_set" |
+		"has_subtitle" |
+		"show_close_button" |
+		"spacing" |
+		"subtitle" |
+		"title" |
+		"container">;
+
+	export interface HeaderBarInitOptions extends HeaderBarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HeaderBar} instead.
 	 */
@@ -17118,7 +18015,7 @@ declare namespace imports.gi.Gtk {
 	interface HeaderBar extends HeaderBarMixin {}
 
 	class HeaderBar {
-		public constructor();
+		public constructor(options?: Partial<HeaderBarInitOptions>);
 		/**
 		 * Creates a new {@link HeaderBar} widget.
 		 * @returns a new {@link HeaderBar}
@@ -17133,6 +18030,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type HeaderBarAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions
+	export interface HeaderBarAccessibleInitOptions extends HeaderBarAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HeaderBarAccessible} instead.
 	 */
@@ -17141,7 +18041,7 @@ declare namespace imports.gi.Gtk {
 	interface HeaderBarAccessible extends HeaderBarAccessibleMixin {}
 
 	class HeaderBarAccessible {
-		public constructor();
+		public constructor(options?: Partial<HeaderBarAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17311,6 +18211,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type IMContextInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IIMContext,
+		"input_hints" |
+		"input_purpose">;
+
+	export interface IMContextInitOptions extends IMContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMContext} instead.
 	 */
@@ -17387,7 +18294,7 @@ declare namespace imports.gi.Gtk {
 	interface IMContext extends IMContextMixin {}
 
 	class IMContext {
-		public constructor();
+		public constructor(options?: Partial<IMContextInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17419,6 +18326,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type IMContextSimpleInitOptionsMixin = IMContextInitOptions & 
+	Pick<IIMContextSimple,
+		"object">;
+
+	export interface IMContextSimpleInitOptions extends IMContextSimpleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMContextSimple} instead.
 	 */
@@ -17445,7 +18358,7 @@ declare namespace imports.gi.Gtk {
 	interface IMContextSimple extends IMContextSimpleMixin {}
 
 	class IMContextSimple {
-		public constructor();
+		public constructor(options?: Partial<IMContextSimpleInitOptions>);
 		/**
 		 * Creates a new {@link IMContextSimple}.
 		 * @returns a new {@link IMContextSimple}.
@@ -17482,6 +18395,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type IMMulticontextInitOptionsMixin = IMContextInitOptions & 
+	Pick<IIMMulticontext,
+		"object">;
+
+	export interface IMMulticontextInitOptions extends IMMulticontextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMMulticontext} instead.
 	 */
@@ -17490,7 +18409,7 @@ declare namespace imports.gi.Gtk {
 	interface IMMulticontext extends IMMulticontextMixin {}
 
 	class IMMulticontext {
-		public constructor();
+		public constructor(options?: Partial<IMMulticontextInitOptions>);
 		/**
 		 * Creates a new {@link IMMulticontext}.
 		 * @returns a new {@link IMMulticontext}.
@@ -17543,6 +18462,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		remove_default(): void;
 	}
+
+	type IconFactoryInitOptionsMixin = GObject.ObjectInitOptions & BuildableInitOptions
+	export interface IconFactoryInitOptions extends IconFactoryInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconFactory} instead.
@@ -17624,7 +18546,7 @@ declare namespace imports.gi.Gtk {
 	interface IconFactory extends IconFactoryMixin {}
 
 	class IconFactory {
-		public constructor();
+		public constructor(options?: Partial<IconFactoryInitOptions>);
 		/**
 		 * Creates a new {@link IconFactory}. An icon factory manages a collection
 		 * of #GtkIconSets; a #GtkIconSet manages a set of variants of a
@@ -17922,6 +18844,9 @@ declare namespace imports.gi.Gtk {
 		set_raw_coordinates(raw_coordinates: boolean): void;
 	}
 
+	type IconInfoInitOptionsMixin = GObject.ObjectInitOptions
+	export interface IconInfoInitOptions extends IconInfoInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconInfo} instead.
 	 */
@@ -17934,7 +18859,7 @@ declare namespace imports.gi.Gtk {
 	interface IconInfo extends IconInfoMixin {}
 
 	class IconInfo {
-		public constructor();
+		public constructor(options?: Partial<IconInfoInitOptions>);
 		/**
 		 * Creates a {@link IconInfo} for a #GdkPixbuf.
 		 * @param icon_theme a {@link IconTheme}
@@ -18269,6 +19194,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type IconThemeInitOptionsMixin = GObject.ObjectInitOptions
+	export interface IconThemeInitOptions extends IconThemeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconTheme} instead.
 	 */
@@ -18347,7 +19275,7 @@ declare namespace imports.gi.Gtk {
 	interface IconTheme extends IconThemeMixin {}
 
 	class IconTheme {
-		public constructor();
+		public constructor(options?: Partial<IconThemeInitOptions>);
 		/**
 		 * Creates a new icon theme object. Icon theme objects are used
 		 * to lookup up an icon by name in a particular icon theme.
@@ -19074,6 +20002,28 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type IconViewInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & CellLayoutInitOptions & ScrollableInitOptions & 
+	Pick<IIconView,
+		"activate_on_single_click" |
+		"cell_area" |
+		"column_spacing" |
+		"columns" |
+		"item_orientation" |
+		"item_padding" |
+		"item_width" |
+		"margin" |
+		"markup_column" |
+		"model" |
+		"pixbuf_column" |
+		"reorderable" |
+		"row_spacing" |
+		"selection_mode" |
+		"spacing" |
+		"text_column" |
+		"tooltip_column">;
+
+	export interface IconViewInitOptions extends IconViewInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconView} instead.
 	 */
@@ -19105,7 +20055,7 @@ declare namespace imports.gi.Gtk {
 	interface IconView extends IconViewMixin {}
 
 	class IconView {
-		public constructor();
+		public constructor(options?: Partial<IconViewInitOptions>);
 		/**
 		 * Creates a new {@link IconView} widget
 		 * @returns A newly created {@link IconView} widget
@@ -19133,6 +20083,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type IconViewAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions
+	export interface IconViewAccessibleInitOptions extends IconViewAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconViewAccessible} instead.
 	 */
@@ -19141,7 +20094,7 @@ declare namespace imports.gi.Gtk {
 	interface IconViewAccessible extends IconViewAccessibleMixin {}
 
 	class IconViewAccessible {
-		public constructor();
+		public constructor(options?: Partial<IconViewAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19345,6 +20298,25 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ImageInitOptionsMixin = MiscInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IImage,
+		"file" |
+		"gicon" |
+		"icon_name" |
+		"icon_set" |
+		"icon_size" |
+		"pixbuf" |
+		"pixbuf_animation" |
+		"pixel_size" |
+		"resource" |
+		"stock" |
+		"storage_type" |
+		"surface" |
+		"use_fallback" |
+		"misc">;
+
+	export interface ImageInitOptions extends ImageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Image} instead.
 	 */
@@ -19439,7 +20411,7 @@ declare namespace imports.gi.Gtk {
 	interface Image extends ImageMixin {}
 
 	class Image {
-		public constructor();
+		public constructor(options?: Partial<ImageInitOptions>);
 		/**
 		 * Creates a new empty {@link Image} widget.
 		 * @returns a newly created {@link Image} widget.
@@ -19581,6 +20553,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ImageAccessibleInitOptionsMixin = WidgetAccessibleInitOptions & Atk.ComponentInitOptions & Atk.ImageInitOptions
+	export interface ImageAccessibleInitOptions extends ImageAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImageAccessible} instead.
 	 */
@@ -19589,7 +20564,7 @@ declare namespace imports.gi.Gtk {
 	interface ImageAccessible extends ImageAccessibleMixin {}
 
 	class ImageAccessible {
-		public constructor();
+		public constructor(options?: Partial<ImageAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19599,6 +20574,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ImageCellAccessibleInitOptionsMixin = RendererCellAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.ImageInitOptions & Atk.TableCellInitOptions
+	export interface ImageCellAccessibleInitOptions extends ImageCellAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImageCellAccessible} instead.
 	 */
@@ -19607,7 +20585,7 @@ declare namespace imports.gi.Gtk {
 	interface ImageCellAccessible extends ImageCellAccessibleMixin {}
 
 	class ImageCellAccessible {
-		public constructor();
+		public constructor(options?: Partial<ImageCellAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19690,6 +20668,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ImageMenuItemInitOptionsMixin = MenuItemInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IImageMenuItem,
+		"always_show_image" |
+		"image" |
+		"use_stock" |
+		"menu_item">;
+
+	export interface ImageMenuItemInitOptions extends ImageMenuItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImageMenuItem} instead.
 	 */
@@ -19761,7 +20748,7 @@ declare namespace imports.gi.Gtk {
 	interface ImageMenuItem extends ImageMenuItemMixin {}
 
 	class ImageMenuItem {
-		public constructor();
+		public constructor(options?: Partial<ImageMenuItemInitOptions>);
 		/**
 		 * Creates a new {@link ImageMenuItem} with an empty label.
 		 * @returns a new {@link ImageMenuItem}
@@ -19932,6 +20919,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type InfoBarInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IInfoBar,
+		"message_type" |
+		"revealed" |
+		"show_close_button">;
+
+	export interface InfoBarInitOptions extends InfoBarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InfoBar} instead.
 	 */
@@ -20012,7 +21007,7 @@ declare namespace imports.gi.Gtk {
 	interface InfoBar extends InfoBarMixin {}
 
 	class InfoBar {
-		public constructor();
+		public constructor(options?: Partial<InfoBarInitOptions>);
 		/**
 		 * Creates a new {@link InfoBar} object.
 		 * @returns a new {@link InfoBar} object
@@ -20053,6 +21048,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type InvisibleInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IInvisible,
+		"screen" |
+		"widget">;
+
+	export interface InvisibleInitOptions extends InvisibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Invisible} instead.
 	 */
@@ -20068,7 +21070,7 @@ declare namespace imports.gi.Gtk {
 	interface Invisible extends InvisibleMixin {}
 
 	class Invisible {
-		public constructor();
+		public constructor(options?: Partial<InvisibleInitOptions>);
 		/**
 		 * Creates a new {@link Invisible}.
 		 * @returns a new {@link Invisible}.
@@ -20665,6 +21667,33 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type LabelInitOptionsMixin = MiscInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<ILabel,
+		"angle" |
+		"attributes" |
+		"cursor_position" |
+		"ellipsize" |
+		"justify" |
+		"label" |
+		"lines" |
+		"max_width_chars" |
+		"mnemonic_keyval" |
+		"mnemonic_widget" |
+		"selectable" |
+		"selection_bound" |
+		"single_line_mode" |
+		"track_visited_links" |
+		"use_markup" |
+		"use_underline" |
+		"width_chars" |
+		"wrap" |
+		"wrap_mode" |
+		"xalign" |
+		"yalign" |
+		"misc">;
+
+	export interface LabelInitOptions extends LabelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Label} instead.
 	 */
@@ -20852,7 +21881,7 @@ declare namespace imports.gi.Gtk {
 	interface Label extends LabelMixin {}
 
 	class Label {
-		public constructor(options?: Partial<LabelOptions>);
+		public constructor(options?: Partial<LabelInitOptions>);
 		/**
 		 * Creates a new label with the given text inside it. You can
 		 * pass %NULL to get an empty label widget.
@@ -20889,6 +21918,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type LabelAccessibleInitOptionsMixin = WidgetAccessibleInitOptions & Atk.ComponentInitOptions & Atk.HypertextInitOptions & Atk.TextInitOptions
+	export interface LabelAccessibleInitOptions extends LabelAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LabelAccessible} instead.
 	 */
@@ -20897,7 +21929,7 @@ declare namespace imports.gi.Gtk {
 	interface LabelAccessible extends LabelAccessibleMixin {}
 
 	class LabelAccessible {
-		public constructor();
+		public constructor(options?: Partial<LabelAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -20984,6 +22016,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type LayoutInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & ScrollableInitOptions & 
+	Pick<ILayout,
+		"height" |
+		"width" |
+		"container">;
+
+	export interface LayoutInitOptions extends LayoutInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Layout} instead.
 	 */
@@ -21006,7 +22046,7 @@ declare namespace imports.gi.Gtk {
 	interface Layout extends LayoutMixin {}
 
 	class Layout {
-		public constructor();
+		public constructor(options?: Partial<LayoutInitOptions>);
 		/**
 		 * Creates a new {@link Layout}. Unless you have a specific adjustment
 		 * you’d like the layout to use for scrolling, pass %NULL for
@@ -21154,6 +22194,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type LevelBarInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<ILevelBar,
+		"inverted" |
+		"max_value" |
+		"min_value" |
+		"mode" |
+		"value">;
+
+	export interface LevelBarInitOptions extends LevelBarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LevelBar} instead.
 	 */
@@ -21257,7 +22307,7 @@ declare namespace imports.gi.Gtk {
 	interface LevelBar extends LevelBarMixin {}
 
 	class LevelBar {
-		public constructor();
+		public constructor(options?: Partial<LevelBarInitOptions>);
 		/**
 		 * Creates a new {@link LevelBar}.
 		 * @returns a {@link LevelBar}.
@@ -21280,6 +22330,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type LevelBarAccessibleInitOptionsMixin = WidgetAccessibleInitOptions & Atk.ComponentInitOptions & Atk.ValueInitOptions
+	export interface LevelBarAccessibleInitOptions extends LevelBarAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LevelBarAccessible} instead.
 	 */
@@ -21288,7 +22341,7 @@ declare namespace imports.gi.Gtk {
 	interface LevelBarAccessible extends LevelBarAccessibleMixin {}
 
 	class LevelBarAccessible {
-		public constructor();
+		public constructor(options?: Partial<LevelBarAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -21349,6 +22402,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type LinkButtonInitOptionsMixin = ButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<ILinkButton,
+		"uri" |
+		"visited">;
+
+	export interface LinkButtonInitOptions extends LinkButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LinkButton} instead.
 	 */
@@ -21379,7 +22439,7 @@ declare namespace imports.gi.Gtk {
 	interface LinkButton extends LinkButtonMixin {}
 
 	class LinkButton {
-		public constructor();
+		public constructor(options?: Partial<LinkButtonInitOptions>);
 		/**
 		 * Creates a new {@link LinkButton} with the URI as its text.
 		 * @param uri a valid URI
@@ -21402,6 +22462,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type LinkButtonAccessibleInitOptionsMixin = ButtonAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.HyperlinkImplInitOptions & Atk.ImageInitOptions
+	export interface LinkButtonAccessibleInitOptions extends LinkButtonAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LinkButtonAccessible} instead.
 	 */
@@ -21410,7 +22473,7 @@ declare namespace imports.gi.Gtk {
 	interface LinkButtonAccessible extends LinkButtonAccessibleMixin {}
 
 	class LinkButtonAccessible {
-		public constructor();
+		public constructor(options?: Partial<LinkButtonAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -21693,6 +22756,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ListBoxInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IListBox,
+		"activate_on_single_click" |
+		"selection_mode">;
+
+	export interface ListBoxInitOptions extends ListBoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBox} instead.
 	 */
@@ -21741,7 +22811,7 @@ declare namespace imports.gi.Gtk {
 	interface ListBox extends ListBoxMixin {}
 
 	class ListBox {
-		public constructor();
+		public constructor(options?: Partial<ListBoxInitOptions>);
 		/**
 		 * Creates a new {@link ListBox} container.
 		 * @returns a new {@link ListBox}
@@ -21756,6 +22826,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ListBoxAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions
+	export interface ListBoxAccessibleInitOptions extends ListBoxAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBoxAccessible} instead.
 	 */
@@ -21764,7 +22837,7 @@ declare namespace imports.gi.Gtk {
 	interface ListBoxAccessible extends ListBoxAccessibleMixin {}
 
 	class ListBoxAccessible {
-		public constructor();
+		public constructor(options?: Partial<ListBoxAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -21859,6 +22932,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ListBoxRowInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & BuildableInitOptions & 
+	Pick<IListBoxRow,
+		"activatable" |
+		"selectable">;
+
+	export interface ListBoxRowInitOptions extends ListBoxRowInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBoxRow} instead.
 	 */
@@ -21867,7 +22947,7 @@ declare namespace imports.gi.Gtk {
 	interface ListBoxRow extends ListBoxRowMixin {}
 
 	class ListBoxRow {
-		public constructor();
+		public constructor(options?: Partial<ListBoxRowInitOptions>);
 		/**
 		 * Creates a new {@link ListBoxRow}, to be used as a child of a #GtkListBox.
 		 * @returns a new {@link ListBoxRow}
@@ -21882,6 +22962,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ListBoxRowAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions
+	export interface ListBoxRowAccessibleInitOptions extends ListBoxRowAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBoxRowAccessible} instead.
 	 */
@@ -21890,7 +22973,7 @@ declare namespace imports.gi.Gtk {
 	interface ListBoxRowAccessible extends ListBoxRowAccessibleMixin {}
 
 	class ListBoxRowAccessible {
-		public constructor();
+		public constructor(options?: Partial<ListBoxRowAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -22089,6 +23172,9 @@ declare namespace imports.gi.Gtk {
 		swap(a: TreeIter, b: TreeIter): void;
 	}
 
+	type ListStoreInitOptionsMixin = GObject.ObjectInitOptions & BuildableInitOptions & TreeDragDestInitOptions & TreeDragSourceInitOptions & TreeModelInitOptions & TreeSortableInitOptions
+	export interface ListStoreInitOptions extends ListStoreInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListStore} instead.
 	 */
@@ -22236,7 +23322,7 @@ declare namespace imports.gi.Gtk {
 	interface ListStore extends ListStoreMixin {}
 
 	class ListStore {
-		public constructor();
+		public constructor(options?: Partial<ListStoreInitOptions>);
 		/**
 		 * Creates a new list store as with #n_columns columns each of the types passed
 		 * in.  Note that only types derived from standard GObject fundamental types
@@ -22287,6 +23373,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type LockButtonInitOptionsMixin = ButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<ILockButton,
+		"permission" |
+		"text_lock" |
+		"text_unlock" |
+		"tooltip_lock" |
+		"tooltip_not_authorized" |
+		"tooltip_unlock">;
+
+	export interface LockButtonInitOptions extends LockButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LockButton} instead.
 	 */
@@ -22327,7 +23424,7 @@ declare namespace imports.gi.Gtk {
 	interface LockButton extends LockButtonMixin {}
 
 	class LockButton {
-		public constructor();
+		public constructor(options?: Partial<LockButtonInitOptions>);
 		/**
 		 * Creates a new lock button which reflects the #permission.
 		 * @param permission a #GPermission
@@ -22343,6 +23440,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type LockButtonAccessibleInitOptionsMixin = ButtonAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.ImageInitOptions
+	export interface LockButtonAccessibleInitOptions extends LockButtonAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LockButtonAccessible} instead.
 	 */
@@ -22351,7 +23451,7 @@ declare namespace imports.gi.Gtk {
 	interface LockButtonAccessible extends LockButtonAccessibleMixin {}
 
 	class LockButtonAccessible {
-		public constructor();
+		public constructor(options?: Partial<LockButtonAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -22824,6 +23924,24 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MenuInitOptionsMixin = MenuShellInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IMenu,
+		"accel_group" |
+		"accel_path" |
+		"active" |
+		"anchor_hints" |
+		"attach_widget" |
+		"menu_type_hint" |
+		"monitor" |
+		"rect_anchor_dx" |
+		"rect_anchor_dy" |
+		"reserve_toggle_size" |
+		"tearoff_state" |
+		"tearoff_title" |
+		"menu_shell">;
+
+	export interface MenuInitOptions extends MenuInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Menu} instead.
 	 */
@@ -22904,7 +24022,7 @@ declare namespace imports.gi.Gtk {
 	interface Menu extends MenuMixin {}
 
 	class Menu {
-		public constructor();
+		public constructor(options?: Partial<MenuInitOptions>);
 		/**
 		 * Creates a new {@link Menu}
 		 * @returns a new {@link Menu}
@@ -22942,6 +24060,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MenuAccessibleInitOptionsMixin = MenuShellAccessibleInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions
+	export interface MenuAccessibleInitOptions extends MenuAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuAccessible} instead.
 	 */
@@ -22950,7 +24071,7 @@ declare namespace imports.gi.Gtk {
 	interface MenuAccessible extends MenuAccessibleMixin {}
 
 	class MenuAccessible {
-		public constructor();
+		public constructor(options?: Partial<MenuAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -22996,6 +24117,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MenuBarInitOptionsMixin = MenuShellInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IMenuBar,
+		"child_pack_direction" |
+		"pack_direction" |
+		"menu_shell">;
+
+	export interface MenuBarInitOptions extends MenuBarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuBar} instead.
 	 */
@@ -23013,7 +24142,7 @@ declare namespace imports.gi.Gtk {
 	interface MenuBar extends MenuBarMixin {}
 
 	class MenuBar {
-		public constructor();
+		public constructor(options?: Partial<MenuBarInitOptions>);
 		/**
 		 * Creates a new {@link MenuBar}
 		 * @returns the new menu bar, as a {@link Widget}
@@ -23178,6 +24307,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MenuButtonInitOptionsMixin = ToggleButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IMenuButton,
+		"align_widget" |
+		"direction" |
+		"menu_model" |
+		"popover" |
+		"popup" |
+		"use_popover">;
+
+	export interface MenuButtonInitOptions extends MenuButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuButton} instead.
 	 */
@@ -23271,7 +24411,7 @@ declare namespace imports.gi.Gtk {
 	interface MenuButton extends MenuButtonMixin {}
 
 	class MenuButton {
-		public constructor();
+		public constructor(options?: Partial<MenuButtonInitOptions>);
 		/**
 		 * Creates a new {@link MenuButton} widget with downwards-pointing
 		 * arrow as the only child. You can replace the child widget
@@ -23288,6 +24428,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MenuButtonAccessibleInitOptionsMixin = ToggleButtonAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.ImageInitOptions
+	export interface MenuButtonAccessibleInitOptions extends MenuButtonAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuButtonAccessible} instead.
 	 */
@@ -23296,7 +24439,7 @@ declare namespace imports.gi.Gtk {
 	interface MenuButtonAccessible extends MenuButtonAccessibleMixin {}
 
 	class MenuButtonAccessible {
-		public constructor();
+		public constructor(options?: Partial<MenuButtonAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -23475,6 +24618,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MenuItemInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IMenuItem,
+		"accel_path" |
+		"label" |
+		"right_justified" |
+		"submenu" |
+		"use_underline" |
+		"bin">;
+
+	export interface MenuItemInitOptions extends MenuItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuItem} instead.
 	 */
@@ -23533,7 +24687,7 @@ declare namespace imports.gi.Gtk {
 	interface MenuItem extends MenuItemMixin {}
 
 	class MenuItem {
-		public constructor();
+		public constructor(options?: Partial<MenuItemInitOptions>);
 		/**
 		 * Creates a new {@link MenuItem}.
 		 * @returns the newly created {@link MenuItem}
@@ -23564,6 +24718,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MenuItemAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions
+	export interface MenuItemAccessibleInitOptions extends MenuItemAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuItemAccessible} instead.
 	 */
@@ -23572,7 +24729,7 @@ declare namespace imports.gi.Gtk {
 	interface MenuItemAccessible extends MenuItemAccessibleMixin {}
 
 	class MenuItemAccessible {
-		public constructor();
+		public constructor(options?: Partial<MenuItemAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -23784,6 +24941,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MenuShellInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IMenuShell,
+		"take_focus" |
+		"container">;
+
+	export interface MenuShellInitOptions extends MenuShellInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuShell} instead.
 	 */
@@ -23821,7 +24985,7 @@ declare namespace imports.gi.Gtk {
 	interface MenuShell extends MenuShellMixin {}
 
 	class MenuShell {
-		public constructor();
+		public constructor(options?: Partial<MenuShellInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -23831,6 +24995,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MenuShellAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions
+	export interface MenuShellAccessibleInitOptions extends MenuShellAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuShellAccessible} instead.
 	 */
@@ -23839,7 +25006,7 @@ declare namespace imports.gi.Gtk {
 	interface MenuShellAccessible extends MenuShellAccessibleMixin {}
 
 	class MenuShellAccessible {
-		public constructor();
+		public constructor(options?: Partial<MenuShellAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -23889,6 +25056,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MenuToolButtonInitOptionsMixin = ToolButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IMenuToolButton,
+		"menu">;
+
+	export interface MenuToolButtonInitOptions extends MenuToolButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuToolButton} instead.
 	 */
@@ -23921,7 +25094,7 @@ declare namespace imports.gi.Gtk {
 	interface MenuToolButton extends MenuToolButtonMixin {}
 
 	class MenuToolButton {
-		public constructor();
+		public constructor(options?: Partial<MenuToolButtonInitOptions>);
 		/**
 		 * Creates a new {@link MenuToolButton} using #icon_widget as icon and
 		 * #label as label.
@@ -24041,6 +25214,18 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MessageDialogInitOptionsMixin = DialogInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IMessageDialog,
+		"image" |
+		"message_area" |
+		"message_type" |
+		"secondary_text" |
+		"secondary_use_markup" |
+		"text" |
+		"use_markup">;
+
+	export interface MessageDialogInitOptions extends MessageDialogInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MessageDialog} instead.
 	 */
@@ -24103,7 +25288,7 @@ declare namespace imports.gi.Gtk {
 	interface MessageDialog extends MessageDialogMixin {}
 
 	class MessageDialog {
-		public constructor();
+		public constructor(options?: Partial<MessageDialogInitOptions>);
 		/**
 		 * Creates a new message dialog, which is a simple dialog with some text
 		 * the user may want to see. When the user clicks a button a “response”
@@ -24219,6 +25404,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MiscInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IMisc,
+		"xalign" |
+		"xpad" |
+		"yalign" |
+		"ypad" |
+		"widget">;
+
+	export interface MiscInitOptions extends MiscInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Misc} instead.
 	 */
@@ -24244,7 +25439,7 @@ declare namespace imports.gi.Gtk {
 	interface Misc extends MiscMixin {}
 
 	class Misc {
-		public constructor();
+		public constructor(options?: Partial<MiscInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -24311,6 +25506,20 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::use_markup", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type ModelButtonInitOptionsMixin = ButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IModelButton,
+		"active" |
+		"centered" |
+		"icon" |
+		"iconic" |
+		"inverted" |
+		"menu_name" |
+		"role" |
+		"text" |
+		"use_markup">;
+
+	export interface ModelButtonInitOptions extends ModelButtonInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ModelButton} instead.
@@ -24421,7 +25630,7 @@ declare namespace imports.gi.Gtk {
 	interface ModelButton extends ModelButtonMixin {}
 
 	class ModelButton {
-		public constructor();
+		public constructor(options?: Partial<ModelButtonInitOptions>);
 		/**
 		 * Creates a new GtkModelButton.
 		 * @returns the newly created {@link ModelButton} widget
@@ -24468,6 +25677,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type MountOperationInitOptionsMixin = Gio.MountOperationInitOptions & 
+	Pick<IMountOperation,
+		"is_showing" |
+		"screen">;
+
+	export interface MountOperationInitOptions extends MountOperationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MountOperation} instead.
 	 */
@@ -24479,7 +25695,7 @@ declare namespace imports.gi.Gtk {
 	interface MountOperation extends MountOperationMixin {}
 
 	class MountOperation {
-		public constructor();
+		public constructor(options?: Partial<MountOperationInitOptions>);
 		/**
 		 * Creates a new {@link MountOperation}
 		 * @param parent transient parent of the window, or %NULL
@@ -24637,6 +25853,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type NativeDialogInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<INativeDialog,
+		"modal" |
+		"title" |
+		"transient_for" |
+		"visible">;
+
+	export interface NativeDialogInitOptions extends NativeDialogInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NativeDialog} instead.
 	 */
@@ -24662,7 +25887,7 @@ declare namespace imports.gi.Gtk {
 	interface NativeDialog extends NativeDialogMixin {}
 
 	class NativeDialog {
-		public constructor();
+		public constructor(options?: Partial<NativeDialogInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -25114,6 +26339,18 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type NotebookInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<INotebook,
+		"enable_popup" |
+		"group_name" |
+		"page" |
+		"scrollable" |
+		"show_border" |
+		"show_tabs" |
+		"tab_pos">;
+
+	export interface NotebookInitOptions extends NotebookInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Notebook} instead.
 	 */
@@ -25205,7 +26442,7 @@ declare namespace imports.gi.Gtk {
 	interface Notebook extends NotebookMixin {}
 
 	class Notebook {
-		public constructor();
+		public constructor(options?: Partial<NotebookInitOptions>);
 		/**
 		 * Creates a new {@link Notebook} widget with no pages.
 		 * @returns the newly created {@link Notebook}
@@ -25220,6 +26457,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type NotebookAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions
+	export interface NotebookAccessibleInitOptions extends NotebookAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NotebookAccessible} instead.
 	 */
@@ -25228,7 +26468,7 @@ declare namespace imports.gi.Gtk {
 	interface NotebookAccessible extends NotebookAccessibleMixin {}
 
 	class NotebookAccessible {
-		public constructor();
+		public constructor(options?: Partial<NotebookAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -25238,6 +26478,9 @@ declare namespace imports.gi.Gtk {
 		invalidate(): void;
 	}
 
+	type NotebookPageAccessibleInitOptionsMixin = Atk.ObjectInitOptions & Atk.ComponentInitOptions
+	export interface NotebookPageAccessibleInitOptions extends NotebookPageAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NotebookPageAccessible} instead.
 	 */
@@ -25246,7 +26489,7 @@ declare namespace imports.gi.Gtk {
 	interface NotebookPageAccessible extends NotebookPageAccessibleMixin {}
 
 	class NotebookPageAccessible {
-		public constructor();
+		public constructor(options?: Partial<NotebookPageAccessibleInitOptions>);
 		public static new(notebook: NotebookAccessible, child: Widget): Atk.Object;
 	}
 
@@ -25358,6 +26601,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type NumerableIconInitOptionsMixin = Gio.EmblemedIconInitOptions & Gio.IconInitOptions & 
+	Pick<INumerableIcon,
+		"background_icon" |
+		"background_icon_name" |
+		"count" |
+		"label" |
+		"style_context">;
+
+	export interface NumerableIconInitOptions extends NumerableIconInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NumerableIcon} instead.
 	 */
@@ -25379,7 +26632,7 @@ declare namespace imports.gi.Gtk {
 	interface NumerableIcon extends NumerableIconMixin {}
 
 	class NumerableIcon {
-		public constructor();
+		public constructor(options?: Partial<NumerableIconInitOptions>);
 		/**
 		 * Creates a new unthemed {@link NumerableIcon}.
 		 * @param base_icon a #GIcon to overlay on
@@ -25422,6 +26675,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type OffscreenWindowInitOptionsMixin = WindowInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IOffscreenWindow,
+		"parent_object">;
+
+	export interface OffscreenWindowInitOptions extends OffscreenWindowInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OffscreenWindow} instead.
 	 */
@@ -25449,7 +26708,7 @@ declare namespace imports.gi.Gtk {
 	interface OffscreenWindow extends OffscreenWindowMixin {}
 
 	class OffscreenWindow {
-		public constructor();
+		public constructor(options?: Partial<OffscreenWindowInitOptions>);
 		/**
 		 * Creates a toplevel container widget that is used to retrieve
 		 * snapshots of widgets without showing them on the screen.
@@ -25520,6 +26779,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type OverlayInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions
+	export interface OverlayInitOptions extends OverlayInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Overlay} instead.
 	 */
@@ -25557,7 +26819,7 @@ declare namespace imports.gi.Gtk {
 	interface Overlay extends OverlayMixin {}
 
 	class Overlay {
-		public constructor();
+		public constructor(options?: Partial<OverlayInitOptions>);
 		/**
 		 * Creates a new {@link Overlay}.
 		 * @returns a new {@link Overlay} object.
@@ -25599,6 +26861,13 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::pad", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type PadControllerInitOptionsMixin = EventControllerInitOptions & 
+	Pick<IPadController,
+		"action_group" |
+		"pad">;
+
+	export interface PadControllerInitOptions extends PadControllerInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PadController} instead.
@@ -25652,7 +26921,7 @@ declare namespace imports.gi.Gtk {
 	interface PadController extends PadControllerMixin {}
 
 	class PadController {
-		public constructor();
+		public constructor(options?: Partial<PadControllerInitOptions>);
 		/**
 		 * Creates a new {@link PadController} that will associate events from #pad to
 		 * actions. A %NULL pad may be provided so the controller manages all pad devices
@@ -25832,6 +27101,9 @@ declare namespace imports.gi.Gtk {
 		to_key_file(key_file: GLib.KeyFile, group_name: string | null): void;
 	}
 
+	type PageSetupInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PageSetupInitOptions extends PageSetupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PageSetup} instead.
 	 */
@@ -25885,7 +27157,7 @@ declare namespace imports.gi.Gtk {
 	interface PageSetup extends PageSetupMixin {}
 
 	class PageSetup {
-		public constructor();
+		public constructor(options?: Partial<PageSetupInitOptions>);
 		/**
 		 * Creates a new {@link PageSetup}.
 		 * @returns a new {@link PageSetup}.
@@ -26072,6 +27344,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type PanedInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IPaned,
+		"max_position" |
+		"min_position" |
+		"position" |
+		"position_set" |
+		"wide_handle" |
+		"container">;
+
+	export interface PanedInitOptions extends PanedInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Paned} instead.
 	 */
@@ -26146,7 +27429,7 @@ declare namespace imports.gi.Gtk {
 	interface Paned extends PanedMixin {}
 
 	class Paned {
-		public constructor();
+		public constructor(options?: Partial<PanedInitOptions>);
 		/**
 		 * Creates a new {@link Paned} widget.
 		 * @param orientation the paned’s orientation.
@@ -26162,6 +27445,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type PanedAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions & Atk.ValueInitOptions
+	export interface PanedAccessibleInitOptions extends PanedAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PanedAccessible} instead.
 	 */
@@ -26170,7 +27456,7 @@ declare namespace imports.gi.Gtk {
 	interface PanedAccessible extends PanedAccessibleMixin {}
 
 	class PanedAccessible {
-		public constructor();
+		public constructor(options?: Partial<PanedAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -26534,6 +27820,22 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type PlacesSidebarInitOptionsMixin = ScrolledWindowInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IPlacesSidebar,
+		"local_only" |
+		"location" |
+		"open_flags" |
+		"populate_all" |
+		"show_connect_to_server" |
+		"show_desktop" |
+		"show_enter_location" |
+		"show_other_locations" |
+		"show_recent" |
+		"show_starred_location" |
+		"show_trash">;
+
+	export interface PlacesSidebarInitOptions extends PlacesSidebarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PlacesSidebar} instead.
 	 */
@@ -26577,7 +27879,7 @@ declare namespace imports.gi.Gtk {
 	interface PlacesSidebar extends PlacesSidebarMixin {}
 
 	class PlacesSidebar {
-		public constructor();
+		public constructor(options?: Partial<PlacesSidebarInitOptions>);
 		/**
 		 * Creates a new {@link PlacesSidebar} widget.
 		 * 
@@ -26645,6 +27947,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type PlugInitOptionsMixin = WindowInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IPlug,
+		"embedded" |
+		"socket_window" |
+		"window">;
+
+	export interface PlugInitOptions extends PlugInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plug} instead.
 	 */
@@ -26673,7 +27983,7 @@ declare namespace imports.gi.Gtk {
 	interface Plug extends PlugMixin {}
 
 	class Plug {
-		public constructor();
+		public constructor(options?: Partial<PlugInitOptions>);
 		/**
 		 * Creates a new plug widget inside the {@link Socket} identified
 		 * by #socket_id. If #socket_id is 0, the plug is left “unplugged” and
@@ -26698,6 +28008,9 @@ declare namespace imports.gi.Gtk {
 		get_id(): string;
 	}
 
+	type PlugAccessibleInitOptionsMixin = WindowAccessibleInitOptions & Atk.ComponentInitOptions & Atk.WindowInitOptions
+	export interface PlugAccessibleInitOptions extends PlugAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PlugAccessible} instead.
 	 */
@@ -26706,7 +28019,7 @@ declare namespace imports.gi.Gtk {
 	interface PlugAccessible extends PlugAccessibleMixin {}
 
 	class PlugAccessible {
-		public constructor();
+		public constructor(options?: Partial<PlugAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -26896,6 +28209,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type PopoverInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IPopover,
+		"constrain_to" |
+		"modal" |
+		"pointing_to" |
+		"position" |
+		"relative_to" |
+		"transitions_enabled">;
+
+	export interface PopoverInitOptions extends PopoverInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Popover} instead.
 	 */
@@ -26967,7 +28291,7 @@ declare namespace imports.gi.Gtk {
 	interface Popover extends PopoverMixin {}
 
 	class Popover {
-		public constructor();
+		public constructor(options?: Partial<PopoverInitOptions>);
 		/**
 		 * Creates a new popover to point to #relative_to
 		 * @param relative_to {@link Widget} the popover is related to
@@ -26999,6 +28323,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type PopoverAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions
+	export interface PopoverAccessibleInitOptions extends PopoverAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PopoverAccessible} instead.
 	 */
@@ -27007,7 +28334,7 @@ declare namespace imports.gi.Gtk {
 	interface PopoverAccessible extends PopoverAccessibleMixin {}
 
 	class PopoverAccessible {
-		public constructor();
+		public constructor(options?: Partial<PopoverAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -27031,6 +28358,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::visible_submenu", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type PopoverMenuInitOptionsMixin = PopoverInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IPopoverMenu,
+		"visible_submenu">;
+
+	export interface PopoverMenuInitOptions extends PopoverMenuInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PopoverMenu} instead.
@@ -27114,7 +28447,7 @@ declare namespace imports.gi.Gtk {
 	interface PopoverMenu extends PopoverMenuMixin {}
 
 	class PopoverMenu {
-		public constructor();
+		public constructor(options?: Partial<PopoverMenuInitOptions>);
 		/**
 		 * Creates a new popover menu.
 		 * @returns a new {@link PopoverMenu}
@@ -27197,6 +28530,9 @@ declare namespace imports.gi.Gtk {
 		set_cairo_context(cr: cairo.Context, dpi_x: number, dpi_y: number): void;
 	}
 
+	type PrintContextInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PrintContextInitOptions extends PrintContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintContext} instead.
 	 */
@@ -27274,7 +28610,7 @@ declare namespace imports.gi.Gtk {
 	interface PrintContext extends PrintContextMixin {}
 
 	class PrintContext {
-		public constructor();
+		public constructor(options?: Partial<PrintContextInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -27905,6 +29241,29 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type PrintOperationInitOptionsMixin = GObject.ObjectInitOptions & PrintOperationPreviewInitOptions & 
+	Pick<IPrintOperation,
+		"allow_async" |
+		"current_page" |
+		"custom_tab_label" |
+		"default_page_setup" |
+		"embed_page_setup" |
+		"export_filename" |
+		"has_selection" |
+		"job_name" |
+		"n_pages" |
+		"n_pages_to_print" |
+		"print_settings" |
+		"show_progress" |
+		"status" |
+		"status_string" |
+		"support_selection" |
+		"track_print_status" |
+		"unit" |
+		"use_full_page">;
+
+	export interface PrintOperationInitOptions extends PrintOperationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintOperation} instead.
 	 */
@@ -27976,7 +29335,7 @@ declare namespace imports.gi.Gtk {
 	interface PrintOperation extends PrintOperationMixin {}
 
 	class PrintOperation {
-		public constructor();
+		public constructor(options?: Partial<PrintOperationInitOptions>);
 		/**
 		 * Creates a new {@link PrintOperation}.
 		 * @returns a new {@link PrintOperation}
@@ -28415,6 +29774,9 @@ declare namespace imports.gi.Gtk {
 		unset(key: string): void;
 	}
 
+	type PrintSettingsInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PrintSettingsInitOptions extends PrintSettingsInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintSettings} instead.
 	 */
@@ -28437,7 +29799,7 @@ declare namespace imports.gi.Gtk {
 	interface PrintSettings extends PrintSettingsMixin {}
 
 	class PrintSettings {
-		public constructor();
+		public constructor(options?: Partial<PrintSettingsInitOptions>);
 		/**
 		 * Creates a new {@link PrintSettings} object.
 		 * @returns a new {@link PrintSettings} object
@@ -28607,6 +29969,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ProgressBarInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IProgressBar,
+		"ellipsize" |
+		"fraction" |
+		"inverted" |
+		"pulse_step" |
+		"show_text" |
+		"text">;
+
+	export interface ProgressBarInitOptions extends ProgressBarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProgressBar} instead.
 	 */
@@ -28656,7 +30029,7 @@ declare namespace imports.gi.Gtk {
 	interface ProgressBar extends ProgressBarMixin {}
 
 	class ProgressBar {
-		public constructor();
+		public constructor(options?: Partial<ProgressBarInitOptions>);
 		/**
 		 * Creates a new {@link ProgressBar}.
 		 * @returns a {@link ProgressBar}.
@@ -28671,6 +30044,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ProgressBarAccessibleInitOptionsMixin = WidgetAccessibleInitOptions & Atk.ComponentInitOptions & Atk.ValueInitOptions
+	export interface ProgressBarAccessibleInitOptions extends ProgressBarAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProgressBarAccessible} instead.
 	 */
@@ -28679,7 +30055,7 @@ declare namespace imports.gi.Gtk {
 	interface ProgressBarAccessible extends ProgressBarAccessibleMixin {}
 
 	class ProgressBarAccessible {
-		public constructor();
+		public constructor(options?: Partial<ProgressBarAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -28772,6 +30148,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RadioActionInitOptionsMixin = ToggleActionInitOptions & BuildableInitOptions & 
+	Pick<IRadioAction,
+		"current_value" |
+		"value">;
+
+	export interface RadioActionInitOptions extends RadioActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioAction} instead.
 	 */
@@ -28785,7 +30168,7 @@ declare namespace imports.gi.Gtk {
 	interface RadioAction extends RadioActionMixin {}
 
 	class RadioAction {
-		public constructor();
+		public constructor(options?: Partial<RadioActionInitOptions>);
 		/**
 		 * Creates a new {@link RadioAction} object. To add the action to
 		 * a #GtkActionGroup and set the accelerator for the action,
@@ -28861,6 +30244,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::check_button", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type RadioButtonInitOptionsMixin = CheckButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IRadioButton,
+		"check_button">;
+
+	export interface RadioButtonInitOptions extends RadioButtonInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioButton} instead.
@@ -28956,7 +30345,7 @@ declare namespace imports.gi.Gtk {
 	interface RadioButton extends RadioButtonMixin {}
 
 	class RadioButton {
-		public constructor();
+		public constructor(options?: Partial<RadioButtonInitOptions>);
 		/**
 		 * Creates a new {@link RadioButton}. To be of any practical value, a widget should
 		 * then be packed into the radio button.
@@ -29020,6 +30409,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RadioButtonAccessibleInitOptionsMixin = ToggleButtonAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.ImageInitOptions
+	export interface RadioButtonAccessibleInitOptions extends RadioButtonAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioButtonAccessible} instead.
 	 */
@@ -29028,7 +30420,7 @@ declare namespace imports.gi.Gtk {
 	interface RadioButtonAccessible extends RadioButtonAccessibleMixin {}
 
 	class RadioButtonAccessible {
-		public constructor();
+		public constructor(options?: Partial<RadioButtonAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29082,6 +30474,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RadioMenuItemInitOptionsMixin = CheckMenuItemInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IRadioMenuItem,
+		"check_menu_item">;
+
+	export interface RadioMenuItemInitOptions extends RadioMenuItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioMenuItem} instead.
 	 */
@@ -29127,7 +30525,7 @@ declare namespace imports.gi.Gtk {
 	interface RadioMenuItem extends RadioMenuItemMixin {}
 
 	class RadioMenuItem {
-		public constructor();
+		public constructor(options?: Partial<RadioMenuItemInitOptions>);
 		/**
 		 * Creates a new {@link RadioMenuItem}.
 		 * @param group the group to which the
@@ -29189,6 +30587,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RadioMenuItemAccessibleInitOptionsMixin = CheckMenuItemAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions
+	export interface RadioMenuItemAccessibleInitOptions extends RadioMenuItemAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioMenuItemAccessible} instead.
 	 */
@@ -29197,7 +30598,7 @@ declare namespace imports.gi.Gtk {
 	interface RadioMenuItemAccessible extends RadioMenuItemAccessibleMixin {}
 
 	class RadioMenuItemAccessible {
-		public constructor();
+		public constructor(options?: Partial<RadioMenuItemAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29215,6 +30616,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_group(group: GLib.SList | null): void;
 	}
+
+	type RadioToolButtonInitOptionsMixin = ToggleToolButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions
+	export interface RadioToolButtonInitOptions extends RadioToolButtonInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioToolButton} instead.
@@ -29237,7 +30641,7 @@ declare namespace imports.gi.Gtk {
 	interface RadioToolButton extends RadioToolButtonMixin {}
 
 	class RadioToolButton {
-		public constructor();
+		public constructor(options?: Partial<RadioToolButtonInitOptions>);
 		/**
 		 * Creates a new {@link RadioToolButton}, adding it to #group.
 		 * @param group An
@@ -29554,6 +30958,20 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RangeInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IRange,
+		"adjustment" |
+		"fill_level" |
+		"inverted" |
+		"lower_stepper_sensitivity" |
+		"restrict_to_fill_level" |
+		"round_digits" |
+		"show_fill_level" |
+		"upper_stepper_sensitivity" |
+		"widget">;
+
+	export interface RangeInitOptions extends RangeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Range} instead.
 	 */
@@ -29571,7 +30989,7 @@ declare namespace imports.gi.Gtk {
 	interface Range extends RangeMixin {}
 
 	class Range {
-		public constructor();
+		public constructor(options?: Partial<RangeInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29581,6 +30999,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RangeAccessibleInitOptionsMixin = WidgetAccessibleInitOptions & Atk.ComponentInitOptions & Atk.ValueInitOptions
+	export interface RangeAccessibleInitOptions extends RangeAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RangeAccessible} instead.
 	 */
@@ -29589,7 +31010,7 @@ declare namespace imports.gi.Gtk {
 	interface RangeAccessible extends RangeAccessibleMixin {}
 
 	class RangeAccessible {
-		public constructor();
+		public constructor(options?: Partial<RangeAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29656,6 +31077,21 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RcStyleInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IRcStyle,
+		"name" |
+		"bg_pixmap_name" |
+		"font_desc" |
+		"color_flags" |
+		"fg" |
+		"bg" |
+		"text" |
+		"base" |
+		"xthickness" |
+		"ythickness">;
+
+	export interface RcStyleInitOptions extends RcStyleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RcStyle} instead.
 	 */
@@ -29670,7 +31106,7 @@ declare namespace imports.gi.Gtk {
 	interface RcStyle extends RcStyleMixin {}
 
 	class RcStyle {
-		public constructor();
+		public constructor(options?: Partial<RcStyleInitOptions>);
 		/**
 		 * Creates a new {@link RcStyle} with no fields set and
 		 * a reference count of 1.
@@ -29704,6 +31140,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RecentActionInitOptionsMixin = ActionInitOptions & BuildableInitOptions & RecentChooserInitOptions & 
+	Pick<IRecentAction,
+		"show_numbers">;
+
+	export interface RecentActionInitOptions extends RecentActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentAction} instead.
 	 */
@@ -29722,7 +31164,7 @@ declare namespace imports.gi.Gtk {
 	interface RecentAction extends RecentActionMixin {}
 
 	class RecentAction {
-		public constructor();
+		public constructor(options?: Partial<RecentActionInitOptions>);
 		/**
 		 * Creates a new {@link RecentAction} object. To add the action to
 		 * a #GtkActionGroup and set the accelerator for the action,
@@ -29759,6 +31201,9 @@ declare namespace imports.gi.Gtk {
 	interface IRecentChooserDialog {
 
 	}
+
+	type RecentChooserDialogInitOptionsMixin = DialogInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & RecentChooserInitOptions
+	export interface RecentChooserDialogInitOptions extends RecentChooserDialogInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentChooserDialog} instead.
@@ -29811,7 +31256,7 @@ declare namespace imports.gi.Gtk {
 	interface RecentChooserDialog extends RecentChooserDialogMixin {}
 
 	class RecentChooserDialog {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserDialogInitOptions>);
 		/**
 		 * Creates a new {@link RecentChooserDialog}.  This function is analogous to
 		 * gtk_dialog_new_with_buttons().
@@ -29861,6 +31306,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RecentChooserMenuInitOptionsMixin = MenuInitOptions & Atk.ImplementorIfaceInitOptions & ActivatableInitOptions & BuildableInitOptions & RecentChooserInitOptions & 
+	Pick<IRecentChooserMenu,
+		"show_numbers">;
+
+	export interface RecentChooserMenuInitOptions extends RecentChooserMenuInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentChooserMenu} instead.
 	 */
@@ -29889,7 +31340,7 @@ declare namespace imports.gi.Gtk {
 	interface RecentChooserMenu extends RecentChooserMenuMixin {}
 
 	class RecentChooserMenu {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserMenuInitOptions>);
 		/**
 		 * Creates a new {@link RecentChooserMenu} widget.
 		 * 
@@ -29927,6 +31378,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RecentChooserWidgetInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & RecentChooserInitOptions
+	export interface RecentChooserWidgetInitOptions extends RecentChooserWidgetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentChooserWidget} instead.
 	 */
@@ -29946,7 +31400,7 @@ declare namespace imports.gi.Gtk {
 	interface RecentChooserWidget extends RecentChooserWidgetMixin {}
 
 	class RecentChooserWidget {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserWidgetInitOptions>);
 		/**
 		 * Creates a new {@link RecentChooserWidget} object.  This is an embeddable widget
 		 * used to access the recently used resources list.
@@ -30058,6 +31512,9 @@ declare namespace imports.gi.Gtk {
 		set_name(name: string): void;
 	}
 
+	type RecentFilterInitOptionsMixin = GObject.InitiallyUnownedInitOptions & BuildableInitOptions
+	export interface RecentFilterInitOptions extends RecentFilterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentFilter} instead.
 	 */
@@ -30116,7 +31573,7 @@ declare namespace imports.gi.Gtk {
 	interface RecentFilter extends RecentFilterMixin {}
 
 	class RecentFilter {
-		public constructor();
+		public constructor(options?: Partial<RecentFilterInitOptions>);
 		/**
 		 * Creates a new {@link RecentFilter} with no rules added to it.
 		 * Such filter does not accept any recently used resources, so is not
@@ -30250,6 +31707,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RecentManagerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IRecentManager,
+		"filename" |
+		"size">;
+
+	export interface RecentManagerInitOptions extends RecentManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentManager} instead.
 	 */
@@ -30320,7 +31784,7 @@ declare namespace imports.gi.Gtk {
 	interface RecentManager extends RecentManagerMixin {}
 
 	class RecentManager {
-		public constructor();
+		public constructor(options?: Partial<RecentManagerInitOptions>);
 		/**
 		 * Creates a new recent manager object. Recent manager objects are used to
 		 * handle the list of recently used resources. A {@link RecentManager} object
@@ -30351,6 +31815,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RendererCellAccessibleInitOptionsMixin = CellAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.TableCellInitOptions & 
+	Pick<IRendererCellAccessible,
+		"renderer">;
+
+	export interface RendererCellAccessibleInitOptions extends RendererCellAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RendererCellAccessible} instead.
 	 */
@@ -30359,7 +31829,7 @@ declare namespace imports.gi.Gtk {
 	interface RendererCellAccessible extends RendererCellAccessibleMixin {}
 
 	class RendererCellAccessible {
-		public constructor();
+		public constructor(options?: Partial<RendererCellAccessibleInitOptions>);
 		public static new(renderer: CellRenderer): Atk.Object;
 	}
 
@@ -30427,6 +31897,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RevealerInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IRevealer,
+		"child_revealed" |
+		"reveal_child" |
+		"transition_duration" |
+		"transition_type">;
+
+	export interface RevealerInitOptions extends RevealerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Revealer} instead.
 	 */
@@ -30451,7 +31930,7 @@ declare namespace imports.gi.Gtk {
 	interface Revealer extends RevealerMixin {}
 
 	class Revealer {
-		public constructor();
+		public constructor(options?: Partial<RevealerInitOptions>);
 		/**
 		 * Creates a new {@link Revealer}.
 		 * @returns a newly created {@link Revealer}
@@ -30596,6 +32075,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ScaleInitOptionsMixin = RangeInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IScale,
+		"digits" |
+		"draw_value" |
+		"has_origin" |
+		"value_pos" |
+		"range">;
+
+	export interface ScaleInitOptions extends ScaleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scale} instead.
 	 */
@@ -30678,7 +32167,7 @@ declare namespace imports.gi.Gtk {
 	interface Scale extends ScaleMixin {}
 
 	class Scale {
-		public constructor();
+		public constructor(options?: Partial<ScaleInitOptions>);
 		/**
 		 * Creates a new {@link Scale}.
 		 * @param orientation the scale’s orientation.
@@ -30713,6 +32202,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ScaleAccessibleInitOptionsMixin = RangeAccessibleInitOptions & Atk.ComponentInitOptions & Atk.ValueInitOptions
+	export interface ScaleAccessibleInitOptions extends ScaleAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScaleAccessible} instead.
 	 */
@@ -30721,7 +32213,7 @@ declare namespace imports.gi.Gtk {
 	interface ScaleAccessible extends ScaleAccessibleMixin {}
 
 	class ScaleAccessible {
-		public constructor();
+		public constructor(options?: Partial<ScaleAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -30825,6 +32317,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ScaleButtonInitOptionsMixin = ButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IScaleButton,
+		"adjustment" |
+		"icons" |
+		"size" |
+		"value">;
+
+	export interface ScaleButtonInitOptions extends ScaleButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScaleButton} instead.
 	 */
@@ -30846,7 +32347,7 @@ declare namespace imports.gi.Gtk {
 	interface ScaleButton extends ScaleButtonMixin {}
 
 	class ScaleButton {
-		public constructor();
+		public constructor(options?: Partial<ScaleButtonInitOptions>);
 		/**
 		 * Creates a {@link ScaleButton}, with a range between #min and #max, with
 		 * a stepping of #step.
@@ -30870,6 +32371,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ScaleButtonAccessibleInitOptionsMixin = ButtonAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.ImageInitOptions & Atk.ValueInitOptions
+	export interface ScaleButtonAccessibleInitOptions extends ScaleButtonAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScaleButtonAccessible} instead.
 	 */
@@ -30878,7 +32382,7 @@ declare namespace imports.gi.Gtk {
 	interface ScaleButtonAccessible extends ScaleButtonAccessibleMixin {}
 
 	class ScaleButtonAccessible {
-		public constructor();
+		public constructor(options?: Partial<ScaleButtonAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -30890,6 +32394,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::range", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type ScrollbarInitOptionsMixin = RangeInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IScrollbar,
+		"range">;
+
+	export interface ScrollbarInitOptions extends ScrollbarInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scrollbar} instead.
@@ -30940,7 +32450,7 @@ declare namespace imports.gi.Gtk {
 	interface Scrollbar extends ScrollbarMixin {}
 
 	class Scrollbar {
-		public constructor();
+		public constructor(options?: Partial<ScrollbarInitOptions>);
 		/**
 		 * Creates a new scrollbar with the given orientation.
 		 * @param orientation the scrollbar’s orientation.
@@ -31322,6 +32832,27 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ScrolledWindowInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IScrolledWindow,
+		"hadjustment" |
+		"hscrollbar_policy" |
+		"kinetic_scrolling" |
+		"max_content_height" |
+		"max_content_width" |
+		"min_content_height" |
+		"min_content_width" |
+		"overlay_scrolling" |
+		"propagate_natural_height" |
+		"propagate_natural_width" |
+		"shadow_type" |
+		"vadjustment" |
+		"vscrollbar_policy" |
+		"window_placement" |
+		"window_placement_set" |
+		"container">;
+
+	export interface ScrolledWindowInitOptions extends ScrolledWindowInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrolledWindow} instead.
 	 */
@@ -31409,7 +32940,7 @@ declare namespace imports.gi.Gtk {
 	interface ScrolledWindow extends ScrolledWindowMixin {}
 
 	class ScrolledWindow {
-		public constructor();
+		public constructor(options?: Partial<ScrolledWindowInitOptions>);
 		/**
 		 * Creates a new scrolled window.
 		 * 
@@ -31431,6 +32962,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ScrolledWindowAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions
+	export interface ScrolledWindowAccessibleInitOptions extends ScrolledWindowAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrolledWindowAccessible} instead.
 	 */
@@ -31439,7 +32973,7 @@ declare namespace imports.gi.Gtk {
 	interface ScrolledWindowAccessible extends ScrolledWindowAccessibleMixin {}
 
 	class ScrolledWindowAccessible {
-		public constructor();
+		public constructor(options?: Partial<ScrolledWindowAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -31529,6 +33063,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SearchBarInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<ISearchBar,
+		"search_mode_enabled" |
+		"show_close_button">;
+
+	export interface SearchBarInitOptions extends SearchBarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SearchBar} instead.
 	 */
@@ -31562,7 +33103,7 @@ declare namespace imports.gi.Gtk {
 	interface SearchBar extends SearchBarMixin {}
 
 	class SearchBar {
-		public constructor();
+		public constructor(options?: Partial<SearchBarInitOptions>);
 		/**
 		 * Creates a {@link SearchBar}. You will need to tell it about
 		 * which widget is going to be your text entry using
@@ -31634,6 +33175,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SearchEntryInitOptionsMixin = EntryInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & CellEditableInitOptions & EditableInitOptions
+	export interface SearchEntryInitOptions extends SearchEntryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SearchEntry} instead.
 	 */
@@ -31668,7 +33212,7 @@ declare namespace imports.gi.Gtk {
 	interface SearchEntry extends SearchEntryMixin {}
 
 	class SearchEntry {
-		public constructor();
+		public constructor(options?: Partial<SearchEntryInitOptions>);
 		/**
 		 * Creates a {@link SearchEntry}, with a find icon when the search field is
 		 * empty, and a clear icon when it isn't.
@@ -31686,6 +33230,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type SeparatorInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<ISeparator,
+		"widget">;
+
+	export interface SeparatorInitOptions extends SeparatorInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Separator} instead.
@@ -31706,7 +33256,7 @@ declare namespace imports.gi.Gtk {
 	interface Separator extends SeparatorMixin {}
 
 	class Separator {
-		public constructor();
+		public constructor(options?: Partial<SeparatorInitOptions>);
 		/**
 		 * Creates a new {@link Separator} with the given orientation.
 		 * @param orientation the separator’s orientation.
@@ -31725,6 +33275,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SeparatorMenuItemInitOptionsMixin = MenuItemInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<ISeparatorMenuItem,
+		"menu_item">;
+
+	export interface SeparatorMenuItemInitOptions extends SeparatorMenuItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SeparatorMenuItem} instead.
 	 */
@@ -31742,7 +33298,7 @@ declare namespace imports.gi.Gtk {
 	interface SeparatorMenuItem extends SeparatorMenuItemMixin {}
 
 	class SeparatorMenuItem {
-		public constructor();
+		public constructor(options?: Partial<SeparatorMenuItemInitOptions>);
 		/**
 		 * Creates a new {@link SeparatorMenuItem}.
 		 * @returns a new {@link SeparatorMenuItem}.
@@ -31772,6 +33328,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SeparatorToolItemInitOptionsMixin = ToolItemInitOptions & Atk.ImplementorIfaceInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<ISeparatorToolItem,
+		"draw">;
+
+	export interface SeparatorToolItemInitOptions extends SeparatorToolItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SeparatorToolItem} instead.
 	 */
@@ -31795,7 +33357,7 @@ declare namespace imports.gi.Gtk {
 	interface SeparatorToolItem extends SeparatorToolItemMixin {}
 
 	class SeparatorToolItem {
-		public constructor();
+		public constructor(options?: Partial<SeparatorToolItemInitOptions>);
 		/**
 		 * Create a new {@link SeparatorToolItem}
 		 * @returns the new {@link SeparatorToolItem}
@@ -32322,6 +33884,96 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SettingsInitOptionsMixin = GObject.ObjectInitOptions & StyleProviderInitOptions & 
+	Pick<ISettings,
+		"color_hash" |
+		"gtk_alternative_button_order" |
+		"gtk_alternative_sort_arrows" |
+		"gtk_application_prefer_dark_theme" |
+		"gtk_auto_mnemonics" |
+		"gtk_button_images" |
+		"gtk_can_change_accels" |
+		"gtk_color_palette" |
+		"gtk_color_scheme" |
+		"gtk_cursor_aspect_ratio" |
+		"gtk_cursor_blink" |
+		"gtk_cursor_blink_time" |
+		"gtk_cursor_blink_timeout" |
+		"gtk_cursor_theme_name" |
+		"gtk_cursor_theme_size" |
+		"gtk_decoration_layout" |
+		"gtk_dialogs_use_header" |
+		"gtk_dnd_drag_threshold" |
+		"gtk_double_click_distance" |
+		"gtk_double_click_time" |
+		"gtk_enable_accels" |
+		"gtk_enable_animations" |
+		"gtk_enable_event_sounds" |
+		"gtk_enable_input_feedback_sounds" |
+		"gtk_enable_mnemonics" |
+		"gtk_enable_primary_paste" |
+		"gtk_enable_tooltips" |
+		"gtk_entry_password_hint_timeout" |
+		"gtk_entry_select_on_focus" |
+		"gtk_error_bell" |
+		"gtk_fallback_icon_theme" |
+		"gtk_file_chooser_backend" |
+		"gtk_font_name" |
+		"gtk_fontconfig_timestamp" |
+		"gtk_icon_sizes" |
+		"gtk_icon_theme_name" |
+		"gtk_im_module" |
+		"gtk_im_preedit_style" |
+		"gtk_im_status_style" |
+		"gtk_key_theme_name" |
+		"gtk_keynav_cursor_only" |
+		"gtk_keynav_use_caret" |
+		"gtk_keynav_wrap_around" |
+		"gtk_label_select_on_focus" |
+		"gtk_long_press_time" |
+		"gtk_menu_bar_accel" |
+		"gtk_menu_bar_popup_delay" |
+		"gtk_menu_images" |
+		"gtk_menu_popdown_delay" |
+		"gtk_menu_popup_delay" |
+		"gtk_modules" |
+		"gtk_overlay_scrolling" |
+		"gtk_primary_button_warps_slider" |
+		"gtk_print_backends" |
+		"gtk_print_preview_command" |
+		"gtk_recent_files_enabled" |
+		"gtk_recent_files_limit" |
+		"gtk_recent_files_max_age" |
+		"gtk_scrolled_window_placement" |
+		"gtk_shell_shows_app_menu" |
+		"gtk_shell_shows_desktop" |
+		"gtk_shell_shows_menubar" |
+		"gtk_show_input_method_menu" |
+		"gtk_show_unicode_menu" |
+		"gtk_sound_theme_name" |
+		"gtk_split_cursor" |
+		"gtk_theme_name" |
+		"gtk_timeout_expand" |
+		"gtk_timeout_initial" |
+		"gtk_timeout_repeat" |
+		"gtk_titlebar_double_click" |
+		"gtk_titlebar_middle_click" |
+		"gtk_titlebar_right_click" |
+		"gtk_toolbar_icon_size" |
+		"gtk_toolbar_style" |
+		"gtk_tooltip_browse_mode_timeout" |
+		"gtk_tooltip_browse_timeout" |
+		"gtk_tooltip_timeout" |
+		"gtk_touchscreen_mode" |
+		"gtk_visible_focus" |
+		"gtk_xft_antialias" |
+		"gtk_xft_dpi" |
+		"gtk_xft_hinting" |
+		"gtk_xft_hintstyle" |
+		"gtk_xft_rgba">;
+
+	export interface SettingsInitOptions extends SettingsInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
@@ -32368,7 +34020,7 @@ declare namespace imports.gi.Gtk {
 	interface Settings extends SettingsMixin {}
 
 	class Settings {
-		public constructor();
+		public constructor(options?: Partial<SettingsInitOptions>);
 		/**
 		 * Gets the {@link Settings} object for the default GDK screen, creating
 		 * it if necessary. See gtk_settings_get_for_screen().
@@ -32425,6 +34077,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ShortcutLabelInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IShortcutLabel,
+		"accelerator" |
+		"disabled_text">;
+
+	export interface ShortcutLabelInitOptions extends ShortcutLabelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutLabel} instead.
 	 */
@@ -32437,7 +34096,7 @@ declare namespace imports.gi.Gtk {
 	interface ShortcutLabel extends ShortcutLabelMixin {}
 
 	class ShortcutLabel {
-		public constructor();
+		public constructor(options?: Partial<ShortcutLabelInitOptions>);
 		/**
 		 * Creates a new {@link ShortcutLabel} with #accelerator set.
 		 * @param accelerator the initial accelerator
@@ -32475,6 +34134,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ShortcutsGroupInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IShortcutsGroup,
+		"height" |
+		"title" |
+		"view">;
+
+	export interface ShortcutsGroupInitOptions extends ShortcutsGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsGroup} instead.
 	 */
@@ -32491,7 +34158,7 @@ declare namespace imports.gi.Gtk {
 	interface ShortcutsGroup extends ShortcutsGroupMixin {}
 
 	class ShortcutsGroup {
-		public constructor();
+		public constructor(options?: Partial<ShortcutsGroupInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -32536,6 +34203,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ShortcutsSectionInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IShortcutsSection,
+		"max_height" |
+		"section_name" |
+		"title" |
+		"view_name">;
+
+	export interface ShortcutsSectionInitOptions extends ShortcutsSectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsSection} instead.
 	 */
@@ -32556,7 +34232,7 @@ declare namespace imports.gi.Gtk {
 	interface ShortcutsSection extends ShortcutsSectionMixin {}
 
 	class ShortcutsSection {
-		public constructor();
+		public constructor(options?: Partial<ShortcutsSectionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -32646,6 +34322,20 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ShortcutsShortcutInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IShortcutsShortcut,
+		"accelerator" |
+		"action_name" |
+		"direction" |
+		"icon" |
+		"icon_set" |
+		"shortcut_type" |
+		"subtitle" |
+		"subtitle_set" |
+		"title">;
+
+	export interface ShortcutsShortcutInitOptions extends ShortcutsShortcutInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsShortcut} instead.
 	 */
@@ -32658,7 +34348,7 @@ declare namespace imports.gi.Gtk {
 	interface ShortcutsShortcut extends ShortcutsShortcutMixin {}
 
 	class ShortcutsShortcut {
-		public constructor();
+		public constructor(options?: Partial<ShortcutsShortcutInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -32706,6 +34396,14 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type ShortcutsWindowInitOptionsMixin = WindowInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IShortcutsWindow,
+		"section_name" |
+		"view_name" |
+		"window">;
+
+	export interface ShortcutsWindowInitOptions extends ShortcutsWindowInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsWindow} instead.
@@ -32757,7 +34455,7 @@ declare namespace imports.gi.Gtk {
 	interface ShortcutsWindow extends ShortcutsWindowMixin {}
 
 	class ShortcutsWindow {
-		public constructor();
+		public constructor(options?: Partial<ShortcutsWindowInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -32824,6 +34522,13 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::mode", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type SizeGroupInitOptionsMixin = GObject.ObjectInitOptions & BuildableInitOptions & 
+	Pick<ISizeGroup,
+		"ignore_hidden" |
+		"mode">;
+
+	export interface SizeGroupInitOptions extends SizeGroupInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SizeGroup} instead.
@@ -32901,7 +34606,7 @@ declare namespace imports.gi.Gtk {
 	interface SizeGroup extends SizeGroupMixin {}
 
 	class SizeGroup {
-		public constructor();
+		public constructor(options?: Partial<SizeGroupInitOptions>);
 		/**
 		 * Create a new {@link SizeGroup}.
 		 * @param mode the mode for the new size group.
@@ -32964,6 +34669,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SocketInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<ISocket,
+		"container">;
+
+	export interface SocketInitOptions extends SocketInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Socket} instead.
 	 */
@@ -33025,7 +34736,7 @@ declare namespace imports.gi.Gtk {
 	interface Socket extends SocketMixin {}
 
 	class Socket {
-		public constructor();
+		public constructor(options?: Partial<SocketInitOptions>);
 		/**
 		 * Create a new empty {@link Socket}.
 		 * @returns the new {@link Socket}.
@@ -33040,6 +34751,9 @@ declare namespace imports.gi.Gtk {
 		embed(path: string): void;
 	}
 
+	type SocketAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions
+	export interface SocketAccessibleInitOptions extends SocketAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketAccessible} instead.
 	 */
@@ -33048,7 +34762,7 @@ declare namespace imports.gi.Gtk {
 	interface SocketAccessible extends SocketAccessibleMixin {}
 
 	class SocketAccessible {
-		public constructor();
+		public constructor(options?: Partial<SocketAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -33271,6 +34985,20 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SpinButtonInitOptionsMixin = EntryInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & CellEditableInitOptions & EditableInitOptions & OrientableInitOptions & 
+	Pick<ISpinButton,
+		"adjustment" |
+		"climb_rate" |
+		"digits" |
+		"numeric" |
+		"snap_to_ticks" |
+		"update_policy" |
+		"value" |
+		"wrap" |
+		"entry">;
+
+	export interface SpinButtonInitOptions extends SpinButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SpinButton} instead.
 	 */
@@ -33388,7 +35116,7 @@ declare namespace imports.gi.Gtk {
 	interface SpinButton extends SpinButtonMixin {}
 
 	class SpinButton {
-		public constructor();
+		public constructor(options?: Partial<SpinButtonInitOptions>);
 		/**
 		 * Creates a new {@link SpinButton}.
 		 * @param adjustment the {@link Adjustment} object that this spin
@@ -33424,6 +35152,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SpinButtonAccessibleInitOptionsMixin = EntryAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.EditableTextInitOptions & Atk.TextInitOptions & Atk.ValueInitOptions
+	export interface SpinButtonAccessibleInitOptions extends SpinButtonAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SpinButtonAccessible} instead.
 	 */
@@ -33432,7 +35163,7 @@ declare namespace imports.gi.Gtk {
 	interface SpinButtonAccessible extends SpinButtonAccessibleMixin {}
 
 	class SpinButtonAccessible {
-		public constructor();
+		public constructor(options?: Partial<SpinButtonAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -33451,6 +35182,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type SpinnerInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<ISpinner,
+		"active">;
+
+	export interface SpinnerInitOptions extends SpinnerInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Spinner} instead.
@@ -33473,7 +35210,7 @@ declare namespace imports.gi.Gtk {
 	interface Spinner extends SpinnerMixin {}
 
 	class Spinner {
-		public constructor();
+		public constructor(options?: Partial<SpinnerInitOptions>);
 		/**
 		 * Returns a new spinner widget. Not yet started.
 		 * @returns a new {@link Spinner}
@@ -33488,6 +35225,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SpinnerAccessibleInitOptionsMixin = WidgetAccessibleInitOptions & Atk.ComponentInitOptions & Atk.ImageInitOptions
+	export interface SpinnerAccessibleInitOptions extends SpinnerAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SpinnerAccessible} instead.
 	 */
@@ -33496,7 +35236,7 @@ declare namespace imports.gi.Gtk {
 	interface SpinnerAccessible extends SpinnerAccessibleMixin {}
 
 	class SpinnerAccessible {
-		public constructor();
+		public constructor(options?: Partial<SpinnerAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -33701,6 +35441,20 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type StackInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IStack,
+		"hhomogeneous" |
+		"homogeneous" |
+		"interpolate_size" |
+		"transition_duration" |
+		"transition_running" |
+		"transition_type" |
+		"vhomogeneous" |
+		"visible_child" |
+		"visible_child_name">;
+
+	export interface StackInitOptions extends StackInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stack} instead.
 	 */
@@ -33727,7 +35481,7 @@ declare namespace imports.gi.Gtk {
 	interface Stack extends StackMixin {}
 
 	class Stack {
-		public constructor();
+		public constructor(options?: Partial<StackInitOptions>);
 		/**
 		 * Creates a new {@link Stack} container.
 		 * @returns a new {@link Stack}
@@ -33742,6 +35496,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type StackAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions
+	export interface StackAccessibleInitOptions extends StackAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StackAccessible} instead.
 	 */
@@ -33750,7 +35507,7 @@ declare namespace imports.gi.Gtk {
 	interface StackAccessible extends StackAccessibleMixin {}
 
 	class StackAccessible {
-		public constructor();
+		public constructor(options?: Partial<StackAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -33776,6 +35533,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::stack", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type StackSidebarInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IStackSidebar,
+		"stack">;
+
+	export interface StackSidebarInitOptions extends StackSidebarInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StackSidebar} instead.
@@ -33803,7 +35566,7 @@ declare namespace imports.gi.Gtk {
 	interface StackSidebar extends StackSidebarMixin {}
 
 	class StackSidebar {
-		public constructor();
+		public constructor(options?: Partial<StackSidebarInitOptions>);
 		/**
 		 * Creates a new sidebar.
 		 * @returns the new {@link StackSidebar}
@@ -33840,6 +35603,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type StackSwitcherInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IStackSwitcher,
+		"icon_size" |
+		"stack" |
+		"widget">;
+
+	export interface StackSwitcherInitOptions extends StackSwitcherInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StackSwitcher} instead.
 	 */
@@ -33872,7 +35643,7 @@ declare namespace imports.gi.Gtk {
 	interface StackSwitcher extends StackSwitcherMixin {}
 
 	class StackSwitcher {
-		public constructor();
+		public constructor(options?: Partial<StackSwitcherInitOptions>);
 		/**
 		 * Create a new {@link StackSwitcher}.
 		 * @returns a new {@link StackSwitcher}.
@@ -34268,6 +36039,25 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type StatusIconInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IStatusIcon,
+		"embedded" |
+		"gicon" |
+		"has_tooltip" |
+		"icon_name" |
+		"orientation" |
+		"pixbuf" |
+		"screen" |
+		"size" |
+		"stock" |
+		"storage_type" |
+		"title" |
+		"tooltip_markup" |
+		"tooltip_text" |
+		"visible">;
+
+	export interface StatusIconInitOptions extends StatusIconInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StatusIcon} instead.
 	 */
@@ -34311,7 +36101,7 @@ declare namespace imports.gi.Gtk {
 	interface StatusIcon extends StatusIconMixin {}
 
 	class StatusIcon {
-		public constructor();
+		public constructor(options?: Partial<StatusIconInitOptions>);
 		/**
 		 * Creates an empty status icon object.
 		 * @returns a new {@link StatusIcon}
@@ -34431,6 +36221,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type StatusbarInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IStatusbar,
+		"parent_widget">;
+
+	export interface StatusbarInitOptions extends StatusbarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Statusbar} instead.
 	 */
@@ -34474,7 +36270,7 @@ declare namespace imports.gi.Gtk {
 	interface Statusbar extends StatusbarMixin {}
 
 	class Statusbar {
-		public constructor();
+		public constructor(options?: Partial<StatusbarInitOptions>);
 		/**
 		 * Creates a new {@link Statusbar} ready for messages.
 		 * @returns the new {@link Statusbar}
@@ -34489,6 +36285,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type StatusbarAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions
+	export interface StatusbarAccessibleInitOptions extends StatusbarAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StatusbarAccessible} instead.
 	 */
@@ -34497,7 +36296,7 @@ declare namespace imports.gi.Gtk {
 	interface StatusbarAccessible extends StatusbarAccessibleMixin {}
 
 	class StatusbarAccessible {
-		public constructor();
+		public constructor(options?: Partial<StatusbarAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -34695,6 +36494,26 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type StyleInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IStyle,
+		"context" |
+		"fg" |
+		"bg" |
+		"light" |
+		"dark" |
+		"mid" |
+		"text" |
+		"base" |
+		"text_aa" |
+		"black" |
+		"white" |
+		"font_desc" |
+		"xthickness" |
+		"ythickness" |
+		"background">;
+
+	export interface StyleInitOptions extends StyleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Style} instead.
 	 */
@@ -34721,7 +36540,7 @@ declare namespace imports.gi.Gtk {
 	interface Style extends StyleMixin {}
 
 	class Style {
-		public constructor();
+		public constructor(options?: Partial<StyleInitOptions>);
 		/**
 		 * Creates a new {@link Style}.
 		 * @returns a new {@link Style}.
@@ -35291,6 +37110,15 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type StyleContextInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IStyleContext,
+		"direction" |
+		"paint_clock" |
+		"screen" |
+		"parent_object">;
+
+	export interface StyleContextInitOptions extends StyleContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StyleContext} instead.
 	 */
@@ -35354,7 +37182,7 @@ declare namespace imports.gi.Gtk {
 	interface StyleContext extends StyleContextMixin {}
 
 	class StyleContext {
-		public constructor();
+		public constructor(options?: Partial<StyleContextInitOptions>);
 		/**
 		 * Creates a standalone {@link StyleContext}, this style context
 		 * won’t be attached to any widget, so you may want
@@ -35482,6 +37310,9 @@ declare namespace imports.gi.Gtk {
 		unset_property(property: string, state: StateFlags): void;
 	}
 
+	type StylePropertiesInitOptionsMixin = GObject.ObjectInitOptions & StyleProviderInitOptions
+	export interface StylePropertiesInitOptions extends StylePropertiesInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StyleProperties} instead.
 	 */
@@ -35508,7 +37339,7 @@ declare namespace imports.gi.Gtk {
 	interface StyleProperties extends StylePropertiesMixin {}
 
 	class StyleProperties {
-		public constructor();
+		public constructor(options?: Partial<StylePropertiesInitOptions>);
 		/**
 		 * Returns a newly created {@link StyleProperties}
 		 * @returns a new {@link StyleProperties}
@@ -35601,6 +37432,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SwitchInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<ISwitch,
+		"active" |
+		"state">;
+
+	export interface SwitchInitOptions extends SwitchInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Switch} instead.
 	 */
@@ -35627,7 +37465,7 @@ declare namespace imports.gi.Gtk {
 	interface Switch extends SwitchMixin {}
 
 	class Switch {
-		public constructor();
+		public constructor(options?: Partial<SwitchInitOptions>);
 		/**
 		 * Creates a new {@link Switch} widget.
 		 * @returns the newly created {@link Switch} instance
@@ -35642,6 +37480,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type SwitchAccessibleInitOptionsMixin = WidgetAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions
+	export interface SwitchAccessibleInitOptions extends SwitchAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SwitchAccessible} instead.
 	 */
@@ -35650,7 +37491,7 @@ declare namespace imports.gi.Gtk {
 	interface SwitchAccessible extends SwitchAccessibleMixin {}
 
 	class SwitchAccessible {
-		public constructor();
+		public constructor(options?: Partial<SwitchAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -35791,6 +37632,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TableInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<ITable,
+		"column_spacing" |
+		"homogeneous" |
+		"n_columns" |
+		"n_rows" |
+		"row_spacing" |
+		"container">;
+
+	export interface TableInitOptions extends TableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Table} instead.
 	 */
@@ -35825,7 +37677,7 @@ declare namespace imports.gi.Gtk {
 	interface Table extends TableMixin {}
 
 	class Table {
-		public constructor();
+		public constructor(options?: Partial<TableInitOptions>);
 		/**
 		 * Used to create a new table widget. An initial size must be given by
 		 * specifying how many rows and columns the table should have, although
@@ -35850,6 +37702,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::menu_item", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type TearoffMenuItemInitOptionsMixin = MenuItemInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<ITearoffMenuItem,
+		"menu_item">;
+
+	export interface TearoffMenuItemInitOptions extends TearoffMenuItemInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TearoffMenuItem} instead.
@@ -35876,7 +37734,7 @@ declare namespace imports.gi.Gtk {
 	interface TearoffMenuItem extends TearoffMenuItemMixin {}
 
 	class TearoffMenuItem {
-		public constructor();
+		public constructor(options?: Partial<TearoffMenuItemInitOptions>);
 		/**
 		 * Creates a new {@link TearoffMenuItem}.
 		 * @returns a new {@link TearoffMenuItem}.
@@ -36842,6 +38700,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TextBufferInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITextBuffer,
+		"copy_target_list" |
+		"cursor_position" |
+		"has_selection" |
+		"paste_target_list" |
+		"tag_table" |
+		"text">;
+
+	export interface TextBufferInitOptions extends TextBufferInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextBuffer} instead.
 	 */
@@ -36856,7 +38725,7 @@ declare namespace imports.gi.Gtk {
 	interface TextBuffer extends TextBufferMixin {}
 
 	class TextBuffer {
-		public constructor();
+		public constructor(options?: Partial<TextBufferInitOptions>);
 		/**
 		 * Creates a new text buffer.
 		 * @param table a tag table, or %NULL to create a new one
@@ -36872,6 +38741,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TextCellAccessibleInitOptionsMixin = RendererCellAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.TableCellInitOptions & Atk.TextInitOptions
+	export interface TextCellAccessibleInitOptions extends TextCellAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextCellAccessible} instead.
 	 */
@@ -36880,7 +38752,7 @@ declare namespace imports.gi.Gtk {
 	interface TextCellAccessible extends TextCellAccessibleMixin {}
 
 	class TextCellAccessible {
-		public constructor();
+		public constructor(options?: Partial<TextCellAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -36905,6 +38777,9 @@ declare namespace imports.gi.Gtk {
 		get_widgets(): GLib.List;
 	}
 
+	type TextChildAnchorInitOptionsMixin = GObject.ObjectInitOptions
+	export interface TextChildAnchorInitOptions extends TextChildAnchorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextChildAnchor} instead.
 	 */
@@ -36918,7 +38793,7 @@ declare namespace imports.gi.Gtk {
 	interface TextChildAnchor extends TextChildAnchorMixin {}
 
 	class TextChildAnchor {
-		public constructor();
+		public constructor(options?: Partial<TextChildAnchorInitOptions>);
 		/**
 		 * Creates a new {@link TextChildAnchor}. Usually you would then insert
 		 * it into a #GtkTextBuffer with gtk_text_buffer_insert_child_anchor().
@@ -36986,6 +38861,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TextMarkInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITextMark,
+		"left_gravity" |
+		"name">;
+
+	export interface TextMarkInitOptions extends TextMarkInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextMark} instead.
 	 */
@@ -37025,7 +38907,7 @@ declare namespace imports.gi.Gtk {
 	interface TextMark extends TextMarkMixin {}
 
 	class TextMark {
-		public constructor();
+		public constructor(options?: Partial<TextMarkInitOptions>);
 		/**
 		 * Creates a text mark. Add it to a buffer using gtk_text_buffer_add_mark().
 		 * If #name is %NULL, the mark is anonymous; otherwise, the mark can be
@@ -37311,6 +39193,82 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TextTagInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITextTag,
+		"accumulative_margin" |
+		"background_full_height" |
+		"background_full_height_set" |
+		"background_gdk" |
+		"background_rgba" |
+		"background_set" |
+		"direction" |
+		"editable" |
+		"editable_set" |
+		"fallback" |
+		"fallback_set" |
+		"family" |
+		"family_set" |
+		"font" |
+		"font_desc" |
+		"font_features" |
+		"font_features_set" |
+		"foreground_gdk" |
+		"foreground_rgba" |
+		"foreground_set" |
+		"indent" |
+		"indent_set" |
+		"invisible" |
+		"invisible_set" |
+		"justification" |
+		"justification_set" |
+		"language" |
+		"language_set" |
+		"left_margin" |
+		"left_margin_set" |
+		"letter_spacing" |
+		"letter_spacing_set" |
+		"name" |
+		"paragraph_background_gdk" |
+		"paragraph_background_rgba" |
+		"paragraph_background_set" |
+		"pixels_above_lines" |
+		"pixels_above_lines_set" |
+		"pixels_below_lines" |
+		"pixels_below_lines_set" |
+		"pixels_inside_wrap" |
+		"pixels_inside_wrap_set" |
+		"right_margin" |
+		"right_margin_set" |
+		"rise" |
+		"rise_set" |
+		"scale" |
+		"scale_set" |
+		"size" |
+		"size_points" |
+		"size_set" |
+		"stretch" |
+		"stretch_set" |
+		"strikethrough" |
+		"strikethrough_rgba" |
+		"strikethrough_rgba_set" |
+		"strikethrough_set" |
+		"style" |
+		"style_set" |
+		"tabs" |
+		"tabs_set" |
+		"underline" |
+		"underline_rgba" |
+		"underline_rgba_set" |
+		"underline_set" |
+		"variant" |
+		"variant_set" |
+		"weight" |
+		"weight_set" |
+		"wrap_mode" |
+		"wrap_mode_set">;
+
+	export interface TextTagInitOptions extends TextTagInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextTag} instead.
 	 */
@@ -37336,7 +39294,7 @@ declare namespace imports.gi.Gtk {
 	interface TextTag extends TextTagMixin {}
 
 	class TextTag {
-		public constructor();
+		public constructor(options?: Partial<TextTagInitOptions>);
 		/**
 		 * Creates a {@link TextTag}. Configure the tag using object arguments,
 		 * i.e. using g_object_set().
@@ -37394,6 +39352,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TextTagTableInitOptionsMixin = GObject.ObjectInitOptions & BuildableInitOptions
+	export interface TextTagTableInitOptions extends TextTagTableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextTagTable} instead.
 	 */
@@ -37424,7 +39385,7 @@ declare namespace imports.gi.Gtk {
 	interface TextTagTable extends TextTagTableMixin {}
 
 	class TextTagTable {
-		public constructor();
+		public constructor(options?: Partial<TextTagTableInitOptions>);
 		/**
 		 * Creates a new {@link TextTagTable}. The table contains no tags by
 		 * default.
@@ -38364,6 +40325,32 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TextViewInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & ScrollableInitOptions & 
+	Pick<ITextView,
+		"accepts_tab" |
+		"bottom_margin" |
+		"buffer" |
+		"cursor_visible" |
+		"editable" |
+		"im_module" |
+		"indent" |
+		"input_hints" |
+		"input_purpose" |
+		"justification" |
+		"left_margin" |
+		"monospace" |
+		"overwrite" |
+		"pixels_above_lines" |
+		"pixels_below_lines" |
+		"pixels_inside_wrap" |
+		"populate_all" |
+		"right_margin" |
+		"tabs" |
+		"top_margin" |
+		"wrap_mode">;
+
+	export interface TextViewInitOptions extends TextViewInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextView} instead.
 	 */
@@ -38401,7 +40388,7 @@ declare namespace imports.gi.Gtk {
 	interface TextView extends TextViewMixin {}
 
 	class TextView {
-		public constructor();
+		public constructor(options?: Partial<TextViewInitOptions>);
 		/**
 		 * Creates a new {@link TextView}. If you don’t call gtk_text_view_set_buffer()
 		 * before using the text view, an empty default buffer will be created
@@ -38430,6 +40417,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TextViewAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions & Atk.EditableTextInitOptions & Atk.StreamableContentInitOptions & Atk.TextInitOptions
+	export interface TextViewAccessibleInitOptions extends TextViewAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextViewAccessible} instead.
 	 */
@@ -38438,7 +40428,7 @@ declare namespace imports.gi.Gtk {
 	interface TextViewAccessible extends TextViewAccessibleMixin {}
 
 	class TextViewAccessible {
-		public constructor();
+		public constructor(options?: Partial<TextViewAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -38606,6 +40596,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ThemingEngineInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IThemingEngine,
+		"name" |
+		"parent_object">;
+
+	export interface ThemingEngineInitOptions extends ThemingEngineInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThemingEngine} instead.
 	 */
@@ -38625,7 +40622,7 @@ declare namespace imports.gi.Gtk {
 	interface ThemingEngine extends ThemingEngineMixin {}
 
 	class ThemingEngine {
-		public constructor();
+		public constructor(options?: Partial<ThemingEngineInitOptions>);
 		/**
 		 * Loads and initializes a theming engine module from the
 		 * standard directories.
@@ -38720,6 +40717,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ToggleActionInitOptionsMixin = ActionInitOptions & BuildableInitOptions & 
+	Pick<IToggleAction,
+		"active" |
+		"draw_as_radio">;
+
+	export interface ToggleActionInitOptions extends ToggleActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleAction} instead.
 	 */
@@ -38732,7 +40736,7 @@ declare namespace imports.gi.Gtk {
 	interface ToggleAction extends ToggleActionMixin {}
 
 	class ToggleAction {
-		public constructor();
+		public constructor(options?: Partial<ToggleActionInitOptions>);
 		/**
 		 * Creates a new {@link ToggleAction} object. To add the action to
 		 * a #GtkActionGroup and set the accelerator for the action,
@@ -38826,6 +40830,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ToggleButtonInitOptionsMixin = ButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IToggleButton,
+		"active" |
+		"draw_indicator" |
+		"inconsistent">;
+
+	export interface ToggleButtonInitOptions extends ToggleButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleButton} instead.
 	 */
@@ -38896,7 +40908,7 @@ declare namespace imports.gi.Gtk {
 	interface ToggleButton extends ToggleButtonMixin {}
 
 	class ToggleButton {
-		public constructor();
+		public constructor(options?: Partial<ToggleButtonInitOptions>);
 		/**
 		 * Creates a new toggle button. A widget should be packed into the button, as in gtk_button_new().
 		 * @returns a new toggle button.
@@ -38926,6 +40938,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ToggleButtonAccessibleInitOptionsMixin = ButtonAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.ImageInitOptions
+	export interface ToggleButtonAccessibleInitOptions extends ToggleButtonAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleButtonAccessible} instead.
 	 */
@@ -38934,7 +40949,7 @@ declare namespace imports.gi.Gtk {
 	interface ToggleButtonAccessible extends ToggleButtonAccessibleMixin {}
 
 	class ToggleButtonAccessible {
-		public constructor();
+		public constructor(options?: Partial<ToggleButtonAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -38967,6 +40982,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ToggleToolButtonInitOptionsMixin = ToolButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IToggleToolButton,
+		"active">;
+
+	export interface ToggleToolButtonInitOptions extends ToggleToolButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleToolButton} instead.
 	 */
@@ -38985,7 +41006,7 @@ declare namespace imports.gi.Gtk {
 	interface ToggleToolButton extends ToggleToolButtonMixin {}
 
 	class ToggleToolButton {
-		public constructor();
+		public constructor(options?: Partial<ToggleToolButtonInitOptions>);
 		/**
 		 * Returns a new {@link ToggleToolButton}
 		 * @returns a newly created {@link ToggleToolButton}
@@ -39129,6 +41150,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ToolButtonInitOptionsMixin = ToolItemInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IToolButton,
+		"icon_name" |
+		"icon_widget" |
+		"label" |
+		"label_widget" |
+		"stock_id" |
+		"use_underline">;
+
+	export interface ToolButtonInitOptions extends ToolButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolButton} instead.
 	 */
@@ -39161,7 +41193,7 @@ declare namespace imports.gi.Gtk {
 	interface ToolButton extends ToolButtonMixin {}
 
 	class ToolButton {
-		public constructor();
+		public constructor(options?: Partial<ToolButtonInitOptions>);
 		/**
 		 * Creates a new {@link ToolButton} using #icon_widget as contents and #label as
 		 * label.
@@ -39447,6 +41479,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ToolItemInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & ActivatableInitOptions & BuildableInitOptions & 
+	Pick<IToolItem,
+		"is_important" |
+		"visible_horizontal" |
+		"visible_vertical">;
+
+	export interface ToolItemInitOptions extends ToolItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolItem} instead.
 	 */
@@ -39467,7 +41507,7 @@ declare namespace imports.gi.Gtk {
 	interface ToolItem extends ToolItemMixin {}
 
 	class ToolItem {
-		public constructor();
+		public constructor(options?: Partial<ToolItemInitOptions>);
 		/**
 		 * Creates a new {@link ToolItem}
 		 * @returns the new {@link ToolItem}
@@ -39588,6 +41628,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ToolItemGroupInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & ToolShellInitOptions & 
+	Pick<IToolItemGroup,
+		"collapsed" |
+		"ellipsize" |
+		"header_relief" |
+		"label" |
+		"label_widget">;
+
+	export interface ToolItemGroupInitOptions extends ToolItemGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolItemGroup} instead.
 	 */
@@ -39605,7 +41655,7 @@ declare namespace imports.gi.Gtk {
 	interface ToolItemGroup extends ToolItemGroupMixin {}
 
 	class ToolItemGroup {
-		public constructor();
+		public constructor(options?: Partial<ToolItemGroupInitOptions>);
 		/**
 		 * Creates a new tool item group with label #label.
 		 * @param label the label of the new group
@@ -39769,6 +41819,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ToolPaletteInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & ScrollableInitOptions & 
+	Pick<IToolPalette,
+		"icon_size" |
+		"icon_size_set" |
+		"toolbar_style">;
+
+	export interface ToolPaletteInitOptions extends ToolPaletteInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolPalette} instead.
 	 */
@@ -39848,7 +41906,7 @@ declare namespace imports.gi.Gtk {
 	interface ToolPalette extends ToolPaletteMixin {}
 
 	class ToolPalette {
-		public constructor();
+		public constructor(options?: Partial<ToolPaletteInitOptions>);
 		/**
 		 * Creates a new tool palette.
 		 * @returns a new {@link ToolPalette}
@@ -40034,6 +42092,16 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ToolbarInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & ToolShellInitOptions & 
+	Pick<IToolbar,
+		"icon_size" |
+		"icon_size_set" |
+		"show_arrow" |
+		"toolbar_style" |
+		"container">;
+
+	export interface ToolbarInitOptions extends ToolbarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Toolbar} instead.
 	 */
@@ -40067,7 +42135,7 @@ declare namespace imports.gi.Gtk {
 	interface Toolbar extends ToolbarMixin {}
 
 	class Toolbar {
-		public constructor();
+		public constructor(options?: Partial<ToolbarInitOptions>);
 		/**
 		 * Creates a new toolbar.
 		 * @returns the newly-created toolbar.
@@ -40146,6 +42214,9 @@ declare namespace imports.gi.Gtk {
 		set_tip_area(rect: Gdk.Rectangle): void;
 	}
 
+	type TooltipInitOptionsMixin = GObject.ObjectInitOptions
+	export interface TooltipInitOptions extends TooltipInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Tooltip} instead.
 	 */
@@ -40190,7 +42261,7 @@ declare namespace imports.gi.Gtk {
 	interface Tooltip extends TooltipMixin {}
 
 	class Tooltip {
-		public constructor();
+		public constructor(options?: Partial<TooltipInitOptions>);
 		/**
 		 * Triggers a new tooltip query on #display, in order to update the current
 		 * visible tooltip, or to show/hide the current tooltip.  This function is
@@ -40208,6 +42279,9 @@ declare namespace imports.gi.Gtk {
 		get_children(): GLib.List;
 	}
 
+	type ToplevelAccessibleInitOptionsMixin = Atk.ObjectInitOptions
+	export interface ToplevelAccessibleInitOptions extends ToplevelAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToplevelAccessible} instead.
 	 */
@@ -40216,7 +42290,7 @@ declare namespace imports.gi.Gtk {
 	interface ToplevelAccessible extends ToplevelAccessibleMixin {}
 
 	class ToplevelAccessible {
-		public constructor();
+		public constructor(options?: Partial<ToplevelAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -40355,6 +42429,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TreeModelFilterInitOptionsMixin = GObject.ObjectInitOptions & TreeDragSourceInitOptions & TreeModelInitOptions & 
+	Pick<ITreeModelFilter,
+		"child_model" |
+		"virtual_root">;
+
+	export interface TreeModelFilterInitOptions extends TreeModelFilterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeModelFilter} instead.
 	 */
@@ -40430,7 +42511,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeModelFilter extends TreeModelFilterMixin {}
 
 	class TreeModelFilter {
-		public constructor();
+		public constructor(options?: Partial<TreeModelFilterInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -40506,6 +42587,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::model", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type TreeModelSortInitOptionsMixin = GObject.ObjectInitOptions & TreeDragSourceInitOptions & TreeModelInitOptions & TreeSortableInitOptions & 
+	Pick<ITreeModelSort,
+		"model">;
+
+	export interface TreeModelSortInitOptions extends TreeModelSortInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeModelSort} instead.
@@ -40611,7 +42698,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeModelSort extends TreeModelSortMixin {}
 
 	class TreeModelSort {
-		public constructor();
+		public constructor(options?: Partial<TreeModelSortInitOptions>);
 		/**
 		 * Creates a new {@link TreeModelSort}, with #child_model as the child model.
 		 * @param child_model A {@link TreeModel}
@@ -40773,6 +42860,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TreeSelectionInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITreeSelection,
+		"mode">;
+
+	export interface TreeSelectionInitOptions extends TreeSelectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeSelection} instead.
 	 */
@@ -40806,7 +42899,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeSelection extends TreeSelectionMixin {}
 
 	class TreeSelection {
-		public constructor();
+		public constructor(options?: Partial<TreeSelectionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -41034,6 +43127,9 @@ declare namespace imports.gi.Gtk {
 		swap(a: TreeIter, b: TreeIter): void;
 	}
 
+	type TreeStoreInitOptionsMixin = GObject.ObjectInitOptions & BuildableInitOptions & TreeDragDestInitOptions & TreeDragSourceInitOptions & TreeModelInitOptions & TreeSortableInitOptions
+	export interface TreeStoreInitOptions extends TreeStoreInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeStore} instead.
 	 */
@@ -41070,7 +43166,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeStore extends TreeStoreMixin {}
 
 	class TreeStore {
-		public constructor();
+		public constructor(options?: Partial<TreeStoreInitOptions>);
 		/**
 		 * Creates a new tree store as with #n_columns columns each of the types passed
 		 * in.  Note that only types derived from standard GObject fundamental types
@@ -42103,6 +44199,29 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TreeViewInitOptionsMixin = ContainerInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & ScrollableInitOptions & 
+	Pick<ITreeView,
+		"activate_on_single_click" |
+		"enable_grid_lines" |
+		"enable_search" |
+		"enable_tree_lines" |
+		"expander_column" |
+		"fixed_height_mode" |
+		"headers_clickable" |
+		"headers_visible" |
+		"hover_expand" |
+		"hover_selection" |
+		"level_indentation" |
+		"model" |
+		"reorderable" |
+		"rubber_banding" |
+		"rules_hint" |
+		"search_column" |
+		"show_expanders" |
+		"tooltip_column">;
+
+	export interface TreeViewInitOptions extends TreeViewInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeView} instead.
 	 */
@@ -42187,7 +44306,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeView extends TreeViewMixin {}
 
 	class TreeView {
-		public constructor();
+		public constructor(options?: Partial<TreeViewInitOptions>);
 		/**
 		 * Creates a new {@link TreeView} widget.
 		 * @returns A newly created {@link TreeView} widget.
@@ -42208,6 +44327,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TreeViewAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions & Atk.SelectionInitOptions & Atk.TableInitOptions & CellAccessibleParentInitOptions
+	export interface TreeViewAccessibleInitOptions extends TreeViewAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeViewAccessible} instead.
 	 */
@@ -42216,7 +44338,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeViewAccessible extends TreeViewAccessibleMixin {}
 
 	class TreeViewAccessible {
-		public constructor();
+		public constructor(options?: Partial<TreeViewAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -42627,6 +44749,30 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TreeViewColumnInitOptionsMixin = GObject.InitiallyUnownedInitOptions & BuildableInitOptions & CellLayoutInitOptions & 
+	Pick<ITreeViewColumn,
+		"alignment" |
+		"cell_area" |
+		"clickable" |
+		"expand" |
+		"fixed_width" |
+		"max_width" |
+		"min_width" |
+		"reorderable" |
+		"resizable" |
+		"sizing" |
+		"sort_column_id" |
+		"sort_indicator" |
+		"sort_order" |
+		"spacing" |
+		"title" |
+		"visible" |
+		"widget" |
+		"width" |
+		"x_offset">;
+
+	export interface TreeViewColumnInitOptions extends TreeViewColumnInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeViewColumn} instead.
 	 */
@@ -42644,7 +44790,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeViewColumn extends TreeViewColumnMixin {}
 
 	class TreeViewColumn {
-		public constructor();
+		public constructor(options?: Partial<TreeViewColumnInitOptions>);
 		/**
 		 * Creates a new {@link TreeViewColumn}.
 		 * @returns A newly created {@link TreeViewColumn}.
@@ -42909,6 +45055,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type UIManagerInitOptionsMixin = GObject.ObjectInitOptions & BuildableInitOptions & 
+	Pick<IUIManager,
+		"add_tearoffs" |
+		"ui">;
+
+	export interface UIManagerInitOptions extends UIManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UIManager} instead.
 	 */
@@ -43144,7 +45297,7 @@ declare namespace imports.gi.Gtk {
 	interface UIManager extends UIManagerMixin {}
 
 	class UIManager {
-		public constructor();
+		public constructor(options?: Partial<UIManagerInitOptions>);
 		/**
 		 * Creates a new ui manager object.
 		 * @returns a new ui manager object.
@@ -43161,6 +45314,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::box", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type VBoxInitOptionsMixin = BoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IVBox,
+		"box">;
+
+	export interface VBoxInitOptions extends VBoxInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VBox} instead.
@@ -43197,7 +45356,7 @@ declare namespace imports.gi.Gtk {
 	interface VBox extends VBoxMixin {}
 
 	class VBox {
-		public constructor();
+		public constructor(options?: Partial<VBoxInitOptions>);
 		/**
 		 * Creates a new {@link VBox}.
 		 * @param homogeneous %TRUE if all children are to be given equal space allotments.
@@ -43217,6 +45376,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type VButtonBoxInitOptionsMixin = ButtonBoxInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IVButtonBox,
+		"button_box">;
+
+	export interface VButtonBoxInitOptions extends VButtonBoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VButtonBox} instead.
 	 */
@@ -43225,7 +45390,7 @@ declare namespace imports.gi.Gtk {
 	interface VButtonBox extends VButtonBoxMixin {}
 
 	class VButtonBox {
-		public constructor();
+		public constructor(options?: Partial<VButtonBoxInitOptions>);
 		/**
 		 * Creates a new vertical button box.
 		 * @returns a new button box {@link Widget}.
@@ -43243,6 +45408,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type VPanedInitOptionsMixin = PanedInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IVPaned,
+		"paned">;
+
+	export interface VPanedInitOptions extends VPanedInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VPaned} instead.
 	 */
@@ -43259,7 +45430,7 @@ declare namespace imports.gi.Gtk {
 	interface VPaned extends VPanedMixin {}
 
 	class VPaned {
-		public constructor();
+		public constructor(options?: Partial<VPanedInitOptions>);
 		/**
 		 * Create a new {@link VPaned}
 		 * @returns the new {@link VPaned}
@@ -43276,6 +45447,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::scale", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type VScaleInitOptionsMixin = ScaleInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IVScale,
+		"scale">;
+
+	export interface VScaleInitOptions extends VScaleInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VScale} instead.
@@ -43294,7 +45471,7 @@ declare namespace imports.gi.Gtk {
 	interface VScale extends VScaleMixin {}
 
 	class VScale {
-		public constructor();
+		public constructor(options?: Partial<VScaleInitOptions>);
 		/**
 		 * Creates a new {@link VScale}.
 		 * @param adjustment the {@link Adjustment} which sets the range of the scale.
@@ -43328,6 +45505,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type VScrollbarInitOptionsMixin = ScrollbarInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IVScrollbar,
+		"scrollbar">;
+
+	export interface VScrollbarInitOptions extends VScrollbarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VScrollbar} instead.
 	 */
@@ -43346,7 +45529,7 @@ declare namespace imports.gi.Gtk {
 	interface VScrollbar extends VScrollbarMixin {}
 
 	class VScrollbar {
-		public constructor();
+		public constructor(options?: Partial<VScrollbarInitOptions>);
 		/**
 		 * Creates a new vertical scrollbar.
 		 * @param adjustment the {@link Adjustment} to use, or %NULL to create a new adjustment
@@ -43365,6 +45548,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type VSeparatorInitOptionsMixin = SeparatorInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IVSeparator,
+		"separator">;
+
+	export interface VSeparatorInitOptions extends VSeparatorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VSeparator} instead.
 	 */
@@ -43380,7 +45569,7 @@ declare namespace imports.gi.Gtk {
 	interface VSeparator extends VSeparatorMixin {}
 
 	class VSeparator {
-		public constructor();
+		public constructor(options?: Partial<VSeparatorInitOptions>);
 		/**
 		 * Creates a new {@link VSeparator}.
 		 * @returns a new {@link VSeparator}.
@@ -43440,6 +45629,13 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ViewportInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & ScrollableInitOptions & 
+	Pick<IViewport,
+		"shadow_type" |
+		"bin">;
+
+	export interface ViewportInitOptions extends ViewportInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Viewport} instead.
 	 */
@@ -43469,7 +45665,7 @@ declare namespace imports.gi.Gtk {
 	interface Viewport extends ViewportMixin {}
 
 	class Viewport {
-		public constructor();
+		public constructor(options?: Partial<ViewportInitOptions>);
 		/**
 		 * Creates a new {@link Viewport} with the given adjustments, or with default
 		 * adjustments if none are given.
@@ -43496,6 +45692,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type VolumeButtonInitOptionsMixin = ScaleButtonInitOptions & Atk.ImplementorIfaceInitOptions & ActionableInitOptions & ActivatableInitOptions & BuildableInitOptions & OrientableInitOptions & 
+	Pick<IVolumeButton,
+		"use_symbolic">;
+
+	export interface VolumeButtonInitOptions extends VolumeButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VolumeButton} instead.
 	 */
@@ -43509,7 +45711,7 @@ declare namespace imports.gi.Gtk {
 	interface VolumeButton extends VolumeButtonMixin {}
 
 	class VolumeButton {
-		public constructor();
+		public constructor(options?: Partial<VolumeButtonInitOptions>);
 		/**
 		 * Creates a {@link VolumeButton}, with a range between 0.0 and 1.0, with
 		 * a stepping of 0.02. Volume values can be obtained and modified using
@@ -47324,6 +49526,49 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type WidgetInitOptionsMixin = GObject.InitiallyUnownedInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IWidget,
+		"app_paintable" |
+		"can_default" |
+		"can_focus" |
+		"composite_child" |
+		"double_buffered" |
+		"events" |
+		"expand" |
+		"focus_on_click" |
+		"halign" |
+		"has_default" |
+		"has_focus" |
+		"has_tooltip" |
+		"height_request" |
+		"hexpand" |
+		"hexpand_set" |
+		"is_focus" |
+		"margin" |
+		"margin_bottom" |
+		"margin_end" |
+		"margin_left" |
+		"margin_right" |
+		"margin_start" |
+		"margin_top" |
+		"name" |
+		"no_show_all" |
+		"opacity" |
+		"receives_default" |
+		"scale_factor" |
+		"sensitive" |
+		"style" |
+		"tooltip_markup" |
+		"tooltip_text" |
+		"valign" |
+		"vexpand" |
+		"vexpand_set" |
+		"visible" |
+		"width_request" |
+		"window">;
+
+	export interface WidgetInitOptions extends WidgetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Widget} instead.
 	 */
@@ -47717,7 +49962,7 @@ declare namespace imports.gi.Gtk {
 	interface Widget extends WidgetMixin {}
 
 	class Widget {
-		public constructor();
+		public constructor(options?: Partial<WidgetInitOptions>);
 		/**
 		 * This is a convenience function for creating a widget and setting
 		 * its properties in one go. For example you might write:
@@ -47773,6 +50018,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type WidgetAccessibleInitOptionsMixin = AccessibleInitOptions & Atk.ComponentInitOptions
+	export interface WidgetAccessibleInitOptions extends WidgetAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WidgetAccessible} instead.
 	 */
@@ -47781,7 +50029,7 @@ declare namespace imports.gi.Gtk {
 	interface WidgetAccessible extends WidgetAccessibleMixin {}
 
 	class WidgetAccessible {
-		public constructor();
+		public constructor(options?: Partial<WidgetAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -49262,6 +51510,44 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type WindowInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & BuildableInitOptions & 
+	Pick<IWindow,
+		"accept_focus" |
+		"application" |
+		"attached_to" |
+		"decorated" |
+		"default_height" |
+		"default_width" |
+		"deletable" |
+		"destroy_with_parent" |
+		"focus_on_map" |
+		"focus_visible" |
+		"gravity" |
+		"has_resize_grip" |
+		"has_toplevel_focus" |
+		"hide_titlebar_when_maximized" |
+		"icon" |
+		"icon_name" |
+		"is_active" |
+		"is_maximized" |
+		"mnemonics_visible" |
+		"modal" |
+		"resizable" |
+		"resize_grip_visible" |
+		"role" |
+		"screen" |
+		"skip_pager_hint" |
+		"skip_taskbar_hint" |
+		"title" |
+		"transient_for" |
+		"type" |
+		"type_hint" |
+		"urgency_hint" |
+		"window_position" |
+		"bin">;
+
+	export interface WindowInitOptions extends WindowInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Window} instead.
 	 */
@@ -49328,7 +51614,7 @@ declare namespace imports.gi.Gtk {
 	interface Window extends WindowMixin {}
 
 	class Window {
-		public constructor(options?: Partial<WindowOptions>);
+		public constructor(options?: Partial<WindowInitOptions>);
 		/**
 		 * Creates a new {@link Window}, which is a toplevel window that can
 		 * contain other widgets. Nearly always, the type of the window should
@@ -49441,6 +51727,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type WindowAccessibleInitOptionsMixin = ContainerAccessibleInitOptions & Atk.ComponentInitOptions & Atk.WindowInitOptions
+	export interface WindowAccessibleInitOptions extends WindowAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowAccessible} instead.
 	 */
@@ -49449,7 +51738,7 @@ declare namespace imports.gi.Gtk {
 	interface WindowAccessible extends WindowAccessibleMixin {}
 
 	class WindowAccessible {
-		public constructor();
+		public constructor(options?: Partial<WindowAccessibleInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -49486,6 +51775,9 @@ declare namespace imports.gi.Gtk {
 		remove_window(window: Window): void;
 	}
 
+	type WindowGroupInitOptionsMixin = GObject.ObjectInitOptions
+	export interface WindowGroupInitOptions extends WindowGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowGroup} instead.
 	 */
@@ -49511,7 +51803,7 @@ declare namespace imports.gi.Gtk {
 	interface WindowGroup extends WindowGroupMixin {}
 
 	class WindowGroup {
-		public constructor();
+		public constructor(options?: Partial<WindowGroupInitOptions>);
 		/**
 		 * Creates a new {@link WindowGroup} object. Grabs added with
 		 * gtk_grab_add() only affect windows within the same #GtkWindowGroup.
@@ -49520,9 +51812,10 @@ declare namespace imports.gi.Gtk {
 		public static new(): WindowGroup;
 	}
 
+	export interface AboutDialogClassInitOptions {}
 	interface AboutDialogClass {}
 	class AboutDialogClass {
-		public constructor();
+		public constructor(options?: Partial<AboutDialogClassInitOptions>);
 		public activate_link: {(dialog: AboutDialog, uri: string): boolean;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -49530,14 +51823,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface AboutDialogPrivateInitOptions {}
 	interface AboutDialogPrivate {}
 	class AboutDialogPrivate {
-		public constructor();
+		public constructor(options?: Partial<AboutDialogPrivateInitOptions>);
 	}
 
+	export interface AccelGroupClassInitOptions {}
 	interface AccelGroupClass {}
 	class AccelGroupClass {
-		public constructor();
+		public constructor(options?: Partial<AccelGroupClassInitOptions>);
 		public accel_changed: {(accel_group: AccelGroup, keyval: number, modifier: Gdk.ModifierType, accel_closure: GObject.Closure): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -49545,22 +51840,25 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface AccelGroupEntryInitOptions {}
 	interface AccelGroupEntry {}
 	class AccelGroupEntry {
-		public constructor();
+		public constructor(options?: Partial<AccelGroupEntryInitOptions>);
 		public key: AccelKey;
 		public closure: GObject.Closure;
 		public accel_path_quark: GLib.Quark;
 	}
 
+	export interface AccelGroupPrivateInitOptions {}
 	interface AccelGroupPrivate {}
 	class AccelGroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<AccelGroupPrivateInitOptions>);
 	}
 
+	export interface AccelKeyInitOptions {}
 	interface AccelKey {}
 	class AccelKey {
-		public constructor();
+		public constructor(options?: Partial<AccelKeyInitOptions>);
 		/**
 		 * The accelerator keyval
 		 */
@@ -49575,9 +51873,10 @@ declare namespace imports.gi.Gtk {
 		public accel_flags: number;
 	}
 
+	export interface AccelLabelClassInitOptions {}
 	interface AccelLabelClass {}
 	class AccelLabelClass {
-		public constructor();
+		public constructor(options?: Partial<AccelLabelClassInitOptions>);
 		public readonly signal_quote1: string;
 		public readonly signal_quote2: string;
 		public readonly mod_name_shift: string;
@@ -49590,19 +51889,22 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface AccelLabelPrivateInitOptions {}
 	interface AccelLabelPrivate {}
 	class AccelLabelPrivate {
-		public constructor();
+		public constructor(options?: Partial<AccelLabelPrivateInitOptions>);
 	}
 
+	export interface AccelMapClassInitOptions {}
 	interface AccelMapClass {}
 	class AccelMapClass {
-		public constructor();
+		public constructor(options?: Partial<AccelMapClassInitOptions>);
 	}
 
+	export interface AccessibleClassInitOptions {}
 	interface AccessibleClass {}
 	class AccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<AccessibleClassInitOptions>);
 		public connect_widget_destroyed: {(accessible: Accessible): void;};
 		public widget_set: {(accessible: Accessible): void;};
 		public widget_unset: {(accessible: Accessible): void;};
@@ -49610,28 +51912,32 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface AccessiblePrivateInitOptions {}
 	interface AccessiblePrivate {}
 	class AccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<AccessiblePrivateInitOptions>);
 	}
 
+	export interface ActionBarClassInitOptions {}
 	interface ActionBarClass {}
 	class ActionBarClass {
-		public constructor();
+		public constructor(options?: Partial<ActionBarClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ActionBarPrivateInitOptions {}
 	interface ActionBarPrivate {}
 	class ActionBarPrivate {
-		public constructor();
+		public constructor(options?: Partial<ActionBarPrivateInitOptions>);
 	}
 
+	export interface ActionClassInitOptions {}
 	interface ActionClass {}
 	class ActionClass {
-		public constructor();
+		public constructor(options?: Partial<ActionClassInitOptions>);
 		public readonly menu_item_type: GObject.Type;
 		public readonly toolbar_item_type: GObject.Type;
 		public activate: {(action: Action): void;};
@@ -49646,13 +51952,14 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ActionEntryInitOptions {}
 	/**
 	 * {@link ActionEntry} structs are used with gtk_action_group_add_actions() to
 	 * construct actions.
 	 */
 	interface ActionEntry {}
 	class ActionEntry {
-		public constructor();
+		public constructor(options?: Partial<ActionEntryInitOptions>);
 		/**
 		 * The name of the action.
 		 */
@@ -49684,9 +51991,10 @@ declare namespace imports.gi.Gtk {
 		public callback: GObject.Callback;
 	}
 
+	export interface ActionGroupClassInitOptions {}
 	interface ActionGroupClass {}
 	class ActionGroupClass {
-		public constructor();
+		public constructor(options?: Partial<ActionGroupClassInitOptions>);
 		public get_action: {(action_group: ActionGroup, action_name: string): Action;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -49694,22 +52002,25 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ActionGroupPrivateInitOptions {}
 	interface ActionGroupPrivate {}
 	class ActionGroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<ActionGroupPrivateInitOptions>);
 	}
 
+	export interface ActionPrivateInitOptions {}
 	interface ActionPrivate {}
 	class ActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<ActionPrivateInitOptions>);
 	}
 
+	export interface ActionableInterfaceInitOptions {}
 	/**
 	 * The interface vtable for {@link Actionable}.
 	 */
 	interface ActionableInterface {}
 	class ActionableInterface {
-		public constructor();
+		public constructor(options?: Partial<ActionableInterfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public get_action_name: {(actionable: Actionable): string | null;};
 		public set_action_name: {(actionable: Actionable, action_name: string | null): void;};
@@ -49717,20 +52028,22 @@ declare namespace imports.gi.Gtk {
 		public set_action_target_value: {(actionable: Actionable, target_value: GLib.Variant | null): void;};
 	}
 
+	export interface ActivatableIfaceInitOptions {}
 	/**
 	 * > This method can be called with a %NULL action at times.
 	 */
 	interface ActivatableIface {}
 	class ActivatableIface {
-		public constructor();
+		public constructor(options?: Partial<ActivatableIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public update: {(activatable: Activatable, action: Action, property_name: string): void;};
 		public sync_action_properties: {(activatable: Activatable, action: Action | null): void;};
 	}
 
+	export interface AdjustmentClassInitOptions {}
 	interface AdjustmentClass {}
 	class AdjustmentClass {
-		public constructor();
+		public constructor(options?: Partial<AdjustmentClassInitOptions>);
 		public changed: {(adjustment: Adjustment): void;};
 		public value_changed: {(adjustment: Adjustment): void;};
 		public _gtk_reserved1: {(): void;};
@@ -49739,127 +52052,147 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface AdjustmentPrivateInitOptions {}
 	interface AdjustmentPrivate {}
 	class AdjustmentPrivate {
-		public constructor();
+		public constructor(options?: Partial<AdjustmentPrivateInitOptions>);
 	}
 
+	export interface AlignmentClassInitOptions {}
 	interface AlignmentClass {}
 	class AlignmentClass {
-		public constructor();
+		public constructor(options?: Partial<AlignmentClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface AlignmentPrivateInitOptions {}
 	interface AlignmentPrivate {}
 	class AlignmentPrivate {
-		public constructor();
+		public constructor(options?: Partial<AlignmentPrivateInitOptions>);
 	}
 
+	export interface AppChooserButtonClassInitOptions {}
 	interface AppChooserButtonClass {}
 	class AppChooserButtonClass {
-		public constructor();
+		public constructor(options?: Partial<AppChooserButtonClassInitOptions>);
 		public readonly padding: any[];
 		public custom_item_activated: {(self: AppChooserButton, item_name: string): void;};
 	}
 
+	export interface AppChooserButtonPrivateInitOptions {}
 	interface AppChooserButtonPrivate {}
 	class AppChooserButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<AppChooserButtonPrivateInitOptions>);
 	}
 
+	export interface AppChooserDialogClassInitOptions {}
 	interface AppChooserDialogClass {}
 	class AppChooserDialogClass {
-		public constructor();
+		public constructor(options?: Partial<AppChooserDialogClassInitOptions>);
 		public readonly padding: any[];
 	}
 
+	export interface AppChooserDialogPrivateInitOptions {}
 	interface AppChooserDialogPrivate {}
 	class AppChooserDialogPrivate {
-		public constructor();
+		public constructor(options?: Partial<AppChooserDialogPrivateInitOptions>);
 	}
 
+	export interface AppChooserWidgetClassInitOptions {}
 	interface AppChooserWidgetClass {}
 	class AppChooserWidgetClass {
-		public constructor();
+		public constructor(options?: Partial<AppChooserWidgetClassInitOptions>);
 		public readonly padding: any[];
 		public application_selected: {(self: AppChooserWidget, app_info: Gio.AppInfo): void;};
 		public application_activated: {(self: AppChooserWidget, app_info: Gio.AppInfo): void;};
 		public populate_popup: {(self: AppChooserWidget, menu: Menu, app_info: Gio.AppInfo): void;};
 	}
 
+	export interface AppChooserWidgetPrivateInitOptions {}
 	interface AppChooserWidgetPrivate {}
 	class AppChooserWidgetPrivate {
-		public constructor();
+		public constructor(options?: Partial<AppChooserWidgetPrivateInitOptions>);
 	}
 
+	export interface ApplicationClassInitOptions {}
 	interface ApplicationClass {}
 	class ApplicationClass {
-		public constructor();
+		public constructor(options?: Partial<ApplicationClassInitOptions>);
 		public readonly padding: any[];
 		public window_added: {(application: Application, window: Window): void;};
 		public window_removed: {(application: Application, window: Window): void;};
 	}
 
+	export interface ApplicationPrivateInitOptions {}
 	interface ApplicationPrivate {}
 	class ApplicationPrivate {
-		public constructor();
+		public constructor(options?: Partial<ApplicationPrivateInitOptions>);
 	}
 
+	export interface ApplicationWindowClassInitOptions {}
 	interface ApplicationWindowClass {}
 	class ApplicationWindowClass {
-		public constructor();
+		public constructor(options?: Partial<ApplicationWindowClassInitOptions>);
 		public readonly padding: any[];
 	}
 
+	export interface ApplicationWindowPrivateInitOptions {}
 	interface ApplicationWindowPrivate {}
 	class ApplicationWindowPrivate {
-		public constructor();
+		public constructor(options?: Partial<ApplicationWindowPrivateInitOptions>);
 	}
 
+	export interface ArrowAccessibleClassInitOptions {}
 	interface ArrowAccessibleClass {}
 	class ArrowAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ArrowAccessibleClassInitOptions>);
 	}
 
+	export interface ArrowAccessiblePrivateInitOptions {}
 	interface ArrowAccessiblePrivate {}
 	class ArrowAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ArrowAccessiblePrivateInitOptions>);
 	}
 
+	export interface ArrowClassInitOptions {}
 	interface ArrowClass {}
 	class ArrowClass {
-		public constructor();
+		public constructor(options?: Partial<ArrowClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ArrowPrivateInitOptions {}
 	interface ArrowPrivate {}
 	class ArrowPrivate {
-		public constructor();
+		public constructor(options?: Partial<ArrowPrivateInitOptions>);
 	}
 
+	export interface AspectFrameClassInitOptions {}
 	interface AspectFrameClass {}
 	class AspectFrameClass {
-		public constructor();
+		public constructor(options?: Partial<AspectFrameClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface AspectFramePrivateInitOptions {}
 	interface AspectFramePrivate {}
 	class AspectFramePrivate {
-		public constructor();
+		public constructor(options?: Partial<AspectFramePrivateInitOptions>);
 	}
 
+	export interface AssistantClassInitOptions {}
 	interface AssistantClass {}
 	class AssistantClass {
-		public constructor();
+		public constructor(options?: Partial<AssistantClassInitOptions>);
 		public prepare: {(assistant: Assistant, page: Widget): void;};
 		public apply: {(assistant: Assistant): void;};
 		public close: {(assistant: Assistant): void;};
@@ -49871,25 +52204,29 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved5: {(): void;};
 	}
 
+	export interface AssistantPrivateInitOptions {}
 	interface AssistantPrivate {}
 	class AssistantPrivate {
-		public constructor();
+		public constructor(options?: Partial<AssistantPrivateInitOptions>);
 	}
 
+	export interface BinClassInitOptions {}
 	interface BinClass {}
 	class BinClass {
-		public constructor();
+		public constructor(options?: Partial<BinClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface BinPrivateInitOptions {}
 	interface BinPrivate {}
 	class BinPrivate {
-		public constructor();
+		public constructor(options?: Partial<BinPrivateInitOptions>);
 	}
 
+	export interface BindingArgInitOptions {}
 	/**
 	 * A {@link BindingArg} holds the data associated with
 	 * an argument for a key binding signal emission as
@@ -49897,20 +52234,21 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface BindingArg {}
 	class BindingArg {
-		public constructor();
+		public constructor(options?: Partial<BindingArgInitOptions>);
 		/**
 		 * implementation detail
 		 */
 		public arg_type: GObject.Type;
 	}
 
+	export interface BindingEntryInitOptions {}
 	/**
 	 * Each key binding element of a binding sets binding list is
 	 * represented by a GtkBindingEntry.
 	 */
 	interface BindingEntry {}
 	class BindingEntry {
-		public constructor();
+		public constructor(options?: Partial<BindingEntryInitOptions>);
 		/**
 		 * key value to match
 		 */
@@ -49949,6 +52287,7 @@ declare namespace imports.gi.Gtk {
 		public signals: BindingSignal;
 	}
 
+	export interface BindingSetInitOptions {}
 	/**
 	 * A binding set maintains a list of activatable key bindings.
 	 * A single binding set can match multiple types of widgets.
@@ -49959,7 +52298,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface BindingSet {}
 	class BindingSet {
-		public constructor();
+		public constructor(options?: Partial<BindingSetInitOptions>);
 		/**
 		 * unique name of this binding set
 		 */
@@ -50013,6 +52352,7 @@ declare namespace imports.gi.Gtk {
 		public add_path(path_type: PathType, path_pattern: string, priority: PathPriorityType): void;
 	}
 
+	export interface BindingSignalInitOptions {}
 	/**
 	 * A GtkBindingSignal stores the necessary information to
 	 * activate a widget in response to a key press via a signal
@@ -50020,7 +52360,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface BindingSignal {}
 	class BindingSignal {
-		public constructor();
+		public constructor(options?: Partial<BindingSignalInitOptions>);
 		/**
 		 * implementation detail
 		 */
@@ -50039,23 +52379,26 @@ declare namespace imports.gi.Gtk {
 		public args: BindingArg[];
 	}
 
+	export interface BooleanCellAccessibleClassInitOptions {}
 	interface BooleanCellAccessibleClass {}
 	class BooleanCellAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<BooleanCellAccessibleClassInitOptions>);
 	}
 
+	export interface BooleanCellAccessiblePrivateInitOptions {}
 	interface BooleanCellAccessiblePrivate {}
 	class BooleanCellAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<BooleanCellAccessiblePrivateInitOptions>);
 	}
 
+	export interface BorderInitOptions {}
 	/**
 	 * A struct that specifies a border around a rectangular area
 	 * that can be of different width on each side.
 	 */
 	interface Border {}
 	class Border {
-		public constructor();
+		public constructor(options?: Partial<BorderInitOptions>);
 		/**
 		 * Allocates a new {@link Border}-struct and initializes its elements to zero.
 		 * @returns a newly allocated {@link Border}-struct.
@@ -50089,20 +52432,23 @@ declare namespace imports.gi.Gtk {
 		public free(): void;
 	}
 
+	export interface BoxClassInitOptions {}
 	interface BoxClass {}
 	class BoxClass {
-		public constructor();
+		public constructor(options?: Partial<BoxClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface BoxPrivateInitOptions {}
 	interface BoxPrivate {}
 	class BoxPrivate {
-		public constructor();
+		public constructor(options?: Partial<BoxPrivateInitOptions>);
 	}
 
+	export interface BuildableIfaceInitOptions {}
 	/**
 	 * The {@link BuildableIface} interface contains method that are
 	 * necessary to allow #GtkBuilder to construct an object from
@@ -50110,7 +52456,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface BuildableIface {}
 	class BuildableIface {
-		public constructor();
+		public constructor(options?: Partial<BuildableIfaceInitOptions>);
 		/**
 		 * the parent class
 		 */
@@ -50127,9 +52473,10 @@ declare namespace imports.gi.Gtk {
 		public get_internal_child: {(buildable: Buildable, builder: Builder, childname: string): GObject.Object;};
 	}
 
+	export interface BuilderClassInitOptions {}
 	interface BuilderClass {}
 	class BuilderClass {
-		public constructor();
+		public constructor(options?: Partial<BuilderClassInitOptions>);
 		public get_type_from_name: {(builder: Builder, type_name: string): GObject.Type;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -50141,38 +52488,44 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface BuilderPrivateInitOptions {}
 	interface BuilderPrivate {}
 	class BuilderPrivate {
-		public constructor();
+		public constructor(options?: Partial<BuilderPrivateInitOptions>);
 	}
 
+	export interface ButtonAccessibleClassInitOptions {}
 	interface ButtonAccessibleClass {}
 	class ButtonAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ButtonAccessibleClassInitOptions>);
 	}
 
+	export interface ButtonAccessiblePrivateInitOptions {}
 	interface ButtonAccessiblePrivate {}
 	class ButtonAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ButtonAccessiblePrivateInitOptions>);
 	}
 
+	export interface ButtonBoxClassInitOptions {}
 	interface ButtonBoxClass {}
 	class ButtonBoxClass {
-		public constructor();
+		public constructor(options?: Partial<ButtonBoxClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ButtonBoxPrivateInitOptions {}
 	interface ButtonBoxPrivate {}
 	class ButtonBoxPrivate {
-		public constructor();
+		public constructor(options?: Partial<ButtonBoxPrivateInitOptions>);
 	}
 
+	export interface ButtonClassInitOptions {}
 	interface ButtonClass {}
 	class ButtonClass {
-		public constructor();
+		public constructor(options?: Partial<ButtonClassInitOptions>);
 		public pressed: {(button: Button): void;};
 		public released: {(button: Button): void;};
 		public clicked: {(button: Button): void;};
@@ -50185,14 +52538,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ButtonPrivateInitOptions {}
 	interface ButtonPrivate {}
 	class ButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<ButtonPrivateInitOptions>);
 	}
 
+	export interface CalendarClassInitOptions {}
 	interface CalendarClass {}
 	class CalendarClass {
-		public constructor();
+		public constructor(options?: Partial<CalendarClassInitOptions>);
 		public month_changed: {(calendar: Calendar): void;};
 		public day_selected: {(calendar: Calendar): void;};
 		public day_selected_double_click: {(calendar: Calendar): void;};
@@ -50206,20 +52561,23 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CalendarPrivateInitOptions {}
 	interface CalendarPrivate {}
 	class CalendarPrivate {
-		public constructor();
+		public constructor(options?: Partial<CalendarPrivateInitOptions>);
 	}
 
+	export interface CellAccessibleClassInitOptions {}
 	interface CellAccessibleClass {}
 	class CellAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<CellAccessibleClassInitOptions>);
 		public update_cache: {(cell: CellAccessible, emit_signal: boolean): void;};
 	}
 
+	export interface CellAccessibleParentIfaceInitOptions {}
 	interface CellAccessibleParentIface {}
 	class CellAccessibleParentIface {
-		public constructor();
+		public constructor(options?: Partial<CellAccessibleParentIfaceInitOptions>);
 		public get_cell_extents: {(parent: CellAccessibleParent, cell: CellAccessible, coord_type: Atk.CoordType): [ x: number, y: number, width: number, height: number ];};
 		public get_cell_area: {(parent: CellAccessibleParent, cell: CellAccessible, cell_rect: Gdk.Rectangle): void;};
 		public grab_focus: {(parent: CellAccessibleParent, cell: CellAccessible): boolean;};
@@ -50234,28 +52592,32 @@ declare namespace imports.gi.Gtk {
 		public get_row_header_cells: {(parent: CellAccessibleParent, cell: CellAccessible): Atk.Object[];};
 	}
 
+	export interface CellAccessiblePrivateInitOptions {}
 	interface CellAccessiblePrivate {}
 	class CellAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<CellAccessiblePrivateInitOptions>);
 	}
 
+	export interface CellAreaBoxClassInitOptions {}
 	interface CellAreaBoxClass {}
 	class CellAreaBoxClass {
-		public constructor();
+		public constructor(options?: Partial<CellAreaBoxClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CellAreaBoxPrivateInitOptions {}
 	interface CellAreaBoxPrivate {}
 	class CellAreaBoxPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellAreaBoxPrivateInitOptions>);
 	}
 
+	export interface CellAreaClassInitOptions {}
 	interface CellAreaClass {}
 	class CellAreaClass {
-		public constructor();
+		public constructor(options?: Partial<CellAreaClassInitOptions>);
 		public add: {(area: CellArea, renderer: CellRenderer): void;};
 		public remove: {(area: CellArea, renderer: CellRenderer): void;};
 		public foreach: {(area: CellArea, callback: CellCallback, callback_data: any | null): void;};
@@ -50305,9 +52667,10 @@ declare namespace imports.gi.Gtk {
 		public list_cell_properties(): GObject.ParamSpec[];
 	}
 
+	export interface CellAreaContextClassInitOptions {}
 	interface CellAreaContextClass {}
 	class CellAreaContextClass {
-		public constructor();
+		public constructor(options?: Partial<CellAreaContextClassInitOptions>);
 		public allocate: {(context: CellAreaContext, width: number, height: number): void;};
 		public reset: {(context: CellAreaContext): void;};
 		public get_preferred_height_for_width: {(context: CellAreaContext, width: number): [ minimum_height: number | null, natural_height: number | null ];};
@@ -50320,28 +52683,32 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved6: {(): void;};
 	}
 
+	export interface CellAreaContextPrivateInitOptions {}
 	interface CellAreaContextPrivate {}
 	class CellAreaContextPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellAreaContextPrivateInitOptions>);
 	}
 
+	export interface CellAreaPrivateInitOptions {}
 	interface CellAreaPrivate {}
 	class CellAreaPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellAreaPrivateInitOptions>);
 	}
 
+	export interface CellEditableIfaceInitOptions {}
 	interface CellEditableIface {}
 	class CellEditableIface {
-		public constructor();
+		public constructor(options?: Partial<CellEditableIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public editing_done: {(cell_editable: CellEditable): void;};
 		public remove_widget: {(cell_editable: CellEditable): void;};
 		public start_editing: {(cell_editable: CellEditable, event: Gdk.Event | null): void;};
 	}
 
+	export interface CellLayoutIfaceInitOptions {}
 	interface CellLayoutIface {}
 	class CellLayoutIface {
-		public constructor();
+		public constructor(options?: Partial<CellLayoutIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public pack_start: {(cell_layout: CellLayout, cell: CellRenderer, expand: boolean): void;};
 		public pack_end: {(cell_layout: CellLayout, cell: CellRenderer, expand: boolean): void;};
@@ -50354,9 +52721,10 @@ declare namespace imports.gi.Gtk {
 		public get_area: {(cell_layout: CellLayout): CellArea | null;};
 	}
 
+	export interface CellRendererAccelClassInitOptions {}
 	interface CellRendererAccelClass {}
 	class CellRendererAccelClass {
-		public constructor();
+		public constructor(options?: Partial<CellRendererAccelClassInitOptions>);
 		public accel_edited: {(accel: CellRendererAccel, path_string: string, accel_key: number, accel_mods: Gdk.ModifierType, hardware_keycode: number): void;};
 		public accel_cleared: {(accel: CellRendererAccel, path_string: string): void;};
 		public _gtk_reserved0: {(): void;};
@@ -50366,14 +52734,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CellRendererAccelPrivateInitOptions {}
 	interface CellRendererAccelPrivate {}
 	class CellRendererAccelPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellRendererAccelPrivateInitOptions>);
 	}
 
+	export interface CellRendererClassInitOptions {}
 	interface CellRendererClass {}
 	class CellRendererClass {
-		public constructor();
+		public constructor(options?: Partial<CellRendererClassInitOptions>);
 		public get_request_mode: {(cell: CellRenderer): SizeRequestMode;};
 		public get_preferred_width: {(cell: CellRenderer, widget: Widget): [ minimum_size: number | null, natural_size: number | null ];};
 		public get_preferred_height_for_width: {(cell: CellRenderer, widget: Widget, width: number): [ minimum_height: number | null, natural_height: number | null ];};
@@ -50402,89 +52772,102 @@ declare namespace imports.gi.Gtk {
 		public set_accessible_type(type: GObject.Type): void;
 	}
 
+	export interface CellRendererClassPrivateInitOptions {}
 	interface CellRendererClassPrivate {}
 	class CellRendererClassPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellRendererClassPrivateInitOptions>);
 	}
 
+	export interface CellRendererComboClassInitOptions {}
 	interface CellRendererComboClass {}
 	class CellRendererComboClass {
-		public constructor();
+		public constructor(options?: Partial<CellRendererComboClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CellRendererComboPrivateInitOptions {}
 	interface CellRendererComboPrivate {}
 	class CellRendererComboPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellRendererComboPrivateInitOptions>);
 	}
 
+	export interface CellRendererPixbufClassInitOptions {}
 	interface CellRendererPixbufClass {}
 	class CellRendererPixbufClass {
-		public constructor();
+		public constructor(options?: Partial<CellRendererPixbufClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CellRendererPixbufPrivateInitOptions {}
 	interface CellRendererPixbufPrivate {}
 	class CellRendererPixbufPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellRendererPixbufPrivateInitOptions>);
 	}
 
+	export interface CellRendererPrivateInitOptions {}
 	interface CellRendererPrivate {}
 	class CellRendererPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellRendererPrivateInitOptions>);
 	}
 
+	export interface CellRendererProgressClassInitOptions {}
 	interface CellRendererProgressClass {}
 	class CellRendererProgressClass {
-		public constructor();
+		public constructor(options?: Partial<CellRendererProgressClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CellRendererProgressPrivateInitOptions {}
 	interface CellRendererProgressPrivate {}
 	class CellRendererProgressPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellRendererProgressPrivateInitOptions>);
 	}
 
+	export interface CellRendererSpinClassInitOptions {}
 	interface CellRendererSpinClass {}
 	class CellRendererSpinClass {
-		public constructor();
+		public constructor(options?: Partial<CellRendererSpinClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CellRendererSpinPrivateInitOptions {}
 	interface CellRendererSpinPrivate {}
 	class CellRendererSpinPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellRendererSpinPrivateInitOptions>);
 	}
 
+	export interface CellRendererSpinnerClassInitOptions {}
 	interface CellRendererSpinnerClass {}
 	class CellRendererSpinnerClass {
-		public constructor();
+		public constructor(options?: Partial<CellRendererSpinnerClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CellRendererSpinnerPrivateInitOptions {}
 	interface CellRendererSpinnerPrivate {}
 	class CellRendererSpinnerPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellRendererSpinnerPrivateInitOptions>);
 	}
 
+	export interface CellRendererTextClassInitOptions {}
 	interface CellRendererTextClass {}
 	class CellRendererTextClass {
-		public constructor();
+		public constructor(options?: Partial<CellRendererTextClassInitOptions>);
 		public edited: {(cell_renderer_text: CellRendererText, path: string, new_text: string): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -50492,14 +52875,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CellRendererTextPrivateInitOptions {}
 	interface CellRendererTextPrivate {}
 	class CellRendererTextPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellRendererTextPrivateInitOptions>);
 	}
 
+	export interface CellRendererToggleClassInitOptions {}
 	interface CellRendererToggleClass {}
 	class CellRendererToggleClass {
-		public constructor();
+		public constructor(options?: Partial<CellRendererToggleClassInitOptions>);
 		public toggled: {(cell_renderer_toggle: CellRendererToggle, path: string): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -50507,28 +52892,32 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CellRendererTogglePrivateInitOptions {}
 	interface CellRendererTogglePrivate {}
 	class CellRendererTogglePrivate {
-		public constructor();
+		public constructor(options?: Partial<CellRendererTogglePrivateInitOptions>);
 	}
 
+	export interface CellViewClassInitOptions {}
 	interface CellViewClass {}
 	class CellViewClass {
-		public constructor();
+		public constructor(options?: Partial<CellViewClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CellViewPrivateInitOptions {}
 	interface CellViewPrivate {}
 	class CellViewPrivate {
-		public constructor();
+		public constructor(options?: Partial<CellViewPrivateInitOptions>);
 	}
 
+	export interface CheckButtonClassInitOptions {}
 	interface CheckButtonClass {}
 	class CheckButtonClass {
-		public constructor();
+		public constructor(options?: Partial<CheckButtonClassInitOptions>);
 		public draw_indicator: {(check_button: CheckButton, cr: cairo.Context): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -50536,19 +52925,22 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CheckMenuItemAccessibleClassInitOptions {}
 	interface CheckMenuItemAccessibleClass {}
 	class CheckMenuItemAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<CheckMenuItemAccessibleClassInitOptions>);
 	}
 
+	export interface CheckMenuItemAccessiblePrivateInitOptions {}
 	interface CheckMenuItemAccessiblePrivate {}
 	class CheckMenuItemAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<CheckMenuItemAccessiblePrivateInitOptions>);
 	}
 
+	export interface CheckMenuItemClassInitOptions {}
 	interface CheckMenuItemClass {}
 	class CheckMenuItemClass {
-		public constructor();
+		public constructor(options?: Partial<CheckMenuItemClassInitOptions>);
 		public toggled: {(check_menu_item: CheckMenuItem): void;};
 		public draw_indicator: {(check_menu_item: CheckMenuItem, cr: cairo.Context): void;};
 		public _gtk_reserved1: {(): void;};
@@ -50557,14 +52949,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CheckMenuItemPrivateInitOptions {}
 	interface CheckMenuItemPrivate {}
 	class CheckMenuItemPrivate {
-		public constructor();
+		public constructor(options?: Partial<CheckMenuItemPrivateInitOptions>);
 	}
 
+	export interface ColorButtonClassInitOptions {}
 	interface ColorButtonClass {}
 	class ColorButtonClass {
-		public constructor();
+		public constructor(options?: Partial<ColorButtonClassInitOptions>);
 		public color_set: {(cp: ColorButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -50572,28 +52966,32 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ColorButtonPrivateInitOptions {}
 	interface ColorButtonPrivate {}
 	class ColorButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<ColorButtonPrivateInitOptions>);
 	}
 
+	export interface ColorChooserDialogClassInitOptions {}
 	interface ColorChooserDialogClass {}
 	class ColorChooserDialogClass {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserDialogClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ColorChooserDialogPrivateInitOptions {}
 	interface ColorChooserDialogPrivate {}
 	class ColorChooserDialogPrivate {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserDialogPrivateInitOptions>);
 	}
 
+	export interface ColorChooserInterfaceInitOptions {}
 	interface ColorChooserInterface {}
 	class ColorChooserInterface {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserInterfaceInitOptions>);
 		public readonly base_interface: GObject.TypeInterface;
 		public readonly padding: any[];
 		public get_rgba: {(chooser: ColorChooser, color: Gdk.RGBA): void;};
@@ -50602,9 +53000,10 @@ declare namespace imports.gi.Gtk {
 		public color_activated: {(chooser: ColorChooser, color: Gdk.RGBA): void;};
 	}
 
+	export interface ColorChooserWidgetClassInitOptions {}
 	interface ColorChooserWidgetClass {}
 	class ColorChooserWidgetClass {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserWidgetClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -50615,14 +53014,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface ColorChooserWidgetPrivateInitOptions {}
 	interface ColorChooserWidgetPrivate {}
 	class ColorChooserWidgetPrivate {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserWidgetPrivateInitOptions>);
 	}
 
+	export interface ColorSelectionClassInitOptions {}
 	interface ColorSelectionClass {}
 	class ColorSelectionClass {
-		public constructor();
+		public constructor(options?: Partial<ColorSelectionClassInitOptions>);
 		public color_changed: {(color_selection: ColorSelection): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -50630,38 +53031,44 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ColorSelectionDialogClassInitOptions {}
 	interface ColorSelectionDialogClass {}
 	class ColorSelectionDialogClass {
-		public constructor();
+		public constructor(options?: Partial<ColorSelectionDialogClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ColorSelectionDialogPrivateInitOptions {}
 	interface ColorSelectionDialogPrivate {}
 	class ColorSelectionDialogPrivate {
-		public constructor();
+		public constructor(options?: Partial<ColorSelectionDialogPrivateInitOptions>);
 	}
 
+	export interface ColorSelectionPrivateInitOptions {}
 	interface ColorSelectionPrivate {}
 	class ColorSelectionPrivate {
-		public constructor();
+		public constructor(options?: Partial<ColorSelectionPrivateInitOptions>);
 	}
 
+	export interface ComboBoxAccessibleClassInitOptions {}
 	interface ComboBoxAccessibleClass {}
 	class ComboBoxAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ComboBoxAccessibleClassInitOptions>);
 	}
 
+	export interface ComboBoxAccessiblePrivateInitOptions {}
 	interface ComboBoxAccessiblePrivate {}
 	class ComboBoxAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ComboBoxAccessiblePrivateInitOptions>);
 	}
 
+	export interface ComboBoxClassInitOptions {}
 	interface ComboBoxClass {}
 	class ComboBoxClass {
-		public constructor();
+		public constructor(options?: Partial<ComboBoxClassInitOptions>);
 		public changed: {(combo_box: ComboBox): void;};
 		public format_entry_text: {(combo_box: ComboBox, path: string): string;};
 		public _gtk_reserved1: {(): void;};
@@ -50669,53 +53076,61 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved3: {(): void;};
 	}
 
+	export interface ComboBoxPrivateInitOptions {}
 	interface ComboBoxPrivate {}
 	class ComboBoxPrivate {
-		public constructor();
+		public constructor(options?: Partial<ComboBoxPrivateInitOptions>);
 	}
 
+	export interface ComboBoxTextClassInitOptions {}
 	interface ComboBoxTextClass {}
 	class ComboBoxTextClass {
-		public constructor();
+		public constructor(options?: Partial<ComboBoxTextClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ComboBoxTextPrivateInitOptions {}
 	interface ComboBoxTextPrivate {}
 	class ComboBoxTextPrivate {
-		public constructor();
+		public constructor(options?: Partial<ComboBoxTextPrivateInitOptions>);
 	}
 
+	export interface ContainerAccessibleClassInitOptions {}
 	interface ContainerAccessibleClass {}
 	class ContainerAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ContainerAccessibleClassInitOptions>);
 		public add_gtk: {(container: Container, widget: Widget, data: any): number;};
 		public remove_gtk: {(container: Container, widget: Widget, data: any): number;};
 	}
 
+	export interface ContainerAccessiblePrivateInitOptions {}
 	interface ContainerAccessiblePrivate {}
 	class ContainerAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ContainerAccessiblePrivateInitOptions>);
 	}
 
+	export interface ContainerCellAccessibleClassInitOptions {}
 	interface ContainerCellAccessibleClass {}
 	class ContainerCellAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ContainerCellAccessibleClassInitOptions>);
 	}
 
+	export interface ContainerCellAccessiblePrivateInitOptions {}
 	interface ContainerCellAccessiblePrivate {}
 	class ContainerCellAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ContainerCellAccessiblePrivateInitOptions>);
 	}
 
+	export interface ContainerClassInitOptions {}
 	/**
 	 * Base class for containers.
 	 */
 	interface ContainerClass {}
 	class ContainerClass {
-		public constructor();
+		public constructor(options?: Partial<ContainerClassInitOptions>);
 		public readonly _handle_border_width: number;
 		public add: {(container: Container, widget: Widget): void;};
 		public remove: {(container: Container, widget: Widget): void;};
@@ -50778,25 +53193,29 @@ declare namespace imports.gi.Gtk {
 		public list_child_properties(): GObject.ParamSpec[];
 	}
 
+	export interface ContainerPrivateInitOptions {}
 	interface ContainerPrivate {}
 	class ContainerPrivate {
-		public constructor();
+		public constructor(options?: Partial<ContainerPrivateInitOptions>);
 	}
 
+	export interface CssProviderClassInitOptions {}
 	interface CssProviderClass {}
 	class CssProviderClass {
-		public constructor();
+		public constructor(options?: Partial<CssProviderClassInitOptions>);
 		public parsing_error: {(provider: CssProvider, section: CssSection, error: GLib.Error): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface CssProviderPrivateInitOptions {}
 	interface CssProviderPrivate {}
 	class CssProviderPrivate {
-		public constructor();
+		public constructor(options?: Partial<CssProviderPrivateInitOptions>);
 	}
 
+	export interface CssSectionInitOptions {}
 	/**
 	 * Defines a part of a CSS document. Because sections are nested into
 	 * one another, you can use gtk_css_section_get_parent() to get the
@@ -50804,7 +53223,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface CssSection {}
 	class CssSection {
-		public constructor();
+		public constructor(options?: Partial<CssSectionInitOptions>);
 		/**
 		 * Returns the line in the CSS document where this section end.
 		 * The line number is 0-indexed, so the first line of the document
@@ -50879,9 +53298,10 @@ declare namespace imports.gi.Gtk {
 		public unref(): void;
 	}
 
+	export interface DialogClassInitOptions {}
 	interface DialogClass {}
 	class DialogClass {
-		public constructor();
+		public constructor(options?: Partial<DialogClassInitOptions>);
 		public response: {(dialog: Dialog, response_id: number): void;};
 		public close: {(dialog: Dialog): void;};
 		public _gtk_reserved1: {(): void;};
@@ -50890,23 +53310,26 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface DialogPrivateInitOptions {}
 	interface DialogPrivate {}
 	class DialogPrivate {
-		public constructor();
+		public constructor(options?: Partial<DialogPrivateInitOptions>);
 	}
 
+	export interface DrawingAreaClassInitOptions {}
 	interface DrawingAreaClass {}
 	class DrawingAreaClass {
-		public constructor();
+		public constructor(options?: Partial<DrawingAreaClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface EditableInterfaceInitOptions {}
 	interface EditableInterface {}
 	class EditableInterface {
-		public constructor();
+		public constructor(options?: Partial<EditableInterfaceInitOptions>);
 		public readonly base_iface: GObject.TypeInterface;
 		public insert_text: {(editable: Editable, new_text: string, new_text_length: number): void;};
 		public delete_text: {(editable: Editable, start_pos: number, end_pos: number): void;};
@@ -50920,19 +53343,22 @@ declare namespace imports.gi.Gtk {
 		public get_position: {(editable: Editable): number;};
 	}
 
+	export interface EntryAccessibleClassInitOptions {}
 	interface EntryAccessibleClass {}
 	class EntryAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<EntryAccessibleClassInitOptions>);
 	}
 
+	export interface EntryAccessiblePrivateInitOptions {}
 	interface EntryAccessiblePrivate {}
 	class EntryAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<EntryAccessiblePrivateInitOptions>);
 	}
 
+	export interface EntryBufferClassInitOptions {}
 	interface EntryBufferClass {}
 	class EntryBufferClass {
-		public constructor();
+		public constructor(options?: Partial<EntryBufferClassInitOptions>);
 		public inserted_text: {(buffer: EntryBuffer, position: number, chars: string, n_chars: number): void;};
 		public deleted_text: {(buffer: EntryBuffer, position: number, n_chars: number): void;};
 		public get_text: {(buffer: EntryBuffer, n_bytes: number): string;};
@@ -50949,11 +53375,13 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface EntryBufferPrivateInitOptions {}
 	interface EntryBufferPrivate {}
 	class EntryBufferPrivate {
-		public constructor();
+		public constructor(options?: Partial<EntryBufferPrivateInitOptions>);
 	}
 
+	export interface EntryClassInitOptions {}
 	/**
 	 * Class structure for {@link Entry}. All virtual functions have a default
 	 * implementation. Derived classes may set the virtual function pointers for the
@@ -50963,7 +53391,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface EntryClass {}
 	class EntryClass {
-		public constructor();
+		public constructor(options?: Partial<EntryClassInitOptions>);
 		public populate_popup: {(entry: Entry, popup: Widget): void;};
 		public activate: {(entry: Entry): void;};
 		public move_cursor: {(entry: Entry, step: MovementStep, count: number, extend_selection: boolean): void;};
@@ -50985,9 +53413,10 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved6: {(): void;};
 	}
 
+	export interface EntryCompletionClassInitOptions {}
 	interface EntryCompletionClass {}
 	class EntryCompletionClass {
-		public constructor();
+		public constructor(options?: Partial<EntryCompletionClassInitOptions>);
 		public match_selected: {(completion: EntryCompletion, model: TreeModel, iter: TreeIter): boolean;};
 		public action_activated: {(completion: EntryCompletion, index_: number): void;};
 		public insert_prefix: {(completion: EntryCompletion, prefix: string): boolean;};
@@ -50998,63 +53427,74 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved2: {(): void;};
 	}
 
+	export interface EntryCompletionPrivateInitOptions {}
 	interface EntryCompletionPrivate {}
 	class EntryCompletionPrivate {
-		public constructor();
+		public constructor(options?: Partial<EntryCompletionPrivateInitOptions>);
 	}
 
+	export interface EntryPrivateInitOptions {}
 	interface EntryPrivate {}
 	class EntryPrivate {
-		public constructor();
+		public constructor(options?: Partial<EntryPrivateInitOptions>);
 	}
 
+	export interface EventBoxClassInitOptions {}
 	interface EventBoxClass {}
 	class EventBoxClass {
-		public constructor();
+		public constructor(options?: Partial<EventBoxClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface EventBoxPrivateInitOptions {}
 	interface EventBoxPrivate {}
 	class EventBoxPrivate {
-		public constructor();
+		public constructor(options?: Partial<EventBoxPrivateInitOptions>);
 	}
 
+	export interface EventControllerClassInitOptions {}
 	interface EventControllerClass {}
 	class EventControllerClass {
-		public constructor();
+		public constructor(options?: Partial<EventControllerClassInitOptions>);
 	}
 
+	export interface EventControllerKeyClassInitOptions {}
 	interface EventControllerKeyClass {}
 	class EventControllerKeyClass {
-		public constructor();
+		public constructor(options?: Partial<EventControllerKeyClassInitOptions>);
 	}
 
+	export interface EventControllerMotionClassInitOptions {}
 	interface EventControllerMotionClass {}
 	class EventControllerMotionClass {
-		public constructor();
+		public constructor(options?: Partial<EventControllerMotionClassInitOptions>);
 	}
 
+	export interface EventControllerScrollClassInitOptions {}
 	interface EventControllerScrollClass {}
 	class EventControllerScrollClass {
-		public constructor();
+		public constructor(options?: Partial<EventControllerScrollClassInitOptions>);
 	}
 
+	export interface ExpanderAccessibleClassInitOptions {}
 	interface ExpanderAccessibleClass {}
 	class ExpanderAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ExpanderAccessibleClassInitOptions>);
 	}
 
+	export interface ExpanderAccessiblePrivateInitOptions {}
 	interface ExpanderAccessiblePrivate {}
 	class ExpanderAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ExpanderAccessiblePrivateInitOptions>);
 	}
 
+	export interface ExpanderClassInitOptions {}
 	interface ExpanderClass {}
 	class ExpanderClass {
-		public constructor();
+		public constructor(options?: Partial<ExpanderClassInitOptions>);
 		public activate: {(expander: Expander): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -51062,14 +53502,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ExpanderPrivateInitOptions {}
 	interface ExpanderPrivate {}
 	class ExpanderPrivate {
-		public constructor();
+		public constructor(options?: Partial<ExpanderPrivateInitOptions>);
 	}
 
+	export interface FileChooserButtonClassInitOptions {}
 	interface FileChooserButtonClass {}
 	class FileChooserButtonClass {
-		public constructor();
+		public constructor(options?: Partial<FileChooserButtonClassInitOptions>);
 		public file_set: {(fc: FileChooserButton): void;};
 		public __gtk_reserved1: {(): void;};
 		public __gtk_reserved2: {(): void;};
@@ -51077,61 +53519,70 @@ declare namespace imports.gi.Gtk {
 		public __gtk_reserved4: {(): void;};
 	}
 
+	export interface FileChooserButtonPrivateInitOptions {}
 	interface FileChooserButtonPrivate {}
 	class FileChooserButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<FileChooserButtonPrivateInitOptions>);
 	}
 
+	export interface FileChooserDialogClassInitOptions {}
 	interface FileChooserDialogClass {}
 	class FileChooserDialogClass {
-		public constructor();
+		public constructor(options?: Partial<FileChooserDialogClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface FileChooserDialogPrivateInitOptions {}
 	interface FileChooserDialogPrivate {}
 	class FileChooserDialogPrivate {
-		public constructor();
+		public constructor(options?: Partial<FileChooserDialogPrivateInitOptions>);
 	}
 
+	export interface FileChooserNativeClassInitOptions {}
 	interface FileChooserNativeClass {}
 	class FileChooserNativeClass {
-		public constructor();
+		public constructor(options?: Partial<FileChooserNativeClassInitOptions>);
 	}
 
+	export interface FileChooserWidgetAccessibleClassInitOptions {}
 	interface FileChooserWidgetAccessibleClass {}
 	class FileChooserWidgetAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<FileChooserWidgetAccessibleClassInitOptions>);
 	}
 
+	export interface FileChooserWidgetAccessiblePrivateInitOptions {}
 	interface FileChooserWidgetAccessiblePrivate {}
 	class FileChooserWidgetAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<FileChooserWidgetAccessiblePrivateInitOptions>);
 	}
 
+	export interface FileChooserWidgetClassInitOptions {}
 	interface FileChooserWidgetClass {}
 	class FileChooserWidgetClass {
-		public constructor();
+		public constructor(options?: Partial<FileChooserWidgetClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface FileChooserWidgetPrivateInitOptions {}
 	interface FileChooserWidgetPrivate {}
 	class FileChooserWidgetPrivate {
-		public constructor();
+		public constructor(options?: Partial<FileChooserWidgetPrivateInitOptions>);
 	}
 
+	export interface FileFilterInfoInitOptions {}
 	/**
 	 * A {@link FileFilterInfo}-struct is used to pass information about the
 	 * tested file to gtk_file_filter_filter().
 	 */
 	interface FileFilterInfo {}
 	class FileFilterInfo {
-		public constructor();
+		public constructor(options?: Partial<FileFilterInfoInitOptions>);
 		/**
 		 * Flags indicating which of the following fields need
 		 *   are filled
@@ -51156,54 +53607,62 @@ declare namespace imports.gi.Gtk {
 		public mime_type: string;
 	}
 
+	export interface FixedChildInitOptions {}
 	interface FixedChild {}
 	class FixedChild {
-		public constructor();
+		public constructor(options?: Partial<FixedChildInitOptions>);
 		public widget: Widget;
 		public x: number;
 		public y: number;
 	}
 
+	export interface FixedClassInitOptions {}
 	interface FixedClass {}
 	class FixedClass {
-		public constructor();
+		public constructor(options?: Partial<FixedClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface FixedPrivateInitOptions {}
 	interface FixedPrivate {}
 	class FixedPrivate {
-		public constructor();
+		public constructor(options?: Partial<FixedPrivateInitOptions>);
 	}
 
+	export interface FlowBoxAccessibleClassInitOptions {}
 	interface FlowBoxAccessibleClass {}
 	class FlowBoxAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<FlowBoxAccessibleClassInitOptions>);
 	}
 
+	export interface FlowBoxAccessiblePrivateInitOptions {}
 	interface FlowBoxAccessiblePrivate {}
 	class FlowBoxAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<FlowBoxAccessiblePrivateInitOptions>);
 	}
 
+	export interface FlowBoxChildAccessibleClassInitOptions {}
 	interface FlowBoxChildAccessibleClass {}
 	class FlowBoxChildAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<FlowBoxChildAccessibleClassInitOptions>);
 	}
 
+	export interface FlowBoxChildClassInitOptions {}
 	interface FlowBoxChildClass {}
 	class FlowBoxChildClass {
-		public constructor();
+		public constructor(options?: Partial<FlowBoxChildClassInitOptions>);
 		public activate: {(child: FlowBoxChild): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 	}
 
+	export interface FlowBoxClassInitOptions {}
 	interface FlowBoxClass {}
 	class FlowBoxClass {
-		public constructor();
+		public constructor(options?: Partial<FlowBoxClassInitOptions>);
 		public child_activated: {(box: FlowBox, child: FlowBoxChild): void;};
 		public selected_children_changed: {(box: FlowBox): void;};
 		public activate_cursor_child: {(box: FlowBox): void;};
@@ -51219,9 +53678,10 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved6: {(): void;};
 	}
 
+	export interface FontButtonClassInitOptions {}
 	interface FontButtonClass {}
 	class FontButtonClass {
-		public constructor();
+		public constructor(options?: Partial<FontButtonClassInitOptions>);
 		public font_set: {(gfp: FontButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -51229,28 +53689,32 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface FontButtonPrivateInitOptions {}
 	interface FontButtonPrivate {}
 	class FontButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<FontButtonPrivateInitOptions>);
 	}
 
+	export interface FontChooserDialogClassInitOptions {}
 	interface FontChooserDialogClass {}
 	class FontChooserDialogClass {
-		public constructor();
+		public constructor(options?: Partial<FontChooserDialogClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface FontChooserDialogPrivateInitOptions {}
 	interface FontChooserDialogPrivate {}
 	class FontChooserDialogPrivate {
-		public constructor();
+		public constructor(options?: Partial<FontChooserDialogPrivateInitOptions>);
 	}
 
+	export interface FontChooserIfaceInitOptions {}
 	interface FontChooserIface {}
 	class FontChooserIface {
-		public constructor();
+		public constructor(options?: Partial<FontChooserIfaceInitOptions>);
 		public readonly base_iface: GObject.TypeInterface;
 		public readonly padding: any[];
 		public get_font_family: {(fontchooser: FontChooser): Pango.FontFamily | null;};
@@ -51262,9 +53726,10 @@ declare namespace imports.gi.Gtk {
 		public get_font_map: {(fontchooser: FontChooser): Pango.FontMap | null;};
 	}
 
+	export interface FontChooserWidgetClassInitOptions {}
 	interface FontChooserWidgetClass {}
 	class FontChooserWidgetClass {
-		public constructor();
+		public constructor(options?: Partial<FontChooserWidgetClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -51275,52 +53740,60 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface FontChooserWidgetPrivateInitOptions {}
 	interface FontChooserWidgetPrivate {}
 	class FontChooserWidgetPrivate {
-		public constructor();
+		public constructor(options?: Partial<FontChooserWidgetPrivateInitOptions>);
 	}
 
+	export interface FontSelectionClassInitOptions {}
 	interface FontSelectionClass {}
 	class FontSelectionClass {
-		public constructor();
+		public constructor(options?: Partial<FontSelectionClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface FontSelectionDialogClassInitOptions {}
 	interface FontSelectionDialogClass {}
 	class FontSelectionDialogClass {
-		public constructor();
+		public constructor(options?: Partial<FontSelectionDialogClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface FontSelectionDialogPrivateInitOptions {}
 	interface FontSelectionDialogPrivate {}
 	class FontSelectionDialogPrivate {
-		public constructor();
+		public constructor(options?: Partial<FontSelectionDialogPrivateInitOptions>);
 	}
 
+	export interface FontSelectionPrivateInitOptions {}
 	interface FontSelectionPrivate {}
 	class FontSelectionPrivate {
-		public constructor();
+		public constructor(options?: Partial<FontSelectionPrivateInitOptions>);
 	}
 
+	export interface FrameAccessibleClassInitOptions {}
 	interface FrameAccessibleClass {}
 	class FrameAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<FrameAccessibleClassInitOptions>);
 	}
 
+	export interface FrameAccessiblePrivateInitOptions {}
 	interface FrameAccessiblePrivate {}
 	class FrameAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<FrameAccessiblePrivateInitOptions>);
 	}
 
+	export interface FrameClassInitOptions {}
 	interface FrameClass {}
 	class FrameClass {
-		public constructor();
+		public constructor(options?: Partial<FrameClassInitOptions>);
 		public compute_child_allocation: {(frame: Frame, allocation: Allocation): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -51328,73 +53801,86 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface FramePrivateInitOptions {}
 	interface FramePrivate {}
 	class FramePrivate {
-		public constructor();
+		public constructor(options?: Partial<FramePrivateInitOptions>);
 	}
 
+	export interface GLAreaClassInitOptions {}
 	/**
 	 * The `GtkGLAreaClass` structure contains only private data.
 	 */
 	interface GLAreaClass {}
 	class GLAreaClass {
-		public constructor();
+		public constructor(options?: Partial<GLAreaClassInitOptions>);
 		public readonly _padding: any[];
 		public render: {(area: GLArea, context: Gdk.GLContext): boolean;};
 		public resize: {(area: GLArea, width: number, height: number): void;};
 		public create_context: {(area: GLArea): Gdk.GLContext;};
 	}
 
+	export interface GestureClassInitOptions {}
 	interface GestureClass {}
 	class GestureClass {
-		public constructor();
+		public constructor(options?: Partial<GestureClassInitOptions>);
 	}
 
+	export interface GestureDragClassInitOptions {}
 	interface GestureDragClass {}
 	class GestureDragClass {
-		public constructor();
+		public constructor(options?: Partial<GestureDragClassInitOptions>);
 	}
 
+	export interface GestureLongPressClassInitOptions {}
 	interface GestureLongPressClass {}
 	class GestureLongPressClass {
-		public constructor();
+		public constructor(options?: Partial<GestureLongPressClassInitOptions>);
 	}
 
+	export interface GestureMultiPressClassInitOptions {}
 	interface GestureMultiPressClass {}
 	class GestureMultiPressClass {
-		public constructor();
+		public constructor(options?: Partial<GestureMultiPressClassInitOptions>);
 	}
 
+	export interface GesturePanClassInitOptions {}
 	interface GesturePanClass {}
 	class GesturePanClass {
-		public constructor();
+		public constructor(options?: Partial<GesturePanClassInitOptions>);
 	}
 
+	export interface GestureRotateClassInitOptions {}
 	interface GestureRotateClass {}
 	class GestureRotateClass {
-		public constructor();
+		public constructor(options?: Partial<GestureRotateClassInitOptions>);
 	}
 
+	export interface GestureSingleClassInitOptions {}
 	interface GestureSingleClass {}
 	class GestureSingleClass {
-		public constructor();
+		public constructor(options?: Partial<GestureSingleClassInitOptions>);
 	}
 
+	export interface GestureStylusClassInitOptions {}
 	interface GestureStylusClass {}
 	class GestureStylusClass {
-		public constructor();
+		public constructor(options?: Partial<GestureStylusClassInitOptions>);
 	}
 
+	export interface GestureSwipeClassInitOptions {}
 	interface GestureSwipeClass {}
 	class GestureSwipeClass {
-		public constructor();
+		public constructor(options?: Partial<GestureSwipeClassInitOptions>);
 	}
 
+	export interface GestureZoomClassInitOptions {}
 	interface GestureZoomClass {}
 	class GestureZoomClass {
-		public constructor();
+		public constructor(options?: Partial<GestureZoomClassInitOptions>);
 	}
 
+	export interface GradientInitOptions {}
 	/**
 	 * GtkGradient is a boxed type that represents a gradient.
 	 * It is the result of parsing a
@@ -51415,7 +53901,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface Gradient {}
 	class Gradient {
-		public constructor();
+		public constructor(options?: Partial<GradientInitOptions>);
 		/**
 		 * Creates a new linear gradient along the line defined by (x0, y0) and (x1, y1). Before using the gradient
 		 * a number of stop colors must be added through gtk_gradient_add_color_stop().
@@ -51474,9 +53960,10 @@ declare namespace imports.gi.Gtk {
 		public unref(): void;
 	}
 
+	export interface GridClassInitOptions {}
 	interface GridClass {}
 	class GridClass {
-		public constructor();
+		public constructor(options?: Partial<GridClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -51487,29 +53974,34 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface GridPrivateInitOptions {}
 	interface GridPrivate {}
 	class GridPrivate {
-		public constructor();
+		public constructor(options?: Partial<GridPrivateInitOptions>);
 	}
 
+	export interface HBoxClassInitOptions {}
 	interface HBoxClass {}
 	class HBoxClass {
-		public constructor();
+		public constructor(options?: Partial<HBoxClassInitOptions>);
 	}
 
+	export interface HButtonBoxClassInitOptions {}
 	interface HButtonBoxClass {}
 	class HButtonBoxClass {
-		public constructor();
+		public constructor(options?: Partial<HButtonBoxClassInitOptions>);
 	}
 
+	export interface HPanedClassInitOptions {}
 	interface HPanedClass {}
 	class HPanedClass {
-		public constructor();
+		public constructor(options?: Partial<HPanedClassInitOptions>);
 	}
 
+	export interface HSVClassInitOptions {}
 	interface HSVClass {}
 	class HSVClass {
-		public constructor();
+		public constructor(options?: Partial<HSVClassInitOptions>);
 		public changed: {(hsv: HSV): void;};
 		public move: {(hsv: HSV, type: DirectionType): void;};
 		public _gtk_reserved1: {(): void;};
@@ -51518,29 +54010,34 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface HSVPrivateInitOptions {}
 	interface HSVPrivate {}
 	class HSVPrivate {
-		public constructor();
+		public constructor(options?: Partial<HSVPrivateInitOptions>);
 	}
 
+	export interface HScaleClassInitOptions {}
 	interface HScaleClass {}
 	class HScaleClass {
-		public constructor();
+		public constructor(options?: Partial<HScaleClassInitOptions>);
 	}
 
+	export interface HScrollbarClassInitOptions {}
 	interface HScrollbarClass {}
 	class HScrollbarClass {
-		public constructor();
+		public constructor(options?: Partial<HScrollbarClassInitOptions>);
 	}
 
+	export interface HSeparatorClassInitOptions {}
 	interface HSeparatorClass {}
 	class HSeparatorClass {
-		public constructor();
+		public constructor(options?: Partial<HSeparatorClassInitOptions>);
 	}
 
+	export interface HandleBoxClassInitOptions {}
 	interface HandleBoxClass {}
 	class HandleBoxClass {
-		public constructor();
+		public constructor(options?: Partial<HandleBoxClassInitOptions>);
 		public child_attached: {(handle_box: HandleBox, child: Widget): void;};
 		public child_detached: {(handle_box: HandleBox, child: Widget): void;};
 		public _gtk_reserved1: {(): void;};
@@ -51549,38 +54046,44 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface HandleBoxPrivateInitOptions {}
 	interface HandleBoxPrivate {}
 	class HandleBoxPrivate {
-		public constructor();
+		public constructor(options?: Partial<HandleBoxPrivateInitOptions>);
 	}
 
+	export interface HeaderBarAccessibleClassInitOptions {}
 	interface HeaderBarAccessibleClass {}
 	class HeaderBarAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<HeaderBarAccessibleClassInitOptions>);
 	}
 
+	export interface HeaderBarAccessiblePrivateInitOptions {}
 	interface HeaderBarAccessiblePrivate {}
 	class HeaderBarAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<HeaderBarAccessiblePrivateInitOptions>);
 	}
 
+	export interface HeaderBarClassInitOptions {}
 	interface HeaderBarClass {}
 	class HeaderBarClass {
-		public constructor();
+		public constructor(options?: Partial<HeaderBarClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface HeaderBarPrivateInitOptions {}
 	interface HeaderBarPrivate {}
 	class HeaderBarPrivate {
-		public constructor();
+		public constructor(options?: Partial<HeaderBarPrivateInitOptions>);
 	}
 
+	export interface IMContextClassInitOptions {}
 	interface IMContextClass {}
 	class IMContextClass {
-		public constructor();
+		public constructor(options?: Partial<IMContextClassInitOptions>);
 		public preedit_start: {(context: IMContext): void;};
 		public preedit_end: {(context: IMContext): void;};
 		public preedit_changed: {(context: IMContext): void;};
@@ -51605,12 +54108,13 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved6: {(): void;};
 	}
 
+	export interface IMContextInfoInitOptions {}
 	/**
 	 * Bookkeeping information about a loadable input method.
 	 */
 	interface IMContextInfo {}
 	class IMContextInfo {
-		public constructor();
+		public constructor(options?: Partial<IMContextInfoInitOptions>);
 		/**
 		 * The unique identification string of the input method.
 		 */
@@ -51634,52 +54138,60 @@ declare namespace imports.gi.Gtk {
 		public default_locales: string;
 	}
 
+	export interface IMContextSimpleClassInitOptions {}
 	interface IMContextSimpleClass {}
 	class IMContextSimpleClass {
-		public constructor();
+		public constructor(options?: Partial<IMContextSimpleClassInitOptions>);
 	}
 
+	export interface IMContextSimplePrivateInitOptions {}
 	interface IMContextSimplePrivate {}
 	class IMContextSimplePrivate {
-		public constructor();
+		public constructor(options?: Partial<IMContextSimplePrivateInitOptions>);
 	}
 
+	export interface IMMulticontextClassInitOptions {}
 	interface IMMulticontextClass {}
 	class IMMulticontextClass {
-		public constructor();
+		public constructor(options?: Partial<IMMulticontextClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface IMMulticontextPrivateInitOptions {}
 	interface IMMulticontextPrivate {}
 	class IMMulticontextPrivate {
-		public constructor();
+		public constructor(options?: Partial<IMMulticontextPrivateInitOptions>);
 	}
 
+	export interface IconFactoryClassInitOptions {}
 	interface IconFactoryClass {}
 	class IconFactoryClass {
-		public constructor();
+		public constructor(options?: Partial<IconFactoryClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface IconFactoryPrivateInitOptions {}
 	interface IconFactoryPrivate {}
 	class IconFactoryPrivate {
-		public constructor();
+		public constructor(options?: Partial<IconFactoryPrivateInitOptions>);
 	}
 
+	export interface IconInfoClassInitOptions {}
 	interface IconInfoClass {}
 	class IconInfoClass {
-		public constructor();
+		public constructor(options?: Partial<IconInfoClassInitOptions>);
 	}
 
+	export interface IconSetInitOptions {}
 	interface IconSet {}
 	class IconSet {
-		public constructor();
+		public constructor(options?: Partial<IconSetInitOptions>);
 		/**
 		 * Creates a new {@link IconSet}. A #GtkIconSet represents a single icon
 		 * in various sizes and widget states. It can provide a #GdkPixbuf
@@ -51807,9 +54319,10 @@ declare namespace imports.gi.Gtk {
 		public unref(): void;
 	}
 
+	export interface IconSourceInitOptions {}
 	interface IconSource {}
 	class IconSource {
-		public constructor();
+		public constructor(options?: Partial<IconSourceInitOptions>);
 		/**
 		 * Creates a new {@link IconSource}. A #GtkIconSource contains a #GdkPixbuf (or
 		 * image filename) that serves as the base image for one or more of the
@@ -52012,9 +54525,10 @@ declare namespace imports.gi.Gtk {
 		public set_state_wildcarded(setting: boolean): void;
 	}
 
+	export interface IconThemeClassInitOptions {}
 	interface IconThemeClass {}
 	class IconThemeClass {
-		public constructor();
+		public constructor(options?: Partial<IconThemeClassInitOptions>);
 		public changed: {(icon_theme: IconTheme): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -52022,24 +54536,28 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface IconThemePrivateInitOptions {}
 	interface IconThemePrivate {}
 	class IconThemePrivate {
-		public constructor();
+		public constructor(options?: Partial<IconThemePrivateInitOptions>);
 	}
 
+	export interface IconViewAccessibleClassInitOptions {}
 	interface IconViewAccessibleClass {}
 	class IconViewAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<IconViewAccessibleClassInitOptions>);
 	}
 
+	export interface IconViewAccessiblePrivateInitOptions {}
 	interface IconViewAccessiblePrivate {}
 	class IconViewAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<IconViewAccessiblePrivateInitOptions>);
 	}
 
+	export interface IconViewClassInitOptions {}
 	interface IconViewClass {}
 	class IconViewClass {
-		public constructor();
+		public constructor(options?: Partial<IconViewClassInitOptions>);
 		public item_activated: {(icon_view: IconView, path: TreePath): void;};
 		public selection_changed: {(icon_view: IconView): void;};
 		public select_all: {(icon_view: IconView): void;};
@@ -52054,62 +54572,72 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface IconViewPrivateInitOptions {}
 	interface IconViewPrivate {}
 	class IconViewPrivate {
-		public constructor();
+		public constructor(options?: Partial<IconViewPrivateInitOptions>);
 	}
 
+	export interface ImageAccessibleClassInitOptions {}
 	interface ImageAccessibleClass {}
 	class ImageAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ImageAccessibleClassInitOptions>);
 	}
 
+	export interface ImageAccessiblePrivateInitOptions {}
 	interface ImageAccessiblePrivate {}
 	class ImageAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ImageAccessiblePrivateInitOptions>);
 	}
 
+	export interface ImageCellAccessibleClassInitOptions {}
 	interface ImageCellAccessibleClass {}
 	class ImageCellAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ImageCellAccessibleClassInitOptions>);
 	}
 
+	export interface ImageCellAccessiblePrivateInitOptions {}
 	interface ImageCellAccessiblePrivate {}
 	class ImageCellAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ImageCellAccessiblePrivateInitOptions>);
 	}
 
+	export interface ImageClassInitOptions {}
 	interface ImageClass {}
 	class ImageClass {
-		public constructor();
+		public constructor(options?: Partial<ImageClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ImageMenuItemClassInitOptions {}
 	interface ImageMenuItemClass {}
 	class ImageMenuItemClass {
-		public constructor();
+		public constructor(options?: Partial<ImageMenuItemClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ImageMenuItemPrivateInitOptions {}
 	interface ImageMenuItemPrivate {}
 	class ImageMenuItemPrivate {
-		public constructor();
+		public constructor(options?: Partial<ImageMenuItemPrivateInitOptions>);
 	}
 
+	export interface ImagePrivateInitOptions {}
 	interface ImagePrivate {}
 	class ImagePrivate {
-		public constructor();
+		public constructor(options?: Partial<ImagePrivateInitOptions>);
 	}
 
+	export interface InfoBarClassInitOptions {}
 	interface InfoBarClass {}
 	class InfoBarClass {
-		public constructor();
+		public constructor(options?: Partial<InfoBarClassInitOptions>);
 		public response: {(info_bar: InfoBar, response_id: number): void;};
 		public close: {(info_bar: InfoBar): void;};
 		public _gtk_reserved1: {(): void;};
@@ -52118,38 +54646,44 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface InfoBarPrivateInitOptions {}
 	interface InfoBarPrivate {}
 	class InfoBarPrivate {
-		public constructor();
+		public constructor(options?: Partial<InfoBarPrivateInitOptions>);
 	}
 
+	export interface InvisibleClassInitOptions {}
 	interface InvisibleClass {}
 	class InvisibleClass {
-		public constructor();
+		public constructor(options?: Partial<InvisibleClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface InvisiblePrivateInitOptions {}
 	interface InvisiblePrivate {}
 	class InvisiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<InvisiblePrivateInitOptions>);
 	}
 
+	export interface LabelAccessibleClassInitOptions {}
 	interface LabelAccessibleClass {}
 	class LabelAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<LabelAccessibleClassInitOptions>);
 	}
 
+	export interface LabelAccessiblePrivateInitOptions {}
 	interface LabelAccessiblePrivate {}
 	class LabelAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<LabelAccessiblePrivateInitOptions>);
 	}
 
+	export interface LabelClassInitOptions {}
 	interface LabelClass {}
 	class LabelClass {
-		public constructor();
+		public constructor(options?: Partial<LabelClassInitOptions>);
 		public move_cursor: {(label: Label, step: MovementStep, count: number, extend_selection: boolean): void;};
 		public copy_clipboard: {(label: Label): void;};
 		public populate_popup: {(label: Label, menu: Menu): void;};
@@ -52164,69 +54698,80 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface LabelPrivateInitOptions {}
 	interface LabelPrivate {}
 	class LabelPrivate {
-		public constructor();
+		public constructor(options?: Partial<LabelPrivateInitOptions>);
 	}
 
+	export interface LabelSelectionInfoInitOptions {}
 	interface LabelSelectionInfo {}
 	class LabelSelectionInfo {
-		public constructor();
+		public constructor(options?: Partial<LabelSelectionInfoInitOptions>);
 	}
 
+	export interface LayoutClassInitOptions {}
 	interface LayoutClass {}
 	class LayoutClass {
-		public constructor();
+		public constructor(options?: Partial<LayoutClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface LayoutPrivateInitOptions {}
 	interface LayoutPrivate {}
 	class LayoutPrivate {
-		public constructor();
+		public constructor(options?: Partial<LayoutPrivateInitOptions>);
 	}
 
+	export interface LevelBarAccessibleClassInitOptions {}
 	interface LevelBarAccessibleClass {}
 	class LevelBarAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<LevelBarAccessibleClassInitOptions>);
 	}
 
+	export interface LevelBarAccessiblePrivateInitOptions {}
 	interface LevelBarAccessiblePrivate {}
 	class LevelBarAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<LevelBarAccessiblePrivateInitOptions>);
 	}
 
+	export interface LevelBarClassInitOptions {}
 	interface LevelBarClass {}
 	class LevelBarClass {
-		public constructor();
+		public constructor(options?: Partial<LevelBarClassInitOptions>);
 		public readonly padding: any[];
 		public offset_changed: {(self: LevelBar, name: string): void;};
 	}
 
+	export interface LevelBarPrivateInitOptions {}
 	interface LevelBarPrivate {}
 	class LevelBarPrivate {
-		public constructor();
+		public constructor(options?: Partial<LevelBarPrivateInitOptions>);
 	}
 
+	export interface LinkButtonAccessibleClassInitOptions {}
 	interface LinkButtonAccessibleClass {}
 	class LinkButtonAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<LinkButtonAccessibleClassInitOptions>);
 	}
 
+	export interface LinkButtonAccessiblePrivateInitOptions {}
 	interface LinkButtonAccessiblePrivate {}
 	class LinkButtonAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<LinkButtonAccessiblePrivateInitOptions>);
 	}
 
+	export interface LinkButtonClassInitOptions {}
 	/**
 	 * The {@link LinkButtonClass} contains only
 	 * private data.
 	 */
 	interface LinkButtonClass {}
 	class LinkButtonClass {
-		public constructor();
+		public constructor(options?: Partial<LinkButtonClassInitOptions>);
 		public activate_link: {(button: LinkButton): boolean;};
 		public _gtk_padding1: {(): void;};
 		public _gtk_padding2: {(): void;};
@@ -52234,24 +54779,28 @@ declare namespace imports.gi.Gtk {
 		public _gtk_padding4: {(): void;};
 	}
 
+	export interface LinkButtonPrivateInitOptions {}
 	interface LinkButtonPrivate {}
 	class LinkButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<LinkButtonPrivateInitOptions>);
 	}
 
+	export interface ListBoxAccessibleClassInitOptions {}
 	interface ListBoxAccessibleClass {}
 	class ListBoxAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ListBoxAccessibleClassInitOptions>);
 	}
 
+	export interface ListBoxAccessiblePrivateInitOptions {}
 	interface ListBoxAccessiblePrivate {}
 	class ListBoxAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ListBoxAccessiblePrivateInitOptions>);
 	}
 
+	export interface ListBoxClassInitOptions {}
 	interface ListBoxClass {}
 	class ListBoxClass {
-		public constructor();
+		public constructor(options?: Partial<ListBoxClassInitOptions>);
 		public row_selected: {(box: ListBox, row: ListBoxRow): void;};
 		public row_activated: {(box: ListBox, row: ListBoxRow): void;};
 		public activate_cursor_row: {(box: ListBox): void;};
@@ -52265,46 +54814,53 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved3: {(): void;};
 	}
 
+	export interface ListBoxRowAccessibleClassInitOptions {}
 	interface ListBoxRowAccessibleClass {}
 	class ListBoxRowAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ListBoxRowAccessibleClassInitOptions>);
 	}
 
+	export interface ListBoxRowClassInitOptions {}
 	interface ListBoxRowClass {}
 	class ListBoxRowClass {
-		public constructor();
+		public constructor(options?: Partial<ListBoxRowClassInitOptions>);
 		public activate: {(row: ListBoxRow): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 	}
 
+	export interface ListStoreClassInitOptions {}
 	interface ListStoreClass {}
 	class ListStoreClass {
-		public constructor();
+		public constructor(options?: Partial<ListStoreClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ListStorePrivateInitOptions {}
 	interface ListStorePrivate {}
 	class ListStorePrivate {
-		public constructor();
+		public constructor(options?: Partial<ListStorePrivateInitOptions>);
 	}
 
+	export interface LockButtonAccessibleClassInitOptions {}
 	interface LockButtonAccessibleClass {}
 	class LockButtonAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<LockButtonAccessibleClassInitOptions>);
 	}
 
+	export interface LockButtonAccessiblePrivateInitOptions {}
 	interface LockButtonAccessiblePrivate {}
 	class LockButtonAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<LockButtonAccessiblePrivateInitOptions>);
 	}
 
+	export interface LockButtonClassInitOptions {}
 	interface LockButtonClass {}
 	class LockButtonClass {
-		public constructor();
+		public constructor(options?: Partial<LockButtonClassInitOptions>);
 		public reserved0: {(): void;};
 		public reserved1: {(): void;};
 		public reserved2: {(): void;};
@@ -52315,81 +54871,94 @@ declare namespace imports.gi.Gtk {
 		public reserved7: {(): void;};
 	}
 
+	export interface LockButtonPrivateInitOptions {}
 	interface LockButtonPrivate {}
 	class LockButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<LockButtonPrivateInitOptions>);
 	}
 
+	export interface MenuAccessibleClassInitOptions {}
 	interface MenuAccessibleClass {}
 	class MenuAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<MenuAccessibleClassInitOptions>);
 	}
 
+	export interface MenuAccessiblePrivateInitOptions {}
 	interface MenuAccessiblePrivate {}
 	class MenuAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuAccessiblePrivateInitOptions>);
 	}
 
+	export interface MenuBarClassInitOptions {}
 	interface MenuBarClass {}
 	class MenuBarClass {
-		public constructor();
+		public constructor(options?: Partial<MenuBarClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface MenuBarPrivateInitOptions {}
 	interface MenuBarPrivate {}
 	class MenuBarPrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuBarPrivateInitOptions>);
 	}
 
+	export interface MenuButtonAccessibleClassInitOptions {}
 	interface MenuButtonAccessibleClass {}
 	class MenuButtonAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<MenuButtonAccessibleClassInitOptions>);
 	}
 
+	export interface MenuButtonAccessiblePrivateInitOptions {}
 	interface MenuButtonAccessiblePrivate {}
 	class MenuButtonAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuButtonAccessiblePrivateInitOptions>);
 	}
 
+	export interface MenuButtonClassInitOptions {}
 	interface MenuButtonClass {}
 	class MenuButtonClass {
-		public constructor();
+		public constructor(options?: Partial<MenuButtonClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface MenuButtonPrivateInitOptions {}
 	interface MenuButtonPrivate {}
 	class MenuButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuButtonPrivateInitOptions>);
 	}
 
+	export interface MenuClassInitOptions {}
 	interface MenuClass {}
 	class MenuClass {
-		public constructor();
+		public constructor(options?: Partial<MenuClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface MenuItemAccessibleClassInitOptions {}
 	interface MenuItemAccessibleClass {}
 	class MenuItemAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<MenuItemAccessibleClassInitOptions>);
 	}
 
+	export interface MenuItemAccessiblePrivateInitOptions {}
 	interface MenuItemAccessiblePrivate {}
 	class MenuItemAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuItemAccessiblePrivateInitOptions>);
 	}
 
+	export interface MenuItemClassInitOptions {}
 	interface MenuItemClass {}
 	class MenuItemClass {
-		public constructor();
+		public constructor(options?: Partial<MenuItemClassInitOptions>);
 		/**
 		 * If %TRUE, then we should always
 		 *    hide the menu when the %GtkMenuItem is activated. Otherwise,
@@ -52410,29 +54979,34 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface MenuItemPrivateInitOptions {}
 	interface MenuItemPrivate {}
 	class MenuItemPrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuItemPrivateInitOptions>);
 	}
 
+	export interface MenuPrivateInitOptions {}
 	interface MenuPrivate {}
 	class MenuPrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuPrivateInitOptions>);
 	}
 
+	export interface MenuShellAccessibleClassInitOptions {}
 	interface MenuShellAccessibleClass {}
 	class MenuShellAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<MenuShellAccessibleClassInitOptions>);
 	}
 
+	export interface MenuShellAccessiblePrivateInitOptions {}
 	interface MenuShellAccessiblePrivate {}
 	class MenuShellAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuShellAccessiblePrivateInitOptions>);
 	}
 
+	export interface MenuShellClassInitOptions {}
 	interface MenuShellClass {}
 	class MenuShellClass {
-		public constructor();
+		public constructor(options?: Partial<MenuShellClassInitOptions>);
 		public readonly submenu_placement: number;
 		public deactivate: {(menu_shell: MenuShell): void;};
 		public selection_done: {(menu_shell: MenuShell): void;};
@@ -52449,14 +55023,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface MenuShellPrivateInitOptions {}
 	interface MenuShellPrivate {}
 	class MenuShellPrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuShellPrivateInitOptions>);
 	}
 
+	export interface MenuToolButtonClassInitOptions {}
 	interface MenuToolButtonClass {}
 	class MenuToolButtonClass {
-		public constructor();
+		public constructor(options?: Partial<MenuToolButtonClassInitOptions>);
 		public show_menu: {(button: MenuToolButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -52464,56 +55040,64 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface MenuToolButtonPrivateInitOptions {}
 	interface MenuToolButtonPrivate {}
 	class MenuToolButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuToolButtonPrivateInitOptions>);
 	}
 
+	export interface MessageDialogClassInitOptions {}
 	interface MessageDialogClass {}
 	class MessageDialogClass {
-		public constructor();
+		public constructor(options?: Partial<MessageDialogClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface MessageDialogPrivateInitOptions {}
 	interface MessageDialogPrivate {}
 	class MessageDialogPrivate {
-		public constructor();
+		public constructor(options?: Partial<MessageDialogPrivateInitOptions>);
 	}
 
+	export interface MiscClassInitOptions {}
 	interface MiscClass {}
 	class MiscClass {
-		public constructor();
+		public constructor(options?: Partial<MiscClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface MiscPrivateInitOptions {}
 	interface MiscPrivate {}
 	class MiscPrivate {
-		public constructor();
+		public constructor(options?: Partial<MiscPrivateInitOptions>);
 	}
 
+	export interface MountOperationClassInitOptions {}
 	interface MountOperationClass {}
 	class MountOperationClass {
-		public constructor();
+		public constructor(options?: Partial<MountOperationClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface MountOperationPrivateInitOptions {}
 	interface MountOperationPrivate {}
 	class MountOperationPrivate {
-		public constructor();
+		public constructor(options?: Partial<MountOperationPrivateInitOptions>);
 	}
 
+	export interface NativeDialogClassInitOptions {}
 	interface NativeDialogClass {}
 	class NativeDialogClass {
-		public constructor();
+		public constructor(options?: Partial<NativeDialogClassInitOptions>);
 		public response: {(self: NativeDialog, response_id: number): void;};
 		public show: {(self: NativeDialog): void;};
 		public hide: {(self: NativeDialog): void;};
@@ -52523,19 +55107,22 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface NotebookAccessibleClassInitOptions {}
 	interface NotebookAccessibleClass {}
 	class NotebookAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<NotebookAccessibleClassInitOptions>);
 	}
 
+	export interface NotebookAccessiblePrivateInitOptions {}
 	interface NotebookAccessiblePrivate {}
 	class NotebookAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<NotebookAccessiblePrivateInitOptions>);
 	}
 
+	export interface NotebookClassInitOptions {}
 	interface NotebookClass {}
 	class NotebookClass {
-		public constructor();
+		public constructor(options?: Partial<NotebookClassInitOptions>);
 		public switch_page: {(notebook: Notebook, page: Widget, page_num: number): void;};
 		public select_page: {(notebook: Notebook, move_focus: boolean): boolean;};
 		public focus_tab: {(notebook: Notebook, type: NotebookTab): boolean;};
@@ -52557,50 +55144,58 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface NotebookPageAccessibleClassInitOptions {}
 	interface NotebookPageAccessibleClass {}
 	class NotebookPageAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<NotebookPageAccessibleClassInitOptions>);
 	}
 
+	export interface NotebookPageAccessiblePrivateInitOptions {}
 	interface NotebookPageAccessiblePrivate {}
 	class NotebookPageAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<NotebookPageAccessiblePrivateInitOptions>);
 	}
 
+	export interface NotebookPrivateInitOptions {}
 	interface NotebookPrivate {}
 	class NotebookPrivate {
-		public constructor();
+		public constructor(options?: Partial<NotebookPrivateInitOptions>);
 	}
 
+	export interface NumerableIconClassInitOptions {}
 	interface NumerableIconClass {}
 	class NumerableIconClass {
-		public constructor();
+		public constructor(options?: Partial<NumerableIconClassInitOptions>);
 		public readonly padding: any[];
 	}
 
+	export interface NumerableIconPrivateInitOptions {}
 	interface NumerableIconPrivate {}
 	class NumerableIconPrivate {
-		public constructor();
+		public constructor(options?: Partial<NumerableIconPrivateInitOptions>);
 	}
 
+	export interface OffscreenWindowClassInitOptions {}
 	interface OffscreenWindowClass {}
 	class OffscreenWindowClass {
-		public constructor();
+		public constructor(options?: Partial<OffscreenWindowClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface OrientableIfaceInitOptions {}
 	interface OrientableIface {}
 	class OrientableIface {
-		public constructor();
+		public constructor(options?: Partial<OrientableIfaceInitOptions>);
 		public readonly base_iface: GObject.TypeInterface;
 	}
 
+	export interface OverlayClassInitOptions {}
 	interface OverlayClass {}
 	class OverlayClass {
-		public constructor();
+		public constructor(options?: Partial<OverlayClassInitOptions>);
 		public get_child_position: {(overlay: Overlay, widget: Widget, allocation: Allocation): boolean;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -52612,17 +55207,19 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface OverlayPrivateInitOptions {}
 	interface OverlayPrivate {}
 	class OverlayPrivate {
-		public constructor();
+		public constructor(options?: Partial<OverlayPrivateInitOptions>);
 	}
 
+	export interface PadActionEntryInitOptions {}
 	/**
 	 * Struct defining a pad action entry.
 	 */
 	interface PadActionEntry {}
 	class PadActionEntry {
-		public constructor();
+		public constructor(options?: Partial<PadActionEntryInitOptions>);
 		/**
 		 * the type of pad feature that will trigger this action entry.
 		 */
@@ -52647,17 +55244,19 @@ declare namespace imports.gi.Gtk {
 		public action_name: string;
 	}
 
+	export interface PadControllerClassInitOptions {}
 	interface PadControllerClass {}
 	class PadControllerClass {
-		public constructor();
+		public constructor(options?: Partial<PadControllerClassInitOptions>);
 	}
 
+	export interface PageRangeInitOptions {}
 	/**
 	 * See also gtk_print_settings_set_page_ranges().
 	 */
 	interface PageRange {}
 	class PageRange {
-		public constructor();
+		public constructor(options?: Partial<PageRangeInitOptions>);
 		/**
 		 * start of page range.
 		 */
@@ -52668,19 +55267,22 @@ declare namespace imports.gi.Gtk {
 		public end: number;
 	}
 
+	export interface PanedAccessibleClassInitOptions {}
 	interface PanedAccessibleClass {}
 	class PanedAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<PanedAccessibleClassInitOptions>);
 	}
 
+	export interface PanedAccessiblePrivateInitOptions {}
 	interface PanedAccessiblePrivate {}
 	class PanedAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<PanedAccessiblePrivateInitOptions>);
 	}
 
+	export interface PanedClassInitOptions {}
 	interface PanedClass {}
 	class PanedClass {
-		public constructor();
+		public constructor(options?: Partial<PanedClassInitOptions>);
 		public cycle_child_focus: {(paned: Paned, reverse: boolean): boolean;};
 		public toggle_handle_focus: {(paned: Paned): boolean;};
 		public move_handle: {(paned: Paned, scroll: ScrollType): boolean;};
@@ -52693,11 +55295,13 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface PanedPrivateInitOptions {}
 	interface PanedPrivate {}
 	class PanedPrivate {
-		public constructor();
+		public constructor(options?: Partial<PanedPrivateInitOptions>);
 	}
 
+	export interface PaperSizeInitOptions {}
 	/**
 	 * GtkPaperSize handles paper sizes. It uses the standard called
 	 * [PWG 5101.1-2002 PWG: Standard for Media Standardized Names](http://www.pwg.org/standards.html)
@@ -52713,7 +55317,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface PaperSize {}
 	class PaperSize {
-		public constructor();
+		public constructor(options?: Partial<PaperSizeInitOptions>);
 		/**
 		 * Creates a new {@link PaperSize} object by parsing a
 		 * [PWG 5101.1-2002](ftp://ftp.pwg.org/pub/pwg/candidates/cs-pwgmsn10-20020226-5101.1.pdf)
@@ -52884,24 +55488,28 @@ declare namespace imports.gi.Gtk {
 		public to_key_file(key_file: GLib.KeyFile, group_name: string): void;
 	}
 
+	export interface PlacesSidebarClassInitOptions {}
 	interface PlacesSidebarClass {}
 	class PlacesSidebarClass {
-		public constructor();
+		public constructor(options?: Partial<PlacesSidebarClassInitOptions>);
 	}
 
+	export interface PlugAccessibleClassInitOptions {}
 	interface PlugAccessibleClass {}
 	class PlugAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<PlugAccessibleClassInitOptions>);
 	}
 
+	export interface PlugAccessiblePrivateInitOptions {}
 	interface PlugAccessiblePrivate {}
 	class PlugAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<PlugAccessiblePrivateInitOptions>);
 	}
 
+	export interface PlugClassInitOptions {}
 	interface PlugClass {}
 	class PlugClass {
-		public constructor();
+		public constructor(options?: Partial<PlugClassInitOptions>);
 		public embedded: {(plug: Plug): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -52909,37 +55517,43 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface PlugPrivateInitOptions {}
 	interface PlugPrivate {}
 	class PlugPrivate {
-		public constructor();
+		public constructor(options?: Partial<PlugPrivateInitOptions>);
 	}
 
+	export interface PopoverAccessibleClassInitOptions {}
 	interface PopoverAccessibleClass {}
 	class PopoverAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<PopoverAccessibleClassInitOptions>);
 	}
 
+	export interface PopoverClassInitOptions {}
 	interface PopoverClass {}
 	class PopoverClass {
-		public constructor();
+		public constructor(options?: Partial<PopoverClassInitOptions>);
 		public readonly reserved: any[];
 		public closed: {(popover: Popover): void;};
 	}
 
+	export interface PopoverMenuClassInitOptions {}
 	interface PopoverMenuClass {}
 	class PopoverMenuClass {
-		public constructor();
+		public constructor(options?: Partial<PopoverMenuClassInitOptions>);
 		public readonly reserved: any[];
 	}
 
+	export interface PopoverPrivateInitOptions {}
 	interface PopoverPrivate {}
 	class PopoverPrivate {
-		public constructor();
+		public constructor(options?: Partial<PopoverPrivateInitOptions>);
 	}
 
+	export interface PrintOperationClassInitOptions {}
 	interface PrintOperationClass {}
 	class PrintOperationClass {
-		public constructor();
+		public constructor(options?: Partial<PrintOperationClassInitOptions>);
 		public done: {(operation: PrintOperation, result: PrintOperationResult): void;};
 		public begin_print: {(operation: PrintOperation, context: PrintContext): void;};
 		public paginate: {(operation: PrintOperation, context: PrintContext): boolean;};
@@ -52961,9 +55575,10 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface PrintOperationPreviewIfaceInitOptions {}
 	interface PrintOperationPreviewIface {}
 	class PrintOperationPreviewIface {
-		public constructor();
+		public constructor(options?: Partial<PrintOperationPreviewIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public ready: {(preview: PrintOperationPreview, context: PrintContext): void;};
 		public got_page_size: {(preview: PrintOperationPreview, context: PrintContext, page_setup: PageSetup): void;};
@@ -52980,38 +55595,44 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface PrintOperationPrivateInitOptions {}
 	interface PrintOperationPrivate {}
 	class PrintOperationPrivate {
-		public constructor();
+		public constructor(options?: Partial<PrintOperationPrivateInitOptions>);
 	}
 
+	export interface ProgressBarAccessibleClassInitOptions {}
 	interface ProgressBarAccessibleClass {}
 	class ProgressBarAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ProgressBarAccessibleClassInitOptions>);
 	}
 
+	export interface ProgressBarAccessiblePrivateInitOptions {}
 	interface ProgressBarAccessiblePrivate {}
 	class ProgressBarAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ProgressBarAccessiblePrivateInitOptions>);
 	}
 
+	export interface ProgressBarClassInitOptions {}
 	interface ProgressBarClass {}
 	class ProgressBarClass {
-		public constructor();
+		public constructor(options?: Partial<ProgressBarClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ProgressBarPrivateInitOptions {}
 	interface ProgressBarPrivate {}
 	class ProgressBarPrivate {
-		public constructor();
+		public constructor(options?: Partial<ProgressBarPrivateInitOptions>);
 	}
 
+	export interface RadioActionClassInitOptions {}
 	interface RadioActionClass {}
 	class RadioActionClass {
-		public constructor();
+		public constructor(options?: Partial<RadioActionClassInitOptions>);
 		public changed: {(action: RadioAction, current: RadioAction): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -53019,13 +55640,14 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface RadioActionEntryInitOptions {}
 	/**
 	 * {@link RadioActionEntry} structs are used with
 	 * gtk_action_group_add_radio_actions() to construct groups of radio actions.
 	 */
 	interface RadioActionEntry {}
 	class RadioActionEntry {
-		public constructor();
+		public constructor(options?: Partial<RadioActionEntryInitOptions>);
 		/**
 		 * The name of the action.
 		 */
@@ -53057,24 +55679,28 @@ declare namespace imports.gi.Gtk {
 		public value: number;
 	}
 
+	export interface RadioActionPrivateInitOptions {}
 	interface RadioActionPrivate {}
 	class RadioActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<RadioActionPrivateInitOptions>);
 	}
 
+	export interface RadioButtonAccessibleClassInitOptions {}
 	interface RadioButtonAccessibleClass {}
 	class RadioButtonAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<RadioButtonAccessibleClassInitOptions>);
 	}
 
+	export interface RadioButtonAccessiblePrivateInitOptions {}
 	interface RadioButtonAccessiblePrivate {}
 	class RadioButtonAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<RadioButtonAccessiblePrivateInitOptions>);
 	}
 
+	export interface RadioButtonClassInitOptions {}
 	interface RadioButtonClass {}
 	class RadioButtonClass {
-		public constructor();
+		public constructor(options?: Partial<RadioButtonClassInitOptions>);
 		public group_changed: {(radio_button: RadioButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -53082,24 +55708,28 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface RadioButtonPrivateInitOptions {}
 	interface RadioButtonPrivate {}
 	class RadioButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<RadioButtonPrivateInitOptions>);
 	}
 
+	export interface RadioMenuItemAccessibleClassInitOptions {}
 	interface RadioMenuItemAccessibleClass {}
 	class RadioMenuItemAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<RadioMenuItemAccessibleClassInitOptions>);
 	}
 
+	export interface RadioMenuItemAccessiblePrivateInitOptions {}
 	interface RadioMenuItemAccessiblePrivate {}
 	class RadioMenuItemAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<RadioMenuItemAccessiblePrivateInitOptions>);
 	}
 
+	export interface RadioMenuItemClassInitOptions {}
 	interface RadioMenuItemClass {}
 	class RadioMenuItemClass {
-		public constructor();
+		public constructor(options?: Partial<RadioMenuItemClassInitOptions>);
 		public group_changed: {(radio_menu_item: RadioMenuItem): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -53107,33 +55737,38 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface RadioMenuItemPrivateInitOptions {}
 	interface RadioMenuItemPrivate {}
 	class RadioMenuItemPrivate {
-		public constructor();
+		public constructor(options?: Partial<RadioMenuItemPrivateInitOptions>);
 	}
 
+	export interface RadioToolButtonClassInitOptions {}
 	interface RadioToolButtonClass {}
 	class RadioToolButtonClass {
-		public constructor();
+		public constructor(options?: Partial<RadioToolButtonClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface RangeAccessibleClassInitOptions {}
 	interface RangeAccessibleClass {}
 	class RangeAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<RangeAccessibleClassInitOptions>);
 	}
 
+	export interface RangeAccessiblePrivateInitOptions {}
 	interface RangeAccessiblePrivate {}
 	class RangeAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<RangeAccessiblePrivateInitOptions>);
 	}
 
+	export interface RangeClassInitOptions {}
 	interface RangeClass {}
 	class RangeClass {
-		public constructor();
+		public constructor(options?: Partial<RangeClassInitOptions>);
 		public readonly slider_detail: string;
 		public readonly stepper_detail: string;
 		public value_changed: {(range: Range): void;};
@@ -53147,22 +55782,25 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved3: {(): void;};
 	}
 
+	export interface RangePrivateInitOptions {}
 	interface RangePrivate {}
 	class RangePrivate {
-		public constructor();
+		public constructor(options?: Partial<RangePrivateInitOptions>);
 	}
 
+	export interface RcContextInitOptions {}
 	interface RcContext {}
 	class RcContext {
-		public constructor();
+		public constructor(options?: Partial<RcContextInitOptions>);
 	}
 
+	export interface RcPropertyInitOptions {}
 	/**
 	 * Deprecated
 	 */
 	interface RcProperty {}
 	class RcProperty {
-		public constructor();
+		public constructor(options?: Partial<RcPropertyInitOptions>);
 		/**
 		 * quark-ified type identifier
 		 */
@@ -53182,9 +55820,10 @@ declare namespace imports.gi.Gtk {
 		public value: GObject.Value;
 	}
 
+	export interface RcStyleClassInitOptions {}
 	interface RcStyleClass {}
 	class RcStyleClass {
-		public constructor();
+		public constructor(options?: Partial<RcStyleClassInitOptions>);
 		public create_rc_style: {(rc_style: RcStyle): RcStyle;};
 		public parse: {(rc_style: RcStyle, settings: Settings, scanner: GLib.Scanner): number;};
 		public merge: {(dest: RcStyle, src: RcStyle): void;};
@@ -53195,37 +55834,42 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface RecentActionClassInitOptions {}
 	interface RecentActionClass {}
 	class RecentActionClass {
-		public constructor();
+		public constructor(options?: Partial<RecentActionClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface RecentActionPrivateInitOptions {}
 	interface RecentActionPrivate {}
 	class RecentActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<RecentActionPrivateInitOptions>);
 	}
 
+	export interface RecentChooserDialogClassInitOptions {}
 	interface RecentChooserDialogClass {}
 	class RecentChooserDialogClass {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserDialogClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface RecentChooserDialogPrivateInitOptions {}
 	interface RecentChooserDialogPrivate {}
 	class RecentChooserDialogPrivate {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserDialogPrivateInitOptions>);
 	}
 
+	export interface RecentChooserIfaceInitOptions {}
 	interface RecentChooserIface {}
 	class RecentChooserIface {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserIfaceInitOptions>);
 		public readonly base_iface: GObject.TypeInterface;
 		public set_current_uri: {(chooser: RecentChooser, uri: string): boolean;};
 		public get_current_uri: {(chooser: RecentChooser): string;};
@@ -53243,41 +55887,46 @@ declare namespace imports.gi.Gtk {
 		public selection_changed: {(chooser: RecentChooser): void;};
 	}
 
+	export interface RecentChooserMenuClassInitOptions {}
 	interface RecentChooserMenuClass {}
 	class RecentChooserMenuClass {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserMenuClassInitOptions>);
 		public gtk_recent1: {(): void;};
 		public gtk_recent2: {(): void;};
 		public gtk_recent3: {(): void;};
 		public gtk_recent4: {(): void;};
 	}
 
+	export interface RecentChooserMenuPrivateInitOptions {}
 	interface RecentChooserMenuPrivate {}
 	class RecentChooserMenuPrivate {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserMenuPrivateInitOptions>);
 	}
 
+	export interface RecentChooserWidgetClassInitOptions {}
 	interface RecentChooserWidgetClass {}
 	class RecentChooserWidgetClass {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserWidgetClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface RecentChooserWidgetPrivateInitOptions {}
 	interface RecentChooserWidgetPrivate {}
 	class RecentChooserWidgetPrivate {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserWidgetPrivateInitOptions>);
 	}
 
+	export interface RecentDataInitOptions {}
 	/**
 	 * Meta-data to be passed to gtk_recent_manager_add_full() when
 	 * registering a recently used resource.
 	 */
 	interface RecentData {}
 	class RecentData {
-		public constructor();
+		public constructor(options?: Partial<RecentDataInitOptions>);
 		/**
 		 * a UTF-8 encoded string, containing the name of the recently
 		 *   used resource to be displayed, or %NULL;
@@ -53316,13 +55965,14 @@ declare namespace imports.gi.Gtk {
 		public is_private: boolean;
 	}
 
+	export interface RecentFilterInfoInitOptions {}
 	/**
 	 * A GtkRecentFilterInfo struct is used
 	 * to pass information about the tested file to gtk_recent_filter_filter().
 	 */
 	interface RecentFilterInfo {}
 	class RecentFilterInfo {
-		public constructor();
+		public constructor(options?: Partial<RecentFilterInfoInitOptions>);
 		/**
 		 * {@link RecentFilterFlags} to indicate which fields are set.
 		 */
@@ -53357,6 +56007,7 @@ declare namespace imports.gi.Gtk {
 		public age: number;
 	}
 
+	export interface RecentInfoInitOptions {}
 	/**
 	 * {@link RecentInfo}-struct contains private data only, and should
 	 * be accessed using the provided API.
@@ -53366,7 +56017,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface RecentInfo {}
 	class RecentInfo {
-		public constructor();
+		public constructor(options?: Partial<RecentInfoInitOptions>);
 		/**
 		 * Creates a #GAppInfo for the specified {@link RecentInfo}
 		 * @param app_name the name of the application that should
@@ -53550,12 +56201,13 @@ declare namespace imports.gi.Gtk {
 		public unref(): void;
 	}
 
+	export interface RecentManagerClassInitOptions {}
 	/**
 	 * {@link RecentManagerClass} contains only private data.
 	 */
 	interface RecentManagerClass {}
 	class RecentManagerClass {
-		public constructor();
+		public constructor(options?: Partial<RecentManagerClassInitOptions>);
 		public changed: {(manager: RecentManager): void;};
 		public _gtk_recent1: {(): void;};
 		public _gtk_recent2: {(): void;};
@@ -53563,21 +56215,25 @@ declare namespace imports.gi.Gtk {
 		public _gtk_recent4: {(): void;};
 	}
 
+	export interface RecentManagerPrivateInitOptions {}
 	interface RecentManagerPrivate {}
 	class RecentManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<RecentManagerPrivateInitOptions>);
 	}
 
+	export interface RendererCellAccessibleClassInitOptions {}
 	interface RendererCellAccessibleClass {}
 	class RendererCellAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<RendererCellAccessibleClassInitOptions>);
 	}
 
+	export interface RendererCellAccessiblePrivateInitOptions {}
 	interface RendererCellAccessiblePrivate {}
 	class RendererCellAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<RendererCellAccessiblePrivateInitOptions>);
 	}
 
+	export interface RequestedSizeInitOptions {}
 	/**
 	 * Represents a request of a screen object in a given orientation. These
 	 * are primarily used in container implementations when allocating a natural
@@ -53585,7 +56241,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface RequestedSize {}
 	class RequestedSize {
-		public constructor();
+		public constructor(options?: Partial<RequestedSizeInitOptions>);
 		/**
 		 * A client pointer
 		 */
@@ -53600,6 +56256,7 @@ declare namespace imports.gi.Gtk {
 		public natural_size: number;
 	}
 
+	export interface RequisitionInitOptions {}
 	/**
 	 * A {@link Requisition}-struct represents the desired size of a widget. See
 	 * [GtkWidget’s geometry management section][geometry-management] for
@@ -53607,7 +56264,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface Requisition {}
 	class Requisition {
-		public constructor();
+		public constructor(options?: Partial<RequisitionInitOptions>);
 		/**
 		 * Allocates a new {@link Requisition}-struct and initializes its elements to zero.
 		 * @returns a new empty {@link Requisition}. The newly allocated #GtkRequisition should
@@ -53633,34 +56290,40 @@ declare namespace imports.gi.Gtk {
 		public free(): void;
 	}
 
+	export interface RevealerClassInitOptions {}
 	interface RevealerClass {}
 	class RevealerClass {
-		public constructor();
+		public constructor(options?: Partial<RevealerClassInitOptions>);
 	}
 
+	export interface ScaleAccessibleClassInitOptions {}
 	interface ScaleAccessibleClass {}
 	class ScaleAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ScaleAccessibleClassInitOptions>);
 	}
 
+	export interface ScaleAccessiblePrivateInitOptions {}
 	interface ScaleAccessiblePrivate {}
 	class ScaleAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ScaleAccessiblePrivateInitOptions>);
 	}
 
+	export interface ScaleButtonAccessibleClassInitOptions {}
 	interface ScaleButtonAccessibleClass {}
 	class ScaleButtonAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ScaleButtonAccessibleClassInitOptions>);
 	}
 
+	export interface ScaleButtonAccessiblePrivateInitOptions {}
 	interface ScaleButtonAccessiblePrivate {}
 	class ScaleButtonAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ScaleButtonAccessiblePrivateInitOptions>);
 	}
 
+	export interface ScaleButtonClassInitOptions {}
 	interface ScaleButtonClass {}
 	class ScaleButtonClass {
-		public constructor();
+		public constructor(options?: Partial<ScaleButtonClassInitOptions>);
 		public value_changed: {(button: ScaleButton, value: number): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -53668,14 +56331,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ScaleButtonPrivateInitOptions {}
 	interface ScaleButtonPrivate {}
 	class ScaleButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<ScaleButtonPrivateInitOptions>);
 	}
 
+	export interface ScaleClassInitOptions {}
 	interface ScaleClass {}
 	class ScaleClass {
-		public constructor();
+		public constructor(options?: Partial<ScaleClassInitOptions>);
 		public format_value: {(scale: Scale, value: number): string;};
 		public draw_value: {(scale: Scale): void;};
 		public get_layout_offsets: {(scale: Scale): [ x: number | null, y: number | null ];};
@@ -53685,40 +56350,46 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ScalePrivateInitOptions {}
 	interface ScalePrivate {}
 	class ScalePrivate {
-		public constructor();
+		public constructor(options?: Partial<ScalePrivateInitOptions>);
 	}
 
+	export interface ScrollableInterfaceInitOptions {}
 	interface ScrollableInterface {}
 	class ScrollableInterface {
-		public constructor();
+		public constructor(options?: Partial<ScrollableInterfaceInitOptions>);
 		public readonly base_iface: GObject.TypeInterface;
 		public get_border: {(scrollable: Scrollable, border: Border): boolean;};
 	}
 
+	export interface ScrollbarClassInitOptions {}
 	interface ScrollbarClass {}
 	class ScrollbarClass {
-		public constructor();
+		public constructor(options?: Partial<ScrollbarClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ScrolledWindowAccessibleClassInitOptions {}
 	interface ScrolledWindowAccessibleClass {}
 	class ScrolledWindowAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ScrolledWindowAccessibleClassInitOptions>);
 	}
 
+	export interface ScrolledWindowAccessiblePrivateInitOptions {}
 	interface ScrolledWindowAccessiblePrivate {}
 	class ScrolledWindowAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ScrolledWindowAccessiblePrivateInitOptions>);
 	}
 
+	export interface ScrolledWindowClassInitOptions {}
 	interface ScrolledWindowClass {}
 	class ScrolledWindowClass {
-		public constructor();
+		public constructor(options?: Partial<ScrolledWindowClassInitOptions>);
 		public readonly scrollbar_spacing: number;
 		public scroll_child: {(scrolled_window: ScrolledWindow, scroll: ScrollType, horizontal: boolean): boolean;};
 		public move_focus_out: {(scrolled_window: ScrolledWindow, direction: DirectionType): void;};
@@ -53728,32 +56399,36 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ScrolledWindowPrivateInitOptions {}
 	interface ScrolledWindowPrivate {}
 	class ScrolledWindowPrivate {
-		public constructor();
+		public constructor(options?: Partial<ScrolledWindowPrivateInitOptions>);
 	}
 
+	export interface SearchBarClassInitOptions {}
 	interface SearchBarClass {}
 	class SearchBarClass {
-		public constructor();
+		public constructor(options?: Partial<SearchBarClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface SearchEntryClassInitOptions {}
 	interface SearchEntryClass {}
 	class SearchEntryClass {
-		public constructor();
+		public constructor(options?: Partial<SearchEntryClassInitOptions>);
 		public search_changed: {(entry: SearchEntry): void;};
 		public next_match: {(entry: SearchEntry): void;};
 		public previous_match: {(entry: SearchEntry): void;};
 		public stop_search: {(entry: SearchEntry): void;};
 	}
 
+	export interface SelectionDataInitOptions {}
 	interface SelectionData {}
 	class SelectionData {
-		public constructor();
+		public constructor(options?: Partial<SelectionDataInitOptions>);
 		/**
 		 * Makes a copy of a {@link SelectionData}-struct and its data.
 		 * @returns a pointer to a copy of #data.
@@ -53916,60 +56591,68 @@ declare namespace imports.gi.Gtk {
 		public targets_include_uri(): boolean;
 	}
 
+	export interface SeparatorClassInitOptions {}
 	interface SeparatorClass {}
 	class SeparatorClass {
-		public constructor();
+		public constructor(options?: Partial<SeparatorClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface SeparatorMenuItemClassInitOptions {}
 	interface SeparatorMenuItemClass {}
 	class SeparatorMenuItemClass {
-		public constructor();
+		public constructor(options?: Partial<SeparatorMenuItemClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface SeparatorPrivateInitOptions {}
 	interface SeparatorPrivate {}
 	class SeparatorPrivate {
-		public constructor();
+		public constructor(options?: Partial<SeparatorPrivateInitOptions>);
 	}
 
+	export interface SeparatorToolItemClassInitOptions {}
 	interface SeparatorToolItemClass {}
 	class SeparatorToolItemClass {
-		public constructor();
+		public constructor(options?: Partial<SeparatorToolItemClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface SeparatorToolItemPrivateInitOptions {}
 	interface SeparatorToolItemPrivate {}
 	class SeparatorToolItemPrivate {
-		public constructor();
+		public constructor(options?: Partial<SeparatorToolItemPrivateInitOptions>);
 	}
 
+	export interface SettingsClassInitOptions {}
 	interface SettingsClass {}
 	class SettingsClass {
-		public constructor();
+		public constructor(options?: Partial<SettingsClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface SettingsPrivateInitOptions {}
 	interface SettingsPrivate {}
 	class SettingsPrivate {
-		public constructor();
+		public constructor(options?: Partial<SettingsPrivateInitOptions>);
 	}
 
+	export interface SettingsValueInitOptions {}
 	interface SettingsValue {}
 	class SettingsValue {
-		public constructor();
+		public constructor(options?: Partial<SettingsValueInitOptions>);
 		/**
 		 * Origin should be something like “filename:linenumber” for
 		 *    rc files, or e.g. “XProperty” for other sources.
@@ -53982,60 +56665,70 @@ declare namespace imports.gi.Gtk {
 		public value: GObject.Value;
 	}
 
+	export interface ShortcutLabelClassInitOptions {}
 	interface ShortcutLabelClass {}
 	class ShortcutLabelClass {
-		public constructor();
+		public constructor(options?: Partial<ShortcutLabelClassInitOptions>);
 	}
 
+	export interface ShortcutsGroupClassInitOptions {}
 	interface ShortcutsGroupClass {}
 	class ShortcutsGroupClass {
-		public constructor();
+		public constructor(options?: Partial<ShortcutsGroupClassInitOptions>);
 	}
 
+	export interface ShortcutsSectionClassInitOptions {}
 	interface ShortcutsSectionClass {}
 	class ShortcutsSectionClass {
-		public constructor();
+		public constructor(options?: Partial<ShortcutsSectionClassInitOptions>);
 	}
 
+	export interface ShortcutsShortcutClassInitOptions {}
 	interface ShortcutsShortcutClass {}
 	class ShortcutsShortcutClass {
-		public constructor();
+		public constructor(options?: Partial<ShortcutsShortcutClassInitOptions>);
 	}
 
+	export interface ShortcutsWindowClassInitOptions {}
 	interface ShortcutsWindowClass {}
 	class ShortcutsWindowClass {
-		public constructor();
+		public constructor(options?: Partial<ShortcutsWindowClassInitOptions>);
 		public close: {(self: ShortcutsWindow): void;};
 		public search: {(self: ShortcutsWindow): void;};
 	}
 
+	export interface SizeGroupClassInitOptions {}
 	interface SizeGroupClass {}
 	class SizeGroupClass {
-		public constructor();
+		public constructor(options?: Partial<SizeGroupClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface SizeGroupPrivateInitOptions {}
 	interface SizeGroupPrivate {}
 	class SizeGroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<SizeGroupPrivateInitOptions>);
 	}
 
+	export interface SocketAccessibleClassInitOptions {}
 	interface SocketAccessibleClass {}
 	class SocketAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<SocketAccessibleClassInitOptions>);
 	}
 
+	export interface SocketAccessiblePrivateInitOptions {}
 	interface SocketAccessiblePrivate {}
 	class SocketAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<SocketAccessiblePrivateInitOptions>);
 	}
 
+	export interface SocketClassInitOptions {}
 	interface SocketClass {}
 	class SocketClass {
-		public constructor();
+		public constructor(options?: Partial<SocketClassInitOptions>);
 		public plug_added: {(socket_: Socket): void;};
 		public plug_removed: {(socket_: Socket): boolean;};
 		public _gtk_reserved1: {(): void;};
@@ -54044,24 +56737,28 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface SocketPrivateInitOptions {}
 	interface SocketPrivate {}
 	class SocketPrivate {
-		public constructor();
+		public constructor(options?: Partial<SocketPrivateInitOptions>);
 	}
 
+	export interface SpinButtonAccessibleClassInitOptions {}
 	interface SpinButtonAccessibleClass {}
 	class SpinButtonAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<SpinButtonAccessibleClassInitOptions>);
 	}
 
+	export interface SpinButtonAccessiblePrivateInitOptions {}
 	interface SpinButtonAccessiblePrivate {}
 	class SpinButtonAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<SpinButtonAccessiblePrivateInitOptions>);
 	}
 
+	export interface SpinButtonClassInitOptions {}
 	interface SpinButtonClass {}
 	class SpinButtonClass {
-		public constructor();
+		public constructor(options?: Partial<SpinButtonClassInitOptions>);
 		public input: {(spin_button: SpinButton, new_value: number): number;};
 		public output: {(spin_button: SpinButton): number;};
 		public value_changed: {(spin_button: SpinButton): void;};
@@ -54073,71 +56770,82 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface SpinButtonPrivateInitOptions {}
 	interface SpinButtonPrivate {}
 	class SpinButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<SpinButtonPrivateInitOptions>);
 	}
 
+	export interface SpinnerAccessibleClassInitOptions {}
 	interface SpinnerAccessibleClass {}
 	class SpinnerAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<SpinnerAccessibleClassInitOptions>);
 	}
 
+	export interface SpinnerAccessiblePrivateInitOptions {}
 	interface SpinnerAccessiblePrivate {}
 	class SpinnerAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<SpinnerAccessiblePrivateInitOptions>);
 	}
 
+	export interface SpinnerClassInitOptions {}
 	interface SpinnerClass {}
 	class SpinnerClass {
-		public constructor();
+		public constructor(options?: Partial<SpinnerClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface SpinnerPrivateInitOptions {}
 	interface SpinnerPrivate {}
 	class SpinnerPrivate {
-		public constructor();
+		public constructor(options?: Partial<SpinnerPrivateInitOptions>);
 	}
 
+	export interface StackAccessibleClassInitOptions {}
 	interface StackAccessibleClass {}
 	class StackAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<StackAccessibleClassInitOptions>);
 	}
 
+	export interface StackClassInitOptions {}
 	interface StackClass {}
 	class StackClass {
-		public constructor();
+		public constructor(options?: Partial<StackClassInitOptions>);
 	}
 
+	export interface StackSidebarClassInitOptions {}
 	interface StackSidebarClass {}
 	class StackSidebarClass {
-		public constructor();
+		public constructor(options?: Partial<StackSidebarClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface StackSidebarPrivateInitOptions {}
 	interface StackSidebarPrivate {}
 	class StackSidebarPrivate {
-		public constructor();
+		public constructor(options?: Partial<StackSidebarPrivateInitOptions>);
 	}
 
+	export interface StackSwitcherClassInitOptions {}
 	interface StackSwitcherClass {}
 	class StackSwitcherClass {
-		public constructor();
+		public constructor(options?: Partial<StackSwitcherClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface StatusIconClassInitOptions {}
 	interface StatusIconClass {}
 	class StatusIconClass {
-		public constructor();
+		public constructor(options?: Partial<StatusIconClassInitOptions>);
 		public activate: {(status_icon: StatusIcon): void;};
 		public popup_menu: {(status_icon: StatusIcon, button: number, activate_time: number): void;};
 		public size_changed: {(status_icon: StatusIcon, size: number): boolean;};
@@ -54151,24 +56859,28 @@ declare namespace imports.gi.Gtk {
 		public __gtk_reserved4: {(): void;};
 	}
 
+	export interface StatusIconPrivateInitOptions {}
 	interface StatusIconPrivate {}
 	class StatusIconPrivate {
-		public constructor();
+		public constructor(options?: Partial<StatusIconPrivateInitOptions>);
 	}
 
+	export interface StatusbarAccessibleClassInitOptions {}
 	interface StatusbarAccessibleClass {}
 	class StatusbarAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<StatusbarAccessibleClassInitOptions>);
 	}
 
+	export interface StatusbarAccessiblePrivateInitOptions {}
 	interface StatusbarAccessiblePrivate {}
 	class StatusbarAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<StatusbarAccessiblePrivateInitOptions>);
 	}
 
+	export interface StatusbarClassInitOptions {}
 	interface StatusbarClass {}
 	class StatusbarClass {
-		public constructor();
+		public constructor(options?: Partial<StatusbarClassInitOptions>);
 		public readonly reserved: any;
 		public text_pushed: {(statusbar: Statusbar, context_id: number, text: string): void;};
 		public text_popped: {(statusbar: Statusbar, context_id: number, text: string): void;};
@@ -54178,14 +56890,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface StatusbarPrivateInitOptions {}
 	interface StatusbarPrivate {}
 	class StatusbarPrivate {
-		public constructor();
+		public constructor(options?: Partial<StatusbarPrivateInitOptions>);
 	}
 
+	export interface StockItemInitOptions {}
 	interface StockItem {}
 	class StockItem {
-		public constructor();
+		public constructor(options?: Partial<StockItemInitOptions>);
 		/**
 		 * Identifier.
 		 */
@@ -54219,9 +56933,10 @@ declare namespace imports.gi.Gtk {
 		public free(): void;
 	}
 
+	export interface StyleClassInitOptions {}
 	interface StyleClass {}
 	class StyleClass {
-		public constructor();
+		public constructor(options?: Partial<StyleClassInitOptions>);
 		public realize: {(style: Style): void;};
 		public unrealize: {(style: Style): void;};
 		public copy: {(style: Style, src: Style): void;};
@@ -54262,9 +56977,10 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved11: {(): void;};
 	}
 
+	export interface StyleContextClassInitOptions {}
 	interface StyleContextClass {}
 	class StyleContextClass {
-		public constructor();
+		public constructor(options?: Partial<StyleContextClassInitOptions>);
 		public changed: {(context: StyleContext): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -54272,47 +56988,54 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface StyleContextPrivateInitOptions {}
 	interface StyleContextPrivate {}
 	class StyleContextPrivate {
-		public constructor();
+		public constructor(options?: Partial<StyleContextPrivateInitOptions>);
 	}
 
+	export interface StylePropertiesClassInitOptions {}
 	interface StylePropertiesClass {}
 	class StylePropertiesClass {
-		public constructor();
+		public constructor(options?: Partial<StylePropertiesClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface StylePropertiesPrivateInitOptions {}
 	interface StylePropertiesPrivate {}
 	class StylePropertiesPrivate {
-		public constructor();
+		public constructor(options?: Partial<StylePropertiesPrivateInitOptions>);
 	}
 
+	export interface StyleProviderIfaceInitOptions {}
 	interface StyleProviderIface {}
 	class StyleProviderIface {
-		public constructor();
+		public constructor(options?: Partial<StyleProviderIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public get_style: {(provider: StyleProvider, path: WidgetPath): StyleProperties | null;};
 		public get_style_property: {(provider: StyleProvider, path: WidgetPath, state: StateFlags, pspec: GObject.ParamSpec, value: GObject.Value): boolean;};
 		public get_icon_factory: {(provider: StyleProvider, path: WidgetPath): IconFactory | null;};
 	}
 
+	export interface SwitchAccessibleClassInitOptions {}
 	interface SwitchAccessibleClass {}
 	class SwitchAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<SwitchAccessibleClassInitOptions>);
 	}
 
+	export interface SwitchAccessiblePrivateInitOptions {}
 	interface SwitchAccessiblePrivate {}
 	class SwitchAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<SwitchAccessiblePrivateInitOptions>);
 	}
 
+	export interface SwitchClassInitOptions {}
 	interface SwitchClass {}
 	class SwitchClass {
-		public constructor();
+		public constructor(options?: Partial<SwitchClassInitOptions>);
 		public activate: {(sw: Switch): void;};
 		public state_set: {(sw: Switch, state: boolean): boolean;};
 		public _switch_padding_1: {(): void;};
@@ -54322,11 +57045,13 @@ declare namespace imports.gi.Gtk {
 		public _switch_padding_5: {(): void;};
 	}
 
+	export interface SwitchPrivateInitOptions {}
 	interface SwitchPrivate {}
 	class SwitchPrivate {
-		public constructor();
+		public constructor(options?: Partial<SwitchPrivateInitOptions>);
 	}
 
+	export interface SymbolicColorInitOptions {}
 	/**
 	 * GtkSymbolicColor is a boxed type that represents a symbolic color.
 	 * It is the result of parsing a
@@ -54346,7 +57071,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface SymbolicColor {}
 	class SymbolicColor {
-		public constructor();
+		public constructor(options?: Partial<SymbolicColorInitOptions>);
 		/**
 		 * Creates a symbolic color by modifying the relative alpha
 		 * value of #color. A factor < 1.0 would resolve to a more
@@ -54439,9 +57164,10 @@ declare namespace imports.gi.Gtk {
 		public unref(): void;
 	}
 
+	export interface TableChildInitOptions {}
 	interface TableChild {}
 	class TableChild {
-		public constructor();
+		public constructor(options?: Partial<TableChildInitOptions>);
 		public widget: Widget;
 		public left_attach: number;
 		public right_attach: number;
@@ -54457,23 +57183,26 @@ declare namespace imports.gi.Gtk {
 		public yfill: number;
 	}
 
+	export interface TableClassInitOptions {}
 	interface TableClass {}
 	class TableClass {
-		public constructor();
+		public constructor(options?: Partial<TableClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TablePrivateInitOptions {}
 	interface TablePrivate {}
 	class TablePrivate {
-		public constructor();
+		public constructor(options?: Partial<TablePrivateInitOptions>);
 	}
 
+	export interface TableRowColInitOptions {}
 	interface TableRowCol {}
 	class TableRowCol {
-		public constructor();
+		public constructor(options?: Partial<TableRowColInitOptions>);
 		public requisition: number;
 		public allocation: number;
 		public spacing: number;
@@ -54484,6 +57213,7 @@ declare namespace imports.gi.Gtk {
 		public empty: number;
 	}
 
+	export interface TargetEntryInitOptions {}
 	/**
 	 * A {@link TargetEntry} represents a single type of
 	 * data than can be supplied for by a widget for a selection
@@ -54491,7 +57221,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface TargetEntry {}
 	class TargetEntry {
-		public constructor();
+		public constructor(options?: Partial<TargetEntryInitOptions>);
 		/**
 		 * Makes a new {@link TargetEntry}.
 		 * @param target String identifier for target
@@ -54529,6 +57259,7 @@ declare namespace imports.gi.Gtk {
 		public free(): void;
 	}
 
+	export interface TargetListInitOptions {}
 	/**
 	 * A {@link TargetList}-struct is a reference counted list
 	 * of #GtkTargetPair and should be treated as
@@ -54536,7 +57267,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface TargetList {}
 	class TargetList {
-		public constructor();
+		public constructor(options?: Partial<TargetListInitOptions>);
 		/**
 		 * Creates a new {@link TargetList} from an array of #GtkTargetEntry.
 		 * @param targets Pointer to an array
@@ -54612,6 +57343,7 @@ declare namespace imports.gi.Gtk {
 		public unref(): void;
 	}
 
+	export interface TargetPairInitOptions {}
 	/**
 	 * A {@link TargetPair} is used to represent the same
 	 * information as a table of #GtkTargetEntry, but in
@@ -54619,7 +57351,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface TargetPair {}
 	class TargetPair {
-		public constructor();
+		public constructor(options?: Partial<TargetPairInitOptions>);
 		/**
 		 * #GdkAtom representation of the target type
 		 */
@@ -54637,23 +57369,26 @@ declare namespace imports.gi.Gtk {
 		public info: number;
 	}
 
+	export interface TearoffMenuItemClassInitOptions {}
 	interface TearoffMenuItemClass {}
 	class TearoffMenuItemClass {
-		public constructor();
+		public constructor(options?: Partial<TearoffMenuItemClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TearoffMenuItemPrivateInitOptions {}
 	interface TearoffMenuItemPrivate {}
 	class TearoffMenuItemPrivate {
-		public constructor();
+		public constructor(options?: Partial<TearoffMenuItemPrivateInitOptions>);
 	}
 
+	export interface TextAppearanceInitOptions {}
 	interface TextAppearance {}
 	class TextAppearance {
-		public constructor();
+		public constructor(options?: Partial<TextAppearanceInitOptions>);
 		/**
 		 * Background #GdkColor.
 		 */
@@ -54695,6 +57430,7 @@ declare namespace imports.gi.Gtk {
 		public is_text: number;
 	}
 
+	export interface TextAttributesInitOptions {}
 	/**
 	 * Using {@link TextAttributes} directly should rarely be necessary.
 	 * It’s primarily useful with gtk_text_iter_get_attributes().
@@ -54703,7 +57439,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface TextAttributes {}
 	class TextAttributes {
-		public constructor();
+		public constructor(options?: Partial<TextAttributesInitOptions>);
 		/**
 		 * Creates a {@link TextAttributes}, which describes
 		 * a set of properties on some text.
@@ -54816,14 +57552,16 @@ declare namespace imports.gi.Gtk {
 		public unref(): void;
 	}
 
+	export interface TextBTreeInitOptions {}
 	interface TextBTree {}
 	class TextBTree {
-		public constructor();
+		public constructor(options?: Partial<TextBTreeInitOptions>);
 	}
 
+	export interface TextBufferClassInitOptions {}
 	interface TextBufferClass {}
 	class TextBufferClass {
-		public constructor();
+		public constructor(options?: Partial<TextBufferClassInitOptions>);
 		public insert_text: {(buffer: TextBuffer, pos: TextIter, new_text: string, new_text_length: number): void;};
 		public insert_pixbuf: {(buffer: TextBuffer, iter: TextIter, pixbuf: GdkPixbuf.Pixbuf): void;};
 		public insert_child_anchor: {(buffer: TextBuffer, iter: TextIter, anchor: TextChildAnchor): void;};
@@ -54843,30 +57581,35 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TextBufferPrivateInitOptions {}
 	interface TextBufferPrivate {}
 	class TextBufferPrivate {
-		public constructor();
+		public constructor(options?: Partial<TextBufferPrivateInitOptions>);
 	}
 
+	export interface TextCellAccessibleClassInitOptions {}
 	interface TextCellAccessibleClass {}
 	class TextCellAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<TextCellAccessibleClassInitOptions>);
 	}
 
+	export interface TextCellAccessiblePrivateInitOptions {}
 	interface TextCellAccessiblePrivate {}
 	class TextCellAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<TextCellAccessiblePrivateInitOptions>);
 	}
 
+	export interface TextChildAnchorClassInitOptions {}
 	interface TextChildAnchorClass {}
 	class TextChildAnchorClass {
-		public constructor();
+		public constructor(options?: Partial<TextChildAnchorClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TextIterInitOptions {}
 	/**
 	 * You may wish to begin by reading the
 	 * [text widget conceptual overview][TextWidget]
@@ -54875,7 +57618,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface TextIter {}
 	class TextIter {
-		public constructor();
+		public constructor(options?: Partial<TextIterInitOptions>);
 		public readonly dummy1: any;
 		public readonly dummy2: any;
 		public readonly dummy3: number;
@@ -55723,18 +58466,20 @@ declare namespace imports.gi.Gtk {
 		public toggles_tag(tag: TextTag | null): boolean;
 	}
 
+	export interface TextMarkClassInitOptions {}
 	interface TextMarkClass {}
 	class TextMarkClass {
-		public constructor();
+		public constructor(options?: Partial<TextMarkClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TextTagClassInitOptions {}
 	interface TextTagClass {}
 	class TextTagClass {
-		public constructor();
+		public constructor(options?: Partial<TextTagClassInitOptions>);
 		public event: {(tag: TextTag, event_object: GObject.Object, event: Gdk.Event, iter: TextIter): boolean;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -55742,14 +58487,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TextTagPrivateInitOptions {}
 	interface TextTagPrivate {}
 	class TextTagPrivate {
-		public constructor();
+		public constructor(options?: Partial<TextTagPrivateInitOptions>);
 	}
 
+	export interface TextTagTableClassInitOptions {}
 	interface TextTagTableClass {}
 	class TextTagTableClass {
-		public constructor();
+		public constructor(options?: Partial<TextTagTableClassInitOptions>);
 		public tag_changed: {(table: TextTagTable, tag: TextTag, size_changed: boolean): void;};
 		public tag_added: {(table: TextTagTable, tag: TextTag): void;};
 		public tag_removed: {(table: TextTagTable, tag: TextTag): void;};
@@ -55759,24 +58506,28 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TextTagTablePrivateInitOptions {}
 	interface TextTagTablePrivate {}
 	class TextTagTablePrivate {
-		public constructor();
+		public constructor(options?: Partial<TextTagTablePrivateInitOptions>);
 	}
 
+	export interface TextViewAccessibleClassInitOptions {}
 	interface TextViewAccessibleClass {}
 	class TextViewAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<TextViewAccessibleClassInitOptions>);
 	}
 
+	export interface TextViewAccessiblePrivateInitOptions {}
 	interface TextViewAccessiblePrivate {}
 	class TextViewAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<TextViewAccessiblePrivateInitOptions>);
 	}
 
+	export interface TextViewClassInitOptions {}
 	interface TextViewClass {}
 	class TextViewClass {
-		public constructor();
+		public constructor(options?: Partial<TextViewClassInitOptions>);
 		public populate_popup: {(text_view: TextView, popup: Widget): void;};
 		public move_cursor: {(text_view: TextView, step: MovementStep, count: number, extend_selection: boolean): void;};
 		public set_anchor: {(text_view: TextView): void;};
@@ -55797,22 +58548,25 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TextViewPrivateInitOptions {}
 	interface TextViewPrivate {}
 	class TextViewPrivate {
-		public constructor();
+		public constructor(options?: Partial<TextViewPrivateInitOptions>);
 	}
 
+	export interface ThemeEngineInitOptions {}
 	interface ThemeEngine {}
 	class ThemeEngine {
-		public constructor();
+		public constructor(options?: Partial<ThemeEngineInitOptions>);
 	}
 
+	export interface ThemingEngineClassInitOptions {}
 	/**
 	 * Base class for theming engines.
 	 */
 	interface ThemingEngineClass {}
 	class ThemingEngineClass {
-		public constructor();
+		public constructor(options?: Partial<ThemingEngineClassInitOptions>);
 		public readonly padding: any[];
 		public render_line: {(engine: ThemingEngine, cr: cairo.Context, x0: number, y0: number, x1: number, y1: number): void;};
 		public render_background: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number): void;};
@@ -55833,14 +58587,16 @@ declare namespace imports.gi.Gtk {
 		public render_icon_surface: {(engine: ThemingEngine, cr: cairo.Context, surface: cairo.Surface, x: number, y: number): void;};
 	}
 
+	export interface ThemingEnginePrivateInitOptions {}
 	interface ThemingEnginePrivate {}
 	class ThemingEnginePrivate {
-		public constructor();
+		public constructor(options?: Partial<ThemingEnginePrivateInitOptions>);
 	}
 
+	export interface ToggleActionClassInitOptions {}
 	interface ToggleActionClass {}
 	class ToggleActionClass {
-		public constructor();
+		public constructor(options?: Partial<ToggleActionClassInitOptions>);
 		public toggled: {(action: ToggleAction): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -55848,13 +58604,14 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ToggleActionEntryInitOptions {}
 	/**
 	 * {@link ToggleActionEntry} structs are used with
 	 * gtk_action_group_add_toggle_actions() to construct toggle actions.
 	 */
 	interface ToggleActionEntry {}
 	class ToggleActionEntry {
-		public constructor();
+		public constructor(options?: Partial<ToggleActionEntryInitOptions>);
 		/**
 		 * The name of the action.
 		 */
@@ -55889,24 +58646,28 @@ declare namespace imports.gi.Gtk {
 		public is_active: boolean;
 	}
 
+	export interface ToggleActionPrivateInitOptions {}
 	interface ToggleActionPrivate {}
 	class ToggleActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<ToggleActionPrivateInitOptions>);
 	}
 
+	export interface ToggleButtonAccessibleClassInitOptions {}
 	interface ToggleButtonAccessibleClass {}
 	class ToggleButtonAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ToggleButtonAccessibleClassInitOptions>);
 	}
 
+	export interface ToggleButtonAccessiblePrivateInitOptions {}
 	interface ToggleButtonAccessiblePrivate {}
 	class ToggleButtonAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ToggleButtonAccessiblePrivateInitOptions>);
 	}
 
+	export interface ToggleButtonClassInitOptions {}
 	interface ToggleButtonClass {}
 	class ToggleButtonClass {
-		public constructor();
+		public constructor(options?: Partial<ToggleButtonClassInitOptions>);
 		public toggled: {(toggle_button: ToggleButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -55914,14 +58675,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ToggleButtonPrivateInitOptions {}
 	interface ToggleButtonPrivate {}
 	class ToggleButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<ToggleButtonPrivateInitOptions>);
 	}
 
+	export interface ToggleToolButtonClassInitOptions {}
 	interface ToggleToolButtonClass {}
 	class ToggleToolButtonClass {
-		public constructor();
+		public constructor(options?: Partial<ToggleToolButtonClassInitOptions>);
 		public toggled: {(button: ToggleToolButton): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -55929,14 +58692,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ToggleToolButtonPrivateInitOptions {}
 	interface ToggleToolButtonPrivate {}
 	class ToggleToolButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<ToggleToolButtonPrivateInitOptions>);
 	}
 
+	export interface ToolButtonClassInitOptions {}
 	interface ToolButtonClass {}
 	class ToolButtonClass {
-		public constructor();
+		public constructor(options?: Partial<ToolButtonClassInitOptions>);
 		public readonly button_type: GObject.Type;
 		public clicked: {(tool_item: ToolButton): void;};
 		public _gtk_reserved1: {(): void;};
@@ -55945,14 +58710,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ToolButtonPrivateInitOptions {}
 	interface ToolButtonPrivate {}
 	class ToolButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<ToolButtonPrivateInitOptions>);
 	}
 
+	export interface ToolItemClassInitOptions {}
 	interface ToolItemClass {}
 	class ToolItemClass {
-		public constructor();
+		public constructor(options?: Partial<ToolItemClassInitOptions>);
 		public create_menu_proxy: {(tool_item: ToolItem): boolean;};
 		public toolbar_reconfigured: {(tool_item: ToolItem): void;};
 		public _gtk_reserved1: {(): void;};
@@ -55961,45 +58728,51 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ToolItemGroupClassInitOptions {}
 	interface ToolItemGroupClass {}
 	class ToolItemGroupClass {
-		public constructor();
+		public constructor(options?: Partial<ToolItemGroupClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ToolItemGroupPrivateInitOptions {}
 	interface ToolItemGroupPrivate {}
 	class ToolItemGroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<ToolItemGroupPrivateInitOptions>);
 	}
 
+	export interface ToolItemPrivateInitOptions {}
 	interface ToolItemPrivate {}
 	class ToolItemPrivate {
-		public constructor();
+		public constructor(options?: Partial<ToolItemPrivateInitOptions>);
 	}
 
+	export interface ToolPaletteClassInitOptions {}
 	interface ToolPaletteClass {}
 	class ToolPaletteClass {
-		public constructor();
+		public constructor(options?: Partial<ToolPaletteClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ToolPalettePrivateInitOptions {}
 	interface ToolPalettePrivate {}
 	class ToolPalettePrivate {
-		public constructor();
+		public constructor(options?: Partial<ToolPalettePrivateInitOptions>);
 	}
 
+	export interface ToolShellIfaceInitOptions {}
 	/**
 	 * Virtual function table for the {@link ToolShell} interface.
 	 */
 	interface ToolShellIface {}
 	class ToolShellIface {
-		public constructor();
+		public constructor(options?: Partial<ToolShellIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public get_icon_size: {(shell: ToolShell): IconSize;};
 		public get_orientation: {(shell: ToolShell): Orientation;};
@@ -56012,9 +58785,10 @@ declare namespace imports.gi.Gtk {
 		public get_text_size_group: {(shell: ToolShell): SizeGroup;};
 	}
 
+	export interface ToolbarClassInitOptions {}
 	interface ToolbarClass {}
 	class ToolbarClass {
-		public constructor();
+		public constructor(options?: Partial<ToolbarClassInitOptions>);
 		public orientation_changed: {(toolbar: Toolbar, orientation: Orientation): void;};
 		public style_changed: {(toolbar: Toolbar, style: ToolbarStyle): void;};
 		public popup_context_menu: {(toolbar: Toolbar, x: number, y: number, button_number: number): boolean;};
@@ -56024,38 +58798,44 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ToolbarPrivateInitOptions {}
 	interface ToolbarPrivate {}
 	class ToolbarPrivate {
-		public constructor();
+		public constructor(options?: Partial<ToolbarPrivateInitOptions>);
 	}
 
+	export interface ToplevelAccessibleClassInitOptions {}
 	interface ToplevelAccessibleClass {}
 	class ToplevelAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<ToplevelAccessibleClassInitOptions>);
 	}
 
+	export interface ToplevelAccessiblePrivateInitOptions {}
 	interface ToplevelAccessiblePrivate {}
 	class ToplevelAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<ToplevelAccessiblePrivateInitOptions>);
 	}
 
+	export interface TreeDragDestIfaceInitOptions {}
 	interface TreeDragDestIface {}
 	class TreeDragDestIface {
-		public constructor();
+		public constructor(options?: Partial<TreeDragDestIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public drag_data_received: {(drag_dest: TreeDragDest, dest: TreePath, selection_data: SelectionData): boolean;};
 		public row_drop_possible: {(drag_dest: TreeDragDest, dest_path: TreePath, selection_data: SelectionData): boolean;};
 	}
 
+	export interface TreeDragSourceIfaceInitOptions {}
 	interface TreeDragSourceIface {}
 	class TreeDragSourceIface {
-		public constructor();
+		public constructor(options?: Partial<TreeDragSourceIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public row_draggable: {(drag_source: TreeDragSource, path: TreePath): boolean;};
 		public drag_data_get: {(drag_source: TreeDragSource, path: TreePath, selection_data: SelectionData): boolean;};
 		public drag_data_delete: {(drag_source: TreeDragSource, path: TreePath): boolean;};
 	}
 
+	export interface TreeIterInitOptions {}
 	/**
 	 * The {@link TreeIter} is the primary structure
 	 * for accessing a #GtkTreeModel. Models are expected to put a unique
@@ -56065,7 +58845,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface TreeIter {}
 	class TreeIter {
-		public constructor();
+		public constructor(options?: Partial<TreeIterInitOptions>);
 		/**
 		 * a unique stamp to catch invalid iterators
 		 */
@@ -56100,9 +58880,10 @@ declare namespace imports.gi.Gtk {
 		public free(): void;
 	}
 
+	export interface TreeModelFilterClassInitOptions {}
 	interface TreeModelFilterClass {}
 	class TreeModelFilterClass {
-		public constructor();
+		public constructor(options?: Partial<TreeModelFilterClassInitOptions>);
 		public visible: {(self: TreeModelFilter, child_model: TreeModel, iter: TreeIter): boolean;};
 		public modify: {(self: TreeModelFilter, child_model: TreeModel, iter: TreeIter, value: GObject.Value, column: number): void;};
 		public _gtk_reserved1: {(): void;};
@@ -56111,14 +58892,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TreeModelFilterPrivateInitOptions {}
 	interface TreeModelFilterPrivate {}
 	class TreeModelFilterPrivate {
-		public constructor();
+		public constructor(options?: Partial<TreeModelFilterPrivateInitOptions>);
 	}
 
+	export interface TreeModelIfaceInitOptions {}
 	interface TreeModelIface {}
 	class TreeModelIface {
-		public constructor();
+		public constructor(options?: Partial<TreeModelIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public row_changed: {(tree_model: TreeModel, path: TreePath, iter: TreeIter): void;};
 		public row_inserted: {(tree_model: TreeModel, path: TreePath, iter: TreeIter): void;};
@@ -56142,23 +58925,26 @@ declare namespace imports.gi.Gtk {
 		public unref_node: {(tree_model: TreeModel, iter: TreeIter): void;};
 	}
 
+	export interface TreeModelSortClassInitOptions {}
 	interface TreeModelSortClass {}
 	class TreeModelSortClass {
-		public constructor();
+		public constructor(options?: Partial<TreeModelSortClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TreeModelSortPrivateInitOptions {}
 	interface TreeModelSortPrivate {}
 	class TreeModelSortPrivate {
-		public constructor();
+		public constructor(options?: Partial<TreeModelSortPrivateInitOptions>);
 	}
 
+	export interface TreePathInitOptions {}
 	interface TreePath {}
 	class TreePath {
-		public constructor();
+		public constructor(options?: Partial<TreePathInitOptions>);
 		/**
 		 * Creates a new {@link TreePath}-struct.
 		 * This refers to a row.
@@ -56299,6 +59085,7 @@ declare namespace imports.gi.Gtk {
 		public up(): boolean;
 	}
 
+	export interface TreeRowReferenceInitOptions {}
 	/**
 	 * A GtkTreeRowReference tracks model changes so that it always refers to the
 	 * same row (a {@link TreePath} refers to a position, not a fixed row). Create a
@@ -56306,7 +59093,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface TreeRowReference {}
 	class TreeRowReference {
-		public constructor();
+		public constructor(options?: Partial<TreeRowReferenceInitOptions>);
 		/**
 		 * Creates a row reference based on #path.
 		 * 
@@ -56378,9 +59165,10 @@ declare namespace imports.gi.Gtk {
 		public valid(): boolean;
 	}
 
+	export interface TreeSelectionClassInitOptions {}
 	interface TreeSelectionClass {}
 	class TreeSelectionClass {
-		public constructor();
+		public constructor(options?: Partial<TreeSelectionClassInitOptions>);
 		public changed: {(selection: TreeSelection): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -56388,14 +59176,16 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TreeSelectionPrivateInitOptions {}
 	interface TreeSelectionPrivate {}
 	class TreeSelectionPrivate {
-		public constructor();
+		public constructor(options?: Partial<TreeSelectionPrivateInitOptions>);
 	}
 
+	export interface TreeSortableIfaceInitOptions {}
 	interface TreeSortableIface {}
 	class TreeSortableIface {
-		public constructor();
+		public constructor(options?: Partial<TreeSortableIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public sort_column_changed: {(sortable: TreeSortable): void;};
 		public get_sort_column_id: {(sortable: TreeSortable): boolean;};
@@ -56405,33 +59195,38 @@ declare namespace imports.gi.Gtk {
 		public has_default_sort_func: {(sortable: TreeSortable): boolean;};
 	}
 
+	export interface TreeStoreClassInitOptions {}
 	interface TreeStoreClass {}
 	class TreeStoreClass {
-		public constructor();
+		public constructor(options?: Partial<TreeStoreClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TreeStorePrivateInitOptions {}
 	interface TreeStorePrivate {}
 	class TreeStorePrivate {
-		public constructor();
+		public constructor(options?: Partial<TreeStorePrivateInitOptions>);
 	}
 
+	export interface TreeViewAccessibleClassInitOptions {}
 	interface TreeViewAccessibleClass {}
 	class TreeViewAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<TreeViewAccessibleClassInitOptions>);
 	}
 
+	export interface TreeViewAccessiblePrivateInitOptions {}
 	interface TreeViewAccessiblePrivate {}
 	class TreeViewAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<TreeViewAccessiblePrivateInitOptions>);
 	}
 
+	export interface TreeViewClassInitOptions {}
 	interface TreeViewClass {}
 	class TreeViewClass {
-		public constructor();
+		public constructor(options?: Partial<TreeViewClassInitOptions>);
 		public row_activated: {(tree_view: TreeView, path: TreePath, column: TreeViewColumn): void;};
 		public test_expand_row: {(tree_view: TreeView, iter: TreeIter, path: TreePath): boolean;};
 		public test_collapse_row: {(tree_view: TreeView, iter: TreeIter, path: TreePath): boolean;};
@@ -56457,9 +59252,10 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved8: {(): void;};
 	}
 
+	export interface TreeViewColumnClassInitOptions {}
 	interface TreeViewColumnClass {}
 	class TreeViewColumnClass {
-		public constructor();
+		public constructor(options?: Partial<TreeViewColumnClassInitOptions>);
 		public clicked: {(tree_column: TreeViewColumn): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -56467,19 +59263,22 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface TreeViewColumnPrivateInitOptions {}
 	interface TreeViewColumnPrivate {}
 	class TreeViewColumnPrivate {
-		public constructor();
+		public constructor(options?: Partial<TreeViewColumnPrivateInitOptions>);
 	}
 
+	export interface TreeViewPrivateInitOptions {}
 	interface TreeViewPrivate {}
 	class TreeViewPrivate {
-		public constructor();
+		public constructor(options?: Partial<TreeViewPrivateInitOptions>);
 	}
 
+	export interface UIManagerClassInitOptions {}
 	interface UIManagerClass {}
 	class UIManagerClass {
-		public constructor();
+		public constructor(options?: Partial<UIManagerClassInitOptions>);
 		public add_widget: {(manager: UIManager, widget: Widget): void;};
 		public actions_changed: {(manager: UIManager): void;};
 		public connect_proxy: {(manager: UIManager, action: Action, proxy: Widget): void;};
@@ -56494,78 +59293,91 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface UIManagerPrivateInitOptions {}
 	interface UIManagerPrivate {}
 	class UIManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<UIManagerPrivateInitOptions>);
 	}
 
+	export interface VBoxClassInitOptions {}
 	interface VBoxClass {}
 	class VBoxClass {
-		public constructor();
+		public constructor(options?: Partial<VBoxClassInitOptions>);
 	}
 
+	export interface VButtonBoxClassInitOptions {}
 	interface VButtonBoxClass {}
 	class VButtonBoxClass {
-		public constructor();
+		public constructor(options?: Partial<VButtonBoxClassInitOptions>);
 	}
 
+	export interface VPanedClassInitOptions {}
 	interface VPanedClass {}
 	class VPanedClass {
-		public constructor();
+		public constructor(options?: Partial<VPanedClassInitOptions>);
 	}
 
+	export interface VScaleClassInitOptions {}
 	interface VScaleClass {}
 	class VScaleClass {
-		public constructor();
+		public constructor(options?: Partial<VScaleClassInitOptions>);
 	}
 
+	export interface VScrollbarClassInitOptions {}
 	interface VScrollbarClass {}
 	class VScrollbarClass {
-		public constructor();
+		public constructor(options?: Partial<VScrollbarClassInitOptions>);
 	}
 
+	export interface VSeparatorClassInitOptions {}
 	interface VSeparatorClass {}
 	class VSeparatorClass {
-		public constructor();
+		public constructor(options?: Partial<VSeparatorClassInitOptions>);
 	}
 
+	export interface ViewportClassInitOptions {}
 	interface ViewportClass {}
 	class ViewportClass {
-		public constructor();
+		public constructor(options?: Partial<ViewportClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface ViewportPrivateInitOptions {}
 	interface ViewportPrivate {}
 	class ViewportPrivate {
-		public constructor();
+		public constructor(options?: Partial<ViewportPrivateInitOptions>);
 	}
 
+	export interface VolumeButtonClassInitOptions {}
 	interface VolumeButtonClass {}
 	class VolumeButtonClass {
-		public constructor();
+		public constructor(options?: Partial<VolumeButtonClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface WidgetAccessibleClassInitOptions {}
 	interface WidgetAccessibleClass {}
 	class WidgetAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<WidgetAccessibleClassInitOptions>);
 		public notify_gtk: {(object: GObject.Object, pspec: GObject.ParamSpec): void;};
 	}
 
+	export interface WidgetAccessiblePrivateInitOptions {}
 	interface WidgetAccessiblePrivate {}
 	class WidgetAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<WidgetAccessiblePrivateInitOptions>);
 	}
 
+	export interface WidgetClassInitOptions {}
 	interface WidgetClass {}
 	class WidgetClass {
-		public constructor();
+		public constructor(options?: Partial<WidgetClassInitOptions>);
 		/**
 		 * The signal to emit when a widget of this class is
 		 *   activated, gtk_widget_activate() handles the emission.
@@ -56796,11 +59608,13 @@ declare namespace imports.gi.Gtk {
 		public set_template_from_resource(resource_name: string): void;
 	}
 
+	export interface WidgetClassPrivateInitOptions {}
 	interface WidgetClassPrivate {}
 	class WidgetClassPrivate {
-		public constructor();
+		public constructor(options?: Partial<WidgetClassPrivateInitOptions>);
 	}
 
+	export interface WidgetPathInitOptions {}
 	/**
 	 * GtkWidgetPath is a boxed type that represents a widget hierarchy from
 	 * the topmost widget, typically a toplevel, to any child. This widget
@@ -56852,7 +59666,7 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface WidgetPath {}
 	class WidgetPath {
-		public constructor();
+		public constructor(options?: Partial<WidgetPathInitOptions>);
 		/**
 		 * Returns an empty widget path.
 		 * @returns A newly created, empty, {@link WidgetPath}
@@ -57158,24 +59972,28 @@ declare namespace imports.gi.Gtk {
 		public unref(): void;
 	}
 
+	export interface WidgetPrivateInitOptions {}
 	interface WidgetPrivate {}
 	class WidgetPrivate {
-		public constructor();
+		public constructor(options?: Partial<WidgetPrivateInitOptions>);
 	}
 
+	export interface WindowAccessibleClassInitOptions {}
 	interface WindowAccessibleClass {}
 	class WindowAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<WindowAccessibleClassInitOptions>);
 	}
 
+	export interface WindowAccessiblePrivateInitOptions {}
 	interface WindowAccessiblePrivate {}
 	class WindowAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<WindowAccessiblePrivateInitOptions>);
 	}
 
+	export interface WindowClassInitOptions {}
 	interface WindowClass {}
 	class WindowClass {
-		public constructor();
+		public constructor(options?: Partial<WindowClassInitOptions>);
 		public set_focus: {(window: Window, focus: Widget | null): void;};
 		public activate_focus: {(window: Window): void;};
 		public activate_default: {(window: Window): void;};
@@ -57186,44 +60004,50 @@ declare namespace imports.gi.Gtk {
 		public _gtk_reserved3: {(): void;};
 	}
 
+	export interface WindowGeometryInfoInitOptions {}
 	interface WindowGeometryInfo {}
 	class WindowGeometryInfo {
-		public constructor();
+		public constructor(options?: Partial<WindowGeometryInfoInitOptions>);
 	}
 
+	export interface WindowGroupClassInitOptions {}
 	interface WindowGroupClass {}
 	class WindowGroupClass {
-		public constructor();
+		public constructor(options?: Partial<WindowGroupClassInitOptions>);
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
 		public _gtk_reserved4: {(): void;};
 	}
 
+	export interface WindowGroupPrivateInitOptions {}
 	interface WindowGroupPrivate {}
 	class WindowGroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<WindowGroupPrivateInitOptions>);
 	}
 
+	export interface WindowPrivateInitOptions {}
 	interface WindowPrivate {}
 	class WindowPrivate {
-		public constructor();
+		public constructor(options?: Partial<WindowPrivateInitOptions>);
 	}
 
+	export interface _MountOperationHandlerInitOptions {}
 	/**
 	 * Abstract interface type for the D-Bus interface <link linkend="gdbus-interface-org-Gtk-MountOperationHandler.top_of_page">org.Gtk.MountOperationHandler</link>.
 	 */
 	interface _MountOperationHandler {}
 	class _MountOperationHandler {
-		public constructor();
+		public constructor(options?: Partial<_MountOperationHandlerInitOptions>);
 	}
 
+	export interface _MountOperationHandlerIfaceInitOptions {}
 	/**
 	 * Virtual table for the D-Bus interface <link linkend="gdbus-interface-org-Gtk-MountOperationHandler.top_of_page">org.Gtk.MountOperationHandler</link>.
 	 */
 	interface _MountOperationHandlerIface {}
 	class _MountOperationHandlerIface {
-		public constructor();
+		public constructor(options?: Partial<_MountOperationHandlerIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -57234,46 +60058,52 @@ declare namespace imports.gi.Gtk {
 		public handle_show_processes: {(object: any, invocation: Gio.DBusMethodInvocation, arg_id: string, arg_message: string, arg_icon_name: string, arg_application_pids: GLib.Variant, arg_choices: string): boolean;};
 	}
 
+	export interface _MountOperationHandlerProxyInitOptions {}
 	/**
 	 * The #_GtkMountOperationHandlerProxy structure contains only private data and should only be accessed using the provided API.
 	 */
 	interface _MountOperationHandlerProxy {}
 	class _MountOperationHandlerProxy {
-		public constructor();
+		public constructor(options?: Partial<_MountOperationHandlerProxyInitOptions>);
 	}
 
+	export interface _MountOperationHandlerProxyClassInitOptions {}
 	/**
 	 * Class structure for #_GtkMountOperationHandlerProxy.
 	 */
 	interface _MountOperationHandlerProxyClass {}
 	class _MountOperationHandlerProxyClass {
-		public constructor();
+		public constructor(options?: Partial<_MountOperationHandlerProxyClassInitOptions>);
 	}
 
+	export interface _MountOperationHandlerProxyPrivateInitOptions {}
 	interface _MountOperationHandlerProxyPrivate {}
 	class _MountOperationHandlerProxyPrivate {
-		public constructor();
+		public constructor(options?: Partial<_MountOperationHandlerProxyPrivateInitOptions>);
 	}
 
+	export interface _MountOperationHandlerSkeletonInitOptions {}
 	/**
 	 * The #_GtkMountOperationHandlerSkeleton structure contains only private data and should only be accessed using the provided API.
 	 */
 	interface _MountOperationHandlerSkeleton {}
 	class _MountOperationHandlerSkeleton {
-		public constructor();
+		public constructor(options?: Partial<_MountOperationHandlerSkeletonInitOptions>);
 	}
 
+	export interface _MountOperationHandlerSkeletonClassInitOptions {}
 	/**
 	 * Class structure for #_GtkMountOperationHandlerSkeleton.
 	 */
 	interface _MountOperationHandlerSkeletonClass {}
 	class _MountOperationHandlerSkeletonClass {
-		public constructor();
+		public constructor(options?: Partial<_MountOperationHandlerSkeletonClassInitOptions>);
 	}
 
+	export interface _MountOperationHandlerSkeletonPrivateInitOptions {}
 	interface _MountOperationHandlerSkeletonPrivate {}
 	class _MountOperationHandlerSkeletonPrivate {
-		public constructor();
+		public constructor(options?: Partial<_MountOperationHandlerSkeletonPrivateInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -57367,6 +60197,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ActionableInitOptionsMixin = Pick<IActionable,
+		"action_name" |
+		"action_target">;
+
+	export interface ActionableInitOptions extends ActionableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Actionable} instead.
 	 */
@@ -57389,7 +60225,7 @@ declare namespace imports.gi.Gtk {
 	interface Actionable extends ActionableMixin {}
 
 	class Actionable {
-		public constructor();
+		public constructor(options?: Partial<ActionableInitOptions>);
 	}
 
 
@@ -57481,6 +60317,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "notify::use_action_appearance", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type ActivatableInitOptionsMixin = Pick<IActivatable,
+		"related_action" |
+		"use_action_appearance">;
+
+	export interface ActivatableInitOptions extends ActivatableInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Activatable} instead.
@@ -57726,7 +60568,7 @@ declare namespace imports.gi.Gtk {
 	interface Activatable extends ActivatableMixin {}
 
 	class Activatable {
-		public constructor();
+		public constructor(options?: Partial<ActivatableInitOptions>);
 	}
 
 
@@ -57761,6 +60603,11 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type AppChooserInitOptionsMixin = Pick<IAppChooser,
+		"content_type">;
+
+	export interface AppChooserInitOptions extends AppChooserInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppChooser} instead.
 	 */
@@ -57788,7 +60635,7 @@ declare namespace imports.gi.Gtk {
 	interface AppChooser extends AppChooserMixin {}
 
 	class AppChooser {
-		public constructor();
+		public constructor(options?: Partial<AppChooserInitOptions>);
 	}
 
 
@@ -57882,6 +60729,9 @@ declare namespace imports.gi.Gtk {
 		set_name(name: string): void;
 	}
 
+	type BuildableInitOptionsMixin  = {};
+	export interface BuildableInitOptions extends BuildableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Buildable} instead.
 	 */
@@ -57904,7 +60754,7 @@ declare namespace imports.gi.Gtk {
 	interface Buildable extends BuildableMixin {}
 
 	class Buildable {
-		public constructor();
+		public constructor(options?: Partial<BuildableInitOptions>);
 	}
 
 
@@ -57927,6 +60777,9 @@ declare namespace imports.gi.Gtk {
 		update_relationset(cell: CellAccessible, relationset: Atk.RelationSet): void;
 	}
 
+	type CellAccessibleParentInitOptionsMixin  = {};
+	export interface CellAccessibleParentInitOptions extends CellAccessibleParentInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellAccessibleParent} instead.
 	 */
@@ -57935,7 +60788,7 @@ declare namespace imports.gi.Gtk {
 	interface CellAccessibleParent extends CellAccessibleParentMixin {}
 
 	class CellAccessibleParent {
-		public constructor();
+		public constructor(options?: Partial<CellAccessibleParentInitOptions>);
 	}
 
 
@@ -58005,6 +60858,11 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type CellEditableInitOptionsMixin = Pick<ICellEditable,
+		"editing_canceled">;
+
+	export interface CellEditableInitOptions extends CellEditableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellEditable} instead.
 	 */
@@ -58018,7 +60876,7 @@ declare namespace imports.gi.Gtk {
 	interface CellEditable extends CellEditableMixin {}
 
 	class CellEditable {
-		public constructor();
+		public constructor(options?: Partial<CellEditableInitOptions>);
 	}
 
 
@@ -58119,6 +60977,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_cell_data_func(cell: CellRenderer, func: CellLayoutDataFunc | null, func_data: any | null, destroy: GLib.DestroyNotify): void;
 	}
+
+	type CellLayoutInitOptionsMixin  = {};
+	export interface CellLayoutInitOptions extends CellLayoutInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellLayout} instead.
@@ -58234,7 +61095,7 @@ declare namespace imports.gi.Gtk {
 	interface CellLayout extends CellLayoutMixin {}
 
 	class CellLayout {
-		public constructor();
+		public constructor(options?: Partial<CellLayoutInitOptions>);
 	}
 
 
@@ -58318,6 +61179,12 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ColorChooserInitOptionsMixin = Pick<IColorChooser,
+		"rgba" |
+		"use_alpha">;
+
+	export interface ColorChooserInitOptions extends ColorChooserInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorChooser} instead.
 	 */
@@ -58334,7 +61201,7 @@ declare namespace imports.gi.Gtk {
 	interface ColorChooser extends ColorChooserMixin {}
 
 	class ColorChooser {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserInitOptions>);
 	}
 
 
@@ -58487,6 +61354,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type EditableInitOptionsMixin  = {};
+	export interface EditableInitOptions extends EditableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Editable} instead.
 	 */
@@ -58532,7 +61402,7 @@ declare namespace imports.gi.Gtk {
 	interface Editable extends EditableMixin {}
 
 	class Editable {
-		public constructor();
+		public constructor(options?: Partial<EditableInitOptions>);
 	}
 
 
@@ -59357,6 +62227,21 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FileChooserInitOptionsMixin = Pick<IFileChooser,
+		"action" |
+		"create_folders" |
+		"do_overwrite_confirmation" |
+		"extra_widget" |
+		"filter" |
+		"local_only" |
+		"preview_widget" |
+		"preview_widget_active" |
+		"select_multiple" |
+		"show_hidden" |
+		"use_preview_label">;
+
+	export interface FileChooserInitOptions extends FileChooserInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooser} instead.
 	 */
@@ -59491,7 +62376,7 @@ declare namespace imports.gi.Gtk {
 	interface FileChooser extends FileChooserMixin {}
 
 	class FileChooser {
-		public constructor();
+		public constructor(options?: Partial<FileChooserInitOptions>);
 	}
 
 
@@ -59705,6 +62590,17 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type FontChooserInitOptionsMixin = Pick<IFontChooser,
+		"font" |
+		"font_desc" |
+		"font_features" |
+		"language" |
+		"level" |
+		"preview_text" |
+		"show_preview_entry">;
+
+	export interface FontChooserInitOptions extends FontChooserInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontChooser} instead.
 	 */
@@ -59720,7 +62616,7 @@ declare namespace imports.gi.Gtk {
 	interface FontChooser extends FontChooserMixin {}
 
 	class FontChooser {
-		public constructor();
+		public constructor(options?: Partial<FontChooserInitOptions>);
 	}
 
 
@@ -59747,6 +62643,11 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type OrientableInitOptionsMixin = Pick<IOrientable,
+		"orientation">;
+
+	export interface OrientableInitOptions extends OrientableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Orientable} instead.
 	 */
@@ -59765,7 +62666,7 @@ declare namespace imports.gi.Gtk {
 	interface Orientable extends OrientableMixin {}
 
 	class Orientable {
-		public constructor();
+		public constructor(options?: Partial<OrientableInitOptions>);
 	}
 
 
@@ -59819,6 +62720,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type PrintOperationPreviewInitOptionsMixin  = {};
+	export interface PrintOperationPreviewInitOptions extends PrintOperationPreviewInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintOperationPreview} instead.
 	 */
@@ -59827,7 +62731,7 @@ declare namespace imports.gi.Gtk {
 	interface PrintOperationPreview extends PrintOperationPreviewMixin {}
 
 	class PrintOperationPreview {
-		public constructor();
+		public constructor(options?: Partial<PrintOperationPreviewInitOptions>);
 	}
 
 
@@ -60106,6 +63010,19 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type RecentChooserInitOptionsMixin = Pick<IRecentChooser,
+		"filter" |
+		"limit" |
+		"local_only" |
+		"select_multiple" |
+		"show_icons" |
+		"show_not_found" |
+		"show_private" |
+		"show_tips" |
+		"sort_type">;
+
+	export interface RecentChooserInitOptions extends RecentChooserInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentChooser} instead.
 	 */
@@ -60122,7 +63039,7 @@ declare namespace imports.gi.Gtk {
 	interface RecentChooser extends RecentChooserMixin {}
 
 	class RecentChooser {
-		public constructor();
+		public constructor(options?: Partial<RecentChooserInitOptions>);
 	}
 
 
@@ -60212,6 +63129,14 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type ScrollableInitOptionsMixin = Pick<IScrollable,
+		"hadjustment" |
+		"hscroll_policy" |
+		"vadjustment" |
+		"vscroll_policy">;
+
+	export interface ScrollableInitOptions extends ScrollableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scrollable} instead.
 	 */
@@ -60249,7 +63174,7 @@ declare namespace imports.gi.Gtk {
 	interface Scrollable extends ScrollableMixin {}
 
 	class Scrollable {
-		public constructor();
+		public constructor(options?: Partial<ScrollableInitOptions>);
 	}
 
 
@@ -60285,6 +63210,9 @@ declare namespace imports.gi.Gtk {
 		get_style_property(path: WidgetPath, state: StateFlags, pspec: GObject.ParamSpec, value: GObject.Value): boolean;
 	}
 
+	type StyleProviderInitOptionsMixin  = {};
+	export interface StyleProviderInitOptions extends StyleProviderInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StyleProvider} instead.
 	 */
@@ -60297,7 +63225,7 @@ declare namespace imports.gi.Gtk {
 	interface StyleProvider extends StyleProviderMixin {}
 
 	class StyleProvider {
-		public constructor();
+		public constructor(options?: Partial<StyleProviderInitOptions>);
 	}
 
 
@@ -60371,6 +63299,9 @@ declare namespace imports.gi.Gtk {
 		rebuild_menu(): void;
 	}
 
+	type ToolShellInitOptionsMixin  = {};
+	export interface ToolShellInitOptions extends ToolShellInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolShell} instead.
 	 */
@@ -60383,7 +63314,7 @@ declare namespace imports.gi.Gtk {
 	interface ToolShell extends ToolShellMixin {}
 
 	class ToolShell {
-		public constructor();
+		public constructor(options?: Partial<ToolShellInitOptions>);
 	}
 
 
@@ -60417,6 +63348,9 @@ declare namespace imports.gi.Gtk {
 		row_drop_possible(dest_path: TreePath, selection_data: SelectionData): boolean;
 	}
 
+	type TreeDragDestInitOptionsMixin  = {};
+	export interface TreeDragDestInitOptions extends TreeDragDestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeDragDest} instead.
 	 */
@@ -60425,7 +63359,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeDragDest extends TreeDragDestMixin {}
 
 	class TreeDragDest {
-		public constructor();
+		public constructor(options?: Partial<TreeDragDestInitOptions>);
 	}
 
 
@@ -60465,6 +63399,9 @@ declare namespace imports.gi.Gtk {
 		row_draggable(path: TreePath): boolean;
 	}
 
+	type TreeDragSourceInitOptionsMixin  = {};
+	export interface TreeDragSourceInitOptions extends TreeDragSourceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeDragSource} instead.
 	 */
@@ -60473,7 +63410,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeDragSource extends TreeDragSourceMixin {}
 
 	class TreeDragSource {
-		public constructor();
+		public constructor(options?: Partial<TreeDragSourceInitOptions>);
 	}
 
 
@@ -60807,6 +63744,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TreeModelInitOptionsMixin  = {};
+	export interface TreeModelInitOptions extends TreeModelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeModel} instead.
 	 */
@@ -61011,7 +63951,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeModel extends TreeModelMixin {}
 
 	class TreeModel {
-		public constructor();
+		public constructor(options?: Partial<TreeModelInitOptions>);
 	}
 
 
@@ -61086,6 +64026,9 @@ declare namespace imports.gi.Gtk {
 
 	}
 
+	type TreeSortableInitOptionsMixin  = {};
+	export interface TreeSortableInitOptions extends TreeSortableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeSortable} instead.
 	 */
@@ -61099,7 +64042,7 @@ declare namespace imports.gi.Gtk {
 	interface TreeSortable extends TreeSortableMixin {}
 
 	class TreeSortable {
-		public constructor();
+		public constructor(options?: Partial<TreeSortableInitOptions>);
 	}
 
 

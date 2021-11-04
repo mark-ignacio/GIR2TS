@@ -1,11 +1,12 @@
 declare namespace imports.gi.Graphene {
+	export interface BoxInitOptions {}
 	/**
 	 * A 3D box, described as the volume between a minimum and
 	 * a maximum vertices.
 	 */
 	interface Box {}
 	class Box {
-		public constructor();
+		public constructor(options?: Partial<BoxInitOptions>);
 		/**
 		 * Allocates a new #graphene_box_t.
 		 * 
@@ -174,6 +175,7 @@ declare namespace imports.gi.Graphene {
 		public union(b: Box, res: Box): void;
 	}
 
+	export interface EulerInitOptions {}
 	/**
 	 * Describe a rotation using Euler angles.
 	 * 
@@ -182,7 +184,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Euler {}
 	class Euler {
-		public constructor();
+		public constructor(options?: Partial<EulerInitOptions>);
 		/**
 		 * Allocates a new #graphene_euler_t.
 		 * 
@@ -367,6 +369,7 @@ declare namespace imports.gi.Graphene {
 		public to_vec3(res: Vec3): void;
 	}
 
+	export interface FrustumInitOptions {}
 	/**
 	 * A 3D volume delimited by 2D clip planes.
 	 * 
@@ -375,7 +378,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Frustum {}
 	class Frustum {
-		public constructor();
+		public constructor(options?: Partial<FrustumInitOptions>);
 		/**
 		 * Allocates a new #graphene_frustum_t structure.
 		 * 
@@ -450,6 +453,7 @@ declare namespace imports.gi.Graphene {
 		public intersects_sphere(sphere: Sphere): boolean;
 	}
 
+	export interface MatrixInitOptions {}
 	/**
 	 * A structure capable of holding a 4x4 matrix.
 	 * 
@@ -458,7 +462,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Matrix {}
 	class Matrix {
-		public constructor();
+		public constructor(options?: Partial<MatrixInitOptions>);
 		/**
 		 * Allocates a new #graphene_matrix_t.
 		 * @returns the newly allocated matrix
@@ -1056,6 +1060,7 @@ declare namespace imports.gi.Graphene {
 		public untransform_point(p: Point, bounds: Rect, res: Point): boolean;
 	}
 
+	export interface PlaneInitOptions {}
 	/**
 	 * A 2D plane that extends infinitely in a 3D volume.
 	 * 
@@ -1064,7 +1069,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Plane {}
 	class Plane {
-		public constructor();
+		public constructor(options?: Partial<PlaneInitOptions>);
 		/**
 		 * Allocates a new #graphene_plane_t structure.
 		 * 
@@ -1178,12 +1183,13 @@ declare namespace imports.gi.Graphene {
 		public transform(matrix: Matrix, normal_matrix: Matrix | null, res: Plane): void;
 	}
 
+	export interface PointInitOptions {}
 	/**
 	 * A point with two coordinates.
 	 */
 	interface Point {}
 	class Point {
-		public constructor();
+		public constructor(options?: Partial<PointInitOptions>);
 		/**
 		 * Allocates a new #graphene_point_t structure.
 		 * 
@@ -1285,12 +1291,13 @@ declare namespace imports.gi.Graphene {
 		public to_vec2(v: Vec2): void;
 	}
 
+	export interface Point3DInitOptions {}
 	/**
 	 * A point with three components: X, Y, and Z.
 	 */
 	interface Point3D {}
 	class Point3D {
-		public constructor();
+		public constructor(options?: Partial<Point3DInitOptions>);
 		/**
 		 * Allocates a #graphene_point3d_t structure.
 		 * @returns the newly allocated structure.
@@ -1423,6 +1430,7 @@ declare namespace imports.gi.Graphene {
 		public to_vec3(v: Vec3): void;
 	}
 
+	export interface QuadInitOptions {}
 	/**
 	 * A 4 vertex quadrilateral, as represented by four #graphene_point_t.
 	 * 
@@ -1431,7 +1439,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Quad {}
 	class Quad {
-		public constructor();
+		public constructor(options?: Partial<QuadInitOptions>);
 		/**
 		 * Allocates a new #graphene_quad_t instance.
 		 * 
@@ -1485,6 +1493,7 @@ declare namespace imports.gi.Graphene {
 		public init_from_rect(r: Rect): Quad;
 	}
 
+	export interface QuaternionInitOptions {}
 	/**
 	 * A quaternion.
 	 * 
@@ -1493,7 +1502,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Quaternion {}
 	class Quaternion {
-		public constructor();
+		public constructor(options?: Partial<QuaternionInitOptions>);
 		/**
 		 * Allocates a new #graphene_quaternion_t.
 		 * 
@@ -1683,6 +1692,7 @@ declare namespace imports.gi.Graphene {
 		public to_vec4(res: Vec4): void;
 	}
 
+	export interface RayInitOptions {}
 	/**
 	 * A ray emitted from an origin in a given direction.
 	 * 
@@ -1691,7 +1701,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Ray {}
 	class Ray {
-		public constructor();
+		public constructor(options?: Partial<RayInitOptions>);
 		/**
 		 * Allocates a new #graphene_ray_t structure.
 		 * 
@@ -1829,6 +1839,7 @@ declare namespace imports.gi.Graphene {
 		public intersects_triangle(t: Triangle): boolean;
 	}
 
+	export interface RectInitOptions {}
 	/**
 	 * The location and size of a rectangle region.
 	 * 
@@ -1845,7 +1856,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Rect {}
 	class Rect {
-		public constructor();
+		public constructor(options?: Partial<RectInitOptions>);
 		/**
 		 * the coordinates of the origin of the rectangle
 		 */
@@ -2132,30 +2143,33 @@ declare namespace imports.gi.Graphene {
 		public union(b: Rect, res: Rect): void;
 	}
 
+	export interface Simd4FInitOptions {}
 	interface Simd4F {}
 	class Simd4F {
-		public constructor();
+		public constructor(options?: Partial<Simd4FInitOptions>);
 		public readonly x: number;
 		public readonly y: number;
 		public readonly z: number;
 		public readonly w: number;
 	}
 
+	export interface Simd4X4FInitOptions {}
 	interface Simd4X4F {}
 	class Simd4X4F {
-		public constructor();
+		public constructor(options?: Partial<Simd4X4FInitOptions>);
 		public readonly x: Simd4F;
 		public readonly y: Simd4F;
 		public readonly z: Simd4F;
 		public readonly w: Simd4F;
 	}
 
+	export interface SizeInitOptions {}
 	/**
 	 * A size.
 	 */
 	interface Size {}
 	class Size {
-		public constructor();
+		public constructor(options?: Partial<SizeInitOptions>);
 		/**
 		 * Allocates a new #graphene_size_t.
 		 * 
@@ -2211,12 +2225,13 @@ declare namespace imports.gi.Graphene {
 		public scale(factor: number, res: Size): void;
 	}
 
+	export interface SphereInitOptions {}
 	/**
 	 * A sphere, represented by its center and radius.
 	 */
 	interface Sphere {}
 	class Sphere {
-		public constructor();
+		public constructor(options?: Partial<SphereInitOptions>);
 		/**
 		 * Allocates a new #graphene_sphere_t.
 		 * 
@@ -2314,12 +2329,13 @@ declare namespace imports.gi.Graphene {
 		public translate(point: Point3D, res: Sphere): void;
 	}
 
+	export interface TriangleInitOptions {}
 	/**
 	 * A triangle.
 	 */
 	interface Triangle {}
 	class Triangle {
-		public constructor();
+		public constructor(options?: Partial<TriangleInitOptions>);
 		/**
 		 * Allocates a new #graphene_triangle_t.
 		 * 
@@ -2468,6 +2484,7 @@ declare namespace imports.gi.Graphene {
 		public init_from_vec3(a: Vec3 | null, b: Vec3 | null, c: Vec3 | null): Triangle;
 	}
 
+	export interface Vec2InitOptions {}
 	/**
 	 * A structure capable of holding a vector with two dimensions, x and y.
 	 * 
@@ -2476,7 +2493,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Vec2 {}
 	class Vec2 {
-		public constructor();
+		public constructor(options?: Partial<Vec2InitOptions>);
 		/**
 		 * Allocates a new #graphene_vec2_t structure.
 		 * 
@@ -2626,6 +2643,7 @@ declare namespace imports.gi.Graphene {
 		public to_float(dest: number[]): void;
 	}
 
+	export interface Vec3InitOptions {}
 	/**
 	 * A structure capable of holding a vector with three dimensions: x, y, and z.
 	 * 
@@ -2634,7 +2652,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Vec3 {}
 	class Vec3 {
-		public constructor();
+		public constructor(options?: Partial<Vec3InitOptions>);
 		/**
 		 * Allocates a new #graphene_vec3_t structure.
 		 * 
@@ -2825,6 +2843,7 @@ declare namespace imports.gi.Graphene {
 		public to_float(dest: number[]): void;
 	}
 
+	export interface Vec4InitOptions {}
 	/**
 	 * A structure capable of holding a vector with four dimensions: x, y, z, and w.
 	 * 
@@ -2833,7 +2852,7 @@ declare namespace imports.gi.Graphene {
 	 */
 	interface Vec4 {}
 	class Vec4 {
-		public constructor();
+		public constructor(options?: Partial<Vec4InitOptions>);
 		/**
 		 * Allocates a new #graphene_vec4_t structure.
 		 * 

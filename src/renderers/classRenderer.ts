@@ -186,6 +186,28 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
 
     let iface_str = header + body;
 
+    
+    let constructorOptions = `type ${class_name}InitOptionsMixin `;
+    if (signalFields.length > 0 || ifaces.length > 0)
+        constructorOptions+= "= ";
+    else {
+        constructorOptions+= " = {};"
+    }
+    
+    if (ifaces.length > 0) {
+        constructorOptions += `${ifaces.map(x => `${x}InitOptions`).join(' & ')}`;
+    }
+
+    if (signalFields.length > 0) {
+        if (ifaces.length > 0)
+            constructorOptions += " & \n"
+        constructorOptions+= `Pick<I${class_name},\n\t`;
+        constructorOptions+= signalFields.map(x => `"${x.$.name.replace(/\-/g, "_")}"`).join(" |\n\t")
+        constructorOptions+= ">;\n";
+    }
+    
+    constructorOptions += `\nexport interface ${class_name}InitOptions extends ${class_name}InitOptionsMixin {}\n\n`;
+
     const ctor_str_list: string[] = ctors.map((c) => {
         // console.log(c);
         const funcModifier = modifier?.function?.[c.$.name];
@@ -211,6 +233,6 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
         `${static_func_body + NeedNewLine(static_func_body)}` +
         `}\n`;
 
-    return iface_str + mixin + extension + static_side;
+    return iface_str + constructorOptions + mixin + extension + static_side;
 
 }

@@ -685,6 +685,20 @@ declare namespace imports.gi.GdkPixbuf {
 
 	}
 
+	type PixbufInitOptionsMixin = GObject.ObjectInitOptions & Gio.IconInitOptions & Gio.LoadableIconInitOptions & 
+	Pick<IPixbuf,
+		"bits_per_sample" |
+		"colorspace" |
+		"has_alpha" |
+		"height" |
+		"n_channels" |
+		"pixel_bytes" |
+		"pixels" |
+		"rowstride" |
+		"width">;
+
+	export interface PixbufInitOptions extends PixbufInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Pixbuf} instead.
 	 */
@@ -830,7 +844,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface Pixbuf extends PixbufMixin {}
 
 	class Pixbuf {
-		public constructor();
+		public constructor(options?: Partial<PixbufInitOptions>);
 		/**
 		 * Creates a new `GdkPixbuf` structure and allocates a buffer for it.
 		 * 
@@ -1297,6 +1311,9 @@ declare namespace imports.gi.GdkPixbuf {
 		unref(): void;
 	}
 
+	type PixbufAnimationInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PixbufAnimationInitOptions extends PixbufAnimationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufAnimation} instead.
 	 */
@@ -1320,7 +1337,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufAnimation extends PixbufAnimationMixin {}
 
 	class PixbufAnimation {
-		public constructor();
+		public constructor(options?: Partial<PixbufAnimationInitOptions>);
 		/**
 		 * Creates a new animation by loading it from a file.
 		 * 
@@ -1459,6 +1476,9 @@ declare namespace imports.gi.GdkPixbuf {
 		on_currently_loading_frame(): boolean;
 	}
 
+	type PixbufAnimationIterInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PixbufAnimationIterInitOptions extends PixbufAnimationIterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufAnimationIter} instead.
 	 */
@@ -1471,7 +1491,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufAnimationIter extends PixbufAnimationIterMixin {}
 
 	class PixbufAnimationIter {
-		public constructor();
+		public constructor(options?: Partial<PixbufAnimationIterInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1606,6 +1626,9 @@ declare namespace imports.gi.GdkPixbuf {
 
 	}
 
+	type PixbufLoaderInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PixbufLoaderInitOptions extends PixbufLoaderInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufLoader} instead.
 	 */
@@ -1661,7 +1684,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufLoader extends PixbufLoaderMixin {}
 
 	class PixbufLoader {
-		public constructor();
+		public constructor(options?: Partial<PixbufLoaderInitOptions>);
 		/**
 		 * Creates a new pixbuf loader object.
 		 * @returns A newly-created pixbuf loader.
@@ -1715,6 +1738,9 @@ declare namespace imports.gi.GdkPixbuf {
 
 	}
 
+	type PixbufNonAnimInitOptionsMixin = PixbufAnimationInitOptions
+	export interface PixbufNonAnimInitOptions extends PixbufNonAnimInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufNonAnim} instead.
 	 */
@@ -1723,7 +1749,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufNonAnim extends PixbufNonAnimMixin {}
 
 	class PixbufNonAnim {
-		public constructor();
+		public constructor(options?: Partial<PixbufNonAnimInitOptions>);
 		public static new(pixbuf: Pixbuf): PixbufAnimation;
 	}
 
@@ -1756,6 +1782,12 @@ declare namespace imports.gi.GdkPixbuf {
 
 	}
 
+	type PixbufSimpleAnimInitOptionsMixin = PixbufAnimationInitOptions & 
+	Pick<IPixbufSimpleAnim,
+		"loop">;
+
+	export interface PixbufSimpleAnimInitOptions extends PixbufSimpleAnimInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufSimpleAnim} instead.
 	 */
@@ -1767,7 +1799,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufSimpleAnim extends PixbufSimpleAnimMixin {}
 
 	class PixbufSimpleAnim {
-		public constructor();
+		public constructor(options?: Partial<PixbufSimpleAnimInitOptions>);
 		/**
 		 * Creates a new, empty animation.
 		 * @param width the width of the animation
@@ -1785,6 +1817,9 @@ declare namespace imports.gi.GdkPixbuf {
 
 	}
 
+	type PixbufSimpleAnimIterInitOptionsMixin = PixbufAnimationIterInitOptions
+	export interface PixbufSimpleAnimIterInitOptions extends PixbufSimpleAnimIterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufSimpleAnimIter} instead.
 	 */
@@ -1793,9 +1828,10 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufSimpleAnimIter extends PixbufSimpleAnimIterMixin {}
 
 	class PixbufSimpleAnimIter {
-		public constructor();
+		public constructor(options?: Partial<PixbufSimpleAnimIterInitOptions>);
 	}
 
+	export interface PixbufAnimationClassInitOptions {}
 	/**
 	 * Modules supporting animations must derive a type from
 	 * {@link Animation}, providing suitable implementations of the
@@ -1803,13 +1839,14 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface PixbufAnimationClass {}
 	class PixbufAnimationClass {
-		public constructor();
+		public constructor(options?: Partial<PixbufAnimationClassInitOptions>);
 		public is_static_image: {(animation: PixbufAnimation): boolean;};
 		public get_static_image: {(animation: PixbufAnimation): Pixbuf;};
 		public get_size: {(animation: PixbufAnimation, width: number, height: number): void;};
 		public get_iter: {(animation: PixbufAnimation, start_time: GLib.TimeVal | null): PixbufAnimationIter;};
 	}
 
+	export interface PixbufAnimationIterClassInitOptions {}
 	/**
 	 * Modules supporting animations must derive a type from
 	 * {@link AnimationIter}, providing suitable implementations of the
@@ -1817,13 +1854,14 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface PixbufAnimationIterClass {}
 	class PixbufAnimationIterClass {
-		public constructor();
+		public constructor(options?: Partial<PixbufAnimationIterClassInitOptions>);
 		public get_delay_time: {(iter: PixbufAnimationIter): number;};
 		public get_pixbuf: {(iter: PixbufAnimationIter): Pixbuf;};
 		public on_currently_loading_frame: {(iter: PixbufAnimationIter): boolean;};
 		public advance: {(iter: PixbufAnimationIter, current_time: GLib.TimeVal | null): boolean;};
 	}
 
+	export interface PixbufFormatInitOptions {}
 	/**
 	 * A `GdkPixbufFormat` contains information about the image format accepted
 	 * by a module.
@@ -1833,7 +1871,7 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface PixbufFormat {}
 	class PixbufFormat {
-		public constructor();
+		public constructor(options?: Partial<PixbufFormatInitOptions>);
 		/**
 		 * the name of the image format
 		 */
@@ -1956,15 +1994,17 @@ declare namespace imports.gi.GdkPixbuf {
 		public set_disabled(disabled: boolean): void;
 	}
 
+	export interface PixbufLoaderClassInitOptions {}
 	interface PixbufLoaderClass {}
 	class PixbufLoaderClass {
-		public constructor();
+		public constructor(options?: Partial<PixbufLoaderClassInitOptions>);
 		public size_prepared: {(loader: PixbufLoader, width: number, height: number): void;};
 		public area_prepared: {(loader: PixbufLoader): void;};
 		public area_updated: {(loader: PixbufLoader, x: number, y: number, width: number, height: number): void;};
 		public closed: {(loader: PixbufLoader): void;};
 	}
 
+	export interface PixbufModuleInitOptions {}
 	/**
 	 * A `GdkPixbufModule` contains the necessary functions to load and save
 	 * images in a certain file format.
@@ -2014,7 +2054,7 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface PixbufModule {}
 	class PixbufModule {
-		public constructor();
+		public constructor(options?: Partial<PixbufModuleInitOptions>);
 		/**
 		 * the name of the module, usually the same as the
 		 *  usual file extension for images of this type, eg. "xpm", "jpeg" or "png".
@@ -2047,6 +2087,7 @@ declare namespace imports.gi.GdkPixbuf {
 		public _reserved4: {(): void;};
 	}
 
+	export interface PixbufModulePatternInitOptions {}
 	/**
 	 * The signature prefix for a module.
 	 * 
@@ -2081,7 +2122,7 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface PixbufModulePattern {}
 	class PixbufModulePattern {
-		public constructor();
+		public constructor(options?: Partial<PixbufModulePatternInitOptions>);
 		/**
 		 * the prefix for this pattern
 		 */
@@ -2097,9 +2138,10 @@ declare namespace imports.gi.GdkPixbuf {
 		public relevance: number;
 	}
 
+	export interface PixbufSimpleAnimClassInitOptions {}
 	interface PixbufSimpleAnimClass {}
 	class PixbufSimpleAnimClass {
-		public constructor();
+		public constructor(options?: Partial<PixbufSimpleAnimClassInitOptions>);
 	}
 
 	/**

@@ -1,4 +1,5 @@
 declare namespace imports.gi.GModule {
+	export interface ModuleInitOptions {}
 	/**
 	 * The #GModule struct is an opaque data structure to represent a
 	 * [dynamically-loaded module][glib-Dynamic-Loading-of-Modules].
@@ -6,7 +7,7 @@ declare namespace imports.gi.GModule {
 	 */
 	interface Module {}
 	class Module {
-		public constructor();
+		public constructor(options?: Partial<ModuleInitOptions>);
 		/**
 		 * Closes a module.
 		 * @returns %TRUE on success

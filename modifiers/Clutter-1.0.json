@@ -11,15 +11,6 @@
                             }
                         }
                     },
-                    "constructor": {
-                        "newParam": [
-                            {
-                                "name": "options",
-                                "optional": true,
-                                "type": "Partial<ActorOptions>"
-                            }
-                        ]
-                    },
                     "get_child_at_index": {
                         "return_type": {
                             "type": "T"
@@ -42,32 +33,6 @@
                     "y_align": {
                         "type_extension": [
                             "St.Align"
-                        ]
-                    }
-                }
-            },
-            "GridLayout": {
-                "function": {
-                    "constructor": {
-                        "newParam": [
-                            {
-                                "name": "options",
-                                "optional": true,
-                                "type": "any"
-                            }
-                        ]
-                    }
-                }
-            },
-            "Point": {
-                "function": {
-                    "constructor": {
-                        "newParam": [
-                            {
-                                "name": "options",
-                                "type": "Partial<PointOptions>",
-                                "optional": true
-                            }
                         ]
                     }
                 }

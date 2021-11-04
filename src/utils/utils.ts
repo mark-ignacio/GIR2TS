@@ -7,7 +7,7 @@ export function NeedNewLine(text: string): string {
 }
 
 export function BuildConstructorNode(class_name: string): FunctionNode {
-    return {
+    const node: FunctionNode = {
         _: "constructor",
         $: {
             name: "constructor"
@@ -28,9 +28,24 @@ export function BuildConstructorNode(class_name: string): FunctionNode {
                     name: "obj"
                 },
                 "parameter": [
-
+                    {
+                        "_": "",
+                        $: {
+                            name: "options?",
+                        },
+                        type: [
+                            {
+                                $: {
+                                    name: `Partial<${class_name}InitOptions>`
+                                },
+                                _: ""
+                            }
+                        ]
+                    }
                 ]
             }
         ]
     }
+
+    return node;
 }

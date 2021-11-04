@@ -13,6 +13,9 @@ declare namespace imports.gi.Gvc {
 
 	}
 
+	type ChannelMapInitOptionsMixin = GObject.ObjectInitOptions
+	export interface ChannelMapInitOptions extends ChannelMapInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ChannelMap} instead.
 	 */
@@ -21,7 +24,7 @@ declare namespace imports.gi.Gvc {
 	interface ChannelMap extends ChannelMapMixin {}
 
 	class ChannelMap {
-		public constructor();
+		public constructor(options?: Partial<ChannelMapInitOptions>);
 		public static new(): ChannelMap;
 	}
 
@@ -65,6 +68,18 @@ declare namespace imports.gi.Gvc {
 
 	}
 
+	type MixerCardInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IMixerCard,
+		"human_profile" |
+		"icon_name" |
+		"id" |
+		"index" |
+		"name" |
+		"pa_context" |
+		"profile">;
+
+	export interface MixerCardInitOptions extends MixerCardInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerCard} instead.
 	 */
@@ -73,7 +88,7 @@ declare namespace imports.gi.Gvc {
 	interface MixerCard extends MixerCardMixin {}
 
 	class MixerCard {
-		public constructor();
+		public constructor(options?: Partial<MixerCardInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -127,6 +142,12 @@ declare namespace imports.gi.Gvc {
 
 	}
 
+	type MixerControlInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IMixerControl,
+		"name">;
+
+	export interface MixerControlInitOptions extends MixerControlInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerControl} instead.
 	 */
@@ -135,7 +156,7 @@ declare namespace imports.gi.Gvc {
 	interface MixerControl extends MixerControlMixin {}
 
 	class MixerControl {
-		public constructor();
+		public constructor(options?: Partial<MixerControlInitOptions>);
 		public static new(name: string): MixerControl;
 	}
 
@@ -149,6 +170,12 @@ declare namespace imports.gi.Gvc {
 
 	}
 
+	type MixerEventRoleInitOptionsMixin = MixerStreamInitOptions & 
+	Pick<IMixerEventRole,
+		"device">;
+
+	export interface MixerEventRoleInitOptions extends MixerEventRoleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerEventRole} instead.
 	 */
@@ -157,7 +184,7 @@ declare namespace imports.gi.Gvc {
 	interface MixerEventRole extends MixerEventRoleMixin {}
 
 	class MixerEventRole {
-		public constructor();
+		public constructor(options?: Partial<MixerEventRoleInitOptions>);
 		public static new(context: any | null, device: string, channel_map: ChannelMap): MixerStream;
 	}
 
@@ -168,6 +195,9 @@ declare namespace imports.gi.Gvc {
 
 	}
 
+	type MixerSinkInitOptionsMixin = MixerStreamInitOptions
+	export interface MixerSinkInitOptions extends MixerSinkInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSink} instead.
 	 */
@@ -176,7 +206,7 @@ declare namespace imports.gi.Gvc {
 	interface MixerSink extends MixerSinkMixin {}
 
 	class MixerSink {
-		public constructor();
+		public constructor(options?: Partial<MixerSinkInitOptions>);
 		public static new(context: any | null, index: number, channel_map: ChannelMap): MixerStream;
 	}
 
@@ -187,6 +217,9 @@ declare namespace imports.gi.Gvc {
 
 	}
 
+	type MixerSinkInputInitOptionsMixin = MixerStreamInitOptions
+	export interface MixerSinkInputInitOptions extends MixerSinkInputInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSinkInput} instead.
 	 */
@@ -195,7 +228,7 @@ declare namespace imports.gi.Gvc {
 	interface MixerSinkInput extends MixerSinkInputMixin {}
 
 	class MixerSinkInput {
-		public constructor();
+		public constructor(options?: Partial<MixerSinkInputInitOptions>);
 		public static new(context: any | null, index: number, channel_map: ChannelMap): MixerStream;
 	}
 
@@ -206,6 +239,9 @@ declare namespace imports.gi.Gvc {
 
 	}
 
+	type MixerSourceInitOptionsMixin = MixerStreamInitOptions
+	export interface MixerSourceInitOptions extends MixerSourceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSource} instead.
 	 */
@@ -214,7 +250,7 @@ declare namespace imports.gi.Gvc {
 	interface MixerSource extends MixerSourceMixin {}
 
 	class MixerSource {
-		public constructor();
+		public constructor(options?: Partial<MixerSourceInitOptions>);
 		public static new(context: any | null, index: number, channel_map: ChannelMap): MixerStream;
 	}
 
@@ -225,6 +261,9 @@ declare namespace imports.gi.Gvc {
 
 	}
 
+	type MixerSourceOutputInitOptionsMixin = MixerStreamInitOptions
+	export interface MixerSourceOutputInitOptions extends MixerSourceOutputInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSourceOutput} instead.
 	 */
@@ -233,7 +272,7 @@ declare namespace imports.gi.Gvc {
 	interface MixerSourceOutput extends MixerSourceOutputMixin {}
 
 	class MixerSourceOutput {
-		public constructor();
+		public constructor(options?: Partial<MixerSourceOutputInitOptions>);
 		public static new(context: any | null, index: number, channel_map: ChannelMap): MixerStream;
 	}
 
@@ -324,6 +363,30 @@ declare namespace imports.gi.Gvc {
 
 	}
 
+	type MixerStreamInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IMixerStream,
+		"application_id" |
+		"can_decibel" |
+		"card_index" |
+		"channel_map" |
+		"decibel" |
+		"description" |
+		"form_factor" |
+		"icon_name" |
+		"id" |
+		"index" |
+		"is_event_stream" |
+		"is_muted" |
+		"is_virtual" |
+		"name" |
+		"pa_context" |
+		"port" |
+		"state" |
+		"sysfs_path" |
+		"volume">;
+
+	export interface MixerStreamInitOptions extends MixerStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerStream} instead.
 	 */
@@ -332,7 +395,7 @@ declare namespace imports.gi.Gvc {
 	interface MixerStream extends MixerStreamMixin {}
 
 	class MixerStream {
-		public constructor();
+		public constructor(options?: Partial<MixerStreamInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -399,6 +462,19 @@ declare namespace imports.gi.Gvc {
 
 	}
 
+	type MixerUIDeviceInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IMixerUIDevice,
+		"card" |
+		"description" |
+		"icon_name" |
+		"origin" |
+		"port_available" |
+		"port_name" |
+		"stream_id" |
+		"type">;
+
+	export interface MixerUIDeviceInitOptions extends MixerUIDeviceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerUIDevice} instead.
 	 */
@@ -407,28 +483,32 @@ declare namespace imports.gi.Gvc {
 	interface MixerUIDevice extends MixerUIDeviceMixin {}
 
 	class MixerUIDevice {
-		public constructor();
+		public constructor(options?: Partial<MixerUIDeviceInitOptions>);
 	}
 
+	export interface ChannelMapClassInitOptions {}
 	interface ChannelMapClass {}
 	class ChannelMapClass {
-		public constructor();
+		public constructor(options?: Partial<ChannelMapClassInitOptions>);
 		public volume_changed: {(channel_map: ChannelMap, set: boolean): void;};
 	}
 
+	export interface ChannelMapPrivateInitOptions {}
 	interface ChannelMapPrivate {}
 	class ChannelMapPrivate {
-		public constructor();
+		public constructor(options?: Partial<ChannelMapPrivateInitOptions>);
 	}
 
+	export interface MixerCardClassInitOptions {}
 	interface MixerCardClass {}
 	class MixerCardClass {
-		public constructor();
+		public constructor(options?: Partial<MixerCardClassInitOptions>);
 	}
 
+	export interface MixerCardPortInitOptions {}
 	interface MixerCardPort {}
 	class MixerCardPort {
-		public constructor();
+		public constructor(options?: Partial<MixerCardPortInitOptions>);
 		public port: string;
 		public human_port: string;
 		public icon_name: string;
@@ -438,14 +518,16 @@ declare namespace imports.gi.Gvc {
 		public profiles: GLib.List;
 	}
 
+	export interface MixerCardPrivateInitOptions {}
 	interface MixerCardPrivate {}
 	class MixerCardPrivate {
-		public constructor();
+		public constructor(options?: Partial<MixerCardPrivateInitOptions>);
 	}
 
+	export interface MixerCardProfileInitOptions {}
 	interface MixerCardProfile {}
 	class MixerCardProfile {
-		public constructor();
+		public constructor(options?: Partial<MixerCardProfileInitOptions>);
 		public profile: string;
 		public human_profile: string;
 		public status: string;
@@ -455,9 +537,10 @@ declare namespace imports.gi.Gvc {
 		public compare(b: MixerCardProfile): number;
 	}
 
+	export interface MixerControlClassInitOptions {}
 	interface MixerControlClass {}
 	class MixerControlClass {
-		public constructor();
+		public constructor(options?: Partial<MixerControlClassInitOptions>);
 		public state_changed: {(control: MixerControl, new_state: MixerControlState): void;};
 		public stream_added: {(control: MixerControl, id: number): void;};
 		public stream_changed: {(control: MixerControl, id: number): void;};
@@ -475,91 +558,107 @@ declare namespace imports.gi.Gvc {
 		public audio_device_selection_needed: {(control: MixerControl, id: number, show_dialog: boolean, choices: HeadsetPortChoice): void;};
 	}
 
+	export interface MixerControlPrivateInitOptions {}
 	interface MixerControlPrivate {}
 	class MixerControlPrivate {
-		public constructor();
+		public constructor(options?: Partial<MixerControlPrivateInitOptions>);
 	}
 
+	export interface MixerEventRoleClassInitOptions {}
 	interface MixerEventRoleClass {}
 	class MixerEventRoleClass {
-		public constructor();
+		public constructor(options?: Partial<MixerEventRoleClassInitOptions>);
 	}
 
+	export interface MixerEventRolePrivateInitOptions {}
 	interface MixerEventRolePrivate {}
 	class MixerEventRolePrivate {
-		public constructor();
+		public constructor(options?: Partial<MixerEventRolePrivateInitOptions>);
 	}
 
+	export interface MixerSinkClassInitOptions {}
 	interface MixerSinkClass {}
 	class MixerSinkClass {
-		public constructor();
+		public constructor(options?: Partial<MixerSinkClassInitOptions>);
 	}
 
+	export interface MixerSinkInputClassInitOptions {}
 	interface MixerSinkInputClass {}
 	class MixerSinkInputClass {
-		public constructor();
+		public constructor(options?: Partial<MixerSinkInputClassInitOptions>);
 	}
 
+	export interface MixerSinkInputPrivateInitOptions {}
 	interface MixerSinkInputPrivate {}
 	class MixerSinkInputPrivate {
-		public constructor();
+		public constructor(options?: Partial<MixerSinkInputPrivateInitOptions>);
 	}
 
+	export interface MixerSinkPrivateInitOptions {}
 	interface MixerSinkPrivate {}
 	class MixerSinkPrivate {
-		public constructor();
+		public constructor(options?: Partial<MixerSinkPrivateInitOptions>);
 	}
 
+	export interface MixerSourceClassInitOptions {}
 	interface MixerSourceClass {}
 	class MixerSourceClass {
-		public constructor();
+		public constructor(options?: Partial<MixerSourceClassInitOptions>);
 	}
 
+	export interface MixerSourceOutputClassInitOptions {}
 	interface MixerSourceOutputClass {}
 	class MixerSourceOutputClass {
-		public constructor();
+		public constructor(options?: Partial<MixerSourceOutputClassInitOptions>);
 	}
 
+	export interface MixerSourceOutputPrivateInitOptions {}
 	interface MixerSourceOutputPrivate {}
 	class MixerSourceOutputPrivate {
-		public constructor();
+		public constructor(options?: Partial<MixerSourceOutputPrivateInitOptions>);
 	}
 
+	export interface MixerSourcePrivateInitOptions {}
 	interface MixerSourcePrivate {}
 	class MixerSourcePrivate {
-		public constructor();
+		public constructor(options?: Partial<MixerSourcePrivateInitOptions>);
 	}
 
+	export interface MixerStreamClassInitOptions {}
 	interface MixerStreamClass {}
 	class MixerStreamClass {
-		public constructor();
+		public constructor(options?: Partial<MixerStreamClassInitOptions>);
 		public push_volume: {(stream: MixerStream, operation: any | null): boolean;};
 		public change_is_muted: {(stream: MixerStream, is_muted: boolean): boolean;};
 		public change_port: {(stream: MixerStream, port: string): boolean;};
 	}
 
+	export interface MixerStreamPortInitOptions {}
 	interface MixerStreamPort {}
 	class MixerStreamPort {
-		public constructor();
+		public constructor(options?: Partial<MixerStreamPortInitOptions>);
 		public port: string;
 		public human_port: string;
 		public priority: number;
 		public available: boolean;
 	}
 
+	export interface MixerStreamPrivateInitOptions {}
 	interface MixerStreamPrivate {}
 	class MixerStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<MixerStreamPrivateInitOptions>);
 	}
 
+	export interface MixerUIDeviceClassInitOptions {}
 	interface MixerUIDeviceClass {}
 	class MixerUIDeviceClass {
-		public constructor();
+		public constructor(options?: Partial<MixerUIDeviceClassInitOptions>);
 	}
 
+	export interface MixerUIDevicePrivateInitOptions {}
 	interface MixerUIDevicePrivate {}
 	class MixerUIDevicePrivate {
-		public constructor();
+		public constructor(options?: Partial<MixerUIDevicePrivateInitOptions>);
 	}
 
 	enum MixerControlState {

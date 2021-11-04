@@ -1,0 +1,21 @@
+{
+    "$schema": "./schema.json",
+    "amend": {
+        "class": {
+            "ScrollView": {
+                "function": {
+                    "get_hscroll_bar": {
+                        "return_type": {
+                            "type": "ScrollBar"
+                        }
+                    },
+                    "get_vscroll_bar": {
+                        "return_type": {
+                            "type": "ScrollBar"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

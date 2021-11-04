@@ -2,20 +2,6 @@
     "$schema": "./schema.json",
     "amend": {
         "class": {
-            "FileIcon": {
-                "function": {
-                    "constructor": {
-                        "newParam": [
-                            {
-                                "type": "Partial<FileIconOptions>",
-                                "optional": true,
-                                "name": "options",
-                                "docs": ""
-                            }
-                        ]
-                    }
-                }
-            },
             "File": {
                 "function": {
                     "replace_contents": {
@@ -56,20 +42,6 @@
                                 "type_extension": ["null"]
                             }
                         }
-                    }
-                }
-            },
-            "Settings": {
-                "function": {
-                    "constructor": {
-                        "newParam": [
-                            {
-                                "type": "Partial<SettingsInitOptions>",
-                                "optional": true,
-                                "name": "options",
-                                "docs": ""
-                            }
-                        ]
                     }
                 }
             },

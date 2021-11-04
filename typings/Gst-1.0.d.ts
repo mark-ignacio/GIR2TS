@@ -77,6 +77,20 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type AllocatorInitOptionsMixin = ObjectInitOptions & 
+	Pick<IAllocator,
+		"object" |
+		"mem_type" |
+		"mem_map" |
+		"mem_unmap" |
+		"mem_copy" |
+		"mem_share" |
+		"mem_is_span" |
+		"mem_map_full" |
+		"mem_unmap_full">;
+
+	export interface AllocatorInitOptions extends AllocatorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Allocator} instead.
 	 */
@@ -98,7 +112,7 @@ declare namespace imports.gi.Gst {
 	interface Allocator extends AllocatorMixin {}
 
 	class Allocator {
-		public constructor();
+		public constructor(options?: Partial<AllocatorInitOptions>);
 		/**
 		 * Find a previously registered allocator with #name. When #name is %NULL, the
 		 * default allocator will be returned.
@@ -433,6 +447,24 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type BinInitOptionsMixin = ElementInitOptions & ChildProxyInitOptions & 
+	Pick<IBin,
+		"async_handling" |
+		"message_forward" |
+		"element" |
+		"numchildren" |
+		"children" |
+		"children_cookie" |
+		"child_bus" |
+		"messages" |
+		"polling" |
+		"state_dirty" |
+		"clock_dirty" |
+		"provided_clock" |
+		"clock_provider">;
+
+	export interface BinInitOptions extends BinInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bin} instead.
 	 */
@@ -539,7 +571,7 @@ declare namespace imports.gi.Gst {
 	interface Bin extends BinMixin {}
 
 	class Bin {
-		public constructor();
+		public constructor(options?: Partial<BinInitOptions>);
 		/**
 		 * Creates a new bin with the given name.
 		 * @param name the name of the new bin
@@ -555,6 +587,9 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type BitmaskInitOptionsMixin  = {};
+	export interface BitmaskInitOptions extends BitmaskInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bitmask} instead.
 	 */
@@ -566,7 +601,7 @@ declare namespace imports.gi.Gst {
 	interface Bitmask extends BitmaskMixin {}
 
 	class Bitmask {
-		public constructor();
+		public constructor(options?: Partial<BitmaskInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -670,6 +705,13 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type BufferPoolInitOptionsMixin = ObjectInitOptions & 
+	Pick<IBufferPool,
+		"object" |
+		"flushing">;
+
+	export interface BufferPoolInitOptions extends BufferPoolInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BufferPool} instead.
 	 */
@@ -717,7 +759,7 @@ declare namespace imports.gi.Gst {
 	interface BufferPool extends BufferPoolMixin {}
 
 	class BufferPool {
-		public constructor();
+		public constructor(options?: Partial<BufferPoolInitOptions>);
 		/**
 		 * Creates a new {@link BufferPool} instance.
 		 * @returns a new {@link BufferPool} instance
@@ -1164,6 +1206,12 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type BusInitOptionsMixin = ObjectInitOptions & 
+	Pick<IBus,
+		"object">;
+
+	export interface BusInitOptions extends BusInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bus} instead.
 	 */
@@ -1213,7 +1261,7 @@ declare namespace imports.gi.Gst {
 	interface Bus extends BusMixin {}
 
 	class Bus {
-		public constructor();
+		public constructor(options?: Partial<BusInitOptions>);
 		/**
 		 * Creates a new {@link Bus} instance.
 		 * @returns a new {@link Bus} instance
@@ -1533,6 +1581,15 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type ClockInitOptionsMixin = ObjectInitOptions & 
+	Pick<IClock,
+		"timeout" |
+		"window_size" |
+		"window_threshold" |
+		"object">;
+
+	export interface ClockInitOptions extends ClockInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clock} instead.
 	 */
@@ -1615,7 +1672,7 @@ declare namespace imports.gi.Gst {
 	interface Clock extends ClockMixin {}
 
 	class Clock {
-		public constructor();
+		public constructor(options?: Partial<ClockInitOptions>);
 		/**
 		 * Compares the two {@link ClockID} instances. This function can be used
 		 * as a GCompareFunc when sorting ids.
@@ -1808,6 +1865,15 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type ControlBindingInitOptionsMixin = ObjectInitOptions & 
+	Pick<IControlBinding,
+		"name" |
+		"object" |
+		"name" |
+		"pspec">;
+
+	export interface ControlBindingInitOptions extends ControlBindingInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ControlBinding} instead.
 	 */
@@ -1822,7 +1888,7 @@ declare namespace imports.gi.Gst {
 	interface ControlBinding extends ControlBindingMixin {}
 
 	class ControlBinding {
-		public constructor();
+		public constructor(options?: Partial<ControlBindingInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1858,6 +1924,13 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type ControlSourceInitOptionsMixin = ObjectInitOptions & 
+	Pick<IControlSource,
+		"get_value" |
+		"get_value_array">;
+
+	export interface ControlSourceInitOptions extends ControlSourceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ControlSource} instead.
 	 */
@@ -1881,7 +1954,7 @@ declare namespace imports.gi.Gst {
 	interface ControlSource extends ControlSourceMixin {}
 
 	class ControlSource {
-		public constructor();
+		public constructor(options?: Partial<ControlSourceInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1960,6 +2033,15 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type DeviceInitOptionsMixin = ObjectInitOptions & 
+	Pick<IDevice,
+		"caps" |
+		"device_class" |
+		"display_name" |
+		"properties">;
+
+	export interface DeviceInitOptions extends DeviceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Device} instead.
 	 */
@@ -1976,7 +2058,7 @@ declare namespace imports.gi.Gst {
 	interface Device extends DeviceMixin {}
 
 	class Device {
-		public constructor();
+		public constructor(options?: Partial<DeviceInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2057,6 +2139,12 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type DeviceMonitorInitOptionsMixin = ObjectInitOptions & 
+	Pick<IDeviceMonitor,
+		"show_all">;
+
+	export interface DeviceMonitorInitOptions extends DeviceMonitorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceMonitor} instead.
 	 */
@@ -2128,7 +2216,7 @@ declare namespace imports.gi.Gst {
 	interface DeviceMonitor extends DeviceMonitorMixin {}
 
 	class DeviceMonitor {
-		public constructor();
+		public constructor(options?: Partial<DeviceMonitorInitOptions>);
 		/**
 		 * Create a new {@link DeviceMonitor}
 		 * @returns a new device monitor.
@@ -2257,6 +2345,12 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type DeviceProviderInitOptionsMixin = ObjectInitOptions & 
+	Pick<IDeviceProvider,
+		"devices">;
+
+	export interface DeviceProviderInitOptions extends DeviceProviderInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceProvider} instead.
 	 */
@@ -2276,7 +2370,7 @@ declare namespace imports.gi.Gst {
 	interface DeviceProvider extends DeviceProviderMixin {}
 
 	class DeviceProvider {
-		public constructor();
+		public constructor(options?: Partial<DeviceProviderInitOptions>);
 		/**
 		 * Create a new device providerfactory capable of instantiating objects of the
 		 * #type and add the factory to #plugin.
@@ -2338,6 +2432,9 @@ declare namespace imports.gi.Gst {
 		has_classesv(classes: string[] | null): boolean;
 	}
 
+	type DeviceProviderFactoryInitOptionsMixin = PluginFeatureInitOptions
+	export interface DeviceProviderFactoryInitOptions extends DeviceProviderFactoryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceProviderFactory} instead.
 	 */
@@ -2356,7 +2453,7 @@ declare namespace imports.gi.Gst {
 	interface DeviceProviderFactory extends DeviceProviderFactoryMixin {}
 
 	class DeviceProviderFactory {
-		public constructor();
+		public constructor(options?: Partial<DeviceProviderFactoryInitOptions>);
 		/**
 		 * Search for an device provider factory of the given name. Refs the returned
 		 * device provider factory; caller is responsible for unreffing.
@@ -2391,6 +2488,9 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type DoubleRangeInitOptionsMixin  = {};
+	export interface DoubleRangeInitOptions extends DoubleRangeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DoubleRange} instead.
 	 */
@@ -2402,7 +2502,7 @@ declare namespace imports.gi.Gst {
 	interface DoubleRange extends DoubleRangeMixin {}
 
 	class DoubleRange {
-		public constructor();
+		public constructor(options?: Partial<DoubleRangeInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2411,6 +2511,9 @@ declare namespace imports.gi.Gst {
 	interface IDynamicTypeFactory {
 
 	}
+
+	type DynamicTypeFactoryInitOptionsMixin = PluginFeatureInitOptions
+	export interface DynamicTypeFactoryInitOptions extends DynamicTypeFactoryInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DynamicTypeFactory} instead.
@@ -2441,7 +2544,7 @@ declare namespace imports.gi.Gst {
 	interface DynamicTypeFactory extends DynamicTypeFactoryMixin {}
 
 	class DynamicTypeFactory {
-		public constructor();
+		public constructor(options?: Partial<DynamicTypeFactoryInitOptions>);
 		public static load(factoryname: string): GObject.Type;
 	}
 
@@ -3371,6 +3474,32 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type ElementInitOptionsMixin = ObjectInitOptions & 
+	Pick<IElement,
+		"object" |
+		"state_lock" |
+		"state_cond" |
+		"state_cookie" |
+		"target_state" |
+		"current_state" |
+		"next_state" |
+		"pending_state" |
+		"last_return" |
+		"bus" |
+		"clock" |
+		"base_time" |
+		"start_time" |
+		"numpads" |
+		"pads" |
+		"numsrcpads" |
+		"srcpads" |
+		"numsinkpads" |
+		"sinkpads" |
+		"pads_cookie" |
+		"contexts">;
+
+	export interface ElementInitOptions extends ElementInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Element} instead.
 	 */
@@ -3430,7 +3559,7 @@ declare namespace imports.gi.Gst {
 	interface Element extends ElementMixin {}
 
 	class Element {
-		public constructor();
+		public constructor(options?: Partial<ElementInitOptions>);
 		/**
 		 * Creates an element for handling the given URI.
 		 * @param type Whether to create a source or a sink
@@ -3565,6 +3694,9 @@ declare namespace imports.gi.Gst {
 		list_is_type(type: ElementFactoryListType): boolean;
 	}
 
+	type ElementFactoryInitOptionsMixin = PluginFeatureInitOptions
+	export interface ElementFactoryInitOptions extends ElementFactoryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ElementFactory} instead.
 	 */
@@ -3600,7 +3732,7 @@ declare namespace imports.gi.Gst {
 	interface ElementFactory extends ElementFactoryMixin {}
 
 	class ElementFactory {
-		public constructor();
+		public constructor(options?: Partial<ElementFactoryInitOptions>);
 		/**
 		 * Search for an element factory of the given name. Refs the returned
 		 * element factory; caller is responsible for unreffing.
@@ -3658,6 +3790,9 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type FlagSetInitOptionsMixin  = {};
+	export interface FlagSetInitOptions extends FlagSetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlagSet} instead.
 	 */
@@ -3670,7 +3805,7 @@ declare namespace imports.gi.Gst {
 	interface FlagSet extends FlagSetMixin {}
 
 	class FlagSet {
-		public constructor();
+		public constructor(options?: Partial<FlagSetInitOptions>);
 		/**
 		 * Create a new sub-class of #GST_TYPE_FLAG_SET
 		 * which will pretty-print the human-readable flags
@@ -3688,6 +3823,9 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type FractionInitOptionsMixin  = {};
+	export interface FractionInitOptions extends FractionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Fraction} instead.
 	 */
@@ -3700,7 +3838,7 @@ declare namespace imports.gi.Gst {
 	interface Fraction extends FractionMixin {}
 
 	class Fraction {
-		public constructor();
+		public constructor(options?: Partial<FractionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3709,6 +3847,9 @@ declare namespace imports.gi.Gst {
 	interface IFractionRange {
 
 	}
+
+	type FractionRangeInitOptionsMixin  = {};
+	export interface FractionRangeInitOptions extends FractionRangeInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FractionRange} instead.
@@ -3721,7 +3862,7 @@ declare namespace imports.gi.Gst {
 	interface FractionRange extends FractionRangeMixin {}
 
 	class FractionRange {
-		public constructor();
+		public constructor(options?: Partial<FractionRangeInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3759,6 +3900,12 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type GhostPadInitOptionsMixin = ProxyPadInitOptions & 
+	Pick<IGhostPad,
+		"pad">;
+
+	export interface GhostPadInitOptions extends GhostPadInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GhostPad} instead.
 	 */
@@ -3782,7 +3929,7 @@ declare namespace imports.gi.Gst {
 	interface GhostPad extends GhostPadMixin {}
 
 	class GhostPad {
-		public constructor();
+		public constructor(options?: Partial<GhostPadInitOptions>);
 		/**
 		 * Create a new ghostpad with #target as the target. The direction will be taken
 		 * from the target pad. #target must be unlinked.
@@ -3855,6 +4002,9 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type Int64RangeInitOptionsMixin  = {};
+	export interface Int64RangeInitOptions extends Int64RangeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Int64Range} instead.
 	 */
@@ -3866,7 +4016,7 @@ declare namespace imports.gi.Gst {
 	interface Int64Range extends Int64RangeMixin {}
 
 	class Int64Range {
-		public constructor();
+		public constructor(options?: Partial<Int64RangeInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3875,6 +4025,9 @@ declare namespace imports.gi.Gst {
 	interface IIntRange {
 
 	}
+
+	type IntRangeInitOptionsMixin  = {};
+	export interface IntRangeInitOptions extends IntRangeInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IntRange} instead.
@@ -3887,7 +4040,7 @@ declare namespace imports.gi.Gst {
 	interface IntRange extends IntRangeMixin {}
 
 	class IntRange {
-		public constructor();
+		public constructor(options?: Partial<IntRangeInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4174,6 +4327,16 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type ObjectInitOptionsMixin = GObject.InitiallyUnownedInitOptions & 
+	Pick<IObject,
+		"name" |
+		"object" |
+		"lock" |
+		"name" |
+		"flags">;
+
+	export interface ObjectInitOptions extends ObjectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Object} instead.
 	 */
@@ -4233,7 +4396,7 @@ declare namespace imports.gi.Gst {
 	interface Object extends ObjectMixin {}
 
 	class Object {
-		public constructor();
+		public constructor(options?: Partial<ObjectInitOptions>);
 		/**
 		 * Checks to see if there is any object named #name in #list. This function
 		 * does not do any locking of any kind. You might want to protect the
@@ -5250,6 +5413,19 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type PadInitOptionsMixin = ObjectInitOptions & 
+	Pick<IPad,
+		"caps" |
+		"direction" |
+		"offset" |
+		"template" |
+		"object" |
+		"element_private" |
+		"padtemplate" |
+		"direction">;
+
+	export interface PadInitOptions extends PadInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Pad} instead.
 	 */
@@ -5319,7 +5495,7 @@ declare namespace imports.gi.Gst {
 	interface Pad extends PadMixin {}
 
 	class Pad {
-		public constructor();
+		public constructor(options?: Partial<PadInitOptions>);
 		/**
 		 * Creates a new pad with the given name in the given direction.
 		 * If name is %NULL, a guaranteed unique name (across all pads)
@@ -5432,6 +5608,21 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type PadTemplateInitOptionsMixin = ObjectInitOptions & 
+	Pick<IPadTemplate,
+		"caps" |
+		"direction" |
+		"gtype" |
+		"name_template" |
+		"presence" |
+		"object" |
+		"name_template" |
+		"direction" |
+		"presence" |
+		"caps">;
+
+	export interface PadTemplateInitOptions extends PadTemplateInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PadTemplate} instead.
 	 */
@@ -5502,7 +5693,7 @@ declare namespace imports.gi.Gst {
 	interface PadTemplate extends PadTemplateMixin {}
 
 	class PadTemplate {
-		public constructor();
+		public constructor(options?: Partial<PadTemplateInitOptions>);
 		/**
 		 * Creates a new pad template with a name according to the given template
 		 * and with the given arguments.
@@ -5540,6 +5731,9 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type ParamArrayInitOptionsMixin = GObject.ParamSpecInitOptions
+	export interface ParamArrayInitOptions extends ParamArrayInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamArray} instead.
 	 */
@@ -5552,7 +5746,7 @@ declare namespace imports.gi.Gst {
 	interface ParamArray extends ParamArrayMixin {}
 
 	class ParamArray {
-		public constructor();
+		public constructor(options?: Partial<ParamArrayInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5561,6 +5755,9 @@ declare namespace imports.gi.Gst {
 	interface IParamFraction {
 
 	}
+
+	type ParamFractionInitOptionsMixin = GObject.ParamSpecInitOptions
+	export interface ParamFractionInitOptions extends ParamFractionInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamFraction} instead.
@@ -5574,7 +5771,7 @@ declare namespace imports.gi.Gst {
 	interface ParamFraction extends ParamFractionMixin {}
 
 	class ParamFraction {
-		public constructor();
+		public constructor(options?: Partial<ParamFractionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5750,6 +5947,18 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type PipelineInitOptionsMixin = BinInitOptions & ChildProxyInitOptions & 
+	Pick<IPipeline,
+		"auto_flush_bus" |
+		"delay" |
+		"latency" |
+		"bin" |
+		"fixed_clock" |
+		"stream_time" |
+		"delay">;
+
+	export interface PipelineInitOptions extends PipelineInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Pipeline} instead.
 	 */
@@ -5805,7 +6014,7 @@ declare namespace imports.gi.Gst {
 	interface Pipeline extends PipelineMixin {}
 
 	class Pipeline {
-		public constructor();
+		public constructor(options?: Partial<PipelineInitOptions>);
 		/**
 		 * Create a new pipeline with the given name.
 		 * @param name name of new pipeline
@@ -5960,6 +6169,9 @@ declare namespace imports.gi.Gst {
 		set_cache_data(cache_data: Structure): void;
 	}
 
+	type PluginInitOptionsMixin = ObjectInitOptions
+	export interface PluginInitOptions extends PluginInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plugin} instead.
 	 */
@@ -5989,7 +6201,7 @@ declare namespace imports.gi.Gst {
 	interface Plugin extends PluginMixin {}
 
 	class Plugin {
-		public constructor();
+		public constructor(options?: Partial<PluginInitOptions>);
 		/**
 		 * Unrefs each member of #list, then frees the list.
 		 * @param list list of {@link Plugin}
@@ -6122,6 +6334,9 @@ declare namespace imports.gi.Gst {
 		set_rank(rank: number): void;
 	}
 
+	type PluginFeatureInitOptionsMixin = ObjectInitOptions
+	export interface PluginFeatureInitOptions extends PluginFeatureInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PluginFeature} instead.
 	 */
@@ -6133,7 +6348,7 @@ declare namespace imports.gi.Gst {
 	interface PluginFeature extends PluginFeatureMixin {}
 
 	class PluginFeature {
-		public constructor();
+		public constructor(options?: Partial<PluginFeatureInitOptions>);
 		/**
 		 * Copies the list of features. Caller should call #gst_plugin_feature_list_free
 		 * when done with the list.
@@ -6186,6 +6401,12 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type ProxyPadInitOptionsMixin = PadInitOptions & 
+	Pick<IProxyPad,
+		"pad">;
+
+	export interface ProxyPadInitOptions extends ProxyPadInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyPad} instead.
 	 */
@@ -6194,7 +6415,7 @@ declare namespace imports.gi.Gst {
 	interface ProxyPad extends ProxyPadMixin {}
 
 	class ProxyPad {
-		public constructor();
+		public constructor(options?: Partial<ProxyPadInitOptions>);
 		/**
 		 * Invoke the default chain function of the proxy pad.
 		 * @param pad a sink {@link Pad}, returns GST_FLOW_ERROR if not.
@@ -6404,6 +6625,12 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type RegistryInitOptionsMixin = ObjectInitOptions & 
+	Pick<IRegistry,
+		"object">;
+
+	export interface RegistryInitOptions extends RegistryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Registry} instead.
 	 */
@@ -6472,7 +6699,7 @@ declare namespace imports.gi.Gst {
 	interface Registry extends RegistryMixin {}
 
 	class Registry {
-		public constructor();
+		public constructor(options?: Partial<RegistryInitOptions>);
 		/**
 		 * By default GStreamer will perform scanning and rebuilding of the
 		 * registry file using a helper child process.
@@ -6581,6 +6808,17 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type StreamInitOptionsMixin = ObjectInitOptions & 
+	Pick<IStream,
+		"caps" |
+		"stream_flags" |
+		"stream_id" |
+		"stream_type" |
+		"tags" |
+		"stream_id">;
+
+	export interface StreamInitOptions extends StreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stream} instead.
 	 */
@@ -6603,7 +6841,7 @@ declare namespace imports.gi.Gst {
 	interface Stream extends StreamMixin {}
 
 	class Stream {
-		public constructor();
+		public constructor(options?: Partial<StreamInitOptions>);
 		/**
 		 * Create a new {@link Stream} for the given #stream_id, #caps, #type
 		 * and #flags
@@ -6652,6 +6890,12 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type StreamCollectionInitOptionsMixin = ObjectInitOptions & 
+	Pick<IStreamCollection,
+		"upstream_id">;
+
+	export interface StreamCollectionInitOptions extends StreamCollectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StreamCollection} instead.
 	 */
@@ -6678,7 +6922,7 @@ declare namespace imports.gi.Gst {
 	interface StreamCollection extends StreamCollectionMixin {}
 
 	class StreamCollection {
-		public constructor();
+		public constructor(options?: Partial<StreamCollectionInitOptions>);
 		/**
 		 * Create a new {@link StreamCollection}.
 		 * @param upstream_id The stream id of the parent stream
@@ -6699,6 +6943,13 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type SystemClockInitOptionsMixin = ClockInitOptions & 
+	Pick<ISystemClock,
+		"clock_type" |
+		"clock">;
+
+	export interface SystemClockInitOptions extends SystemClockInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SystemClock} instead.
 	 */
@@ -6718,7 +6969,7 @@ declare namespace imports.gi.Gst {
 	interface SystemClock extends SystemClockMixin {}
 
 	class SystemClock {
-		public constructor();
+		public constructor(options?: Partial<SystemClockInitOptions>);
 		/**
 		 * Get a handle to the default system clock. The refcount of the
 		 * clock will be increased so you need to unref the clock after
@@ -6898,6 +7149,19 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type TaskInitOptionsMixin = ObjectInitOptions & 
+	Pick<ITask,
+		"object" |
+		"state" |
+		"cond" |
+		"lock" |
+		"func" |
+		"user_data" |
+		"notify" |
+		"running">;
+
+	export interface TaskInitOptions extends TaskInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Task} instead.
 	 */
@@ -6947,7 +7211,7 @@ declare namespace imports.gi.Gst {
 	interface Task extends TaskMixin {}
 
 	class Task {
-		public constructor();
+		public constructor(options?: Partial<TaskInitOptions>);
 		/**
 		 * Create a new Task that will repeatedly call the provided #func
 		 * with #user_data as a parameter. Typically the task will run in
@@ -7014,6 +7278,12 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type TaskPoolInitOptionsMixin = ObjectInitOptions & 
+	Pick<ITaskPool,
+		"object">;
+
+	export interface TaskPoolInitOptions extends TaskPoolInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TaskPool} instead.
 	 */
@@ -7028,7 +7298,7 @@ declare namespace imports.gi.Gst {
 	interface TaskPool extends TaskPoolMixin {}
 
 	class TaskPool {
-		public constructor();
+		public constructor(options?: Partial<TaskPoolInitOptions>);
 		/**
 		 * Create a new default task pool. The default task pool will use a regular
 		 * GThreadPool for threads.
@@ -7047,6 +7317,12 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type TracerInitOptionsMixin = ObjectInitOptions & 
+	Pick<ITracer,
+		"params">;
+
+	export interface TracerInitOptions extends TracerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Tracer} instead.
 	 */
@@ -7061,7 +7337,7 @@ declare namespace imports.gi.Gst {
 	interface Tracer extends TracerMixin {}
 
 	class Tracer {
-		public constructor();
+		public constructor(options?: Partial<TracerInitOptions>);
 		/**
 		 * Create a new tracer-factory  capable of instantiating objects of the
 		 * #type and add the factory to #plugin.
@@ -7087,6 +7363,9 @@ declare namespace imports.gi.Gst {
 		get_tracer_type(): GObject.Type;
 	}
 
+	type TracerFactoryInitOptionsMixin = PluginFeatureInitOptions
+	export interface TracerFactoryInitOptions extends TracerFactoryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TracerFactory} instead.
 	 */
@@ -7099,7 +7378,7 @@ declare namespace imports.gi.Gst {
 	interface TracerFactory extends TracerFactoryMixin {}
 
 	class TracerFactory {
-		public constructor();
+		public constructor(options?: Partial<TracerFactoryInitOptions>);
 		/**
 		 * Gets the list of all registered tracer factories. You must free the
 		 * list using gst_plugin_feature_list_free().
@@ -7128,6 +7407,9 @@ declare namespace imports.gi.Gst {
 		log(): void;
 	}
 
+	type TracerRecordInitOptionsMixin = ObjectInitOptions
+	export interface TracerRecordInitOptions extends TracerRecordInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TracerRecord} instead.
 	 */
@@ -7140,7 +7422,7 @@ declare namespace imports.gi.Gst {
 	interface TracerRecord extends TracerRecordMixin {}
 
 	class TracerRecord {
-		public constructor();
+		public constructor(options?: Partial<TracerRecordInitOptions>);
 		/**
 		 * Create a new tracer record. The record instance can be used to efficiently
 		 * log entries using gst_tracer_record_log().
@@ -7199,6 +7481,9 @@ declare namespace imports.gi.Gst {
 		 */
 		has_function(): boolean;
 	}
+
+	type TypeFindFactoryInitOptionsMixin = PluginFeatureInitOptions
+	export interface TypeFindFactoryInitOptions extends TypeFindFactoryInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TypeFindFactory} instead.
@@ -7259,7 +7544,7 @@ declare namespace imports.gi.Gst {
 	interface TypeFindFactory extends TypeFindFactoryMixin {}
 
 	class TypeFindFactory {
-		public constructor();
+		public constructor(options?: Partial<TypeFindFactoryInitOptions>);
 		/**
 		 * Gets the list of all registered typefind factories. You must free the
 		 * list using gst_plugin_feature_list_free().
@@ -7281,6 +7566,9 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type ValueArrayInitOptionsMixin  = {};
+	export interface ValueArrayInitOptions extends ValueArrayInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ValueArray} instead.
 	 */
@@ -7292,7 +7580,7 @@ declare namespace imports.gi.Gst {
 	interface ValueArray extends ValueArrayMixin {}
 
 	class ValueArray {
-		public constructor();
+		public constructor(options?: Partial<ValueArrayInitOptions>);
 		/**
 		 * Appends #append_value to the GstValueArray in #value.
 		 * @param value a #GValue of type #GST_TYPE_ARRAY
@@ -7341,6 +7629,9 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type ValueListInitOptionsMixin  = {};
+	export interface ValueListInitOptions extends ValueListInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ValueList} instead.
 	 */
@@ -7352,7 +7643,7 @@ declare namespace imports.gi.Gst {
 	interface ValueList extends ValueListMixin {}
 
 	class ValueList {
-		public constructor();
+		public constructor(options?: Partial<ValueListInitOptions>);
 		/**
 		 * Appends #append_value to the GstValueList in #value.
 		 * @param value a #GValue of type #GST_TYPE_LIST
@@ -7415,12 +7706,13 @@ declare namespace imports.gi.Gst {
 		public static prepend_value(value: GObject.Value, prepend_value: GObject.Value): void;
 	}
 
+	export interface AllocationParamsInitOptions {}
 	/**
 	 * Parameters to control the allocation of memory
 	 */
 	interface AllocationParams {}
 	class AllocationParams {
-		public constructor();
+		public constructor(options?: Partial<AllocationParamsInitOptions>);
 		/**
 		 * flags to control allocation
 		 */
@@ -7456,12 +7748,13 @@ declare namespace imports.gi.Gst {
 		public init(): void;
 	}
 
+	export interface AllocatorClassInitOptions {}
 	/**
 	 * The {@link Allocator} is used to create new memory.
 	 */
 	interface AllocatorClass {}
 	class AllocatorClass {
-		public constructor();
+		public constructor(options?: Partial<AllocatorClassInitOptions>);
 		/**
 		 * Object parent class
 		 */
@@ -7471,18 +7764,20 @@ declare namespace imports.gi.Gst {
 		public free: {(allocator: Allocator, memory: Memory): void;};
 	}
 
+	export interface AllocatorPrivateInitOptions {}
 	interface AllocatorPrivate {}
 	class AllocatorPrivate {
-		public constructor();
+		public constructor(options?: Partial<AllocatorPrivateInitOptions>);
 	}
 
+	export interface AtomicQueueInitOptions {}
 	/**
 	 * The {@link AtomicQueue} object implements a queue that can be used from multiple
 	 * threads without performing any blocking operations.
 	 */
 	interface AtomicQueue {}
 	class AtomicQueue {
-		public constructor();
+		public constructor(options?: Partial<AtomicQueueInitOptions>);
 		/**
 		 * Create a new atomic queue instance. #initial_size will be rounded up to the
 		 * nearest power of 2 and used as the initial size of the queue.
@@ -7522,6 +7817,7 @@ declare namespace imports.gi.Gst {
 		public unref(): void;
 	}
 
+	export interface BinClassInitOptions {}
 	/**
 	 * Subclasses can override the #add_element and #remove_element to
 	 * update the list of children in the bin.
@@ -7538,7 +7834,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface BinClass {}
 	class BinClass {
-		public constructor();
+		public constructor(options?: Partial<BinClassInitOptions>);
 		public readonly pool: GLib.ThreadPool;
 		public readonly _gst_reserved: any[];
 		public element_added: {(bin: Bin, child: Element): void;};
@@ -7551,11 +7847,13 @@ declare namespace imports.gi.Gst {
 		public deep_element_removed: {(bin: Bin, sub_bin: Bin, child: Element): void;};
 	}
 
+	export interface BinPrivateInitOptions {}
 	interface BinPrivate {}
 	class BinPrivate {
-		public constructor();
+		public constructor(options?: Partial<BinPrivateInitOptions>);
 	}
 
+	export interface BufferInitOptions {}
 	/**
 	 * Buffers are the basic unit of data transfer in GStreamer. They contain the
 	 * timing and offset along with other arbitrary metadata that is associated
@@ -7648,7 +7946,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Buffer {}
 	class Buffer {
-		public constructor();
+		public constructor(options?: Partial<BufferInitOptions>);
 		/**
 		 * Creates a newly allocated buffer without any data.
 		 * 
@@ -8216,6 +8514,7 @@ declare namespace imports.gi.Gst {
 		public unset_flags(flags: BufferFlags): boolean;
 	}
 
+	export interface BufferListInitOptions {}
 	/**
 	 * Buffer lists are an object containing a list of buffers.
 	 * 
@@ -8228,7 +8527,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface BufferList {}
 	class BufferList {
-		public constructor();
+		public constructor(options?: Partial<BufferListInitOptions>);
 		/**
 		 * Creates a new, empty {@link BufferList}. The caller is responsible for unreffing
 		 * the returned #GstBufferList.
@@ -8317,6 +8616,7 @@ declare namespace imports.gi.Gst {
 		public remove(idx: number, length: number): void;
 	}
 
+	export interface BufferPoolAcquireParamsInitOptions {}
 	/**
 	 * Parameters passed to the gst_buffer_pool_acquire_buffer() function to control the
 	 * allocation of the buffer.
@@ -8327,7 +8627,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface BufferPoolAcquireParams {}
 	class BufferPoolAcquireParams {
-		public constructor();
+		public constructor(options?: Partial<BufferPoolAcquireParamsInitOptions>);
 		/**
 		 * the format of #start and #stop
 		 */
@@ -8347,12 +8647,13 @@ declare namespace imports.gi.Gst {
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface BufferPoolClassInitOptions {}
 	/**
 	 * The GstBufferPool class.
 	 */
 	interface BufferPoolClass {}
 	class BufferPoolClass {
-		public constructor();
+		public constructor(options?: Partial<BufferPoolClassInitOptions>);
 		/**
 		 * Object parent class
 		 */
@@ -8371,24 +8672,28 @@ declare namespace imports.gi.Gst {
 		public flush_stop: {(pool: BufferPool): void;};
 	}
 
+	export interface BufferPoolPrivateInitOptions {}
 	interface BufferPoolPrivate {}
 	class BufferPoolPrivate {
-		public constructor();
+		public constructor(options?: Partial<BufferPoolPrivateInitOptions>);
 	}
 
+	export interface BusClassInitOptions {}
 	interface BusClass {}
 	class BusClass {
-		public constructor();
+		public constructor(options?: Partial<BusClassInitOptions>);
 		public readonly _gst_reserved: any[];
 		public message: {(bus: Bus, message: Message): void;};
 		public sync_message: {(bus: Bus, message: Message): void;};
 	}
 
+	export interface BusPrivateInitOptions {}
 	interface BusPrivate {}
 	class BusPrivate {
-		public constructor();
+		public constructor(options?: Partial<BusPrivateInitOptions>);
 	}
 
+	export interface CapsInitOptions {}
 	/**
 	 * Caps (capabilities) are lightweight refcounted objects describing media types.
 	 * They are composed of an array of {@link Structure}.
@@ -8427,7 +8732,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Caps {}
 	class Caps {
-		public constructor();
+		public constructor(options?: Partial<CapsInitOptions>);
 		/**
 		 * Creates a new {@link Caps} that indicates that it is compatible with
 		 * any media format.
@@ -8830,6 +9135,7 @@ declare namespace imports.gi.Gst {
 		public truncate(): Caps;
 	}
 
+	export interface CapsFeaturesInitOptions {}
 	/**
 	 * {@link CapsFeatures} can optionally be set on a #GstCaps to add requirements
 	 * for additional features for a specific #GstStructure. Caps structures with
@@ -8852,7 +9158,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface CapsFeatures {}
 	class CapsFeatures {
-		public constructor();
+		public constructor(options?: Partial<CapsFeaturesInitOptions>);
 		/**
 		 * Creates a new {@link CapsFeatures} with the given features.
 		 * The last argument must be %NULL.
@@ -9002,12 +9308,13 @@ declare namespace imports.gi.Gst {
 		public to_string(): string;
 	}
 
+	export interface ChildProxyInterfaceInitOptions {}
 	/**
 	 * {@link ChildProxy} interface.
 	 */
 	interface ChildProxyInterface {}
 	class ChildProxyInterface {
-		public constructor();
+		public constructor(options?: Partial<ChildProxyInterfaceInitOptions>);
 		public readonly _gst_reserved: any[];
 		public get_child_by_name: {(parent: ChildProxy, name: string): GObject.Object | null;};
 		public get_child_by_index: {(parent: ChildProxy, index: number): GObject.Object | null;};
@@ -9016,13 +9323,14 @@ declare namespace imports.gi.Gst {
 		public child_removed: {(parent: ChildProxy, child: GObject.Object, name: string): void;};
 	}
 
+	export interface ClockClassInitOptions {}
 	/**
 	 * GStreamer clock class. Override the vmethods to implement the clock
 	 * functionality.
 	 */
 	interface ClockClass {}
 	class ClockClass {
-		public constructor();
+		public constructor(options?: Partial<ClockClassInitOptions>);
 		public readonly _gst_reserved: any[];
 		public change_resolution: {(clock: Clock, old_resolution: ClockTime, new_resolution: ClockTime): ClockTime;};
 		public get_resolution: {(clock: Clock): ClockTime;};
@@ -9032,6 +9340,7 @@ declare namespace imports.gi.Gst {
 		public unschedule: {(clock: Clock, entry: ClockEntry): void;};
 	}
 
+	export interface ClockEntryInitOptions {}
 	/**
 	 * All pending timeouts or periodic notifies are converted into
 	 * an entry.
@@ -9040,7 +9349,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface ClockEntry {}
 	class ClockEntry {
-		public constructor();
+		public constructor(options?: Partial<ClockEntryInitOptions>);
 		/**
 		 * reference counter (read-only)
 		 */
@@ -9058,11 +9367,13 @@ declare namespace imports.gi.Gst {
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface ClockPrivateInitOptions {}
 	interface ClockPrivate {}
 	class ClockPrivate {
-		public constructor();
+		public constructor(options?: Partial<ClockPrivateInitOptions>);
 	}
 
+	export interface ContextInitOptions {}
 	/**
 	 * {@link Context} is a container object used to store contexts like a device
 	 * context, a display server connection and similar concepts that should
@@ -9095,7 +9406,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Context {}
 	class Context {
-		public constructor();
+		public constructor(options?: Partial<ContextInitOptions>);
 		/**
 		 * Create a new context.
 		 * @param context_type Context type
@@ -9136,12 +9447,13 @@ declare namespace imports.gi.Gst {
 		public writable_structure(): Structure;
 	}
 
+	export interface ControlBindingClassInitOptions {}
 	/**
 	 * The class structure of {@link ControlBinding}.
 	 */
 	interface ControlBindingClass {}
 	class ControlBindingClass {
-		public constructor();
+		public constructor(options?: Partial<ControlBindingClassInitOptions>);
 		public readonly _gst_reserved: any[];
 		public sync_values: {(binding: ControlBinding, object: Object, timestamp: ClockTime, last_sync: ClockTime): boolean;};
 		public get_value: {(binding: ControlBinding, timestamp: ClockTime): GObject.Value | null;};
@@ -9149,20 +9461,23 @@ declare namespace imports.gi.Gst {
 		public get_g_value_array: {(binding: ControlBinding, timestamp: ClockTime, interval: ClockTime, n_values: number, values: GObject.Value[]): boolean;};
 	}
 
+	export interface ControlBindingPrivateInitOptions {}
 	interface ControlBindingPrivate {}
 	class ControlBindingPrivate {
-		public constructor();
+		public constructor(options?: Partial<ControlBindingPrivateInitOptions>);
 	}
 
+	export interface ControlSourceClassInitOptions {}
 	/**
 	 * The class structure of {@link ControlSource}.
 	 */
 	interface ControlSourceClass {}
 	class ControlSourceClass {
-		public constructor();
+		public constructor(options?: Partial<ControlSourceClassInitOptions>);
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface DateTimeInitOptions {}
 	/**
 	 * Struct to store date, time and timezone information altogether.
 	 * {@link DateTime} is refcounted and immutable.
@@ -9173,7 +9488,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface DateTime {}
 	class DateTime {
-		public constructor();
+		public constructor(options?: Partial<DateTimeInitOptions>);
 		/**
 		 * Creates a new {@link DateTime} using the date and times in the gregorian calendar
 		 * in the supplied timezone.
@@ -9435,13 +9750,14 @@ declare namespace imports.gi.Gst {
 		public unref(): void;
 	}
 
+	export interface DebugCategoryInitOptions {}
 	/**
 	 * This is the struct that describes the categories. Once initialized with
 	 * #GST_DEBUG_CATEGORY_INIT, its values can't be changed anymore.
 	 */
 	interface DebugCategory {}
 	class DebugCategory {
-		public constructor();
+		public constructor(options?: Partial<DebugCategoryInitOptions>);
 		public readonly threshold: number;
 		public readonly color: number;
 		public readonly name: string;
@@ -9491,9 +9807,10 @@ declare namespace imports.gi.Gst {
 		public set_threshold(level: DebugLevel): void;
 	}
 
+	export interface DebugMessageInitOptions {}
 	interface DebugMessage {}
 	class DebugMessage {
-		public constructor();
+		public constructor(options?: Partial<DebugMessageInitOptions>);
 		/**
 		 * Gets the string representation of a {@link DebugMessage}. This function is used
 		 * in debug handlers to extract the message.
@@ -9502,42 +9819,47 @@ declare namespace imports.gi.Gst {
 		public get(): string | null;
 	}
 
+	export interface DeviceClassInitOptions {}
 	/**
 	 * The class structure for a {@link Device} object.
 	 */
 	interface DeviceClass {}
 	class DeviceClass {
-		public constructor();
+		public constructor(options?: Partial<DeviceClassInitOptions>);
 		public readonly _gst_reserved: any[];
 		public create_element: {(device: Device, name: string | null): Element | null;};
 		public reconfigure_element: {(device: Device, element: Element): boolean;};
 	}
 
+	export interface DeviceMonitorClassInitOptions {}
 	/**
 	 * Opaque device monitor class structure.
 	 */
 	interface DeviceMonitorClass {}
 	class DeviceMonitorClass {
-		public constructor();
+		public constructor(options?: Partial<DeviceMonitorClassInitOptions>);
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface DeviceMonitorPrivateInitOptions {}
 	interface DeviceMonitorPrivate {}
 	class DeviceMonitorPrivate {
-		public constructor();
+		public constructor(options?: Partial<DeviceMonitorPrivateInitOptions>);
 	}
 
+	export interface DevicePrivateInitOptions {}
 	interface DevicePrivate {}
 	class DevicePrivate {
-		public constructor();
+		public constructor(options?: Partial<DevicePrivateInitOptions>);
 	}
 
+	export interface DeviceProviderClassInitOptions {}
 	/**
 	 * The structure of the base {@link DeviceProviderClass}
 	 */
 	interface DeviceProviderClass {}
 	class DeviceProviderClass {
-		public constructor();
+		public constructor(options?: Partial<DeviceProviderClassInitOptions>);
 		/**
 		 * a pointer to the {@link DeviceProviderFactory} that creates this
 		 *  provider
@@ -9608,31 +9930,35 @@ declare namespace imports.gi.Gst {
 		public set_static_metadata(longname: string, classification: string, description: string, author: string): void;
 	}
 
+	export interface DeviceProviderFactoryClassInitOptions {}
 	/**
 	 * The opaque {@link DeviceProviderFactoryClass} data structure.
 	 */
 	interface DeviceProviderFactoryClass {}
 	class DeviceProviderFactoryClass {
-		public constructor();
+		public constructor(options?: Partial<DeviceProviderFactoryClassInitOptions>);
 	}
 
+	export interface DeviceProviderPrivateInitOptions {}
 	interface DeviceProviderPrivate {}
 	class DeviceProviderPrivate {
-		public constructor();
+		public constructor(options?: Partial<DeviceProviderPrivateInitOptions>);
 	}
 
+	export interface DynamicTypeFactoryClassInitOptions {}
 	interface DynamicTypeFactoryClass {}
 	class DynamicTypeFactoryClass {
-		public constructor();
+		public constructor(options?: Partial<DynamicTypeFactoryClassInitOptions>);
 	}
 
+	export interface ElementClassInitOptions {}
 	/**
 	 * GStreamer element class. Override the vmethods to implement the element
 	 * functionality.
 	 */
 	interface ElementClass {}
 	class ElementClass {
-		public constructor();
+		public constructor(options?: Partial<ElementClassInitOptions>);
 		/**
 		 * metadata for elements of this class
 		 */
@@ -9775,11 +10101,13 @@ declare namespace imports.gi.Gst {
 		public set_static_metadata(longname: string, classification: string, description: string, author: string): void;
 	}
 
+	export interface ElementFactoryClassInitOptions {}
 	interface ElementFactoryClass {}
 	class ElementFactoryClass {
-		public constructor();
+		public constructor(options?: Partial<ElementFactoryClassInitOptions>);
 	}
 
+	export interface EventInitOptions {}
 	/**
 	 * The event class provides factory methods to construct events for sending
 	 * and functions to query (parse) received events.
@@ -9825,7 +10153,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Event {}
 	class Event {
-		public constructor();
+		public constructor(options?: Partial<EventInitOptions>);
 		/**
 		 * Create a new buffersize event. The event is sent downstream and notifies
 		 * elements that they should provide a buffer of the specified dimensions.
@@ -10608,12 +10936,13 @@ declare namespace imports.gi.Gst {
 		public writable_structure(): Structure;
 	}
 
+	export interface FormatDefinitionInitOptions {}
 	/**
 	 * A format definition
 	 */
 	interface FormatDefinition {}
 	class FormatDefinition {
-		public constructor();
+		public constructor(options?: Partial<FormatDefinitionInitOptions>);
 		/**
 		 * The unique id of this format
 		 */
@@ -10632,17 +10961,20 @@ declare namespace imports.gi.Gst {
 		public quark: GLib.Quark;
 	}
 
+	export interface GhostPadClassInitOptions {}
 	interface GhostPadClass {}
 	class GhostPadClass {
-		public constructor();
+		public constructor(options?: Partial<GhostPadClassInitOptions>);
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface GhostPadPrivateInitOptions {}
 	interface GhostPadPrivate {}
 	class GhostPadPrivate {
-		public constructor();
+		public constructor(options?: Partial<GhostPadPrivateInitOptions>);
 	}
 
+	export interface IteratorInitOptions {}
 	/**
 	 * A GstIterator is used to retrieve multiple objects from another object in
 	 * a threadsafe way.
@@ -10685,7 +11017,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Iterator {}
 	class Iterator {
-		public constructor();
+		public constructor(options?: Partial<IteratorInitOptions>);
 		/**
 		 * Create a new iterator. This function is mainly used for objects
 		 * implementing the next/resync/free function to iterate a data structure.
@@ -10914,13 +11246,14 @@ declare namespace imports.gi.Gst {
 		public resync(): void;
 	}
 
+	export interface MapInfoInitOptions {}
 	/**
 	 * A structure containing the result of a map operation such as
 	 * gst_memory_map(). It contains the data and size.
 	 */
 	interface MapInfo {}
 	class MapInfo {
-		public constructor();
+		public constructor(options?: Partial<MapInfoInitOptions>);
 		/**
 		 * a pointer to the mapped memory
 		 */
@@ -10949,6 +11282,7 @@ declare namespace imports.gi.Gst {
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface MemoryInitOptions {}
 	/**
 	 * GstMemory is a lightweight refcounted object that wraps a region of memory.
 	 * They are typically used to manage the data of a {@link Buffer}.
@@ -10989,7 +11323,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Memory {}
 	class Memory {
-		public constructor();
+		public constructor(options?: Partial<MemoryInitOptions>);
 		/**
 		 * Allocate a new memory block that wraps the given #data.
 		 * 
@@ -11130,6 +11464,7 @@ declare namespace imports.gi.Gst {
 		public unmap(info: MapInfo): void;
 	}
 
+	export interface MessageInitOptions {}
 	/**
 	 * Messages are implemented as a subclass of {@link MiniObject} with a generic
 	 * #GstStructure as the content. This allows for writing custom messages without
@@ -11149,7 +11484,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Message {}
 	class Message {
-		public constructor();
+		public constructor(options?: Partial<MessageInitOptions>);
 		/**
 		 * Create a new application-typed message. GStreamer will never create these
 		 * messages; they are a gift from us to you. Enjoy.
@@ -12289,6 +12624,7 @@ declare namespace imports.gi.Gst {
 		public writable_structure(): Structure;
 	}
 
+	export interface MetaInitOptions {}
 	/**
 	 * The {@link Meta} structure should be included as the first member of a #GstBuffer
 	 * metadata structure. The structure defines the API of the metadata and should
@@ -12312,7 +12648,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Meta {}
 	class Meta {
-		public constructor();
+		public constructor(options?: Partial<MetaInitOptions>);
 		/**
 		 * extra flags for the metadata
 		 */
@@ -12337,13 +12673,14 @@ declare namespace imports.gi.Gst {
 		public get_seqnum(): number;
 	}
 
+	export interface MetaInfoInitOptions {}
 	/**
 	 * The {@link MetaInfo} provides information about a specific metadata
 	 * structure.
 	 */
 	interface MetaInfo {}
 	class MetaInfo {
-		public constructor();
+		public constructor(options?: Partial<MetaInfoInitOptions>);
 		/**
 		 * tag identifying the metadata structure and api
 		 */
@@ -12370,12 +12707,13 @@ declare namespace imports.gi.Gst {
 		public transform_func: MetaTransformFunction;
 	}
 
+	export interface MetaTransformCopyInitOptions {}
 	/**
 	 * Extra data passed to a "gst-copy" transform {@link MetaTransformFunction}.
 	 */
 	interface MetaTransformCopy {}
 	class MetaTransformCopy {
-		public constructor();
+		public constructor(options?: Partial<MetaTransformCopyInitOptions>);
 		/**
 		 * %TRUE if only region is copied
 		 */
@@ -12390,6 +12728,7 @@ declare namespace imports.gi.Gst {
 		public size: number;
 	}
 
+	export interface MiniObjectInitOptions {}
 	/**
 	 * {@link MiniObject} is a simple structure that can be used to implement refcounted
 	 * types.
@@ -12420,7 +12759,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface MiniObject {}
 	class MiniObject {
-		public constructor();
+		public constructor(options?: Partial<MiniObjectInitOptions>);
 		/**
 		 * the GType of the object
 		 */
@@ -12594,12 +12933,13 @@ declare namespace imports.gi.Gst {
 		public weak_unref(notify: MiniObjectNotify, data: any | null): void;
 	}
 
+	export interface ObjectClassInitOptions {}
 	/**
 	 * GStreamer base object class.
 	 */
 	interface ObjectClass {}
 	class ObjectClass {
-		public constructor();
+		public constructor(options?: Partial<ObjectClassInitOptions>);
 		/**
 		 * separator used by gst_object_get_path_string()
 		 */
@@ -12608,25 +12948,28 @@ declare namespace imports.gi.Gst {
 		public deep_notify: {(object: Object, orig: Object, pspec: GObject.ParamSpec): void;};
 	}
 
+	export interface PadClassInitOptions {}
 	interface PadClass {}
 	class PadClass {
-		public constructor();
+		public constructor(options?: Partial<PadClassInitOptions>);
 		public readonly _gst_reserved: any[];
 		public linked: {(pad: Pad, peer: Pad): void;};
 		public unlinked: {(pad: Pad, peer: Pad): void;};
 	}
 
+	export interface PadPrivateInitOptions {}
 	interface PadPrivate {}
 	class PadPrivate {
-		public constructor();
+		public constructor(options?: Partial<PadPrivateInitOptions>);
 	}
 
+	export interface PadProbeInfoInitOptions {}
 	/**
 	 * Info passed in the {@link PadProbeCallback}.
 	 */
 	interface PadProbeInfo {}
 	class PadProbeInfo {
-		public constructor();
+		public constructor(options?: Partial<PadProbeInfoInitOptions>);
 		/**
 		 * the current probe type
 		 */
@@ -12656,32 +12999,35 @@ declare namespace imports.gi.Gst {
 		public get_query(): Query | null;
 	}
 
+	export interface PadTemplateClassInitOptions {}
 	interface PadTemplateClass {}
 	class PadTemplateClass {
-		public constructor();
+		public constructor(options?: Partial<PadTemplateClassInitOptions>);
 		public readonly _gst_reserved: any[];
 		public pad_created: {(templ: PadTemplate, pad: Pad): void;};
 	}
 
+	export interface ParamSpecArrayInitOptions {}
 	/**
 	 * A GParamSpec derived structure for arrays of values.
 	 */
 	interface ParamSpecArray {}
 	class ParamSpecArray {
-		public constructor();
+		public constructor(options?: Partial<ParamSpecArrayInitOptions>);
 		/**
 		 * the #GParamSpec of the type of values in the array
 		 */
 		public element_spec: GObject.ParamSpec;
 	}
 
+	export interface ParamSpecFractionInitOptions {}
 	/**
 	 * A GParamSpec derived structure that contains the meta data for fractional
 	 * properties.
 	 */
 	interface ParamSpecFraction {}
 	class ParamSpecFraction {
-		public constructor();
+		public constructor(options?: Partial<ParamSpecFractionInitOptions>);
 		/**
 		 * minimal numerator
 		 */
@@ -12708,6 +13054,7 @@ declare namespace imports.gi.Gst {
 		public def_den: number;
 	}
 
+	export interface ParentBufferMetaInitOptions {}
 	/**
 	 * The {@link ParentBufferMeta} is a #GstMeta which can be attached to a #GstBuffer
 	 * to hold a reference to another buffer that is only released when the child
@@ -12720,19 +13067,20 @@ declare namespace imports.gi.Gst {
 	 */
 	interface ParentBufferMeta {}
 	class ParentBufferMeta {
-		public constructor();
+		public constructor(options?: Partial<ParentBufferMetaInitOptions>);
 		/**
 		 * the {@link Buffer} on which a reference is being held.
 		 */
 		public buffer: Buffer;
 	}
 
+	export interface ParseContextInitOptions {}
 	/**
 	 * Opaque structure.
 	 */
 	interface ParseContext {}
 	class ParseContext {
-		public constructor();
+		public constructor(options?: Partial<ParseContextInitOptions>);
 		/**
 		 * Allocates a parse context for use with gst_parse_launch_full() or
 		 * gst_parse_launchv_full().
@@ -12762,22 +13110,26 @@ declare namespace imports.gi.Gst {
 		public get_missing_elements(): string[] | null;
 	}
 
+	export interface PipelineClassInitOptions {}
 	interface PipelineClass {}
 	class PipelineClass {
-		public constructor();
+		public constructor(options?: Partial<PipelineClassInitOptions>);
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface PipelinePrivateInitOptions {}
 	interface PipelinePrivate {}
 	class PipelinePrivate {
-		public constructor();
+		public constructor(options?: Partial<PipelinePrivateInitOptions>);
 	}
 
+	export interface PluginClassInitOptions {}
 	interface PluginClass {}
 	class PluginClass {
-		public constructor();
+		public constructor(options?: Partial<PluginClassInitOptions>);
 	}
 
+	export interface PluginDescInitOptions {}
 	/**
 	 * A plugin should export a variable of this type called plugin_desc. The plugin
 	 * loader will use the data provided there to initialize the plugin.
@@ -12787,7 +13139,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface PluginDesc {}
 	class PluginDesc {
-		public constructor();
+		public constructor(options?: Partial<PluginDescInitOptions>);
 		/**
 		 * the major version number of core that plugin was compiled for
 		 */
@@ -12840,11 +13192,13 @@ declare namespace imports.gi.Gst {
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface PluginFeatureClassInitOptions {}
 	interface PluginFeatureClass {}
 	class PluginFeatureClass {
-		public constructor();
+		public constructor(options?: Partial<PluginFeatureClassInitOptions>);
 	}
 
+	export interface PollInitOptions {}
 	/**
 	 * A {@link Poll} keeps track of file descriptors much like fd_set (used with
 	 * select ()) or a struct pollfd array (used with poll ()). Once created with
@@ -12872,7 +13226,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Poll {}
 	class Poll {
-		public constructor();
+		public constructor(options?: Partial<PollInitOptions>);
 		/**
 		 * Add a file descriptor to the file descriptor set.
 		 * @param fd a file descriptor.
@@ -13044,12 +13398,13 @@ declare namespace imports.gi.Gst {
 		public write_control(): boolean;
 	}
 
+	export interface PollFDInitOptions {}
 	/**
 	 * A file descriptor object.
 	 */
 	interface PollFD {}
 	class PollFD {
-		public constructor();
+		public constructor(options?: Partial<PollFDInitOptions>);
 		/**
 		 * a file descriptor
 		 */
@@ -13062,12 +13417,13 @@ declare namespace imports.gi.Gst {
 		public init(): void;
 	}
 
+	export interface PresetInterfaceInitOptions {}
 	/**
 	 * {@link Preset} interface.
 	 */
 	interface PresetInterface {}
 	class PresetInterface {
-		public constructor();
+		public constructor(options?: Partial<PresetInterfaceInitOptions>);
 		public readonly _gst_reserved: any[];
 		public get_preset_names: {(preset: Preset): string[];};
 		public get_property_names: {(preset: Preset): string[];};
@@ -13079,6 +13435,7 @@ declare namespace imports.gi.Gst {
 		public get_meta: {(preset: Preset, name: string, tag: string): boolean;};
 	}
 
+	export interface PromiseInitOptions {}
 	/**
 	 * The {@link Promise} object implements the container for values that may
 	 * be available later. i.e. a Future or a Promise in
@@ -13136,7 +13493,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Promise {}
 	class Promise {
-		public constructor();
+		public constructor(options?: Partial<PromiseInitOptions>);
 		public static new(): Promise;
 		/**
 		 * #func will be called exactly once when transitioning out of
@@ -13184,13 +13541,14 @@ declare namespace imports.gi.Gst {
 		public wait(): PromiseResult;
 	}
 
+	export interface ProtectionMetaInitOptions {}
 	/**
 	 * Metadata type that holds information about a sample from a protection-protected
 	 * track, including the information needed to decrypt it (if it is encrypted).
 	 */
 	interface ProtectionMeta {}
 	class ProtectionMeta {
-		public constructor();
+		public constructor(options?: Partial<ProtectionMetaInitOptions>);
 		/**
 		 * the parent {@link Meta}.
 		 */
@@ -13201,17 +13559,20 @@ declare namespace imports.gi.Gst {
 		public info: Structure;
 	}
 
+	export interface ProxyPadClassInitOptions {}
 	interface ProxyPadClass {}
 	class ProxyPadClass {
-		public constructor();
+		public constructor(options?: Partial<ProxyPadClassInitOptions>);
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface ProxyPadPrivateInitOptions {}
 	interface ProxyPadPrivate {}
 	class ProxyPadPrivate {
-		public constructor();
+		public constructor(options?: Partial<ProxyPadPrivateInitOptions>);
 	}
 
+	export interface QueryInitOptions {}
 	/**
 	 * Queries can be performed on pads (gst_pad_query()) and elements
 	 * (gst_element_query()). Please note that some queries might need a running
@@ -13239,7 +13600,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Query {}
 	class Query {
-		public constructor();
+		public constructor(options?: Partial<QueryInitOptions>);
 		/**
 		 * Constructs a new query object for querying if #caps are accepted.
 		 * 
@@ -13933,6 +14294,7 @@ declare namespace imports.gi.Gst {
 		public writable_structure(): Structure;
 	}
 
+	export interface ReferenceTimestampMetaInitOptions {}
 	/**
 	 * {@link ReferenceTimestampMeta} can be used to attach alternative timestamps and
 	 * possibly durations to a #GstBuffer. These are generally not according to
@@ -13947,7 +14309,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface ReferenceTimestampMeta {}
 	class ReferenceTimestampMeta {
-		public constructor();
+		public constructor(options?: Partial<ReferenceTimestampMetaInitOptions>);
 		/**
 		 * identifier for the timestamp reference.
 		 */
@@ -13962,23 +14324,26 @@ declare namespace imports.gi.Gst {
 		public duration: ClockTime;
 	}
 
+	export interface RegistryClassInitOptions {}
 	interface RegistryClass {}
 	class RegistryClass {
-		public constructor();
+		public constructor(options?: Partial<RegistryClassInitOptions>);
 	}
 
+	export interface RegistryPrivateInitOptions {}
 	interface RegistryPrivate {}
 	class RegistryPrivate {
-		public constructor();
+		public constructor(options?: Partial<RegistryPrivateInitOptions>);
 	}
 
+	export interface SampleInitOptions {}
 	/**
 	 * A {@link Sample} is a small object containing data, a type, timing and
 	 * extra arbitrary information.
 	 */
 	interface Sample {}
 	class Sample {
-		public constructor();
+		public constructor(options?: Partial<SampleInitOptions>);
 		/**
 		 * Create a new {@link Sample} with the provided details.
 		 * 
@@ -14056,6 +14421,7 @@ declare namespace imports.gi.Gst {
 		public set_segment(segment: Segment): void;
 	}
 
+	export interface SegmentInitOptions {}
 	/**
 	 * This helper structure holds the relevant values for tracking the region of
 	 * interest in a media file, called a segment.
@@ -14106,7 +14472,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Segment {}
 	class Segment {
-		public constructor();
+		public constructor(options?: Partial<SegmentInitOptions>);
 		/**
 		 * Allocate a new {@link Segment} structure and initialize it using
 		 * gst_segment_init().
@@ -14464,6 +14830,7 @@ declare namespace imports.gi.Gst {
 		public to_stream_time_full(format: Format, position: number): number;
 	}
 
+	export interface StaticCapsInitOptions {}
 	/**
 	 * Datastructure to initialize {@link Caps} from a string description usually
 	 * used in conjunction with GST_STATIC_CAPS() and gst_static_caps_get() to
@@ -14471,7 +14838,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface StaticCaps {}
 	class StaticCaps {
-		public constructor();
+		public constructor(options?: Partial<StaticCapsInitOptions>);
 		/**
 		 * the cached {@link Caps}
 		 */
@@ -14495,12 +14862,13 @@ declare namespace imports.gi.Gst {
 		public get(): Caps | null;
 	}
 
+	export interface StaticPadTemplateInitOptions {}
 	/**
 	 * Structure describing the {@link StaticPadTemplate}.
 	 */
 	interface StaticPadTemplate {}
 	class StaticPadTemplate {
-		public constructor();
+		public constructor(options?: Partial<StaticPadTemplateInitOptions>);
 		/**
 		 * the name of the template
 		 */
@@ -14532,35 +14900,40 @@ declare namespace imports.gi.Gst {
 		public get_caps(): Caps;
 	}
 
+	export interface StreamClassInitOptions {}
 	/**
 	 * GstStream class structure
 	 */
 	interface StreamClass {}
 	class StreamClass {
-		public constructor();
+		public constructor(options?: Partial<StreamClassInitOptions>);
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface StreamCollectionClassInitOptions {}
 	/**
 	 * GstStreamCollection class structure
 	 */
 	interface StreamCollectionClass {}
 	class StreamCollectionClass {
-		public constructor();
+		public constructor(options?: Partial<StreamCollectionClassInitOptions>);
 		public readonly _gst_reserved: any[];
 		public stream_notify: {(collection: StreamCollection, stream: Stream, pspec: GObject.ParamSpec): void;};
 	}
 
+	export interface StreamCollectionPrivateInitOptions {}
 	interface StreamCollectionPrivate {}
 	class StreamCollectionPrivate {
-		public constructor();
+		public constructor(options?: Partial<StreamCollectionPrivateInitOptions>);
 	}
 
+	export interface StreamPrivateInitOptions {}
 	interface StreamPrivate {}
 	class StreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<StreamPrivateInitOptions>);
 	}
 
+	export interface StructureInitOptions {}
 	/**
 	 * A {@link Structure} is a collection of key/value pairs. The keys are expressed as
 	 * GQuarks and the values can be of any GType.
@@ -14664,7 +15037,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Structure {}
 	class Structure {
-		public constructor();
+		public constructor(options?: Partial<StructureInitOptions>);
 		/**
 		 * Creates a {@link Structure} from a string representation.
 		 * If end is not %NULL, a pointer to the place inside the given string
@@ -15305,17 +15678,20 @@ declare namespace imports.gi.Gst {
 		public to_string(): string;
 	}
 
+	export interface SystemClockClassInitOptions {}
 	interface SystemClockClass {}
 	class SystemClockClass {
-		public constructor();
+		public constructor(options?: Partial<SystemClockClassInitOptions>);
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface SystemClockPrivateInitOptions {}
 	interface SystemClockPrivate {}
 	class SystemClockPrivate {
-		public constructor();
+		public constructor(options?: Partial<SystemClockPrivateInitOptions>);
 	}
 
+	export interface TagListInitOptions {}
 	/**
 	 * List of tags and values used to describe media metadata.
 	 * 
@@ -15324,7 +15700,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface TagList {}
 	class TagList {
-		public constructor();
+		public constructor(options?: Partial<TagListInitOptions>);
 		/**
 		 * Creates a new taglist and appends the values for the given tags. It expects
 		 * tag-value pairs like gst_tag_list_add(), and a %NULL terminator after the
@@ -15757,31 +16133,34 @@ declare namespace imports.gi.Gst {
 		public to_string(): string | null;
 	}
 
+	export interface TagSetterInterfaceInitOptions {}
 	/**
 	 * {@link TagSetterInterface} interface.
 	 */
 	interface TagSetterInterface {}
 	class TagSetterInterface {
-		public constructor();
+		public constructor(options?: Partial<TagSetterInterfaceInitOptions>);
 		/**
 		 * parent interface type.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
+	export interface TaskClassInitOptions {}
 	interface TaskClass {}
 	class TaskClass {
-		public constructor();
+		public constructor(options?: Partial<TaskClassInitOptions>);
 		public readonly pool: TaskPool;
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface TaskPoolClassInitOptions {}
 	/**
 	 * The {@link TaskPoolClass} object.
 	 */
 	interface TaskPoolClass {}
 	class TaskPoolClass {
-		public constructor();
+		public constructor(options?: Partial<TaskPoolClassInitOptions>);
 		public readonly _gst_reserved: any[];
 		public prepare: {(pool: TaskPool): void;};
 		public cleanup: {(pool: TaskPool): void;};
@@ -15789,17 +16168,19 @@ declare namespace imports.gi.Gst {
 		public join: {(pool: TaskPool, id: any | null): void;};
 	}
 
+	export interface TaskPrivateInitOptions {}
 	interface TaskPrivate {}
 	class TaskPrivate {
-		public constructor();
+		public constructor(options?: Partial<TaskPrivateInitOptions>);
 	}
 
+	export interface TimedValueInitOptions {}
 	/**
 	 * Structure for saving a timestamp and a value.
 	 */
 	interface TimedValue {}
 	class TimedValue {
-		public constructor();
+		public constructor(options?: Partial<TimedValueInitOptions>);
 		/**
 		 * timestamp of the value change
 		 */
@@ -15810,6 +16191,7 @@ declare namespace imports.gi.Gst {
 		public value: number;
 	}
 
+	export interface TocInitOptions {}
 	/**
 	 * {@link Toc} functions are used to create/free #GstToc and #GstTocEntry structures.
 	 * Also they are used to convert #GstToc into #GstStructure and vice versa.
@@ -15859,7 +16241,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Toc {}
 	class Toc {
-		public constructor();
+		public constructor(options?: Partial<TocInitOptions>);
 		/**
 		 * Create a new {@link Toc} structure.
 		 * @param scope scope of this TOC
@@ -15904,9 +16286,10 @@ declare namespace imports.gi.Gst {
 		public set_tags(tags: TagList | null): void;
 	}
 
+	export interface TocEntryInitOptions {}
 	interface TocEntry {}
 	class TocEntry {
-		public constructor();
+		public constructor(options?: Partial<TocEntryInitOptions>);
 		/**
 		 * Create new {@link TocEntry} structure.
 		 * @param type entry type.
@@ -15988,46 +16371,52 @@ declare namespace imports.gi.Gst {
 		public set_tags(tags: TagList | null): void;
 	}
 
+	export interface TocSetterInterfaceInitOptions {}
 	/**
 	 * {@link TocSetterInterface} interface.
 	 */
 	interface TocSetterInterface {}
 	class TocSetterInterface {
-		public constructor();
+		public constructor(options?: Partial<TocSetterInterfaceInitOptions>);
 		/**
 		 * parent interface type.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
+	export interface TracerClassInitOptions {}
 	interface TracerClass {}
 	class TracerClass {
-		public constructor();
+		public constructor(options?: Partial<TracerClassInitOptions>);
 		public readonly _gst_reserved: any[];
 	}
 
+	export interface TracerFactoryClassInitOptions {}
 	interface TracerFactoryClass {}
 	class TracerFactoryClass {
-		public constructor();
+		public constructor(options?: Partial<TracerFactoryClassInitOptions>);
 	}
 
+	export interface TracerPrivateInitOptions {}
 	interface TracerPrivate {}
 	class TracerPrivate {
-		public constructor();
+		public constructor(options?: Partial<TracerPrivateInitOptions>);
 	}
 
+	export interface TracerRecordClassInitOptions {}
 	interface TracerRecordClass {}
 	class TracerRecordClass {
-		public constructor();
+		public constructor(options?: Partial<TracerRecordClassInitOptions>);
 	}
 
+	export interface TypeFindInitOptions {}
 	/**
 	 * The following functions allow you to detect the media type of an unknown
 	 * stream.
 	 */
 	interface TypeFind {}
 	class TypeFind {
-		public constructor();
+		public constructor(options?: Partial<TypeFindInitOptions>);
 		/**
 		 * The data used by the caller of the typefinding function.
 		 */
@@ -16082,23 +16471,26 @@ declare namespace imports.gi.Gst {
 		public suggest_simple(probability: number, media_type: string, fieldname: string | null): void;
 	}
 
+	export interface TypeFindFactoryClassInitOptions {}
 	interface TypeFindFactoryClass {}
 	class TypeFindFactoryClass {
-		public constructor();
+		public constructor(options?: Partial<TypeFindFactoryClassInitOptions>);
 	}
 
+	export interface URIHandlerInterfaceInitOptions {}
 	/**
 	 * Any {@link Element} using this interface should implement these methods.
 	 */
 	interface URIHandlerInterface {}
 	class URIHandlerInterface {
-		public constructor();
+		public constructor(options?: Partial<URIHandlerInterfaceInitOptions>);
 		public get_type: {(type: GObject.Type): URIType;};
 		public get_protocols: {(type: GObject.Type): string[];};
 		public get_uri: {(handler: URIHandler): string | null;};
 		public set_uri: {(handler: URIHandler, uri: string): boolean;};
 	}
 
+	export interface UriInitOptions {}
 	/**
 	 * A {@link Uri} object can be used to parse and split a URI string into its
 	 * constituent parts. Two #GstUri objects can be joined to make a new #GstUri
@@ -16106,7 +16498,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface Uri {}
 	class Uri {
-		public constructor();
+		public constructor(options?: Partial<UriInitOptions>);
 		/**
 		 * Creates a new {@link Uri} object with the given URI parts. The path and query
 		 * strings will be broken down into their elements. All strings should not be
@@ -16410,12 +16802,13 @@ declare namespace imports.gi.Gst {
 		public to_string(): string;
 	}
 
+	export interface ValueTableInitOptions {}
 	/**
 	 * VTable for the #GValue #type.
 	 */
 	interface ValueTable {}
 	class ValueTable {
-		public constructor();
+		public constructor(options?: Partial<ValueTableInitOptions>);
 		/**
 		 * a #GType
 		 */
@@ -16536,6 +16929,9 @@ declare namespace imports.gi.Gst {
 
 	}
 
+	type ChildProxyInitOptionsMixin  = {};
+	export interface ChildProxyInitOptions extends ChildProxyInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ChildProxy} instead.
 	 */
@@ -16559,7 +16955,7 @@ declare namespace imports.gi.Gst {
 	interface ChildProxy extends ChildProxyMixin {}
 
 	class ChildProxy {
-		public constructor();
+		public constructor(options?: Partial<ChildProxyInitOptions>);
 	}
 
 
@@ -16633,6 +17029,9 @@ declare namespace imports.gi.Gst {
 		set_meta(name: string, tag: string, value: string | null): boolean;
 	}
 
+	type PresetInitOptionsMixin  = {};
+	export interface PresetInitOptions extends PresetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Preset} instead.
 	 */
@@ -16666,7 +17065,7 @@ declare namespace imports.gi.Gst {
 	interface Preset extends PresetMixin {}
 
 	class Preset {
-		public constructor();
+		public constructor(options?: Partial<PresetInitOptions>);
 		/**
 		 * Gets the directory for application specific presets if set by the
 		 * application.
@@ -16762,6 +17161,9 @@ declare namespace imports.gi.Gst {
 		set_tag_merge_mode(mode: TagMergeMode): void;
 	}
 
+	type TagSetterInitOptionsMixin  = {};
+	export interface TagSetterInitOptions extends TagSetterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TagSetter} instead.
 	 */
@@ -16812,7 +17214,7 @@ declare namespace imports.gi.Gst {
 	interface TagSetter extends TagSetterMixin {}
 
 	class TagSetter {
-		public constructor();
+		public constructor(options?: Partial<TagSetterInitOptions>);
 	}
 
 
@@ -16841,6 +17243,9 @@ declare namespace imports.gi.Gst {
 		set_toc(toc: Toc | null): void;
 	}
 
+	type TocSetterInitOptionsMixin  = {};
+	export interface TocSetterInitOptions extends TocSetterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TocSetter} instead.
 	 */
@@ -16865,7 +17270,7 @@ declare namespace imports.gi.Gst {
 	interface TocSetter extends TocSetterMixin {}
 
 	class TocSetter {
-		public constructor();
+		public constructor(options?: Partial<TocSetterInitOptions>);
 	}
 
 
@@ -16905,6 +17310,9 @@ declare namespace imports.gi.Gst {
 		set_uri(uri: string): boolean;
 	}
 
+	type URIHandlerInitOptionsMixin  = {};
+	export interface URIHandlerInitOptions extends URIHandlerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link URIHandler} instead.
 	 */
@@ -16923,7 +17331,7 @@ declare namespace imports.gi.Gst {
 	interface URIHandler extends URIHandlerMixin {}
 
 	class URIHandler {
-		public constructor();
+		public constructor(options?: Partial<URIHandlerInitOptions>);
 	}
 
 

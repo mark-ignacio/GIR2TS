@@ -1,10 +1,11 @@
 declare namespace imports.gi.HarfBuzz {
+	export interface aat_layout_feature_selector_info_tInitOptions {}
 	/**
 	 * Structure representing a setting for an #hb_aat_layout_feature_type_t.
 	 */
 	interface aat_layout_feature_selector_info_t {}
 	class aat_layout_feature_selector_info_t {
-		public constructor();
+		public constructor(options?: Partial<aat_layout_feature_selector_info_tInitOptions>);
 		/**
 		 * The selector's name identifier
 		 */
@@ -20,6 +21,7 @@ declare namespace imports.gi.HarfBuzz {
 		public readonly reserved: number;
 	}
 
+	export interface blob_tInitOptions {}
 	/**
 	 * Data type for blobs. A blob wraps a chunk of binary
 	 * data and facilitates its lifecycle management between
@@ -27,26 +29,29 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface blob_t {}
 	class blob_t {
-		public constructor();
+		public constructor(options?: Partial<blob_tInitOptions>);
 	}
 
+	export interface buffer_tInitOptions {}
 	/**
 	 * The main structure holding the input text and its properties before shaping,
 	 * and output glyphs and their information after shaping.
 	 */
 	interface buffer_t {}
 	class buffer_t {
-		public constructor();
+		public constructor(options?: Partial<buffer_tInitOptions>);
 	}
 
+	export interface face_tInitOptions {}
 	/**
 	 * Data type for holding font faces.
 	 */
 	interface face_t {}
 	class face_t {
-		public constructor();
+		public constructor(options?: Partial<face_tInitOptions>);
 	}
 
+	export interface feature_tInitOptions {}
 	/**
 	 * The #hb_feature_t is the structure that holds information about requested
 	 * feature application. The feature will be applied with the given value to all
@@ -56,7 +61,7 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface feature_t {}
 	class feature_t {
-		public constructor();
+		public constructor(options?: Partial<feature_tInitOptions>);
 		/**
 		 * The #hb_tag_t tag of the feature
 		 */
@@ -86,6 +91,7 @@ declare namespace imports.gi.HarfBuzz {
 		public _string(): [ string[], number ];
 	}
 
+	export interface font_extents_tInitOptions {}
 	/**
 	 * Font-wide extent values, measured in font units.
 	 * 
@@ -94,7 +100,7 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface font_extents_t {}
 	class font_extents_t {
-		public constructor();
+		public constructor(options?: Partial<font_extents_tInitOptions>);
 		/**
 		 * The height of typographic ascenders.
 		 */
@@ -118,6 +124,7 @@ declare namespace imports.gi.HarfBuzz {
 		public readonly reserved1: position_t;
 	}
 
+	export interface font_funcs_tInitOptions {}
 	/**
 	 * Data type containing a set of virtual methods used for
 	 * working on #hb_font_t font objects.
@@ -130,17 +137,19 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface font_funcs_t {}
 	class font_funcs_t {
-		public constructor();
+		public constructor(options?: Partial<font_funcs_tInitOptions>);
 	}
 
+	export interface font_tInitOptions {}
 	/**
 	 * Data type for holding fonts.
 	 */
 	interface font_t {}
 	class font_t {
-		public constructor();
+		public constructor(options?: Partial<font_tInitOptions>);
 	}
 
+	export interface glyph_extents_tInitOptions {}
 	/**
 	 * Glyph extent values, measured in font units.
 	 * 
@@ -148,7 +157,7 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface glyph_extents_t {}
 	class glyph_extents_t {
-		public constructor();
+		public constructor(options?: Partial<glyph_extents_tInitOptions>);
 		/**
 		 * Distance from the x-origin to the left extremum of the glyph.
 		 */
@@ -167,13 +176,14 @@ declare namespace imports.gi.HarfBuzz {
 		public height: position_t;
 	}
 
+	export interface glyph_info_tInitOptions {}
 	/**
 	 * The #hb_glyph_info_t is the structure that holds information about the
 	 * glyphs and their relation to input text.
 	 */
 	interface glyph_info_t {}
 	class glyph_info_t {
-		public constructor();
+		public constructor(options?: Partial<glyph_info_tInitOptions>);
 		/**
 		 * either a Unicode code point (before shaping) or a glyph index
 		 *             (after shaping).
@@ -198,6 +208,7 @@ declare namespace imports.gi.HarfBuzz {
 		public readonly var2: var_int_t;
 	}
 
+	export interface glyph_position_tInitOptions {}
 	/**
 	 * The #hb_glyph_position_t is the structure that holds the positions of the
 	 * glyph in both horizontal and vertical directions. All positions in
@@ -205,7 +216,7 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface glyph_position_t {}
 	class glyph_position_t {
-		public constructor();
+		public constructor(options?: Partial<glyph_position_tInitOptions>);
 		/**
 		 * how much the line advances after drawing this glyph when setting
 		 *             text in horizontal direction.
@@ -229,13 +240,14 @@ declare namespace imports.gi.HarfBuzz {
 		public readonly var: var_int_t;
 	}
 
+	export interface language_tInitOptions {}
 	/**
 	 * Data type for languages. Each #hb_language_t corresponds to a BCP 47
 	 * language tag.
 	 */
 	interface language_t {}
 	class language_t {
-		public constructor();
+		public constructor(options?: Partial<language_tInitOptions>);
 		/**
 		 * Converts an #hb_language_t to a string.
 		 * @returns 
@@ -245,20 +257,22 @@ declare namespace imports.gi.HarfBuzz {
 		public _string(): string;
 	}
 
+	export interface map_tInitOptions {}
 	/**
 	 * Data type for holding integer-to-integer hash maps.
 	 */
 	interface map_t {}
 	class map_t {
-		public constructor();
+		public constructor(options?: Partial<map_tInitOptions>);
 	}
 
+	export interface ot_color_layer_tInitOptions {}
 	/**
 	 * Pairs of glyph and color index.
 	 */
 	interface ot_color_layer_t {}
 	class ot_color_layer_t {
-		public constructor();
+		public constructor(options?: Partial<ot_color_layer_tInitOptions>);
 		/**
 		 * the glyph ID of the layer
 		 */
@@ -269,6 +283,7 @@ declare namespace imports.gi.HarfBuzz {
 		public color_index: number;
 	}
 
+	export interface ot_math_glyph_part_tInitOptions {}
 	/**
 	 * Data type to hold information for a "part" component of a math-variant glyph.
 	 * Large variants for stretchable math glyphs (such as parentheses) can be constructed
@@ -276,7 +291,7 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface ot_math_glyph_part_t {}
 	class ot_math_glyph_part_t {
-		public constructor();
+		public constructor(options?: Partial<ot_math_glyph_part_tInitOptions>);
 		/**
 		 * The glyph index of the variant part
 		 */
@@ -299,12 +314,13 @@ declare namespace imports.gi.HarfBuzz {
 		public flags: ot_math_glyph_part_flags_t;
 	}
 
+	export interface ot_math_glyph_variant_tInitOptions {}
 	/**
 	 * Data type to hold math-variant information for a glyph.
 	 */
 	interface ot_math_glyph_variant_t {}
 	class ot_math_glyph_variant_t {
-		public constructor();
+		public constructor(options?: Partial<ot_math_glyph_variant_tInitOptions>);
 		/**
 		 * The glyph index of the variant
 		 */
@@ -315,12 +331,13 @@ declare namespace imports.gi.HarfBuzz {
 		public advance: position_t;
 	}
 
+	export interface ot_name_entry_tInitOptions {}
 	/**
 	 * Structure representing a name ID in a particular language.
 	 */
 	interface ot_name_entry_t {}
 	class ot_name_entry_t {
-		public constructor();
+		public constructor(options?: Partial<ot_name_entry_tInitOptions>);
 		/**
 		 * name ID
 		 */
@@ -332,6 +349,7 @@ declare namespace imports.gi.HarfBuzz {
 		public language: language_t;
 	}
 
+	export interface ot_var_axis_info_tInitOptions {}
 	/**
 	 * Data type for holding variation-axis values.
 	 * 
@@ -342,7 +360,7 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface ot_var_axis_info_t {}
 	class ot_var_axis_info_t {
-		public constructor();
+		public constructor(options?: Partial<ot_var_axis_info_tInitOptions>);
 		/**
 		 * Index of the axis in the variation-axis array
 		 */
@@ -374,12 +392,13 @@ declare namespace imports.gi.HarfBuzz {
 		public readonly reserved: number;
 	}
 
+	export interface ot_var_axis_tInitOptions {}
 	/**
 	 * Use #hb_ot_var_axis_info_t instead.
 	 */
 	interface ot_var_axis_t {}
 	class ot_var_axis_t {
-		public constructor();
+		public constructor(options?: Partial<ot_var_axis_tInitOptions>);
 		/**
 		 * axis tag
 		 */
@@ -402,6 +421,7 @@ declare namespace imports.gi.HarfBuzz {
 		public max_value: number;
 	}
 
+	export interface segment_properties_tInitOptions {}
 	/**
 	 * The structure that holds various text properties of an #hb_buffer_t. Can be
 	 * set and retrieved using hb_buffer_set_segment_properties() and
@@ -409,7 +429,7 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface segment_properties_t {}
 	class segment_properties_t {
-		public constructor();
+		public constructor(options?: Partial<segment_properties_tInitOptions>);
 		/**
 		 * the #hb_direction_t of the buffer, see hb_buffer_set_direction().
 		 */
@@ -426,6 +446,7 @@ declare namespace imports.gi.HarfBuzz {
 		public readonly reserved2: any;
 	}
 
+	export interface set_tInitOptions {}
 	/**
 	 * Data type for holding a set of integers. #hb_set_t's are
 	 * used to gather and contain glyph IDs, Unicode code
@@ -434,9 +455,10 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface set_t {}
 	class set_t {
-		public constructor();
+		public constructor(options?: Partial<set_tInitOptions>);
 	}
 
+	export interface shape_plan_tInitOptions {}
 	/**
 	 * Data type for holding a shaping plan.
 	 * 
@@ -450,9 +472,10 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface shape_plan_t {}
 	class shape_plan_t {
-		public constructor();
+		public constructor(options?: Partial<shape_plan_tInitOptions>);
 	}
 
+	export interface unicode_funcs_tInitOptions {}
 	/**
 	 * Data type containing a set of virtual methods used for
 	 * accessing various Unicode character properties.
@@ -465,18 +488,20 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface unicode_funcs_t {}
 	class unicode_funcs_t {
-		public constructor();
+		public constructor(options?: Partial<unicode_funcs_tInitOptions>);
 	}
 
+	export interface user_data_key_tInitOptions {}
 	/**
 	 * Data structure for holding user-data keys.
 	 */
 	interface user_data_key_t {}
 	class user_data_key_t {
-		public constructor();
+		public constructor(options?: Partial<user_data_key_tInitOptions>);
 		public readonly unused: string;
 	}
 
+	export interface variation_tInitOptions {}
 	/**
 	 * Data type for holding variation data. Registered OpenType
 	 * variation-axis tags are listed in
@@ -484,7 +509,7 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	interface variation_t {}
 	class variation_t {
-		public constructor();
+		public constructor(options?: Partial<variation_tInitOptions>);
 		/**
 		 * The #hb_tag_t tag of the variation-axis name
 		 */
@@ -4072,6 +4097,16 @@ declare namespace imports.gi.HarfBuzz {
 
 	}
 
+	type var_int_tInitOptionsMixin = Pick<Ivar_int_t,
+		"u32" |
+		"i32" |
+		"u16" |
+		"i16" |
+		"u8" |
+		"i8">;
+
+	export interface var_int_tInitOptions extends var_int_tInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link var_int_t} instead.
 	 */
@@ -4080,7 +4115,7 @@ declare namespace imports.gi.HarfBuzz {
 	interface var_int_t extends var_int_tMixin {}
 
 	class var_int_t {
-		public constructor();
+		public constructor(options?: Partial<var_int_tInitOptions>);
 	}
 
 

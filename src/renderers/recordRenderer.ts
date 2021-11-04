@@ -84,7 +84,8 @@ export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclu
         body += renderMethod(m, ns_name, modifierFunc, { indentNum: 1, exclude: excluded }) + '\n';
     }
 
-    let result = renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
+    let result = `export interface ${rec_node.$.name}InitOptions {}\n`;
+    result += renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
     result += `interface ${rec_node.$.name} {}\n`;
 
     const genericModifier = modifier?.generic ?? "";

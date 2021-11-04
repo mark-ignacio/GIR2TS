@@ -6,6 +6,9 @@ declare namespace imports.gi.Cogl {
 
 	}
 
+	type BitmapInitOptionsMixin  = {};
+	export interface BitmapInitOptions extends BitmapInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bitmap} instead.
 	 */
@@ -14,7 +17,7 @@ declare namespace imports.gi.Cogl {
 	interface Bitmap extends BitmapMixin {}
 
 	class Bitmap {
-		public constructor();
+		public constructor(options?: Partial<BitmapInitOptions>);
 		/**
 		 * Loads an image file from disk. This function can be safely called from
 		 * within a thread.
@@ -80,6 +83,9 @@ declare namespace imports.gi.Cogl {
 		tan(): Fixed;
 	}
 
+	type FixedInitOptionsMixin  = {};
+	export interface FixedInitOptions extends FixedInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Fixed} instead.
 	 */
@@ -91,7 +97,7 @@ declare namespace imports.gi.Cogl {
 	interface Fixed extends FixedMixin {}
 
 	class Fixed {
-		public constructor();
+		public constructor(options?: Partial<FixedInitOptions>);
 		/**
 		 * Calculates base 2 logarithm.
 		 * 
@@ -117,6 +123,9 @@ declare namespace imports.gi.Cogl {
 
 	}
 
+	type OffscreenInitOptionsMixin  = {};
+	export interface OffscreenInitOptions extends OffscreenInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Offscreen} instead.
 	 */
@@ -125,7 +134,7 @@ declare namespace imports.gi.Cogl {
 	interface Offscreen extends OffscreenMixin {}
 
 	class Offscreen {
-		public constructor();
+		public constructor(options?: Partial<OffscreenInitOptions>);
 		/**
 		 * This creates an offscreen buffer object using the given #texture as the
 		 * primary color buffer. It doesn't just initialize the contents of the
@@ -188,6 +197,7 @@ declare namespace imports.gi.Cogl {
 		public static unref(offscreen: any | null): void;
 	}
 
+	export interface ColorInitOptions {}
 	/**
 	 * A structure for holding a color definition. The contents of
 	 * the CoglColor structure are private and should never by accessed
@@ -195,7 +205,7 @@ declare namespace imports.gi.Cogl {
 	 */
 	interface Color {}
 	class Color {
-		public constructor();
+		public constructor(options?: Partial<ColorInitOptions>);
 		/**
 		 * Creates a new (empty) color
 		 * @returns a newly-allocated {@link Color}. Use cogl_color_free()
@@ -414,14 +424,16 @@ declare namespace imports.gi.Cogl {
 		public unpremultiply(): void;
 	}
 
+	export interface EulerInitOptions {}
 	interface Euler {}
 	class Euler {
-		public constructor();
+		public constructor(options?: Partial<EulerInitOptions>);
 	}
 
+	export interface MaterialInitOptions {}
 	interface Material {}
 	class Material {
-		public constructor();
+		public constructor(options?: Partial<MaterialInitOptions>);
 		/**
 		 * Creates a new material with the configuration copied from the
 		 * source material.
@@ -943,9 +955,10 @@ declare namespace imports.gi.Cogl {
 		public set_user_program(program: Handle): void;
 	}
 
+	export interface MaterialLayerInitOptions {}
 	interface MaterialLayer {}
 	class MaterialLayer {
-		public constructor();
+		public constructor(options?: Partial<MaterialLayerInitOptions>);
 		/**
 		 * Queries the currently set downscaling filter for a material later
 		 * @returns the current downscaling filter
@@ -995,6 +1008,7 @@ declare namespace imports.gi.Cogl {
 		public get_wrap_mode_t(): MaterialWrapMode;
 	}
 
+	export interface MatrixInitOptions {}
 	/**
 	 * A CoglMatrix holds a 4x4 transform matrix. This is a single precision,
 	 * column-major matrix which means it is compatible with what OpenGL expects.
@@ -1023,7 +1037,7 @@ declare namespace imports.gi.Cogl {
 	 */
 	interface Matrix {}
 	class Matrix {
-		public constructor();
+		public constructor(options?: Partial<MatrixInitOptions>);
 		public xx: number;
 		public yx: number;
 		public zx: number;
@@ -1238,17 +1252,19 @@ declare namespace imports.gi.Cogl {
 		public transpose(): void;
 	}
 
+	export interface QuaternionInitOptions {}
 	interface Quaternion {}
 	class Quaternion {
-		public constructor();
+		public constructor(options?: Partial<QuaternionInitOptions>);
 	}
 
+	export interface TextureVertexInitOptions {}
 	/**
 	 * Used to specify vertex information when calling cogl_polygon()
 	 */
 	interface TextureVertex {}
 	class TextureVertex {
-		public constructor();
+		public constructor(options?: Partial<TextureVertexInitOptions>);
 		/**
 		 * Model x-coordinate
 		 */
@@ -1276,21 +1292,24 @@ declare namespace imports.gi.Cogl {
 		public color: Color;
 	}
 
+	export interface _ColorSizeCheckInitOptions {}
 	interface _ColorSizeCheck {}
 	class _ColorSizeCheck {
-		public constructor();
+		public constructor(options?: Partial<_ColorSizeCheckInitOptions>);
 		public compile_time_assert_CoglColor_size: string[];
 	}
 
+	export interface _MatrixSizeCheckInitOptions {}
 	interface _MatrixSizeCheck {}
 	class _MatrixSizeCheck {
-		public constructor();
+		public constructor(options?: Partial<_MatrixSizeCheckInitOptions>);
 		public compile_time_assert_CoglMatrix_size: string[];
 	}
 
+	export interface _TextureVertexSizeCheckInitOptions {}
 	interface _TextureVertexSizeCheck {}
 	class _TextureVertexSizeCheck {
-		public constructor();
+		public constructor(options?: Partial<_TextureVertexSizeCheckInitOptions>);
 		public compile_time_assert_CoglTextureVertex_size: string[];
 	}
 
@@ -1457,6 +1476,9 @@ declare namespace imports.gi.Cogl {
 		set_region(src_x: number, src_y: number, dst_x: number, dst_y: number, dst_width: number, dst_height: number, width: number, height: number, format: PixelFormat, rowstride: number, data: number): Bool;
 	}
 
+	type TextureInitOptionsMixin  = {};
+	export interface TextureInitOptions extends TextureInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Texture} instead.
 	 */
@@ -1465,7 +1487,7 @@ declare namespace imports.gi.Cogl {
 	interface Texture extends TextureMixin {}
 
 	class Texture {
-		public constructor();
+		public constructor(options?: Partial<TextureInitOptions>);
 		/**
 		 * Increment the reference count for a cogl texture.
 		 * @param texture a {@link Texture}.

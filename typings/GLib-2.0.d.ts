@@ -1,10 +1,11 @@
 declare namespace imports.gi.GLib {
+	export interface ArrayInitOptions {}
 	/**
 	 * Contains the public fields of a GArray.
 	 */
 	interface Array {}
 	class Array {
-		public constructor();
+		public constructor(options?: Partial<ArrayInitOptions>);
 		/**
 		 * a pointer to the element data. The data may be moved as
 		 *     elements are added to the #GArray.
@@ -17,6 +18,7 @@ declare namespace imports.gi.GLib {
 		public len: number;
 	}
 
+	export interface AsyncQueueInitOptions {}
 	/**
 	 * An opaque data structure which represents an asynchronous queue.
 	 * 
@@ -24,7 +26,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface AsyncQueue {}
 	class AsyncQueue {
-		public constructor();
+		public constructor(options?: Partial<AsyncQueueInitOptions>);
 		/**
 		 * Returns the length of the queue.
 		 * 
@@ -297,12 +299,13 @@ declare namespace imports.gi.GLib {
 		public unref_and_unlock(): void;
 	}
 
+	export interface BookmarkFileInitOptions {}
 	/**
 	 * An opaque data structure representing a set of bookmarks.
 	 */
 	interface BookmarkFile {}
 	class BookmarkFile {
-		public constructor();
+		public constructor(options?: Partial<BookmarkFileInitOptions>);
 		/**
 		 * Adds the application with #name and #exec to the list of
 		 * applications that have registered a bookmark for #uri into
@@ -851,12 +854,13 @@ declare namespace imports.gi.GLib {
 		public to_file(filename: string): boolean;
 	}
 
+	export interface ByteArrayInitOptions {}
 	/**
 	 * Contains the public fields of a GByteArray.
 	 */
 	interface ByteArray {}
 	class ByteArray {
-		public constructor();
+		public constructor(options?: Partial<ByteArrayInitOptions>);
 		/**
 		 * a pointer to the element data. The data may be moved as
 		 *     elements are added to the #GByteArray
@@ -868,6 +872,7 @@ declare namespace imports.gi.GLib {
 		public len: number;
 	}
 
+	export interface BytesInitOptions {}
 	/**
 	 * A simple refcounted data type representing an immutable sequence of zero or
 	 * more bytes from an unspecified origin.
@@ -896,7 +901,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Bytes {}
 	class Bytes {
-		public constructor();
+		public constructor(options?: Partial<BytesInitOptions>);
 		/**
 		 * Creates a new #GBytes from #data.
 		 * 
@@ -1090,6 +1095,7 @@ declare namespace imports.gi.GLib {
 		public unref_to_data(): number[];
 	}
 
+	export interface ChecksumInitOptions {}
 	/**
 	 * An opaque structure representing a checksumming operation.
 	 * 
@@ -1098,7 +1104,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Checksum {}
 	class Checksum {
-		public constructor();
+		public constructor(options?: Partial<ChecksumInitOptions>);
 		/**
 		 * Creates a new #GChecksum, using the checksum algorithm #checksum_type.
 		 * If the #checksum_type is not known, %NULL is returned.
@@ -1165,6 +1171,7 @@ declare namespace imports.gi.GLib {
 		public update(data: number[], length: number): void;
 	}
 
+	export interface CondInitOptions {}
 	/**
 	 * The #GCond struct is an opaque data structure that represents a
 	 * condition. Threads can block on a #GCond if they find a certain
@@ -1234,7 +1241,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Cond {}
 	class Cond {
-		public constructor();
+		public constructor(options?: Partial<CondInitOptions>);
 		public readonly p: any;
 		public readonly i: number[];
 		/**
@@ -1349,6 +1356,7 @@ declare namespace imports.gi.GLib {
 		public wait_until(mutex: Mutex, end_time: number): boolean;
 	}
 
+	export interface DataInitOptions {}
 	/**
 	 * An opaque data structure that represents a keyed data list.
 	 * 
@@ -1356,9 +1364,10 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Data {}
 	class Data {
-		public constructor();
+		public constructor(options?: Partial<DataInitOptions>);
 	}
 
+	export interface DateInitOptions {}
 	/**
 	 * Represents a day between January 1, Year 1 and a few thousand years in
 	 * the future. None of its members should be accessed directly.
@@ -1374,7 +1383,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Date {}
 	class Date {
-		public constructor();
+		public constructor(options?: Partial<DateInitOptions>);
 		/**
 		 * Allocates a #GDate and initializes
 		 * it to a safe state. The new date will
@@ -1685,12 +1694,13 @@ declare namespace imports.gi.GLib {
 		public valid(): boolean;
 	}
 
+	export interface DateTimeInitOptions {}
 	/**
 	 * An opaque structure that represents a date and time, including a time zone.
 	 */
 	interface DateTime {}
 	class DateTime {
-		public constructor();
+		public constructor(options?: Partial<DateTimeInitOptions>);
 		/**
 		 * Creates a new #GDateTime corresponding to the given date and time in
 		 * the time zone #tz.
@@ -2365,13 +2375,14 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface DebugKeyInitOptions {}
 	/**
 	 * Associates a string with a bit flag.
 	 * Used in g_parse_debug_string().
 	 */
 	interface DebugKey {}
 	class DebugKey {
-		public constructor();
+		public constructor(options?: Partial<DebugKeyInitOptions>);
 		/**
 		 * the string
 		 */
@@ -2382,12 +2393,13 @@ declare namespace imports.gi.GLib {
 		public value: number;
 	}
 
+	export interface DirInitOptions {}
 	/**
 	 * An opaque structure representing an opened directory.
 	 */
 	interface Dir {}
 	class Dir {
-		public constructor();
+		public constructor(options?: Partial<DirInitOptions>);
 		/**
 		 * Closes the directory and deallocates all related resources.
 		 */
@@ -2418,13 +2430,14 @@ declare namespace imports.gi.GLib {
 		public rewind(): void;
 	}
 
+	export interface ErrorInitOptions {}
 	/**
 	 * The `GError` structure contains information about
 	 * an error that has occurred.
 	 */
 	interface Error {}
 	class Error {
-		public constructor();
+		public constructor(options?: Partial<ErrorInitOptions>);
 		/**
 		 * Creates a new #GError with the given #domain and #code,
 		 * and a message formatted with #format.
@@ -2494,6 +2507,7 @@ declare namespace imports.gi.GLib {
 		public matches(domain: Quark, code: number): boolean;
 	}
 
+	export interface HashTableInitOptions {}
 	/**
 	 * The #GHashTable struct is an opaque data structure to represent a
 	 * [Hash Table][glib-Hash-Tables]. It should only be accessed via the
@@ -2501,9 +2515,10 @@ declare namespace imports.gi.GLib {
 	 */
 	interface HashTable {}
 	class HashTable {
-		public constructor();
+		public constructor(options?: Partial<HashTableInitOptions>);
 	}
 
+	export interface HashTableIterInitOptions {}
 	/**
 	 * A GHashTableIter structure represents an iterator that can be used
 	 * to iterate over the elements of a #GHashTable. GHashTableIter
@@ -2515,7 +2530,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface HashTableIter {}
 	class HashTableIter {
-		public constructor();
+		public constructor(options?: Partial<HashTableIterInitOptions>);
 		public readonly dummy1: any;
 		public readonly dummy2: any;
 		public readonly dummy3: any;
@@ -2596,6 +2611,7 @@ declare namespace imports.gi.GLib {
 		public steal(): void;
 	}
 
+	export interface HmacInitOptions {}
 	/**
 	 * An opaque structure representing a HMAC operation.
 	 * To create a new GHmac, use g_hmac_new(). To free
@@ -2603,7 +2619,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Hmac {}
 	class Hmac {
-		public constructor();
+		public constructor(options?: Partial<HmacInitOptions>);
 		/**
 		 * Copies a #GHmac. If #hmac has been closed, by calling
 		 * g_hmac_get_string() or g_hmac_get_digest(), the copied
@@ -2660,12 +2676,13 @@ declare namespace imports.gi.GLib {
 		public update(data: number[], length: number): void;
 	}
 
+	export interface HookInitOptions {}
 	/**
 	 * The #GHook struct represents a single hook function in a #GHookList.
 	 */
 	interface Hook {}
 	class Hook {
-		public constructor();
+		public constructor(options?: Partial<HookInitOptions>);
 		/**
 		 * data which is passed to func when this hook is invoked
 		 */
@@ -2710,12 +2727,13 @@ declare namespace imports.gi.GLib {
 		public compare_ids(sibling: Hook): number;
 	}
 
+	export interface HookListInitOptions {}
 	/**
 	 * The #GHookList struct represents a list of hook functions.
 	 */
 	interface HookList {}
 	class HookList {
-		public constructor();
+		public constructor(options?: Partial<HookListInitOptions>);
 		/**
 		 * the next free #GHook id
 		 */
@@ -2792,13 +2810,14 @@ declare namespace imports.gi.GLib {
 		public marshal_check(may_recurse: boolean, marshaller: HookCheckMarshaller, marshal_data: any | null): void;
 	}
 
+	export interface IConvInitOptions {}
 	/**
 	 * The GIConv struct wraps an iconv() conversion descriptor. It contains
 	 * private data and should only be accessed using the following functions.
 	 */
 	interface IConv {}
 	class IConv {
-		public constructor();
+		public constructor(options?: Partial<IConvInitOptions>);
 		/**
 		 * Same as the standard UNIX routine iconv(), but
 		 * may be implemented via libiconv on UNIX flavors that lack
@@ -2834,6 +2853,7 @@ declare namespace imports.gi.GLib {
 		public close(): number;
 	}
 
+	export interface IOChannelInitOptions {}
 	/**
 	 * A data structure representing an IO Channel. The fields should be
 	 * considered private and should only be accessed with the following
@@ -2841,7 +2861,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface IOChannel {}
 	class IOChannel {
-		public constructor();
+		public constructor(options?: Partial<IOChannelInitOptions>);
 		/**
 		 * Open a file #filename as a #GIOChannel using mode #mode. This
 		 * channel will be closed when the last reference to it is dropped,
@@ -3197,13 +3217,14 @@ declare namespace imports.gi.GLib {
 		public write_unichar(thechar: string): IOStatus;
 	}
 
+	export interface IOFuncsInitOptions {}
 	/**
 	 * A table of functions used to handle different types of #GIOChannel
 	 * in a generic way.
 	 */
 	interface IOFuncs {}
 	class IOFuncs {
-		public constructor();
+		public constructor(options?: Partial<IOFuncsInitOptions>);
 		public io_read: {(channel: IOChannel, buf: string, count: number, bytes_read: number): IOStatus;};
 		public io_write: {(channel: IOChannel, buf: string, count: number, bytes_written: number): IOStatus;};
 		public io_seek: {(channel: IOChannel, offset: number, type: SeekType): IOStatus;};
@@ -3214,13 +3235,14 @@ declare namespace imports.gi.GLib {
 		public io_get_flags: {(channel: IOChannel): IOFlags;};
 	}
 
+	export interface KeyFileInitOptions {}
 	/**
 	 * The GKeyFile struct contains only private data
 	 * and should not be accessed directly.
 	 */
 	interface KeyFile {}
 	class KeyFile {
-		public constructor();
+		public constructor(options?: Partial<KeyFileInitOptions>);
 		/**
 		 * Creates a new empty #GKeyFile object. Use
 		 * g_key_file_load_from_file(), g_key_file_load_from_data(),
@@ -3769,12 +3791,13 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface ListInitOptions {}
 	/**
 	 * The #GList struct is used for each element in a doubly-linked list.
 	 */
 	interface List {}
 	class List {
-		public constructor();
+		public constructor(options?: Partial<ListInitOptions>);
 		/**
 		 * holds the element's data, which can be a pointer to any kind
 		 *        of data, or any integer value using the
@@ -3791,6 +3814,7 @@ declare namespace imports.gi.GLib {
 		public prev: GLib.List;
 	}
 
+	export interface LogFieldInitOptions {}
 	/**
 	 * Structure representing a single field in a structured log entry. See
 	 * g_log_structured() for details.
@@ -3802,7 +3826,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface LogField {}
 	class LogField {
-		public constructor();
+		public constructor(options?: Partial<LogFieldInitOptions>);
 		/**
 		 * field name (UTF-8 string)
 		 */
@@ -3817,13 +3841,14 @@ declare namespace imports.gi.GLib {
 		public length: number;
 	}
 
+	export interface MainContextInitOptions {}
 	/**
 	 * The `GMainContext` struct is an opaque data
 	 * type representing a set of sources to be handled in a main loop.
 	 */
 	interface MainContext {}
 	class MainContext {
-		public constructor();
+		public constructor(options?: Partial<MainContextInitOptions>);
 		/**
 		 * Creates a new #GMainContext structure.
 		 * @returns the new #GMainContext
@@ -4138,13 +4163,14 @@ declare namespace imports.gi.GLib {
 		public wakeup(): void;
 	}
 
+	export interface MainLoopInitOptions {}
 	/**
 	 * The `GMainLoop` struct is an opaque data type
 	 * representing the main event loop of a GLib or GTK+ application.
 	 */
 	interface MainLoop {}
 	class MainLoop {
-		public constructor();
+		public constructor(options?: Partial<MainLoopInitOptions>);
 		/**
 		 * Creates a new #GMainLoop structure.
 		 * @param context a #GMainContext  (if %NULL, the default context will be used).
@@ -4191,6 +4217,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface MappedFileInitOptions {}
 	/**
 	 * The #GMappedFile represents a file mapping created with
 	 * g_mapped_file_new(). It has only private members and should
@@ -4198,7 +4225,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface MappedFile {}
 	class MappedFile {
-		public constructor();
+		public constructor(options?: Partial<MappedFileInitOptions>);
 		/**
 		 * Maps a file into memory. On UNIX, this is using the mmap() function.
 		 * 
@@ -4286,6 +4313,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface MarkupParseContextInitOptions {}
 	/**
 	 * A parse context is used to parse a stream of bytes that
 	 * you expect to contain marked-up text.
@@ -4295,7 +4323,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface MarkupParseContext {}
 	class MarkupParseContext {
-		public constructor();
+		public constructor(options?: Partial<MarkupParseContextInitOptions>);
 		/**
 		 * Creates a new parse context. A parse context is used to parse
 		 * marked-up documents. You can feed any number of documents into
@@ -4533,6 +4561,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface MarkupParserInitOptions {}
 	/**
 	 * Any of the fields in #GMarkupParser can be %NULL, in which case they
 	 * will be ignored. Except for the #error function, any of these callbacks
@@ -4544,7 +4573,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface MarkupParser {}
 	class MarkupParser {
-		public constructor();
+		public constructor(options?: Partial<MarkupParserInitOptions>);
 		public start_element: {(context: MarkupParseContext, element_name: string, attribute_names: string, attribute_values: string): void;};
 		public end_element: {(context: MarkupParseContext, element_name: string): void;};
 		public text: {(context: MarkupParseContext, text: string, text_len: number): void;};
@@ -4552,13 +4581,14 @@ declare namespace imports.gi.GLib {
 		public error: {(context: MarkupParseContext, error: Error): void;};
 	}
 
+	export interface MatchInfoInitOptions {}
 	/**
 	 * A GMatchInfo is an opaque struct used to return information about
 	 * matches.
 	 */
 	interface MatchInfo {}
 	class MatchInfo {
-		public constructor();
+		public constructor(options?: Partial<MatchInfoInitOptions>);
 		/**
 		 * Returns a new string containing the text in #string_to_expand with
 		 * references and escape sequences expanded. References refer to the last
@@ -4767,6 +4797,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface MemVTableInitOptions {}
 	/**
 	 * A set of functions used to perform memory allocation. The same #GMemVTable must
 	 * be used for all allocations in the same program; a call to g_mem_set_vtable(),
@@ -4776,7 +4807,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface MemVTable {}
 	class MemVTable {
-		public constructor();
+		public constructor(options?: Partial<MemVTableInitOptions>);
 		public malloc: {(n_bytes: number): any;};
 		public realloc: {(mem: any, n_bytes: number): any;};
 		public free: {(mem: any): void;};
@@ -4785,12 +4816,13 @@ declare namespace imports.gi.GLib {
 		public try_realloc: {(mem: any, n_bytes: number): any;};
 	}
 
+	export interface NodeInitOptions {}
 	/**
 	 * The #GNode struct represents one node in a [n-ary tree][glib-N-ary-Trees].
 	 */
 	interface Node {}
 	class Node {
-		public constructor();
+		public constructor(options?: Partial<NodeInitOptions>);
 		/**
 		 * contains the actual data of the node.
 		 */
@@ -4998,6 +5030,7 @@ declare namespace imports.gi.GLib {
 		public unlink(): void;
 	}
 
+	export interface OnceInitOptions {}
 	/**
 	 * A #GOnce struct controls a one-time initialization function. Any
 	 * one-time initialization function must have its own unique #GOnce
@@ -5005,7 +5038,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Once {}
 	class Once {
-		public constructor();
+		public constructor(options?: Partial<OnceInitOptions>);
 		/**
 		 * the status of the #GOnce
 		 */
@@ -5018,6 +5051,7 @@ declare namespace imports.gi.GLib {
 		public impl(func: ThreadFunc, arg: any | null): any | null;
 	}
 
+	export interface OptionContextInitOptions {}
 	/**
 	 * A `GOptionContext` struct defines which options
 	 * are accepted by the commandline option parser. The struct has only private
@@ -5025,7 +5059,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface OptionContext {}
 	class OptionContext {
-		public constructor();
+		public constructor(options?: Partial<OptionContextInitOptions>);
 		/**
 		 * Adds a #GOptionGroup to the #context, so that parsing with #context
 		 * will recognize the options in the group. Note that this will take
@@ -5248,6 +5282,7 @@ declare namespace imports.gi.GLib {
 		public set_translation_domain(domain: string): void;
 	}
 
+	export interface OptionEntryInitOptions {}
 	/**
 	 * A GOptionEntry struct defines a single option. To have an effect, they
 	 * must be added to a #GOptionGroup with g_option_context_add_main_entries()
@@ -5255,7 +5290,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface OptionEntry {}
 	class OptionEntry {
-		public constructor();
+		public constructor(options?: Partial<OptionEntryInitOptions>);
 		/**
 		 * The long name of an option can be used to specify it
 		 *     in a commandline as `--long_name`. Every option must have a
@@ -5314,6 +5349,7 @@ declare namespace imports.gi.GLib {
 		public arg_description: string;
 	}
 
+	export interface OptionGroupInitOptions {}
 	/**
 	 * A `GOptionGroup` struct defines the options in a single
 	 * group. The struct has only private fields and should not be directly accessed.
@@ -5325,7 +5361,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface OptionGroup {}
 	class OptionGroup {
-		public constructor();
+		public constructor(options?: Partial<OptionGroupInitOptions>);
 		/**
 		 * Creates a new #GOptionGroup.
 		 * @param name the name for the option group, this is used to provide
@@ -5403,13 +5439,14 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface PatternSpecInitOptions {}
 	/**
 	 * A GPatternSpec struct is the 'compiled' form of a pattern. This
 	 * structure is opaque and its fields cannot be accessed directly.
 	 */
 	interface PatternSpec {}
 	class PatternSpec {
-		public constructor();
+		public constructor(options?: Partial<PatternSpecInitOptions>);
 		/**
 		 * Compiles a pattern to a #GPatternSpec.
 		 * @param pattern a zero-terminated UTF-8 encoded string
@@ -5467,13 +5504,14 @@ declare namespace imports.gi.GLib {
 		public match_string(string: string): boolean;
 	}
 
+	export interface PollFDInitOptions {}
 	/**
 	 * Represents a file descriptor, which events to poll for, and which events
 	 * occurred.
 	 */
 	interface PollFD {}
 	class PollFD {
-		public constructor();
+		public constructor(options?: Partial<PollFDInitOptions>);
 		/**
 		 * the file descriptor to poll (or a HANDLE on Win32)
 		 */
@@ -5492,6 +5530,7 @@ declare namespace imports.gi.GLib {
 		public revents: number;
 	}
 
+	export interface PrivateInitOptions {}
 	/**
 	 * The #GPrivate struct is an opaque data structure to represent a
 	 * thread-local data key. It is approximately equivalent to the
@@ -5513,7 +5552,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Private {}
 	class Private {
-		public constructor();
+		public constructor(options?: Partial<PrivateInitOptions>);
 		public readonly p: any;
 		public readonly notify: DestroyNotify;
 		public readonly future: any[];
@@ -5547,12 +5586,13 @@ declare namespace imports.gi.GLib {
 		public set(value: any | null): void;
 	}
 
+	export interface PtrArrayInitOptions {}
 	/**
 	 * Contains the public fields of a pointer array.
 	 */
 	interface PtrArray {}
 	class PtrArray {
-		public constructor();
+		public constructor(options?: Partial<PtrArrayInitOptions>);
 		/**
 		 * points to the array of pointers, which may be moved when the
 		 *     array grows
@@ -5564,13 +5604,14 @@ declare namespace imports.gi.GLib {
 		public len: number;
 	}
 
+	export interface QueueInitOptions {}
 	/**
 	 * Contains the public fields of a
 	 * [Queue][glib-Double-ended-Queues].
 	 */
 	interface Queue {}
 	class Queue {
-		public constructor();
+		public constructor(options?: Partial<QueueInitOptions>);
 		/**
 		 * a pointer to the first element of the queue
 		 */
@@ -5874,6 +5915,7 @@ declare namespace imports.gi.GLib {
 		public unlink(link_: GLib.List): void;
 	}
 
+	export interface RWLockInitOptions {}
 	/**
 	 * The GRWLock struct is an opaque data structure to represent a
 	 * reader-writer lock. It is similar to a #GMutex in that it allows
@@ -5941,7 +5983,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface RWLock {}
 	class RWLock {
-		public constructor();
+		public constructor(options?: Partial<RWLockInitOptions>);
 		public readonly p: any;
 		public readonly i: number[];
 		/**
@@ -6041,13 +6083,14 @@ declare namespace imports.gi.GLib {
 		public writer_unlock(): void;
 	}
 
+	export interface RandInitOptions {}
 	/**
 	 * The GRand struct is an opaque data structure. It should only be
 	 * accessed through the g_rand_* functions.
 	 */
 	interface Rand {}
 	class Rand {
-		public constructor();
+		public constructor(options?: Partial<RandInitOptions>);
 		/**
 		 * Copies a #GRand into a new one with the same exact state as before.
 		 * This way you can take a snapshot of the random number generator for
@@ -6104,6 +6147,7 @@ declare namespace imports.gi.GLib {
 		public set_seed_array(seed: number, seed_length: number): void;
 	}
 
+	export interface RecMutexInitOptions {}
 	/**
 	 * The GRecMutex struct is an opaque data structure to represent a
 	 * recursive mutex. It is similar to a #GMutex with the difference
@@ -6120,7 +6164,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface RecMutex {}
 	class RecMutex {
-		public constructor();
+		public constructor(options?: Partial<RecMutexInitOptions>);
 		public readonly p: any;
 		public readonly i: number[];
 		/**
@@ -6192,6 +6236,7 @@ declare namespace imports.gi.GLib {
 		public unlock(): void;
 	}
 
+	export interface RegexInitOptions {}
 	/**
 	 * The g_regex_*() functions implement regular
 	 * expression pattern matching using syntax and semantics similar to
@@ -6261,7 +6306,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Regex {}
 	class Regex {
-		public constructor();
+		public constructor(options?: Partial<RegexInitOptions>);
 		/**
 		 * Compiles the regular expression to an internal form, and does
 		 * the initial setup of the #GRegex structure.
@@ -6668,13 +6713,14 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface SListInitOptions {}
 	/**
 	 * The #GSList struct is used for each element in the singly-linked
 	 * list.
 	 */
 	interface SList {}
 	class SList {
-		public constructor();
+		public constructor(options?: Partial<SListInitOptions>);
 		/**
 		 * holds the element's data, which can be a pointer to any kind
 		 *        of data, or any integer value using the
@@ -6687,6 +6733,7 @@ declare namespace imports.gi.GLib {
 		public next: GLib.SList;
 	}
 
+	export interface ScannerInitOptions {}
 	/**
 	 * The data structure representing a lexical scanner.
 	 * 
@@ -6705,7 +6752,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Scanner {}
 	class Scanner {
-		public constructor();
+		public constructor(options?: Partial<ScannerInitOptions>);
 		/**
 		 * unused
 		 */
@@ -6933,6 +6980,7 @@ declare namespace imports.gi.GLib {
 		public warn(format: string): void;
 	}
 
+	export interface ScannerConfigInitOptions {}
 	/**
 	 * Specifies the #GScanner parser configuration. Most settings can
 	 * be changed during the parsing phase and will affect the lexical
@@ -6940,7 +6988,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface ScannerConfig {}
 	class ScannerConfig {
-		public constructor();
+		public constructor(options?: Partial<ScannerConfigInitOptions>);
 		/**
 		 * specifies which characters should be skipped
 		 *     by the scanner (the default is the whitespace characters: space,
@@ -7078,13 +7126,14 @@ declare namespace imports.gi.GLib {
 		public readonly padding_dummy: number;
 	}
 
+	export interface SequenceInitOptions {}
 	/**
 	 * The #GSequence struct is an opaque data type representing a
 	 * [sequence][glib-Sequences] data type.
 	 */
 	interface Sequence {}
 	class Sequence {
-		public constructor();
+		public constructor(options?: Partial<SequenceInitOptions>);
 		/**
 		 * Adds a new item to the end of #seq.
 		 * @param data the data for the new item
@@ -7289,13 +7338,14 @@ declare namespace imports.gi.GLib {
 		public sort_iter(cmp_func: SequenceIterCompareFunc, cmp_data: any | null): void;
 	}
 
+	export interface SequenceIterInitOptions {}
 	/**
 	 * The #GSequenceIter struct is an opaque data type representing an
 	 * iterator pointing into a #GSequence.
 	 */
 	interface SequenceIter {}
 	class SequenceIter {
-		public constructor();
+		public constructor(options?: Partial<SequenceIterInitOptions>);
 		/**
 		 * Returns a negative number if #a comes before #b, 0 if they are equal,
 		 * and a positive number if #a comes after #b.
@@ -7351,13 +7401,14 @@ declare namespace imports.gi.GLib {
 		public prev(): SequenceIter;
 	}
 
+	export interface SourceInitOptions {}
 	/**
 	 * The `GSource` struct is an opaque data type
 	 * representing an event source.
 	 */
 	interface Source {}
 	class Source {
-		public constructor();
+		public constructor(options?: Partial<SourceInitOptions>);
 		/**
 		 * Creates a new #GSource structure. The size is specified to
 		 * allow creating structures derived from #GSource that contain
@@ -7842,18 +7893,20 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface SourceCallbackFuncsInitOptions {}
 	/**
 	 * The `GSourceCallbackFuncs` struct contains
 	 * functions for managing callback objects.
 	 */
 	interface SourceCallbackFuncs {}
 	class SourceCallbackFuncs {
-		public constructor();
+		public constructor(options?: Partial<SourceCallbackFuncsInitOptions>);
 		public ref: {(cb_data: any): void;};
 		public unref: {(cb_data: any): void;};
 		public get: {(cb_data: any, source: Source, func: SourceFunc, data: any | null): void;};
 	}
 
+	export interface SourceFuncsInitOptions {}
 	/**
 	 * The `GSourceFuncs` struct contains a table of
 	 * functions used to handle event sources in a generic manner.
@@ -7878,7 +7931,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface SourceFuncs {}
 	class SourceFuncs {
-		public constructor();
+		public constructor(options?: Partial<SourceFuncsInitOptions>);
 		public readonly closure_callback: SourceFunc;
 		public readonly closure_marshal: SourceDummyMarshal;
 		public prepare: {(source: Source, timeout_: number): boolean;};
@@ -7887,11 +7940,13 @@ declare namespace imports.gi.GLib {
 		public finalize: {(source: Source): void;};
 	}
 
+	export interface SourcePrivateInitOptions {}
 	interface SourcePrivate {}
 	class SourcePrivate {
-		public constructor();
+		public constructor(options?: Partial<SourcePrivateInitOptions>);
 	}
 
+	export interface StatBufInitOptions {}
 	/**
 	 * A type corresponding to the appropriate struct type for the stat()
 	 * system call, depending on the platform and/or compiler being used.
@@ -7900,15 +7955,16 @@ declare namespace imports.gi.GLib {
 	 */
 	interface StatBuf {}
 	class StatBuf {
-		public constructor();
+		public constructor(options?: Partial<StatBufInitOptions>);
 	}
 
+	export interface StringInitOptions {}
 	/**
 	 * The GString struct contains the public fields of a GString.
 	 */
 	interface String {}
 	class String {
-		public constructor();
+		public constructor(options?: Partial<StringInitOptions>);
 		/**
 		 * Creates a new #GString, initialized with the given string.
 		 * @param init the initial text to copy into the string, or %NULL to
@@ -8239,13 +8295,14 @@ declare namespace imports.gi.GLib {
 		public vprintf(format: string, args: any[]): void;
 	}
 
+	export interface StringChunkInitOptions {}
 	/**
 	 * An opaque data structure representing String Chunks.
 	 * It should only be accessed by using the following functions.
 	 */
 	interface StringChunk {}
 	class StringChunk {
-		public constructor();
+		public constructor(options?: Partial<StringChunkInitOptions>);
 		/**
 		 * Frees all strings contained within the #GStringChunk.
 		 * After calling g_string_chunk_clear() it is not safe to
@@ -8312,6 +8369,7 @@ declare namespace imports.gi.GLib {
 		public insert_len(string: string, len: number): string;
 	}
 
+	export interface StrvBuilderInitOptions {}
 	/**
 	 * #GStrvBuilder is a method of easily building dynamically sized
 	 * NULL-terminated string arrays.
@@ -8327,7 +8385,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface StrvBuilder {}
 	class StrvBuilder {
-		public constructor();
+		public constructor(options?: Partial<StrvBuilderInitOptions>);
 		/**
 		 * Add a string to the end of the array.
 		 * 
@@ -8372,21 +8430,23 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface TestCaseInitOptions {}
 	/**
 	 * An opaque structure representing a test case.
 	 */
 	interface TestCase {}
 	class TestCase {
-		public constructor();
+		public constructor(options?: Partial<TestCaseInitOptions>);
 		/**
 		 * Free the #test_case.
 		 */
 		public free(): void;
 	}
 
+	export interface TestConfigInitOptions {}
 	interface TestConfig {}
 	class TestConfig {
-		public constructor();
+		public constructor(options?: Partial<TestConfigInitOptions>);
 		public test_initialized: boolean;
 		public test_quick: boolean;
 		public test_perf: boolean;
@@ -8395,9 +8455,10 @@ declare namespace imports.gi.GLib {
 		public test_undefined: boolean;
 	}
 
+	export interface TestLogBufferInitOptions {}
 	interface TestLogBuffer {}
 	class TestLogBuffer {
-		public constructor();
+		public constructor(options?: Partial<TestLogBufferInitOptions>);
 		public readonly data: String;
 		public readonly msgs: GLib.SList;
 		/**
@@ -8417,9 +8478,10 @@ declare namespace imports.gi.GLib {
 		public push(n_bytes: number, bytes: number): void;
 	}
 
+	export interface TestLogMsgInitOptions {}
 	interface TestLogMsg {}
 	class TestLogMsg {
-		public constructor();
+		public constructor(options?: Partial<TestLogMsgInitOptions>);
 		public log_type: TestLogType;
 		public n_strings: number;
 		public strings: string;
@@ -8431,12 +8493,13 @@ declare namespace imports.gi.GLib {
 		public free(): void;
 	}
 
+	export interface TestSuiteInitOptions {}
 	/**
 	 * An opaque structure representing a test suite.
 	 */
 	interface TestSuite {}
 	class TestSuite {
-		public constructor();
+		public constructor(options?: Partial<TestSuiteInitOptions>);
 		/**
 		 * Adds #test_case to #suite.
 		 * @param test_case a #GTestCase
@@ -8453,6 +8516,7 @@ declare namespace imports.gi.GLib {
 		public free(): void;
 	}
 
+	export interface ThreadInitOptions {}
 	/**
 	 * The #GThread struct represents a running thread. This struct
 	 * is returned by g_thread_new() or g_thread_try_new(). You can
@@ -8470,7 +8534,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Thread {}
 	class Thread {
-		public constructor();
+		public constructor(options?: Partial<ThreadInitOptions>);
 		/**
 		 * This function creates a new thread. The new thread starts by invoking
 		 * #func with the argument data. The thread will run until #func returns
@@ -8553,6 +8617,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface ThreadPoolInitOptions {}
 	/**
 	 * The #GThreadPool struct represents a thread pool. It has three
 	 * public read-only members, but the underlying struct is bigger,
@@ -8560,7 +8625,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface ThreadPool {}
 	class ThreadPool {
-		public constructor();
+		public constructor(options?: Partial<ThreadPoolInitOptions>);
 		/**
 		 * the function to execute in the threads of this pool
 		 */
@@ -8679,6 +8744,7 @@ declare namespace imports.gi.GLib {
 		public unprocessed(): number;
 	}
 
+	export interface TimeValInitOptions {}
 	/**
 	 * Represents a precise time, with seconds and microseconds.
 	 * 
@@ -8693,7 +8759,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface TimeVal {}
 	class TimeVal {
-		public constructor();
+		public constructor(options?: Partial<TimeValInitOptions>);
 		/**
 		 * seconds
 		 */
@@ -8749,13 +8815,14 @@ declare namespace imports.gi.GLib {
 		public to_iso8601(): string | null;
 	}
 
+	export interface TimeZoneInitOptions {}
 	/**
 	 * #GTimeZone is an opaque structure whose members cannot be accessed
 	 * directly.
 	 */
 	interface TimeZone {}
 	class TimeZone {
-		public constructor();
+		public constructor(options?: Partial<TimeZoneInitOptions>);
 		/**
 		 * A version of g_time_zone_new_identifier() which returns the UTC time zone
 		 * if #identifier could not be parsed or loaded.
@@ -8970,12 +9037,13 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface TimerInitOptions {}
 	/**
 	 * Opaque datatype that records a start time.
 	 */
 	interface Timer {}
 	class Timer {
-		public constructor();
+		public constructor(options?: Partial<TimerInitOptions>);
 		/**
 		 * Resumes a timer that has previously been stopped with
 		 * g_timer_stop(). g_timer_stop() must be called before using this
@@ -9025,13 +9093,14 @@ declare namespace imports.gi.GLib {
 		public stop(): void;
 	}
 
+	export interface TrashStackInitOptions {}
 	/**
 	 * Each piece of memory that is pushed onto the stack
 	 * is cast to a GTrashStack*.
 	 */
 	interface TrashStack {}
 	class TrashStack {
-		public constructor();
+		public constructor(options?: Partial<TrashStackInitOptions>);
 		/**
 		 * pointer to the previous element of the stack,
 		 *     gets stored in the first `sizeof (gpointer)`
@@ -9040,6 +9109,7 @@ declare namespace imports.gi.GLib {
 		public next: TrashStack;
 	}
 
+	export interface TreeInitOptions {}
 	/**
 	 * The GTree struct is an opaque data structure representing a
 	 * [balanced binary tree][glib-Balanced-Binary-Trees]. It should be
@@ -9047,7 +9117,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Tree {}
 	class Tree {
-		public constructor();
+		public constructor(options?: Partial<TreeInitOptions>);
 		/**
 		 * Creates a new #GTree.
 		 * @param key_compare_func the function used to order the nodes in the #GTree.
@@ -9332,12 +9402,13 @@ declare namespace imports.gi.GLib {
 		public upper_bound(key: any | null): TreeNode | null;
 	}
 
+	export interface TreeNodeInitOptions {}
 	/**
 	 * An opaque type which identifies a specific node in a #GTree.
 	 */
 	interface TreeNode {}
 	class TreeNode {
-		public constructor();
+		public constructor(options?: Partial<TreeNodeInitOptions>);
 		/**
 		 * Gets the key stored at a particular tree node.
 		 * @returns the key at the node.
@@ -9362,6 +9433,7 @@ declare namespace imports.gi.GLib {
 		public value(): any | null;
 	}
 
+	export interface UriInitOptions {}
 	/**
 	 * The #GUri type and related functions can be used to parse URIs into
 	 * their components, and build valid URIs from individual components.
@@ -9474,7 +9546,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Uri {}
 	class Uri {
-		public constructor();
+		public constructor(options?: Partial<UriInitOptions>);
 		/**
 		 * Gets #uri's authentication parameters, which may contain
 		 * `%`-encoding, depending on the flags with which #uri was created.
@@ -9606,6 +9678,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface UriParamsIterInitOptions {}
 	/**
 	 * Many URI schemes include one or more attribute/value pairs as part of the URI
 	 * value. For example `scheme://server/path?query=string&is=there` has two
@@ -9619,7 +9692,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface UriParamsIter {}
 	class UriParamsIter {
-		public constructor();
+		public constructor(options?: Partial<UriParamsIterInitOptions>);
 		public readonly dummy0: number;
 		public readonly dummy1: any;
 		public readonly dummy2: any;
@@ -9685,6 +9758,7 @@ declare namespace imports.gi.GLib {
 		public next(): boolean;
 	}
 
+	export interface VariantInitOptions {}
 	/**
 	 * #GVariant is a variant datatype; it can contain one or more values
 	 * along with information about the type of the values.
@@ -11164,6 +11238,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface VariantBuilderInitOptions {}
 	/**
 	 * A utility type for constructing container-type #GVariant instances.
 	 * 
@@ -11175,7 +11250,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface VariantBuilder {}
 	class VariantBuilder {
-		public constructor();
+		public constructor(options?: Partial<VariantBuilderInitOptions>);
 		/**
 		 * Allocates and initialises a new #GVariantBuilder.
 		 * 
@@ -11408,6 +11483,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface VariantDictInitOptions {}
 	/**
 	 * #GVariantDict is a mutable interface to #GVariant dictionaries.
 	 * 
@@ -11501,7 +11577,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface VariantDict {}
 	class VariantDict {
-		public constructor();
+		public constructor(options?: Partial<VariantDictInitOptions>);
 		/**
 		 * Allocates and initialises a new #GVariantDict.
 		 * 
@@ -11648,13 +11724,14 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface VariantIterInitOptions {}
 	/**
 	 * #GVariantIter is an opaque data structure and can only be accessed
 	 * using the following functions.
 	 */
 	interface VariantIter {}
 	class VariantIter {
-		public constructor();
+		public constructor(options?: Partial<VariantIterInitOptions>);
 		public readonly x: number[];
 		/**
 		 * Creates a new heap-allocated #GVariantIter to iterate over the
@@ -11843,6 +11920,7 @@ declare namespace imports.gi.GLib {
 		public next_value(): Variant | null;
 	}
 
+	export interface VariantTypeInitOptions {}
 	/**
 	 * This section introduces the GVariant type system. It is based, in
 	 * large part, on the D-Bus type system, with two major changes and
@@ -11994,7 +12072,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface VariantType {}
 	class VariantType {
-		public constructor();
+		public constructor(options?: Partial<VariantTypeInitOptions>);
 		/**
 		 * Creates a new #GVariantType corresponding to the type string given
 		 * by #type_string.  It is appropriate to call g_variant_type_free() on
@@ -16902,6 +16980,11 @@ declare namespace imports.gi.GLib {
 
 	}
 
+	type DoubleIEEE754InitOptionsMixin = Pick<IDoubleIEEE754,
+		"v_double">;
+
+	export interface DoubleIEEE754InitOptions extends DoubleIEEE754InitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DoubleIEEE754} instead.
 	 */
@@ -16916,7 +16999,7 @@ declare namespace imports.gi.GLib {
 	interface DoubleIEEE754 extends DoubleIEEE754Mixin {}
 
 	class DoubleIEEE754 {
-		public constructor();
+		public constructor(options?: Partial<DoubleIEEE754InitOptions>);
 	}
 
 
@@ -16933,6 +17016,11 @@ declare namespace imports.gi.GLib {
 
 	}
 
+	type FloatIEEE754InitOptionsMixin = Pick<IFloatIEEE754,
+		"v_float">;
+
+	export interface FloatIEEE754InitOptions extends FloatIEEE754InitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FloatIEEE754} instead.
 	 */
@@ -16947,7 +17035,7 @@ declare namespace imports.gi.GLib {
 	interface FloatIEEE754 extends FloatIEEE754Mixin {}
 
 	class FloatIEEE754 {
-		public constructor();
+		public constructor(options?: Partial<FloatIEEE754InitOptions>);
 	}
 
 
@@ -17027,6 +17115,9 @@ declare namespace imports.gi.GLib {
 		unlock(): void;
 	}
 
+	type MutexInitOptionsMixin  = {};
+	export interface MutexInitOptions extends MutexInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Mutex} instead.
 	 */
@@ -17081,7 +17172,7 @@ declare namespace imports.gi.GLib {
 	interface Mutex extends MutexMixin {}
 
 	class Mutex {
-		public constructor();
+		public constructor(options?: Partial<MutexInitOptions>);
 	}
 
 
@@ -17153,6 +17244,22 @@ declare namespace imports.gi.GLib {
 
 	}
 
+	type TokenValueInitOptionsMixin = Pick<ITokenValue,
+		"v_symbol" |
+		"v_identifier" |
+		"v_binary" |
+		"v_octal" |
+		"v_int" |
+		"v_int64" |
+		"v_float" |
+		"v_hex" |
+		"v_string" |
+		"v_comment" |
+		"v_char" |
+		"v_error">;
+
+	export interface TokenValueInitOptions extends TokenValueInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TokenValue} instead.
 	 */
@@ -17164,7 +17271,7 @@ declare namespace imports.gi.GLib {
 	interface TokenValue extends TokenValueMixin {}
 
 	class TokenValue {
-		public constructor();
+		public constructor(options?: Partial<TokenValueInitOptions>);
 	}
 
 

@@ -42,6 +42,17 @@ declare namespace imports.gi.St {
 
 	}
 
+	type AdjustmentInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IAdjustment,
+		"lower" |
+		"page_increment" |
+		"page_size" |
+		"step_increment" |
+		"upper" |
+		"value">;
+
+	export interface AdjustmentInitOptions extends AdjustmentInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Adjustment} instead.
 	 */
@@ -55,7 +66,7 @@ declare namespace imports.gi.St {
 	interface Adjustment extends AdjustmentMixin {}
 
 	class Adjustment {
-		public constructor();
+		public constructor(options?: Partial<AdjustmentInitOptions>);
 		public static new(value: number, lower: number, upper: number, step_increment: number, page_increment: number, page_size: number): Adjustment;
 	}
 
@@ -127,6 +138,41 @@ declare namespace imports.gi.St {
 
 	}
 
+	type BackgroundEffectInitOptionsMixin = Clutter.OffscreenEffectInitOptions & 
+	Pick<IBackgroundEffect,
+		"bumpmap" |
+		"actor" |
+		"bg_texture" |
+		"bg_sub_texture" |
+		"bg_bumpmap" |
+		"bumpmap_location" |
+		"pixel_step_uniform0" |
+		"pixel_step_uniform1" |
+		"pixel_step_uniform2" |
+		"BumpTex_uniform" |
+		"bump_step_uniform" |
+		"bg_posx_i" |
+		"bg_posy_i" |
+		"bg_width_i" |
+		"bg_height_i" |
+		"fg_width_i" |
+		"fg_height_i" |
+		"bumptex_width_i" |
+		"bumptex_height_i" |
+		"posx_old" |
+		"posy_old" |
+		"width_old" |
+		"height_old" |
+		"pipeline0" |
+		"pipeline1" |
+		"pipeline2" |
+		"pipeline3" |
+		"pipeline4" |
+		"old_time" |
+		"opacity">;
+
+	export interface BackgroundEffectInitOptions extends BackgroundEffectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BackgroundEffect} instead.
 	 */
@@ -135,7 +181,7 @@ declare namespace imports.gi.St {
 	interface BackgroundEffect extends BackgroundEffectMixin {}
 
 	class BackgroundEffect {
-		public constructor();
+		public constructor(options?: Partial<BackgroundEffectInitOptions>);
 		public static new(): Clutter.Effect;
 	}
 
@@ -211,6 +257,16 @@ declare namespace imports.gi.St {
 
 	}
 
+	type BinInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<IBin,
+		"child" |
+		"x_align" |
+		"x_fill" |
+		"y_align" |
+		"y_fill">;
+
+	export interface BinInitOptions extends BinInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bin} instead.
 	 */
@@ -222,7 +278,7 @@ declare namespace imports.gi.St {
 	interface Bin extends BinMixin {}
 
 	class Bin {
-		public constructor();
+		public constructor(options?: Partial<BinInitOptions>);
 		/**
 		 * Creates a new {@link Bin}, a simple container for one child.
 		 * @returns the newly created {@link Bin} actor
@@ -244,6 +300,9 @@ declare namespace imports.gi.St {
 		get_filename(): string;
 	}
 
+	type BorderImageInitOptionsMixin = GObject.ObjectInitOptions
+	export interface BorderImageInitOptions extends BorderImageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BorderImage} instead.
 	 */
@@ -252,7 +311,7 @@ declare namespace imports.gi.St {
 	interface BorderImage extends BorderImageMixin {}
 
 	class BorderImage {
-		public constructor();
+		public constructor(options?: Partial<BorderImageInitOptions>);
 		public static new(filename: string, border_top: number, border_right: number, border_bottom: number, border_left: number): BorderImage;
 	}
 
@@ -304,6 +363,13 @@ declare namespace imports.gi.St {
 
 	}
 
+	type BoxLayoutInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & ScrollableInitOptions & 
+	Pick<IBoxLayout,
+		"pack_start" |
+		"vertical">;
+
+	export interface BoxLayoutInitOptions extends BoxLayoutInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BoxLayout} instead.
 	 */
@@ -316,7 +382,7 @@ declare namespace imports.gi.St {
 	interface BoxLayout extends BoxLayoutMixin {}
 
 	class BoxLayout {
-		public constructor();
+		public constructor(options?: Partial<BoxLayoutInitOptions>);
 		/**
 		 * Create a new {@link BoxLayout}.
 		 * @returns a newly allocated {@link BoxLayout}
@@ -342,6 +408,16 @@ declare namespace imports.gi.St {
 
 	}
 
+	type BoxLayoutChildInitOptionsMixin = Clutter.ChildMetaInitOptions & 
+	Pick<IBoxLayoutChild,
+		"expand" |
+		"x_align" |
+		"x_fill" |
+		"y_align" |
+		"y_fill">;
+
+	export interface BoxLayoutChildInitOptions extends BoxLayoutChildInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BoxLayoutChild} instead.
 	 */
@@ -354,7 +430,7 @@ declare namespace imports.gi.St {
 	interface BoxLayoutChild extends BoxLayoutChildMixin {}
 
 	class BoxLayoutChild {
-		public constructor();
+		public constructor(options?: Partial<BoxLayoutChildInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -435,6 +511,16 @@ declare namespace imports.gi.St {
 
 	}
 
+	type ButtonInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<IButton,
+		"button_mask" |
+		"checked" |
+		"label" |
+		"pressed" |
+		"toggle_mode">;
+
+	export interface ButtonInitOptions extends ButtonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Button} instead.
 	 */
@@ -447,7 +533,7 @@ declare namespace imports.gi.St {
 	interface Button extends ButtonMixin {}
 
 	class Button {
-		public constructor();
+		public constructor(options?: Partial<ButtonInitOptions>);
 		/**
 		 * Create a new button
 		 * @returns a new {@link Button}
@@ -480,6 +566,9 @@ declare namespace imports.gi.St {
 		set_text(type: ClipboardType, text: string): void;
 	}
 
+	type ClipboardInitOptionsMixin = GObject.ObjectInitOptions
+	export interface ClipboardInitOptions extends ClipboardInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clipboard} instead.
 	 */
@@ -492,7 +581,7 @@ declare namespace imports.gi.St {
 	interface Clipboard extends ClipboardMixin {}
 
 	class Clipboard {
-		public constructor();
+		public constructor(options?: Partial<ClipboardInitOptions>);
 		/**
 		 * Get the global {@link Clipboard} object that represents the clipboard.
 		 * @returns a {@link Clipboard} owned by St and must not be
@@ -532,6 +621,9 @@ declare namespace imports.gi.St {
 
 	}
 
+	type DrawingAreaInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions
+	export interface DrawingAreaInitOptions extends DrawingAreaInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DrawingArea} instead.
 	 */
@@ -540,7 +632,7 @@ declare namespace imports.gi.St {
 	interface DrawingArea extends DrawingAreaMixin {}
 
 	class DrawingArea {
-		public constructor();
+		public constructor(options?: Partial<DrawingAreaInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -614,6 +706,14 @@ declare namespace imports.gi.St {
 
 	}
 
+	type EntryInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<IEntry,
+		"clutter_text" |
+		"hint_text" |
+		"text">;
+
+	export interface EntryInitOptions extends EntryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Entry} instead.
 	 */
@@ -626,7 +726,7 @@ declare namespace imports.gi.St {
 	interface Entry extends EntryMixin {}
 
 	class Entry {
-		public constructor();
+		public constructor(options?: Partial<EntryInitOptions>);
 		/**
 		 * Create a new {@link Entry} with the specified entry
 		 * @param text text to set the entry to
@@ -661,6 +761,9 @@ declare namespace imports.gi.St {
 		remove_group(root: Widget): void;
 	}
 
+	type FocusManagerInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FocusManagerInitOptions extends FocusManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FocusManager} instead.
 	 */
@@ -672,7 +775,7 @@ declare namespace imports.gi.St {
 	interface FocusManager extends FocusManagerMixin {}
 
 	class FocusManager {
-		public constructor();
+		public constructor(options?: Partial<FocusManagerInitOptions>);
 		/**
 		 * Gets the {@link FocusManager} for #stage, creating it if necessary.
 		 * @param stage a #ClutterStage
@@ -688,6 +791,9 @@ declare namespace imports.gi.St {
 
 	}
 
+	type GroupInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions
+	export interface GroupInitOptions extends GroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Group} instead.
 	 */
@@ -699,7 +805,7 @@ declare namespace imports.gi.St {
 	interface Group extends GroupMixin {}
 
 	class Group {
-		public constructor();
+		public constructor(options?: Partial<GroupInitOptions>);
 		/**
 		 * Create a new  {@link Group}.
 		 * @returns the newly created {@link Group} actor
@@ -714,6 +820,9 @@ declare namespace imports.gi.St {
 		set_autoshow_im(autoshow: boolean): void;
 	}
 
+	type IMTextInitOptionsMixin = Clutter.TextInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions
+	export interface IMTextInitOptions extends IMTextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMText} instead.
 	 */
@@ -722,7 +831,7 @@ declare namespace imports.gi.St {
 	interface IMText extends IMTextMixin {}
 
 	class IMText {
-		public constructor();
+		public constructor(options?: Partial<IMTextInitOptions>);
 		/**
 		 * Create a new {@link IMText} with the specified text
 		 * @param text text to set  to
@@ -776,6 +885,15 @@ declare namespace imports.gi.St {
 
 	}
 
+	type IconInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<IIcon,
+		"gicon" |
+		"icon_name" |
+		"icon_size" |
+		"icon_type">;
+
+	export interface IconInitOptions extends IconInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Icon} instead.
 	 */
@@ -788,7 +906,7 @@ declare namespace imports.gi.St {
 	interface Icon extends IconMixin {}
 
 	class Icon {
-		public constructor();
+		public constructor(options?: Partial<IconInitOptions>);
 		/**
 		 * Create a newly allocated {@link Icon}
 		 * @returns A newly allocated {@link Icon}
@@ -823,6 +941,13 @@ declare namespace imports.gi.St {
 
 	}
 
+	type LabelInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<ILabel,
+		"clutter_text" |
+		"text">;
+
+	export interface LabelInitOptions extends LabelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Label} instead.
 	 */
@@ -835,7 +960,7 @@ declare namespace imports.gi.St {
 	interface Label extends LabelMixin {}
 
 	class Label {
-		public constructor();
+		public constructor(options?: Partial<LabelInitOptions>);
 		/**
 		 * Create a new {@link Label} with the specified label
 		 * @param text text to set the label to
@@ -879,6 +1004,20 @@ declare namespace imports.gi.St {
 
 	}
 
+	type PolygonInitOptionsMixin = Clutter.ActorInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<IPolygon,
+		"debug" |
+		"llc_x" |
+		"llc_y" |
+		"lrc_x" |
+		"lrc_y" |
+		"ulc_x" |
+		"ulc_y" |
+		"urc_x" |
+		"urc_y">;
+
+	export interface PolygonInitOptions extends PolygonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Polygon} instead.
 	 */
@@ -887,7 +1026,7 @@ declare namespace imports.gi.St {
 	interface Polygon extends PolygonMixin {}
 
 	class Polygon {
-		public constructor();
+		public constructor(options?: Partial<PolygonInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -911,6 +1050,13 @@ declare namespace imports.gi.St {
 
 	}
 
+	type ScrollBarInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<IScrollBar,
+		"adjustment" |
+		"vertical">;
+
+	export interface ScrollBarInitOptions extends ScrollBarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrollBar} instead.
 	 */
@@ -923,7 +1069,7 @@ declare namespace imports.gi.St {
 	interface ScrollBar extends ScrollBarMixin {}
 
 	class ScrollBar {
-		public constructor();
+		public constructor(options?: Partial<ScrollBarInitOptions>);
 		public static new(adjustment: Adjustment): Widget;
 	}
 
@@ -945,14 +1091,14 @@ declare namespace imports.gi.St {
 		 * Gets the horizontal scrollbar of the scrollbiew
 		 * @returns the horizontal {@link Scrollbar}
 		 */
-		get_hscroll_bar(): Clutter.Actor;
+		get_hscroll_bar(): ScrollBar;
 		get_mouse_scrolling(): boolean;
 		get_row_size(): number;
 		/**
 		 * Gets the vertical scrollbar of the scrollbiew
 		 * @returns the vertical {@link Scrollbar}
 		 */
-		get_vscroll_bar(): Clutter.Actor;
+		get_vscroll_bar(): ScrollBar;
 		set_auto_scrolling(enabled: boolean): void;
 		set_column_size(column_size: number): void;
 		set_mouse_scrolling(enabled: boolean): void;
@@ -974,6 +1120,19 @@ declare namespace imports.gi.St {
 
 	}
 
+	type ScrollViewInitOptionsMixin = BinInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<IScrollView,
+		"enable_auto_scrolling" |
+		"enable_mouse_scrolling" |
+		"hscroll" |
+		"hscrollbar_policy" |
+		"hscrollbar_visible" |
+		"vscroll" |
+		"vscrollbar_policy" |
+		"vscrollbar_visible">;
+
+	export interface ScrollViewInitOptions extends ScrollViewInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrollView} instead.
 	 */
@@ -986,7 +1145,7 @@ declare namespace imports.gi.St {
 	interface ScrollView extends ScrollViewMixin {}
 
 	class ScrollView {
-		public constructor();
+		public constructor(options?: Partial<ScrollViewInitOptions>);
 		public static new(): Widget;
 	}
 
@@ -1000,6 +1159,12 @@ declare namespace imports.gi.St {
 
 	}
 
+	type ScrollViewFadeInitOptionsMixin = Clutter.OffscreenEffectInitOptions & 
+	Pick<IScrollViewFade,
+		"fade_offset">;
+
+	export interface ScrollViewFadeInitOptions extends ScrollViewFadeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrollViewFade} instead.
 	 */
@@ -1008,7 +1173,7 @@ declare namespace imports.gi.St {
 	interface ScrollViewFade extends ScrollViewFadeMixin {}
 
 	class ScrollViewFade {
-		public constructor();
+		public constructor(options?: Partial<ScrollViewFadeInitOptions>);
 		public static new(): Clutter.Effect;
 	}
 
@@ -1022,6 +1187,12 @@ declare namespace imports.gi.St {
 
 	}
 
+	type SettingsInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ISettings,
+		"font_name">;
+
+	export interface SettingsInitOptions extends SettingsInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
@@ -1030,7 +1201,7 @@ declare namespace imports.gi.St {
 	interface Settings extends SettingsMixin {}
 
 	class Settings {
-		public constructor();
+		public constructor(options?: Partial<SettingsInitOptions>);
 		/**
 		 * Gets the {@link Settings}
 		 * @returns a settings object
@@ -1177,6 +1348,14 @@ declare namespace imports.gi.St {
 
 	}
 
+	type TableInitOptionsMixin = WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<ITable,
+		"column_count" |
+		"homogeneous" |
+		"row_count">;
+
+	export interface TableInitOptions extends TableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Table} instead.
 	 */
@@ -1189,7 +1368,7 @@ declare namespace imports.gi.St {
 	interface Table extends TableMixin {}
 
 	class Table {
-		public constructor();
+		public constructor(options?: Partial<TableInitOptions>);
 		/**
 		 * Create a new {@link Table}
 		 * @returns a new {@link Table}
@@ -1227,6 +1406,22 @@ declare namespace imports.gi.St {
 
 	}
 
+	type TableChildInitOptionsMixin = Clutter.ChildMetaInitOptions & 
+	Pick<ITableChild,
+		"allocate_hidden" |
+		"col" |
+		"col_span" |
+		"row" |
+		"row_span" |
+		"x_align" |
+		"x_expand" |
+		"x_fill" |
+		"y_align" |
+		"y_expand" |
+		"y_fill">;
+
+	export interface TableChildInitOptions extends TableChildInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TableChild} instead.
 	 */
@@ -1239,7 +1434,7 @@ declare namespace imports.gi.St {
 	interface TableChild extends TableChildMixin {}
 
 	class TableChild {
-		public constructor();
+		public constructor(options?: Partial<TableChildInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1368,6 +1563,9 @@ declare namespace imports.gi.St {
 
 	}
 
+	type TextureCacheInitOptionsMixin = GObject.ObjectInitOptions
+	export interface TextureCacheInitOptions extends TextureCacheInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextureCache} instead.
 	 */
@@ -1376,7 +1574,7 @@ declare namespace imports.gi.St {
 	interface TextureCache extends TextureCacheMixin {}
 
 	class TextureCache {
-		public constructor();
+		public constructor(options?: Partial<TextureCacheInitOptions>);
 		public static get_default(): TextureCache;
 		/**
 		 * Converts a #GdkPixbuf into a #ClutterTexture.
@@ -1423,6 +1621,15 @@ declare namespace imports.gi.St {
 
 	}
 
+	type ThemeInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITheme,
+		"application_stylesheet" |
+		"default_stylesheet" |
+		"fallback_stylesheet" |
+		"theme_stylesheet">;
+
+	export interface ThemeInitOptions extends ThemeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Theme} instead.
 	 */
@@ -1431,7 +1638,7 @@ declare namespace imports.gi.St {
 	interface Theme extends ThemeMixin {}
 
 	class Theme {
-		public constructor();
+		public constructor(options?: Partial<ThemeInitOptions>);
 		public static new(application_stylesheet: string, theme_stylesheet: string, default_stylesheet: string): Theme;
 	}
 
@@ -1489,6 +1696,12 @@ declare namespace imports.gi.St {
 
 	}
 
+	type ThemeContextInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IThemeContext,
+		"scale_factor">;
+
+	export interface ThemeContextInitOptions extends ThemeContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThemeContext} instead.
 	 */
@@ -1497,7 +1710,7 @@ declare namespace imports.gi.St {
 	interface ThemeContext extends ThemeContextMixin {}
 
 	class ThemeContext {
-		public constructor();
+		public constructor(options?: Partial<ThemeContextInitOptions>);
 		/**
 		 * Create a new theme context not associated with any #ClutterStage.
 		 * This can be useful in testing scenarios, or if using StThemeContext
@@ -1874,6 +2087,9 @@ declare namespace imports.gi.St {
 		paint_equal(other: ThemeNode): boolean;
 	}
 
+	type ThemeNodeInitOptionsMixin = GObject.ObjectInitOptions
+	export interface ThemeNodeInitOptions extends ThemeNodeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThemeNode} instead.
 	 */
@@ -1882,7 +2098,7 @@ declare namespace imports.gi.St {
 	interface ThemeNode extends ThemeNodeMixin {}
 
 	class ThemeNode {
-		public constructor();
+		public constructor(options?: Partial<ThemeNodeInitOptions>);
 		/**
 		 * Creates a new {@link ThemeNode}. Once created, a node is immutable. Of any
 		 * of the attributes of the node (like the #element_class) change the node
@@ -2342,6 +2558,22 @@ declare namespace imports.gi.St {
 
 	}
 
+	type WidgetInitOptionsMixin = Clutter.ActorInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<IWidget,
+		"accessible_name" |
+		"accessible_role" |
+		"can_focus" |
+		"hover" |
+		"important" |
+		"label_actor" |
+		"pseudo_class" |
+		"style" |
+		"style_class" |
+		"theme" |
+		"track_hover">;
+
+	export interface WidgetInitOptions extends WidgetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Widget} instead.
 	 */
@@ -2355,7 +2587,7 @@ declare namespace imports.gi.St {
 	interface Widget extends WidgetMixin {}
 
 	class Widget {
-		public constructor();
+		public constructor(options?: Partial<WidgetInitOptions>);
 		public static get_default_direction(): TextDirection;
 		public static set_default_direction(dir: TextDirection): void;
 	}
@@ -2367,6 +2599,9 @@ declare namespace imports.gi.St {
 
 	}
 
+	type WidgetAccessibleInitOptionsMixin = Atk.GObjectAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions
+	export interface WidgetAccessibleInitOptions extends WidgetAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WidgetAccessible} instead.
 	 */
@@ -2375,151 +2610,176 @@ declare namespace imports.gi.St {
 	interface WidgetAccessible extends WidgetAccessibleMixin {}
 
 	class WidgetAccessible {
-		public constructor();
+		public constructor(options?: Partial<WidgetAccessibleInitOptions>);
 	}
 
+	export interface AdjustmentClassInitOptions {}
 	/**
 	 * Base class for {@link Adjustment}.
 	 */
 	interface AdjustmentClass {}
 	class AdjustmentClass {
-		public constructor();
+		public constructor(options?: Partial<AdjustmentClassInitOptions>);
 		public changed: {(adjustment: Adjustment): void;};
 	}
 
+	export interface AdjustmentPrivateInitOptions {}
 	interface AdjustmentPrivate {}
 	class AdjustmentPrivate {
-		public constructor();
+		public constructor(options?: Partial<AdjustmentPrivateInitOptions>);
 	}
 
+	export interface BackgroundEffectClassInitOptions {}
 	interface BackgroundEffectClass {}
 	class BackgroundEffectClass {
-		public constructor();
+		public constructor(options?: Partial<BackgroundEffectClassInitOptions>);
 		public readonly base_pipeline: any;
 	}
 
+	export interface BinClassInitOptions {}
 	/**
 	 * The {@link BinClass} struct contains only private data
 	 */
 	interface BinClass {}
 	class BinClass {
-		public constructor();
+		public constructor(options?: Partial<BinClassInitOptions>);
 	}
 
+	export interface BinPrivateInitOptions {}
 	interface BinPrivate {}
 	class BinPrivate {
-		public constructor();
+		public constructor(options?: Partial<BinPrivateInitOptions>);
 	}
 
+	export interface BorderImageClassInitOptions {}
 	interface BorderImageClass {}
 	class BorderImageClass {
-		public constructor();
+		public constructor(options?: Partial<BorderImageClassInitOptions>);
 	}
 
+	export interface BoxLayoutChildClassInitOptions {}
 	interface BoxLayoutChildClass {}
 	class BoxLayoutChildClass {
-		public constructor();
+		public constructor(options?: Partial<BoxLayoutChildClassInitOptions>);
 	}
 
+	export interface BoxLayoutChildPrivateInitOptions {}
 	interface BoxLayoutChildPrivate {}
 	class BoxLayoutChildPrivate {
-		public constructor();
+		public constructor(options?: Partial<BoxLayoutChildPrivateInitOptions>);
 	}
 
+	export interface BoxLayoutClassInitOptions {}
 	interface BoxLayoutClass {}
 	class BoxLayoutClass {
-		public constructor();
+		public constructor(options?: Partial<BoxLayoutClassInitOptions>);
 	}
 
+	export interface BoxLayoutPrivateInitOptions {}
 	interface BoxLayoutPrivate {}
 	class BoxLayoutPrivate {
-		public constructor();
+		public constructor(options?: Partial<BoxLayoutPrivateInitOptions>);
 	}
 
+	export interface ButtonClassInitOptions {}
 	interface ButtonClass {}
 	class ButtonClass {
-		public constructor();
+		public constructor(options?: Partial<ButtonClassInitOptions>);
 		public transition: {(button: Button): void;};
 		public clicked: {(button: Button): void;};
 	}
 
+	export interface ButtonPrivateInitOptions {}
 	interface ButtonPrivate {}
 	class ButtonPrivate {
-		public constructor();
+		public constructor(options?: Partial<ButtonPrivateInitOptions>);
 	}
 
+	export interface ClipboardClassInitOptions {}
 	interface ClipboardClass {}
 	class ClipboardClass {
-		public constructor();
+		public constructor(options?: Partial<ClipboardClassInitOptions>);
 	}
 
+	export interface ClipboardPrivateInitOptions {}
 	interface ClipboardPrivate {}
 	class ClipboardPrivate {
-		public constructor();
+		public constructor(options?: Partial<ClipboardPrivateInitOptions>);
 	}
 
+	export interface DrawingAreaClassInitOptions {}
 	interface DrawingAreaClass {}
 	class DrawingAreaClass {
-		public constructor();
+		public constructor(options?: Partial<DrawingAreaClassInitOptions>);
 		public repaint: {(area: DrawingArea): void;};
 	}
 
+	export interface DrawingAreaPrivateInitOptions {}
 	interface DrawingAreaPrivate {}
 	class DrawingAreaPrivate {
-		public constructor();
+		public constructor(options?: Partial<DrawingAreaPrivateInitOptions>);
 	}
 
+	export interface EntryClassInitOptions {}
 	interface EntryClass {}
 	class EntryClass {
-		public constructor();
+		public constructor(options?: Partial<EntryClassInitOptions>);
 		public primary_icon_clicked: {(entry: Entry): void;};
 		public secondary_icon_clicked: {(entry: Entry): void;};
 	}
 
+	export interface EntryPrivateInitOptions {}
 	interface EntryPrivate {}
 	class EntryPrivate {
-		public constructor();
+		public constructor(options?: Partial<EntryPrivateInitOptions>);
 	}
 
+	export interface FocusManagerClassInitOptions {}
 	/**
 	 * The {@link FocusManagerClass} struct contains only private data
 	 */
 	interface FocusManagerClass {}
 	class FocusManagerClass {
-		public constructor();
+		public constructor(options?: Partial<FocusManagerClassInitOptions>);
 	}
 
+	export interface FocusManagerPrivateInitOptions {}
 	interface FocusManagerPrivate {}
 	class FocusManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<FocusManagerPrivateInitOptions>);
 	}
 
+	export interface GroupClassInitOptions {}
 	/**
 	 * The {@link GroupClass} struct contains only private data
 	 */
 	interface GroupClass {}
 	class GroupClass {
-		public constructor();
+		public constructor(options?: Partial<GroupClassInitOptions>);
 	}
 
+	export interface GroupPrivateInitOptions {}
 	interface GroupPrivate {}
 	class GroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<GroupPrivateInitOptions>);
 	}
 
+	export interface IMTextClassInitOptions {}
 	interface IMTextClass {}
 	class IMTextClass {
-		public constructor();
+		public constructor(options?: Partial<IMTextClassInitOptions>);
 	}
 
+	export interface IMTextPrivateInitOptions {}
 	interface IMTextPrivate {}
 	class IMTextPrivate {
-		public constructor();
+		public constructor(options?: Partial<IMTextPrivateInitOptions>);
 	}
 
+	export interface IconClassInitOptions {}
 	interface IconClass {}
 	class IconClass {
-		public constructor();
+		public constructor(options?: Partial<IconClassInitOptions>);
 		public _padding_0: {(): void;};
 		public _padding_1: {(): void;};
 		public _padding_2: {(): void;};
@@ -2527,13 +2787,14 @@ declare namespace imports.gi.St {
 		public _padding_4: {(): void;};
 	}
 
+	export interface IconColorsInitOptions {}
 	/**
 	 * The {@link IconColors} structure encapsulates colors for colorizing a symbolic
 	 * icon.
 	 */
 	interface IconColors {}
 	class IconColors {
-		public constructor();
+		public constructor(options?: Partial<IconColorsInitOptions>);
 		/**
 		 * Creates a new {@link IconColors}. All colors are initialized to transparent black.
 		 * @returns a newly created {@link IconColors}. Free with st_icon_colors_unref()
@@ -2576,72 +2837,84 @@ declare namespace imports.gi.St {
 		public unref(): void;
 	}
 
+	export interface IconPrivateInitOptions {}
 	interface IconPrivate {}
 	class IconPrivate {
-		public constructor();
+		public constructor(options?: Partial<IconPrivateInitOptions>);
 	}
 
+	export interface LabelClassInitOptions {}
 	interface LabelClass {}
 	class LabelClass {
-		public constructor();
+		public constructor(options?: Partial<LabelClassInitOptions>);
 	}
 
+	export interface LabelPrivateInitOptions {}
 	interface LabelPrivate {}
 	class LabelPrivate {
-		public constructor();
+		public constructor(options?: Partial<LabelPrivateInitOptions>);
 	}
 
+	export interface PolygonClassInitOptions {}
 	interface PolygonClass {}
 	class PolygonClass {
-		public constructor();
+		public constructor(options?: Partial<PolygonClassInitOptions>);
 		public repaint: {(area: Polygon): void;};
 	}
 
+	export interface PolygonPrivateInitOptions {}
 	interface PolygonPrivate {}
 	class PolygonPrivate {
-		public constructor();
+		public constructor(options?: Partial<PolygonPrivateInitOptions>);
 	}
 
+	export interface ScrollBarClassInitOptions {}
 	interface ScrollBarClass {}
 	class ScrollBarClass {
-		public constructor();
+		public constructor(options?: Partial<ScrollBarClassInitOptions>);
 		public scroll_start: {(bar: ScrollBar): void;};
 		public scroll_stop: {(bar: ScrollBar): void;};
 	}
 
+	export interface ScrollBarPrivateInitOptions {}
 	interface ScrollBarPrivate {}
 	class ScrollBarPrivate {
-		public constructor();
+		public constructor(options?: Partial<ScrollBarPrivateInitOptions>);
 	}
 
+	export interface ScrollViewClassInitOptions {}
 	interface ScrollViewClass {}
 	class ScrollViewClass {
-		public constructor();
+		public constructor(options?: Partial<ScrollViewClassInitOptions>);
 	}
 
+	export interface ScrollViewPrivateInitOptions {}
 	interface ScrollViewPrivate {}
 	class ScrollViewPrivate {
-		public constructor();
+		public constructor(options?: Partial<ScrollViewPrivateInitOptions>);
 	}
 
+	export interface ScrollableInterfaceInitOptions {}
 	interface ScrollableInterface {}
 	class ScrollableInterface {
-		public constructor();
+		public constructor(options?: Partial<ScrollableInterfaceInitOptions>);
 		public set_adjustments: {(scrollable: Scrollable, hadjustment: Adjustment, vadjustment: Adjustment): void;};
 		public get_adjustments: {(scrollable: Scrollable, hadjustment: Adjustment, vadjustment: Adjustment): void;};
 	}
 
+	export interface SettingsClassInitOptions {}
 	interface SettingsClass {}
 	class SettingsClass {
-		public constructor();
+		public constructor(options?: Partial<SettingsClassInitOptions>);
 	}
 
+	export interface ShadowInitOptions {}
 	/**
 	 * Attributes of the -st-shadow property.
 	 */
 	interface Shadow {}
 	class Shadow {
-		public constructor();
+		public constructor(options?: Partial<ShadowInitOptions>);
 		/**
 		 * Creates a new {@link Shadow}
 		 * @param color shadow's color
@@ -2706,62 +2979,73 @@ declare namespace imports.gi.St {
 		public unref(): void;
 	}
 
+	export interface TableChildClassInitOptions {}
 	interface TableChildClass {}
 	class TableChildClass {
-		public constructor();
+		public constructor(options?: Partial<TableChildClassInitOptions>);
 	}
 
+	export interface TableClassInitOptions {}
 	interface TableClass {}
 	class TableClass {
-		public constructor();
+		public constructor(options?: Partial<TableClassInitOptions>);
 	}
 
+	export interface TablePrivateInitOptions {}
 	interface TablePrivate {}
 	class TablePrivate {
-		public constructor();
+		public constructor(options?: Partial<TablePrivateInitOptions>);
 	}
 
+	export interface TextureCacheClassInitOptions {}
 	interface TextureCacheClass {}
 	class TextureCacheClass {
-		public constructor();
+		public constructor(options?: Partial<TextureCacheClassInitOptions>);
 	}
 
+	export interface TextureCachePrivateInitOptions {}
 	interface TextureCachePrivate {}
 	class TextureCachePrivate {
-		public constructor();
+		public constructor(options?: Partial<TextureCachePrivateInitOptions>);
 	}
 
+	export interface ThemeClassInitOptions {}
 	interface ThemeClass {}
 	class ThemeClass {
-		public constructor();
+		public constructor(options?: Partial<ThemeClassInitOptions>);
 	}
 
+	export interface ThemeContextClassInitOptions {}
 	interface ThemeContextClass {}
 	class ThemeContextClass {
-		public constructor();
+		public constructor(options?: Partial<ThemeContextClassInitOptions>);
 	}
 
+	export interface ThemeNodeClassInitOptions {}
 	interface ThemeNodeClass {}
 	class ThemeNodeClass {
-		public constructor();
+		public constructor(options?: Partial<ThemeNodeClassInitOptions>);
 	}
 
+	export interface WidgetAccessibleClassInitOptions {}
 	interface WidgetAccessibleClass {}
 	class WidgetAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<WidgetAccessibleClassInitOptions>);
 	}
 
+	export interface WidgetAccessiblePrivateInitOptions {}
 	interface WidgetAccessiblePrivate {}
 	class WidgetAccessiblePrivate {
-		public constructor();
+		public constructor(options?: Partial<WidgetAccessiblePrivateInitOptions>);
 	}
 
+	export interface WidgetClassInitOptions {}
 	/**
 	 * Base class for stylable actors.
 	 */
 	interface WidgetClass {}
 	class WidgetClass {
-		public constructor();
+		public constructor(options?: Partial<WidgetClassInitOptions>);
 		public style_changed: {(self: Widget): void;};
 		public popup_menu: {(self: Widget): void;};
 		public navigate_focus: {(self: Widget, from: Clutter.Actor | null, direction: Gtk.DirectionType): boolean;};
@@ -2769,9 +3053,10 @@ declare namespace imports.gi.St {
 		public get_focus_chain: {(widget: Widget): GLib.List;};
 	}
 
+	export interface WidgetPrivateInitOptions {}
 	interface WidgetPrivate {}
 	class WidgetPrivate {
-		public constructor();
+		public constructor(options?: Partial<WidgetPrivateInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2787,6 +3072,12 @@ declare namespace imports.gi.St {
 
 	}
 
+	type ScrollableInitOptionsMixin = Pick<IScrollable,
+		"hadjustment" |
+		"vadjustment">;
+
+	export interface ScrollableInitOptions extends ScrollableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scrollable} instead.
 	 */
@@ -2795,7 +3086,7 @@ declare namespace imports.gi.St {
 	interface Scrollable extends ScrollableMixin {}
 
 	class Scrollable {
-		public constructor();
+		public constructor(options?: Partial<ScrollableInitOptions>);
 	}
 
 

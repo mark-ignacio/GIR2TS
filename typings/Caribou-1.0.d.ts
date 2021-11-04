@@ -23,6 +23,12 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type DisplayAdapterInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IDisplayAdapter,
+		"display">;
+
+	export interface DisplayAdapterInitOptions extends DisplayAdapterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DisplayAdapter} instead.
 	 */
@@ -31,7 +37,7 @@ declare namespace imports.gi.Caribou {
 	interface DisplayAdapter extends DisplayAdapterMixin {}
 
 	class DisplayAdapter {
-		public constructor();
+		public constructor(options?: Partial<DisplayAdapterInitOptions>);
 		public static set_default(adapter: Caribou.DisplayAdapter): boolean;
 		public static get_default(): Caribou.DisplayAdapter;
 	}
@@ -43,6 +49,9 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type NullAdapterInitOptionsMixin = Caribou.DisplayAdapterInitOptions
+	export interface NullAdapterInitOptions extends NullAdapterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NullAdapter} instead.
 	 */
@@ -51,7 +60,7 @@ declare namespace imports.gi.Caribou {
 	interface NullAdapter extends NullAdapterMixin {}
 
 	class NullAdapter {
-		public constructor();
+		public constructor(options?: Partial<NullAdapterInitOptions>);
 		public static new(): Caribou.NullAdapter;
 	}
 
@@ -62,6 +71,9 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type XAdapterInitOptionsMixin = Caribou.DisplayAdapterInitOptions
+	export interface XAdapterInitOptions extends XAdapterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link XAdapter} instead.
 	 */
@@ -70,7 +82,7 @@ declare namespace imports.gi.Caribou {
 	interface XAdapter extends XAdapterMixin {}
 
 	class XAdapter {
-		public constructor();
+		public constructor(options?: Partial<XAdapterInitOptions>);
 		public static new(): Caribou.XAdapter;
 	}
 
@@ -95,6 +107,14 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type KeyboardModelInitOptionsMixin = GObject.ObjectInitOptions & Caribou.IKeyboardObjectInitOptions & 
+	Pick<IKeyboardModel,
+		"active_group" |
+		"keyboard_type" |
+		"keyboard_file">;
+
+	export interface KeyboardModelInitOptions extends KeyboardModelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyboardModel} instead.
 	 */
@@ -103,7 +123,7 @@ declare namespace imports.gi.Caribou {
 	interface KeyboardModel extends KeyboardModelMixin {}
 
 	class KeyboardModel {
-		public constructor(options?: Partial<KeyboardModelOptions>);
+		public constructor(options?: Partial<KeyboardModelInitOptions>);
 		public static new(): Caribou.KeyboardModel;
 	}
 
@@ -119,6 +139,9 @@ declare namespace imports.gi.Caribou {
 		name_lost(name: string): void;
 	}
 
+	type KeyboardServiceInitOptionsMixin = GObject.ObjectInitOptions
+	export interface KeyboardServiceInitOptions extends KeyboardServiceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyboardService} instead.
 	 */
@@ -127,7 +150,7 @@ declare namespace imports.gi.Caribou {
 	interface KeyboardService extends KeyboardServiceMixin {}
 
 	class KeyboardService {
-		public constructor();
+		public constructor(options?: Partial<KeyboardServiceInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -146,6 +169,14 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type GroupModelInitOptionsMixin = GObject.ObjectInitOptions & Caribou.IKeyboardObjectInitOptions & 
+	Pick<IGroupModel,
+		"active_level" |
+		"group" |
+		"variant">;
+
+	export interface GroupModelInitOptions extends GroupModelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GroupModel} instead.
 	 */
@@ -154,7 +185,7 @@ declare namespace imports.gi.Caribou {
 	interface GroupModel extends GroupModelMixin {}
 
 	class GroupModel {
-		public constructor();
+		public constructor(options?: Partial<GroupModelInitOptions>);
 		public static new(group: string, variant: string): Caribou.GroupModel;
 		public static create_group_name(group: string, variant: string): string;
 	}
@@ -172,6 +203,12 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type LevelModelInitOptionsMixin = Caribou.ScannableGroupInitOptions & Caribou.IKeyboardObjectInitOptions & 
+	Pick<ILevelModel,
+		"mode">;
+
+	export interface LevelModelInitOptions extends LevelModelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LevelModel} instead.
 	 */
@@ -180,7 +217,7 @@ declare namespace imports.gi.Caribou {
 	interface LevelModel extends LevelModelMixin {}
 
 	class LevelModel {
-		public constructor();
+		public constructor(options?: Partial<LevelModelInitOptions>);
 		public static new(mode: string): Caribou.LevelModel;
 	}
 
@@ -191,6 +228,9 @@ declare namespace imports.gi.Caribou {
 		get_columns(result_length1: number): Caribou.ColumnModel[];
 	}
 
+	type RowModelInitOptionsMixin = Caribou.ScannableGroupInitOptions & Caribou.IScannableItemInitOptions & Caribou.IKeyboardObjectInitOptions
+	export interface RowModelInitOptions extends RowModelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RowModel} instead.
 	 */
@@ -199,7 +239,7 @@ declare namespace imports.gi.Caribou {
 	interface RowModel extends RowModelMixin {}
 
 	class RowModel {
-		public constructor();
+		public constructor(options?: Partial<RowModelInitOptions>);
 		public static new(): Caribou.RowModel;
 	}
 
@@ -255,6 +295,22 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type KeyModelInitOptionsMixin = GObject.ObjectInitOptions & Caribou.IScannableItemInitOptions & Caribou.IKeyboardObjectInitOptions & 
+	Pick<IKeyModel,
+		"align" |
+		"width" |
+		"toggle" |
+		"repeatable" |
+		"is_modifier" |
+		"show_subkeys" |
+		"name" |
+		"keyval" |
+		"text" |
+		"label" |
+		"modifier_state">;
+
+	export interface KeyModelInitOptions extends KeyModelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyModel} instead.
 	 */
@@ -263,7 +319,7 @@ declare namespace imports.gi.Caribou {
 	interface KeyModel extends KeyModelMixin {}
 
 	class KeyModel {
-		public constructor();
+		public constructor(options?: Partial<KeyModelInitOptions>);
 		public static new(name: string, text: string | null): Caribou.KeyModel;
 	}
 
@@ -275,6 +331,9 @@ declare namespace imports.gi.Caribou {
 		first_key(): Caribou.KeyModel;
 	}
 
+	type ColumnModelInitOptionsMixin = Caribou.ScannableGroupInitOptions & Caribou.IScannableItemInitOptions & Caribou.IKeyboardObjectInitOptions
+	export interface ColumnModelInitOptions extends ColumnModelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColumnModel} instead.
 	 */
@@ -283,7 +342,7 @@ declare namespace imports.gi.Caribou {
 	interface ColumnModel extends ColumnModelMixin {}
 
 	class ColumnModel {
-		public constructor();
+		public constructor(options?: Partial<ColumnModelInitOptions>);
 		public static new(): Caribou.ColumnModel;
 	}
 
@@ -335,6 +394,21 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type ScannerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IScanner,
+		"bind_settings" |
+		"scan_grouping" |
+		"scan_enabled" |
+		"step_time" |
+		"switch_device" |
+		"keyboard_key" |
+		"mouse_button" |
+		"scan_cycles" |
+		"autorestart" |
+		"inverse_scanning">;
+
+	export interface ScannerInitOptions extends ScannerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scanner} instead.
 	 */
@@ -343,7 +417,7 @@ declare namespace imports.gi.Caribou {
 	interface Scanner extends ScannerMixin {}
 
 	class Scanner {
-		public constructor();
+		public constructor(options?: Partial<ScannerInitOptions>);
 		public static new(): Caribou.Scanner;
 	}
 
@@ -355,6 +429,9 @@ declare namespace imports.gi.Caribou {
 		child_select(): Caribou.IScannableItem | null;
 	}
 
+	type ScannableGroupInitOptionsMixin = GObject.ObjectInitOptions & Caribou.IScannableGroupInitOptions
+	export interface ScannableGroupInitOptions extends ScannableGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScannableGroup} instead.
 	 */
@@ -363,12 +440,13 @@ declare namespace imports.gi.Caribou {
 	interface ScannableGroup extends ScannableGroupMixin {}
 
 	class ScannableGroup {
-		public constructor();
+		public constructor(options?: Partial<ScannableGroupInitOptions>);
 	}
 
+	export interface DisplayAdapterClassInitOptions {}
 	interface DisplayAdapterClass {}
 	class DisplayAdapterClass {
-		public constructor();
+		public constructor(options?: Partial<DisplayAdapterClassInitOptions>);
 		public keyval_press: {(self: Caribou.DisplayAdapter, keyval: number): void;};
 		public keyval_release: {(self: Caribou.DisplayAdapter, keyval: number): void;};
 		public mod_lock: {(self: Caribou.DisplayAdapter, mask: number): void;};
@@ -381,44 +459,52 @@ declare namespace imports.gi.Caribou {
 		public register_button_func: {(self: Caribou.DisplayAdapter, button: number, func: Caribou.KeyButtonCallback | null, func_target: any | null): void;};
 	}
 
+	export interface DisplayAdapterPrivateInitOptions {}
 	interface DisplayAdapterPrivate {}
 	class DisplayAdapterPrivate {
-		public constructor();
+		public constructor(options?: Partial<DisplayAdapterPrivateInitOptions>);
 	}
 
+	export interface NullAdapterClassInitOptions {}
 	interface NullAdapterClass {}
 	class NullAdapterClass {
-		public constructor();
+		public constructor(options?: Partial<NullAdapterClassInitOptions>);
 	}
 
+	export interface NullAdapterPrivateInitOptions {}
 	interface NullAdapterPrivate {}
 	class NullAdapterPrivate {
-		public constructor();
+		public constructor(options?: Partial<NullAdapterPrivateInitOptions>);
 	}
 
+	export interface XAdapterClassInitOptions {}
 	interface XAdapterClass {}
 	class XAdapterClass {
-		public constructor();
+		public constructor(options?: Partial<XAdapterClassInitOptions>);
 	}
 
+	export interface XAdapterPrivateInitOptions {}
 	interface XAdapterPrivate {}
 	class XAdapterPrivate {
-		public constructor();
+		public constructor(options?: Partial<XAdapterPrivateInitOptions>);
 	}
 
+	export interface KeyboardModelClassInitOptions {}
 	interface KeyboardModelClass {}
 	class KeyboardModelClass {
-		public constructor();
+		public constructor(options?: Partial<KeyboardModelClassInitOptions>);
 	}
 
+	export interface KeyboardModelPrivateInitOptions {}
 	interface KeyboardModelPrivate {}
 	class KeyboardModelPrivate {
-		public constructor();
+		public constructor(options?: Partial<KeyboardModelPrivateInitOptions>);
 	}
 
+	export interface KeyboardServiceClassInitOptions {}
 	interface KeyboardServiceClass {}
 	class KeyboardServiceClass {
-		public constructor();
+		public constructor(options?: Partial<KeyboardServiceClassInitOptions>);
 		public set_cursor_location: {(self: Caribou.KeyboardService, x: number, y: number, w: number, h: number): void;};
 		public set_entry_location: {(self: Caribou.KeyboardService, x: number, y: number, w: number, h: number): void;};
 		public show: {(self: Caribou.KeyboardService, timestamp: number): void;};
@@ -426,86 +512,102 @@ declare namespace imports.gi.Caribou {
 		public name_lost: {(self: Caribou.KeyboardService, name: string): void;};
 	}
 
+	export interface KeyboardServicePrivateInitOptions {}
 	interface KeyboardServicePrivate {}
 	class KeyboardServicePrivate {
-		public constructor();
+		public constructor(options?: Partial<KeyboardServicePrivateInitOptions>);
 	}
 
+	export interface GroupModelClassInitOptions {}
 	interface GroupModelClass {}
 	class GroupModelClass {
-		public constructor();
+		public constructor(options?: Partial<GroupModelClassInitOptions>);
 	}
 
+	export interface GroupModelPrivateInitOptions {}
 	interface GroupModelPrivate {}
 	class GroupModelPrivate {
-		public constructor();
+		public constructor(options?: Partial<GroupModelPrivateInitOptions>);
 	}
 
+	export interface LevelModelClassInitOptions {}
 	interface LevelModelClass {}
 	class LevelModelClass {
-		public constructor();
+		public constructor(options?: Partial<LevelModelClassInitOptions>);
 	}
 
+	export interface LevelModelPrivateInitOptions {}
 	interface LevelModelPrivate {}
 	class LevelModelPrivate {
-		public constructor();
+		public constructor(options?: Partial<LevelModelPrivateInitOptions>);
 	}
 
+	export interface RowModelClassInitOptions {}
 	interface RowModelClass {}
 	class RowModelClass {
-		public constructor();
+		public constructor(options?: Partial<RowModelClassInitOptions>);
 	}
 
+	export interface RowModelPrivateInitOptions {}
 	interface RowModelPrivate {}
 	class RowModelPrivate {
-		public constructor();
+		public constructor(options?: Partial<RowModelPrivateInitOptions>);
 	}
 
+	export interface KeyModelClassInitOptions {}
 	interface KeyModelClass {}
 	class KeyModelClass {
-		public constructor();
+		public constructor(options?: Partial<KeyModelClassInitOptions>);
 	}
 
+	export interface KeyModelPrivateInitOptions {}
 	interface KeyModelPrivate {}
 	class KeyModelPrivate {
-		public constructor();
+		public constructor(options?: Partial<KeyModelPrivateInitOptions>);
 	}
 
+	export interface ColumnModelClassInitOptions {}
 	interface ColumnModelClass {}
 	class ColumnModelClass {
-		public constructor();
+		public constructor(options?: Partial<ColumnModelClassInitOptions>);
 	}
 
+	export interface ColumnModelPrivateInitOptions {}
 	interface ColumnModelPrivate {}
 	class ColumnModelPrivate {
-		public constructor();
+		public constructor(options?: Partial<ColumnModelPrivateInitOptions>);
 	}
 
+	export interface ScannerClassInitOptions {}
 	interface ScannerClass {}
 	class ScannerClass {
-		public constructor();
+		public constructor(options?: Partial<ScannerClassInitOptions>);
 	}
 
+	export interface ScannerPrivateInitOptions {}
 	interface ScannerPrivate {}
 	class ScannerPrivate {
-		public constructor();
+		public constructor(options?: Partial<ScannerPrivateInitOptions>);
 	}
 
+	export interface ScannableGroupClassInitOptions {}
 	interface ScannableGroupClass {}
 	class ScannableGroupClass {
-		public constructor();
+		public constructor(options?: Partial<ScannableGroupClassInitOptions>);
 		public get_scan_children: {(self: Caribou.ScannableGroup, result_length1: number): Caribou.IScannableItem[];};
 		public child_select: {(self: Caribou.ScannableGroup): Caribou.IScannableItem | null;};
 	}
 
+	export interface ScannableGroupPrivateInitOptions {}
 	interface ScannableGroupPrivate {}
 	class ScannableGroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<ScannableGroupPrivateInitOptions>);
 	}
 
+	export interface IScannableItemIfaceInitOptions {}
 	interface IScannableItemIface {}
 	class IScannableItemIface {
-		public constructor();
+		public constructor(options?: Partial<IScannableItemIfaceInitOptions>);
 		public readonly parent_iface: GObject.TypeInterface;
 		public get_scan_stepping: {(self: Caribou.IScannableItem): boolean;};
 		public set_scan_stepping: {(self: Caribou.IScannableItem, value: boolean): void;};
@@ -513,9 +615,10 @@ declare namespace imports.gi.Caribou {
 		public set_scan_selected: {(self: Caribou.IScannableItem, value: boolean): void;};
 	}
 
+	export interface IScannableGroupIfaceInitOptions {}
 	interface IScannableGroupIface {}
 	class IScannableGroupIface {
-		public constructor();
+		public constructor(options?: Partial<IScannableGroupIfaceInitOptions>);
 		public readonly parent_iface: GObject.TypeInterface;
 		public child_select: {(self: Caribou.IScannableGroup): Caribou.IScannableItem | null;};
 		public scan_reset: {(self: Caribou.IScannableGroup): void;};
@@ -527,9 +630,10 @@ declare namespace imports.gi.Caribou {
 		public set_scan_grouping: {(self: Caribou.IScannableGroup, value: Caribou.ScanGrouping): void;};
 	}
 
+	export interface IKeyboardObjectIfaceInitOptions {}
 	interface IKeyboardObjectIface {}
 	class IKeyboardObjectIface {
-		public constructor();
+		public constructor(options?: Partial<IKeyboardObjectIfaceInitOptions>);
 		public readonly parent_iface: GObject.TypeInterface;
 		public get_children: {(self: Caribou.IKeyboardObject, result_length1: number): Caribou.IKeyboardObject[];};
 		public get_keys: {(self: Caribou.IKeyboardObject, result_length1: number): Caribou.KeyModel[];};
@@ -550,6 +654,12 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type IScannableItemInitOptionsMixin = Pick<IIScannableItem,
+		"scan_stepping" |
+		"scan_selected">;
+
+	export interface IScannableItemInitOptions extends IScannableItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IScannableItem} instead.
 	 */
@@ -558,7 +668,7 @@ declare namespace imports.gi.Caribou {
 	interface IScannableItem extends IScannableItemMixin {}
 
 	class IScannableItem {
-		public constructor();
+		public constructor(options?: Partial<IScannableItemInitOptions>);
 	}
 
 
@@ -584,6 +694,11 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type IScannableGroupInitOptionsMixin = Pick<IIScannableGroup,
+		"scan_grouping">;
+
+	export interface IScannableGroupInitOptions extends IScannableGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IScannableGroup} instead.
 	 */
@@ -592,7 +707,7 @@ declare namespace imports.gi.Caribou {
 	interface IScannableGroup extends IScannableGroupMixin {}
 
 	class IScannableGroup {
-		public constructor();
+		public constructor(options?: Partial<IScannableGroupInitOptions>);
 	}
 
 
@@ -609,6 +724,9 @@ declare namespace imports.gi.Caribou {
 
 	}
 
+	type IKeyboardObjectInitOptionsMixin  = {};
+	export interface IKeyboardObjectInitOptions extends IKeyboardObjectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IKeyboardObject} instead.
 	 */
@@ -617,7 +735,7 @@ declare namespace imports.gi.Caribou {
 	interface IKeyboardObject extends IKeyboardObjectMixin {}
 
 	class IKeyboardObject {
-		public constructor();
+		public constructor(options?: Partial<IKeyboardObjectInitOptions>);
 	}
 
 

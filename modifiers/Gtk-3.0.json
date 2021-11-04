@@ -2,34 +2,6 @@
     "$schema": "./schema.json",
     "amend": {
         "class": {
-            "Label": {
-                "function": {
-                    "constructor": {
-                        "newParam": [
-                            {
-                                "type": "Partial<LabelOptions>",
-                                "name": "options",
-                                "optional": true,
-                                "docs": ""
-                            }
-                        ]
-                    }
-                }
-            },
-            "Window": {
-                "function": {
-                    "constructor": {
-                        "newParam": [
-                            {
-                                "type": "Partial<WindowOptions>",
-                                "name": "options",
-                                "optional": true,
-                                "docs": ""
-                            }
-                        ]
-                    }
-                }
-            }
         }
     }
 }

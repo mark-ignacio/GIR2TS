@@ -222,6 +222,9 @@ declare namespace imports.gi.Pango {
 		set_round_glyph_positions(round_positions: boolean): void;
 	}
 
+	type ContextInitOptionsMixin = GObject.ObjectInitOptions
+	export interface ContextInitOptions extends ContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Context} instead.
 	 */
@@ -240,7 +243,7 @@ declare namespace imports.gi.Pango {
 	interface Context extends ContextMixin {}
 
 	class Context {
-		public constructor();
+		public constructor(options?: Partial<ContextInitOptions>);
 		/**
 		 * Creates a new `PangoContext` initialized to default values.
 		 * 
@@ -310,6 +313,9 @@ declare namespace imports.gi.Pango {
 		unref(): void;
 	}
 
+	type CoverageInitOptionsMixin = GObject.ObjectInitOptions
+	export interface CoverageInitOptions extends CoverageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Coverage} instead.
 	 */
@@ -328,7 +334,7 @@ declare namespace imports.gi.Pango {
 	interface Coverage extends CoverageMixin {}
 
 	class Coverage {
-		public constructor();
+		public constructor(options?: Partial<CoverageInitOptions>);
 		/**
 		 * Create a new `PangoCoverage`
 		 * @returns the newly allocated `PangoCoverage`, initialized
@@ -459,6 +465,9 @@ declare namespace imports.gi.Pango {
 		has_char(wc: string): boolean;
 	}
 
+	type FontInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FontInitOptions extends FontInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Font} instead.
 	 */
@@ -471,7 +480,7 @@ declare namespace imports.gi.Pango {
 	interface Font extends FontMixin {}
 
 	class Font {
-		public constructor();
+		public constructor(options?: Partial<FontInitOptions>);
 		/**
 		 * Frees an array of font descriptions.
 		 * @param descs a pointer
@@ -530,6 +539,9 @@ declare namespace imports.gi.Pango {
 		list_sizes(): [ number[] | null, number ];
 	}
 
+	type FontFaceInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FontFaceInitOptions extends FontFaceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontFace} instead.
 	 */
@@ -542,7 +554,7 @@ declare namespace imports.gi.Pango {
 	interface FontFace extends FontFaceMixin {}
 
 	class FontFace {
-		public constructor();
+		public constructor(options?: Partial<FontFaceInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -607,6 +619,9 @@ declare namespace imports.gi.Pango {
 		list_faces(): [ FontFace[] | null, number ];
 	}
 
+	type FontFamilyInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FontFamilyInitOptions extends FontFamilyInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontFamily} instead.
 	 */
@@ -622,7 +637,7 @@ declare namespace imports.gi.Pango {
 	interface FontFamily extends FontFamilyMixin {}
 
 	class FontFamily {
-		public constructor();
+		public constructor(options?: Partial<FontFamilyInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -704,6 +719,9 @@ declare namespace imports.gi.Pango {
 		load_fontset(context: Context, desc: FontDescription, language: Language): Fontset | null;
 	}
 
+	type FontMapInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FontMapInitOptions extends FontMapInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontMap} instead.
 	 */
@@ -719,7 +737,7 @@ declare namespace imports.gi.Pango {
 	interface FontMap extends FontMapMixin {}
 
 	class FontMap {
-		public constructor();
+		public constructor(options?: Partial<FontMapInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -749,6 +767,9 @@ declare namespace imports.gi.Pango {
 		get_metrics(): FontMetrics;
 	}
 
+	type FontsetInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FontsetInitOptions extends FontsetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Fontset} instead.
 	 */
@@ -765,7 +786,7 @@ declare namespace imports.gi.Pango {
 	interface Fontset extends FontsetMixin {}
 
 	class Fontset {
-		public constructor();
+		public constructor(options?: Partial<FontsetInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -784,6 +805,9 @@ declare namespace imports.gi.Pango {
 		size(): number;
 	}
 
+	type FontsetSimpleInitOptionsMixin = FontsetInitOptions
+	export interface FontsetSimpleInitOptions extends FontsetSimpleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontsetSimple} instead.
 	 */
@@ -799,7 +823,7 @@ declare namespace imports.gi.Pango {
 	interface FontsetSimple extends FontsetSimpleMixin {}
 
 	class FontsetSimple {
-		public constructor();
+		public constructor(options?: Partial<FontsetSimpleInitOptions>);
 		/**
 		 * Creates a new `PangoFontsetSimple` for the given language.
 		 * @param language a `PangoLanguage` tag
@@ -1499,6 +1523,9 @@ declare namespace imports.gi.Pango {
 		xy_to_index(x: number, y: number): boolean;
 	}
 
+	type LayoutInitOptionsMixin = GObject.ObjectInitOptions
+	export interface LayoutInitOptions extends LayoutInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Layout} instead.
 	 */
@@ -1534,7 +1561,7 @@ declare namespace imports.gi.Pango {
 	interface Layout extends LayoutMixin {}
 
 	class Layout {
-		public constructor();
+		public constructor(options?: Partial<LayoutInitOptions>);
 		/**
 		 * Create a new `PangoLayout` object with attributes initialized to
 		 * default values for a particular `PangoContext`.
@@ -1781,6 +1808,12 @@ declare namespace imports.gi.Pango {
 
 	}
 
+	type RendererInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IRenderer,
+		"matrix">;
+
+	export interface RendererInitOptions extends RendererInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Renderer} instead.
 	 */
@@ -1797,16 +1830,17 @@ declare namespace imports.gi.Pango {
 	interface Renderer extends RendererMixin {}
 
 	class Renderer {
-		public constructor();
+		public constructor(options?: Partial<RendererInitOptions>);
 	}
 
+	export interface AnalysisInitOptions {}
 	/**
 	 * The `PangoAnalysis` structure stores information about
 	 * the properties of a segment of text.
 	 */
 	interface Analysis {}
 	class Analysis {
-		public constructor();
+		public constructor(options?: Partial<AnalysisInitOptions>);
 		/**
 		 * unused
 		 */
@@ -1845,6 +1879,7 @@ declare namespace imports.gi.Pango {
 		public extra_attrs: GLib.SList;
 	}
 
+	export interface AttrClassInitOptions {}
 	/**
 	 * The `PangoAttrClass` structure stores the type and operations for
 	 * a particular type of attribute.
@@ -1854,7 +1889,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface AttrClass {}
 	class AttrClass {
-		public constructor();
+		public constructor(options?: Partial<AttrClassInitOptions>);
 		/**
 		 * the type ID for this attribute
 		 */
@@ -1864,13 +1899,14 @@ declare namespace imports.gi.Pango {
 		public equal: {(attr1: Attribute, attr2: Attribute): boolean;};
 	}
 
+	export interface AttrColorInitOptions {}
 	/**
 	 * The `PangoAttrColor` structure is used to represent attributes that
 	 * are colors.
 	 */
 	interface AttrColor {}
 	class AttrColor {
-		public constructor();
+		public constructor(options?: Partial<AttrColorInitOptions>);
 		/**
 		 * the common portion of the attribute
 		 */
@@ -1881,13 +1917,14 @@ declare namespace imports.gi.Pango {
 		public color: Color;
 	}
 
+	export interface AttrFloatInitOptions {}
 	/**
 	 * The `PangoAttrFloat` structure is used to represent attributes with
 	 * a float or double value.
 	 */
 	interface AttrFloat {}
 	class AttrFloat {
-		public constructor();
+		public constructor(options?: Partial<AttrFloatInitOptions>);
 		/**
 		 * the common portion of the attribute
 		 */
@@ -1898,13 +1935,14 @@ declare namespace imports.gi.Pango {
 		public value: number;
 	}
 
+	export interface AttrFontDescInitOptions {}
 	/**
 	 * The `PangoAttrFontDesc` structure is used to store an attribute that
 	 * sets all aspects of the font description at once.
 	 */
 	interface AttrFontDesc {}
 	class AttrFontDesc {
-		public constructor();
+		public constructor(options?: Partial<AttrFontDescInitOptions>);
 		/**
 		 * the common portion of the attribute
 		 */
@@ -1915,13 +1953,14 @@ declare namespace imports.gi.Pango {
 		public desc: FontDescription;
 	}
 
+	export interface AttrFontFeaturesInitOptions {}
 	/**
 	 * The `PangoAttrFontFeatures` structure is used to represent OpenType
 	 * font features as an attribute.
 	 */
 	interface AttrFontFeatures {}
 	class AttrFontFeatures {
-		public constructor();
+		public constructor(options?: Partial<AttrFontFeaturesInitOptions>);
 		/**
 		 * the common portion of the attribute
 		 */
@@ -1932,13 +1971,14 @@ declare namespace imports.gi.Pango {
 		public features: string;
 	}
 
+	export interface AttrIntInitOptions {}
 	/**
 	 * The `PangoAttrInt` structure is used to represent attributes with
 	 * an integer or enumeration value.
 	 */
 	interface AttrInt {}
 	class AttrInt {
-		public constructor();
+		public constructor(options?: Partial<AttrIntInitOptions>);
 		/**
 		 * the common portion of the attribute
 		 */
@@ -1949,6 +1989,7 @@ declare namespace imports.gi.Pango {
 		public value: number;
 	}
 
+	export interface AttrIteratorInitOptions {}
 	/**
 	 * A `PangoAttrIterator` is used to iterate through a `PangoAttrList`.
 	 * 
@@ -1960,7 +2001,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface AttrIterator {}
 	class AttrIterator {
-		public constructor();
+		public constructor(options?: Partial<AttrIteratorInitOptions>);
 		/**
 		 * Copy a `PangoAttrIterator`.
 		 * @returns the newly allocated
@@ -2035,13 +2076,14 @@ declare namespace imports.gi.Pango {
 		public range(): [ start: number, end: number ];
 	}
 
+	export interface AttrLanguageInitOptions {}
 	/**
 	 * The `PangoAttrLanguage` structure is used to represent attributes that
 	 * are languages.
 	 */
 	interface AttrLanguage {}
 	class AttrLanguage {
-		public constructor();
+		public constructor(options?: Partial<AttrLanguageInitOptions>);
 		/**
 		 * the common portion of the attribute
 		 */
@@ -2052,6 +2094,7 @@ declare namespace imports.gi.Pango {
 		public value: Language;
 	}
 
+	export interface AttrListInitOptions {}
 	/**
 	 * A `PangoAttrList` represents a list of attributes that apply to a section
 	 * of text.
@@ -2067,7 +2110,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface AttrList {}
 	class AttrList {
-		public constructor();
+		public constructor(options?: Partial<AttrListInitOptions>);
 		/**
 		 * Create a new empty attribute list with a reference
 		 * count of one.
@@ -2213,13 +2256,14 @@ declare namespace imports.gi.Pango {
 		public update(pos: number, remove: number, add: number): void;
 	}
 
+	export interface AttrShapeInitOptions {}
 	/**
 	 * The `PangoAttrShape` structure is used to represent attributes which
 	 * impose shape restrictions.
 	 */
 	interface AttrShape {}
 	class AttrShape {
-		public constructor();
+		public constructor(options?: Partial<AttrShapeInitOptions>);
 		/**
 		 * the common portion of the attribute
 		 */
@@ -2246,13 +2290,14 @@ declare namespace imports.gi.Pango {
 		public destroy_func: GLib.DestroyNotify;
 	}
 
+	export interface AttrSizeInitOptions {}
 	/**
 	 * The `PangoAttrSize` structure is used to represent attributes which
 	 * set font size.
 	 */
 	interface AttrSize {}
 	class AttrSize {
-		public constructor();
+		public constructor(options?: Partial<AttrSizeInitOptions>);
 		/**
 		 * the common portion of the attribute
 		 */
@@ -2271,13 +2316,14 @@ declare namespace imports.gi.Pango {
 		public absolute: number;
 	}
 
+	export interface AttrStringInitOptions {}
 	/**
 	 * The `PangoAttrString` structure is used to represent attributes with
 	 * a string value.
 	 */
 	interface AttrString {}
 	class AttrString {
-		public constructor();
+		public constructor(options?: Partial<AttrStringInitOptions>);
 		/**
 		 * the common portion of the attribute
 		 */
@@ -2288,6 +2334,7 @@ declare namespace imports.gi.Pango {
 		public value: string;
 	}
 
+	export interface AttributeInitOptions {}
 	/**
 	 * The `PangoAttribute` structure represents the common portions of all
 	 * attributes.
@@ -2300,7 +2347,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface Attribute {}
 	class Attribute {
-		public constructor();
+		public constructor(options?: Partial<AttributeInitOptions>);
 		/**
 		 * the class structure holding information about the type of the attribute
 		 */
@@ -2345,13 +2392,14 @@ declare namespace imports.gi.Pango {
 		public init(klass: AttrClass): void;
 	}
 
+	export interface ColorInitOptions {}
 	/**
 	 * The `PangoColor` structure is used to
 	 * represent a color in an uncalibrated RGB color-space.
 	 */
 	interface Color {}
 	class Color {
-		public constructor();
+		public constructor(options?: Partial<ColorInitOptions>);
 		/**
 		 * value of red component
 		 */
@@ -2427,14 +2475,16 @@ declare namespace imports.gi.Pango {
 		public to_string(): string;
 	}
 
+	export interface ContextClassInitOptions {}
 	interface ContextClass {}
 	class ContextClass {
-		public constructor();
+		public constructor(options?: Partial<ContextClassInitOptions>);
 	}
 
+	export interface FontClassInitOptions {}
 	interface FontClass {}
 	class FontClass {
-		public constructor();
+		public constructor(options?: Partial<FontClassInitOptions>);
 		public describe: {(font: Font): FontDescription;};
 		public get_coverage: {(font: Font, language: Language): Coverage;};
 		public get_glyph_extents: {(font: Font | null, glyph: Glyph, ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;};
@@ -2445,6 +2495,7 @@ declare namespace imports.gi.Pango {
 		public create_hb_font: {(font: Font): HarfBuzz.font_t;};
 	}
 
+	export interface FontDescriptionInitOptions {}
 	/**
 	 * A `PangoFontDescription` describes a font in an implementation-independent
 	 * manner.
@@ -2455,7 +2506,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface FontDescription {}
 	class FontDescription {
-		public constructor();
+		public constructor(options?: Partial<FontDescriptionInitOptions>);
 		/**
 		 * Creates a new font description structure with all fields unset.
 		 * @returns the newly allocated `PangoFontDescription`, which
@@ -2807,9 +2858,10 @@ declare namespace imports.gi.Pango {
 		public unset_fields(to_unset: FontMask): void;
 	}
 
+	export interface FontFaceClassInitOptions {}
 	interface FontFaceClass {}
 	class FontFaceClass {
-		public constructor();
+		public constructor(options?: Partial<FontFaceClassInitOptions>);
 		public get_face_name: {(face: FontFace): string;};
 		public describe: {(face: FontFace): FontDescription;};
 		public list_sizes: {(face: FontFace): [ number[] | null, number ];};
@@ -2819,9 +2871,10 @@ declare namespace imports.gi.Pango {
 		public _pango_reserved4: {(): void;};
 	}
 
+	export interface FontFamilyClassInitOptions {}
 	interface FontFamilyClass {}
 	class FontFamilyClass {
-		public constructor();
+		public constructor(options?: Partial<FontFamilyClassInitOptions>);
 		public list_faces: {(family: FontFamily): [ FontFace[] | null, number ];};
 		public get_name: {(family: FontFamily): string;};
 		public is_monospace: {(family: FontFamily): boolean;};
@@ -2830,13 +2883,14 @@ declare namespace imports.gi.Pango {
 		public _pango_reserved2: {(): void;};
 	}
 
+	export interface FontMapClassInitOptions {}
 	/**
 	 * The `PangoFontMapClass` structure holds the virtual functions for
 	 * a particular `PangoFontMap` implementation.
 	 */
 	interface FontMapClass {}
 	class FontMapClass {
-		public constructor();
+		public constructor(options?: Partial<FontMapClassInitOptions>);
 		/**
 		 * the type of rendering-system-dependent engines that
 		 * can handle fonts of this fonts loaded with this fontmap.
@@ -2851,6 +2905,7 @@ declare namespace imports.gi.Pango {
 		public get_face: {(fontmap: FontMap, font: Font): FontFace;};
 	}
 
+	export interface FontMetricsInitOptions {}
 	/**
 	 * A `PangoFontMetrics` structure holds the overall metric information
 	 * for a font.
@@ -2862,7 +2917,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface FontMetrics {}
 	class FontMetrics {
-		public constructor();
+		public constructor(options?: Partial<FontMetricsInitOptions>);
 		public readonly ref_count: number;
 		public readonly ascent: number;
 		public readonly descent: number;
@@ -2962,13 +3017,14 @@ declare namespace imports.gi.Pango {
 		public unref(): void;
 	}
 
+	export interface FontsetClassInitOptions {}
 	/**
 	 * The `PangoFontsetClass` structure holds the virtual functions for
 	 * a particular `PangoFontset` implementation.
 	 */
 	interface FontsetClass {}
 	class FontsetClass {
-		public constructor();
+		public constructor(options?: Partial<FontsetClassInitOptions>);
 		public get_font: {(fontset: Fontset, wc: number): Font;};
 		public get_metrics: {(fontset: Fontset): FontMetrics;};
 		public get_language: {(fontset: Fontset): Language;};
@@ -2979,18 +3035,20 @@ declare namespace imports.gi.Pango {
 		public _pango_reserved4: {(): void;};
 	}
 
+	export interface FontsetSimpleClassInitOptions {}
 	interface FontsetSimpleClass {}
 	class FontsetSimpleClass {
-		public constructor();
+		public constructor(options?: Partial<FontsetSimpleClassInitOptions>);
 	}
 
+	export interface GlyphGeometryInitOptions {}
 	/**
 	 * The `PangoGlyphGeometry` structure contains width and positioning
 	 * information for a single glyph.
 	 */
 	interface GlyphGeometry {}
 	class GlyphGeometry {
-		public constructor();
+		public constructor(options?: Partial<GlyphGeometryInitOptions>);
 		/**
 		 * the logical width to use for the the character.
 		 */
@@ -3005,13 +3063,14 @@ declare namespace imports.gi.Pango {
 		public y_offset: GlyphUnit;
 	}
 
+	export interface GlyphInfoInitOptions {}
 	/**
 	 * A `PangoGlyphInfo` structure represents a single glyph with
 	 * positioning information and visual attributes.
 	 */
 	interface GlyphInfo {}
 	class GlyphInfo {
-		public constructor();
+		public constructor(options?: Partial<GlyphInfoInitOptions>);
 		/**
 		 * the glyph itself.
 		 */
@@ -3026,6 +3085,7 @@ declare namespace imports.gi.Pango {
 		public attr: GlyphVisAttr;
 	}
 
+	export interface GlyphItemInitOptions {}
 	/**
 	 * A `PangoGlyphItem` is a pair of a `PangoItem` and the glyphs
 	 * resulting from shaping the items text.
@@ -3036,7 +3096,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface GlyphItem {}
 	class GlyphItem {
-		public constructor();
+		public constructor(options?: Partial<GlyphItemInitOptions>);
 		/**
 		 * corresponding `PangoItem`
 		 */
@@ -3132,6 +3192,7 @@ declare namespace imports.gi.Pango {
 		public split(text: string, split_index: number): GlyphItem;
 	}
 
+	export interface GlyphItemIterInitOptions {}
 	/**
 	 * A `PangoGlyphItemIter` is an iterator over the clusters in a
 	 * `PangoGlyphItem`.
@@ -3176,7 +3237,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface GlyphItemIter {}
 	class GlyphItemIter {
-		public constructor();
+		public constructor(options?: Partial<GlyphItemIterInitOptions>);
 		public glyph_item: GlyphItem;
 		public text: string;
 		public start_glyph: number;
@@ -3231,6 +3292,7 @@ declare namespace imports.gi.Pango {
 		public prev_cluster(): boolean;
 	}
 
+	export interface GlyphStringInitOptions {}
 	/**
 	 * A `PangoGlyphString` is used to store strings of glyphs with geometry
 	 * and visual attribute information.
@@ -3240,7 +3302,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface GlyphString {}
 	class GlyphString {
-		public constructor();
+		public constructor(options?: Partial<GlyphStringInitOptions>);
 		/**
 		 * Create a new `PangoGlyphString`.
 		 * @returns the newly allocated `PangoGlyphString`, which
@@ -3366,6 +3428,7 @@ declare namespace imports.gi.Pango {
 		public x_to_index(text: string, length: number, analysis: Analysis, x_pos: number): [ index_: number, trailing: number ];
 	}
 
+	export interface GlyphVisAttrInitOptions {}
 	/**
 	 * A `PangoGlyphVisAttr` structure communicates information between
 	 * the shaping and rendering phases.
@@ -3375,7 +3438,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface GlyphVisAttr {}
 	class GlyphVisAttr {
-		public constructor();
+		public constructor(options?: Partial<GlyphVisAttrInitOptions>);
 		/**
 		 * set for the first logical glyph in each cluster.
 		 *   (Clusters are stored in visual order, within the cluster, glyphs
@@ -3386,6 +3449,7 @@ declare namespace imports.gi.Pango {
 		public is_cluster_start: number;
 	}
 
+	export interface ItemInitOptions {}
 	/**
 	 * The `PangoItem` structure stores information about a segment of text.
 	 * 
@@ -3394,7 +3458,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface Item {}
 	class Item {
-		public constructor();
+		public constructor(options?: Partial<ItemInitOptions>);
 		/**
 		 * Creates a new `PangoItem` structure initialized to default values.
 		 * @returns the newly allocated `PangoItem`, which should
@@ -3463,6 +3527,7 @@ declare namespace imports.gi.Pango {
 		public split(split_index: number, split_offset: number): Item;
 	}
 
+	export interface LanguageInitOptions {}
 	/**
 	 * The `PangoLanguage` structure is used to
 	 * represent a language.
@@ -3472,7 +3537,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface Language {}
 	class Language {
-		public constructor();
+		public constructor(options?: Partial<LanguageInitOptions>);
 		/**
 		 * Get a string that is representative of the characters needed to
 		 * render a particular language.
@@ -3572,11 +3637,13 @@ declare namespace imports.gi.Pango {
 		public to_string(): string;
 	}
 
+	export interface LayoutClassInitOptions {}
 	interface LayoutClass {}
 	class LayoutClass {
-		public constructor();
+		public constructor(options?: Partial<LayoutClassInitOptions>);
 	}
 
+	export interface LayoutIterInitOptions {}
 	/**
 	 * A `PangoLayoutIter` can be used to iterate over the visual
 	 * extents of a `PangoLayout`.
@@ -3587,7 +3654,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface LayoutIter {}
 	class LayoutIter {
-		public constructor();
+		public constructor(options?: Partial<LayoutIterInitOptions>);
 		/**
 		 * Determines whether #iter is on the last line of the layout.
 		 * @returns %TRUE if #iter is on the last line
@@ -3763,6 +3830,7 @@ declare namespace imports.gi.Pango {
 		public next_run(): boolean;
 	}
 
+	export interface LayoutLineInitOptions {}
 	/**
 	 * A `PangoLayoutLine` represents one of the lines resulting from laying
 	 * out a paragraph via `PangoLayout`.
@@ -3773,7 +3841,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface LayoutLine {}
 	class LayoutLine {
-		public constructor();
+		public constructor(options?: Partial<LayoutLineInitOptions>);
 		/**
 		 * the layout this line belongs to, might be %NULL
 		 */
@@ -3891,13 +3959,14 @@ declare namespace imports.gi.Pango {
 		public x_to_index(x_pos: number): boolean;
 	}
 
+	export interface LogAttrInitOptions {}
 	/**
 	 * The `PangoLogAttr` structure stores information about the attributes of a
 	 * single character.
 	 */
 	interface LogAttr {}
 	class LogAttr {
-		public constructor();
+		public constructor(options?: Partial<LogAttrInitOptions>);
 		/**
 		 * if set, can break line in front of character
 		 */
@@ -3979,6 +4048,7 @@ declare namespace imports.gi.Pango {
 		public is_word_boundary: number;
 	}
 
+	export interface MatrixInitOptions {}
 	/**
 	 * A `PangoMatrix` specifies a transformation between user-space
 	 * and device coordinates.
@@ -3992,7 +4062,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface Matrix {}
 	class Matrix {
-		public constructor();
+		public constructor(options?: Partial<MatrixInitOptions>);
 		/**
 		 * 1st component of the transformation matrix
 		 */
@@ -4138,6 +4208,7 @@ declare namespace imports.gi.Pango {
 		public translate(tx: number, ty: number): void;
 	}
 
+	export interface RectangleInitOptions {}
 	/**
 	 * The `PangoRectangle` structure represents a rectangle.
 	 * 
@@ -4147,7 +4218,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface Rectangle {}
 	class Rectangle {
-		public constructor();
+		public constructor(options?: Partial<RectangleInitOptions>);
 		/**
 		 * X coordinate of the left side of the rectangle.
 		 */
@@ -4166,6 +4237,7 @@ declare namespace imports.gi.Pango {
 		public height: number;
 	}
 
+	export interface RendererClassInitOptions {}
 	/**
 	 * Class structure for `PangoRenderer`.
 	 * 
@@ -4186,7 +4258,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface RendererClass {}
 	class RendererClass {
-		public constructor();
+		public constructor(options?: Partial<RendererClassInitOptions>);
 		public draw_glyphs: {(renderer: Renderer, font: Font, glyphs: GlyphString, x: number, y: number): void;};
 		public draw_rectangle: {(renderer: Renderer, part: RenderPart, x: number, y: number, width: number, height: number): void;};
 		public draw_error_underline: {(renderer: Renderer, x: number, y: number, width: number, height: number): void;};
@@ -4203,18 +4275,20 @@ declare namespace imports.gi.Pango {
 		public _pango_reserved4: {(): void;};
 	}
 
+	export interface RendererPrivateInitOptions {}
 	interface RendererPrivate {}
 	class RendererPrivate {
-		public constructor();
+		public constructor(options?: Partial<RendererPrivateInitOptions>);
 	}
 
+	export interface ScriptIterInitOptions {}
 	/**
 	 * A `PangoScriptIter` is used to iterate through a string
 	 * and identify ranges in different scripts.
 	 */
 	interface ScriptIter {}
 	class ScriptIter {
-		public constructor();
+		public constructor(options?: Partial<ScriptIterInitOptions>);
 		/**
 		 * Create a new `PangoScriptIter`, used to break a string of
 		 * Unicode text into runs by Unicode script.
@@ -4260,6 +4334,7 @@ declare namespace imports.gi.Pango {
 		public next(): boolean;
 	}
 
+	export interface TabArrayInitOptions {}
 	/**
 	 * A `PangoTabArray` contains an array of tab stops.
 	 * 
@@ -4268,7 +4343,7 @@ declare namespace imports.gi.Pango {
 	 */
 	interface TabArray {}
 	class TabArray {
-		public constructor();
+		public constructor(options?: Partial<TabArrayInitOptions>);
 		/**
 		 * Creates an array of #initial_size tab stops.
 		 * 
