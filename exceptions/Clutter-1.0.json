@@ -11,6 +11,11 @@
                 "method": [
                     "parse_custom_node"
                 ]
+            },
+            "Event": {
+                "method": [
+                    "type"
+                ]
             }
         },
         "function": []
