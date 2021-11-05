@@ -111,7 +111,9 @@ function renderNamespace(ns_node: NamespaceNode, ns_name: string, exclude?: Excl
 
     // Change lines with only whitespace chars to empty strings 
     body = body.split("\n").reduce((p, c) => p += (c.trim() == "" ? "\n" : `${c}\n`));
-    return `declare namespace imports.gi.${ns_node.$.name} {\n${body}}`;
+    let result = "/** Generated with https://github.com/Gr3q/GIR2TS - If possible do not modify. */\n";
+    result += `declare namespace imports.gi.${ns_node.$.name} {\n${body}}`;
+    return result;
 }
 
 //#region Generator
