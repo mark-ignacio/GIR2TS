@@ -362,9 +362,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		/**
 		 * Get the color used for the label on a given output (monitor).
 		 * @param output Output device (i.e. monitor) to query
-		 * @param rgba_out Color of selected monitor.
+		 * @returns Color of selected monitor.
 		 */
-		get_rgba_for_output(output: RROutputInfo, rgba_out: Gdk.RGBA): void;
+		get_rgba_for_output(output: RROutputInfo): Gdk.RGBA;
 		/**
 		 * Hide ouput labels.
 		 */
@@ -416,7 +416,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_rotation(): RRRotation;
 		get_scale(): number;
 		get_serial(): number;
-		get_vendor(vendor: string[]): void;
+		get_vendor(): string[];
 		is_active(): boolean;
 		is_connected(): boolean;
 		set_active(active: boolean): void;
@@ -707,8 +707,20 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * all the (out) parameters are set to %NULL.
 		 * @param id layout's identifier about which to retrieve the info
 		 * @returns %TRUE if the layout exists or %FALSE otherwise.
+		 * 
+		 * location to store
+		 * the layout's display name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's short name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's XKB name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's XKB variant, or %NULL
 		 */
-		get_layout_info(id: string): boolean;
+		get_layout_info(id: string): [ boolean, string | null, string | null, string | null, string | null ];
 		/**
 		 * Retrieves the layout that better fits #language. It also fetches
 		 * information about that layout like gnome_xkb_info_get_layout_info().
@@ -717,8 +729,23 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * (out) parameters are set to %NULL.
 		 * @param language an ISO 639 code
 		 * @returns %TRUE if a layout exists or %FALSE otherwise.
+		 * 
+		 * location to store the
+		 * layout's indentifier, or %NULL
+		 * 
+		 * location to store
+		 * the layout's display name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's short name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's XKB name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's XKB variant, or %NULL
 		 */
-		get_layout_info_for_language(language: string): boolean;
+		get_layout_info_for_language(language: string): [ boolean, string | null, string | null, string | null, string | null, string | null ];
 		/**
 		 * Returns a list of all option identifiers we know about for group
 		 * #group_id.

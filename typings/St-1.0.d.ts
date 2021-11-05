@@ -1810,15 +1810,18 @@ declare namespace imports.gi.St {
 		get_background_bumpmap(): string;
 		/**
 		 * Returns #node's background color.
-		 * @param color location to store the color
+		 * @returns location to store the color
 		 */
-		get_background_color(color: Clutter.Color): void;
+		get_background_color(): Clutter.Color;
 		/**
 		 * The #start and #end arguments will only be set if #type is not #ST_GRADIENT_NONE.
-		 * @param start Color at start of gradient
-		 * @param end Color at end of gradient
+		 * @returns Type of gradient
+		 * 
+		 * Color at start of gradient
+		 * 
+		 * Color at end of gradient
 		 */
-		get_background_gradient(start: Clutter.Color, end: Clutter.Color): void;
+		get_background_gradient(): [ type: GradientType, start: Clutter.Color, end: Clutter.Color ];
 		/**
 		 * Returns #node's background image.
 		 * @returns 
@@ -1834,15 +1837,15 @@ declare namespace imports.gi.St {
 		 * Gets the box used to paint the actor's background, including the area
 		 * occupied by properties which paint outside the actor's assigned allocation.
 		 * @param allocation the box allocated to a #ClutterActor
-		 * @param paint_box computed box occupied when painting the actor's background
+		 * @returns computed box occupied when painting the actor's background
 		 */
-		get_background_paint_box(allocation: Clutter.ActorBox, paint_box: Clutter.ActorBox): void;
+		get_background_paint_box(allocation: Clutter.ActorBox): Clutter.ActorBox;
 		/**
 		 * Returns the color of #node's border on #side
 		 * @param side a {@link Side}
-		 * @param color location to store the color
+		 * @returns location to store the color
 		 */
-		get_border_color(side: Side, color: Clutter.Color): void;
+		get_border_color(side: Side): Clutter.Color;
 		/**
 		 * Gets the value for the border-image style property
 		 * @returns the border image, or %NULL
@@ -1870,19 +1873,19 @@ declare namespace imports.gi.St {
 		 * and lets you handle the case where the theme does not specify the
 		 * indicated color.
 		 * @param property_name The name of the color property
-		 * @param color location to store the color that
+		 * @returns location to store the color that
 		 *   was determined.
 		 */
-		get_color(property_name: string, color: Clutter.Color): void;
+		get_color(property_name: string): Clutter.Color;
 		/**
 		 * Gets the box within an actor's allocation that contents the content
 		 * of an actor (excluding borders and padding). This is a convenience function
 		 * meant to be used from the allocate() or paint() methods of a #ClutterActor
 		 * subclass.
 		 * @param allocation the box allocated to a #ClutterAlctor
-		 * @param content_box computed box occupied by the actor's content
+		 * @returns computed box occupied by the actor's content
 		 */
-		get_content_box(allocation: Clutter.ActorBox, content_box: Clutter.ActorBox): void;
+		get_content_box(allocation: Clutter.ActorBox): Clutter.ActorBox;
 		/**
 		 * Generically looks up a property containing a single numeric value
 		 *  without units.
@@ -1901,9 +1904,9 @@ declare namespace imports.gi.St {
 		get_font(): Pango.FontDescription;
 		/**
 		 * Returns #node's foreground color.
-		 * @param color location to store the color
+		 * @returns location to store the color
 		 */
-		get_foreground_color(color: Clutter.Color): void;
+		get_foreground_color(): Clutter.Color;
 		get_height(): number;
 		/**
 		 * Gets the total horizonal padding (left + right padding)
@@ -1939,9 +1942,9 @@ declare namespace imports.gi.St {
 		get_min_width(): number;
 		/**
 		 * Returns the color of #node's outline.
-		 * @param color location to store the color
+		 * @returns location to store the color
 		 */
-		get_outline_color(color: Clutter.Color): void;
+		get_outline_color(): Clutter.Color;
 		get_outline_width(): number;
 		get_padding(side: Side): number;
 		/**
@@ -1950,9 +1953,9 @@ declare namespace imports.gi.St {
 		 * When painting #node to an offscreen buffer, this function can be
 		 * used to determine the necessary size of the buffer.
 		 * @param allocation the box allocated to a #ClutterActor
-		 * @param paint_box computed box occupied when painting the actor
+		 * @returns computed box occupied when painting the actor
 		 */
-		get_paint_box(allocation: Clutter.ActorBox, paint_box: Clutter.ActorBox): void;
+		get_paint_box(allocation: Clutter.ActorBox): Clutter.ActorBox;
 		/**
 		 * Gets the parent themed element node.
 		 * @returns the parent {@link ThemeNode}, or %NULL if this
@@ -2015,13 +2018,14 @@ declare namespace imports.gi.St {
 		 *   parent's parent, and so forth. Note that if the property has a
 		 *   value of 'inherit' it will be inherited even if %FALSE is passed
 		 *   in for #inherit; this only affects the default behavior for inheritance.
-		 * @param color location to store the color that was
-		 *   determined. If the property is not found, the value in this location
-		 *   will not be changed.
 		 * @returns %TRUE if the property was found in the properties for this
 		 *  theme node (or in the properties of parent nodes when inheriting.)
+		 * 
+		 * location to store the color that was
+		 *   determined. If the property is not found, the value in this location
+		 *   will not be changed.
 		 */
-		lookup_color(property_name: string, inherit: boolean, color: Clutter.Color): boolean;
+		lookup_color(property_name: string, inherit: boolean): [ boolean, Clutter.Color ];
 		/**
 		 * Generically looks up a property containing a single numeric value
 		 *  without units.
@@ -2035,8 +2039,12 @@ declare namespace imports.gi.St {
 		 *   in for #inherit; this only affects the default behavior for inheritance.
 		 * @returns %TRUE if the property was found in the properties for this
 		 *  theme node (or in the properties of parent nodes when inheriting.)
+		 * 
+		 * location to store the value that was determined.
+		 *   If the property is not found, the value in this location
+		 *   will not be changed.
 		 */
-		lookup_double(property_name: string, inherit: boolean): boolean;
+		lookup_double(property_name: string, inherit: boolean): [ boolean, number ];
 		/**
 		 * Generically looks up a property containing a single length value. When
 		 * specific getters (like st_theme_node_get_border_width()) exist, they
@@ -2052,8 +2060,13 @@ declare namespace imports.gi.St {
 		 *   in for #inherit; this only affects the default behavior for inheritance.
 		 * @returns %TRUE if the property was found in the properties for this
 		 *  theme node (or in the properties of parent nodes when inheriting.)
+		 * 
+		 * location to store the length that was determined.
+		 *   If the property is not found, the value in this location
+		 *   will not be changed. The returned length is resolved
+		 *   to pixels.
 		 */
-		lookup_length(property_name: string, inherit: boolean): boolean;
+		lookup_length(property_name: string, inherit: boolean): [ boolean, number ];
 		/**
 		 * If the property is not found, the value in the shadow variable will not
 		 * be changed.
@@ -2073,8 +2086,10 @@ declare namespace imports.gi.St {
 		 * @returns %TRUE if the property was found in the properties for this
 		 * theme node (or in the properties of parent nodes when inheriting.), %FALSE
 		 * if the property was not found, or was explicitly set to 'none'.
+		 * 
+		 * location to store the shadow
 		 */
-		lookup_shadow(property_name: string, inherit: boolean): boolean;
+		lookup_shadow(property_name: string, inherit: boolean): [ boolean, Shadow ];
 		paint(framebuffer: any, box: Clutter.ActorBox, paint_opacity: number): void;
 		/**
 		 * Check if st_theme_node_paint() will paint identically for #node as it does

@@ -30,8 +30,10 @@ declare namespace imports.gi.GModule {
 		 * by #G_MODULE_EXPORT. Note that a valid symbol can be %NULL.
 		 * @param symbol_name the name of the symbol to find
 		 * @returns %TRUE on success
+		 * 
+		 * returns the pointer to the symbol value
 		 */
-		public symbol(symbol_name: string): boolean;
+		public symbol(symbol_name: string): [ boolean, any | null ];
 	}
 
 	/**

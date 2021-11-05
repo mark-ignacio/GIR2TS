@@ -10,8 +10,8 @@ declare namespace imports.gi.Caribou {
 		mod_unlock(mask: number): void;
 		mod_latch(mask: number): void;
 		mod_unlatch(mask: number): void;
-		get_current_group(group_name: string, variant_name: string): number;
-		get_groups(group_names: string[], group_names_length1: number, variant_names: string[], variant_names_length1: number): void;
+		get_current_group(): [ number, string, string ];
+		get_groups(): [ string[], number, string[], number ];
 		register_key_func(keyval: number, func: Caribou.KeyButtonCallback | null, func_target: any | null): void;
 		register_button_func(button: number, func: Caribou.KeyButtonCallback | null, func_target: any | null): void;
 		get_display(): Gdk.Display;
@@ -93,7 +93,7 @@ declare namespace imports.gi.Caribou {
 		active_group: string;
 		keyboard_type: string;
 		keyboard_file: string;
-		get_groups(result_length1: number): string[];
+		get_groups(): [ string[], number ];
 		get_group(group_name: string): Caribou.GroupModel;
 		get_active_group(): string;
 		get_keyboard_type(): string;
@@ -160,7 +160,7 @@ declare namespace imports.gi.Caribou {
 		active_level: string;
 		readonly group: string;
 		readonly variant: string;
-		get_levels(result_length1: number): string[];
+		get_levels(): [ string[], number ];
 		get_level(level_name: string): Caribou.LevelModel;
 		get_active_level(): string;
 		connect(signal: "notify::active_level", callback: (owner: this, ...args: any) => number): number;
@@ -195,7 +195,7 @@ declare namespace imports.gi.Caribou {
 	 */
 	interface ILevelModel {
 		mode: string;
-		get_rows(result_length1: number): Caribou.RowModel[];
+		get_rows(): [ Caribou.RowModel[], number ];
 		get_mode(): string;
 		connect(signal: "level-toggled", callback: (owner: this, new_level: string) => void): number;
 
@@ -225,7 +225,7 @@ declare namespace imports.gi.Caribou {
 	 * use {@link RowModel} instead.
 	 */
 	interface IRowModel {
-		get_columns(result_length1: number): Caribou.ColumnModel[];
+		get_columns(): [ Caribou.ColumnModel[], number ];
 	}
 
 	type RowModelInitOptionsMixin = Caribou.ScannableGroupInitOptions & Caribou.IScannableItemInitOptions & Caribou.IKeyboardObjectInitOptions
@@ -260,7 +260,7 @@ declare namespace imports.gi.Caribou {
 		readonly modifier_state: Caribou.ModifierState;
 		press(): void;
 		release(): void;
-		get_extended_keys(result_length1: number): Caribou.KeyModel[];
+		get_extended_keys(): [ Caribou.KeyModel[], number ];
 		activate(): void;
 		get_align(): string;
 		set_align(value: string): void;
@@ -425,7 +425,7 @@ declare namespace imports.gi.Caribou {
 	 * use {@link ScannableGroup} instead.
 	 */
 	interface IScannableGroup {
-		get_scan_children(result_length1: number): Caribou.IScannableItem[];
+		get_scan_children(): [ Caribou.IScannableItem[], number ];
 		child_select(): Caribou.IScannableItem | null;
 	}
 
@@ -453,8 +453,8 @@ declare namespace imports.gi.Caribou {
 		public mod_unlock: {(self: Caribou.DisplayAdapter, mask: number): void;};
 		public mod_latch: {(self: Caribou.DisplayAdapter, mask: number): void;};
 		public mod_unlatch: {(self: Caribou.DisplayAdapter, mask: number): void;};
-		public get_current_group: {(self: Caribou.DisplayAdapter, group_name: string, variant_name: string): number;};
-		public get_groups: {(self: Caribou.DisplayAdapter, group_names: string[], group_names_length1: number, variant_names: string[], variant_names_length1: number): void;};
+		public get_current_group: {(self: Caribou.DisplayAdapter): [ number, string, string ];};
+		public get_groups: {(self: Caribou.DisplayAdapter): [ string[], number, string[], number ];};
 		public register_key_func: {(self: Caribou.DisplayAdapter, keyval: number, func: Caribou.KeyButtonCallback | null, func_target: any | null): void;};
 		public register_button_func: {(self: Caribou.DisplayAdapter, button: number, func: Caribou.KeyButtonCallback | null, func_target: any | null): void;};
 	}
@@ -594,7 +594,7 @@ declare namespace imports.gi.Caribou {
 	interface ScannableGroupClass {}
 	class ScannableGroupClass {
 		public constructor(options?: Partial<ScannableGroupClassInitOptions>);
-		public get_scan_children: {(self: Caribou.ScannableGroup, result_length1: number): Caribou.IScannableItem[];};
+		public get_scan_children: {(self: Caribou.ScannableGroup): [ Caribou.IScannableItem[], number ];};
 		public child_select: {(self: Caribou.ScannableGroup): Caribou.IScannableItem | null;};
 	}
 
@@ -622,10 +622,10 @@ declare namespace imports.gi.Caribou {
 		public readonly parent_iface: GObject.TypeInterface;
 		public child_select: {(self: Caribou.IScannableGroup): Caribou.IScannableItem | null;};
 		public scan_reset: {(self: Caribou.IScannableGroup): void;};
-		public get_scan_children: {(self: Caribou.IScannableGroup, result_length1: number): Caribou.IScannableItem[];};
+		public get_scan_children: {(self: Caribou.IScannableGroup): [ Caribou.IScannableItem[], number ];};
 		public child_step: {(self: Caribou.IScannableGroup, cycles: number): Caribou.IScannableItem | null;};
-		public get_step_path: {(self: Caribou.IScannableGroup, result_length1: number): Caribou.IScannableItem[];};
-		public get_selected_path: {(self: Caribou.IScannableGroup, result_length1: number): Caribou.IScannableItem[];};
+		public get_step_path: {(self: Caribou.IScannableGroup): [ Caribou.IScannableItem[], number ];};
+		public get_selected_path: {(self: Caribou.IScannableGroup): [ Caribou.IScannableItem[], number ];};
 		public get_scan_grouping: {(self: Caribou.IScannableGroup): Caribou.ScanGrouping;};
 		public set_scan_grouping: {(self: Caribou.IScannableGroup, value: Caribou.ScanGrouping): void;};
 	}
@@ -635,8 +635,8 @@ declare namespace imports.gi.Caribou {
 	class IKeyboardObjectIface {
 		public constructor(options?: Partial<IKeyboardObjectIfaceInitOptions>);
 		public readonly parent_iface: GObject.TypeInterface;
-		public get_children: {(self: Caribou.IKeyboardObject, result_length1: number): Caribou.IKeyboardObject[];};
-		public get_keys: {(self: Caribou.IKeyboardObject, result_length1: number): Caribou.KeyModel[];};
+		public get_children: {(self: Caribou.IKeyboardObject): [ Caribou.IKeyboardObject[], number ];};
+		public get_keys: {(self: Caribou.IKeyboardObject): [ Caribou.KeyModel[], number ];};
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -680,10 +680,10 @@ declare namespace imports.gi.Caribou {
 		scan_grouping: Caribou.ScanGrouping;
 		child_select(): Caribou.IScannableItem | null;
 		scan_reset(): void;
-		get_scan_children(result_length1: number): Caribou.IScannableItem[];
+		get_scan_children(): [ Caribou.IScannableItem[], number ];
 		child_step(cycles: number): Caribou.IScannableItem | null;
-		get_step_path(result_length1: number): Caribou.IScannableItem[];
-		get_selected_path(result_length1: number): Caribou.IScannableItem[];
+		get_step_path(): [ Caribou.IScannableItem[], number ];
+		get_selected_path(): [ Caribou.IScannableItem[], number ];
 		get_scan_grouping(): Caribou.ScanGrouping;
 		set_scan_grouping(value: Caribou.ScanGrouping): void;
 		connect(signal: "selected-item-changed", callback: (owner: this, selected_item: Caribou.IScannableItem | null) => void): number;
@@ -716,8 +716,8 @@ declare namespace imports.gi.Caribou {
 	 * use {@link IKeyboardObject} instead.
 	 */
 	interface IIKeyboardObject {
-		get_children(result_length1: number): Caribou.IKeyboardObject[];
-		get_keys(result_length1: number): Caribou.KeyModel[];
+		get_children(): [ Caribou.IKeyboardObject[], number ];
+		get_keys(): [ Caribou.KeyModel[], number ];
 		connect(signal: "key-clicked", callback: (owner: this, key: Caribou.KeyModel) => void): number;
 		connect(signal: "key-pressed", callback: (owner: this, key: Caribou.KeyModel) => void): number;
 		connect(signal: "key-released", callback: (owner: this, key: Caribou.KeyModel) => void): number;

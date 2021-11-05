@@ -1623,10 +1623,10 @@ declare namespace imports.gi.Atk {
 		public constructor(options?: Partial<TableCellIfaceInitOptions>);
 		public get_column_span: {(cell: TableCell): number;};
 		public get_column_header_cells: {(cell: TableCell): Object[];};
-		public get_position: {(cell: TableCell): boolean;};
+		public get_position: {(cell: TableCell): [ boolean, number, number ];};
 		public get_row_span: {(cell: TableCell): number;};
 		public get_row_header_cells: {(cell: TableCell): Object[];};
-		public get_row_column_span: {(cell: TableCell): boolean;};
+		public get_row_column_span: {(cell: TableCell): [ boolean, number, number, number, number ];};
 		public get_table: {(cell: TableCell): Object;};
 	}
 
@@ -1677,18 +1677,18 @@ declare namespace imports.gi.Atk {
 	class TextIface {
 		public constructor(options?: Partial<TextIfaceInitOptions>);
 		public get_text: {(text: Text, start_offset: number, end_offset: number): string;};
-		public get_text_after_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
-		public get_text_at_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
+		public get_text_after_offset: {(text: Text, offset: number, boundary_type: TextBoundary): [ string, number, number ];};
+		public get_text_at_offset: {(text: Text, offset: number, boundary_type: TextBoundary): [ string, number, number ];};
 		public get_character_at_offset: {(text: Text, offset: number): string;};
-		public get_text_before_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
+		public get_text_before_offset: {(text: Text, offset: number, boundary_type: TextBoundary): [ string, number, number ];};
 		public get_caret_offset: {(text: Text): number;};
-		public get_run_attributes: {(text: Text, offset: number): AttributeSet;};
+		public get_run_attributes: {(text: Text, offset: number): [ AttributeSet, number, number ];};
 		public get_default_attributes: {(text: Text): AttributeSet;};
 		public get_character_extents: {(text: Text, offset: number, coords: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];};
 		public get_character_count: {(text: Text): number;};
 		public get_offset_at_point: {(text: Text, x: number, y: number, coords: CoordType): number;};
 		public get_n_selections: {(text: Text): number;};
-		public get_selection: {(text: Text, selection_num: number): string;};
+		public get_selection: {(text: Text, selection_num: number): [ string, number, number ];};
 		public add_selection: {(text: Text, start_offset: number, end_offset: number): boolean;};
 		public remove_selection: {(text: Text, selection_num: number): boolean;};
 		public set_selection: {(text: Text, selection_num: number, start_offset: number, end_offset: number): boolean;};
@@ -1697,9 +1697,9 @@ declare namespace imports.gi.Atk {
 		public text_caret_moved: {(text: Text, location: number): void;};
 		public text_selection_changed: {(text: Text): void;};
 		public text_attributes_changed: {(text: Text): void;};
-		public get_range_extents: {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle): void;};
+		public get_range_extents: {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType): TextRectangle;};
 		public get_bounded_ranges: {(text: Text, rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType): TextRange[];};
-		public get_string_at_offset: {(text: Text, offset: number, granularity: TextGranularity): string | null;};
+		public get_string_at_offset: {(text: Text, offset: number, granularity: TextGranularity): [ string | null, number, number ];};
 		public scroll_substring_to: {(text: Text, start_offset: number, end_offset: number, type: ScrollType): boolean;};
 		public scroll_substring_to_point: {(text: Text, start_offset: number, end_offset: number, coords: CoordType, x: number, y: number): boolean;};
 	}
@@ -1771,11 +1771,11 @@ declare namespace imports.gi.Atk {
 	interface ValueIface {}
 	class ValueIface {
 		public constructor(options?: Partial<ValueIfaceInitOptions>);
-		public get_current_value: {(obj: Value, value: GObject.Value): void;};
-		public get_maximum_value: {(obj: Value, value: GObject.Value): void;};
-		public get_minimum_value: {(obj: Value, value: GObject.Value): void;};
+		public get_current_value: {(obj: Value): GObject.Value;};
+		public get_maximum_value: {(obj: Value): GObject.Value;};
+		public get_minimum_value: {(obj: Value): GObject.Value;};
 		public set_current_value: {(obj: Value, value: GObject.Value): boolean;};
-		public get_minimum_increment: {(obj: Value, value: GObject.Value): void;};
+		public get_minimum_increment: {(obj: Value): GObject.Value;};
 		public get_value_and_text: {(obj: Value): [ value: number, text: string | null ];};
 		public get_range: {(obj: Value): Range | null;};
 		public get_increment: {(obj: Value): number;};
@@ -3046,8 +3046,12 @@ declare namespace imports.gi.Atk {
 		/**
 		 * Retrieves the tabular position of this cell.
 		 * @returns TRUE if successful; FALSE otherwise.
+		 * 
+		 * the row of the given cell.
+		 * 
+		 * the column of the given cell.
 		 */
-		get_position(): boolean;
+		get_position(): [ boolean, number, number ];
 		/**
 		 * Gets the row and column indexes and span of this cell accessible.
 		 * 
@@ -3055,8 +3059,16 @@ declare namespace imports.gi.Atk {
 		 * will implement this function by calling get_row_span and get_column_span
 		 * on the object.
 		 * @returns TRUE if successful; FALSE otherwise.
+		 * 
+		 * the row index of the given cell.
+		 * 
+		 * the column index of the given cell.
+		 * 
+		 * the number of rows occupied by this cell.
+		 * 
+		 * the number of columns occupied by this cell.
 		 */
-		get_row_column_span(): boolean;
+		get_row_column_span(): [ boolean, number, number, number, number ];
 		/**
 		 * Returns the row headers as an array of cell accessibles.
 		 * @returns a GPtrArray of AtkObjects
@@ -3192,9 +3204,9 @@ declare namespace imports.gi.Atk {
 		 * @param end_offset The offset of the text character after the last character
 		 *        for which boundary information is required.
 		 * @param coord_type Specify whether coordinates are relative to the screen or widget window.
-		 * @param rect A pointer to a AtkTextRectangle which is filled in by this function.
+		 * @returns A pointer to a AtkTextRectangle which is filled in by this function.
 		 */
-		get_range_extents(start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle): void;
+		get_range_extents(start_offset: number, end_offset: number, coord_type: CoordType): TextRectangle;
 		/**
 		 * Creates an {@link AttributeSet} which consists of the attributes explicitly
 		 * set at the position #offset in the text. #start_offset and #end_offset are
@@ -3208,8 +3220,12 @@ declare namespace imports.gi.Atk {
 		 * @returns an {@link AttributeSet} which contains the attributes
 		 *         explicitly set at #offset. This #AtkAttributeSet should be freed by
 		 *         a call to atk_attribute_set_free().
+		 * 
+		 * the address to put the start offset of the range
+		 * 
+		 * the address to put the end offset of the range
 		 */
-		get_run_attributes(offset: number): AttributeSet;
+		get_run_attributes(offset: number): [ AttributeSet, number, number ];
 		/**
 		 * Gets the text from the specified selection.
 		 * @param selection_num The selection number.  The selected regions are
@@ -3219,8 +3235,13 @@ declare namespace imports.gi.Atk {
 		 * moving or deleting a selected region can change the numbering.
 		 * @returns a newly allocated string containing the selected text. Use g_free()
 		 *          to free the returned string.
+		 * 
+		 * passes back the starting character offset of the selected region
+		 * 
+		 * passes back the ending character offset (offset immediately past)
+		 * of the selected region
 		 */
-		get_selection(selection_num: number): string;
+		get_selection(selection_num: number): [ string, number, number ];
 		/**
 		 * Gets a portion of the text exposed through an {@link Text} according to a given #offset
 		 * and a specific #granularity, along with the start and end offsets defining the
@@ -3258,8 +3279,14 @@ declare namespace imports.gi.Atk {
 		 *          the #offset bounded by the specified #granularity. Use g_free()
 		 *          to free the returned string.  Returns %NULL if the offset is invalid
 		 *          or no implementation is available.
+		 * 
+		 * the starting character offset of the returned string, or -1
+		 *                in the case of error (e.g. invalid offset, not implemented)
+		 * 
+		 * the offset of the first character after the returned string,
+		 *              or -1 in the case of error (e.g. invalid offset, not implemented)
 		 */
-		get_string_at_offset(offset: number, granularity: TextGranularity): string | null;
+		get_string_at_offset(offset: number, granularity: TextGranularity): [ string | null, number, number ];
 		/**
 		 * Gets the specified text.
 		 * @param start_offset a starting character offset within #text
@@ -3276,8 +3303,13 @@ declare namespace imports.gi.Atk {
 		 * @returns a newly allocated string containing the text after #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
+		 * 
+		 * the starting character offset of the returned string
+		 * 
+		 * the offset of the first character after the
+		 *              returned substring
 		 */
-		get_text_after_offset(offset: number, boundary_type: TextBoundary): string;
+		get_text_after_offset(offset: number, boundary_type: TextBoundary): [ string, number, number ];
 		/**
 		 * Gets the specified text.
 		 * 
@@ -3308,8 +3340,13 @@ declare namespace imports.gi.Atk {
 		 * @returns a newly allocated string containing the text at #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
+		 * 
+		 * the starting character offset of the returned string
+		 * 
+		 * the offset of the first character after the
+		 *              returned substring
 		 */
-		get_text_at_offset(offset: number, boundary_type: TextBoundary): string;
+		get_text_at_offset(offset: number, boundary_type: TextBoundary): [ string, number, number ];
 		/**
 		 * Gets the specified text.
 		 * @param offset position
@@ -3317,8 +3354,13 @@ declare namespace imports.gi.Atk {
 		 * @returns a newly allocated string containing the text before #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
+		 * 
+		 * the starting character offset of the returned string
+		 * 
+		 * the offset of the first character after the
+		 *              returned substring
 		 */
-		get_text_before_offset(offset: number, boundary_type: TextBoundary): string;
+		get_text_before_offset(offset: number, boundary_type: TextBoundary): [ string, number, number ];
 		/**
 		 * Removes the specified selection.
 		 * @param selection_num The selection number.  The selected regions are
@@ -3477,9 +3519,9 @@ declare namespace imports.gi.Atk {
 	interface IValue {
 		/**
 		 * Gets the value of this object.
-		 * @param value a #GValue representing the current accessible value
+		 * @returns a #GValue representing the current accessible value
 		 */
-		get_current_value(value: GObject.Value): void;
+		get_current_value(): GObject.Value;
 		/**
 		 * Gets the minimum increment by which the value of this object may be
 		 * changed.  If zero, the minimum increment is undefined, which may
@@ -3491,21 +3533,21 @@ declare namespace imports.gi.Atk {
 		get_increment(): number;
 		/**
 		 * Gets the maximum value of this object.
-		 * @param value a #GValue representing the maximum accessible value
+		 * @returns a #GValue representing the maximum accessible value
 		 */
-		get_maximum_value(value: GObject.Value): void;
+		get_maximum_value(): GObject.Value;
 		/**
 		 * Gets the minimum increment by which the value of this object may be changed.  If zero,
 		 * the minimum increment is undefined, which may mean that it is limited only by the
 		 * floating point precision of the platform.
-		 * @param value a #GValue representing the minimum increment by which the accessible value may be changed
+		 * @returns a #GValue representing the minimum increment by which the accessible value may be changed
 		 */
-		get_minimum_increment(value: GObject.Value): void;
+		get_minimum_increment(): GObject.Value;
 		/**
 		 * Gets the minimum value of this object.
-		 * @param value a #GValue representing the minimum accessible value
+		 * @returns a #GValue representing the minimum accessible value
 		 */
-		get_minimum_value(value: GObject.Value): void;
+		get_minimum_value(): GObject.Value;
 		/**
 		 * Gets the range of this object.
 		 * @returns a newly allocated {@link Range}

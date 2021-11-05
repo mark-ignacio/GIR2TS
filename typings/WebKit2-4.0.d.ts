@@ -297,14 +297,14 @@ declare namespace imports.gi.WebKit2 {
 		finish(): void;
 		/**
 		 * Gets the bounding box of the color input element.
-		 * @param rect a #GdkRectangle to fill in with the element area
+		 * @returns a #GdkRectangle to fill in with the element area
 		 */
-		get_element_rectangle(rect: Gdk.Rectangle): void;
+		get_element_rectangle(): Gdk.Rectangle;
 		/**
 		 * Gets the current #GdkRGBA color of #request
-		 * @param rgba a #GdkRGBA to fill in with the current color.
+		 * @returns a #GdkRGBA to fill in with the current color.
 		 */
-		get_rgba(rgba: Gdk.RGBA): void;
+		get_rgba(): Gdk.RGBA;
 		/**
 		 * Sets the current #GdkRGBA color of #request
 		 * @param rgba a pointer #GdkRGBA
@@ -1342,8 +1342,14 @@ declare namespace imports.gi.WebKit2 {
 		 * If this function returns %FALSE, then both #field_names and
 		 * #field_values will be empty.
 		 * @returns %TRUE if the form contains text fields, or %FALSE otherwise
+		 * 
+		 * 
+		 *    names of the text fields in the form
+		 * 
+		 * 
+		 *    values of the text fields in the form
 		 */
-		list_text_fields(): boolean;
+		list_text_fields(): [ boolean, string[] | null, string[] | null ];
 		/**
 		 * Continue the form submission.
 		 */
@@ -4917,8 +4923,10 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns a
 		 *    string with the data of #resource, or %NULL in case of error. if #length
 		 *    is not %NULL, the size of the data will be assigned to it.
+		 * 
+		 * return location for the length of the resource data
 		 */
-		get_data_finish(result: Gio.AsyncResult): number[];
+		get_data_finish(result: Gio.AsyncResult): [ number[], number | null ];
 		/**
 		 * Retrieves the #WebKitURIResponse of the resource load operation.
 		 * This method returns %NULL if called before the response
@@ -5184,9 +5192,9 @@ declare namespace imports.gi.WebKit2 {
 		 * Gets the color that is used to draw the #web_view background before
 		 * the actual contents are rendered.
 		 * For more information see also webkit_web_view_set_background_color()
-		 * @param rgba a #GdkRGBA to fill in with the background color
+		 * @returns a #GdkRGBA to fill in with the background color
 		 */
-		get_background_color(rgba: Gdk.RGBA): void;
+		get_background_color(): Gdk.RGBA;
 		/**
 		 * Gets the web context of #web_view.
 		 * @returns the #WebKitWebContext of the view
@@ -5325,8 +5333,12 @@ declare namespace imports.gi.WebKit2 {
 		 * which case subresources that fail certificate verification will be blocked.
 		 * @returns %TRUE if the #web_view connection uses HTTPS and a response has been received
 		 *    from the server, or %FALSE otherwise.
+		 * 
+		 * return location for a #GTlsCertificate
+		 * 
+		 * return location for a #GTlsCertificateFlags the verification status of #certificate
 		 */
-		get_tls_info(): boolean;
+		get_tls_info(): [ boolean, Gio.TlsCertificate, Gio.TlsCertificateFlags ];
 		/**
 		 * Returns the current active URI of #web_view. The active URI might change during
 		 * a load operation:
@@ -6792,9 +6804,9 @@ declare namespace imports.gi.WebKit2 {
 		get_fullscreen(): boolean;
 		/**
 		 * Get the geometry the window should have on the screen when shown.
-		 * @param geometry return location for the window geometry
+		 * @returns return location for the window geometry
 		 */
-		get_geometry(geometry: Gdk.Rectangle): void;
+		get_geometry(): Gdk.Rectangle;
 		/**
 		 * Get whether the window should have the locationbar visible or not.
 		 * @returns %TRUE if locationbar should be visible or %FALSE otherwise.

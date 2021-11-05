@@ -88,15 +88,17 @@ declare namespace imports.gi.Cinnamon {
 		 * @returns 
 		 */
 		is_window_backed(): boolean;
-		launch(timestamp: number, uris: GLib.List, workspace: number): boolean;
+		launch(timestamp: number, uris: GLib.List, workspace: number): [ boolean, string ];
 		/**
 		 * Launch an application using the dedicated gpu (if available)
 		 * @param timestamp Event timestamp, or 0 for current event timestamp
 		 * @param uris List of uris to pass to application
 		 * @param workspace Start on this workspace, or -1 for default
 		 * @returns 
+		 * 
+		 * Returned startup notification ID, or %NULL if none
 		 */
-		launch_offloaded(timestamp: number, uris: GLib.List, workspace: number): boolean;
+		launch_offloaded(timestamp: number, uris: GLib.List, workspace: number): [ boolean, string ];
 		/**
 		 * Request that the application create a new window.
 		 * @param workspace open on this workspace, or -1 for default
@@ -1507,7 +1509,7 @@ declare namespace imports.gi.Cinnamon {
 	 */
 	function get_file_contents_utf8_sync(path: string): string;
 
-	function parse_search_provider(data: string): boolean;
+	function parse_search_provider(data: string): [ boolean, string, string, GLib.List, string ];
 
 	/**
 	 * Set a double uniform on a ClutterShaderEffect.
@@ -1562,9 +1564,9 @@ declare namespace imports.gi.Cinnamon {
 	 * clutter_actor_get_abs_allocation_vertices() if no transformation is in effect
 	 * and also works around limitations in the GJS binding of arrays.
 	 * @param actor a #ClutterActor
-	 * @param box location to store returned box in stage coordinates
+	 * @returns location to store returned box in stage coordinates
 	 */
-	function util_get_transformed_allocation(actor: Clutter.Actor, box: Clutter.ActorBox): void;
+	function util_get_transformed_allocation(actor: Clutter.Actor): Clutter.ActorBox;
 
 	/**
 	 * Gets the first week day for the current locale, expressed as a

@@ -20,9 +20,9 @@ export interface Parameter {
 
 export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModifier, constructor: boolean = false): FunctionInfo {
     let func_name = func_node.$.name;
-    let return_type: string = "any", returnDoc: string | null = null;
+    let return_type: string = "any", returnDoc: string | null = null, returnName: string | null = null;
     if (!constructor) {
-        ({ type:return_type, docString:returnDoc } = GetTypeInfo(func_node['return-value']?.[0]));
+        ({ type:return_type, docString:returnDoc, name:returnName  } = GetTypeInfo(func_node['return-value']?.[0]));
 
         // Modifiers
         return_type = modifier?.return_type?.type ?? return_type;
@@ -40,7 +40,7 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
             let param_name = param_node.$.name;
 
             // Return param if direction is out an it's not caller allocated
-            if (param_node.$.direction == "out" && param_node.$["caller-allocates"] == 0) {
+            if (param_node.$.direction == "out") {
                 return_params.push(param_node);
                 continue;
             }
@@ -78,20 +78,38 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
         }
     }
 
-    // Tuple return type
-    if (return_params.length > 1 && return_type == "void") {
+    // Returns multiple things, it should be a tuple
+    if (return_params.length > 0) {
         let tupleReturnTypes: TypeInfo[] = [];
+
+        // If already has something to return, it should be the first one
+        if (return_type != "void") {
+            tupleReturnTypes.push({
+                docString: returnDoc,
+                type: return_type,
+                name: returnName
+            })
+        }
+        // Get info
         for (const outParam of return_params) {
             const typeInfo = GetTypeInfo(outParam);
             tupleReturnTypes.push(typeInfo);
         }
+
         returnDoc = `${tupleReturnTypes.map(x => x.docString).join("\n\n")}`;
-        if (tupleReturnTypes.every(x => x.name != null)) {
-            return_type = `[ ${tupleReturnTypes.map(x => `${x.name}: ${x.type}`).join(", ")} ]`;
+        // Single return item, it should not be a tuple
+        if (tupleReturnTypes.length == 1) {
+            return_type = tupleReturnTypes[0].type;
         }
+        // named or non-named tuple
         else {
-            return_type = `[ ${tupleReturnTypes.map(x => x.type).join(", ")} ]`;
-        } 
+            if (tupleReturnTypes.every(x => x.name != null)) {
+                return_type = `[ ${tupleReturnTypes.map(x => `${x.name}: ${x.type}`).join(", ")} ]`;
+            }
+            else {
+                return_type = `[ ${tupleReturnTypes.map(x => x.type).join(", ")} ]`;
+            }
+        }
     }
 
     return {

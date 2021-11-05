@@ -31,8 +31,12 @@ declare namespace imports.gi.Cogl {
 		 * of the bitmap.
 		 * @param filename the file to check
 		 * @returns %TRUE if the image was successfully parsed
+		 * 
+		 * return location for the bitmap width, or %NULL
+		 * 
+		 * return location for the bitmap height, or %NULL
 		 */
-		public static get_size_from_file(filename: string): Bool;
+		public static get_size_from_file(filename: string): [ Bool, number, number ];
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -453,9 +457,9 @@ declare namespace imports.gi.Cogl {
 		public get_ambient(ambient: Color): void;
 		/**
 		 * Retrieves the current material color.
-		 * @param color The location to store the color
+		 * @returns The location to store the color
 		 */
-		public get_color(color: Color): void;
+		public get_color(): Color;
 		/**
 		 * Retrieves the current diffuse color for #material
 		 * @param diffuse The location to store the diffuse color
@@ -1098,12 +1102,13 @@ declare namespace imports.gi.Cogl {
 		 * technically save a copy of the inverse transform within the given
 		 * #CoglMatrix so that subsequent requests for the inverse transform may
 		 * avoid costly inversion calculations.</note>
-		 * @param inverse The destination for a 4x4 inverse transformation matrix
 		 * @returns %TRUE if the inverse was successfully calculated or %FALSE
 		 *   for degenerate transformations that can't be inverted (in this case the
 		 *   #inverse matrix will simply be initialized with the identity matrix)
+		 * 
+		 * The destination for a 4x4 inverse transformation matrix
 		 */
-		public get_inverse(inverse: Matrix): Bool;
+		public get_inverse(): [ Bool, Matrix ];
 		/**
 		 * Initializes #matrix with the contents of #array
 		 * @param array A linear array of 16 floats (column-major order)
@@ -1365,8 +1370,14 @@ declare namespace imports.gi.Cogl {
 		 * queried.
 		 * @returns %TRUE if the handle was successfully retrieved, %FALSE
 		 *   if the handle was invalid
+		 * 
+		 * pointer to return location for the
+		 *   textures GL handle, or %NULL.
+		 * 
+		 * pointer to return location for the
+		 *   GL target type, or %NULL.
 		 */
-		get_gl_texture(): Bool;
+		get_gl_texture(): [ Bool, number | null, number | null ];
 		/**
 		 * Queries the height of a cogl texture.
 		 * @returns the height of the GPU side texture in pixels
@@ -2700,12 +2711,12 @@ declare namespace imports.gi.Cogl {
 	/**
 	 * Converts a color expressed in HLS (hue, luminance and saturation)
 	 * values into a {@link Color}.
-	 * @param color return location for a {@link Color}
 	 * @param hue hue value, in the 0 .. 360 range
 	 * @param saturation saturation value, in the 0 .. 1 range
 	 * @param luminance luminance value, in the 0 .. 1 range
+	 * @returns return location for a {@link Color}
 	 */
-	function color_init_from_hsl(color: Color, hue: number, saturation: number, luminance: number): void;
+	function color_init_from_hsl(hue: number, saturation: number, luminance: number): Color;
 
 	/**
 	 * Create a new cogl program object that can be used to replace parts of the GL
@@ -2848,9 +2859,9 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Stores the current model-view matrix in #matrix.
-	 * @param matrix return location for the model-view matrix
+	 * @returns return location for the model-view matrix
 	 */
-	function get_modelview_matrix(matrix: Matrix): void;
+	function get_modelview_matrix(): Matrix;
 
 	/**
 	 * Retrieves the #GOptionGroup used by Cogl to parse the command
@@ -2876,9 +2887,9 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Stores the current projection matrix in #matrix.
-	 * @param matrix return location for the projection matrix
+	 * @returns return location for the projection matrix
 	 */
-	function get_projection_matrix(matrix: Matrix): void;
+	function get_projection_matrix(): Matrix;
 
 	/**
 	 * Returns the current source material as previously set using
@@ -2897,8 +2908,10 @@ declare namespace imports.gi.Cogl {
 	 * Stores the current viewport in #v. #v[0] and #v[1] get the x and y
 	 * position of the viewport and #v[2] and #v[3] get the width and
 	 * height.
+	 * @returns pointer to a 4 element array
+	 *   of #float<!-- -->s to receive the viewport dimensions.
 	 */
-	function get_viewport(): void;
+	function get_viewport(): number[];
 
 	function gtype_matrix_get_type(): GObject.Type;
 
