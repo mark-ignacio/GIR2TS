@@ -192,7 +192,7 @@ declare namespace imports.gi.St {
 		/**
 		 * The child #ClutterActor of the {@link Bin} container.
 		 */
-		child: Clutter.Actor;
+		child: Clutter.Actor | null;
 		/**
 		 * The horizontal alignment of the {@link Bin} child.
 		 */

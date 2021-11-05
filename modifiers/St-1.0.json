@@ -15,6 +15,15 @@
                         }
                     }
                 }
+            },
+            "Bin": {
+                "prop": {
+                    "child": {
+                        "type_extension": [
+                            "null"
+                        ]
+                    }
+                }
             }
         }
     }
