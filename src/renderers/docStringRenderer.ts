@@ -5,8 +5,11 @@ export interface DocStringOptions {
     ns_name: string;
     indent?: number;
     deprecatedDoc?: string;
-    class_name?: string;
 }
+
+function capitalize(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
  /** Convert references to for same library, like #SoupMessage to {link Message} */
  function convertLinks(doc: string, ns_name?: string): string {
@@ -31,26 +34,12 @@ export interface DocStringOptions {
     return doc;
 }
 
-function convertClassRefs(doc: string, ns_name?: string, class_name?: string): string {
-    if (doc == undefined)
-        return doc;
-
-    if (ns_name == undefined)
-        return doc;   
-    
-    if (class_name == undefined)
-        return doc; 
-    
-    return doc;
-}
-
-function prepareDocString(doc: string | undefined, ns_name?: string, class_name?: string): string[] | undefined {
+function prepareDocString(doc: string | undefined, ns_name?: string): string[] | undefined {
     if (doc == undefined)
         return doc;
 
     let result = doc.replace(/@/g, "#");
     result = convertLinks(result, ns_name);
-    result = convertClassRefs(result, ns_name, class_name);
 
     return result.split("\n");
 }
@@ -60,8 +49,7 @@ export function renderDocString(docString: string | null, params?: Parameter[], 
     const {
         indent = 0,
         ns_name, 
-        deprecatedDoc,
-        class_name
+        deprecatedDoc
     } = options ?? {};
     
     if (docString == null)
@@ -72,13 +60,13 @@ export function renderDocString(docString: string | null, params?: Parameter[], 
     let doc = `${ind}/**\n`;
     if (deprecatedDoc) {
         doc+= `${ind} * @deprecated\n`;
-        for (const line of prepareDocString(deprecatedDoc, ns_name, class_name) ?? []) {
+        for (const line of prepareDocString(deprecatedDoc, ns_name) ?? []) {
             doc+= `${ind} * ${line}\n`
         }
         doc+= `${ind} * \n`;
     }
 
-    for (const line of prepareDocString(docString, ns_name, class_name) ?? []) {
+    for (const line of prepareDocString(docString, ns_name) ?? []) {
         doc += `${ind} * ${line}\n`;
     }
 
@@ -90,7 +78,7 @@ export function renderDocString(docString: string | null, params?: Parameter[], 
                 continue;
             }
             else {
-                const lines = prepareDocString(param.docString, ns_name, class_name) ?? [""];
+                const lines = prepareDocString(param.docString, ns_name) ?? [""];
                 doc += ` ${lines[0]}\n`;
                 if (lines.length > 1)
                     for (let i = 1; i < lines.length; i++) {
@@ -102,7 +90,7 @@ export function renderDocString(docString: string | null, params?: Parameter[], 
 
 
     if (return_info?.type != null && return_info.type != "void") {
-        const lines = prepareDocString(return_info.docString ?? undefined, ns_name, class_name) ?? [""];
+        const lines = prepareDocString(return_info.docString ?? undefined, ns_name) ?? [""];
         doc += `${ind} * @returns ${lines[0]}\n`;
         if (lines.length > 1)
             for (let i = 1; i < lines.length; i++) {
