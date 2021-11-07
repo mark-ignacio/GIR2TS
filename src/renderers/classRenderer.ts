@@ -27,13 +27,6 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     let exclude_self = false;
     let exclude_all_members = false;
 
-    /** Transform all extends as I{className} for Mixins */
-    function transformExtension(className: string): string {
-        const parts = className.split(".");
-        parts[parts.length - 1] = `I${parts[parts.length - 1]}`
-        return parts.join(".")
-    }
-
     exclude_method_list = exclude_method_list.concat(exclude?.method ?? []);
     exclude_all_members = exclude?.members ?? false;
     if (exclude?.self) {
@@ -101,14 +94,6 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     header += mixinDocstring;
     header += `interface I${class_name}`;
 
-    const method_str_list: string[] = methods.map((m) => {
-        // if method is present in exclude_list
-        const excluded = (exclude_method_list.includes(m.$.name) || exclude_all_members);
-        const funcModifier = modifier?.function?.[m.$.name];
-        let method_str = renderMethod(m, ns_name, funcModifier, { include_access_modifier: false, indentNum: 1, exclude: excluded });
-        return method_str;
-    });
-
     let mixin = "";
     mixin += mixinDocstring;
     mixin += `type ${class_name}Mixin = I${class_name}`;
@@ -124,6 +109,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
 
     let body = "";
 
+    //#region Render props
     let fieldsAdded: Set<string> = new Set();
     let signalFields: ParameterNode[] = [];
     if (fields.length > 0) {
@@ -131,6 +117,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
         for (const field of fields) {
             const fieldName = field.$.name.replace(/-/g, "_");
 
+            // Exclude if duplicate of method, duplicate of prop
             let excluded = false;
             if (methodNames.has(fieldName)) 
                 excluded = true;
@@ -144,18 +131,33 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
             signalFields.push(field);
         }
     }
+    //#endregion
+
+    //#region Methods
+    const method_str_list: string[] = methods.map((m) => {
+        // if method is present in exclude_list
+        const excluded = (exclude_method_list.includes(m.$.name) || exclude_all_members);
+        const funcModifier = modifier?.function?.[m.$.name];
+        let method_str = renderMethod(m, ns_name, funcModifier, { include_access_modifier: false, indentNum: 1, exclude: excluded });
+        return method_str;
+    });
 
     if (method_str_list.length > 0) {
         body += method_str_list.join('\n');
     }
 
+    //#endregion
+
+    //#region Signals
     if (signals.length > 0) {
         body+= "\n";
         for (const signal of signals) {
             body+= renderSignal(signal, ns_name, false, 1);
         }
     }
+    //#endregion
 
+    //#region generate signals for props
     if (signalFields.length > 0) {
         body+= "\n";
         for (const signal of signalFields) {
@@ -180,6 +182,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
             }, ns_name, false, 1);
         }
     }
+    //#endregion
 
     body = ` {\n` +
         `${body}\n` +
@@ -187,7 +190,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
 
     let iface_str = header + body;
 
-    
+    //#region Constructor init options interface
     let constructorOptions = `type ${class_name}InitOptionsMixin `;
     if (signalFields.length > 0 || ifaces.length > 0)
         constructorOptions+= "= ";
@@ -208,7 +211,9 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     }
     
     constructorOptions += `\nexport interface ${class_name}InitOptions extends ${class_name}InitOptionsMixin {}\n\n`;
+    //#endregion
 
+    //#region Static functions
     const ctor_str_list: string[] = ctors.map((c) => {
         // console.log(c);
         const funcModifier = modifier?.function?.[c.$.name];
@@ -221,6 +226,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
         return renderMethod(sf, ns_name, funcModifier, { indentNum: 1, staticFunc: true });
     });
     const static_func_body = static_func_str_list.join('\n');
+    //#endregion
 
     const constructor_modifier = modifier?.function?.["constructor"];
     const classGenericModifier = modifier?.generic ?? "";
