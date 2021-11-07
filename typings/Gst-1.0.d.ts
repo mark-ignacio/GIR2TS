@@ -403,10 +403,24 @@ declare namespace imports.gi.Gst {
 		sync_children_states(): boolean;
 		/**
 		 * Will be emitted after the element was added to sub_bin.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - sub_bin: the {@link Bin} the element was added to 
+		 *  - element: the #GstElement that was added to #sub_bin 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "deep-element-added", callback: (owner: this, sub_bin: Bin, element: Element) => void): number;
 		/**
 		 * Will be emitted after the element was removed from sub_bin.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - sub_bin: the {@link Bin} the element was removed from 
+		 *  - element: the #GstElement that was removed from #sub_bin 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "deep-element-removed", callback: (owner: this, sub_bin: Bin, element: Element) => void): number;
 		/**
@@ -421,14 +435,32 @@ declare namespace imports.gi.Gst {
 		 * Connect to this signal if the default latency calculations are not
 		 * sufficient, like when you need different latencies for different sinks in
 		 * the same pipeline.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "do-latency", callback: (owner: this) => boolean): number;
 		/**
 		 * Will be emitted after the element was added to the bin.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - element: the {@link Element} that was added to the bin 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "element-added", callback: (owner: this, element: Element) => void): number;
 		/**
 		 * Will be emitted after the element was removed from the bin.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - element: the {@link Element} that was removed from the bin 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "element-removed", callback: (owner: this, element: Element) => void): number;
 
@@ -1205,6 +1237,12 @@ declare namespace imports.gi.Gst {
 		 * A message has been posted on the bus. This signal is emitted from a
 		 * GSource added to the mainloop. this signal will only be emitted when
 		 * there is a mainloop running.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: the message that has been posted asynchronously 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "message", callback: (owner: this, message: Message) => void): number;
 		/**
@@ -1213,6 +1251,12 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * This signal will not be emitted by default, you have to call
 		 * gst_bus_enable_sync_message_emission() before.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: the message that has been posted synchronously 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "sync-message", callback: (owner: this, message: Message) => void): number;
 
@@ -1597,6 +1641,12 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * This signal will be emitted from an arbitrary thread, most likely not
 		 * the application's main thread.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - synced: if the clock is synced now 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "synced", callback: (owner: this, synced: boolean) => void): number;
 
@@ -3479,6 +3529,11 @@ declare namespace imports.gi.Gst {
 		 * This signals that the element will not generate more dynamic pads.
 		 * Note that this signal will usually be emitted from the context of
 		 * the streaming thread.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "no-more-pads", callback: (owner: this) => void): number;
 		/**
@@ -3487,10 +3542,22 @@ declare namespace imports.gi.Gst {
 		 * mind that if you add new elements to the pipeline in the signal handler
 		 * you will need to set them to the desired target state with
 		 * gst_element_set_state() or gst_element_sync_state_with_parent().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - new_pad: the pad that has been added 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pad-added", callback: (owner: this, new_pad: Pad) => void): number;
 		/**
 		 * a {@link Pad} has been removed from the element
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - old_pad: the pad that has been removed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pad-removed", callback: (owner: this, old_pad: Pad) => void): number;
 
@@ -4360,6 +4427,13 @@ declare namespace imports.gi.Gst {
 		 * The deep notify signal is used to be notified of property changes. It is
 		 * typically attached to the toplevel bin to receive notifications from all
 		 * the elements contained in that bin.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - prop_object: the object that originated the signal 
+		 *  - prop: the property that changed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "deep-notify", callback: (owner: this, prop_object: Object, prop: GObject.ParamSpec) => void): number;
 
@@ -5460,10 +5534,22 @@ declare namespace imports.gi.Gst {
 		use_fixed_caps(): void;
 		/**
 		 * Signals that a pad has been linked to the peer pad.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - peer: the peer pad that has been connected 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "linked", callback: (owner: this, peer: Pad) => void): number;
 		/**
 		 * Signals that a pad has been unlinked from the peer pad.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - peer: the peer pad that has been disconnected 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unlinked", callback: (owner: this, peer: Pad) => void): number;
 
@@ -5657,6 +5743,12 @@ declare namespace imports.gi.Gst {
 		set_documentation_caps(caps: Caps): void;
 		/**
 		 * This signal is fired when an element creates a pad from this template.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - pad: the pad that was created. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pad-created", callback: (owner: this, pad: Pad) => void): number;
 
@@ -6681,11 +6773,23 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Signals that a feature has been added to the registry (possibly
 		 * replacing a previously-added one by the same name)
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - feature: the feature that has been added 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "feature-added", callback: (owner: this, feature: PluginFeature) => void): number;
 		/**
 		 * Signals that a plugin has been added to the registry (possibly
 		 * replacing a previously-added one by the same name)
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - plugin: the plugin that has been added 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "plugin-added", callback: (owner: this, plugin: Plugin) => void): number;
 
@@ -17208,10 +17312,24 @@ declare namespace imports.gi.Gst {
 		set_valist(first_property_name: string, var_args: any[]): void;
 		/**
 		 * Will be emitted after the #object was added to the #child_proxy.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - object: the #GObject that was added 
+		 *  - name: the name of the new child 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "child-added", callback: (owner: this, object: GObject.Object, name: string) => void): number;
 		/**
 		 * Will be emitted after the #object was removed from the #child_proxy.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - object: the #GObject that was removed 
+		 *  - name: the name of the old child 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "child-removed", callback: (owner: this, object: GObject.Object, name: string) => void): number;
 

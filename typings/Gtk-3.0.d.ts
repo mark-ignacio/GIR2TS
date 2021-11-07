@@ -314,6 +314,13 @@ declare namespace imports.gi.Gtk {
 		 * The signal which gets emitted to activate a URI.
 		 * Applications may connect to it to override the default behaviour,
 		 * which is to call gtk_show_uri_on_window().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - uri: the URI that is activated 
+		 *  - returns %TRUE if the link has been activated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate-link", callback: (owner: this, uri: string) => boolean): number;
 
@@ -535,6 +542,15 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * The accel-activate signal is an implementation detail of
 		 * {@link AccelGroup} and not meant to be used by applications.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - acceleratable: the object on which the accelerator was activated 
+		 *  - keyval: the accelerator keyval 
+		 *  - modifier: the modifier combination of the accelerator 
+		 *  - returns %TRUE if the accelerator was activated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "accel-activate", callback: (owner: this, acceleratable: GObject.Object, keyval: number, modifier: Gdk.ModifierType) => boolean): number;
 		/**
@@ -544,6 +560,14 @@ declare namespace imports.gi.Gtk {
 		 * Widgets like {@link AccelLabel} which display an associated
 		 * accelerator should connect to this signal, and rebuild
 		 * their visual representation if the #accel_closure is theirs.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - keyval: the accelerator keyval 
+		 *  - modifier: the modifier combination of the accelerator 
+		 *  - accel_closure: the #GClosure of the accelerator 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "accel-changed", callback: (owner: this, keyval: number, modifier: Gdk.ModifierType, accel_closure: GObject.Closure) => void): number;
 
@@ -765,6 +789,14 @@ declare namespace imports.gi.Gtk {
 		 * The path is also used as the detail for the signal,
 		 * so it is possible to connect to
 		 * changed::`accel_path`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - accel_path: the path of the accelerator that changed 
+		 *  - accel_key: the key value for the new accelerator 
+		 *  - accel_mods: the modifier mask for the new accelerator 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this, accel_path: string, accel_key: number, accel_mods: Gdk.ModifierType) => void): number;
 
@@ -1406,6 +1438,11 @@ declare namespace imports.gi.Gtk {
 		unblock_activate(): void;
 		/**
 		 * The "activate" signal is emitted when the action is activated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 
@@ -1792,6 +1829,13 @@ declare namespace imports.gi.Gtk {
 		 * {@link UIManager} proxies the signal and provides global notification
 		 * just before any action is connected to a proxy, which is probably more
 		 * convenient to use.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action: the action 
+		 *  - proxy: the proxy 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "connect-proxy", callback: (owner: this, action: Action, proxy: Widget) => void): number;
 		/**
@@ -1801,6 +1845,13 @@ declare namespace imports.gi.Gtk {
 		 * {@link UIManager} proxies the signal and provides global notification
 		 * just before any action is connected to a proxy, which is probably more
 		 * convenient to use.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action: the action 
+		 *  - proxy: the proxy 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "disconnect-proxy", callback: (owner: this, action: Action, proxy: Widget) => void): number;
 		/**
@@ -1809,6 +1860,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * This is intended for {@link UIManager} to proxy the signal and provide global
 		 * notification just after any action is activated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action: the action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "post-activate", callback: (owner: this, action: Action) => void): number;
 		/**
@@ -1817,6 +1874,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * This is intended for {@link UIManager} to proxy the signal and provide global
 		 * notification just before any action is activated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action: the action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pre-activate", callback: (owner: this, action: Action) => void): number;
 
@@ -2085,10 +2148,20 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Emitted when one or more of the {@link Adjustment} properties have been
 		 * changed, other than the #GtkAdjustment:value property.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the {@link Adjustment}:value property has been changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "value-changed", callback: (owner: this) => void): number;
 
@@ -2389,6 +2462,12 @@ declare namespace imports.gi.Gtk {
 		 * Emitted when a custom item, previously added with
 		 * gtk_app_chooser_button_append_custom_item(), is activated from the
 		 * dropdown menu.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - item_name: the name of the activated item 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "custom-item-activated", callback: (owner: this, item_name: string) => void): number;
 
@@ -2653,10 +2732,22 @@ declare namespace imports.gi.Gtk {
 		 * This usually happens when the user double clicks an item, or an item
 		 * is selected and the user presses one of the keys Space, Shift+Space,
 		 * Return or Enter.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - application: the activated #GAppInfo 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "application-activated", callback: (owner: this, application: Gio.AppInfo) => void): number;
 		/**
 		 * Emitted when an application item is selected from the widget's list.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - application: the selected #GAppInfo 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "application-selected", callback: (owner: this, application: Gio.AppInfo) => void): number;
 		/**
@@ -2664,6 +2755,13 @@ declare namespace imports.gi.Gtk {
 		 * Clients can insert menu items into the provided {@link Menu} object in the
 		 * callback of this signal; the context menu will be shown over the item
 		 * if at least one item has been added to the menu.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - menu: the {@link Menu} to populate 
+		 *  - application: the current #GAppInfo 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "populate-popup", callback: (owner: this, menu: Menu, application: Gio.AppInfo) => void): number;
 
@@ -3052,17 +3150,34 @@ declare namespace imports.gi.Gtk {
 		 * connect to this signal and call gtk_application_inhibit() with
 		 * %GTK_APPLICATION_INHIBIT_LOGOUT to delay the end of the session
 		 * until state has been saved.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "query-end", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when a {@link Window} is added to #application through
 		 * gtk_application_add_window().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - window: the newly-added {@link Window} 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "window-added", callback: (owner: this, window: Window) => void): number;
 		/**
 		 * Emitted when a {@link Window} is removed from #application,
 		 * either as a side-effect of being destroyed or explicitly
 		 * through gtk_application_remove_window().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - window: the {@link Window} that is being removed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "window-removed", callback: (owner: this, window: Window) => void): number;
 
@@ -3786,16 +3901,31 @@ declare namespace imports.gi.Gtk {
 		 * %GTK_ASSISTANT_PAGE_PROGRESS after the confirmation page and handle
 		 * this operation within the #GtkAssistant::prepare signal of the progress
 		 * page.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "apply", callback: (owner: this) => void): number;
 		/**
 		 * The ::cancel signal is emitted when then the cancel button is clicked.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cancel", callback: (owner: this) => void): number;
 		/**
 		 * The ::close signal is emitted either when the close button of
 		 * a summary page is clicked, or when the apply button in the last
 		 * page in the flow (of type %GTK_ASSISTANT_PAGE_CONFIRM) is clicked.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "close", callback: (owner: this) => void): number;
 		connect(signal: "escape", callback: (owner: this) => void): number;
@@ -3805,6 +3935,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * A handler for this signal can do any preparations which are
 		 * necessary before showing #page.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - page: the current page 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "prepare", callback: (owner: this, page: Widget) => void): number;
 
@@ -4897,26 +5033,56 @@ declare namespace imports.gi.Gtk {
 		 * emitting it causes the button to animate press then release.
 		 * Applications should never connect to this signal, but use the
 		 * {@link Button}::clicked signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the button has been activated (pressed and released).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "clicked", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the pointer enters the button.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "enter", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the pointer leaves the button.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "leave", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the button is pressed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pressed", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the button is released.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "released", callback: (owner: this) => void): number;
 
@@ -5285,31 +5451,66 @@ declare namespace imports.gi.Gtk {
 		unmark_day(day: number): void;
 		/**
 		 * Emitted when the user selects a day.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "day-selected", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the user double-clicks a day.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "day-selected-double-click", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the user clicks a button to change the selected month on a
 		 * calendar.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "month-changed", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the user switched to the next month.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "next-month", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when user switched to the next year.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "next-year", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the user switched to the previous month.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "prev-month", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when user switched to the previous year.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "prev-year", callback: (owner: this) => void): number;
 
@@ -5867,10 +6068,29 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Indicates that editing has started on #renderer and that #editable
 		 * should be added to the owning cell-layouting widget at #cell_area.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - renderer: the {@link CellRenderer} that started the edited 
+		 *  - editable: the #GtkCellEditable widget to add 
+		 *  - cell_area: the #GtkWidget relative #GdkRectangle coordinates
+		 *             where #editable should be added 
+		 *  - path: the #GtkTreePath string this edit was initiated for 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "add-editable", callback: (owner: this, renderer: CellRenderer, editable: CellEditable, cell_area: Gdk.Rectangle, path: string) => void): number;
 		/**
 		 * This signal is emitted whenever applying attributes to #area from #model
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - model: the {@link TreeModel} to apply the attributes from 
+		 *  - iter: the #GtkTreeIter indicating which row to apply the attributes of 
+		 *  - is_expander: whether the view shows children for this row 
+		 *  - is_expanded: whether the view is currently showing the children of this row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "apply-attributes", callback: (owner: this, model: TreeModel, iter: TreeIter, is_expander: boolean, is_expanded: boolean) => void): number;
 		/**
@@ -5882,11 +6102,25 @@ declare namespace imports.gi.Gtk {
 		 * currently focused renderer did not change, this is
 		 * because focus may change to the same renderer in the
 		 * same cell area for a different row of data.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - renderer: the {@link CellRenderer} that has focus 
+		 *  - path: the current #GtkTreePath string set for #area 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "focus-changed", callback: (owner: this, renderer: CellRenderer, path: string) => void): number;
 		/**
 		 * Indicates that editing finished on #renderer and that #editable
 		 * should be removed from the owning cell-layouting widget.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - renderer: the {@link CellRenderer} that finished editeding 
+		 *  - editable: the #GtkCellEditable widget to remove 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "remove-editable", callback: (owner: this, renderer: CellRenderer, editable: CellEditable) => void): number;
 
@@ -6778,6 +7012,11 @@ declare namespace imports.gi.Gtk {
 		 * editing when the user presses Escape.
 		 * 
 		 * See also: gtk_cell_renderer_stop_editing().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "editing-canceled", callback: (owner: this) => void): number;
 		/**
@@ -6810,6 +7049,13 @@ declare namespace imports.gi.Gtk {
 		 *     }
 		 * }
 		 * ]|
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - editable: the {@link CellEditable} 
+		 *  - path: the path identifying the edited cell 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "editing-started", callback: (owner: this, editable: CellEditable, path: string) => void): number;
 
@@ -6927,10 +7173,25 @@ declare namespace imports.gi.Gtk {
 
 		/**
 		 * Gets emitted when the user has removed the accelerator.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path_string: the path identifying the row of the edited cell 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "accel-cleared", callback: (owner: this, path_string: string) => void): number;
 		/**
 		 * Gets emitted when the user has selected a new accelerator.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path_string: the path identifying the row of the edited cell 
+		 *  - accel_key: the new accelerator keyval 
+		 *  - accel_mods: the new acclerator modifier mask 
+		 *  - hardware_keycode: the keycode of the new accelerator 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "accel-edited", callback: (owner: this, path_string: string, accel_key: number, accel_mods: Gdk.ModifierType, hardware_keycode: number) => void): number;
 
@@ -7012,6 +7273,15 @@ declare namespace imports.gi.Gtk {
 		 * the tree view will immediately cease the editing operating.  This
 		 * means that you most probably want to refrain from changing the model
 		 * until the combo cell renderer emits the edited or editing_canceled signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path_string: a string of the path identifying the edited cell
+		 *               (relative to the tree view model) 
+		 *  - new_iter: the new iter selected in the combo box
+		 *            (relative to the combo box model) 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this, path_string: string, new_iter: TreeIter) => void): number;
 
@@ -7491,6 +7761,13 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * It is the responsibility of the application to update the model
 		 * and store #new_text at the position indicated by #path.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: the path identifying the edited cell 
+		 *  - new_text: the new text 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "edited", callback: (owner: this, path: string, new_text: string) => void): number;
 
@@ -7675,6 +7952,13 @@ declare namespace imports.gi.Gtk {
 		 * It is the responsibility of the application to update the model
 		 * with the correct value to store at #path.  Often this is simply the
 		 * opposite of the value currently stored at #path.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: string representation of {@link TreePath} describing the
+		 *        event location 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggled", callback: (owner: this, path: string) => void): number;
 
@@ -8089,6 +8373,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * A signal handler can use gtk_check_menu_item_get_active()
 		 * to discover the new state.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggled", callback: (owner: this) => void): number;
 
@@ -8512,6 +8801,12 @@ declare namespace imports.gi.Gtk {
 		 * The ::owner-change signal is emitted when GTK+ receives an
 		 * event that indicates that the ownership of the selection
 		 * associated with #clipboard has changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventOwnerChange event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "owner-change", callback: (owner: this, event: Gdk.EventOwnerChange) => void): number;
 
@@ -8736,6 +9031,11 @@ declare namespace imports.gi.Gtk {
 		 * Note that this signal is only emitted when the user
 		 * changes the color. If you need to react to programmatic color changes
 		 * as well, use the notify::color signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "color-set", callback: (owner: this) => void): number;
 
@@ -9029,6 +9329,11 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted when the color changes in the {@link ColorSelection}
 		 * according to its update policy.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "color-changed", callback: (owner: this) => void): number;
 
@@ -9505,6 +9810,11 @@ declare namespace imports.gi.Gtk {
 		 * call to gtk_combo_box_set_active_iter().
 		 * It will also be emitted while typing into the entry of a combo box
 		 * with an entry.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 		/**
@@ -9540,12 +9850,26 @@ declare namespace imports.gi.Gtk {
 		 *   return g_strdup_printf ("%g", value);
 		 * }
 		 * ]|
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: the GtkTreePath string from the combo box's current model to format text for 
+		 *  - returns a newly allocated string representing #path
+		 * for the current GtkComboBox model. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "format-entry-text", callback: (owner: this, path: string) => string): number;
 		/**
 		 * The ::move-active signal is a
 		 * [keybinding signal][GtkBindingSignal]
 		 * which gets emitted to move the active selection.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - scroll_type: a {@link ScrollType} 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-active", callback: (owner: this, scroll_type: ScrollType) => void): number;
 		/**
@@ -9554,6 +9878,12 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted to popdown the combo box list.
 		 * 
 		 * The default bindings for this signal are Alt+Up and Escape.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "popdown", callback: (owner: this) => boolean): number;
 		/**
@@ -9562,6 +9892,11 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted to popup the combo box list.
 		 * 
 		 * The default binding for this signal is Alt+Down.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "popup", callback: (owner: this) => void): number;
 
@@ -10566,6 +10901,13 @@ declare namespace imports.gi.Gtk {
 		 * Note that this signal may be emitted at any time as the css provider
 		 * may opt to defer parsing parts or all of the input to a later time
 		 * than when a loading function was called.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - section: section the error happened in 
+		 *  - error: The parsing error 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "parsing-error", callback: (owner: this, section: CssSection, error: GLib.Error) => void): number;
 
@@ -10840,6 +11182,11 @@ declare namespace imports.gi.Gtk {
 		 * the dialog.
 		 * 
 		 * The default binding for this signal is the Escape key.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "close", callback: (owner: this) => void): number;
 		/**
@@ -10847,6 +11194,12 @@ declare namespace imports.gi.Gtk {
 		 * delete event, or the application programmer calls gtk_dialog_response().
 		 * On a delete event, the response ID is #GTK_RESPONSE_DELETE_EVENT.
 		 * Otherwise, it depends on which action widget was clicked.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - response_id: the response ID 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "response", callback: (owner: this, response_id: number) => void): number;
 
@@ -12056,6 +12409,11 @@ declare namespace imports.gi.Gtk {
 		 * activation of entries.
 		 * 
 		 * The default bindings for this signal are all forms of the Enter key.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
@@ -12065,6 +12423,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default bindings for this signal are
 		 * Backspace and Shift-Backspace.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "backspace", callback: (owner: this) => void): number;
 		/**
@@ -12074,6 +12437,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default bindings for this signal are
 		 * Ctrl-c and Ctrl-Insert.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "copy-clipboard", callback: (owner: this) => void): number;
 		/**
@@ -12083,6 +12451,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default bindings for this signal are
 		 * Ctrl-x and Shift-Delete.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cut-clipboard", callback: (owner: this) => void): number;
 		/**
@@ -12097,16 +12470,37 @@ declare namespace imports.gi.Gtk {
 		 * The default bindings for this signal are
 		 * Delete for deleting a character and Ctrl-Delete for
 		 * deleting a word.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - type: the granularity of the deletion, as a {@link DeleteType} 
+		 *  - count: the number of #type units to delete 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "delete-from-cursor", callback: (owner: this, type: DeleteType, count: number) => void): number;
 		/**
 		 * The ::icon-press signal is emitted when an activatable icon
 		 * is clicked.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - icon_pos: The position of the clicked icon 
+		 *  - event: the button press event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "icon-press", callback: (owner: this, icon_pos: EntryIconPosition, event: Gdk.Event) => void): number;
 		/**
 		 * The ::icon-release signal is emitted on the button release from a
 		 * mouse click over an activatable icon.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - icon_pos: The position of the clicked icon 
+		 *  - event: the button release event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "icon-release", callback: (owner: this, icon_pos: EntryIconPosition, event: Gdk.Event) => void): number;
 		/**
@@ -12116,6 +12510,12 @@ declare namespace imports.gi.Gtk {
 		 * fixed string at the cursor.
 		 * 
 		 * This signal has no default bindings.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - string: the string to insert 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert-at-cursor", callback: (owner: this, string: string) => void): number;
 		/**
@@ -12124,6 +12524,11 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted to present the Emoji chooser for the #entry.
 		 * 
 		 * The default bindings for this signal are Ctrl-. and Ctrl-;
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert-emoji", callback: (owner: this) => void): number;
 		/**
@@ -12144,6 +12549,14 @@ declare namespace imports.gi.Gtk {
 		 * - Arrow keys move by individual characters/lines
 		 * - Ctrl-arrow key combinations move by words/paragraphs
 		 * - Home/End keys move to the ends of the buffer
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - step: the granularity of the move, as a {@link MovementStep} 
+		 *  - count: the number of #step units to move 
+		 *  - extend_selection: %TRUE if the move should extend the selection 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, count: number, extend_selection: boolean) => void): number;
 		/**
@@ -12154,6 +12567,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default bindings for this signal are
 		 * Ctrl-v and Shift-Insert.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "paste-clipboard", callback: (owner: this) => void): number;
 		/**
@@ -12169,12 +12587,24 @@ declare namespace imports.gi.Gtk {
 		 * #widget will be a different container, e.g. a #GtkToolbar.
 		 * The signal handler should not make assumptions about the
 		 * type of #widget.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - widget: the container that is being populated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "populate-popup", callback: (owner: this, widget: Widget) => void): number;
 		/**
 		 * If an input method is used, the typed text will not immediately
 		 * be committed to the buffer. So if you are interested in the text,
 		 * connect to this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - preedit: the current preedit string 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "preedit-changed", callback: (owner: this, preedit: string) => void): number;
 		/**
@@ -12183,6 +12613,11 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted to toggle the overwrite mode of the entry.
 		 * 
 		 * The default bindings for this signal is Insert.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggle-overwrite", callback: (owner: this) => void): number;
 
@@ -12523,10 +12958,25 @@ declare namespace imports.gi.Gtk {
 		set_text(chars: string, n_chars: number): void;
 		/**
 		 * This signal is emitted after text is deleted from the buffer.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - position: the position the text was deleted at. 
+		 *  - n_chars: The number of characters that were deleted. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "deleted-text", callback: (owner: this, position: number, n_chars: number) => void): number;
 		/**
 		 * This signal is emitted after text is inserted into the buffer.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - position: the position the text was inserted at. 
+		 *  - chars: The text that was inserted. 
+		 *  - n_chars: The number of characters that were inserted. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "inserted-text", callback: (owner: this, position: number, chars: string, n_chars: number) => void): number;
 
@@ -12799,6 +13249,12 @@ declare namespace imports.gi.Gtk {
 		set_text_column(column: number): void;
 		/**
 		 * Gets emitted when an action is activated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - index: the index of the activated action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "action-activated", callback: (owner: this, index: number) => void): number;
 		/**
@@ -12809,6 +13265,14 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Note that #model is the model that was passed to
 		 * gtk_entry_completion_set_model().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - model: the {@link TreeModel} containing the matches 
+		 *  - iter: a #GtkTreeIter positioned at the selected match 
+		 *  - returns %TRUE if the signal has been handled 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cursor-on-match", callback: (owner: this, model: TreeModel, iter: TreeIter) => boolean): number;
 		/**
@@ -12820,6 +13284,13 @@ declare namespace imports.gi.Gtk {
 		 * smaller part of the #prefix into the entry - e.g. the entry used in
 		 * the {@link FileChooser} inserts only the part of the prefix up to the
 		 * next '/'.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - prefix: the common prefix of all possible completions 
+		 *  - returns %TRUE if the signal has been handled 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert-prefix", callback: (owner: this, prefix: string) => boolean): number;
 		/**
@@ -12830,6 +13301,14 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Note that #model is the model that was passed to
 		 * gtk_entry_completion_set_model().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - model: the {@link TreeModel} containing the matches 
+		 *  - iter: a #GtkTreeIter positioned at the selected match 
+		 *  - returns %TRUE if the signal has been handled 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "match-selected", callback: (owner: this, model: TreeModel, iter: TreeIter) => boolean): number;
 		/**
@@ -12837,6 +13316,11 @@ declare namespace imports.gi.Gtk {
 		 * number of rows in completion_complete method.
 		 * (In other words when GtkEntryCompletion is out of
 		 *  suggestions)
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "no-matches", callback: (owner: this) => void): number;
 
@@ -13147,10 +13631,27 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "im-update", callback: (owner: this) => void): number;
 		/**
 		 * This signal is emitted whenever a key is pressed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - keyval: the pressed key. 
+		 *  - keycode: the raw code of the pressed key. 
+		 *  - state: the bitmask, representing the state of modifier keys and pointer buttons. See #GdkModifierType. 
+		 *  - returns %TRUE if the key press was handled, %FALSE otherwise. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "key-pressed", callback: (owner: this, keyval: number, keycode: number, state: Gdk.ModifierType) => boolean): number;
 		/**
 		 * This signal is emitted whenever a key is released.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - keyval: the released key. 
+		 *  - keycode: the raw code of the released key. 
+		 *  - state: the bitmask, representing the state of modifier keys and pointer buttons. See #GdkModifierType. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "key-released", callback: (owner: this, keyval: number, keycode: number, state: Gdk.ModifierType) => void): number;
 		connect(signal: "modifiers", callback: (owner: this, object: Gdk.ModifierType) => boolean): number;
@@ -13185,14 +13686,33 @@ declare namespace imports.gi.Gtk {
 
 		/**
 		 * Signals that the pointer has entered the widget.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - x: the x coordinate 
+		 *  - y: the y coordinate 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "enter", callback: (owner: this, x: number, y: number) => void): number;
 		/**
 		 * Signals that pointer has left the widget.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "leave", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the pointer moves inside the widget.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - x: the x coordinate 
+		 *  - y: the y coordinate 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "motion", callback: (owner: this, x: number, y: number) => void): number;
 
@@ -13248,21 +13768,45 @@ declare namespace imports.gi.Gtk {
 		 * flag is set. #vel_x and #vel_y express the initial velocity that was
 		 * imprinted by the scroll events. #vel_x and #vel_y are expressed in
 		 * pixels/ms.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - vel_x: X velocity 
+		 *  - vel_y: Y velocity 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "decelerate", callback: (owner: this, vel_x: number, vel_y: number) => void): number;
 		/**
 		 * Signals that the widget should scroll by the
 		 * amount specified by #dx and #dy.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - dx: X delta 
+		 *  - dy: Y delta 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "scroll", callback: (owner: this, dx: number, dy: number) => void): number;
 		/**
 		 * Signals that a new scrolling operation has begun. It will
 		 * only be emitted on devices capable of it.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "scroll-begin", callback: (owner: this) => void): number;
 		/**
 		 * Signals that a new scrolling operation has finished. It will
 		 * only be emitted on devices capable of it.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "scroll-end", callback: (owner: this) => void): number;
 
@@ -13689,6 +14233,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Note that this signal is only emitted when the user
 		 * changes the file.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "file-set", callback: (owner: this) => void): number;
 
@@ -14215,6 +14764,11 @@ declare namespace imports.gi.Gtk {
 		 * folder in the file list.
 		 * 
 		 * The default binding for this signal is `Alt + D`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "desktop-folder", callback: (owner: this) => void): number;
 		/**
@@ -14228,6 +14782,11 @@ declare namespace imports.gi.Gtk {
 		 * chooser to switch to the "baz" subfolder.
 		 * 
 		 * The default binding for this signal is `Alt + Down`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "down-folder", callback: (owner: this) => void): number;
 		/**
@@ -14238,6 +14797,11 @@ declare namespace imports.gi.Gtk {
 		 * folder in the file list.
 		 * 
 		 * The default binding for this signal is `Alt + Home`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "home-folder", callback: (owner: this) => void): number;
 		/**
@@ -14252,6 +14816,12 @@ declare namespace imports.gi.Gtk {
 		 * "`/`" (a slash):  this lets you type `/` and immediately type a path name.
 		 * On Unix systems, this is bound to `~` (tilde) with a #path string of "~"
 		 * itself for access to home directories.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: a string that gets put in the text entry for the file name 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "location-popup", callback: (owner: this, path: string) => void): number;
 		/**
@@ -14262,6 +14832,11 @@ declare namespace imports.gi.Gtk {
 		 * pastes into a {@link FileChooserWidget}.
 		 * 
 		 * The default binding for this signal is `Control + V`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "location-popup-on-paste", callback: (owner: this) => void): number;
 		/**
@@ -14272,6 +14847,11 @@ declare namespace imports.gi.Gtk {
 		 * can use to manually type the name of the file he wishes to select.
 		 * 
 		 * The default binding for this signal is `Control + L`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "location-toggle-popup", callback: (owner: this) => void): number;
 		/**
@@ -14281,6 +14861,11 @@ declare namespace imports.gi.Gtk {
 		 * This is used to move the focus to the places sidebar.
 		 * 
 		 * The default binding for this signal is `Alt + P`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "places-shortcut", callback: (owner: this) => void): number;
 		/**
@@ -14296,6 +14881,12 @@ declare namespace imports.gi.Gtk {
 		 * `Alt + 1` is actually defined to switch to the bookmark at index
 		 * 0, and so on successively; `Alt + 0` is defined to switch to the
 		 * bookmark at index 10.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - bookmark_index: the number of the bookmark to switch to 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "quick-bookmark", callback: (owner: this, bookmark_index: number) => void): number;
 		/**
@@ -14305,6 +14896,11 @@ declare namespace imports.gi.Gtk {
 		 * This is used to make the file chooser show the Recent location.
 		 * 
 		 * The default binding for this signal is `Alt + R`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "recent-shortcut", callback: (owner: this) => void): number;
 		/**
@@ -14314,6 +14910,11 @@ declare namespace imports.gi.Gtk {
 		 * This is used to make the file chooser show the search entry.
 		 * 
 		 * The default binding for this signal is `Alt + S`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "search-shortcut", callback: (owner: this) => void): number;
 		/**
@@ -14323,6 +14924,11 @@ declare namespace imports.gi.Gtk {
 		 * This is used to make the file chooser display hidden files.
 		 * 
 		 * The default binding for this signal is `Control + H`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-hidden", callback: (owner: this) => void): number;
 		/**
@@ -14333,6 +14939,11 @@ declare namespace imports.gi.Gtk {
 		 * in the file hierarchy.
 		 * 
 		 * The default binding for this signal is `Alt + Up`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "up-folder", callback: (owner: this) => void): number;
 
@@ -14940,11 +15551,22 @@ declare namespace imports.gi.Gtk {
 		 * The ::activate-cursor-child signal is a
 		 * [keybinding signal][GtkBindingSignal]
 		 * which gets emitted when the user activates the #box.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate-cursor-child", callback: (owner: this) => void): number;
 		/**
 		 * The ::child-activated signal is emitted when a child has been
 		 * activated by the user.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - child: the child that is activated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "child-activated", callback: (owner: this, child: FlowBoxChild) => void): number;
 		/**
@@ -14963,6 +15585,15 @@ declare namespace imports.gi.Gtk {
 		 * - Arrow keys move by individual children
 		 * - Home/End keys move to the ends of the box
 		 * - PageUp/PageDown keys move vertically by pages
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - step: the granularity fo the move, as a {@link MovementStep} 
+		 *  - count: the number of #step units to move 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 * %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, count: number) => boolean): number;
 		/**
@@ -14972,6 +15603,11 @@ declare namespace imports.gi.Gtk {
 		 * the selection mode permits it.
 		 * 
 		 * The default bindings for this signal is Ctrl-a.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "select-all", callback: (owner: this) => void): number;
 		/**
@@ -14981,6 +15617,11 @@ declare namespace imports.gi.Gtk {
 		 * Use gtk_flow_box_selected_foreach() or
 		 * gtk_flow_box_get_selected_children() to obtain the
 		 * selected children.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "selected-children-changed", callback: (owner: this) => void): number;
 		/**
@@ -14989,6 +15630,11 @@ declare namespace imports.gi.Gtk {
 		 * which toggles the selection of the child that has the focus.
 		 * 
 		 * The default binding for this signal is Ctrl-Space.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggle-cursor-child", callback: (owner: this) => void): number;
 		/**
@@ -14998,6 +15644,11 @@ declare namespace imports.gi.Gtk {
 		 * the selection mode permits it.
 		 * 
 		 * The default bindings for this signal is Ctrl-Shift-a.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unselect-all", callback: (owner: this) => void): number;
 
@@ -15150,6 +15801,11 @@ declare namespace imports.gi.Gtk {
 		 * While this signal is used as a
 		 * [keybinding signal][GtkBindingSignal],
 		 * it can be used by applications for their own purposes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 
@@ -15305,6 +15961,11 @@ declare namespace imports.gi.Gtk {
 		 * Note that this signal is only emitted when the user
 		 * changes the font. If you need to react to programmatic font changes
 		 * as well, use the notify::font signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "font-set", callback: (owner: this) => void): number;
 
@@ -16028,6 +16689,13 @@ declare namespace imports.gi.Gtk {
 		 * If context creation fails then the signal handler can use
 		 * gtk_gl_area_set_error() to register a more detailed error
 		 * of how the construction failed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns a newly created #GdkGLContext;
+		 *     the {@link GLArea} widget will take ownership of the returned value. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "create-context", callback: (owner: this) => Gdk.GLContext): number;
 		/**
@@ -16036,6 +16704,14 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The #context is bound to the #area prior to emitting this function,
 		 * and the buffers are painted to the window once the emission terminates.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the #GdkGLContext used by #area 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "render", callback: (owner: this, context: Gdk.GLContext) => boolean): number;
 		/**
@@ -16048,6 +16724,13 @@ declare namespace imports.gi.Gtk {
 		 * is emitted.
 		 * 
 		 * The default handler sets up the GL viewport.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - width: the width of the viewport 
+		 *  - height: the height of the viewport 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "resize", callback: (owner: this, width: number, height: number) => void): number;
 
@@ -16411,6 +17094,12 @@ declare namespace imports.gi.Gtk {
 		 * Note: These conditions may also happen when an extra touch (eg. a third touch
 		 * on a 2-touches gesture) is lifted, in that situation #sequence won't pertain
 		 * to the current set of active touches, so don't rely on this being true.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - sequence: the #GdkEventSequence that made the gesture to be recognized 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "begin", callback: (owner: this, sequence: Gdk.EventSequence | null) => void): number;
 		/**
@@ -16420,6 +17109,12 @@ declare namespace imports.gi.Gtk {
 		 * was claimed by parent widgets' controllers (see gtk_gesture_set_sequence_state()).
 		 * 
 		 * #gesture must forget everything about #sequence as a reaction to this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - sequence: the #GdkEventSequence that was cancelled 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cancel", callback: (owner: this, sequence: Gdk.EventSequence | null) => void): number;
 		/**
@@ -16432,17 +17127,36 @@ declare namespace imports.gi.Gtk {
 		 * previously triggering recognition on #gesture (ie. a just pressed touch
 		 * sequence that exceeds #GtkGesture:n-points). This situation may be detected
 		 * by checking through gtk_gesture_handles_sequence().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - sequence: the #GdkEventSequence that made gesture recognition to finish 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "end", callback: (owner: this, sequence: Gdk.EventSequence | null) => void): number;
 		/**
 		 * This signal is emitted whenever a sequence state changes. See
 		 * gtk_gesture_set_sequence_state() to know more about the expectable
 		 * sequence lifetimes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - sequence: the #GdkEventSequence that was cancelled 
+		 *  - state: the new sequence state 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "sequence-state-changed", callback: (owner: this, sequence: Gdk.EventSequence | null, state: EventSequenceState) => void): number;
 		/**
 		 * This signal is emitted whenever an event is handled while the gesture is
 		 * recognized. #sequence is guaranteed to pertain to the set of active touches.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - sequence: the #GdkEventSequence that was updated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "update", callback: (owner: this, sequence: Gdk.EventSequence | null) => void): number;
 
@@ -16588,14 +17302,35 @@ declare namespace imports.gi.Gtk {
 		get_start_point(): [ boolean, number | null, number | null ];
 		/**
 		 * This signal is emitted whenever dragging starts.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - start_x: X coordinate, relative to the widget allocation 
+		 *  - start_y: Y coordinate, relative to the widget allocation 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-begin", callback: (owner: this, start_x: number, start_y: number) => void): number;
 		/**
 		 * This signal is emitted whenever the dragging is finished.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - offset_x: X offset, relative to the start point 
+		 *  - offset_y: Y offset, relative to the start point 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-end", callback: (owner: this, offset_x: number, offset_y: number) => void): number;
 		/**
 		 * This signal is emitted whenever the dragging point moves.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - offset_x: X offset, relative to the start point 
+		 *  - offset_y: Y offset, relative to the start point 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-update", callback: (owner: this, offset_x: number, offset_y: number) => void): number;
 
@@ -16638,11 +17373,23 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted whenever a press moved too far, or was released
 		 * before {@link GestureLongPress}::pressed happened.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cancelled", callback: (owner: this) => void): number;
 		/**
 		 * This signal is emitted whenever a press goes unmoved/unreleased longer than
 		 * what the GTK+ defaults tell.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - x: the X coordinate where the press happened, relative to the widget allocation 
+		 *  - y: the Y coordinate where the press happened, relative to the widget allocation 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pressed", callback: (owner: this, x: number, y: number) => void): number;
 
@@ -16711,6 +17458,14 @@ declare namespace imports.gi.Gtk {
 		set_area(rect: Gdk.Rectangle | null): void;
 		/**
 		 * This signal is emitted whenever a button or touch press happens.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - n_press: how many touch/button presses happened with this one 
+		 *  - x: The X coordinate, in widget allocation coordinates 
+		 *  - y: The Y coordinate, in widget allocation coordinates 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pressed", callback: (owner: this, n_press: number, x: number, y: number) => void): number;
 		/**
@@ -16718,11 +17473,24 @@ declare namespace imports.gi.Gtk {
 		 * will report the number of press that is paired to this event, note
 		 * that {@link GestureMultiPress}::stopped may have been emitted between the
 		 * press and its release, #n_press will only start over at the next press.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - n_press: number of press that is paired with this release 
+		 *  - x: The X coordinate, in widget allocation coordinates 
+		 *  - y: The Y coordinate, in widget allocation coordinates 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "released", callback: (owner: this, n_press: number, x: number, y: number) => void): number;
 		/**
 		 * This signal is emitted whenever any time/distance threshold has
 		 * been exceeded.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "stopped", callback: (owner: this) => void): number;
 
@@ -16782,6 +17550,13 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted once a panning gesture along the
 		 * expected axis is detected.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - direction: current direction of the pan gesture 
+		 *  - offset: Offset along the gesture orientation 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pan", callback: (owner: this, direction: PanDirection, offset: number) => void): number;
 
@@ -16843,6 +17618,13 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted when the angle between both tracked points
 		 * changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - angle: Current angle in radians 
+		 *  - angle_delta: Difference with the starting angle, in radians 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "angle-changed", callback: (owner: this, angle: number, angle_delta: number) => void): number;
 
@@ -17064,6 +17846,13 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted when the recognized gesture is finished, velocity
 		 * and direction are a product of previously recorded events.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - velocity_x: velocity in the X axis, in pixels/sec 
+		 *  - velocity_y: velocity in the Y axis, in pixels/sec 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "swipe", callback: (owner: this, velocity_x: number, velocity_y: number) => void): number;
 
@@ -17115,6 +17904,12 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted whenever the distance between both tracked
 		 * sequences changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - scale: Scale delta, taking the initial state as 1:1 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "scale-changed", callback: (owner: this, scale: number) => void): number;
 
@@ -17798,11 +18593,27 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted when the contents of the
 		 * handlebox are reattached to the main window.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - widget: the child widget of the handlebox.
+		 *   (this argument provides no extra information
+		 *   and is here only for backwards-compatibility) 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "child-attached", callback: (owner: this, widget: Widget) => void): number;
 		/**
 		 * This signal is emitted when the contents of the
 		 * handlebox are detached from the main window.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - widget: the child widget of the handlebox.
+		 *   (this argument provides no extra information
+		 *   and is here only for backwards-compatibility) 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "child-detached", callback: (owner: this, widget: Widget) => void): number;
 
@@ -18240,11 +19051,27 @@ declare namespace imports.gi.Gtk {
 		 * The ::commit signal is emitted when a complete input sequence
 		 * has been entered by the user. This can be a single character
 		 * immediately after a key press or the final result of preediting.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - str: the completed character(s) entered by the user 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "commit", callback: (owner: this, str: string) => void): number;
 		/**
 		 * The ::delete-surrounding signal is emitted when the input method
 		 * needs to delete all or part of the context surrounding the cursor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - offset: the character offset from the cursor position of the text
+		 *           to be deleted. A negative value indicates a position before
+		 *           the cursor. 
+		 *  - n_chars: the number of characters to be deleted 
+		 *  - returns %TRUE if the signal was handled. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "delete-surrounding", callback: (owner: this, offset: number, n_chars: number) => boolean): number;
 		/**
@@ -18252,16 +19079,31 @@ declare namespace imports.gi.Gtk {
 		 * currently being entered has changed.  It is also emitted at the end of
 		 * a preedit sequence, in which case
 		 * gtk_im_context_get_preedit_string() returns the empty string.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "preedit-changed", callback: (owner: this) => void): number;
 		/**
 		 * The ::preedit-end signal is emitted when a preediting sequence
 		 * has been completed or canceled.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "preedit-end", callback: (owner: this) => void): number;
 		/**
 		 * The ::preedit-start signal is emitted when a new preediting sequence
 		 * starts.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "preedit-start", callback: (owner: this) => void): number;
 		/**
@@ -18269,6 +19111,12 @@ declare namespace imports.gi.Gtk {
 		 * requires the context surrounding the cursor.  The callback should set
 		 * the input method surrounding context by calling the
 		 * gtk_im_context_set_surrounding() method.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE if the signal was handled. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "retrieve-surrounding", callback: (owner: this) => boolean): number;
 
@@ -19282,6 +20130,11 @@ declare namespace imports.gi.Gtk {
 		 * Emitted when the current icon theme is switched or GTK+ detects
 		 * that a change has occurred in the contents of the current
 		 * icon theme.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
@@ -20021,6 +20874,12 @@ declare namespace imports.gi.Gtk {
 		 * programmatically.
 		 * 
 		 * The default bindings for this signal are Space, Return and Enter.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate-cursor-item", callback: (owner: this) => boolean): number;
 		/**
@@ -20031,6 +20890,12 @@ declare namespace imports.gi.Gtk {
 		 * "activate-on-single-click" property set to %TRUE. It is also
 		 * emitted when a non-editable item is selected and one of the keys:
 		 * Space, Return or Enter is pressed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: the {@link TreePath} for the activated item 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "item-activated", callback: (owner: this, path: TreePath) => void): number;
 		/**
@@ -20048,6 +20913,14 @@ declare namespace imports.gi.Gtk {
 		 * - PageUp/PageDown which move by "pages"
 		 * All of these will extend the selection when combined with
 		 * the Shift modifier.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - step: the granularity of the move, as a {@link MovementStep} 
+		 *  - count: the number of #step units to move 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, count: number) => boolean): number;
 		/**
@@ -20059,6 +20932,11 @@ declare namespace imports.gi.Gtk {
 		 * programmatically.
 		 * 
 		 * The default binding for this signal is Ctrl-a.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "select-all", callback: (owner: this) => void): number;
 		/**
@@ -20071,11 +20949,21 @@ declare namespace imports.gi.Gtk {
 		 * programmatically.
 		 * 
 		 * There is no default binding for this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "select-cursor-item", callback: (owner: this) => void): number;
 		/**
 		 * The ::selection-changed signal is emitted when the selection
 		 * (i.e. the set of selected items) changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "selection-changed", callback: (owner: this) => void): number;
 		/**
@@ -20089,6 +20977,11 @@ declare namespace imports.gi.Gtk {
 		 * programmatically.
 		 * 
 		 * There is no default binding for this signal is Ctrl-Space.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggle-cursor-item", callback: (owner: this) => void): number;
 		/**
@@ -20100,6 +20993,11 @@ declare namespace imports.gi.Gtk {
 		 * programmatically.
 		 * 
 		 * The default binding for this signal is Ctrl-Shift-a.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unselect-all", callback: (owner: this) => void): number;
 
@@ -21025,12 +21923,23 @@ declare namespace imports.gi.Gtk {
 		 * the info bar.
 		 * 
 		 * The default binding for this signal is the Escape key.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "close", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when an action widget is clicked or the application programmer
 		 * calls gtk_dialog_response(). The #response_id depends on which action
 		 * widget was clicked.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - response_id: the response ID 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "response", callback: (owner: this, response_id: number) => void): number;
 
@@ -21721,12 +22630,24 @@ declare namespace imports.gi.Gtk {
 		 * if they need to control activation of URIs programmatically.
 		 * 
 		 * The default bindings for this signal are all forms of the Enter key.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate-current-link", callback: (owner: this) => void): number;
 		/**
 		 * The signal which gets emitted to activate a URI.
 		 * Applications may connect to it to override the default behaviour,
 		 * which is to call gtk_show_uri_on_window().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - uri: the URI that is activated 
+		 *  - returns %TRUE if the link has been activated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate-link", callback: (owner: this, uri: string) => boolean): number;
 		/**
@@ -21735,6 +22656,11 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted to copy the selection to the clipboard.
 		 * 
 		 * The default binding for this signal is Ctrl-c.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "copy-clipboard", callback: (owner: this) => void): number;
 		/**
@@ -21755,6 +22681,14 @@ declare namespace imports.gi.Gtk {
 		 * - Arrow keys move by individual characters/lines
 		 * - Ctrl-arrow key combinations move by words/paragraphs
 		 * - Home/End keys move to the ends of the buffer
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - step: the granularity of the move, as a {@link MovementStep} 
+		 *  - count: the number of #step units to move 
+		 *  - extend_selection: %TRUE if the move should extend the selection 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, count: number, extend_selection: boolean) => void): number;
 		/**
@@ -21764,6 +22698,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * If you need to add items to the context menu, connect
 		 * to this signal and append your menuitems to the #menu.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - menu: the menu that is being populated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "populate-popup", callback: (owner: this, menu: Menu) => void): number;
 
@@ -22310,6 +23250,12 @@ declare namespace imports.gi.Gtk {
 		 * The signal supports detailed connections; you can connect to the
 		 * detailed signal "changed::x" in order to only receive callbacks when
 		 * the value of offset "x" changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - name: the name of the offset that changed value 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "offset-changed", callback: (owner: this, name: string) => void): number;
 
@@ -22521,6 +23467,12 @@ declare namespace imports.gi.Gtk {
 		 * To override the default behavior, you can connect to the ::activate-link
 		 * signal and stop the propagation of the signal by returning %TRUE from
 		 * your handler.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate-link", callback: (owner: this) => boolean): number;
 
@@ -22844,6 +23796,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "move-cursor", callback: (owner: this, object: MovementStep, p0: number) => void): number;
 		/**
 		 * The ::row-activated signal is emitted when a row has been activated by the user.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - row: the activated row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-activated", callback: (owner: this, row: ListBoxRow) => void): number;
 		/**
@@ -22853,6 +23811,12 @@ declare namespace imports.gi.Gtk {
 		 * When the #box is using #GTK_SELECTION_MULTIPLE, this signal will not
 		 * give you the full picture of selection changes, and you should use
 		 * the {@link ListBox}::selected-rows-changed signal instead.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - row: the selected row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-selected", callback: (owner: this, row: ListBoxRow | null) => void): number;
 		/**
@@ -22861,11 +23825,21 @@ declare namespace imports.gi.Gtk {
 		 * mode permits it.
 		 * 
 		 * The default bindings for this signal is Ctrl-a.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "select-all", callback: (owner: this) => void): number;
 		/**
 		 * The ::selected-rows-changed signal is emitted when the
 		 * set of selected rows changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "selected-rows-changed", callback: (owner: this) => void): number;
 		connect(signal: "toggle-cursor-row", callback: (owner: this) => void): number;
@@ -22875,6 +23849,11 @@ declare namespace imports.gi.Gtk {
 		 * mode permits it.
 		 * 
 		 * The default bindings for this signal is Ctrl-Shift-a.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unselect-all", callback: (owner: this) => void): number;
 
@@ -23051,6 +24030,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * If you want to be notified when the user activates a row (by key or not),
 		 * use the {@link ListBox}::row-activated signal on the row’s parent #GtkListBox.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 
@@ -24032,6 +25016,17 @@ declare namespace imports.gi.Gtk {
 		 * gtk_menu_popup_at_pointer (), {@link Menu}:anchor-hints,
 		 * #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and
 		 * #GtkMenu:menu-type-hint.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - flipped_rect: the position of #menu after any possible
+		 *                flipping or %NULL if the backend can't obtain it 
+		 *  - final_rect: the final position of #menu or %NULL if the
+		 *              backend can't obtain it 
+		 *  - flipped_x: %TRUE if the anchors were flipped horizontally 
+		 *  - flipped_y: %TRUE if the anchors were flipped vertically 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "popped-up", callback: (owner: this, flipped_rect: any | null, final_rect: any | null, flipped_x: boolean, flipped_y: boolean) => void): number;
 
@@ -24723,12 +25718,22 @@ declare namespace imports.gi.Gtk {
 		toggle_size_request(): void;
 		/**
 		 * Emitted when the item is activated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the item is activated, but also if the menu item has a
 		 * submenu. For normal applications, the relevant signal is
 		 * {@link MenuItem}::activate.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate-item", callback: (owner: this) => void): number;
 		connect(signal: "deselect", callback: (owner: this) => void): number;
@@ -25022,20 +26027,42 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * An action signal that activates the current menu item within
 		 * the menu shell.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - force_hide: if %TRUE, hide the menu after activating the menu item 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate-current", callback: (owner: this, force_hide: boolean) => void): number;
 		/**
 		 * An action signal which cancels the selection within the menu shell.
 		 * Causes the {@link MenuShell}::selection-done signal to be emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cancel", callback: (owner: this) => void): number;
 		/**
 		 * A keybinding signal which moves the focus in the
 		 * given #direction.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - direction: the direction to cycle in 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cycle-focus", callback: (owner: this, direction: DirectionType) => void): number;
 		/**
 		 * This signal is emitted when a menu shell is deactivated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "deactivate", callback: (owner: this) => void): number;
 		/**
@@ -25045,21 +26072,46 @@ declare namespace imports.gi.Gtk {
 		 * parameter.
 		 * 
 		 * The inverse of this signal is the GtkContainer::removed signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - child: the {@link MenuItem} that is being inserted 
+		 *  - position: the position at which the insert occurs 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert", callback: (owner: this, child: Widget, position: number) => void): number;
 		/**
 		 * An keybinding signal which moves the current menu item
 		 * in the direction specified by #direction.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - direction: the direction to move 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-current", callback: (owner: this, direction: MenuDirectionType) => void): number;
 		/**
 		 * The ::move-selected signal is emitted to move the selection to
 		 * another item.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - distance: +1 to move to the next item, -1 to move to the previous 
+		 *  - returns %TRUE to stop the signal emission, %FALSE to continue 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-selected", callback: (owner: this, distance: number) => boolean): number;
 		/**
 		 * This signal is emitted when a selection has been
 		 * completed within a menu shell.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "selection-done", callback: (owner: this) => void): number;
 
@@ -25176,6 +26228,11 @@ declare namespace imports.gi.Gtk {
 		 * Note that even if you populate the menu dynamically in this way,
 		 * you must set an empty menu on the {@link MenuToolButton} beforehand,
 		 * since the arrow is made insensitive if the menu is not set.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-menu", callback: (owner: this) => void): number;
 
@@ -25970,6 +27027,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * If you call gtk_native_dialog_hide() before the user responds to
 		 * the dialog this signal will not be emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - response_id: the response ID 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "response", callback: (owner: this, response_id: number) => void): number;
 
@@ -26430,6 +27493,16 @@ declare namespace imports.gi.Gtk {
 		 * responsible for moving/resizing the window and adding the
 		 * necessary properties to the notebook (e.g. the
 		 * {@link Notebook}:group-name ).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - page: the tab of #notebook that is being detached 
+		 *  - x: the X coordinate where the drop happens 
+		 *  - y: the Y coordinate where the drop happens 
+		 *  - returns a {@link Notebook} that #page should be
+		 *     added to, or %NULL. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "create-window", callback: (owner: this, page: Widget, x: number, y: number) => Notebook): number;
 		connect(signal: "focus-tab", callback: (owner: this, object: NotebookTab) => boolean): number;
@@ -26437,22 +27510,50 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * the ::page-added signal is emitted in the notebook
 		 * right after a page is added to the notebook.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - child: the child {@link Widget} affected 
+		 *  - page_num: the new page number for #child 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "page-added", callback: (owner: this, child: Widget, page_num: number) => void): number;
 		/**
 		 * the ::page-removed signal is emitted in the notebook
 		 * right after a page is removed from the notebook.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - child: the child {@link Widget} affected 
+		 *  - page_num: the #child page number 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "page-removed", callback: (owner: this, child: Widget, page_num: number) => void): number;
 		/**
 		 * the ::page-reordered signal is emitted in the notebook
 		 * right after a page has been reordered.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - child: the child {@link Widget} affected 
+		 *  - page_num: the new page number for #child 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "page-reordered", callback: (owner: this, child: Widget, page_num: number) => void): number;
 		connect(signal: "reorder-tab", callback: (owner: this, object: DirectionType, p0: boolean) => boolean): number;
 		connect(signal: "select-page", callback: (owner: this, object: boolean) => boolean): number;
 		/**
 		 * Emitted when the user or a function changes the current page.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - page: the new current page 
+		 *  - page_num: the index of the page 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "switch-page", callback: (owner: this, page: Widget, page_num: number) => void): number;
 
@@ -26901,6 +28002,16 @@ declare namespace imports.gi.Gtk {
 		 * be full-width/height). If the main child is a
 		 * {@link ScrolledWindow}, the overlays are placed relative
 		 * to its contents.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - widget: the child widget to position 
+		 *  - returns %TRUE if the #allocation has been filled
+		 * 
+		 * return
+		 *   location for the allocation 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "get-child-position", callback: (owner: this, widget: Widget) => [ boolean, Gdk.Rectangle ]): number;
 
@@ -27416,6 +28527,12 @@ declare namespace imports.gi.Gtk {
 		 * moving it using key bindings.
 		 * 
 		 * The default binding for this signal is Return or Space.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "accept-position", callback: (owner: this) => boolean): number;
 		/**
@@ -27426,6 +28543,12 @@ declare namespace imports.gi.Gtk {
 		 * moving it.
 		 * 
 		 * The default binding for this signal is Escape.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cancel-position", callback: (owner: this) => boolean): number;
 		/**
@@ -27434,6 +28557,13 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted to cycle the focus between the children of the paned.
 		 * 
 		 * The default binding is f6.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - reversed: whether cycling backward or forward 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cycle-child-focus", callback: (owner: this, reversed: boolean) => boolean): number;
 		/**
@@ -27443,6 +28573,13 @@ declare namespace imports.gi.Gtk {
 		 * the user to change position of the handle by using key bindings.
 		 * 
 		 * The default binding for this signal is f8.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - reversed: whether cycling backward or forward 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cycle-handle-focus", callback: (owner: this, reversed: boolean) => boolean): number;
 		/**
@@ -27450,6 +28587,13 @@ declare namespace imports.gi.Gtk {
 		 * [keybinding signal][GtkBindingSignal]
 		 * which gets emitted to move the handle when the user is using key bindings
 		 * to move it.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - scroll_type: a {@link ScrollType} 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-handle", callback: (owner: this, scroll_type: ScrollType) => boolean): number;
 		/**
@@ -27459,6 +28603,12 @@ declare namespace imports.gi.Gtk {
 		 * move focus to the next widget in the focus chain.
 		 * 
 		 * The default binding is Tab.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggle-handle-focus", callback: (owner: this) => boolean): number;
 
@@ -27816,6 +28966,14 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * The places sidebar emits this signal when it needs to ask the application
 		 * to pop up a menu to ask the user for which drag action to perform.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actions: Possible drag actions that need to be asked for. 
+		 *  - returns the final drag action that the sidebar should pass to the drag side
+		 * of the drag-and-drop operation. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-action-ask", callback: (owner: this, actions: number) => number): number;
 		/**
@@ -27828,6 +28986,18 @@ declare namespace imports.gi.Gtk {
 		 * possible actions for the destination #dest_file.
 		 * 
 		 * The drag action to use must be the return value of the signal handler.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: #GdkDragContext with information about the drag operation 
+		 *  - dest_file: #GFile with the tentative location that is being hovered for a drop 
+		 *  - source_file_list: 
+		 *   List of #GFile that are being dragged 
+		 *  - returns The drag action to use, for example, #GDK_ACTION_COPY
+		 * or #GDK_ACTION_MOVE, or 0 if no action is allowed here (i.e. drops
+		 * are not allowed in the specified #dest_file). 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-action-requested", callback: (owner: this, context: Gdk.DragContext, dest_file: Gio.File, source_file_list: GLib.List) => number): number;
 		/**
@@ -27836,6 +29006,15 @@ declare namespace imports.gi.Gtk {
 		 * destination.  This item is in the #dest_file, and the
 		 * #source_file_list has the list of files that are dropped into it and
 		 * which should be copied/moved/etc. based on the specified #action.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - dest_file: Destination #GFile. 
+		 *  - source_file_list: 
+		 *   #GList of #GFile that got dropped. 
+		 *  - action: Drop action to perform. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-perform-drop", callback: (owner: this, dest_file: Gio.File, source_file_list: GLib.List, action: number) => void): number;
 		/**
@@ -27843,6 +29022,12 @@ declare namespace imports.gi.Gtk {
 		 * because the user clicked on some location that needs mounting.
 		 * In this way the application using the {@link PlacesSidebar} can track the
 		 * progress of the operation and, for example, show a notification.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - mount_operation: the #GMountOperation that is going to start. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mount", callback: (owner: this, mount_operation: Gio.MountOperation) => void): number;
 		/**
@@ -27850,6 +29035,13 @@ declare namespace imports.gi.Gtk {
 		 * in it.  The calling application should display the contents of that
 		 * location; for example, a file manager should show a list of files in
 		 * the specified location.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - location: #GFile to which the caller should switch. 
+		 *  - open_flags: a single value from {@link PlacesOpenFlags} specifying how the #location should be opened. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "open-location", callback: (owner: this, location: Gio.File, open_flags: PlacesOpenFlags) => void): number;
 		/**
@@ -27878,6 +29070,16 @@ declare namespace imports.gi.Gtk {
 		 * #GtkEntries, #GtkSpinButtons, etc. If your application can deal with this
 		 * situation, you can set #GtkPlacesSidebar::populate-all to %TRUE to request
 		 * that this signal is emitted for populating popovers as well.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - container: a {@link Menu} or another #GtkContainer 
+		 *  - selected_item: #GFile with the item to which
+		 *     the popup should refer, or %NULL in the case of a #selected_volume. 
+		 *  - selected_volume: #GVolume if the selected
+		 *     item is a volume, or %NULL if it is a file. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "populate-popup", callback: (owner: this, container: Widget, selected_item: Gio.File | null, selected_volume: Gio.Volume | null) => void): number;
 		/**
@@ -27886,6 +29088,11 @@ declare namespace imports.gi.Gtk {
 		 * For example, the application may bring up a dialog box asking for
 		 * a URL like "sftp://ftp.example.com".  It is up to the application to create
 		 * the corresponding mount by using, for example, g_file_mount_enclosing_volume().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-connect-to-server", callback: (owner: this) => void): number;
 		/**
@@ -27893,6 +29100,11 @@ declare namespace imports.gi.Gtk {
 		 * application to present an way to directly enter a location.
 		 * For example, the application may bring up a dialog box asking for
 		 * a URL like "http://http.example.com".
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-enter-location", callback: (owner: this) => void): number;
 		/**
@@ -27900,6 +29112,13 @@ declare namespace imports.gi.Gtk {
 		 * application to present an error message.  Most of these messages
 		 * refer to mounting or unmounting media, for example, when a drive
 		 * cannot be started for some reason.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - primary: primary message with a summary of the error to show. 
+		 *  - secondary: secondary message with details of the error to show. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-error-message", callback: (owner: this, primary: string, secondary: string) => void): number;
 		/**
@@ -27908,6 +29127,11 @@ declare namespace imports.gi.Gtk {
 		 * and network access points.
 		 * For example, the application may bring up a page showing persistent
 		 * volumes and discovered network addresses.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-other-locations", callback: (owner: this) => void): number;
 		/**
@@ -27916,6 +29140,12 @@ declare namespace imports.gi.Gtk {
 		 * and network access points.
 		 * For example, the application may bring up a page showing persistent
 		 * volumes and discovered network addresses.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - open_flags: a single value from {@link PlacesOpenFlags} specifying how it should be opened. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-other-locations-with-flags", callback: (owner: this, open_flags: PlacesOpenFlags) => void): number;
 		/**
@@ -27923,6 +29153,13 @@ declare namespace imports.gi.Gtk {
 		 * application to present a way to show the starred files. In GNOME,
 		 * starred files are implemented by setting the nao:predefined-tag-favorite
 		 * tag in the tracker database.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - open_flags: a single value from {@link PlacesOpenFlags} specifying how the
+		 *   starred file should be opened. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-starred-location", callback: (owner: this, open_flags: PlacesOpenFlags) => void): number;
 		/**
@@ -27930,6 +29167,12 @@ declare namespace imports.gi.Gtk {
 		 * because the user for example ejected some drive or unmounted a mount.
 		 * In this way the application using the {@link PlacesSidebar} can track the
 		 * progress of the operation and, for example, show a notification.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - mount_operation: the #GMountOperation that is going to start. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unmount", callback: (owner: this, mount_operation: Gio.MountOperation) => void): number;
 
@@ -28065,6 +29308,11 @@ declare namespace imports.gi.Gtk {
 		get_socket_window(): Gdk.Window | null;
 		/**
 		 * Gets emitted when the plug becomes embedded in a socket.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "embedded", callback: (owner: this) => void): number;
 
@@ -28325,6 +29573,11 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted when the popover is dismissed either through
 		 * API or user interaction.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "closed", callback: (owner: this) => void): number;
 
@@ -29208,6 +30461,12 @@ declare namespace imports.gi.Gtk {
 		 * A typical use for ::begin-print is to use the parameters from the
 		 * {@link PrintContext} and paginate the document accordingly, and then
 		 * set the number of pages with gtk_print_operation_set_n_pages().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the {@link PrintContext} for the current operation 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "begin-print", callback: (owner: this, context: PrintContext) => void): number;
 		/**
@@ -29221,6 +30480,13 @@ declare namespace imports.gi.Gtk {
 		 * to stay around until the {@link PrintOperation}::custom-widget-apply
 		 * signal is emitted on the operation. Then you can read out any
 		 * information you need from the widgets.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns A custom widget that gets embedded in
+		 *          the print dialog, or %NULL 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "create-custom-widget", callback: (owner: this) => GObject.Object): number;
 		/**
@@ -29229,6 +30495,12 @@ declare namespace imports.gi.Gtk {
 		 * When you get this signal you should read the information from the
 		 * custom widgets, as the widgets are not guaraneed to be around at a
 		 * later time.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - widget: the custom widget added in create-custom-widget 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "custom-widget-apply", callback: (owner: this, widget: Widget) => void): number;
 		/**
@@ -29242,6 +30514,12 @@ declare namespace imports.gi.Gtk {
 		 * If you enabled print status tracking then
 		 * gtk_print_operation_is_finished() may still return %FALSE
 		 * after {@link PrintOperation}::done was emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - result: the result of the print operation 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "done", callback: (owner: this, result: PrintOperationResult) => void): number;
 		/**
@@ -29293,12 +30571,25 @@ declare namespace imports.gi.Gtk {
 		 * gtk_print_operation_set_unit() before starting the print operation
 		 * to set up the transformation of the cairo context according to your
 		 * needs.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the {@link PrintContext} for the current operation 
+		 *  - page_nr: the number of the currently printed page (0-based) 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "draw-page", callback: (owner: this, context: PrintContext, page_nr: number) => void): number;
 		/**
 		 * Emitted after all pages have been rendered.
 		 * A handler for this signal can clean up any resources that have
 		 * been allocated in the {@link PrintOperation}::begin-print handler.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the {@link PrintContext} for the current operation 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "end-print", callback: (owner: this, context: PrintContext) => void): number;
 		/**
@@ -29315,6 +30606,13 @@ declare namespace imports.gi.Gtk {
 		 * If you don't need to do pagination in chunks, you can simply do
 		 * it all in the ::begin-print handler, and set the number of pages
 		 * from there.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the {@link PrintContext} for the current operation 
+		 *  - returns %TRUE if pagination is complete 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "paginate", callback: (owner: this, context: PrintContext) => boolean): number;
 		/**
@@ -29334,12 +30632,29 @@ declare namespace imports.gi.Gtk {
 		 * are selected for print and render them. The preview must be
 		 * finished by calling gtk_print_operation_preview_end_preview()
 		 * (typically in response to the user clicking a close button).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - preview: the {@link PrintOperationPreview} for the current operation 
+		 *  - context: the #GtkPrintContext that will be used 
+		 *  - parent: the #GtkWindow to use as window parent, or %NULL 
+		 *  - returns %TRUE if the listener wants to take over control of the preview 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "preview", callback: (owner: this, preview: PrintOperationPreview, context: PrintContext, parent: Window | null) => boolean): number;
 		/**
 		 * Emitted once for every page that is printed, to give
 		 * the application a chance to modify the page setup. Any changes
 		 * done to #setup will be in force only for printing this page.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the {@link PrintContext} for the current operation 
+		 *  - page_nr: the number of the currently printed page (0-based) 
+		 *  - setup: the #GtkPageSetup 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "request-page-setup", callback: (owner: this, context: PrintContext, page_nr: number, setup: PageSetup) => void): number;
 		/**
@@ -29347,12 +30662,25 @@ declare namespace imports.gi.Gtk {
 		 * See {@link PrintStatus} for the phases that are being discriminated.
 		 * Use gtk_print_operation_get_status() to find out the current
 		 * status.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "status-changed", callback: (owner: this) => void): number;
 		/**
 		 * Emitted after change of selected printer. The actual page setup and
 		 * print settings are passed to the custom widget, which can actualize
 		 * itself according to this change.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - widget: the custom widget added in create-custom-widget 
+		 *  - setup: actual page setup 
+		 *  - settings: actual print settings 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "update-custom-widget", callback: (owner: this, widget: Widget, setup: PageSetup, settings: PrintSettings) => void): number;
 
@@ -30278,6 +31606,12 @@ declare namespace imports.gi.Gtk {
 		 * The ::changed signal is emitted on every member of a radio group when the
 		 * active member is changed. The signal gets emitted after the ::activate signals
 		 * for the previous and current active members.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - current: the member of #action's group which has just been activated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this, current: RadioAction) => void): number;
 
@@ -30376,6 +31710,11 @@ declare namespace imports.gi.Gtk {
 		 * vice-versa, and when a button is moved from one group of 2 or
 		 * more buttons to a different one, but not when the composition
 		 * of the group that a button belongs to changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "group-changed", callback: (owner: this) => void): number;
 
@@ -31058,6 +32397,12 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Emitted before clamping a value, to give the application a
 		 * chance to adjust the bounds.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - value: the value before we clamp 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "adjust-bounds", callback: (owner: this, value: number) => void): number;
 		/**
@@ -31073,14 +32418,34 @@ declare namespace imports.gi.Gtk {
 		 * the GtkRange::change-value signal is responsible for clamping the
 		 * value to the desired number of decimal digits; the default GTK+
 		 * handler clamps the value based on #GtkRange:round-digits.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - scroll: the type of scroll action that was performed 
+		 *  - value: the new value resulting from the scroll action 
+		 *  - returns %TRUE to prevent other handlers from being invoked for
+		 *     the signal, %FALSE to propagate the signal further 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "change-value", callback: (owner: this, scroll: ScrollType, value: number) => boolean): number;
 		/**
 		 * Virtual function that moves the slider. Used for keybindings.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - step: how to move the slider 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-slider", callback: (owner: this, step: ScrollType) => void): number;
 		/**
 		 * Emitted when the range value changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "value-changed", callback: (owner: this) => void): number;
 
@@ -31837,6 +33202,11 @@ declare namespace imports.gi.Gtk {
 		 * Emitted when the current recently used resources manager changes
 		 * its contents, either by calling gtk_recent_manager_add_item() or
 		 * by another application.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
@@ -32202,6 +33572,13 @@ declare namespace imports.gi.Gtk {
 		 *                           gtk_scale_get_digits (scale), value);
 		 *  }
 		 * ]|
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - value: the value to format 
+		 *  - returns allocated string representing #value 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "format-value", callback: (owner: this, value: number) => string): number;
 
@@ -32432,6 +33809,11 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted to popdown the scale widget.
 		 * 
 		 * The default binding for this signal is Escape.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "popdown", callback: (owner: this) => void): number;
 		/**
@@ -32440,11 +33822,22 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted to popup the scale widget.
 		 * 
 		 * The default bindings for this signal are Space, Enter and Return.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "popup", callback: (owner: this) => void): number;
 		/**
 		 * The ::value-changed signal is emitted when the value field has
 		 * changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - value: the new value 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "value-changed", callback: (owner: this, value: number) => void): number;
 
@@ -32918,6 +34311,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Note: The #pos argument is LTR/RTL aware, so callers should be aware too
 		 * if intending to provide behavior on horizontal edges.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - pos: edge side that was hit 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "edge-overshot", callback: (owner: this, pos: PositionType) => void): number;
 		/**
@@ -32930,6 +34329,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Note: The #pos argument is LTR/RTL aware, so callers should be aware too
 		 * if intending to provide behavior on horizontal edges.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - pos: edge side that was reached 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "edge-reached", callback: (owner: this, pos: PositionType) => void): number;
 		/**
@@ -32940,6 +34345,13 @@ declare namespace imports.gi.Gtk {
 		 * #direction_type on this scrolled window’s toplevel parent in the
 		 * container hierarchy. The default bindings for this signal are
 		 * `Ctrl + Tab` to move forward and `Ctrl + Shift + Tab` to move backward.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - direction_type: either %GTK_DIR_TAB_FORWARD or
+		 *   %GTK_DIR_TAB_BACKWARD 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-focus-out", callback: (owner: this, direction_type: DirectionType) => void): number;
 		/**
@@ -32948,6 +34360,15 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted when a keybinding that scrolls is pressed.
 		 * The horizontal or vertical adjustment is updated which triggers a
 		 * signal that the scrolled window’s child may listen to and scroll itself.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - scroll: a {@link ScrollType} describing how much to scroll 
+		 *  - horizontal: whether the keybinding scrolls the child
+		 *   horizontally or not 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "scroll-child", callback: (owner: this, scroll: ScrollType, horizontal: boolean) => boolean): number;
 
@@ -33282,6 +34703,11 @@ declare namespace imports.gi.Gtk {
 		 * matches.
 		 * 
 		 * The default bindings for this signal is Ctrl-g.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "next-match", callback: (owner: this) => void): number;
 		/**
@@ -33293,11 +34719,21 @@ declare namespace imports.gi.Gtk {
 		 * matches.
 		 * 
 		 * The default bindings for this signal is Ctrl-Shift-g.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "previous-match", callback: (owner: this) => void): number;
 		/**
 		 * The {@link SearchEntry}::search-changed signal is emitted with a short
 		 * delay of 150 milliseconds after the last change to the entry text.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "search-changed", callback: (owner: this) => void): number;
 		/**
@@ -33308,6 +34744,11 @@ declare namespace imports.gi.Gtk {
 		 * entry in this case.
 		 * 
 		 * The default bindings for this signal is Escape.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "stop-search", callback: (owner: this) => void): number;
 
@@ -34518,6 +35959,11 @@ declare namespace imports.gi.Gtk {
 		 * the window.
 		 * 
 		 * The default binding for this signal is the Escape key.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "close", callback: (owner: this) => void): number;
 		/**
@@ -34526,6 +35972,11 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted when the user uses a keybinding to start a search.
 		 * 
 		 * The default binding for this signal is Control-F.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "search", callback: (owner: this) => void): number;
 
@@ -34794,12 +36245,23 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted when a client is successfully
 		 * added to the socket.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "plug-added", callback: (owner: this) => void): number;
 		/**
 		 * This signal is emitted when a client is removed from the socket.
 		 * The default action is to destroy the {@link Socket} widget, so if you
 		 * want to reuse it you must add a signal handler that returns %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE to stop other handlers from being invoked. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "plug-removed", callback: (owner: this) => boolean): number;
 
@@ -35065,6 +36527,12 @@ declare namespace imports.gi.Gtk {
 		 * programmatically.
 		 * 
 		 * The default bindings for this signal are Up/Down and PageUp and/PageDown.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - scroll: a {@link ScrollType} to specify the speed and amount of change 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "change-value", callback: (owner: this, scroll: ScrollType) => void): number;
 		/**
@@ -35074,6 +36542,15 @@ declare namespace imports.gi.Gtk {
 		 * the entry and set #new_value to the new value.
 		 * 
 		 * The default conversion uses g_strtod().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE for a successful conversion, %FALSE if the input
+		 *     was not handled, and %GTK_INPUT_ERROR if the conversion failed.
+		 * 
+		 * return location for the new value 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "input", callback: (owner: this) => [ number, number ]): number;
 		/**
@@ -35098,16 +36575,32 @@ declare namespace imports.gi.Gtk {
 		 *    return TRUE;
 		 * }
 		 * ]|
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE if the value has been displayed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "output", callback: (owner: this) => boolean): number;
 		/**
 		 * The ::value-changed signal is emitted when the value represented by
 		 * #spinbutton changes. Also see the {@link SpinButton}::output signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "value-changed", callback: (owner: this) => void): number;
 		/**
 		 * The ::wrapped signal is emitted right after the spinbutton wraps
 		 * from its maximum to minimum value or vice-versa.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "wrapped", callback: (owner: this) => void): number;
 
@@ -36107,6 +37600,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Unlike most G_SIGNAL_ACTION signals, this signal is meant to
 		 * be used by applications and should be wrapped by language bindings.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
@@ -36115,6 +37613,15 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Whether this event is emitted is platform-dependent.  Use the ::activate
 		 * and ::popup-menu signals in preference.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventButton which triggered
+		 *                                 this signal 
+		 *  - returns %TRUE to stop other handlers from being invoked
+		 * for the event. %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "button-press-event", callback: (owner: this, event: Gdk.EventButton) => boolean): number;
 		/**
@@ -36123,6 +37630,15 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Whether this event is emitted is platform-dependent.  Use the ::activate
 		 * and ::popup-menu signals in preference.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventButton which triggered
+		 *                                 this signal 
+		 *  - returns %TRUE to stop other handlers from being invoked
+		 * for the event. %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "button-release-event", callback: (owner: this, event: Gdk.EventButton) => boolean): number;
 		/**
@@ -36135,6 +37651,15 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Unlike most G_SIGNAL_ACTION signals, this signal is meant to
 		 * be used by applications and should be wrapped by language bindings.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - button: the button that was pressed, or 0 if the
+		 *   signal is not emitted in response to a button press event 
+		 *  - activate_time: the timestamp of the event that
+		 *   triggered the signal emission 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "popup-menu", callback: (owner: this, button: number, activate_time: number) => void): number;
 		/**
@@ -36153,6 +37678,18 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Whether this signal is emitted is platform-dependent.
 		 * For plain text tooltips, use {@link StatusIcon}:tooltip-text in preference.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - x: the x coordinate of the cursor position where the request has been
+		 *     emitted, relative to #status_icon 
+		 *  - y: the y coordinate of the cursor position where the request has been
+		 *     emitted, relative to #status_icon 
+		 *  - keyboard_mode: %TRUE if the tooltip was trigged using the keyboard 
+		 *  - tooltip: a {@link Tooltip} 
+		 *  - returns %TRUE if #tooltip should be shown right now, %FALSE otherwise. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "query-tooltip", callback: (owner: this, x: number, y: number, keyboard_mode: boolean, tooltip: Tooltip) => boolean): number;
 		/**
@@ -36161,11 +37698,28 @@ declare namespace imports.gi.Gtk {
 		 * button press events for buttons 4 and 5 when the wheel is turned.
 		 * 
 		 * Whether this event is emitted is platform-dependent.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventScroll which triggered
+		 *                                 this signal 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "scroll-event", callback: (owner: this, event: Gdk.EventScroll) => boolean): number;
 		/**
 		 * Gets emitted when the size available for the image
 		 * changes, e.g. because the notification area got resized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - size: the new size 
+		 *  - returns %TRUE if the icon was updated for the new
+		 * size. Otherwise, GTK+ will scale the icon as necessary. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "size-changed", callback: (owner: this, size: number) => boolean): number;
 
@@ -36360,10 +37914,24 @@ declare namespace imports.gi.Gtk {
 		remove_all(context_id: number): void;
 		/**
 		 * Is emitted whenever a new message is popped off a statusbar's stack.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context_id: the context id of the relevant message/statusbar 
+		 *  - text: the message that was just popped 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "text-popped", callback: (owner: this, context_id: number, text: string) => void): number;
 		/**
 		 * Is emitted whenever a new message gets pushed onto a statusbar's stack.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context_id: the context id of the relevant message/statusbar 
+		 *  - text: the message that was pushed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "text-pushed", callback: (owner: this, context_id: number, text: string) => void): number;
 
@@ -36617,6 +38185,11 @@ declare namespace imports.gi.Gtk {
 		 * visual. Connecting to this signal is probably seldom
 		 * useful since most of the time applications and widgets only
 		 * deal with styles that have been already realized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "realize", callback: (owner: this) => void): number;
 		/**
@@ -36624,6 +38197,11 @@ declare namespace imports.gi.Gtk {
 		 * is being cleaned up. A connection to this signal can be useful
 		 * if a widget wants to cache objects as object data on {@link Style}.
 		 * This signal provides a convenient place to free such cached objects.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unrealize", callback: (owner: this) => void): number;
 
@@ -37256,6 +38834,11 @@ declare namespace imports.gi.Gtk {
 		 * #GtkWidget::style-updated signal/vfunc might be more convenient to use.
 		 * 
 		 * This signal is useful when using the theming layer standalone.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
@@ -37569,6 +39152,11 @@ declare namespace imports.gi.Gtk {
 		 * emitting it causes the switch to animate.
 		 * Applications should never connect to this signal, but use the
 		 * notify::active signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
@@ -37585,6 +39173,13 @@ declare namespace imports.gi.Gtk {
 		 * Visually, the underlying state is represented by the trough color of
 		 * the switch, while the #GtkSwitch:active property is represented by the
 		 * position of the switch.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - state: the new state of the switch 
+		 *  - returns %TRUE to stop the signal emission 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "state-set", callback: (owner: this, state: boolean) => boolean): number;
 
@@ -38730,6 +40325,14 @@ declare namespace imports.gi.Gtk {
 		 * gtk_text_buffer_apply_tag(),
 		 * gtk_text_buffer_insert_with_tags(),
 		 * gtk_text_buffer_insert_range().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - tag: the applied tag 
+		 *  - start: the start of the range the tag is applied to 
+		 *  - end: the end of the range the tag is applied to 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "apply-tag", callback: (owner: this, tag: TextTag, start: TextIter, end: TextIter) => void): number;
 		/**
@@ -38743,11 +40346,21 @@ declare namespace imports.gi.Gtk {
 		 * gtk_text_buffer_delete_interactive(),
 		 * gtk_text_buffer_backspace(),
 		 * gtk_text_buffer_delete_selection().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "begin-user-action", callback: (owner: this) => void): number;
 		/**
 		 * The ::changed signal is emitted when the content of a {@link TextBuffer}
 		 * has changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 		/**
@@ -38762,6 +40375,13 @@ declare namespace imports.gi.Gtk {
 		 * do not have access to the deleted text.
 		 * 
 		 * See also: gtk_text_buffer_delete().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - start: the start of the range to be deleted 
+		 *  - end: the end of the range to be deleted 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "delete-range", callback: (owner: this, start: TextIter, end: TextIter) => void): number;
 		/**
@@ -38776,6 +40396,11 @@ declare namespace imports.gi.Gtk {
 		 * gtk_text_buffer_backspace(),
 		 * gtk_text_buffer_delete_selection(),
 		 * gtk_text_buffer_backspace().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "end-user-action", callback: (owner: this) => void): number;
 		/**
@@ -38789,6 +40414,13 @@ declare namespace imports.gi.Gtk {
 		 * inserted #anchor.
 		 * 
 		 * See also: gtk_text_buffer_insert_child_anchor().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - location: position to insert #anchor in #textbuffer 
+		 *  - anchor: the {@link TextChildAnchor} to be inserted 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert-child-anchor", callback: (owner: this, location: TextIter, anchor: TextChildAnchor) => void): number;
 		/**
@@ -38801,6 +40433,13 @@ declare namespace imports.gi.Gtk {
 		 * inserted #pixbuf.
 		 * 
 		 * See also: gtk_text_buffer_insert_pixbuf().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - location: position to insert #pixbuf in #textbuffer 
+		 *  - pixbuf: the #GdkPixbuf to be inserted 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert-pixbuf", callback: (owner: this, location: TextIter, pixbuf: GdkPixbuf.Pixbuf) => void): number;
 		/**
@@ -38815,6 +40454,14 @@ declare namespace imports.gi.Gtk {
 		 * See also:
 		 * gtk_text_buffer_insert(),
 		 * gtk_text_buffer_insert_range().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - location: position to insert #text in #textbuffer 
+		 *  - text: the UTF-8 text to be inserted 
+		 *  - len: length of the inserted text in bytes 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert-text", callback: (owner: this, location: TextIter, text: string, len: number) => void): number;
 		/**
@@ -38823,6 +40470,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * See also:
 		 * gtk_text_buffer_delete_mark().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - mark: The mark that was deleted 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mark-deleted", callback: (owner: this, mark: TextMark) => void): number;
 		/**
@@ -38832,6 +40485,13 @@ declare namespace imports.gi.Gtk {
 		 * See also:
 		 * gtk_text_buffer_create_mark(),
 		 * gtk_text_buffer_move_mark().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - location: The location of #mark in #textbuffer 
+		 *  - mark: The mark that is set 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mark-set", callback: (owner: this, location: TextIter, mark: TextMark) => void): number;
 		/**
@@ -38840,12 +40500,23 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * See also:
 		 * gtk_text_buffer_set_modified().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "modified-changed", callback: (owner: this) => void): number;
 		/**
 		 * The paste-done signal is emitted after paste operation has been completed.
 		 * This is useful to properly scroll the view to the end of the pasted text.
 		 * See gtk_text_buffer_paste_clipboard() for more details.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - clipboard: the {@link Clipboard} pasted from 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "paste-done", callback: (owner: this, clipboard: Clipboard) => void): number;
 		/**
@@ -38858,6 +40529,14 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * See also:
 		 * gtk_text_buffer_remove_tag().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - tag: the tag to be removed 
+		 *  - start: the start of the range the tag is removed from 
+		 *  - end: the end of the range the tag is removed from 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "remove-tag", callback: (owner: this, tag: TextTag, start: TextIter, end: TextIter) => void): number;
 
@@ -39286,6 +40965,16 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * The ::event signal is emitted when an event occurs on a region of the
 		 * buffer marked with this tag.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - object: the object the event was fired from (typically a {@link TextView}) 
+		 *  - event: the event which triggered the signal 
+		 *  - iter: a #GtkTextIter pointing at the location the event occurred 
+		 *  - returns %TRUE to stop other handlers from being invoked for the
+		 * event. %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "event", callback: (owner: this, object: GObject.Object, event: Gdk.Event, iter: TextIter) => boolean): number;
 
@@ -40318,6 +42007,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default bindings for this signal are
 		 * Backspace and Shift-Backspace.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "backspace", callback: (owner: this) => void): number;
 		/**
@@ -40327,6 +42021,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default bindings for this signal are
 		 * Ctrl-c and Ctrl-Insert.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "copy-clipboard", callback: (owner: this) => void): number;
 		/**
@@ -40336,6 +42035,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default bindings for this signal are
 		 * Ctrl-x and Shift-Delete.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cut-clipboard", callback: (owner: this) => void): number;
 		/**
@@ -40351,11 +42055,29 @@ declare namespace imports.gi.Gtk {
 		 * Delete for deleting a character, Ctrl-Delete for
 		 * deleting a word and Ctrl-Backspace for deleting a word
 		 * backwords.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - type: the granularity of the deletion, as a {@link DeleteType} 
+		 *  - count: the number of #type units to delete 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "delete-from-cursor", callback: (owner: this, type: DeleteType, count: number) => void): number;
 		/**
 		 * The ::extend-selection signal is emitted when the selection needs to be
 		 * extended at #location.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - granularity: the granularity type 
+		 *  - location: the location where to extend the selection 
+		 *  - start: where the selection should start 
+		 *  - end: where the selection should end 
+		 *  - returns %GDK_EVENT_STOP to stop other handlers from being invoked for the
+		 *   event. %GDK_EVENT_PROPAGATE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "extend-selection", callback: (owner: this, granularity: TextExtendSelection, location: TextIter, start: TextIter, end: TextIter) => boolean): number;
 		/**
@@ -40365,6 +42087,12 @@ declare namespace imports.gi.Gtk {
 		 * fixed string at the cursor.
 		 * 
 		 * This signal has no default bindings.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - string: the string to insert 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert-at-cursor", callback: (owner: this, string: string) => void): number;
 		/**
@@ -40373,6 +42101,11 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted to present the Emoji chooser for the #text_view.
 		 * 
 		 * The default bindings for this signal are Ctrl-. and Ctrl-;
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert-emoji", callback: (owner: this) => void): number;
 		/**
@@ -40395,6 +42128,14 @@ declare namespace imports.gi.Gtk {
 		 * - Home/End keys move to the ends of the buffer
 		 * - PageUp/PageDown keys move vertically by pages
 		 * - Ctrl-PageUp/PageDown keys move horizontally by pages
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - step: the granularity of the move, as a {@link MovementStep} 
+		 *  - count: the number of #step units to move 
+		 *  - extend_selection: %TRUE if the move should extend the selection 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, count: number, extend_selection: boolean) => void): number;
 		/**
@@ -40405,6 +42146,13 @@ declare namespace imports.gi.Gtk {
 		 * is visible in a containing scrolled window.
 		 * 
 		 * There are no default bindings for this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - step: the granularity of the movement, as a {@link ScrollStep} 
+		 *  - count: the number of #step units to move 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-viewport", callback: (owner: this, step: ScrollStep, count: number) => void): number;
 		/**
@@ -40415,6 +42163,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default bindings for this signal are
 		 * Ctrl-v and Shift-Insert.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "paste-clipboard", callback: (owner: this) => void): number;
 		/**
@@ -40432,6 +42185,12 @@ declare namespace imports.gi.Gtk {
 		 * The signal handler should not make assumptions about the
 		 * type of #widget, but check whether #popup is a #GtkMenu
 		 * or #GtkToolbar or another kind of container.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - popup: the container that is being populated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "populate-popup", callback: (owner: this, popup: Widget) => void): number;
 		/**
@@ -40441,6 +42200,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * This signal is only emitted if the text at the given position
 		 * is actually editable.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - preedit: the current preedit string 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "preedit-changed", callback: (owner: this, preedit: string) => void): number;
 		/**
@@ -40451,6 +42216,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default bindings for this signal are Ctrl-a and Ctrl-/
 		 * for selecting and Shift-Ctrl-a and Ctrl-\ for unselecting.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - select: %TRUE to select, %FALSE to unselect 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "select-all", callback: (owner: this, select: boolean) => void): number;
 		/**
@@ -40461,6 +42232,11 @@ declare namespace imports.gi.Gtk {
 		 * "insert" mark.
 		 * 
 		 * This signal has no default bindings.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "set-anchor", callback: (owner: this) => void): number;
 		/**
@@ -40470,6 +42246,11 @@ declare namespace imports.gi.Gtk {
 		 * property.
 		 * 
 		 * The default binding for this signal is F7.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggle-cursor-visible", callback: (owner: this) => void): number;
 		/**
@@ -40478,6 +42259,11 @@ declare namespace imports.gi.Gtk {
 		 * which gets emitted to toggle the overwrite mode of the text view.
 		 * 
 		 * The default bindings for this signal is Insert.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggle-overwrite", callback: (owner: this) => void): number;
 
@@ -40894,6 +42680,11 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Should be connected if you wish to perform an action
 		 * whenever the {@link ToggleAction} state is changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggled", callback: (owner: this) => void): number;
 
@@ -41006,6 +42797,11 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Should be connected if you wish to perform an action whenever the
 		 * {@link ToggleButton}'s state is changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggled", callback: (owner: this) => void): number;
 
@@ -41160,6 +42956,11 @@ declare namespace imports.gi.Gtk {
 		set_active(is_active: boolean): void;
 		/**
 		 * Emitted whenever the toggle tool button changes state.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toggled", callback: (owner: this) => void): number;
 
@@ -41323,6 +43124,11 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted when the tool button is clicked with the mouse
 		 * or activated with the keyboard.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "clicked", callback: (owner: this) => void): number;
 
@@ -41643,6 +43449,12 @@ declare namespace imports.gi.Gtk {
 		 * how it will respond to this signal it must call gtk_tool_item_rebuild_menu()
 		 * to invalidate the cache and ensure that the toolbar rebuilds its overflow
 		 * menu.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE if the signal was handled, %FALSE if not 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "create-menu-proxy", callback: (owner: this) => boolean): number;
 		/**
@@ -41655,6 +43467,11 @@ declare namespace imports.gi.Gtk {
 		 * - gtk_tool_shell_get_relief_style()
 		 * to find out what the toolbar should look like and change
 		 * themselves accordingly.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "toolbar-reconfigured", callback: (owner: this) => void): number;
 
@@ -42247,10 +44064,23 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * A keybinding signal used internally by GTK+. This signal can't
 		 * be used in application code
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - focus_home: %TRUE if the first item should be focused 
+		 *  - returns %TRUE if the signal was handled, %FALSE if not 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "focus-home-or-end", callback: (owner: this, focus_home: boolean) => boolean): number;
 		/**
 		 * Emitted when the orientation of the toolbar changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - orientation: the new {@link Orientation} of the toolbar 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "orientation-changed", callback: (owner: this, orientation: Orientation) => void): number;
 		/**
@@ -42262,10 +44092,25 @@ declare namespace imports.gi.Gtk {
 		 * appear at the coordinates given by #x and #y. The mouse button
 		 * number is given by the #button parameter. If the menu was popped
 		 * up using the keybaord, #button is -1.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - x: the x coordinate of the point where the menu should appear 
+		 *  - y: the y coordinate of the point where the menu should appear 
+		 *  - button: the mouse button the user pressed, or -1 
+		 *  - returns return %TRUE if the signal was handled, %FALSE if not 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "popup-context-menu", callback: (owner: this, x: number, y: number, button: number) => boolean): number;
 		/**
 		 * Emitted when the style of the toolbar changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - style: the new {@link ToolbarStyle} of the toolbar 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "style-changed", callback: (owner: this, style: ToolbarStyle) => void): number;
 
@@ -43045,6 +44890,11 @@ declare namespace imports.gi.Gtk {
 		 * this signal is mostly a hint.  It may only be emitted once when a range
 		 * of rows are selected, and it may occasionally be emitted when nothing
 		 * has happened.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
@@ -44353,10 +46203,20 @@ declare namespace imports.gi.Gtk {
 		unset_rows_drag_source(): void;
 		/**
 		 * The number of columns of the treeview has changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "columns-changed", callback: (owner: this) => void): number;
 		/**
 		 * The position of the cursor (focused cell) has changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cursor-changed", callback: (owner: this) => void): number;
 		connect(signal: "expand-collapse-cursor-row", callback: (owner: this, object: boolean, p0: boolean, p1: boolean) => boolean): number;
@@ -44370,6 +46230,21 @@ declare namespace imports.gi.Gtk {
 		 * programmatically. In contrast to gtk_tree_view_set_cursor() and
 		 * gtk_tree_view_set_cursor_on_cell() when moving horizontally
 		 * #GtkTreeView::move-cursor does not reset the current selection.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - step: the granularity of the move, as a
+		 * {@link MovementStep}. %GTK_MOVEMENT_LOGICAL_POSITIONS,
+		 * %GTK_MOVEMENT_VISUAL_POSITIONS, %GTK_MOVEMENT_DISPLAY_LINES,
+		 * %GTK_MOVEMENT_PAGES and %GTK_MOVEMENT_BUFFER_ENDS are
+		 * supported. %GTK_MOVEMENT_LOGICAL_POSITIONS and
+		 * %GTK_MOVEMENT_VISUAL_POSITIONS are treated identically. 
+		 *  - direction: the direction to move: +1 to move forwards;
+		 * -1 to move backwards. The resulting movement is
+		 * undefined for all other values. 
+		 *  - returns %TRUE if #step is supported, %FALSE otherwise. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move-cursor", callback: (owner: this, step: MovementStep, direction: number) => boolean): number;
 		/**
@@ -44384,14 +46259,35 @@ declare namespace imports.gi.Gtk {
 		 * For selection handling refer to the
 		 * [tree widget conceptual overview][TreeWidget]
 		 * as well as {@link TreeSelection}.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: the {@link TreePath} for the activated row 
+		 *  - column: the #GtkTreeViewColumn in which the activation occurred 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-activated", callback: (owner: this, path: TreePath, column: TreeViewColumn) => void): number;
 		/**
 		 * The given row has been collapsed (child nodes are hidden).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - iter: the tree iter of the collapsed row 
+		 *  - path: a tree path that points to the row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-collapsed", callback: (owner: this, iter: TreeIter, path: TreePath) => void): number;
 		/**
 		 * The given row has been expanded (child nodes are shown).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - iter: the tree iter of the expanded row 
+		 *  - path: a tree path that points to the row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-expanded", callback: (owner: this, iter: TreeIter, path: TreePath) => void): number;
 		connect(signal: "select-all", callback: (owner: this) => boolean): number;
@@ -44401,11 +46297,27 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * The given row is about to be collapsed (hide its children nodes). Use this
 		 * signal if you need to control the collapsibility of individual rows.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - iter: the tree iter of the row to collapse 
+		 *  - path: a tree path that points to the row 
+		 *  - returns %FALSE to allow collapsing, %TRUE to reject 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "test-collapse-row", callback: (owner: this, iter: TreeIter, path: TreePath) => boolean): number;
 		/**
 		 * The given row is about to be expanded (show its children nodes). Use this
 		 * signal if you need to control the expandability of individual rows.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - iter: the tree iter of the row to expand 
+		 *  - path: a tree path that points to the row 
+		 *  - returns %FALSE to allow expansion, %TRUE to reject 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "test-expand-row", callback: (owner: this, iter: TreeIter, path: TreePath) => boolean): number;
 		connect(signal: "toggle-cursor-row", callback: (owner: this) => boolean): number;
@@ -45250,12 +47162,23 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * The ::actions-changed signal is emitted whenever the set of actions
 		 * changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "actions-changed", callback: (owner: this) => void): number;
 		/**
 		 * The ::add-widget signal is emitted for each generated menubar and toolbar.
 		 * It is not emitted for generated popup menus, which can be obtained by
 		 * gtk_ui_manager_get_widget().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - widget: the added widget 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "add-widget", callback: (owner: this, widget: Widget) => void): number;
 		/**
@@ -45265,11 +47188,25 @@ declare namespace imports.gi.Gtk {
 		 * This is intended for simple customizations for which a custom action
 		 * class would be too clumsy, e.g. showing tooltips for menuitems in the
 		 * statusbar.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action: the action 
+		 *  - proxy: the proxy 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "connect-proxy", callback: (owner: this, action: Action, proxy: Widget) => void): number;
 		/**
 		 * The ::disconnect-proxy signal is emitted after disconnecting a proxy
 		 * from an action in the group.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action: the action 
+		 *  - proxy: the proxy 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "disconnect-proxy", callback: (owner: this, action: Action, proxy: Widget) => void): number;
 		/**
@@ -45278,6 +47215,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * This is intended for applications to get notification
 		 * just after any action is activated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action: the action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "post-activate", callback: (owner: this, action: Action) => void): number;
 		/**
@@ -45286,6 +47229,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * This is intended for applications to get notification
 		 * just before any action is activated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action: the action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pre-activate", callback: (owner: this, action: Action) => void): number;
 
@@ -49103,6 +51052,15 @@ declare namespace imports.gi.Gtk {
 		 * widget needs to enable the #GDK_BUTTON_PRESS_MASK mask.
 		 * 
 		 * This signal will be sent to the grab widget if there is one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventButton which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "button-press-event", callback: (owner: this, event: Gdk.EventButton) => boolean): number;
 		/**
@@ -49113,6 +51071,15 @@ declare namespace imports.gi.Gtk {
 		 * widget needs to enable the #GDK_BUTTON_RELEASE_MASK mask.
 		 * 
 		 * This signal will be sent to the grab widget if there is one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventButton which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "button-release-event", callback: (owner: this, event: Gdk.EventButton) => boolean): number;
 		/**
@@ -49121,18 +51088,36 @@ declare namespace imports.gi.Gtk {
 		 * This signal is present to allow applications and derived
 		 * widgets to override the default {@link Widget} handling
 		 * for determining whether an accelerator can be activated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - signal_id: the ID of a signal installed on #widget 
+		 *  - returns %TRUE if the signal can be activated. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "can-activate-accel", callback: (owner: this, signal_id: number) => boolean): number;
 		/**
 		 * The ::child-notify signal is emitted for each
 		 * [child property][child-properties]  that has
 		 * changed on an object. The signal's detail holds the property name.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - child_property: the #GParamSpec of the changed child property 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "child-notify", callback: (owner: this, child_property: GObject.ParamSpec) => void): number;
 		/**
 		 * The ::composited-changed signal is emitted when the composited
 		 * status of #widgets screen changes.
 		 * See gdk_screen_is_composited().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "composited-changed", callback: (owner: this) => void): number;
 		/**
@@ -49142,12 +51127,29 @@ declare namespace imports.gi.Gtk {
 		 * To receive this signal, the #GdkWindow associated to the widget needs
 		 * to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
 		 * automatically for all new windows.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventConfigure which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "configure-event", callback: (owner: this, event: Gdk.EventConfigure) => boolean): number;
 		/**
 		 * Emitted when a redirected window belonging to #widget gets drawn into.
 		 * The region/area members of the event shows what area of the redirected
 		 * drawable was drawn into.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventExpose event 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "damage-event", callback: (owner: this, event: Gdk.EventExpose) => boolean): number;
 		/**
@@ -49156,6 +51158,14 @@ declare namespace imports.gi.Gtk {
 		 * destroys the window. Connecting gtk_widget_hide_on_delete() to
 		 * this signal will cause the window to be hidden instead, so that
 		 * it can later be shown again without reconstructing it.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the event which triggered this signal 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "delete-event", callback: (owner: this, event: Gdk.Event) => boolean): number;
 		/**
@@ -49164,6 +51174,11 @@ declare namespace imports.gi.Gtk {
 		 * if all references are released.
 		 * 
 		 * This signal is not suitable for saving widget state.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "destroy", callback: (owner: this) => void): number;
 		/**
@@ -49175,11 +51190,25 @@ declare namespace imports.gi.Gtk {
 		 * To receive this signal, the #GdkWindow associated to the widget needs
 		 * to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
 		 * automatically for all new windows.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the event which triggered this signal 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "destroy-event", callback: (owner: this, event: Gdk.Event) => boolean): number;
 		/**
 		 * The ::direction-changed signal is emitted when the text direction
 		 * of a widget changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - previous_direction: the previous text direction of #widget 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "direction-changed", callback: (owner: this, previous_direction: TextDirection) => void): number;
 		/**
@@ -49190,6 +51219,12 @@ declare namespace imports.gi.Gtk {
 		 * Note that some widgets set up a drag icon in the default handler of
 		 * this signal, so you may have to use g_signal_connect_after() to
 		 * override what the default handler did.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the drag context 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-begin", callback: (owner: this, context: Gdk.DragContext) => void): number;
 		/**
@@ -49197,6 +51232,12 @@ declare namespace imports.gi.Gtk {
 		 * with the action %GDK_ACTION_MOVE is successfully completed. The signal
 		 * handler is responsible for deleting the data that has been dropped. What
 		 * "delete" means depends on the context of the drag operation.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the drag context 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-data-delete", callback: (owner: this, context: Gdk.DragContext) => void): number;
 		/**
@@ -49205,6 +51246,16 @@ declare namespace imports.gi.Gtk {
 		 * the signal handler to fill #data with the data in the format which
 		 * is indicated by #info. See gtk_selection_data_set() and
 		 * gtk_selection_data_set_text().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the drag context 
+		 *  - data: the {@link SelectionData} to be filled with the dragged data 
+		 *  - info: the info that has been registered with the target in the
+		 *        #GtkTargetList 
+		 *  - time: the timestamp at which the data was requested 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-data-get", callback: (owner: this, context: Gdk.DragContext, data: SelectionData, info: number, time: number) => void): number;
 		/**
@@ -49268,6 +51319,18 @@ declare namespace imports.gi.Gtk {
 		 *     gtk_drag_finish (context, FALSE, FALSE, time);
 		 *  }
 		 * ]|
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the drag context 
+		 *  - x: where the drop happened 
+		 *  - y: where the drop happened 
+		 *  - data: the received data 
+		 *  - info: the info that has been registered with the target in the
+		 *        {@link TargetList} 
+		 *  - time: the timestamp at which the data was received 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-data-received", callback: (owner: this, context: Gdk.DragContext, x: number, y: number, data: SelectionData, info: number, time: number) => void): number;
 		/**
@@ -49281,12 +51344,28 @@ declare namespace imports.gi.Gtk {
 		 * directly or in a {@link Widget}::drag-data-received handler which gets
 		 * triggered by calling gtk_drag_get_data() to receive the data for one
 		 * or more of the supported targets.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the drag context 
+		 *  - x: the x coordinate of the current cursor position 
+		 *  - y: the y coordinate of the current cursor position 
+		 *  - time: the timestamp of the motion event 
+		 *  - returns whether the cursor position is in a drop zone 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-drop", callback: (owner: this, context: Gdk.DragContext, x: number, y: number, time: number) => boolean): number;
 		/**
 		 * The ::drag-end signal is emitted on the drag source when a drag is
 		 * finished.  A typical reason to connect to this signal is to undo
 		 * things done in {@link Widget}::drag-begin.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the drag context 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-end", callback: (owner: this, context: Gdk.DragContext) => void): number;
 		/**
@@ -49295,6 +51374,14 @@ declare namespace imports.gi.Gtk {
 		 * operation based on the type of error, it returns %TRUE is the failure has
 		 * been already handled (not showing the default "drag operation failed"
 		 * animation), otherwise it returns %FALSE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the drag context 
+		 *  - result: the result of the drag operation 
+		 *  - returns %TRUE if the failed drag operation has been already handled. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-failed", callback: (owner: this, context: Gdk.DragContext, result: DragResult) => boolean): number;
 		/**
@@ -49307,6 +51394,13 @@ declare namespace imports.gi.Gtk {
 		 * Likewise, the #GtkWidget::drag-leave signal is also emitted before the
 		 * ::drag-drop signal, for instance to allow cleaning up of a preview item
 		 * created in the #GtkWidget::drag-motion signal handler.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the drag context 
+		 *  - time: the timestamp of the motion event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-leave", callback: (owner: this, context: Gdk.DragContext, time: number) => void): number;
 		/**
@@ -49396,6 +51490,16 @@ declare namespace imports.gi.Gtk {
 		 *    }
 		 * }
 		 * ]|
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the drag context 
+		 *  - x: the x coordinate of the current cursor position 
+		 *  - y: the y coordinate of the current cursor position 
+		 *  - time: the timestamp of the motion event 
+		 *  - returns whether the cursor position is in a drop zone 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-motion", callback: (owner: this, context: Gdk.DragContext, x: number, y: number, time: number) => boolean): number;
 		/**
@@ -49416,6 +51520,14 @@ declare namespace imports.gi.Gtk {
 		 * extents of the clip region with gdk_cairo_get_clip_rectangle(), or they can
 		 * get a finer-grained representation of the dirty region with
 		 * cairo_copy_clip_rectangle_list().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - cr: the cairo context to draw to 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 * %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "draw", callback: (owner: this, cr: cairo.Context) => boolean): number;
 		/**
@@ -49426,6 +51538,15 @@ declare namespace imports.gi.Gtk {
 		 * to enable the #GDK_ENTER_NOTIFY_MASK mask.
 		 * 
 		 * This signal will be sent to the grab widget if there is one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventCrossing which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "enter-notify-event", callback: (owner: this, event: Gdk.EventCrossing) => boolean): number;
 		/**
@@ -49434,12 +51555,29 @@ declare namespace imports.gi.Gtk {
 		 * signal that matches the type of event delivered (e.g.
 		 * {@link Widget}::key-press-event) and finally a generic
 		 * #GtkWidget::event-after signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEvent which triggered this signal 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event
+		 * and to cancel the emission of the second specific ::event signal.
+		 *   %FALSE to propagate the event further and to allow the emission of
+		 *   the second signal. The ::event-after signal is emitted regardless of
+		 *   the return value. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "event", callback: (owner: this, event: Gdk.Event) => boolean): number;
 		/**
 		 * After the emission of the {@link Widget}::event signal and (optionally)
 		 * the second more specific signal, ::event-after will be emitted
 		 * regardless of the previous two signals handlers return values.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEvent which triggered this signal 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "event-after", callback: (owner: this, event: Gdk.Event) => void): number;
 		connect(signal: "focus", callback: (owner: this, direction: DirectionType) => boolean): number;
@@ -49449,6 +51587,15 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * To receive this signal, the #GdkWindow associated to the widget needs
 		 * to enable the #GDK_FOCUS_CHANGE_MASK mask.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventFocus which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "focus-in-event", callback: (owner: this, event: Gdk.EventFocus) => boolean): number;
 		/**
@@ -49457,6 +51604,15 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * To receive this signal, the #GdkWindow associated to the widget needs
 		 * to enable the #GDK_FOCUS_CHANGE_MASK mask.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventFocus which triggered this
+		 *   signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "focus-out-event", callback: (owner: this, event: Gdk.EventFocus) => boolean): number;
 		/**
@@ -49466,6 +51622,14 @@ declare namespace imports.gi.Gtk {
 		 * On X11, this happens when the grab window becomes unviewable
 		 * (i.e. it or one of its ancestors is unmapped), or if the same
 		 * application grabs the pointer or keyboard again.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventGrabBroken event 
+		 *  - returns %TRUE to stop other handlers from being invoked for
+		 *   the event. %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "grab-broken-event", callback: (owner: this, event: Gdk.EventGrabBroken) => boolean): number;
 		connect(signal: "grab-focus", callback: (owner: this) => void): number;
@@ -49478,11 +51642,23 @@ declare namespace imports.gi.Gtk {
 		 * A widget is shadowed by a gtk_grab_add() when the topmost
 		 * grab widget in the grab stack of its window group is not
 		 * its ancestor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - was_grabbed: %FALSE if the widget becomes shadowed, %TRUE
+		 *               if it becomes unshadowed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "grab-notify", callback: (owner: this, was_grabbed: boolean) => void): number;
 		/**
 		 * The ::hide signal is emitted when #widget is hidden, for example with
 		 * gtk_widget_hide().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "hide", callback: (owner: this) => void): number;
 		/**
@@ -49491,6 +51667,13 @@ declare namespace imports.gi.Gtk {
 		 * “anchored” when its toplevel
 		 * ancestor is a {@link Window}. This signal is emitted when
 		 * a widget changes from un-anchored to anchored or vice-versa.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - previous_toplevel: the previous toplevel ancestor, or %NULL
+		 *   if the widget was previously unanchored 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "hierarchy-changed", callback: (owner: this, previous_toplevel: Widget | null) => void): number;
 		/**
@@ -49501,6 +51684,14 @@ declare namespace imports.gi.Gtk {
 		 * to enable the #GDK_KEY_PRESS_MASK mask.
 		 * 
 		 * This signal will be sent to the grab widget if there is one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventKey which triggered this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "key-press-event", callback: (owner: this, event: Gdk.EventKey) => boolean): number;
 		/**
@@ -49510,11 +51701,28 @@ declare namespace imports.gi.Gtk {
 		 * to enable the #GDK_KEY_RELEASE_MASK mask.
 		 * 
 		 * This signal will be sent to the grab widget if there is one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventKey which triggered this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "key-release-event", callback: (owner: this, event: Gdk.EventKey) => boolean): number;
 		/**
 		 * Gets emitted if keyboard navigation fails.
 		 * See gtk_widget_keynav_failed() for details.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - direction: the direction of movement 
+		 *  - returns %TRUE if stopping keyboard navigation is fine, %FALSE
+		 *          if the emitting widget should try to handle the keyboard
+		 *          navigation attempt in its parent container(s). 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "keynav-failed", callback: (owner: this, direction: DirectionType) => boolean): number;
 		/**
@@ -49525,6 +51733,15 @@ declare namespace imports.gi.Gtk {
 		 * to enable the #GDK_LEAVE_NOTIFY_MASK mask.
 		 * 
 		 * This signal will be sent to the grab widget if there is one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventCrossing which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "leave-notify-event", callback: (owner: this, event: Gdk.EventCrossing) => boolean): number;
 		/**
@@ -49537,6 +51754,11 @@ declare namespace imports.gi.Gtk {
 		 * The ::map signal can be used to determine whether a widget will be drawn,
 		 * for instance it can resume an animation that was stopped during the
 		 * emission of #GtkWidget::unmap.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "map", callback: (owner: this) => void): number;
 		/**
@@ -49546,11 +51768,27 @@ declare namespace imports.gi.Gtk {
 		 * To receive this signal, the #GdkWindow associated to the widget needs
 		 * to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
 		 * automatically for all new windows.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventAny which triggered this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "map-event", callback: (owner: this, event: Gdk.EventAny) => boolean): number;
 		/**
 		 * The default handler for this signal activates #widget if #group_cycling
 		 * is %FALSE, or just makes #widget grab focus if #group_cycling is %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - group_cycling: %TRUE if there are other widgets with the same mnemonic 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 * %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mnemonic-activate", callback: (owner: this, group_cycling: boolean) => boolean): number;
 		/**
@@ -49561,12 +51799,28 @@ declare namespace imports.gi.Gtk {
 		 * needs to enable the #GDK_POINTER_MOTION_MASK mask.
 		 * 
 		 * This signal will be sent to the grab widget if there is one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventMotion which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "motion-notify-event", callback: (owner: this, event: Gdk.EventMotion) => boolean): number;
 		connect(signal: "move-focus", callback: (owner: this, direction: DirectionType) => void): number;
 		/**
 		 * The ::parent-set signal is emitted when a new parent
 		 * has been set on a widget.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - old_parent: the previous parent, or %NULL if the widget
+		 *   just got its initial parent. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "parent-set", callback: (owner: this, old_parent: Widget | null) => void): number;
 		/**
@@ -49577,6 +51831,12 @@ declare namespace imports.gi.Gtk {
 		 * a menu with clipboard commands. See the
 		 * [Popup Menu Migration Checklist][checklist-popup-menu]
 		 * for an example of how to use this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE if a menu was activated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "popup-menu", callback: (owner: this) => boolean): number;
 		/**
@@ -49585,6 +51845,15 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * To receive this signal, the #GdkWindow associated to the widget needs
 		 * to enable the #GDK_PROPERTY_CHANGE_MASK mask.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventProperty which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "property-notify-event", callback: (owner: this, event: Gdk.EventProperty) => boolean): number;
 		/**
@@ -49592,6 +51861,15 @@ declare namespace imports.gi.Gtk {
 		 * to enable the #GDK_PROXIMITY_IN_MASK mask.
 		 * 
 		 * This signal will be sent to the grab widget if there is one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventProximity which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "proximity-in-event", callback: (owner: this, event: Gdk.EventProximity) => boolean): number;
 		/**
@@ -49599,6 +51877,15 @@ declare namespace imports.gi.Gtk {
 		 * to enable the #GDK_PROXIMITY_OUT_MASK mask.
 		 * 
 		 * This signal will be sent to the grab widget if there is one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventProximity which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "proximity-out-event", callback: (owner: this, event: Gdk.EventProximity) => boolean): number;
 		/**
@@ -49614,17 +51901,41 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The signal handler is free to manipulate #tooltip with the therefore
 		 * destined function calls.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - x: the x coordinate of the cursor position where the request has
+		 *     been emitted, relative to #widget's left side 
+		 *  - y: the y coordinate of the cursor position where the request has
+		 *     been emitted, relative to #widget's top 
+		 *  - keyboard_mode: %TRUE if the tooltip was triggered using the keyboard 
+		 *  - tooltip: a {@link Tooltip} 
+		 *  - returns %TRUE if #tooltip should be shown right now, %FALSE otherwise. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "query-tooltip", callback: (owner: this, x: number, y: number, keyboard_mode: boolean, tooltip: Tooltip) => boolean): number;
 		/**
 		 * The ::realize signal is emitted when #widget is associated with a
 		 * #GdkWindow, which means that gtk_widget_realize() has been called or the
 		 * widget has been mapped (that is, it is going to be drawn).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "realize", callback: (owner: this) => void): number;
 		/**
 		 * The ::screen-changed signal gets emitted when the
 		 * screen of a widget has changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - previous_screen: the previous screen, or %NULL if the
+		 *   widget was not associated with a screen before 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "screen-changed", callback: (owner: this, previous_screen: Gdk.Screen | null) => void): number;
 		/**
@@ -49636,11 +51947,29 @@ declare namespace imports.gi.Gtk {
 		 * to enable the #GDK_SCROLL_MASK mask.
 		 * 
 		 * This signal will be sent to the grab widget if there is one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventScroll which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "scroll-event", callback: (owner: this, event: Gdk.EventScroll) => boolean): number;
 		/**
 		 * The ::selection-clear-event signal will be emitted when the
 		 * the #widget's window has lost ownership of a selection.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventSelection which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "selection-clear-event", callback: (owner: this, event: Gdk.EventSelection) => boolean): number;
 		connect(signal: "selection-get", callback: (owner: this, data: SelectionData, info: number, time: number) => void): number;
@@ -49650,11 +51979,25 @@ declare namespace imports.gi.Gtk {
 		 * The ::selection-request-event signal will be emitted when
 		 * another client requests ownership of the selection owned by
 		 * the #widget's window.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventSelection which triggered
+		 *   this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "selection-request-event", callback: (owner: this, event: Gdk.EventSelection) => boolean): number;
 		/**
 		 * The ::show signal is emitted when #widget is shown, for example with
 		 * gtk_widget_show().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show", callback: (owner: this) => void): number;
 		connect(signal: "show-help", callback: (owner: this, help_type: WidgetHelpType) => boolean): number;
@@ -49662,11 +52005,23 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * The ::state-changed signal is emitted when the widget state changes.
 		 * See gtk_widget_get_state().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - state: the previous state 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "state-changed", callback: (owner: this, state: StateType) => void): number;
 		/**
 		 * The ::state-flags-changed signal is emitted when the widget state
 		 * changes, see gtk_widget_get_state_flags().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - flags: The previous state flags. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "state-flags-changed", callback: (owner: this, flags: StateFlags) => void): number;
 		/**
@@ -49677,6 +52032,13 @@ declare namespace imports.gi.Gtk {
 		 * Note that this signal is emitted for changes to the deprecated
 		 * {@link Style}. To track changes to the #GtkStyleContext associated
 		 * with a widget, use the #GtkWidget::style-updated signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - previous_style: the previous style, or %NULL if the widget
+		 *   just got its initial style 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "style-set", callback: (owner: this, previous_style: Style | null) => void): number;
 		/**
@@ -49686,6 +52048,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Note that style-modifying functions like gtk_widget_override_color() also
 		 * cause this signal to be emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "style-updated", callback: (owner: this) => void): number;
 		connect(signal: "touch-event", callback: (owner: this, object: Gdk.Event) => boolean): number;
@@ -49696,6 +52063,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * As ::unmap indicates that a widget will not be shown any longer, it can be
 		 * used to, for example, stop an animation on the widget.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unmap", callback: (owner: this) => void): number;
 		/**
@@ -49705,6 +52077,14 @@ declare namespace imports.gi.Gtk {
 		 * To receive this signal, the #GdkWindow associated to the widget needs
 		 * to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
 		 * automatically for all new windows.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventAny which triggered this signal 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unmap-event", callback: (owner: this, event: Gdk.EventAny) => boolean): number;
 		/**
@@ -49712,6 +52092,11 @@ declare namespace imports.gi.Gtk {
 		 * #widget is destroyed, which means that gtk_widget_unrealize() has been
 		 * called or the widget has been unmapped (that is, it is going to be
 		 * hidden).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unrealize", callback: (owner: this) => void): number;
 		/**
@@ -49720,6 +52105,15 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * To receive this signal the #GdkWindow associated to the widget needs
 		 * to enable the #GDK_VISIBILITY_NOTIFY_MASK mask.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventVisibility which
+		 *   triggered this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "visibility-notify-event", callback: (owner: this, event: Gdk.EventVisibility) => boolean): number;
 		/**
@@ -49729,6 +52123,15 @@ declare namespace imports.gi.Gtk {
 		 * To receive this signal the #GdkWindow associated to the widget
 		 * needs to enable the #GDK_STRUCTURE_MASK mask. GDK will enable
 		 * this mask automatically for all new windows.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #GdkEventWindowState which
+		 *   triggered this signal. 
+		 *  - returns %TRUE to stop other handlers from being invoked for the
+		 *   event. %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "window-state-event", callback: (owner: this, event: Gdk.EventWindowState) => boolean): number;
 
@@ -51691,6 +54094,11 @@ declare namespace imports.gi.Gtk {
 		 * [keybinding signal][GtkBindingSignal]
 		 * which gets emitted when the user activates the default widget
 		 * of #window.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate-default", callback: (owner: this) => void): number;
 		/**
@@ -51698,6 +54106,11 @@ declare namespace imports.gi.Gtk {
 		 * [keybinding signal][GtkBindingSignal]
 		 * which gets emitted when the user activates the currently
 		 * focused widget of #window.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate-focus", callback: (owner: this) => void): number;
 		/**
@@ -51709,16 +54122,34 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default bindings for this signal are Ctrl-Shift-I
 		 * and Ctrl-Shift-D.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - toggle: toggle the debugger 
+		 *  - returns %TRUE if the key binding was handled 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "enable-debugging", callback: (owner: this, toggle: boolean) => boolean): number;
 		/**
 		 * The ::keys-changed signal gets emitted when the set of accelerators
 		 * or mnemonics that are associated with #window changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "keys-changed", callback: (owner: this) => void): number;
 		/**
 		 * This signal is emitted whenever the currently focused widget in
 		 * this window changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - widget: the newly focused widget (or %NULL for no focus) 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "set-focus", callback: (owner: this, widget: Widget | null) => void): number;
 
@@ -61132,6 +63563,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * gtk_cell_editable_editing_done() is a convenience method
 		 * for emitting #GtkCellEditable::editing-done.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "editing-done", callback: (owner: this) => void): number;
 		/**
@@ -61147,6 +63583,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * gtk_cell_editable_remove_widget() is a convenience method
 		 * for emitting #GtkCellEditable::remove-widget.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "remove-widget", callback: (owner: this) => void): number;
 
@@ -61467,6 +63908,12 @@ declare namespace imports.gi.Gtk {
 		 * This usually happens when the user clicks a color swatch,
 		 * or a color is selected and the user presses one of the keys
 		 * Space, Shift+Space, Return or Enter.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - color: the color 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "color-activated", callback: (owner: this, color: Gdk.RGBA) => void): number;
 
@@ -61627,6 +64074,11 @@ declare namespace imports.gi.Gtk {
 		 * is implemented by first deleting the selection, then inserting
 		 * the new content, and may cause multiple ::notify::text signals
 		 * to be emitted).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 		/**
@@ -61639,6 +64091,13 @@ declare namespace imports.gi.Gtk {
 		 * prevent it from being deleted entirely. The #start_pos
 		 * and #end_pos parameters are interpreted as for
 		 * gtk_editable_delete_text().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - start_pos: the starting position 
+		 *  - end_pos: the end position 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "delete-text", callback: (owner: this, start_pos: number, end_pos: number) => void): number;
 		/**
@@ -61649,6 +64108,14 @@ declare namespace imports.gi.Gtk {
 		 * stopping the signal with g_signal_stop_emission(), it
 		 * is possible to modify the inserted text, or prevent
 		 * it from being inserted entirely.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - new_text: the new text to insert 
+		 *  - new_text_length: the length of the new text, in bytes,
+		 *     or -1 if new_text is nul-terminated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert-text", callback: (owner: this, new_text: string, new_text_length: number) => void): number;
 
@@ -62438,6 +64905,13 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * gtk_widget_destroy (chooser);
 		 * ]|
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns a {@link FileChooserConfirmation} value that indicates which
+		 *  action to take after emitting the signal. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "confirm-overwrite", callback: (owner: this) => FileChooserConfirmation): number;
 		/**
@@ -62454,6 +64928,11 @@ declare namespace imports.gi.Gtk {
 		 * gtk_file_chooser_get_current_folder(),
 		 * gtk_file_chooser_set_current_folder_uri(),
 		 * gtk_file_chooser_get_current_folder_uri().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "current-folder-changed", callback: (owner: this) => void): number;
 		/**
@@ -62468,6 +64947,11 @@ declare namespace imports.gi.Gtk {
 		 * See also: gtk_file_chooser_get_filename(),
 		 * gtk_file_chooser_get_filenames(), gtk_file_chooser_get_uri(),
 		 * gtk_file_chooser_get_uris().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "file-activated", callback: (owner: this) => void): number;
 		/**
@@ -62485,6 +64969,11 @@ declare namespace imports.gi.Gtk {
 		 * gtk_file_chooser_get_filenames(), gtk_file_chooser_select_uri(),
 		 * gtk_file_chooser_unselect_uri(), gtk_file_chooser_get_uri(),
 		 * gtk_file_chooser_get_uris().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "selection-changed", callback: (owner: this) => void): number;
 		/**
@@ -62510,6 +64999,11 @@ declare namespace imports.gi.Gtk {
 		 * gtk_file_chooser_set_use_preview_label(),
 		 * gtk_file_chooser_get_preview_filename(),
 		 * gtk_file_chooser_get_preview_uri().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "update-preview", callback: (owner: this) => void): number;
 
@@ -62877,6 +65371,12 @@ declare namespace imports.gi.Gtk {
 		 * This usually happens when the user double clicks an item,
 		 * or an item is selected and the user presses one of the keys
 		 * Space, Shift+Space, Return or Enter.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - fontname: the font name 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "font-activated", callback: (owner: this, fontname: string) => void): number;
 
@@ -63008,6 +65508,13 @@ declare namespace imports.gi.Gtk {
 		 * A handler for this signal should update the #context
 		 * according to #page_setup and set up a suitable cairo
 		 * context, using gtk_print_context_set_cairo_context().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the current {@link PrintContext} 
+		 *  - page_setup: the #GtkPageSetup for the current page 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "got-page-size", callback: (owner: this, context: PrintContext, page_setup: PageSetup) => void): number;
 		/**
@@ -63015,6 +65522,12 @@ declare namespace imports.gi.Gtk {
 		 * before the first page is rendered.
 		 * 
 		 * A handler for this signal can be used for setup tasks.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context: the current {@link PrintContext} 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "ready", callback: (owner: this, context: PrintContext) => void): number;
 
@@ -63291,6 +65804,11 @@ declare namespace imports.gi.Gtk {
 		 * in the recent chooser.  This can happen by double-clicking on an item
 		 * in the recently used resources list, or by pressing
 		 * `Enter`.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "item-activated", callback: (owner: this) => void): number;
 		/**
@@ -63298,6 +65816,11 @@ declare namespace imports.gi.Gtk {
 		 * selected recently used resources.  This can happen when a user
 		 * modifies the selection with the mouse or the keyboard, or when
 		 * explicitly calling functions to change the selection.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "selection-changed", callback: (owner: this) => void): number;
 
@@ -64016,6 +66539,13 @@ declare namespace imports.gi.Gtk {
 		unref_node(iter: TreeIter): void;
 		/**
 		 * This signal is emitted when a row in the model has changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: a {@link TreePath}-struct identifying the changed row 
+		 *  - iter: a valid #GtkTreeIter-struct pointing to the changed row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-changed", callback: (owner: this, path: TreePath, iter: TreeIter) => void): number;
 		/**
@@ -64027,11 +66557,24 @@ declare namespace imports.gi.Gtk {
 		 * This should be called by models after a row has been removed.
 		 * The location pointed to by #path should be the location that
 		 * the row previously was at. It may not be a valid location anymore.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: a {@link TreePath}-struct identifying the row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-deleted", callback: (owner: this, path: TreePath) => void): number;
 		/**
 		 * This signal is emitted when a row has gotten the first child
 		 * row or lost its last child row.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: a {@link TreePath}-struct identifying the row 
+		 *  - iter: a valid #GtkTreeIter-struct pointing to the row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-has-child-toggled", callback: (owner: this, path: TreePath, iter: TreeIter) => void): number;
 		/**
@@ -64041,6 +66584,13 @@ declare namespace imports.gi.Gtk {
 		 * Note that the row may still be empty at this point, since
 		 * it is a common pattern to first insert an empty row, and
 		 * then fill it with the desired values.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: a {@link TreePath}-struct identifying the new row 
+		 *  - iter: a valid #GtkTreeIter-struct pointing to the new row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-inserted", callback: (owner: this, path: TreePath, iter: TreeIter) => void): number;
 		/**
@@ -64050,6 +66600,18 @@ declare namespace imports.gi.Gtk {
 		 * Note that this signal is not emitted
 		 * when rows are reordered by DND, since this is implemented
 		 * by removing and then reinserting the row.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - path: a {@link TreePath}-struct identifying the tree node whose children
+		 *     have been reordered 
+		 *  - iter: a valid #GtkTreeIter-struct pointing to the node whose children
+		 *     have been reordered, or %NULL if the depth of #path is 0 
+		 *  - new_order: an array of integers mapping the current position
+		 *     of each child to its old position before the re-ordering,
+		 *     i.e. #new_order`[newpos] = oldpos` 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "rows-reordered", callback: (owner: this, path: TreePath, iter: TreeIter, new_order: any | null) => void): number;
 
@@ -64336,6 +66898,11 @@ declare namespace imports.gi.Gtk {
 		 * The ::sort-column-changed signal is emitted when the sort column
 		 * or sort order of #sortable is changed. The signal is emitted before
 		 * the contents of #sortable are resorted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "sort-column-changed", callback: (owner: this) => void): number;
 

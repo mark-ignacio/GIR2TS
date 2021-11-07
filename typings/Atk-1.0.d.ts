@@ -108,6 +108,11 @@ declare namespace imports.gi.Atk {
 		is_valid(): boolean;
 		/**
 		 * The signal link-activated is emitted when a link is activated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "link-activated", callback: (owner: this) => void): number;
 
@@ -499,17 +504,42 @@ declare namespace imports.gi.Atk {
 		 * which has the state ATK_STATE_MANAGES_DESCENDANTS when the focus
 		 * object in the object changes. For instance, a table will emit the
 		 * signal when the cell in the table which has focus changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: the newly focused object. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "active-descendant-changed", callback: (owner: this, arg1: Object) => void): number;
 		/**
 		 * The signal "children-changed" is emitted when a child is added or
 		 * removed form an object. It supports two details: "add" and
 		 * "remove"
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The index of the added or removed child. The value can be
+		 * -1. This is used if the value is not known by the implementor
+		 * when the child is added/removed or irrelevant. 
+		 *  - arg2: A gpointer to the child AtkObject which was added or
+		 * removed. If the child was removed, it is possible that it is not
+		 * available for the implementor. In that case this pointer can be
+		 * NULL. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "children-changed", callback: (owner: this, arg1: number, arg2: Object) => void): number;
 		/**
 		 * The signal "focus-event" is emitted when an object gained or lost
 		 * focus.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: a boolean value which indicates whether the object gained
+		 * or lost focus. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "focus-event", callback: (owner: this, arg1: boolean) => void): number;
 		/**
@@ -526,17 +556,36 @@ declare namespace imports.gi.Atk {
 		 * notifications. #AtkObject::property-changed is needed by the
 		 * implementation of atk_add_global_event_listener() because GObject
 		 * notify doesn't support emission hooks.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: an {@link PropertyValues} containing the new
+		 * value of the property which changed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "property-change", callback: (owner: this, arg1: PropertyValues) => void): number;
 		/**
 		 * The "state-change" signal is emitted when an object's state
 		 * changes.  The detail value identifies the state type which has
 		 * changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The name of the state which has changed 
+		 *  - arg2: A boolean which indicates whether the state has been set or unset. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "state-change", callback: (owner: this, arg1: string, arg2: boolean) => void): number;
 		/**
 		 * The "visible-data-changed" signal is emitted when the visual
 		 * appearance of the object changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "visible-data-changed", callback: (owner: this) => void): number;
 
@@ -2077,6 +2126,12 @@ declare namespace imports.gi.Atk {
 		/**
 		 * The 'bounds-changed" signal is emitted when the bposition or
 		 * size of the component changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The AtkRectangle giving the new position and size. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "bounds-changed", callback: (owner: this, arg1: Rectangle) => void): number;
 
@@ -2186,6 +2241,11 @@ declare namespace imports.gi.Atk {
 		 * static contents are fully loaded into the container.
 		 * (Dynamic document contents should be exposed via other
 		 * signals.)
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "load-complete", callback: (owner: this) => void): number;
 		/**
@@ -2195,12 +2255,24 @@ declare namespace imports.gi.Atk {
 		 * however be emitted while waiting for a resource (for instance
 		 * while blocking on a file or network read) unless a
 		 * user-significant timeout has occurred.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "load-stopped", callback: (owner: this) => void): number;
 		/**
 		 * The 'page-changed' signal is emitted when the current page of
 		 * a document changes, e.g. pressing page up/down in a document
 		 * viewer.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - page_number: the new page number. If this value is unknown
+		 * or not applicable, -1 should be provided. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "page-changed", callback: (owner: this, page_number: number) => void): number;
 		/**
@@ -2209,6 +2281,11 @@ declare namespace imports.gi.Atk {
 		 * been emitted, a matching 'load-complete' or 'load-stopped'
 		 * signal should follow, which clients may await before
 		 * interrogating ATK for the latest document content.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "reload", callback: (owner: this) => void): number;
 
@@ -2410,6 +2487,12 @@ declare namespace imports.gi.Atk {
 		 * The "link-selected" signal is emitted by an AtkHyperText
 		 * object when one of the hyperlinks associated with the object
 		 * is selected.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: the index of the hyperlink which is selected 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "link-selected", callback: (owner: this, arg1: number) => void): number;
 
@@ -2618,6 +2701,11 @@ declare namespace imports.gi.Atk {
 		/**
 		 * The "selection-changed" signal is emitted by an object which
 		 * implements AtkSelection interface when the selection changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "selection-changed", callback: (owner: this) => void): number;
 
@@ -2944,39 +3032,82 @@ declare namespace imports.gi.Atk {
 		/**
 		 * The "column-deleted" signal is emitted by an object which
 		 * implements the AtkTable interface when a column is deleted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The index of the first column deleted. 
+		 *  - arg2: The number of columns deleted. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "column-deleted", callback: (owner: this, arg1: number, arg2: number) => void): number;
 		/**
 		 * The "column-inserted" signal is emitted by an object which
 		 * implements the AtkTable interface when a column is inserted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The index of the column inserted. 
+		 *  - arg2: The number of colums inserted. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "column-inserted", callback: (owner: this, arg1: number, arg2: number) => void): number;
 		/**
 		 * The "column-reordered" signal is emitted by an object which
 		 * implements the AtkTable interface when the columns are
 		 * reordered.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "column-reordered", callback: (owner: this) => void): number;
 		/**
 		 * The "model-changed" signal is emitted by an object which
 		 * implements the AtkTable interface when the model displayed by
 		 * the table changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "model-changed", callback: (owner: this) => void): number;
 		/**
 		 * The "row-deleted" signal is emitted by an object which
 		 * implements the AtkTable interface when a row is deleted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The index of the first row deleted. 
+		 *  - arg2: The number of rows deleted. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-deleted", callback: (owner: this, arg1: number, arg2: number) => void): number;
 		/**
 		 * The "row-inserted" signal is emitted by an object which
 		 * implements the AtkTable interface when a row is inserted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The index of the first row inserted. 
+		 *  - arg2: The number of rows inserted. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-inserted", callback: (owner: this, arg1: number, arg2: number) => void): number;
 		/**
 		 * The "row-reordered" signal is emitted by an object which
 		 * implements the AtkTable interface when the rows are
 		 * reordered.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-reordered", callback: (owner: this) => void): number;
 
@@ -3431,12 +3562,23 @@ declare namespace imports.gi.Atk {
 		 * The "text-attributes-changed" signal is emitted when the text
 		 * attributes of the text of an object which implements AtkText
 		 * changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "text-attributes-changed", callback: (owner: this) => void): number;
 		/**
 		 * The "text-caret-moved" signal is emitted when the caret
 		 * position of the text of an object which implements AtkText
 		 * changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The new position of the text caret. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "text-caret-moved", callback: (owner: this, arg1: number) => void): number;
 		/**
@@ -3445,6 +3587,13 @@ declare namespace imports.gi.Atk {
 		 * signal will have a detail which is either "insert" or
 		 * "delete" which identifies whether the text change was an
 		 * insertion or a deletion.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The position (character offset) of the insertion or deletion. 
+		 *  - arg2: The length (in characters) of text inserted or deleted. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "text-changed", callback: (owner: this, arg1: number, arg2: number) => void): number;
 		/**
@@ -3452,6 +3601,14 @@ declare namespace imports.gi.Atk {
 		 * inserted. If the signal was not triggered by the user
 		 * (e.g. typing or pasting text), the "system" detail should be
 		 * included.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The position (character offset) of the insertion. 
+		 *  - arg2: The length (in characters) of text inserted. 
+		 *  - arg3: The new text inserted 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "text-insert", callback: (owner: this, arg1: number, arg2: number, arg3: string) => void): number;
 		/**
@@ -3459,11 +3616,24 @@ declare namespace imports.gi.Atk {
 		 * removed. If the signal was not triggered by the user
 		 * (e.g. typing or pasting text), the "system" detail should be
 		 * included.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - arg1: The position (character offset) of the removal. 
+		 *  - arg2: The length (in characters) of text removed. 
+		 *  - arg3: The old text removed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "text-remove", callback: (owner: this, arg1: number, arg2: number, arg3: string) => void): number;
 		/**
 		 * The "text-selection-changed" signal is emitted when the
 		 * selected text of an object which implements AtkText changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "text-selection-changed", callback: (owner: this) => void): number;
 
@@ -3611,6 +3781,14 @@ declare namespace imports.gi.Atk {
 		 * Example: a password meter whose value changes as the user
 		 * types their new password. Appropiate value text would be
 		 * "weak", "acceptable" and "strong".
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - value: the new value in a numerical form. 
+		 *  - text: human readable text alternative (also called
+		 * description) of this object. NULL if not available. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "value-changed", callback: (owner: this, value: number, text: string) => void): number;
 
@@ -3782,46 +3960,91 @@ declare namespace imports.gi.Atk {
 		/**
 		 * The signal {@link Window}::activate is emitted when a window
 		 * becomes the active window of the application or session.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
 		 * The signal {@link Window}::create is emitted when a new window
 		 * is created.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "create", callback: (owner: this) => void): number;
 		/**
 		 * The signal {@link Window}::deactivate is emitted when a window is
 		 * no longer the active window of the application or session.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "deactivate", callback: (owner: this) => void): number;
 		/**
 		 * The signal {@link Window}::destroy is emitted when a window is
 		 * destroyed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "destroy", callback: (owner: this) => void): number;
 		/**
 		 * The signal {@link Window}::maximize is emitted when a window
 		 * is maximized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "maximize", callback: (owner: this) => void): number;
 		/**
 		 * The signal {@link Window}::minimize is emitted when a window
 		 * is minimized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "minimize", callback: (owner: this) => void): number;
 		/**
 		 * The signal {@link Window}::move is emitted when a window
 		 * is moved.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "move", callback: (owner: this) => void): number;
 		/**
 		 * The signal {@link Window}::resize is emitted when a window
 		 * is resized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "resize", callback: (owner: this) => void): number;
 		/**
 		 * The signal {@link Window}::restore is emitted when a window
 		 * is restored.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "restore", callback: (owner: this) => void): number;
 

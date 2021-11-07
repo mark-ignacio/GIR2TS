@@ -1009,6 +1009,12 @@ declare namespace imports.gi.GObject {
 		 * It is important to note that you must use
 		 * [canonical parameter names][canonical-parameter-names] as
 		 * detail strings for the notify signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - pspec: the #GParamSpec of the property which changed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "notify", callback: (owner: this, pspec: ParamSpec) => void): number;
 

@@ -728,11 +728,22 @@ declare namespace imports.gi.Gdk {
 		 * switches from the USB mouse to a tablet), in that case the
 		 * master device will change to reflect the new slave device
 		 * axes and keys.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 		/**
 		 * The ::tool-changed signal is emitted on pen/eraser
 		 * {@link Devices} whenever tools enter or leave proximity.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - tool: The new current tool 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "tool-changed", callback: (owner: this, tool: DeviceTool) => void): number;
 
@@ -851,6 +862,12 @@ declare namespace imports.gi.Gdk {
 		 * The ::device-added signal is emitted either when a new master
 		 * pointer is created, or when a slave (Hardware) input device
 		 * is plugged in.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - device: the newly added {@link Device}. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "device-added", callback: (owner: this, device: Device) => void): number;
 		/**
@@ -864,12 +881,24 @@ declare namespace imports.gi.Gdk {
 		 * (gdk_device_get_associated_device() returns %NULL), its
 		 * {@link DeviceType} will change to %GDK_DEVICE_TYPE_FLOATING,
 		 * if it's attached, it will change to %GDK_DEVICE_TYPE_SLAVE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - device: the {@link Device} that changed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "device-changed", callback: (owner: this, device: Device) => void): number;
 		/**
 		 * The ::device-removed signal is emitted either when a master
 		 * pointer is removed, or when a slave (Hardware) input device
 		 * is unplugged.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - device: the just removed {@link Device}. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "device-removed", callback: (owner: this, device: Device) => void): number;
 
@@ -1428,31 +1457,66 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * The ::closed signal is emitted when the connection to the windowing
 		 * system for #display is closed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - is_error: %TRUE if the display was closed due to an error 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "closed", callback: (owner: this, is_error: boolean) => void): number;
 		/**
 		 * The ::monitor-added signal is emitted whenever a monitor is
 		 * added.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - monitor: the monitor that was just added 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "monitor-added", callback: (owner: this, monitor: Monitor) => void): number;
 		/**
 		 * The ::monitor-removed signal is emitted whenever a monitor is
 		 * removed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - monitor: the monitor that was just removed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "monitor-removed", callback: (owner: this, monitor: Monitor) => void): number;
 		/**
 		 * The ::opened signal is emitted when the connection to the windowing
 		 * system for #display is opened.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "opened", callback: (owner: this) => void): number;
 		/**
 		 * The ::seat-added signal is emitted whenever a new seat is made
 		 * known to the windowing system.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - seat: the seat that was just added 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "seat-added", callback: (owner: this, seat: Seat) => void): number;
 		/**
 		 * The ::seat-removed signal is emitted whenever a seat is removed
 		 * by the windowing system.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - seat: the seat that was just removed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "seat-removed", callback: (owner: this, seat: Seat) => void): number;
 
@@ -1549,6 +1613,12 @@ declare namespace imports.gi.Gdk {
 		set_default_display(display: Display): void;
 		/**
 		 * The ::display-opened signal is emitted when a display is opened.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - display: the opened display 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "display-opened", callback: (owner: this, display: Display) => void): number;
 
@@ -1724,6 +1794,12 @@ declare namespace imports.gi.Gdk {
 		 * This signal will only be emitted if the {@link DragContext} manages
 		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
 		 * for more information.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action: The action currently chosen 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "action-changed", callback: (owner: this, action: DragAction) => void): number;
 		/**
@@ -1732,6 +1808,12 @@ declare namespace imports.gi.Gdk {
 		 * This signal will only be emitted if the {@link DragContext} manages
 		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
 		 * for more information.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - reason: The reason the context was cancelled 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cancel", callback: (owner: this, reason: DragCancelReason) => void): number;
 		/**
@@ -1742,6 +1824,11 @@ declare namespace imports.gi.Gdk {
 		 * This signal will only be emitted if the {@link DragContext} manages
 		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
 		 * for more information.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "dnd-finished", callback: (owner: this) => void): number;
 		/**
@@ -1750,6 +1837,12 @@ declare namespace imports.gi.Gdk {
 		 * This signal will only be emitted if the {@link DragContext} manages
 		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
 		 * for more information.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - time: the time at which the drop happened. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drop-performed", callback: (owner: this, time: number) => void): number;
 
@@ -1944,17 +2037,32 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * This signal ends processing of the frame. Applications
 		 * should generally not handle this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "after-paint", callback: (owner: this) => void): number;
 		/**
 		 * This signal begins processing of the frame. Applications
 		 * should generally not handle this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "before-paint", callback: (owner: this) => void): number;
 		/**
 		 * This signal is used to flush pending motion events that
 		 * are being batched up and compressed together. Applications
 		 * should not handle this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "flush-events", callback: (owner: this) => void): number;
 		/**
@@ -1962,6 +2070,11 @@ declare namespace imports.gi.Gdk {
 		 * application processing of the frame. Any work to update
 		 * sizes and positions of application elements should be
 		 * performed. GTK+ normally handles this internally.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "layout", callback: (owner: this) => void): number;
 		/**
@@ -1970,12 +2083,22 @@ declare namespace imports.gi.Gdk {
 		 * repainted. GDK normally handles this internally and
 		 * produces expose events, which are turned into GTK+
 		 * #GtkWidget::draw signals.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "paint", callback: (owner: this) => void): number;
 		/**
 		 * This signal is emitted after processing of the frame is
 		 * finished, and is handled internally by GTK+ to resume normal
 		 * event processing. Applications should not handle this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "resume-events", callback: (owner: this) => void): number;
 		/**
@@ -1985,6 +2108,11 @@ declare namespace imports.gi.Gdk {
 		 * Applications can connect directly to this signal, or
 		 * use gtk_widget_add_tick_callback() as a more convenient
 		 * interface.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "update", callback: (owner: this) => void): number;
 
@@ -2468,17 +2596,32 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * The ::direction-changed signal gets emitted when the direction of
 		 * the keymap changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "direction-changed", callback: (owner: this) => void): number;
 		/**
 		 * The ::keys-changed signal is emitted when the mapping represented by
 		 * #keymap changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "keys-changed", callback: (owner: this) => void): number;
 		/**
 		 * The ::state-changed signal is emitted when the state of the
 		 * keyboard changes, e.g when Caps Lock is turned on or off.
 		 * See gdk_keymap_get_caps_lock_state().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "state-changed", callback: (owner: this) => void): number;
 
@@ -2976,6 +3119,11 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * The ::composited-changed signal is emitted when the composited
 		 * status of the screen changes
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "composited-changed", callback: (owner: this) => void): number;
 		/**
@@ -2984,11 +3132,21 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Only for X11 and OS X for now. A future implementation for Win32
 		 * may be a possibility.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "monitors-changed", callback: (owner: this) => void): number;
 		/**
 		 * The ::size-changed signal is emitted when the pixel width or
 		 * height of a screen changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "size-changed", callback: (owner: this) => void): number;
 
@@ -3155,11 +3313,23 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * The ::device-added signal is emitted when a new input
 		 * device is related to this seat.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - device: the newly added {@link Device}. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "device-added", callback: (owner: this, device: Device) => void): number;
 		/**
 		 * The ::device-removed signal is emitted when an
 		 * input device is removed (e.g. unplugged).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - device: the just removed {@link Device}. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "device-removed", callback: (owner: this, device: Device) => void): number;
 		/**
@@ -3169,11 +3339,23 @@ declare namespace imports.gi.Gdk {
 		 * will emit the {@link Device}::tool-changed signal accordingly.
 		 * 
 		 * A same tool may be used by several devices.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - tool: the new {@link DeviceTool} known to the seat 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "tool-added", callback: (owner: this, tool: DeviceTool) => void): number;
 		/**
 		 * This signal is emitted whenever a tool is no longer known
 		 * to this #seat.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - tool: the just removed {@link DeviceTool} 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "tool-removed", callback: (owner: this, tool: DeviceTool) => void): number;
 
@@ -5194,6 +5376,14 @@ declare namespace imports.gi.Gdk {
 		 * Note that it is not possible to access the window's previous
 		 * surface from within any callback of this signal. Calling
 		 * gdk_offscreen_window_get_surface() will lead to a crash.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - width: the width of the offscreen surface to create 
+		 *  - height: the height of the offscreen surface to create 
+		 *  - returns the newly created #cairo_surface_t for the offscreen window 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "create-surface", callback: (owner: this, width: number, height: number) => cairo.Surface): number;
 		/**
@@ -5201,6 +5391,18 @@ declare namespace imports.gi.Gdk {
 		 * in the embedder of an offscreen window to the offscreen window.
 		 * 
 		 * See also {@link Window}::to-embedder.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - embedder_x: x coordinate in the embedder window 
+		 *  - embedder_y: y coordinate in the embedder window 
+		 *  - returns return location for the x
+		 *     coordinate in the offscreen window
+		 * 
+		 * return location for the y
+		 *     coordinate in the offscreen window 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "from-embedder", callback: (owner: this, embedder_x: number, embedder_y: number) => [ offscreen_x: number, offscreen_y: number ]): number;
 		/**
@@ -5215,11 +5417,31 @@ declare namespace imports.gi.Gdk {
 		 * flipping, but before any possible sliding. #final_rect is #flipped_rect,
 		 * but possibly translated in the case that flipping is still ineffective in
 		 * keeping #window on-screen.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - flipped_rect: the position of #window after any possible
+		 *                flipping or %NULL if the backend can't obtain it 
+		 *  - final_rect: the final position of #window or %NULL if the
+		 *              backend can't obtain it 
+		 *  - flipped_x: %TRUE if the anchors were flipped horizontally 
+		 *  - flipped_y: %TRUE if the anchors were flipped vertically 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "moved-to-rect", callback: (owner: this, flipped_rect: any | null, final_rect: any | null, flipped_x: boolean, flipped_y: boolean) => void): number;
 		/**
 		 * The ::pick-embedded-child signal is emitted to find an embedded
 		 * child at the given position.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - x: x coordinate in the window 
+		 *  - y: y coordinate in the window 
+		 *  - returns the {@link Window} of the
+		 *     embedded child at #x, #y, or %NULL 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pick-embedded-child", callback: (owner: this, x: number, y: number) => Window | null): number;
 		/**
@@ -5227,6 +5449,18 @@ declare namespace imports.gi.Gdk {
 		 * in an offscreen window to its embedder.
 		 * 
 		 * See also {@link Window}::from-embedder.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - offscreen_x: x coordinate in the offscreen window 
+		 *  - offscreen_y: y coordinate in the offscreen window 
+		 *  - returns return location for the x
+		 *     coordinate in the embedder window
+		 * 
+		 * return location for the y
+		 *     coordinate in the embedder window 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "to-embedder", callback: (owner: this, offscreen_x: number, offscreen_y: number) => [ embedder_x: number, embedder_y: number ]): number;
 

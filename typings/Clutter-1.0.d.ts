@@ -3517,16 +3517,39 @@ declare namespace imports.gi.Clutter {
 		 * but if you want to track the allocation flags as well, for instance
 		 * to know whether the absolute origin of #actor changed, then you might
 		 * want use this signal instead.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - box: a {@link ActorBox} with the new allocation 
+		 *  - flags: #ClutterAllocationFlags for the allocation 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "allocation-changed", callback: (owner: this, box: ActorBox, flags: AllocationFlags) => void): number;
 		/**
 		 * The ::button-press-event signal is emitted each time a mouse button
 		 * is pressed on #actor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link ButtonEvent} 
+		 *  - returns %TRUE if the event has been handled by the actor,
+		 *   or %FALSE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "button-press-event", callback: (owner: this, event: ButtonEvent) => boolean): number;
 		/**
 		 * The ::button-release-event signal is emitted each time a mouse button
 		 * is released on #actor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link ButtonEvent} 
+		 *  - returns %TRUE if the event has been handled by the actor,
+		 *   or %FALSE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "button-release-event", callback: (owner: this, event: ButtonEvent) => boolean): number;
 		/**
@@ -3537,6 +3560,14 @@ declare namespace imports.gi.Clutter {
 		 * event before the specialized events (like
 		 * ClutterActor::button-press-event or ::key-released-event) are
 		 * emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link Event} 
+		 *  - returns %TRUE if the event has been handled by the actor,
+		 *   or %FALSE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "captured-event", callback: (owner: this, event: Event) => boolean): number;
 		/**
@@ -3554,10 +3585,23 @@ declare namespace imports.gi.Clutter {
 		 * class handler of this signal and call clutter_actor_destroy() on
 		 * their children. When overriding the default class handler, it is
 		 * required to chain up to the parent's implementation.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "destroy", callback: (owner: this) => void): number;
 		/**
 		 * The ::enter-event signal is emitted when the pointer enters the #actor
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link CrossingEvent} 
+		 *  - returns %TRUE if the event has been handled by the actor,
+		 *   or %FALSE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "enter-event", callback: (owner: this, event: CrossingEvent) => boolean): number;
 		/**
@@ -3565,39 +3609,94 @@ declare namespace imports.gi.Clutter {
 		 * by the #actor. This signal will be emitted on every actor,
 		 * following the hierarchy chain, until it reaches the top-level
 		 * container (the {@link Stage}).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link Event} 
+		 *  - returns %TRUE if the event has been handled by the actor,
+		 *   or %FALSE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "event", callback: (owner: this, event: Event) => boolean): number;
 		/**
 		 * The ::hide signal is emitted when an actor is no longer rendered
 		 * on the stage.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "hide", callback: (owner: this) => void): number;
 		/**
 		 * The ::key-focus-in signal is emitted when #actor receives key focus.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "key-focus-in", callback: (owner: this) => void): number;
 		/**
 		 * The ::key-focus-out signal is emitted when #actor loses key focus.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "key-focus-out", callback: (owner: this) => void): number;
 		/**
 		 * The ::key-press-event signal is emitted each time a keyboard button
 		 * is pressed while #actor has key focus (see clutter_stage_set_key_focus()).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link KeyEvent} 
+		 *  - returns %TRUE if the event has been handled by the actor,
+		 *   or %FALSE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "key-press-event", callback: (owner: this, event: KeyEvent) => boolean): number;
 		/**
 		 * The ::key-release-event signal is emitted each time a keyboard button
 		 * is released while #actor has key focus (see
 		 * clutter_stage_set_key_focus()).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link KeyEvent} 
+		 *  - returns %TRUE if the event has been handled by the actor,
+		 *   or %FALSE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "key-release-event", callback: (owner: this, event: KeyEvent) => boolean): number;
 		/**
 		 * The ::leave-event signal is emitted when the pointer leaves the #actor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link CrossingEvent} 
+		 *  - returns %TRUE if the event has been handled by the actor,
+		 *   or %FALSE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "leave-event", callback: (owner: this, event: CrossingEvent) => boolean): number;
 		/**
 		 * The ::motion-event signal is emitted each time the mouse pointer is
 		 * moved over #actor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link MotionEvent} 
+		 *  - returns %TRUE if the event has been handled by the actor,
+		 *   or %FALSE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "motion-event", callback: (owner: this, event: MotionEvent) => boolean): number;
 		/**
@@ -3612,10 +3711,21 @@ declare namespace imports.gi.Clutter {
 		 * #ClutterActor class and override the #ClutterActorClass.paint virtual
 		 * function, or use a #ClutterEffect. The #ClutterActor::paint signal
 		 * will be removed in a future version of Clutter.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "paint", callback: (owner: this) => void): number;
 		/**
 		 * This signal is emitted when the parent of the actor changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - old_parent: the previous parent of the actor, or %NULL 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "parent-set", callback: (owner: this, old_parent: Actor | null) => void): number;
 		/**
@@ -3629,6 +3739,12 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * It is possible to connect a handler to the ::pick signal in order
 		 * to set up some custom aspect of a paint in pick mode.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - color: the {@link Color} to be used when picking 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pick", callback: (owner: this, color: Color) => void): number;
 		/**
@@ -3675,6 +3791,12 @@ declare namespace imports.gi.Clutter {
 		 * pipeline is executed. If you want to know when the pipeline has
 		 * been completed you should use clutter_threads_add_repaint_func()
 		 * or clutter_threads_add_repaint_func_full().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - origin: the actor which initiated the redraw request 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "queue-redraw", callback: (owner: this, origin: Actor) => void): number;
 		/**
@@ -3688,26 +3810,57 @@ declare namespace imports.gi.Clutter {
 		 * The main purpose of this signal is to allow relayout to be propagated
 		 * properly in the presence of #ClutterClone actors. Applications will
 		 * not normally need to connect to this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "queue-relayout", callback: (owner: this) => void): number;
 		/**
 		 * The ::realize signal is emitted each time an actor is being
 		 * realized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "realize", callback: (owner: this) => void): number;
 		/**
 		 * The ::scroll-event signal is emitted each time the mouse is
 		 * scrolled on #actor
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link ScrollEvent} 
+		 *  - returns %TRUE if the event has been handled by the actor,
+		 *   or %FALSE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "scroll-event", callback: (owner: this, event: ScrollEvent) => boolean): number;
 		/**
 		 * The ::show signal is emitted when an actor is visible and
 		 * rendered on the stage.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show", callback: (owner: this) => void): number;
 		/**
 		 * The ::touch-event signal is emitted each time a touch
 		 * begin/end/update/cancel event.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link Event} 
+		 *  - returns %CLUTTER_EVENT_STOP if the event has been handled by
+		 *   the actor, or %CLUTTER_EVENT_PROPAGATE to continue the emission. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "touch-event", callback: (owner: this, event: Event) => boolean): number;
 		/**
@@ -3716,16 +3869,33 @@ declare namespace imports.gi.Clutter {
 		 * duration (including eventual repeats), it has been stopped
 		 * using clutter_timeline_stop(), or it has been removed from the
 		 * transitions applied on #actor, using clutter_actor_remove_transition().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - name: the name of the transition 
+		 *  - is_finished: whether the transition was finished, or stopped 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "transition-stopped", callback: (owner: this, name: string, is_finished: boolean) => void): number;
 		/**
 		 * The ::transitions-completed signal is emitted once all transitions
 		 * involving #actor are complete.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "transitions-completed", callback: (owner: this) => void): number;
 		/**
 		 * The ::unrealize signal is emitted each time an actor is being
 		 * unrealized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unrealize", callback: (owner: this) => void): number;
 
@@ -4441,11 +4611,21 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The #animation instance is guaranteed to be valid for the entire
 		 * duration of the signal emission chain.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "completed", callback: (owner: this) => void): number;
 		/**
 		 * The ::started signal is emitted once the animation has been
 		 * started
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "started", callback: (owner: this) => void): number;
 
@@ -4765,16 +4945,31 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * The ::font-changed signal is emitted each time the font options
 		 * have been changed through {@link Settings}.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "font-changed", callback: (owner: this) => void): number;
 		/**
 		 * The ::resolution-changed signal is emitted each time the font
 		 * resolutions has been changed through {@link Settings}.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "resolution-changed", callback: (owner: this) => void): number;
 		/**
 		 * The ::settings-changed signal is emitted each time the {@link Settings}
 		 * properties have been changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "settings-changed", callback: (owner: this) => void): number;
 
@@ -4879,11 +5074,23 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * The ::apply signal is emitted each time the behaviour is applied
 		 * to an actor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the actor the behaviour was applied to. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "applied", callback: (owner: this, actor: Actor) => void): number;
 		/**
 		 * The ::removed signal is emitted each time a behaviour is not applied
 		 * to an actor anymore.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the removed actor 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "removed", callback: (owner: this, actor: Actor) => void): number;
 
@@ -5262,6 +5469,12 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * This signal is emitted each time a node defined inside the path
 		 * is reached.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - knot_num: the index of the {@link Knot} reached 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "knot-reached", callback: (owner: this, knot_num: number) => void): number;
 
@@ -6610,6 +6823,14 @@ declare namespace imports.gi.Clutter {
 		 * The first signal handler that returns a non-%NULL, valid surface will
 		 * stop any further signal emission, and the returned surface will be
 		 * the one used.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - width: the width of the surface to create 
+		 *  - height: the height of the surface to create 
+		 *  - returns the newly created #cairo_surface_t for the texture 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "create-surface", callback: (owner: this, width: number, height: number) => cairo.Surface): number;
 		/**
@@ -6623,6 +6844,14 @@ declare namespace imports.gi.Clutter {
 		 * of the Cairo context passed to each callback is automatically saved
 		 * and restored, so it's not necessary to call cairo_save() and
 		 * cairo_restore().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - cr: the Cairo context to use to draw 
+		 *  - returns %TRUE if the signal emission should stop, and %FALSE
+		 *   to continue 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "draw", callback: (owner: this, cr: cairo.Context) => boolean): number;
 
@@ -6742,6 +6971,16 @@ declare namespace imports.gi.Clutter {
 		 * It is safe to connect multiple handlers to this signal: each
 		 * handler invocation will be automatically protected by cairo_save()
 		 * and cairo_restore() pairs.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - cr: the Cairo context used to draw 
+		 *  - width: the width of the #canvas 
+		 *  - height: the height of the #canvas 
+		 *  - returns %TRUE if the signal emission should stop, and
+		 *   %FALSE otherwise 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "draw", callback: (owner: this, cr: cairo.Context, width: number, height: number) => boolean): number;
 
@@ -6939,6 +7178,12 @@ declare namespace imports.gi.Clutter {
 		 * The ::clicked signal is emitted when the {@link Actor} to which
 		 * a #ClutterClickAction has been applied should respond to a
 		 * pointer button press and release events
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "clicked", callback: (owner: this, actor: Actor) => void): number;
 		/**
@@ -6957,6 +7202,15 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * It is possible to forcibly cancel a long press detection using
 		 * clutter_click_action_release().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 *  - state: the long press state 
+		 *  - returns Only the %CLUTTER_LONG_PRESS_QUERY state uses the
+		 *   returned value of the handler; other states will ignore it 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "long-press", callback: (owner: this, actor: Actor, state: LongPressState) => boolean): number;
 
@@ -7370,11 +7624,23 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * The ::device-added signal is emitted each time a device has been
 		 * added to the {@link DeviceManager}
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - device: the newly added {@link InputDevice} 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "device-added", callback: (owner: this, device: InputDevice) => void): number;
 		/**
 		 * The ::device-removed signal is emitted each time a device has been
 		 * removed from the {@link DeviceManager}
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - device: the removed {@link InputDevice} 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "device-removed", callback: (owner: this, device: InputDevice) => void): number;
 
@@ -7563,6 +7829,15 @@ declare namespace imports.gi.Clutter {
 		 * The emission of this signal can be delayed by using the
 		 * #ClutterDragAction:x-drag-threshold and
 		 * #ClutterDragAction:y-drag-threshold properties
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the action 
+		 *  - event_x: the X coordinate (in stage space) of the press event 
+		 *  - event_y: the Y coordinate (in stage space) of the press event 
+		 *  - modifiers: the modifiers of the press event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-begin", callback: (owner: this, actor: Actor, event_x: number, event_y: number, modifiers: ModifierType) => void): number;
 		/**
@@ -7571,6 +7846,15 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * This signal is emitted if and only if the {@link DragAction}::drag-begin
 		 * signal has been emitted first
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the action 
+		 *  - event_x: the X coordinate (in stage space) of the release event 
+		 *  - event_y: the Y coordinate (in stage space) of the release event 
+		 *  - modifiers: the modifiers of the release event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-end", callback: (owner: this, actor: Actor, event_x: number, event_y: number, modifiers: ModifierType) => void): number;
 		/**
@@ -7589,6 +7873,18 @@ declare namespace imports.gi.Clutter {
 		 * want to override the default behaviour, you can connect to the
 		 * #ClutterDragAction::drag-progress signal and return %FALSE from the
 		 * handler.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the action 
+		 *  - delta_x: the X component of the distance between the press event
+		 *   that began the dragging and the current position of the pointer,
+		 *   as of the latest motion event 
+		 *  - delta_y: the Y component of the distance between the press event
+		 *   that began the dragging and the current position of the pointer,
+		 *   as of the latest motion event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-motion", callback: (owner: this, actor: Actor, delta_x: number, delta_y: number) => void): number;
 		/**
@@ -7603,6 +7899,20 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The default handler will emit #ClutterDragAction::drag-motion,
 		 * if #ClutterDragAction::drag-progress emission returns %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the action 
+		 *  - delta_x: the X component of the distance between the press event
+		 *   that began the dragging and the current position of the pointer,
+		 *   as of the latest motion event 
+		 *  - delta_y: the Y component of the distance between the press event
+		 *   that began the dragging and the current position of the pointer,
+		 *   as of the latest motion event 
+		 *  - returns %TRUE if the drag should continue, and %FALSE
+		 *   if it should be stopped. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drag-progress", callback: (owner: this, actor: Actor, delta_x: number, delta_y: number) => boolean): number;
 
@@ -7659,12 +7969,29 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The default implementation of #ClutterDropAction returns %TRUE for
 		 * this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 *  - event_x: the X coordinate (in stage space) of the drop event 
+		 *  - event_y: the Y coordinate (in stage space) of the drop event 
+		 *  - returns %TRUE if the drop is accepted, and %FALSE otherwise 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "can-drop", callback: (owner: this, actor: Actor, event_x: number, event_y: number) => boolean): number;
 		/**
 		 * The ::drop signal is emitted when the dragged actor is dropped
 		 * on #actor. This signal is only emitted if at least an handler of
 		 * {@link DropAction}::can-drop returns %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 *  - event_x: the X coordinate (in stage space) of the drop event 
+		 *  - event_y: the Y coordinate (in stage space) of the drop event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drop", callback: (owner: this, actor: Actor, event_x: number, event_y: number) => void): number;
 		/**
@@ -7673,16 +8000,36 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * After the ::drop-cancel signal is fired the active drag is
 		 * terminated.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 *  - event_x: the X coordinate (in stage space) of the drop event 
+		 *  - event_y: the Y coordinate (in stage space) of the drop event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drop-cancel", callback: (owner: this, actor: Actor, event_x: number, event_y: number) => void): number;
 		/**
 		 * The ::over-in signal is emitted when the dragged actor crosses
 		 * into #actor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "over-in", callback: (owner: this, actor: Actor) => void): number;
 		/**
 		 * The ::over-out signal is emitted when the dragged actor crosses
 		 * outside #actor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "over-out", callback: (owner: this, actor: Actor) => void): number;
 
@@ -8159,6 +8506,14 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * The ::gesture_begin signal is emitted when the {@link Actor} to which
 		 * a #ClutterGestureAction has been applied starts receiving a gesture.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 *  - returns %TRUE if the gesture should start, and %FALSE if
+		 *   the gesture should be ignored. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "gesture-begin", callback: (owner: this, actor: Actor) => boolean): number;
 		/**
@@ -8167,6 +8522,12 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * This signal is emitted if and only if the #ClutterGestureAction::gesture-begin
 		 * signal has been emitted first.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "gesture-cancel", callback: (owner: this, actor: Actor) => void): number;
 		/**
@@ -8175,11 +8536,25 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * This signal is emitted if and only if the {@link GestureAction}::gesture-begin
 		 * signal has been emitted first.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "gesture-end", callback: (owner: this, actor: Actor) => void): number;
 		/**
 		 * The ::gesture-progress signal is emitted for each motion event after
 		 * the {@link GestureAction}::gesture-begin signal has been emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 *  - returns %TRUE if the gesture should continue, and %FALSE if
+		 *   the gesture should be cancelled. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "gesture-progress", callback: (owner: this, actor: Actor) => boolean): number;
 
@@ -9489,6 +9864,11 @@ declare namespace imports.gi.Clutter {
 		 * can be controlled or changed using parameters should emit the
 		 * ::layout-changed signal whenever one of the parameters changes,
 		 * by using clutter_layout_manager_layout_changed().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "layout-changed", callback: (owner: this) => void): number;
 
@@ -9842,28 +10222,56 @@ declare namespace imports.gi.Clutter {
 		set_types(n_columns: number, types: GObject.Type[]): void;
 		/**
 		 * The ::filter-changed signal is emitted when a new filter has been applied
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "filter-changed", callback: (owner: this) => void): number;
 		/**
 		 * The ::row-added signal is emitted when a new row has been added.
 		 * The data on the row has already been set when the ::row-added signal
 		 * has been emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - iter: a {@link ModelIter} pointing to the new row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-added", callback: (owner: this, iter: ModelIter) => void): number;
 		/**
 		 * The ::row-removed signal is emitted when a row has been changed.
 		 * The data on the row has already been updated when the ::row-changed
 		 * signal has been emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - iter: a {@link ModelIter} pointing to the changed row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-changed", callback: (owner: this, iter: ModelIter) => void): number;
 		/**
 		 * The ::row-removed signal is emitted when a row has been removed.
 		 * The data on the row pointed by the passed iterator is still valid
 		 * when the ::row-removed signal has been emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - iter: a {@link ModelIter} pointing to the removed row 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "row-removed", callback: (owner: this, iter: ModelIter) => void): number;
 		/**
 		 * The ::sort-changed signal is emitted after the model has been sorted
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "sort-changed", callback: (owner: this) => void): number;
 
@@ -10416,11 +10824,27 @@ declare namespace imports.gi.Clutter {
 		 * a pan gesture. #is_interpolated is set to %TRUE during the
 		 * interpolation phase of the pan, after the drag has ended and
 		 * the :interpolate property was set to %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 *  - is_interpolated: if the event is the result of interpolating
+		 *                   the motion velocity at the end of the drag 
+		 *  - returns %TRUE if the pan should continue, and %FALSE if
+		 *   the pan should be cancelled. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pan", callback: (owner: this, actor: Actor, is_interpolated: boolean) => boolean): number;
 		/**
 		 * The ::pan-stopped signal is emitted at the end of the interpolation
 		 * phase of the pan action, only when :interpolate is set to %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pan-stopped", callback: (owner: this, actor: Actor) => void): number;
 
@@ -10834,6 +11258,13 @@ declare namespace imports.gi.Clutter {
 		 * The ::node-reached signal is emitted each time a
 		 * {@link PathConstraint}:offset value results in the actor
 		 * passing a #ClutterPathNode
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} using the #constraint 
+		 *  - index: the index of the node that has been reached 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "node-reached", callback: (owner: this, actor: Actor, index: number) => void): number;
 
@@ -11053,6 +11484,16 @@ declare namespace imports.gi.Clutter {
 		 * The ::rotate signal is emitted when a rotate gesture is
 		 * recognized on the attached actor and when the gesture is
 		 * cancelled (in this case with an angle value of 0).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 *  - angle: the difference of angle of rotation between the initial
+		 * rotation and the current rotation 
+		 *  - returns %TRUE if the rotation should continue, and %FALSE if
+		 *   the rotation should be cancelled. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "rotate", callback: (owner: this, actor: Actor, angle: number) => boolean): number;
 
@@ -11181,25 +11622,52 @@ declare namespace imports.gi.Clutter {
 		stop(): void;
 		/**
 		 * The ::completed signal is emitted each time a {@link Score} terminates.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "completed", callback: (owner: this) => void): number;
 		/**
 		 * The ::paused signal is emitted each time a {@link Score}
 		 * is paused.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "paused", callback: (owner: this) => void): number;
 		/**
 		 * The ::started signal is emitted each time a {@link Score} starts playing.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "started", callback: (owner: this) => void): number;
 		/**
 		 * The ::timeline-completed signal is emitted each time a timeline
 		 * inside a {@link Score} terminates.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - timeline: the completed timeline 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "timeline-completed", callback: (owner: this, timeline: Timeline) => void): number;
 		/**
 		 * The ::timeline-started signal is emitted each time a new timeline
 		 * inside a {@link Score} starts playing.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - timeline: the current timeline 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "timeline-started", callback: (owner: this, timeline: Timeline) => void): number;
 
@@ -12548,16 +13016,31 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * The ::activate signal is emitted when the stage receives key focus
 		 * from the underlying window system.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
 		 * The ::after-paint signal is emitted after the stage is painted,
 		 * but before the results are displayed on the screen.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "after-paint", callback: (owner: this) => void): number;
 		/**
 		 * The ::deactivate signal is emitted when the stage loses key focus
 		 * from the underlying window system.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "deactivate", callback: (owner: this) => void): number;
 		/**
@@ -12574,15 +13057,32 @@ declare namespace imports.gi.Clutter {
 		 * This signal is emitted only on Clutter backends that
 		 * embed #ClutterStage in native windows. It is not emitted for
 		 * backends that use a static frame buffer.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: a {@link Event} of type %CLUTTER_DELETE 
+		 *  - returns null 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "delete-event", callback: (owner: this, event: Event) => boolean): number;
 		/**
 		 * The ::fullscreen signal is emitted when the stage is made fullscreen.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "fullscreen", callback: (owner: this) => void): number;
 		/**
 		 * The ::unfullscreen signal is emitted when the stage leaves a fullscreen
 		 * state.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unfullscreen", callback: (owner: this) => void): number;
 
@@ -12711,11 +13211,23 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * The ::stage-added signal is emitted each time a new {@link Stage}
 		 * has been added to the stage manager.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - stage: the added stage 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "stage-added", callback: (owner: this, stage: Stage) => void): number;
 		/**
 		 * The ::stage-removed signal is emitted each time a {@link Stage}
 		 * has been removed from the stage manager.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - stage: the removed stage 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "stage-removed", callback: (owner: this, stage: Stage) => void): number;
 
@@ -12978,6 +13490,11 @@ declare namespace imports.gi.Clutter {
 		 * The ::completed signal is emitted when a {@link State} reaches
 		 * the target state specified by clutter_state_set_state() or
 		 * clutter_state_warp_to_state().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "completed", callback: (owner: this) => void): number;
 
@@ -13021,11 +13538,27 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * The ::swept signal is emitted when a swipe gesture is recognized on the
 		 * attached actor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 *  - direction: the main direction of the swipe gesture 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "swept", callback: (owner: this, actor: Actor, direction: SwipeDirection) => void): number;
 		/**
 		 * The ::swipe signal is emitted when a swipe gesture is recognized on the
 		 * attached actor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 *  - direction: the main direction of the swipe gesture 
+		 *  - returns %TRUE if the swipe should continue, and %FALSE if
+		 *   the swipe should be cancelled. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "swipe", callback: (owner: this, actor: Actor, direction: SwipeDirection) => boolean): number;
 
@@ -13293,6 +13826,12 @@ declare namespace imports.gi.Clutter {
 
 		/**
 		 * The ::tap signal is emitted when the tap gesture is complete.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the #action 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "tap", callback: (owner: this, actor: Actor) => void): number;
 
@@ -14037,11 +14576,21 @@ declare namespace imports.gi.Clutter {
 		 * The ::activate signal is emitted each time the actor is 'activated'
 		 * by the user, normally by pressing the 'Enter' key. The signal is
 		 * emitted only if {@link Text}:activatable is set to %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
 		 * The ::cursor-changed signal is emitted whenever the cursor
 		 * position or size changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cursor-changed", callback: (owner: this) => void): number;
 		/**
@@ -14049,20 +14598,50 @@ declare namespace imports.gi.Clutter {
 		 * changes inside a {@link Text} actor. Inside #geometry it is stored
 		 * the current position and size of the cursor, relative to the actor
 		 * itself.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - geometry: the coordinates of the cursor 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cursor-event", callback: (owner: this, geometry: Geometry) => void): number;
 		/**
 		 * This signal is emitted when text is deleted from the actor by
 		 * the user. It is emitted before #self text changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - start_pos: the starting position 
+		 *  - end_pos: the end position 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "delete-text", callback: (owner: this, start_pos: number, end_pos: number) => void): number;
 		/**
 		 * This signal is emitted when text is inserted into the actor by
 		 * the user. It is emitted before #self text changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - new_text: the new text to insert 
+		 *  - new_text_length: the length of the new text, in bytes, or -1 if
+		 *     new_text is nul-terminated 
+		 *  - position: the position, in characters, at which to insert the
+		 *     new text. this is an in-out parameter.  After the signal
+		 *     emission is finished, it should point after the newly
+		 *     inserted text. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insert-text", callback: (owner: this, new_text: string, new_text_length: number, position: any | null) => void): number;
 		/**
 		 * The ::text-changed signal is emitted after #actor's text changes
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "text-changed", callback: (owner: this) => void): number;
 
@@ -14297,10 +14876,25 @@ declare namespace imports.gi.Clutter {
 		set_text(chars: string, n_chars: number): void;
 		/**
 		 * This signal is emitted after text is deleted from the buffer.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - position: the position the text was deleted at. 
+		 *  - n_chars: The number of characters that were deleted. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "deleted-text", callback: (owner: this, position: number, n_chars: number) => void): number;
 		/**
 		 * This signal is emitted after text is inserted into the buffer.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - position: the position the text was inserted at. 
+		 *  - chars: The text that was inserted. 
+		 *  - n_chars: The number of characters that were inserted. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "inserted-text", callback: (owner: this, position: number, chars: string, n_chars: number) => void): number;
 
@@ -14650,17 +15244,35 @@ declare namespace imports.gi.Clutter {
 		 * The ::load-finished signal is emitted when a texture load has
 		 * completed. If there was an error during loading, #error will
 		 * be set, otherwise it will be %NULL
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - error: A set error, or %NULL 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "load-finished", callback: (owner: this, error: GLib.Error) => void): number;
 		/**
 		 * The ::pixbuf-change signal is emitted each time the pixbuf
 		 * used by #texture changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pixbuf-change", callback: (owner: this) => void): number;
 		/**
 		 * The ::size-change signal is emitted each time the size of the
 		 * pixbuf used by #texture changes.  The new size is given as
 		 * argument to the callback.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - width: the width of the new texture 
+		 *  - height: the height of the new texture 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "size-change", callback: (owner: this, width: number, height: number) => void): number;
 
@@ -15226,6 +15838,11 @@ declare namespace imports.gi.Clutter {
 		 * If you want to get notification on whether the #ClutterTimeline has
 		 * been stopped or has finished its run, including its eventual repeats,
 		 * you should use the #ClutterTimeline::stopped signal instead.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "completed", callback: (owner: this) => void): number;
 		/**
@@ -15251,16 +15868,34 @@ declare namespace imports.gi.Clutter {
 		 * In the example, the first callback will be invoked for both
 		 * the "foo" and "bar" marker, while the second and third callbacks
 		 * will be invoked for the "foo" or "bar" markers, respectively.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - marker_name: the name of the marker reached 
+		 *  - msecs: the elapsed time 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "marker-reached", callback: (owner: this, marker_name: string, msecs: number) => void): number;
 		/**
 		 * The ::new-frame signal is emitted for each timeline running
 		 * timeline before a new frame is drawn to give animations a chance
 		 * to update the scene.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - msecs: the elapsed time between 0 and duration 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "new-frame", callback: (owner: this, msecs: number) => void): number;
 		/**
 		 * The ::paused signal is emitted when clutter_timeline_pause() is invoked.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "paused", callback: (owner: this) => void): number;
 		/**
@@ -15268,6 +15903,11 @@ declare namespace imports.gi.Clutter {
 		 * This might be as soon as clutter_timeline_start() is invoked or
 		 * after the delay set in the ClutterTimeline:delay property has
 		 * expired.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "started", callback: (owner: this) => void): number;
 		/**
@@ -15280,6 +15920,13 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If the #ClutterTimeline has is marked as infinitely repeating,
 		 * this signal will never be emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - is_finished: %TRUE if the signal was emitted at the end of the
+		 *   timeline. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "stopped", callback: (owner: this, is_finished: boolean) => void): number;
 
@@ -15587,6 +16234,16 @@ declare namespace imports.gi.Clutter {
 		 * distance between the touch points and the current distance. To
 		 * override the default behaviour, connect to this signal and return
 		 * %FALSE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the {@link Actor} attached to the action 
+		 *  - focal_point: the focal point of the zoom 
+		 *  - factor: the initial distance between the 2 touch points 
+		 *  - returns %TRUE if the zoom should continue, and %FALSE if
+		 *   the zoom should be cancelled. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "zoom", callback: (owner: this, actor: Actor, focal_point: Point, factor: number) => boolean): number;
 
@@ -19456,17 +20113,36 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * The ::actor-added signal is emitted each time an actor
 		 * has been added to #container.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the new child that has been added to #container 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "actor-added", callback: (owner: this, actor: Actor) => void): number;
 		/**
 		 * The ::actor-removed signal is emitted each time an actor
 		 * is removed from #container.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the child that has been removed from #container 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "actor-removed", callback: (owner: this, actor: Actor) => void): number;
 		/**
 		 * The ::child-notify signal is emitted each time a property is
 		 * being set through the clutter_container_child_set() and
 		 * clutter_container_child_set_property() calls.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: the child that has had a property set 
+		 *  - pspec: the #GParamSpec of the property set 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "child-notify", callback: (owner: this, actor: Actor, pspec: GObject.ParamSpec) => void): number;
 
@@ -19538,11 +20214,23 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * This signal is emitted each time a {@link Content} implementation is
 		 * assigned to a #ClutterActor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: a {@link Actor} 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "attached", callback: (owner: this, actor: Actor) => void): number;
 		/**
 		 * This signal is emitted each time a {@link Content} implementation is
 		 * removed from a #ClutterActor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - actor: a {@link Actor} 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "detached", callback: (owner: this, actor: Actor) => void): number;
 
@@ -19712,10 +20400,21 @@ declare namespace imports.gi.Clutter {
 		set_uri(uri: string): void;
 		/**
 		 * The ::eos signal is emitted each time the media stream ends.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "eos", callback: (owner: this) => void): number;
 		/**
 		 * The ::error signal is emitted each time an error occurred.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - error: the #GError 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "error", callback: (owner: this, error: GLib.Error) => void): number;
 

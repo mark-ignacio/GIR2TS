@@ -752,6 +752,14 @@ declare namespace imports.gi.Soup {
 		 * {@link Session} connects to this signal and emits its own
 		 * #SoupSession::authenticate signal when it is emitted, so
 		 * you shouldn't need to use this signal directly.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - msg: the {@link Message} being sent 
+		 *  - auth: the #SoupAuth to authenticate 
+		 *  - retrying: %TRUE if this is the second (or later) attempt 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "authenticate", callback: (owner: this, msg: Message, auth: Auth, retrying: boolean) => void): number;
 
@@ -1131,6 +1139,13 @@ declare namespace imports.gi.Soup {
 		 * #new_cookie will be %NULL. If a cookie has been changed,
 		 * #old_cookie will contain its old value, and #new_cookie its
 		 * new value.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - old_cookie: the old {@link Cookie} value 
+		 *  - new_cookie: the new #SoupCookie value 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this, old_cookie: Cookie, new_cookie: Cookie) => void): number;
 
@@ -1307,12 +1322,25 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * Note that you shouldn't modify the policies from a callback to
 		 * this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - old_policy: the old {@link HSTSPolicy} value 
+		 *  - new_policy: the new #SoupHSTSPolicy value 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this, old_policy: HSTSPolicy, new_policy: HSTSPolicy) => void): number;
 		/**
 		 * Emitted when #hsts_enforcer has upgraded the protocol
 		 * for #message to HTTPS as a result of matching its domain with
 		 * a HSTS policy.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: the message for which HSTS is being enforced 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "hsts-enforced", callback: (owner: this, message: Message) => void): number;
 
@@ -1837,12 +1865,24 @@ declare namespace imports.gi.Soup {
 		 * After this signal is emitted, the data that was spooled so
 		 * that sniffing could be done is delivered on the first
 		 * emission of #SoupMessage::got-chunk.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - type: the content type that we got from sniffing 
+		 *  - params: a #GHashTable with the parameters 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "content-sniffed", callback: (owner: this, type: string, params: GLib.HashTable) => void): number;
 		/**
 		 * Emitted when all HTTP processing is finished for a message.
 		 * (After {@link Message}::got_body for client-side messages, or
 		 * after #SoupMessage::wrote_body for server-side messages.)
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "finished", callback: (owner: this) => void): number;
 		/**
@@ -1854,6 +1894,11 @@ declare namespace imports.gi.Soup {
 		 * See also soup_message_add_header_handler() and
 		 * soup_message_add_status_code_handler(), which can be used
 		 * to connect to a subset of emissions of this signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "got-body", callback: (owner: this) => void): number;
 		/**
@@ -1865,6 +1910,12 @@ declare namespace imports.gi.Soup {
 		 * If you cancel or requeue #msg while processing this signal,
 		 * then the current HTTP I/O will be stopped after this signal
 		 * emission finished, and #msg's connection will be closed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - chunk: the just-read chunk 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "got-chunk", callback: (owner: this, chunk: Buffer) => void): number;
 		/**
@@ -1886,6 +1937,11 @@ declare namespace imports.gi.Soup {
 		 * requeue it from a {@link Message}::got_body handler rather
 		 * than a #SoupMessage::got_headers handler, so that the
 		 * existing HTTP connection can be reused.)
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "got-headers", callback: (owner: this) => void): number;
 		/**
@@ -1898,6 +1954,11 @@ declare namespace imports.gi.Soup {
 		 * If you cancel or requeue #msg while processing this signal,
 		 * then the current HTTP I/O will be stopped after this signal
 		 * emission finished, and #msg's connection will be closed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "got-informational", callback: (owner: this) => void): number;
 		/**
@@ -1913,6 +1974,13 @@ declare namespace imports.gi.Soup {
 		 * See #GSocketClient::event for more information on what
 		 * the different values of #event correspond to, and what
 		 * #connection will be in each case.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the network event 
+		 *  - connection: the current state of the network connection 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "network-event", callback: (owner: this, event: Gio.SocketClientEvent, connection: Gio.IOStream) => void): number;
 		/**
@@ -1920,10 +1988,20 @@ declare namespace imports.gi.Soup {
 		 * being sent again (eg, because the first attempt received a
 		 * redirection response, or because we needed to use
 		 * authentication).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "restarted", callback: (owner: this) => void): number;
 		/**
 		 * Emitted just before a message is sent.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "starting", callback: (owner: this) => void): number;
 		/**
@@ -1933,6 +2011,11 @@ declare namespace imports.gi.Soup {
 		 * from the server. For a server-side message, this means that
 		 * libsoup has finished writing the response and is nearly
 		 * done with the message.)
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "wrote-body", callback: (owner: this) => void): number;
 		/**
@@ -1942,6 +2025,12 @@ declare namespace imports.gi.Soup {
 		 * Unlike {@link Message}::wrote_chunk, this is emitted after
 		 * every successful write() call, not only after finishing a
 		 * complete "chunk".
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - chunk: the data written 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "wrote-body-data", callback: (owner: this, chunk: Buffer) => void): number;
 		/**
@@ -1953,6 +2042,11 @@ declare namespace imports.gi.Soup {
 		 * soup_message_body_append_buffer()) has been written. To get
 		 * more useful continuous progress information, use
 		 * #SoupMessage::wrote_body_data.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "wrote-chunk", callback: (owner: this) => void): number;
 		/**
@@ -1960,11 +2054,21 @@ declare namespace imports.gi.Soup {
 		 * message. (For a client-side message, this is after writing
 		 * the request headers; for a server-side message, it is after
 		 * writing the response headers.)
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "wrote-headers", callback: (owner: this) => void): number;
 		/**
 		 * Emitted immediately after writing a 1xx (Informational)
 		 * response for a (server-side) message.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "wrote-informational", callback: (owner: this) => void): number;
 
@@ -2903,11 +3007,25 @@ declare namespace imports.gi.Soup {
 		 * emitted; the signal exists primarily to allow the server to
 		 * free any state that it may have allocated in
 		 * #SoupServer::request_started.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: the message 
+		 *  - client: the client context 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "request-aborted", callback: (owner: this, message: Message, client: ClientContext) => void): number;
 		/**
 		 * Emitted when the server has finished writing a response to
 		 * a request.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: the message 
+		 *  - client: the client context 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "request-finished", callback: (owner: this, message: Message, client: ClientContext) => void): number;
 		/**
@@ -2918,6 +3036,13 @@ declare namespace imports.gi.Soup {
 		 * before any (non-early) handlers are called for the message,
 		 * and if it sets the message's #status_code, then normal
 		 * handler processing will be skipped.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: the message 
+		 *  - client: the client context 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "request-read", callback: (owner: this, message: Message, client: ClientContext) => void): number;
 		/**
@@ -2932,6 +3057,13 @@ declare namespace imports.gi.Soup {
 		 * a #SoupServer::request_finished signal. If a network error
 		 * occurs, the processing will instead end with
 		 * #SoupServer::request_aborted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: the new message 
+		 *  - client: the client context 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "request-started", callback: (owner: this, message: Message, client: ClientContext) => void): number;
 
@@ -3700,12 +3832,26 @@ declare namespace imports.gi.Soup {
 		 * (as long as you g_object_ref() it to make sure it doesn't
 		 * get destroyed), and then unpause #msg when you are ready
 		 * for it to continue.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - msg: the {@link Message} being sent 
+		 *  - auth: the #SoupAuth to authenticate 
+		 *  - retrying: %TRUE if this is the second (or later) attempt 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "authenticate", callback: (owner: this, msg: Message, auth: Auth, retrying: boolean) => void): number;
 		/**
 		 * Emitted when a new connection is created. This is an
 		 * internal signal intended only to be used for debugging
 		 * purposes, and may go away in the future.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - connection: the connection 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "connection-created", callback: (owner: this, connection: GObject.Object) => void): number;
 		/**
@@ -3744,12 +3890,25 @@ declare namespace imports.gi.Soup {
 		 * exactly once, but #SoupSession::request_started and
 		 * #SoupMessage::finished (and all of the other #SoupMessage
 		 * signals) may be invoked multiple times for a given message.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - msg: the request that was queued 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "request-queued", callback: (owner: this, msg: Message) => void): number;
 		/**
 		 * Emitted just before a request is sent. See
 		 * {@link Session}::request_queued for a detailed description of
 		 * the message lifecycle within a session.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - msg: the request being sent 
+		 *  - socket: the socket the request is being sent on 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "request-started", callback: (owner: this, msg: Message, socket: Socket) => void): number;
 		/**
@@ -3757,12 +3916,24 @@ declare namespace imports.gi.Soup {
 		 * indicating that #session is done with it. See
 		 * {@link Session}::request_queued for a detailed description of the
 		 * message lifecycle within a session.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - msg: the request that was unqueued 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "request-unqueued", callback: (owner: this, msg: Message) => void): number;
 		/**
 		 * Emitted when an SSL tunnel is being created on a proxy
 		 * connection. This is an internal signal intended only to be
 		 * used for debugging purposes, and may go away in the future.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - connection: the connection 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "tunneling", callback: (owner: this, connection: GObject.Object) => void): number;
 
@@ -4117,11 +4288,23 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Emitted when the socket is disconnected, for whatever
 		 * reason.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "disconnected", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when a network-related event occurs. See
 		 * #GSocketClient::event for more details.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the event that occurred 
+		 *  - connection: the current connection state 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "event", callback: (owner: this, event: Gio.SocketClientEvent, connection: Gio.IOStream) => void): number;
 		/**
@@ -4130,17 +4313,33 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * You must ref the #new if you want to keep it; otherwise it
 		 * will be destroyed after the signal is emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - _new: the new socket 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "new-connection", callback: (owner: this, _new: Socket) => void): number;
 		/**
 		 * Emitted when an async socket is readable. See
 		 * soup_socket_read(), soup_socket_read_until() and
 		 * {@link Socket}:non-blocking.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "readable", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when an async socket is writable. See
 		 * soup_socket_write() and {@link Socket}:non-blocking.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "writable", callback: (owner: this) => void): number;
 
@@ -4379,16 +4578,32 @@ declare namespace imports.gi.Soup {
 		 * condition that caused a close.
 		 * 
 		 * This signal will be emitted once.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "closed", callback: (owner: this) => void): number;
 		/**
 		 * This signal will be emitted during an orderly close.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "closing", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when an error occurred on the WebSocket. This may
 		 * be fired multiple times. Fatal errors will be followed by
 		 * the {@link WebsocketConnection}::closed signal being emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - error: the error that occured 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "error", callback: (owner: this, error: GLib.Error) => void): number;
 		/**
@@ -4397,6 +4612,13 @@ declare namespace imports.gi.Soup {
 		 * As a convenience, the #message data will always be
 		 * NUL-terminated, but the NUL byte will not be included in
 		 * the length count.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - type: the type of message contents 
+		 *  - message: the message data 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "message", callback: (owner: this, type: number, message: GLib.Bytes) => void): number;
 		/**
@@ -4406,6 +4628,12 @@ declare namespace imports.gi.Soup {
 		 * As a convenience, the #message data will always be
 		 * NUL-terminated, but the NUL byte will not be included in
 		 * the length count.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: the application data (if any) 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pong", callback: (owner: this, message: GLib.Bytes) => void): number;
 
