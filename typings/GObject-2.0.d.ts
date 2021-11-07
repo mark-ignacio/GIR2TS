@@ -444,9 +444,9 @@ declare namespace imports.gi.GObject {
 		 * "any_signal", which means to disconnect any signal with matching
 		 * callback and data, or "any_signal::signal_name", which only
 		 * disconnects the signal named "signal_name".
-		 * @param signal_spec the spec for the first signal
+		 * @param id returned ID of the connect function
 		 */
-		disconnect(signal_spec: string): void;
+		disconnect(id: number): void;
 		/**
 		 * This is a variant of g_object_get_data() which returns
 		 * a 'duplicate' of the value. #dup_func defines the

@@ -1,0 +1,20 @@
+{
+    "$schema": "./schema.json",
+    "amend": {
+        "class": {
+            "Object": {
+                "function": {
+                    "disconnect": {
+                        "param": {
+                            "signal_spec": {
+                                "newName": "id",
+                                "type": "number",
+                                "doc": "returned ID of the connect function"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
