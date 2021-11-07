@@ -10187,7 +10187,7 @@ declare namespace imports.gi.Gtk {
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */
@@ -21417,7 +21417,7 @@ declare namespace imports.gi.Gtk {
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */
@@ -21458,7 +21458,7 @@ declare namespace imports.gi.Gtk {
 		 *  - owner: owner of the emitted event 
 		 *  - step: the granularity of the move, as a {@link MovementStep} 
 		 *  - count: the number of #step units to move 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */
@@ -24052,7 +24052,7 @@ declare namespace imports.gi.Gtk {
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */
@@ -29154,7 +29154,7 @@ declare namespace imports.gi.Gtk {
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */
@@ -29170,7 +29170,7 @@ declare namespace imports.gi.Gtk {
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */
@@ -29185,7 +29185,7 @@ declare namespace imports.gi.Gtk {
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
 		 *  - reversed: whether cycling backward or forward 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */
@@ -29201,7 +29201,7 @@ declare namespace imports.gi.Gtk {
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
 		 *  - reversed: whether cycling backward or forward 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */
@@ -29215,7 +29215,7 @@ declare namespace imports.gi.Gtk {
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
 		 *  - scroll_type: a {@link ScrollType} 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */
@@ -29230,7 +29230,7 @@ declare namespace imports.gi.Gtk {
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */
@@ -35032,7 +35032,7 @@ declare namespace imports.gi.Gtk {
 		 *  - scroll: a {@link ScrollType} describing how much to scroll 
 		 *  - horizontal: whether the keybinding scrolls the child
 		 *   horizontally or not 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */

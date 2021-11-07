@@ -6720,9 +6720,9 @@ declare namespace imports.gi.WebKit2 {
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
-		 *  - object: null 
-		 *  - p0: null 
-		 *  - p1: null 
+		 *  - object:  
+		 *  - p0:  
+		 *  - p1:  
 		 *  - returns %TRUE to stop other handlers from being invoked for the event.
 		 *   %FALSE to propagate the event further. 
 		 * 

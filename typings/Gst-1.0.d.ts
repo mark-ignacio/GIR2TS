@@ -438,7 +438,7 @@ declare namespace imports.gi.Gst {
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */

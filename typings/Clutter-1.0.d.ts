@@ -13799,7 +13799,7 @@ declare namespace imports.gi.Clutter {
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
 		 *  - event: a {@link Event} of type %CLUTTER_DELETE 
-		 *  - returns null 
+		 *  - returns  
 		 * 
 		 * @returns Callback ID
 		 */

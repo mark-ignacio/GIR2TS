@@ -9,10 +9,10 @@ export function renderSignal(node: FunctionNode, ns_name: string, exclude: boole
     //#region Generate callback docstring
     let callbackDocstring = "Callback function\n - owner: owner of the emitted event \n";
     for (const param of info.params) {
-        callbackDocstring+= ` - ${param.name}: ${param.docString} \n`;
+        callbackDocstring+= ` - ${param.name}: ${param.docString ?? ""} \n`;
     }
     if (info.return_type?.type != "void") {
-        callbackDocstring+= ` - returns ${info.return_type?.docString} \n`;
+        callbackDocstring+= ` - returns ${info.return_type?.docString ?? ""} \n`;
     }
     //#endregion
 

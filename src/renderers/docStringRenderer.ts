@@ -7,12 +7,9 @@ export interface DocStringOptions {
     deprecatedDoc?: string;
 }
 
-function capitalize(str: string) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
 
- /** Convert references to for same library, like #SoupMessage to {link Message} */
- function convertLinks(doc: string, ns_name?: string): string {
+/** Convert references to for same library, like #SoupMessage to {link Message} */
+function convertLinks(doc: string, ns_name?: string): string {
     if (doc == undefined)
         return doc;
 
@@ -48,10 +45,10 @@ function prepareDocString(doc: string | undefined, ns_name?: string): string[] |
 export function renderDocString(docString: string | null, params?: Parameter[], return_info?: TypeInfo, options?: DocStringOptions): string {
     const {
         indent = 0,
-        ns_name, 
+        ns_name,
         deprecatedDoc
     } = options ?? {};
-    
+
     if (docString == null)
         return "";
 
@@ -59,11 +56,11 @@ export function renderDocString(docString: string | null, params?: Parameter[], 
 
     let doc = `${ind}/**\n`;
     if (deprecatedDoc) {
-        doc+= `${ind} * @deprecated\n`;
+        doc += `${ind} * @deprecated\n`;
         for (const line of prepareDocString(deprecatedDoc, ns_name) ?? []) {
-            doc+= `${ind} * ${line}\n`
+            doc += `${ind} * ${line}\n`
         }
-        doc+= `${ind} * \n`;
+        doc += `${ind} * \n`;
     }
 
     for (const line of prepareDocString(docString, ns_name) ?? []) {
