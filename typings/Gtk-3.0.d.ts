@@ -1025,6 +1025,9 @@ declare namespace imports.gi.Gtk {
 	interface IAccessible {
 		widget: Widget;
 		/**
+		 * @deprecated
+		 * Use gtk_accessible_set_widget() and its vfuncs.
+		 * 
 		 * This function specifies the callback function to be called
 		 * when the widget corresponding to a GtkAccessible is destroyed.
 		 */
@@ -1182,6 +1185,9 @@ declare namespace imports.gi.Gtk {
 		visible_vertical: boolean;
 		readonly object: GObject.Object;
 		/**
+		 * @deprecated
+		 * Use g_action_group_activate_action() on a #GAction instead
+		 * 
 		 * Emits the “activate” signal on the specified action, if it isn't
 		 * insensitive. This gets called by the proxy widgets when they get
 		 * activated.
@@ -1190,6 +1196,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		activate(): void;
 		/**
+		 * @deprecated
+		 * Use g_simple_action_set_enabled() to disable the
+		 * #GSimpleAction instead
+		 * 
 		 * Disable activation signals from the action
 		 * 
 		 * This is needed when updating the state of your proxy
@@ -1199,6 +1209,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		block_activate(): void;
 		/**
+		 * @deprecated
+		 * Use #GAction and the accelerator group on an associated
+		 * {@link Menu} instead
+		 * 
 		 * Installs the accelerator for #action if #action has an
 		 * accel path and group. See gtk_action_set_accel_path() and
 		 * gtk_action_set_accel_group()
@@ -1210,6 +1224,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect_accelerator(): void;
 		/**
+		 * @deprecated
+		 * Use g_menu_item_set_icon() to set an icon on a #GMenuItem,
+		 * or gtk_container_add() to add a {@link Image} to a #GtkButton
+		 * 
 		 * This function is intended for use by action implementations to
 		 * create icons displayed in the proxy widgets.
 		 * @param icon_size the size of the icon ({@link IconSize}) that should
@@ -1218,6 +1236,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		create_icon(icon_size: number): Widget;
 		/**
+		 * @deprecated
+		 * Use #GAction and #GMenuModel instead, and create a
+		 * {@link Menu} with gtk_menu_new_from_model()
+		 * 
 		 * If #action provides a {@link Menu} widget as a submenu for the menu
 		 * item or the toolbar item it creates, this function returns an
 		 * instance of that menu.
@@ -1226,20 +1248,36 @@ declare namespace imports.gi.Gtk {
 		 */
 		create_menu(): Widget;
 		/**
+		 * @deprecated
+		 * Use g_menu_item_new() and associate it with a #GAction
+		 * instead.
+		 * 
 		 * Creates a menu item widget that proxies for the given action.
 		 * @returns a menu item connected to the action.
 		 */
 		create_menu_item(): Widget;
 		/**
+		 * @deprecated
+		 * Use a {@link ToolItem} and associate it with a #GAction using
+		 * gtk_actionable_set_action_name() instead
+		 * 
 		 * Creates a toolbar item widget that proxies for the given action.
 		 * @returns a toolbar item connected to the action.
 		 */
 		create_tool_item(): Widget;
 		/**
+		 * @deprecated
+		 * Use #GAction and the accelerator group on an associated
+		 * {@link Menu} instead
+		 * 
 		 * Undoes the effect of one call to gtk_action_connect_accelerator().
 		 */
 		disconnect_accelerator(): void;
 		/**
+		 * @deprecated
+		 * Use #GAction and {@link Menu} instead, which have no
+		 * equivalent for getting the accel closure
+		 * 
 		 * Returns the accel closure for this action.
 		 * @returns the accel closure for this action. The
 		 *          returned closure is owned by GTK+ and must not be unreffed
@@ -1247,6 +1285,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_accel_closure(): GObject.Closure;
 		/**
+		 * @deprecated
+		 * Use #GAction and the accelerator path on an associated
+		 * {@link Menu} instead
+		 * 
 		 * Returns the accel path for this action.
 		 * @returns the accel path for this action, or %NULL
 		 *   if none is set. The returned string is owned by GTK+
@@ -1254,32 +1296,58 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_accel_path(): string;
 		/**
+		 * @deprecated
+		 * Use g_menu_item_get_attribute_value() on a #GMenuItem
+		 * instead
+		 * 
 		 * Returns whether #action's menu item proxies will always
 		 * show their image, if available.
 		 * @returns %TRUE if the menu item proxies will always show their image
 		 */
 		get_always_show_image(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and
+		 * g_menu_item_get_attribute_value() to get an icon from a #GMenuItem
+		 * associated with a #GAction
+		 * 
 		 * Gets the gicon of #action.
 		 * @returns The action’s #GIcon if one is set.
 		 */
 		get_gicon(): Gio.Icon;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and
+		 * g_menu_item_get_attribute_value() to get an icon from a #GMenuItem
+		 * associated with a #GAction
+		 * 
 		 * Gets the icon name of #action.
 		 * @returns the icon name
 		 */
 		get_icon_name(): string;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and control and monitor whether
+		 * labels are shown directly
+		 * 
 		 * Checks whether #action is important or not
 		 * @returns whether #action is important
 		 */
 		get_is_important(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and get a label from a menu item
+		 * with g_menu_item_get_attribute_value(). For {@link Actionable} widgets, use the
+		 * widget-specific API to get a label
+		 * 
 		 * Gets the label text of #action.
 		 * @returns the label text
 		 */
 		get_label(): string;
 		/**
+		 * @deprecated
+		 * Use g_action_get_name() on a #GAction instead
+		 * 
 		 * Returns the name of the action.
 		 * @returns the name of the action. The string belongs to GTK+ and should not
 		 *   be freed.
@@ -1293,6 +1361,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_proxies(): GLib.SList;
 		/**
+		 * @deprecated
+		 * Use g_action_get_enabled() on a #GAction
+		 * instead
+		 * 
 		 * Returns whether the action itself is sensitive. Note that this doesn’t
 		 * necessarily mean effective sensitivity. See gtk_action_is_sensitive()
 		 * for that.
@@ -1300,21 +1372,37 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_sensitive(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, which has no equivalent of short
+		 * labels
+		 * 
 		 * Gets the short label text of #action.
 		 * @returns the short label text.
 		 */
 		get_short_label(): string;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, which has no equivalent of stock
+		 * items
+		 * 
 		 * Gets the stock id of #action.
 		 * @returns the stock id
 		 */
 		get_stock_id(): string;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and get tooltips from associated
+		 * {@link Actionable} widgets with gtk_widget_get_tooltip_text()
+		 * 
 		 * Gets the tooltip text of #action.
 		 * @returns the tooltip text
 		 */
 		get_tooltip(): string;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and control and monitor the state of
+		 * {@link Actionable} widgets directly
+		 * 
 		 * Returns whether the action itself is visible. Note that this doesn’t
 		 * necessarily mean effective visibility. See gtk_action_is_sensitive()
 		 * for that.
@@ -1322,34 +1410,58 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_visible(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and control and monitor the
+		 * visibility of associated widgets and menu items directly
+		 * 
 		 * Checks whether #action is visible when horizontal
 		 * @returns whether #action is visible when horizontal
 		 */
 		get_visible_horizontal(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and control and monitor the
+		 * visibility of associated widgets and menu items directly
+		 * 
 		 * Checks whether #action is visible when horizontal
 		 * @returns whether #action is visible when horizontal
 		 */
 		get_visible_vertical(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_action_get_enabled() on a #GAction
+		 * instead
+		 * 
 		 * Returns whether the action is effectively sensitive.
 		 * @returns %TRUE if the action and its associated action group
 		 * are both sensitive.
 		 */
 		is_sensitive(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and control and monitor the state of
+		 * {@link Actionable} widgets directly
+		 * 
 		 * Returns whether the action is effectively visible.
 		 * @returns %TRUE if the action and its associated action group
 		 * are both visible.
 		 */
 		is_visible(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GAction and the accelerator group on an associated
+		 * {@link Menu} instead
+		 * 
 		 * Sets the {@link AccelGroup} in which the accelerator for this action
 		 * will be installed.
 		 * @param accel_group a {@link AccelGroup} or %NULL
 		 */
 		set_accel_group(accel_group: AccelGroup | null): void;
 		/**
+		 * @deprecated
+		 * Use #GAction and the accelerator path on an associated
+		 * {@link Menu} instead
+		 * 
 		 * Sets the accel path for this action.  All proxy widgets associated
 		 * with the action will have this accel path, so that their
 		 * accelerators are consistent.
@@ -1361,6 +1473,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_accel_path(accel_path: string): void;
 		/**
+		 * @deprecated
+		 * Use g_menu_item_set_icon() on a #GMenuItem instead, if the
+		 * item should have an image
+		 * 
 		 * Sets whether #action's menu item proxies will ignore the
 		 * {@link Settings}:gtk-menu-images setting and always show their image, if available.
 		 * 
@@ -1370,16 +1486,30 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_always_show_image(always_show: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and g_menu_item_set_icon() to set an
+		 * icon on a #GMenuItem associated with a #GAction, or gtk_container_add() to
+		 * add a {@link Image} to a #GtkButton
+		 * 
 		 * Sets the icon of #action.
 		 * @param icon the #GIcon to set
 		 */
 		set_gicon(icon: Gio.Icon): void;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and g_menu_item_set_icon() to set an
+		 * icon on a #GMenuItem associated with a #GAction, or gtk_container_add() to
+		 * add a {@link Image} to a #GtkButton
+		 * 
 		 * Sets the icon name on #action
 		 * @param icon_name the icon name to set
 		 */
 		set_icon_name(icon_name: string): void;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and control and monitor whether
+		 * labels are shown directly
+		 * 
 		 * Sets whether the action is important, this attribute is used
 		 * primarily by toolbar items to decide whether to show a label
 		 * or not.
@@ -1387,11 +1517,20 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_is_important(is_important: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and set a label on a menu item with
+		 * g_menu_item_set_label(). For {@link Actionable} widgets, use the widget-specific
+		 * API to set a label
+		 * 
 		 * Sets the label of #action.
 		 * @param label the label text to set
 		 */
 		set_label(label: string): void;
 		/**
+		 * @deprecated
+		 * Use g_simple_action_set_enabled() on a #GSimpleAction
+		 * instead
+		 * 
 		 * Sets the :sensitive property of the action to #sensitive. Note that
 		 * this doesn’t necessarily mean effective sensitivity. See
 		 * gtk_action_is_sensitive()
@@ -1400,21 +1539,37 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_sensitive(sensitive: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, which has no equivalent of short
+		 * labels
+		 * 
 		 * Sets a shorter label text on #action.
 		 * @param short_label the label text to set
 		 */
 		set_short_label(short_label: string): void;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, which has no equivalent of stock
+		 * items
+		 * 
 		 * Sets the stock id on #action
 		 * @param stock_id the stock id
 		 */
 		set_stock_id(stock_id: string): void;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and set tooltips on associated
+		 * {@link Actionable} widgets with gtk_widget_set_tooltip_text()
+		 * 
 		 * Sets the tooltip text on #action
 		 * @param tooltip the tooltip text
 		 */
 		set_tooltip(tooltip: string): void;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and control and monitor the state of
+		 * {@link Actionable} widgets directly
+		 * 
 		 * Sets the :visible property of the action to #visible. Note that
 		 * this doesn’t necessarily mean effective visibility. See
 		 * gtk_action_is_visible()
@@ -1423,16 +1578,28 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_visible(visible: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and control and monitor the
+		 * visibility of associated widgets and menu items directly
+		 * 
 		 * Sets whether #action is visible when horizontal
 		 * @param visible_horizontal whether the action is visible horizontally
 		 */
 		set_visible_horizontal(visible_horizontal: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #GAction instead, and control and monitor the
+		 * visibility of associated widgets and menu items directly
+		 * 
 		 * Sets whether #action is visible when vertical
 		 * @param visible_vertical whether the action is visible vertically
 		 */
 		set_visible_vertical(visible_vertical: boolean): void;
 		/**
+		 * @deprecated
+		 * Use g_simple_action_set_enabled() to enable the
+		 * #GSimpleAction instead
+		 * 
 		 * Reenable activation signals from the action
 		 */
 		unblock_activate(): void;
@@ -1547,6 +1714,10 @@ declare namespace imports.gi.Gtk {
 	class Action {
 		public constructor(options?: Partial<ActionInitOptions>);
 		/**
+		 * @deprecated
+		 * Use #GAction instead, associating it to a widget with
+		 * {@link Actionable} or creating a #GtkMenu with gtk_menu_new_from_model()
+		 * 
 		 * Creates a new {@link Action} object. To add the action to a
 		 * #GtkActionGroup and set the accelerator for the action,
 		 * call gtk_action_group_add_action_with_accel().
@@ -2005,6 +2176,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		value: number;
 		/**
+		 * @deprecated
+		 * GTK+ emits {@link Adjustment}::changed itself whenever any
+		 *    of the properties (other than value) change
+		 * 
 		 * Emits a {@link Adjustment}::changed signal from the #GtkAdjustment.
 		 * This is typically called by the owner of the #GtkAdjustment after it has
 		 * changed any of the #GtkAdjustment properties other than the value.
@@ -2140,6 +2315,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_value(value: number): void;
 		/**
+		 * @deprecated
+		 * GTK+ emits {@link Adjustment}::value-changed itself whenever
+		 *    the value changes
+		 * 
 		 * Emits a {@link Adjustment}::value-changed signal from the #GtkAdjustment.
 		 * This is typically called by the owner of the #GtkAdjustment after it has
 		 * changed the #GtkAdjustment:value property.
@@ -2262,6 +2441,9 @@ declare namespace imports.gi.Gtk {
 		yscale: number;
 		readonly bin: Bin;
 		/**
+		 * @deprecated
+		 * Use {@link Widget} alignment and margin properties
+		 * 
 		 * Gets the padding on the different sides of the widget.
 		 * See gtk_alignment_set_padding ().
 		 * @returns location to store the padding for
@@ -2278,6 +2460,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_padding(): [ padding_top: number | null, padding_bottom: number | null, padding_left: number | null, padding_right: number | null ];
 		/**
+		 * @deprecated
+		 * Use {@link Widget} alignment and margin properties
+		 * 
 		 * Sets the {@link Alignment} values.
 		 * @param xalign the horizontal alignment of the child widget, from 0 (left) to 1
 		 *  (right).
@@ -2293,6 +2478,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set(xalign: number, yalign: number, xscale: number, yscale: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link Widget} alignment and margin properties
+		 * 
 		 * Sets the padding on the different sides of the widget.
 		 * The padding adds blank space to the sides of the widget. For instance,
 		 * this can be used to indent the child widget towards the right by adding
@@ -2358,6 +2546,9 @@ declare namespace imports.gi.Gtk {
 	class Alignment {
 		public constructor(options?: Partial<AlignmentInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link Widget} alignment and margin properties
+		 * 
 		 * Creates a new {@link Alignment}.
 		 * @param xalign the horizontal alignment of the child widget, from 0 (left) to 1
 		 *  (right).
@@ -2846,6 +3037,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		readonly screensaver_active: boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_application_set_accels_for_action() instead
+		 * 
 		 * Installs an accelerator that will cause the named action
 		 * to be activated when the key combination specificed by #accelerator
 		 * is pressed.
@@ -3060,6 +3254,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		prefers_app_menu(): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_application_set_accels_for_action() instead
+		 * 
 		 * Removes an accelerator that has been previously added
 		 * with gtk_application_add_accelerator().
 		 * @param action_name the name of the action to activate
@@ -3506,6 +3703,9 @@ declare namespace imports.gi.Gtk {
 		shadow_type: ShadowType;
 		readonly misc: Misc;
 		/**
+		 * @deprecated
+		 * Use a {@link Image} with a suitable icon.
+		 * 
 		 * Sets the direction and style of the {@link Arrow}, #arrow.
 		 * @param arrow_type a valid {@link ArrowType}.
 		 * @param shadow_type a valid {@link ShadowType}.
@@ -3557,6 +3757,9 @@ declare namespace imports.gi.Gtk {
 	class Arrow {
 		public constructor(options?: Partial<ArrowInitOptions>);
 		/**
+		 * @deprecated
+		 * Use a {@link Image} with a suitable icon.
+		 * 
 		 * Creates a new {@link Arrow} widget.
 		 * @param arrow_type a valid {@link ArrowType}.
 		 * @param shadow_type a valid {@link ShadowType}.
@@ -3733,6 +3936,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_page_has_padding(page: Widget): boolean;
 		/**
+		 * @deprecated
+		 * Since GTK+ 3.2, a header is no longer shown;
+		 *     add your header decoration to the page content instead.
+		 * 
 		 * Gets the header image for #page.
 		 * @param page a page of #assistant
 		 * @returns the header image for #page,
@@ -3740,6 +3947,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_page_header_image(page: Widget): GdkPixbuf.Pixbuf;
 		/**
+		 * @deprecated
+		 * Since GTK+ 3.2, sidebar images are not
+		 *     shown anymore.
+		 * 
 		 * Gets the side image for #page.
 		 * @param page a page of #assistant
 		 * @returns the side image for #page,
@@ -3846,12 +4057,20 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_page_has_padding(page: Widget, has_padding: boolean): void;
 		/**
+		 * @deprecated
+		 * Since GTK+ 3.2, a header is no longer shown;
+		 *     add your header decoration to the page content instead.
+		 * 
 		 * Sets a header image for #page.
 		 * @param page a page of #assistant
 		 * @param pixbuf the new header image #page
 		 */
 		set_page_header_image(page: Widget, pixbuf: GdkPixbuf.Pixbuf | null): void;
 		/**
+		 * @deprecated
+		 * Since GTK+ 3.2, sidebar images are not
+		 *     shown anymore.
+		 * 
 		 * Sets a side image for #page.
 		 * 
 		 * This image used to be displayed in the side area of the assistant
@@ -4874,10 +5093,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		clicked(): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Widget}::enter-notify-event signal.
+		 * 
 		 * Emits a {@link Button}::enter signal to the given #GtkButton.
 		 */
 		enter(): void;
 		/**
+		 * @deprecated
+		 * Access the child widget directly if you need to control
+		 * its alignment.
+		 * 
 		 * Gets the alignment of the child in the button.
 		 * @returns return location for horizontal alignment
 		 * 
@@ -4897,6 +5123,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_event_window(): Gdk.Window;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_focus_on_click() instead
+		 * 
 		 * Returns whether the button grabs focus when it is clicked with the mouse.
 		 * See gtk_button_set_focus_on_click().
 		 * @returns %TRUE if the button grabs focus when it is clicked with
@@ -4947,18 +5176,31 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_use_underline(): boolean;
 		/**
+		 * @deprecated
+		 * Use the {@link Widget}::leave-notify-event signal.
+		 * 
 		 * Emits a {@link Button}::leave signal to the given #GtkButton.
 		 */
 		leave(): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Widget}::button-press-event signal.
+		 * 
 		 * Emits a {@link Button}::pressed signal to the given #GtkButton.
 		 */
 		pressed(): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Widget}::button-release-event signal.
+		 * 
 		 * Emits a {@link Button}::released signal to the given #GtkButton.
 		 */
 		released(): void;
 		/**
+		 * @deprecated
+		 * Access the child widget directly if you need to control
+		 * its alignment.
+		 * 
 		 * Sets the alignment of the child. This property has no effect unless
 		 * the child is a {@link Misc} or a #GtkAlignment.
 		 * @param xalign the horizontal position of the child, 0.0 is left aligned,
@@ -4977,6 +5219,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_always_show_image(always_show: boolean): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_focus_on_click() instead
+		 * 
 		 * Sets whether the button will grab focus when it is clicked with the mouse.
 		 * Making mouse clicks not grab focus is useful in places like toolbars where
 		 * you don’t want the keyboard focus removed from the main area of the
@@ -5166,6 +5411,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_icon_name(icon_name: string | null, size: number): Widget;
 		/**
+		 * @deprecated
+		 * Stock items are deprecated. Use gtk_button_new_with_label()
+		 * instead.
+		 * 
 		 * Creates a new {@link Button} containing the image and text from a
 		 * [stock item][gtkstock].
 		 * Some stock ids have preprocessor macros like #GTK_STOCK_OK and
@@ -6900,6 +7149,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_sensitive(): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_cell_renderer_get_preferred_size() instead.
+		 * 
 		 * Obtains the width and height needed to render the cell. Used by view
 		 * widgets to determine the appropriate size for the cell_area passed to
 		 * gtk_cell_renderer_render().  If #cell_area is not %NULL, fills in the
@@ -8096,6 +8348,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_model(): TreeModel | null;
 		/**
+		 * @deprecated
+		 * Combo box formerly used this to calculate the
+		 * sizes for cellviews, now you can achieve this by either using
+		 * the {@link CellView}:fit-model property or by setting the currently
+		 * displayed row of the #GtkCellView and using gtk_widget_get_preferred_size().
+		 * 
 		 * Sets #requisition to the size needed by #cell_view to display
 		 * the model row pointed to by #path.
 		 * @param path a {@link TreePath}
@@ -8105,6 +8363,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_size_of_row(path: TreePath): [ boolean, Requisition ];
 		/**
+		 * @deprecated
+		 * Use gtk_cell_view_set_background_rgba() instead.
+		 * 
 		 * Sets the background color of #view.
 		 * @param color the new background color
 		 */
@@ -8974,16 +9235,25 @@ declare namespace imports.gi.Gtk {
 		use_alpha: boolean;
 		readonly button: Button;
 		/**
+		 * @deprecated
+		 * Use gtk_color_chooser_get_rgba() instead.
+		 * 
 		 * Returns the current alpha value.
 		 * @returns an integer between 0 and 65535
 		 */
 		get_alpha(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_color_chooser_get_rgba() instead.
+		 * 
 		 * Sets #color to be the current color in the {@link ColorButton} widget.
 		 * @returns a #GdkColor to fill in with the current color
 		 */
 		get_color(): Gdk.Color;
 		/**
+		 * @deprecated
+		 * Use gtk_color_chooser_get_rgba() instead.
+		 * 
 		 * Sets #rgba to be the current color in the {@link ColorButton} widget.
 		 * @returns a #GdkRGBA to fill in with the current color
 		 */
@@ -8994,21 +9264,33 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_title(): string;
 		/**
+		 * @deprecated
+		 * Use gtk_color_chooser_get_use_alpha() instead.
+		 * 
 		 * Does the color selection dialog use the alpha channel ?
 		 * @returns %TRUE if the color sample uses alpha channel, %FALSE if not
 		 */
 		get_use_alpha(): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_color_chooser_set_rgba() instead.
+		 * 
 		 * Sets the current opacity to be #alpha.
 		 * @param alpha an integer between 0 and 65535
 		 */
 		set_alpha(alpha: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_color_chooser_set_rgba() instead.
+		 * 
 		 * Sets the current color to be #color.
 		 * @param color A #GdkColor to set the current color with
 		 */
 		set_color(color: Gdk.Color): void;
 		/**
+		 * @deprecated
+		 * Use gtk_color_chooser_set_rgba() instead.
+		 * 
 		 * Sets the current color to be #rgba.
 		 * @param rgba a #GdkRGBA to set the current color with
 		 */
@@ -9019,6 +9301,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_title(title: string): void;
 		/**
+		 * @deprecated
+		 * Use gtk_color_chooser_set_use_alpha() instead.
+		 * 
 		 * Sets whether or not the color button should use the alpha channel.
 		 * @param use_alpha %TRUE if color button should use alpha channel, %FALSE if not
 		 */
@@ -9092,6 +9377,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(): Widget;
 		/**
+		 * @deprecated
+		 * Use gtk_color_button_new_with_rgba() instead.
+		 * 
 		 * Creates a new color button.
 		 * @param color A #GdkColor to set the current color with
 		 * @returns a new color button
@@ -9223,6 +9511,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_current_alpha(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_color_selection_get_current_rgba() instead.
+		 * 
 		 * Sets #color to be the current color in the GtkColorSelection widget.
 		 * @returns a #GdkColor to fill in with the current color
 		 */
@@ -9249,6 +9540,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_previous_alpha(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_color_selection_get_previous_rgba() instead.
+		 * 
 		 * Fills #color in with the original color value.
 		 * @returns a #GdkColor to fill in with the original color value
 		 */
@@ -9273,6 +9567,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_current_alpha(alpha: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_color_selection_set_current_rgba() instead.
+		 * 
 		 * Sets the current color to be #color.
 		 * 
 		 * The first time this is called, it will also set
@@ -9307,6 +9604,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_previous_alpha(alpha: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_color_selection_set_previous_rgba() instead.
+		 * 
 		 * Sets the “previous” color to be #color.
 		 * 
 		 * This function should be called with some hesitations,
@@ -9602,6 +9902,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_entry_text_column(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_focus_on_click() instead
+		 * 
 		 * Returns whether the combo box grabs focus when it is clicked
 		 * with the mouse. See gtk_combo_box_set_focus_on_click().
 		 * @returns %TRUE if the combo box grabs focus when it is
@@ -9744,6 +10047,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_entry_text_column(text_column: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_focus_on_click() instead
+		 * 
 		 * Sets whether the combo box will grab focus when it is clicked with
 		 * the mouse. Making mouse clicks not grab focus is useful in places
 		 * like toolbars where you don’t want the keyboard focus removed from
@@ -10375,6 +10681,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_children(): GLib.List;
 		/**
+		 * @deprecated
+		 * For overriding focus behavior, use the
+		 *     GtkWidgetClass::focus signal.
+		 * 
 		 * Retrieves the focus chain of the container, if one has been
 		 * set explicitly. If no focus chain has been explicitly
 		 * set, GTK+ computes the focus chain based on the positions
@@ -10422,6 +10732,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_path_for_child(child: Widget): WidgetPath;
 		/**
+		 * @deprecated
+		 * Resize modes are deprecated. They aren’t necessary
+		 *     anymore since frame clocks and might introduce obscure bugs if
+		 *     used.
+		 * 
 		 * Returns the resize mode for the container. See
 		 * gtk_container_set_resize_mode ().
 		 * @returns the current resize mode
@@ -10478,6 +10793,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_border_width(border_width: number): void;
 		/**
+		 * @deprecated
+		 * For overriding focus behavior, use the
+		 *     GtkWidgetClass::focus signal.
+		 * 
 		 * Sets a focus chain, overriding the one computed automatically by GTK+.
 		 * 
 		 * In principle each widget in the chain should be a descendant of the
@@ -10530,6 +10849,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_focus_vadjustment(adjustment: Adjustment): void;
 		/**
+		 * @deprecated
+		 * Call gtk_widget_queue_draw() in your size_allocate handler.
+		 * 
 		 * Sets the #reallocate_redraws flag of the container to the given value.
 		 * 
 		 * Containers requesting reallocation redraws get automatically
@@ -10538,6 +10860,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_reallocate_redraws(needs_redraws: boolean): void;
 		/**
+		 * @deprecated
+		 * Resize modes are deprecated. They aren’t necessary
+		 *     anymore since frame clocks and might introduce obscure bugs if
+		 *     used.
+		 * 
 		 * Sets the resize mode for the container.
 		 * 
 		 * The resize mode of a container determines whether a resize request
@@ -10547,6 +10874,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_resize_mode(resize_mode: ResizeMode): void;
 		/**
+		 * @deprecated
+		 * For overriding focus behavior, use the
+		 *     GtkWidgetClass::focus signal.
+		 * 
 		 * Removes a focus chain explicitly set with gtk_container_set_focus_chain().
 		 */
 		unset_focus_chain(): void;
@@ -10956,6 +11287,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(): CssProvider;
 		/**
+		 * @deprecated
+		 * Use gtk_css_provider_new() instead.
+		 * 
 		 * Returns the provider containing the style settings used as a
 		 * fallback for all widgets.
 		 * @returns The provider used for fallback styling.
@@ -11017,6 +11351,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		add_buttons(first_button_text: string): void;
 		/**
+		 * @deprecated
+		 * Direct access to the action area
+		 *   is discouraged; use gtk_dialog_add_button(), etc.
+		 * 
 		 * Returns the action area of #dialog.
 		 * @returns the action area
 		 */
@@ -11107,6 +11445,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		run(): number;
 		/**
+		 * @deprecated
+		 * Deprecated
+		 * 
 		 * Sets an alternative button order. If the
 		 * {@link Settings}:gtk-alternative-button-order setting is set to %TRUE,
 		 * the dialog buttons are reordered according to the order of the
@@ -11147,6 +11488,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_alternative_button_order(first_response_id: number): void;
 		/**
+		 * @deprecated
+		 * Deprecated
+		 * 
 		 * Sets an alternative button order. If the
 		 * {@link Settings}:gtk-alternative-button-order setting is set to %TRUE,
 		 * the dialog buttons are reordered according to the order of the
@@ -11867,6 +12211,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_icon_sensitive(icon_pos: EntryIconPosition): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_entry_get_icon_name() instead.
+		 * 
 		 * Retrieves the stock id used for the icon, or %NULL if there is
 		 * no icon or if the icon was set by some other method (e.g., by
 		 * pixbuf, icon name or gicon).
@@ -11900,6 +12247,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_icon_tooltip_text(icon_pos: EntryIconPosition): string | null;
 		/**
+		 * @deprecated
+		 * Use the standard border and padding CSS properties (through
+		 *   objects like {@link StyleContext} and #GtkCssProvider); the value returned by
+		 *   this function is ignored by #GtkEntry.
+		 * 
 		 * This function returns the entry’s {@link Entry}:inner-border property. See
 		 * gtk_entry_set_inner_border() for more information.
 		 * @returns the entry’s {@link Border}, or
@@ -12212,6 +12564,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_icon_from_pixbuf(icon_pos: EntryIconPosition, pixbuf: GdkPixbuf.Pixbuf | null): void;
 		/**
+		 * @deprecated
+		 * Use gtk_entry_set_icon_from_icon_name() instead.
+		 * 
 		 * Sets the icon shown in the entry at the specified position from
 		 * a stock image.
 		 * 
@@ -12259,6 +12614,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_icon_tooltip_text(icon_pos: EntryIconPosition, tooltip: string | null): void;
 		/**
+		 * @deprecated
+		 * Use the standard border and padding CSS properties (through
+		 *   objects like {@link StyleContext} and #GtkCssProvider); the value set with
+		 *   this function is ignored by #GtkEntry.
+		 * 
 		 * Sets %entry’s inner-border property to #border, or clears it if %NULL
 		 * is passed. The inner-border is the area around the entry’s text, but
 		 * inside its frame.
@@ -13946,6 +14306,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_resize_toplevel(): boolean;
 		/**
+		 * @deprecated
+		 * Use margins on the child instead.
+		 * 
 		 * Gets the value set by gtk_expander_set_spacing().
 		 * @returns spacing between the expander and child
 		 */
@@ -14000,6 +14363,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_resize_toplevel(resize_toplevel: boolean): void;
 		/**
+		 * @deprecated
+		 * Use margins on the child instead.
+		 * 
 		 * Sets the spacing field of #expander, which is the number of
 		 * pixels to place between expander and the child.
 		 * @param spacing distance between the expander and child in pixels
@@ -14193,6 +14559,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		width_chars: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_focus_on_click() instead
+		 * 
 		 * Returns whether the button grabs focus when it is clicked with the mouse.
 		 * See gtk_file_chooser_button_set_focus_on_click().
 		 * @returns %TRUE if the button grabs focus when it is clicked with
@@ -14211,6 +14580,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_width_chars(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_focus_on_click() instead
+		 * 
 		 * Sets whether the button will grab focus when it is clicked with the mouse.
 		 * Making mouse clicks not grab focus is useful in places like toolbars where
 		 * you don’t want the keyboard focus removed from the main area of the
@@ -15888,6 +16260,9 @@ declare namespace imports.gi.Gtk {
 		use_size: boolean;
 		readonly button: Button;
 		/**
+		 * @deprecated
+		 * Use gtk_font_chooser_get_font() instead
+		 * 
 		 * Retrieves the name of the currently selected font. This name includes
 		 * style and size information as well. If you want to render something
 		 * with the font, use this string with pango_font_description_from_string() .
@@ -15923,6 +16298,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_use_size(): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_font_chooser_set_font() instead
+		 * 
 		 * Sets or updates the currently-displayed font in font picker dialog.
 		 * @param fontname Name of font to display in font chooser dialog
 		 * @returns %TRUE
@@ -16126,6 +16504,9 @@ declare namespace imports.gi.Gtk {
 		font_name: string;
 		preview_text: string;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * Gets the #PangoFontFace representing the selected font group
 		 * details (i.e. family, slant, weight, width, etc).
 		 * @returns A #PangoFontFace representing the
@@ -16134,12 +16515,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_face(): Pango.FontFace;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * This returns the {@link TreeView} which lists all styles available for
 		 * the selected font. For example, “Regular”, “Bold”, etc.
 		 * @returns A {@link Widget} that is part of #fontsel
 		 */
 		get_face_list(): Widget;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * Gets the #PangoFontFamily representing the selected font family.
 		 * @returns A #PangoFontFamily representing the
 		 *     selected font family. Font families are a collection of font
@@ -16148,12 +16535,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_family(): Pango.FontFamily;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * This returns the {@link TreeView} that lists font families, for
 		 * example, “Sans”, “Serif”, etc.
 		 * @returns A {@link Widget} that is part of #fontsel
 		 */
 		get_family_list(): Widget;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * Gets the currently-selected font name.
 		 * 
 		 * Note that this can be a different string than what you set with
@@ -16167,11 +16560,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_font_name(): string;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * This returns the {@link Entry} used to display the font as a preview.
 		 * @returns A {@link Widget} that is part of #fontsel
 		 */
 		get_preview_entry(): Widget;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * Gets the text displayed in the preview area.
 		 * @returns the text displayed in the preview area.
 		 *     This string is owned by the widget and should not be
@@ -16179,23 +16578,35 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_preview_text(): string;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * The selected font size.
 		 * @returns A n integer representing the selected font size,
 		 *     or -1 if no font size is selected.
 		 */
 		get_size(): number;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * This returns the {@link Entry} used to allow the user to edit the font
 		 * number manually instead of selecting it from the list of font sizes.
 		 * @returns A {@link Widget} that is part of #fontsel
 		 */
 		get_size_entry(): Widget;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * This returns the {@link TreeView} used to list font sizes.
 		 * @returns A {@link Widget} that is part of #fontsel
 		 */
 		get_size_list(): Widget;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * Sets the currently-selected font.
 		 * 
 		 * Note that the #fontsel needs to know the screen in which it will appear
@@ -16208,6 +16619,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_font_name(fontname: string): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooser}
+		 * 
 		 * Sets the text displayed in the preview area.
 		 * The #text is used to show how the selected font looks.
 		 * @param text the text to display in the preview area
@@ -16235,6 +16649,9 @@ declare namespace imports.gi.Gtk {
 	class FontSelection {
 		public constructor(options?: Partial<FontSelectionInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link FontChooserWidget} instead
+		 * 
 		 * Creates a new {@link FontSelection}.
 		 * @returns a new {@link FontSelection}
 		 */
@@ -16246,12 +16663,18 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IFontSelectionDialog {
 		/**
+		 * @deprecated
+		 * Use {@link FontChooserDialog}
+		 * 
 		 * Gets the “Cancel” button.
 		 * @returns the {@link Widget} used in the dialog
 		 *     for the “Cancel” button.
 		 */
 		get_cancel_button(): Widget;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooserDialog}
+		 * 
 		 * Gets the currently-selected font name.
 		 * 
 		 * Note that this can be a different string than what you set with
@@ -16265,17 +16688,26 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_font_name(): string;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooserDialog}
+		 * 
 		 * Retrieves the {@link FontSelection} widget embedded in the dialog.
 		 * @returns the embedded {@link FontSelection}
 		 */
 		get_font_selection(): Widget;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooserDialog}
+		 * 
 		 * Gets the “OK” button.
 		 * @returns the {@link Widget} used in the dialog
 		 *     for the “OK” button.
 		 */
 		get_ok_button(): Widget;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooserDialog}
+		 * 
 		 * Gets the text displayed in the preview area.
 		 * @returns the text displayed in the preview area.
 		 *     This string is owned by the widget and should not be
@@ -16283,6 +16715,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_preview_text(): string;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooserDialog}
+		 * 
 		 * Sets the currently selected font.
 		 * @param fontname a font name like “Helvetica 12” or “Times Bold 18”
 		 * @returns %TRUE if the font selected in #fsd is now the
@@ -16290,6 +16725,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_font_name(fontname: string): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link FontChooserDialog}
+		 * 
 		 * Sets the text displayed in the preview area.
 		 * @param text the text to display in the preview area
 		 */
@@ -16309,6 +16747,9 @@ declare namespace imports.gi.Gtk {
 	class FontSelectionDialog {
 		public constructor(options?: Partial<FontSelectionDialogInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link FontChooserDialog}
+		 * 
 		 * Creates a new {@link FontSelectionDialog}.
 		 * @param title the title of the dialog window
 		 * @returns a new {@link FontSelectionDialog}
@@ -18206,6 +18647,10 @@ declare namespace imports.gi.Gtk {
 	class HBox {
 		public constructor(options?: Partial<HBoxInitOptions>);
 		/**
+		 * @deprecated
+		 * You should use gtk_box_new() with a %GTK_ORIENTATION_HORIZONTAL
+		 *   {@link Orientable}:orientation instead
+		 * 
 		 * Creates a new {@link HBox}.
 		 * @param homogeneous %TRUE if all children are to be given equal space allotments.
 		 * @param spacing the number of pixels to place by default between children.
@@ -18240,6 +18685,9 @@ declare namespace imports.gi.Gtk {
 	class HButtonBox {
 		public constructor(options?: Partial<HButtonBoxInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_button_box_new() with %GTK_ORIENTATION_HORIZONTAL instead
+		 * 
 		 * Creates a new horizontal button box.
 		 * @returns a new button box {@link Widget}.
 		 */
@@ -18280,6 +18728,9 @@ declare namespace imports.gi.Gtk {
 	class HPaned {
 		public constructor(options?: Partial<HPanedInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_paned_new() with %GTK_ORIENTATION_HORIZONTAL instead
+		 * 
 		 * Create a new {@link HPaned}
 		 * @returns the new {@link HPaned}
 		 */
@@ -18415,6 +18866,9 @@ declare namespace imports.gi.Gtk {
 	class HScale {
 		public constructor(options?: Partial<HScaleInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_scale_new() with %GTK_ORIENTATION_HORIZONTAL instead
+		 * 
 		 * Creates a new {@link HScale}.
 		 * @param adjustment the {@link Adjustment} which sets the range of
 		 * the scale.
@@ -18422,6 +18876,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(adjustment: Adjustment | null): Widget;
 		/**
+		 * @deprecated
+		 * Use gtk_scale_new_with_range() with %GTK_ORIENTATION_HORIZONTAL instead
+		 * 
 		 * Creates a new horizontal scale widget that lets the user input a
 		 * number between #min and #max (including #min and #max) with the
 		 * increment #step.  #step must be nonzero; it’s the distance the
@@ -18474,6 +18931,9 @@ declare namespace imports.gi.Gtk {
 	class HScrollbar {
 		public constructor(options?: Partial<HScrollbarInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_scrollbar_new() with %GTK_ORIENTATION_HORIZONTAL instead
+		 * 
 		 * Creates a new horizontal scrollbar.
 		 * @param adjustment the {@link Adjustment} to use, or %NULL to create a new adjustment
 		 * @returns the new {@link HScrollbar}
@@ -18519,6 +18979,9 @@ declare namespace imports.gi.Gtk {
 	class HSeparator {
 		public constructor(options?: Partial<HSeparatorInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_separator_new() with %GTK_ORIENTATION_HORIZONTAL instead
+		 * 
 		 * Creates a new {@link HSeparator}.
 		 * @returns a new {@link HSeparator}.
 		 */
@@ -18536,23 +18999,35 @@ declare namespace imports.gi.Gtk {
 		snap_edge_set: boolean;
 		readonly bin: Bin;
 		/**
+		 * @deprecated
+		 * {@link HandleBox} has been deprecated.
+		 * 
 		 * Whether the handlebox’s child is currently detached.
 		 * @returns %TRUE if the child is currently detached, otherwise %FALSE
 		 */
 		get_child_detached(): boolean;
 		/**
+		 * @deprecated
+		 * {@link HandleBox} has been deprecated.
+		 * 
 		 * Gets the handle position of the handle box. See
 		 * gtk_handle_box_set_handle_position().
 		 * @returns the current handle position.
 		 */
 		get_handle_position(): PositionType;
 		/**
+		 * @deprecated
+		 * {@link HandleBox} has been deprecated.
+		 * 
 		 * Gets the type of shadow drawn around the handle box. See
 		 * gtk_handle_box_set_shadow_type().
 		 * @returns the type of shadow currently drawn around the handle box.
 		 */
 		get_shadow_type(): ShadowType;
 		/**
+		 * @deprecated
+		 * {@link HandleBox} has been deprecated.
+		 * 
 		 * Gets the edge used for determining reattachment of the handle box.
 		 * See gtk_handle_box_set_snap_edge().
 		 * @returns the edge used for determining reattachment, or
@@ -18561,17 +19036,26 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_snap_edge(): PositionType;
 		/**
+		 * @deprecated
+		 * {@link HandleBox} has been deprecated.
+		 * 
 		 * Sets the side of the handlebox where the handle is drawn.
 		 * @param position the side of the handlebox where the handle should be drawn.
 		 */
 		set_handle_position(position: PositionType): void;
 		/**
+		 * @deprecated
+		 * {@link HandleBox} has been deprecated.
+		 * 
 		 * Sets the type of shadow to be drawn around the border
 		 * of the handle box.
 		 * @param type the shadow type.
 		 */
 		set_shadow_type(type: ShadowType): void;
 		/**
+		 * @deprecated
+		 * {@link HandleBox} has been deprecated.
+		 * 
 		 * Sets the snap edge of a handlebox. The snap edge is
 		 * the edge of the detached child that must be aligned
 		 * with the corresponding edge of the “ghost” left
@@ -18674,6 +19158,9 @@ declare namespace imports.gi.Gtk {
 	class HandleBox {
 		public constructor(options?: Partial<HandleBoxInitOptions>);
 		/**
+		 * @deprecated
+		 * {@link HandleBox} has been deprecated.
+		 * 
 		 * Create a new handle box.
 		 * @returns a new {@link HandleBox}.
 		 */
@@ -19286,6 +19773,12 @@ declare namespace imports.gi.Gtk {
 	interface IIMMulticontext {
 		readonly object: IMContext;
 		/**
+		 * @deprecated
+		 * It is better to use the system-wide input
+		 *     method framework for changing input methods. Modern
+		 *     desktop shells offer on-screen displays for this that
+		 *     can triggered with a keyboard shortcut, e.g. Super-Space.
+		 * 
 		 * Add menuitems for various available input methods to a menu;
 		 * the menuitems, when selected, will switch the input method
 		 * for the context and the global default input method.
@@ -19336,6 +19829,9 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IIconFactory {
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Adds the given #icon_set to the icon factory, under the name
 		 * #stock_id.  #stock_id should be namespaced for your application,
 		 * e.g. “myapp-whatever-icon”.  Normally applications create a
@@ -19351,6 +19847,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		add(stock_id: string, icon_set: IconSet): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Adds an icon factory to the list of icon factories searched by
 		 * gtk_style_lookup_icon_set(). This means that, for example,
 		 * gtk_image_new_from_stock() will be able to find icons in #factory.
@@ -19360,6 +19859,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		add_default(): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Looks up #stock_id in the icon factory, returning an icon set
 		 * if found, otherwise %NULL. For display to the user, you should
 		 * use gtk_style_lookup_icon_set() on the {@link Style} for the
@@ -19370,6 +19872,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		lookup(stock_id: string): IconSet;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Removes an icon factory from the list of default icon
 		 * factories. Not normally used; you might use it for a library that
 		 * can be unloaded or shut down.
@@ -19462,6 +19967,9 @@ declare namespace imports.gi.Gtk {
 	class IconFactory {
 		public constructor(options?: Partial<IconFactoryInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Creates a new {@link IconFactory}. An icon factory manages a collection
 		 * of #GtkIconSets; a #GtkIconSet manages a set of variants of a
 		 * particular icon (i.e. a #GtkIconSet contains variants for different
@@ -19479,6 +19987,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(): IconFactory;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Looks for an icon in the list of default icon factories.  For
 		 * display to the user, you should use gtk_style_lookup_icon_set() on
 		 * the {@link Style} for the widget that will display the icon, instead of
@@ -19495,15 +20006,24 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IIconInfo {
 		/**
+		 * @deprecated
+		 * Use g_object_ref()
+		 * 
 		 * Make a copy of a {@link IconInfo}.
 		 * @returns the new GtkIconInfo
 		 */
 		copy(): IconInfo;
 		/**
+		 * @deprecated
+		 * Use g_object_unref()
+		 * 
 		 * Free a {@link IconInfo} and associated information
 		 */
 		free(): void;
 		/**
+		 * @deprecated
+		 * Attachment points are deprecated
+		 * 
 		 * This function is deprecated and always returns %FALSE.
 		 * @returns %FALSE
 		 * 
@@ -19540,6 +20060,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_base_size(): number;
 		/**
+		 * @deprecated
+		 * This function is deprecated, use
+		 *     gtk_icon_theme_add_resource_path() instead of builtin icons.
+		 * 
 		 * Gets the built-in image for this icon, if any. To allow GTK+ to use
 		 * built in icon images, you must pass the %GTK_ICON_LOOKUP_USE_BUILTIN
 		 * to gtk_icon_theme_lookup_icon().
@@ -19550,11 +20074,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_builtin_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
+		 * @deprecated
+		 * Display names are deprecated
+		 * 
 		 * This function is deprecated and always returns %NULL.
 		 * @returns %NULL
 		 */
 		get_display_name(): string;
 		/**
+		 * @deprecated
+		 * Embedded rectangles are deprecated
+		 * 
 		 * This function is deprecated and always returns %FALSE.
 		 * @returns %FALSE
 		 * 
@@ -19747,6 +20277,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		load_symbolic_for_context_finish(res: Gio.AsyncResult): [ GdkPixbuf.Pixbuf, boolean | null ];
 		/**
+		 * @deprecated
+		 * Use gtk_icon_info_load_symbolic_for_context() instead
+		 * 
 		 * Loads an icon, modifying it to match the system colours for the foreground,
 		 * success, warning and error colors provided. If the icon is not a symbolic
 		 * one, the function will return the result from gtk_icon_info_load_icon().
@@ -19764,6 +20297,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		load_symbolic_for_style(style: Style, state: StateType): [ GdkPixbuf.Pixbuf, boolean | null ];
 		/**
+		 * @deprecated
+		 * Embedded rectangles and attachment points are deprecated
+		 * 
 		 * Sets whether the coordinates returned by gtk_icon_info_get_embedded_rect()
 		 * and gtk_icon_info_get_attach_points() should be returned in their
 		 * original form as specified in the icon theme, instead of scaled
@@ -20232,6 +20768,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(): IconTheme;
 		/**
+		 * @deprecated
+		 * Use gtk_icon_theme_add_resource_path()
+		 *     to add application-specific icons to the icon theme.
+		 * 
 		 * Registers a built-in icon for icon theme lookups. The idea
 		 * of built-in icons is to allow an application or library
 		 * that uses themed icons to function requiring files to
@@ -21198,6 +21738,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_icon_name(): [ icon_name: string | null, size: number | null ];
 		/**
+		 * @deprecated
+		 * Use gtk_image_get_icon_name() instead.
+		 * 
 		 * Gets the icon set and size being displayed by the {@link Image}.
 		 * The storage type of the image must be %GTK_IMAGE_EMPTY or
 		 * %GTK_IMAGE_ICON_SET (see gtk_image_get_storage_type()).
@@ -21224,6 +21767,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_pixel_size(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_image_get_icon_name() instead.
+		 * 
 		 * Gets the stock icon name and size being displayed by the {@link Image}.
 		 * The storage type of the image must be %GTK_IMAGE_EMPTY or
 		 * %GTK_IMAGE_STOCK (see gtk_image_get_storage_type()).
@@ -21267,6 +21813,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_from_icon_name(icon_name: string | null, size: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_image_set_from_icon_name() instead.
+		 * 
 		 * See gtk_image_new_from_icon_set() for details.
 		 * @param icon_set a {@link IconSet}
 		 * @param size a stock icon size ({@link IconSize})
@@ -21283,6 +21832,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_from_resource(resource_path: string | null): void;
 		/**
+		 * @deprecated
+		 * Use gtk_image_set_from_icon_name() instead.
+		 * 
 		 * See gtk_image_new_from_stock() for details.
 		 * @param stock_id a stock icon name
 		 * @param size a stock icon size ({@link IconSize})
@@ -21492,6 +22044,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_icon_name(icon_name: string | null, size: number): Widget;
 		/**
+		 * @deprecated
+		 * Use gtk_image_new_from_icon_name() instead.
+		 * 
 		 * Creates a {@link Image} displaying an icon set. Sample stock sizes are
 		 * #GTK_ICON_SIZE_MENU, #GTK_ICON_SIZE_SMALL_TOOLBAR. Instead of using
 		 * this function, usually it’s better to create a #GtkIconFactory, put
@@ -21543,6 +22098,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_resource(resource_path: string): Widget;
 		/**
+		 * @deprecated
+		 * Use gtk_image_new_from_icon_name() instead.
+		 * 
 		 * Creates a {@link Image} displaying a stock icon. Sample stock icon
 		 * names are #GTK_STOCK_OPEN, #GTK_STOCK_QUIT. Sample stock sizes
 		 * are #GTK_ICON_SIZE_MENU, #GTK_ICON_SIZE_SMALL_TOOLBAR. If the stock
@@ -21769,11 +22327,17 @@ declare namespace imports.gi.Gtk {
 	class ImageMenuItem {
 		public constructor(options?: Partial<ImageMenuItemInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_menu_item_new() instead.
+		 * 
 		 * Creates a new {@link ImageMenuItem} with an empty label.
 		 * @returns a new {@link ImageMenuItem}
 		 */
 		public static new(): Widget;
 		/**
+		 * @deprecated
+		 * Use gtk_menu_item_new_with_mnemonic() instead.
+		 * 
 		 * Creates a new {@link ImageMenuItem} containing the image and text from a
 		 * stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
 		 * and #GTK_STOCK_APPLY.
@@ -21790,12 +22354,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_stock(stock_id: string, accel_group: AccelGroup | null): Widget;
 		/**
+		 * @deprecated
+		 * Use gtk_menu_item_new_with_label() instead.
+		 * 
 		 * Creates a new {@link ImageMenuItem} containing a label.
 		 * @param label the text of the menu item.
 		 * @returns a new {@link ImageMenuItem}.
 		 */
 		public static new_with_label(label: string): Widget;
 		/**
+		 * @deprecated
+		 * Use gtk_menu_item_new_with_mnemonic() instead.
+		 * 
 		 * Creates a new {@link ImageMenuItem} containing a label. The label
 		 * will be created using gtk_label_new_with_mnemonic(), so underscores
 		 * in #label indicate the mnemonic for the menu item.
@@ -23010,6 +23580,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_bin_window(): Gdk.Window;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_get_hadjustment()
+		 * 
 		 * This function should only be called after the layout has been
 		 * placed in a {@link ScrolledWindow} or otherwise configured for
 		 * scrolling. It returns the #GtkAdjustment used for communication
@@ -23031,6 +23604,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_size(): [ width: number | null, height: number | null ];
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_get_vadjustment()
+		 * 
 		 * This function should only be called after the layout has been
 		 * placed in a {@link ScrolledWindow} or otherwise configured for
 		 * scrolling. It returns the #GtkAdjustment used for communication
@@ -23056,6 +23632,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		put(child_widget: Widget, x: number, y: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_set_hadjustment()
+		 * 
 		 * Sets the horizontal scroll adjustment for the layout.
 		 * 
 		 * See {@link ScrolledWindow}, #GtkScrollbar, #GtkAdjustment for details.
@@ -23069,6 +23648,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_size(width: number, height: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_set_vadjustment()
+		 * 
 		 * Sets the vertical scroll adjustment for the layout.
 		 * 
 		 * See {@link ScrolledWindow}, #GtkScrollbar, #GtkAdjustment for details.
@@ -24748,6 +25330,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		popdown(): void;
 		/**
+		 * @deprecated
+		 * Please use gtk_menu_popup_at_widget(),
+		 *     gtk_menu_popup_at_pointer(). or gtk_menu_popup_at_rect() instead
+		 * 
 		 * Displays a menu and makes it available for selection.
 		 * 
 		 * Applications can use this function to display context-sensitive
@@ -24856,6 +25442,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		popup_at_widget(widget: Widget, widget_anchor: Gdk.Gravity, menu_anchor: Gdk.Gravity, trigger_event: Gdk.Event | null): void;
 		/**
+		 * @deprecated
+		 * Please use gtk_menu_popup_at_widget(),
+		 *     gtk_menu_popup_at_pointer(). or gtk_menu_popup_at_rect() instead
+		 * 
 		 * Displays a menu and makes it available for selection.
 		 * 
 		 * Applications can use this function to display context-sensitive menus,
@@ -25623,6 +26213,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_reserve_indicator(): boolean;
 		/**
+		 * @deprecated
+		 * See gtk_menu_item_set_right_justified()
+		 * 
 		 * Gets whether the menu item appears justified at the right
 		 * side of the menu bar.
 		 * @returns %TRUE if the menu item will appear at the
@@ -25686,6 +26279,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_reserve_indicator(reserve: boolean): void;
 		/**
+		 * @deprecated
+		 * If you insist on using it, use
+		 *   gtk_widget_set_hexpand() and gtk_widget_set_halign().
+		 * 
 		 * Sets whether the menu item appears justified at the right
 		 * side of a menu bar. This was traditionally done for “Help”
 		 * menu items, but is now considered a bad idea. (If the widget
@@ -26288,6 +26885,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(icon_widget: Widget | null, label: string | null): ToolItem;
 		/**
+		 * @deprecated
+		 * Use gtk_menu_tool_button_new() instead.
+		 * 
 		 * Creates a new {@link MenuToolButton}.
 		 * The new #GtkMenuToolButton will contain an icon and label from
 		 * the stock item indicated by #stock_id.
@@ -26363,6 +26963,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		format_secondary_text(message_format: string | null): void;
 		/**
+		 * @deprecated
+		 * Use {@link Dialog} for dialogs with images
+		 * 
 		 * Gets the dialog’s image.
 		 * @returns the dialog’s image
 		 */
@@ -26378,6 +26981,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_message_area(): Widget;
 		/**
+		 * @deprecated
+		 * Use {@link Dialog} to create dialogs with images
+		 * 
 		 * Sets the dialog’s image to #image.
 		 * @param image the image
 		 */
@@ -26549,6 +27155,9 @@ declare namespace imports.gi.Gtk {
 		ypad: number;
 		readonly widget: Widget;
 		/**
+		 * @deprecated
+		 * Use {@link Widget} alignment and margin properties.
+		 * 
 		 * Gets the X and Y alignment of the widget within its allocation.
 		 * See gtk_misc_set_alignment().
 		 * @returns location to store X alignment of #misc, or %NULL
@@ -26557,6 +27166,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_alignment(): [ xalign: number | null, yalign: number | null ];
 		/**
+		 * @deprecated
+		 * Use {@link Widget} alignment and margin properties.
+		 * 
 		 * Gets the padding in the X and Y directions of the widget.
 		 * See gtk_misc_set_padding().
 		 * @returns location to store padding in the X
@@ -26567,12 +27179,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_padding(): [ xpad: number | null, ypad: number | null ];
 		/**
+		 * @deprecated
+		 * Use {@link Widget}'s alignment (#GtkWidget:halign and #GtkWidget:valign) and margin properties or #GtkLabel's #GtkLabel:xalign and #GtkLabel:yalign properties.
+		 * 
 		 * Sets the alignment of the widget.
 		 * @param xalign the horizontal alignment, from 0 (left) to 1 (right).
 		 * @param yalign the vertical alignment, from 0 (top) to 1 (bottom).
 		 */
 		set_alignment(xalign: number, yalign: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link Widget} alignment and margin properties.
+		 * 
 		 * Sets the amount of space to add around the widget.
 		 * @param xpad the amount of space to add on the left and right of the widget,
 		 *   in pixels.
@@ -27204,6 +27822,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_tab_detachable(child: Widget): boolean;
 		/**
+		 * @deprecated
+		 * this function returns zero
+		 * 
 		 * Returns the horizontal width of a tab border.
 		 * @returns horizontal width of a tab border
 		 */
@@ -27238,6 +27859,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_tab_reorderable(child: Widget): boolean;
 		/**
+		 * @deprecated
+		 * this function returns zero
+		 * 
 		 * Returns the vertical width of a tab border.
 		 * @returns vertical width of a tab border
 		 */
@@ -28804,6 +29428,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_open_flags(): PlacesOpenFlags;
 		/**
+		 * @deprecated
+		 * It is recommended to group this functionality with the drives
+		 *     and network location under the new 'Other Location' item
+		 * 
 		 * Returns the value previously set with gtk_places_sidebar_set_show_connect_to_server()
 		 * @returns %TRUE if the sidebar will display a “Connect to Server” item.
 		 */
@@ -28905,6 +29533,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_open_flags(flags: PlacesOpenFlags): void;
 		/**
+		 * @deprecated
+		 * It is recommended to group this functionality with the drives
+		 *     and network location under the new 'Other Location' item
+		 * 
 		 * Sets whether the #sidebar should show an item for connecting to a network server;
 		 * this is off by default. An application may want to turn this on if it implements
 		 * a way for the user to connect to network servers directly.
@@ -29496,6 +30128,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_relative_to(): Widget;
 		/**
+		 * @deprecated
+		 * You can show or hide the popover without transitions
+		 *   using gtk_widget_show() and gtk_widget_hide() while gtk_popover_popup()
+		 *   and gtk_popover_popdown() will use transitions.
+		 * 
 		 * Returns whether show/hide transitions are enabled on this popover.
 		 * @returns #TRUE if the show and hide transitions of the given
 		 *          popover are enabled, #FALSE otherwise.
@@ -29566,6 +30203,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_relative_to(relative_to: Widget | null): void;
 		/**
+		 * @deprecated
+		 * You can show or hide the popover without transitions
+		 *   using gtk_widget_show() and gtk_widget_hide() while gtk_popover_popup()
+		 *   and gtk_popover_popdown() will use transitions.
+		 * 
 		 * Sets whether show/hide transitions are enabled on this popover
 		 * @param transitions_enabled Whether transitions are enabled
 		 */
@@ -32127,6 +32769,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(group: GLib.SList | null): ToolItem;
 		/**
+		 * @deprecated
+		 * Use gtk_radio_tool_button_new() instead.
+		 * 
 		 * Creates a new {@link RadioToolButton}, adding it to #group.
 		 * The new #GtkRadioToolButton will contain an icon and label from the
 		 * stock item indicated by #stock_id.
@@ -32143,6 +32788,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_widget(group: RadioToolButton | null): ToolItem;
 		/**
+		 * @deprecated
+		 * gtk_radio_tool_button_new_from_widget
+		 * 
 		 * Creates a new {@link RadioToolButton} adding it to the same group as #group.
 		 * The new #GtkRadioToolButton will contain an icon and label from the
 		 * stock item indicated by #stock_id.
@@ -32214,6 +32862,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_lower_stepper_sensitivity(): SensitivityType;
 		/**
+		 * @deprecated
+		 * Use the min-height/min-width CSS properties on the slider
+		 *   node.
+		 * 
 		 * This function is useful mainly for {@link Range} subclasses.
 		 * 
 		 * See gtk_range_set_min_slider_size().
@@ -32338,6 +32990,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_lower_stepper_sensitivity(sensitivity: SensitivityType): void;
 		/**
+		 * @deprecated
+		 * Use the min-height/min-width CSS properties on the slider
+		 *   node.
+		 * 
 		 * Sets the minimum size of the range’s slider.
 		 * 
 		 * This function is useful mainly for {@link Range} subclasses.
@@ -32561,6 +33217,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		readonly ythickness: number;
 		/**
+		 * @deprecated
+		 * Use {@link CssProvider} instead.
+		 * 
 		 * Makes a copy of the specified {@link RcStyle}. This function
 		 * will correctly copy an RC style that is a member of a class
 		 * derived from #GtkRcStyle.
@@ -32611,6 +33270,9 @@ declare namespace imports.gi.Gtk {
 	class RcStyle {
 		public constructor(options?: Partial<RcStyleInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link CssProvider} instead.
+		 * 
 		 * Creates a new {@link RcStyle} with no fields set and
 		 * a reference count of 1.
 		 * @returns the newly-created {@link RcStyle}
@@ -34055,6 +34717,10 @@ declare namespace imports.gi.Gtk {
 		window_placement_set: boolean;
 		readonly container: Bin;
 		/**
+		 * @deprecated
+		 * gtk_container_add() will automatically add
+		 * a {@link Viewport} if the child doesn’t implement #GtkScrollable.
+		 * 
 		 * Used to add children without native scrolling capabilities. This
 		 * is simply a convenience function; it is equivalent to adding the
 		 * unscrollable child to a viewport, then adding the viewport to the
@@ -36070,6 +36736,14 @@ declare namespace imports.gi.Gtk {
 		 */
 		add_widget(widget: Widget): void;
 		/**
+		 * @deprecated
+		 * Measuring the size of hidden widgets has not worked
+		 *     reliably for a long time. In most cases, they will report a size
+		 *     of 0 nowadays, and thus, their size will not affect the other
+		 *     size group members. In effect, size groups will always operate
+		 *     as if this property was %TRUE. Use a {@link Stack} instead to hide
+		 *     widgets while still having their size taken into account.
+		 * 
 		 * Returns if invisible widgets are ignored when calculating the size.
 		 * @returns %TRUE if invisible widgets are ignored.
 		 */
@@ -36091,6 +36765,14 @@ declare namespace imports.gi.Gtk {
 		 */
 		remove_widget(widget: Widget): void;
 		/**
+		 * @deprecated
+		 * Measuring the size of hidden widgets has not worked
+		 *     reliably for a long time. In most cases, they will report a size
+		 *     of 0 nowadays, and thus, their size will not affect the other
+		 *     size group members. In effect, size groups will always operate
+		 *     as if this property was %TRUE. Use a {@link Stack} instead to hide
+		 *     widgets while still having their size taken into account.
+		 * 
 		 * Sets whether unmapped widgets should be ignored when
 		 * calculating the size.
 		 * @param ignore_hidden whether unmapped widgets should be ignored
@@ -37360,6 +38042,12 @@ declare namespace imports.gi.Gtk {
 		tooltip_text: string;
 		visible: boolean;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function, as the platform is responsible for the
+		 *   presentation of notifications
+		 * 
 		 * Obtains information about the location of the status icon
 		 * on screen. This information can be used to e.g. position
 		 * popups like notification bubbles.
@@ -37388,6 +38076,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_geometry(): [ boolean, Gdk.Screen | null, Gdk.Rectangle | null, Orientation | null ];
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Retrieves the #GIcon being displayed by the {@link StatusIcon}.
 		 * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
 		 * %GTK_IMAGE_GICON (see gtk_status_icon_get_storage_type()).
@@ -37399,12 +38092,22 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_gicon(): Gio.Icon | null;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Returns the current value of the has-tooltip property.
 		 * See {@link StatusIcon}:has-tooltip for more information.
 		 * @returns current value of has-tooltip on #status_icon.
 		 */
 		get_has_tooltip(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Gets the name of the icon being displayed by the {@link StatusIcon}.
 		 * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
 		 * %GTK_IMAGE_ICON_NAME (see gtk_status_icon_get_storage_type()).
@@ -37414,6 +38117,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_icon_name(): string | null;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Gets the #GdkPixbuf being displayed by the {@link StatusIcon}.
 		 * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
 		 * %GTK_IMAGE_PIXBUF (see gtk_status_icon_get_storage_type()).
@@ -37424,11 +38132,22 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function, as notifications are managed by the platform
+		 * 
 		 * Returns the #GdkScreen associated with #status_icon.
 		 * @returns a #GdkScreen.
 		 */
 		get_screen(): Gdk.Screen;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function, as the representation of a notification
+		 *   is left to the platform
+		 * 
 		 * Gets the size in pixels that is available for the image.
 		 * Stock icons and named icons adapt their size automatically
 		 * if the size of the notification area changes. For other
@@ -37441,6 +38160,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_size(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_status_icon_get_icon_name() instead.
+		 * 
 		 * Gets the id of the stock icon being displayed by the {@link StatusIcon}.
 		 * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
 		 * %GTK_IMAGE_STOCK (see gtk_status_icon_get_storage_type()).
@@ -37451,6 +38173,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_stock(): string | null;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function, and #GNotification only supports #GIcon
+		 *   instances
+		 * 
 		 * Gets the type of representation being used by the {@link StatusIcon}
 		 * to store image data. If the #GtkStatusIcon has no image data,
 		 * the return value will be %GTK_IMAGE_EMPTY.
@@ -37458,23 +38186,43 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_storage_type(): ImageType;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Gets the title of this tray icon. See gtk_status_icon_set_title().
 		 * @returns the title of the status icon
 		 */
 		get_title(): string;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Gets the contents of the tooltip for #status_icon.
 		 * @returns the tooltip text, or %NULL. You should free the
 		 *   returned string with g_free() when done.
 		 */
 		get_tooltip_markup(): string | null;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Gets the contents of the tooltip for #status_icon.
 		 * @returns the tooltip text, or %NULL. You should free the
 		 *   returned string with g_free() when done.
 		 */
 		get_tooltip_text(): string | null;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Returns whether the status icon is visible or not.
 		 * Note that being visible does not guarantee that
 		 * the user can actually see the icon, see also
@@ -37483,6 +38231,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_visible(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * This function is only useful on the X11/freedesktop.org platform.
 		 * 
 		 * It returns a window ID for the widget in the underlying
@@ -37499,6 +38252,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_x11_window_id(): number;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Returns whether the status icon is embedded in a notification
 		 * area.
 		 * @returns %TRUE if the status icon is embedded in
@@ -37506,18 +38264,33 @@ declare namespace imports.gi.Gtk {
 		 */
 		is_embedded(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; you can use g_notification_set_icon()
+		 *   to associate a #GIcon with a notification
+		 * 
 		 * Makes #status_icon display the file #filename.
 		 * See gtk_status_icon_new_from_file() for details.
 		 * @param filename a filename
 		 */
 		set_from_file(filename: string): void;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; you can use g_notification_set_icon()
+		 *   to associate a #GIcon with a notification
+		 * 
 		 * Makes #status_icon display the #GIcon.
 		 * See gtk_status_icon_new_from_gicon() for details.
 		 * @param icon a GIcon
 		 */
 		set_from_gicon(icon: Gio.Icon): void;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; you can use g_notification_set_icon()
+		 *   to associate a #GIcon with a notification
+		 * 
 		 * Makes #status_icon display the icon named #icon_name from the
 		 * current icon theme.
 		 * See gtk_status_icon_new_from_icon_name() for details.
@@ -37525,24 +38298,44 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_from_icon_name(icon_name: string): void;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; you can use g_notification_set_icon()
+		 *   to associate a #GIcon with a notification
+		 * 
 		 * Makes #status_icon display #pixbuf.
 		 * See gtk_status_icon_new_from_pixbuf() for details.
 		 * @param pixbuf a #GdkPixbuf or %NULL
 		 */
 		set_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf | null): void;
 		/**
+		 * @deprecated
+		 * Use gtk_status_icon_set_from_icon_name() instead.
+		 * 
 		 * Makes #status_icon display the stock icon with the id #stock_id.
 		 * See gtk_status_icon_new_from_stock() for details.
 		 * @param stock_id a stock icon id
 		 */
 		set_from_stock(stock_id: string): void;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function, but notifications can display an arbitrary
+		 *   amount of text using g_notification_set_body()
+		 * 
 		 * Sets the has-tooltip property on #status_icon to #has_tooltip.
 		 * See {@link StatusIcon}:has-tooltip for more information.
 		 * @param has_tooltip whether or not #status_icon has a tooltip
 		 */
 		set_has_tooltip(has_tooltip: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function, as notifications are associated with a
+		 *   unique application identifier by #GApplication
+		 * 
 		 * Sets the name of this tray icon.
 		 * This should be a string identifying this icon. It is may be
 		 * used for sorting the icons in the tray and will not be shown to
@@ -37551,6 +38344,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_name(name: string): void;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function, as GTK typically only has one #GdkScreen
+		 *   and notifications are managed by the platform
+		 * 
 		 * Sets the #GdkScreen where #status_icon is displayed; if
 		 * the icon is already mapped, it will be unmapped, and
 		 * then remapped on the new screen.
@@ -37558,6 +38357,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_screen(screen: Gdk.Screen): void;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; you should use g_notification_set_title()
+		 *   and g_notification_set_body() to present text inside your notification
+		 * 
 		 * Sets the title of this tray icon.
 		 * This should be a short, human-readable, localized string
 		 * describing the tray icon. It may be used by tools like screen
@@ -37566,6 +38370,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_title(title: string): void;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Sets #markup as the contents of the tooltip, which is marked up with
 		 *  the [Pango text markup language][PangoMarkupFormat].
 		 * 
@@ -37578,6 +38387,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_tooltip_markup(markup: string | null): void;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function
+		 * 
 		 * Sets #text as the contents of the tooltip.
 		 * 
 		 * This function will take care of setting {@link StatusIcon}:has-tooltip to
@@ -37590,6 +38404,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_tooltip_text(text: string): void;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; there is no direct replacement
+		 *   for this function, as notifications are managed by the platform
+		 * 
 		 * Shows or hides a status icon.
 		 * @param visible %TRUE to show the status icon, %FALSE to hide it
 		 */
@@ -37804,11 +38623,19 @@ declare namespace imports.gi.Gtk {
 	class StatusIcon {
 		public constructor(options?: Partial<StatusIconInitOptions>);
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications
+		 * 
 		 * Creates an empty status icon object.
 		 * @returns a new {@link StatusIcon}
 		 */
 		public static new(): StatusIcon;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications
+		 * 
 		 * Creates a status icon displaying the file #filename.
 		 * 
 		 * The image will be scaled down to fit in the available
@@ -37818,6 +38645,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_file(filename: string): StatusIcon;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications
+		 * 
 		 * Creates a status icon displaying a #GIcon. If the icon is a
 		 * themed icon, it will be updated when the theme changes.
 		 * @param icon a #GIcon
@@ -37825,6 +38656,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_gicon(icon: Gio.Icon): StatusIcon;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications
+		 * 
 		 * Creates a status icon displaying an icon from the current icon theme.
 		 * If the current icon theme is changed, the icon will be updated
 		 * appropriately.
@@ -37833,6 +38668,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_icon_name(icon_name: string): StatusIcon;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications
+		 * 
 		 * Creates a status icon displaying #pixbuf.
 		 * 
 		 * The image will be scaled down to fit in the available
@@ -37842,6 +38681,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf): StatusIcon;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications
+		 * 
 		 * Creates a status icon displaying a stock icon. Sample stock icon
 		 * names are #GTK_STOCK_OPEN, #GTK_STOCK_QUIT. You can register your
 		 * own stock icon names, see gtk_icon_factory_add_default() and
@@ -37851,6 +38694,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_stock(stock_id: string): StatusIcon;
 		/**
+		 * @deprecated
+		 * Use #GNotification and {@link Application} to
+		 *   provide status notifications; notifications do not have menus,
+		 *   but can have buttons, and actions associated with each button
+		 * 
 		 * Menu positioning function to use with gtk_menu_popup()
 		 * to position #menu aligned to the status icon #user_data.
 		 * @param menu the {@link Menu}
@@ -38080,6 +38928,9 @@ declare namespace imports.gi.Gtk {
 		readonly background: cairo.Pattern[];
 		apply_default_background(cr: cairo.Context, window: Gdk.Window, state_type: StateType, x: number, y: number, width: number, height: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_style_attach() instead
+		 * 
 		 * Attaches a style to a window; this process allocates the
 		 * colors and creates the GC’s for the style - it specializes
 		 * it to a particular visual. The process may involve the creation
@@ -38097,11 +38948,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		attach(window: Gdk.Window): Style;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} instead
+		 * 
 		 * Creates a copy of the passed in {@link Style} object.
 		 * @returns a copy of #style
 		 */
 		copy(): Style;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} instead
+		 * 
 		 * Detaches a style from a window. If the style is not attached
 		 * to any windows anymore, it is unrealized. See gtk_style_attach().
 		 */
@@ -38138,6 +38995,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		has_context(): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_style_context_lookup_color() instead
+		 * 
 		 * Looks up #color_name in the style’s logical color mappings,
 		 * filling in #color and returning %TRUE if found, otherwise
 		 * returning %FALSE. Do not cache the found mapping, because
@@ -38150,6 +39010,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		lookup_color(color_name: string): [ boolean, Gdk.Color ];
 		/**
+		 * @deprecated
+		 * Use gtk_style_context_lookup_icon_set() instead
+		 * 
 		 * Looks up #stock_id in the icon factories associated with #style
 		 * and the default icon factory, returning an icon set if found,
 		 * otherwise %NULL.
@@ -38158,6 +39021,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		lookup_icon_set(stock_id: string): IconSet;
 		/**
+		 * @deprecated
+		 * Use gtk_render_icon_pixbuf() instead
+		 * 
 		 * Renders the icon specified by #source at the given #size
 		 * according to the given parameters and returns the result in a
 		 * pixbuf.
@@ -38174,6 +39040,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		render_icon(source: IconSource, direction: TextDirection, state: StateType, size: number, widget: Widget | null, detail: string | null): GdkPixbuf.Pixbuf;
 		/**
+		 * @deprecated
+		 * Use gtk_style_context_set_background() instead
+		 * 
 		 * Sets the background of #window to the background color or pixmap
 		 * specified by #style for the given state.
 		 * @param window a #GdkWindow
@@ -38271,6 +39140,9 @@ declare namespace imports.gi.Gtk {
 	class Style {
 		public constructor(options?: Partial<StyleInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext}
+		 * 
 		 * Creates a new {@link Style}.
 		 * @returns a new {@link Style}.
 		 */
@@ -38351,6 +39223,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		add_region(region_name: string, flags: RegionFlags): void;
 		/**
+		 * @deprecated
+		 * This function does nothing.
+		 * 
 		 * Stops all running animations for #region_id and all animatable
 		 * regions underneath.
 		 * 
@@ -38373,6 +39248,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get(state: StateFlags): void;
 		/**
+		 * @deprecated
+		 * Use gtk_render_background() instead.
+		 * 
 		 * Gets the background color for a given state.
 		 * 
 		 * This function is far less useful than it seems, and it should not be used in
@@ -38397,6 +39275,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_border(state: StateFlags): Border;
 		/**
+		 * @deprecated
+		 * Use gtk_render_frame() instead.
+		 * 
 		 * Gets the border color for a given state.
 		 * @param state state to retrieve the color for
 		 * @returns return value for the border color
@@ -38412,11 +39293,20 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_color(state: StateFlags): Gdk.RGBA;
 		/**
+		 * @deprecated
+		 * Use gtk_style_context_get_state() and
+		 *   check for #GTK_STATE_FLAG_DIR_LTR and
+		 *   #GTK_STATE_FLAG_DIR_RTL instead.
+		 * 
 		 * Returns the widget direction used for rendering.
 		 * @returns the widget direction
 		 */
 		get_direction(): TextDirection;
 		/**
+		 * @deprecated
+		 * Use gtk_style_context_get() for "font" or
+		 *     subproperties instead.
+		 * 
 		 * Returns the font description for a given state. The returned
 		 * object is const and will remain valid until the
 		 * {@link StyleContext}::changed signal happens.
@@ -38567,6 +39457,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		has_region(region_name: string): [ boolean, RegionFlags | null ];
 		/**
+		 * @deprecated
+		 * Style contexts are invalidated automatically.
+		 * 
 		 * Invalidates #context style information, so it will be reconstructed
 		 * again. It is useful if you modify the #context and need the new
 		 * information immediately.
@@ -38597,6 +39490,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		lookup_color(color_name: string): [ boolean, Gdk.RGBA ];
 		/**
+		 * @deprecated
+		 * Use gtk_icon_theme_lookup_icon() instead.
+		 * 
 		 * Looks up #stock_id in the icon factories associated to #context and
 		 * the default icon factory, returning an icon set if found, otherwise
 		 * %NULL.
@@ -38605,6 +39501,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		lookup_icon_set(stock_id: string): IconSet | null;
 		/**
+		 * @deprecated
+		 * This function does nothing.
+		 * 
 		 * Notifies a state change on #context, so if the current style makes use
 		 * of transition animations, one will be started so all rendered elements
 		 * under #region_id are animated for state #state being set to value
@@ -38654,11 +39553,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		notify_state_change(window: Gdk.Window, region_id: any | null, state: StateType, state_value: boolean): void;
 		/**
+		 * @deprecated
+		 * This function does nothing.
+		 * 
 		 * Pops an animatable region from #context.
 		 * See gtk_style_context_push_animatable_region().
 		 */
 		pop_animatable_region(): void;
 		/**
+		 * @deprecated
+		 * This function does nothing.
+		 * 
 		 * Pushes an animatable region, so all further gtk_render_*() calls between
 		 * this call and the following gtk_style_context_pop_animatable_region()
 		 * will potentially show transition animations for this region if
@@ -38702,6 +39607,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		save(): void;
 		/**
+		 * @deprecated
+		 * This function does nothing.
+		 * 
 		 * This function is analogous to gdk_window_scroll(), and
 		 * should be called together with it so the invalidation
 		 * areas for any ongoing animation are scrolled together
@@ -38713,12 +39621,22 @@ declare namespace imports.gi.Gtk {
 		 */
 		scroll_animations(window: Gdk.Window, dx: number, dy: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_render_background() instead.
+		 *   Note that clients still using this function are now responsible
+		 *   for calling this function again whenever #context is invalidated.
+		 * 
 		 * Sets the background of #window to the background pattern or
 		 * color specified in #context for its current state.
 		 * @param window a #GdkWindow
 		 */
 		set_background(window: Gdk.Window): void;
 		/**
+		 * @deprecated
+		 * Use gtk_style_context_set_state() with
+		 *   #GTK_STATE_FLAG_DIR_LTR and #GTK_STATE_FLAG_DIR_RTL
+		 *   instead.
+		 * 
 		 * Sets the reading direction for rendering purposes.
 		 * 
 		 * If you are using a {@link StyleContext} returned from
@@ -38797,6 +39715,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_state(flags: StateFlags): void;
 		/**
+		 * @deprecated
+		 * This function always returns %FALSE
+		 * 
 		 * Returns %TRUE if there is a transition animation running for the
 		 * current region (see gtk_style_context_push_animatable_region()).
 		 * 
@@ -38976,16 +39897,25 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IStyleProperties {
 		/**
+		 * @deprecated
+		 * {@link StyleProperties} are deprecated.
+		 * 
 		 * Clears all style information from #props.
 		 */
 		clear(): void;
 		/**
+		 * @deprecated
+		 * {@link StyleProperties} are deprecated.
+		 * 
 		 * Retrieves several style property values from #props for a
 		 * given state.
 		 * @param state state to retrieve the property values for
 		 */
 		get(state: StateFlags): void;
 		/**
+		 * @deprecated
+		 * {@link StyleProperties} are deprecated.
+		 * 
 		 * Gets a style property from #props for the given state. When done with #value,
 		 * g_value_unset() needs to be called to free any allocated memory.
 		 * @param property style property name
@@ -38996,12 +39926,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_property(property: string, state: StateFlags): [ boolean, GObject.Value ];
 		/**
+		 * @deprecated
+		 * {@link StyleProperties} are deprecated.
+		 * 
 		 * Retrieves several style property values from #props for a given state.
 		 * @param state state to retrieve the property values for
 		 * @param args va_list of property name/return location pairs, followed by %NULL
 		 */
 		get_valist(state: StateFlags, args: any[]): void;
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Returns the symbolic color that is mapped
 		 * to #name.
 		 * @param name color name to lookup
@@ -39009,6 +39945,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		lookup_color(name: string): SymbolicColor;
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Maps #color so it can be referenced by #name. See
 		 * gtk_style_properties_lookup_color()
 		 * @param name color name
@@ -39016,6 +39955,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		map_color(name: string, color: SymbolicColor): void;
 		/**
+		 * @deprecated
+		 * {@link StyleProperties} are deprecated.
+		 * 
 		 * Merges into #props all the style information contained
 		 * in #props_to_merge. If #replace is %TRUE, the values
 		 * will be overwritten, if it is %FALSE, the older values
@@ -39025,11 +39967,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		merge(props_to_merge: StyleProperties, replace: boolean): void;
 		/**
+		 * @deprecated
+		 * {@link StyleProperties} are deprecated.
+		 * 
 		 * Sets several style properties on #props.
 		 * @param state state to set the values for
 		 */
 		set(state: StateFlags): void;
 		/**
+		 * @deprecated
+		 * {@link StyleProperties} are deprecated.
+		 * 
 		 * Sets a styling property in #props.
 		 * @param property styling property to set
 		 * @param state state to set the value for
@@ -39037,12 +39985,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_property(property: string, state: StateFlags, value: GObject.Value): void;
 		/**
+		 * @deprecated
+		 * {@link StyleProperties} are deprecated.
+		 * 
 		 * Sets several style properties on #props.
 		 * @param state state to set the values for
 		 * @param args va_list of property name/value pairs, followed by %NULL
 		 */
 		set_valist(state: StateFlags, args: any[]): void;
 		/**
+		 * @deprecated
+		 * {@link StyleProperties} are deprecated.
+		 * 
 		 * Unsets a style property in #props.
 		 * @param property property to unset
 		 * @param state state to unset
@@ -39081,11 +40035,18 @@ declare namespace imports.gi.Gtk {
 	class StyleProperties {
 		public constructor(options?: Partial<StylePropertiesInitOptions>);
 		/**
+		 * @deprecated
+		 * {@link StyleProperties} are deprecated.
+		 * 
 		 * Returns a newly created {@link StyleProperties}
 		 * @returns a new {@link StyleProperties}
 		 */
 		public static new(): StyleProperties;
 		/**
+		 * @deprecated
+		 * This code could only look up custom properties and
+		 *     those are deprecated.
+		 * 
 		 * Returns %TRUE if a property has been registered, if #pspec or
 		 * #parse_func are not %NULL, the #GParamSpec and parsing function
 		 * will be respectively returned.
@@ -39098,6 +40059,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static lookup_property(property_name: string): [ boolean, StylePropertyParser, GObject.ParamSpec ];
 		/**
+		 * @deprecated
+		 * Code should use the default properties provided by CSS.
+		 * 
 		 * Registers a property so it can be used in the CSS file format.
 		 * This function is the low-level equivalent of
 		 * gtk_theming_engine_register_property(), if you are implementing
@@ -39261,6 +40225,10 @@ declare namespace imports.gi.Gtk {
 		row_spacing: number;
 		readonly container: Container;
 		/**
+		 * @deprecated
+		 * Use gtk_grid_attach() with {@link Grid}. Note that the attach
+		 *     arguments differ between those two functions.
+		 * 
 		 * Adds a widget to a table. The number of “cells” that a widget will occupy is
 		 * specified by #left_attach, #right_attach, #top_attach and #bottom_attach.
 		 * These each represent the leftmost, rightmost, uppermost and lowest column
@@ -39287,6 +40255,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		attach(child: Widget, left_attach: number, right_attach: number, top_attach: number, bottom_attach: number, xoptions: AttachOptions, yoptions: AttachOptions, xpadding: number, ypadding: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_grid_attach() with {@link Grid}. Note that the attach
+		 *     arguments differ between those two functions.
+		 * 
 		 * As there are many options associated with gtk_table_attach(), this convenience
 		 * function provides the programmer with a means to add children to a table with
 		 * identical padding and expansion options. The values used for the {@link AttachOptions}
@@ -39299,6 +40271,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		attach_defaults(widget: Widget, left_attach: number, right_attach: number, top_attach: number, bottom_attach: number): void;
 		/**
+		 * @deprecated
+		 * {@link Grid} does not offer a replacement for this
+		 *     functionality.
+		 * 
 		 * Gets the amount of space between column #col, and
 		 * column #col + 1. See gtk_table_set_col_spacing().
 		 * @param column a column in the table, 0 indicates the first column
@@ -39306,6 +40282,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_col_spacing(column: number): number;
 		/**
+		 * @deprecated
+		 * Use gtk_grid_get_column_spacing() with {@link Grid}.
+		 * 
 		 * Gets the default column spacing for the table. This is
 		 * the spacing that will be used for newly added columns.
 		 * (See gtk_table_set_col_spacings())
@@ -39313,6 +40292,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_default_col_spacing(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_grid_get_row_spacing() with {@link Grid}.
+		 * 
 		 * Gets the default row spacing for the table. This is
 		 * the spacing that will be used for newly added rows.
 		 * (See gtk_table_set_row_spacings())
@@ -39320,12 +40302,20 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_default_row_spacing(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_grid_get_row_homogeneous() and
+		 *     gtk_grid_get_column_homogeneous() with {@link Grid}.
+		 * 
 		 * Returns whether the table cells are all constrained to the same
 		 * width and height. (See gtk_table_set_homogeneous ())
 		 * @returns %TRUE if the cells are all constrained to the same size
 		 */
 		get_homogeneous(): boolean;
 		/**
+		 * @deprecated
+		 * {@link Grid} does not offer a replacement for this
+		 *     functionality.
+		 * 
 		 * Gets the amount of space between row #row, and
 		 * row #row + 1. See gtk_table_set_row_spacing().
 		 * @param row a row in the table, 0 indicates the first row
@@ -39333,6 +40323,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_row_spacing(row: number): number;
 		/**
+		 * @deprecated
+		 * {@link Grid} does not expose the number of columns and
+		 *     rows.
+		 * 
 		 * Gets the number of rows and columns in the table.
 		 * @returns return location for the number of
 		 *   rows, or %NULL
@@ -39342,6 +40336,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_size(): [ rows: number | null, columns: number | null ];
 		/**
+		 * @deprecated
+		 * {@link Grid} resizes automatically.
+		 * 
 		 * If you need to change a table’s size after
 		 * it has been created, this function allows you to do so.
 		 * @param rows The new number of rows.
@@ -39349,6 +40346,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		resize(rows: number, columns: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_margin_start() and
+		 *     gtk_widget_set_margin_end() on the widgets contained in the row if
+		 *     you need this functionality. {@link Grid} does not support per-row spacing.
+		 * 
 		 * Alters the amount of space between a given table column and the following
 		 * column.
 		 * @param column the column whose spacing should be changed.
@@ -39356,12 +40358,19 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_col_spacing(column: number, spacing: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_grid_set_column_spacing() with {@link Grid}.
+		 * 
 		 * Sets the space between every column in #table equal to #spacing.
 		 * @param spacing the number of pixels of space to place between every column
 		 *   in the table.
 		 */
 		set_col_spacings(spacing: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_grid_set_row_homogeneous() and
+		 *     gtk_grid_set_column_homogeneous() with {@link Grid}.
+		 * 
 		 * Changes the homogenous property of table cells, ie. whether all cells are
 		 * an equal size or not.
 		 * @param homogeneous Set to %TRUE to ensure all table cells are the same size. Set
@@ -39369,12 +40378,20 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_homogeneous(homogeneous: boolean): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_margin_top() and
+		 *     gtk_widget_set_margin_bottom() on the widgets contained in the row if
+		 *     you need this functionality. {@link Grid} does not support per-row spacing.
+		 * 
 		 * Changes the space between a given table row and the subsequent row.
 		 * @param row row number whose spacing will be changed.
 		 * @param spacing number of pixels that the spacing should take up.
 		 */
 		set_row_spacing(row: number, spacing: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_grid_set_row_spacing() with {@link Grid}.
+		 * 
 		 * Sets the space between every row in #table equal to #spacing.
 		 * @param spacing the number of pixels of space to place between every row in the table.
 		 */
@@ -39435,6 +40452,9 @@ declare namespace imports.gi.Gtk {
 	class Table {
 		public constructor(options?: Partial<TableInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_grid_new().
+		 * 
 		 * Used to create a new table widget. An initial size must be given by
 		 * specifying how many rows and columns the table should have, although
 		 * this can be changed later with gtk_table_resize().  #rows and #columns
@@ -39492,6 +40512,10 @@ declare namespace imports.gi.Gtk {
 	class TearoffMenuItem {
 		public constructor(options?: Partial<TearoffMenuItemInitOptions>);
 		/**
+		 * @deprecated
+		 * {@link TearoffMenuItem} is deprecated and should not be
+		 *     used in newly written code.
+		 * 
 		 * Creates a new {@link TearoffMenuItem}.
 		 * @returns a new {@link TearoffMenuItem}.
 		 */
@@ -41505,6 +42529,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_editable(): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_get_hadjustment()
+		 * 
 		 * Gets the horizontal-scrolling {@link Adjustment}.
 		 * @returns pointer to the horizontal {@link Adjustment}
 		 */
@@ -41656,6 +42683,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_top_margin(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_get_vadjustment()
+		 * 
 		 * Gets the vertical-scrolling {@link Adjustment}.
 		 * @returns pointer to the vertical {@link Adjustment}
 		 */
@@ -42443,11 +43473,19 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_color(state: StateFlags): Gdk.RGBA;
 		/**
+		 * @deprecated
+		 * Use gtk_theming_engine_get_state() and
+		 *   check for #GTK_STATE_FLAG_DIR_LTR and
+		 *   #GTK_STATE_FLAG_DIR_RTL instead.
+		 * 
 		 * Returns the widget direction used for rendering.
 		 * @returns the widget direction
 		 */
 		get_direction(): TextDirection;
 		/**
+		 * @deprecated
+		 * Use gtk_theming_engine_get()
+		 * 
 		 * Returns the font description for a given state.
 		 * @param state state to retrieve the font for
 		 * @returns the #PangoFontDescription for the given
@@ -42548,6 +43586,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		lookup_color(color_name: string): [ boolean, Gdk.RGBA ];
 		/**
+		 * @deprecated
+		 * Always returns %FALSE
+		 * 
 		 * Returns %TRUE if there is a transition animation running for the
 		 * current region (see gtk_style_context_push_animatable_region()).
 		 * 
@@ -42603,6 +43644,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static load(name: string): ThemingEngine | null;
 		/**
+		 * @deprecated
+		 * Code should use the default properties provided by CSS.
+		 * 
 		 * Registers a property so it can be used in the CSS file format,
 		 * on the CSS file the property will look like
 		 * "-${#name_space}-${property_name}". being
@@ -42999,6 +44043,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(): ToolItem;
 		/**
+		 * @deprecated
+		 * Use gtk_toggle_tool_button_new() instead.
+		 * 
 		 * Creates a new {@link ToggleToolButton} containing the image and text from a
 		 * stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
 		 * and #GTK_STOCK_APPLY.
@@ -43055,6 +44102,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_label_widget(): Widget | null;
 		/**
+		 * @deprecated
+		 * Use gtk_tool_button_get_icon_name() instead.
+		 * 
 		 * Returns the name of the stock item. See gtk_tool_button_set_stock_id().
 		 * The returned string is owned by GTK+ and must not be freed or modifed.
 		 * @returns the name of the stock item for #button.
@@ -43103,6 +44153,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_label_widget(label_widget: Widget | null): void;
 		/**
+		 * @deprecated
+		 * Use gtk_tool_button_set_icon_name() instead.
+		 * 
 		 * Sets the name of the stock item. See gtk_tool_button_new_from_stock().
 		 * The stock_id property only has an effect if not overridden by non-%NULL
 		 * {@link ToolButton}:label-widget and #GtkToolButton:icon-widget properties.
@@ -43194,6 +44247,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(icon_widget: Widget | null, label: string | null): ToolItem;
 		/**
+		 * @deprecated
+		 * Use gtk_tool_button_new() together with
+		 * gtk_image_new_from_icon_name() instead.
+		 * 
 		 * Creates a new {@link ToolButton} containing the image and text from a
 		 * stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
 		 * and #GTK_STOCK_APPLY.
@@ -43744,6 +44801,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_group_position(group: ToolItemGroup): number;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_get_hadjustment()
+		 * 
 		 * Gets the horizontal adjustment of the tool palette.
 		 * @returns the horizontal adjustment of #palette
 		 */
@@ -43760,6 +44820,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_style(): ToolbarStyle;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_get_vadjustment()
+		 * 
 		 * Gets the vertical adjustment of the tool palette.
 		 * @returns the vertical adjustment of #palette
 		 */
@@ -44210,6 +45273,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_icon_from_icon_name(icon_name: string | null, size: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_tooltip_set_icon_from_icon_name() instead.
+		 * 
 		 * Sets the icon of the tooltip (which is in front of the text) to be
 		 * the stock item indicated by #stock_id with the size indicated
 		 * by #size.  If #stock_id is %NULL, the image will be hidden.
@@ -45540,6 +46606,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_grid_lines(): TreeViewGridLines;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_get_hadjustment()
+		 * 
 		 * Gets the {@link Adjustment} currently being used for the horizontal aspect.
 		 * @returns A {@link Adjustment} object, or %NULL
 		 *     if none is currently being used.
@@ -45706,6 +46775,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_tooltip_context(keyboard_tip: boolean): [ boolean, TreeModel | null, TreePath | null, TreeIter | null ];
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_get_vadjustment()
+		 * 
 		 * Gets the {@link Adjustment} currently being used for the vertical aspect.
 		 * @returns A {@link Adjustment} object, or %NULL
 		 *     if none is currently being used.
@@ -45940,6 +47012,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_cursor_on_cell(path: TreePath, focus_column: TreeViewColumn | null, focus_cell: CellRenderer | null, start_editing: boolean): void;
 		/**
+		 * @deprecated
+		 * Accessibility does not need the function anymore.
+		 * 
 		 * This function should almost never be used.  It is meant for private use by
 		 * ATK for determining the number of visible children that are removed when the
 		 * user collapses a row, or a row is deleted.
@@ -45996,6 +47071,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_grid_lines(grid_lines: TreeViewGridLines): void;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_set_hadjustment()
+		 * 
 		 * Sets the {@link Adjustment} for the current horizontal aspect.
 		 * @param adjustment The {@link Adjustment} to set, or %NULL
 		 */
@@ -46185,6 +47263,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_tooltip_row(tooltip: Tooltip, path: TreePath): void;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_set_vadjustment()
+		 * 
 		 * Sets the {@link Adjustment} for the current vertical aspect.
 		 * @param adjustment The {@link Adjustment} to set, or %NULL
 		 */
@@ -47081,6 +48162,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_action_groups(): GLib.List;
 		/**
+		 * @deprecated
+		 * Tearoff menus are deprecated and should not
+		 *     be used in newly written code.
+		 * 
 		 * Returns whether menus generated by this {@link UIManager}
 		 * will have tearoff menu items.
 		 * @returns whether tearoff menu items are added
@@ -47151,6 +48236,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		remove_ui(merge_id: number): void;
 		/**
+		 * @deprecated
+		 * Tearoff menus are deprecated and should not
+		 *     be used in newly written code.
+		 * 
 		 * Sets the “add_tearoffs” property, which controls whether menus
 		 * generated by this {@link UIManager} will have tearoff menu items.
 		 * 
@@ -47546,6 +48635,10 @@ declare namespace imports.gi.Gtk {
 	class VBox {
 		public constructor(options?: Partial<VBoxInitOptions>);
 		/**
+		 * @deprecated
+		 * You should use gtk_box_new() with a %GTK_ORIENTATION_VERTICAL
+		 *   {@link Orientable}:orientation instead
+		 * 
 		 * Creates a new {@link VBox}.
 		 * @param homogeneous %TRUE if all children are to be given equal space allotments.
 		 * @param spacing the number of pixels to place by default between children.
@@ -47580,6 +48673,9 @@ declare namespace imports.gi.Gtk {
 	class VButtonBox {
 		public constructor(options?: Partial<VButtonBoxInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_button_box_new() with %GTK_ORIENTATION_VERTICAL instead
+		 * 
 		 * Creates a new vertical button box.
 		 * @returns a new button box {@link Widget}.
 		 */
@@ -47620,6 +48716,9 @@ declare namespace imports.gi.Gtk {
 	class VPaned {
 		public constructor(options?: Partial<VPanedInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_paned_new() with %GTK_ORIENTATION_VERTICAL instead
+		 * 
 		 * Create a new {@link VPaned}
 		 * @returns the new {@link VPaned}
 		 */
@@ -47661,12 +48760,18 @@ declare namespace imports.gi.Gtk {
 	class VScale {
 		public constructor(options?: Partial<VScaleInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_scale_new() with %GTK_ORIENTATION_VERTICAL instead
+		 * 
 		 * Creates a new {@link VScale}.
 		 * @param adjustment the {@link Adjustment} which sets the range of the scale.
 		 * @returns a new {@link VScale}.
 		 */
 		public static new(adjustment: Adjustment): Widget;
 		/**
+		 * @deprecated
+		 * Use gtk_scale_new_with_range() with %GTK_ORIENTATION_VERTICAL instead
+		 * 
 		 * Creates a new vertical scale widget that lets the user input a
 		 * number between #min and #max (including #min and #max) with the
 		 * increment #step.  #step must be nonzero; it’s the distance the
@@ -47719,6 +48824,9 @@ declare namespace imports.gi.Gtk {
 	class VScrollbar {
 		public constructor(options?: Partial<VScrollbarInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_scrollbar_new() with %GTK_ORIENTATION_VERTICAL instead
+		 * 
 		 * Creates a new vertical scrollbar.
 		 * @param adjustment the {@link Adjustment} to use, or %NULL to create a new adjustment
 		 * @returns the new {@link VScrollbar}
@@ -47759,6 +48867,9 @@ declare namespace imports.gi.Gtk {
 	class VSeparator {
 		public constructor(options?: Partial<VSeparatorInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gtk_separator_new() with %GTK_ORIENTATION_VERTICAL instead
+		 * 
 		 * Creates a new {@link VSeparator}.
 		 * @returns a new {@link VSeparator}.
 		 */
@@ -47777,6 +48888,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_bin_window(): Gdk.Window;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_get_hadjustment()
+		 * 
 		 * Returns the horizontal adjustment of the viewport.
 		 * @returns the horizontal adjustment of #viewport.
 		 */
@@ -47788,6 +48902,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_shadow_type(): ShadowType;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_get_vadjustment()
+		 * 
 		 * Returns the vertical adjustment of the viewport.
 		 * @returns the vertical adjustment of #viewport.
 		 */
@@ -47798,6 +48915,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_view_window(): Gdk.Window;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_set_hadjustment()
+		 * 
 		 * Sets the horizontal adjustment of the viewport.
 		 * @param adjustment a {@link Adjustment}.
 		 */
@@ -47808,6 +48928,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_shadow_type(type: ShadowType): void;
 		/**
+		 * @deprecated
+		 * Use gtk_scrollable_set_vadjustment()
+		 * 
 		 * Sets the vertical adjustment of the viewport.
 		 * @param adjustment a {@link Adjustment}.
 		 */
@@ -48208,6 +49331,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		// child_notify(child_property: string): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_path() instead
+		 * 
 		 * Same as gtk_widget_path(), but always uses the name of a widget’s type,
 		 * never uses a custom name set with gtk_widget_set_name().
 		 * @returns location to store the length of the
@@ -48312,6 +49438,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		device_is_shadowed(device: Gdk.Device): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_drag_begin_with_coordinates() instead
+		 * 
 		 * This function is equivalent to gtk_drag_begin_with_coordinates(),
 		 * passing -1, -1 as coordinates.
 		 * @param targets The targets (data formats) in which the
@@ -48591,6 +49720,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		drag_source_set_icon_pixbuf(pixbuf: GdkPixbuf.Pixbuf): void;
 		/**
+		 * @deprecated
+		 * Use gtk_drag_source_set_icon_name() instead.
+		 * 
 		 * Sets the icon that will be used for drags from a particular source
 		 * to a stock icon.
 		 * @param stock_id the ID of the stock icon to use
@@ -48634,6 +49766,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		draw(cr: cairo.Context): void;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} instead
+		 * 
 		 * Ensures that #widget has a style (#widget->style).
 		 * 
 		 * Not a very useful function; most of the time, if you
@@ -48791,6 +49926,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_can_focus(): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_preferred_size() instead.
+		 * 
 		 * This function is only for use in widget implementations. Obtains
 		 * #widget->requisition, unless someone has forced a particular
 		 * geometry on the widget (e.g. with gtk_widget_set_size_request()),
@@ -48850,6 +49988,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_clipboard(selection: Gdk.Atom): Clipboard;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_class_set_template(), or don’t use this API at all.
+		 * 
 		 * Obtains the composite name of a widget.
 		 * @returns the composite name of #widget, or %NULL if #widget is not
 		 *   a composite child. The string should be freed when it is no
@@ -49019,11 +50160,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_margin_end(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_margin_start() instead.
+		 * 
 		 * Gets the value of the {@link Widget}:margin-left property.
 		 * @returns The left margin of #widget
 		 */
 		get_margin_left(): number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_margin_end() instead.
+		 * 
 		 * Gets the value of the {@link Widget}:margin-right property.
 		 * @returns The right margin of #widget
 		 */
@@ -49048,6 +50195,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_modifier_mask(intent: Gdk.ModifierIntent): Gdk.ModifierType;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} with a custom #GtkStyleProvider instead
+		 * 
 		 * Returns the current modifier style for the widget. (As set by
 		 * gtk_widget_modify_style().) If no style has previously set, a new
 		 * {@link RcStyle} will be created with all values unset, and set as the
@@ -49116,6 +50266,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_path(): WidgetPath;
 		/**
+		 * @deprecated
+		 * Use gdk_window_get_device_position() instead.
+		 * 
 		 * Obtains the location of the mouse pointer in widget coordinates.
 		 * Widget coordinates are a bit odd; for historical reasons, they are
 		 * defined as #widget->window coordinates for widgets that return %TRUE for
@@ -49254,6 +50407,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_request_mode(): SizeRequestMode;
 		/**
+		 * @deprecated
+		 * The {@link Requisition} cache on the widget was
+		 * removed, If you need to cache sizes across requests and allocations,
+		 * add an explicit cache to the widget in question instead.
+		 * 
 		 * Retrieves the widget’s requisition.
 		 * 
 		 * This function should only be used by widget implementations in
@@ -49266,6 +50424,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_requisition(): Requisition;
 		/**
+		 * @deprecated
+		 * Use gdk_screen_get_root_window() instead
+		 * 
 		 * Get the root window where this widget is located. This function can
 		 * only be called after the widget has been added to a widget
 		 * hierarchy with {@link Window} at the top.
@@ -49330,6 +50491,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_size_request(): [ width: number | null, height: number | null ];
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_state_flags() instead.
+		 * 
 		 * Returns the widget’s state. See gtk_widget_set_state().
 		 * @returns the state of #widget.
 		 */
@@ -49347,6 +50511,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_state_flags(): StateFlags;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} instead
+		 * 
 		 * Simply an accessor function that returns #widget->style.
 		 * @returns the widget’s {@link Style}
 		 */
@@ -49556,6 +50723,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		has_grab(): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} instead
+		 * 
 		 * Determines if the widget style has been looked up through the rc mechanism.
 		 * @returns %TRUE if the widget has been looked up through the rc
 		 *   mechanism, %FALSE otherwise.
@@ -49665,6 +50835,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		is_ancestor(ancestor: Widget): boolean;
 		/**
+		 * @deprecated
+		 * Use gdk_screen_is_composited() instead.
+		 * 
 		 * Whether #widget can rely on having its alpha channel
 		 * drawn correctly. On X11 this function returns whether a
 		 * compositing manager is running for #widget’s screen.
@@ -49794,6 +50967,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		// mnemonic_activate(group_cycling: boolean): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_override_background_color() instead
+		 * 
 		 * Sets the base color for a widget in a particular state.
 		 * All other style values are left untouched. The base color
 		 * is the background color used along with the text color
@@ -49816,6 +50992,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		modify_base(state: StateType, color: Gdk.Color | null): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_override_background_color() instead
+		 * 
 		 * Sets the background color for a widget in a particular state.
 		 * 
 		 * All other style values are left untouched.
@@ -49837,6 +51016,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		modify_bg(state: StateType, color: Gdk.Color | null): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_override_cursor() instead.
+		 * 
 		 * Sets the cursor color to use in a widget, overriding the {@link Widget}
 		 * cursor-color and secondary-cursor-color
 		 * style properties.
@@ -49852,6 +51034,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		modify_cursor(primary: Gdk.Color | null, secondary: Gdk.Color | null): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_override_color() instead
+		 * 
 		 * Sets the foreground color for a widget in a particular state.
 		 * 
 		 * All other style values are left untouched.
@@ -49863,6 +51048,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		modify_fg(state: StateType, color: Gdk.Color | null): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_override_font() instead
+		 * 
 		 * Sets the font to use for a widget.
 		 * 
 		 * All other style values are left untouched.
@@ -49872,6 +51060,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		modify_font(font_desc: Pango.FontDescription | null): void;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} with a custom #GtkStyleProvider instead
+		 * 
 		 * Modifies style values on the widget.
 		 * 
 		 * Modifications made using this technique take precedence over
@@ -49894,6 +51085,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		modify_style(style: RcStyle): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_override_color() instead
+		 * 
 		 * Sets the text color for a widget in a particular state.
 		 * 
 		 * All other style values are left untouched.
@@ -49908,6 +51102,14 @@ declare namespace imports.gi.Gtk {
 		 */
 		modify_text(state: StateType, color: Gdk.Color | null): void;
 		/**
+		 * @deprecated
+		 * This function is not useful in the context of CSS-based
+		 *   rendering. If you wish to change the way a widget renders its background
+		 *   you should use a custom CSS style, through an application-specific
+		 *   {@link StyleProvider} and a CSS style class. You can also override the default
+		 *   drawing of a widget through the #GtkWidget::draw signal, and use Cairo to
+		 *   draw a specific color, regardless of the CSS style.
+		 * 
 		 * Sets the background color to use for a widget.
 		 * 
 		 * All other style values are left untouched.
@@ -49918,6 +51120,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		override_background_color(state: StateFlags, color: Gdk.RGBA | null): void;
 		/**
+		 * @deprecated
+		 * Use a custom style provider and style classes instead
+		 * 
 		 * Sets the color to use for a widget.
 		 * 
 		 * All other style values are left untouched.
@@ -49949,6 +51154,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		override_color(state: StateFlags, color: Gdk.RGBA | null): void;
 		/**
+		 * @deprecated
+		 * This function is not useful in the context of CSS-based
+		 *   rendering. If you wish to change the color used to render the primary
+		 *   and secondary cursors you should use a custom CSS style, through an
+		 *   application-specific {@link StyleProvider} and a CSS style class.
+		 * 
 		 * Sets the cursor color to use in a widget, overriding the
 		 * cursor-color and secondary-cursor-color
 		 * style properties. All other style values are left untouched.
@@ -49965,6 +51176,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		override_cursor(cursor: Gdk.RGBA | null, secondary_cursor: Gdk.RGBA | null): void;
 		/**
+		 * @deprecated
+		 * This function is not useful in the context of CSS-based
+		 *   rendering. If you wish to change the font a widget uses to render its text
+		 *   you should use a custom CSS style, through an application-specific
+		 *   {@link StyleProvider} and a CSS style class.
+		 * 
 		 * Sets the font to use for a widget. All other style values are
 		 * left untouched. See gtk_widget_override_color().
 		 * @param font_desc the font description to use, or %NULL to undo
@@ -49972,6 +51189,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		override_font(font_desc: Pango.FontDescription | null): void;
 		/**
+		 * @deprecated
+		 * This function is not useful in the context of CSS-based
+		 *   rendering. If you wish to change the color used to render symbolic icons
+		 *   you should use a custom CSS style, through an application-specific
+		 *   {@link StyleProvider} and a CSS style class.
+		 * 
 		 * Sets a symbolic color for a widget.
 		 * 
 		 * All other style values are left untouched.
@@ -49984,6 +51207,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		override_symbolic_color(name: string, color: Gdk.RGBA | null): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_path() instead
+		 * 
 		 * Obtains the full path to #widget. The path is simply the name of a
 		 * widget and all its parents in the container hierarchy, separated by
 		 * periods. The name of a widget comes from
@@ -50102,6 +51328,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		realize(): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_allocation() and
+		 *     cairo_region_intersect_rectangle() to get the same behavior.
+		 * 
 		 * Computes the intersection of a #widget’s area and #region, returning
 		 * the intersection. The result may be empty, use cairo_region_is_empty() to
 		 * check.
@@ -50150,6 +51380,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		remove_tick_callback(id: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_render_icon_pixbuf() instead.
+		 * 
 		 * A convenience function that uses the theme settings for #widget
 		 * to look up #stock_id and render it to a pixbuf. #stock_id should
 		 * be a stock icon ID such as #GTK_STOCK_OPEN or #GTK_STOCK_OK. #size
@@ -50171,6 +51404,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		render_icon(stock_id: string, size: number, detail: string | null): GdkPixbuf.Pixbuf | null;
 		/**
+		 * @deprecated
+		 * Use gtk_icon_theme_load_icon() instead.
+		 * 
 		 * A convenience function that uses the theme engine and style
 		 * settings for #widget to look up #stock_id and render it to
 		 * a pixbuf. #stock_id should be a stock icon ID such as
@@ -50189,12 +51425,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		render_icon_pixbuf(stock_id: string, size: number): GdkPixbuf.Pixbuf | null;
 		/**
+		 * @deprecated
+		 * Use gtk_container_remove() and gtk_container_add().
+		 * 
 		 * Moves a widget from one {@link Container} to another, handling reference
 		 * count issues to avoid destroying the widget.
 		 * @param new_parent a {@link Container} to move the widget into
 		 */
 		reparent(new_parent: Widget): void;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} instead, and gtk_widget_reset_style()
+		 * 
 		 * Reset the styles of #widget and all descendents, so when
 		 * they are looked up again, they get the correct values
 		 * for the currently loaded RC file settings.
@@ -50210,6 +51452,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		reset_style(): void;
 		/**
+		 * @deprecated
+		 * Application and widget code should not handle
+		 *   expose events directly; invalidation should use the {@link Widget}
+		 *   API, and drawing should only happen inside #GtkWidget::draw
+		 *   implementations
+		 * 
 		 * Very rarely-used function. This function is used to emit
 		 * an expose event on a widget. This function is not normally used
 		 * directly. The only time it is used is when propagating an expose
@@ -50358,6 +51606,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_clip(clip: Allocation): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_class_set_template(), or don’t use this API at all.
+		 * 
 		 * Sets a widgets composite name. The widget must be
 		 * a composite child of its parent; see gtk_widget_push_composite_child().
 		 * @param name the name to set
@@ -50407,6 +51658,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		// set_direction(dir: TextDirection): void;
 		/**
+		 * @deprecated
+		 * This function does not work under non-X11 backends or with
+		 * non-native windows.
+		 * It should not be used in newly written code.
+		 * 
 		 * Widgets are double buffered by default; you can use this function
 		 * to turn off the buffering. “Double buffered” simply means that
 		 * gdk_window_begin_draw_frame() and gdk_window_end_draw_frame() are called
@@ -50567,12 +51823,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_margin_end(margin: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_margin_start() instead.
+		 * 
 		 * Sets the left margin of #widget.
 		 * See the {@link Widget}:margin-left property.
 		 * @param margin the left margin
 		 */
 		set_margin_left(margin: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_margin_end() instead.
+		 * 
 		 * Sets the right margin of #widget.
 		 * See the {@link Widget}:margin-right property.
 		 * @param margin the right margin
@@ -50737,6 +51999,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_size_request(width: number, height: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_state_flags() instead.
+		 * 
 		 * This function is for use in widget implementations. Sets the state
 		 * of a widget (insensitive, prelighted, etc.) Usually you should set
 		 * the state using wrapper functions such as gtk_widget_set_sensitive().
@@ -50762,6 +52027,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_state_flags(flags: StateFlags, clear: boolean): void;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} instead
+		 * 
 		 * Used to set the {@link Style} for a widget (#widget->style). Since
 		 * GTK 3, this function does nothing, the passed in style is ignored.
 		 * @param style a {@link Style}, or %NULL to remove the effect
@@ -50934,6 +52202,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		size_allocate_with_baseline(allocation: Allocation, baseline: number): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_preferred_size() instead.
+		 * 
 		 * This function is typically used when implementing a {@link Container}
 		 * subclass.  Obtains the preferred size of a widget. The container
 		 * uses this information to arrange its child widgets and decide what
@@ -50950,6 +52221,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		size_request(): Requisition;
 		/**
+		 * @deprecated
+		 * This step is unnecessary with {@link StyleContext}.
+		 * 
 		 * This function attaches the widget’s {@link Style} to the widget's
 		 * #GdkWindow. It is a replacement for
 		 * 
@@ -52632,16 +53906,28 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static get_default_direction(): TextDirection;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} instead, and
+		 *     gtk_css_provider_get_default() to obtain a #GtkStyleProvider
+		 *     with the default widget style information.
+		 * 
 		 * Returns the default style used by all widgets initially.
 		 * @returns the default style. This {@link Style}
 		 *     object is owned by GTK+ and should not be modified or freed.
 		 */
 		public static get_default_style(): Style;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_class_set_template(), or don’t use this API at all.
+		 * 
 		 * Cancels the effect of a previous call to gtk_widget_push_composite_child().
 		 */
 		public static pop_composite_child(): void;
 		/**
+		 * @deprecated
+		 * This API never really worked well and was mostly unused, now
+		 * we have a more complete mechanism for composite children, see gtk_widget_class_set_template().
+		 * 
 		 * Makes all newly-created widgets as composite children until
 		 * the corresponding gtk_widget_pop_composite_child() call.
 		 * 
@@ -52980,6 +54266,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_group(): WindowGroup;
 		/**
+		 * @deprecated
+		 * Resize grips have been removed.
+		 * 
 		 * Determines whether the window may have a resize grip.
 		 * @returns %TRUE if the window has a resize grip
 		 */
@@ -53032,6 +54321,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_modal(): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_get_opacity instead.
+		 * 
 		 * Fetches the requested opacity for this window. See
 		 * gtk_window_set_opacity().
 		 * @returns the requested opacity for this window.
@@ -53087,6 +54379,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_resizable(): boolean;
 		/**
+		 * @deprecated
+		 * Resize grips have been removed.
+		 * 
 		 * If a window has a resize grip, this will retrieve the grip
 		 * position, width and height into the specified #GdkRectangle.
 		 * @returns %TRUE if the resize grip’s area was retrieved
@@ -53347,6 +54642,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		move(x: number, y: number): void;
 		/**
+		 * @deprecated
+		 * Geometry handling in GTK is deprecated.
+		 * 
 		 * Parses a standard X Window System geometry string - see the
 		 * manual page for X (type “man X”) for details on this.
 		 * gtk_window_parse_geometry() does work on all GTK+ ports
@@ -53474,6 +54772,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		remove_mnemonic(keyval: number, target: Widget): void;
 		/**
+		 * @deprecated
+		 * GUI builders can call gtk_widget_hide(),
+		 *   gtk_widget_unrealize() and then gtk_widget_show() on #window
+		 *   themselves, if they still need this functionality.
+		 * 
 		 * Hides #window, then reshows it, resetting the
 		 * default size and position of the window. Used
 		 * by GUI builders only.
@@ -53513,11 +54816,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		resize(width: number, height: number): void;
 		/**
+		 * @deprecated
+		 * Resize grips have been removed.
+		 * 
 		 * Determines whether a resize grip is visible for the specified window.
 		 * @returns %TRUE if a resize grip exists and is visible
 		 */
 		resize_grip_is_visible(): boolean;
 		/**
+		 * @deprecated
+		 * This function does nothing. Use
+		 *    gtk_window_resize() and compute the geometry yourself.
+		 * 
 		 * Like gtk_window_resize(), but #width and #height are interpreted
 		 * in terms of the base size and increment set with
 		 * gtk_window_set_geometry_hints.
@@ -53593,6 +54903,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_default(default_widget: Widget | null): void;
 		/**
+		 * @deprecated
+		 * This function does nothing. If you want to set a default
+		 *     size, use gtk_window_set_default_size() instead.
+		 * 
 		 * Like gtk_window_set_default_size(), but #width and #height are interpreted
 		 * in terms of the base size and increment set with
 		 * gtk_window_set_geometry_hints.
@@ -53705,6 +55019,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_gravity(gravity: Gdk.Gravity): void;
 		/**
+		 * @deprecated
+		 * Resize grips have been removed.
+		 * 
 		 * Sets whether #window has a corner resize grip.
 		 * 
 		 * Note that the resize grip is only shown if the window
@@ -53881,6 +55198,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		set_modal(modal: boolean): void;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_opacity instead.
+		 * 
 		 * Request the windowing system to make #window partially transparent,
 		 * with opacity 0 being fully transparent and 1 fully opaque. (Values
 		 * of the opacity parameter are clamped to the [0,1] range.) On X11
@@ -56586,6 +57906,9 @@ declare namespace imports.gi.Gtk {
 	class Gradient {
 		public constructor(options?: Partial<GradientInitOptions>);
 		/**
+		 * @deprecated
+		 * {@link Gradient} is deprecated.
+		 * 
 		 * Creates a new linear gradient along the line defined by (x0, y0) and (x1, y1). Before using the gradient
 		 * a number of stop colors must be added through gtk_gradient_add_color_stop().
 		 * @param x0 X coordinate of the starting point
@@ -56596,6 +57919,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_linear(x0: number, y0: number, x1: number, y1: number): Gradient;
 		/**
+		 * @deprecated
+		 * {@link Gradient} is deprecated.
+		 * 
 		 * Creates a new radial gradient along the two circles defined by (x0, y0, radius0) and
 		 * (x1, y1, radius1). Before using the gradient a number of stop colors must be added
 		 * through gtk_gradient_add_color_stop().
@@ -56609,17 +57935,26 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_radial(x0: number, y0: number, radius0: number, x1: number, y1: number, radius1: number): Gradient;
 		/**
+		 * @deprecated
+		 * {@link Gradient} is deprecated.
+		 * 
 		 * Adds a stop color to #gradient.
 		 * @param offset offset for the color stop
 		 * @param color color to use
 		 */
 		public add_color_stop(offset: number, color: SymbolicColor): void;
 		/**
+		 * @deprecated
+		 * {@link Gradient} is deprecated.
+		 * 
 		 * Increases the reference count of #gradient.
 		 * @returns The same #gradient
 		 */
 		public ref(): Gradient;
 		/**
+		 * @deprecated
+		 * {@link Gradient} is deprecated.
+		 * 
 		 * If #gradient is resolvable, #resolved_gradient will be filled in
 		 * with the resolved gradient as a cairo_pattern_t, and %TRUE will
 		 * be returned. Generally, if #gradient can’t be resolved, it is
@@ -56633,12 +57968,18 @@ declare namespace imports.gi.Gtk {
 		public resolve(props: StyleProperties): [ boolean, cairo.Pattern ];
 		public resolve_for_context(context: StyleContext): cairo.Pattern;
 		/**
+		 * @deprecated
+		 * {@link Gradient} is deprecated.
+		 * 
 		 * Creates a string representation for #gradient that is suitable
 		 * for using in GTK CSS files.
 		 * @returns A string representation for #gradient
 		 */
 		public to_string(): string;
 		/**
+		 * @deprecated
+		 * {@link Gradient} is deprecated.
+		 * 
 		 * Decreases the reference count of #gradient, freeing its memory
 		 * if the reference count reaches 0.
 		 */
@@ -56878,6 +58219,9 @@ declare namespace imports.gi.Gtk {
 	class IconSet {
 		public constructor(options?: Partial<IconSetInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Creates a new {@link IconSet}. A #GtkIconSet represents a single icon
 		 * in various sizes and widget states. It can provide a #GdkPixbuf
 		 * for a given size and state on request, and automatically caches
@@ -56891,6 +58235,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(): IconSet;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Creates a new {@link IconSet} with #pixbuf as the default/fallback
 		 * source image. If you don’t add any additional #GtkIconSource to the
 		 * icon set, all variants of the icon will be created from #pixbuf,
@@ -56901,6 +58248,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf): IconSet;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Icon sets have a list of {@link IconSource}, which they use as base
 		 * icons for rendering icons in different states and sizes. Icons are
 		 * scaled, made to look insensitive, etc. in
@@ -56930,11 +58280,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		public add_source(source: IconSource): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Copies #icon_set by value.
 		 * @returns a new {@link IconSet} identical to the first.
 		 */
 		public copy(): IconSet;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Obtains a list of icon sizes this icon set can render. The returned
 		 * array must be freed with g_free().
 		 * @returns return location
@@ -56944,11 +58300,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		public get_sizes(): [ number[], number ];
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Increments the reference count on #icon_set.
 		 * @returns #icon_set.
 		 */
 		public ref(): IconSet;
 		/**
+		 * @deprecated
+		 * Use gtk_icon_set_render_icon_pixbuf() instead
+		 * 
 		 * Renders an icon using gtk_style_render_icon(). In most cases,
 		 * gtk_widget_render_icon() is better, since it automatically provides
 		 * most of the arguments from the current widget settings.  This
@@ -56970,6 +58332,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public render_icon(style: Style | null, direction: TextDirection, state: StateType, size: number, widget: Widget | null, detail: string | null): GdkPixbuf.Pixbuf;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Renders an icon using gtk_render_icon_pixbuf(). In most cases,
 		 * gtk_widget_render_icon_pixbuf() is better, since it automatically provides
 		 * most of the arguments from the current widget settings.  This
@@ -56983,6 +58348,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public render_icon_pixbuf(context: StyleContext, size: number): GdkPixbuf.Pixbuf;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Renders an icon using gtk_render_icon_pixbuf() and converts it to a
 		 * cairo surface.
 		 * 
@@ -56998,6 +58366,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public render_icon_surface(context: StyleContext, size: number, scale: number, for_window: Gdk.Window | null): cairo.Surface;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Decrements the reference count on #icon_set, and frees memory
 		 * if the reference count reaches 0.
 		 */
@@ -57009,6 +58380,9 @@ declare namespace imports.gi.Gtk {
 	class IconSource {
 		public constructor(options?: Partial<IconSourceInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Creates a new {@link IconSource}. A #GtkIconSource contains a #GdkPixbuf (or
 		 * image filename) that serves as the base image for one or more of the
 		 * icons in a #GtkIconSet, along with a specification for which icons in the
@@ -57041,16 +58415,25 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new(): IconSource;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Creates a copy of #source; mostly useful for language bindings.
 		 * @returns a new {@link IconSource}
 		 */
 		public copy(): IconSource;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Frees a dynamically-allocated icon source, along with its
 		 * filename, size, and pixbuf fields if those are not %NULL.
 		 */
 		public free(): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Obtains the text direction this icon source applies to. The return
 		 * value is only useful/meaningful if the text direction is not
 		 * wildcarded.
@@ -57058,11 +58441,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		public get_direction(): TextDirection;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Gets the value set by gtk_icon_source_set_direction_wildcarded().
 		 * @returns %TRUE if this icon source is a base for any text direction variant
 		 */
 		public get_direction_wildcarded(): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Retrieves the source filename, or %NULL if none is set. The
 		 * filename is not a copy, and should not be modified or expected to
 		 * persist beyond the lifetime of the icon source.
@@ -57071,6 +58460,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public get_filename(): string;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Retrieves the source icon name, or %NULL if none is set. The
 		 * icon_name is not a copy, and should not be modified or expected to
 		 * persist beyond the lifetime of the icon source.
@@ -57078,6 +58470,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public get_icon_name(): string;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Retrieves the source pixbuf, or %NULL if none is set.
 		 * In addition, if a filename source is in use, this
 		 * function in some cases will return the pixbuf from
@@ -57089,17 +58484,26 @@ declare namespace imports.gi.Gtk {
 		 */
 		public get_pixbuf(): GdkPixbuf.Pixbuf;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Obtains the icon size this source applies to. The return value
 		 * is only useful/meaningful if the icon size is not wildcarded.
 		 * @returns icon size ({@link IconSize}) this source matches.
 		 */
 		public get_size(): number;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Gets the value set by gtk_icon_source_set_size_wildcarded().
 		 * @returns %TRUE if this icon source is a base for any icon size variant
 		 */
 		public get_size_wildcarded(): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Obtains the widget state this icon source applies to. The return
 		 * value is only useful/meaningful if the widget state is not
 		 * wildcarded.
@@ -57107,11 +58511,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		public get_state(): StateType;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Gets the value set by gtk_icon_source_set_state_wildcarded().
 		 * @returns %TRUE if this icon source is a base for any widget state variant
 		 */
 		public get_state_wildcarded(): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Sets the text direction this icon source is intended to be used
 		 * with.
 		 * 
@@ -57123,6 +58533,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public set_direction(direction: TextDirection): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * If the text direction is wildcarded, this source can be used
 		 * as the base image for an icon in any {@link TextDirection}.
 		 * If the text direction is not wildcarded, then the
@@ -57136,24 +58549,36 @@ declare namespace imports.gi.Gtk {
 		 */
 		public set_direction_wildcarded(setting: boolean): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Sets the name of an image file to use as a base image when creating
 		 * icon variants for {@link IconSet}. The filename must be absolute.
 		 * @param filename image file to use
 		 */
 		public set_filename(filename: string): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Sets the name of an icon to look up in the current icon theme
 		 * to use as a base image when creating icon variants for {@link IconSet}.
 		 * @param icon_name name of icon to use
 		 */
 		public set_icon_name(icon_name: string | null): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Sets a pixbuf to use as a base image when creating icon variants
 		 * for {@link IconSet}.
 		 * @param pixbuf pixbuf to use as a source
 		 */
 		public set_pixbuf(pixbuf: GdkPixbuf.Pixbuf): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Sets the icon size this icon source is intended to be used
 		 * with.
 		 * 
@@ -57165,6 +58590,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public set_size(size: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * If the icon size is wildcarded, this source can be used as the base
 		 * image for an icon of any size.  If the size is not wildcarded, then
 		 * the size the source applies to should be set with
@@ -57181,6 +58609,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public set_size_wildcarded(setting: boolean): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * Sets the widget state this icon source is intended to be used
 		 * with.
 		 * 
@@ -57192,6 +58623,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public set_state(state: StateType): void;
 		/**
+		 * @deprecated
+		 * Use {@link IconTheme} instead.
+		 * 
 		 * If the widget state is wildcarded, this source can be used as the
 		 * base image for an icon in any {@link StateType}.  If the widget state
 		 * is not wildcarded, then the state the source applies to should be
@@ -59778,6 +61212,9 @@ declare namespace imports.gi.Gtk {
 	class SymbolicColor {
 		public constructor(options?: Partial<SymbolicColorInitOptions>);
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Creates a symbolic color by modifying the relative alpha
 		 * value of #color. A factor < 1.0 would resolve to a more
 		 * transparent color, while > 1.0 would resolve to a more
@@ -59788,12 +61225,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_alpha(color: SymbolicColor, factor: number): SymbolicColor;
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Creates a symbolic color pointing to a literal color.
 		 * @param color a #GdkRGBA
 		 * @returns a newly created {@link SymbolicColor}
 		 */
 		public static new_literal(color: Gdk.RGBA): SymbolicColor;
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Creates a symbolic color defined as a mix of another
 		 * two colors. a mix factor of 0 would resolve to #color1,
 		 * while a factor of 1 would resolve to #color2.
@@ -59804,6 +61247,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_mix(color1: SymbolicColor, color2: SymbolicColor, factor: number): SymbolicColor;
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Creates a symbolic color pointing to an unresolved named
 		 * color. See gtk_style_context_lookup_color() and
 		 * gtk_style_properties_lookup_color().
@@ -59812,6 +61258,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_name(name: string): SymbolicColor;
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Creates a symbolic color defined as a shade of
 		 * another color. A factor > 1.0 would resolve to
 		 * a brighter color, while < 1.0 would resolve to
@@ -59822,6 +61271,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_shade(color: SymbolicColor, factor: number): SymbolicColor;
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Creates a symbolic color based on the current win32
 		 * theme.
 		 * 
@@ -59834,11 +61286,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		public static new_win32(theme_class: string, id: number): SymbolicColor;
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Increases the reference count of #color
 		 * @returns the same #color
 		 */
 		public ref(): SymbolicColor;
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * If #color is resolvable, #resolved_color will be filled in
 		 * with the resolved color, and %TRUE will be returned. Generally,
 		 * if #color can’t be resolved, it is due to it being defined on
@@ -59855,6 +61313,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public resolve(props: StyleProperties | null): [ boolean, Gdk.RGBA ];
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Converts the given #color to a string representation. This is useful
 		 * both for debugging and for serialization of strings. The format of
 		 * the string may change between different versions of GTK, but it is
@@ -59864,6 +61325,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public to_string(): string;
 		/**
+		 * @deprecated
+		 * {@link SymbolicColor} is deprecated.
+		 * 
 		 * Decreases the reference count of #color, freeing its memory if the
 		 * reference count reaches 0.
 		 */
@@ -60522,6 +61986,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public backward_word_starts(count: number): boolean;
 		/**
+		 * @deprecated
+		 * Use gtk_text_iter_starts_tag() instead.
+		 * 
 		 * Returns %TRUE if #tag is toggled on at exactly this point. If #tag
 		 * is %NULL, returns %TRUE if any tag is toggled on at this point.
 		 * 
@@ -62461,6 +63928,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public iter_add_class(pos: number, name: string): void;
 		/**
+		 * @deprecated
+		 * The use of regions is deprecated.
+		 * 
 		 * Adds the region #name to the widget at position #pos in
 		 * the hierarchy defined in #path. See
 		 * gtk_style_context_add_region().
@@ -62479,6 +63949,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public iter_clear_classes(pos: number): void;
 		/**
+		 * @deprecated
+		 * The use of regions is deprecated.
+		 * 
 		 * Removes all regions from the widget at position #pos in the
 		 * hierarchy defined in #path.
 		 * @param pos position to modify, -1 for the path head
@@ -62563,6 +64036,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public iter_has_qname(pos: number, qname: GLib.Quark): boolean;
 		/**
+		 * @deprecated
+		 * The use of regions is deprecated.
+		 * 
 		 * See gtk_widget_path_iter_has_region(). This is a version that operates
 		 * with GQuarks.
 		 * @param pos position to query, -1 for the path head
@@ -62573,6 +64049,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public iter_has_qregion(pos: number, qname: GLib.Quark): [ boolean, RegionFlags ];
 		/**
+		 * @deprecated
+		 * The use of regions is deprecated.
+		 * 
 		 * Returns %TRUE if the widget at position #pos has the class #name
 		 * defined, %FALSE otherwise.
 		 * @param pos position to query, -1 for the path head
@@ -62593,6 +64072,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public iter_list_classes(pos: number): GLib.SList;
 		/**
+		 * @deprecated
+		 * The use of regions is deprecated.
+		 * 
 		 * Returns a list with all the region names defined for the widget
 		 * at position #pos in the hierarchy defined in #path.
 		 * @param pos position to query, -1 for the path head
@@ -62610,6 +64092,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		public iter_remove_class(pos: number, name: string): void;
 		/**
+		 * @deprecated
+		 * The use of regions is deprecated.
+		 * 
 		 * Removes the region #name from the widget at position #pos in
 		 * the hierarchy defined in #path.
 		 * @param pos position to modify, -1 for the path head
@@ -66011,6 +67496,9 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IStyleProvider {
 		/**
+		 * @deprecated
+		 * Will always return %NULL for all GTK-provided style providers.
+		 * 
 		 * Returns the {@link IconFactory} defined to be in use for #path, or %NULL if none
 		 * is defined.
 		 * @param path {@link WidgetPath} to query
@@ -66018,6 +67506,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		get_icon_factory(path: WidgetPath): IconFactory | null;
 		/**
+		 * @deprecated
+		 * Will always return %NULL for all GTK-provided style providers
+		 *     as the interface cannot correctly work the way CSS is specified.
+		 * 
 		 * Returns the style settings affecting a widget defined by #path, or %NULL if
 		 * #provider doesn’t contemplate styling #path.
 		 * @param path {@link WidgetPath} to query

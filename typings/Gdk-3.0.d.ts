@@ -18,6 +18,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		set_desktop(desktop: number): void;
 		/**
+		 * @deprecated
+		 * Use gdk_display_get_app_launch_context() instead
+		 * 
 		 * Sets the display on which applications will be launched when
 		 * using this context. See also gdk_app_launch_context_set_screen().
 		 * @param display a {@link Display}
@@ -109,6 +112,9 @@ declare namespace imports.gi.Gdk {
 	class AppLaunchContext {
 		public constructor(options?: Partial<AppLaunchContextInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gdk_display_get_app_launch_context() instead
+		 * 
 		 * Creates a new {@link AppLaunchContext}.
 		 * @returns a new {@link AppLaunchContext}
 		 */
@@ -158,11 +164,17 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_surface(): [ cairo.Surface | null, number | null, number | null ];
 		/**
+		 * @deprecated
+		 * Use g_object_ref() instead
+		 * 
 		 * Adds a reference to #cursor.
 		 * @returns Same #cursor that was passed in
 		 */
 		ref(): Cursor;
 		/**
+		 * @deprecated
+		 * Use g_object_unref() instead
+		 * 
 		 * Removes a reference from #cursor, deallocating the cursor
 		 * if no references remain.
 		 */
@@ -192,6 +204,9 @@ declare namespace imports.gi.Gdk {
 	class Cursor {
 		public constructor(options?: Partial<CursorInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gdk_cursor_new_for_display() instead.
+		 * 
 		 * Creates a new cursor from the set of builtin cursors for the default display.
 		 * See gdk_cursor_new_for_display().
 		 * 
@@ -614,6 +629,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_window_at_position_double(): [ Window | null, number | null, number | null ];
 		/**
+		 * @deprecated
+		 * Use gdk_seat_grab() instead.
+		 * 
 		 * Grabs the device so that all events coming from this device are passed to
 		 * this application until the device is ungrabbed with gdk_device_ungrab(),
 		 * or the window becomes unviewable. This overrides any previous grab on the device
@@ -699,6 +717,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		set_mode(mode: InputMode): boolean;
 		/**
+		 * @deprecated
+		 * Use gdk_seat_ungrab() instead.
+		 * 
 		 * Release any grab on #device.
 		 * @param time_ a timestap (e.g. %GDK_CURRENT_TIME).
 		 */
@@ -809,6 +830,10 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static free_history(events: TimeCoord[], n_events: number): void;
 		/**
+		 * @deprecated
+		 * The symbol was never meant to be used outside
+		 *   of GTK+
+		 * 
 		 * Determines information about the current keyboard grab.
 		 * This is not public API and must not be used by applications.
 		 * @param display the display for which to get the grab information
@@ -831,6 +856,9 @@ declare namespace imports.gi.Gdk {
 	interface IDeviceManager {
 		display: Display;
 		/**
+		 * @deprecated
+		 * Use gdk_seat_get_pointer() instead.
+		 * 
 		 * Returns the client pointer, that is, the master pointer that acts as the core pointer
 		 * for this application. In X11, window managers may change this depending on the interaction
 		 * pattern under the presence of several pointers.
@@ -849,6 +877,10 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_display(): Display | null;
 		/**
+		 * @deprecated
+		 * , use gdk_seat_get_pointer(), gdk_seat_get_keyboard()
+		 *             and gdk_seat_get_slaves() instead.
+		 * 
 		 * Returns the list of devices of type #type currently attached to
 		 * #device_manager.
 		 * @param type device type to get.
@@ -1161,6 +1193,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_default_seat(): Seat;
 		/**
+		 * @deprecated
+		 * Use gdk_display_get_default_seat() and {@link Seat} operations.
+		 * 
 		 * Returns the {@link DeviceManager} associated to #display.
 		 * @returns A {@link DeviceManager}, or
 		 *          %NULL. This memory is owned by GDK and must not be freed
@@ -1214,6 +1249,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_n_monitors(): number;
 		/**
+		 * @deprecated
+		 * The number of screens is always 1.
+		 * 
 		 * Gets the number of screen managed by the #display.
 		 * @returns number of screens.
 		 */
@@ -1225,6 +1263,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_name(): string;
 		/**
+		 * @deprecated
+		 * Use gdk_device_get_position() instead.
+		 * 
 		 * Gets the current location of the pointer and the current modifier
 		 * mask for a given display.
 		 * @returns location to store the screen that the
@@ -1249,12 +1290,18 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_primary_monitor(): Monitor | null;
 		/**
+		 * @deprecated
+		 * There is only one screen; use gdk_display_get_default_screen() to get it.
+		 * 
 		 * Returns a screen object for one of the screens of the display.
 		 * @param screen_num the screen number
 		 * @returns the {@link Screen} object
 		 */
 		get_screen(screen_num: number): Screen;
 		/**
+		 * @deprecated
+		 * Use gdk_device_get_window_at_position() instead.
+		 * 
 		 * Obtains the window underneath the mouse pointer, returning the location
 		 * of the pointer in that window in #win_x, #win_y for #screen. Returns %NULL
 		 * if the window under the mouse pointer is not known to GDK (for example,
@@ -1281,11 +1328,18 @@ declare namespace imports.gi.Gdk {
 		 */
 		is_closed(): boolean;
 		/**
+		 * @deprecated
+		 * Use gdk_device_ungrab(), together with gdk_device_grab()
+		 *             instead.
+		 * 
 		 * Release any keyboard grab
 		 * @param time_ a timestap (e.g #GDK_CURRENT_TIME).
 		 */
 		keyboard_ungrab(time_: number): void;
 		/**
+		 * @deprecated
+		 * Use gdk_device_manager_list_devices() instead.
+		 * 
 		 * Returns the list of available input devices attached to #display.
 		 * The list is statically allocated and should not be freed.
 		 * @returns 
@@ -1321,11 +1375,18 @@ declare namespace imports.gi.Gdk {
 		 */
 		peek_event(): Event | null;
 		/**
+		 * @deprecated
+		 * Use gdk_display_device_is_grabbed() instead.
+		 * 
 		 * Test if the pointer is grabbed.
 		 * @returns %TRUE if an active X pointer grab is in effect
 		 */
 		pointer_is_grabbed(): boolean;
 		/**
+		 * @deprecated
+		 * Use gdk_device_ungrab(), together with gdk_device_grab()
+		 *             instead.
+		 * 
 		 * Release any pointer grab.
 		 * @param time_ a timestap (e.g. %GDK_CURRENT_TIME).
 		 */
@@ -1384,6 +1445,10 @@ declare namespace imports.gi.Gdk {
 		 */
 		supports_clipboard_persistence(): boolean;
 		/**
+		 * @deprecated
+		 * Compositing is an outdated technology that
+		 *   only ever worked on X11.
+		 * 
 		 * Returns %TRUE if gdk_window_set_composited() can be used
 		 * to redirect drawing on the window using compositing.
 		 * 
@@ -1438,6 +1503,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		sync(): void;
 		/**
+		 * @deprecated
+		 * Use gdk_device_warp() instead.
+		 * 
 		 * Warps the pointer of #display to the point #x,#y on
 		 * the screen #screen, unless the pointer is confined
 		 * to a window by a grab, in which case it will be moved
@@ -1570,6 +1638,10 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static open(display_name: string): Display | null;
 		/**
+		 * @deprecated
+		 * This symbol was never meant to be used outside
+		 *   of GTK+
+		 * 
 		 * Opens the default display specified by command line arguments or
 		 * environment variables, sets it as the default display, and returns
 		 * it. gdk_parse_args() must have been called first. If the default
@@ -2648,6 +2720,9 @@ declare namespace imports.gi.Gdk {
 	class Keymap {
 		public constructor(options?: Partial<KeymapInitOptions>);
 		/**
+		 * @deprecated
+		 * Use gdk_keymap_get_for_display() instead
+		 * 
 		 * Returns the {@link Keymap} attached to the default display.
 		 * @returns the {@link Keymap} attached to the default display.
 		 */
@@ -2847,6 +2922,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_font_options(): cairo.FontOptions | null;
 		/**
+		 * @deprecated
+		 * Use per-monitor information instead
+		 * 
 		 * Gets the height of #screen in pixels. The returned size is in
 		 * ”application pixels”, not in ”device pixels” (see
 		 * gdk_screen_get_monitor_scale_factor()).
@@ -2854,6 +2932,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_height(): number;
 		/**
+		 * @deprecated
+		 * Use per-monitor information instead
+		 * 
 		 * Returns the height of #screen in millimeters.
 		 * 
 		 * Note that this value is somewhat ill-defined when the screen
@@ -2863,6 +2944,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_height_mm(): number;
 		/**
+		 * @deprecated
+		 * Use gdk_display_get_monitor_at_point() instead
+		 * 
 		 * Returns the monitor number in which the point (#x,#y) is located.
 		 * @param x the x coordinate in the virtual screen.
 		 * @param y the y coordinate in the virtual screen.
@@ -2871,6 +2955,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_monitor_at_point(x: number, y: number): number;
 		/**
+		 * @deprecated
+		 * Use gdk_display_get_monitor_at_window() instead
+		 * 
 		 * Returns the number of the monitor in which the largest area of the
 		 * bounding rectangle of #window resides.
 		 * @param window a {@link Window}
@@ -2880,6 +2967,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_monitor_at_window(window: Window): number;
 		/**
+		 * @deprecated
+		 * Use gdk_monitor_get_geometry() instead
+		 * 
 		 * Retrieves the {@link Rectangle} representing the size and position of
 		 * the individual monitor within the entire screen area. The returned
 		 * geometry is in ”application pixels”, not in ”device pixels” (see
@@ -2896,12 +2986,18 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_monitor_geometry(monitor_num: number): Rectangle | null;
 		/**
+		 * @deprecated
+		 * Use gdk_monitor_get_height_mm() instead
+		 * 
 		 * Gets the height in millimeters of the specified monitor.
 		 * @param monitor_num number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
 		 * @returns the height of the monitor, or -1 if not available
 		 */
 		get_monitor_height_mm(monitor_num: number): number;
 		/**
+		 * @deprecated
+		 * Use gdk_monitor_get_model() instead
+		 * 
 		 * Returns the output name of the specified monitor.
 		 * Usually something like VGA, DVI, or TV, not the actual
 		 * product name of the display device.
@@ -2911,6 +3007,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_monitor_plug_name(monitor_num: number): string | null;
 		/**
+		 * @deprecated
+		 * Use gdk_monitor_get_scale_factor() instead
+		 * 
 		 * Returns the internal scale factor that maps from monitor coordinates
 		 * to the actual device pixels. On traditional systems this is 1, but
 		 * on very high density outputs this can be a higher value (often 2).
@@ -2923,12 +3022,18 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_monitor_scale_factor(monitor_num: number): number;
 		/**
+		 * @deprecated
+		 * Use gdk_monitor_get_width_mm() instead
+		 * 
 		 * Gets the width in millimeters of the specified monitor, if available.
 		 * @param monitor_num number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
 		 * @returns the width of the monitor, or -1 if not available
 		 */
 		get_monitor_width_mm(monitor_num: number): number;
 		/**
+		 * @deprecated
+		 * Use gdk_monitor_get_workarea() instead
+		 * 
 		 * Retrieves the {@link Rectangle} representing the size and position of
 		 * the “work area” on a monitor within the entire screen area. The returned
 		 * geometry is in ”application pixels”, not in ”device pixels” (see
@@ -2950,6 +3055,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_monitor_workarea(monitor_num: number): Rectangle | null;
 		/**
+		 * @deprecated
+		 * Use gdk_display_get_n_monitors() instead
+		 * 
 		 * Returns the number of monitors which #screen consists of.
 		 * @returns number of monitors which #screen consists of
 		 */
@@ -2961,6 +3069,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_number(): number;
 		/**
+		 * @deprecated
+		 * Use gdk_display_get_primary_monitor() instead
+		 * 
 		 * Gets the primary monitor for #screen.  The primary monitor
 		 * is considered the monitor where the “main desktop” lives.
 		 * While normal application windows typically allow the window
@@ -3034,6 +3145,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_toplevel_windows(): GLib.List;
 		/**
+		 * @deprecated
+		 * Use per-monitor information instead
+		 * 
 		 * Gets the width of #screen in pixels. The returned size is in
 		 * ”application pixels”, not in ”device pixels” (see
 		 * gdk_screen_get_monitor_scale_factor()).
@@ -3041,6 +3155,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_width(): number;
 		/**
+		 * @deprecated
+		 * Use per-monitor information instead
+		 * 
 		 * Gets the width of #screen in millimeters.
 		 * 
 		 * Note that this value is somewhat ill-defined when the screen
@@ -3192,6 +3309,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static get_default(): Screen | null;
 		/**
+		 * @deprecated
+		 * Use per-monitor information
+		 * 
 		 * Gets the height of the default screen in pixels. The returned
 		 * size is in ”application pixels”, not in ”device pixels” (see
 		 * gdk_screen_get_monitor_scale_factor()).
@@ -3199,6 +3319,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static height(): number;
 		/**
+		 * @deprecated
+		 * Use per-monitor information
+		 * 
 		 * Returns the height of the default screen in millimeters.
 		 * Note that on many X servers this value will not be correct.
 		 * @returns the height of the default screen in millimeters,
@@ -3206,6 +3329,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static height_mm(): number;
 		/**
+		 * @deprecated
+		 * Use per-monitor information
+		 * 
 		 * Gets the width of the default screen in pixels. The returned
 		 * size is in ”application pixels”, not in ”device pixels” (see
 		 * gdk_screen_get_monitor_scale_factor()).
@@ -3213,6 +3339,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static width(): number;
 		/**
+		 * @deprecated
+		 * Use per-monitor information
+		 * 
 		 * Returns the width of the default screen in millimeters.
 		 * Note that on many X servers this value will not be correct.
 		 * @returns the width of the default screen in millimeters,
@@ -3389,6 +3518,10 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface IVisual {
 		/**
+		 * @deprecated
+		 * Use gdk_visual_get_red_pixel_details() and its variants to
+		 *     learn about the pixel layout of TrueColor and DirectColor visuals
+		 * 
 		 * Returns the number of significant bits per red, green and blue value.
 		 * 
 		 * Not all GDK backend provide a meaningful value for this function.
@@ -3409,6 +3542,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_blue_pixel_details(): [ mask: number | null, shift: number | null, precision: number | null ];
 		/**
+		 * @deprecated
+		 * This information is not useful
+		 * 
 		 * Returns the byte order of this visual.
 		 * 
 		 * The information returned by this function is only relevant
@@ -3418,6 +3554,10 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_byte_order(): ByteOrder;
 		/**
+		 * @deprecated
+		 * This information is not useful, since GDK does not
+		 *     provide APIs to operate on colormaps.
+		 * 
 		 * Returns the size of a colormap for this visual.
 		 * 
 		 * You have to use platform-specific APIs to manipulate colormaps.
@@ -3484,12 +3624,20 @@ declare namespace imports.gi.Gdk {
 	class Visual {
 		public constructor(options?: Partial<VisualInitOptions>);
 		/**
+		 * @deprecated
+		 * Visual selection should be done using
+		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 * 
 		 * Get the visual with the most available colors for the default
 		 * GDK screen. The return value should not be freed.
 		 * @returns best visual
 		 */
 		public static get_best(): Visual;
 		/**
+		 * @deprecated
+		 * Visual selection should be done using
+		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 * 
 		 * Get the best available depth for the default GDK screen.  “Best”
 		 * means “largest,” i.e. 32 preferred over 24 preferred over 8 bits
 		 * per pixel.
@@ -3497,11 +3645,19 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static get_best_depth(): number;
 		/**
+		 * @deprecated
+		 * Visual selection should be done using
+		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 * 
 		 * Return the best available visual type for the default GDK screen.
 		 * @returns best visual type
 		 */
 		public static get_best_type(): VisualType;
 		/**
+		 * @deprecated
+		 * Visual selection should be done using
+		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 * 
 		 * Combines gdk_visual_get_best_with_depth() and
 		 * gdk_visual_get_best_with_type().
 		 * @param depth a bit depth
@@ -3511,6 +3667,10 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static get_best_with_both(depth: number, visual_type: VisualType): Visual | null;
 		/**
+		 * @deprecated
+		 * Visual selection should be done using
+		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 * 
 		 * Get the best visual with depth #depth for the default GDK screen.
 		 * Color visuals and visuals with mutable colormaps are preferred
 		 * over grayscale or fixed-colormap visuals. The return value should
@@ -3520,6 +3680,10 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static get_best_with_depth(depth: number): Visual;
 		/**
+		 * @deprecated
+		 * Visual selection should be done using
+		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 * 
 		 * Get the best visual of the given #visual_type for the default GDK screen.
 		 * Visuals with higher color depths are considered better. The return value
 		 * should not be freed. %NULL may be returned if no visual has type
@@ -3529,6 +3693,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static get_best_with_type(visual_type: VisualType): Visual;
 		/**
+		 * @deprecated
+		 * Use gdk_screen_get_system_visual (gdk_screen_get_default ()).
+		 * 
 		 * Get the system’s default visual for the default GDK screen.
 		 * This is the visual for the root window of the display.
 		 * The return value should not be freed.
@@ -3626,6 +3793,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		begin_move_drag_for_device(device: Device, button: number, root_x: number, root_y: number, timestamp: number): void;
 		/**
+		 * @deprecated
+		 * Use gdk_window_begin_draw_frame() instead
+		 * 
 		 * A convenience wrapper around gdk_window_begin_paint_region() which
 		 * creates a rectangular region for you. See
 		 * gdk_window_begin_paint_region() for details.
@@ -3633,6 +3803,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		begin_paint_rect(rectangle: Rectangle): void;
 		/**
+		 * @deprecated
+		 * Use gdk_window_begin_draw_frame() instead
+		 * 
 		 * Indicates that you are beginning the process of redrawing #region.
 		 * A backing store (offscreen buffer) large enough to contain #region
 		 * will be created. The backing store will be initialized with the
@@ -3703,6 +3876,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		begin_resize_drag_for_device(edge: WindowEdge, device: Device, button: number, root_x: number, root_y: number, timestamp: number): void;
 		/**
+		 * @deprecated
+		 * this function is no longer needed
+		 * 
 		 * Does nothing, present only for compatiblity.
 		 */
 		configure_finished(): void;
@@ -3852,6 +4028,9 @@ declare namespace imports.gi.Gdk {
 		destroy(): void;
 		destroy_notify(): void;
 		/**
+		 * @deprecated
+		 * this function is no longer needed
+		 * 
 		 * Does nothing, present only for compatiblity.
 		 */
 		enable_synchronized_configure(): void;
@@ -3898,6 +4077,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		focus(timestamp: number): void;
 		/**
+		 * @deprecated
+		 * This symbol was never meant to be used outside of GTK+
+		 * 
 		 * Temporarily freezes a window and all its descendants such that it won't
 		 * receive expose events.  The window will begin receiving expose events
 		 * again when gdk_window_thaw_toplevel_updates_libgtk_only() is called. If
@@ -3955,6 +4137,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_accept_focus(): boolean;
 		/**
+		 * @deprecated
+		 * Don't use this function
+		 * 
 		 * Gets the pattern used to clear the background on #window.
 		 * @returns The pattern to use for the
 		 * background or %NULL if there is no background.
@@ -3996,6 +4181,10 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_clip_region(): cairo.Region;
 		/**
+		 * @deprecated
+		 * Compositing is an outdated technology that
+		 *   only ever worked on X11.
+		 * 
 		 * Determines whether #window is composited.
 		 * 
 		 * See gdk_window_set_composited().
@@ -4230,6 +4419,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_pass_through(): boolean;
 		/**
+		 * @deprecated
+		 * Use gdk_window_get_device_position() instead.
+		 * 
 		 * Obtains the current pointer position and modifier state.
 		 * The position is given in coordinates relative to the upper left
 		 * corner of #window.
@@ -4730,6 +4922,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		set_accept_focus(accept_focus: boolean): void;
 		/**
+		 * @deprecated
+		 * Don't use this function
+		 * 
 		 * Sets the background color of #window.
 		 * 
 		 * However, when using GTK+, influence the background of a widget
@@ -4740,6 +4935,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		set_background(color: Color): void;
 		/**
+		 * @deprecated
+		 * Don't use this function
+		 * 
 		 * Sets the background of #window.
 		 * 
 		 * A background of %NULL means that the window won't have any background. On the
@@ -4752,6 +4950,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		set_background_pattern(pattern: cairo.Pattern | null): void;
 		/**
+		 * @deprecated
+		 * Don't use this function
+		 * 
 		 * Sets the background color of #window.
 		 * 
 		 * See also gdk_window_set_background_pattern().
@@ -4773,6 +4974,10 @@ declare namespace imports.gi.Gdk {
 		 */
 		set_child_shapes(): void;
 		/**
+		 * @deprecated
+		 * Compositing is an outdated technology that
+		 *   only ever worked on X11.
+		 * 
 		 * Sets a {@link Window} as composited, or unsets it. Composited
 		 * windows do not automatically have their contents drawn to
 		 * the screen. Drawing is redirected to an offscreen buffer
@@ -5189,6 +5394,10 @@ declare namespace imports.gi.Gdk {
 		 */
 		set_startup_id(startup_id: string): void;
 		/**
+		 * @deprecated
+		 * static gravities haven't worked on anything but X11
+		 *   for a long time.
+		 * 
 		 * Used to set the bit gravity of the given window to static, and flag
 		 * it so all children get static subwindow gravity. This is used if you
 		 * are implementing scary features that involve deep knowledge of the
@@ -5316,6 +5525,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		stick(): void;
 		/**
+		 * @deprecated
+		 * This symbol was never meant to be used outside of GTK+
+		 * 
 		 * Thaws a window frozen with
 		 * gdk_window_freeze_toplevel_updates_libgtk_only().
 		 * 
@@ -5497,6 +5709,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static new(parent: Window | null, attributes: WindowAttr, attributes_mask: WindowAttributesType): Window;
 		/**
+		 * @deprecated
+		 * Use gdk_device_get_window_at_position() instead.
+		 * 
 		 * Obtains the window underneath the mouse pointer, returning the
 		 * location of that window in #win_x, #win_y. Returns %NULL if the
 		 * window under the mouse pointer is not known to GDK (if the window
@@ -5599,6 +5814,9 @@ declare namespace imports.gi.Gdk {
 		 */
 		public blue: number;
 		/**
+		 * @deprecated
+		 * Use {@link RGBA}
+		 * 
 		 * Makes a copy of a {@link Color}.
 		 * 
 		 * The result must be freed using gdk_color_free().
@@ -5606,22 +5824,34 @@ declare namespace imports.gi.Gdk {
 		 */
 		public copy(): Color;
 		/**
+		 * @deprecated
+		 * Use {@link RGBA}
+		 * 
 		 * Compares two colors.
 		 * @param colorb another {@link Color}
 		 * @returns %TRUE if the two colors compare equal
 		 */
 		public equal(colorb: Color): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link RGBA}
+		 * 
 		 * Frees a {@link Color} created with gdk_color_copy().
 		 */
 		public free(): void;
 		/**
+		 * @deprecated
+		 * Use {@link RGBA}
+		 * 
 		 * A hash function suitable for using for a hash
 		 * table that stores {@link Colors}.
 		 * @returns The hash function applied to #color
 		 */
 		public hash(): number;
 		/**
+		 * @deprecated
+		 * Use {@link RGBA}
+		 * 
 		 * Returns a textual specification of #color in the hexadecimal
 		 * form “\#rrrrggggbbbb” where “r”, “g” and “b” are hex digits
 		 * representing the red, green and blue components respectively.

@@ -496,6 +496,9 @@ declare namespace imports.gi.WebKit2 {
 	 */
 	interface IContextMenuItem {
 		/**
+		 * @deprecated
+		 * Use webkit_context_menu_item_get_gaction() instead.
+		 * 
 		 * Gets the action associated to #item as a #GtkAction.
 		 * @returns the #GtkAction associated to the #WebKitContextMenuItem,
 		 *    or %NULL if #item is a separator.
@@ -547,6 +550,9 @@ declare namespace imports.gi.WebKit2 {
 	class ContextMenuItem {
 		public constructor(options?: Partial<ContextMenuItemInitOptions>);
 		/**
+		 * @deprecated
+		 * Use webkit_context_menu_item_new_from_gaction() instead.
+		 * 
 		 * Creates a new #WebKitContextMenuItem for the given #action.
 		 * @param action a #GtkAction
 		 * @returns the newly created #WebKitContextMenuItem object.
@@ -619,6 +625,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		add_cookie_finish(result: Gio.AsyncResult): boolean;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_clear() instead.
+		 * 
 		 * Delete all cookies of #cookie_manager
 		 */
 		delete_all_cookies(): void;
@@ -639,6 +648,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		delete_cookie_finish(result: Gio.AsyncResult): boolean;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_remove() instead.
+		 * 
 		 * Remove all cookies of #cookie_manager for the given #domain.
 		 * @param domain a domain name
 		 */
@@ -681,6 +693,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_cookies_finish(result: Gio.AsyncResult): GLib.List;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_fetch() instead.
+		 * 
 		 * Asynchronously get the list of domains for which #cookie_manager contains cookies.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
@@ -690,6 +705,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_domains_with_cookies(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_fetch_finish() instead.
+		 * 
 		 * Finish an asynchronous operation started with webkit_cookie_manager_get_domains_with_cookies().
 		 * The return value is a %NULL terminated list of strings which should
 		 * be released with g_strfreev().
@@ -1416,6 +1434,9 @@ declare namespace imports.gi.WebKit2 {
 	 */
 	interface IFormSubmissionRequest {
 		/**
+		 * @deprecated
+		 * Use webkit_form_submission_request_list_text_fields() instead.
+		 * 
 		 * Get a #GHashTable with the values of the text fields contained in the form
 		 * associated to #request. Note that fields will be missing if the form
 		 * contains multiple text input elements with the same name, so this
@@ -1944,11 +1965,17 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_frame_name(): string;
 		/**
+		 * @deprecated
+		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:modifiers property.
 		 * @returns The modifiers active if this decision was triggered by a mouse event
 		 */
 		get_modifiers(): number;
 		/**
+		 * @deprecated
+		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:mouse-button property.
 		 * @returns The mouse button used if this decision was triggered by a mouse event or 0 otherwise
 		 */
@@ -1959,11 +1986,17 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_navigation_action(): NavigationAction;
 		/**
+		 * @deprecated
+		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:navigation-type property.
 		 * @returns The type of navigation triggering this policy decision.
 		 */
 		get_navigation_type(): NavigationType;
 		/**
+		 * @deprecated
+		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:request property.
 		 * @returns The URI request that is associated with this navigation
 		 */
@@ -3192,6 +3225,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_enable_plugins(): boolean;
 		/**
+		 * @deprecated
+		 * Use #WebKitWebView:is-ephemeral or #WebKitWebContext:is-ephemeral instead.
+		 * 
 		 * Get the #WebKitSettings:enable-private-browsing property.
 		 * @returns %TRUE If private browsing is enabled or %FALSE otherwise.
 		 */
@@ -3491,6 +3527,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		set_enable_plugins(enabled: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #WebKitWebView:is-ephemeral or #WebKitWebContext:is-ephemeral instead.
+		 * 
 		 * Set the #WebKitSettings:enable-private-browsing property.
 		 * @param enabled Value to be set
 		 */
@@ -4550,6 +4589,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_spell_checking_languages(): string[];
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_get_tls_errors_policy() instead.
+		 * 
 		 * Get the TLS errors policy of #context
 		 * @returns a #WebKitTLSErrorsPolicy
 		 */
@@ -4700,6 +4742,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		set_cache_model(cache_model: CacheModel): void;
 		/**
+		 * @deprecated
+		 * Use webkit_web_context_new_with_website_data_manager() instead.
+		 * 
 		 * Set the directory where disk cache files will be stored
 		 * This method must be called before loading anything in this context, otherwise
 		 * it will not have any effect.
@@ -4724,6 +4769,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		set_favicon_database_directory(path: string | null): void;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_set_network_proxy_settings() instead.
+		 * 
 		 * Set the network proxy settings to be used by connections started in #context.
 		 * By default %WEBKIT_NETWORK_PROXY_MODE_DEFAULT is used, which means that the
 		 * system settings will be used (g_proxy_resolver_get_default()).
@@ -4796,6 +4844,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		set_spell_checking_languages(languages: string[]): void;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_set_tls_errors_policy() instead.
+		 * 
 		 * Set the TLS errors policy of #context as #policy
 		 * @param policy a #WebKitTLSErrorsPolicy
 		 */
@@ -5523,6 +5574,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_is_muted(): boolean;
 		/**
+		 * @deprecated
+		 * Use jsc_value_get_context() instead.
+		 * 
 		 * Get the global JavaScript context used by #web_view to deserialize the
 		 * result values of scripts executed with webkit_web_view_run_javascript().
 		 * @returns the <function>JSGlobalContextRef</function> used by #web_view to deserialize
@@ -7081,6 +7135,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_tls_errors_policy(): TLSErrorsPolicy;
 		/**
+		 * @deprecated
+		 * WebSQL is no longer supported. Use IndexedDB instead.
+		 * 
 		 * Get the #WebKitWebsiteDataManager:websql-directory property.
 		 * @returns the directory where WebSQL databases are stored or %NULL if #manager is ephemeral.
 		 */
@@ -7928,6 +7985,9 @@ declare namespace imports.gi.WebKit2 {
 	class JavascriptResult {
 		public constructor(options?: Partial<JavascriptResultInitOptions>);
 		/**
+		 * @deprecated
+		 * Use jsc_value_get_context() instead.
+		 * 
 		 * Get the global Javascript context that should be used with the
 		 * <function>JSValueRef</function> returned by webkit_javascript_result_get_value().
 		 * @returns the <function>JSGlobalContextRef</function> for the #WebKitJavascriptResult
@@ -7939,6 +7999,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		// public get_js_value(): JavaScriptCore.Value;
 		/**
+		 * @deprecated
+		 * Use webkit_javascript_result_get_js_value() instead.
+		 * 
 		 * Get the value of #js_result. You should use the <function>JSGlobalContextRef</function>
 		 * returned by webkit_javascript_result_get_global_context() to use the <function>JSValueRef</function>.
 		 * @returns the <function>JSValueRef</function> of the #WebKitJavascriptResult

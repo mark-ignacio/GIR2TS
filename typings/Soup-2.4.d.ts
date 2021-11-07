@@ -1097,6 +1097,9 @@ declare namespace imports.gi.Soup {
 		 */
 		is_persistent(): boolean;
 		/**
+		 * @deprecated
+		 * This is a no-op.
+		 * 
 		 * This function exists for backward compatibility, but does not do
 		 * anything any more; cookie jars are saved automatically when they
 		 * are changed.
@@ -1425,6 +1428,9 @@ declare namespace imports.gi.Soup {
 		 */
 		max_body_size: number;
 		/**
+		 * @deprecated
+		 * Use soup_session_add_feature() instead.
+		 * 
 		 * Sets #logger to watch #session and print debug information for
 		 * its messages.
 		 * 
@@ -1435,6 +1441,9 @@ declare namespace imports.gi.Soup {
 		 */
 		attach(session: Session): void;
 		/**
+		 * @deprecated
+		 * Use soup_session_remove_feature() instead.
+		 * 
 		 * Stops #logger from watching #session.
 		 * @param session a {@link Session}
 		 */
@@ -1702,6 +1711,11 @@ declare namespace imports.gi.Soup {
 		is_keepalive(): boolean;
 		restarted(): void;
 		/**
+		 * @deprecated
+		 * {@link Request} provides a much simpler API that lets you
+		 * read the response directly into your own buffers without needing to
+		 * mess with callbacks, pausing/unpausing, etc.
+		 * 
 		 * Sets an alternate chunk-allocation function to use when reading
 		 * #msg's body when using the traditional (ie,
 		 * non-{@link Request}<!-- -->-based) API. Every time data is available
@@ -2756,6 +2770,11 @@ declare namespace imports.gi.Soup {
 		 */
 		disconnect(): void;
 		/**
+		 * @deprecated
+		 * If you are using soup_server_listen(), etc, then
+		 * the server listens on the thread-default #GMainContext, and this
+		 * property is ignored.
+		 * 
 		 * Gets #server's async_context, if you are using the old API. (With
 		 * the new API, the server runs in the thread's thread-default
 		 * #GMainContext, regardless of what this method returns.)
@@ -2767,6 +2786,11 @@ declare namespace imports.gi.Soup {
 		 */
 		get_async_context(): GLib.MainContext | null;
 		/**
+		 * @deprecated
+		 * If you are using soup_server_listen(), etc, then use
+		 * soup_server_get_listeners() to get a list of all listening sockets,
+		 * but note that that function returns #GSockets, not {@link Sockets}.
+		 * 
 		 * Gets #server's listening socket, if you are using the old API.
 		 * 
 		 * You should treat this socket as read-only; writing to it or
@@ -2787,6 +2811,10 @@ declare namespace imports.gi.Soup {
 		 */
 		get_listeners(): GLib.SList;
 		/**
+		 * @deprecated
+		 * If you are using soup_server_listen(), etc, then use
+		 * soup_server_get_uris() to get a list of all listening addresses.
+		 * 
 		 * Gets the TCP port that #server is listening on, if you are using
 		 * the old API.
 		 * @returns the port #server is listening on.
@@ -2920,6 +2948,11 @@ declare namespace imports.gi.Soup {
 		 */
 		pause_message(msg: Message): void;
 		/**
+		 * @deprecated
+		 * When using soup_server_listen(), etc, the server will
+		 * always listen for connections, and will process them whenever the
+		 * thread-default #GMainContext is running.
+		 * 
 		 * Stops processing for #server, if you are using the old API. Call
 		 * this to clean up after soup_server_run_async(), or to terminate a
 		 * call to soup_server_run().
@@ -2951,6 +2984,11 @@ declare namespace imports.gi.Soup {
 		 */
 		remove_websocket_extension(extension_type: GObject.Type): void;
 		/**
+		 * @deprecated
+		 * When using soup_server_listen(), etc, the server will
+		 * always listen for connections, and will process them whenever the
+		 * thread-default #GMainContext is running.
+		 * 
 		 * Starts #server, if you are using the old API, causing it to listen
 		 * for and process incoming connections. Unlike
 		 * soup_server_run_async(), this creates a #GMainLoop and runs it, and
@@ -2959,6 +2997,11 @@ declare namespace imports.gi.Soup {
 		 */
 		run(): void;
 		/**
+		 * @deprecated
+		 * When using soup_server_listen(), etc, the server will
+		 * always listen for connections, and will process them whenever the
+		 * thread-default #GMainContext is running.
+		 * 
 		 * Starts #server, if you are using the old API, causing it to listen
 		 * for and process incoming connections.
 		 * 
@@ -3553,6 +3596,9 @@ declare namespace imports.gi.Soup {
 		 */
 		prefetch_dns(hostname: string, cancellable: Gio.Cancellable | null, callback: AddressCallback | null): void;
 		/**
+		 * @deprecated
+		 * use soup_session_prefetch_dns() instead
+		 * 
 		 * Tells #session that #uri may be requested shortly, and so the
 		 * session can try to prepare (resolving the domain name, obtaining
 		 * proxy address, etc.) in order to work more quickly once the URI is
@@ -4033,11 +4079,21 @@ declare namespace imports.gi.Soup {
 	class SessionAsync {
 		public constructor(options?: Partial<SessionAsyncInitOptions>);
 		/**
+		 * @deprecated
+		 * {@link SessionAsync} is deprecated; use a plain
+		 * #SoupSession, created with soup_session_new(). See the <link
+		 * linkend="libsoup-session-porting">porting guide</link>.
+		 * 
 		 * Creates an asynchronous {@link Session} with the default options.
 		 * @returns the new session.
 		 */
 		public static new(): Session;
 		/**
+		 * @deprecated
+		 * {@link SessionAsync} is deprecated; use a plain
+		 * #SoupSession, created with soup_session_new_with_options(). See the
+		 * <link linkend="libsoup-session-porting">porting guide</link>.
+		 * 
 		 * Creates an asynchronous {@link Session} with the specified options.
 		 * @param optname1 name of first property to set
 		 * @returns the new session.
@@ -4065,11 +4121,21 @@ declare namespace imports.gi.Soup {
 	class SessionSync {
 		public constructor(options?: Partial<SessionSyncInitOptions>);
 		/**
+		 * @deprecated
+		 * {@link SessionSync} is deprecated; use a plain
+		 * #SoupSession, created with soup_session_new(). See the <link
+		 * linkend="libsoup-session-porting">porting guide</link>.
+		 * 
 		 * Creates an synchronous {@link Session} with the default options.
 		 * @returns the new session.
 		 */
 		public static new(): Session;
 		/**
+		 * @deprecated
+		 * {@link SessionSync} is deprecated; use a plain
+		 * #SoupSession, created with soup_session_new_with_options(). See the
+		 * <link linkend="libsoup-session-porting">porting guide</link>.
+		 * 
 		 * Creates an synchronous {@link Session} with the specified options.
 		 * @param optname1 name of first property to set
 		 * @returns the new session.
@@ -5025,6 +5091,10 @@ declare namespace imports.gi.Soup {
 	class ClientContext {
 		public constructor(options?: Partial<ClientContextInitOptions>);
 		/**
+		 * @deprecated
+		 * Use soup_client_context_get_remote_address(), which returns
+		 * a #GSocketAddress.
+		 * 
 		 * Retrieves the {@link Address} associated with the remote end
 		 * of a connection.
 		 * @returns the {@link Address}
@@ -5086,6 +5156,10 @@ declare namespace imports.gi.Soup {
 		 */
 		public get_remote_address(): Gio.SocketAddress | null;
 		/**
+		 * @deprecated
+		 * use soup_client_context_get_gsocket(), which returns
+		 * a #GSocket.
+		 * 
 		 * Retrieves the {@link Socket} that #client is associated with.
 		 * 
 		 * If you are using this method to observe when multiple requests are
@@ -5582,6 +5656,9 @@ declare namespace imports.gi.Soup {
 		 */
 		public to_time_t(): number;
 		/**
+		 * @deprecated
+		 * Do not use #GTimeVal, as it's not Y2038-safe.
+		 * 
 		 * Converts #date to a #GTimeVal.
 		 * @returns a #GTimeVal structure in which to store the converted time.
 		 */
@@ -6009,6 +6086,10 @@ declare namespace imports.gi.Soup {
 		 */
 		public free_ranges(ranges: Range): void;
 		/**
+		 * @deprecated
+		 * Use soup_message_headers_get_one() or
+		 * soup_message_headers_get_list() instead.
+		 * 
 		 * Gets the value of header #name in #hdrs.
 		 * 
 		 * This method was supposed to work correctly for both single-valued
@@ -7066,6 +7147,10 @@ declare namespace imports.gi.Soup {
 	 */
 	interface IProxyURIResolver {
 		/**
+		 * @deprecated
+		 * {@link ProxyURIResolver} is deprecated in favor of
+		 * #GProxyResolver
+		 * 
 		 * Asynchronously determines a proxy URI to use for #msg and calls
 		 * #callback.
 		 * @param uri the {@link URI} you want a proxy for
@@ -7075,6 +7160,10 @@ declare namespace imports.gi.Soup {
 		 */
 		get_proxy_uri_async(uri: URI, async_context: GLib.MainContext | null, cancellable: Gio.Cancellable | null, callback: ProxyURIResolverCallback): void;
 		/**
+		 * @deprecated
+		 * {@link ProxyURIResolver} is deprecated in favor of
+		 * #GProxyResolver
+		 * 
 		 * Synchronously determines a proxy URI to use for #uri. If #uri
 		 * should be sent via proxy, *#proxy_uri will be set to the URI of the
 		 * proxy, else it will be set to %NULL.
@@ -8380,6 +8469,10 @@ declare namespace imports.gi.Soup {
 	 */
 	interface ChunkAllocator {
 		/**
+		 * @deprecated
+		 * Use {@link Request} if you want to read into your
+		 * own buffers.
+		 * 
 		 * The prototype for a chunk allocation callback. This should allocate
 		 * a new {@link Buffer} and return it for the I/O layer to read message
 		 * body data off the network into.

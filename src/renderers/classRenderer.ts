@@ -119,7 +119,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     mixin += ";\n\n";
 
     let extension = "";
-    extension += renderDocString(class_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name)
+    extension += renderDocString(class_node?.doc?.[0]?._ ?? null, undefined, undefined, { ns_name: ns_name})
     extension += `${exclude_self ? '// ' : ''}interface ${class_name} extends ${class_name}Mixin {}\n`;
 
     let body = "";
@@ -168,14 +168,15 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
                         docString: "",
                         name: "...args",
                         type: "any",
-                        optional: false
+                        optional: false,
                     }
                 ],
                 return_type: {
                     docString: "",
                     type: "number",
                     name: null
-                }
+                },
+                deprecatedDoc: null
             }, ns_name, false, 1);
         }
     }

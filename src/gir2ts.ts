@@ -16,13 +16,13 @@ import { js_reserved_words } from "./consts";
 
 
 function renderNodeAsBlankInterface(node: Node, ns_name: string) {
-    let result = renderDocString(node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
+    let result = renderDocString(node?.doc?.[0]?._ ?? null, undefined, undefined, { ns_name: ns_name });
     result += `interface ${node.$.name} {}`;
     return result;
 }
 
 function renderAlias(alias_node: ParameterNode, ns_name: string): string {
-    let result = renderDocString(alias_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
+    let result = renderDocString(alias_node?.doc?.[0]?._ ?? null, undefined, undefined, { ns_name: ns_name });
     result += `type ${alias_node.$.name} = ${GetTypeInfo(alias_node).type};`;
     return result;
 }

@@ -3982,6 +3982,10 @@ declare namespace imports.gi.Gst {
 	interface IGhostPad {
 		readonly pad: ProxyPad;
 		/**
+		 * @deprecated
+		 * This function is deprecated since 1.18 and does nothing
+		 * anymore.
+		 * 
 		 * Finish initialization of a newly allocated ghost pad.
 		 * 
 		 * This function is most useful in language bindings and when subclassing
@@ -4296,6 +4300,11 @@ declare namespace imports.gi.Gst {
 		 */
 		has_active_control_bindings(): boolean;
 		/**
+		 * @deprecated
+		 * Use gst_object_has_as_ancestor() instead.
+		 * 
+		 * MT safe. Grabs and releases #object's locks.
+		 * 
 		 * Check if #object has an ancestor #ancestor somewhere up in
 		 * the hierarchy. One can e.g. check if a {@link Element} is inside a #GstPipeline.
 		 * @param ancestor a {@link Object} to check as ancestor
@@ -9956,6 +9965,9 @@ declare namespace imports.gi.Gst {
 		public readonly name: string;
 		public readonly description: string;
 		/**
+		 * @deprecated
+		 * This function can easily cause memory corruption, don't use it.
+		 * 
 		 * Removes and frees the category and all associated resources.
 		 */
 		public free(): void;
@@ -15025,6 +15037,9 @@ declare namespace imports.gi.Gst {
 		 */
 		public set_running_time(format: Format, running_time: number): boolean;
 		/**
+		 * @deprecated
+		 * Use gst_segment_position_from_running_time() instead.
+		 * 
 		 * Convert #running_time into a position in the segment so that
 		 * gst_segment_to_running_time() with that position returns #running_time.
 		 * @param format the format of the segment.

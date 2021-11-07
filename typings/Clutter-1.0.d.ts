@@ -864,6 +864,12 @@ declare namespace imports.gi.Clutter {
 		 */
 		allocate_preferred_size(flags: AllocationFlags): void;
 		/**
+		 * @deprecated
+		 * Use the implicit transition for animatable properties
+		 *   in {@link Actor} instead. See clutter_actor_save_easing_state(),
+		 *   clutter_actor_set_easing_mode(), clutter_actor_set_easing_duration(),
+		 *   clutter_actor_set_easing_delay(), and clutter_actor_restore_easing_state().
+		 * 
 		 * Animates the given list of properties of #actor between the current
 		 * value for each property and a new final value. The animation has a
 		 * definite duration and a speed given by the #mode.
@@ -1014,6 +1020,12 @@ declare namespace imports.gi.Clutter {
 		 */
 		animate(mode: number, duration: number, first_property_name: string): Animation;
 		/**
+		 * @deprecated
+		 * Use the implicit transition for animatable properties
+		 *   in {@link Actor} instead. See clutter_actor_save_easing_state(),
+		 *   clutter_actor_set_easing_mode(), clutter_actor_set_easing_duration(),
+		 *   clutter_actor_set_easing_delay(), and clutter_actor_restore_easing_state().
+		 * 
 		 * Animates the given list of properties of #actor between the current
 		 * value for each property and a new final value. The animation has a
 		 * definite behaviour given by the passed #alpha.
@@ -1029,6 +1041,12 @@ declare namespace imports.gi.Clutter {
 		 */
 		animate_with_alpha(alpha: Alpha, first_property_name: string): Animation;
 		/**
+		 * @deprecated
+		 * Use the implicit transition for animatable properties
+		 *   in {@link Actor} instead. See clutter_actor_save_easing_state(),
+		 *   clutter_actor_set_easing_mode(), clutter_actor_set_easing_duration(),
+		 *   clutter_actor_set_easing_delay(), and clutter_actor_restore_easing_state().
+		 * 
 		 * Animates the given list of properties of #actor between the current
 		 * value for each property and a new final value. The animation has a
 		 * definite behaviour given by the passed #alpha.
@@ -1054,6 +1072,12 @@ declare namespace imports.gi.Clutter {
 		 */
 		animate_with_alphav(alpha: Alpha, n_properties: number, properties: string[], values: GObject.Value[]): Animation;
 		/**
+		 * @deprecated
+		 * Use the implicit transition for animatable properties
+		 *   in {@link Actor} instead. See clutter_actor_save_easing_state(),
+		 *   clutter_actor_set_easing_mode(), clutter_actor_set_easing_duration(),
+		 *   clutter_actor_set_easing_delay(), and clutter_actor_restore_easing_state().
+		 * 
 		 * Animates the given list of properties of #actor between the current
 		 * value for each property and a new final value. The animation has a
 		 * definite duration given by #timeline and a speed given by the #mode.
@@ -1071,6 +1095,12 @@ declare namespace imports.gi.Clutter {
 		 */
 		animate_with_timeline(mode: number, timeline: Timeline, first_property_name: string): Animation;
 		/**
+		 * @deprecated
+		 * Use the implicit transition for animatable properties
+		 *   in {@link Actor} instead. See clutter_actor_save_easing_state(),
+		 *   clutter_actor_set_easing_mode(), clutter_actor_set_easing_duration(),
+		 *   clutter_actor_set_easing_delay(), and clutter_actor_restore_easing_state().
+		 * 
 		 * Animates the given list of properties of #actor between the current
 		 * value for each property and a new final value. The animation has a
 		 * definite duration given by #timeline and a speed given by the #mode.
@@ -1098,6 +1128,12 @@ declare namespace imports.gi.Clutter {
 		 */
 		animate_with_timelinev(mode: number, timeline: Timeline, n_properties: number, properties: string[], values: GObject.Value[]): Animation;
 		/**
+		 * @deprecated
+		 * Use the implicit transition for animatable properties
+		 *   in {@link Actor} instead. See clutter_actor_save_easing_state(),
+		 *   clutter_actor_set_easing_mode(), clutter_actor_set_easing_duration(),
+		 *   clutter_actor_set_easing_delay(), and clutter_actor_restore_easing_state().
+		 * 
 		 * Animates the given list of properties of #actor between the current
 		 * value for each property and a new final value. The animation has a
 		 * definite duration and a speed given by the #mode.
@@ -1295,6 +1331,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		destroy_all_children(): void;
 		/**
+		 * @deprecated
+		 * Use the implicit transition for animatable properties
+		 *   in {@link Actor} instead, and clutter_actor_remove_transition() to
+		 *   remove the transition.
+		 * 
 		 * Detaches the {@link Animation} used by #actor, if clutter_actor_animate()
 		 * has been called on #actor.
 		 * 
@@ -1376,6 +1417,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_allocation_box(): ActorBox;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_allocation_box() instead.
+		 * 
 		 * Gets the layout box an actor has been assigned.  The allocation can
 		 * only be assumed valid inside a paint() method; anywhere else, it
 		 * may be out-of-date.
@@ -1408,6 +1452,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_allocation_vertices(ancestor: Actor | null): Vertex[];
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * Gets the current anchor point of the #actor in pixels.
 		 * @returns return location for the X coordinate of the anchor point
 		 * 
@@ -1415,6 +1462,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_anchor_point(): [ anchor_x: number, anchor_y: number ];
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead.
+		 * 
 		 * Retrieves the anchor position expressed as a {@link Gravity}. If
 		 * the anchor point was specified using pixels or units this will
 		 * return %CLUTTER_GRAVITY_NONE.
@@ -1422,6 +1472,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_anchor_point_gravity(): Gravity;
 		/**
+		 * @deprecated
+		 * Use the implicit transition for animatable properties
+		 *   in {@link Actor} instead, and clutter_actor_get_transition() to retrieve
+		 *   the transition.
+		 * 
 		 * Retrieves the {@link Animation} used by #actor, if clutter_actor_animate()
 		 * has been called on #actor.
 		 * @returns a {@link Animation}, or %NULL
@@ -1554,6 +1609,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_default_paint_volume(): PaintVolume;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_z_position() instead.
+		 * 
 		 * Retrieves the depth of #self.
 		 * @returns the depth of the actor
 		 */
@@ -1614,6 +1672,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_flags(): ActorFlags;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_position() and
+		 *   clutter_actor_get_size(), or clutter_actor_get_allocation_geometry()
+		 *   instead.
+		 * 
 		 * Gets the size and position of an actor relative to its parent
 		 * actor. This is the same as calling clutter_actor_get_position() and
 		 * clutter_actor_get_size(). It tries to "do what you mean" and get the
@@ -1622,6 +1685,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_geometry(): Geometry;
 		/**
+		 * @deprecated
+		 * The id is not used any longer, and this function
+		 *   always returns 0.
+		 * 
 		 * Retrieves the unique id for #self.
 		 * @returns Globally unique value for this object instance.
 		 */
@@ -1918,6 +1985,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_request_mode(): RequestMode;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_rotation_angle() and
+		 *   clutter_actor_get_pivot_point() instead.
+		 * 
 		 * Retrieves the angle and center of rotation on the given axis,
 		 * set using clutter_actor_set_rotation().
 		 * @param axis the axis of rotation
@@ -1946,6 +2017,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_scale(): [ scale_x: number | null, scale_y: number | null ];
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_pivot_point() instead.
+		 * 
 		 * Retrieves the scale center coordinate in pixels relative to the top
 		 * left corner of the actor. If the scale center was specified using a
 		 * {@link Gravity} this will calculate the pixel offset using the
@@ -1958,6 +2032,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_scale_center(): [ center_x: number | null, center_y: number | null ];
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_pivot_point() instead.
+		 * 
 		 * Retrieves the scale center as a compass direction. If the scale
 		 * center was specified in pixels or units this will return
 		 * %CLUTTER_GRAVITY_NONE.
@@ -1971,6 +2048,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_scale_z(): number;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_effect() instead.
+		 * 
 		 * Queries the currently set {@link Shader} on #self.
 		 * @returns The currently set {@link Shader}
 		 *   or %NULL if no shader is set.
@@ -2012,6 +2092,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_transform(): Matrix;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_transform() instead
+		 * 
 		 * Retrieves the transformations applied to #self relative to its
 		 * parent.
 		 * @returns the return location for a {@link Matrix}
@@ -2202,6 +2285,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_z_position(): number;
 		/**
+		 * @deprecated
+		 * Use the {@link Actor}:pivot-point instead of
+		 *   a #ClutterGravity
+		 * 
 		 * Retrieves the center for the rotation around the Z axis as a
 		 * compass direction. If the center was specified in pixels or units
 		 * this will return %CLUTTER_GRAVITY_NONE.
@@ -2289,6 +2376,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		hide(): void;
 		/**
+		 * @deprecated
+		 * Using clutter_actor_hide() on the actor will
+		 *   prevent its children from being painted as well.
+		 * 
 		 * Calls clutter_actor_hide() on all child actors (if any).
 		 */
 		hide_all(): void;
@@ -2387,6 +2478,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		is_visible(): boolean;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_child_below_sibling() instead.
+		 * 
 		 * Puts #self below #above.
 		 * 
 		 * Both actors must have the same parent, and the parent must implement
@@ -2397,6 +2491,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		lower(above: Actor | null): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_child_below_sibling() with
+		 *   a %NULL sibling, instead.
+		 * 
 		 * Lowers #self to the bottom.
 		 * 
 		 * This function calls clutter_actor_lower() internally.
@@ -2416,6 +2514,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		map(): void;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point and
+		 * clutter_actor_set_translation() instead.
+		 * 
 		 * Sets an anchor point for the actor, and adjusts the actor postion so that
 		 * the relative position of the actor toward its parent remains the same.
 		 * @param anchor_x X coordinate of the anchor point
@@ -2423,6 +2525,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		move_anchor_point(anchor_x: number, anchor_y: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point and
+		 * clutter_actor_set_translation() instead.
+		 * 
 		 * Sets an anchor point on the actor based on the given gravity, adjusting the
 		 * actor postion so that its relative position within its parent remains
 		 * unchanged.
@@ -2477,10 +2583,22 @@ declare namespace imports.gi.Clutter {
 		 */
 		paint(): void;
 		/**
+		 * @deprecated
+		 * All children of an actor are accessible through
+		 *   the {@link Actor} API. This function is only useful for legacy
+		 *   containers overriding the default implementation of the
+		 *   #ClutterContainer interface.
+		 * 
 		 * Disables the effects of clutter_actor_push_internal().
 		 */
 		pop_internal(): void;
 		/**
+		 * @deprecated
+		 * All children of an actor are accessible through
+		 *   the {@link Actor} API, and #ClutterActor implements the
+		 *   #ClutterContainer interface, so this function is only useful
+		 *   for legacy containers overriding the default implementation.
+		 * 
 		 * Should be used by actors implementing the {@link Container} and with
 		 * internal children added through clutter_actor_set_parent(), for instance:
 		 * 
@@ -2561,6 +2679,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		queue_relayout(): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_child_above_sibling() instead.
+		 * 
 		 * Puts #self above #below.
 		 * 
 		 * Both actors must have the same parent, and the parent must implement
@@ -2571,12 +2692,20 @@ declare namespace imports.gi.Clutter {
 		 */
 		raise(below: Actor | null): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_child_above_sibling() with
+		 *   a %NULL sibling, instead.
+		 * 
 		 * Raises #self to the top.
 		 * 
 		 * This function calls clutter_actor_raise() internally.
 		 */
 		raise_top(): void;
 		/**
+		 * @deprecated
+		 * Actors are automatically realized, and nothing
+		 *   requires explicit realization.
+		 * 
 		 * Realization informs the actor that it is attached to a stage. It
 		 * can use this to allocate resources if it wanted to delay allocation
 		 * until it would be rendered. However it is perfectly acceptable for
@@ -2677,6 +2806,13 @@ declare namespace imports.gi.Clutter {
 		 */
 		remove_transition(name: string): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_remove_child() and
+		 *   clutter_actor_add_child() instead; remember to take a reference on
+		 *   the actor being removed before calling clutter_actor_remove_child()
+		 *   to avoid the reference count dropping to zero and the actor being
+		 *   destroyed.
+		 * 
 		 * Resets the parent actor of #self.
 		 * 
 		 * This function is logically equivalent to calling clutter_actor_unparent()
@@ -2789,6 +2925,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_allocation(box: ActorBox, flags: AllocationFlags): void;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead.
+		 * 
 		 * Sets an anchor point for #self. The anchor point is a point in the
 		 * coordinate space of an actor to which the actor position within its
 		 * parent is relative; the default is (0, 0), i.e. the top-left corner
@@ -2798,6 +2937,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_anchor_point(anchor_x: number, anchor_y: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point and
+		 * clutter_actor_set_translation() instead. E.g. For %CLUTTER_GRAVITY_CENTER set
+		 * pivot_point to (0.5,0.5) and the translation to (width/2,height/2).
+		 * 
 		 * Sets an anchor point on the actor, based on the given gravity (this is a
 		 * convenience function wrapping clutter_actor_set_anchor_point()).
 		 * 
@@ -2918,6 +3062,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_content_scaling_filters(min_filter: ScalingFilter, mag_filter: ScalingFilter): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_z_position() instead.
+		 * 
 		 * Sets the Z coordinate of #self to #depth.
 		 * 
 		 * The unit used by #depth is dependant on the perspective setup. See
@@ -2957,6 +3104,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_flags(flags: ActorFlags): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_position() and
+		 *   clutter_actor_set_size() instead.
+		 * 
 		 * Sets the actor's fixed position and forces its minimum and natural
 		 * size, in pixels. This means the untransformed actor will have the
 		 * given geometry. This is the same as calling clutter_actor_set_position()
@@ -3094,6 +3245,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_opacity(opacity: number): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_add_child() instead.
+		 * 
 		 * Sets the parent of #self to #parent.
 		 * 
 		 * This function will result in #parent acquiring a reference on #self,
@@ -3149,6 +3303,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_request_mode(mode: RequestMode): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_rotation_angle() and
+		 *   clutter_actor_set_pivot_point() instead.
+		 * 
 		 * Sets the rotation angle of #self around the given axis.
 		 * 
 		 * The rotation center coordinates used depend on the value of #axis:
@@ -3192,6 +3350,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_scale(scale_x: number, scale_y: number): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_pivot_point() to control
+		 *   the scale center
+		 * 
 		 * Scales an actor with the given factors around the given center
 		 * point. The center point is specified in pixels relative to the
 		 * anchor point (usually the top left corner of the actor).
@@ -3205,6 +3367,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_scale_full(scale_x: number, scale_y: number, center_x: number, center_y: number): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_pivot_point() to set the
+		 *   scale center using normalized coordinates instead.
+		 * 
 		 * Scales an actor with the given factors around the given
 		 * center point. The center point is specified as one of the compass
 		 * directions in {@link Gravity}. For example, setting it to north
@@ -3229,6 +3395,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_scale_z(scale_z: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} and
+		 *   clutter_actor_add_effect() instead.
+		 * 
 		 * Sets the {@link Shader} to be used when rendering #self.
 		 * 
 		 * If #shader is %NULL this function will unset any currently set shader
@@ -3242,6 +3412,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_shader(shader: Shader | null): boolean;
 		/**
+		 * @deprecated
+		 * Use clutter_shader_effect_set_uniform_value() instead
+		 * 
 		 * Sets the value for a named parameter of the shader applied
 		 * to #actor.
 		 * @param param the name of the parameter
@@ -3249,6 +3422,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_shader_param(param: string, value: GObject.Value): void;
 		/**
+		 * @deprecated
+		 * Use clutter_shader_effect_set_uniform() instead
+		 * 
 		 * Sets the value for a named float parameter of the shader applied
 		 * to #actor.
 		 * @param param the name of the parameter
@@ -3256,6 +3432,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_shader_param_float(param: string, value: number): void;
 		/**
+		 * @deprecated
+		 * Use clutter_shader_effect_set_uniform() instead
+		 * 
 		 * Sets the value for a named int parameter of the shader applied to
 		 * #actor.
 		 * @param param the name of the parameter
@@ -3386,6 +3565,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_z_position(z_position: number): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_rotation_angle() and
+		 *   clutter_actor_set_pivot_point() instead.
+		 * 
 		 * Sets the rotation angle of #self around the Z axis using the center
 		 * point specified as a compass point. For example to rotate such that
 		 * the center of the actor remains static you can use
@@ -3417,6 +3600,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		show(): void;
 		/**
+		 * @deprecated
+		 * Actors are visible by default
+		 * 
 		 * Calls clutter_actor_show() on all children of an actor (if any).
 		 */
 		show_all(): void;
@@ -3464,6 +3650,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		unmap(): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_remove_child() instead.
+		 * 
 		 * Removes the parent of #self.
 		 * 
 		 * This will cause the parent of #self to release the reference
@@ -3476,6 +3665,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		unparent(): void;
 		/**
+		 * @deprecated
+		 * Actors are automatically unrealized, and nothing
+		 *   requires explicit realization.
+		 * 
 		 * Unrealization informs the actor that it may be being destroyed or
 		 * moved to another stage. The actor may want to destroy any
 		 * underlying graphics resources at this point. However it is
@@ -4294,27 +4487,42 @@ declare namespace imports.gi.Clutter {
 		 */
 		timeline: Timeline;
 		/**
+		 * @deprecated
+		 * Use clutter_timeline_get_progress()
+		 * 
 		 * Query the current alpha value.
 		 * @returns The current alpha value for the alpha
 		 */
 		get_alpha(): number;
 		/**
+		 * @deprecated
+		 * Use {@link Timeline} instead
+		 * 
 		 * Retrieves the {@link AnimationMode} used by #alpha.
 		 * @returns the animation mode
 		 */
 		get_mode(): number;
 		/**
+		 * @deprecated
+		 * Use {@link Timeline} directlry
+		 * 
 		 * Gets the {@link Timeline} bound to #alpha.
 		 * @returns a {@link Timeline} instance
 		 */
 		get_timeline(): Timeline;
 		/**
+		 * @deprecated
+		 * Use clutter_timeline_set_progress_func()
+		 * 
 		 * Sets the #GClosure used to compute the alpha value at each
 		 * frame of the {@link Timeline} bound to #alpha.
 		 * @param closure A #GClosure
 		 */
 		set_closure(closure: GObject.Closure): void;
 		/**
+		 * @deprecated
+		 * Use clutter_timeline_set_progress_func()
+		 * 
 		 * Sets the {@link AlphaFunc} function used to compute
 		 * the alpha value at each frame of the #ClutterTimeline
 		 * bound to #alpha.
@@ -4326,6 +4534,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_func(func: AlphaFunc, data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
+		 * @deprecated
+		 * Use {@link Timeline} and
+		 *   clutter_timeline_set_progress_mode() instead
+		 * 
 		 * Sets the progress function of #alpha using the symbolic value
 		 * of #mode, as taken by the {@link AnimationMode} enumeration or
 		 * using the value returned by clutter_alpha_register_func().
@@ -4333,6 +4545,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_mode(mode: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link Timeline} directly
+		 * 
 		 * Binds #alpha to #timeline.
 		 * @param timeline A {@link Timeline}
 		 */
@@ -4366,6 +4581,9 @@ declare namespace imports.gi.Clutter {
 	class Alpha {
 		public constructor(options?: Partial<AlphaInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link Timeline} instead
+		 * 
 		 * Creates a new {@link Alpha} instance.  You must set a function
 		 * to compute the alpha value using clutter_alpha_set_func() and
 		 * bind a #ClutterTimeline object to the #ClutterAlpha instance
@@ -4377,6 +4595,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		public static new(): Alpha;
 		/**
+		 * @deprecated
+		 * Use {@link Timeline} instead
+		 * 
 		 * Creates a new {@link Alpha} instance and sets the timeline
 		 * and animation mode.
 		 * 
@@ -4387,6 +4608,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		public static new_full(timeline: Timeline, mode: number): Alpha;
 		/**
+		 * @deprecated
+		 * Use {@link Timeline} instead
+		 * 
 		 * Creates a new {@link Alpha} instances and sets the timeline
 		 * and the alpha function.
 		 * 
@@ -4401,6 +4625,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		public static new_with_func(timeline: Timeline, func: AlphaFunc, data: any | null, destroy: GLib.DestroyNotify): Alpha;
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this
+		 *   function. Use clutter_timeline_set_progress_func() on each
+		 *   specific {@link Timeline} instance
+		 * 
 		 * #GClosure variant of clutter_alpha_register_func().
 		 * 
 		 * Registers a global alpha function and returns its logical id
@@ -4412,6 +4641,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		public static register_closure(closure: GObject.Closure): number;
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this
+		 *   function. Use clutter_timeline_set_progress_func() on each
+		 *   specific {@link Timeline} instance
+		 * 
 		 * Registers a global alpha function and returns its logical id
 		 * to be used by clutter_alpha_set_mode() or by {@link Animation}.
 		 * 
@@ -4454,6 +4688,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		timeline: Timeline;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Adds a single property with name #property_name to the
 		 * animation #animation.  For more information about animations,
 		 * see clutter_actor_animate().
@@ -4466,6 +4703,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		bind(property_name: string, _final: GObject.Value): Animation;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Binds #interval to the #property_name of the #GObject
 		 * attached to #animation. The {@link Animation} will take
 		 * ownership of the passed #ClutterInterval.  For more information
@@ -4479,6 +4719,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		bind_interval(property_name: string, interval: Interval): Animation;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Emits the ::completed signal on #animation
 		 * 
 		 * When using this function with a {@link Animation} created
@@ -4490,16 +4733,26 @@ declare namespace imports.gi.Clutter {
 		 */
 		completed(): void;
 		/**
+		 * @deprecated
+		 * Use clutter_animation_get_timeline() and
+		 *   clutter_timeline_get_progress_mode() instead.
+		 * 
 		 * Retrieves the {@link Alpha} used by #animation.
 		 * @returns the alpha object used by the animation
 		 */
 		get_alpha(): Alpha;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Retrieves the duration of #animation, in milliseconds.
 		 * @returns the duration of the animation
 		 */
 		get_duration(): number;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Retrieves the {@link Interval} associated to #property_name
 		 * inside #animation.
 		 * @param property_name name of the property
@@ -4509,27 +4762,42 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_interval(property_name: string): Interval;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Retrieves whether #animation is looping.
 		 * @returns %TRUE if the animation is looping
 		 */
 		get_loop(): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Retrieves the animation mode of #animation, as set by
 		 * clutter_animation_set_mode().
 		 * @returns the mode for the animation
 		 */
 		get_mode(): number;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Retrieves the #GObject attached to #animation.
 		 * @returns a #GObject
 		 */
 		get_object(): GObject.Object;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Retrieves the {@link Timeline} used by #animation
 		 * @returns the timeline used by the animation
 		 */
 		get_timeline(): Timeline;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Checks whether #animation is controlling #property_name.
 		 * @param property_name name of the property
 		 * @returns %TRUE if the property is animated by the
@@ -4537,6 +4805,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		has_property(property_name: string): boolean;
 		/**
+		 * @deprecated
+		 * Use clutter_animation_get_timeline() and
+		 *   clutter_timeline_set_progress_mode() instead.
+		 * 
 		 * Sets #alpha as the {@link Alpha} used by #animation.
 		 * 
 		 * If #alpha is not %NULL, the #ClutterAnimation will take ownership
@@ -4545,6 +4817,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_alpha(alpha: Alpha): void;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Sets the duration of #animation in milliseconds.
 		 * 
 		 * This function will set {@link Animation}:alpha and
@@ -4553,6 +4828,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_duration(msecs: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Sets whether #animation should loop over itself once finished.
 		 * 
 		 * A looping {@link Animation} will not emit the #ClutterAnimation::completed
@@ -4564,6 +4842,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_loop(loop: boolean): void;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Sets the animation #mode of #animation. The animation #mode is
 		 * a logical id, either coming from the {@link AnimationMode} enumeration
 		 * or the return value of clutter_alpha_register_func().
@@ -4573,12 +4854,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_mode(mode: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Attaches #animation to #object. The {@link Animation} will take a
 		 * reference on #object.
 		 * @param object a #GObject
 		 */
 		set_object(object: GObject.Object): void;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Sets the {@link Timeline} used by #animation.
 		 * 
 		 * This function will take a reference on the passed #timeline.
@@ -4587,11 +4874,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_timeline(timeline: Timeline | null): void;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Removes #property_name from the list of animated properties.
 		 * @param property_name name of the property
 		 */
 		unbind_property(property_name: string): void;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Updates the #final value of the interval for #property_name
 		 * @param property_name name of the property
 		 * @param _final The final value of the property
@@ -4599,6 +4892,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		update(property_name: string, _final: GObject.Value): Animation;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Changes the #interval for #property_name. The {@link Animation}
 		 * will take ownership of the passed #ClutterInterval.
 		 * @param property_name name of the property
@@ -4663,6 +4959,9 @@ declare namespace imports.gi.Clutter {
 	class Animation {
 		public constructor(options?: Partial<AnimationInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Creates a new {@link Animation} instance. You should set the
 		 * #GObject to be animated using clutter_animation_set_object(),
 		 * set the duration with clutter_animation_set_duration() and the
@@ -4697,6 +4996,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		timeline: Timeline;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Compute the value for a managed property at a given progress.
 		 * 
 		 * If the property is an ease-in property, the current value of the property
@@ -4711,11 +5013,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		compute_value(object: GObject.Object, property_name: string, progress: number, value: GObject.Value): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Retrieves the current duration of an animator
 		 * @returns the duration of the animation, in milliseconds
 		 */
 		get_duration(): number;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Returns a list of pointers to opaque structures with accessor functions
 		 * that describe the keys added to an animator.
 		 * @param object a #GObject to search for, or %NULL for all objects
@@ -4730,11 +5038,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_keys(object: GObject.Object | null, property_name: string | null, progress: number): GLib.List;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Get the timeline hooked up for driving the {@link Animator}
 		 * @returns the {@link Timeline} that drives the animator
 		 */
 		get_timeline(): Timeline;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Checks if a property value is to be eased into the animation.
 		 * @param object a #GObject
 		 * @param property_name the name of a property on object
@@ -4742,6 +5056,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		property_get_ease_in(object: GObject.Object, property_name: string): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Get the interpolation used by animator for a property on a particular
 		 * object.
 		 * @param object a #GObject
@@ -4750,6 +5067,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		property_get_interpolation(object: GObject.Object, property_name: string): Interpolation;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Sets whether a property value is to be eased into the animation.
 		 * @param object a #GObject
 		 * @param property_name the name of a property on object
@@ -4757,6 +5077,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		property_set_ease_in(object: GObject.Object, property_name: string, ease_in: boolean): void;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Set the interpolation method to use, %CLUTTER_INTERPOLATION_LINEAR causes
 		 * the values to linearly change between the values, and
 		 * %CLUTTER_INTERPOLATION_CUBIC causes the values to smoothly change between
@@ -4767,6 +5090,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		property_set_interpolation(object: GObject.Object, property_name: string, interpolation: Interpolation): void;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Removes all keys matching the conditions specificed in the arguments.
 		 * @param object a #GObject to search for, or %NULL for all
 		 * @param property_name a specific property name to query for,
@@ -4776,6 +5102,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		remove_key(object: GObject.Object | null, property_name: string | null, progress: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Adds multiple keys to a {@link Animator}, specifying the value a given
 		 * property should have at a given progress of the animation. The mode
 		 * specified is the mode used when going to this key from the previous key of
@@ -4791,12 +5120,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		set(first_object: any | null, first_property_name: string, first_mode: number, first_progress: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Runs the timeline of the {@link Animator} with a duration in msecs
 		 * as specified.
 		 * @param duration milliseconds a run of the animator should last.
 		 */
 		set_duration(duration: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Sets a single key in the {@link Animator} for the #property_name of
 		 * #object at #progress.
 		 * 
@@ -4811,11 +5146,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_key(object: GObject.Object, property_name: string, mode: number, progress: number, value: GObject.Value): Animator;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Sets an external timeline that will be used for driving the animation
 		 * @param timeline a {@link Timeline}
 		 */
 		set_timeline(timeline: Timeline): void;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Start the ClutterAnimator, this is a thin wrapper that rewinds
 		 * and starts the animators current timeline.
 		 * @returns the {@link Timeline} that drives
@@ -4849,6 +5190,9 @@ declare namespace imports.gi.Clutter {
 	class Animator {
 		public constructor(options?: Partial<AnimatorInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Creates a new {@link Animator} instance
 		 * @returns a new {@link Animator}.
 		 */
@@ -4860,17 +5204,26 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBackend {
 		/**
+		 * @deprecated
+		 * Use {@link Settings}:double-click-distance instead
+		 * 
 		 * Retrieves the distance used to verify a double click event
 		 * @returns a distance, in pixels.
 		 */
 		get_double_click_distance(): number;
 		/**
+		 * @deprecated
+		 * Use {@link Settings}:double-click-time instead
+		 * 
 		 * Gets the maximum time between two button press events, as set
 		 * by clutter_backend_set_double_click_time().
 		 * @returns a time in milliseconds
 		 */
 		get_double_click_time(): number;
 		/**
+		 * @deprecated
+		 * Use {@link Settings}:font-name instead
+		 * 
 		 * Retrieves the default font name as set by
 		 * clutter_backend_set_font_name().
 		 * @returns the font name for the backend. The returned string is
@@ -4900,17 +5253,26 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_resolution(): number;
 		/**
+		 * @deprecated
+		 * Use {@link Settings}:double-click-distance instead
+		 * 
 		 * Sets the maximum distance used to verify a double click event.
 		 * @param distance a distance, in pixels
 		 */
 		set_double_click_distance(distance: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link Settings}:double-click-time instead
+		 * 
 		 * Sets the maximum time between two button press events, used to
 		 * verify whether it's a double click event or not.
 		 * @param msec milliseconds between two button press events
 		 */
 		set_double_click_time(msec: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link Settings}:font-name instead
+		 * 
 		 * Sets the default font to be used by Clutter. The #font_name string
 		 * must either be %NULL, which means that the font name from the
 		 * default {@link Backend} will be used; or be something that can
@@ -4932,6 +5294,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_font_options(options: cairo.FontOptions): void;
 		/**
+		 * @deprecated
+		 * Use {@link Settings}:font-dpi instead
+		 * 
 		 * Sets the resolution for font handling on the screen. This is a
 		 * scale factor between points specified in a #PangoFontDescription
 		 * and cairo units. The default value is 96, meaning that a 10 point
@@ -5789,6 +6154,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		y_align: BinAlignment;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_add_child() instead.
+		 * 
 		 * Adds a {@link Actor} to the container using #self and
 		 * sets the alignment policies for it
 		 * 
@@ -5802,6 +6170,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		add(child: Actor, x_align: BinAlignment, y_align: BinAlignment): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Actor}:x-align and the
+		 *   #ClutterActor:y-align properties of #ClutterActor instead.
+		 * 
 		 * Retrieves the horizontal and vertical alignment policies for
 		 * a child of #self
 		 * 
@@ -5816,6 +6188,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_alignment(child: Actor | null): [ x_align: BinAlignment | null, y_align: BinAlignment | null ];
 		/**
+		 * @deprecated
+		 * Use the {@link Actor}:x-align and
+		 *   #ClutterActor:y-align properties of #ClutterActor instead.
+		 * 
 		 * Sets the horizontal and vertical alignment policies to be applied
 		 * to a #child of #self
 		 * 
@@ -6207,6 +6583,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		color_set: boolean;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_background_color() instead.
+		 * 
 		 * Retrieves the background color of #box
 		 * 
 		 * If the {@link Box}:color-set property is set to %FALSE the
@@ -6215,6 +6594,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_color(): Color;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_layout_manager() instead.
+		 * 
 		 * Retrieves the {@link LayoutManager} instance used by #box
 		 * @returns a {@link LayoutManager}. The returned
 		 *   #ClutterLayoutManager is owned by the #ClutterBox and it should not
@@ -6222,6 +6604,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_layout_manager(): LayoutManager;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_add_child() instead. To set
+		 *   specific layout properties, use clutter_layout_manager_child_set()
+		 * 
 		 * Adds #actor to #box and sets layout properties at the same time,
 		 * if the {@link LayoutManager} used by #box has them
 		 * 
@@ -6235,6 +6621,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		pack(actor: Actor, first_property: string): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_insert_child_above() instead.
+		 *   To set specific layout properties, use clutter_layout_manager_child_set()
+		 * 
 		 * Adds #actor to #box, placing it after #sibling, and sets layout
 		 * properties at the same time, if the {@link LayoutManager} used by
 		 * #box supports them
@@ -6250,6 +6640,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		pack_after(actor: Actor, sibling: Actor | null, first_property: string): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_insert_child_at_index() instead.
+		 *   To set specific layout properties, use clutter_layout_manager_child_set()
+		 * 
 		 * Adds #actor to #box, placing it at #position, and sets layout
 		 * properties at the same time, if the {@link LayoutManager} used by
 		 * #box supports them
@@ -6263,6 +6657,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		pack_at(actor: Actor, position: number, first_property: string): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_insert_child_below() instead.
+		 *   To set specific layout properties, use clutter_layout_manager_child_set()
+		 * 
 		 * Adds #actor to #box, placing it before #sibling, and sets layout
 		 * properties at the same time, if the {@link LayoutManager} used by
 		 * #box supports them
@@ -6278,6 +6676,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		pack_before(actor: Actor, sibling: Actor | null, first_property: string): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_add_child() instead. To set
+		 *   specific layout properties, use clutter_layout_manager_child_set()
+		 * 
 		 * Vector-based variant of clutter_box_pack(), intended for language
 		 * bindings to use
 		 * @param actor a {@link Actor}
@@ -6289,11 +6691,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		packv(actor: Actor, n_properties: number, properties: string[], values: GObject.Value[]): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_background_color() instead.
+		 * 
 		 * Sets (or unsets) the background color for #box
 		 * @param color the background color, or %NULL to unset
 		 */
 		set_color(color: Color | null): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_layout_manager() instead.
+		 * 
 		 * Sets the {@link LayoutManager} for #box
 		 * 
 		 * A #ClutterLayoutManager is a delegate object that controls the
@@ -6327,6 +6735,9 @@ declare namespace imports.gi.Clutter {
 	class Box {
 		public constructor(options?: Partial<BoxInitOptions>);
 		/**
+		 * @deprecated
+		 * Use clutter_actor_new() instead.
+		 * 
 		 * Creates a new {@link Box}. The children of the box will be layed
 		 * out by the passed #manager
 		 * @param manager a {@link LayoutManager}
@@ -6388,6 +6799,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		vertical: boolean;
 		/**
+		 * @deprecated
+		 * {@link BoxLayout} will honour #ClutterActor's
+		 *   #ClutterActor:x-align and #ClutterActor:y-align properies
+		 * 
 		 * Retrieves the horizontal and vertical alignment policies for #actor
 		 * as set using clutter_box_layout_pack() or clutter_box_layout_set_alignment()
 		 * @param actor a {@link Actor} child of #layout
@@ -6407,12 +6822,20 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_easing_mode(): number;
 		/**
+		 * @deprecated
+		 * {@link BoxLayout} will honour #ClutterActor's
+		 *   #ClutterActor:x-expand and #ClutterActor:y-expand properies
+		 * 
 		 * Retrieves whether #actor should expand inside #layout
 		 * @param actor a {@link Actor} child of #layout
 		 * @returns %TRUE if the {@link Actor} should expand, %FALSE otherwise
 		 */
 		get_expand(actor: Actor): boolean;
 		/**
+		 * @deprecated
+		 * {@link BoxLayout} will honour #ClutterActor's
+		 *   #ClutterActor:x-align and #ClutterActor:y-align properies
+		 * 
 		 * Retrieves the horizontal and vertical fill policies for #actor
 		 * as set using clutter_box_layout_pack() or clutter_box_layout_set_fill()
 		 * @param actor a {@link Actor} child of #layout
@@ -6449,6 +6872,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_use_animations(): boolean;
 		/**
+		 * @deprecated
+		 * Use clutter_box_layout_get_orientation() instead
+		 * 
 		 * Retrieves the orientation of the #layout as set using the
 		 * clutter_box_layout_set_vertical() function
 		 * @returns %TRUE if the {@link BoxLayout} is arranging its children
@@ -6456,6 +6882,13 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_vertical(): boolean;
 		/**
+		 * @deprecated
+		 * {@link BoxLayout} honours #ClutterActor's
+		 *   align and expand properties. The preferred way is adding
+		 *   the #actor with clutter_actor_add_child() and setting
+		 *   #ClutterActor:x-align, #ClutterActor:y-align,
+		 *   #ClutterActor:x-expand and #ClutterActor:y-expand
+		 * 
 		 * Packs #actor inside the {@link Container} associated to #layout
 		 * and sets the layout properties
 		 * @param actor a {@link Actor}
@@ -6467,6 +6900,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		pack(actor: Actor, expand: boolean, x_fill: boolean, y_fill: boolean, x_align: BoxAlignment, y_align: BoxAlignment): void;
 		/**
+		 * @deprecated
+		 * {@link BoxLayout} will honour #ClutterActor's
+		 *   #ClutterActor:x-align and #ClutterActor:y-align properies
+		 * 
 		 * Sets the horizontal and vertical alignment policies for #actor
 		 * inside #layout
 		 * @param actor a {@link Actor} child of #layout
@@ -6475,12 +6912,20 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_alignment(actor: Actor, x_align: BoxAlignment, y_align: BoxAlignment): void;
 		/**
+		 * @deprecated
+		 * The layout manager will honour the easing state
+		 *   of the children when allocating them.
+		 * 
 		 * Sets the duration of the animations used by #layout when animating changes
 		 * in the layout properties.
 		 * @param msecs the duration of the animations, in milliseconds
 		 */
 		set_easing_duration(msecs: number): void;
 		/**
+		 * @deprecated
+		 * The layout manager will honour the easing state
+		 *   of the children when allocating them.
+		 * 
 		 * Sets the easing mode to be used by #layout when animating changes in layout
 		 * properties.
 		 * @param mode an easing mode, either from {@link AnimationMode} or a logical id
@@ -6488,12 +6933,20 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_easing_mode(mode: number): void;
 		/**
+		 * @deprecated
+		 * {@link BoxLayout} will honour #ClutterActor's
+		 *   #ClutterActor:x-expand and #ClutterActor:y-expand properies
+		 * 
 		 * Sets whether #actor should expand inside #layout
 		 * @param actor a {@link Actor} child of #layout
 		 * @param expand whether #actor should expand
 		 */
 		set_expand(actor: Actor, expand: boolean): void;
 		/**
+		 * @deprecated
+		 * {@link BoxLayout} will honour #ClutterActor's
+		 *   #ClutterActor:x-align and #ClutterActor:y-align properies
+		 * 
 		 * Sets the horizontal and vertical fill policies for #actor
 		 * inside #layout
 		 * @param actor a {@link Actor} child of #layout
@@ -6525,6 +6978,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_spacing(spacing: number): void;
 		/**
+		 * @deprecated
+		 * The layout manager will honour the easing state
+		 *   of the children when allocating them.
+		 * 
 		 * Sets whether #layout should animate changes in the layout properties
 		 * 
 		 * The duration of the animations is controlled by
@@ -6538,6 +6995,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_use_animations(animate: boolean): void;
 		/**
+		 * @deprecated
+		 * Use clutter_box_layout_set_orientation() instead.
+		 * 
 		 * Sets whether #layout should arrange its children vertically alongside
 		 * the Y axis, instead of horizontally alongside the X axis
 		 * @param vertical %TRUE if the layout should be vertical
@@ -6724,6 +7184,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		surface_width: number;
 		/**
+		 * @deprecated
+		 * Use {@link Canvas} instead
+		 * 
 		 * Clears #self's internal drawing surface, so that the next upload
 		 * will replace the previous contents of the {@link CairoTexture}
 		 * rather than adding to it.
@@ -6733,6 +7196,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		clear(): void;
 		/**
+		 * @deprecated
+		 * Use the {@link CairoTexture}::draw signal and
+		 *   the clutter_cairo_texture_invalidate() function to obtain a
+		 *   Cairo context for 2D drawing.
+		 * 
 		 * Creates a new Cairo context for the #cairo texture. It is
 		 * similar to using clutter_cairo_texture_create_region() with #x_offset
 		 * and #y_offset of 0, #width equal to the #cairo texture surface width
@@ -6746,6 +7214,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		create(): cairo.Context;
 		/**
+		 * @deprecated
+		 * Use the {@link CairoTexture}::draw signal and
+		 *   clutter_cairo_texture_invalidate_rectangle() to obtain a
+		 *   clipped Cairo context for 2D drawing.
+		 * 
 		 * Creates a new Cairo context that will updat the region defined
 		 * by #x_offset, #y_offset, #width and #height.
 		 * 
@@ -6761,12 +7234,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		create_region(x_offset: number, y_offset: number, width: number, height: number): cairo.Context;
 		/**
+		 * @deprecated
+		 * Use {@link Canvas} instead
+		 * 
 		 * Retrieves the value set using clutter_cairo_texture_set_auto_resize().
 		 * @returns %TRUE if the {@link CairoTexture} should track the
 		 *   allocation, and %FALSE otherwise
 		 */
 		get_auto_resize(): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link Canvas} instead
+		 * 
 		 * Retrieves the surface width and height for #self.
 		 * @returns return location for the surface width, or %NULL
 		 * 
@@ -6774,6 +7253,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_surface_size(): [ width: number, height: number ];
 		/**
+		 * @deprecated
+		 * Use {@link Canvas} instead
+		 * 
 		 * Invalidates the whole surface of a {@link CairoTexture}.
 		 * 
 		 * This function will cause the #ClutterCairoTexture::draw signal
@@ -6783,6 +7265,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		invalidate(): void;
 		/**
+		 * @deprecated
+		 * Use {@link Canvas} instead
+		 * 
 		 * Invalidates a rectangular region of a {@link CairoTexture}.
 		 * 
 		 * The invalidation will cause the #ClutterCairoTexture::draw signal
@@ -6794,6 +7279,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		invalidate_rectangle(rect: cairo.RectangleInt | null): void;
 		/**
+		 * @deprecated
+		 * Use {@link Canvas} instead
+		 * 
 		 * Sets whether the {@link CairoTexture} should ensure that the
 		 * backing Cairo surface used matches the allocation assigned to
 		 * the actor. If the allocation changes, the contents of the
@@ -6803,6 +7291,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_auto_resize(value: boolean): void;
 		/**
+		 * @deprecated
+		 * Use {@link Canvas} instead
+		 * 
 		 * Resizes the Cairo surface used by #self to #width and #height.
 		 * 
 		 * This function will not invalidate the contents of the Cairo
@@ -6882,6 +7373,9 @@ declare namespace imports.gi.Clutter {
 	class CairoTexture {
 		public constructor(options?: Partial<CairoTextureInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link Canvas} instead
+		 * 
 		 * Creates a new {@link CairoTexture} actor, with a surface of #width by
 		 * #height pixels.
 		 * @param width the width of the surface
@@ -8462,6 +8956,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_threshold_trigger_edge(): GestureTriggerEdge;
 		/**
+		 * @deprecated
+		 * Use clutter_gesture_action_get_threshold_trigger_edge() instead.
+		 * 
 		 * Retrieves the edge trigger of the gesture #action, as set using
 		 * clutter_gesture_action_set_threshold_trigger_edge().
 		 * @returns the edge trigger
@@ -8786,11 +9283,17 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IGroup {
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_n_children() instead.
+		 * 
 		 * Gets the number of actors held in the group.
 		 * @returns The number of child actors held in the group.
 		 */
 		get_n_children(): number;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_child_at_index() instead.
+		 * 
 		 * Gets a groups child held at #index_ in stack.
 		 * @param index_ the position of the requested actor.
 		 * @returns A Clutter actor, or %NULL if
@@ -8798,6 +9301,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_nth_child(index_: number): Actor;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_remove_all_children() instead.
+		 * 
 		 * Removes all children actors from the {@link Group}.
 		 */
 		remove_all(): void;
@@ -8820,6 +9326,9 @@ declare namespace imports.gi.Clutter {
 	class Group {
 		public constructor(options?: Partial<GroupInitOptions>);
 		/**
+		 * @deprecated
+		 * Use clutter_actor_new() instead.
+		 * 
 		 * Create a new  {@link Group}.
 		 * @returns the newly created {@link Group} actor
 		 */
@@ -9041,6 +9550,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_coords(sequence: EventSequence | null): [ boolean, Point ];
 		/**
+		 * @deprecated
+		 * Use clutter_input_device_get_coords() instead.
+		 * 
 		 * Retrieves the latest coordinates of the pointer of #device
 		 * @returns return location for the X coordinate
 		 * 
@@ -9962,6 +10474,9 @@ declare namespace imports.gi.Clutter {
 	class ListModel {
 		public constructor(options?: Partial<ListModelInitOptions>);
 		/**
+		 * @deprecated
+		 * Use #GListStore instead
+		 * 
 		 * Creates a new default model with #n_columns columns with the types
 		 * and names passed in.
 		 * 
@@ -9985,6 +10500,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		public static new(n_columns: number): Model;
 		/**
+		 * @deprecated
+		 * Use #GListStore instead
+		 * 
 		 * Non-vararg version of clutter_list_model_new(). This function is
 		 * useful for language bindings.
 		 * @param n_columns number of columns in the model
@@ -10007,6 +10525,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		readonly filter_set: boolean;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Creates and appends a new row to the {@link Model}, setting the
 		 * row values upon creation. For example, to append a new row where
 		 * column 0 is type %G_TYPE_INT and column 1 is of type %G_TYPE_STRING:
@@ -10021,6 +10542,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		append(): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Creates and appends a new row to the {@link Model}, setting the row
 		 * values for the given #columns upon creation.
 		 * @param n_columns the number of columns and values
@@ -10029,6 +10553,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		appendv(n_columns: number, columns: number[], values: GObject.Value[]): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Checks whether the row pointer by #iter should be filtered or not using
 		 * the filtering function set on #model.
 		 * 
@@ -10039,6 +10566,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		filter_iter(iter: ModelIter): boolean;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Checks whether #row should be filtered or not using the
 		 * filtering function set on #model.
 		 * 
@@ -10049,11 +10579,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		filter_row(row: number): boolean;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Calls #func for each row in the model.
 		 * @param func a {@link ModelForeachFunc}
 		 */
 		foreach(func: ModelForeachFunc): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Retrieves the name of the #column
 		 * @param column the column number
 		 * @returns the name of the column. The model holds the returned
@@ -10061,18 +10597,27 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_column_name(column: number): string;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Retrieves the type of the #column.
 		 * @param column the column number
 		 * @returns the type of the column.
 		 */
 		get_column_type(column: number): GObject.Type;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Returns whether the #model has a filter in place, set
 		 * using clutter_model_set_filter()
 		 * @returns %TRUE if a filter is set
 		 */
 		get_filter_set(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Retrieves a {@link ModelIter} representing the first non-filtered
 		 * row in #model.
 		 * @returns A new {@link ModelIter}.
@@ -10080,6 +10625,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_first_iter(): ModelIter;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Retrieves a {@link ModelIter} representing the row at the given index.
 		 * 
 		 * If a filter function has been set using clutter_model_set_filter()
@@ -10092,6 +10640,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_iter_at_row(row: number): ModelIter;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Retrieves a {@link ModelIter} representing the last non-filtered
 		 * row in #model.
 		 * @returns A new {@link ModelIter}.
@@ -10099,11 +10650,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_last_iter(): ModelIter;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Retrieves the number of columns inside #model.
 		 * @returns the number of columns
 		 */
 		get_n_columns(): number;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Retrieves the number of rows inside #model, eventually taking
 		 * into account any filtering function set using clutter_model_set_filter().
 		 * @returns The length of the #model. If there is a filter set, then
@@ -10111,11 +10668,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_n_rows(): number;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Retrieves the number of column used for sorting the #model.
 		 * @returns a column number, or -1 if the model is not sorted
 		 */
 		get_sorting_column(): number;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Inserts a new row to the {@link Model} at #row, setting the row
 		 * values upon creation. For example, to insert a new row at index 100,
 		 * where column 0 is type %G_TYPE_INT and column 1 is of type
@@ -10132,6 +10695,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		insert(row: number): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Sets the data in the cell specified by #iter and #column. The type of
 		 * #value must be convertable to the type of the column. If the row does
 		 * not exist then it is created.
@@ -10141,6 +10707,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		insert_value(row: number, column: number, value: GObject.Value): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Inserts data at #row into the {@link Model}, setting the row
 		 * values for the given #columns upon creation.
 		 * @param row row index
@@ -10150,6 +10719,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		insertv(row: number, n_columns: number, columns: number[], values: GObject.Value[]): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Creates and prepends a new row to the {@link Model}, setting the row
 		 * values upon creation. For example, to prepend a new row where column 0
 		 * is type %G_TYPE_INT and column 1 is of type %G_TYPE_STRING:
@@ -10164,6 +10736,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		prepend(): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Creates and prepends a new row to the {@link Model}, setting the row
 		 * values for the given #columns upon creation.
 		 * @param n_columns the number of columns and values to set
@@ -10172,22 +10747,34 @@ declare namespace imports.gi.Clutter {
 		 */
 		prependv(n_columns: number, columns: number[], values: GObject.Value[]): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Removes the row at the given position from the model.
 		 * @param row position of row to remove
 		 */
 		remove(row: number): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Force a resort on the #model. This function should only be
 		 * used by subclasses of {@link Model}.
 		 */
 		resort(): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Filters the #model using the given filtering function.
 		 * @param func a {@link ModelFilterFunc}, or #NULL
 		 * @param notify destroy notifier of #user_data, or #NULL
 		 */
 		set_filter(func: ModelFilterFunc | null, notify: GLib.DestroyNotify): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Assigns a name to the columns of a {@link Model}.
 		 * 
 		 * This function is meant primarily for #GObjects that inherit from
@@ -10198,6 +10785,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_names(n_columns: number, names: string[]): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Sorts #model using the given sorting function.
 		 * @param column the column to sort on
 		 * @param func a {@link ModelSortFunc}, or #NULL
@@ -10205,12 +10795,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_sort(column: number, func: ModelSortFunc | null, notify: GLib.DestroyNotify): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Sets the model to sort by #column. If #column is a negative value
 		 * the sorting column will be unset.
 		 * @param column the column of the #model to sort, or -1
 		 */
 		set_sorting_column(column: number): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Sets the types of the columns inside a {@link Model}.
 		 * 
 		 * This function is meant primarily for #GObjects that inherit from
@@ -10314,11 +10910,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		row: number;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Copies the passed iterator.
 		 * @returns a copy of the iterator, or %NULL
 		 */
 		copy(): ModelIter;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Gets the value of one or more cells in the row referenced by #iter. The
 		 * variable argument list should contain integer column numbers, each column
 		 * column number followed by a place to store the value being retrieved. The
@@ -10334,22 +10936,34 @@ declare namespace imports.gi.Clutter {
 		 */
 		get(): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Retrieves a pointer to the {@link Model} that this iter is part of.
 		 * @returns a pointer to a {@link Model}.
 		 */
 		get_model(): Model;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Retrieves the position of the row that the #iter points to.
 		 * @returns the position of the #iter in the model
 		 */
 		get_row(): number;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * See clutter_model_iter_get(). This version takes a va_list for language
 		 * bindings.
 		 * @param args a list of column/return location pairs, terminated by -1
 		 */
 		get_valist(args: any[]): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Sets an initializes #value to that at #column. When done with #value,
 		 * g_value_unset() needs to be called to free any allocated memory.
 		 * @param column column number to retrieve the value from
@@ -10357,18 +10971,27 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_value(column: number): GObject.Value;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Gets whether the current iterator is at the beginning of the model
 		 * to which it belongs.
 		 * @returns #TRUE if #iter is the first iter in the filtered model
 		 */
 		is_first(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Gets whether the iterator is at the end of the model to which it
 		 * belongs.
 		 * @returns #TRUE if #iter is the last iter in the filtered model.
 		 */
 		is_last(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Updates the #iter to point at the next position in the model.
 		 * The model implementation should take into account the presence of
 		 * a filter function.
@@ -10377,6 +11000,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		next(): ModelIter;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Sets the #iter to point at the previous position in the model.
 		 * The model implementation should take into account the presence of
 		 * a filter function.
@@ -10385,6 +11011,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		prev(): ModelIter;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Sets the value of one or more cells in the row referenced by #iter. The
 		 * variable argument list should contain integer column numbers, each column
 		 * column number followed by the value to be set. The  list is terminated by a
@@ -10397,12 +11026,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		set(): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * See clutter_model_iter_set(); this version takes a va_list for language
 		 * bindings.
 		 * @param args va_list of column/value pairs, terminiated by -1
 		 */
 		set_valist(args: any[]): void;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Sets the data in the cell specified by #iter and #column. The type of
 		 * #value must be convertable to the type of the column.
 		 * @param column column number to retrieve the value from
@@ -10475,6 +11110,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_target_rect(): [ boolean, Rect ];
 		/**
+		 * @deprecated
+		 * Use clutter_offscreen_effect_get_target_rect() instead
+		 * 
 		 * Retrieves the size of the offscreen buffer used by #effect to
 		 * paint the actor to which it has been applied.
 		 * 
@@ -11401,33 +12039,57 @@ declare namespace imports.gi.Clutter {
 		 */
 		has_border: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link Actor} and a #ClutterCanvas to draw
+		 *   the border with Cairo
+		 * 
 		 * Gets the color of the border used by #rectangle and places
 		 * it into #color.
 		 * @returns return location for a {@link Color}
 		 */
 		get_border_color(): Color;
 		/**
+		 * @deprecated
+		 * Use {@link Actor} and a #ClutterCanvas content
+		 *   to draw the border using Cairo
+		 * 
 		 * Gets the width (in pixels) of the border used by #rectangle
 		 * @returns the border's width
 		 */
 		get_border_width(): number;
 		/**
+		 * @deprecated
+		 * Use {@link Actor} and clutter_actor_get_background_color()
+		 *   instead
+		 * 
 		 * Retrieves the color of #rectangle.
 		 * @returns return location for a {@link Color}
 		 */
 		get_color(): Color;
 		/**
+		 * @deprecated
+		 * Use {@link Actor} and a #ClutterCanvas to draw
+		 *   the border with Cairo
+		 * 
 		 * Sets the color of the border used by #rectangle using #color
 		 * @param color the color of the border
 		 */
 		set_border_color(color: Color): void;
 		/**
+		 * @deprecated
+		 * Use {@link Actor} and a #ClutterCanvas content
+		 *   to draw the border using Cairo
+		 * 
 		 * Sets the width (in pixel) of the border used by #rectangle.
 		 * A #width of 0 will unset the border.
 		 * @param width the width of the border
 		 */
 		set_border_width(width: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link Actor} and clutter_actor_set_background_color()
+		 *   instead
+		 * 
 		 * Sets the color of #rectangle.
 		 * @param color a {@link Color}
 		 */
@@ -11462,11 +12124,18 @@ declare namespace imports.gi.Clutter {
 	class Rectangle {
 		public constructor(options?: Partial<RectangleInitOptions>);
 		/**
+		 * @deprecated
+		 * Use clutter_actor_new() instead
+		 * 
 		 * Creates a new {@link Actor} with a rectangular shape.
 		 * @returns a new {@link Rectangle}
 		 */
 		public static new(): Actor;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_new() and
+		 *   clutter_actor_set_background_color() instead
+		 * 
 		 * Creates a new {@link Actor} with a rectangular shape
 		 * and of the given #color.
 		 * @param color a {@link Color}
@@ -12150,6 +12819,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		vertex_source: string;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Compiles and links GLSL sources set for vertex and fragment shaders for
 		 * a {@link Shader}. If the compilation fails and a #GError return location is
 		 * provided the error will contain the errors from the compiler, if any.
@@ -12157,6 +12829,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		compile(): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Retrieves the underlying #CoglHandle for the fragment shader.
 		 * @returns A #CoglHandle for the fragment
 		 *   shader, or %NULL. The handle is owned by the {@link Shader}
@@ -12164,6 +12839,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_cogl_fragment_shader(): Cogl.Handle;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Retrieves the underlying #CoglHandle for the shader program.
 		 * @returns A #CoglHandle for the shader program,
 		 *   or %NULL. The handle is owned by the {@link Shader} and it should
@@ -12171,6 +12849,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_cogl_program(): Cogl.Handle;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Retrieves the underlying #CoglHandle for the vertex shader.
 		 * @returns A #CoglHandle for the vertex
 		 *   shader, or %NULL. The handle is owned by the {@link Shader}
@@ -12178,6 +12859,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_cogl_vertex_shader(): Cogl.Handle;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Query the current GLSL fragment source set on #shader.
 		 * @returns the source of the fragment shader for this
 		 * ClutterShader object or %NULL. The returned string is owned by the
@@ -12185,11 +12869,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_fragment_source(): string;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Checks whether #shader is enabled.
 		 * @returns %TRUE if the shader is enabled.
 		 */
 		get_is_enabled(): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Query the current GLSL vertex source set on #shader.
 		 * @returns the source of the vertex shader for this
 		 * ClutterShader object or %NULL. The returned string is owned by the
@@ -12197,16 +12887,25 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_vertex_source(): string;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Checks whether #shader is is currently compiled, linked and bound
 		 * to the GL context.
 		 * @returns %TRUE if the shader is compiled, linked and ready for use.
 		 */
 		is_compiled(): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Frees up any GL context resources held by the shader.
 		 */
 		release(): void;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Sets the GLSL source code to be used by a {@link Shader} for the fragment
 		 * program.
 		 * @param data GLSL source code.
@@ -12214,6 +12913,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_fragment_source(data: string, length: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Enables a shader. This function will attempt to compile and link
 		 * the shader, if it isn't already.
 		 * 
@@ -12223,6 +12925,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_is_enabled(enabled: boolean): void;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Sets a user configurable variable in the GLSL shader programs attached to
 		 * a {@link Shader}.
 		 * @param name name of uniform in GLSL shader program to set.
@@ -12231,6 +12936,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_uniform(name: string, value: GObject.Value): void;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Sets the GLSL source code to be used by a {@link Shader} for the vertex
 		 * program.
 		 * @param data GLSL source code.
@@ -12267,6 +12975,9 @@ declare namespace imports.gi.Clutter {
 	class Shader {
 		public constructor(options?: Partial<ShaderInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Create a new {@link Shader} instance.
 		 * @returns a new {@link Shader}.
 		 */
@@ -12687,11 +13398,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_actor_at_pos(pick_mode: PickMode, x: number, y: number): Actor;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_background_color() instead.
+		 * 
 		 * Retrieves the stage color.
 		 * @returns return location for a {@link Color}
 		 */
 		get_color(): Color;
 		/**
+		 * @deprecated
+		 * This function will always return the default
+		 *   values of {@link Fog}
+		 * 
 		 * Retrieves the current depth cueing settings from the stage.
 		 * @returns return location for a {@link Fog} structure
 		 */
@@ -12771,6 +13489,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_use_alpha(): boolean;
 		/**
+		 * @deprecated
+		 * This function will always return %FALSE
+		 * 
 		 * Gets whether the depth cueing effect is enabled on #stage.
 		 * @returns %TRUE if the depth cueing effect is enabled
 		 */
@@ -12785,12 +13506,20 @@ declare namespace imports.gi.Clutter {
 		 */
 		hide_cursor(): void;
 		/**
+		 * @deprecated
+		 * Track the stage pointer inside your application
+		 *   code, or use clutter_actor_get_stage() to retrieve the stage for
+		 *   a given actor.
+		 * 
 		 * Checks if #stage is the default stage, or an instance created using
 		 * clutter_stage_new() but internally using the same implementation.
 		 * @returns %TRUE if the passed stage is the default one
 		 */
 		is_default(): boolean;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_queue_redraw() instead.
+		 * 
 		 * Queues a redraw for the passed stage.
 		 * 
 		 * Applications should call clutter_actor_queue_redraw() and not
@@ -12823,11 +13552,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_accept_focus(accept_focus: boolean): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_background_color() instead.
+		 * 
 		 * Sets the stage color.
 		 * @param color A {@link Color}
 		 */
 		set_color(color: Color): void;
 		/**
+		 * @deprecated
+		 * Fog settings are ignored.
+		 * 
 		 * Sets the fog (also known as "depth cueing") settings for the #stage.
 		 * 
 		 * A {@link Stage} will only use a linear fog progression, which
@@ -12992,6 +13727,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_use_alpha(use_alpha: boolean): void;
 		/**
+		 * @deprecated
+		 * Calling this function produces no visible effect
+		 * 
 		 * Sets whether the depth cueing effect on the stage should be enabled
 		 * or not.
 		 * 
@@ -13150,6 +13888,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		public static new(): Actor;
 		/**
+		 * @deprecated
+		 * Use clutter_stage_new() instead.
+		 * 
 		 * Retrieves a {@link Stage} singleton.
 		 * 
 		 * This function is not as useful as it sounds, and will most likely
@@ -13204,6 +13945,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		peek_stages(): GLib.SList;
 		/**
+		 * @deprecated
+		 * Calling this function has no effect
+		 * 
 		 * Sets #stage as the default stage.
 		 * @param stage a {@link Stage}
 		 */
@@ -13278,6 +14022,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		state: string;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Retrieves the {@link Animator} that is being used for transitioning
 		 * between the two states, if any has been set
 		 * @param source_state_name the name of a source state
@@ -13286,6 +14034,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_animator(source_state_name: string, target_state_name: string): Animator;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Queries the duration used for transitions between a source and
 		 * target state pair
 		 * 
@@ -13299,6 +14051,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_duration(source_state_name: string | null, target_state_name: string | null): number;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Returns a list of pointers to opaque structures with accessor functions
 		 * that describe the keys added to an animator.
 		 * @param source_state_name the source transition name to query,
@@ -13317,6 +14073,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_keys(source_state_name: string | null, target_state_name: string | null, object: GObject.Object | null, property_name: string | null): GLib.List;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Queries the currently set target state.
 		 * 
 		 * During a transition this function will return the target of the transition.
@@ -13328,6 +14088,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_state(): string;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Gets a list of all the state names managed by this {@link State}.
 		 * @returns a newly allocated
 		 *   #GList of state names. The contents of the returned #GList are owned
@@ -13337,6 +14101,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_states(): GLib.List;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Gets the timeline driving the {@link State}
 		 * @returns the {@link Timeline} that drives
 		 *   the state change animations. The returned timeline is owned
@@ -13344,6 +14112,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_timeline(): Timeline;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Removes all keys matching the search criteria passed in arguments.
 		 * @param source_state_name the source state name to query,
 		 *   or %NULL for all source states
@@ -13356,6 +14128,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		remove_key(source_state_name: string | null, target_state_name: string | null, object: GObject.Object | null, property_name: string | null): void;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Adds multiple keys to a named state of a {@link State} instance, specifying
 		 * the easing mode and value a given property of an object should have at a
 		 * given progress of the animation.
@@ -13412,6 +14188,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set(source_state_name: string | null, target_state_name: string, first_object: any | null, first_property_name: string, first_mode: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Specifies a {@link Animator} to be used when transitioning between
 		 * the two named states.
 		 * 
@@ -13429,6 +14209,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_animator(source_state_name: string, target_state_name: string, animator: Animator | null): void;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Sets the duration of a transition.
 		 * 
 		 * If both state names are %NULL the default duration for #state is set.
@@ -13444,6 +14228,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_duration(source_state_name: string | null, target_state_name: string | null, duration: number): void;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Sets one specific end key for a state name, #object, #property_name
 		 * combination.
 		 * @param source_state_name the source transition to specify
@@ -13463,6 +14251,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_key(source_state_name: string | null, target_state_name: string, object: GObject.Object, property_name: string, mode: number, value: GObject.Value, pre_delay: number, post_delay: number): State;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Change the current state of {@link State} to #target_state_name.
 		 * 
 		 * The state will animate during its transition, see
@@ -13477,6 +14269,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_state(target_state_name: string): Timeline;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Change to the specified target state immediately with no animation.
 		 * 
 		 * See clutter_state_set_state().
@@ -13524,6 +14320,10 @@ declare namespace imports.gi.Clutter {
 	class State {
 		public constructor(options?: Partial<StateInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Creates a new {@link State}
 		 * @returns the newly create {@link State} instance
 		 */
@@ -13630,6 +14430,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		use_animations: boolean;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_x_align() and
+		 *   clutter_actor_get_y_align() instead.
+		 * 
 		 * Retrieves the horizontal and vertical alignment policies for #actor
 		 * as set using clutter_table_layout_pack() or
 		 * clutter_table_layout_set_alignment().
@@ -13640,26 +14444,46 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_alignment(actor: Actor): [ x_align: TableAlignment, y_align: TableAlignment ];
 		/**
+		 * @deprecated
+		 * No direct replacement is available
+		 * 
 		 * Retrieve the current number of columns in #layout
 		 * @returns the number of columns
 		 */
 		get_column_count(): number;
 		/**
+		 * @deprecated
+		 * Use {@link GridLayout}:column-spacing
+		 * 
 		 * Retrieves the spacing set using clutter_table_layout_set_column_spacing()
 		 * @returns the spacing between columns of the {@link TableLayout}
 		 */
 		get_column_spacing(): number;
 		/**
+		 * @deprecated
+		 * {@link TableLayout} will honour the easing state
+		 *   of the children when allocating them. See clutter_actor_set_easing_mode()
+		 *   and clutter_actor_set_easing_duration().
+		 * 
 		 * Retrieves the duration set using clutter_table_layout_set_easing_duration()
 		 * @returns the duration of the animations, in milliseconds
 		 */
 		get_easing_duration(): number;
 		/**
+		 * @deprecated
+		 * {@link TableLayout} will honour the easing state
+		 *   of the children when allocating them. See clutter_actor_set_easing_mode()
+		 *   and clutter_actor_set_easing_duration().
+		 * 
 		 * Retrieves the easing mode set using clutter_table_layout_set_easing_mode()
 		 * @returns an easing mode
 		 */
 		get_easing_mode(): number;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_x_expand() and
+		 *   clutter_actor_get_y_expand() instead.
+		 * 
 		 * Retrieves the horizontal and vertical expand policies for #actor
 		 * as set using clutter_table_layout_pack() or clutter_table_layout_set_expand()
 		 * @param actor a {@link Actor} child of #layout
@@ -13669,6 +14493,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_expand(actor: Actor): [ x_expand: boolean, y_expand: boolean ];
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_x_align() and
+		 *   clutter_actor_get_y_align() instead.
+		 * 
 		 * Retrieves the horizontal and vertical fill policies for #actor
 		 * as set using clutter_table_layout_pack() or clutter_table_layout_set_fill()
 		 * @param actor a {@link Actor} child of #layout
@@ -13678,16 +14506,26 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_fill(actor: Actor): [ x_fill: boolean, y_fill: boolean ];
 		/**
+		 * @deprecated
+		 * No direct replacement is available
+		 * 
 		 * Retrieve the current number rows in the #layout
 		 * @returns the number of rows
 		 */
 		get_row_count(): number;
 		/**
+		 * @deprecated
+		 * Use {@link GridLayout}:row-spacing instead
+		 * 
 		 * Retrieves the spacing set using clutter_table_layout_set_row_spacing()
 		 * @returns the spacing between rows of the {@link TableLayout}
 		 */
 		get_row_spacing(): number;
 		/**
+		 * @deprecated
+		 * Use the `width` and `height` layout properties
+		 *   of {@link GridLayout} instead
+		 * 
 		 * Retrieves the row and column span for #actor as set using
 		 * clutter_table_layout_pack() or clutter_table_layout_set_span()
 		 * @param actor a {@link Actor} child of #layout
@@ -13697,6 +14535,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_span(actor: Actor): [ column_span: number, row_span: number ];
 		/**
+		 * @deprecated
+		 * {@link TableLayout} will honour the easing state
+		 *   of the children when allocating them. See clutter_actor_set_easing_mode()
+		 *   and clutter_actor_set_easing_duration().
+		 * 
 		 * Retrieves whether #layout should animate changes in the layout properties
 		 * 
 		 * Since clutter_table_layout_set_use_animations()
@@ -13704,6 +14547,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_use_animations(): boolean;
 		/**
+		 * @deprecated
+		 * Use clutter_grid_layout_attach() instead
+		 * 
 		 * Packs #actor inside the {@link Container} associated to #layout
 		 * at the given row and column.
 		 * @param actor a {@link Actor}
@@ -13712,6 +14558,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		pack(actor: Actor, column: number, row: number): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_x_align() and
+		 *   clutter_actor_set_y_align() instead.
+		 * 
 		 * Sets the horizontal and vertical alignment policies for #actor
 		 * inside #layout
 		 * @param actor a {@link Actor} child of #layout
@@ -13720,11 +14570,19 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_alignment(actor: Actor, x_align: TableAlignment, y_align: TableAlignment): void;
 		/**
+		 * @deprecated
+		 * Use {@link GridLayout}:column-spacing instead
+		 * 
 		 * Sets the spacing between columns of #layout
 		 * @param spacing the spacing between columns of the layout, in pixels
 		 */
 		set_column_spacing(spacing: number): void;
 		/**
+		 * @deprecated
+		 * {@link TableLayout} will honour the easing state
+		 *   of the children when allocating them. See clutter_actor_set_easing_mode()
+		 *   and clutter_actor_set_easing_duration().
+		 * 
 		 * Sets the duration of the animations used by #layout when animating changes
 		 * in the layout properties
 		 * 
@@ -13734,6 +14592,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_easing_duration(msecs: number): void;
 		/**
+		 * @deprecated
+		 * {@link TableLayout} will honour the easing state
+		 *   of the children when allocating them. See clutter_actor_set_easing_mode()
+		 *   and clutter_actor_set_easing_duration().
+		 * 
 		 * Sets the easing mode to be used by #layout when animating changes in layout
 		 * properties
 		 * 
@@ -13744,6 +14607,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_easing_mode(mode: number): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_x_expand() or
+		 *   clutter_actor_set_y_expand() instead.
+		 * 
 		 * Sets the horizontal and vertical expand policies for #actor
 		 * inside #layout
 		 * @param actor a {@link Actor} child of #layout
@@ -13752,6 +14619,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_expand(actor: Actor, x_expand: boolean, y_expand: boolean): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_x_align() and
+		 *   clutter_actor_set_y_align() instead.
+		 * 
 		 * Sets the horizontal and vertical fill policies for #actor
 		 * inside #layout
 		 * @param actor a {@link Actor} child of #layout
@@ -13760,11 +14631,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_fill(actor: Actor, x_fill: boolean, y_fill: boolean): void;
 		/**
+		 * @deprecated
+		 * Use {@link GridLayout}:row-spacing instead
+		 * 
 		 * Sets the spacing between rows of #layout
 		 * @param spacing the spacing between rows of the layout, in pixels
 		 */
 		set_row_spacing(spacing: number): void;
 		/**
+		 * @deprecated
+		 * Use the `width` and `height` layout properties
+		 *   of {@link GridLayout} instead
+		 * 
 		 * Sets the row and column span for #actor
 		 * inside #layout
 		 * @param actor a {@link Actor} child of #layout
@@ -13773,6 +14651,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_span(actor: Actor, column_span: number, row_span: number): void;
 		/**
+		 * @deprecated
+		 * {@link TableLayout} will honour the easing state
+		 *   of the children when allocating them. See clutter_actor_set_easing_mode()
+		 *   and clutter_actor_set_easing_duration().
+		 * 
 		 * Sets whether #layout should animate changes in the layout properties
 		 * 
 		 * The duration of the animations is controlled by
@@ -13813,6 +14696,9 @@ declare namespace imports.gi.Clutter {
 	class TableLayout {
 		public constructor(options?: Partial<TableLayoutInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link GridLayout} instead
+		 * 
 		 * Creates a new {@link TableLayout} layout manager
 		 * @returns the newly created {@link TableLayout}
 		 */
@@ -15001,6 +15887,10 @@ declare namespace imports.gi.Clutter {
 		sync_size: boolean;
 		readonly tile_waste: number;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and clutter_content_get_preferred_size()
+		 *   instead
+		 * 
 		 * Gets the size in pixels of the untransformed underlying image
 		 * @returns return location for the width, or %NULL
 		 * 
@@ -15008,6 +15898,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_base_size(): [ width: number, height: number ];
 		/**
+		 * @deprecated
+		 * No replacement is available; it's not advisable
+		 *   to modify the Cogl pipeline of an actor. Use a {@link Content}
+		 *   implementation and modify the pipeline during the paint sequence
+		 * 
 		 * Returns a handle to the underlying COGL material used for drawing
 		 * the actor.
 		 * @returns a handle for a #CoglMaterial. The
@@ -15016,6 +15911,12 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_cogl_material(): Cogl.Handle;
 		/**
+		 * @deprecated
+		 * No replacement available; it's not advisable to
+		 *   modify the Cogl pipeline of an actor. Use a {@link Content}
+		 *   implementation and set up the pipeline during the paint sequence
+		 *   instead.
+		 * 
 		 * Retrieves the handle to the underlying COGL texture used for drawing
 		 * the actor. No extra reference is taken so if you need to keep the
 		 * handle then you should call cogl_handle_ref() on it.
@@ -15029,29 +15930,46 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_cogl_texture(): Cogl.Handle;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and clutter_actor_get_content_scaling_filters()
+		 *   instead
+		 * 
 		 * Gets the filter quality used when scaling a texture.
 		 * @returns The filter quality value.
 		 */
 		get_filter_quality(): TextureQuality;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and clutter_actor_get_content_gravity()
+		 *   instead
+		 * 
 		 * Retrieves the value set using clutter_texture_set_keep_aspect_ratio()
 		 * @returns %TRUE if the {@link Texture} should maintain the
 		 *   aspect ratio of the underlying image
 		 */
 		get_keep_aspect_ratio(): boolean;
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this function
+		 * 
 		 * Retrieves the value set using clutter_texture_set_load_async()
 		 * @returns %TRUE if the {@link Texture} should load the data from
 		 *   disk asynchronously
 		 */
 		get_load_async(): boolean;
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this function
+		 * 
 		 * Retrieves the value set by clutter_texture_set_load_data_async()
 		 * @returns %TRUE if the {@link Texture} should load the image
 		 *   data from a file asynchronously
 		 */
 		get_load_data_async(): boolean;
 		/**
+		 * @deprecated
+		 * No replacement is available
+		 * 
 		 * Gets the maximum waste that will be used when creating a texture or
 		 * -1 if slicing is disabled.
 		 * @returns The maximum waste or -1 if the texture waste is
@@ -15059,12 +15977,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_max_tile_waste(): number;
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this function
+		 * 
 		 * Retrieves the value set by clutter_texture_set_load_data_async()
 		 * @returns %TRUE if the {@link Texture} should define its shape
 		 * using the alpha channel when picking.
 		 */
 		get_pick_with_alpha(): boolean;
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this function
+		 * 
 		 * Retrieves the pixel format used by #texture. This is
 		 * equivalent to:
 		 * 
@@ -15078,6 +16002,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_pixel_format(): Cogl.PixelFormat;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and clutter_actor_get_content_repeat()
+		 *   instead
+		 * 
 		 * Retrieves the horizontal and vertical repeat values set
 		 * using clutter_texture_set_repeat()
 		 * @returns return location for the horizontal repeat
@@ -15086,12 +16014,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_repeat(): [ repeat_x: boolean, repeat_y: boolean ];
 		/**
+		 * @deprecated
+		 * There is no direct replacement
+		 * 
 		 * Retrieves the value set with clutter_texture_set_sync_size()
 		 * @returns %TRUE if the {@link Texture} should have the same
 		 *   preferred size of the underlying image data
 		 */
 		get_sync_size(): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and clutter_image_set_area() instead
+		 * 
 		 * Updates a sub-region of the pixel data in a {@link Texture}.
 		 * @param data Image data in RGB type colorspace.
 		 * @param has_alpha Set to TRUE if image data has an alpha channel.
@@ -15107,6 +16041,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_area_from_rgb_data(data: number[], has_alpha: boolean, x: number, y: number, width: number, height: number, rowstride: number, bpp: number, flags: TextureFlags): boolean;
 		/**
+		 * @deprecated
+		 * No replacement is available; it's not advisable
+		 *   to modify the Cogl pipeline of an actor. Use a {@link Content}
+		 *   implementation and modify the pipeline during the paint sequence
+		 * 
 		 * Replaces the underlying Cogl material drawn by this actor with
 		 * #cogl_material. A reference to the material is taken so if the
 		 * handle is no longer needed it should be deref'd with
@@ -15119,6 +16058,12 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_cogl_material(cogl_material: Cogl.Handle): void;
 		/**
+		 * @deprecated
+		 * No replacement available; it's not advisable to
+		 *   modify the Cogl pipeline of an actor. Use a {@link Content}
+		 *   implementation and set up the pipeline during the paint sequence
+		 *   instead.
+		 * 
 		 * Replaces the underlying COGL texture drawn by this actor with
 		 * #cogl_tex. A reference to the texture is taken so if the handle is
 		 * no longer needed it should be deref'd with cogl_handle_unref.
@@ -15126,6 +16071,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_cogl_texture(cogl_tex: Cogl.Handle): void;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and clutter_actor_set_content_scaling_filters()
+		 *   instead
+		 * 
 		 * Sets the filter quality when scaling a texture. The quality is an
 		 * enumeration currently the following values are supported:
 		 * %CLUTTER_TEXTURE_QUALITY_LOW which is fast but only uses nearest neighbour
@@ -15138,6 +16087,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_filter_quality(filter_quality: TextureQuality): void;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and platform-specific image
+		 *   loading API, like GdkPixbuf, instead
+		 * 
 		 * Sets the {@link Texture} image data from an image file. In case of
 		 * failure, %FALSE is returned and #error is set.
 		 * 
@@ -15152,6 +16105,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_from_file(filename: string): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and clutter_image_set_data() instead
+		 * 
 		 * Sets {@link Texture} image data.
 		 * @param data image data in RGBA type colorspace.
 		 * @param has_alpha set to %TRUE if image data has an alpha channel.
@@ -15165,6 +16121,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_from_rgb_data(data: number[], has_alpha: boolean, width: number, height: number, rowstride: number, bpp: number, flags: TextureFlags): boolean;
 		/**
+		 * @deprecated
+		 * Use a custom {@link Content} implementation and
+		 *   set up the Cogl pipeline using a #ClutterPipelineNode with a
+		 *   fragment shader instead.
+		 * 
 		 * Sets a {@link Texture} from YUV image data. If an error occurred,
 		 * %FALSE is returned and #error is set.
 		 * 
@@ -15182,12 +16143,21 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_from_yuv_data(data: number[], width: number, height: number, flags: TextureFlags): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and clutter_actor_set_content_gravity()
+		 *   with %CLUTTER_CONTENT_GRAVITY_RESIZE_ASPECT instead
+		 * 
 		 * Sets whether #texture should have a preferred size maintaining
 		 * the aspect ratio of the underlying image
 		 * @param keep_aspect %TRUE to maintain aspect ratio
 		 */
 		set_keep_aspect_ratio(keep_aspect: boolean): void;
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this function.
+		 *   Use {@link Image} and platform-specific API for loading image data
+		 *   asynchronously, like GdkPixbuf
+		 * 
 		 * Sets whether #texture should use a worker thread to load the data
 		 * from disk asynchronously. Setting #load_async to %TRUE will make
 		 * clutter_texture_set_from_file() return immediately.
@@ -15199,6 +16169,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_load_async(load_async: boolean): void;
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this function.
+		 *   Use {@link Image} and platform-specific API for loading image data
+		 *   asynchronously, like GdkPixbuf
+		 * 
 		 * Sets whether #texture should use a worker thread to load the data
 		 * from disk asynchronously. Setting #load_async to %TRUE will make
 		 * clutter_texture_set_from_file() block until the {@link Texture} has
@@ -15211,6 +16186,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_load_data_async(load_async: boolean): void;
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this function
+		 * 
 		 * Sets whether #texture should have it's shape defined by the alpha
 		 * channel when picking.
 		 * 
@@ -15227,6 +16205,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_pick_with_alpha(pick_with_alpha: boolean): void;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and clutter_actor_set_content_repeat()
+		 *   instead
+		 * 
 		 * Sets whether the #texture should repeat horizontally or
 		 * vertically when the actor size is bigger than the image size
 		 * @param repeat_x %TRUE if the texture should repeat horizontally
@@ -15234,6 +16216,12 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_repeat(repeat_x: boolean, repeat_y: boolean): void;
 		/**
+		 * @deprecated
+		 * No replacement is available. A {@link Actor} using
+		 *   #ClutterImage with a %CLUTTER_REQUEST_CONTENT_SIZE request mode
+		 *   will automatically bind the preferred size of the content to the
+		 *   preferred size of the actor
+		 * 
 		 * Sets whether #texture should have the same preferred size as the
 		 * underlying image data.
 		 * @param sync_size %TRUE if the texture should have the same size of the
@@ -15322,11 +16310,19 @@ declare namespace imports.gi.Clutter {
 	class Texture {
 		public constructor(options?: Partial<TextureInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link Image} instead
+		 * 
 		 * Creates a new empty {@link Texture} object.
 		 * @returns A newly created {@link Texture} object.
 		 */
 		public static new(): Actor;
 		/**
+		 * @deprecated
+		 * Use the {@link OffscreenEffect} and #ClutterShaderEffect
+		 *   directly on the intended #ClutterActor to replace the functionality of
+		 *   this function.
+		 * 
 		 * Creates a new {@link Texture} object with its source a prexisting
 		 * actor (and associated children). The textures content will contain
 		 * 'live' redirected output of the actors scene.
@@ -15381,6 +16377,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		public static new_from_actor(actor: Actor): Actor;
 		/**
+		 * @deprecated
+		 * No direct replacement is available. Use {@link Image}
+		 *   and platform-specific image loading API, like GdkPixbuf, instead
+		 * 
 		 * Creates a new ClutterTexture actor to display the image contained a
 		 * file. If the image failed to load then NULL is returned and #error
 		 * is set.
@@ -15535,6 +16535,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		advance_to_marker(marker_name: string): void;
 		/**
+		 * @deprecated
+		 * Use clutter_timeline_new() or g_object_new()
+		 *   instead
+		 * 
 		 * Create a new {@link Timeline} instance which has property values
 		 * matching that of supplied timeline. The cloned timeline will not
 		 * be started and will not be positioned to the current position of
@@ -15622,6 +16626,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_elapsed_time(): number;
 		/**
+		 * @deprecated
+		 * Use clutter_timeline_get_repeat_count() instead.
+		 * 
 		 * Gets whether #timeline is looping
 		 * @returns %TRUE if the timeline is looping
 		 */
@@ -15765,6 +16772,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_duration(msecs: number): void;
 		/**
+		 * @deprecated
+		 * Use clutter_timeline_set_repeat_count() instead.
+		 * 
 		 * Sets whether #timeline should loop.
 		 * 
 		 * This function is equivalent to calling clutter_timeline_set_repeat_count()
@@ -16717,6 +17727,9 @@ declare namespace imports.gi.Clutter {
 	class AnimatorKey {
 		public constructor(options?: Partial<AnimatorKeyInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Retrieves the mode of a {@link Animator} key, for the first key of a
 		 * property for an object this represents the whether the animation is
 		 * open ended and or curved for the remainding keys for the property it
@@ -16725,21 +17738,33 @@ declare namespace imports.gi.Clutter {
 		 */
 		public get_mode(): number;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Retrieves the object a key applies to.
 		 * @returns the object an animator_key exist for.
 		 */
 		public get_object(): GObject.Object;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Retrieves the progress of an clutter_animator_key
 		 * @returns the progress defined for a {@link Animator} key.
 		 */
 		public get_progress(): number;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Retrieves the name of the property a key applies to.
 		 * @returns the name of the property an animator_key exist for.
 		 */
 		public get_property_name(): string;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Retrieves the #GType of the property a key applies to
 		 * 
 		 * You can use this type to initialize the #GValue to pass to
@@ -16748,6 +17773,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		public get_property_type(): GObject.Type;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * Retrieves a copy of the value for a {@link AnimatorKey}.
 		 * 
 		 * The passed in #GValue needs to be already initialized for the value
@@ -17647,6 +18675,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		public height: number;
 		/**
+		 * @deprecated
+		 * Use {@link Rect} and clutter_rect_intersection()
+		 * 
 		 * Determines if #geometry0 and geometry1 intersect returning %TRUE if
 		 * they do else %FALSE.
 		 * @param geometry1 The second geometry to test
@@ -17655,6 +18686,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		public intersects(geometry1: Geometry): boolean;
 		/**
+		 * @deprecated
+		 * Use {@link Rect} and clutter_rect_union()
+		 * 
 		 * Find the union of two rectangles represented as {@link Geometry}.
 		 * @param geometry_b another {@link Geometry}
 		 * @returns location to store the result
@@ -19141,34 +20175,58 @@ declare namespace imports.gi.Clutter {
 	class StateKey {
 		public constructor(options?: Partial<StateKeyInitOptions>);
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Retrieves the easing mode used for #state_key.
 		 * @returns the mode of a {@link StateKey}
 		 */
 		public get_mode(): number;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Retrieves the object instance this {@link StateKey} applies to.
 		 * @returns the object this state key applies to.
 		 */
 		public get_object(): GObject.Object;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Retrieves the duration of the pause after transitioning is complete
 		 * as a fraction of the total transition time.
 		 * @returns the post delay, used after doing the transition.
 		 */
 		public get_post_delay(): number;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Retrieves the pause before transitioning starts as a fraction of
 		 * the total transition time.
 		 * @returns the pre delay used before starting the transition.
 		 */
 		public get_pre_delay(): number;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Retrieves the name of the property this {@link StateKey} applies to
 		 * @returns the name of the property. The returned string is owned
 		 *   by the {@link StateKey} and should never be modified or freed
 		 */
 		public get_property_name(): string;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Retrieves the #GType of the property a key applies to
 		 * 
 		 * You can use this type to initialize the #GValue to pass to
@@ -19177,6 +20235,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		public get_property_type(): GObject.Type;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Retrieves the name of the source state of the #state_key
 		 * @returns the name of the source state for this key, or %NULL
 		 *   if this is the generic state key for the given property when
@@ -19185,6 +20247,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		public get_source_state_name(): string;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Get the name of the source state this {@link StateKey} contains,
 		 * or NULL if this is the generic state key for the given property
 		 * when transitioning to the target state.
@@ -19193,6 +20259,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		public get_target_state_name(): string;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Retrieves a copy of the value for a {@link StateKey}.
 		 * 
 		 * The #GValue needs to be already initialized for the value type
@@ -19409,6 +20479,9 @@ declare namespace imports.gi.Clutter {
 	class TimeoutPool {
 		public constructor(options?: Partial<TimeoutPoolInitOptions>);
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this API
+		 * 
 		 * Sets a function to be called at regular intervals, and puts it inside
 		 * the #pool. The function is repeatedly called until it returns %FALSE,
 		 * at which point the timeout is automatically destroyed and the function
@@ -19432,6 +20505,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		public add(fps: number, func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
 		/**
+		 * @deprecated
+		 * There is no direct replacement for this API
+		 * 
 		 * Removes a timeout function with #id_ from the timeout pool. The id
 		 * is the same returned when adding a function to the timeout pool with
 		 * clutter_timeout_pool_add().
@@ -19816,6 +20892,10 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IAnimatable {
 		/**
+		 * @deprecated
+		 * Use clutter_animatable_interpolate_value()
+		 *   instead
+		 * 
 		 * Calls the animate_property() virtual function for #animatable.
 		 * 
 		 * The #initial_value and #final_value #GValue<!-- -->s must contain
@@ -19901,6 +20981,9 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IContainer {
 		/**
+		 * @deprecated
+		 * Use clutter_actor_add_child() instead.
+		 * 
 		 * Adds a list of {@link Actor}<!-- -->s to #container. Each time and
 		 * actor is added, the "actor-added" signal is emitted. Each actor should
 		 * be parented to #container, which takes a reference on the actor. You
@@ -19913,6 +20996,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		add(first_actor: Actor): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_add_child() instead.
+		 * 
 		 * Adds a {@link Actor} to #container. This function will emit the
 		 * "actor-added" signal. The actor should be parented to
 		 * #container. You cannot add a #ClutterActor to more than one
@@ -19925,6 +21011,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		add_actor(actor: Actor): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_add_child() instead.
+		 * 
 		 * Alternative va_list version of clutter_container_add().
 		 * 
 		 * This function will call {@link ContainerIface}.add(), which is a
@@ -20012,6 +21101,13 @@ declare namespace imports.gi.Clutter {
 		 */
 		find_child_by_name(child_name: string): Actor;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_first_child() or
+		 *   clutter_actor_get_last_child() to retrieve the beginning of
+		 *   the list of children, and clutter_actor_get_next_sibling()
+		 *   and clutter_actor_get_previous_sibling() to iterate over it;
+		 *   alternatively, use the {@link ActorIter} API.
+		 * 
 		 * Calls #callback for each child of #container that was added
 		 * by the application (with clutter_container_add_actor()). Does
 		 * not iterate over "internal" children that are part of the
@@ -20023,6 +21119,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		foreach(callback: Callback): void;
 		/**
+		 * @deprecated
+		 * See clutter_container_foreach().
+		 * 
 		 * Calls #callback for each child of #container, including "internal"
 		 * children built in to the container itself that were never added
 		 * by the application.
@@ -20042,6 +21141,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_child_meta(actor: Actor): ChildMeta;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_get_children() instead.
+		 * 
 		 * Retrieves all the children of #container.
 		 * @returns a list
 		 *   of {@link Actor}<!-- -->s. Use g_list_free() on the returned
@@ -20049,6 +21151,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_children(): GLib.List;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_child_below_sibling() instead.
+		 * 
 		 * Lowers #actor to #sibling level, in the depth ordering.
 		 * 
 		 * This function calls the {@link ContainerIface}.lower() virtual function,
@@ -20060,6 +21165,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		lower_child(actor: Actor, sibling: Actor | null): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_set_child_above_sibling() instead.
+		 * 
 		 * Raises #actor to #sibling level, in the depth ordering.
 		 * 
 		 * This function calls the {@link ContainerIface}.raise() virtual function,
@@ -20071,6 +21179,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		raise_child(actor: Actor, sibling: Actor | null): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_remove_child() instead.
+		 * 
 		 * Removes a %NULL terminated list of {@link Actor}<!-- -->s from
 		 * #container. Each actor should be unparented, so if you want to keep it
 		 * around you must hold a reference to it yourself, using g_object_ref().
@@ -20084,6 +21195,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		remove(first_actor: Actor): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_remove_child() instead.
+		 * 
 		 * Removes #actor from #container. The actor should be unparented, so
 		 * if you want to keep it around you must hold a reference to it
 		 * yourself, using g_object_ref(). When the actor has been removed,
@@ -20096,6 +21210,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		remove_actor(actor: Actor): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_remove_child() instead.
+		 * 
 		 * Alternative va_list version of clutter_container_remove().
 		 * 
 		 * This function will call {@link ContainerIface}.remove(), which is a
@@ -20106,6 +21223,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		remove_valist(first_actor: Actor, var_args: any[]): void;
 		/**
+		 * @deprecated
+		 * The {@link ContainerIface}.sort_depth_order() virtual
+		 *   function should not be used any more; the default implementation in
+		 *   #ClutterContainer does not do anything.
+		 * 
 		 * Sorts a container's children using their depth. This function should not
 		 * be normally used by applications.
 		 */
@@ -22454,6 +23576,9 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface AlphaFunc {
 		/**
+		 * @deprecated
+		 * Use {@link TimelineProgressFunc} instead.
+		 * 
 		 * A function returning a value depending on the position of
 		 * the {@link Timeline} bound to #alpha.
 		 * @param alpha a {@link Alpha}
@@ -22531,6 +23656,9 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ModelFilterFunc {
 		/**
+		 * @deprecated
+		 * Implement filters using a custom #GListModel instead
+		 * 
 		 * Filters the content of a row in the model.
 		 * @param model a {@link Model}
 		 * @param iter the iterator for the row
@@ -22544,6 +23672,9 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ModelForeachFunc {
 		/**
+		 * @deprecated
+		 * Use #GListModel
+		 * 
 		 * Iterates on the content of a row in the model
 		 * @param model a {@link Model}
 		 * @param iter the iterator for the row
@@ -22557,6 +23688,9 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ModelSortFunc {
 		/**
+		 * @deprecated
+		 * Implement sorting using a custom #GListModel instead
+		 * 
 		 * Compares the content of two rows in the model.
 		 * @param model a {@link Model}
 		 * @param a a #GValue representing the contents of the row

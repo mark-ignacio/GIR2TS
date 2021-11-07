@@ -38,8 +38,10 @@ export function renderSignal(node: FunctionNode, ns_name: string, exclude: boole
             name: "",
             type: ""
         },
-        indent,
-        ns_name
+        { 
+            indent: indent,
+            ns_name: ns_name
+        }
     );
     result += "\t".repeat(indent);
     if (exclude)
@@ -50,7 +52,7 @@ export function renderSignal(node: FunctionNode, ns_name: string, exclude: boole
 }
 
 export function renderSignalFromInfo(info: FunctionInfo, ns_name: string, exclude: boolean = false, indent: number = 0) {  
-    let result = renderDocString(info.doc, undefined, undefined, indent, ns_name);
+    let result = renderDocString(info.doc, undefined, undefined, {indent: indent, ns_name: ns_name});
     result += "\t".repeat(indent);
     if (exclude)
         result += "// ";

@@ -42,7 +42,17 @@ export function renderMethod(
     const ind = "\t".repeat(indentNum);
     let indentAdded = false;
     let str = '';
-    str += renderDocString(info.doc, info.params, info.return_type, indentNum, ns_name);
+    str += renderDocString(
+        info.doc,
+        info.params,
+        info.return_type,
+        { 
+            ns_name: ns_name,
+            indent: indentNum,
+            deprecatedDoc: info.deprecatedDoc ?? undefined
+        }
+    );
+    
     if (exclude) {
         str += `${ind}// `;
         indentAdded = true;

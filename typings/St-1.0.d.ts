@@ -829,6 +829,9 @@ declare namespace imports.gi.St {
 	class Group {
 		public constructor(options?: Partial<GroupInitOptions>);
 		/**
+		 * @deprecated
+		 * Use st_widget_new() instead.
+		 * 
 		 * Create a new  {@link Group}.
 		 * @returns the newly created {@link Group} actor
 		 */
@@ -2250,6 +2253,9 @@ declare namespace imports.gi.St {
 		 */
 		change_style_pseudo_class(pseudo_class: string, add: boolean): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_destroy_all_children instead
+		 * 
 		 * Destroys all child actors from #widget.
 		 */
 		destroy_children(): void;

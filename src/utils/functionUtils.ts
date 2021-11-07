@@ -9,6 +9,7 @@ export interface FunctionInfo {
     return_type?: TypeInfo;
     params: Parameter[];
     doc: string | null;
+    deprecatedDoc: string | null;
 }
 
 export interface Parameter {
@@ -120,6 +121,7 @@ export function getFunctionInfo(func_node: FunctionNode, modifier?: FunctionModi
             name: null
         },
         params: params,
-        doc: modifier?.doc ?? doc
+        doc: modifier?.doc ?? doc,
+        deprecatedDoc: func_node["doc-deprecated"]?.[0]?.["_"] ?? null
     }
 }

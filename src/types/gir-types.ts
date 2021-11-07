@@ -51,6 +51,7 @@ export interface ParametersNode extends Node {
 export interface FunctionNode extends Node {
     "return-value": ParameterNode[];
     parameters: ParametersNode[];
+    "doc-deprecated"?: Node[];
     doc?: Node[];
 }
 

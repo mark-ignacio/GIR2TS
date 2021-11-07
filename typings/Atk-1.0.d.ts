@@ -95,6 +95,10 @@ declare namespace imports.gi.Atk {
 		 */
 		is_inline(): boolean;
 		/**
+		 * @deprecated
+		 * Please use ATK_STATE_FOCUSABLE for all links,
+		 * and ATK_STATE_FOCUSED for focused links.
+		 * 
 		 * Determines whether this AtkHyperlink is selected
 		 * @returns True if the AtkHyperlink is selected, False otherwise
 		 */
@@ -156,6 +160,9 @@ declare namespace imports.gi.Atk {
 	 */
 	interface IMisc {
 		/**
+		 * @deprecated
+		 * Since 2.12.
+		 * 
 		 * Take the thread mutex for the GUI toolkit,
 		 * if one exists.
 		 * (This method is implemented by the toolkit ATK implementation layer;
@@ -163,6 +170,9 @@ declare namespace imports.gi.Atk {
 		 */
 		threads_enter(): void;
 		/**
+		 * @deprecated
+		 * Since 2.12.
+		 * 
 		 * Release the thread mutex for the GUI toolkit,
 		 * if one exists. This method, and atk_misc_threads_enter,
 		 * are needed in some situations by threaded application code which
@@ -193,6 +203,9 @@ declare namespace imports.gi.Atk {
 	class Misc {
 		public constructor(options?: Partial<MiscInitOptions>);
 		/**
+		 * @deprecated
+		 * Since 2.12.
+		 * 
 		 * Obtain the singleton instance of AtkMisc for this application.
 		 * @returns The singleton instance of AtkMisc for this application.
 		 */
@@ -316,6 +329,10 @@ declare namespace imports.gi.Atk {
 		 */
 		add_relationship(relationship: RelationType, target: Object): boolean;
 		/**
+		 * @deprecated
+		 * Connect directly to {@link Object}::property-change or
+		 *   the relevant #GObject::notify signal for each desired property.
+		 * 
 		 * Calls #handler on property changes.
 		 * @param handler a function to be called when a property changes its value
 		 * @returns a #guint which is the handler id used in
@@ -353,11 +370,17 @@ declare namespace imports.gi.Atk {
 		 */
 		get_index_in_parent(): number;
 		/**
+		 * @deprecated
+		 * Use atk_component_get_layer instead.
+		 * 
 		 * Gets the layer of the accessible.
 		 * @returns an {@link Layer} which is the layer of the accessible
 		 */
 		get_layer(): Layer;
 		/**
+		 * @deprecated
+		 * Use atk_component_get_mdi_zorder instead.
+		 * 
 		 * Gets the zorder of the accessible. The value G_MININT will be returned
 		 * if the layer of the accessible is not ATK_LAYER_MDI.
 		 * @returns a gint which is the zorder of the accessible, i.e. the depth at
@@ -453,6 +476,9 @@ declare namespace imports.gi.Atk {
 		 */
 		ref_state_set(): StateSet;
 		/**
+		 * @deprecated
+		 * See atk_object_connect_property_change_handler()
+		 * 
 		 * Removes a property change handler.
 		 * @param handler_id a guint which identifies the handler to be removed.
 		 */
@@ -1968,6 +1994,10 @@ declare namespace imports.gi.Atk {
 	 */
 	interface IComponent {
 		/**
+		 * @deprecated
+		 * If you need to track when an object gains or
+		 * lose the focus, use the {@link Object}::state-change "focused" notification instead.
+		 * 
 		 * Add the specified handler to the set of functions to be called
 		 * when this object receives focus events (in or out). If the handler is
 		 * already added it is not added again
@@ -2027,6 +2057,9 @@ declare namespace imports.gi.Atk {
 		 */
 		get_mdi_zorder(): number;
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_component_get_extents() instead.
+		 * 
 		 * Gets the position of #component in the form of
 		 * a point specifying #component's top-left corner.
 		 * 
@@ -2040,6 +2073,9 @@ declare namespace imports.gi.Atk {
 		 */
 		// get_position(coord_type: CoordType): [ x: number | null, y: number | null ];
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_component_get_extents() instead.
+		 * 
 		 * Gets the size of the #component in terms of width and height.
 		 * 
 		 * If the size can not be obtained (e.g. a non-embedded plug or missing
@@ -2066,6 +2102,10 @@ declare namespace imports.gi.Atk {
 		 */
 		ref_accessible_at_point(x: number, y: number, coord_type: CoordType): Object | null;
 		/**
+		 * @deprecated
+		 * If you need to track when an object gains or
+		 * lose the focus, use the {@link Object}::state-change "focused" notification instead.
+		 * 
 		 * Remove the handler specified by #handler_id from the list of
 		 * functions to be executed when this object receives focus events
 		 * (in or out).
@@ -2193,6 +2233,11 @@ declare namespace imports.gi.Atk {
 		 */
 		get_current_page_number(): number;
 		/**
+		 * @deprecated
+		 * Since 2.12. #document is already a representation of
+		 * the document. Use it directly, or one of its children, as an
+		 * instance of the DOM.
+		 * 
 		 * Gets a %gpointer that points to an instance of the DOM.  It is
 		 * up to the caller to check atk_document_get_type to determine
 		 * how to cast this pointer.
@@ -2200,11 +2245,18 @@ declare namespace imports.gi.Atk {
 		 */
 		get_document(): any | null;
 		/**
+		 * @deprecated
+		 * Since 2.12. Please use atk_document_get_attributes() to
+		 * ask for the document type if it applies.
+		 * 
 		 * Gets a string indicating the document type.
 		 * @returns a string indicating the document type
 		 */
 		get_document_type(): string;
 		/**
+		 * @deprecated
+		 * Please use atk_object_get_object_locale() instead.
+		 * 
 		 * Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
 		 *          of the content of this document instance.  Individual
 		 *          text substrings or images within this document may have
@@ -2839,6 +2891,9 @@ declare namespace imports.gi.Atk {
 		 */
 		get_caption(): Object | null;
 		/**
+		 * @deprecated
+		 * Since 2.12.
+		 * 
 		 * Gets a #gint representing the column at the specified #index_.
 		 * @param index_ a #gint representing an index in #table
 		 * @returns a gint representing the column at the specified index,
@@ -2870,6 +2925,10 @@ declare namespace imports.gi.Atk {
 		 */
 		get_column_header(column: number): Object | null;
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_table_ref_at() in order to get the
+		 * accessible that represents the cell at (#row, #column)
+		 * 
 		 * Gets a #gint representing the index at the specified #row and
 		 * #column.
 		 * @param row a #gint representing a row in #table
@@ -2892,6 +2951,9 @@ declare namespace imports.gi.Atk {
 		 */
 		get_n_rows(): number;
 		/**
+		 * @deprecated
+		 * since 2.12.
+		 * 
 		 * Gets a #gint representing the row at the specified #index_.
 		 * @param index_ a #gint representing an index in #table
 		 * @returns a gint representing the row at the specified index,
@@ -3429,6 +3491,9 @@ declare namespace imports.gi.Atk {
 		 */
 		get_text(start_offset: number, end_offset: number): string;
 		/**
+		 * @deprecated
+		 * Please use atk_text_get_string_at_offset() instead.
+		 * 
 		 * Gets the specified text.
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
@@ -3443,6 +3508,10 @@ declare namespace imports.gi.Atk {
 		 */
 		get_text_after_offset(offset: number, boundary_type: TextBoundary): [ string, number, number ];
 		/**
+		 * @deprecated
+		 * This method is deprecated since ATK version
+		 * 2.9.4. Please use atk_text_get_string_at_offset() instead.
+		 * 
 		 * Gets the specified text.
 		 * 
 		 * If the boundary_type if ATK_TEXT_BOUNDARY_CHAR the character at the
@@ -3480,6 +3549,9 @@ declare namespace imports.gi.Atk {
 		 */
 		get_text_at_offset(offset: number, boundary_type: TextBoundary): [ string, number, number ];
 		/**
+		 * @deprecated
+		 * Please use atk_text_get_string_at_offset() instead.
+		 * 
 		 * Gets the specified text.
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
@@ -3689,6 +3761,10 @@ declare namespace imports.gi.Atk {
 	 */
 	interface IValue {
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_value_get_value_and_text()
+		 * instead.
+		 * 
 		 * Gets the value of this object.
 		 * @returns a #GValue representing the current accessible value
 		 */
@@ -3703,11 +3779,17 @@ declare namespace imports.gi.Atk {
 		 */
 		get_increment(): number;
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_value_get_range() instead.
+		 * 
 		 * Gets the maximum value of this object.
 		 * @returns a #GValue representing the maximum accessible value
 		 */
 		get_maximum_value(): GObject.Value;
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_value_get_increment() instead.
+		 * 
 		 * Gets the minimum increment by which the value of this object may be changed.  If zero,
 		 * the minimum increment is undefined, which may mean that it is limited only by the
 		 * floating point precision of the platform.
@@ -3715,6 +3797,9 @@ declare namespace imports.gi.Atk {
 		 */
 		get_minimum_increment(): GObject.Value;
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_value_get_range() instead.
+		 * 
 		 * Gets the minimum value of this object.
 		 * @returns a #GValue representing the minimum accessible value
 		 */
@@ -3745,6 +3830,9 @@ declare namespace imports.gi.Atk {
 		 */
 		get_value_and_text(): [ value: number, text: string | null ];
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_value_set_value() instead.
+		 * 
 		 * Sets the value of this object.
 		 * @param value a #GValue which is the desired new accessible value.
 		 * @returns %TRUE if new value is successfully set, %FALSE otherwise.
@@ -5472,6 +5560,11 @@ declare namespace imports.gi.Atk {
 	 */
 	interface FocusHandler {
 		/**
+		 * @deprecated
+		 * Deprecated with atk_component_add_focus_handler()
+		 * and atk_component_remove_focus_handler(). See those
+		 * methods for more information.
+		 * 
 		 * The type of callback function used for
 		 * atk_component_add_focus_handler() and
 		 * atk_component_remove_focus_handler()
@@ -5524,6 +5617,9 @@ declare namespace imports.gi.Atk {
 	 */
 	interface PropertyChangeHandler {
 		/**
+		 * @deprecated
+		 * Since 2.12.
+		 * 
 		 * An AtkPropertyChangeHandler is a function which is executed when an
 		 * AtkObject's property changes value. It is specified in a call to
 		 * atk_object_connect_property_change_handler().

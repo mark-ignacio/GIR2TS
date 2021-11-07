@@ -1,38 +1,84 @@
 import { Parameter } from "../utils/functionUtils";
 import { TypeInfo } from "../utils/paramUtils";
 
+export interface DocStringOptions {
+    ns_name: string;
+    indent?: number;
+    deprecatedDoc?: string;
+    class_name?: string;
+}
+
+ /** Convert references to for same library, like #SoupMessage to {link Message} */
+ function convertLinks(doc: string, ns_name?: string): string {
+    if (doc == undefined)
+        return doc;
+
+    if (ns_name == undefined)
+        return doc;
+
+    const regex = new RegExp(`#${ns_name}[\\w\\d]*`, "gm");
+    const result = regex.exec(doc);
+    if (result != null) {
+        for (const item of result) {
+            if (item == `#${ns_name}`) {
+                continue;
+            }
+
+            const newItem = item.replace(`#${ns_name}`, "");
+            doc = doc.replace(item, `{@link ${newItem.toString()}}`);
+        }
+    }
+    return doc;
+}
+
+function convertClassRefs(doc: string, ns_name?: string, class_name?: string): string {
+    if (doc == undefined)
+        return doc;
+
+    if (ns_name == undefined)
+        return doc;   
+    
+    if (class_name == undefined)
+        return doc; 
+    
+    return doc;
+}
+
+function prepareDocString(doc: string | undefined, ns_name?: string, class_name?: string): string[] | undefined {
+    if (doc == undefined)
+        return doc;
+
+    let result = doc.replace(/@/g, "#");
+    result = convertLinks(result, ns_name);
+    result = convertClassRefs(result, ns_name, class_name);
+
+    return result.split("\n");
+}
+
 // TODO: Add support for param links like #param
-export function renderDocString(docString: string | null, params?: Parameter[], return_info?: TypeInfo, indent: number = 0, ns_name?: string): string {
+export function renderDocString(docString: string | null, params?: Parameter[], return_info?: TypeInfo, options?: DocStringOptions): string {
+    const {
+        indent = 0,
+        ns_name, 
+        deprecatedDoc,
+        class_name
+    } = options ?? {};
+    
     if (docString == null)
         return "";
 
     const ind = "\t".repeat(indent);
 
-    /** Convert references to for same library, like #SoupMessage to {link Message} */
-    function convertLinks(doc: string | undefined, ns_name?: string): string | undefined {
-        if (doc == undefined)
-            return doc;
-
-        if (ns_name == undefined)
-            return doc;
-
-        const regex = new RegExp(`#${ns_name}[\\w\\d]*`, "gm");
-        const result = regex.exec(doc);
-        if (result != null) {
-            for (const item of result) {
-                if (item == `#${ns_name}`) {
-                    continue;
-                }
-
-                const newItem = item.replace(`#${ns_name}`, "");
-                doc = doc.replace(item, `{@link ${newItem.toString()}}`);
-            }
+    let doc = `${ind}/**\n`;
+    if (deprecatedDoc) {
+        doc+= `${ind} * @deprecated\n`;
+        for (const line of prepareDocString(deprecatedDoc, ns_name, class_name) ?? []) {
+            doc+= `${ind} * ${line}\n`
         }
-        return doc;
+        doc+= `${ind} * \n`;
     }
 
-    let doc = `${ind}/**\n`;
-    for (const line of convertLinks(docString?.replace(/@/g, "#"), ns_name)?.split("\n") ?? []) {
+    for (const line of prepareDocString(docString, ns_name, class_name) ?? []) {
         doc += `${ind} * ${line}\n`;
     }
 
@@ -44,7 +90,7 @@ export function renderDocString(docString: string | null, params?: Parameter[], 
                 continue;
             }
             else {
-                const lines = convertLinks(param.docString.replace(/@/g, "#"), ns_name)?.split("\n") ?? [""];
+                const lines = prepareDocString(param.docString, ns_name, class_name) ?? [""];
                 doc += ` ${lines[0]}\n`;
                 if (lines.length > 1)
                     for (let i = 1; i < lines.length; i++) {
@@ -56,7 +102,7 @@ export function renderDocString(docString: string | null, params?: Parameter[], 
 
 
     if (return_info?.type != null && return_info.type != "void") {
-        const lines = convertLinks(return_info.docString?.replace(/@/g, "#"), ns_name)?.split("\n") ?? [""];
+        const lines = prepareDocString(return_info.docString ?? undefined, ns_name, class_name) ?? [""];
         doc += `${ind} * @returns ${lines[0]}\n`;
         if (lines.length > 1)
             for (let i = 1; i < lines.length; i++) {

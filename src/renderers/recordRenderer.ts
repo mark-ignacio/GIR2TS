@@ -85,7 +85,7 @@ export function renderRecordAsClass(rec_node: RecordNode, ns_name: string, exclu
     }
 
     let result = `export interface ${rec_node.$.name}InitOptions {}\n`;
-    result += renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, 0, ns_name);
+    result += renderDocString(rec_node?.doc?.[0]?._ ?? null, undefined, undefined, {ns_name: ns_name});
     result += `interface ${rec_node.$.name} {}\n`;
 
     const genericModifier = modifier?.generic ?? "";

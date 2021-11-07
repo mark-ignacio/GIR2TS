@@ -627,6 +627,13 @@ declare namespace imports.gi.Gio {
 		 */
 		send_notification(id: string | null, notification: Notification): void;
 		/**
+		 * @deprecated
+		 * Use the #GActionMap interface instead.  Never ever
+		 * mix use of this API with use of #GActionMap on the same #application
+		 * or things will go very badly wrong.  This function is known to
+		 * introduce buggy behaviour (ie: signals not emitted on changes to the
+		 * action group), so you should really use #GActionMap instead.
+		 * 
 		 * This used to be how actions were associated with a #GApplication.
 		 * Now there is #GActionMap for that.
 		 * @param action_group a #GActionGroup, or %NULL
@@ -6033,6 +6040,10 @@ declare namespace imports.gi.Gio {
 		 */
 		read_uint64(cancellable: Cancellable | null): number;
 		/**
+		 * @deprecated
+		 * Use g_data_input_stream_read_upto() instead, which has more
+		 *     consistent behaviour regarding the stop character.
+		 * 
 		 * Reads a string from the data input stream, up to the first
 		 * occurrence of any of the stop characters.
 		 * 
@@ -6055,6 +6066,10 @@ declare namespace imports.gi.Gio {
 		 */
 		read_until(stop_chars: string, cancellable: Cancellable | null): [ string, number | null ];
 		/**
+		 * @deprecated
+		 * Use g_data_input_stream_read_upto_async() instead, which
+		 *     has more consistent behaviour regarding the stop character.
+		 * 
 		 * The asynchronous version of g_data_input_stream_read_until().
 		 * It is an error to have two outstanding calls to this function.
 		 * 
@@ -6077,6 +6092,10 @@ declare namespace imports.gi.Gio {
 		 */
 		read_until_async(stop_chars: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_data_input_stream_read_upto_finish() instead, which
+		 *     has more consistent behaviour regarding the stop character.
+		 * 
 		 * Finish an asynchronous call started by
 		 * g_data_input_stream_read_until_async().
 		 * @param result the #GAsyncResult that was provided to the callback.
@@ -6603,6 +6622,10 @@ declare namespace imports.gi.Gio {
 		 */
 		public static search(search_string: string): string[][];
 		/**
+		 * @deprecated
+		 * do not use this API.  Since 2.42 the value of the
+		 * `XDG_CURRENT_DESKTOP` environment variable will be used.
+		 * 
 		 * Sets the name of the desktop that the application is running in.
 		 * This is used by g_app_info_should_show() and
 		 * g_desktop_app_info_get_show_in() to evaluate the
@@ -7309,6 +7332,10 @@ declare namespace imports.gi.Gio {
 		 */
 		get_modification_date_time(): GLib.DateTime | null;
 		/**
+		 * @deprecated
+		 * Use g_file_info_get_modification_date_time() instead, as
+		 *    #GTimeVal is deprecated due to the year 2038 problem.
+		 * 
 		 * Gets the modification time of the current #info and sets it
 		 * in #result.
 		 * @returns a #GTimeVal.
@@ -7526,6 +7553,10 @@ declare namespace imports.gi.Gio {
 		 */
 		set_modification_date_time(mtime: GLib.DateTime): void;
 		/**
+		 * @deprecated
+		 * Use g_file_info_set_modification_date_time() instead, as
+		 *    #GTimeVal is deprecated due to the year 2038 problem.
+		 * 
 		 * Sets the %G_FILE_ATTRIBUTE_TIME_MODIFIED and
 		 * %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC attributes in the file info to the
 		 * given time value.
@@ -11138,6 +11169,10 @@ declare namespace imports.gi.Gio {
 		 */
 		set_title(title: string): void;
 		/**
+		 * @deprecated
+		 * Since 2.42, this has been deprecated in favour of
+		 *    g_notification_set_priority().
+		 * 
 		 * Deprecated in favor of g_notification_set_priority().
 		 * @param urgent %TRUE if #notification is urgent
 		 */
@@ -12891,6 +12926,9 @@ declare namespace imports.gi.Gio {
 		 */
 		get_mapped(key: string, mapping: SettingsGetMapping): any | null;
 		/**
+		 * @deprecated
+		 * Use g_settings_schema_key_get_range() instead.
+		 * 
 		 * Queries the range of a key.
 		 * @param key the key to query the range of
 		 * @returns 
@@ -12997,6 +13035,9 @@ declare namespace imports.gi.Gio {
 		 */
 		list_children(): string[];
 		/**
+		 * @deprecated
+		 * Use g_settings_schema_list_keys() instead.
+		 * 
 		 * Introspects the list of keys on #settings.
 		 * 
 		 * You should probably not be calling this function from "normal" code
@@ -13010,6 +13051,9 @@ declare namespace imports.gi.Gio {
 		 */
 		list_keys(): string[];
 		/**
+		 * @deprecated
+		 * Use g_settings_schema_key_range_check() instead.
+		 * 
 		 * Checks if the given #value is of the correct type and within the
 		 * permitted range for #key.
 		 * @param key the key to check
@@ -13711,6 +13755,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_with_path(schema_id: string, path: string): Settings;
 		/**
+		 * @deprecated
+		 * Use g_settings_schema_source_list_schemas() instead
+		 * 
 		 * Deprecated.
 		 * @returns a list of relocatable
 		 *   #GSettings schemas that are available, in no defined order.  The list must
@@ -13718,6 +13765,12 @@ declare namespace imports.gi.Gio {
 		 */
 		public static list_relocatable_schemas(): string[];
 		/**
+		 * @deprecated
+		 * Use g_settings_schema_source_list_schemas() instead.
+		 * If you used g_settings_list_schemas() to check for the presence of
+		 * a particular schema, use g_settings_schema_source_lookup() instead
+		 * of your whole loop.
+		 * 
 		 * Deprecated.
 		 * @returns a list of #GSettings
 		 *   schemas that are available, in no defined order.  The list must not be
@@ -14124,6 +14177,9 @@ declare namespace imports.gi.Gio {
 	 */
 	interface ISimpleActionGroup {
 		/**
+		 * @deprecated
+		 * Use g_action_map_add_action_entries()
+		 * 
 		 * A convenience function for creating multiple #GSimpleAction instances
 		 * and adding them to the action group.
 		 * @param entries a pointer to the first item in
@@ -14132,6 +14188,9 @@ declare namespace imports.gi.Gio {
 		 */
 		add_entries(entries: ActionEntry[], n_entries: number): void;
 		/**
+		 * @deprecated
+		 * Use g_action_map_add_action()
+		 * 
 		 * Adds an action to the action group.
 		 * 
 		 * If the action group already contains an action with the same name as
@@ -14142,6 +14201,9 @@ declare namespace imports.gi.Gio {
 		 */
 		insert(action: Action): void;
 		/**
+		 * @deprecated
+		 * Use g_action_map_lookup_action()
+		 * 
 		 * Looks up the action with the name #action_name in the group.
 		 * 
 		 * If no such action exists, returns %NULL.
@@ -14150,6 +14212,9 @@ declare namespace imports.gi.Gio {
 		 */
 		lookup(action_name: string): Action;
 		/**
+		 * @deprecated
+		 * Use g_action_map_remove_action()
+		 * 
 		 * Removes the named action from the action group.
 		 * 
 		 * If no action of this name is in the group then nothing happens.
@@ -14186,6 +14251,9 @@ declare namespace imports.gi.Gio {
 	 */
 	interface ISimpleAsyncResult {
 		/**
+		 * @deprecated
+		 * Use #GTask instead.
+		 * 
 		 * Completes an asynchronous I/O job immediately. Must be called in
 		 * the thread where the asynchronous result was to be delivered, as it
 		 * invokes the callback directly. If you are in a different thread use
@@ -14196,6 +14264,9 @@ declare namespace imports.gi.Gio {
 		 */
 		complete(): void;
 		/**
+		 * @deprecated
+		 * Use #GTask instead.
+		 * 
 		 * Completes an asynchronous function in an idle handler in the
 		 * [thread-default main context][g-main-context-push-thread-default]
 		 * of the thread that #simple was initially created in
@@ -14206,27 +14277,42 @@ declare namespace imports.gi.Gio {
 		 */
 		complete_in_idle(): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_propagate_boolean() instead.
+		 * 
 		 * Gets the operation result boolean from within the asynchronous result.
 		 * @returns %TRUE if the operation's result was %TRUE, %FALSE
 		 *     if the operation's result was %FALSE.
 		 */
 		get_op_res_gboolean(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_propagate_pointer() instead.
+		 * 
 		 * Gets a pointer result as returned by the asynchronous function.
 		 * @returns a pointer from the result.
 		 */
 		get_op_res_gpointer(): any | null;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_propagate_int() instead.
+		 * 
 		 * Gets a gssize from the asynchronous result.
 		 * @returns a gssize returned from the asynchronous function.
 		 */
 		get_op_res_gssize(): number;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_get_source_tag() instead.
+		 * 
 		 * Gets the source tag for the #GSimpleAsyncResult.
 		 * @returns a #gpointer to the source object for the #GSimpleAsyncResult.
 		 */
 		get_source_tag(): any | null;
 		/**
+		 * @deprecated
+		 * Use #GTask instead.
+		 * 
 		 * Propagates an error from within the simple asynchronous result to
 		 * a given destination.
 		 * 
@@ -14237,6 +14323,9 @@ declare namespace imports.gi.Gio {
 		 */
 		propagate_error(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_run_in_thread() instead.
+		 * 
 		 * Runs the asynchronous job in a separate thread and then calls
 		 * g_simple_async_result_complete_in_idle() on #simple to return
 		 * the result to the appropriate main loop.
@@ -14249,6 +14338,9 @@ declare namespace imports.gi.Gio {
 		 */
 		run_in_thread(func: SimpleAsyncThreadFunc, io_priority: number, cancellable: Cancellable | null): void;
 		/**
+		 * @deprecated
+		 * Use #GTask instead.
+		 * 
 		 * Sets a #GCancellable to check before dispatching results.
 		 * 
 		 * This function has one very specific purpose: the provided cancellable
@@ -14268,6 +14360,9 @@ declare namespace imports.gi.Gio {
 		 */
 		set_check_cancellable(check_cancellable: Cancellable | null): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_new_error() instead.
+		 * 
 		 * Sets an error within the asynchronous result without a #GError.
 		 * @param domain a #GQuark (usually #G_IO_ERROR).
 		 * @param code an error code.
@@ -14275,6 +14370,9 @@ declare namespace imports.gi.Gio {
 		 */
 		set_error(domain: GLib.Quark, code: number, format: string): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_error() instead.
+		 * 
 		 * Sets an error within the asynchronous result without a #GError.
 		 * Unless writing a binding, see g_simple_async_result_set_error().
 		 * @param domain a #GQuark (usually #G_IO_ERROR).
@@ -14284,6 +14382,9 @@ declare namespace imports.gi.Gio {
 		 */
 		set_error_va(domain: GLib.Quark, code: number, format: string, args: any[]): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_error() instead.
+		 * 
 		 * Sets the result from a #GError.
 		 * @param error #GError.
 		 */
@@ -14298,23 +14399,35 @@ declare namespace imports.gi.Gio {
 		 */
 		set_handle_cancellation(handle_cancellation: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_boolean() instead.
+		 * 
 		 * Sets the operation result to a boolean within the asynchronous result.
 		 * @param op_res a #gboolean.
 		 */
 		set_op_res_gboolean(op_res: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_pointer() instead.
+		 * 
 		 * Sets the operation result within the asynchronous result to a pointer.
 		 * @param op_res a pointer result from an asynchronous function.
 		 * @param destroy_op_res a #GDestroyNotify function.
 		 */
 		set_op_res_gpointer(op_res: any | null, destroy_op_res: GLib.DestroyNotify): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_int() instead.
+		 * 
 		 * Sets the operation result within the asynchronous result to
 		 * the given #op_res.
 		 * @param op_res a #gssize.
 		 */
 		set_op_res_gssize(op_res: number): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_error() instead.
+		 * 
 		 * Sets the result from #error, and takes over the caller's ownership
 		 * of #error, so the caller does not need to free it any more.
 		 * @param error a #GError
@@ -14502,6 +14615,9 @@ declare namespace imports.gi.Gio {
 	class SimpleAsyncResult {
 		public constructor(options?: Partial<SimpleAsyncResultInitOptions>);
 		/**
+		 * @deprecated
+		 * Use g_task_new() instead.
+		 * 
 		 * Creates a #GSimpleAsyncResult.
 		 * 
 		 * The common convention is to create the #GSimpleAsyncResult in the
@@ -14519,6 +14635,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, source_tag: any | null): SimpleAsyncResult;
 		/**
+		 * @deprecated
+		 * Use g_task_new() and g_task_return_new_error() instead.
+		 * 
 		 * Creates a new #GSimpleAsyncResult with a set error.
 		 * @param source_object a #GObject, or %NULL.
 		 * @param callback a #GAsyncReadyCallback.
@@ -14529,6 +14648,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_error(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, domain: GLib.Quark, code: number, format: string): SimpleAsyncResult;
 		/**
+		 * @deprecated
+		 * Use g_task_new() and g_task_return_error() instead.
+		 * 
 		 * Creates a #GSimpleAsyncResult from an error condition.
 		 * @param source_object a #GObject, or %NULL.
 		 * @param callback a #GAsyncReadyCallback.
@@ -14537,6 +14659,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_from_error(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, error: GLib.Error): SimpleAsyncResult;
 		/**
+		 * @deprecated
+		 * Use g_task_new() and g_task_return_error() instead.
+		 * 
 		 * Creates a #GSimpleAsyncResult from an error condition, and takes over the
 		 * caller's ownership of #error, so the caller does not need to free it anymore.
 		 * @param source_object a #GObject, or %NULL
@@ -14546,6 +14671,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_take_error(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, error: GLib.Error): SimpleAsyncResult;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_is_valid() instead.
+		 * 
 		 * Ensures that the data passed to the _finish function of an async
 		 * operation is consistent.  Three checks are performed.
 		 * 
@@ -19761,6 +19889,11 @@ declare namespace imports.gi.Gio {
 		 */
 		get_protocol_version(): TlsProtocolVersion;
 		/**
+		 * @deprecated
+		 * Changing the rehandshake mode is no longer
+		 *   required for compatibility. Also, rehandshaking has been removed
+		 *   from the TLS protocol in TLS 1.3.
+		 * 
 		 * Gets #conn rehandshaking mode. See
 		 * g_tls_connection_set_rehandshake_mode() for details.
 		 * @returns %G_TLS_REHANDSHAKE_SAFELY
@@ -19775,6 +19908,9 @@ declare namespace imports.gi.Gio {
 		 */
 		get_require_close_notify(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_tls_connection_get_database() instead
+		 * 
 		 * Gets whether #conn uses the system certificate database to verify
 		 * peer certificates. See g_tls_connection_set_use_system_certdb().
 		 * @returns whether #conn uses the system certificate database
@@ -19892,6 +20028,11 @@ declare namespace imports.gi.Gio {
 		 */
 		set_interaction(interaction: TlsInteraction | null): void;
 		/**
+		 * @deprecated
+		 * Changing the rehandshake mode is no longer
+		 *   required for compatibility. Also, rehandshaking has been removed
+		 *   from the TLS protocol in TLS 1.3.
+		 * 
 		 * Since GLib 2.64, changing the rehandshake mode is no longer supported
 		 * and will have no effect. With TLS 1.3, rehandshaking has been removed from
 		 * the TLS protocol, replaced by separate post-handshake authentication and
@@ -19931,6 +20072,9 @@ declare namespace imports.gi.Gio {
 		 */
 		set_require_close_notify(require_close_notify: boolean): void;
 		/**
+		 * @deprecated
+		 * Use g_tls_connection_set_database() instead
+		 * 
 		 * Sets whether #conn uses the system certificate database to verify
 		 * peer certificates. This is %TRUE by default. If set to %FALSE, then
 		 * peer certificate validation will always set the
@@ -21140,6 +21284,9 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IUnixMountMonitor {
 		/**
+		 * @deprecated
+		 * This function does nothing.  Don't call it.
+		 * 
 		 * This function does nothing.
 		 * 
 		 * Before 2.44, this was a partially-effective way of controlling the
@@ -21188,6 +21335,9 @@ declare namespace imports.gi.Gio {
 	class UnixMountMonitor {
 		public constructor(options?: Partial<UnixMountMonitorInitOptions>);
 		/**
+		 * @deprecated
+		 * Use g_unix_mount_monitor_get() instead.
+		 * 
 		 * Deprecated alias for g_unix_mount_monitor_get().
 		 * 
 		 * This function was never a true constructor, which is why it was
@@ -21300,6 +21450,9 @@ declare namespace imports.gi.Gio {
 		 */
 		get_address_type(): UnixSocketAddressType;
 		/**
+		 * @deprecated
+		 * Use g_unix_socket_address_get_address_type()
+		 * 
 		 * Tests if #address is abstract.
 		 * @returns %TRUE if the address is abstract, %FALSE otherwise
 		 */
@@ -21372,6 +21525,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new(path: string): SocketAddress;
 		/**
+		 * @deprecated
+		 * Use g_unix_socket_address_new_with_type().
+		 * 
 		 * Creates a new %G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED
 		 * #GUnixSocketAddress for #path.
 		 * @param path the abstract name
@@ -21737,6 +21893,13 @@ declare namespace imports.gi.Gio {
 	class VolumeMonitor {
 		public constructor(options?: Partial<VolumeMonitorInitOptions>);
 		/**
+		 * @deprecated
+		 * Instead of using this function, #GVolumeMonitor
+		 * implementations should instead create shadow mounts with the URI of
+		 * the mount they intend to adopt. See the proxy volume monitor in
+		 * gvfs for an example of this. Also see g_mount_is_shadowed(),
+		 * g_mount_shadow() and g_mount_unshadow() functions.
+		 * 
 		 * This function should be called by any #GVolumeMonitor
 		 * implementation when a new #GMount object is created that is not
 		 * associated with a #GVolume object. It must be called just before
@@ -23641,6 +23804,9 @@ declare namespace imports.gi.Gio {
 	class IOSchedulerJob {
 		public constructor(options?: Partial<IOSchedulerJobInitOptions>);
 		/**
+		 * @deprecated
+		 * Use g_main_context_invoke().
+		 * 
 		 * Used from an I/O job to send a callback to be run in the thread
 		 * that the job was started from, waiting for the result (and thus
 		 * blocking the I/O job).
@@ -23650,6 +23816,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public send_to_mainloop(func: GLib.SourceFunc, notify: GLib.DestroyNotify | null): boolean;
 		/**
+		 * @deprecated
+		 * Use g_main_context_invoke().
+		 * 
 		 * Used from an I/O job to send a callback to be run asynchronously in
 		 * the thread that the job was started from. The callback will be run
 		 * when the main loop is available, but at that time the I/O job might
@@ -27282,6 +27451,10 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_valist_async(object_type: GObject.Type, first_property_name: string, var_args: any[], io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_object_new_with_properties() and
+		 * g_async_initable_init_async() instead. See #GParameter for more information.
+		 * 
 		 * Helper function for constructing #GAsyncInitable object. This is
 		 * similar to g_object_newv() but also initializes the object asynchronously.
 		 * 
@@ -28080,6 +28253,10 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IDesktopAppInfoLookup {
 		/**
+		 * @deprecated
+		 * The #GDesktopAppInfoLookup interface is deprecated and
+		 *    unused by GIO.
+		 * 
 		 * Gets the default application for launching applications
 		 * using this URI scheme for a particular #GDesktopAppInfoLookup
 		 * implementation.
@@ -28146,6 +28323,9 @@ declare namespace imports.gi.Gio {
 		 */
 		can_stop(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_drive_eject_with_operation() instead.
+		 * 
 		 * Asynchronously ejects a drive.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -28157,6 +28337,9 @@ declare namespace imports.gi.Gio {
 		 */
 		eject(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_drive_eject_with_operation_finish() instead.
+		 * 
 		 * Finishes ejecting a drive.
 		 * @param result a #GAsyncResult.
 		 * @returns %TRUE if the drive has been ejected successfully,
@@ -28735,6 +28918,11 @@ declare namespace imports.gi.Gio {
 		 */
 		get_protocol_version(): TlsProtocolVersion;
 		/**
+		 * @deprecated
+		 * Changing the rehandshake mode is no longer
+		 *   required for compatibility. Also, rehandshaking has been removed
+		 *   from the TLS protocol in TLS 1.3.
+		 * 
 		 * Gets #conn rehandshaking mode. See
 		 * g_dtls_connection_set_rehandshake_mode() for details.
 		 * @returns %G_TLS_REHANDSHAKE_SAFELY
@@ -28854,6 +29042,11 @@ declare namespace imports.gi.Gio {
 		 */
 		set_interaction(interaction: TlsInteraction | null): void;
 		/**
+		 * @deprecated
+		 * Changing the rehandshake mode is no longer
+		 *   required for compatibility. Also, rehandshaking has been removed
+		 *   from the TLS protocol in TLS 1.3.
+		 * 
 		 * Since GLib 2.64, changing the rehandshake mode is no longer supported
 		 * and will have no effect. With TLS 1.3, rehandshaking has been removed from
 		 * the TLS protocol, replaced by separate post-handshake authentication and
@@ -29429,6 +29622,9 @@ declare namespace imports.gi.Gio {
 		 */
 		dup(): File;
 		/**
+		 * @deprecated
+		 * Use g_file_eject_mountable_with_operation() instead.
+		 * 
 		 * Starts an asynchronous eject on a mountable.
 		 * When this operation has completed, #callback will be called with
 		 * #user_user data, and the operation can be finalized with
@@ -29445,6 +29641,10 @@ declare namespace imports.gi.Gio {
 		 */
 		eject_mountable(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_file_eject_mountable_with_operation_finish()
+		 *     instead.
+		 * 
 		 * Finishes an asynchronous eject operation started by
 		 * g_file_eject_mountable().
 		 * @param result a #GAsyncResult
@@ -31121,6 +31321,9 @@ declare namespace imports.gi.Gio {
 		 */
 		trash_finish(result: AsyncResult): boolean;
 		/**
+		 * @deprecated
+		 * Use g_file_unmount_mountable_with_operation() instead.
+		 * 
 		 * Unmounts a file of type G_FILE_TYPE_MOUNTABLE.
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
@@ -31138,6 +31341,10 @@ declare namespace imports.gi.Gio {
 		 */
 		unmount_mountable(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_file_unmount_mountable_with_operation_finish()
+		 *     instead.
+		 * 
 		 * Finishes an unmount operation, see g_file_unmount_mountable() for details.
 		 * 
 		 * Finish an asynchronous unmount operation that was started
@@ -31637,6 +31844,10 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_valist(object_type: GObject.Type, first_property_name: string, var_args: any[], cancellable: Cancellable | null): GObject.Object;
 		/**
+		 * @deprecated
+		 * Use g_object_new_with_properties() and
+		 * g_initable_init() instead. See #GParameter for more information.
+		 * 
 		 * Helper function for constructing #GInitable object. This is
 		 * similar to g_object_newv() but also initializes the object
 		 * and returns %NULL, setting an error on failure.
@@ -31968,6 +32179,9 @@ declare namespace imports.gi.Gio {
 		 */
 		can_unmount(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_mount_eject_with_operation() instead.
+		 * 
 		 * Ejects a mount. This is an asynchronous operation, and is
 		 * finished by calling g_mount_eject_finish() with the #mount
 		 * and #GAsyncResult data returned in the #callback.
@@ -31977,6 +32191,9 @@ declare namespace imports.gi.Gio {
 		 */
 		eject(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_mount_eject_with_operation_finish() instead.
+		 * 
 		 * Finishes ejecting a mount. If any errors occurred during the operation,
 		 * #error will be set to contain the errors and %FALSE will be returned.
 		 * @param result a #GAsyncResult.
@@ -32178,6 +32395,9 @@ declare namespace imports.gi.Gio {
 		 */
 		shadow(): void;
 		/**
+		 * @deprecated
+		 * Use g_mount_unmount_with_operation() instead.
+		 * 
 		 * Unmounts a mount. This is an asynchronous operation, and is
 		 * finished by calling g_mount_unmount_finish() with the #mount
 		 * and #GAsyncResult data returned in the #callback.
@@ -32187,6 +32407,9 @@ declare namespace imports.gi.Gio {
 		 */
 		unmount(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_mount_unmount_with_operation_finish() instead.
+		 * 
 		 * Finishes unmounting a mount. If any errors occurred during the operation,
 		 * #error will be set to contain the errors and %FALSE will be returned.
 		 * @param result a #GAsyncResult.
@@ -33383,6 +33606,9 @@ declare namespace imports.gi.Gio {
 		 */
 		get_server_identity(): SocketConnectable | null;
 		/**
+		 * @deprecated
+		 * SSL 3.0 is insecure.
+		 * 
 		 * SSL 3.0 is no longer supported. See
 		 * g_tls_client_connection_set_use_ssl3() for details.
 		 * @returns %FALSE
@@ -33402,6 +33628,9 @@ declare namespace imports.gi.Gio {
 		 */
 		set_server_identity(identity: SocketConnectable): void;
 		/**
+		 * @deprecated
+		 * SSL 3.0 is insecure.
+		 * 
 		 * Since GLib 2.42.1, SSL 3.0 is no longer supported.
 		 * 
 		 * From GLib 2.42.1 through GLib 2.62, this function could be used to
@@ -33582,6 +33811,9 @@ declare namespace imports.gi.Gio {
 		 */
 		can_mount(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_volume_eject_with_operation() instead.
+		 * 
 		 * Ejects a volume. This is an asynchronous operation, and is
 		 * finished by calling g_volume_eject_finish() with the #volume
 		 * and #GAsyncResult returned in the #callback.
@@ -33591,6 +33823,9 @@ declare namespace imports.gi.Gio {
 		 */
 		eject(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_volume_eject_with_operation_finish() instead.
+		 * 
 		 * Finishes ejecting a volume. If any errors occurred during the operation,
 		 * #error will be set to contain the errors and %FALSE will be returned.
 		 * @param result a #GAsyncResult

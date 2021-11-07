@@ -340,6 +340,9 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		read_pixels(): number;
 		/**
+		 * @deprecated
+		 * Use g_object_ref().
+		 * 
 		 * Adds a reference to a pixbuf.
 		 * @returns The same as the #pixbuf argument.
 		 */
@@ -683,6 +686,9 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		set_option(key: string, value: string): boolean;
 		/**
+		 * @deprecated
+		 * Use g_object_unref().
+		 * 
 		 * Removes a reference from a pixbuf.
 		 */
 		unref(): void;
@@ -991,6 +997,9 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		public static new_from_file_at_size(filename: string, width: number, height: number): Pixbuf | null;
 		/**
+		 * @deprecated
+		 * Use `GResource` instead.
+		 * 
 		 * Creates a `GdkPixbuf` from a flat representation that is suitable for
 		 * storing as inline data in a program.
 		 * 
@@ -1322,11 +1331,17 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		is_static_image(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_object_ref().
+		 * 
 		 * Adds a reference to an animation.
 		 * @returns The same as the #animation argument.
 		 */
 		ref(): PixbufAnimation;
 		/**
+		 * @deprecated
+		 * Use g_object_unref().
+		 * 
 		 * Removes a reference from an animation.
 		 */
 		unref(): void;
