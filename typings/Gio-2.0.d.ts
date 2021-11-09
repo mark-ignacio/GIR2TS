@@ -12626,6 +12626,10 @@ declare namespace imports.gi.Gio {
 		 */
 		path: string;
 		/**
+		 * @deprecated
+		 * Use the 'schema-id' property instead.  In a future
+		 * version, this property may instead refer to a #GSettingsSchema.
+		 * 
 		 * The name of the schema that describes the types of keys
 		 * for this #GSettings object.
 		 * 
@@ -19779,6 +19783,9 @@ declare namespace imports.gi.Gio {
 		 */
 		readonly protocol_version: TlsProtocolVersion;
 		/**
+		 * @deprecated
+		 * The rehandshake mode is ignored.
+		 * 
 		 * The rehandshaking mode. See
 		 * g_tls_connection_set_rehandshake_mode().
 		 */
@@ -19789,6 +19796,9 @@ declare namespace imports.gi.Gio {
 		 */
 		require_close_notify: boolean;
 		/**
+		 * @deprecated
+		 * Use GTlsConnection:database instead
+		 * 
 		 * Whether or not the system certificate database will be used to
 		 * verify peer certificates. See
 		 * g_tls_connection_set_use_system_certdb().
@@ -21438,6 +21448,11 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IUnixSocketAddress {
 		/**
+		 * @deprecated
+		 * Use #GUnixSocketAddress:address-type, which
+		 * distinguishes between zero-padded and non-zero-padded
+		 * abstract addresses.
+		 * 
 		 * Whether or not this is an abstract address
 		 */
 		abstract: boolean;
@@ -27330,6 +27345,9 @@ declare namespace imports.gi.Gio {
 		 */
 		readonly protocol_version: TlsProtocolVersion;
 		/**
+		 * @deprecated
+		 * The rehandshake mode is ignored.
+		 * 
 		 * The rehandshaking mode. See
 		 * g_dtls_connection_set_rehandshake_mode().
 		 */
@@ -32098,6 +32116,9 @@ declare namespace imports.gi.Gio {
 		 */
 		server_identity: SocketConnectable;
 		/**
+		 * @deprecated
+		 * SSL 3.0 is insecure.
+		 * 
 		 * SSL 3.0 is no longer supported. See
 		 * g_tls_client_connection_set_use_ssl3() for details.
 		 */

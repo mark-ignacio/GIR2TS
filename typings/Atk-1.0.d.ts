@@ -46,6 +46,10 @@ declare namespace imports.gi.Atk {
 		readonly end_index: number;
 		readonly number_of_anchors: number;
 		/**
+		 * @deprecated
+		 * Please use ATK_STATE_FOCUSABLE for all links, and
+		 * ATK_STATE_FOCUSED for focused links.
+		 * 
 		 * Selected link
 		 */
 		readonly selected_link: boolean;
@@ -290,28 +294,52 @@ declare namespace imports.gi.Atk {
 		accessible_parent: Object;
 		accessible_role: Role;
 		/**
+		 * @deprecated
+		 * Since 1.3. Use table-caption-object instead.
+		 * 
 		 * Table caption.
 		 */
 		accessible_table_caption: string;
 		accessible_table_caption_object: Object;
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_table_get_column_description()
+		 * and atk_table_set_column_description() instead.
+		 * 
 		 * Accessible table column description.
 		 */
 		accessible_table_column_description: string;
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_table_get_column_header() and
+		 * atk_table_set_column_header() instead.
+		 * 
 		 * Accessible table column header.
 		 */
 		accessible_table_column_header: Object;
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_table_get_row_description() and
+		 * atk_table_set_row_description() instead.
+		 * 
 		 * Accessible table row description.
 		 */
 		accessible_table_row_description: string;
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_table_get_row_header() and
+		 * atk_table_set_row_header() instead.
+		 * 
 		 * Accessible table row header.
 		 */
 		accessible_table_row_header: Object;
 		accessible_table_summary: Object;
 		/**
+		 * @deprecated
+		 * Since 2.12. Use atk_value_get_value_and_text() to get
+		 * the value, and value-changed signal to be notified on their value
+		 * changes.
+		 * 
 		 * Numeric value of this object, in case being and AtkValue.
 		 */
 		accessible_value: number;

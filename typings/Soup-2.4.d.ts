@@ -2516,6 +2516,10 @@ declare namespace imports.gi.Soup {
 	 */
 	interface IServer {
 		/**
+		 * @deprecated
+		 * The new API uses the thread-default #GMainContext
+		 * rather than having an explicitly-specified one.
+		 * 
 		 * The server's #GMainContext, if you are using the old API.
 		 * Servers created using soup_server_listen() will listen on
 		 * the #GMainContext that was the thread-default context at
@@ -2550,6 +2554,12 @@ declare namespace imports.gi.Soup {
 		 */
 		https_aliases: string[];
 		/**
+		 * @deprecated
+		 * {@link Servers} can listen on multiple interfaces
+		 * at once now. Use soup_server_listen(), etc, to listen on an
+		 * interface, and soup_server_get_uris() to see what addresses
+		 * are being listened on.
+		 * 
 		 * The address of the network interface the server is
 		 * listening on, if you are using the old {@link Server} API.
 		 * (This will not be set if you use soup_server_listen(),
@@ -2557,6 +2567,12 @@ declare namespace imports.gi.Soup {
 		 */
 		interface: Address;
 		/**
+		 * @deprecated
+		 * {@link Servers} can listen on multiple interfaces
+		 * at once now. Use soup_server_listen(), etc, to listen on a
+		 * port, and soup_server_get_uris() to see what ports are
+		 * being listened on.
+		 * 
 		 * The port the server is listening on, if you are using the
 		 * old {@link Server} API. (This will not be set if you use
 		 * soup_server_listen(), etc.)
@@ -2591,6 +2607,10 @@ declare namespace imports.gi.Soup {
 		 */
 		server_header: string;
 		/**
+		 * @deprecated
+		 * use {@link Server}:tls-certificate or
+		 * soup_server_set_ssl_certificate().
+		 * 
 		 * Path to a file containing a PEM-encoded certificate.
 		 * 
 		 * If you set this property and {@link Server}:ssl-key-file at
@@ -2602,6 +2622,10 @@ declare namespace imports.gi.Soup {
 		 */
 		ssl_cert_file: string;
 		/**
+		 * @deprecated
+		 * use {@link Server}:tls-certificate or
+		 * soup_server_set_ssl_certificate().
+		 * 
 		 * Path to a file containing a PEM-encoded private key. See
 		 * {@link Server}:ssl-cert-file for more information about how this
 		 * is used.
@@ -3272,6 +3296,9 @@ declare namespace imports.gi.Soup {
 		 */
 		proxy_resolver: Gio.ProxyResolver;
 		/**
+		 * @deprecated
+		 * Use SoupSession:proxy-resolver along with #GSimpleProxyResolver.
+		 * 
 		 * A proxy to use for all http and https requests in this
 		 * session. Setting this will clear the
 		 * {@link Session}:proxy-resolver property, and remove any
@@ -3297,6 +3324,11 @@ declare namespace imports.gi.Soup {
 		 */
 		// remove_feature_by_type: GObject.Type;
 		/**
+		 * @deprecated
+		 * use {@link Session}:ssl-use-system-ca-file, or
+		 * else #SoupSession:tls-database with a #GTlsFileDatabase
+		 * (which allows you to do explicit error handling).
+		 * 
 		 * File containing SSL CA certificates.
 		 * 
 		 * If the specified file does not exist or cannot be read,
@@ -3396,6 +3428,10 @@ declare namespace imports.gi.Soup {
 		 */
 		tls_interaction: Gio.TlsInteraction;
 		/**
+		 * @deprecated
+		 * use soup_session_add_feature_by_type() with
+		 * #SOUP_TYPE_AUTH_NTLM.
+		 * 
 		 * Whether or not to use NTLM authentication.
 		 */
 		use_ntlm: boolean;

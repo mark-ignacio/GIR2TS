@@ -37,6 +37,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		readonly allocation: ActorBox;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * The anchor point expressed as a {@link Gravity}
 		 * 
 		 * It is highly recommended not to use #ClutterActor:anchor-x,
@@ -50,6 +53,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		anchor_gravity: Gravity;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * The X coordinate of an actor's anchor point, relative to
 		 * the actor coordinate space, in pixels.
 		 * 
@@ -64,6 +70,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		anchor_x: number;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * The Y coordinate of an actor's anchor point, relative to
 		 * the actor coordinate space, in pixels
 		 * 
@@ -104,6 +113,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		readonly child_transform_set: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:clip-rect instead.
+		 * 
 		 * The visible region of the actor, in actor-relative coordinates
 		 */
 		clip: Geometry;
@@ -161,6 +173,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		content_repeat: ContentRepeat;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:z-position instead.
+		 * 
 		 * The position of the actor on the Z axis.
 		 * 
 		 * The {@link Actor}:depth property is relative to the parent's
@@ -450,30 +465,51 @@ declare namespace imports.gi.Clutter {
 		 */
 		rotation_angle_z: number;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * The rotation center on the X axis.
 		 */
 		rotation_center_x: Vertex;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * The rotation center on the Y axis.
 		 */
 		rotation_center_y: Vertex;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * The rotation center on the Z axis.
 		 */
 		rotation_center_z: Vertex;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * The rotation center on the Z axis expressed as a {@link Gravity}.
 		 */
 		rotation_center_z_gravity: Gravity;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * The horizontal center point for scaling
 		 */
 		scale_center_x: number;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * The vertical center point for scaling
 		 */
 		scale_center_y: number;
 		/**
+		 * @deprecated
+		 * Use {@link Actor}:pivot-point instead
+		 * 
 		 * The center point for scaling expressed as a {@link Gravity}
 		 */
 		scale_gravity: Gravity;
@@ -4467,12 +4503,19 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IAlpha {
 		/**
+		 * @deprecated
+		 * Use {@link Timeline}::new-frame and
+		 *   clutter_timeline_get_progress() instead
+		 * 
 		 * The alpha value as computed by the alpha function. The linear
 		 * interval is 0.0 to 1.0, but the Alpha allows overshooting by
 		 * one unit in each direction, so the valid interval is -1.0 to 2.0.
 		 */
 		readonly alpha: number;
 		/**
+		 * @deprecated
+		 * Use {@link Timeline}:progress-mode
+		 * 
 		 * The progress function logical id - either a value from the
 		 * {@link AnimationMode} enumeration or a value returned by
 		 * clutter_alpha_register_func().
@@ -4662,28 +4705,47 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IAnimation {
 		/**
+		 * @deprecated
+		 * Use the {@link Animation}:timeline property and
+		 *   the #ClutterTimeline:progress-mode property instead.
+		 * 
 		 * The {@link Alpha} used by the animation.
 		 */
 		alpha: Alpha;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * The duration of the animation, expressed in milliseconds.
 		 */
 		duration: number;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * Whether the animation should loop.
 		 */
 		loop: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * The animation mode, either a value from {@link AnimationMode}
 		 * or a value returned by clutter_alpha_register_func(). The
 		 * default value is %CLUTTER_LINEAR.
 		 */
 		mode: number;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * The #GObject to which the animation applies.
 		 */
 		object: GObject.Object;
 		/**
+		 * @deprecated
+		 * Use {@link PropertyTransition} instead
+		 * 
 		 * The {@link Timeline} used by the animation.
 		 */
 		timeline: Timeline;
@@ -4986,11 +5048,17 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IAnimator {
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * The duration of the {@link Timeline} used by the #ClutterAnimator
 		 * to drive the animation
 		 */
 		duration: number;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} instead
+		 * 
 		 * The {@link Timeline} used by the #ClutterAnimator to drive the
 		 * animation
 		 */
@@ -6144,11 +6212,19 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBinLayout {
 		/**
+		 * @deprecated
+		 * Use the {@link Actor}:x-expand and the
+		 *   #ClutterActor:x-align properties on #ClutterActor instead.
+		 * 
 		 * The default horizontal alignment policy for actors managed
 		 * by the {@link BinLayout}
 		 */
 		x_align: BinAlignment;
 		/**
+		 * @deprecated
+		 * Use the {@link Actor}:y-expand and the
+		 *   #ClutterActor:y-align properties on #ClutterActor instead.
+		 * 
 		 * The default vertical alignment policy for actors managed
 		 * by the {@link BinLayout}
 		 */
@@ -6567,6 +6643,9 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBox {
 		/**
+		 * @deprecated
+		 * Use the {@link Actor}:background-color property
+		 * 
 		 * The color to be used to paint the background of the
 		 * {@link Box}. Setting this property will set the
 		 * #ClutterBox:color-set property as a side effect
@@ -6576,6 +6655,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		color: Color;
 		/**
+		 * @deprecated
+		 * Use the {@link Actor}:background-color-set property
+		 * 
 		 * Whether the {@link Box}:color property has been set.
 		 * 
 		 * This property reads the #ClutterActor:background-color-set property
@@ -6751,6 +6833,10 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IBoxLayout {
 		/**
+		 * @deprecated
+		 * The {@link BoxLayout} will honour the easing state of
+		 *   the children when allocating them.
+		 * 
 		 * The duration of the animations, in case {@link BoxLayout}:use-animations
 		 * is set to %TRUE.
 		 * 
@@ -6758,6 +6844,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		easing_duration: number;
 		/**
+		 * @deprecated
+		 * The {@link BoxLayout} will honour the easing state of
+		 *   the children when allocating them.
+		 * 
 		 * The easing mode for the animations, in case
 		 * {@link BoxLayout}:use-animations is set to %TRUE.
 		 * 
@@ -6789,11 +6879,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		spacing: number;
 		/**
+		 * @deprecated
+		 * {@link BoxLayout} will honour the easing state
+		 *   of the children when allocating them.
+		 * 
 		 * Whether the {@link BoxLayout} should animate changes in the
 		 * layout, overriding the easing state of the children.
 		 */
 		use_animations: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link BoxLayout}:orientation instead.
+		 * 
 		 * Whether the {@link BoxLayout} should arrange its children
 		 * alongside the Y axis, instead of alongside the X axis
 		 */
@@ -10518,6 +10615,9 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IModel {
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * Whether the {@link Model} has a filter set
 		 * 
 		 * This property is set to %TRUE if a filter function has been
@@ -10902,10 +11002,16 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IModelIter {
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * A reference to the {@link Model} that this iter belongs to.
 		 */
 		model: Model;
 		/**
+		 * @deprecated
+		 * Use #GListModel instead
+		 * 
 		 * The row number to which this iter points to.
 		 */
 		row: number;
@@ -12801,19 +12907,31 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IShader {
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Whether the shader is compiled and linked, ready for use
 		 * in the GL context.
 		 */
 		readonly compiled: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * Whether the shader is currently used in the GL rendering pipeline.
 		 */
 		enabled: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * GLSL source code for the fragment shader part of the shader program.
 		 */
 		fragment_source: string;
 		/**
+		 * @deprecated
+		 * Use {@link ShaderEffect} instead.
+		 * 
 		 * GLSL source code for the vertex shader part of the shader
 		 * program, if any
 		 */
@@ -13287,6 +13405,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		accept_focus: boolean;
 		/**
+		 * @deprecated
+		 * Use the {@link Actor}:background-color property of
+		 *   #ClutterActor instead.
+		 * 
 		 * The background color of the main stage.
 		 */
 		color: Color;
@@ -13295,6 +13417,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		cursor_visible: boolean;
 		/**
+		 * @deprecated
+		 * This property does not do anything.
+		 * 
 		 * The settings for the GL "fog", used only if {@link Stage}:use-fog
 		 * is set to %TRUE
 		 */
@@ -13315,6 +13440,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		no_clear_hint: boolean;
 		/**
+		 * @deprecated
+		 * This property does not do anything.
+		 * 
 		 * Whether the stage should be rendered in an offscreen buffer.
 		 */
 		offscreen: boolean;
@@ -13335,6 +13463,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		use_alpha: boolean;
 		/**
+		 * @deprecated
+		 * This property does not do anything.
+		 * 
 		 * Whether the stage should use a linear GL "fog" in creating the
 		 * depth-cueing effect, to enhance the perception of depth by fading
 		 * actors farther from the viewpoint.
@@ -14010,11 +14141,19 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface IState {
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * Default duration used if an duration has not been specified for a specific
 		 * source/target state pair. The values is in milliseconds.
 		 */
 		duration: number;
 		/**
+		 * @deprecated
+		 * Use {@link KeyframeTransition} and
+		 *   #ClutterTransitionGroup instead
+		 * 
 		 * The currently set target state, setting it causes the
 		 * state machine to transition to the new state, use
 		 * clutter_state_warp_to_state() to change state without
@@ -14392,10 +14531,17 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ITableLayout {
 		/**
+		 * @deprecated
+		 * Use {@link GridLayout}:column-spacing instead
+		 * 
 		 * The spacing between columns of the {@link TableLayout}, in pixels
 		 */
 		column_spacing: number;
 		/**
+		 * @deprecated
+		 * {@link TableLayout} will honour the easing state
+		 *   of the children when allocating them
+		 * 
 		 * The duration of the animations, in case {@link TableLayout}:use-animations
 		 * is set to %TRUE.
 		 * 
@@ -14403,6 +14549,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		easing_duration: number;
 		/**
+		 * @deprecated
+		 * {@link TableLayout} will honour the easing state
+		 *   of the children when allocating them
+		 * 
 		 * The easing mode for the animations, in case
 		 * {@link TableLayout}:use-animations is set to %TRUE.
 		 * 
@@ -14415,10 +14565,17 @@ declare namespace imports.gi.Clutter {
 		 */
 		easing_mode: number;
 		/**
+		 * @deprecated
+		 * Use {@link GridLayout}:row-spacing instead
+		 * 
 		 * The spacing between rows of the {@link TableLayout}, in pixels
 		 */
 		row_spacing: number;
 		/**
+		 * @deprecated
+		 * {@link TableLayout} will honour the easing state
+		 *   of the children when allocating them
+		 * 
 		 * Whether the {@link TableLayout} should animate changes in the
 		 * layout properties.
 		 * 
@@ -14847,6 +15004,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		password_char: number;
 		/**
+		 * @deprecated
+		 * Use ClutterText:cursor-position instead.
+		 * 
 		 * The current input cursor position. -1 is taken to be the end of the text
 		 */
 		position: number;
@@ -15871,6 +16031,10 @@ declare namespace imports.gi.Clutter {
 		cogl_texture: any;
 		disable_slicing: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link Image} and platform-specific image loading
+		 *   API, like GdkPixbuf
+		 * 
 		 * The path of the file containing the image data to be displayed by
 		 * the texture.
 		 * 
@@ -16458,6 +16622,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		duration: number;
 		/**
+		 * @deprecated
+		 * Use the {@link Timeline}:repeat-count property instead.
+		 * 
 		 * Whether the timeline should automatically rewind and restart.
 		 * 
 		 * As a side effect, setting this property to %TRUE will set the

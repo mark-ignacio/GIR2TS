@@ -1089,11 +1089,19 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IAction {
 		/**
+		 * @deprecated
+		 * Lookup the #GAction using g_action_map_lookup_action()
+		 * instead
+		 * 
 		 * The GtkActionGroup this GtkAction is associated with, or NULL
 		 * (for internal use).
 		 */
 		action_group: ActionGroup;
 		/**
+		 * @deprecated
+		 * There is no corresponding replacement when using
+		 * #GAction
+		 * 
 		 * If %TRUE, the action's menu item proxies will ignore the {@link Settings}:gtk-menu-images
 		 * setting and always show their image, if available.
 		 * 
@@ -1102,6 +1110,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		always_show_image: boolean;
 		/**
+		 * @deprecated
+		 * Use the "icon" attribute on a #GMenuItem instead
+		 * 
 		 * The #GIcon displayed in the {@link Action}.
 		 * 
 		 * Note that the stock icon is preferred, if the #GtkAction:stock-id
@@ -1112,10 +1123,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		gicon: Gio.Icon;
 		/**
+		 * @deprecated
+		 * There is no corresponding replacement when using
+		 * #GAction
+		 * 
 		 * When TRUE, empty menu proxies for this action are hidden.
 		 */
 		hide_if_empty: boolean;
 		/**
+		 * @deprecated
+		 * Use the "icon" attribute on a #GMenuItem instead
+		 * 
 		 * The name of the icon from the icon theme.
 		 * 
 		 * Note that the stock icon is preferred, if the {@link Action}:stock-id
@@ -1127,11 +1145,18 @@ declare namespace imports.gi.Gtk {
 		 */
 		icon_name: string;
 		/**
+		 * @deprecated
+		 * There is no corresponding replacement when using
+		 * #GAction
+		 * 
 		 * Whether the action is considered important. When TRUE, toolitem
 		 * proxies for this action show text in GTK_TOOLBAR_BOTH_HORIZ mode.
 		 */
 		is_important: boolean;
 		/**
+		 * @deprecated
+		 * Use the "label" attribute on #GMenuItem instead
+		 * 
 		 * The label used for menu items and buttons that activate
 		 * this action. If the label is %NULL, GTK+ uses the stock
 		 * label specified via the stock-id property.
@@ -1141,14 +1166,25 @@ declare namespace imports.gi.Gtk {
 		 */
 		label: string;
 		/**
+		 * @deprecated
+		 * Use #GAction:name instead
+		 * 
 		 * A unique name for the action.
 		 */
 		name: string;
 		/**
+		 * @deprecated
+		 * Use #GAction:enabled and #GSimpleAction:enabled
+		 * instead
+		 * 
 		 * Whether the action is enabled.
 		 */
 		sensitive: boolean;
 		/**
+		 * @deprecated
+		 * There is no corresponding replacement when using
+		 * #GAction
+		 * 
 		 * A shorter label that may be used on toolbar buttons.
 		 * 
 		 * This is an appearance property and thus only applies if
@@ -1156,6 +1192,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		short_label: string;
 		/**
+		 * @deprecated
+		 * There is no corresponding replacement when using
+		 * #GAction
+		 * 
 		 * The stock icon displayed in widgets representing this action.
 		 * 
 		 * This is an appearance property and thus only applies if
@@ -1163,23 +1203,42 @@ declare namespace imports.gi.Gtk {
 		 */
 		stock_id: string;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_tooltip_text() instead
+		 * 
 		 * A tooltip for this action.
 		 */
 		tooltip: string;
 		/**
+		 * @deprecated
+		 * There is no corresponding replacement when using
+		 * #GAction
+		 * 
 		 * Whether the action is visible.
 		 */
 		visible: boolean;
 		/**
+		 * @deprecated
+		 * There is no corresponding replacement when using
+		 * #GAction
+		 * 
 		 * Whether the toolbar item is visible when the toolbar is in a horizontal orientation.
 		 */
 		visible_horizontal: boolean;
 		/**
+		 * @deprecated
+		 * There is no corresponding replacement when using
+		 * #GAction
+		 * 
 		 * When %TRUE, toolitem proxies for this action are represented in the
 		 * toolbar overflow menu.
 		 */
 		visible_overflown: boolean;
 		/**
+		 * @deprecated
+		 * There is no corresponding replacement when using
+		 * #GAction
+		 * 
 		 * Whether the toolbar item is visible when the toolbar is in a vertical orientation.
 		 */
 		visible_vertical: boolean;
@@ -2400,40 +2459,64 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IAlignment {
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_margin_bottom() instead
+		 * 
 		 * The padding to insert at the bottom of the widget.
 		 */
 		bottom_padding: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_margin_start() instead
+		 * 
 		 * The padding to insert at the left of the widget.
 		 */
 		left_padding: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_margin_end() instead
+		 * 
 		 * The padding to insert at the right of the widget.
 		 */
 		right_padding: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_margin_top() instead
+		 * 
 		 * The padding to insert at the top of the widget.
 		 */
 		top_padding: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_halign() on the child instead
+		 * 
 		 * Horizontal position of child in available space. A value of 0.0
 		 * will flush the child left (or right, in RTL locales); a value
 		 * of 1.0 will flush the child right (or left, in RTL locales).
 		 */
 		xalign: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_hexpand() on the child instead
+		 * 
 		 * If available horizontal space is bigger than needed, how much
 		 * of it to use for the child. A value of 0.0 means none; a value
 		 * of 1.0 means all.
 		 */
 		xscale: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_valign() on the child instead
+		 * 
 		 * Vertical position of child in available space. A value of 0.0
 		 * will flush the child to the top; a value of 1.0 will flush the
 		 * child to the bottom.
 		 */
 		yalign: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_vexpand() on the child instead
+		 * 
 		 * If available vertical space is bigger than needed, how much
 		 * of it to use for the child. A value of 0.0 means none; a value
 		 * of 1.0 means all.
@@ -5077,12 +5160,20 @@ declare namespace imports.gi.Gtk {
 		use_stock: boolean;
 		use_underline: boolean;
 		/**
+		 * @deprecated
+		 * Access the child widget directly if you need to control
+		 * its alignment.
+		 * 
 		 * If the child of the button is a {@link Misc} or #GtkAlignment, this property
 		 * can be used to control its horizontal alignment. 0.0 is left aligned,
 		 * 1.0 is right aligned.
 		 */
 		xalign: number;
 		/**
+		 * @deprecated
+		 * Access the child widget directly if you need to control
+		 * its alignment.
+		 * 
 		 * If the child of the button is a {@link Misc} or #GtkAlignment, this property
 		 * can be used to control its vertical alignment. 0.0 is top aligned,
 		 * 1.0 is bottom aligned.
@@ -7027,6 +7118,9 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface ICellRenderer {
 		/**
+		 * @deprecated
+		 * Use {@link CellRenderer}:cell-background-rgba instead.
+		 * 
 		 * Cell background as a #GdkColor
 		 */
 		cell_background_gdk: Gdk.Color;
@@ -7592,6 +7686,9 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface ICellRendererPixbuf {
 		/**
+		 * @deprecated
+		 * Cell renderers always follow state.
+		 * 
 		 * Specifies whether the rendered pixbuf should be colorized
 		 * according to the {@link CellRendererState}.
 		 */
@@ -7907,6 +8004,9 @@ declare namespace imports.gi.Gtk {
 		alignment: Pango.Alignment;
 		attributes: Pango.AttrList;
 		/**
+		 * @deprecated
+		 * Use {@link CellRendererText}:background-rgba instead.
+		 * 
 		 * Background color as a #GdkColor
 		 */
 		background_gdk: Gdk.Color;
@@ -7930,6 +8030,9 @@ declare namespace imports.gi.Gtk {
 		font: string;
 		font_desc: Pango.FontDescription;
 		/**
+		 * @deprecated
+		 * Use {@link CellRendererText}:foreground-rgba instead.
+		 * 
 		 * Foreground color as a #GdkColor
 		 */
 		foreground_gdk: Gdk.Color;
@@ -8265,6 +8368,9 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface ICellView {
 		/**
+		 * @deprecated
+		 * Use {@link CellView}:background-rgba instead.
+		 * 
 		 * The background color as a #GdkColor
 		 */
 		background_gdk: Gdk.Color;
@@ -9207,6 +9313,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		alpha: number;
 		/**
+		 * @deprecated
+		 * Use {@link ColorButton}:rgba instead.
+		 * 
 		 * The selected color.
 		 */
 		color: Gdk.Color;
@@ -9496,6 +9605,9 @@ declare namespace imports.gi.Gtk {
 	interface IColorSelection {
 		current_alpha: number;
 		/**
+		 * @deprecated
+		 * Use {@link ColorSelection}:current-rgba instead.
+		 * 
 		 * The current GdkColor color.
 		 */
 		current_color: Gdk.Color;
@@ -11896,6 +12008,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		im_module: string;
 		/**
+		 * @deprecated
+		 * Use the standard border and padding CSS properties
+		 *   (through objects like {@link StyleContext} and #GtkCssProvider); the value
+		 *   of this style property is ignored.
+		 * 
 		 * Sets the text area's border between the text and the frame.
 		 */
 		inner_border: Border;
@@ -11985,6 +12102,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		primary_icon_sensitive: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link Entry}:primary-icon-name instead.
+		 * 
 		 * The stock id to use for the primary icon for the entry.
 		 */
 		primary_icon_stock: string;
@@ -12049,6 +12169,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		secondary_icon_sensitive: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link Entry}:secondary-icon-name instead.
+		 * 
 		 * The stock id to use for the secondary icon for the entry.
 		 */
 		secondary_icon_stock: string;
@@ -12071,6 +12194,10 @@ declare namespace imports.gi.Gtk {
 		secondary_icon_tooltip_text: string;
 		readonly selection_bound: number;
 		/**
+		 * @deprecated
+		 * Use CSS to determine the style of the border;
+		 *     the value of this style property is ignored.
+		 * 
 		 * Which kind of shadow to draw around the entry when
 		 * {@link Entry}:has-frame is set to %TRUE.
 		 */
@@ -14254,6 +14381,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		resize_toplevel: boolean;
 		/**
+		 * @deprecated
+		 * This property is deprecated and ignored.
+		 *     Use margins on the child instead.
+		 * 
 		 * Space to put between the label and the child when the
 		 * expander is expanded.
 		 */
@@ -16229,6 +16360,9 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IFontButton {
 		/**
+		 * @deprecated
+		 * Use the {@link FontChooser}::font property instead
+		 * 
 		 * The name of the currently selected font.
 		 */
 		font_name: string;
@@ -22170,6 +22304,10 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IImageMenuItem {
 		/**
+		 * @deprecated
+		 * Use a {@link MenuItem} containing a #GtkBox with
+		 *   a #GtkAccelLabel and a #GtkImage instead
+		 * 
 		 * If %TRUE, the menu item will always show the image, if available.
 		 * 
 		 * Use this property only if the menuitem would be useless or hard to use
@@ -22177,10 +22315,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		always_show_image: boolean;
 		/**
+		 * @deprecated
+		 * Use a {@link MenuItem} containing a #GtkBox with
+		 *   a #GtkAccelLabel and a #GtkImage instead
+		 * 
 		 * Child widget to appear next to the menu text.
 		 */
 		image: Widget;
 		/**
+		 * @deprecated
+		 * Use a named icon from the {@link IconTheme} instead
+		 * 
 		 * If %TRUE, the label set in the menuitem is used as a
 		 * stock id to select the stock item for the item.
 		 */
@@ -26902,6 +27047,9 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IMessageDialog {
 		/**
+		 * @deprecated
+		 * Use {@link Dialog} to create dialogs with images
+		 * 
 		 * The image for this dialog.
 		 */
 		image: Widget;
@@ -27133,22 +27281,38 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IMisc {
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_halign() instead. If you are using
+		 *   {@link Label}, use #GtkLabel:xalign instead.
+		 * 
 		 * The horizontal alignment. A value of 0.0 means left alignment (or right
 		 * on RTL locales); a value of 1.0 means right alignment (or left on RTL
 		 * locales).
 		 */
 		xalign: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_margin_start() and
+		 *   gtk_widget_set_margin_end() instead
+		 * 
 		 * The amount of space to add on the left and right of the widget, in
 		 * pixels.
 		 */
 		xpad: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_valign() instead. If you are using
+		 *   {@link Label}, use #GtkLabel:yalign instead.
+		 * 
 		 * The vertical alignment. A value of 0.0 means top alignment;
 		 * a value of 1.0 means bottom alignment.
 		 */
 		yalign: number;
 		/**
+		 * @deprecated
+		 * Use gtk_widget_set_margin_top() and
+		 *   gtk_widget_set_margin_bottom() instead
+		 * 
 		 * The amount of space to add on the top and bottom of the widget, in
 		 * pixels.
 		 */
@@ -30055,6 +30219,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		relative_to: Widget;
 		/**
+		 * @deprecated
+		 * You can show or hide the popover without transitions
+		 *   using gtk_widget_show() and gtk_widget_hide() while gtk_popover_popup()
+		 *   and gtk_popover_popdown() will use transitions.
+		 * 
 		 * Whether show/hide transitions are enabled for this popover.
 		 */
 		transitions_enabled: boolean;
@@ -34711,6 +34880,10 @@ declare namespace imports.gi.Gtk {
 		vscrollbar_policy: PolicyType;
 		window_placement: CornerType;
 		/**
+		 * @deprecated
+		 * This value is ignored and
+		 * {@link ScrolledWindow}:window-placement value is always honored.
+		 * 
 		 * Whether "window-placement" should be used to determine the location
 		 * of the contents with respect to the scrollbars.
 		 */
@@ -35615,6 +35788,9 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface ISettings {
 		/**
+		 * @deprecated
+		 * Will always return an empty hash table.
+		 * 
 		 * Holds a hash table representation of the {@link Settings}:gtk-color-scheme
 		 * setting, mapping color names to #GdkColors.
 		 */
@@ -35641,23 +35817,43 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_application_prefer_dark_theme: boolean;
 		/**
+		 * @deprecated
+		 * This setting is ignored
+		 * 
 		 * Whether mnemonics should be automatically shown and hidden when the user
 		 * presses the mnemonic activator.
 		 */
 		gtk_auto_mnemonics: boolean;
 		/**
+		 * @deprecated
+		 * This setting is deprecated. Application developers
+		 *   control whether a button should show an icon or not, on a
+		 *   per-button basis. If a {@link Button} should show an icon, use the
+		 *   #GtkButton:always-show-image property of #GtkButton, and pack a
+		 *   #GtkImage inside the #GtkButton
+		 * 
 		 * Whether images should be shown on buttons
 		 */
 		gtk_button_images: boolean;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * Whether menu accelerators can be changed by pressing a key over the menu item.
 		 */
 		gtk_can_change_accels: boolean;
 		/**
+		 * @deprecated
+		 * Only used by the deprecated color selector widget.
+		 * 
 		 * Palette to use in the deprecated color selector.
 		 */
 		gtk_color_palette: string;
 		/**
+		 * @deprecated
+		 * Color scheme support was dropped and is no longer supported.
+		 *     You can still set this property, but it will be ignored.
+		 * 
 		 * A palette of named colors for use in themes. The format of the string is
 		 * |[
 		 * name1: color1
@@ -35761,6 +35957,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_enable_input_feedback_sounds: boolean;
 		/**
+		 * @deprecated
+		 * This setting can still be used for application
+		 *      overrides, but will be ignored in the future
+		 * 
 		 * Whether labels and menu items should have visible mnemonics which
 		 * can be activated.
 		 */
@@ -35771,6 +35971,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_enable_primary_paste: boolean;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * Whether tooltips should be shown on widgets.
 		 */
 		gtk_enable_tooltips: boolean;
@@ -35790,10 +35993,16 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_error_bell: boolean;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * Name of a icon theme to fall back to.
 		 */
 		gtk_fallback_icon_theme: string;
 		/**
+		 * @deprecated
+		 * This setting is ignored. {@link FileChooser} uses GIO by default.
+		 * 
 		 * Name of the GtkFileChooser backend to use by default.
 		 */
 		gtk_file_chooser_backend: string;
@@ -35803,6 +36012,9 @@ declare namespace imports.gi.Gtk {
 		gtk_font_name: string;
 		gtk_fontconfig_timestamp: number;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * A list of icon sizes. The list is separated by colons, and
 		 * item has the form:
 		 * 
@@ -35827,15 +36039,25 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_im_module: string;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * How to draw the input method preedit string.
 		 */
 		gtk_im_preedit_style: IMPreeditStyle;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * How to draw the input method statusbar.
 		 */
 		gtk_im_status_style: IMStatusStyle;
 		gtk_key_theme_name: string;
 		/**
+		 * @deprecated
+		 * Generally, the behavior for touchscreen input should be
+		 *             performed dynamically based on gdk_event_get_source_device().
+		 * 
 		 * When %TRUE, keyboard navigation should be able to reach all widgets
 		 * by using the cursor keys only. Tab, Shift etc. keys can't be expected
 		 * to be present on the used input device.
@@ -35848,6 +36070,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_keynav_use_caret: boolean;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * When %TRUE, some widgets will wrap around when doing keyboard
 		 * navigation, such as menus, menubars and notebooks.
 		 */
@@ -35858,22 +36083,42 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_long_press_time: number;
 		/**
+		 * @deprecated
+		 * This setting can still be used for application
+		 *      overrides, but will be ignored in the future
+		 * 
 		 * Keybinding to activate the menu bar.
 		 */
 		gtk_menu_bar_accel: string;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * Delay before the submenus of a menu bar appear.
 		 */
 		gtk_menu_bar_popup_delay: number;
 		/**
+		 * @deprecated
+		 * This setting is deprecated. Application developers
+		 *   control whether or not a {@link MenuItem} should have an icon or not,
+		 *   on a per widget basis. Either use a #GtkMenuItem with a #GtkBox
+		 *   containing a #GtkImage and a #GtkAccelLabel, or describe your menus
+		 *   using a #GMenu XML description
+		 * 
 		 * Whether images should be shown in menu items
 		 */
 		gtk_menu_images: boolean;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * The time before hiding a submenu when the pointer is moving towards the submenu.
 		 */
 		gtk_menu_popdown_delay: number;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * Minimum time the pointer must stay over a menu item before the submenu appear.
 		 */
 		gtk_menu_popup_delay: number;
@@ -35919,6 +36164,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_recent_files_enabled: boolean;
 		/**
+		 * @deprecated
+		 * This setting is ignored
+		 * 
 		 * The number of recently used files that should be displayed by default by
 		 * {@link RecentChooser} implementations and by the #GtkFileChooser. A value of
 		 * -1 means every recently used file stored.
@@ -35932,6 +36180,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_recent_files_max_age: number;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * Where the contents of scrolled windows are located with respect to the
 		 * scrollbars, if not overridden by the scrolled window's own placement.
 		 */
@@ -35981,14 +36232,23 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_titlebar_right_click: string;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * The size of icons in default toolbars.
 		 */
 		gtk_toolbar_icon_size: IconSize;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * The size of icons in default toolbars.
 		 */
 		gtk_toolbar_style: ToolbarStyle;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * Amount of time, in milliseconds, after which the browse mode
 		 * will be disabled.
 		 * 
@@ -35997,6 +36257,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_tooltip_browse_mode_timeout: number;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * Controls the time after which tooltips will appear when
 		 * browse mode is enabled, in milliseconds.
 		 * 
@@ -36009,17 +36272,27 @@ declare namespace imports.gi.Gtk {
 		 */
 		gtk_tooltip_browse_timeout: number;
 		/**
+		 * @deprecated
+		 * This setting is ignored.
+		 * 
 		 * Time, in milliseconds, after which a tooltip could appear if the
 		 * cursor is hovering on top of a widget.
 		 */
 		gtk_tooltip_timeout: number;
 		/**
+		 * @deprecated
+		 * Generally, the behavior for touchscreen input should be
+		 *             performed dynamically based on gdk_event_get_source_device().
+		 * 
 		 * When %TRUE, there are no motion notify events delivered on this screen,
 		 * and widgets can't use the pointer hovering them for any essential
 		 * functionality.
 		 */
 		gtk_touchscreen_mode: boolean;
 		/**
+		 * @deprecated
+		 * This setting is ignored
+		 * 
 		 * Whether 'focus rectangles' should be always visible, never visible,
 		 * or hidden until the user starts to use the keyboard.
 		 */
@@ -36718,6 +36991,14 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface ISizeGroup {
 		/**
+		 * @deprecated
+		 * Measuring the size of hidden widgets has not worked
+		 *     reliably for a long time. In most cases, they will report a size
+		 *     of 0 nowadays, and thus, their size will not affect the other
+		 *     size group members. In effect, size groups will always operate
+		 *     as if this property was %TRUE. Use a {@link Stack} instead to hide
+		 *     widgets while still having their size taken into account.
+		 * 
 		 * If %TRUE, unmapped widgets are ignored when determining
 		 * the size of the group.
 		 */
@@ -41813,6 +42094,9 @@ declare namespace imports.gi.Gtk {
 		background_full_height: boolean;
 		background_full_height_set: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link TextTag}:background-rgba instead.
+		 * 
 		 * Background color as a #GdkColor.
 		 */
 		background_gdk: Gdk.Color;
@@ -41848,6 +42132,9 @@ declare namespace imports.gi.Gtk {
 		font_features: string;
 		font_features_set: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link TextTag}:foreground-rgba instead.
+		 * 
 		 * Foreground color as a #GdkColor.
 		 */
 		foreground_gdk: Gdk.Color;
@@ -41888,6 +42175,9 @@ declare namespace imports.gi.Gtk {
 		letter_spacing_set: boolean;
 		name: string;
 		/**
+		 * @deprecated
+		 * Use {@link TextTag}:paragraph-background-rgba instead.
+		 * 
 		 * The paragraph background color as a #GdkColor.
 		 */
 		paragraph_background_gdk: Gdk.Color;
@@ -46346,6 +46636,10 @@ declare namespace imports.gi.Gtk {
 		reorderable: boolean;
 		rubber_banding: boolean;
 		/**
+		 * @deprecated
+		 * The theme is responsible for drawing rows
+		 *   using zebra striping
+		 * 
 		 * Sets a hint to the theme to draw rows in alternating colors.
 		 */
 		rules_hint: boolean;
@@ -48067,6 +48361,10 @@ declare namespace imports.gi.Gtk {
 	 */
 	interface IUIManager {
 		/**
+		 * @deprecated
+		 * Tearoff menus are deprecated and should not
+		 *     be used in newly written code.
+		 * 
 		 * The "add-tearoffs" property controls whether generated menus
 		 * have tearoff menu items.
 		 * 
@@ -49041,6 +49339,9 @@ declare namespace imports.gi.Gtk {
 		can_focus: boolean;
 		readonly composite_child: boolean;
 		/**
+		 * @deprecated
+		 * Widgets should not use this property.
+		 * 
 		 * Whether the widget is double buffered.
 		 */
 		double_buffered: boolean;
@@ -49109,6 +49410,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		margin_end: number;
 		/**
+		 * @deprecated
+		 * Use {@link Widget}:margin-start instead.
+		 * 
 		 * Margin on left side of widget.
 		 * 
 		 * This property adds margin outside of the widget's normal size
@@ -49117,6 +49421,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		margin_left: number;
 		/**
+		 * @deprecated
+		 * Use {@link Widget}:margin-end instead.
+		 * 
 		 * Margin on right side of widget.
 		 * 
 		 * This property adds margin outside of the widget's normal size
@@ -49158,6 +49465,9 @@ declare namespace imports.gi.Gtk {
 		readonly scale_factor: number;
 		sensitive: boolean;
 		/**
+		 * @deprecated
+		 * Use {@link StyleContext} instead
+		 * 
 		 * The style of the widget, which contains information about how it will look (colors, etc).
 		 */
 		style: Style;
@@ -54026,6 +54336,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		gravity: Gdk.Gravity;
 		/**
+		 * @deprecated
+		 * Resize grips have been removed.
+		 * 
 		 * Whether the window has a corner resize grip.
 		 * 
 		 * Note that the resize grip is only shown if the window is
@@ -54057,6 +54370,9 @@ declare namespace imports.gi.Gtk {
 		modal: boolean;
 		resizable: boolean;
 		/**
+		 * @deprecated
+		 * Resize grips have been removed.
+		 * 
 		 * Whether a corner resize grip is currently shown.
 		 */
 		readonly resize_grip_visible: boolean;

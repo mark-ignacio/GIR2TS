@@ -12,6 +12,7 @@ export interface ParameterAttributes extends NodeAttributes {
     "optional"?: number;
     "allow-none"?: number;
     "nullable"?: number;
+    deprecated?: number;
 }
 
 export interface MemberAttributes extends NodeAttributes {
@@ -37,6 +38,7 @@ export interface ParameterNode extends Node {
     type?: TypeNode[];
     array?: NodeWithType[];
     doc?: Node[];
+    "doc-deprecated"?: Node[];
 }
 
 export interface NodeWithType extends Node {

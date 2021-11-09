@@ -10,7 +10,7 @@ export function renderProperty(prop_node: ParameterNode, ns_name: string, modifi
     }
     prop_name = prop_name.replace(/-/g, '_');
 
-    let result = renderDocString(modifiers?.doc ?? prop_node.doc?.[0]?._ ?? null, undefined, undefined, {indent: indent, ns_name: ns_name});
+    let result = renderDocString(modifiers?.doc ?? prop_node.doc?.[0]?._ ?? null, undefined, undefined, {indent: indent, ns_name: ns_name, deprecatedDoc: prop_node?.["doc-deprecated"]?.[0]?._ ?? ((prop_node?.$?.deprecated == 1) ? "" : undefined)});
     result += "\t".repeat(indent);
     if (exclude)
         result += "// ";

@@ -1929,6 +1929,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		readonly frame_name: string;
 		/**
+		 * @deprecated
+		 * Use #WebKitNavigationPolicyDecision:navigation-action instead
+		 * 
 		 * If the navigation associated with this policy decision was originally
 		 * triggered by a mouse event, this property contains a bitmask of various
 		 * #GdkModifierType values describing the modifiers used for that click.
@@ -1937,6 +1940,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		readonly modifiers: number;
 		/**
+		 * @deprecated
+		 * Use #WebKitNavigationPolicyDecision:navigation-action instead
+		 * 
 		 * If the navigation associated with this policy decision was originally
 		 * triggered by a mouse event, this property contains non-zero button number
 		 * of the button triggering that event. The button numbers match those from GDK.
@@ -1949,12 +1955,18 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		readonly navigation_action: NavigationAction;
 		/**
+		 * @deprecated
+		 * Use #WebKitNavigationPolicyDecision:navigation-action instead
+		 * 
 		 * The type of navigation that triggered this policy decision. This is
 		 * useful for enacting different policies depending on what type of user
 		 * action caused the navigation.
 		 */
 		readonly navigation_type: NavigationType;
 		/**
+		 * @deprecated
+		 * Use #WebKitNavigationPolicyDecision:navigation-action instead
+		 * 
 		 * This property contains the #WebKitURIRequest associated with this
 		 * navigation.
 		 */
@@ -2907,6 +2919,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		enable_plugins: boolean;
 		/**
+		 * @deprecated
+		 * Use #WebKitWebView:is-ephemeral or #WebKitWebsiteDataManager:is-ephemeral instead.
+		 * 
 		 * Determines whether or not private browsing is enabled. Private browsing
 		 * will disable history, cache and form auto-fill for any pages visited.
 		 */
@@ -4444,6 +4459,9 @@ declare namespace imports.gi.WebKit2 {
 	 */
 	interface IWebContext {
 		/**
+		 * @deprecated
+		 * Use #WebKitWebsiteDataManager:local-storage-directory instead.
+		 * 
 		 * The directory where local storage data will be saved.
 		 */
 		local_storage_directory: string;
@@ -7001,6 +7019,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		service_worker_registrations_directory: string;
 		/**
+		 * @deprecated
+		 * WebSQL is no longer supported. Use IndexedDB instead.
+		 * 
 		 * The directory where WebSQL databases will be stored.
 		 */
 		websql_directory: string;
