@@ -5868,12 +5868,6 @@ declare namespace imports.gi.Gdk {
 		public constructor(options?: Partial<DevicePadInterfaceInitOptions>);
 	}
 
-	export interface DrawingContextClassInitOptions {}
-	interface DrawingContextClass {}
-	class DrawingContextClass {
-		public constructor(options?: Partial<DrawingContextClassInitOptions>);
-	}
-
 	export interface EventAnyInitOptions {}
 	/**
 	 * Contains the fields which are common to all event structs.
@@ -7043,18 +7037,6 @@ declare namespace imports.gi.Gdk {
 		public new_window_state: WindowState;
 	}
 
-	export interface FrameClockClassInitOptions {}
-	interface FrameClockClass {}
-	class FrameClockClass {
-		public constructor(options?: Partial<FrameClockClassInitOptions>);
-	}
-
-	export interface FrameClockPrivateInitOptions {}
-	interface FrameClockPrivate {}
-	class FrameClockPrivate {
-		public constructor(options?: Partial<FrameClockPrivateInitOptions>);
-	}
-
 	export interface FrameTimingsInitOptions {}
 	/**
 	 * A {@link FrameTimings} object holds timing information for a single frame
@@ -7280,12 +7262,6 @@ declare namespace imports.gi.Gdk {
 		 *   uppercase letter is printed.
 		 */
 		public level: number;
-	}
-
-	export interface MonitorClassInitOptions {}
-	interface MonitorClass {}
-	class MonitorClass {
-		public constructor(options?: Partial<MonitorClassInitOptions>);
 	}
 
 	export interface PointInitOptions {}
@@ -7521,24 +7497,6 @@ declare namespace imports.gi.Gdk {
 		 * a hint of the function of the window
 		 */
 		public type_hint: WindowTypeHint;
-	}
-
-	export interface WindowClassInitOptions {}
-	interface WindowClass {}
-	class WindowClass {
-		public constructor(options?: Partial<WindowClassInitOptions>);
-		public pick_embedded_child: {(window: Window, x: number, y: number): Window;};
-		public to_embedder: {(window: Window, offscreen_x: number, offscreen_y: number, embedder_x: number, embedder_y: number): void;};
-		public from_embedder: {(window: Window, embedder_x: number, embedder_y: number, offscreen_x: number, offscreen_y: number): void;};
-		public create_surface: {(window: Window, width: number, height: number): cairo.Surface;};
-		public _gdk_reserved1: {(): void;};
-		public _gdk_reserved2: {(): void;};
-		public _gdk_reserved3: {(): void;};
-		public _gdk_reserved4: {(): void;};
-		public _gdk_reserved5: {(): void;};
-		public _gdk_reserved6: {(): void;};
-		public _gdk_reserved7: {(): void;};
-		public _gdk_reserved8: {(): void;};
 	}
 
 	export interface WindowRedirectInitOptions {}

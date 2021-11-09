@@ -17287,23 +17287,6 @@ declare namespace imports.gi.Clutter {
 		public static new(): Action;
 	}
 
-	export interface ActionClassInitOptions {}
-	/**
-	 * The ClutterActionClass structure contains only private data
-	 */
-	interface ActionClass {}
-	class ActionClass {
-		public constructor(options?: Partial<ActionClassInitOptions>);
-		public _clutter_action1: {(): void;};
-		public _clutter_action2: {(): void;};
-		public _clutter_action3: {(): void;};
-		public _clutter_action4: {(): void;};
-		public _clutter_action5: {(): void;};
-		public _clutter_action6: {(): void;};
-		public _clutter_action7: {(): void;};
-		public _clutter_action8: {(): void;};
-	}
-
 	export interface ActorBoxInitOptions {}
 	/**
 	 * Bounding box of an actor. The coordinates of the top left and right bottom
@@ -17468,51 +17451,6 @@ declare namespace imports.gi.Clutter {
 		public union(b: ActorBox): ActorBox;
 	}
 
-	export interface ActorClassInitOptions {}
-	/**
-	 * Base class for actors.
-	 */
-	interface ActorClass {}
-	class ActorClass {
-		public constructor(options?: Partial<ActorClassInitOptions>);
-		public readonly _padding_dummy: any[];
-		public show: {(self: Actor): void;};
-		public show_all: {(self: Actor): void;};
-		public hide: {(self: Actor): void;};
-		public hide_all: {(self: Actor): void;};
-		public realize: {(self: Actor): void;};
-		public unrealize: {(self: Actor): void;};
-		public map: {(self: Actor): void;};
-		public unmap: {(self: Actor): void;};
-		public paint: {(self: Actor): void;};
-		public parent_set: {(actor: Actor, old_parent: Actor): void;};
-		public destroy: {(self: Actor): void;};
-		public pick: {(actor: Actor, color: Color): void;};
-		public queue_redraw: {(actor: Actor, leaf_that_queued: Actor): void;};
-		public get_preferred_width: {(self: Actor, for_height: number): [ min_width_p: number | null, natural_width_p: number | null ];};
-		public get_preferred_height: {(self: Actor, for_width: number): [ min_height_p: number | null, natural_height_p: number | null ];};
-		public allocate: {(self: Actor, box: ActorBox, flags: AllocationFlags): void;};
-		public apply_transform: {(actor: Actor, matrix: Matrix): void;};
-		public event: {(actor: Actor, event: Event): boolean;};
-		public button_press_event: {(actor: Actor, event: ButtonEvent): boolean;};
-		public button_release_event: {(actor: Actor, event: ButtonEvent): boolean;};
-		public scroll_event: {(actor: Actor, event: ScrollEvent): boolean;};
-		public key_press_event: {(actor: Actor, event: KeyEvent): boolean;};
-		public key_release_event: {(actor: Actor, event: KeyEvent): boolean;};
-		public motion_event: {(actor: Actor, event: MotionEvent): boolean;};
-		public enter_event: {(actor: Actor, event: CrossingEvent): boolean;};
-		public leave_event: {(actor: Actor, event: CrossingEvent): boolean;};
-		public captured_event: {(actor: Actor, event: Event): boolean;};
-		public key_focus_in: {(actor: Actor): void;};
-		public key_focus_out: {(actor: Actor): void;};
-		public queue_relayout: {(self: Actor): void;};
-		public get_accessible: {(self: Actor): Atk.Object;};
-		public get_paint_volume: {(actor: Actor, volume: PaintVolume): boolean;};
-		public has_overlaps: {(self: Actor): boolean;};
-		public paint_node: {(self: Actor, root: PaintNode): void;};
-		public touch_event: {(self: Actor, event: TouchEvent): boolean;};
-	}
-
 	export interface ActorIterInitOptions {}
 	/**
 	 * An iterator structure that allows to efficiently iterate over a
@@ -17611,62 +17549,6 @@ declare namespace imports.gi.Clutter {
 		public remove(): void;
 	}
 
-	export interface ActorMetaClassInitOptions {}
-	/**
-	 * The {@link ActorMetaClass} structure contains
-	 * only private data
-	 */
-	interface ActorMetaClass {}
-	class ActorMetaClass {
-		public constructor(options?: Partial<ActorMetaClassInitOptions>);
-		public set_actor: {(meta: ActorMeta, actor: Actor | null): void;};
-		public _clutter_meta1: {(): void;};
-		public _clutter_meta2: {(): void;};
-		public _clutter_meta3: {(): void;};
-		public _clutter_meta4: {(): void;};
-		public _clutter_meta5: {(): void;};
-		public _clutter_meta6: {(): void;};
-		public _clutter_meta7: {(): void;};
-	}
-
-	export interface ActorMetaPrivateInitOptions {}
-	interface ActorMetaPrivate {}
-	class ActorMetaPrivate {
-		public constructor(options?: Partial<ActorMetaPrivateInitOptions>);
-	}
-
-	export interface ActorPrivateInitOptions {}
-	interface ActorPrivate {}
-	class ActorPrivate {
-		public constructor(options?: Partial<ActorPrivateInitOptions>);
-	}
-
-	export interface AlignConstraintClassInitOptions {}
-	interface AlignConstraintClass {}
-	class AlignConstraintClass {
-		public constructor(options?: Partial<AlignConstraintClassInitOptions>);
-	}
-
-	export interface AlphaClassInitOptions {}
-	/**
-	 * Base class for {@link Alpha}
-	 */
-	interface AlphaClass {}
-	class AlphaClass {
-		public constructor(options?: Partial<AlphaClassInitOptions>);
-		public _clutter_alpha_1: {(): void;};
-		public _clutter_alpha_2: {(): void;};
-		public _clutter_alpha_3: {(): void;};
-		public _clutter_alpha_4: {(): void;};
-		public _clutter_alpha_5: {(): void;};
-	}
-
-	export interface AlphaPrivateInitOptions {}
-	interface AlphaPrivate {}
-	class AlphaPrivate {
-		public constructor(options?: Partial<AlphaPrivateInitOptions>);
-	}
-
 	export interface AnimatableIfaceInitOptions {}
 	/**
 	 * Base interface for #GObject<!-- -->s that can be animated by a
@@ -17681,42 +17563,6 @@ declare namespace imports.gi.Clutter {
 		public get_initial_state: {(animatable: Animatable, property_name: string, value: GObject.Value): void;};
 		public set_final_state: {(animatable: Animatable, property_name: string, value: GObject.Value): void;};
 		public interpolate_value: {(animatable: Animatable, property_name: string, interval: Interval, progress: number): [ boolean, GObject.Value ];};
-	}
-
-	export interface AnimationClassInitOptions {}
-	/**
-	 * The {@link AnimationClass} structure contains only private data and
-	 * should be accessed using the provided functions.
-	 */
-	interface AnimationClass {}
-	class AnimationClass {
-		public constructor(options?: Partial<AnimationClassInitOptions>);
-		public started: {(animation: Animation): void;};
-		public completed: {(animation: Animation): void;};
-		public _clutter_reserved1: {(): void;};
-		public _clutter_reserved2: {(): void;};
-		public _clutter_reserved3: {(): void;};
-		public _clutter_reserved4: {(): void;};
-		public _clutter_reserved5: {(): void;};
-		public _clutter_reserved6: {(): void;};
-		public _clutter_reserved7: {(): void;};
-		public _clutter_reserved8: {(): void;};
-	}
-
-	export interface AnimationPrivateInitOptions {}
-	interface AnimationPrivate {}
-	class AnimationPrivate {
-		public constructor(options?: Partial<AnimationPrivateInitOptions>);
-	}
-
-	export interface AnimatorClassInitOptions {}
-	/**
-	 * The {@link AnimatorClass} structure contains only private data
-	 */
-	interface AnimatorClass {}
-	class AnimatorClass {
-		public constructor(options?: Partial<AnimatorClassInitOptions>);
-		public readonly _padding_dummy: any[];
 	}
 
 	export interface AnimatorKeyInitOptions {}
@@ -17790,12 +17636,6 @@ declare namespace imports.gi.Clutter {
 		public get_value(value: GObject.Value): boolean;
 	}
 
-	export interface AnimatorPrivateInitOptions {}
-	interface AnimatorPrivate {}
-	class AnimatorPrivate {
-		public constructor(options?: Partial<AnimatorPrivateInitOptions>);
-	}
-
 	export interface AnyEventInitOptions {}
 	/**
 	 * Common members for a {@link Event}
@@ -17820,208 +17660,6 @@ declare namespace imports.gi.Clutter {
 		 * event source actor
 		 */
 		public source: Actor;
-	}
-
-	export interface BackendClassInitOptions {}
-	interface BackendClass {}
-	class BackendClass {
-		public constructor(options?: Partial<BackendClassInitOptions>);
-	}
-
-	export interface BehaviourClassInitOptions {}
-	/**
-	 * Base class for behaviours.
-	 */
-	interface BehaviourClass {}
-	class BehaviourClass {
-		public constructor(options?: Partial<BehaviourClassInitOptions>);
-		public alpha_notify: {(behave: Behaviour, alpha_value: number): void;};
-		public applied: {(behave: Behaviour, actor: Actor): void;};
-		public removed: {(behave: Behaviour, actor: Actor): void;};
-		public _clutter_behaviour1: {(): void;};
-		public _clutter_behaviour2: {(): void;};
-		public _clutter_behaviour3: {(): void;};
-		public _clutter_behaviour4: {(): void;};
-		public _clutter_behaviour5: {(): void;};
-		public _clutter_behaviour6: {(): void;};
-	}
-
-	export interface BehaviourDepthClassInitOptions {}
-	/**
-	 * The {@link BehaviourDepthClass} structure contains only private data
-	 */
-	interface BehaviourDepthClass {}
-	class BehaviourDepthClass {
-		public constructor(options?: Partial<BehaviourDepthClassInitOptions>);
-	}
-
-	export interface BehaviourDepthPrivateInitOptions {}
-	interface BehaviourDepthPrivate {}
-	class BehaviourDepthPrivate {
-		public constructor(options?: Partial<BehaviourDepthPrivateInitOptions>);
-	}
-
-	export interface BehaviourEllipseClassInitOptions {}
-	/**
-	 * The {@link BehaviourEllipseClass} struct contains only private data
-	 */
-	interface BehaviourEllipseClass {}
-	class BehaviourEllipseClass {
-		public constructor(options?: Partial<BehaviourEllipseClassInitOptions>);
-	}
-
-	export interface BehaviourEllipsePrivateInitOptions {}
-	interface BehaviourEllipsePrivate {}
-	class BehaviourEllipsePrivate {
-		public constructor(options?: Partial<BehaviourEllipsePrivateInitOptions>);
-	}
-
-	export interface BehaviourOpacityClassInitOptions {}
-	/**
-	 * The {@link BehaviourOpacityClass} structure contains only private data
-	 */
-	interface BehaviourOpacityClass {}
-	class BehaviourOpacityClass {
-		public constructor(options?: Partial<BehaviourOpacityClassInitOptions>);
-	}
-
-	export interface BehaviourOpacityPrivateInitOptions {}
-	interface BehaviourOpacityPrivate {}
-	class BehaviourOpacityPrivate {
-		public constructor(options?: Partial<BehaviourOpacityPrivateInitOptions>);
-	}
-
-	export interface BehaviourPathClassInitOptions {}
-	/**
-	 * The {@link BehaviourPathClass} struct contains only private data
-	 */
-	interface BehaviourPathClass {}
-	class BehaviourPathClass {
-		public constructor(options?: Partial<BehaviourPathClassInitOptions>);
-		public knot_reached: {(pathb: BehaviourPath, knot_num: number): void;};
-		public _clutter_path_1: {(): void;};
-		public _clutter_path_2: {(): void;};
-		public _clutter_path_3: {(): void;};
-		public _clutter_path_4: {(): void;};
-	}
-
-	export interface BehaviourPathPrivateInitOptions {}
-	interface BehaviourPathPrivate {}
-	class BehaviourPathPrivate {
-		public constructor(options?: Partial<BehaviourPathPrivateInitOptions>);
-	}
-
-	export interface BehaviourPrivateInitOptions {}
-	interface BehaviourPrivate {}
-	class BehaviourPrivate {
-		public constructor(options?: Partial<BehaviourPrivateInitOptions>);
-	}
-
-	export interface BehaviourRotateClassInitOptions {}
-	/**
-	 * The {@link BehaviourRotateClass} struct contains only private data
-	 */
-	interface BehaviourRotateClass {}
-	class BehaviourRotateClass {
-		public constructor(options?: Partial<BehaviourRotateClassInitOptions>);
-	}
-
-	export interface BehaviourRotatePrivateInitOptions {}
-	interface BehaviourRotatePrivate {}
-	class BehaviourRotatePrivate {
-		public constructor(options?: Partial<BehaviourRotatePrivateInitOptions>);
-	}
-
-	export interface BehaviourScaleClassInitOptions {}
-	/**
-	 * The {@link BehaviourScaleClass} struct contains only private data
-	 */
-	interface BehaviourScaleClass {}
-	class BehaviourScaleClass {
-		public constructor(options?: Partial<BehaviourScaleClassInitOptions>);
-	}
-
-	export interface BehaviourScalePrivateInitOptions {}
-	interface BehaviourScalePrivate {}
-	class BehaviourScalePrivate {
-		public constructor(options?: Partial<BehaviourScalePrivateInitOptions>);
-	}
-
-	export interface BinLayoutClassInitOptions {}
-	/**
-	 * The {@link BinLayoutClass} structure contains only private
-	 * data and should be accessed using the provided API
-	 */
-	interface BinLayoutClass {}
-	class BinLayoutClass {
-		public constructor(options?: Partial<BinLayoutClassInitOptions>);
-	}
-
-	export interface BinLayoutPrivateInitOptions {}
-	interface BinLayoutPrivate {}
-	class BinLayoutPrivate {
-		public constructor(options?: Partial<BinLayoutPrivateInitOptions>);
-	}
-
-	export interface BindConstraintClassInitOptions {}
-	interface BindConstraintClass {}
-	class BindConstraintClass {
-		public constructor(options?: Partial<BindConstraintClassInitOptions>);
-	}
-
-	export interface BindingPoolClassInitOptions {}
-	interface BindingPoolClass {}
-	class BindingPoolClass {
-		public constructor(options?: Partial<BindingPoolClassInitOptions>);
-	}
-
-	export interface BlurEffectClassInitOptions {}
-	interface BlurEffectClass {}
-	class BlurEffectClass {
-		public constructor(options?: Partial<BlurEffectClassInitOptions>);
-	}
-
-	export interface BoxClassInitOptions {}
-	/**
-	 * The {@link BoxClass} structure contains only private data
-	 */
-	interface BoxClass {}
-	class BoxClass {
-		public constructor(options?: Partial<BoxClassInitOptions>);
-		public clutter_padding_1: {(): void;};
-		public clutter_padding_2: {(): void;};
-		public clutter_padding_3: {(): void;};
-		public clutter_padding_4: {(): void;};
-		public clutter_padding_5: {(): void;};
-		public clutter_padding_6: {(): void;};
-	}
-
-	export interface BoxLayoutClassInitOptions {}
-	/**
-	 * The {@link BoxLayoutClass} structure contains only private
-	 * data and should be accessed using the provided API
-	 */
-	interface BoxLayoutClass {}
-	class BoxLayoutClass {
-		public constructor(options?: Partial<BoxLayoutClassInitOptions>);
-	}
-
-	export interface BoxLayoutPrivateInitOptions {}
-	interface BoxLayoutPrivate {}
-	class BoxLayoutPrivate {
-		public constructor(options?: Partial<BoxLayoutPrivateInitOptions>);
-	}
-
-	export interface BoxPrivateInitOptions {}
-	interface BoxPrivate {}
-	class BoxPrivate {
-		public constructor(options?: Partial<BoxPrivateInitOptions>);
-	}
-
-	export interface BrightnessContrastEffectClassInitOptions {}
-	interface BrightnessContrastEffectClass {}
-	class BrightnessContrastEffectClass {
-		public constructor(options?: Partial<BrightnessContrastEffectClassInitOptions>);
 	}
 
 	export interface ButtonEventInitOptions {}
@@ -18085,106 +17723,6 @@ declare namespace imports.gi.Clutter {
 		 * device the event originated from, use clutter_event_get_source_device()
 		 */
 		public device: InputDevice;
-	}
-
-	export interface CairoTextureClassInitOptions {}
-	/**
-	 * The {@link CairoTextureClass} struct contains only private data.
-	 */
-	interface CairoTextureClass {}
-	class CairoTextureClass {
-		public constructor(options?: Partial<CairoTextureClassInitOptions>);
-		public create_surface: {(texture: CairoTexture, width: number, height: number): cairo.Surface;};
-		public draw: {(texture: CairoTexture, cr: cairo.Context): boolean;};
-		public _clutter_cairo_3: {(): void;};
-		public _clutter_cairo_4: {(): void;};
-	}
-
-	export interface CairoTexturePrivateInitOptions {}
-	interface CairoTexturePrivate {}
-	class CairoTexturePrivate {
-		public constructor(options?: Partial<CairoTexturePrivateInitOptions>);
-	}
-
-	export interface CanvasClassInitOptions {}
-	/**
-	 * The {@link CanvasClass} structure contains
-	 * private data.
-	 */
-	interface CanvasClass {}
-	class CanvasClass {
-		public constructor(options?: Partial<CanvasClassInitOptions>);
-		public readonly _padding: any[];
-		public draw: {(canvas: Canvas, cr: cairo.Context, width: number, height: number): boolean;};
-	}
-
-	export interface CanvasPrivateInitOptions {}
-	interface CanvasPrivate {}
-	class CanvasPrivate {
-		public constructor(options?: Partial<CanvasPrivateInitOptions>);
-	}
-
-	export interface ChildMetaClassInitOptions {}
-	/**
-	 * The {@link ChildMetaClass} contains only private data
-	 */
-	interface ChildMetaClass {}
-	class ChildMetaClass {
-		public constructor(options?: Partial<ChildMetaClassInitOptions>);
-	}
-
-	export interface ClickActionClassInitOptions {}
-	/**
-	 * The {@link ClickActionClass} structure
-	 * contains only private data
-	 */
-	interface ClickActionClass {}
-	class ClickActionClass {
-		public constructor(options?: Partial<ClickActionClassInitOptions>);
-		public clicked: {(action: ClickAction, actor: Actor): void;};
-		public long_press: {(action: ClickAction, actor: Actor, state: LongPressState): boolean;};
-		public _clutter_click_action1: {(): void;};
-		public _clutter_click_action2: {(): void;};
-		public _clutter_click_action3: {(): void;};
-		public _clutter_click_action4: {(): void;};
-		public _clutter_click_action5: {(): void;};
-		public _clutter_click_action6: {(): void;};
-		public _clutter_click_action7: {(): void;};
-	}
-
-	export interface ClickActionPrivateInitOptions {}
-	interface ClickActionPrivate {}
-	class ClickActionPrivate {
-		public constructor(options?: Partial<ClickActionPrivateInitOptions>);
-	}
-
-	export interface ClipNodeClassInitOptions {}
-	/**
-	 * The `ClutterClipNodeClass` structure is an opaque
-	 * type whose members cannot be directly accessed.
-	 */
-	interface ClipNodeClass {}
-	class ClipNodeClass {
-		public constructor(options?: Partial<ClipNodeClassInitOptions>);
-	}
-
-	export interface CloneClassInitOptions {}
-	/**
-	 * The {@link CloneClass} structure contains only private data
-	 */
-	interface CloneClass {}
-	class CloneClass {
-		public constructor(options?: Partial<CloneClassInitOptions>);
-		public _clutter_actor_clone1: {(): void;};
-		public _clutter_actor_clone2: {(): void;};
-		public _clutter_actor_clone3: {(): void;};
-		public _clutter_actor_clone4: {(): void;};
-	}
-
-	export interface ClonePrivateInitOptions {}
-	interface ClonePrivate {}
-	class ClonePrivate {
-		public constructor(options?: Partial<ClonePrivateInitOptions>);
 	}
 
 	export interface ColorInitOptions {}
@@ -18344,41 +17882,6 @@ declare namespace imports.gi.Clutter {
 		public to_string(): string;
 	}
 
-	export interface ColorNodeClassInitOptions {}
-	/**
-	 * The `ClutterColorNodeClass` structure is an
-	 * opaque type whose members cannot be directly accessed.
-	 */
-	interface ColorNodeClass {}
-	class ColorNodeClass {
-		public constructor(options?: Partial<ColorNodeClassInitOptions>);
-	}
-
-	export interface ColorizeEffectClassInitOptions {}
-	interface ColorizeEffectClass {}
-	class ColorizeEffectClass {
-		public constructor(options?: Partial<ColorizeEffectClassInitOptions>);
-	}
-
-	export interface ConstraintClassInitOptions {}
-	/**
-	 * The {@link ConstraintClass} structure contains
-	 * only private data
-	 */
-	interface ConstraintClass {}
-	class ConstraintClass {
-		public constructor(options?: Partial<ConstraintClassInitOptions>);
-		public update_allocation: {(constraint: Constraint, actor: Actor, allocation: ActorBox): void;};
-		public update_preferred_size: {(constraint: Constraint, actor: Actor, direction: Orientation, for_size: number, minimum_size: number, natural_size: number): void;};
-		public _clutter_constraint1: {(): void;};
-		public _clutter_constraint2: {(): void;};
-		public _clutter_constraint3: {(): void;};
-		public _clutter_constraint4: {(): void;};
-		public _clutter_constraint5: {(): void;};
-		public _clutter_constraint6: {(): void;};
-		public _clutter_constraint7: {(): void;};
-	}
-
 	export interface ContainerIfaceInitOptions {}
 	/**
 	 * Base interface for container actors. The #add, #remove and #foreach
@@ -18471,127 +17974,6 @@ declare namespace imports.gi.Clutter {
 		public related: Actor;
 	}
 
-	export interface DeformEffectClassInitOptions {}
-	/**
-	 * The {@link DeformEffectClass} structure contains
-	 * only private data
-	 */
-	interface DeformEffectClass {}
-	class DeformEffectClass {
-		public constructor(options?: Partial<DeformEffectClassInitOptions>);
-		public deform_vertex: {(effect: DeformEffect, width: number, height: number, vertex: Cogl.TextureVertex): void;};
-		public _clutter_deform1: {(): void;};
-		public _clutter_deform2: {(): void;};
-		public _clutter_deform3: {(): void;};
-		public _clutter_deform4: {(): void;};
-		public _clutter_deform5: {(): void;};
-		public _clutter_deform6: {(): void;};
-		public _clutter_deform7: {(): void;};
-	}
-
-	export interface DeformEffectPrivateInitOptions {}
-	interface DeformEffectPrivate {}
-	class DeformEffectPrivate {
-		public constructor(options?: Partial<DeformEffectPrivateInitOptions>);
-	}
-
-	export interface DesaturateEffectClassInitOptions {}
-	interface DesaturateEffectClass {}
-	class DesaturateEffectClass {
-		public constructor(options?: Partial<DesaturateEffectClassInitOptions>);
-	}
-
-	export interface DeviceManagerClassInitOptions {}
-	/**
-	 * The {@link DeviceManagerClass} structure contains only private data
-	 */
-	interface DeviceManagerClass {}
-	class DeviceManagerClass {
-		public constructor(options?: Partial<DeviceManagerClassInitOptions>);
-		public readonly _padding: any[];
-		public get_devices: {(device_manager: DeviceManager): GLib.SList;};
-		public get_core_device: {(device_manager: DeviceManager, device_type: InputDeviceType): InputDevice;};
-		public get_device: {(device_manager: DeviceManager, device_id: number): InputDevice;};
-		public add_device: {(manager: DeviceManager, device: InputDevice): void;};
-		public remove_device: {(manager: DeviceManager, device: InputDevice): void;};
-		public select_stage_events: {(manager: DeviceManager, stage: Stage): void;};
-	}
-
-	export interface DeviceManagerPrivateInitOptions {}
-	interface DeviceManagerPrivate {}
-	class DeviceManagerPrivate {
-		public constructor(options?: Partial<DeviceManagerPrivateInitOptions>);
-	}
-
-	export interface DragActionClassInitOptions {}
-	/**
-	 * The {@link DragActionClass} structure contains
-	 * only private data
-	 */
-	interface DragActionClass {}
-	class DragActionClass {
-		public constructor(options?: Partial<DragActionClassInitOptions>);
-		public drag_begin: {(action: DragAction, actor: Actor, event_x: number, event_y: number, modifiers: ModifierType): void;};
-		public drag_motion: {(action: DragAction, actor: Actor, delta_x: number, delta_y: number): void;};
-		public drag_end: {(action: DragAction, actor: Actor, event_x: number, event_y: number, modifiers: ModifierType): void;};
-		public drag_progress: {(action: DragAction, actor: Actor, delta_x: number, delta_y: number): boolean;};
-		public _clutter_drag_action1: {(): void;};
-		public _clutter_drag_action2: {(): void;};
-		public _clutter_drag_action3: {(): void;};
-		public _clutter_drag_action4: {(): void;};
-	}
-
-	export interface DragActionPrivateInitOptions {}
-	interface DragActionPrivate {}
-	class DragActionPrivate {
-		public constructor(options?: Partial<DragActionPrivateInitOptions>);
-	}
-
-	export interface DropActionClassInitOptions {}
-	/**
-	 * The {@link DropActionClass} structure contains
-	 * only private data.
-	 */
-	interface DropActionClass {}
-	class DropActionClass {
-		public constructor(options?: Partial<DropActionClassInitOptions>);
-		public can_drop: {(action: DropAction, actor: Actor, event_x: number, event_y: number): boolean;};
-		public over_in: {(action: DropAction, actor: Actor): void;};
-		public over_out: {(action: DropAction, actor: Actor): void;};
-		public drop: {(action: DropAction, actor: Actor, event_x: number, event_y: number): void;};
-		public _clutter_drop_action1: {(): void;};
-		public _clutter_drop_action2: {(): void;};
-		public _clutter_drop_action3: {(): void;};
-		public _clutter_drop_action4: {(): void;};
-		public _clutter_drop_action5: {(): void;};
-		public _clutter_drop_action6: {(): void;};
-		public _clutter_drop_action7: {(): void;};
-		public _clutter_drop_action8: {(): void;};
-	}
-
-	export interface DropActionPrivateInitOptions {}
-	interface DropActionPrivate {}
-	class DropActionPrivate {
-		public constructor(options?: Partial<DropActionPrivateInitOptions>);
-	}
-
-	export interface EffectClassInitOptions {}
-	/**
-	 * The {@link EffectClass} structure contains only private data
-	 */
-	interface EffectClass {}
-	class EffectClass {
-		public constructor(options?: Partial<EffectClassInitOptions>);
-		public pre_paint: {(effect: Effect): boolean;};
-		public post_paint: {(effect: Effect): void;};
-		public get_paint_volume: {(effect: Effect, volume: PaintVolume): boolean;};
-		public paint: {(effect: Effect, flags: EffectPaintFlags): void;};
-		public pick: {(effect: Effect, flags: EffectPaintFlags): void;};
-		public _clutter_effect4: {(): void;};
-		public _clutter_effect5: {(): void;};
-		public _clutter_effect6: {(): void;};
-	}
-
 	export interface EventSequenceInitOptions {}
 	/**
 	 * The {@link EventSequence} structure is an opaque
@@ -18600,32 +17982,6 @@ declare namespace imports.gi.Clutter {
 	interface EventSequence {}
 	class EventSequence {
 		public constructor(options?: Partial<EventSequenceInitOptions>);
-	}
-
-	export interface FixedLayoutClassInitOptions {}
-	/**
-	 * The {@link FixedLayoutClass} structure contains only private data
-	 * and it should be accessed using the provided API
-	 */
-	interface FixedLayoutClass {}
-	class FixedLayoutClass {
-		public constructor(options?: Partial<FixedLayoutClassInitOptions>);
-	}
-
-	export interface FlowLayoutClassInitOptions {}
-	/**
-	 * The {@link FlowLayoutClass} structure contains only private data
-	 * and should be accessed using the provided API
-	 */
-	interface FlowLayoutClass {}
-	class FlowLayoutClass {
-		public constructor(options?: Partial<FlowLayoutClassInitOptions>);
-	}
-
-	export interface FlowLayoutPrivateInitOptions {}
-	interface FlowLayoutPrivate {}
-	class FlowLayoutPrivate {
-		public constructor(options?: Partial<FlowLayoutPrivateInitOptions>);
 	}
 
 	export interface FogInitOptions {}
@@ -18696,117 +18052,6 @@ declare namespace imports.gi.Clutter {
 		public union(geometry_b: Geometry): Geometry;
 	}
 
-	export interface GestureActionClassInitOptions {}
-	/**
-	 * The {@link GestureClass} structure contains only
-	 * private data.
-	 */
-	interface GestureActionClass {}
-	class GestureActionClass {
-		public constructor(options?: Partial<GestureActionClassInitOptions>);
-		public gesture_begin: {(action: GestureAction, actor: Actor): boolean;};
-		public gesture_progress: {(action: GestureAction, actor: Actor): boolean;};
-		public gesture_end: {(action: GestureAction, actor: Actor): void;};
-		public gesture_cancel: {(action: GestureAction, actor: Actor): void;};
-		public gesture_prepare: {(action: GestureAction, actor: Actor): boolean;};
-		public _clutter_gesture_action1: {(): void;};
-		public _clutter_gesture_action2: {(): void;};
-		public _clutter_gesture_action3: {(): void;};
-		public _clutter_gesture_action4: {(): void;};
-		public _clutter_gesture_action5: {(): void;};
-		public _clutter_gesture_action6: {(): void;};
-	}
-
-	export interface GestureActionPrivateInitOptions {}
-	interface GestureActionPrivate {}
-	class GestureActionPrivate {
-		public constructor(options?: Partial<GestureActionPrivateInitOptions>);
-	}
-
-	export interface GridLayoutClassInitOptions {}
-	/**
-	 * The {@link GridLayoutClass} structure contains only private
-	 * data and should be accessed using the provided API
-	 */
-	interface GridLayoutClass {}
-	class GridLayoutClass {
-		public constructor(options?: Partial<GridLayoutClassInitOptions>);
-		public readonly _padding: any[];
-	}
-
-	export interface GridLayoutPrivateInitOptions {}
-	interface GridLayoutPrivate {}
-	class GridLayoutPrivate {
-		public constructor(options?: Partial<GridLayoutPrivateInitOptions>);
-	}
-
-	export interface GroupClassInitOptions {}
-	/**
-	 * The {@link GroupClass} structure contains only private data
-	 */
-	interface GroupClass {}
-	class GroupClass {
-		public constructor(options?: Partial<GroupClassInitOptions>);
-		public _clutter_reserved1: {(): void;};
-		public _clutter_reserved2: {(): void;};
-		public _clutter_reserved3: {(): void;};
-		public _clutter_reserved4: {(): void;};
-		public _clutter_reserved5: {(): void;};
-		public _clutter_reserved6: {(): void;};
-	}
-
-	export interface GroupPrivateInitOptions {}
-	interface GroupPrivate {}
-	class GroupPrivate {
-		public constructor(options?: Partial<GroupPrivateInitOptions>);
-	}
-
-	export interface ImageClassInitOptions {}
-	/**
-	 * The {@link ImageClass} structure contains
-	 * private data.
-	 */
-	interface ImageClass {}
-	class ImageClass {
-		public constructor(options?: Partial<ImageClassInitOptions>);
-		public readonly _padding: any[];
-	}
-
-	export interface ImagePrivateInitOptions {}
-	interface ImagePrivate {}
-	class ImagePrivate {
-		public constructor(options?: Partial<ImagePrivateInitOptions>);
-	}
-
-	export interface InputDeviceClassInitOptions {}
-	interface InputDeviceClass {}
-	class InputDeviceClass {
-		public constructor(options?: Partial<InputDeviceClassInitOptions>);
-	}
-
-	export interface IntervalClassInitOptions {}
-	/**
-	 * The {@link IntervalClass} contains only private data.
-	 */
-	interface IntervalClass {}
-	class IntervalClass {
-		public constructor(options?: Partial<IntervalClassInitOptions>);
-		public validate: {(interval: Interval, pspec: GObject.ParamSpec): boolean;};
-		public compute_value: {(interval: Interval, factor: number): [ boolean, GObject.Value ];};
-		public _clutter_reserved1: {(): void;};
-		public _clutter_reserved2: {(): void;};
-		public _clutter_reserved3: {(): void;};
-		public _clutter_reserved4: {(): void;};
-		public _clutter_reserved5: {(): void;};
-		public _clutter_reserved6: {(): void;};
-	}
-
-	export interface IntervalPrivateInitOptions {}
-	interface IntervalPrivate {}
-	class IntervalPrivate {
-		public constructor(options?: Partial<IntervalPrivateInitOptions>);
-	}
-
 	export interface KeyEventInitOptions {}
 	/**
 	 * Key event
@@ -18857,23 +18102,6 @@ declare namespace imports.gi.Clutter {
 		public device: InputDevice;
 	}
 
-	export interface KeyframeTransitionClassInitOptions {}
-	/**
-	 * The `ClutterKeyframeTransitionClass` structure contains only
-	 * private data.
-	 */
-	interface KeyframeTransitionClass {}
-	class KeyframeTransitionClass {
-		public constructor(options?: Partial<KeyframeTransitionClassInitOptions>);
-		public readonly _padding: any[];
-	}
-
-	export interface KeyframeTransitionPrivateInitOptions {}
-	interface KeyframeTransitionPrivate {}
-	class KeyframeTransitionPrivate {
-		public constructor(options?: Partial<KeyframeTransitionPrivateInitOptions>);
-	}
-
 	export interface KnotInitOptions {}
 	/**
 	 * Point in a path behaviour.
@@ -18904,63 +18132,6 @@ declare namespace imports.gi.Clutter {
 		 * Frees the memory of an allocated knot.
 		 */
 		public free(): void;
-	}
-
-	export interface LayoutManagerClassInitOptions {}
-	/**
-	 * The {@link LayoutManagerClass} structure contains only private
-	 * data and should be accessed using the provided API
-	 */
-	interface LayoutManagerClass {}
-	class LayoutManagerClass {
-		public constructor(options?: Partial<LayoutManagerClassInitOptions>);
-		public get_preferred_width: {(manager: LayoutManager, container: Container, for_height: number): [ min_width_p: number | null, nat_width_p: number | null ];};
-		public get_preferred_height: {(manager: LayoutManager, container: Container, for_width: number): [ min_height_p: number | null, nat_height_p: number | null ];};
-		public allocate: {(manager: LayoutManager, container: Container, allocation: ActorBox, flags: AllocationFlags): void;};
-		public set_container: {(manager: LayoutManager, container: Container | null): void;};
-		public get_child_meta_type: {(manager: LayoutManager): GObject.Type;};
-		public create_child_meta: {(manager: LayoutManager, container: Container, actor: Actor): LayoutMeta;};
-		public begin_animation: {(manager: LayoutManager, duration: number, mode: number): Alpha;};
-		public get_animation_progress: {(manager: LayoutManager): number;};
-		public end_animation: {(manager: LayoutManager): void;};
-		public layout_changed: {(manager: LayoutManager): void;};
-		public _clutter_padding_1: {(): void;};
-		public _clutter_padding_2: {(): void;};
-		public _clutter_padding_3: {(): void;};
-		public _clutter_padding_4: {(): void;};
-		public _clutter_padding_5: {(): void;};
-		public _clutter_padding_6: {(): void;};
-		public _clutter_padding_7: {(): void;};
-		public _clutter_padding_8: {(): void;};
-	}
-
-	export interface LayoutMetaClassInitOptions {}
-	/**
-	 * The {@link LayoutMetaClass} contains only private data and
-	 * should never be accessed directly
-	 */
-	interface LayoutMetaClass {}
-	class LayoutMetaClass {
-		public constructor(options?: Partial<LayoutMetaClassInitOptions>);
-		public _clutter_padding1: {(): void;};
-		public _clutter_padding2: {(): void;};
-		public _clutter_padding3: {(): void;};
-		public _clutter_padding4: {(): void;};
-	}
-
-	export interface ListModelClassInitOptions {}
-	/**
-	 * The {@link ListModelClass} struct contains only private data.
-	 */
-	interface ListModelClass {}
-	class ListModelClass {
-		public constructor(options?: Partial<ListModelClassInitOptions>);
-	}
-
-	export interface ListModelPrivateInitOptions {}
-	interface ListModelPrivate {}
-	class ListModelPrivate {
-		public constructor(options?: Partial<ListModelPrivateInitOptions>);
 	}
 
 	export interface MarginInitOptions {}
@@ -19060,74 +18231,6 @@ declare namespace imports.gi.Clutter {
 		public error: {(media: Media, error: GLib.Error): void;};
 	}
 
-	export interface ModelClassInitOptions {}
-	/**
-	 * Class for {@link Model} instances.
-	 */
-	interface ModelClass {}
-	class ModelClass {
-		public constructor(options?: Partial<ModelClassInitOptions>);
-		public get_n_rows: {(model: Model): number;};
-		public get_n_columns: {(model: Model): number;};
-		public get_column_name: {(model: Model, column: number): string;};
-		public get_column_type: {(model: Model, column: number): GObject.Type;};
-		public insert_row: {(model: Model, index_: number): ModelIter;};
-		public remove_row: {(model: Model, row: number): void;};
-		public get_iter_at_row: {(model: Model, row: number): ModelIter;};
-		public resort: {(model: Model, func: ModelSortFunc, data: any | null): void;};
-		public row_added: {(model: Model, iter: ModelIter): void;};
-		public row_removed: {(model: Model, iter: ModelIter): void;};
-		public row_changed: {(model: Model, iter: ModelIter): void;};
-		public sort_changed: {(model: Model): void;};
-		public filter_changed: {(model: Model): void;};
-		public _clutter_model_1: {(): void;};
-		public _clutter_model_2: {(): void;};
-		public _clutter_model_3: {(): void;};
-		public _clutter_model_4: {(): void;};
-		public _clutter_model_5: {(): void;};
-		public _clutter_model_6: {(): void;};
-		public _clutter_model_7: {(): void;};
-		public _clutter_model_8: {(): void;};
-	}
-
-	export interface ModelIterClassInitOptions {}
-	/**
-	 * Class for {@link ModelIter} instances.
-	 */
-	interface ModelIterClass {}
-	class ModelIterClass {
-		public constructor(options?: Partial<ModelIterClassInitOptions>);
-		public get_value: {(iter: ModelIter, column: number): GObject.Value;};
-		public set_value: {(iter: ModelIter, column: number, value: GObject.Value): void;};
-		public is_first: {(iter: ModelIter): boolean;};
-		public is_last: {(iter: ModelIter): boolean;};
-		public next: {(iter: ModelIter): ModelIter;};
-		public prev: {(iter: ModelIter): ModelIter;};
-		public get_model: {(iter: ModelIter): Model;};
-		public get_row: {(iter: ModelIter): number;};
-		public copy: {(iter: ModelIter): ModelIter;};
-		public _clutter_model_iter_1: {(): void;};
-		public _clutter_model_iter_2: {(): void;};
-		public _clutter_model_iter_3: {(): void;};
-		public _clutter_model_iter_4: {(): void;};
-		public _clutter_model_iter_5: {(): void;};
-		public _clutter_model_iter_6: {(): void;};
-		public _clutter_model_iter_7: {(): void;};
-		public _clutter_model_iter_8: {(): void;};
-	}
-
-	export interface ModelIterPrivateInitOptions {}
-	interface ModelIterPrivate {}
-	class ModelIterPrivate {
-		public constructor(options?: Partial<ModelIterPrivateInitOptions>);
-	}
-
-	export interface ModelPrivateInitOptions {}
-	interface ModelPrivate {}
-	class ModelPrivate {
-		public constructor(options?: Partial<ModelPrivateInitOptions>);
-	}
-
 	export interface MotionEventInitOptions {}
 	/**
 	 * Event for the pointer motion
@@ -19176,51 +18279,6 @@ declare namespace imports.gi.Clutter {
 		 * device the event originated from, use clutter_event_get_source_device()
 		 */
 		public device: InputDevice;
-	}
-
-	export interface OffscreenEffectClassInitOptions {}
-	/**
-	 * The {@link OffscreenEffectClass} structure contains only private data
-	 */
-	interface OffscreenEffectClass {}
-	class OffscreenEffectClass {
-		public constructor(options?: Partial<OffscreenEffectClassInitOptions>);
-		public create_texture: {(effect: OffscreenEffect, width: number, height: number): Cogl.Handle;};
-		public paint_target: {(effect: OffscreenEffect): void;};
-		public _clutter_offscreen1: {(): void;};
-		public _clutter_offscreen2: {(): void;};
-		public _clutter_offscreen3: {(): void;};
-		public _clutter_offscreen4: {(): void;};
-		public _clutter_offscreen5: {(): void;};
-		public _clutter_offscreen6: {(): void;};
-		public _clutter_offscreen7: {(): void;};
-	}
-
-	export interface OffscreenEffectPrivateInitOptions {}
-	interface OffscreenEffectPrivate {}
-	class OffscreenEffectPrivate {
-		public constructor(options?: Partial<OffscreenEffectPrivateInitOptions>);
-	}
-
-	export interface PageTurnEffectClassInitOptions {}
-	interface PageTurnEffectClass {}
-	class PageTurnEffectClass {
-		public constructor(options?: Partial<PageTurnEffectClassInitOptions>);
-	}
-
-	export interface PaintNodeClassInitOptions {}
-	/**
-	 * The `ClutterPaintNodeClass` structure contains only private data.
-	 */
-	interface PaintNodeClass {}
-	class PaintNodeClass {
-		public constructor(options?: Partial<PaintNodeClassInitOptions>);
-	}
-
-	export interface PaintNodePrivateInitOptions {}
-	interface PaintNodePrivate {}
-	class PaintNodePrivate {
-		public constructor(options?: Partial<PaintNodePrivateInitOptions>);
 	}
 
 	export interface PaintVolumeInitOptions {}
@@ -19401,30 +18459,6 @@ declare namespace imports.gi.Clutter {
 		public union_box(box: ActorBox): void;
 	}
 
-	export interface PanActionClassInitOptions {}
-	/**
-	 * The {@link PanActionClass} structure contains
-	 * only private data.
-	 */
-	interface PanActionClass {}
-	class PanActionClass {
-		public constructor(options?: Partial<PanActionClassInitOptions>);
-		public pan: {(action: PanAction, actor: Actor, is_interpolated: boolean): boolean;};
-		public pan_stopped: {(action: PanAction, actor: Actor): void;};
-		public _clutter_pan_action1: {(): void;};
-		public _clutter_pan_action2: {(): void;};
-		public _clutter_pan_action3: {(): void;};
-		public _clutter_pan_action4: {(): void;};
-		public _clutter_pan_action5: {(): void;};
-		public _clutter_pan_action6: {(): void;};
-	}
-
-	export interface PanActionPrivateInitOptions {}
-	interface PanActionPrivate {}
-	class PanActionPrivate {
-		public constructor(options?: Partial<PanActionPrivateInitOptions>);
-	}
-
 	export interface ParamSpecUnitsInitOptions {}
 	/**
 	 * #GParamSpec subclass for unit based properties.
@@ -19448,21 +18482,6 @@ declare namespace imports.gi.Clutter {
 		 * higher boundary
 		 */
 		public maximum: number;
-	}
-
-	export interface PathClassInitOptions {}
-	/**
-	 * The {@link PathClass} struct contains only private data.
-	 */
-	interface PathClass {}
-	class PathClass {
-		public constructor(options?: Partial<PathClassInitOptions>);
-	}
-
-	export interface PathConstraintClassInitOptions {}
-	interface PathConstraintClass {}
-	class PathConstraintClass {
-		public constructor(options?: Partial<PathConstraintClassInitOptions>);
 	}
 
 	export interface PathNodeInitOptions {}
@@ -19503,12 +18522,6 @@ declare namespace imports.gi.Clutter {
 		public free(): void;
 	}
 
-	export interface PathPrivateInitOptions {}
-	interface PathPrivate {}
-	class PathPrivate {
-		public constructor(options?: Partial<PathPrivateInitOptions>);
-	}
-
 	export interface PerspectiveInitOptions {}
 	/**
 	 * Stage perspective definition. {@link Perspective} is only used by
@@ -19536,16 +18549,6 @@ declare namespace imports.gi.Clutter {
 		 *   plane (always positive)
 		 */
 		public z_far: number;
-	}
-
-	export interface PipelineNodeClassInitOptions {}
-	/**
-	 * The `ClutterPipelineNodeClass` structure is an opaque
-	 * type whose members cannot be directly accessed.
-	 */
-	interface PipelineNodeClass {}
-	class PipelineNodeClass {
-		public constructor(options?: Partial<PipelineNodeClassInitOptions>);
 	}
 
 	export interface PointInitOptions {}
@@ -19604,23 +18607,6 @@ declare namespace imports.gi.Clutter {
 		 * @returns the initialized {@link Point}
 		 */
 		public init(x: number, y: number): Point;
-	}
-
-	export interface PropertyTransitionClassInitOptions {}
-	/**
-	 * The {@link PropertyTransitionClass} structure
-	 * contains private data.
-	 */
-	interface PropertyTransitionClass {}
-	class PropertyTransitionClass {
-		public constructor(options?: Partial<PropertyTransitionClassInitOptions>);
-		public readonly _padding: any[];
-	}
-
-	export interface PropertyTransitionPrivateInitOptions {}
-	interface PropertyTransitionPrivate {}
-	class PropertyTransitionPrivate {
-		public constructor(options?: Partial<PropertyTransitionPrivateInitOptions>);
 	}
 
 	export interface RectInitOptions {}
@@ -19802,98 +18788,6 @@ declare namespace imports.gi.Clutter {
 		public union(b: Rect): Rect;
 	}
 
-	export interface RectangleClassInitOptions {}
-	/**
-	 * The {@link RectangleClass} structure contains only private data
-	 */
-	interface RectangleClass {}
-	class RectangleClass {
-		public constructor(options?: Partial<RectangleClassInitOptions>);
-		public _clutter_rectangle1: {(): void;};
-		public _clutter_rectangle2: {(): void;};
-		public _clutter_rectangle3: {(): void;};
-		public _clutter_rectangle4: {(): void;};
-	}
-
-	export interface RectanglePrivateInitOptions {}
-	interface RectanglePrivate {}
-	class RectanglePrivate {
-		public constructor(options?: Partial<RectanglePrivateInitOptions>);
-	}
-
-	export interface RotateActionClassInitOptions {}
-	/**
-	 * The {@link RotateActionClass} structure contains
-	 * only private data.
-	 */
-	interface RotateActionClass {}
-	class RotateActionClass {
-		public constructor(options?: Partial<RotateActionClassInitOptions>);
-		public rotate: {(action: RotateAction, actor: Actor, angle: number): boolean;};
-		public _clutter_rotate_action1: {(): void;};
-		public _clutter_rotate_action2: {(): void;};
-		public _clutter_rotate_action3: {(): void;};
-		public _clutter_rotate_action4: {(): void;};
-		public _clutter_rotate_action5: {(): void;};
-		public _clutter_rotate_action6: {(): void;};
-		public _clutter_rotate_action7: {(): void;};
-	}
-
-	export interface RotateActionPrivateInitOptions {}
-	interface RotateActionPrivate {}
-	class RotateActionPrivate {
-		public constructor(options?: Partial<RotateActionPrivateInitOptions>);
-	}
-
-	export interface ScoreClassInitOptions {}
-	/**
-	 * The {@link ScoreClass} structure contains only private data
-	 */
-	interface ScoreClass {}
-	class ScoreClass {
-		public constructor(options?: Partial<ScoreClassInitOptions>);
-		public timeline_started: {(score: Score, timeline: Timeline): void;};
-		public timeline_completed: {(score: Score, timeline: Timeline): void;};
-		public started: {(score: Score): void;};
-		public completed: {(score: Score): void;};
-		public paused: {(score: Score): void;};
-		public _clutter_score_1: {(): void;};
-		public _clutter_score_2: {(): void;};
-		public _clutter_score_3: {(): void;};
-		public _clutter_score_4: {(): void;};
-		public _clutter_score_5: {(): void;};
-	}
-
-	export interface ScorePrivateInitOptions {}
-	interface ScorePrivate {}
-	class ScorePrivate {
-		public constructor(options?: Partial<ScorePrivateInitOptions>);
-	}
-
-	export interface ScriptClassInitOptions {}
-	/**
-	 * The {@link ScriptClass} structure contains only private data
-	 */
-	interface ScriptClass {}
-	class ScriptClass {
-		public constructor(options?: Partial<ScriptClassInitOptions>);
-		public get_type_from_name: {(script: Script, type_name: string): GObject.Type;};
-		public _clutter_reserved1: {(): void;};
-		public _clutter_reserved2: {(): void;};
-		public _clutter_reserved3: {(): void;};
-		public _clutter_reserved4: {(): void;};
-		public _clutter_reserved5: {(): void;};
-		public _clutter_reserved6: {(): void;};
-		public _clutter_reserved7: {(): void;};
-		public _clutter_reserved8: {(): void;};
-	}
-
-	export interface ScriptPrivateInitOptions {}
-	interface ScriptPrivate {}
-	class ScriptPrivate {
-		public constructor(options?: Partial<ScriptPrivateInitOptions>);
-	}
-
 	export interface ScriptableIfaceInitOptions {}
 	/**
 	 * Interface for implementing "scriptable" objects. An object implementing
@@ -19908,23 +18802,6 @@ declare namespace imports.gi.Clutter {
 		public get_id: {(scriptable: Scriptable): string;};
 		// public parse_custom_node: {(scriptable: Scriptable, script: Script, value: GObject.Value, name: string, node: Json.Node): boolean;};
 		public set_custom_property: {(scriptable: Scriptable, script: Script, name: string, value: GObject.Value): void;};
-	}
-
-	export interface ScrollActorClassInitOptions {}
-	/**
-	 * The {@link ScrollActor} structure contains only
-	 * private data.
-	 */
-	interface ScrollActorClass {}
-	class ScrollActorClass {
-		public constructor(options?: Partial<ScrollActorClassInitOptions>);
-		public readonly _padding: any[];
-	}
-
-	export interface ScrollActorPrivateInitOptions {}
-	interface ScrollActorPrivate {}
-	class ScrollActorPrivate {
-		public constructor(options?: Partial<ScrollActorPrivateInitOptions>);
 	}
 
 	export interface ScrollEventInitOptions {}
@@ -19989,49 +18866,6 @@ declare namespace imports.gi.Clutter {
 		public finish_flags: ScrollFinishFlags;
 	}
 
-	export interface SettingsClassInitOptions {}
-	interface SettingsClass {}
-	class SettingsClass {
-		public constructor(options?: Partial<SettingsClassInitOptions>);
-	}
-
-	export interface ShaderClassInitOptions {}
-	/**
-	 * The {@link ShaderClass} structure contains only private data
-	 */
-	interface ShaderClass {}
-	class ShaderClass {
-		public constructor(options?: Partial<ShaderClassInitOptions>);
-	}
-
-	export interface ShaderEffectClassInitOptions {}
-	/**
-	 * The {@link ShaderEffectClass} structure contains
-	 * only private data
-	 */
-	interface ShaderEffectClass {}
-	class ShaderEffectClass {
-		public constructor(options?: Partial<ShaderEffectClassInitOptions>);
-		public get_static_shader_source: {(effect: ShaderEffect): string;};
-		public _clutter_shader1: {(): void;};
-		public _clutter_shader2: {(): void;};
-		public _clutter_shader3: {(): void;};
-		public _clutter_shader4: {(): void;};
-		public _clutter_shader5: {(): void;};
-	}
-
-	export interface ShaderEffectPrivateInitOptions {}
-	interface ShaderEffectPrivate {}
-	class ShaderEffectPrivate {
-		public constructor(options?: Partial<ShaderEffectPrivateInitOptions>);
-	}
-
-	export interface ShaderPrivateInitOptions {}
-	interface ShaderPrivate {}
-	class ShaderPrivate {
-		public constructor(options?: Partial<ShaderPrivateInitOptions>);
-	}
-
 	export interface SizeInitOptions {}
 	/**
 	 * A size, in 2D space.
@@ -20078,45 +18912,6 @@ declare namespace imports.gi.Clutter {
 		public init(width: number, height: number): Size;
 	}
 
-	export interface SnapConstraintClassInitOptions {}
-	interface SnapConstraintClass {}
-	class SnapConstraintClass {
-		public constructor(options?: Partial<SnapConstraintClassInitOptions>);
-	}
-
-	export interface StageClassInitOptions {}
-	/**
-	 * The {@link StageClass} structure contains only private data
-	 */
-	interface StageClass {}
-	class StageClass {
-		public constructor(options?: Partial<StageClassInitOptions>);
-		public readonly _padding_dummy: any[];
-		public fullscreen: {(stage: Stage): void;};
-		public unfullscreen: {(stage: Stage): void;};
-		public activate: {(stage: Stage): void;};
-		public deactivate: {(stage: Stage): void;};
-		public delete_event: {(stage: Stage, event: Event): boolean;};
-	}
-
-	export interface StageManagerClassInitOptions {}
-	/**
-	 * The {@link StageManagerClass} structure contains only private data
-	 * and should be accessed using the provided API
-	 */
-	interface StageManagerClass {}
-	class StageManagerClass {
-		public constructor(options?: Partial<StageManagerClassInitOptions>);
-		public stage_added: {(stage_manager: StageManager, stage: Stage): void;};
-		public stage_removed: {(stage_manager: StageManager, stage: Stage): void;};
-	}
-
-	export interface StagePrivateInitOptions {}
-	interface StagePrivate {}
-	class StagePrivate {
-		public constructor(options?: Partial<StagePrivateInitOptions>);
-	}
-
 	export interface StageStateEventInitOptions {}
 	/**
 	 * Event signalling a change in the {@link Stage} state.
@@ -20152,18 +18947,6 @@ declare namespace imports.gi.Clutter {
 		 * bitwise OR of the current state flags
 		 */
 		public new_state: StageState;
-	}
-
-	export interface StateClassInitOptions {}
-	/**
-	 * The {@link StateClass} structure contains
-	 * only private data
-	 */
-	interface StateClass {}
-	class StateClass {
-		public constructor(options?: Partial<StateClassInitOptions>);
-		public readonly _padding_dummy: any[];
-		public completed: {(state: State): void;};
 	}
 
 	export interface StateKeyInitOptions {}
@@ -20275,199 +19058,6 @@ declare namespace imports.gi.Clutter {
 		 *   and %FALSE otherwise
 		 */
 		public get_value(value: GObject.Value): boolean;
-	}
-
-	export interface StatePrivateInitOptions {}
-	interface StatePrivate {}
-	class StatePrivate {
-		public constructor(options?: Partial<StatePrivateInitOptions>);
-	}
-
-	export interface SwipeActionClassInitOptions {}
-	/**
-	 * The {@link SwipeActionClass} structure contains
-	 * only private data.
-	 */
-	interface SwipeActionClass {}
-	class SwipeActionClass {
-		public constructor(options?: Partial<SwipeActionClassInitOptions>);
-		public swept: {(action: SwipeAction, actor: Actor, direction: SwipeDirection): void;};
-		public swipe: {(action: SwipeAction, actor: Actor, direction: SwipeDirection): boolean;};
-		public _clutter_swipe_action1: {(): void;};
-		public _clutter_swipe_action2: {(): void;};
-		public _clutter_swipe_action3: {(): void;};
-		public _clutter_swipe_action4: {(): void;};
-		public _clutter_swipe_action5: {(): void;};
-		public _clutter_swipe_action6: {(): void;};
-	}
-
-	export interface SwipeActionPrivateInitOptions {}
-	interface SwipeActionPrivate {}
-	class SwipeActionPrivate {
-		public constructor(options?: Partial<SwipeActionPrivateInitOptions>);
-	}
-
-	export interface TableLayoutClassInitOptions {}
-	/**
-	 * The {@link TableLayoutClass} structure contains only private
-	 * data and should be accessed using the provided API
-	 */
-	interface TableLayoutClass {}
-	class TableLayoutClass {
-		public constructor(options?: Partial<TableLayoutClassInitOptions>);
-	}
-
-	export interface TableLayoutPrivateInitOptions {}
-	interface TableLayoutPrivate {}
-	class TableLayoutPrivate {
-		public constructor(options?: Partial<TableLayoutPrivateInitOptions>);
-	}
-
-	export interface TapActionClassInitOptions {}
-	/**
-	 * The {@link TapActionClass} structure contains
-	 * only private data.
-	 */
-	interface TapActionClass {}
-	class TapActionClass {
-		public constructor(options?: Partial<TapActionClassInitOptions>);
-		public tap: {(action: TapAction, actor: Actor): boolean;};
-		public _clutter_tap_action1: {(): void;};
-		public _clutter_tap_action2: {(): void;};
-		public _clutter_tap_action3: {(): void;};
-		public _clutter_tap_action4: {(): void;};
-		public _clutter_tap_action5: {(): void;};
-		public _clutter_tap_action6: {(): void;};
-	}
-
-	export interface TapActionPrivateInitOptions {}
-	interface TapActionPrivate {}
-	class TapActionPrivate {
-		public constructor(options?: Partial<TapActionPrivateInitOptions>);
-	}
-
-	export interface TextBufferClassInitOptions {}
-	/**
-	 * The {@link TextBufferClass} structure contains
-	 * only private data.
-	 */
-	interface TextBufferClass {}
-	class TextBufferClass {
-		public constructor(options?: Partial<TextBufferClassInitOptions>);
-		public inserted_text: {(buffer: TextBuffer, position: number, chars: string, n_chars: number): void;};
-		public deleted_text: {(buffer: TextBuffer, position: number, n_chars: number): void;};
-		public get_text: {(buffer: TextBuffer, n_bytes: number): string;};
-		public get_length: {(buffer: TextBuffer): number;};
-		public insert_text: {(buffer: TextBuffer, position: number, chars: string, n_chars: number): number;};
-		public delete_text: {(buffer: TextBuffer, position: number, n_chars: number): number;};
-		public _clutter_reserved1: {(): void;};
-		public _clutter_reserved2: {(): void;};
-		public _clutter_reserved3: {(): void;};
-		public _clutter_reserved4: {(): void;};
-		public _clutter_reserved5: {(): void;};
-		public _clutter_reserved6: {(): void;};
-		public _clutter_reserved7: {(): void;};
-		public _clutter_reserved8: {(): void;};
-	}
-
-	export interface TextBufferPrivateInitOptions {}
-	interface TextBufferPrivate {}
-	class TextBufferPrivate {
-		public constructor(options?: Partial<TextBufferPrivateInitOptions>);
-	}
-
-	export interface TextClassInitOptions {}
-	/**
-	 * The {@link TextClass} struct contains only private data.
-	 */
-	interface TextClass {}
-	class TextClass {
-		public constructor(options?: Partial<TextClassInitOptions>);
-		public text_changed: {(self: Text): void;};
-		public activate: {(self: Text): void;};
-		public cursor_event: {(self: Text, geometry: Geometry): void;};
-		public cursor_changed: {(self: Text): void;};
-		public _clutter_reserved1: {(): void;};
-		public _clutter_reserved2: {(): void;};
-		public _clutter_reserved3: {(): void;};
-		public _clutter_reserved4: {(): void;};
-		public _clutter_reserved5: {(): void;};
-		public _clutter_reserved6: {(): void;};
-		public _clutter_reserved7: {(): void;};
-	}
-
-	export interface TextNodeClassInitOptions {}
-	/**
-	 * The `ClutterTextNodeClass` structure is an opaque
-	 * type whose contents cannot be directly accessed.
-	 */
-	interface TextNodeClass {}
-	class TextNodeClass {
-		public constructor(options?: Partial<TextNodeClassInitOptions>);
-	}
-
-	export interface TextPrivateInitOptions {}
-	interface TextPrivate {}
-	class TextPrivate {
-		public constructor(options?: Partial<TextPrivateInitOptions>);
-	}
-
-	export interface TextureClassInitOptions {}
-	/**
-	 * The {@link TextureClass} structure contains only private data
-	 */
-	interface TextureClass {}
-	class TextureClass {
-		public constructor(options?: Partial<TextureClassInitOptions>);
-		public size_change: {(texture: Texture, width: number, height: number): void;};
-		public pixbuf_change: {(texture: Texture): void;};
-		public load_finished: {(texture: Texture, error: GLib.Error): void;};
-		public _clutter_texture1: {(): void;};
-		public _clutter_texture2: {(): void;};
-		public _clutter_texture3: {(): void;};
-		public _clutter_texture4: {(): void;};
-		public _clutter_texture5: {(): void;};
-	}
-
-	export interface TextureNodeClassInitOptions {}
-	/**
-	 * The `ClutterTextureNodeClass` structure is an
-	 * opaque type whose members cannot be directly accessed.
-	 */
-	interface TextureNodeClass {}
-	class TextureNodeClass {
-		public constructor(options?: Partial<TextureNodeClassInitOptions>);
-	}
-
-	export interface TexturePrivateInitOptions {}
-	interface TexturePrivate {}
-	class TexturePrivate {
-		public constructor(options?: Partial<TexturePrivateInitOptions>);
-	}
-
-	export interface TimelineClassInitOptions {}
-	/**
-	 * The {@link TimelineClass} structure contains only private data
-	 */
-	interface TimelineClass {}
-	class TimelineClass {
-		public constructor(options?: Partial<TimelineClassInitOptions>);
-		public started: {(timeline: Timeline): void;};
-		public completed: {(timeline: Timeline): void;};
-		public paused: {(timeline: Timeline): void;};
-		public new_frame: {(timeline: Timeline, msecs: number): void;};
-		public marker_reached: {(timeline: Timeline, marker_name: string, msecs: number): void;};
-		public stopped: {(timeline: Timeline, is_finished: boolean): void;};
-		public _clutter_timeline_1: {(): void;};
-		public _clutter_timeline_2: {(): void;};
-		public _clutter_timeline_3: {(): void;};
-		public _clutter_timeline_4: {(): void;};
-	}
-
-	export interface TimelinePrivateInitOptions {}
-	interface TimelinePrivate {}
-	class TimelinePrivate {
-		public constructor(options?: Partial<TimelinePrivateInitOptions>);
 	}
 
 	export interface TimeoutPoolInitOptions {}
@@ -20701,43 +19291,6 @@ declare namespace imports.gi.Clutter {
 		public dy: number;
 	}
 
-	export interface TransitionClassInitOptions {}
-	/**
-	 * The {@link TransitionClass} structure contains
-	 * private data.
-	 */
-	interface TransitionClass {}
-	class TransitionClass {
-		public constructor(options?: Partial<TransitionClassInitOptions>);
-		public readonly _padding: any[];
-		public attached: {(transition: Transition, animatable: Animatable): void;};
-		public detached: {(transition: Transition, animatable: Animatable): void;};
-		public compute_value: {(transition: Transition, animatable: Animatable, interval: Interval, progress: number): void;};
-	}
-
-	export interface TransitionGroupClassInitOptions {}
-	/**
-	 * The {@link TransitionGroupClass} structure
-	 * contains only private data.
-	 */
-	interface TransitionGroupClass {}
-	class TransitionGroupClass {
-		public constructor(options?: Partial<TransitionGroupClassInitOptions>);
-		public readonly _padding: any[];
-	}
-
-	export interface TransitionGroupPrivateInitOptions {}
-	interface TransitionGroupPrivate {}
-	class TransitionGroupPrivate {
-		public constructor(options?: Partial<TransitionGroupPrivateInitOptions>);
-	}
-
-	export interface TransitionPrivateInitOptions {}
-	interface TransitionPrivate {}
-	class TransitionPrivate {
-		public constructor(options?: Partial<TransitionPrivateInitOptions>);
-	}
-
 	export interface UnitsInitOptions {}
 	/**
 	 * An opaque structure, to be used to store sizing and positioning
@@ -20863,28 +19416,6 @@ declare namespace imports.gi.Clutter {
 		 * @returns the initialized {@link Vertex}
 		 */
 		public init(x: number, y: number, z: number): Vertex;
-	}
-
-	export interface ZoomActionClassInitOptions {}
-	/**
-	 * The {@link ZoomActionClass} structure contains
-	 * only private data
-	 */
-	interface ZoomActionClass {}
-	class ZoomActionClass {
-		public constructor(options?: Partial<ZoomActionClassInitOptions>);
-		public zoom: {(action: ZoomAction, actor: Actor, focal_point: Point, factor: number): boolean;};
-		public _clutter_zoom_action1: {(): void;};
-		public _clutter_zoom_action2: {(): void;};
-		public _clutter_zoom_action3: {(): void;};
-		public _clutter_zoom_action4: {(): void;};
-		public _clutter_zoom_action5: {(): void;};
-	}
-
-	export interface ZoomActionPrivateInitOptions {}
-	interface ZoomActionPrivate {}
-	class ZoomActionPrivate {
-		public constructor(options?: Partial<ZoomActionPrivateInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -21293,7 +19824,7 @@ declare namespace imports.gi.Clutter {
 		 * @returns The #GParamSpec for the property or %NULL
 		 *   if no such property exist.
 		 */
-		public static class_find_child_property(klass: GObject.ObjectClass, property_name: string): GObject.ParamSpec;
+		public static class_find_child_property(klass: GObject.Object, property_name: string): GObject.ParamSpec;
 		/**
 		 * Returns an array of #GParamSpec for all child properties.
 		 * @param klass a #GObjectClass implementing the {@link Container} interface.
@@ -21302,7 +19833,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * return location for length of returned array.
 		 */
-		public static class_list_child_properties(klass: GObject.ObjectClass): [ GObject.ParamSpec[], number ];
+		public static class_list_child_properties(klass: GObject.Object): [ GObject.ParamSpec[], number ];
 	}
 
 
@@ -24334,7 +22865,7 @@ declare namespace imports.gi.Clutter {
 	 * @returns The #GParamSpec for the property or %NULL
 	 *   if no such property exist.
 	 */
-	function container_class_find_child_property(klass: GObject.ObjectClass, property_name: string): GObject.ParamSpec;
+	function container_class_find_child_property(klass: GObject.Object, property_name: string): GObject.ParamSpec;
 
 	/**
 	 * Returns an array of #GParamSpec for all child properties.
@@ -24344,7 +22875,7 @@ declare namespace imports.gi.Clutter {
 	 * 
 	 * return location for length of returned array.
 	 */
-	function container_class_list_child_properties(klass: GObject.ObjectClass): [ GObject.ParamSpec[], number ];
+	function container_class_list_child_properties(klass: GObject.Object): [ GObject.ParamSpec[], number ];
 
 	/**
 	 * Disable loading the accessibility support. It has the same effect

@@ -4869,78 +4869,6 @@ declare namespace imports.gi.Soup {
 		public constructor(options?: Partial<WebsocketExtensionManagerInitOptions>);
 	}
 
-	export interface AddressClassInitOptions {}
-	interface AddressClass {}
-	class AddressClass {
-		public constructor(options?: Partial<AddressClassInitOptions>);
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface AuthClassInitOptions {}
-	interface AuthClass {}
-	class AuthClass {
-		public constructor(options?: Partial<AuthClassInitOptions>);
-		public readonly scheme_name: string;
-		public readonly strength: number;
-		public update: {(auth: Auth, msg: Message, auth_header: GLib.HashTable): boolean;};
-		public get_protection_space: {(auth: Auth, source_uri: URI): GLib.SList;};
-		public authenticate: {(auth: Auth, username: string, password: string): void;};
-		public is_authenticated: {(auth: Auth): boolean;};
-		public get_authorization: {(auth: Auth, msg: Message): string;};
-		public is_ready: {(auth: Auth, msg: Message): boolean;};
-		public can_authenticate: {(auth: Auth): boolean;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface AuthDomainBasicClassInitOptions {}
-	interface AuthDomainBasicClass {}
-	class AuthDomainBasicClass {
-		public constructor(options?: Partial<AuthDomainBasicClassInitOptions>);
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface AuthDomainClassInitOptions {}
-	interface AuthDomainClass {}
-	class AuthDomainClass {
-		public constructor(options?: Partial<AuthDomainClassInitOptions>);
-		public accepts: {(domain: AuthDomain, msg: Message, header: string): string;};
-		public challenge: {(domain: AuthDomain, msg: Message): string;};
-		public check_password: {(domain: AuthDomain, msg: Message, username: string, password: string): boolean;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface AuthDomainDigestClassInitOptions {}
-	interface AuthDomainDigestClass {}
-	class AuthDomainDigestClass {
-		public constructor(options?: Partial<AuthDomainDigestClassInitOptions>);
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface AuthManagerClassInitOptions {}
-	interface AuthManagerClass {}
-	class AuthManagerClass {
-		public constructor(options?: Partial<AuthManagerClassInitOptions>);
-		public authenticate: {(manager: AuthManager, msg: Message, auth: Auth, retrying: boolean): void;};
-	}
-
-	export interface AuthManagerPrivateInitOptions {}
-	interface AuthManagerPrivate {}
-	class AuthManagerPrivate {
-		public constructor(options?: Partial<AuthManagerPrivateInitOptions>);
-	}
-
 	export interface BufferInitOptions {}
 	/**
 	 * A data buffer, generally used to represent a chunk of a
@@ -5055,22 +4983,6 @@ declare namespace imports.gi.Soup {
 		 * @returns the new {@link Buffer}.
 		 */
 		public new_subbuffer(offset: number, length: number): Buffer;
-	}
-
-	export interface CacheClassInitOptions {}
-	interface CacheClass {}
-	class CacheClass {
-		public constructor(options?: Partial<CacheClassInitOptions>);
-		public get_cacheability: {(cache: Cache, msg: Message): Cacheability;};
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-	}
-
-	export interface CachePrivateInitOptions {}
-	interface CachePrivate {}
-	class CachePrivate {
-		public constructor(options?: Partial<CachePrivateInitOptions>);
 	}
 
 	export interface ClientContextInitOptions {}
@@ -5197,42 +5109,6 @@ declare namespace imports.gi.Soup {
 	interface Connection {}
 	class Connection {
 		public constructor(options?: Partial<ConnectionInitOptions>);
-	}
-
-	export interface ContentDecoderClassInitOptions {}
-	interface ContentDecoderClass {}
-	class ContentDecoderClass {
-		public constructor(options?: Partial<ContentDecoderClassInitOptions>);
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-		public _libsoup_reserved5: {(): void;};
-	}
-
-	export interface ContentDecoderPrivateInitOptions {}
-	interface ContentDecoderPrivate {}
-	class ContentDecoderPrivate {
-		public constructor(options?: Partial<ContentDecoderPrivateInitOptions>);
-	}
-
-	export interface ContentSnifferClassInitOptions {}
-	interface ContentSnifferClass {}
-	class ContentSnifferClass {
-		public constructor(options?: Partial<ContentSnifferClassInitOptions>);
-		public sniff: {(sniffer: ContentSniffer, msg: Message, buffer: Buffer): [ string, GLib.HashTable | null ];};
-		public get_buffer_size: {(sniffer: ContentSniffer): number;};
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-		public _libsoup_reserved5: {(): void;};
-	}
-
-	export interface ContentSnifferPrivateInitOptions {}
-	interface ContentSnifferPrivate {}
-	class ContentSnifferPrivate {
-		public constructor(options?: Partial<ContentSnifferPrivateInitOptions>);
 	}
 
 	export interface CookieInitOptions {}
@@ -5468,37 +5344,6 @@ declare namespace imports.gi.Soup {
 		public to_set_cookie_header(): string;
 	}
 
-	export interface CookieJarClassInitOptions {}
-	interface CookieJarClass {}
-	class CookieJarClass {
-		public constructor(options?: Partial<CookieJarClassInitOptions>);
-		public save: {(jar: CookieJar): void;};
-		public is_persistent: {(jar: CookieJar): boolean;};
-		public changed: {(jar: CookieJar, old_cookie: Cookie, new_cookie: Cookie): void;};
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-	}
-
-	export interface CookieJarDBClassInitOptions {}
-	interface CookieJarDBClass {}
-	class CookieJarDBClass {
-		public constructor(options?: Partial<CookieJarDBClassInitOptions>);
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface CookieJarTextClassInitOptions {}
-	interface CookieJarTextClass {}
-	class CookieJarTextClass {
-		public constructor(options?: Partial<CookieJarTextClassInitOptions>);
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
 	export interface DateInitOptions {}
 	/**
 	 * A date and time. The date is assumed to be in the (proleptic)
@@ -5665,42 +5510,6 @@ declare namespace imports.gi.Soup {
 		public to_timeval(): GLib.TimeVal;
 	}
 
-	export interface HSTSEnforcerClassInitOptions {}
-	interface HSTSEnforcerClass {}
-	class HSTSEnforcerClass {
-		public constructor(options?: Partial<HSTSEnforcerClassInitOptions>);
-		public is_persistent: {(hsts_enforcer: HSTSEnforcer): boolean;};
-		public has_valid_policy: {(hsts_enforcer: HSTSEnforcer, domain: string): boolean;};
-		public changed: {(enforcer: HSTSEnforcer, old_policy: HSTSPolicy, new_policy: HSTSPolicy): void;};
-		public hsts_enforced: {(enforcer: HSTSEnforcer, message: Message): void;};
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface HSTSEnforcerDBClassInitOptions {}
-	interface HSTSEnforcerDBClass {}
-	class HSTSEnforcerDBClass {
-		public constructor(options?: Partial<HSTSEnforcerDBClassInitOptions>);
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface HSTSEnforcerDBPrivateInitOptions {}
-	interface HSTSEnforcerDBPrivate {}
-	class HSTSEnforcerDBPrivate {
-		public constructor(options?: Partial<HSTSEnforcerDBPrivateInitOptions>);
-	}
-
-	export interface HSTSEnforcerPrivateInitOptions {}
-	interface HSTSEnforcerPrivate {}
-	class HSTSEnforcerPrivate {
-		public constructor(options?: Partial<HSTSEnforcerPrivateInitOptions>);
-	}
-
 	export interface HSTSPolicyInitOptions {}
 	/**
 	 * An HTTP Strict Transport Security policy.
@@ -5830,16 +5639,6 @@ declare namespace imports.gi.Soup {
 		 * @returns %TRUE if #policy is permanent, %FALSE otherwise
 		 */
 		public is_session_policy(): boolean;
-	}
-
-	export interface LoggerClassInitOptions {}
-	interface LoggerClass {}
-	class LoggerClass {
-		public constructor(options?: Partial<LoggerClassInitOptions>);
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
 	}
 
 	export interface MessageBodyInitOptions {}
@@ -6003,26 +5802,6 @@ declare namespace imports.gi.Soup {
 		 * @param chunk a {@link Buffer} returned from soup_message_body_get_chunk()
 		 */
 		public wrote_chunk(chunk: Buffer): void;
-	}
-
-	export interface MessageClassInitOptions {}
-	interface MessageClass {}
-	class MessageClass {
-		public constructor(options?: Partial<MessageClassInitOptions>);
-		public wrote_informational: {(msg: Message): void;};
-		public wrote_headers: {(msg: Message): void;};
-		public wrote_chunk: {(msg: Message): void;};
-		public wrote_body: {(msg: Message): void;};
-		public got_informational: {(msg: Message): void;};
-		public got_headers: {(msg: Message): void;};
-		public got_chunk: {(msg: Message, chunk: Buffer): void;};
-		public got_body: {(msg: Message): void;};
-		public restarted: {(msg: Message): void;};
-		public finished: {(msg: Message): void;};
-		public starting: {(msg: Message): void;};
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
 	}
 
 	export interface MessageHeadersInitOptions {}
@@ -6522,18 +6301,6 @@ declare namespace imports.gi.Soup {
 		public to_message(dest_headers: MessageHeaders, dest_body: MessageBody): void;
 	}
 
-	export interface MultipartInputStreamClassInitOptions {}
-	interface MultipartInputStreamClass {}
-	class MultipartInputStreamClass {
-		public constructor(options?: Partial<MultipartInputStreamClassInitOptions>);
-	}
-
-	export interface MultipartInputStreamPrivateInitOptions {}
-	interface MultipartInputStreamPrivate {}
-	class MultipartInputStreamPrivate {
-		public constructor(options?: Partial<MultipartInputStreamPrivateInitOptions>);
-	}
-
 	export interface PasswordManagerInterfaceInitOptions {}
 	interface PasswordManagerInterface {}
 	class PasswordManagerInterface {
@@ -6541,12 +6308,6 @@ declare namespace imports.gi.Soup {
 		public readonly base: GObject.TypeInterface;
 		public get_passwords_async: {(password_manager: PasswordManager, msg: Message, auth: Auth, retrying: boolean, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: PasswordManagerCallback): void;};
 		public get_passwords_sync: {(password_manager: PasswordManager, msg: Message, auth: Auth, cancellable: Gio.Cancellable | null): void;};
-	}
-
-	export interface ProxyResolverDefaultClassInitOptions {}
-	interface ProxyResolverDefaultClass {}
-	class ProxyResolverDefaultClass {
-		public constructor(options?: Partial<ProxyResolverDefaultClassInitOptions>);
 	}
 
 	export interface ProxyResolverInterfaceInitOptions {}
@@ -6601,113 +6362,6 @@ declare namespace imports.gi.Soup {
 		public end: number;
 	}
 
-	export interface RequestClassInitOptions {}
-	interface RequestClass {}
-	class RequestClass {
-		public constructor(options?: Partial<RequestClassInitOptions>);
-		public readonly schemes: string;
-		public check_uri: {(req_base: Request, uri: URI): boolean;};
-		public send: {(request: Request, cancellable: Gio.Cancellable | null): Gio.InputStream;};
-		public send_async: {(request: Request, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;};
-		public send_finish: {(request: Request, result: Gio.AsyncResult): Gio.InputStream;};
-		public get_content_length: {(request: Request): number;};
-		public get_content_type: {(request: Request): string | null;};
-	}
-
-	export interface RequestDataClassInitOptions {}
-	interface RequestDataClass {}
-	class RequestDataClass {
-		public constructor(options?: Partial<RequestDataClassInitOptions>);
-	}
-
-	export interface RequestDataPrivateInitOptions {}
-	interface RequestDataPrivate {}
-	class RequestDataPrivate {
-		public constructor(options?: Partial<RequestDataPrivateInitOptions>);
-	}
-
-	export interface RequestFileClassInitOptions {}
-	interface RequestFileClass {}
-	class RequestFileClass {
-		public constructor(options?: Partial<RequestFileClassInitOptions>);
-	}
-
-	export interface RequestFilePrivateInitOptions {}
-	interface RequestFilePrivate {}
-	class RequestFilePrivate {
-		public constructor(options?: Partial<RequestFilePrivateInitOptions>);
-	}
-
-	export interface RequestHTTPClassInitOptions {}
-	interface RequestHTTPClass {}
-	class RequestHTTPClass {
-		public constructor(options?: Partial<RequestHTTPClassInitOptions>);
-	}
-
-	export interface RequestHTTPPrivateInitOptions {}
-	interface RequestHTTPPrivate {}
-	class RequestHTTPPrivate {
-		public constructor(options?: Partial<RequestHTTPPrivateInitOptions>);
-	}
-
-	export interface RequestPrivateInitOptions {}
-	interface RequestPrivate {}
-	class RequestPrivate {
-		public constructor(options?: Partial<RequestPrivateInitOptions>);
-	}
-
-	export interface RequesterClassInitOptions {}
-	interface RequesterClass {}
-	class RequesterClass {
-		public constructor(options?: Partial<RequesterClassInitOptions>);
-	}
-
-	export interface RequesterPrivateInitOptions {}
-	interface RequesterPrivate {}
-	class RequesterPrivate {
-		public constructor(options?: Partial<RequesterPrivateInitOptions>);
-	}
-
-	export interface ServerClassInitOptions {}
-	interface ServerClass {}
-	class ServerClass {
-		public constructor(options?: Partial<ServerClassInitOptions>);
-		public request_started: {(server: Server, msg: Message, client: ClientContext): void;};
-		public request_read: {(server: Server, msg: Message, client: ClientContext): void;};
-		public request_finished: {(server: Server, msg: Message, client: ClientContext): void;};
-		public request_aborted: {(server: Server, msg: Message, client: ClientContext): void;};
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface SessionAsyncClassInitOptions {}
-	interface SessionAsyncClass {}
-	class SessionAsyncClass {
-		public constructor(options?: Partial<SessionAsyncClassInitOptions>);
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface SessionClassInitOptions {}
-	interface SessionClass {}
-	class SessionClass {
-		public constructor(options?: Partial<SessionClassInitOptions>);
-		public request_started: {(session: Session, msg: Message, socket: Socket): void;};
-		public authenticate: {(session: Session, msg: Message, auth: Auth, retrying: boolean): void;};
-		public queue_message: {(session: Session, msg: Message, callback: SessionCallback | null): void;};
-		public requeue_message: {(session: Session, msg: Message): void;};
-		public send_message: {(session: Session, msg: Message): number;};
-		public cancel_message: {(session: Session, msg: Message, status_code: number): void;};
-		public auth_required: {(session: Session, msg: Message, auth: Auth, retrying: boolean): void;};
-		public flush_queue: {(session: Session): void;};
-		public kick: {(session: Session): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
 	export interface SessionFeatureInterfaceInitOptions {}
 	/**
 	 * The interface implemented by {@link SessionFeature}<!-- -->s.
@@ -6723,30 +6377,6 @@ declare namespace imports.gi.Soup {
 		public add_feature: {(feature: SessionFeature, type: GObject.Type): boolean;};
 		public remove_feature: {(feature: SessionFeature, type: GObject.Type): boolean;};
 		public has_feature: {(feature: SessionFeature, type: GObject.Type): boolean;};
-	}
-
-	export interface SessionSyncClassInitOptions {}
-	interface SessionSyncClass {}
-	class SessionSyncClass {
-		public constructor(options?: Partial<SessionSyncClassInitOptions>);
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface SocketClassInitOptions {}
-	interface SocketClass {}
-	class SocketClass {
-		public constructor(options?: Partial<SocketClassInitOptions>);
-		public readable: {(sock: Socket): void;};
-		public writable: {(sock: Socket): void;};
-		public disconnected: {(sock: Socket): void;};
-		public new_connection: {(listener: Socket, new_sock: Socket): void;};
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
 	}
 
 	export interface URIInitOptions {}
@@ -7001,57 +6631,6 @@ declare namespace imports.gi.Soup {
 		 * @returns %TRUE or %FALSE
 		 */
 		public uses_default_port(): boolean;
-	}
-
-	export interface WebsocketConnectionClassInitOptions {}
-	/**
-	 * The abstract base class for {@link WebsocketConnection}
-	 */
-	interface WebsocketConnectionClass {}
-	class WebsocketConnectionClass {
-		public constructor(options?: Partial<WebsocketConnectionClassInitOptions>);
-		public message: {(self: WebsocketConnection, type: WebsocketDataType, message: GLib.Bytes): void;};
-		public error: {(self: WebsocketConnection, error: GLib.Error): void;};
-		public closing: {(self: WebsocketConnection): void;};
-		public closed: {(self: WebsocketConnection): void;};
-		public pong: {(self: WebsocketConnection, message: GLib.Bytes): void;};
-	}
-
-	export interface WebsocketConnectionPrivateInitOptions {}
-	interface WebsocketConnectionPrivate {}
-	class WebsocketConnectionPrivate {
-		public constructor(options?: Partial<WebsocketConnectionPrivateInitOptions>);
-	}
-
-	export interface WebsocketExtensionClassInitOptions {}
-	/**
-	 * The class structure for the SoupWebsocketExtension.
-	 */
-	interface WebsocketExtensionClass {}
-	class WebsocketExtensionClass {
-		public constructor(options?: Partial<WebsocketExtensionClassInitOptions>);
-		public readonly name: string;
-		public configure: {(extension: WebsocketExtension, connection_type: WebsocketConnectionType, params: GLib.HashTable | null): boolean;};
-		public get_request_params: {(extension: WebsocketExtension): string | null;};
-		public get_response_params: {(extension: WebsocketExtension): string | null;};
-		public process_outgoing_message: {(extension: WebsocketExtension, payload: GLib.Bytes): GLib.Bytes;};
-		public process_incoming_message: {(extension: WebsocketExtension, payload: GLib.Bytes): GLib.Bytes;};
-		public _libsoup_reserved1: {(): void;};
-		public _libsoup_reserved2: {(): void;};
-		public _libsoup_reserved3: {(): void;};
-		public _libsoup_reserved4: {(): void;};
-	}
-
-	export interface WebsocketExtensionDeflateClassInitOptions {}
-	interface WebsocketExtensionDeflateClass {}
-	class WebsocketExtensionDeflateClass {
-		public constructor(options?: Partial<WebsocketExtensionDeflateClassInitOptions>);
-	}
-
-	export interface WebsocketExtensionManagerClassInitOptions {}
-	interface WebsocketExtensionManagerClass {}
-	class WebsocketExtensionManagerClass {
-		public constructor(options?: Partial<WebsocketExtensionManagerClassInitOptions>);
 	}
 
 	export interface XMLRPCParamsInitOptions {}

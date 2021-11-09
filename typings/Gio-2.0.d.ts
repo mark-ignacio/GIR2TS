@@ -22192,77 +22192,6 @@ declare namespace imports.gi.Gio {
 		public launch_uris_finish: {(appinfo: AppInfo, result: AsyncResult): boolean;};
 	}
 
-	export interface AppLaunchContextClassInitOptions {}
-	interface AppLaunchContextClass {}
-	class AppLaunchContextClass {
-		public constructor(options?: Partial<AppLaunchContextClassInitOptions>);
-		public get_display: {(context: AppLaunchContext, info: AppInfo, files: GLib.List): string | null;};
-		public get_startup_notify_id: {(context: AppLaunchContext, info: AppInfo, files: GLib.List): string | null;};
-		public launch_failed: {(context: AppLaunchContext, startup_notify_id: string): void;};
-		public launched: {(context: AppLaunchContext, info: AppInfo, platform_data: GLib.Variant): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-	}
-
-	export interface AppLaunchContextPrivateInitOptions {}
-	interface AppLaunchContextPrivate {}
-	class AppLaunchContextPrivate {
-		public constructor(options?: Partial<AppLaunchContextPrivateInitOptions>);
-	}
-
-	export interface ApplicationClassInitOptions {}
-	/**
-	 * Virtual function table for #GApplication.
-	 */
-	interface ApplicationClass {}
-	class ApplicationClass {
-		public constructor(options?: Partial<ApplicationClassInitOptions>);
-		public readonly padding: any[];
-		public startup: {(application: Application): void;};
-		public activate: {(application: Application): void;};
-		public open: {(application: Application, files: File[], n_files: number, hint: string): void;};
-		public command_line: {(application: Application, command_line: ApplicationCommandLine): number;};
-		public local_command_line: {(application: Application): [ boolean, number ];};
-		public before_emit: {(application: Application, platform_data: GLib.Variant): void;};
-		public after_emit: {(application: Application, platform_data: GLib.Variant): void;};
-		public add_platform_data: {(application: Application, builder: GLib.VariantBuilder): void;};
-		public quit_mainloop: {(application: Application): void;};
-		public run_mainloop: {(application: Application): void;};
-		public shutdown: {(application: Application): void;};
-		public dbus_register: {(application: Application, connection: DBusConnection, object_path: string): boolean;};
-		public dbus_unregister: {(application: Application, connection: DBusConnection, object_path: string): void;};
-		public handle_local_options: {(application: Application, options: GLib.VariantDict): number;};
-		public name_lost: {(application: Application): boolean;};
-	}
-
-	export interface ApplicationCommandLineClassInitOptions {}
-	/**
-	 * The #GApplicationCommandLineClass-struct
-	 * contains private data only.
-	 */
-	interface ApplicationCommandLineClass {}
-	class ApplicationCommandLineClass {
-		public constructor(options?: Partial<ApplicationCommandLineClassInitOptions>);
-		public readonly padding: any[];
-		public print_literal: {(cmdline: ApplicationCommandLine, message: string): void;};
-		public printerr_literal: {(cmdline: ApplicationCommandLine, message: string): void;};
-		public get_stdin: {(cmdline: ApplicationCommandLine): InputStream | null;};
-	}
-
-	export interface ApplicationCommandLinePrivateInitOptions {}
-	interface ApplicationCommandLinePrivate {}
-	class ApplicationCommandLinePrivate {
-		public constructor(options?: Partial<ApplicationCommandLinePrivateInitOptions>);
-	}
-
-	export interface ApplicationPrivateInitOptions {}
-	interface ApplicationPrivate {}
-	class ApplicationPrivate {
-		public constructor(options?: Partial<ApplicationPrivateInitOptions>);
-	}
-
 	export interface AsyncInitableIfaceInitOptions {}
 	/**
 	 * Provides an interface for asynchronous initializing object such that
@@ -22295,64 +22224,6 @@ declare namespace imports.gi.Gio {
 		public is_tagged: {(res: AsyncResult, source_tag: any | null): boolean;};
 	}
 
-	export interface BufferedInputStreamClassInitOptions {}
-	interface BufferedInputStreamClass {}
-	class BufferedInputStreamClass {
-		public constructor(options?: Partial<BufferedInputStreamClassInitOptions>);
-		public fill: {(stream: BufferedInputStream, count: number, cancellable: Cancellable | null): number;};
-		public fill_async: {(stream: BufferedInputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public fill_finish: {(stream: BufferedInputStream, result: AsyncResult): number;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface BufferedInputStreamPrivateInitOptions {}
-	interface BufferedInputStreamPrivate {}
-	class BufferedInputStreamPrivate {
-		public constructor(options?: Partial<BufferedInputStreamPrivateInitOptions>);
-	}
-
-	export interface BufferedOutputStreamClassInitOptions {}
-	interface BufferedOutputStreamClass {}
-	class BufferedOutputStreamClass {
-		public constructor(options?: Partial<BufferedOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-	}
-
-	export interface BufferedOutputStreamPrivateInitOptions {}
-	interface BufferedOutputStreamPrivate {}
-	class BufferedOutputStreamPrivate {
-		public constructor(options?: Partial<BufferedOutputStreamPrivateInitOptions>);
-	}
-
-	export interface CancellableClassInitOptions {}
-	interface CancellableClass {}
-	class CancellableClass {
-		public constructor(options?: Partial<CancellableClassInitOptions>);
-		public cancelled: {(cancellable: Cancellable | null): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface CancellablePrivateInitOptions {}
-	interface CancellablePrivate {}
-	class CancellablePrivate {
-		public constructor(options?: Partial<CancellablePrivateInitOptions>);
-	}
-
-	export interface CharsetConverterClassInitOptions {}
-	interface CharsetConverterClass {}
-	class CharsetConverterClass {
-		public constructor(options?: Partial<CharsetConverterClassInitOptions>);
-	}
-
 	export interface ConverterIfaceInitOptions {}
 	/**
 	 * Provides an interface for converting data from one type
@@ -22368,49 +22239,6 @@ declare namespace imports.gi.Gio {
 		public readonly g_iface: GObject.TypeInterface;
 		public convert: {(converter: Converter, inbuf: number[] | null, inbuf_size: number, outbuf: number[] | null, outbuf_size: number, flags: ConverterFlags): [ ConverterResult, number, number ];};
 		public reset: {(converter: Converter): void;};
-	}
-
-	export interface ConverterInputStreamClassInitOptions {}
-	interface ConverterInputStreamClass {}
-	class ConverterInputStreamClass {
-		public constructor(options?: Partial<ConverterInputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface ConverterInputStreamPrivateInitOptions {}
-	interface ConverterInputStreamPrivate {}
-	class ConverterInputStreamPrivate {
-		public constructor(options?: Partial<ConverterInputStreamPrivateInitOptions>);
-	}
-
-	export interface ConverterOutputStreamClassInitOptions {}
-	interface ConverterOutputStreamClass {}
-	class ConverterOutputStreamClass {
-		public constructor(options?: Partial<ConverterOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface ConverterOutputStreamPrivateInitOptions {}
-	interface ConverterOutputStreamPrivate {}
-	class ConverterOutputStreamPrivate {
-		public constructor(options?: Partial<ConverterOutputStreamPrivateInitOptions>);
-	}
-
-	export interface CredentialsClassInitOptions {}
-	/**
-	 * Class structure for #GCredentials.
-	 */
-	interface CredentialsClass {}
-	class CredentialsClass {
-		public constructor(options?: Partial<CredentialsClassInitOptions>);
 	}
 
 	export interface DBusAnnotationInfoInitOptions {}
@@ -22623,28 +22451,6 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
-	export interface DBusInterfaceSkeletonClassInitOptions {}
-	/**
-	 * Class structure for #GDBusInterfaceSkeleton.
-	 */
-	interface DBusInterfaceSkeletonClass {}
-	class DBusInterfaceSkeletonClass {
-		public constructor(options?: Partial<DBusInterfaceSkeletonClassInitOptions>);
-		public readonly vfunc_padding: any[];
-		public readonly signal_padding: any[];
-		public get_info: {(interface_: DBusInterfaceSkeleton): DBusInterfaceInfo;};
-		public get_vtable: {(interface_: DBusInterfaceSkeleton): DBusInterfaceVTable;};
-		public get_properties: {(interface_: DBusInterfaceSkeleton): GLib.Variant;};
-		public flush: {(interface_: DBusInterfaceSkeleton): void;};
-		public g_authorize_method: {(interface_: DBusInterfaceSkeleton, invocation: DBusMethodInvocation): boolean;};
-	}
-
-	export interface DBusInterfaceSkeletonPrivateInitOptions {}
-	interface DBusInterfaceSkeletonPrivate {}
-	class DBusInterfaceSkeletonPrivate {
-		public constructor(options?: Partial<DBusInterfaceSkeletonPrivateInitOptions>);
-	}
-
 	export interface DBusInterfaceVTableInitOptions {}
 	/**
 	 * Virtual table for handling properties and method calls for a D-Bus
@@ -22838,24 +22644,6 @@ declare namespace imports.gi.Gio {
 		public interface_removed: {(object: DBusObject, interface_: DBusInterface): void;};
 	}
 
-	export interface DBusObjectManagerClientClassInitOptions {}
-	/**
-	 * Class structure for #GDBusObjectManagerClient.
-	 */
-	interface DBusObjectManagerClientClass {}
-	class DBusObjectManagerClientClass {
-		public constructor(options?: Partial<DBusObjectManagerClientClassInitOptions>);
-		public readonly padding: any[];
-		public interface_proxy_signal: {(manager: DBusObjectManagerClient, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant): void;};
-		public interface_proxy_properties_changed: {(manager: DBusObjectManagerClient, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string): void;};
-	}
-
-	export interface DBusObjectManagerClientPrivateInitOptions {}
-	interface DBusObjectManagerClientPrivate {}
-	class DBusObjectManagerClientPrivate {
-		public constructor(options?: Partial<DBusObjectManagerClientPrivateInitOptions>);
-	}
-
 	export interface DBusObjectManagerIfaceInitOptions {}
 	/**
 	 * Base type for D-Bus object managers.
@@ -22875,55 +22663,6 @@ declare namespace imports.gi.Gio {
 		public object_removed: {(manager: DBusObjectManager, object: DBusObject): void;};
 		public interface_added: {(manager: DBusObjectManager, object: DBusObject, interface_: DBusInterface): void;};
 		public interface_removed: {(manager: DBusObjectManager, object: DBusObject, interface_: DBusInterface): void;};
-	}
-
-	export interface DBusObjectManagerServerClassInitOptions {}
-	/**
-	 * Class structure for #GDBusObjectManagerServer.
-	 */
-	interface DBusObjectManagerServerClass {}
-	class DBusObjectManagerServerClass {
-		public constructor(options?: Partial<DBusObjectManagerServerClassInitOptions>);
-		public readonly padding: any[];
-	}
-
-	export interface DBusObjectManagerServerPrivateInitOptions {}
-	interface DBusObjectManagerServerPrivate {}
-	class DBusObjectManagerServerPrivate {
-		public constructor(options?: Partial<DBusObjectManagerServerPrivateInitOptions>);
-	}
-
-	export interface DBusObjectProxyClassInitOptions {}
-	/**
-	 * Class structure for #GDBusObjectProxy.
-	 */
-	interface DBusObjectProxyClass {}
-	class DBusObjectProxyClass {
-		public constructor(options?: Partial<DBusObjectProxyClassInitOptions>);
-		public readonly padding: any[];
-	}
-
-	export interface DBusObjectProxyPrivateInitOptions {}
-	interface DBusObjectProxyPrivate {}
-	class DBusObjectProxyPrivate {
-		public constructor(options?: Partial<DBusObjectProxyPrivateInitOptions>);
-	}
-
-	export interface DBusObjectSkeletonClassInitOptions {}
-	/**
-	 * Class structure for #GDBusObjectSkeleton.
-	 */
-	interface DBusObjectSkeletonClass {}
-	class DBusObjectSkeletonClass {
-		public constructor(options?: Partial<DBusObjectSkeletonClassInitOptions>);
-		public readonly padding: any[];
-		public authorize_method: {(object: DBusObjectSkeleton, interface_: DBusInterfaceSkeleton, invocation: DBusMethodInvocation): boolean;};
-	}
-
-	export interface DBusObjectSkeletonPrivateInitOptions {}
-	interface DBusObjectSkeletonPrivate {}
-	class DBusObjectSkeletonPrivate {
-		public constructor(options?: Partial<DBusObjectSkeletonPrivateInitOptions>);
 	}
 
 	export interface DBusPropertyInfoInitOptions {}
@@ -22965,24 +22704,6 @@ declare namespace imports.gi.Gio {
 		 * the memory used is freed.
 		 */
 		public unref(): void;
-	}
-
-	export interface DBusProxyClassInitOptions {}
-	/**
-	 * Class structure for #GDBusProxy.
-	 */
-	interface DBusProxyClass {}
-	class DBusProxyClass {
-		public constructor(options?: Partial<DBusProxyClassInitOptions>);
-		public readonly padding: any[];
-		public g_properties_changed: {(proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string): void;};
-		public g_signal: {(proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant): void;};
-	}
-
-	export interface DBusProxyPrivateInitOptions {}
-	interface DBusProxyPrivate {}
-	class DBusProxyPrivate {
-		public constructor(options?: Partial<DBusProxyPrivateInitOptions>);
 	}
 
 	export interface DBusSignalInfoInitOptions {}
@@ -23044,40 +22765,6 @@ declare namespace imports.gi.Gio {
 		public readonly padding: any[];
 	}
 
-	export interface DataInputStreamClassInitOptions {}
-	interface DataInputStreamClass {}
-	class DataInputStreamClass {
-		public constructor(options?: Partial<DataInputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface DataInputStreamPrivateInitOptions {}
-	interface DataInputStreamPrivate {}
-	class DataInputStreamPrivate {
-		public constructor(options?: Partial<DataInputStreamPrivateInitOptions>);
-	}
-
-	export interface DataOutputStreamClassInitOptions {}
-	interface DataOutputStreamClass {}
-	class DataOutputStreamClass {
-		public constructor(options?: Partial<DataOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface DataOutputStreamPrivateInitOptions {}
-	interface DataOutputStreamPrivate {}
-	class DataOutputStreamPrivate {
-		public constructor(options?: Partial<DataOutputStreamPrivateInitOptions>);
-	}
-
 	export interface DatagramBasedInterfaceInitOptions {}
 	/**
 	 * Provides an interface for socket-like objects which have datagram semantics,
@@ -23098,12 +22785,6 @@ declare namespace imports.gi.Gio {
 		public create_source: {(datagram_based: DatagramBased, condition: GLib.IOCondition, cancellable: Cancellable | null): GLib.Source;};
 		public condition_check: {(datagram_based: DatagramBased, condition: GLib.IOCondition): GLib.IOCondition;};
 		public condition_wait: {(datagram_based: DatagramBased, condition: GLib.IOCondition, timeout: number, cancellable: Cancellable | null): boolean;};
-	}
-
-	export interface DesktopAppInfoClassInitOptions {}
-	interface DesktopAppInfoClass {}
-	class DesktopAppInfoClass {
-		public constructor(options?: Partial<DesktopAppInfoClassInitOptions>);
 	}
 
 	export interface DesktopAppInfoLookupIfaceInitOptions {}
@@ -23210,24 +22891,6 @@ declare namespace imports.gi.Gio {
 		 * The parent interface.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
-	}
-
-	export interface EmblemClassInitOptions {}
-	interface EmblemClass {}
-	class EmblemClass {
-		public constructor(options?: Partial<EmblemClassInitOptions>);
-	}
-
-	export interface EmblemedIconClassInitOptions {}
-	interface EmblemedIconClass {}
-	class EmblemedIconClass {
-		public constructor(options?: Partial<EmblemedIconClassInitOptions>);
-	}
-
-	export interface EmblemedIconPrivateInitOptions {}
-	interface EmblemedIconPrivate {}
-	class EmblemedIconPrivate {
-		public constructor(options?: Partial<EmblemedIconPrivateInitOptions>);
 	}
 
 	export interface FileAttributeInfoInitOptions {}
@@ -23417,63 +23080,6 @@ declare namespace imports.gi.Gio {
 		public get_fd: {(fd_based: FileDescriptorBased): number;};
 	}
 
-	export interface FileEnumeratorClassInitOptions {}
-	interface FileEnumeratorClass {}
-	class FileEnumeratorClass {
-		public constructor(options?: Partial<FileEnumeratorClassInitOptions>);
-		public next_file: {(enumerator: FileEnumerator, cancellable: Cancellable | null): FileInfo | null;};
-		public close_fn: {(enumerator: FileEnumerator, cancellable: Cancellable | null): boolean;};
-		public next_files_async: {(enumerator: FileEnumerator, num_files: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public next_files_finish: {(enumerator: FileEnumerator, result: AsyncResult): GLib.List;};
-		public close_async: {(enumerator: FileEnumerator, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public close_finish: {(enumerator: FileEnumerator, result: AsyncResult): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-	}
-
-	export interface FileEnumeratorPrivateInitOptions {}
-	interface FileEnumeratorPrivate {}
-	class FileEnumeratorPrivate {
-		public constructor(options?: Partial<FileEnumeratorPrivateInitOptions>);
-	}
-
-	export interface FileIOStreamClassInitOptions {}
-	interface FileIOStreamClass {}
-	class FileIOStreamClass {
-		public constructor(options?: Partial<FileIOStreamClassInitOptions>);
-		public tell: {(stream: FileIOStream): number;};
-		public can_seek: {(stream: FileIOStream): boolean;};
-		public seek: {(stream: FileIOStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
-		public can_truncate: {(stream: FileIOStream): boolean;};
-		public truncate_fn: {(stream: FileIOStream, size: number, cancellable: Cancellable | null): boolean;};
-		public query_info: {(stream: FileIOStream, attributes: string, cancellable: Cancellable | null): FileInfo;};
-		public query_info_async: {(stream: FileIOStream, attributes: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public query_info_finish: {(stream: FileIOStream, result: AsyncResult): FileInfo;};
-		public get_etag: {(stream: FileIOStream): string | null;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface FileIOStreamPrivateInitOptions {}
-	interface FileIOStreamPrivate {}
-	class FileIOStreamPrivate {
-		public constructor(options?: Partial<FileIOStreamPrivateInitOptions>);
-	}
-
-	export interface FileIconClassInitOptions {}
-	interface FileIconClass {}
-	class FileIconClass {
-		public constructor(options?: Partial<FileIconClassInitOptions>);
-	}
-
 	export interface FileIfaceInitOptions {}
 	/**
 	 * An interface for writing VFS file handles.
@@ -23593,108 +23199,6 @@ declare namespace imports.gi.Gio {
 		public measure_disk_usage_finish: {(file: File, result: AsyncResult): [ boolean, number | null, number | null, number | null ];};
 	}
 
-	export interface FileInfoClassInitOptions {}
-	interface FileInfoClass {}
-	class FileInfoClass {
-		public constructor(options?: Partial<FileInfoClassInitOptions>);
-	}
-
-	export interface FileInputStreamClassInitOptions {}
-	interface FileInputStreamClass {}
-	class FileInputStreamClass {
-		public constructor(options?: Partial<FileInputStreamClassInitOptions>);
-		public tell: {(stream: FileInputStream): number;};
-		public can_seek: {(stream: FileInputStream): boolean;};
-		public seek: {(stream: FileInputStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
-		public query_info: {(stream: FileInputStream, attributes: string, cancellable: Cancellable | null): FileInfo;};
-		public query_info_async: {(stream: FileInputStream, attributes: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public query_info_finish: {(stream: FileInputStream, result: AsyncResult): FileInfo;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface FileInputStreamPrivateInitOptions {}
-	interface FileInputStreamPrivate {}
-	class FileInputStreamPrivate {
-		public constructor(options?: Partial<FileInputStreamPrivateInitOptions>);
-	}
-
-	export interface FileMonitorClassInitOptions {}
-	interface FileMonitorClass {}
-	class FileMonitorClass {
-		public constructor(options?: Partial<FileMonitorClassInitOptions>);
-		public changed: {(monitor: FileMonitor, file: File, other_file: File, event_type: FileMonitorEvent): void;};
-		public cancel: {(monitor: FileMonitor): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface FileMonitorPrivateInitOptions {}
-	interface FileMonitorPrivate {}
-	class FileMonitorPrivate {
-		public constructor(options?: Partial<FileMonitorPrivateInitOptions>);
-	}
-
-	export interface FileOutputStreamClassInitOptions {}
-	interface FileOutputStreamClass {}
-	class FileOutputStreamClass {
-		public constructor(options?: Partial<FileOutputStreamClassInitOptions>);
-		public tell: {(stream: FileOutputStream): number;};
-		public can_seek: {(stream: FileOutputStream): boolean;};
-		public seek: {(stream: FileOutputStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
-		public can_truncate: {(stream: FileOutputStream): boolean;};
-		public truncate_fn: {(stream: FileOutputStream, size: number, cancellable: Cancellable | null): boolean;};
-		public query_info: {(stream: FileOutputStream, attributes: string, cancellable: Cancellable | null): FileInfo;};
-		public query_info_async: {(stream: FileOutputStream, attributes: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public query_info_finish: {(stream: FileOutputStream, result: AsyncResult): FileInfo;};
-		public get_etag: {(stream: FileOutputStream): string | null;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface FileOutputStreamPrivateInitOptions {}
-	interface FileOutputStreamPrivate {}
-	class FileOutputStreamPrivate {
-		public constructor(options?: Partial<FileOutputStreamPrivateInitOptions>);
-	}
-
-	export interface FilenameCompleterClassInitOptions {}
-	interface FilenameCompleterClass {}
-	class FilenameCompleterClass {
-		public constructor(options?: Partial<FilenameCompleterClassInitOptions>);
-		public got_completion_data: {(filename_completer: FilenameCompleter): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-	}
-
-	export interface FilterInputStreamClassInitOptions {}
-	interface FilterInputStreamClass {}
-	class FilterInputStreamClass {
-		public constructor(options?: Partial<FilterInputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-	}
-
-	export interface FilterOutputStreamClassInitOptions {}
-	interface FilterOutputStreamClass {}
-	class FilterOutputStreamClass {
-		public constructor(options?: Partial<FilterOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-	}
-
 	export interface IOExtensionInitOptions {}
 	/**
 	 * #GIOExtension is an opaque data structure and can only be accessed
@@ -23766,12 +23270,6 @@ declare namespace imports.gi.Gio {
 		public set_required_type(type: GObject.Type): void;
 	}
 
-	export interface IOModuleClassInitOptions {}
-	interface IOModuleClass {}
-	class IOModuleClass {
-		public constructor(options?: Partial<IOModuleClassInitOptions>);
-	}
-
 	export interface IOModuleScopeInitOptions {}
 	/**
 	 * Represents a scope for loading IO modules. A scope can be used for blocking
@@ -23840,33 +23338,6 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<IOStreamAdapterInitOptions>);
 	}
 
-	export interface IOStreamClassInitOptions {}
-	interface IOStreamClass {}
-	class IOStreamClass {
-		public constructor(options?: Partial<IOStreamClassInitOptions>);
-		public get_input_stream: {(stream: IOStream): InputStream;};
-		public get_output_stream: {(stream: IOStream): OutputStream;};
-		public close_fn: {(stream: IOStream, cancellable: Cancellable | null): boolean;};
-		public close_async: {(stream: IOStream, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public close_finish: {(stream: IOStream, result: AsyncResult): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-		public _g_reserved8: {(): void;};
-		public _g_reserved9: {(): void;};
-		public _g_reserved10: {(): void;};
-	}
-
-	export interface IOStreamPrivateInitOptions {}
-	interface IOStreamPrivate {}
-	class IOStreamPrivate {
-		public constructor(options?: Partial<IOStreamPrivateInitOptions>);
-	}
-
 	export interface IconIfaceInitOptions {}
 	/**
 	 * GIconIface is used to implement GIcon types for various
@@ -23885,44 +23356,6 @@ declare namespace imports.gi.Gio {
 		public to_tokens: {(icon: Icon, tokens: any[], out_version: number): boolean;};
 		public from_tokens: {(tokens: string, num_tokens: number, version: number): Icon;};
 		public serialize: {(icon: Icon): GLib.Variant | null;};
-	}
-
-	export interface InetAddressClassInitOptions {}
-	interface InetAddressClass {}
-	class InetAddressClass {
-		public constructor(options?: Partial<InetAddressClassInitOptions>);
-		public to_string: {(address: InetAddress): string;};
-		public to_bytes: {(address: InetAddress): number;};
-	}
-
-	export interface InetAddressMaskClassInitOptions {}
-	interface InetAddressMaskClass {}
-	class InetAddressMaskClass {
-		public constructor(options?: Partial<InetAddressMaskClassInitOptions>);
-	}
-
-	export interface InetAddressMaskPrivateInitOptions {}
-	interface InetAddressMaskPrivate {}
-	class InetAddressMaskPrivate {
-		public constructor(options?: Partial<InetAddressMaskPrivateInitOptions>);
-	}
-
-	export interface InetAddressPrivateInitOptions {}
-	interface InetAddressPrivate {}
-	class InetAddressPrivate {
-		public constructor(options?: Partial<InetAddressPrivateInitOptions>);
-	}
-
-	export interface InetSocketAddressClassInitOptions {}
-	interface InetSocketAddressClass {}
-	class InetSocketAddressClass {
-		public constructor(options?: Partial<InetSocketAddressClassInitOptions>);
-	}
-
-	export interface InetSocketAddressPrivateInitOptions {}
-	interface InetSocketAddressPrivate {}
-	class InetSocketAddressPrivate {
-		public constructor(options?: Partial<InetSocketAddressPrivateInitOptions>);
 	}
 
 	export interface InitableIfaceInitOptions {}
@@ -24001,32 +23434,6 @@ declare namespace imports.gi.Gio {
 		public num_control_messages: number;
 	}
 
-	export interface InputStreamClassInitOptions {}
-	interface InputStreamClass {}
-	class InputStreamClass {
-		public constructor(options?: Partial<InputStreamClassInitOptions>);
-		public read_fn: {(stream: InputStream, buffer: any | null, count: number, cancellable: Cancellable | null): number;};
-		public skip: {(stream: InputStream, count: number, cancellable: Cancellable | null): number;};
-		public close_fn: {(stream: InputStream, cancellable: Cancellable | null): boolean;};
-		public read_async: {(stream: InputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): number[] | null;};
-		public read_finish: {(stream: InputStream, result: AsyncResult): number;};
-		public skip_async: {(stream: InputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public skip_finish: {(stream: InputStream, result: AsyncResult): number;};
-		public close_async: {(stream: InputStream, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public close_finish: {(stream: InputStream, result: AsyncResult): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface InputStreamPrivateInitOptions {}
-	interface InputStreamPrivate {}
-	class InputStreamPrivate {
-		public constructor(options?: Partial<InputStreamPrivateInitOptions>);
-	}
-
 	export interface InputVectorInitOptions {}
 	/**
 	 * Structure used for scatter/gather data input.
@@ -24063,12 +23470,6 @@ declare namespace imports.gi.Gio {
 		public get_item: {(list: ListModel, position: number): GObject.Object | null;};
 	}
 
-	export interface ListStoreClassInitOptions {}
-	interface ListStoreClass {}
-	class ListStoreClass {
-		public constructor(options?: Partial<ListStoreClassInitOptions>);
-	}
-
 	export interface LoadableIconIfaceInitOptions {}
 	/**
 	 * Interface for icons that can be loaded as a stream.
@@ -24085,23 +23486,6 @@ declare namespace imports.gi.Gio {
 		public load_finish: {(icon: LoadableIcon, res: AsyncResult): [ InputStream, string | null ];};
 	}
 
-	export interface MemoryInputStreamClassInitOptions {}
-	interface MemoryInputStreamClass {}
-	class MemoryInputStreamClass {
-		public constructor(options?: Partial<MemoryInputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface MemoryInputStreamPrivateInitOptions {}
-	interface MemoryInputStreamPrivate {}
-	class MemoryInputStreamPrivate {
-		public constructor(options?: Partial<MemoryInputStreamPrivateInitOptions>);
-	}
-
 	export interface MemoryMonitorInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GMemoryMonitor.
@@ -24114,69 +23498,6 @@ declare namespace imports.gi.Gio {
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 		public low_memory_warning: {(monitor: MemoryMonitor, level: MemoryMonitorWarningLevel): void;};
-	}
-
-	export interface MemoryOutputStreamClassInitOptions {}
-	interface MemoryOutputStreamClass {}
-	class MemoryOutputStreamClass {
-		public constructor(options?: Partial<MemoryOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface MemoryOutputStreamPrivateInitOptions {}
-	interface MemoryOutputStreamPrivate {}
-	class MemoryOutputStreamPrivate {
-		public constructor(options?: Partial<MemoryOutputStreamPrivateInitOptions>);
-	}
-
-	export interface MenuAttributeIterClassInitOptions {}
-	interface MenuAttributeIterClass {}
-	class MenuAttributeIterClass {
-		public constructor(options?: Partial<MenuAttributeIterClassInitOptions>);
-		public get_next: {(iter: MenuAttributeIter): [ boolean, string | null, GLib.Variant | null ];};
-	}
-
-	export interface MenuAttributeIterPrivateInitOptions {}
-	interface MenuAttributeIterPrivate {}
-	class MenuAttributeIterPrivate {
-		public constructor(options?: Partial<MenuAttributeIterPrivateInitOptions>);
-	}
-
-	export interface MenuLinkIterClassInitOptions {}
-	interface MenuLinkIterClass {}
-	class MenuLinkIterClass {
-		public constructor(options?: Partial<MenuLinkIterClassInitOptions>);
-		public get_next: {(iter: MenuLinkIter): [ boolean, string | null, MenuModel | null ];};
-	}
-
-	export interface MenuLinkIterPrivateInitOptions {}
-	interface MenuLinkIterPrivate {}
-	class MenuLinkIterPrivate {
-		public constructor(options?: Partial<MenuLinkIterPrivateInitOptions>);
-	}
-
-	export interface MenuModelClassInitOptions {}
-	interface MenuModelClass {}
-	class MenuModelClass {
-		public constructor(options?: Partial<MenuModelClassInitOptions>);
-		public is_mutable: {(model: MenuModel): boolean;};
-		public get_n_items: {(model: MenuModel): number;};
-		public get_item_attributes: {(model: MenuModel, item_index: number): GLib.HashTable;};
-		public iterate_item_attributes: {(model: MenuModel, item_index: number): MenuAttributeIter;};
-		public get_item_attribute_value: {(model: MenuModel, item_index: number, attribute: string, expected_type: GLib.VariantType | null): GLib.Variant | null;};
-		public get_item_links: {(model: MenuModel, item_index: number): GLib.HashTable;};
-		public iterate_item_links: {(model: MenuModel, item_index: number): MenuLinkIter;};
-		public get_item_link: {(model: MenuModel, item_index: number, link: string): MenuModel | null;};
-	}
-
-	export interface MenuModelPrivateInitOptions {}
-	interface MenuModelPrivate {}
-	class MenuModelPrivate {
-		public constructor(options?: Partial<MenuModelPrivateInitOptions>);
 	}
 
 	export interface MountIfaceInitOptions {}
@@ -24219,64 +23540,6 @@ declare namespace imports.gi.Gio {
 		public get_symbolic_icon: {(mount: Mount): Icon;};
 	}
 
-	export interface MountOperationClassInitOptions {}
-	interface MountOperationClass {}
-	class MountOperationClass {
-		public constructor(options?: Partial<MountOperationClassInitOptions>);
-		public ask_password: {(op: MountOperation, message: string, default_user: string, default_domain: string, flags: AskPasswordFlags): void;};
-		public ask_question: {(op: MountOperation, message: string, choices: string[]): void;};
-		public reply: {(op: MountOperation, result: MountOperationResult): void;};
-		public aborted: {(op: MountOperation): void;};
-		public show_processes: {(op: MountOperation, message: string, processes: GLib.Pid[], choices: string[]): void;};
-		public show_unmount_progress: {(op: MountOperation, message: string, time_left: number, bytes_left: number): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-		public _g_reserved8: {(): void;};
-		public _g_reserved9: {(): void;};
-	}
-
-	export interface MountOperationPrivateInitOptions {}
-	interface MountOperationPrivate {}
-	class MountOperationPrivate {
-		public constructor(options?: Partial<MountOperationPrivateInitOptions>);
-	}
-
-	export interface NativeSocketAddressClassInitOptions {}
-	interface NativeSocketAddressClass {}
-	class NativeSocketAddressClass {
-		public constructor(options?: Partial<NativeSocketAddressClassInitOptions>);
-	}
-
-	export interface NativeSocketAddressPrivateInitOptions {}
-	interface NativeSocketAddressPrivate {}
-	class NativeSocketAddressPrivate {
-		public constructor(options?: Partial<NativeSocketAddressPrivateInitOptions>);
-	}
-
-	export interface NativeVolumeMonitorClassInitOptions {}
-	interface NativeVolumeMonitorClass {}
-	class NativeVolumeMonitorClass {
-		public constructor(options?: Partial<NativeVolumeMonitorClassInitOptions>);
-		public get_mount_for_mount_path: {(mount_path: string, cancellable: Cancellable): Mount;};
-	}
-
-	export interface NetworkAddressClassInitOptions {}
-	interface NetworkAddressClass {}
-	class NetworkAddressClass {
-		public constructor(options?: Partial<NetworkAddressClassInitOptions>);
-	}
-
-	export interface NetworkAddressPrivateInitOptions {}
-	interface NetworkAddressPrivate {}
-	class NetworkAddressPrivate {
-		public constructor(options?: Partial<NetworkAddressPrivateInitOptions>);
-	}
-
 	export interface NetworkMonitorInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GNetworkMonitor.
@@ -24292,18 +23555,6 @@ declare namespace imports.gi.Gio {
 		public can_reach: {(monitor: NetworkMonitor, connectable: SocketConnectable, cancellable: Cancellable | null): boolean;};
 		public can_reach_async: {(monitor: NetworkMonitor, connectable: SocketConnectable, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public can_reach_finish: {(monitor: NetworkMonitor, result: AsyncResult): boolean;};
-	}
-
-	export interface NetworkServiceClassInitOptions {}
-	interface NetworkServiceClass {}
-	class NetworkServiceClass {
-		public constructor(options?: Partial<NetworkServiceClassInitOptions>);
-	}
-
-	export interface NetworkServicePrivateInitOptions {}
-	interface NetworkServicePrivate {}
-	class NetworkServicePrivate {
-		public constructor(options?: Partial<NetworkServicePrivateInitOptions>);
 	}
 
 	export interface OutputMessageInitOptions {}
@@ -24347,38 +23598,6 @@ declare namespace imports.gi.Gio {
 		public num_control_messages: number;
 	}
 
-	export interface OutputStreamClassInitOptions {}
-	interface OutputStreamClass {}
-	class OutputStreamClass {
-		public constructor(options?: Partial<OutputStreamClassInitOptions>);
-		public write_fn: {(stream: OutputStream, buffer: number[] | null, count: number, cancellable: Cancellable | null): number;};
-		public splice: {(stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, cancellable: Cancellable | null): number;};
-		public flush: {(stream: OutputStream, cancellable: Cancellable | null): boolean;};
-		public close_fn: {(stream: OutputStream, cancellable: Cancellable | null): boolean;};
-		public write_async: {(stream: OutputStream, buffer: number[] | null, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public write_finish: {(stream: OutputStream, result: AsyncResult): number;};
-		public splice_async: {(stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public splice_finish: {(stream: OutputStream, result: AsyncResult): number;};
-		public flush_async: {(stream: OutputStream, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public flush_finish: {(stream: OutputStream, result: AsyncResult): boolean;};
-		public close_async: {(stream: OutputStream, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public close_finish: {(stream: OutputStream, result: AsyncResult): boolean;};
-		public writev_fn: {(stream: OutputStream, vectors: OutputVector[], n_vectors: number, cancellable: Cancellable | null): [ boolean, number | null ];};
-		public writev_async: {(stream: OutputStream, vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public writev_finish: {(stream: OutputStream, result: AsyncResult): [ boolean, number | null ];};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-		public _g_reserved8: {(): void;};
-	}
-
-	export interface OutputStreamPrivateInitOptions {}
-	interface OutputStreamPrivate {}
-	class OutputStreamPrivate {
-		public constructor(options?: Partial<OutputStreamPrivateInitOptions>);
-	}
-
 	export interface OutputVectorInitOptions {}
 	/**
 	 * Structure used for scatter/gather data output.
@@ -24397,25 +23616,6 @@ declare namespace imports.gi.Gio {
 		 * the size of #buffer.
 		 */
 		public size: number;
-	}
-
-	export interface PermissionClassInitOptions {}
-	interface PermissionClass {}
-	class PermissionClass {
-		public constructor(options?: Partial<PermissionClassInitOptions>);
-		public readonly reserved: any[];
-		public acquire: {(permission: Permission, cancellable: Cancellable | null): boolean;};
-		public acquire_async: {(permission: Permission, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public acquire_finish: {(permission: Permission, result: AsyncResult): boolean;};
-		public release: {(permission: Permission, cancellable: Cancellable | null): boolean;};
-		public release_async: {(permission: Permission, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public release_finish: {(permission: Permission, result: AsyncResult): boolean;};
-	}
-
-	export interface PermissionPrivateInitOptions {}
-	interface PermissionPrivate {}
-	class PermissionPrivate {
-		public constructor(options?: Partial<PermissionPrivateInitOptions>);
 	}
 
 	export interface PollableInputStreamInterfaceInitOptions {}
@@ -24490,43 +23690,6 @@ declare namespace imports.gi.Gio {
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
-	export interface ProxyAddressClassInitOptions {}
-	/**
-	 * Class structure for #GProxyAddress.
-	 */
-	interface ProxyAddressClass {}
-	class ProxyAddressClass {
-		public constructor(options?: Partial<ProxyAddressClassInitOptions>);
-	}
-
-	export interface ProxyAddressEnumeratorClassInitOptions {}
-	/**
-	 * Class structure for #GProxyAddressEnumerator.
-	 */
-	interface ProxyAddressEnumeratorClass {}
-	class ProxyAddressEnumeratorClass {
-		public constructor(options?: Partial<ProxyAddressEnumeratorClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-	}
-
-	export interface ProxyAddressEnumeratorPrivateInitOptions {}
-	interface ProxyAddressEnumeratorPrivate {}
-	class ProxyAddressEnumeratorPrivate {
-		public constructor(options?: Partial<ProxyAddressEnumeratorPrivateInitOptions>);
-	}
-
-	export interface ProxyAddressPrivateInitOptions {}
-	interface ProxyAddressPrivate {}
-	class ProxyAddressPrivate {
-		public constructor(options?: Partial<ProxyAddressPrivateInitOptions>);
-	}
-
 	export interface ProxyInterfaceInitOptions {}
 	/**
 	 * Provides an interface for handling proxy connection and payload.
@@ -24571,34 +23734,6 @@ declare namespace imports.gi.Gio {
 		public readonly g_iface: GObject.TypeInterface;
 		public activate_action_full: {(remote: RemoteActionGroup, action_name: string, parameter: GLib.Variant | null, platform_data: GLib.Variant): void;};
 		public change_action_state_full: {(remote: RemoteActionGroup, action_name: string, value: GLib.Variant, platform_data: GLib.Variant): void;};
-	}
-
-	export interface ResolverClassInitOptions {}
-	interface ResolverClass {}
-	class ResolverClass {
-		public constructor(options?: Partial<ResolverClassInitOptions>);
-		public reload: {(resolver: Resolver): void;};
-		public lookup_by_name: {(resolver: Resolver, hostname: string, cancellable: Cancellable | null): GLib.List;};
-		public lookup_by_name_async: {(resolver: Resolver, hostname: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_by_name_finish: {(resolver: Resolver, result: AsyncResult): GLib.List;};
-		public lookup_by_address: {(resolver: Resolver, address: InetAddress, cancellable: Cancellable | null): string;};
-		public lookup_by_address_async: {(resolver: Resolver, address: InetAddress, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_by_address_finish: {(resolver: Resolver, result: AsyncResult): string;};
-		public lookup_service: {(resolver: Resolver, rrname: string, cancellable: Cancellable | null): GLib.List;};
-		public lookup_service_async: {(resolver: Resolver, rrname: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_service_finish: {(resolver: Resolver, result: AsyncResult): GLib.List;};
-		public lookup_records: {(resolver: Resolver, rrname: string, record_type: ResolverRecordType, cancellable: Cancellable | null): GLib.List;};
-		public lookup_records_async: {(resolver: Resolver, rrname: string, record_type: ResolverRecordType, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_records_finish: {(resolver: Resolver, result: AsyncResult): GLib.List;};
-		public lookup_by_name_with_flags_async: {(resolver: Resolver, hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_by_name_with_flags_finish: {(resolver: Resolver, result: AsyncResult): GLib.List;};
-		public lookup_by_name_with_flags: {(resolver: Resolver, hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable | null): GLib.List;};
-	}
-
-	export interface ResolverPrivateInitOptions {}
-	interface ResolverPrivate {}
-	class ResolverPrivate {
-		public constructor(options?: Partial<ResolverPrivateInitOptions>);
 	}
 
 	export interface ResourceInitOptions {}
@@ -24863,49 +23998,6 @@ declare namespace imports.gi.Gio {
 		public seek: {(seekable: Seekable, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
 		public can_truncate: {(seekable: Seekable): boolean;};
 		public truncate_fn: {(seekable: Seekable, offset: number, cancellable: Cancellable | null): boolean;};
-	}
-
-	export interface SettingsBackendClassInitOptions {}
-	/**
-	 * Class structure for #GSettingsBackend.
-	 */
-	interface SettingsBackendClass {}
-	class SettingsBackendClass {
-		public constructor(options?: Partial<SettingsBackendClassInitOptions>);
-		public readonly padding: any[];
-		public read: {(backend: SettingsBackend, key: string, expected_type: GLib.VariantType, default_value: boolean): GLib.Variant;};
-		public get_writable: {(backend: SettingsBackend, key: string): boolean;};
-		public write: {(backend: SettingsBackend, key: string, value: GLib.Variant, origin_tag: any | null): boolean;};
-		public write_tree: {(backend: SettingsBackend, tree: GLib.Tree, origin_tag: any | null): boolean;};
-		public reset: {(backend: SettingsBackend, key: string, origin_tag: any | null): void;};
-		public subscribe: {(backend: SettingsBackend, name: string): void;};
-		public unsubscribe: {(backend: SettingsBackend, name: string): void;};
-		public sync: {(backend: SettingsBackend): void;};
-		public get_permission: {(backend: SettingsBackend, path: string): Permission;};
-		public read_user_value: {(backend: SettingsBackend, key: string, expected_type: GLib.VariantType): GLib.Variant;};
-	}
-
-	export interface SettingsBackendPrivateInitOptions {}
-	interface SettingsBackendPrivate {}
-	class SettingsBackendPrivate {
-		public constructor(options?: Partial<SettingsBackendPrivateInitOptions>);
-	}
-
-	export interface SettingsClassInitOptions {}
-	interface SettingsClass {}
-	class SettingsClass {
-		public constructor(options?: Partial<SettingsClassInitOptions>);
-		public readonly padding: any[];
-		public writable_changed: {(settings: Settings, key: string): void;};
-		public changed: {(settings: Settings, key: string): void;};
-		public writable_change_event: {(settings: Settings, key: GLib.Quark): boolean;};
-		public change_event: {(settings: Settings, keys: GLib.Quark, n_keys: number): boolean;};
-	}
-
-	export interface SettingsPrivateInitOptions {}
-	interface SettingsPrivate {}
-	class SettingsPrivate {
-		public constructor(options?: Partial<SettingsPrivateInitOptions>);
 	}
 
 	export interface SettingsSchemaInitOptions {}
@@ -25282,96 +24374,6 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
-	export interface SimpleActionGroupClassInitOptions {}
-	interface SimpleActionGroupClass {}
-	class SimpleActionGroupClass {
-		public constructor(options?: Partial<SimpleActionGroupClassInitOptions>);
-		public readonly padding: any[];
-	}
-
-	export interface SimpleActionGroupPrivateInitOptions {}
-	interface SimpleActionGroupPrivate {}
-	class SimpleActionGroupPrivate {
-		public constructor(options?: Partial<SimpleActionGroupPrivateInitOptions>);
-	}
-
-	export interface SimpleAsyncResultClassInitOptions {}
-	interface SimpleAsyncResultClass {}
-	class SimpleAsyncResultClass {
-		public constructor(options?: Partial<SimpleAsyncResultClassInitOptions>);
-	}
-
-	export interface SimpleProxyResolverClassInitOptions {}
-	interface SimpleProxyResolverClass {}
-	class SimpleProxyResolverClass {
-		public constructor(options?: Partial<SimpleProxyResolverClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface SimpleProxyResolverPrivateInitOptions {}
-	interface SimpleProxyResolverPrivate {}
-	class SimpleProxyResolverPrivate {
-		public constructor(options?: Partial<SimpleProxyResolverPrivateInitOptions>);
-	}
-
-	export interface SocketAddressClassInitOptions {}
-	interface SocketAddressClass {}
-	class SocketAddressClass {
-		public constructor(options?: Partial<SocketAddressClassInitOptions>);
-		public get_family: {(address: SocketAddress): SocketFamily;};
-		public get_native_size: {(address: SocketAddress): number;};
-		public to_native: {(address: SocketAddress, dest: any | null, destlen: number): boolean;};
-	}
-
-	export interface SocketAddressEnumeratorClassInitOptions {}
-	/**
-	 * Class structure for #GSocketAddressEnumerator.
-	 */
-	interface SocketAddressEnumeratorClass {}
-	class SocketAddressEnumeratorClass {
-		public constructor(options?: Partial<SocketAddressEnumeratorClassInitOptions>);
-		public next: {(enumerator: SocketAddressEnumerator, cancellable: Cancellable | null): SocketAddress;};
-		public next_async: {(enumerator: SocketAddressEnumerator, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public next_finish: {(enumerator: SocketAddressEnumerator, result: AsyncResult): SocketAddress;};
-	}
-
-	export interface SocketClassInitOptions {}
-	interface SocketClass {}
-	class SocketClass {
-		public constructor(options?: Partial<SocketClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-		public _g_reserved8: {(): void;};
-		public _g_reserved9: {(): void;};
-		public _g_reserved10: {(): void;};
-	}
-
-	export interface SocketClientClassInitOptions {}
-	interface SocketClientClass {}
-	class SocketClientClass {
-		public constructor(options?: Partial<SocketClientClassInitOptions>);
-		public event: {(client: SocketClient, event: SocketClientEvent, connectable: SocketConnectable, connection: IOStream): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-	}
-
-	export interface SocketClientPrivateInitOptions {}
-	interface SocketClientPrivate {}
-	class SocketClientPrivate {
-		public constructor(options?: Partial<SocketClientPrivateInitOptions>);
-	}
-
 	export interface SocketConnectableIfaceInitOptions {}
 	/**
 	 * Provides an interface for returning a #GSocketAddressEnumerator
@@ -25387,99 +24389,6 @@ declare namespace imports.gi.Gio {
 		public enumerate: {(connectable: SocketConnectable): SocketAddressEnumerator;};
 		public proxy_enumerate: {(connectable: SocketConnectable): SocketAddressEnumerator;};
 		public to_string: {(connectable: SocketConnectable): string;};
-	}
-
-	export interface SocketConnectionClassInitOptions {}
-	interface SocketConnectionClass {}
-	class SocketConnectionClass {
-		public constructor(options?: Partial<SocketConnectionClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-	}
-
-	export interface SocketConnectionPrivateInitOptions {}
-	interface SocketConnectionPrivate {}
-	class SocketConnectionPrivate {
-		public constructor(options?: Partial<SocketConnectionPrivateInitOptions>);
-	}
-
-	export interface SocketControlMessageClassInitOptions {}
-	/**
-	 * Class structure for #GSocketControlMessage.
-	 */
-	interface SocketControlMessageClass {}
-	class SocketControlMessageClass {
-		public constructor(options?: Partial<SocketControlMessageClassInitOptions>);
-		public get_size: {(message: SocketControlMessage): number;};
-		public get_level: {(message: SocketControlMessage): number;};
-		public get_type: {(message: SocketControlMessage): number;};
-		public serialize: {(message: SocketControlMessage, data: any): void;};
-		public deserialize: {(level: number, type: number, size: number, data: any): SocketControlMessage;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface SocketControlMessagePrivateInitOptions {}
-	interface SocketControlMessagePrivate {}
-	class SocketControlMessagePrivate {
-		public constructor(options?: Partial<SocketControlMessagePrivateInitOptions>);
-	}
-
-	export interface SocketListenerClassInitOptions {}
-	/**
-	 * Class structure for #GSocketListener.
-	 */
-	interface SocketListenerClass {}
-	class SocketListenerClass {
-		public constructor(options?: Partial<SocketListenerClassInitOptions>);
-		public changed: {(listener: SocketListener): void;};
-		public event: {(listener: SocketListener, event: SocketListenerEvent, socket: Socket): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-	}
-
-	export interface SocketListenerPrivateInitOptions {}
-	interface SocketListenerPrivate {}
-	class SocketListenerPrivate {
-		public constructor(options?: Partial<SocketListenerPrivateInitOptions>);
-	}
-
-	export interface SocketPrivateInitOptions {}
-	interface SocketPrivate {}
-	class SocketPrivate {
-		public constructor(options?: Partial<SocketPrivateInitOptions>);
-	}
-
-	export interface SocketServiceClassInitOptions {}
-	/**
-	 * Class structure for #GSocketService.
-	 */
-	interface SocketServiceClass {}
-	class SocketServiceClass {
-		public constructor(options?: Partial<SocketServiceClassInitOptions>);
-		public incoming: {(service: SocketService, connection: SocketConnection, source_object: GObject.Object): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-	}
-
-	export interface SocketServicePrivateInitOptions {}
-	interface SocketServicePrivate {}
-	class SocketServicePrivate {
-		public constructor(options?: Partial<SocketServicePrivateInitOptions>);
 	}
 
 	export interface SrvTargetInitOptions {}
@@ -25593,60 +24502,6 @@ declare namespace imports.gi.Gio {
 		public init(): void;
 	}
 
-	export interface TaskClassInitOptions {}
-	interface TaskClass {}
-	class TaskClass {
-		public constructor(options?: Partial<TaskClassInitOptions>);
-	}
-
-	export interface TcpConnectionClassInitOptions {}
-	interface TcpConnectionClass {}
-	class TcpConnectionClass {
-		public constructor(options?: Partial<TcpConnectionClassInitOptions>);
-	}
-
-	export interface TcpConnectionPrivateInitOptions {}
-	interface TcpConnectionPrivate {}
-	class TcpConnectionPrivate {
-		public constructor(options?: Partial<TcpConnectionPrivateInitOptions>);
-	}
-
-	export interface TcpWrapperConnectionClassInitOptions {}
-	interface TcpWrapperConnectionClass {}
-	class TcpWrapperConnectionClass {
-		public constructor(options?: Partial<TcpWrapperConnectionClassInitOptions>);
-	}
-
-	export interface TcpWrapperConnectionPrivateInitOptions {}
-	interface TcpWrapperConnectionPrivate {}
-	class TcpWrapperConnectionPrivate {
-		public constructor(options?: Partial<TcpWrapperConnectionPrivateInitOptions>);
-	}
-
-	export interface ThemedIconClassInitOptions {}
-	interface ThemedIconClass {}
-	class ThemedIconClass {
-		public constructor(options?: Partial<ThemedIconClassInitOptions>);
-	}
-
-	export interface ThreadedSocketServiceClassInitOptions {}
-	interface ThreadedSocketServiceClass {}
-	class ThreadedSocketServiceClass {
-		public constructor(options?: Partial<ThreadedSocketServiceClassInitOptions>);
-		public run: {(service: ThreadedSocketService, connection: SocketConnection, source_object: GObject.Object): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface ThreadedSocketServicePrivateInitOptions {}
-	interface ThreadedSocketServicePrivate {}
-	class ThreadedSocketServicePrivate {
-		public constructor(options?: Partial<ThreadedSocketServicePrivateInitOptions>);
-	}
-
 	export interface TlsBackendInterfaceInitOptions {}
 	/**
 	 * Provides an interface for describing TLS-related types.
@@ -25669,20 +24524,6 @@ declare namespace imports.gi.Gio {
 		public get_dtls_server_connection_type: {(): GObject.Type;};
 	}
 
-	export interface TlsCertificateClassInitOptions {}
-	interface TlsCertificateClass {}
-	class TlsCertificateClass {
-		public constructor(options?: Partial<TlsCertificateClassInitOptions>);
-		public readonly padding: any[];
-		public verify: {(cert: TlsCertificate, identity: SocketConnectable | null, trusted_ca: TlsCertificate | null): TlsCertificateFlags;};
-	}
-
-	export interface TlsCertificatePrivateInitOptions {}
-	interface TlsCertificatePrivate {}
-	class TlsCertificatePrivate {
-		public constructor(options?: Partial<TlsCertificatePrivateInitOptions>);
-	}
-
 	export interface TlsClientConnectionInterfaceInitOptions {}
 	/**
 	 * vtable for a #GTlsClientConnection implementation.
@@ -25695,59 +24536,6 @@ declare namespace imports.gi.Gio {
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 		public copy_session_state: {(conn: TlsClientConnection, source: TlsClientConnection): void;};
-	}
-
-	export interface TlsConnectionClassInitOptions {}
-	/**
-	 * The class structure for the #GTlsConnection type.
-	 */
-	interface TlsConnectionClass {}
-	class TlsConnectionClass {
-		public constructor(options?: Partial<TlsConnectionClassInitOptions>);
-		public readonly padding: any[];
-		public accept_certificate: {(connection: TlsConnection, peer_cert: TlsCertificate, errors: TlsCertificateFlags): boolean;};
-		public handshake: {(conn: TlsConnection, cancellable: Cancellable | null): boolean;};
-		public handshake_async: {(conn: TlsConnection, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public handshake_finish: {(conn: TlsConnection, result: AsyncResult): boolean;};
-		public get_binding_data: {(conn: TlsConnection, type: TlsChannelBindingType, data: number[]): boolean;};
-		public get_negotiated_protocol: {(conn: TlsConnection): string | null;};
-	}
-
-	export interface TlsConnectionPrivateInitOptions {}
-	interface TlsConnectionPrivate {}
-	class TlsConnectionPrivate {
-		public constructor(options?: Partial<TlsConnectionPrivateInitOptions>);
-	}
-
-	export interface TlsDatabaseClassInitOptions {}
-	/**
-	 * The class for #GTlsDatabase. Derived classes should implement the various
-	 * virtual methods. _async and _finish methods have a default
-	 * implementation that runs the corresponding sync method in a thread.
-	 */
-	interface TlsDatabaseClass {}
-	class TlsDatabaseClass {
-		public constructor(options?: Partial<TlsDatabaseClassInitOptions>);
-		public readonly padding: any[];
-		public verify_chain: {(self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable | null, interaction: TlsInteraction | null, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable | null): TlsCertificateFlags;};
-		public verify_chain_async: {(self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable | null, interaction: TlsInteraction | null, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public verify_chain_finish: {(self: TlsDatabase, result: AsyncResult): TlsCertificateFlags;};
-		public create_certificate_handle: {(self: TlsDatabase, certificate: TlsCertificate): string | null;};
-		public lookup_certificate_for_handle: {(self: TlsDatabase, handle: string, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null): TlsCertificate | null;};
-		public lookup_certificate_for_handle_async: {(self: TlsDatabase, handle: string, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_certificate_for_handle_finish: {(self: TlsDatabase, result: AsyncResult): TlsCertificate;};
-		public lookup_certificate_issuer: {(self: TlsDatabase, certificate: TlsCertificate, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null): TlsCertificate;};
-		public lookup_certificate_issuer_async: {(self: TlsDatabase, certificate: TlsCertificate, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_certificate_issuer_finish: {(self: TlsDatabase, result: AsyncResult): TlsCertificate;};
-		public lookup_certificates_issued_by: {(self: TlsDatabase, issuer_raw_dn: number[], interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null): GLib.List;};
-		public lookup_certificates_issued_by_async: {(self: TlsDatabase, issuer_raw_dn: number[], interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_certificates_issued_by_finish: {(self: TlsDatabase, result: AsyncResult): GLib.List;};
-	}
-
-	export interface TlsDatabasePrivateInitOptions {}
-	interface TlsDatabasePrivate {}
-	class TlsDatabasePrivate {
-		public constructor(options?: Partial<TlsDatabasePrivateInitOptions>);
 	}
 
 	export interface TlsFileDatabaseInterfaceInitOptions {}
@@ -25764,60 +24552,6 @@ declare namespace imports.gi.Gio {
 		public readonly padding: any[];
 	}
 
-	export interface TlsInteractionClassInitOptions {}
-	/**
-	 * The class for #GTlsInteraction. Derived classes implement the various
-	 * virtual interaction methods to handle TLS interactions.
-	 * 
-	 * Derived classes can choose to implement whichever interactions methods they'd
-	 * like to support by overriding those virtual methods in their class
-	 * initialization function. If a derived class implements an async method,
-	 * it must also implement the corresponding finish method.
-	 * 
-	 * The synchronous interaction methods should implement to display modal dialogs,
-	 * and the asynchronous methods to display modeless dialogs.
-	 * 
-	 * If the user cancels an interaction, then the result should be
-	 * %G_TLS_INTERACTION_FAILED and the error should be set with a domain of
-	 * %G_IO_ERROR and code of %G_IO_ERROR_CANCELLED.
-	 */
-	interface TlsInteractionClass {}
-	class TlsInteractionClass {
-		public constructor(options?: Partial<TlsInteractionClassInitOptions>);
-		public readonly padding: any[];
-		public ask_password: {(interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable | null): TlsInteractionResult;};
-		public ask_password_async: {(interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public ask_password_finish: {(interaction: TlsInteraction, result: AsyncResult): TlsInteractionResult;};
-		public request_certificate: {(interaction: TlsInteraction, connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable | null): TlsInteractionResult;};
-		public request_certificate_async: {(interaction: TlsInteraction, connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public request_certificate_finish: {(interaction: TlsInteraction, result: AsyncResult): TlsInteractionResult;};
-	}
-
-	export interface TlsInteractionPrivateInitOptions {}
-	interface TlsInteractionPrivate {}
-	class TlsInteractionPrivate {
-		public constructor(options?: Partial<TlsInteractionPrivateInitOptions>);
-	}
-
-	export interface TlsPasswordClassInitOptions {}
-	/**
-	 * Class structure for #GTlsPassword.
-	 */
-	interface TlsPasswordClass {}
-	class TlsPasswordClass {
-		public constructor(options?: Partial<TlsPasswordClassInitOptions>);
-		public readonly padding: any[];
-		public get_value: {(password: TlsPassword): [ number[], number ];};
-		public set_value: {(password: TlsPassword, value: number[], length: number, destroy: GLib.DestroyNotify | null): void;};
-		public get_default_warning: {(password: TlsPassword): string;};
-	}
-
-	export interface TlsPasswordPrivateInitOptions {}
-	interface TlsPasswordPrivate {}
-	class TlsPasswordPrivate {
-		public constructor(options?: Partial<TlsPasswordPrivateInitOptions>);
-	}
-
 	export interface TlsServerConnectionInterfaceInitOptions {}
 	/**
 	 * vtable for a #GTlsServerConnection implementation.
@@ -25831,83 +24565,6 @@ declare namespace imports.gi.Gio {
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
-	export interface UnixConnectionClassInitOptions {}
-	interface UnixConnectionClass {}
-	class UnixConnectionClass {
-		public constructor(options?: Partial<UnixConnectionClassInitOptions>);
-	}
-
-	export interface UnixConnectionPrivateInitOptions {}
-	interface UnixConnectionPrivate {}
-	class UnixConnectionPrivate {
-		public constructor(options?: Partial<UnixConnectionPrivateInitOptions>);
-	}
-
-	export interface UnixCredentialsMessageClassInitOptions {}
-	/**
-	 * Class structure for #GUnixCredentialsMessage.
-	 */
-	interface UnixCredentialsMessageClass {}
-	class UnixCredentialsMessageClass {
-		public constructor(options?: Partial<UnixCredentialsMessageClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-	}
-
-	export interface UnixCredentialsMessagePrivateInitOptions {}
-	interface UnixCredentialsMessagePrivate {}
-	class UnixCredentialsMessagePrivate {
-		public constructor(options?: Partial<UnixCredentialsMessagePrivateInitOptions>);
-	}
-
-	export interface UnixFDListClassInitOptions {}
-	interface UnixFDListClass {}
-	class UnixFDListClass {
-		public constructor(options?: Partial<UnixFDListClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface UnixFDListPrivateInitOptions {}
-	interface UnixFDListPrivate {}
-	class UnixFDListPrivate {
-		public constructor(options?: Partial<UnixFDListPrivateInitOptions>);
-	}
-
-	export interface UnixFDMessageClassInitOptions {}
-	interface UnixFDMessageClass {}
-	class UnixFDMessageClass {
-		public constructor(options?: Partial<UnixFDMessageClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-	}
-
-	export interface UnixFDMessagePrivateInitOptions {}
-	interface UnixFDMessagePrivate {}
-	class UnixFDMessagePrivate {
-		public constructor(options?: Partial<UnixFDMessagePrivateInitOptions>);
-	}
-
-	export interface UnixInputStreamClassInitOptions {}
-	interface UnixInputStreamClass {}
-	class UnixInputStreamClass {
-		public constructor(options?: Partial<UnixInputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface UnixInputStreamPrivateInitOptions {}
-	interface UnixInputStreamPrivate {}
-	class UnixInputStreamPrivate {
-		public constructor(options?: Partial<UnixInputStreamPrivateInitOptions>);
-	}
-
 	export interface UnixMountEntryInitOptions {}
 	/**
 	 * Defines a Unix mount entry (e.g. <filename>/media/cdrom</filename>).
@@ -25916,12 +24573,6 @@ declare namespace imports.gi.Gio {
 	interface UnixMountEntry {}
 	class UnixMountEntry {
 		public constructor(options?: Partial<UnixMountEntryInitOptions>);
-	}
-
-	export interface UnixMountMonitorClassInitOptions {}
-	interface UnixMountMonitorClass {}
-	class UnixMountMonitorClass {
-		public constructor(options?: Partial<UnixMountMonitorClassInitOptions>);
 	}
 
 	export interface UnixMountPointInitOptions {}
@@ -26007,58 +24658,6 @@ declare namespace imports.gi.Gio {
 		public is_user_mountable(): boolean;
 	}
 
-	export interface UnixOutputStreamClassInitOptions {}
-	interface UnixOutputStreamClass {}
-	class UnixOutputStreamClass {
-		public constructor(options?: Partial<UnixOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface UnixOutputStreamPrivateInitOptions {}
-	interface UnixOutputStreamPrivate {}
-	class UnixOutputStreamPrivate {
-		public constructor(options?: Partial<UnixOutputStreamPrivateInitOptions>);
-	}
-
-	export interface UnixSocketAddressClassInitOptions {}
-	interface UnixSocketAddressClass {}
-	class UnixSocketAddressClass {
-		public constructor(options?: Partial<UnixSocketAddressClassInitOptions>);
-	}
-
-	export interface UnixSocketAddressPrivateInitOptions {}
-	interface UnixSocketAddressPrivate {}
-	class UnixSocketAddressPrivate {
-		public constructor(options?: Partial<UnixSocketAddressPrivateInitOptions>);
-	}
-
-	export interface VfsClassInitOptions {}
-	interface VfsClass {}
-	class VfsClass {
-		public constructor(options?: Partial<VfsClassInitOptions>);
-		public is_active: {(vfs: Vfs): boolean;};
-		public get_file_for_path: {(vfs: Vfs, path: string): File;};
-		public get_file_for_uri: {(vfs: Vfs, uri: string): File;};
-		public get_supported_uri_schemes: {(vfs: Vfs): string[];};
-		public parse_name: {(vfs: Vfs, parse_name: string): File;};
-		public local_file_add_info: {(vfs: Vfs, filename: string, device: number, attribute_matcher: FileAttributeMatcher, info: FileInfo, cancellable: Cancellable | null, extra_data: any | null, free_extra_data: GLib.DestroyNotify): void;};
-		public add_writable_namespaces: {(vfs: Vfs, list: FileAttributeInfoList): void;};
-		public local_file_set_attributes: {(vfs: Vfs, filename: string, info: FileInfo, flags: FileQueryInfoFlags, cancellable: Cancellable | null): boolean;};
-		public local_file_removed: {(vfs: Vfs, filename: string): void;};
-		public local_file_moved: {(vfs: Vfs, source: string, dest: string): void;};
-		public deserialize_icon: {(vfs: Vfs, value: GLib.Variant): Icon;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-	}
-
 	export interface VolumeIfaceInitOptions {}
 	/**
 	 * Interface for implementing operations for mountable volumes.
@@ -26091,49 +24690,6 @@ declare namespace imports.gi.Gio {
 		public eject_with_operation_finish: {(volume: Volume, result: AsyncResult): boolean;};
 		public get_sort_key: {(volume: Volume): string | null;};
 		public get_symbolic_icon: {(volume: Volume): Icon;};
-	}
-
-	export interface VolumeMonitorClassInitOptions {}
-	interface VolumeMonitorClass {}
-	class VolumeMonitorClass {
-		public constructor(options?: Partial<VolumeMonitorClassInitOptions>);
-		public volume_added: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
-		public volume_removed: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
-		public volume_changed: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
-		public mount_added: {(volume_monitor: VolumeMonitor, mount: Mount): void;};
-		public mount_removed: {(volume_monitor: VolumeMonitor, mount: Mount): void;};
-		public mount_pre_unmount: {(volume_monitor: VolumeMonitor, mount: Mount): void;};
-		public mount_changed: {(volume_monitor: VolumeMonitor, mount: Mount): void;};
-		public drive_connected: {(volume_monitor: VolumeMonitor, drive: Drive): void;};
-		public drive_disconnected: {(volume_monitor: VolumeMonitor, drive: Drive): void;};
-		public drive_changed: {(volume_monitor: VolumeMonitor, drive: Drive): void;};
-		public is_supported: {(): boolean;};
-		public get_connected_drives: {(volume_monitor: VolumeMonitor): GLib.List;};
-		public get_volumes: {(volume_monitor: VolumeMonitor): GLib.List;};
-		public get_mounts: {(volume_monitor: VolumeMonitor): GLib.List;};
-		public get_volume_for_uuid: {(volume_monitor: VolumeMonitor, uuid: string): Volume | null;};
-		public get_mount_for_uuid: {(volume_monitor: VolumeMonitor, uuid: string): Mount | null;};
-		public adopt_orphan_mount: {(mount: Mount, volume_monitor: VolumeMonitor): Volume;};
-		public drive_eject_button: {(volume_monitor: VolumeMonitor, drive: Drive): void;};
-		public drive_stop_button: {(volume_monitor: VolumeMonitor, drive: Drive): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-	}
-
-	export interface ZlibCompressorClassInitOptions {}
-	interface ZlibCompressorClass {}
-	class ZlibCompressorClass {
-		public constructor(options?: Partial<ZlibCompressorClassInitOptions>);
-	}
-
-	export interface ZlibDecompressorClassInitOptions {}
-	interface ZlibDecompressorClass {}
-	class ZlibDecompressorClass {
-		public constructor(options?: Partial<ZlibDecompressorClassInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

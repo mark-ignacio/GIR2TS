@@ -60,6 +60,40 @@
                         }
                     }
                 }
+            },
+            "Container": {
+                "function": {
+                    "class_find_child_property": {
+                        "param": {
+                            "klass": {
+                                "type": "GObject.Object"
+                            }
+                        }
+                    },
+                    "class_list_child_properties": {
+                        "param": {
+                            "klass": {
+                                "type": "GObject.Object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "function": {
+            "container_class_find_child_property": {
+                "param": {
+                    "klass": {
+                        "type": "GObject.Object"
+                    }
+                }
+            },
+            "container_class_list_child_properties": {
+                "param": {
+                    "klass": {
+                        "type": "GObject.Object"
+                    }
+                }
             }
         }
     }

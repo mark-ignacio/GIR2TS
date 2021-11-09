@@ -7455,130 +7455,6 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
-	export interface AuthenticationRequestClassInitOptions {}
-	interface AuthenticationRequestClass {}
-	class AuthenticationRequestClass {
-		public constructor(options?: Partial<AuthenticationRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface AuthenticationRequestPrivateInitOptions {}
-	interface AuthenticationRequestPrivate {}
-	class AuthenticationRequestPrivate {
-		public constructor(options?: Partial<AuthenticationRequestPrivateInitOptions>);
-	}
-
-	export interface AutomationSessionClassInitOptions {}
-	interface AutomationSessionClass {}
-	class AutomationSessionClass {
-		public constructor(options?: Partial<AutomationSessionClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface AutomationSessionPrivateInitOptions {}
-	interface AutomationSessionPrivate {}
-	class AutomationSessionPrivate {
-		public constructor(options?: Partial<AutomationSessionPrivateInitOptions>);
-	}
-
-	export interface BackForwardListClassInitOptions {}
-	interface BackForwardListClass {}
-	class BackForwardListClass {
-		public constructor(options?: Partial<BackForwardListClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface BackForwardListItemClassInitOptions {}
-	interface BackForwardListItemClass {}
-	class BackForwardListItemClass {
-		public constructor(options?: Partial<BackForwardListItemClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface BackForwardListItemPrivateInitOptions {}
-	interface BackForwardListItemPrivate {}
-	class BackForwardListItemPrivate {
-		public constructor(options?: Partial<BackForwardListItemPrivateInitOptions>);
-	}
-
-	export interface BackForwardListPrivateInitOptions {}
-	interface BackForwardListPrivate {}
-	class BackForwardListPrivate {
-		public constructor(options?: Partial<BackForwardListPrivateInitOptions>);
-	}
-
-	export interface ColorChooserRequestClassInitOptions {}
-	interface ColorChooserRequestClass {}
-	class ColorChooserRequestClass {
-		public constructor(options?: Partial<ColorChooserRequestClassInitOptions>);
-	}
-
-	export interface ColorChooserRequestPrivateInitOptions {}
-	interface ColorChooserRequestPrivate {}
-	class ColorChooserRequestPrivate {
-		public constructor(options?: Partial<ColorChooserRequestPrivateInitOptions>);
-	}
-
-	export interface ContextMenuClassInitOptions {}
-	interface ContextMenuClass {}
-	class ContextMenuClass {
-		public constructor(options?: Partial<ContextMenuClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface ContextMenuItemClassInitOptions {}
-	interface ContextMenuItemClass {}
-	class ContextMenuItemClass {
-		public constructor(options?: Partial<ContextMenuItemClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface ContextMenuItemPrivateInitOptions {}
-	interface ContextMenuItemPrivate {}
-	class ContextMenuItemPrivate {
-		public constructor(options?: Partial<ContextMenuItemPrivateInitOptions>);
-	}
-
-	export interface ContextMenuPrivateInitOptions {}
-	interface ContextMenuPrivate {}
-	class ContextMenuPrivate {
-		public constructor(options?: Partial<ContextMenuPrivateInitOptions>);
-	}
-
-	export interface CookieManagerClassInitOptions {}
-	interface CookieManagerClass {}
-	class CookieManagerClass {
-		public constructor(options?: Partial<CookieManagerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface CookieManagerPrivateInitOptions {}
-	interface CookieManagerPrivate {}
-	class CookieManagerPrivate {
-		public constructor(options?: Partial<CookieManagerPrivateInitOptions>);
-	}
-
 	export interface CredentialInitOptions {}
 	interface Credential {}
 	class Credential {
@@ -7620,151 +7496,6 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns %TRUE if the credential has a password or %FALSE otherwise.
 		 */
 		public has_password(): boolean;
-	}
-
-	export interface DeviceInfoPermissionRequestClassInitOptions {}
-	interface DeviceInfoPermissionRequestClass {}
-	class DeviceInfoPermissionRequestClass {
-		public constructor(options?: Partial<DeviceInfoPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface DeviceInfoPermissionRequestPrivateInitOptions {}
-	interface DeviceInfoPermissionRequestPrivate {}
-	class DeviceInfoPermissionRequestPrivate {
-		public constructor(options?: Partial<DeviceInfoPermissionRequestPrivateInitOptions>);
-	}
-
-	export interface DownloadClassInitOptions {}
-	interface DownloadClass {}
-	class DownloadClass {
-		public constructor(options?: Partial<DownloadClassInitOptions>);
-		public decide_destination: {(download: Download, suggested_filename: string): boolean;};
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface DownloadPrivateInitOptions {}
-	interface DownloadPrivate {}
-	class DownloadPrivate {
-		public constructor(options?: Partial<DownloadPrivateInitOptions>);
-	}
-
-	export interface EditorStateClassInitOptions {}
-	interface EditorStateClass {}
-	class EditorStateClass {
-		public constructor(options?: Partial<EditorStateClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface EditorStatePrivateInitOptions {}
-	interface EditorStatePrivate {}
-	class EditorStatePrivate {
-		public constructor(options?: Partial<EditorStatePrivateInitOptions>);
-	}
-
-	export interface FaviconDatabaseClassInitOptions {}
-	interface FaviconDatabaseClass {}
-	class FaviconDatabaseClass {
-		public constructor(options?: Partial<FaviconDatabaseClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface FaviconDatabasePrivateInitOptions {}
-	interface FaviconDatabasePrivate {}
-	class FaviconDatabasePrivate {
-		public constructor(options?: Partial<FaviconDatabasePrivateInitOptions>);
-	}
-
-	export interface FileChooserRequestClassInitOptions {}
-	interface FileChooserRequestClass {}
-	class FileChooserRequestClass {
-		public constructor(options?: Partial<FileChooserRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface FileChooserRequestPrivateInitOptions {}
-	interface FileChooserRequestPrivate {}
-	class FileChooserRequestPrivate {
-		public constructor(options?: Partial<FileChooserRequestPrivateInitOptions>);
-	}
-
-	export interface FindControllerClassInitOptions {}
-	interface FindControllerClass {}
-	class FindControllerClass {
-		public constructor(options?: Partial<FindControllerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface FindControllerPrivateInitOptions {}
-	interface FindControllerPrivate {}
-	class FindControllerPrivate {
-		public constructor(options?: Partial<FindControllerPrivateInitOptions>);
-	}
-
-	export interface FormSubmissionRequestClassInitOptions {}
-	interface FormSubmissionRequestClass {}
-	class FormSubmissionRequestClass {
-		public constructor(options?: Partial<FormSubmissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface FormSubmissionRequestPrivateInitOptions {}
-	interface FormSubmissionRequestPrivate {}
-	class FormSubmissionRequestPrivate {
-		public constructor(options?: Partial<FormSubmissionRequestPrivateInitOptions>);
-	}
-
-	export interface GeolocationManagerClassInitOptions {}
-	interface GeolocationManagerClass {}
-	class GeolocationManagerClass {
-		public constructor(options?: Partial<GeolocationManagerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface GeolocationManagerPrivateInitOptions {}
-	interface GeolocationManagerPrivate {}
-	class GeolocationManagerPrivate {
-		public constructor(options?: Partial<GeolocationManagerPrivateInitOptions>);
-	}
-
-	export interface GeolocationPermissionRequestClassInitOptions {}
-	interface GeolocationPermissionRequestClass {}
-	class GeolocationPermissionRequestClass {
-		public constructor(options?: Partial<GeolocationPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface GeolocationPermissionRequestPrivateInitOptions {}
-	interface GeolocationPermissionRequestPrivate {}
-	class GeolocationPermissionRequestPrivate {
-		public constructor(options?: Partial<GeolocationPermissionRequestPrivateInitOptions>);
 	}
 
 	export interface GeolocationPositionInitOptions {}
@@ -7818,22 +7549,6 @@ declare namespace imports.gi.WebKit2 {
 		 * @param timestamp timestamp in seconds since the epoch, or 0 to use current time
 		 */
 		public set_timestamp(timestamp: number): void;
-	}
-
-	export interface HitTestResultClassInitOptions {}
-	interface HitTestResultClass {}
-	class HitTestResultClass {
-		public constructor(options?: Partial<HitTestResultClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface HitTestResultPrivateInitOptions {}
-	interface HitTestResultPrivate {}
-	class HitTestResultPrivate {
-		public constructor(options?: Partial<HitTestResultPrivateInitOptions>);
 	}
 
 	export interface ITPFirstPartyInitOptions {}
@@ -7903,39 +7618,6 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
-	export interface InputMethodContextClassInitOptions {}
-	interface InputMethodContextClass {}
-	class InputMethodContextClass {
-		public constructor(options?: Partial<InputMethodContextClassInitOptions>);
-		public preedit_started: {(context: InputMethodContext): void;};
-		public preedit_changed: {(context: InputMethodContext): void;};
-		public preedit_finished: {(context: InputMethodContext): void;};
-		public committed: {(context: InputMethodContext, text: string): void;};
-		public delete_surrounding: {(context: InputMethodContext, offset: number, n_chars: number): void;};
-		public set_enable_preedit: {(context: InputMethodContext, enabled: boolean): void;};
-		public get_preedit: {(context: InputMethodContext): [ text: string | null, underlines: GLib.List | null, cursor_offset: number | null ];};
-		public filter_key_event: {(context: InputMethodContext, key_event: Gdk.EventKey): boolean;};
-		public notify_focus_in: {(context: InputMethodContext): void;};
-		public notify_focus_out: {(context: InputMethodContext): void;};
-		public notify_cursor_area: {(context: InputMethodContext, x: number, y: number, width: number, height: number): void;};
-		public notify_surrounding: {(context: InputMethodContext, text: string, length: number, cursor_index: number, selection_index: number): void;};
-		public reset: {(context: InputMethodContext): void;};
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-		public _webkit_reserved4: {(): void;};
-		public _webkit_reserved5: {(): void;};
-		public _webkit_reserved6: {(): void;};
-		public _webkit_reserved7: {(): void;};
-	}
-
-	export interface InputMethodContextPrivateInitOptions {}
-	interface InputMethodContextPrivate {}
-	class InputMethodContextPrivate {
-		public constructor(options?: Partial<InputMethodContextPrivateInitOptions>);
-	}
-
 	export interface InputMethodUnderlineInitOptions {}
 	interface InputMethodUnderline {}
 	class InputMethodUnderline {
@@ -7962,22 +7644,6 @@ declare namespace imports.gi.WebKit2 {
 		 * @param rgba a #GdkRGBA or %NULL
 		 */
 		public set_color(rgba: Gdk.RGBA | null): void;
-	}
-
-	export interface InstallMissingMediaPluginsPermissionRequestClassInitOptions {}
-	interface InstallMissingMediaPluginsPermissionRequestClass {}
-	class InstallMissingMediaPluginsPermissionRequestClass {
-		public constructor(options?: Partial<InstallMissingMediaPluginsPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface InstallMissingMediaPluginsPermissionRequestPrivateInitOptions {}
-	interface InstallMissingMediaPluginsPermissionRequestPrivate {}
-	class InstallMissingMediaPluginsPermissionRequestPrivate {
-		public constructor(options?: Partial<InstallMissingMediaPluginsPermissionRequestPrivateInitOptions>);
 	}
 
 	export interface JavascriptResultInitOptions {}
@@ -8020,22 +7686,6 @@ declare namespace imports.gi.WebKit2 {
 		 * thread.
 		 */
 		public unref(): void;
-	}
-
-	export interface MediaKeySystemPermissionRequestClassInitOptions {}
-	interface MediaKeySystemPermissionRequestClass {}
-	class MediaKeySystemPermissionRequestClass {
-		public constructor(options?: Partial<MediaKeySystemPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface MediaKeySystemPermissionRequestPrivateInitOptions {}
-	interface MediaKeySystemPermissionRequestPrivate {}
-	class MediaKeySystemPermissionRequestPrivate {
-		public constructor(options?: Partial<MediaKeySystemPermissionRequestPrivateInitOptions>);
 	}
 
 	export interface MimeInfoInitOptions {}
@@ -8118,22 +7768,6 @@ declare namespace imports.gi.WebKit2 {
 		public is_user_gesture(): boolean;
 	}
 
-	export interface NavigationPolicyDecisionClassInitOptions {}
-	interface NavigationPolicyDecisionClass {}
-	class NavigationPolicyDecisionClass {
-		public constructor(options?: Partial<NavigationPolicyDecisionClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface NavigationPolicyDecisionPrivateInitOptions {}
-	interface NavigationPolicyDecisionPrivate {}
-	class NavigationPolicyDecisionPrivate {
-		public constructor(options?: Partial<NavigationPolicyDecisionPrivateInitOptions>);
-	}
-
 	export interface NetworkProxySettingsInitOptions {}
 	interface NetworkProxySettings {}
 	class NetworkProxySettings {
@@ -8194,46 +7828,6 @@ declare namespace imports.gi.WebKit2 {
 		public free(): void;
 	}
 
-	export interface NotificationClassInitOptions {}
-	interface NotificationClass {}
-	class NotificationClass {
-		public constructor(options?: Partial<NotificationClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-		public _webkit_reserved4: {(): void;};
-		public _webkit_reserved5: {(): void;};
-	}
-
-	export interface NotificationPermissionRequestClassInitOptions {}
-	interface NotificationPermissionRequestClass {}
-	class NotificationPermissionRequestClass {
-		public constructor(options?: Partial<NotificationPermissionRequestClassInitOptions>);
-	}
-
-	export interface NotificationPermissionRequestPrivateInitOptions {}
-	interface NotificationPermissionRequestPrivate {}
-	class NotificationPermissionRequestPrivate {
-		public constructor(options?: Partial<NotificationPermissionRequestPrivateInitOptions>);
-	}
-
-	export interface NotificationPrivateInitOptions {}
-	interface NotificationPrivate {}
-	class NotificationPrivate {
-		public constructor(options?: Partial<NotificationPrivateInitOptions>);
-	}
-
-	export interface OptionMenuClassInitOptions {}
-	interface OptionMenuClass {}
-	class OptionMenuClass {
-		public constructor(options?: Partial<OptionMenuClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
 	export interface OptionMenuItemInitOptions {}
 	interface OptionMenuItem {}
 	class OptionMenuItem {
@@ -8279,12 +7873,6 @@ declare namespace imports.gi.WebKit2 {
 		public is_selected(): boolean;
 	}
 
-	export interface OptionMenuPrivateInitOptions {}
-	interface OptionMenuPrivate {}
-	class OptionMenuPrivate {
-		public constructor(options?: Partial<OptionMenuPrivateInitOptions>);
-	}
-
 	export interface PermissionRequestIfaceInitOptions {}
 	interface PermissionRequestIface {}
 	class PermissionRequestIface {
@@ -8292,104 +7880,6 @@ declare namespace imports.gi.WebKit2 {
 		public readonly parent_interface: GObject.TypeInterface;
 		public allow: {(request: PermissionRequest): void;};
 		public deny: {(request: PermissionRequest): void;};
-	}
-
-	export interface PluginClassInitOptions {}
-	interface PluginClass {}
-	class PluginClass {
-		public constructor(options?: Partial<PluginClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface PluginPrivateInitOptions {}
-	interface PluginPrivate {}
-	class PluginPrivate {
-		public constructor(options?: Partial<PluginPrivateInitOptions>);
-	}
-
-	export interface PointerLockPermissionRequestClassInitOptions {}
-	interface PointerLockPermissionRequestClass {}
-	class PointerLockPermissionRequestClass {
-		public constructor(options?: Partial<PointerLockPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface PointerLockPermissionRequestPrivateInitOptions {}
-	interface PointerLockPermissionRequestPrivate {}
-	class PointerLockPermissionRequestPrivate {
-		public constructor(options?: Partial<PointerLockPermissionRequestPrivateInitOptions>);
-	}
-
-	export interface PolicyDecisionClassInitOptions {}
-	interface PolicyDecisionClass {}
-	class PolicyDecisionClass {
-		public constructor(options?: Partial<PolicyDecisionClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface PolicyDecisionPrivateInitOptions {}
-	interface PolicyDecisionPrivate {}
-	class PolicyDecisionPrivate {
-		public constructor(options?: Partial<PolicyDecisionPrivateInitOptions>);
-	}
-
-	export interface PrintCustomWidgetClassInitOptions {}
-	interface PrintCustomWidgetClass {}
-	class PrintCustomWidgetClass {
-		public constructor(options?: Partial<PrintCustomWidgetClassInitOptions>);
-		public apply: {(print_custom_widget: PrintCustomWidget, widget: Gtk.Widget): void;};
-		public update: {(print_custom_widget: PrintCustomWidget, widget: Gtk.Widget, page_setup: Gtk.PageSetup, print_settings: Gtk.PrintSettings): void;};
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface PrintCustomWidgetPrivateInitOptions {}
-	interface PrintCustomWidgetPrivate {}
-	class PrintCustomWidgetPrivate {
-		public constructor(options?: Partial<PrintCustomWidgetPrivateInitOptions>);
-	}
-
-	export interface PrintOperationClassInitOptions {}
-	interface PrintOperationClass {}
-	class PrintOperationClass {
-		public constructor(options?: Partial<PrintOperationClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface PrintOperationPrivateInitOptions {}
-	interface PrintOperationPrivate {}
-	class PrintOperationPrivate {
-		public constructor(options?: Partial<PrintOperationPrivateInitOptions>);
-	}
-
-	export interface ResponsePolicyDecisionClassInitOptions {}
-	interface ResponsePolicyDecisionClass {}
-	class ResponsePolicyDecisionClass {
-		public constructor(options?: Partial<ResponsePolicyDecisionClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface ResponsePolicyDecisionPrivateInitOptions {}
-	interface ResponsePolicyDecisionPrivate {}
-	class ResponsePolicyDecisionPrivate {
-		public constructor(options?: Partial<ResponsePolicyDecisionPrivateInitOptions>);
 	}
 
 	export interface ScriptDialogInitOptions {}
@@ -8453,22 +7943,6 @@ declare namespace imports.gi.WebKit2 {
 		 * thread.
 		 */
 		public unref(): void;
-	}
-
-	export interface SecurityManagerClassInitOptions {}
-	interface SecurityManagerClass {}
-	class SecurityManagerClass {
-		public constructor(options?: Partial<SecurityManagerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface SecurityManagerPrivateInitOptions {}
-	interface SecurityManagerPrivate {}
-	class SecurityManagerPrivate {
-		public constructor(options?: Partial<SecurityManagerPrivateInitOptions>);
 	}
 
 	export interface SecurityOriginInitOptions {}
@@ -8542,70 +8016,6 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
-	export interface SettingsClassInitOptions {}
-	interface SettingsClass {}
-	class SettingsClass {
-		public constructor(options?: Partial<SettingsClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface SettingsPrivateInitOptions {}
-	interface SettingsPrivate {}
-	class SettingsPrivate {
-		public constructor(options?: Partial<SettingsPrivateInitOptions>);
-	}
-
-	export interface URIRequestClassInitOptions {}
-	interface URIRequestClass {}
-	class URIRequestClass {
-		public constructor(options?: Partial<URIRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface URIRequestPrivateInitOptions {}
-	interface URIRequestPrivate {}
-	class URIRequestPrivate {
-		public constructor(options?: Partial<URIRequestPrivateInitOptions>);
-	}
-
-	export interface URIResponseClassInitOptions {}
-	interface URIResponseClass {}
-	class URIResponseClass {
-		public constructor(options?: Partial<URIResponseClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface URIResponsePrivateInitOptions {}
-	interface URIResponsePrivate {}
-	class URIResponsePrivate {
-		public constructor(options?: Partial<URIResponsePrivateInitOptions>);
-	}
-
-	export interface URISchemeRequestClassInitOptions {}
-	interface URISchemeRequestClass {}
-	class URISchemeRequestClass {
-		public constructor(options?: Partial<URISchemeRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface URISchemeRequestPrivateInitOptions {}
-	interface URISchemeRequestPrivate {}
-	class URISchemeRequestPrivate {
-		public constructor(options?: Partial<URISchemeRequestPrivateInitOptions>);
-	}
-
 	export interface UserContentFilterInitOptions {}
 	interface UserContentFilter {}
 	class UserContentFilter {
@@ -8629,70 +8039,6 @@ declare namespace imports.gi.WebKit2 {
 		 * be called from any thread.
 		 */
 		public unref(): void;
-	}
-
-	export interface UserContentFilterStoreClassInitOptions {}
-	interface UserContentFilterStoreClass {}
-	class UserContentFilterStoreClass {
-		public constructor(options?: Partial<UserContentFilterStoreClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface UserContentFilterStorePrivateInitOptions {}
-	interface UserContentFilterStorePrivate {}
-	class UserContentFilterStorePrivate {
-		public constructor(options?: Partial<UserContentFilterStorePrivateInitOptions>);
-	}
-
-	export interface UserContentManagerClassInitOptions {}
-	interface UserContentManagerClass {}
-	class UserContentManagerClass {
-		public constructor(options?: Partial<UserContentManagerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface UserContentManagerPrivateInitOptions {}
-	interface UserContentManagerPrivate {}
-	class UserContentManagerPrivate {
-		public constructor(options?: Partial<UserContentManagerPrivateInitOptions>);
-	}
-
-	export interface UserMediaPermissionRequestClassInitOptions {}
-	interface UserMediaPermissionRequestClass {}
-	class UserMediaPermissionRequestClass {
-		public constructor(options?: Partial<UserMediaPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface UserMediaPermissionRequestPrivateInitOptions {}
-	interface UserMediaPermissionRequestPrivate {}
-	class UserMediaPermissionRequestPrivate {
-		public constructor(options?: Partial<UserMediaPermissionRequestPrivateInitOptions>);
-	}
-
-	export interface UserMessageClassInitOptions {}
-	interface UserMessageClass {}
-	class UserMessageClass {
-		public constructor(options?: Partial<UserMessageClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface UserMessagePrivateInitOptions {}
-	interface UserMessagePrivate {}
-	class UserMessagePrivate {
-		public constructor(options?: Partial<UserMessagePrivateInitOptions>);
 	}
 
 	export interface UserScriptInitOptions {}
@@ -8789,115 +8135,6 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
-	export interface WebContextClassInitOptions {}
-	interface WebContextClass {}
-	class WebContextClass {
-		public constructor(options?: Partial<WebContextClassInitOptions>);
-		public download_started: {(context: WebContext, download: Download): void;};
-		public initialize_web_extensions: {(context: WebContext): void;};
-		public initialize_notification_permissions: {(context: WebContext): void;};
-		public automation_started: {(context: WebContext, session: AutomationSession): void;};
-		public user_message_received: {(context: WebContext, message: UserMessage): boolean;};
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-	}
-
-	export interface WebContextPrivateInitOptions {}
-	interface WebContextPrivate {}
-	class WebContextPrivate {
-		public constructor(options?: Partial<WebContextPrivateInitOptions>);
-	}
-
-	export interface WebInspectorClassInitOptions {}
-	interface WebInspectorClass {}
-	class WebInspectorClass {
-		public constructor(options?: Partial<WebInspectorClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebInspectorPrivateInitOptions {}
-	interface WebInspectorPrivate {}
-	class WebInspectorPrivate {
-		public constructor(options?: Partial<WebInspectorPrivateInitOptions>);
-	}
-
-	export interface WebResourceClassInitOptions {}
-	interface WebResourceClass {}
-	class WebResourceClass {
-		public constructor(options?: Partial<WebResourceClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebResourcePrivateInitOptions {}
-	interface WebResourcePrivate {}
-	class WebResourcePrivate {
-		public constructor(options?: Partial<WebResourcePrivateInitOptions>);
-	}
-
-	export interface WebViewBaseClassInitOptions {}
-	interface WebViewBaseClass {}
-	class WebViewBaseClass {
-		public constructor(options?: Partial<WebViewBaseClassInitOptions>);
-		public readonly parentClass: Gtk.ContainerClass;
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebViewBasePrivateInitOptions {}
-	interface WebViewBasePrivate {}
-	class WebViewBasePrivate {
-		public constructor(options?: Partial<WebViewBasePrivateInitOptions>);
-	}
-
-	export interface WebViewClassInitOptions {}
-	interface WebViewClass {}
-	class WebViewClass {
-		public constructor(options?: Partial<WebViewClassInitOptions>);
-		public load_changed: {(web_view: WebView, load_event: LoadEvent): void;};
-		public load_failed: {(web_view: WebView, load_event: LoadEvent, failing_uri: string, error: GLib.Error): boolean;};
-		public create: {(web_view: WebView, navigation_action: NavigationAction): Gtk.Widget;};
-		public ready_to_show: {(web_view: WebView): void;};
-		public run_as_modal: {(web_view: WebView): void;};
-		public close: {(web_view: WebView): void;};
-		public script_dialog: {(web_view: WebView, dialog: ScriptDialog): boolean;};
-		public decide_policy: {(web_view: WebView, decision: PolicyDecision, type: PolicyDecisionType): boolean;};
-		public permission_request: {(web_view: WebView, permission_request: PermissionRequest): boolean;};
-		public mouse_target_changed: {(web_view: WebView, hit_test_result: HitTestResult, modifiers: number): void;};
-		public print: {(web_view: WebView, print_operation: PrintOperation): boolean;};
-		public resource_load_started: {(web_view: WebView, resource: WebResource, request: URIRequest): void;};
-		public enter_fullscreen: {(web_view: WebView): boolean;};
-		public leave_fullscreen: {(web_view: WebView): boolean;};
-		public run_file_chooser: {(web_view: WebView, request: FileChooserRequest): boolean;};
-		public context_menu: {(web_view: WebView, context_menu: ContextMenu, event: Gdk.Event, hit_test_result: HitTestResult): boolean;};
-		public context_menu_dismissed: {(web_view: WebView): void;};
-		public submit_form: {(web_view: WebView, request: FormSubmissionRequest): void;};
-		public insecure_content_detected: {(web_view: WebView, event: InsecureContentEvent): void;};
-		public web_process_crashed: {(web_view: WebView): boolean;};
-		public authenticate: {(web_view: WebView, request: AuthenticationRequest): boolean;};
-		public load_failed_with_tls_errors: {(web_view: WebView, failing_uri: string, certificate: Gio.TlsCertificate, errors: Gio.TlsCertificateFlags): boolean;};
-		public show_notification: {(web_view: WebView, notification: Notification): boolean;};
-		public run_color_chooser: {(web_view: WebView, request: ColorChooserRequest): boolean;};
-		public show_option_menu: {(web_view: WebView, rectangle: Gdk.Rectangle, menu: OptionMenu): boolean;};
-		public web_process_terminated: {(web_view: WebView, reason: WebProcessTerminationReason): void;};
-		public user_message_received: {(web_view: WebView, message: UserMessage): boolean;};
-		public _webkit_reserved0: {(): void;};
-	}
-
-	export interface WebViewPrivateInitOptions {}
-	interface WebViewPrivate {}
-	class WebViewPrivate {
-		public constructor(options?: Partial<WebViewPrivateInitOptions>);
-	}
-
 	export interface WebViewSessionStateInitOptions {}
 	interface WebViewSessionState {}
 	class WebViewSessionState {
@@ -8966,70 +8203,6 @@ declare namespace imports.gi.WebKit2 {
 		 * called from any thread.
 		 */
 		public unref(): void;
-	}
-
-	export interface WebsiteDataAccessPermissionRequestClassInitOptions {}
-	interface WebsiteDataAccessPermissionRequestClass {}
-	class WebsiteDataAccessPermissionRequestClass {
-		public constructor(options?: Partial<WebsiteDataAccessPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebsiteDataAccessPermissionRequestPrivateInitOptions {}
-	interface WebsiteDataAccessPermissionRequestPrivate {}
-	class WebsiteDataAccessPermissionRequestPrivate {
-		public constructor(options?: Partial<WebsiteDataAccessPermissionRequestPrivateInitOptions>);
-	}
-
-	export interface WebsiteDataManagerClassInitOptions {}
-	interface WebsiteDataManagerClass {}
-	class WebsiteDataManagerClass {
-		public constructor(options?: Partial<WebsiteDataManagerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebsiteDataManagerPrivateInitOptions {}
-	interface WebsiteDataManagerPrivate {}
-	class WebsiteDataManagerPrivate {
-		public constructor(options?: Partial<WebsiteDataManagerPrivateInitOptions>);
-	}
-
-	export interface WebsitePoliciesClassInitOptions {}
-	interface WebsitePoliciesClass {}
-	class WebsitePoliciesClass {
-		public constructor(options?: Partial<WebsitePoliciesClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebsitePoliciesPrivateInitOptions {}
-	interface WebsitePoliciesPrivate {}
-	class WebsitePoliciesPrivate {
-		public constructor(options?: Partial<WebsitePoliciesPrivateInitOptions>);
-	}
-
-	export interface WindowPropertiesClassInitOptions {}
-	interface WindowPropertiesClass {}
-	class WindowPropertiesClass {
-		public constructor(options?: Partial<WindowPropertiesClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WindowPropertiesPrivateInitOptions {}
-	interface WindowPropertiesPrivate {}
-	class WindowPropertiesPrivate {
-		public constructor(options?: Partial<WindowPropertiesPrivateInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,

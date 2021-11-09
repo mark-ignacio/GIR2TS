@@ -1893,36 +1893,6 @@ declare namespace imports.gi.GdkPixbuf {
 		public constructor(options?: Partial<PixbufSimpleAnimIterInitOptions>);
 	}
 
-	export interface PixbufAnimationClassInitOptions {}
-	/**
-	 * Modules supporting animations must derive a type from
-	 * {@link Animation}, providing suitable implementations of the
-	 * virtual functions.
-	 */
-	interface PixbufAnimationClass {}
-	class PixbufAnimationClass {
-		public constructor(options?: Partial<PixbufAnimationClassInitOptions>);
-		public is_static_image: {(animation: PixbufAnimation): boolean;};
-		public get_static_image: {(animation: PixbufAnimation): Pixbuf;};
-		public get_size: {(animation: PixbufAnimation, width: number, height: number): void;};
-		public get_iter: {(animation: PixbufAnimation, start_time: GLib.TimeVal | null): PixbufAnimationIter;};
-	}
-
-	export interface PixbufAnimationIterClassInitOptions {}
-	/**
-	 * Modules supporting animations must derive a type from
-	 * {@link AnimationIter}, providing suitable implementations of the
-	 * virtual functions.
-	 */
-	interface PixbufAnimationIterClass {}
-	class PixbufAnimationIterClass {
-		public constructor(options?: Partial<PixbufAnimationIterClassInitOptions>);
-		public get_delay_time: {(iter: PixbufAnimationIter): number;};
-		public get_pixbuf: {(iter: PixbufAnimationIter): Pixbuf;};
-		public on_currently_loading_frame: {(iter: PixbufAnimationIter): boolean;};
-		public advance: {(iter: PixbufAnimationIter, current_time: GLib.TimeVal | null): boolean;};
-	}
-
 	export interface PixbufFormatInitOptions {}
 	/**
 	 * A `GdkPixbufFormat` contains information about the image format accepted
@@ -2054,16 +2024,6 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param disabled `TRUE` to disable the format #format
 		 */
 		public set_disabled(disabled: boolean): void;
-	}
-
-	export interface PixbufLoaderClassInitOptions {}
-	interface PixbufLoaderClass {}
-	class PixbufLoaderClass {
-		public constructor(options?: Partial<PixbufLoaderClassInitOptions>);
-		public size_prepared: {(loader: PixbufLoader, width: number, height: number): void;};
-		public area_prepared: {(loader: PixbufLoader): void;};
-		public area_updated: {(loader: PixbufLoader, x: number, y: number, width: number, height: number): void;};
-		public closed: {(loader: PixbufLoader): void;};
 	}
 
 	export interface PixbufModuleInitOptions {}
@@ -2198,12 +2158,6 @@ declare namespace imports.gi.GdkPixbuf {
 		 * relevance of this pattern
 		 */
 		public relevance: number;
-	}
-
-	export interface PixbufSimpleAnimClassInitOptions {}
-	interface PixbufSimpleAnimClass {}
-	class PixbufSimpleAnimClass {
-		public constructor(options?: Partial<PixbufSimpleAnimClassInitOptions>);
 	}
 
 	/**

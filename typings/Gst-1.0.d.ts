@@ -7929,28 +7929,6 @@ declare namespace imports.gi.Gst {
 		public init(): void;
 	}
 
-	export interface AllocatorClassInitOptions {}
-	/**
-	 * The {@link Allocator} is used to create new memory.
-	 */
-	interface AllocatorClass {}
-	class AllocatorClass {
-		public constructor(options?: Partial<AllocatorClassInitOptions>);
-		/**
-		 * Object parent class
-		 */
-		public readonly object_class: ObjectClass;
-		public readonly _gst_reserved: any[];
-		public alloc: {(allocator: Allocator | null, size: number, params: AllocationParams | null): Memory | null;};
-		public free: {(allocator: Allocator, memory: Memory): void;};
-	}
-
-	export interface AllocatorPrivateInitOptions {}
-	interface AllocatorPrivate {}
-	class AllocatorPrivate {
-		public constructor(options?: Partial<AllocatorPrivateInitOptions>);
-	}
-
 	export interface AtomicQueueInitOptions {}
 	/**
 	 * The {@link AtomicQueue} object implements a queue that can be used from multiple
@@ -7996,42 +7974,6 @@ declare namespace imports.gi.Gst {
 		 * Unref #queue and free the memory when the refcount reaches 0.
 		 */
 		public unref(): void;
-	}
-
-	export interface BinClassInitOptions {}
-	/**
-	 * Subclasses can override the #add_element and #remove_element to
-	 * update the list of children in the bin.
-	 * 
-	 * The #handle_message method can be overridden to implement custom
-	 * message handling.  #handle_message takes ownership of the message, just like
-	 * #gst_element_post_message.
-	 * 
-	 * The #deep_element_added vfunc will be called when a new element has been
-	 * added to any bin inside this bin, so it will also be called if a new child
-	 * was added to a sub-bin of this bin. {@link Bin} implementations that override
-	 * this message should chain up to the parent class implementation so the
-	 * #GstBin::deep-element-added signal is emitted on all parents.
-	 */
-	interface BinClass {}
-	class BinClass {
-		public constructor(options?: Partial<BinClassInitOptions>);
-		public readonly pool: GLib.ThreadPool;
-		public readonly _gst_reserved: any[];
-		public element_added: {(bin: Bin, child: Element): void;};
-		public element_removed: {(bin: Bin, child: Element): void;};
-		public add_element: {(bin: Bin, element: Element): boolean;};
-		public remove_element: {(bin: Bin, element: Element): boolean;};
-		public handle_message: {(bin: Bin, message: Message): void;};
-		public do_latency: {(bin: Bin): boolean;};
-		public deep_element_added: {(bin: Bin, sub_bin: Bin, child: Element): void;};
-		public deep_element_removed: {(bin: Bin, sub_bin: Bin, child: Element): void;};
-	}
-
-	export interface BinPrivateInitOptions {}
-	interface BinPrivate {}
-	class BinPrivate {
-		public constructor(options?: Partial<BinPrivateInitOptions>);
 	}
 
 	export interface BufferInitOptions {}
@@ -8849,52 +8791,6 @@ declare namespace imports.gi.Gst {
 		public readonly _gst_reserved: any[];
 	}
 
-	export interface BufferPoolClassInitOptions {}
-	/**
-	 * The GstBufferPool class.
-	 */
-	interface BufferPoolClass {}
-	class BufferPoolClass {
-		public constructor(options?: Partial<BufferPoolClassInitOptions>);
-		/**
-		 * Object parent class
-		 */
-		public readonly object_class: ObjectClass;
-		public readonly _gst_reserved: any[];
-		public get_options: {(pool: BufferPool): string[];};
-		public set_config: {(pool: BufferPool, config: Structure): boolean;};
-		public start: {(pool: BufferPool): boolean;};
-		public stop: {(pool: BufferPool): boolean;};
-		public acquire_buffer: {(pool: BufferPool, params: BufferPoolAcquireParams | null): [ FlowReturn, Buffer ];};
-		public alloc_buffer: {(pool: BufferPool, buffer: Buffer, params: BufferPoolAcquireParams): FlowReturn;};
-		public reset_buffer: {(pool: BufferPool, buffer: Buffer): void;};
-		public release_buffer: {(pool: BufferPool, buffer: Buffer): void;};
-		public free_buffer: {(pool: BufferPool, buffer: Buffer): void;};
-		public flush_start: {(pool: BufferPool): void;};
-		public flush_stop: {(pool: BufferPool): void;};
-	}
-
-	export interface BufferPoolPrivateInitOptions {}
-	interface BufferPoolPrivate {}
-	class BufferPoolPrivate {
-		public constructor(options?: Partial<BufferPoolPrivateInitOptions>);
-	}
-
-	export interface BusClassInitOptions {}
-	interface BusClass {}
-	class BusClass {
-		public constructor(options?: Partial<BusClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public message: {(bus: Bus, message: Message): void;};
-		public sync_message: {(bus: Bus, message: Message): void;};
-	}
-
-	export interface BusPrivateInitOptions {}
-	interface BusPrivate {}
-	class BusPrivate {
-		public constructor(options?: Partial<BusPrivateInitOptions>);
-	}
-
 	export interface CapsInitOptions {}
 	/**
 	 * Caps (capabilities) are lightweight refcounted objects describing media types.
@@ -9525,23 +9421,6 @@ declare namespace imports.gi.Gst {
 		public child_removed: {(parent: ChildProxy, child: GObject.Object, name: string): void;};
 	}
 
-	export interface ClockClassInitOptions {}
-	/**
-	 * GStreamer clock class. Override the vmethods to implement the clock
-	 * functionality.
-	 */
-	interface ClockClass {}
-	class ClockClass {
-		public constructor(options?: Partial<ClockClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public change_resolution: {(clock: Clock, old_resolution: ClockTime, new_resolution: ClockTime): ClockTime;};
-		public get_resolution: {(clock: Clock): ClockTime;};
-		public get_internal_time: {(clock: Clock): ClockTime;};
-		public wait: {(clock: Clock, entry: ClockEntry, jitter: ClockTimeDiff): ClockReturn;};
-		public wait_async: {(clock: Clock, entry: ClockEntry): ClockReturn;};
-		public unschedule: {(clock: Clock, entry: ClockEntry): void;};
-	}
-
 	export interface ClockEntryInitOptions {}
 	/**
 	 * All pending timeouts or periodic notifies are converted into
@@ -9567,12 +9446,6 @@ declare namespace imports.gi.Gst {
 		public unscheduled: boolean;
 		public woken_up: boolean;
 		public readonly _gst_reserved: any[];
-	}
-
-	export interface ClockPrivateInitOptions {}
-	interface ClockPrivate {}
-	class ClockPrivate {
-		public constructor(options?: Partial<ClockPrivateInitOptions>);
 	}
 
 	export interface ContextInitOptions {}
@@ -9647,36 +9520,6 @@ declare namespace imports.gi.Gst {
 		 * This function checks if #context is writable.
 		 */
 		public writable_structure(): Structure;
-	}
-
-	export interface ControlBindingClassInitOptions {}
-	/**
-	 * The class structure of {@link ControlBinding}.
-	 */
-	interface ControlBindingClass {}
-	class ControlBindingClass {
-		public constructor(options?: Partial<ControlBindingClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public sync_values: {(binding: ControlBinding, object: Object, timestamp: ClockTime, last_sync: ClockTime): boolean;};
-		public get_value: {(binding: ControlBinding, timestamp: ClockTime): GObject.Value | null;};
-		public get_value_array: {(binding: ControlBinding, timestamp: ClockTime, interval: ClockTime, n_values: number, values: any[] | null): boolean;};
-		public get_g_value_array: {(binding: ControlBinding, timestamp: ClockTime, interval: ClockTime, n_values: number, values: GObject.Value[]): boolean;};
-	}
-
-	export interface ControlBindingPrivateInitOptions {}
-	interface ControlBindingPrivate {}
-	class ControlBindingPrivate {
-		public constructor(options?: Partial<ControlBindingPrivateInitOptions>);
-	}
-
-	export interface ControlSourceClassInitOptions {}
-	/**
-	 * The class structure of {@link ControlSource}.
-	 */
-	interface ControlSourceClass {}
-	class ControlSourceClass {
-		public constructor(options?: Partial<ControlSourceClassInitOptions>);
-		public readonly _gst_reserved: any[];
 	}
 
 	export interface DateTimeInitOptions {}
@@ -10022,294 +9865,6 @@ declare namespace imports.gi.Gst {
 		 * @returns the string representation of a {@link DebugMessage}.
 		 */
 		public get(): string | null;
-	}
-
-	export interface DeviceClassInitOptions {}
-	/**
-	 * The class structure for a {@link Device} object.
-	 */
-	interface DeviceClass {}
-	class DeviceClass {
-		public constructor(options?: Partial<DeviceClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public create_element: {(device: Device, name: string | null): Element | null;};
-		public reconfigure_element: {(device: Device, element: Element): boolean;};
-	}
-
-	export interface DeviceMonitorClassInitOptions {}
-	/**
-	 * Opaque device monitor class structure.
-	 */
-	interface DeviceMonitorClass {}
-	class DeviceMonitorClass {
-		public constructor(options?: Partial<DeviceMonitorClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface DeviceMonitorPrivateInitOptions {}
-	interface DeviceMonitorPrivate {}
-	class DeviceMonitorPrivate {
-		public constructor(options?: Partial<DeviceMonitorPrivateInitOptions>);
-	}
-
-	export interface DevicePrivateInitOptions {}
-	interface DevicePrivate {}
-	class DevicePrivate {
-		public constructor(options?: Partial<DevicePrivateInitOptions>);
-	}
-
-	export interface DeviceProviderClassInitOptions {}
-	/**
-	 * The structure of the base {@link DeviceProviderClass}
-	 */
-	interface DeviceProviderClass {}
-	class DeviceProviderClass {
-		public constructor(options?: Partial<DeviceProviderClassInitOptions>);
-		/**
-		 * a pointer to the {@link DeviceProviderFactory} that creates this
-		 *  provider
-		 */
-		public readonly factory: DeviceProviderFactory;
-		public readonly metadata: any;
-		public readonly _gst_reserved: any[];
-		public probe: {(provider: DeviceProvider): GLib.List;};
-		public start: {(provider: DeviceProvider): boolean;};
-		public stop: {(provider: DeviceProvider): void;};
-		/**
-		 * Set #key with #value as metadata in #klass.
-		 * @param key the key to set
-		 * @param value the value to set
-		 */
-		public add_metadata(key: string, value: string): void;
-		/**
-		 * Set #key with #value as metadata in #klass.
-		 * 
-		 * Same as gst_device_provider_class_add_metadata(), but #value must be a static string
-		 * or an inlined string, as it will not be copied. (GStreamer plugins will
-		 * be made resident once loaded, so this function can be used even from
-		 * dynamically loaded plugins.)
-		 * @param key the key to set
-		 * @param value the value to set
-		 */
-		public add_static_metadata(key: string, value: string): void;
-		/**
-		 * Get metadata with #key in #klass.
-		 * @param key the key to get
-		 * @returns the metadata for #key.
-		 */
-		public get_metadata(key: string): string | null;
-		/**
-		 * Sets the detailed information for a {@link DeviceProviderClass}.
-		 * 
-		 * > This function is for use in _class_init functions only.
-		 * @param longname The long English name of the device provider. E.g. "File Sink"
-		 * @param classification String describing the type of device provider, as an
-		 *  unordered list separated with slashes ('/'). See draft-klass.txt of the
-		 *  design docs
-		 * for more details and common types. E.g: "Sink/File"
-		 * @param description Sentence describing the purpose of the device provider.
-		 * E.g: "Write stream to a file"
-		 * @param author Name and contact details of the author(s). Use \n to separate
-		 * multiple author metadata. E.g: "Joe Bloggs &lt;joe.blogs at foo.com&gt;"
-		 */
-		public set_metadata(longname: string, classification: string, description: string, author: string): void;
-		/**
-		 * Sets the detailed information for a {@link DeviceProviderClass}.
-		 * 
-		 * > This function is for use in _class_init functions only.
-		 * 
-		 * Same as gst_device_provider_class_set_metadata(), but #longname, #classification,
-		 * #description, and #author must be static strings or inlined strings, as
-		 * they will not be copied. (GStreamer plugins will be made resident once
-		 * loaded, so this function can be used even from dynamically loaded plugins.)
-		 * @param longname The long English name of the element. E.g. "File Sink"
-		 * @param classification String describing the type of element, as
-		 * an unordered list separated with slashes ('/'). See draft-klass.txt of the
-		 * design docs for more details and common types. E.g: "Sink/File"
-		 * @param description Sentence describing the purpose of the
-		 * element.  E.g: "Write stream to a file"
-		 * @param author Name and contact details of the author(s). Use \n
-		 * to separate multiple author metadata. E.g: "Joe Bloggs &lt;joe.blogs at
-		 * foo.com&gt;"
-		 */
-		public set_static_metadata(longname: string, classification: string, description: string, author: string): void;
-	}
-
-	export interface DeviceProviderFactoryClassInitOptions {}
-	/**
-	 * The opaque {@link DeviceProviderFactoryClass} data structure.
-	 */
-	interface DeviceProviderFactoryClass {}
-	class DeviceProviderFactoryClass {
-		public constructor(options?: Partial<DeviceProviderFactoryClassInitOptions>);
-	}
-
-	export interface DeviceProviderPrivateInitOptions {}
-	interface DeviceProviderPrivate {}
-	class DeviceProviderPrivate {
-		public constructor(options?: Partial<DeviceProviderPrivateInitOptions>);
-	}
-
-	export interface DynamicTypeFactoryClassInitOptions {}
-	interface DynamicTypeFactoryClass {}
-	class DynamicTypeFactoryClass {
-		public constructor(options?: Partial<DynamicTypeFactoryClassInitOptions>);
-	}
-
-	export interface ElementClassInitOptions {}
-	/**
-	 * GStreamer element class. Override the vmethods to implement the element
-	 * functionality.
-	 */
-	interface ElementClass {}
-	class ElementClass {
-		public constructor(options?: Partial<ElementClassInitOptions>);
-		/**
-		 * metadata for elements of this class
-		 */
-		public readonly metadata: any;
-		/**
-		 * the {@link ElementFactory} that creates these elements
-		 */
-		public readonly elementfactory: ElementFactory;
-		/**
-		 * a #GList of {@link PadTemplate}
-		 */
-		public readonly padtemplates: GLib.List;
-		/**
-		 * the number of padtemplates
-		 */
-		public readonly numpadtemplates: number;
-		/**
-		 * changed whenever the padtemplates change
-		 */
-		public readonly pad_templ_cookie: number;
-		public readonly _gst_reserved: any[];
-		public pad_added: {(element: Element, pad: Pad): void;};
-		public pad_removed: {(element: Element, pad: Pad): void;};
-		public no_more_pads: {(element: Element): void;};
-		public request_new_pad: {(element: Element, templ: PadTemplate, name: string | null, caps: Caps | null): Pad | null;};
-		public release_pad: {(element: Element, pad: Pad): void;};
-		public get_state: {(element: Element, timeout: ClockTime): [ StateChangeReturn, State | null, State | null ];};
-		public set_state: {(element: Element, state: State): StateChangeReturn;};
-		public change_state: {(element: Element, transition: StateChange): StateChangeReturn;};
-		public state_changed: {(element: Element, oldstate: State, newstate: State, pending: State): void;};
-		public set_bus: {(element: Element, bus: Bus | null): void;};
-		public provide_clock: {(element: Element): Clock | null;};
-		public set_clock: {(element: Element, clock: Clock | null): boolean;};
-		public send_event: {(element: Element, event: Event): boolean;};
-		public query: {(element: Element, query: Query): boolean;};
-		public post_message: {(element: Element, message: Message): boolean;};
-		public set_context: {(element: Element, context: Context): void;};
-		/**
-		 * Set #key with #value as metadata in #klass.
-		 * @param key the key to set
-		 * @param value the value to set
-		 */
-		public add_metadata(key: string, value: string): void;
-		/**
-		 * Adds a padtemplate to an element class. This is mainly used in the _class_init
-		 * functions of classes. If a pad template with the same name as an already
-		 * existing one is added the old one is replaced by the new one.
-		 * 
-		 * #templ's reference count will be incremented, and any floating
-		 * reference will be removed (see gst_object_ref_sink())
-		 * @param templ a {@link PadTemplate} to add to the element class.
-		 */
-		public add_pad_template(templ: PadTemplate): void;
-		/**
-		 * Set #key with #value as metadata in #klass.
-		 * 
-		 * Same as gst_element_class_add_metadata(), but #value must be a static string
-		 * or an inlined string, as it will not be copied. (GStreamer plugins will
-		 * be made resident once loaded, so this function can be used even from
-		 * dynamically loaded plugins.)
-		 * @param key the key to set
-		 * @param value the value to set
-		 */
-		public add_static_metadata(key: string, value: string): void;
-		/**
-		 * Adds a pad template to an element class based on the static pad template
-		 * #templ. This is mainly used in the _class_init functions of element
-		 * implementations. If a pad template with the same name already exists,
-		 * the old one is replaced by the new one.
-		 * @param static_templ {@link StaticPadTemplate} to add as pad template to the element class.
-		 */
-		public add_static_pad_template(static_templ: StaticPadTemplate): void;
-		/**
-		 * Adds a pad template to an element class based on the static pad template
-		 * #templ. This is mainly used in the _class_init functions of element
-		 * implementations. If a pad template with the same name already exists,
-		 * the old one is replaced by the new one.
-		 * @param static_templ {@link StaticPadTemplate} to add as pad template to the element class.
-		 * @param pad_type The #GType of the pad to create
-		 */
-		public add_static_pad_template_with_gtype(static_templ: StaticPadTemplate, pad_type: GObject.Type): void;
-		/**
-		 * Get metadata with #key in #klass.
-		 * @param key the key to get
-		 * @returns the metadata for #key.
-		 */
-		public get_metadata(key: string): string;
-		/**
-		 * Retrieves a padtemplate from #element_class with the given name.
-		 * > If you use this function in the #GInstanceInitFunc of an object class
-		 * > that has subclasses, make sure to pass the g_class parameter of the
-		 * > #GInstanceInitFunc here.
-		 * @param name the name of the {@link PadTemplate} to get.
-		 * @returns the {@link PadTemplate} with the
-		 *     given name, or %NULL if none was found. No unreferencing is
-		 *     necessary.
-		 */
-		public get_pad_template(name: string): PadTemplate | null;
-		/**
-		 * Retrieves a list of the pad templates associated with #element_class. The
-		 * list must not be modified by the calling code.
-		 * > If you use this function in the #GInstanceInitFunc of an object class
-		 * > that has subclasses, make sure to pass the g_class parameter of the
-		 * > #GInstanceInitFunc here.
-		 * @returns the #GList of
-		 *     pad templates.
-		 */
-		public get_pad_template_list(): GLib.List;
-		/**
-		 * Sets the detailed information for a {@link ElementClass}.
-		 * > This function is for use in _class_init functions only.
-		 * @param longname The long English name of the element. E.g. "File Sink"
-		 * @param classification String describing the type of element, as an unordered list
-		 * separated with slashes ('/'). See draft-klass.txt of the design docs
-		 * for more details and common types. E.g: "Sink/File"
-		 * @param description Sentence describing the purpose of the element.
-		 * E.g: "Write stream to a file"
-		 * @param author Name and contact details of the author(s). Use \n to separate
-		 * multiple author metadata. E.g: "Joe Bloggs &lt;joe.blogs at foo.com&gt;"
-		 */
-		public set_metadata(longname: string, classification: string, description: string, author: string): void;
-		/**
-		 * Sets the detailed information for a {@link ElementClass}.
-		 * 
-		 * > This function is for use in _class_init functions only.
-		 * 
-		 * Same as gst_element_class_set_metadata(), but #longname, #classification,
-		 * #description, and #author must be static strings or inlined strings, as
-		 * they will not be copied. (GStreamer plugins will be made resident once
-		 * loaded, so this function can be used even from dynamically loaded plugins.)
-		 * @param longname The long English name of the element. E.g. "File Sink"
-		 * @param classification String describing the type of element, as an unordered list
-		 * separated with slashes ('/'). See draft-klass.txt of the design docs
-		 * for more details and common types. E.g: "Sink/File"
-		 * @param description Sentence describing the purpose of the element.
-		 * E.g: "Write stream to a file"
-		 * @param author Name and contact details of the author(s). Use \n to separate
-		 * multiple author metadata. E.g: "Joe Bloggs &lt;joe.blogs at foo.com&gt;"
-		 */
-		public set_static_metadata(longname: string, classification: string, description: string, author: string): void;
-	}
-
-	export interface ElementFactoryClassInitOptions {}
-	interface ElementFactoryClass {}
-	class ElementFactoryClass {
-		public constructor(options?: Partial<ElementFactoryClassInitOptions>);
 	}
 
 	export interface EventInitOptions {}
@@ -11177,19 +10732,6 @@ declare namespace imports.gi.Gst {
 		 * A quark for the nick
 		 */
 		public quark: GLib.Quark;
-	}
-
-	export interface GhostPadClassInitOptions {}
-	interface GhostPadClass {}
-	class GhostPadClass {
-		public constructor(options?: Partial<GhostPadClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface GhostPadPrivateInitOptions {}
-	interface GhostPadPrivate {}
-	class GhostPadPrivate {
-		public constructor(options?: Partial<GhostPadPrivateInitOptions>);
 	}
 
 	export interface IteratorInitOptions {}
@@ -13189,36 +12731,6 @@ declare namespace imports.gi.Gst {
 		public weak_unref(notify: MiniObjectNotify, data: any | null): void;
 	}
 
-	export interface ObjectClassInitOptions {}
-	/**
-	 * GStreamer base object class.
-	 */
-	interface ObjectClass {}
-	class ObjectClass {
-		public constructor(options?: Partial<ObjectClassInitOptions>);
-		/**
-		 * separator used by gst_object_get_path_string()
-		 */
-		public readonly path_string_separator: string;
-		public readonly _gst_reserved: any[];
-		public deep_notify: {(object: Object, orig: Object, pspec: GObject.ParamSpec): void;};
-	}
-
-	export interface PadClassInitOptions {}
-	interface PadClass {}
-	class PadClass {
-		public constructor(options?: Partial<PadClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public linked: {(pad: Pad, peer: Pad): void;};
-		public unlinked: {(pad: Pad, peer: Pad): void;};
-	}
-
-	export interface PadPrivateInitOptions {}
-	interface PadPrivate {}
-	class PadPrivate {
-		public constructor(options?: Partial<PadPrivateInitOptions>);
-	}
-
 	export interface PadProbeInfoInitOptions {}
 	/**
 	 * Info passed in the {@link PadProbeCallback}.
@@ -13253,14 +12765,6 @@ declare namespace imports.gi.Gst {
 		public get_buffer_list(): BufferList | null;
 		public get_event(): Event | null;
 		public get_query(): Query | null;
-	}
-
-	export interface PadTemplateClassInitOptions {}
-	interface PadTemplateClass {}
-	class PadTemplateClass {
-		public constructor(options?: Partial<PadTemplateClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public pad_created: {(templ: PadTemplate, pad: Pad): void;};
 	}
 
 	export interface ParamSpecArrayInitOptions {}
@@ -13366,25 +12870,6 @@ declare namespace imports.gi.Gst {
 		public get_missing_elements(): string[] | null;
 	}
 
-	export interface PipelineClassInitOptions {}
-	interface PipelineClass {}
-	class PipelineClass {
-		public constructor(options?: Partial<PipelineClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface PipelinePrivateInitOptions {}
-	interface PipelinePrivate {}
-	class PipelinePrivate {
-		public constructor(options?: Partial<PipelinePrivateInitOptions>);
-	}
-
-	export interface PluginClassInitOptions {}
-	interface PluginClass {}
-	class PluginClass {
-		public constructor(options?: Partial<PluginClassInitOptions>);
-	}
-
 	export interface PluginDescInitOptions {}
 	/**
 	 * A plugin should export a variable of this type called plugin_desc. The plugin
@@ -13446,12 +12931,6 @@ declare namespace imports.gi.Gst {
 		 */
 		public release_datetime: string;
 		public readonly _gst_reserved: any[];
-	}
-
-	export interface PluginFeatureClassInitOptions {}
-	interface PluginFeatureClass {}
-	class PluginFeatureClass {
-		public constructor(options?: Partial<PluginFeatureClassInitOptions>);
 	}
 
 	export interface PollInitOptions {}
@@ -13813,19 +13292,6 @@ declare namespace imports.gi.Gst {
 		 * the cryptographic information needed to decrypt the sample.
 		 */
 		public info: Structure;
-	}
-
-	export interface ProxyPadClassInitOptions {}
-	interface ProxyPadClass {}
-	class ProxyPadClass {
-		public constructor(options?: Partial<ProxyPadClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface ProxyPadPrivateInitOptions {}
-	interface ProxyPadPrivate {}
-	class ProxyPadPrivate {
-		public constructor(options?: Partial<ProxyPadPrivateInitOptions>);
 	}
 
 	export interface QueryInitOptions {}
@@ -14606,18 +14072,6 @@ declare namespace imports.gi.Gst {
 		public duration: ClockTime;
 	}
 
-	export interface RegistryClassInitOptions {}
-	interface RegistryClass {}
-	class RegistryClass {
-		public constructor(options?: Partial<RegistryClassInitOptions>);
-	}
-
-	export interface RegistryPrivateInitOptions {}
-	interface RegistryPrivate {}
-	class RegistryPrivate {
-		public constructor(options?: Partial<RegistryPrivateInitOptions>);
-	}
-
 	export interface SampleInitOptions {}
 	/**
 	 * A {@link Sample} is a small object containing data, a type, timing and
@@ -15197,39 +14651,6 @@ declare namespace imports.gi.Gst {
 		 * on the returned caps to modify it.
 		 */
 		public get_caps(): Caps;
-	}
-
-	export interface StreamClassInitOptions {}
-	/**
-	 * GstStream class structure
-	 */
-	interface StreamClass {}
-	class StreamClass {
-		public constructor(options?: Partial<StreamClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface StreamCollectionClassInitOptions {}
-	/**
-	 * GstStreamCollection class structure
-	 */
-	interface StreamCollectionClass {}
-	class StreamCollectionClass {
-		public constructor(options?: Partial<StreamCollectionClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public stream_notify: {(collection: StreamCollection, stream: Stream, pspec: GObject.ParamSpec): void;};
-	}
-
-	export interface StreamCollectionPrivateInitOptions {}
-	interface StreamCollectionPrivate {}
-	class StreamCollectionPrivate {
-		public constructor(options?: Partial<StreamCollectionPrivateInitOptions>);
-	}
-
-	export interface StreamPrivateInitOptions {}
-	interface StreamPrivate {}
-	class StreamPrivate {
-		public constructor(options?: Partial<StreamPrivateInitOptions>);
 	}
 
 	export interface StructureInitOptions {}
@@ -16011,19 +15432,6 @@ declare namespace imports.gi.Gst {
 		public to_string(): string;
 	}
 
-	export interface SystemClockClassInitOptions {}
-	interface SystemClockClass {}
-	class SystemClockClass {
-		public constructor(options?: Partial<SystemClockClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface SystemClockPrivateInitOptions {}
-	interface SystemClockPrivate {}
-	class SystemClockPrivate {
-		public constructor(options?: Partial<SystemClockPrivateInitOptions>);
-	}
-
 	export interface TagListInitOptions {}
 	/**
 	 * List of tags and values used to describe media metadata.
@@ -16533,34 +15941,6 @@ declare namespace imports.gi.Gst {
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
-	export interface TaskClassInitOptions {}
-	interface TaskClass {}
-	class TaskClass {
-		public constructor(options?: Partial<TaskClassInitOptions>);
-		public readonly pool: TaskPool;
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface TaskPoolClassInitOptions {}
-	/**
-	 * The {@link TaskPoolClass} object.
-	 */
-	interface TaskPoolClass {}
-	class TaskPoolClass {
-		public constructor(options?: Partial<TaskPoolClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public prepare: {(pool: TaskPool): void;};
-		public cleanup: {(pool: TaskPool): void;};
-		public push: {(pool: TaskPool, func: TaskPoolFunction): any | null;};
-		public join: {(pool: TaskPool, id: any | null): void;};
-	}
-
-	export interface TaskPrivateInitOptions {}
-	interface TaskPrivate {}
-	class TaskPrivate {
-		public constructor(options?: Partial<TaskPrivateInitOptions>);
-	}
-
 	export interface TimedValueInitOptions {}
 	/**
 	 * Structure for saving a timestamp and a value.
@@ -16783,31 +16163,6 @@ declare namespace imports.gi.Gst {
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
-	export interface TracerClassInitOptions {}
-	interface TracerClass {}
-	class TracerClass {
-		public constructor(options?: Partial<TracerClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface TracerFactoryClassInitOptions {}
-	interface TracerFactoryClass {}
-	class TracerFactoryClass {
-		public constructor(options?: Partial<TracerFactoryClassInitOptions>);
-	}
-
-	export interface TracerPrivateInitOptions {}
-	interface TracerPrivate {}
-	class TracerPrivate {
-		public constructor(options?: Partial<TracerPrivateInitOptions>);
-	}
-
-	export interface TracerRecordClassInitOptions {}
-	interface TracerRecordClass {}
-	class TracerRecordClass {
-		public constructor(options?: Partial<TracerRecordClassInitOptions>);
-	}
-
 	export interface TypeFindInitOptions {}
 	/**
 	 * The following functions allow you to detect the media type of an unknown
@@ -16870,12 +16225,6 @@ declare namespace imports.gi.Gst {
 		 * @param fieldname first field of the suggested caps, or %NULL
 		 */
 		public suggest_simple(probability: number, media_type: string, fieldname: string | null): void;
-	}
-
-	export interface TypeFindFactoryClassInitOptions {}
-	interface TypeFindFactoryClass {}
-	class TypeFindFactoryClass {
-		public constructor(options?: Partial<TypeFindFactoryClassInitOptions>);
 	}
 
 	export interface URIHandlerInterfaceInitOptions {}

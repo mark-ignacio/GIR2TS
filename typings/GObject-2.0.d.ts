@@ -2900,30 +2900,6 @@ declare namespace imports.gi.GObject {
 		public value_nick: string;
 	}
 
-	export interface InitiallyUnownedClassInitOptions {}
-	/**
-	 * The class structure for the GInitiallyUnowned type.
-	 */
-	interface InitiallyUnownedClass {}
-	class InitiallyUnownedClass {
-		public constructor(options?: Partial<InitiallyUnownedClassInitOptions>);
-		/**
-		 * the parent class
-		 */
-		public readonly g_type_class: TypeClass;
-		public readonly construct_properties: GLib.SList;
-		public readonly flags: number;
-		public readonly pdummy: any[];
-		public constructor_: {(type: GObject.Type, n_construct_properties: number, construct_properties: ObjectConstructParam): Object;};
-		public set_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
-		public get_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
-		public dispose: {(object: Object): void;};
-		public finalize: {(object: Object): void;};
-		public dispatch_properties_changed: {(object: Object, n_pspecs: number, pspecs: ParamSpec): void;};
-		public notify: {(object: Object, pspec: ParamSpec): void;};
-		public constructed: {(object: Object): void;};
-	}
-
 	export interface InterfaceInfoInitOptions {}
 	/**
 	 * A structure that provides information to the type system which is
@@ -2946,174 +2922,6 @@ declare namespace imports.gi.GObject {
 		public interface_data: any;
 	}
 
-	export interface ObjectClassInitOptions {}
-	/**
-	 * The class structure for the GObject type.
-	 * 
-	 * |[<!-- language="C" -->
-	 * // Example of implementing a singleton using a constructor.
-	 * static MySingleton *the_singleton = NULL;
-	 * 
-	 * static GObject*
-	 * my_singleton_constructor (GType                  type,
-	 *                           guint                  n_construct_params,
-	 *                           GObjectConstructParam *construct_params)
-	 * {
-	 *   GObject *object;
-	 *   
-	 *   if (!the_singleton)
-	 *     {
-	 *       object = G_OBJECT_CLASS (parent_class)->constructor (type,
-	 *                                                            n_construct_params,
-	 *                                                            construct_params);
-	 *       the_singleton = MY_SINGLETON (object);
-	 *     }
-	 *   else
-	 *     object = g_object_ref (G_OBJECT (the_singleton));
-	 * 
-	 *   return object;
-	 * }
-	 * ]|
-	 */
-	interface ObjectClass {}
-	class ObjectClass {
-		public constructor(options?: Partial<ObjectClassInitOptions>);
-		/**
-		 * the parent class
-		 */
-		public readonly g_type_class: TypeClass;
-		public readonly construct_properties: GLib.SList;
-		public readonly flags: number;
-		public readonly pdummy: any[];
-		public constructor_: {(type: GObject.Type, n_construct_properties: number, construct_properties: ObjectConstructParam): Object;};
-		public set_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
-		public get_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
-		public dispose: {(object: Object): void;};
-		public finalize: {(object: Object): void;};
-		public dispatch_properties_changed: {(object: Object, n_pspecs: number, pspecs: ParamSpec): void;};
-		public notify: {(object: Object, pspec: ParamSpec): void;};
-		public constructed: {(object: Object): void;};
-		/**
-		 * Looks up the #GParamSpec for a property of a class.
-		 * @param property_name the name of the property to look up
-		 * @returns the #GParamSpec for the property, or
-		 *          %NULL if the class doesn't have a property of that name
-		 */
-		public find_property(property_name: string): ParamSpec;
-		/**
-		 * Installs new properties from an array of #GParamSpecs.
-		 * 
-		 * All properties should be installed during the class initializer.  It
-		 * is possible to install properties after that, but doing so is not
-		 * recommend, and specifically, is not guaranteed to be thread-safe vs.
-		 * use of properties on the same type on other threads.
-		 * 
-		 * The property id of each property is the index of each #GParamSpec in
-		 * the #pspecs array.
-		 * 
-		 * The property id of 0 is treated specially by #GObject and it should not
-		 * be used to store a #GParamSpec.
-		 * 
-		 * This function should be used if you plan to use a static array of
-		 * #GParamSpecs and g_object_notify_by_pspec(). For instance, this
-		 * class initialization:
-		 * 
-		 * |[<!-- language="C" -->
-		 * enum {
-		 *   PROP_0, PROP_FOO, PROP_BAR, N_PROPERTIES
-		 * };
-		 * 
-		 * static GParamSpec *obj_properties[N_PROPERTIES] = { NULL, };
-		 * 
-		 * static void
-		 * my_object_class_init (MyObjectClass *klass)
-		 * {
-		 *   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-		 * 
-		 *   obj_properties[PROP_FOO] =
-		 *     g_param_spec_int ("foo", "Foo", "Foo",
-		 *                       -1, G_MAXINT,
-		 *                       0,
-		 *                       G_PARAM_READWRITE);
-		 * 
-		 *   obj_properties[PROP_BAR] =
-		 *     g_param_spec_string ("bar", "Bar", "Bar",
-		 *                          NULL,
-		 *                          G_PARAM_READWRITE);
-		 * 
-		 *   gobject_class->set_property = my_object_set_property;
-		 *   gobject_class->get_property = my_object_get_property;
-		 *   g_object_class_install_properties (gobject_class,
-		 *                                      N_PROPERTIES,
-		 *                                      obj_properties);
-		 * }
-		 * ]|
-		 * 
-		 * allows calling g_object_notify_by_pspec() to notify of property changes:
-		 * 
-		 * |[<!-- language="C" -->
-		 * void
-		 * my_object_set_foo (MyObject *self, gint foo)
-		 * {
-		 *   if (self->foo != foo)
-		 *     {
-		 *       self->foo = foo;
-		 *       g_object_notify_by_pspec (G_OBJECT (self), obj_properties[PROP_FOO]);
-		 *     }
-		 *  }
-		 * ]|
-		 * @param n_pspecs the length of the #GParamSpecs array
-		 * @param pspecs the #GParamSpecs array
-		 *   defining the new properties
-		 */
-		public install_properties(n_pspecs: number, pspecs: ParamSpec[]): void;
-		/**
-		 * Installs a new property.
-		 * 
-		 * All properties should be installed during the class initializer.  It
-		 * is possible to install properties after that, but doing so is not
-		 * recommend, and specifically, is not guaranteed to be thread-safe vs.
-		 * use of properties on the same type on other threads.
-		 * 
-		 * Note that it is possible to redefine a property in a derived class,
-		 * by installing a property with the same name. This can be useful at times,
-		 * e.g. to change the range of allowed values or the default value.
-		 * @param property_id the id for the new property
-		 * @param pspec the #GParamSpec for the new property
-		 */
-		public install_property(property_id: number, pspec: ParamSpec): void;
-		/**
-		 * Get an array of #GParamSpec* for all properties of a class.
-		 * @returns an array of
-		 *          #GParamSpec* which should be freed after use
-		 * 
-		 * return location for the length of the returned array
-		 */
-		public list_properties(): [ ParamSpec[], number ];
-		/**
-		 * Registers #property_id as referring to a property with the name
-		 * #name in a parent class or in an interface implemented by #oclass.
-		 * This allows this class to "override" a property implementation in
-		 * a parent class or to provide the implementation of a property from
-		 * an interface.
-		 * 
-		 * Internally, overriding is implemented by creating a property of type
-		 * #GParamSpecOverride; generally operations that query the properties of
-		 * the object class, such as g_object_class_find_property() or
-		 * g_object_class_list_properties() will return the overridden
-		 * property. However, in one case, the #construct_properties argument of
-		 * the #constructor virtual function, the #GParamSpecOverride is passed
-		 * instead, so that the #param_id field of the #GParamSpec will be
-		 * correct.  For virtually all uses, this makes no difference. If you
-		 * need to get the overridden property, you can call
-		 * g_param_spec_get_redirect_target().
-		 * @param property_id the new property ID
-		 * @param name the name of a property registered in a parent class or
-		 *  in an interface of this class.
-		 */
-		public override_property(property_id: number, name: string): void;
-	}
-
 	export interface ObjectConstructParamInitOptions {}
 	/**
 	 * The GObjectConstructParam struct is an auxiliary structure used to hand
@@ -3130,30 +2938,6 @@ declare namespace imports.gi.GObject {
 		 * the value to set the parameter to
 		 */
 		public value: Value;
-	}
-
-	export interface ParamSpecClassInitOptions {}
-	/**
-	 * The class structure for the GParamSpec type.
-	 * Normally, GParamSpec classes are filled by
-	 * g_param_type_register_static().
-	 */
-	interface ParamSpecClass {}
-	class ParamSpecClass {
-		public constructor(options?: Partial<ParamSpecClassInitOptions>);
-		/**
-		 * the parent class
-		 */
-		public readonly g_type_class: TypeClass;
-		/**
-		 * the #GValue type for this parameter
-		 */
-		public readonly value_type: GObject.Type;
-		public readonly dummy: any[];
-		public finalize: {(pspec: ParamSpec): void;};
-		public value_set_default: {(pspec: ParamSpec, value: Value): void;};
-		public value_validate: {(pspec: ParamSpec, value: Value): boolean;};
-		public values_cmp: {(pspec: ParamSpec, value1: Value, value2: Value): number;};
 	}
 
 	export interface ParamSpecPoolInitOptions {}
@@ -3563,22 +3347,6 @@ declare namespace imports.gi.GObject {
 		 *     type doesn't conform to the interface
 		 */
 		public peek_parent(): TypeInterface;
-	}
-
-	export interface TypeModuleClassInitOptions {}
-	/**
-	 * In order to implement dynamic loading of types based on #GTypeModule,
-	 * the #load and #unload functions in #GTypeModuleClass must be implemented.
-	 */
-	interface TypeModuleClass {}
-	class TypeModuleClass {
-		public constructor(options?: Partial<TypeModuleClassInitOptions>);
-		public load: {(module: TypeModule): boolean;};
-		public unload: {(module: TypeModule): void;};
-		public reserved1: {(): void;};
-		public reserved2: {(): void;};
-		public reserved3: {(): void;};
-		public reserved4: {(): void;};
 	}
 
 	export interface TypePluginClassInitOptions {}

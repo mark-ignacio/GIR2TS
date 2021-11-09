@@ -1350,30 +1350,6 @@ declare namespace imports.gi.Atk {
 		public paste_text: {(text: EditableText, position: number): void;};
 	}
 
-	export interface GObjectAccessibleClassInitOptions {}
-	interface GObjectAccessibleClass {}
-	class GObjectAccessibleClass {
-		public constructor(options?: Partial<GObjectAccessibleClassInitOptions>);
-		public readonly pad1: Function;
-		public readonly pad2: Function;
-	}
-
-	export interface HyperlinkClassInitOptions {}
-	interface HyperlinkClass {}
-	class HyperlinkClass {
-		public constructor(options?: Partial<HyperlinkClassInitOptions>);
-		public readonly pad1: Function;
-		public get_uri: {(link_: Hyperlink, i: number): string;};
-		public get_object: {(link_: Hyperlink, i: number): Object;};
-		public get_end_index: {(link_: Hyperlink): number;};
-		public get_start_index: {(link_: Hyperlink): number;};
-		public is_valid: {(link_: Hyperlink): boolean;};
-		public get_n_anchors: {(link_: Hyperlink): number;};
-		public link_state: {(link_: Hyperlink): number;};
-		public is_selected_link: {(link_: Hyperlink): boolean;};
-		public link_activated: {(link_: Hyperlink): void;};
-	}
-
 	export interface HyperlinkImplIfaceInitOptions {}
 	interface HyperlinkImplIface {}
 	class HyperlinkImplIface {
@@ -1459,81 +1435,6 @@ declare namespace imports.gi.Atk {
 		 * and only used to compare the dispatch times of events to one another.
 		 */
 		public timestamp: number;
-	}
-
-	export interface MiscClassInitOptions {}
-	/**
-	 * Usage of AtkMisc is deprecated since 2.12 and heavily discouraged.
-	 */
-	interface MiscClass {}
-	class MiscClass {
-		public constructor(options?: Partial<MiscClassInitOptions>);
-		public readonly vfuncs: any[];
-		public threads_enter: {(misc: Misc): void;};
-		public threads_leave: {(misc: Misc): void;};
-	}
-
-	export interface NoOpObjectClassInitOptions {}
-	interface NoOpObjectClass {}
-	class NoOpObjectClass {
-		public constructor(options?: Partial<NoOpObjectClassInitOptions>);
-	}
-
-	export interface NoOpObjectFactoryClassInitOptions {}
-	interface NoOpObjectFactoryClass {}
-	class NoOpObjectFactoryClass {
-		public constructor(options?: Partial<NoOpObjectFactoryClassInitOptions>);
-	}
-
-	export interface ObjectClassInitOptions {}
-	interface ObjectClass {}
-	class ObjectClass {
-		public constructor(options?: Partial<ObjectClassInitOptions>);
-		public readonly pad1: Function;
-		public get_name: {(accessible: Object): string;};
-		public get_description: {(accessible: Object): string;};
-		public get_parent: {(accessible: Object): Object;};
-		public get_n_children: {(accessible: Object): number;};
-		public ref_child: {(accessible: Object, i: number): Object;};
-		public get_index_in_parent: {(accessible: Object): number;};
-		public ref_relation_set: {(accessible: Object): RelationSet;};
-		public get_role: {(accessible: Object): Role;};
-		public get_layer: {(accessible: Object): Layer;};
-		public get_mdi_zorder: {(accessible: Object): number;};
-		public ref_state_set: {(accessible: Object): StateSet;};
-		public set_name: {(accessible: Object, name: string): void;};
-		public set_description: {(accessible: Object, description: string): void;};
-		public set_parent: {(accessible: Object, parent: Object): void;};
-		public set_role: {(accessible: Object, role: Role): void;};
-		public connect_property_change_handler: {(accessible: Object, handler: PropertyChangeHandler): number;};
-		public remove_property_change_handler: {(accessible: Object, handler_id: number): void;};
-		public initialize: {(accessible: Object, data: any | null): void;};
-		public children_changed: {(accessible: Object, change_index: number, changed_child: any | null): void;};
-		public focus_event: {(accessible: Object, focus_in: boolean): void;};
-		public property_change: {(accessible: Object, values: PropertyValues): void;};
-		public state_change: {(accessible: Object, name: string, state_set: boolean): void;};
-		public visible_data_changed: {(accessible: Object): void;};
-		public active_descendant_changed: {(accessible: Object, child: any | null): void;};
-		public get_attributes: {(accessible: Object): AttributeSet;};
-		public get_object_locale: {(accessible: Object): string;};
-	}
-
-	export interface ObjectFactoryClassInitOptions {}
-	interface ObjectFactoryClass {}
-	class ObjectFactoryClass {
-		public constructor(options?: Partial<ObjectFactoryClassInitOptions>);
-		public readonly pad1: Function;
-		public readonly pad2: Function;
-		public create_accessible: {(obj: GObject.Object): Object;};
-		public invalidate: {(factory: ObjectFactory): void;};
-		public get_accessible_type: {(): GObject.Type;};
-	}
-
-	export interface PlugClassInitOptions {}
-	interface PlugClass {}
-	class PlugClass {
-		public constructor(options?: Partial<PlugClassInitOptions>);
-		public get_object_id: {(obj: Plug): string;};
 	}
 
 	export interface PropertyValuesInitOptions {}
@@ -1630,26 +1531,6 @@ declare namespace imports.gi.Atk {
 		public height: number;
 	}
 
-	export interface RegistryClassInitOptions {}
-	interface RegistryClass {}
-	class RegistryClass {
-		public constructor(options?: Partial<RegistryClassInitOptions>);
-	}
-
-	export interface RelationClassInitOptions {}
-	interface RelationClass {}
-	class RelationClass {
-		public constructor(options?: Partial<RelationClassInitOptions>);
-	}
-
-	export interface RelationSetClassInitOptions {}
-	interface RelationSetClass {}
-	class RelationSetClass {
-		public constructor(options?: Partial<RelationSetClassInitOptions>);
-		public readonly pad1: Function;
-		public readonly pad2: Function;
-	}
-
 	export interface SelectionIfaceInitOptions {}
 	interface SelectionIface {}
 	class SelectionIface {
@@ -1662,19 +1543,6 @@ declare namespace imports.gi.Atk {
 		public remove_selection: {(selection: Selection, i: number): boolean;};
 		public select_all_selection: {(selection: Selection): boolean;};
 		public selection_changed: {(selection: Selection): void;};
-	}
-
-	export interface SocketClassInitOptions {}
-	interface SocketClass {}
-	class SocketClass {
-		public constructor(options?: Partial<SocketClassInitOptions>);
-		public embed: {(obj: Socket, plug_id: string): void;};
-	}
-
-	export interface StateSetClassInitOptions {}
-	interface StateSetClass {}
-	class StateSetClass {
-		public constructor(options?: Partial<StateSetClassInitOptions>);
 	}
 
 	export interface StreamableContentIfaceInitOptions {}
@@ -1828,19 +1696,6 @@ declare namespace imports.gi.Atk {
 		 * The height of a rectangle
 		 */
 		public height: number;
-	}
-
-	export interface UtilClassInitOptions {}
-	interface UtilClass {}
-	class UtilClass {
-		public constructor(options?: Partial<UtilClassInitOptions>);
-		public add_global_event_listener: {(listener: GObject.SignalEmissionHook, event_type: string): number;};
-		public remove_global_event_listener: {(listener_id: number): void;};
-		public add_key_event_listener: {(listener: KeySnoopFunc, data: any | null): number;};
-		public remove_key_event_listener: {(listener_id: number): void;};
-		public get_root: {(): Object;};
-		public get_toolkit_name: {(): string;};
-		public get_toolkit_version: {(): string;};
 	}
 
 	export interface ValueIfaceInitOptions {}

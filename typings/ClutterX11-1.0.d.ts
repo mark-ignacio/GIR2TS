@@ -158,22 +158,6 @@ declare namespace imports.gi.ClutterX11 {
 		public static new_with_window(window: xlib.Window): Clutter.Actor;
 	}
 
-	export interface TexturePixmapClassInitOptions {}
-	/**
-	 * The {@link TexturePixmapClass} structure contains only private data
-	 */
-	interface TexturePixmapClass {}
-	class TexturePixmapClass {
-		public constructor(options?: Partial<TexturePixmapClassInitOptions>);
-		public update_area: {(texture: TexturePixmap, x: number, y: number, width: number, height: number): void;};
-	}
-
-	export interface TexturePixmapPrivateInitOptions {}
-	interface TexturePixmapPrivate {}
-	class TexturePixmapPrivate {
-		public constructor(options?: Partial<TexturePixmapPrivateInitOptions>);
-	}
-
 	export interface XInputDeviceInitOptions {}
 	interface XInputDevice {}
 	class XInputDevice {

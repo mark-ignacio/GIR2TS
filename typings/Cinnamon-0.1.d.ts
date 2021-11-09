@@ -1246,56 +1246,6 @@ declare namespace imports.gi.Cinnamon {
 		public static get_for_stage(stage: Clutter.Stage): XFixesCursor;
 	}
 
-	export interface AppClassInitOptions {}
-	interface AppClass {}
-	class AppClass {
-		public constructor(options?: Partial<AppClassInitOptions>);
-	}
-
-	export interface AppPrivateInitOptions {}
-	interface AppPrivate {}
-	class AppPrivate {
-		public constructor(options?: Partial<AppPrivateInitOptions>);
-	}
-
-	export interface AppSystemClassInitOptions {}
-	interface AppSystemClass {}
-	class AppSystemClass {
-		public constructor(options?: Partial<AppSystemClassInitOptions>);
-		public installed_changed: {(appsys: AppSystem): void;};
-		public favorites_changed: {(appsys: AppSystem): void;};
-	}
-
-	export interface AppSystemPrivateInitOptions {}
-	interface AppSystemPrivate {}
-	class AppSystemPrivate {
-		public constructor(options?: Partial<AppSystemPrivateInitOptions>);
-	}
-
-	export interface DocSystemClassInitOptions {}
-	interface DocSystemClass {}
-	class DocSystemClass {
-		public constructor(options?: Partial<DocSystemClassInitOptions>);
-	}
-
-	export interface DocSystemPrivateInitOptions {}
-	interface DocSystemPrivate {}
-	class DocSystemPrivate {
-		public constructor(options?: Partial<DocSystemPrivateInitOptions>);
-	}
-
-	export interface EmbeddedWindowClassInitOptions {}
-	interface EmbeddedWindowClass {}
-	class EmbeddedWindowClass {
-		public constructor(options?: Partial<EmbeddedWindowClassInitOptions>);
-	}
-
-	export interface EmbeddedWindowPrivateInitOptions {}
-	interface EmbeddedWindowPrivate {}
-	class EmbeddedWindowPrivate {
-		public constructor(options?: Partial<EmbeddedWindowPrivateInitOptions>);
-	}
-
 	export interface GenericContainerAllocationInitOptions {}
 	interface GenericContainerAllocation {}
 	class GenericContainerAllocation {
@@ -1303,78 +1253,6 @@ declare namespace imports.gi.Cinnamon {
 		public min_size: number;
 		public natural_size: number;
 		public readonly _refcount: number;
-	}
-
-	export interface GenericContainerClassInitOptions {}
-	interface GenericContainerClass {}
-	class GenericContainerClass {
-		public constructor(options?: Partial<GenericContainerClassInitOptions>);
-	}
-
-	export interface GenericContainerPrivateInitOptions {}
-	interface GenericContainerPrivate {}
-	class GenericContainerPrivate {
-		public constructor(options?: Partial<GenericContainerPrivateInitOptions>);
-	}
-
-	export interface GlobalClassInitOptions {}
-	interface GlobalClass {}
-	class GlobalClass {
-		public constructor(options?: Partial<GlobalClassInitOptions>);
-	}
-
-	export interface GtkEmbedClassInitOptions {}
-	interface GtkEmbedClass {}
-	class GtkEmbedClass {
-		public constructor(options?: Partial<GtkEmbedClassInitOptions>);
-	}
-
-	export interface GtkEmbedPrivateInitOptions {}
-	interface GtkEmbedPrivate {}
-	class GtkEmbedPrivate {
-		public constructor(options?: Partial<GtkEmbedPrivateInitOptions>);
-	}
-
-	export interface PerfLogClassInitOptions {}
-	interface PerfLogClass {}
-	class PerfLogClass {
-		public constructor(options?: Partial<PerfLogClassInitOptions>);
-	}
-
-	export interface RecorderClassInitOptions {}
-	interface RecorderClass {}
-	class RecorderClass {
-		public constructor(options?: Partial<RecorderClassInitOptions>);
-	}
-
-	export interface ScreenshotClassInitOptions {}
-	interface ScreenshotClass {}
-	class ScreenshotClass {
-		public constructor(options?: Partial<ScreenshotClassInitOptions>);
-	}
-
-	export interface SlicerClassInitOptions {}
-	interface SlicerClass {}
-	class SlicerClass {
-		public constructor(options?: Partial<SlicerClassInitOptions>);
-	}
-
-	export interface SlicerPrivateInitOptions {}
-	interface SlicerPrivate {}
-	class SlicerPrivate {
-		public constructor(options?: Partial<SlicerPrivateInitOptions>);
-	}
-
-	export interface StackClassInitOptions {}
-	interface StackClass {}
-	class StackClass {
-		public constructor(options?: Partial<StackClassInitOptions>);
-	}
-
-	export interface StackPrivateInitOptions {}
-	interface StackPrivate {}
-	class StackPrivate {
-		public constructor(options?: Partial<StackPrivateInitOptions>);
 	}
 
 	export interface StartupSequenceInitOptions {}
@@ -1386,56 +1264,6 @@ declare namespace imports.gi.Cinnamon {
 		public get_completed(): boolean;
 		public get_id(): string;
 		public get_name(): string;
-	}
-
-	export interface TrayIconClassInitOptions {}
-	interface TrayIconClass {}
-	class TrayIconClass {
-		public constructor(options?: Partial<TrayIconClassInitOptions>);
-	}
-
-	export interface TrayIconPrivateInitOptions {}
-	interface TrayIconPrivate {}
-	class TrayIconPrivate {
-		public constructor(options?: Partial<TrayIconPrivateInitOptions>);
-	}
-
-	export interface TrayManagerClassInitOptions {}
-	interface TrayManagerClass {}
-	class TrayManagerClass {
-		public constructor(options?: Partial<TrayManagerClassInitOptions>);
-		public tray_icon_added: {(manager: TrayManager, icon: Clutter.Actor, lowercase_wm_class: string): void;};
-		public tray_icon_removed: {(manager: TrayManager, icon: Clutter.Actor): void;};
-	}
-
-	export interface TrayManagerPrivateInitOptions {}
-	interface TrayManagerPrivate {}
-	class TrayManagerPrivate {
-		public constructor(options?: Partial<TrayManagerPrivateInitOptions>);
-	}
-
-	export interface WMClassInitOptions {}
-	interface WMClass {}
-	class WMClass {
-		public constructor(options?: Partial<WMClassInitOptions>);
-	}
-
-	export interface WindowTrackerClassInitOptions {}
-	interface WindowTrackerClass {}
-	class WindowTrackerClass {
-		public constructor(options?: Partial<WindowTrackerClassInitOptions>);
-	}
-
-	export interface WindowTrackerPrivateInitOptions {}
-	interface WindowTrackerPrivate {}
-	class WindowTrackerPrivate {
-		public constructor(options?: Partial<WindowTrackerPrivateInitOptions>);
-	}
-
-	export interface XFixesCursorClassInitOptions {}
-	interface XFixesCursorClass {}
-	class XFixesCursorClass {
-		public constructor(options?: Partial<XFixesCursorClassInitOptions>);
 	}
 
 	enum AppState {

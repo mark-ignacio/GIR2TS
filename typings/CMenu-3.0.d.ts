@@ -292,12 +292,6 @@ declare namespace imports.gi.CMenu {
 		public static item_unref(item: any | null): void;
 	}
 
-	export interface DesktopAppInfoClassInitOptions {}
-	interface DesktopAppInfoClass {}
-	class DesktopAppInfoClass {
-		public constructor(options?: Partial<DesktopAppInfoClassInitOptions>);
-	}
-
 	export interface TreeAliasInitOptions {}
 	interface TreeAlias {}
 	class TreeAlias {
@@ -312,12 +306,6 @@ declare namespace imports.gi.CMenu {
 		 * @returns The #GMenuTree
 		 */
 		public get_tree(): Tree;
-	}
-
-	export interface TreeClassInitOptions {}
-	interface TreeClass {}
-	class TreeClass {
-		public constructor(options?: Partial<TreeClassInitOptions>);
 	}
 
 	export interface TreeDirectoryInitOptions {}

@@ -814,61 +814,6 @@ declare namespace imports.gi.CinnamonDesktop {
 		public static get_var_defs(): [ rules: string, var_defs: any ];
 	}
 
-	export interface BGClassInitOptions {}
-	interface BGClass {}
-	class BGClass {
-		public constructor(options?: Partial<BGClassInitOptions>);
-	}
-
-	export interface BGCrossfadeClassInitOptions {}
-	interface BGCrossfadeClass {}
-	class BGCrossfadeClass {
-		public constructor(options?: Partial<BGCrossfadeClassInitOptions>);
-		public finished: {(fade: BGCrossfade, window: Gdk.Window): void;};
-	}
-
-	export interface BGCrossfadePrivateInitOptions {}
-	interface BGCrossfadePrivate {}
-	class BGCrossfadePrivate {
-		public constructor(options?: Partial<BGCrossfadePrivateInitOptions>);
-	}
-
-	export interface DesktopThumbnailFactoryClassInitOptions {}
-	interface DesktopThumbnailFactoryClass {}
-	class DesktopThumbnailFactoryClass {
-		public constructor(options?: Partial<DesktopThumbnailFactoryClassInitOptions>);
-	}
-
-	export interface DesktopThumbnailFactoryPrivateInitOptions {}
-	interface DesktopThumbnailFactoryPrivate {}
-	class DesktopThumbnailFactoryPrivate {
-		public constructor(options?: Partial<DesktopThumbnailFactoryPrivateInitOptions>);
-	}
-
-	export interface PnpIdsClassInitOptions {}
-	interface PnpIdsClass {}
-	class PnpIdsClass {
-		public constructor(options?: Partial<PnpIdsClassInitOptions>);
-	}
-
-	export interface PnpIdsPrivateInitOptions {}
-	interface PnpIdsPrivate {}
-	class PnpIdsPrivate {
-		public constructor(options?: Partial<PnpIdsPrivateInitOptions>);
-	}
-
-	export interface RRConfigClassInitOptions {}
-	interface RRConfigClass {}
-	class RRConfigClass {
-		public constructor(options?: Partial<RRConfigClassInitOptions>);
-	}
-
-	export interface RRConfigPrivateInitOptions {}
-	interface RRConfigPrivate {}
-	class RRConfigPrivate {
-		public constructor(options?: Partial<RRConfigPrivateInitOptions>);
-	}
-
 	export interface RRCrtcInitOptions {}
 	interface RRCrtc {}
 	class RRCrtc {
@@ -884,18 +829,6 @@ declare namespace imports.gi.CinnamonDesktop {
 		public set_config_with_time(timestamp: number, x: number, y: number, mode: RRMode, rotation: RRRotation, outputs: RROutput, n_outputs: number, scale: number, global_scale: number): boolean;
 		public set_gamma(size: number, red: number, green: number, blue: number): void;
 		public supports_rotation(rotation: RRRotation): boolean;
-	}
-
-	export interface RRLabelerClassInitOptions {}
-	interface RRLabelerClass {}
-	class RRLabelerClass {
-		public constructor(options?: Partial<RRLabelerClassInitOptions>);
-	}
-
-	export interface RRLabelerPrivateInitOptions {}
-	interface RRLabelerPrivate {}
-	class RRLabelerPrivate {
-		public constructor(options?: Partial<RRLabelerPrivateInitOptions>);
 	}
 
 	export interface RRModeInitOptions {}
@@ -937,57 +870,6 @@ declare namespace imports.gi.CinnamonDesktop {
 		public list_modes(): RRMode;
 		public set_backlight(value: number): boolean;
 		public supports_mode(mode: RRMode): boolean;
-	}
-
-	export interface RROutputInfoClassInitOptions {}
-	interface RROutputInfoClass {}
-	class RROutputInfoClass {
-		public constructor(options?: Partial<RROutputInfoClassInitOptions>);
-	}
-
-	export interface RROutputInfoPrivateInitOptions {}
-	interface RROutputInfoPrivate {}
-	class RROutputInfoPrivate {
-		public constructor(options?: Partial<RROutputInfoPrivateInitOptions>);
-	}
-
-	export interface RRScreenClassInitOptions {}
-	interface RRScreenClass {}
-	class RRScreenClass {
-		public constructor(options?: Partial<RRScreenClassInitOptions>);
-		public changed: {(): void;};
-		public output_connected: {(output: RROutput): void;};
-		public output_disconnected: {(output: RROutput): void;};
-	}
-
-	export interface RRScreenPrivateInitOptions {}
-	interface RRScreenPrivate {}
-	class RRScreenPrivate {
-		public constructor(options?: Partial<RRScreenPrivateInitOptions>);
-	}
-
-	export interface WallClockClassInitOptions {}
-	interface WallClockClass {}
-	class WallClockClass {
-		public constructor(options?: Partial<WallClockClassInitOptions>);
-	}
-
-	export interface WallClockPrivateInitOptions {}
-	interface WallClockPrivate {}
-	class WallClockPrivate {
-		public constructor(options?: Partial<WallClockPrivateInitOptions>);
-	}
-
-	export interface XkbInfoClassInitOptions {}
-	interface XkbInfoClass {}
-	class XkbInfoClass {
-		public constructor(options?: Partial<XkbInfoClassInitOptions>);
-	}
-
-	export interface XkbInfoPrivateInitOptions {}
-	interface XkbInfoPrivate {}
-	class XkbInfoPrivate {
-		public constructor(options?: Partial<XkbInfoPrivateInitOptions>);
 	}
 
 	enum DesktopThumbnailSize {

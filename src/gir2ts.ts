@@ -32,16 +32,19 @@ function renderNamespace(ns_node: NamespaceNode, ns_name: string, exclude?: Excl
     let class_nodes: ClassNode[] = [];
     if (ns_node.class)
         class_nodes = class_nodes.concat(ns_node.class);
-    for (let class_node of class_nodes) {
-        let class_name = class_node.$.name;
-        // if (exclude && class_name in exclude.exclude.class)
-        body += '\n\t' + (renderClassAsInterface(
-            class_node,
-            ns_name,
-            exclude?.exclude?.class?.[class_name],
-            modifiers?.amend?.class?.[class_name]
-        )).replace(/\n/gm, "\n\t");
-    }
+        for (let class_node of class_nodes) {
+            let class_name = class_node.$.name;
+            // if (exclude && class_name in exclude.exclude.class)
+            body += '\n\t' + (renderClassAsInterface(
+                class_node,
+                ns_name,
+                exclude?.exclude?.class?.[class_name],
+                modifiers?.amend?.class?.[class_name]
+            )).replace(/\n/gm, "\n\t");
+            
+            const recordNodes = ns_node.record.filter((x) => x.$.name == `${class_name}Private` || x.$.name == `${class_name}Class`);
+            ns_node.record = ns_node.record.filter((x) => x.$.name != `${class_name}Private` && x.$.name != `${class_name}Class`);
+        }
     if (ns_node.record)
         for (let rec_node of ns_node.record) {
             body += '\n\t' + (renderRecordAsClass(

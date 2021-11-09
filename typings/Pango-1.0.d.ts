@@ -2503,26 +2503,6 @@ declare namespace imports.gi.Pango {
 		public to_string(): string;
 	}
 
-	export interface ContextClassInitOptions {}
-	interface ContextClass {}
-	class ContextClass {
-		public constructor(options?: Partial<ContextClassInitOptions>);
-	}
-
-	export interface FontClassInitOptions {}
-	interface FontClass {}
-	class FontClass {
-		public constructor(options?: Partial<FontClassInitOptions>);
-		public describe: {(font: Font): FontDescription;};
-		public get_coverage: {(font: Font, language: Language): Coverage;};
-		public get_glyph_extents: {(font: Font | null, glyph: Glyph): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];};
-		public get_metrics: {(font: Font | null, language: Language | null): FontMetrics;};
-		public get_font_map: {(font: Font | null): FontMap | null;};
-		public describe_absolute: {(font: Font): FontDescription;};
-		public get_features: {(font: Font): [ HarfBuzz.feature_t[], number ];};
-		public create_hb_font: {(font: Font): HarfBuzz.font_t;};
-	}
-
 	export interface FontDescriptionInitOptions {}
 	/**
 	 * A `PangoFontDescription` describes a font in an implementation-independent
@@ -2886,53 +2866,6 @@ declare namespace imports.gi.Pango {
 		public unset_fields(to_unset: FontMask): void;
 	}
 
-	export interface FontFaceClassInitOptions {}
-	interface FontFaceClass {}
-	class FontFaceClass {
-		public constructor(options?: Partial<FontFaceClassInitOptions>);
-		public get_face_name: {(face: FontFace): string;};
-		public describe: {(face: FontFace): FontDescription;};
-		public list_sizes: {(face: FontFace): [ number[] | null, number ];};
-		public is_synthesized: {(face: FontFace): boolean;};
-		public get_family: {(face: FontFace): FontFamily;};
-		public _pango_reserved3: {(): void;};
-		public _pango_reserved4: {(): void;};
-	}
-
-	export interface FontFamilyClassInitOptions {}
-	interface FontFamilyClass {}
-	class FontFamilyClass {
-		public constructor(options?: Partial<FontFamilyClassInitOptions>);
-		public list_faces: {(family: FontFamily): [ FontFace[] | null, number ];};
-		public get_name: {(family: FontFamily): string;};
-		public is_monospace: {(family: FontFamily): boolean;};
-		public is_variable: {(family: FontFamily): boolean;};
-		public get_face: {(family: FontFamily, name: string | null): FontFace | null;};
-		public _pango_reserved2: {(): void;};
-	}
-
-	export interface FontMapClassInitOptions {}
-	/**
-	 * The `PangoFontMapClass` structure holds the virtual functions for
-	 * a particular `PangoFontMap` implementation.
-	 */
-	interface FontMapClass {}
-	class FontMapClass {
-		public constructor(options?: Partial<FontMapClassInitOptions>);
-		/**
-		 * the type of rendering-system-dependent engines that
-		 * can handle fonts of this fonts loaded with this fontmap.
-		 */
-		public readonly shape_engine_type: string;
-		public load_font: {(fontmap: FontMap, context: Context, desc: FontDescription): Font | null;};
-		public list_families: {(fontmap: FontMap): [ FontFamily[], number ];};
-		public load_fontset: {(fontmap: FontMap, context: Context, desc: FontDescription, language: Language): Fontset | null;};
-		public get_serial: {(fontmap: FontMap): number;};
-		public changed: {(fontmap: FontMap): void;};
-		public get_family: {(fontmap: FontMap, name: string): FontFamily;};
-		public get_face: {(fontmap: FontMap, font: Font): FontFace;};
-	}
-
 	export interface FontMetricsInitOptions {}
 	/**
 	 * A `PangoFontMetrics` structure holds the overall metric information
@@ -3043,30 +2976,6 @@ declare namespace imports.gi.Pango {
 		 * If the result is zero, frees the structure and any associated memory.
 		 */
 		public unref(): void;
-	}
-
-	export interface FontsetClassInitOptions {}
-	/**
-	 * The `PangoFontsetClass` structure holds the virtual functions for
-	 * a particular `PangoFontset` implementation.
-	 */
-	interface FontsetClass {}
-	class FontsetClass {
-		public constructor(options?: Partial<FontsetClassInitOptions>);
-		public get_font: {(fontset: Fontset, wc: number): Font;};
-		public get_metrics: {(fontset: Fontset): FontMetrics;};
-		public get_language: {(fontset: Fontset): Language;};
-		public foreach: {(fontset: Fontset, func: FontsetForeachFunc, data: any | null): void;};
-		public _pango_reserved1: {(): void;};
-		public _pango_reserved2: {(): void;};
-		public _pango_reserved3: {(): void;};
-		public _pango_reserved4: {(): void;};
-	}
-
-	export interface FontsetSimpleClassInitOptions {}
-	interface FontsetSimpleClass {}
-	class FontsetSimpleClass {
-		public constructor(options?: Partial<FontsetSimpleClassInitOptions>);
 	}
 
 	export interface GlyphGeometryInitOptions {}
@@ -3667,12 +3576,6 @@ declare namespace imports.gi.Pango {
 		 * @returns 
 		 */
 		public to_string(): string;
-	}
-
-	export interface LayoutClassInitOptions {}
-	interface LayoutClass {}
-	class LayoutClass {
-		public constructor(options?: Partial<LayoutClassInitOptions>);
 	}
 
 	export interface LayoutIterInitOptions {}
@@ -4282,50 +4185,6 @@ declare namespace imports.gi.Pango {
 		 * height of the rectangle.
 		 */
 		public height: number;
-	}
-
-	export interface RendererClassInitOptions {}
-	/**
-	 * Class structure for `PangoRenderer`.
-	 * 
-	 * The following vfuncs take user space coordinates in Pango units
-	 * and have default implementations:
-	 * - draw_glyphs
-	 * - draw_rectangle
-	 * - draw_error_underline
-	 * - draw_shape
-	 * - draw_glyph_item
-	 * 
-	 * The default draw_shape implementation draws nothing.
-	 * 
-	 * The following vfuncs take device space coordinates as doubles
-	 * and must be implemented:
-	 * - draw_trapezoid
-	 * - draw_glyph
-	 */
-	interface RendererClass {}
-	class RendererClass {
-		public constructor(options?: Partial<RendererClassInitOptions>);
-		public draw_glyphs: {(renderer: Renderer, font: Font, glyphs: GlyphString, x: number, y: number): void;};
-		public draw_rectangle: {(renderer: Renderer, part: RenderPart, x: number, y: number, width: number, height: number): void;};
-		public draw_error_underline: {(renderer: Renderer, x: number, y: number, width: number, height: number): void;};
-		public draw_shape: {(renderer: Renderer, attr: AttrShape, x: number, y: number): void;};
-		public draw_trapezoid: {(renderer: Renderer, part: RenderPart, y1_: number, x11: number, x21: number, y2: number, x12: number, x22: number): void;};
-		public draw_glyph: {(renderer: Renderer, font: Font, glyph: Glyph, x: number, y: number): void;};
-		public part_changed: {(renderer: Renderer, part: RenderPart): void;};
-		public begin: {(renderer: Renderer): void;};
-		public end: {(renderer: Renderer): void;};
-		public prepare_run: {(renderer: Renderer, run: LayoutRun): void;};
-		public draw_glyph_item: {(renderer: Renderer, text: string | null, glyph_item: GlyphItem, x: number, y: number): void;};
-		public _pango_reserved2: {(): void;};
-		public _pango_reserved3: {(): void;};
-		public _pango_reserved4: {(): void;};
-	}
-
-	export interface RendererPrivateInitOptions {}
-	interface RendererPrivate {}
-	class RendererPrivate {
-		public constructor(options?: Partial<RendererPrivateInitOptions>);
 	}
 
 	export interface ScriptIterInitOptions {}
