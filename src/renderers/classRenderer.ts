@@ -1,4 +1,4 @@
-import { ClassNode, FunctionNode, ParameterNode } from "../types/gir-types";
+import { ClassNode, FieldNode, FunctionNode, ParameterNode } from "../types/gir-types";
 import { ClassModifier, FunctionModifier, ModifierDesc } from "../types/modifier-types";
 import { ExcludeClass } from "../types/exclude-types";
 import { renderMethod } from "./methodRenderer";
@@ -36,6 +36,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     if (class_node.$.parent) {
         ifaces.push(class_node.$.parent);
     }
+    
     if (class_node.implements) {
         for (let iface of class_node.implements) {
             ifaces.push(iface.$.name);
@@ -85,33 +86,45 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
         }
     }
 
+    const mixin = renderMixinPart(class_name, ifaces);
+    const extension = renderInterfacePart(class_name, class_node, ns_name, exclude_self);
+    const iface_str = renderIInterfacePart(class_name, methods, fields, signals, ns_name, exclude, modifier);
+    const constructorOptions = renderInitOptionsInterface(class_name, fields, ifaces);
+    const static_side = renderClassPart(ctors, static_funcs, class_name, ns_name, modifier);
+
+    return iface_str + constructorOptions + mixin + extension + static_side;
+}
+
+
+function getAdvisoryDocstring(class_name: string): string {
     let mixinDocstring = ""
     mixinDocstring += `/** This construct is only for enabling class multi-inheritance,\n`;
     mixinDocstring += ` * use {@link ${class_name}} instead.\n`
     mixinDocstring += ` */\n`;
+    return mixinDocstring;
+}
 
+function renderIInterfacePart(
+    class_name: string,
+    methods: FunctionNode[],
+    fields: FieldNode[],
+    signals: FunctionNode[],
+    ns_name: string, 
+    exclude?: ExcludeClass, 
+    modifier?: ClassModifier
+    ): string {
+
+    let exclude_all_members = exclude?.self ?? exclude?.members ?? false;
+
+    let headerDocstring = getAdvisoryDocstring(class_name);
     let header = '';
-    header += mixinDocstring;
+    header += headerDocstring;
     header += `interface I${class_name}`;
-
-    let mixin = "";
-    mixin += mixinDocstring;
-    mixin += `type ${class_name}Mixin = I${class_name}`;
-    if (ifaces.length > 0) {
-        mixin += " &"
-        mixin += ` ${ifaces.join(' & ')}`;
-    }
-    mixin += ";\n\n";
-
-    let extension = "";
-    extension += renderDocString(class_node?.doc?.[0]?._ ?? null, undefined, undefined, { ns_name: ns_name})
-    extension += `${exclude_self ? '// ' : ''}interface ${class_name} extends ${class_name}Mixin {}\n`;
 
     let body = "";
 
     //#region Render props
     let fieldsAdded: Set<string> = new Set();
-    let signalFields: ParameterNode[] = [];
     if (fields.length > 0) {
         const methodNames = new Set(methods.map((x) => x.$.name));
         for (const field of fields) {
@@ -123,12 +136,11 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
                 excluded = true;
             if (fieldsAdded.has(fieldName))
                 excluded = true;
-            if (exclude?.prop?.includes(fieldName))
+            if (exclude_all_members || exclude?.prop?.includes(fieldName))
                 excluded = true
 
             body+= `${renderProperty(field, ns_name, modifier?.prop?.[fieldName] , false, 1, excluded)}\n`;
             fieldsAdded.add(fieldName);
-            signalFields.push(field);
         }
     }
     //#endregion
@@ -136,7 +148,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     //#region Methods
     const method_str_list: string[] = methods.map((m) => {
         // if method is present in exclude_list
-        const excluded = (exclude_method_list.includes(m.$.name) || exclude_all_members);
+        const excluded = (exclude?.method?.includes(m.$.name) || exclude_all_members);
         const funcModifier = modifier?.function?.[m.$.name];
         let method_str = renderMethod(m, ns_name, funcModifier, { include_access_modifier: false, indentNum: 1, exclude: excluded });
         return method_str;
@@ -152,15 +164,16 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
     if (signals.length > 0) {
         body+= "\n";
         for (const signal of signals) {
-            body+= renderSignal(signal, ns_name, false, 1);
+            body+= renderSignal(signal, ns_name, exclude_all_members, 1);
         }
     }
+
     //#endregion
 
-    //#region generate signals for props
-    if (signalFields.length > 0) {
+    //#region generate notify signals for props
+    if (fields.length > 0) {
         body+= "\n";
-        for (const signal of signalFields) {
+        for (const signal of fields) {
             const fieldName = signal.$.name.replace(/-/g, "_");
             body+= renderSignalFromInfo({
                 doc: null,
@@ -179,7 +192,7 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
                     name: null
                 },
                 deprecatedDoc: null
-            }, ns_name, false, 1);
+            }, ns_name, exclude_all_members, 1);
         }
     }
     //#endregion
@@ -189,10 +202,31 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
         `}\n\n`;
 
     let iface_str = header + body;
+    return iface_str;
+}
 
-    //#region Constructor init options interface
+function renderMixinPart(class_name: string, ifaces: string[]): string {
+    let mixin = "";
+    mixin += getAdvisoryDocstring(class_name);
+    mixin += `type ${class_name}Mixin = I${class_name}`;
+    if (ifaces.length > 0) {
+        mixin += " &"
+        mixin += ` ${ifaces.join(' & ')}`;
+    }
+    mixin += ";\n\n";
+    return mixin;
+}
+
+function renderInterfacePart(class_name: string, class_node: ClassNode, ns_name: string, exclude_self: boolean): string {
+    let extension = "";
+    extension += renderDocString(class_node?.doc?.[0]?._ ?? null, undefined, undefined, { ns_name: ns_name})
+    extension += `${exclude_self ? '// ' : ''}interface ${class_name} extends ${class_name}Mixin {}\n`;
+    return extension;
+}
+
+function renderInitOptionsInterface(class_name: string, fields: FieldNode[], ifaces: string[]): string {
     let constructorOptions = `type ${class_name}InitOptionsMixin `;
-    if (signalFields.length > 0 || ifaces.length > 0)
+    if (fields.length > 0 || ifaces.length > 0)
         constructorOptions+= "= ";
     else {
         constructorOptions+= " = {};"
@@ -202,20 +236,20 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
         constructorOptions += `${ifaces.map(x => `${x}InitOptions`).join(' & ')}`;
     }
 
-    if (signalFields.length > 0) {
+    if (fields.length > 0) {
         if (ifaces.length > 0)
             constructorOptions += " & \n"
         constructorOptions+= `Pick<I${class_name},\n\t`;
-        constructorOptions+= signalFields.map(x => `"${x.$.name.replace(/\-/g, "_")}"`).join(" |\n\t")
+        constructorOptions+= fields.map(x => `"${x.$.name.replace(/\-/g, "_")}"`).join(" |\n\t")
         constructorOptions+= ">;\n";
     }
     
     constructorOptions += `\nexport interface ${class_name}InitOptions extends ${class_name}InitOptionsMixin {}\n\n`;
-    //#endregion
+    return constructorOptions;
+}
 
-    //#region Static functions
+function renderClassPart(ctors: FunctionNode[], static_funcs: FunctionNode[], class_name: string, ns_name: string, modifier?: ClassModifier): string {
     const ctor_str_list: string[] = ctors.map((c) => {
-        // console.log(c);
         const funcModifier = modifier?.function?.[c.$.name];
         return renderMethod(c, ns_name, funcModifier, { indentNum: 1, staticFunc: true });
     });
@@ -226,7 +260,6 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
         return renderMethod(sf, ns_name, funcModifier, { indentNum: 1, staticFunc: true });
     });
     const static_func_body = static_func_str_list.join('\n');
-    //#endregion
 
     const constructor_modifier = modifier?.function?.["constructor"];
     const classGenericModifier = modifier?.generic ?? "";
@@ -240,6 +273,5 @@ export function renderClassAsInterface(class_node: ClassNode, ns_name: string, e
         `${static_func_body + NeedNewLine(static_func_body)}` +
         `}\n`;
 
-    return iface_str + constructorOptions + mixin + extension + static_side;
-
+    return static_side;
 }
