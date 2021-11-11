@@ -1244,7 +1244,7 @@ declare namespace imports.gi.Gdk {
 		 * Gets the number of monitors that belong to #display.
 		 * 
 		 * The returned number is valid until the next emission of the
-		 * {@link Display}::monitor-added or #GdkDisplay::monitor-removed signal.
+		 * {@link Display.monitor_added} or #GdkDisplay::monitor-removed signal.
 		 * @returns the number of monitors
 		 */
 		get_n_monitors(): number;
@@ -3465,7 +3465,7 @@ declare namespace imports.gi.Gdk {
 		 * The ::tool-added signal is emitted whenever a new tool
 		 * is made known to the seat. The tool may later be assigned
 		 * to a device (i.e. on proximity with a tablet). The device
-		 * will emit the {@link Device}::tool-changed signal accordingly.
+		 * will emit the {@link Device.tool_changed} signal accordingly.
 		 * 
 		 * A same tool may be used by several devices.
 		 * @param signal 
@@ -4810,7 +4810,7 @@ declare namespace imports.gi.Gdk {
 		 * %GDK_GRAVITY_NORTH_WEST with %GDK_GRAVITY_NORTH_EAST and vice versa if
 		 * #window extends beyond the left or right edges of the monitor.
 		 * 
-		 * Connect to the {@link Window}::moved-to-rect signal to find out how it was
+		 * Connect to the {@link Window.moved_to_rect} signal to find out how it was
 		 * actually positioned.
 		 * @param rect the destination {@link Rectangle} to align #window with
 		 * @param rect_anchor the point on #rect to align with #window's anchor point
@@ -5602,7 +5602,7 @@ declare namespace imports.gi.Gdk {
 		 * The ::from-embedder signal is emitted to translate coordinates
 		 * in the embedder of an offscreen window to the offscreen window.
 		 * 
-		 * See also {@link Window}::to-embedder.
+		 * See also {@link Window.to_embedder}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -5660,7 +5660,7 @@ declare namespace imports.gi.Gdk {
 		 * The ::to-embedder signal is emitted to translate coordinates
 		 * in an offscreen window to its embedder.
 		 * 
-		 * See also {@link Window}::from-embedder.
+		 * See also {@link Window.from_embedder}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -11328,7 +11328,7 @@ declare namespace imports.gi.Gdk {
 	 * Sets #window to be embedded in #embedder.
 	 * 
 	 * To fully embed an offscreen window, in addition to calling this
-	 * function, it is also necessary to handle the {@link Window}::pick-embedded-child
+	 * function, it is also necessary to handle the {@link Window.pick_embedded_child}
 	 * signal on the #embedder and the #GdkWindow::to-embedder and
 	 * #GdkWindow::from-embedder signals on #window.
 	 * @param window a {@link Window}

@@ -16,15 +16,21 @@ function convertLinks(doc: string, ns_name?: string): string {
     if (ns_name == undefined)
         return doc;
 
-    const regex = new RegExp(`#${ns_name}[\\w\\d]*`, "gm");
+    /**
+     *  @example Captures #Clutter:optional-prop
+     */
+    const regex = new RegExp(`#${ns_name}[\\w\\d:-]*(?<!:)`, "gm");
     const result = regex.exec(doc);
     if (result != null) {
         for (const item of result) {
+            // Just the namespace name, skip
             if (item == `#${ns_name}`) {
                 continue;
             }
 
-            const newItem = item.replace(`#${ns_name}`, "");
+            let newItem = item;
+
+            newItem = newItem.replace(`#${ns_name}`, "").replace(/:+/g, ".").replace(/-/g, "_");
             doc = doc.replace(item, `{@link ${newItem.toString()}}`);
         }
     }

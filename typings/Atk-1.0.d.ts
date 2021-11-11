@@ -358,7 +358,7 @@ declare namespace imports.gi.Atk {
 		add_relationship(relationship: RelationType, target: Object): boolean;
 		/**
 		 * @deprecated
-		 * Connect directly to {@link Object}::property-change or
+		 * Connect directly to {@link Object.property_change} or
 		 *   the relevant #GObject::notify signal for each desired property.
 		 * 
 		 * Calls #handler on property changes.
@@ -1879,7 +1879,7 @@ declare namespace imports.gi.Atk {
 		/**
 		 * @deprecated
 		 * If you need to track when an object gains or
-		 * lose the focus, use the {@link Object}::state-change "focused" notification instead.
+		 * lose the focus, use the {@link Object.state_change} "focused" notification instead.
 		 * 
 		 * Add the specified handler to the set of functions to be called
 		 * when this object receives focus events (in or out). If the handler is
@@ -1987,7 +1987,7 @@ declare namespace imports.gi.Atk {
 		/**
 		 * @deprecated
 		 * If you need to track when an object gains or
-		 * lose the focus, use the {@link Object}::state-change "focused" notification instead.
+		 * lose the focus, use the {@link Object.state_change} "focused" notification instead.
 		 * 
 		 * Remove the handler specified by #handler_id from the list of
 		 * functions to be executed when this object receives focus events
@@ -3728,7 +3728,7 @@ declare namespace imports.gi.Atk {
 		 * object. In any case, it is possible that the value can't be
 		 * modified (ie: a read-only component). If the value changes due this
 		 * call, it is possible that the text could change, and will trigger
-		 * an {@link Value}::value-changed signal emission.
+		 * an {@link Value.value_changed} signal emission.
 		 * 
 		 * Note for implementors: the deprecated atk_value_set_current_value()
 		 * method returned TRUE or FALSE depending if the value was assigned
@@ -3929,7 +3929,7 @@ declare namespace imports.gi.Atk {
 	interface IWindow {
 
 		/**
-		 * The signal {@link Window}::activate is emitted when a window
+		 * The signal {@link Window.activate} is emitted when a window
 		 * becomes the active window of the application or session.
 		 * @param signal 
 		 * @param callback Callback function
@@ -3939,7 +3939,7 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
-		 * The signal {@link Window}::create is emitted when a new window
+		 * The signal {@link Window.create} is emitted when a new window
 		 * is created.
 		 * @param signal 
 		 * @param callback Callback function
@@ -3949,7 +3949,7 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "create", callback: (owner: this) => void): number;
 		/**
-		 * The signal {@link Window}::deactivate is emitted when a window is
+		 * The signal {@link Window.deactivate} is emitted when a window is
 		 * no longer the active window of the application or session.
 		 * @param signal 
 		 * @param callback Callback function
@@ -3959,7 +3959,7 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "deactivate", callback: (owner: this) => void): number;
 		/**
-		 * The signal {@link Window}::destroy is emitted when a window is
+		 * The signal {@link Window.destroy} is emitted when a window is
 		 * destroyed.
 		 * @param signal 
 		 * @param callback Callback function
@@ -3969,7 +3969,7 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "destroy", callback: (owner: this) => void): number;
 		/**
-		 * The signal {@link Window}::maximize is emitted when a window
+		 * The signal {@link Window.maximize} is emitted when a window
 		 * is maximized.
 		 * @param signal 
 		 * @param callback Callback function
@@ -3979,7 +3979,7 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "maximize", callback: (owner: this) => void): number;
 		/**
-		 * The signal {@link Window}::minimize is emitted when a window
+		 * The signal {@link Window.minimize} is emitted when a window
 		 * is minimized.
 		 * @param signal 
 		 * @param callback Callback function
@@ -3989,7 +3989,7 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "minimize", callback: (owner: this) => void): number;
 		/**
-		 * The signal {@link Window}::move is emitted when a window
+		 * The signal {@link Window.move} is emitted when a window
 		 * is moved.
 		 * @param signal 
 		 * @param callback Callback function
@@ -3999,7 +3999,7 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "move", callback: (owner: this) => void): number;
 		/**
-		 * The signal {@link Window}::resize is emitted when a window
+		 * The signal {@link Window.resize} is emitted when a window
 		 * is resized.
 		 * @param signal 
 		 * @param callback Callback function
@@ -4009,7 +4009,7 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "resize", callback: (owner: this) => void): number;
 		/**
-		 * The signal {@link Window}::restore is emitted when a window
+		 * The signal {@link Window.restore} is emitted when a window
 		 * is restored.
 		 * @param signal 
 		 * @param callback Callback function

@@ -505,7 +505,7 @@ declare namespace imports.gi.GObject {
 		 * non-zero, the emission of "notify" signals on #object is
 		 * stopped. The signals are queued until the freeze count is decreased
 		 * to zero. Duplicate notifications are squashed so that at most one
-		 * #GObject::notify signal is emitted for each property modified while the
+		 * {@link .notify} signal is emitted for each property modified while the
 		 * object is frozen.
 		 * 
 		 * This is necessary for accessors that modify multiple properties to prevent
@@ -941,7 +941,7 @@ declare namespace imports.gi.GObject {
 		 * and when it reaches zero, queued "notify" signals are emitted.
 		 * 
 		 * Duplicate notifications for each property are squashed so that at most one
-		 * #GObject::notify signal is emitted for each property, in the reverse order
+		 * {@link .notify} signal is emitted for each property, in the reverse order
 		 * in which they have been queued.
 		 * 
 		 * It is an error to call this function when the freeze count is zero.

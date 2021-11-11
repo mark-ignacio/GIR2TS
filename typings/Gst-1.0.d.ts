@@ -2740,7 +2740,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * The pad and the element should be unlocked when calling this function.
 		 * 
-		 * This function will emit the {@link Element}::pad-added signal on the element.
+		 * This function will emit the {@link Element.pad_added} signal on the element.
 		 * @param pad the {@link Pad} to add to the element.
 		 * @returns %TRUE if the pad could be added. This function can fail when
 		 * a pad with the same name already existed or the pad already had another
@@ -3219,7 +3219,7 @@ declare namespace imports.gi.Gst {
 		 * pad templates use this in combination with autopluggers to figure out that
 		 * the element is done initializing its pads.
 		 * 
-		 * This function emits the {@link Element}::no-more-pads signal.
+		 * This function emits the {@link Element.no_more_pads} signal.
 		 * 
 		 * MT safe.
 		 */
@@ -3329,7 +3329,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * The pad and the element should be unlocked when calling this function.
 		 * 
-		 * This function will emit the {@link Element}::pad-removed signal on the element.
+		 * This function will emit the {@link Element.pad_removed} signal on the element.
 		 * @param pad the {@link Pad} to remove from the element.
 		 * @returns %TRUE if the pad could be removed. Can return %FALSE if the
 		 * pad does not belong to the provided element.
@@ -5522,7 +5522,7 @@ declare namespace imports.gi.Gst {
 		 */
 		store_sticky_event(event: Event): FlowReturn;
 		/**
-		 * Unlinks the source pad from the sink pad. Will emit the {@link Pad}::unlinked
+		 * Unlinks the source pad from the sink pad. Will emit the {@link Pad.unlinked}
 		 * signal on both pads.
 		 * @param sinkpad the sink {@link Pad} to unlink.
 		 * @returns %TRUE if the pads were unlinked. This function returns %FALSE if

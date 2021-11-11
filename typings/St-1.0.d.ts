@@ -328,12 +328,12 @@ declare namespace imports.gi.St {
 		pack_start: boolean;
 		vertical: boolean;
 		/**
-		 * Get the value of the {@link BoxLayout}::pack-start property.
+		 * Get the value of the {@link BoxLayout.pack_start} property.
 		 * @returns %TRUE if pack-start is enabled
 		 */
 		get_pack_start(): boolean;
 		/**
-		 * Get the value of the {@link BoxLayout}::vertical property.
+		 * Get the value of the {@link BoxLayout.vertical} property.
 		 * @returns %TRUE if the layout is vertical
 		 */
 		get_vertical(): boolean;
@@ -355,12 +355,12 @@ declare namespace imports.gi.St {
 		 */
 		insert_before(actor: Clutter.Actor, sibling: Clutter.Actor): void;
 		/**
-		 * Set the value of the {@link BoxLayout}::pack-start property.
+		 * Set the value of the {@link BoxLayout.pack_start} property.
 		 * @param pack_start %TRUE if the layout should use pack-start
 		 */
 		set_pack_start(pack_start: boolean): void;
 		/**
-		 * Set the value of the {@link BoxLayout}::vertical property
+		 * Set the value of the {@link BoxLayout.vertical} property
 		 * @param vertical %TRUE if the layout should be vertical
 		 */
 		set_vertical(vertical: boolean): void;
@@ -461,9 +461,9 @@ declare namespace imports.gi.St {
 		fake_release(): void;
 		/**
 		 * Gets the mask of mouse buttons that #button emits the
-		 * {@link Button}::clicked signal for.
+		 * {@link Button.clicked} signal for.
 		 * @returns the mask of mouse buttons that #button emits the
-		 * {@link Button}::clicked signal for.
+		 * {@link Button.clicked} signal for.
 		 */
 		get_button_mask(): ButtonMask;
 		/**
@@ -482,7 +482,7 @@ declare namespace imports.gi.St {
 		 */
 		get_toggle_mode(): boolean;
 		/**
-		 * Sets which mouse buttons #button emits {@link Button}::clicked for.
+		 * Sets which mouse buttons #button emits {@link Button.clicked} for.
 		 * @param mask the mask of mouse buttons that #button responds to
 		 */
 		set_button_mask(mask: ButtonMask): void;
@@ -2181,7 +2181,7 @@ declare namespace imports.gi.St {
 		can_focus: boolean;
 		/**
 		 * Whether or not the pointer is currently hovering over the widget. This is
-		 * only tracked automatically if {@link Widget}:track-hover is %TRUE, but you can
+		 * only tracked automatically if {@link Widget.track_hover} is %TRUE, but you can
 		 * adjust it manually in any case.
 		 */
 		hover: boolean;
@@ -2212,7 +2212,7 @@ declare namespace imports.gi.St {
 		/**
 		 * Determines whether the widget tracks pointer hover state. If
 		 * %TRUE (and the widget is visible and reactive), the
-		 * {@link Widget}:hover property and "hover" style pseudo class will be
+		 * {@link Widget.hover} property and "hover" style pseudo class will be
 		 * adjusted automatically as the pointer moves in and out of the
 		 * widget.
 		 */
@@ -2292,7 +2292,7 @@ declare namespace imports.gi.St {
 		 */
 		get_focus_chain(): GLib.List;
 		/**
-		 * If {@link Widget}:track-hover is set, this returns whether the pointer
+		 * If {@link Widget.track_hover} is set, this returns whether the pointer
 		 * is currently over the widget.
 		 * @returns current value of hover on #widget
 		 */
@@ -2376,7 +2376,7 @@ declare namespace imports.gi.St {
 		 * 
 		 * If #from is a descendant of #widget, this attempts to move the
 		 * keyboard focus to the next descendant of #widget (in the order
-		 * implied by #direction) that has the {@link Widget}:can-focus property
+		 * implied by #direction) that has the {@link Widget.can_focus} property
 		 * set. If #from is %NULL, or outside of #widget, this attempts to
 		 * focus either #widget itself, or its first descendant in the order
 		 * implied by #direction.
@@ -2501,7 +2501,7 @@ declare namespace imports.gi.St {
 		 * Sets #widget's hover property and adds or removes "hover" from its
 		 * pseudo class accordingly
 		 * 
-		 * If you have set {@link Widget}:track-hover, you should not need to call
+		 * If you have set {@link Widget.track_hover}, you should not need to call
 		 * this directly. You can call st_widget_sync_hover() if the hover
 		 * state might be out of sync due to another actor's pointer grab.
 		 * @param hover whether the pointer is hovering over the widget

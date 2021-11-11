@@ -1422,7 +1422,7 @@ declare namespace imports.gi.Soup {
 		 */
 		level: LoggerLogLevel;
 		/**
-		 * If {@link Logger}:level is %SOUP_LOGGER_LOG_BODY, this gives
+		 * If {@link Logger.level} is %SOUP_LOGGER_LOG_BODY, this gives
 		 * the maximum number of bytes of the body that will be logged.
 		 * (-1 means "no limit".)
 		 */
@@ -1552,7 +1552,7 @@ declare namespace imports.gi.Soup {
 		 */
 		tls_certificate: Gio.TlsCertificate;
 		/**
-		 * The verification errors on {@link Message}:tls-certificate
+		 * The verification errors on {@link Message.tls_certificate}
 		 */
 		tls_errors: Gio.TlsCertificateFlags;
 		uri: URI;
@@ -1860,7 +1860,7 @@ declare namespace imports.gi.Soup {
 		wrote_headers(): void;
 		wrote_informational(): void;
 		/**
-		 * This signal is emitted after {@link Message}::got-headers, and
+		 * This signal is emitted after {@link Message.got_headers}, and
 		 * before the first #SoupMessage::got-chunk. If content
 		 * sniffing is disabled, or no content sniffing will be
 		 * performed, due to the sniffer deciding to trust the
@@ -1890,7 +1890,7 @@ declare namespace imports.gi.Soup {
 		connect(signal: "content-sniffed", callback: (owner: this, type: string, params: GLib.HashTable) => void): number;
 		/**
 		 * Emitted when all HTTP processing is finished for a message.
-		 * (After {@link Message}::got_body for client-side messages, or
+		 * (After {@link Message.got_body} for client-side messages, or
 		 * after #SoupMessage::wrote_body for server-side messages.)
 		 * @param signal 
 		 * @param callback Callback function
@@ -1948,7 +1948,7 @@ declare namespace imports.gi.Soup {
 		 * emission finished, and #msg's connection will be closed.
 		 * (If you need to requeue a message--eg, after handling
 		 * authentication or redirection--it is usually better to
-		 * requeue it from a {@link Message}::got_body handler rather
+		 * requeue it from a {@link Message.got_body} handler rather
 		 * than a #SoupMessage::got_headers handler, so that the
 		 * existing HTTP connection can be reused.)
 		 * @param signal 
@@ -2036,7 +2036,7 @@ declare namespace imports.gi.Soup {
 		 * Emitted immediately after writing a portion of the message
 		 * body to the network.
 		 * 
-		 * Unlike {@link Message}::wrote_chunk, this is emitted after
+		 * Unlike {@link Message.wrote_chunk}, this is emitted after
 		 * every successful write() call, not only after finishing a
 		 * complete "chunk".
 		 * @param signal 
@@ -2051,7 +2051,7 @@ declare namespace imports.gi.Soup {
 		 * Emitted immediately after writing a body chunk for a message.
 		 * 
 		 * Note that this signal is not parallel to
-		 * {@link Message}::got_chunk; it is emitted only when a complete
+		 * {@link Message.got_chunk}; it is emitted only when a complete
 		 * chunk (added with soup_message_body_append() or
 		 * soup_message_body_append_buffer()) has been written. To get
 		 * more useful continuous progress information, use
@@ -2541,13 +2541,13 @@ declare namespace imports.gi.Soup {
 		 * any scheme except "https" is considered to be an alias for
 		 * "http".
 		 * 
-		 * See also {@link Server}:https-aliases.
+		 * See also {@link Server.https_aliases}.
 		 */
 		http_aliases: string[];
 		/**
 		 * A comma-delimited list of URI schemes that should be
 		 * considered to be aliases for "https". See
-		 * {@link Server}:http-aliases for more information.
+		 * {@link Server.http_aliases} for more information.
 		 * 
 		 * The default value is %NULL, meaning that no URI schemes
 		 * are considered aliases for "https".
@@ -2608,12 +2608,12 @@ declare namespace imports.gi.Soup {
 		server_header: string;
 		/**
 		 * @deprecated
-		 * use {@link Server}:tls-certificate or
+		 * use {@link Server.tls_certificate} or
 		 * soup_server_set_ssl_certificate().
 		 * 
 		 * Path to a file containing a PEM-encoded certificate.
 		 * 
-		 * If you set this property and {@link Server}:ssl-key-file at
+		 * If you set this property and {@link Server.ssl_key_file} at
 		 * construct time, then soup_server_new() will try to read the
 		 * files; if it cannot, it will return %NULL, with no explicit
 		 * indication of what went wrong (and logging a warning with
@@ -2623,11 +2623,11 @@ declare namespace imports.gi.Soup {
 		ssl_cert_file: string;
 		/**
 		 * @deprecated
-		 * use {@link Server}:tls-certificate or
+		 * use {@link Server.tls_certificate} or
 		 * soup_server_set_ssl_certificate().
 		 * 
 		 * Path to a file containing a PEM-encoded private key. See
-		 * {@link Server}:ssl-cert-file for more information about how this
+		 * {@link Server.ssl_cert_file} for more information about how this
 		 * is used.
 		 */
 		ssl_key_file: string;
@@ -2862,7 +2862,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * In order for a server to run https, you must call
 		 * soup_server_set_ssl_cert_file(), or set the
-		 * {@link Server}:tls-certificate property, to provide it with a
+		 * {@link Server.tls_certificate} property, to provide it with a
 		 * certificate to use.
 		 * 
 		 * If you are using the deprecated single-listener APIs, then a return
@@ -3041,7 +3041,7 @@ declare namespace imports.gi.Soup {
 		 * specified by #ssl_cert_file and #ssl_key_file (which may point to
 		 * the same file).
 		 * 
-		 * Alternatively, you can set the {@link Server}:tls-certificate property
+		 * Alternatively, you can set the {@link Server.tls_certificate} property
 		 * at construction time, if you already have a #GTlsCertificate.
 		 * @param ssl_cert_file path to a file containing a PEM-encoded SSL/TLS
 		 *   certificate.
@@ -3065,7 +3065,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Emitted when processing has failed for a message; this
 		 * could mean either that it could not be read (if
-		 * {@link Server}::request_read has not been emitted for it yet),
+		 * {@link Server.request_read} has not been emitted for it yet),
 		 * or that the response could not be written back (if
 		 * #SoupServer::request_read has been emitted but
 		 * #SoupServer::request_finished has not been).
@@ -3119,7 +3119,7 @@ declare namespace imports.gi.Soup {
 		 * you can usefully do with it is connect to its signals.
 		 * 
 		 * If the request is read successfully, this will eventually
-		 * be followed by a {@link Server}::request_read signal. If a
+		 * be followed by a {@link Server.request_read} signal. If a
 		 * response is then sent, the request processing will end with
 		 * a #SoupServer::request_finished signal. If a network error
 		 * occurs, the processing will instead end with
@@ -3216,7 +3216,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * The #GMainContext that miscellaneous session-related
 		 * asynchronous callbacks are invoked on. (Eg, setting
-		 * {@link Session}:idle-timeout will add a timeout source on this
+		 * {@link Session.idle_timeout} will add a timeout source on this
 		 * context.)
 		 * 
 		 * For a plain #SoupSession, this property is always set to
@@ -3250,7 +3250,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * A comma-delimited list of URI schemes that should be
 		 * considered to be aliases for "https". See
-		 * {@link Session}:http-aliases for more information.
+		 * {@link Session.http_aliases} for more information.
 		 * 
 		 * The default value is %NULL, meaning that no URI schemes
 		 * are considered aliases for "https".
@@ -3284,7 +3284,7 @@ declare namespace imports.gi.Soup {
 		max_conns_per_host: number;
 		/**
 		 * A #GProxyResolver to use with this session. Setting this
-		 * will clear the {@link Session}:proxy-uri property, and remove
+		 * will clear the {@link Session.proxy_uri} property, and remove
 		 * any <type>SoupProxyURIResolver</type> features that have
 		 * been added to the session.
 		 * 
@@ -3301,7 +3301,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * A proxy to use for all http and https requests in this
 		 * session. Setting this will clear the
-		 * {@link Session}:proxy-resolver property, and remove any
+		 * {@link Session.proxy_resolver} property, and remove any
 		 * <type>SoupProxyURIResolver</type> features that have been
 		 * added to the session. Setting this property will also
 		 * cancel all currently pending messages.
@@ -3325,7 +3325,7 @@ declare namespace imports.gi.Soup {
 		// remove_feature_by_type: GObject.Type;
 		/**
 		 * @deprecated
-		 * use {@link Session}:ssl-use-system-ca-file, or
+		 * use {@link Session.ssl_use_system_ca_file}, or
 		 * else #SoupSession:tls-database with a #GTlsFileDatabase
 		 * (which allows you to do explicit error handling).
 		 * 
@@ -3338,7 +3338,7 @@ declare namespace imports.gi.Soup {
 		 */
 		ssl_ca_file: string;
 		/**
-		 * Normally, if {@link Session}:tls-database is set (including if
+		 * Normally, if {@link Session.tls_database} is set (including if
 		 * it was set via #SoupSession:ssl-use-system-ca-file or
 		 * #SoupSession:ssl-ca-file), then libsoup will reject any
 		 * certificate that is invalid (ie, expired) or that is not
@@ -3364,7 +3364,7 @@ declare namespace imports.gi.Soup {
 		ssl_strict: boolean;
 		/**
 		 * Setting this to %TRUE is equivalent to setting
-		 * {@link Session}:tls-database to the default system CA database.
+		 * {@link Session.tls_database} to the default system CA database.
 		 * (and likewise, setting #SoupSession:tls-database to the
 		 * default database by hand will cause this property to
 		 * become %TRUE).
@@ -3405,7 +3405,7 @@ declare namespace imports.gi.Soup {
 		 * Sets the #GTlsDatabase to use for validating SSL/TLS
 		 * certificates.
 		 * 
-		 * Note that setting the {@link Session}:ssl-ca-file or
+		 * Note that setting the {@link Session.ssl_ca_file} or
 		 * #SoupSession:ssl-use-system-ca-file property will cause
 		 * this property to be set to a #GTlsDatabase corresponding to
 		 * the indicated file or system default.
@@ -3556,7 +3556,7 @@ declare namespace imports.gi.Soup {
 		 */
 		connect_finish(result: Gio.AsyncResult): Gio.IOStream;
 		/**
-		 * Gets #session's {@link Session}:async-context. This does not add a ref
+		 * Gets #session's {@link Session.async_context}. This does not add a ref
 		 * to the context, so you will need to ref it yourself if you want it
 		 * to outlive its session.
 		 * 
@@ -3942,7 +3942,7 @@ declare namespace imports.gi.Soup {
 		 * soup_session_send_message() implicitly queues the message
 		 * as well.)
 		 * 
-		 * When sending a request, first {@link Session}::request_queued
+		 * When sending a request, first {@link Session.request_queued}
 		 * is emitted, indicating that the session has become aware of
 		 * the request.
 		 * 
@@ -3982,7 +3982,7 @@ declare namespace imports.gi.Soup {
 		connect(signal: "request-queued", callback: (owner: this, msg: Message) => void): number;
 		/**
 		 * Emitted just before a request is sent. See
-		 * {@link Session}::request_queued for a detailed description of
+		 * {@link Session.request_queued} for a detailed description of
 		 * the message lifecycle within a session.
 		 * @param signal 
 		 * @param callback Callback function
@@ -3996,7 +3996,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Emitted when a request is removed from #session's queue,
 		 * indicating that #session is done with it. See
-		 * {@link Session}::request_queued for a detailed description of the
+		 * {@link Session.request_queued} for a detailed description of the
 		 * message lifecycle within a session.
 		 * @param signal 
 		 * @param callback Callback function
@@ -4295,7 +4295,7 @@ declare namespace imports.gi.Soup {
 		is_ssl(): boolean;
 		/**
 		 * Makes #sock start listening on its local address. When connections
-		 * come in, #sock will emit {@link Socket}::new_connection.
+		 * come in, #sock will emit {@link Socket.new_connection}.
 		 * @returns whether or not #sock is now listening.
 		 */
 		listen(): boolean;
@@ -4307,7 +4307,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * If #sock is non-blocking, and no data is available, the return
 		 * value will be %SOUP_SOCKET_WOULD_BLOCK. In this case, the caller
-		 * can connect to the {@link Socket}::readable signal to know when there
+		 * can connect to the {@link Socket.readable} signal to know when there
 		 * is more data to read. (NB: You MUST read all available data off the
 		 * socket first. #SoupSocket::readable is only emitted after
 		 * soup_socket_read() returns %SOUP_SOCKET_WOULD_BLOCK, and it is only
@@ -4372,7 +4372,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * If #sock is non-blocking, and no data could be written right away,
 		 * the return value will be %SOUP_SOCKET_WOULD_BLOCK. In this case,
-		 * the caller can connect to the {@link Socket}::writable signal to know
+		 * the caller can connect to the {@link Socket.writable} signal to know
 		 * when more data can be written. (NB: #SoupSocket::writable is only
 		 * emitted after soup_socket_write() returns %SOUP_SOCKET_WOULD_BLOCK,
 		 * and it is only emitted once. See the documentation for
@@ -4426,7 +4426,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Emitted when an async socket is readable. See
 		 * soup_socket_read(), soup_socket_read_until() and
-		 * {@link Socket}:non-blocking.
+		 * {@link Socket.non_blocking}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -4436,7 +4436,7 @@ declare namespace imports.gi.Soup {
 		connect(signal: "readable", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when an async socket is writable. See
-		 * soup_socket_write() and {@link Socket}:non-blocking.
+		 * soup_socket_write() and {@link Socket.non_blocking}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -4553,7 +4553,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Close the connection in an orderly fashion.
 		 * 
-		 * Note that until the {@link WebsocketConnection}::closed signal fires, the connection
+		 * Note that until the {@link WebsocketConnection.closed} signal fires, the connection
 		 * is not yet completely closed. The close message is not even sent until the
 		 * main loop runs.
 		 * 
@@ -4699,7 +4699,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Emitted when an error occurred on the WebSocket. This may
 		 * be fired multiple times. Fatal errors will be followed by
-		 * the {@link WebsocketConnection}::closed signal being emitted.
+		 * the {@link WebsocketConnection.closed} signal being emitted.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -5797,7 +5797,7 @@ declare namespace imports.gi.Soup {
 		 * #body may be discarded when they are no longer needed.
 		 * 
 		 * In particular, if you set this flag to %FALSE on an "incoming"
-		 * message body (that is, the {@link Message}:response_body of a
+		 * message body (that is, the {@link Message.response_body} of a
 		 * client-side message, or #SoupMessage:request_body of a server-side
 		 * message), this will cause each chunk of the body to be discarded
 		 * after its corresponding #SoupMessage::got_chunk signal is emitted.
@@ -7691,7 +7691,7 @@ declare namespace imports.gi.Soup {
 	}
 
 	/**
-	 * The type of data contained in a {@link WebsocketConnection}::message
+	 * The type of data contained in a {@link WebsocketConnection.message}
 	 * signal.
 	 */
 	enum WebsocketDataType {
@@ -7852,7 +7852,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Deprecated: equivalent to calling
 		 *   soup_message_body_set_accumulate() on the incoming message body
-		 *   (ie, {@link Message}:response_body for a client-side request),
+		 *   (ie, {@link Message.response_body} for a client-side request),
 		 *   passing %FALSE.
 		 */
 		OVERWRITE_CHUNKS = 8,
@@ -7873,13 +7873,13 @@ declare namespace imports.gi.Soup {
 		 * Requests that the message should be
 		 *   sent on a newly-created connection, not reusing an existing
 		 *   persistent connection. Note that messages with non-idempotent
-		 *   {@link Message}:method<!-- -->s behave this way by default, unless
+		 *   {@link Message.method}<!-- -->s behave this way by default, unless
 		 *   #SOUP_MESSAGE_IDEMPOTENT is set.
 		 */
 		NEW_CONNECTION = 64,
 		/**
 		 * The message is considered idempotent,
-		 *   regardless its {@link Message}:method, and allows reuse of existing
+		 *   regardless its {@link Message.method}, and allows reuse of existing
 		 *   idle connections, instead of always requiring a new one, unless
 		 *   #SOUP_MESSAGE_NEW_CONNECTION is set.
 		 */
@@ -8902,7 +8902,7 @@ declare namespace imports.gi.Soup {
 	 * 
 	 * <emphasis>There is no reason for you to ever use this
 	 * function.</emphasis> If you wanted the textual description for the
-	 * {@link Message}:status_code of a given #SoupMessage, you should just
+	 * {@link Message.status_code} of a given #SoupMessage, you should just
 	 * look at the message's #SoupMessage:reason_phrase. However, you
 	 * should only do that for use in debugging messages; HTTP reason
 	 * phrases are not localized, and are not generally very descriptive
@@ -9671,185 +9671,185 @@ declare namespace imports.gi.Soup {
 	const ADDRESS_ANY_PORT: number;
 
 	/**
-	 * Alias for the {@link Address}:family property. (The
+	 * Alias for the {@link Address.family} property. (The
 	 * #SoupAddressFamily for this address.)
-	 * @returns Alias for the {@link Address}:family property. (The
+	 * @returns Alias for the {@link Address.family} property. (The
 	 * #SoupAddressFamily for this address.)
 	 */
 	const ADDRESS_FAMILY: string;
 
 	/**
-	 * Alias for the {@link Address}:name property. (The hostname for
+	 * Alias for the {@link Address.name} property. (The hostname for
 	 * this address.)
-	 * @returns Alias for the {@link Address}:name property. (The hostname for
+	 * @returns Alias for the {@link Address.name} property. (The hostname for
 	 * this address.)
 	 */
 	const ADDRESS_NAME: string;
 
 	/**
-	 * An alias for the {@link Address}:physical property. (The
+	 * An alias for the {@link Address.physical} property. (The
 	 * stringified IP address for this address.)
-	 * @returns An alias for the {@link Address}:physical property. (The
+	 * @returns An alias for the {@link Address.physical} property. (The
 	 * stringified IP address for this address.)
 	 */
 	const ADDRESS_PHYSICAL: string;
 
 	/**
-	 * An alias for the {@link Address}:port property. (The port for
+	 * An alias for the {@link Address.port} property. (The port for
 	 * this address.)
-	 * @returns An alias for the {@link Address}:port property. (The port for
+	 * @returns An alias for the {@link Address.port} property. (The port for
 	 * this address.)
 	 */
 	const ADDRESS_PORT: string;
 
 	/**
-	 * Alias for the {@link Address}:protocol property. (The URI scheme
+	 * Alias for the {@link Address.protocol} property. (The URI scheme
 	 * used with this address.)
-	 * @returns Alias for the {@link Address}:protocol property. (The URI scheme
+	 * @returns Alias for the {@link Address.protocol} property. (The URI scheme
 	 * used with this address.)
 	 */
 	const ADDRESS_PROTOCOL: string;
 
 	/**
-	 * An alias for the {@link Address}:sockaddr property. (A pointer
+	 * An alias for the {@link Address.sockaddr} property. (A pointer
 	 * to the struct sockaddr for this address.)
-	 * @returns An alias for the {@link Address}:sockaddr property. (A pointer
+	 * @returns An alias for the {@link Address.sockaddr} property. (A pointer
 	 * to the struct sockaddr for this address.)
 	 */
 	const ADDRESS_SOCKADDR: string;
 
 	/**
-	 * Alias for the {@link AuthDomain}:add-path property. (Shortcut
+	 * Alias for the {@link AuthDomain.add_path} property. (Shortcut
 	 * for calling soup_auth_domain_add_path().)
-	 * @returns Alias for the {@link AuthDomain}:add-path property. (Shortcut
+	 * @returns Alias for the {@link AuthDomain.add_path} property. (Shortcut
 	 * for calling soup_auth_domain_add_path().)
 	 */
 	const AUTH_DOMAIN_ADD_PATH: string;
 
 	/**
-	 * Alias for the {@link AuthDomainBasic}:auth-callback property.
+	 * Alias for the {@link AuthDomainBasic.auth_callback} property.
 	 * (The #SoupAuthDomainBasicAuthCallback.)
-	 * @returns Alias for the {@link AuthDomainBasic}:auth-callback property.
+	 * @returns Alias for the {@link AuthDomainBasic.auth_callback} property.
 	 * (The #SoupAuthDomainBasicAuthCallback.)
 	 */
 	const AUTH_DOMAIN_BASIC_AUTH_CALLBACK: string;
 
 	/**
-	 * Alias for the {@link AuthDomainBasic}:auth-data property.
+	 * Alias for the {@link AuthDomainBasic.auth_data} property.
 	 * (The data to pass to the #SoupAuthDomainBasicAuthCallback.)
-	 * @returns Alias for the {@link AuthDomainBasic}:auth-data property.
+	 * @returns Alias for the {@link AuthDomainBasic.auth_data} property.
 	 * (The data to pass to the #SoupAuthDomainBasicAuthCallback.)
 	 */
 	const AUTH_DOMAIN_BASIC_AUTH_DATA: string;
 
 	/**
-	 * Alias for the {@link AuthDomainDigest}:auth-callback property.
+	 * Alias for the {@link AuthDomainDigest.auth_callback} property.
 	 * (The #SoupAuthDomainDigestAuthCallback.)
-	 * @returns Alias for the {@link AuthDomainDigest}:auth-callback property.
+	 * @returns Alias for the {@link AuthDomainDigest.auth_callback} property.
 	 * (The #SoupAuthDomainDigestAuthCallback.)
 	 */
 	const AUTH_DOMAIN_DIGEST_AUTH_CALLBACK: string;
 
 	/**
-	 * Alias for the {@link AuthDomainDigest}:auth-callback property.
+	 * Alias for the {@link AuthDomainDigest.auth_callback} property.
 	 * (The #SoupAuthDomainDigestAuthCallback.)
-	 * @returns Alias for the {@link AuthDomainDigest}:auth-callback property.
+	 * @returns Alias for the {@link AuthDomainDigest.auth_callback} property.
 	 * (The #SoupAuthDomainDigestAuthCallback.)
 	 */
 	const AUTH_DOMAIN_DIGEST_AUTH_DATA: string;
 
 	/**
-	 * Alias for the {@link AuthDomain}:filter property. (The
+	 * Alias for the {@link AuthDomain.filter} property. (The
 	 * #SoupAuthDomainFilter for the domain.)
-	 * @returns Alias for the {@link AuthDomain}:filter property. (The
+	 * @returns Alias for the {@link AuthDomain.filter} property. (The
 	 * #SoupAuthDomainFilter for the domain.)
 	 */
 	const AUTH_DOMAIN_FILTER: string;
 
 	/**
-	 * Alias for the {@link AuthDomain}:filter-data property. (Data
+	 * Alias for the {@link AuthDomain.filter_data} property. (Data
 	 * to pass to the #SoupAuthDomainFilter.)
-	 * @returns Alias for the {@link AuthDomain}:filter-data property. (Data
+	 * @returns Alias for the {@link AuthDomain.filter_data} property. (Data
 	 * to pass to the #SoupAuthDomainFilter.)
 	 */
 	const AUTH_DOMAIN_FILTER_DATA: string;
 
 	/**
-	 * Alias for the {@link AuthDomain}:generic-auth-callback property.
+	 * Alias for the {@link AuthDomain.generic_auth_callback} property.
 	 * (The #SoupAuthDomainGenericAuthCallback.)
-	 * @returns Alias for the {@link AuthDomain}:generic-auth-callback property.
+	 * @returns Alias for the {@link AuthDomain.generic_auth_callback} property.
 	 * (The #SoupAuthDomainGenericAuthCallback.)
 	 */
 	const AUTH_DOMAIN_GENERIC_AUTH_CALLBACK: string;
 
 	/**
-	 * Alias for the {@link AuthDomain}:generic-auth-data property.
+	 * Alias for the {@link AuthDomain.generic_auth_data} property.
 	 * (The data to pass to the #SoupAuthDomainGenericAuthCallback.)
-	 * @returns Alias for the {@link AuthDomain}:generic-auth-data property.
+	 * @returns Alias for the {@link AuthDomain.generic_auth_data} property.
 	 * (The data to pass to the #SoupAuthDomainGenericAuthCallback.)
 	 */
 	const AUTH_DOMAIN_GENERIC_AUTH_DATA: string;
 
 	/**
-	 * Alias for the {@link AuthDomain}:proxy property. (Whether or
+	 * Alias for the {@link AuthDomain.proxy} property. (Whether or
 	 * not this is a proxy auth domain.)
-	 * @returns Alias for the {@link AuthDomain}:proxy property. (Whether or
+	 * @returns Alias for the {@link AuthDomain.proxy} property. (Whether or
 	 * not this is a proxy auth domain.)
 	 */
 	const AUTH_DOMAIN_PROXY: string;
 
 	/**
-	 * Alias for the {@link AuthDomain}:realm property. (The realm of
+	 * Alias for the {@link AuthDomain.realm} property. (The realm of
 	 * this auth domain.)
-	 * @returns Alias for the {@link AuthDomain}:realm property. (The realm of
+	 * @returns Alias for the {@link AuthDomain.realm} property. (The realm of
 	 * this auth domain.)
 	 */
 	const AUTH_DOMAIN_REALM: string;
 
 	/**
-	 * Alias for the {@link AuthDomain}:remove-path property.
+	 * Alias for the {@link AuthDomain.remove_path} property.
 	 * (Shortcut for calling soup_auth_domain_remove_path().)
-	 * @returns Alias for the {@link AuthDomain}:remove-path property.
+	 * @returns Alias for the {@link AuthDomain.remove_path} property.
 	 * (Shortcut for calling soup_auth_domain_remove_path().)
 	 */
 	const AUTH_DOMAIN_REMOVE_PATH: string;
 
 	/**
-	 * An alias for the {@link Auth}:host property. (The
+	 * An alias for the {@link Auth.host} property. (The
 	 * host being authenticated to.)
-	 * @returns An alias for the {@link Auth}:host property. (The
+	 * @returns An alias for the {@link Auth.host} property. (The
 	 * host being authenticated to.)
 	 */
 	const AUTH_HOST: string;
 
 	/**
-	 * An alias for the {@link Auth}:is-authenticated property.
+	 * An alias for the {@link Auth.is_authenticated} property.
 	 * (Whether or not the auth has been authenticated.)
-	 * @returns An alias for the {@link Auth}:is-authenticated property.
+	 * @returns An alias for the {@link Auth.is_authenticated} property.
 	 * (Whether or not the auth has been authenticated.)
 	 */
 	const AUTH_IS_AUTHENTICATED: string;
 
 	/**
-	 * An alias for the {@link Auth}:is-for-proxy property. (Whether
+	 * An alias for the {@link Auth.is_for_proxy} property. (Whether
 	 * or not the auth is for a proxy server.)
-	 * @returns An alias for the {@link Auth}:is-for-proxy property. (Whether
+	 * @returns An alias for the {@link Auth.is_for_proxy} property. (Whether
 	 * or not the auth is for a proxy server.)
 	 */
 	const AUTH_IS_FOR_PROXY: string;
 
 	/**
-	 * An alias for the {@link Auth}:realm property. (The
+	 * An alias for the {@link Auth.realm} property. (The
 	 * authentication realm.)
-	 * @returns An alias for the {@link Auth}:realm property. (The
+	 * @returns An alias for the {@link Auth.realm} property. (The
 	 * authentication realm.)
 	 */
 	const AUTH_REALM: string;
 
 	/**
-	 * An alias for the {@link Auth}:scheme-name property. (The
+	 * An alias for the {@link Auth.scheme_name} property. (The
 	 * authentication scheme name.)
-	 * @returns An alias for the {@link Auth}:scheme-name property. (The
+	 * @returns An alias for the {@link Auth.scheme_name} property. (The
 	 * authentication scheme name.)
 	 */
 	const AUTH_SCHEME_NAME: string;
@@ -9865,31 +9865,31 @@ declare namespace imports.gi.Soup {
 	const CHAR_URI_SUB_DELIMS: number;
 
 	/**
-	 * Alias for the {@link CookieJar}:accept-policy property.
-	 * @returns Alias for the {@link CookieJar}:accept-policy property.
+	 * Alias for the {@link CookieJar.accept_policy} property.
+	 * @returns Alias for the {@link CookieJar.accept_policy} property.
 	 */
 	const COOKIE_JAR_ACCEPT_POLICY: string;
 
 	/**
-	 * Alias for the {@link CookieJarDB}:filename property. (The
+	 * Alias for the {@link CookieJarDB.filename} property. (The
 	 * cookie-storage filename.)
-	 * @returns Alias for the {@link CookieJarDB}:filename property. (The
+	 * @returns Alias for the {@link CookieJarDB.filename} property. (The
 	 * cookie-storage filename.)
 	 */
 	const COOKIE_JAR_DB_FILENAME: string;
 
 	/**
-	 * Alias for the {@link CookieJar}:read-only property. (Whether
+	 * Alias for the {@link CookieJar.read_only} property. (Whether
 	 * or not the cookie jar is read-only.)
-	 * @returns Alias for the {@link CookieJar}:read-only property. (Whether
+	 * @returns Alias for the {@link CookieJar.read_only} property. (Whether
 	 * or not the cookie jar is read-only.)
 	 */
 	const COOKIE_JAR_READ_ONLY: string;
 
 	/**
-	 * Alias for the {@link CookieJarText}:filename property. (The
+	 * Alias for the {@link CookieJarText.filename} property. (The
 	 * cookie-storage filename.)
-	 * @returns Alias for the {@link CookieJarText}:filename property. (The
+	 * @returns Alias for the {@link CookieJarText.filename} property. (The
 	 * cookie-storage filename.)
 	 */
 	const COOKIE_JAR_TEXT_FILENAME: string;
@@ -9951,14 +9951,14 @@ declare namespace imports.gi.Soup {
 	const HSTS_POLICY_MAX_AGE_PAST: number;
 
 	/**
-	 * Alias for the {@link Logger}:level property, qv.
-	 * @returns Alias for the {@link Logger}:level property, qv.
+	 * Alias for the {@link Logger.level} property, qv.
+	 * @returns Alias for the {@link Logger.level} property, qv.
 	 */
 	const LOGGER_LEVEL: string;
 
 	/**
-	 * Alias for the {@link Logger}:max-body-size property, qv.
-	 * @returns Alias for the {@link Logger}:max-body-size property, qv.
+	 * Alias for the {@link Logger.max_body_size} property, qv.
+	 * @returns Alias for the {@link Logger.max_body_size} property, qv.
 	 */
 	const LOGGER_MAX_BODY_SIZE: string;
 
@@ -9973,27 +9973,27 @@ declare namespace imports.gi.Soup {
 	const MAJOR_VERSION: number;
 
 	/**
-	 * Alias for the {@link Message}:first-party property. (The
+	 * Alias for the {@link Message.first_party} property. (The
 	 * #SoupURI loaded in the application when the message was
 	 * queued.)
-	 * @returns Alias for the {@link Message}:first-party property. (The
+	 * @returns Alias for the {@link Message.first_party} property. (The
 	 * #SoupURI loaded in the application when the message was
 	 * queued.)
 	 */
 	const MESSAGE_FIRST_PARTY: string;
 
 	/**
-	 * Alias for the {@link Message}:flags property. (The message's
+	 * Alias for the {@link Message.flags} property. (The message's
 	 * #SoupMessageFlags.)
-	 * @returns Alias for the {@link Message}:flags property. (The message's
+	 * @returns Alias for the {@link Message.flags} property. (The message's
 	 * #SoupMessageFlags.)
 	 */
 	const MESSAGE_FLAGS: string;
 
 	/**
-	 * Alias for the {@link Message}:http-version property. (The
+	 * Alias for the {@link Message.http_version} property. (The
 	 * message's #SoupHTTPVersion.)
-	 * @returns Alias for the {@link Message}:http-version property. (The
+	 * @returns Alias for the {@link Message.http_version} property. (The
 	 * message's #SoupHTTPVersion.)
 	 */
 	const MESSAGE_HTTP_VERSION: string;
@@ -10001,9 +10001,9 @@ declare namespace imports.gi.Soup {
 	const MESSAGE_IS_TOP_LEVEL_NAVIGATION: string;
 
 	/**
-	 * Alias for the {@link Message}:method property. (The message's
+	 * Alias for the {@link Message.method} property. (The message's
 	 * HTTP method.)
-	 * @returns Alias for the {@link Message}:method property. (The message's
+	 * @returns Alias for the {@link Message.method} property. (The message's
 	 * HTTP method.)
 	 */
 	const MESSAGE_METHOD: string;
@@ -10017,65 +10017,65 @@ declare namespace imports.gi.Soup {
 	const MESSAGE_PRIORITY: string;
 
 	/**
-	 * Alias for the {@link Message}:reason-phrase property. (The
+	 * Alias for the {@link Message.reason_phrase} property. (The
 	 * message's HTTP response reason phrase.)
-	 * @returns Alias for the {@link Message}:reason-phrase property. (The
+	 * @returns Alias for the {@link Message.reason_phrase} property. (The
 	 * message's HTTP response reason phrase.)
 	 */
 	const MESSAGE_REASON_PHRASE: string;
 
 	/**
-	 * Alias for the {@link Message}:request-body property. (The
+	 * Alias for the {@link Message.request_body} property. (The
 	 * message's HTTP request body.)
-	 * @returns Alias for the {@link Message}:request-body property. (The
+	 * @returns Alias for the {@link Message.request_body} property. (The
 	 * message's HTTP request body.)
 	 */
 	const MESSAGE_REQUEST_BODY: string;
 
 	/**
-	 * Alias for the {@link Message}:request-body-data property. (The
+	 * Alias for the {@link Message.request_body_data} property. (The
 	 * message's HTTP request body, as a #GBytes.)
-	 * @returns Alias for the {@link Message}:request-body-data property. (The
+	 * @returns Alias for the {@link Message.request_body_data} property. (The
 	 * message's HTTP request body, as a #GBytes.)
 	 */
 	const MESSAGE_REQUEST_BODY_DATA: string;
 
 	/**
-	 * Alias for the {@link Message}:request-headers property. (The
+	 * Alias for the {@link Message.request_headers} property. (The
 	 * message's HTTP request headers.)
-	 * @returns Alias for the {@link Message}:request-headers property. (The
+	 * @returns Alias for the {@link Message.request_headers} property. (The
 	 * message's HTTP request headers.)
 	 */
 	const MESSAGE_REQUEST_HEADERS: string;
 
 	/**
-	 * Alias for the {@link Message}:response-body property. (The
+	 * Alias for the {@link Message.response_body} property. (The
 	 * message's HTTP response body.)
-	 * @returns Alias for the {@link Message}:response-body property. (The
+	 * @returns Alias for the {@link Message.response_body} property. (The
 	 * message's HTTP response body.)
 	 */
 	const MESSAGE_RESPONSE_BODY: string;
 
 	/**
-	 * Alias for the {@link Message}:response-body-data property. (The
+	 * Alias for the {@link Message.response_body_data} property. (The
 	 * message's HTTP response body, as a #GBytes.)
-	 * @returns Alias for the {@link Message}:response-body-data property. (The
+	 * @returns Alias for the {@link Message.response_body_data} property. (The
 	 * message's HTTP response body, as a #GBytes.)
 	 */
 	const MESSAGE_RESPONSE_BODY_DATA: string;
 
 	/**
-	 * Alias for the {@link Message}:response-headers property. (The
+	 * Alias for the {@link Message.response_headers} property. (The
 	 * message's HTTP response headers.)
-	 * @returns Alias for the {@link Message}:response-headers property. (The
+	 * @returns Alias for the {@link Message.response_headers} property. (The
 	 * message's HTTP response headers.)
 	 */
 	const MESSAGE_RESPONSE_HEADERS: string;
 
 	/**
-	 * Alias for the {@link Message}:server-side property. (%TRUE if
+	 * Alias for the {@link Message.server_side} property. (%TRUE if
 	 * the message was created by #SoupServer.)
-	 * @returns Alias for the {@link Message}:server-side property. (%TRUE if
+	 * @returns Alias for the {@link Message.server_side} property. (%TRUE if
 	 * the message was created by #SoupServer.)
 	 */
 	const MESSAGE_SERVER_SIDE: string;
@@ -10083,33 +10083,33 @@ declare namespace imports.gi.Soup {
 	const MESSAGE_SITE_FOR_COOKIES: string;
 
 	/**
-	 * Alias for the {@link Message}:status-code property. (The
+	 * Alias for the {@link Message.status_code} property. (The
 	 * message's HTTP response status code.)
-	 * @returns Alias for the {@link Message}:status-code property. (The
+	 * @returns Alias for the {@link Message.status_code} property. (The
 	 * message's HTTP response status code.)
 	 */
 	const MESSAGE_STATUS_CODE: string;
 
 	/**
-	 * Alias for the {@link Message}:tls-certificate property. (The
+	 * Alias for the {@link Message.tls_certificate} property. (The
 	 * TLS certificate associated with the message, if any.)
-	 * @returns Alias for the {@link Message}:tls-certificate property. (The
+	 * @returns Alias for the {@link Message.tls_certificate} property. (The
 	 * TLS certificate associated with the message, if any.)
 	 */
 	const MESSAGE_TLS_CERTIFICATE: string;
 
 	/**
-	 * Alias for the {@link Message}:tls-errors property. (The
+	 * Alias for the {@link Message.tls_errors} property. (The
 	 * verification errors on #SoupMessage:tls-certificate.)
-	 * @returns Alias for the {@link Message}:tls-errors property. (The
+	 * @returns Alias for the {@link Message.tls_errors} property. (The
 	 * verification errors on #SoupMessage:tls-certificate.)
 	 */
 	const MESSAGE_TLS_ERRORS: string;
 
 	/**
-	 * Alias for the {@link Message}:uri property. (The message's
+	 * Alias for the {@link Message.uri} property. (The message's
 	 * #SoupURI.)
-	 * @returns Alias for the {@link Message}:uri property. (The message's
+	 * @returns Alias for the {@link Message.uri} property. (The message's
 	 * #SoupURI.)
 	 */
 	const MESSAGE_URI: string;
@@ -10135,309 +10135,309 @@ declare namespace imports.gi.Soup {
 	const MINOR_VERSION: number;
 
 	/**
-	 * Alias for the {@link Request}:session property, qv.
-	 * @returns Alias for the {@link Request}:session property, qv.
+	 * Alias for the {@link Request.session} property, qv.
+	 * @returns Alias for the {@link Request.session} property, qv.
 	 */
 	const REQUEST_SESSION: string;
 
 	/**
-	 * Alias for the {@link Request}:uri property, qv.
-	 * @returns Alias for the {@link Request}:uri property, qv.
+	 * Alias for the {@link Request.uri} property, qv.
+	 * @returns Alias for the {@link Request.uri} property, qv.
 	 */
 	const REQUEST_URI: string;
 
 	/**
-	 * Alias for the {@link Server}:add-websocket-extension property, qv.
-	 * @returns Alias for the {@link Server}:add-websocket-extension property, qv.
+	 * Alias for the {@link Server.add_websocket_extension} property, qv.
+	 * @returns Alias for the {@link Server.add_websocket_extension} property, qv.
 	 */
 	const SERVER_ADD_WEBSOCKET_EXTENSION: string;
 
 	/**
-	 * Alias for the deprecated {@link Server}:async-context
+	 * Alias for the deprecated {@link Server.async_context}
 	 * property, qv.
-	 * @returns Alias for the deprecated {@link Server}:async-context
+	 * @returns Alias for the deprecated {@link Server.async_context}
 	 * property, qv.
 	 */
 	const SERVER_ASYNC_CONTEXT: string;
 
 	/**
-	 * Alias for the {@link Server}:https-aliases property, qv.
-	 * @returns Alias for the {@link Server}:https-aliases property, qv.
+	 * Alias for the {@link Server.https_aliases} property, qv.
+	 * @returns Alias for the {@link Server.https_aliases} property, qv.
 	 */
 	const SERVER_HTTPS_ALIASES: string;
 
 	/**
-	 * Alias for the {@link Server}:http-aliases property, qv.
-	 * @returns Alias for the {@link Server}:http-aliases property, qv.
+	 * Alias for the {@link Server.http_aliases} property, qv.
+	 * @returns Alias for the {@link Server.http_aliases} property, qv.
 	 */
 	const SERVER_HTTP_ALIASES: string;
 
 	/**
-	 * Alias for the {@link Server}:interface property, qv.
-	 * @returns Alias for the {@link Server}:interface property, qv.
+	 * Alias for the {@link Server.interface} property, qv.
+	 * @returns Alias for the {@link Server.interface} property, qv.
 	 */
 	const SERVER_INTERFACE: string;
 
 	/**
-	 * Alias for the deprecated {@link Server}:port property, qv.
-	 * @returns Alias for the deprecated {@link Server}:port property, qv.
+	 * Alias for the deprecated {@link Server.port} property, qv.
+	 * @returns Alias for the deprecated {@link Server.port} property, qv.
 	 */
 	const SERVER_PORT: string;
 
 	/**
-	 * Alias for the {@link Server}:raw-paths property. (If %TRUE,
+	 * Alias for the {@link Server.raw_paths} property. (If %TRUE,
 	 * percent-encoding in the Request-URI path will not be
 	 * automatically decoded.)
-	 * @returns Alias for the {@link Server}:raw-paths property. (If %TRUE,
+	 * @returns Alias for the {@link Server.raw_paths} property. (If %TRUE,
 	 * percent-encoding in the Request-URI path will not be
 	 * automatically decoded.)
 	 */
 	const SERVER_RAW_PATHS: string;
 
 	/**
-	 * Alias for the {@link Server}:remove-websocket-extension property, qv.
-	 * @returns Alias for the {@link Server}:remove-websocket-extension property, qv.
+	 * Alias for the {@link Server.remove_websocket_extension} property, qv.
+	 * @returns Alias for the {@link Server.remove_websocket_extension} property, qv.
 	 */
 	const SERVER_REMOVE_WEBSOCKET_EXTENSION: string;
 
 	/**
-	 * Alias for the {@link Server}:server-header property, qv.
-	 * @returns Alias for the {@link Server}:server-header property, qv.
+	 * Alias for the {@link Server.server_header} property, qv.
+	 * @returns Alias for the {@link Server.server_header} property, qv.
 	 */
 	const SERVER_SERVER_HEADER: string;
 
 	/**
-	 * Alias for the {@link Server}:ssl-cert-file property, qv.
-	 * @returns Alias for the {@link Server}:ssl-cert-file property, qv.
+	 * Alias for the {@link Server.ssl_cert_file} property, qv.
+	 * @returns Alias for the {@link Server.ssl_cert_file} property, qv.
 	 */
 	const SERVER_SSL_CERT_FILE: string;
 
 	/**
-	 * Alias for the {@link Server}:ssl-key-file property, qv.
-	 * @returns Alias for the {@link Server}:ssl-key-file property, qv.
+	 * Alias for the {@link Server.ssl_key_file} property, qv.
+	 * @returns Alias for the {@link Server.ssl_key_file} property, qv.
 	 */
 	const SERVER_SSL_KEY_FILE: string;
 
 	/**
-	 * Alias for the {@link Server}:tls-certificate property, qv.
-	 * @returns Alias for the {@link Server}:tls-certificate property, qv.
+	 * Alias for the {@link Server.tls_certificate} property, qv.
+	 * @returns Alias for the {@link Server.tls_certificate} property, qv.
 	 */
 	const SERVER_TLS_CERTIFICATE: string;
 
 	/**
-	 * Alias for the {@link Session}:accept-language property, qv.
-	 * @returns Alias for the {@link Session}:accept-language property, qv.
+	 * Alias for the {@link Session.accept_language} property, qv.
+	 * @returns Alias for the {@link Session.accept_language} property, qv.
 	 */
 	const SESSION_ACCEPT_LANGUAGE: string;
 
 	/**
-	 * Alias for the {@link Session}:accept-language-auto property, qv.
-	 * @returns Alias for the {@link Session}:accept-language-auto property, qv.
+	 * Alias for the {@link Session.accept_language_auto} property, qv.
+	 * @returns Alias for the {@link Session.accept_language_auto} property, qv.
 	 */
 	const SESSION_ACCEPT_LANGUAGE_AUTO: string;
 
 	/**
-	 * Alias for the {@link Session}:add-feature property, qv.
-	 * @returns Alias for the {@link Session}:add-feature property, qv.
+	 * Alias for the {@link Session.add_feature} property, qv.
+	 * @returns Alias for the {@link Session.add_feature} property, qv.
 	 */
 	const SESSION_ADD_FEATURE: string;
 
 	/**
-	 * Alias for the {@link Session}:add-feature-by-type property, qv.
-	 * @returns Alias for the {@link Session}:add-feature-by-type property, qv.
+	 * Alias for the {@link Session.add_feature_by_type} property, qv.
+	 * @returns Alias for the {@link Session.add_feature_by_type} property, qv.
 	 */
 	const SESSION_ADD_FEATURE_BY_TYPE: string;
 
 	/**
-	 * Alias for the {@link Session}:async-context property, qv.
-	 * @returns Alias for the {@link Session}:async-context property, qv.
+	 * Alias for the {@link Session.async_context} property, qv.
+	 * @returns Alias for the {@link Session.async_context} property, qv.
 	 */
 	const SESSION_ASYNC_CONTEXT: string;
 
 	/**
-	 * Alias for the {@link Session}:https-aliases property, qv.
-	 * @returns Alias for the {@link Session}:https-aliases property, qv.
+	 * Alias for the {@link Session.https_aliases} property, qv.
+	 * @returns Alias for the {@link Session.https_aliases} property, qv.
 	 */
 	const SESSION_HTTPS_ALIASES: string;
 
 	/**
-	 * Alias for the {@link Session}:http-aliases property, qv.
-	 * @returns Alias for the {@link Session}:http-aliases property, qv.
+	 * Alias for the {@link Session.http_aliases} property, qv.
+	 * @returns Alias for the {@link Session.http_aliases} property, qv.
 	 */
 	const SESSION_HTTP_ALIASES: string;
 
 	/**
-	 * Alias for the {@link Session}:idle-timeout property, qv.
-	 * @returns Alias for the {@link Session}:idle-timeout property, qv.
+	 * Alias for the {@link Session.idle_timeout} property, qv.
+	 * @returns Alias for the {@link Session.idle_timeout} property, qv.
 	 */
 	const SESSION_IDLE_TIMEOUT: string;
 
 	/**
-	 * Alias for the {@link Session}:local-address property, qv.
-	 * @returns Alias for the {@link Session}:local-address property, qv.
+	 * Alias for the {@link Session.local_address} property, qv.
+	 * @returns Alias for the {@link Session.local_address} property, qv.
 	 */
 	const SESSION_LOCAL_ADDRESS: string;
 
 	/**
-	 * Alias for the {@link Session}:max-conns property, qv.
-	 * @returns Alias for the {@link Session}:max-conns property, qv.
+	 * Alias for the {@link Session.max_conns} property, qv.
+	 * @returns Alias for the {@link Session.max_conns} property, qv.
 	 */
 	const SESSION_MAX_CONNS: string;
 
 	/**
-	 * Alias for the {@link Session}:max-conns-per-host property, qv.
-	 * @returns Alias for the {@link Session}:max-conns-per-host property, qv.
+	 * Alias for the {@link Session.max_conns_per_host} property, qv.
+	 * @returns Alias for the {@link Session.max_conns_per_host} property, qv.
 	 */
 	const SESSION_MAX_CONNS_PER_HOST: string;
 
 	/**
-	 * Alias for the {@link Session}:proxy-resolver property, qv.
-	 * @returns Alias for the {@link Session}:proxy-resolver property, qv.
+	 * Alias for the {@link Session.proxy_resolver} property, qv.
+	 * @returns Alias for the {@link Session.proxy_resolver} property, qv.
 	 */
 	const SESSION_PROXY_RESOLVER: string;
 
 	/**
-	 * Alias for the {@link Session}:proxy-uri property, qv.
-	 * @returns Alias for the {@link Session}:proxy-uri property, qv.
+	 * Alias for the {@link Session.proxy_uri} property, qv.
+	 * @returns Alias for the {@link Session.proxy_uri} property, qv.
 	 */
 	const SESSION_PROXY_URI: string;
 
 	/**
-	 * Alias for the {@link Session}:remove-feature-by-type property,
+	 * Alias for the {@link Session.remove_feature_by_type} property,
 	 * qv.
-	 * @returns Alias for the {@link Session}:remove-feature-by-type property,
+	 * @returns Alias for the {@link Session.remove_feature_by_type} property,
 	 * qv.
 	 */
 	const SESSION_REMOVE_FEATURE_BY_TYPE: string;
 
 	/**
-	 * Alias for the {@link Session}:ssl-ca-file property, qv.
-	 * @returns Alias for the {@link Session}:ssl-ca-file property, qv.
+	 * Alias for the {@link Session.ssl_ca_file} property, qv.
+	 * @returns Alias for the {@link Session.ssl_ca_file} property, qv.
 	 */
 	const SESSION_SSL_CA_FILE: string;
 
 	/**
-	 * Alias for the {@link Session}:ssl-strict property, qv.
-	 * @returns Alias for the {@link Session}:ssl-strict property, qv.
+	 * Alias for the {@link Session.ssl_strict} property, qv.
+	 * @returns Alias for the {@link Session.ssl_strict} property, qv.
 	 */
 	const SESSION_SSL_STRICT: string;
 
 	/**
-	 * Alias for the {@link Session}:ssl-use-system-ca-file property,
+	 * Alias for the {@link Session.ssl_use_system_ca_file} property,
 	 * qv.
-	 * @returns Alias for the {@link Session}:ssl-use-system-ca-file property,
+	 * @returns Alias for the {@link Session.ssl_use_system_ca_file} property,
 	 * qv.
 	 */
 	const SESSION_SSL_USE_SYSTEM_CA_FILE: string;
 
 	/**
-	 * Alias for the {@link Session}:timeout property, qv.
-	 * @returns Alias for the {@link Session}:timeout property, qv.
+	 * Alias for the {@link Session.timeout} property, qv.
+	 * @returns Alias for the {@link Session.timeout} property, qv.
 	 */
 	const SESSION_TIMEOUT: string;
 
 	/**
-	 * Alias for the {@link Session}:tls-database property, qv.
-	 * @returns Alias for the {@link Session}:tls-database property, qv.
+	 * Alias for the {@link Session.tls_database} property, qv.
+	 * @returns Alias for the {@link Session.tls_database} property, qv.
 	 */
 	const SESSION_TLS_DATABASE: string;
 
 	/**
-	 * Alias for the {@link Session}:tls-interaction property, qv.
-	 * @returns Alias for the {@link Session}:tls-interaction property, qv.
+	 * Alias for the {@link Session.tls_interaction} property, qv.
+	 * @returns Alias for the {@link Session.tls_interaction} property, qv.
 	 */
 	const SESSION_TLS_INTERACTION: string;
 
 	/**
-	 * Alias for the {@link Session}:user-agent property, qv.
-	 * @returns Alias for the {@link Session}:user-agent property, qv.
+	 * Alias for the {@link Session.user_agent} property, qv.
+	 * @returns Alias for the {@link Session.user_agent} property, qv.
 	 */
 	const SESSION_USER_AGENT: string;
 
 	/**
-	 * Alias for the {@link Session}:use-ntlm property, qv.
-	 * @returns Alias for the {@link Session}:use-ntlm property, qv.
+	 * Alias for the {@link Session.use_ntlm} property, qv.
+	 * @returns Alias for the {@link Session.use_ntlm} property, qv.
 	 */
 	const SESSION_USE_NTLM: string;
 
 	/**
-	 * Alias for the {@link Session}:use-thread-context property, qv.
-	 * @returns Alias for the {@link Session}:use-thread-context property, qv.
+	 * Alias for the {@link Session.use_thread_context} property, qv.
+	 * @returns Alias for the {@link Session.use_thread_context} property, qv.
 	 */
 	const SESSION_USE_THREAD_CONTEXT: string;
 
 	/**
-	 * Alias for the {@link Socket}:async-context property. (The
+	 * Alias for the {@link Socket.async_context} property. (The
 	 * socket's #GMainContext.)
-	 * @returns Alias for the {@link Socket}:async-context property. (The
+	 * @returns Alias for the {@link Socket.async_context} property. (The
 	 * socket's #GMainContext.)
 	 */
 	const SOCKET_ASYNC_CONTEXT: string;
 
 	/**
-	 * Alias for the {@link Socket}:non-blocking property. (Whether
+	 * Alias for the {@link Socket.non_blocking} property. (Whether
 	 * or not the socket uses non-blocking I/O.)
-	 * @returns Alias for the {@link Socket}:non-blocking property. (Whether
+	 * @returns Alias for the {@link Socket.non_blocking} property. (Whether
 	 * or not the socket uses non-blocking I/O.)
 	 */
 	const SOCKET_FLAG_NONBLOCKING: string;
 
 	/**
-	 * Alias for the {@link Socket}:is-server property, qv.
-	 * @returns Alias for the {@link Socket}:is-server property, qv.
+	 * Alias for the {@link Socket.is_server} property, qv.
+	 * @returns Alias for the {@link Socket.is_server} property, qv.
 	 */
 	const SOCKET_IS_SERVER: string;
 
 	/**
-	 * Alias for the {@link Socket}:local-address property. (Address
+	 * Alias for the {@link Socket.local_address} property. (Address
 	 * of local end of socket.)
-	 * @returns Alias for the {@link Socket}:local-address property. (Address
+	 * @returns Alias for the {@link Socket.local_address} property. (Address
 	 * of local end of socket.)
 	 */
 	const SOCKET_LOCAL_ADDRESS: string;
 
 	/**
-	 * Alias for the {@link Socket}:remote-address property. (Address
+	 * Alias for the {@link Socket.remote_address} property. (Address
 	 * of remote end of socket.)
-	 * @returns Alias for the {@link Socket}:remote-address property. (Address
+	 * @returns Alias for the {@link Socket.remote_address} property. (Address
 	 * of remote end of socket.)
 	 */
 	const SOCKET_REMOTE_ADDRESS: string;
 
 	/**
-	 * Alias for the {@link Socket}:ssl-creds property.
+	 * Alias for the {@link Socket.ssl_creds} property.
 	 * (SSL credential information.)
-	 * @returns Alias for the {@link Socket}:ssl-creds property.
+	 * @returns Alias for the {@link Socket.ssl_creds} property.
 	 * (SSL credential information.)
 	 */
 	const SOCKET_SSL_CREDENTIALS: string;
 
 	/**
-	 * Alias for the {@link Socket}:ssl-fallback property.
-	 * @returns Alias for the {@link Socket}:ssl-fallback property.
+	 * Alias for the {@link Socket.ssl_fallback} property.
+	 * @returns Alias for the {@link Socket.ssl_fallback} property.
 	 */
 	const SOCKET_SSL_FALLBACK: string;
 
 	/**
-	 * Alias for the {@link Socket}:ssl-strict property.
-	 * @returns Alias for the {@link Socket}:ssl-strict property.
+	 * Alias for the {@link Socket.ssl_strict} property.
+	 * @returns Alias for the {@link Socket.ssl_strict} property.
 	 */
 	const SOCKET_SSL_STRICT: string;
 
 	/**
-	 * Alias for the {@link Socket}:timeout property. (The timeout
+	 * Alias for the {@link Socket.timeout} property. (The timeout
 	 * in seconds for blocking socket I/O operations.)
-	 * @returns Alias for the {@link Socket}:timeout property. (The timeout
+	 * @returns Alias for the {@link Socket.timeout} property. (The timeout
 	 * in seconds for blocking socket I/O operations.)
 	 */
 	const SOCKET_TIMEOUT: string;
 
 	/**
-	 * Alias for the {@link Socket}:tls-certificate
+	 * Alias for the {@link Socket.tls_certificate}
 	 * property. Note that this property's value is only useful
 	 * if the socket is for a TLS connection, and only reliable
 	 * after some data has been transferred to or from it.
-	 * @returns Alias for the {@link Socket}:tls-certificate
+	 * @returns Alias for the {@link Socket.tls_certificate}
 	 * property. Note that this property's value is only useful
 	 * if the socket is for a TLS connection, and only reliable
 	 * after some data has been transferred to or from it.
@@ -10445,11 +10445,11 @@ declare namespace imports.gi.Soup {
 	const SOCKET_TLS_CERTIFICATE: string;
 
 	/**
-	 * Alias for the {@link Socket}:tls-errors
+	 * Alias for the {@link Socket.tls_errors}
 	 * property. Note that this property's value is only useful
 	 * if the socket is for a TLS connection, and only reliable
 	 * after some data has been transferred to or from it.
-	 * @returns Alias for the {@link Socket}:tls-errors
+	 * @returns Alias for the {@link Socket.tls_errors}
 	 * property. Note that this property's value is only useful
 	 * if the socket is for a TLS connection, and only reliable
 	 * after some data has been transferred to or from it.
@@ -10457,17 +10457,17 @@ declare namespace imports.gi.Soup {
 	const SOCKET_TLS_ERRORS: string;
 
 	/**
-	 * Alias for the {@link Socket}:trusted-certificate
+	 * Alias for the {@link Socket.trusted_certificate}
 	 * property.
-	 * @returns Alias for the {@link Socket}:trusted-certificate
+	 * @returns Alias for the {@link Socket.trusted_certificate}
 	 * property.
 	 */
 	const SOCKET_TRUSTED_CERTIFICATE: string;
 
 	/**
-	 * Alias for the {@link Socket}:use-thread-context property. (Use
+	 * Alias for the {@link Socket.use_thread_context} property. (Use
 	 * g_main_context_get_thread_default())
-	 * @returns Alias for the {@link Socket}:use-thread-context property. (Use
+	 * @returns Alias for the {@link Socket.use_thread_context} property. (Use
 	 * g_main_context_get_thread_default())
 	 */
 	const SOCKET_USE_THREAD_CONTEXT: string;
