@@ -13,6 +13,7 @@ import { renderCallback } from "./renderers/freeCallbackRenderer";
 import { renderEnumeration } from "./renderers/enumRenderer";
 import { RenderConstant } from "./renderers/constantRenderer";
 import { js_reserved_words } from "./consts";
+import { GatherNodeNames, getSnakeCaseNamespaceMap, getSnakeCaseNodeNameMap } from "./utils/utils";
 
 
 function renderNodeAsBlankInterface(node: Node, ns_name: string) {
@@ -133,6 +134,9 @@ interface GeneratorResult {
 }
 
 
+export const nsNodeSnakeCaseMap: Record<string, Record<string, string>> = {};
+export let nsSnakeCaseMap: Record<string, string> = {}; 
+
 export class Generator {
 
     private lib_list: { lib_name: string; xml_str: string }[];
@@ -145,8 +149,6 @@ export class Generator {
         this.exclude_json_map = exclude_json_map;
         this.modifier_json_map = modifier_json_map;
     }
-
-
 
     public generateTypings(cb: (res: GeneratorResult[]) => any) {
         let self = this;
@@ -172,6 +174,14 @@ export class Generator {
         }
         function proceed() {
             const res: GeneratorResult[] = [];
+            const ns_names: string[] = [];
+            for (let ns of self.ns_list) {
+                const ns_name = ns.ns_node.$.name.replace(/\./g, "");
+                ns_names.push(ns_name);
+                nsNodeSnakeCaseMap[ns_name] = getSnakeCaseNodeNameMap(ns.ns_node);
+            }
+            nsSnakeCaseMap = getSnakeCaseNamespaceMap(ns_names);
+            
             for (let ns of self.ns_list) {
                 const ns_name = ns.ns_node.$.name;
                 const typing_str = renderNamespace(ns.ns_node, ns_name, self.exclude_json_map[ns.lib_name], self.modifier_json_map[ns.lib_name]);

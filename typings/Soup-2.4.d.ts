@@ -12,7 +12,7 @@ declare namespace imports.gi.Soup {
 		sockaddr: any;
 		/**
 		 * Tests if #addr1 and #addr2 have the same IP address. This method
-		 * can be used with soup_address_hash_by_ip() to create a
+		 * can be used with {@link Soup.Address.hash_by_ip} to create a
 		 * #GHashTable that hashes on IP address.
 		 * 
 		 * This would be used to distinguish hosts in situations where
@@ -31,7 +31,7 @@ declare namespace imports.gi.Soup {
 		equal_by_ip(addr2: Address): boolean;
 		/**
 		 * Tests if #addr1 and #addr2 have the same "name". This method can be
-		 * used with soup_address_hash_by_name() to create a #GHashTable that
+		 * used with {@link Soup.Address.hash_by_name} to create a #GHashTable that
 		 * hashes on address "names".
 		 * 
 		 * Comparing by name normally means comparing the addresses by their
@@ -67,7 +67,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * This method is not thread-safe; if you call it while #addr is being
 		 * resolved in another thread, it may return garbage. You can use
-		 * soup_address_is_resolved() to safely test whether or not an address
+		 * {@link Soup.Address.is_resolved} to safely test whether or not an address
 		 * is resolved before fetching its name or address.
 		 * @returns the hostname, or %NULL if it is not known.
 		 */
@@ -78,7 +78,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * This method is not thread-safe; if you call it while #addr is being
 		 * resolved in another thread, it may return garbage. You can use
-		 * soup_address_is_resolved() to safely test whether or not an address
+		 * {@link Soup.Address.is_resolved} to safely test whether or not an address
 		 * is resolved before fetching its name or address.
 		 * @returns the physical address, or %NULL
 		 */
@@ -94,7 +94,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * This method is not thread-safe; if you call it while #addr is being
 		 * resolved in another thread, it may return garbage. You can use
-		 * soup_address_is_resolved() to safely test whether or not an address
+		 * {@link Soup.Address.is_resolved} to safely test whether or not an address
 		 * is resolved before fetching its name or address.
 		 * @param len return location for sockaddr length
 		 * @returns the sockaddr, or %NULL
@@ -102,13 +102,13 @@ declare namespace imports.gi.Soup {
 		get_sockaddr(len: number): any | null;
 		/**
 		 * A hash function (for #GHashTable) that corresponds to
-		 * soup_address_equal_by_ip(), qv
+		 * {@link Soup.Address.equal_by_ip}, qv
 		 * @returns the IP-based hash value for #addr.
 		 */
 		hash_by_ip(): number;
 		/**
 		 * A hash function (for #GHashTable) that corresponds to
-		 * soup_address_equal_by_name(), qv
+		 * {@link Soup.Address.equal_by_name}, qv
 		 * @returns the named-based hash value for #addr.
 		 */
 		hash_by_name(): number;
@@ -121,7 +121,7 @@ declare namespace imports.gi.Soup {
 		is_resolved(): boolean;
 		/**
 		 * Asynchronously resolves the missing half of #addr (its IP address
-		 * if it was created with soup_address_new(), or its hostname if it
+		 * if it was created with {@link Soup.Address.new}, or its hostname if it
 		 * was created with soup_address_new_from_sockaddr() or
 		 * soup_address_new_any().)
 		 * 
@@ -141,7 +141,7 @@ declare namespace imports.gi.Soup {
 		resolve_async(async_context: GLib.MainContext | null, cancellable: Gio.Cancellable | null, callback: AddressCallback): void;
 		/**
 		 * Synchronously resolves the missing half of #addr, as with
-		 * soup_address_resolve_async().
+		 * {@link Soup.Address.resolve_async}.
 		 * 
 		 * If #cancellable is non-%NULL, it can be used to cancel the
 		 * resolution. soup_address_resolve_sync() will then return a status
@@ -188,7 +188,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Creates a {@link Address} from #name and #port. The #SoupAddress's IP
 		 * address may not be available right away; the caller can call
-		 * soup_address_resolve_async() or soup_address_resolve_sync() to
+		 * {@link Soup.Address.resolve_async} or soup_address_resolve_sync() to
 		 * force a DNS resolution.
 		 * @param name a hostname or physical address
 		 * @param port a port number
@@ -233,18 +233,18 @@ declare namespace imports.gi.Soup {
 		authenticate(username: string, password: string): void;
 		/**
 		 * Tests if #auth is able to authenticate by providing credentials to the
-		 * soup_auth_authenticate().
+		 * {@link Soup.Auth.authenticate}.
 		 * @returns %TRUE if #auth is able to accept credentials.
 		 */
 		can_authenticate(): boolean;
 		/**
 		 * Frees #space.
-		 * @param space the return value from soup_auth_get_protection_space()
+		 * @param space the return value from {@link Soup.Auth.get_protection_space}
 		 */
 		free_protection_space(space: GLib.SList): void;
 		/**
 		 * Generates an appropriate "Authorization" header for #msg. (The
-		 * session will only call this if soup_auth_is_authenticated()
+		 * session will only call this if {@link Soup.Auth.is_authenticated}
 		 * returned %TRUE.)
 		 * @param msg the {@link Message} to be authorized
 		 * @returns the "Authorization" header, which must be freed.
@@ -271,7 +271,7 @@ declare namespace imports.gi.Soup {
 		 * @param source_uri the URI of the request that #auth was generated in
 		 * response to.
 		 * @returns the list of
-		 * paths, which can be freed with soup_auth_free_protection_space().
+		 * paths, which can be freed with {@link Soup.Auth.free_protection_space}.
 		 */
 		get_protection_space(source_uri: URI): GLib.SList;
 		/**
@@ -303,7 +303,7 @@ declare namespace imports.gi.Soup {
 		is_for_proxy(): boolean;
 		/**
 		 * Tests if #auth is ready to make a request for #msg with. For most
-		 * auths, this is equivalent to soup_auth_is_authenticated(), but for
+		 * auths, this is equivalent to {@link Soup.Auth.is_authenticated}, but for
 		 * some auth types (eg, NTLM), the auth may be sendable (eg, as an
 		 * authentication request) even before it is authenticated.
 		 * @param msg a {@link Message}
@@ -313,7 +313,7 @@ declare namespace imports.gi.Soup {
 		save_password(username: string, password: string): void;
 		/**
 		 * Updates #auth with the information from #msg and #auth_header,
-		 * possibly un-authenticating it. As with soup_auth_new(), this is
+		 * possibly un-authenticating it. As with {@link Soup.Auth.new}, this is
 		 * normally only used by {@link Session}.
 		 * @param msg the {@link Message} #auth is being updated for
 		 * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
@@ -432,7 +432,7 @@ declare namespace imports.gi.Soup {
 		realm: string;
 		/**
 		 * Checks if #msg contains appropriate authorization for #domain to
-		 * accept it. Mirroring soup_auth_domain_covers(), this does not check
+		 * accept it. Mirroring {@link Soup.AuthDomain.covers}, this does not check
 		 * whether or not #domain <emphasis>cares</emphasis> if #msg is
 		 * authorized.
 		 * 
@@ -446,7 +446,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Adds #path to #domain, such that requests under #path on #domain's
 		 * server will require authentication (unless overridden by
-		 * soup_auth_domain_remove_path() or soup_auth_domain_set_filter()).
+		 * {@link Soup.AuthDomain.remove_path} or soup_auth_domain_set_filter()).
 		 * 
 		 * You can also add paths by setting the %SOUP_AUTH_DOMAIN_ADD_PATH
 		 * property, which can also be used to add one or more paths at
@@ -495,7 +495,7 @@ declare namespace imports.gi.Soup {
 		 * Removes #path from #domain, such that requests under #path on
 		 * #domain's server will NOT require authentication.
 		 * 
-		 * This is not simply an undo-er for soup_auth_domain_add_path(); it
+		 * This is not simply an undo-er for {@link Soup.AuthDomain.add_path}; it
 		 * can be used to "carve out" a subtree that does not require
 		 * authentication inside a hierarchy that does. Note also that unlike
 		 * with soup_auth_domain_add_path(), this cannot be overridden by
@@ -841,7 +841,7 @@ declare namespace imports.gi.Soup {
 		clear(): void;
 		/**
 		 * Synchronously writes the cache index out to disk. Contrast with
-		 * soup_cache_flush(), which writes pending cache
+		 * {@link Soup.Cache.flush}, which writes pending cache
 		 * <emphasis>entries</emphasis> to disk.
 		 * 
 		 * You must call this before exiting if you want your cache data to
@@ -853,7 +853,7 @@ declare namespace imports.gi.Soup {
 		 * committed to disk. For doing so it will iterate the #GMainContext
 		 * associated with #cache's session as long as needed.
 		 * 
-		 * Contrast with soup_cache_dump(), which writes out the cache index
+		 * Contrast with {@link Soup.Cache.dump}, which writes out the cache index
 		 * file.
 		 */
 		flush(): void;
@@ -1015,7 +1015,7 @@ declare namespace imports.gi.Soup {
 		 * #cookie will be 'stolen' by the jar, so don't free it afterwards.
 		 * 
 		 * For secure cookies to work properly you may want to use
-		 * soup_cookie_jar_add_cookie_full().
+		 * {@link Soup.CookieJar.add_cookie_full}.
 		 * @param first_party the URI for the main document
 		 * @param cookie a {@link Cookie}
 		 */
@@ -1057,7 +1057,7 @@ declare namespace imports.gi.Soup {
 		 */
 		get_cookie_list(uri: URI, for_http: boolean): GLib.SList;
 		/**
-		 * This is an extended version of soup_cookie_jar_get_cookie_list() that
+		 * This is an extended version of {@link Soup.CookieJar.get_cookie_list} that
 		 * provides more information required to use SameSite cookies. See the
 		 * [SameSite cookies spec](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00)
 		 * for more detailed information.
@@ -1117,7 +1117,7 @@ declare namespace imports.gi.Soup {
 		 * Keep in mind that if the {@link CookieJarAcceptPolicy} set is either
 		 * %SOUP_COOKIE_JAR_ACCEPT_NO_THIRD_PARTY or
 		 * %SOUP_COOKIE_JAR_ACCEPT_GRANDFATHERED_THIRD_PARTY you'll need to use
-		 * soup_cookie_jar_set_cookie_with_first_party(), otherwise the jar
+		 * {@link Soup.CookieJar.set_cookie_with_first_party}, otherwise the jar
 		 * will have no way of knowing if the cookie is being set by a third
 		 * party or not.
 		 * @param uri the URI setting the cookie
@@ -1271,7 +1271,7 @@ declare namespace imports.gi.Soup {
 		 * Gets a list of domains for which there are policies in #enforcer.
 		 * @param session_policies whether to include session policies
 		 * @returns a newly allocated
-		 * list of domains. Use g_list_free_full() and g_free() to free the
+		 * list of domains. Use {@link G.list_free_full} and g_free() to free the
 		 * list.
 		 */
 		get_domains(session_policies: boolean): GLib.List;
@@ -1279,7 +1279,7 @@ declare namespace imports.gi.Soup {
 		 * Gets a list with the policies in #enforcer.
 		 * @param session_policies whether to include session policies
 		 * @returns a newly
-		 * allocated list of policies. Use g_list_free_full() and
+		 * allocated list of policies. Use {@link G.list_free_full} and
 		 * soup_hsts_policy_free() to free the list.
 		 */
 		get_policies(session_policies: boolean): GLib.List;
@@ -1300,7 +1300,7 @@ declare namespace imports.gi.Soup {
 		 * existing HSTS policy for its host will be removed instead. If a
 		 * policy existed for this host, it will be replaced. Otherwise, the
 		 * new policy will be inserted. If the policy is a session policy, that
-		 * is, one created with soup_hsts_policy_new_session_policy(), the policy
+		 * is, one created with {@link Soup.hsts_policy_new_session_policy}, the policy
 		 * will not expire and will be enforced during the lifetime of
 		 * #hsts_enforcer's {@link Session}.
 		 * @param policy the policy of the HSTS host
@@ -1429,20 +1429,20 @@ declare namespace imports.gi.Soup {
 		max_body_size: number;
 		/**
 		 * @deprecated
-		 * Use soup_session_add_feature() instead.
+		 * Use {@link Soup.Session.add_feature} instead.
 		 * 
 		 * Sets #logger to watch #session and print debug information for
 		 * its messages.
 		 * 
 		 * (The session will take a reference on #logger, which will be
-		 * removed when you call soup_logger_detach(), or when the session is
+		 * removed when you call {@link Soup.Logger.detach}, or when the session is
 		 * destroyed.)
 		 * @param session a {@link Session}
 		 */
 		attach(session: Session): void;
 		/**
 		 * @deprecated
-		 * Use soup_session_remove_feature() instead.
+		 * Use {@link Soup.Session.remove_feature} instead.
 		 * 
 		 * Stops #logger from watching #session.
 		 * @param session a {@link Session}
@@ -1461,7 +1461,7 @@ declare namespace imports.gi.Soup {
 		 * For each HTTP request #logger will invoke #request_filter to
 		 * determine how much (if any) of that request to log. (If you do not
 		 * set a request filter, #logger will just always log requests at the
-		 * level passed to soup_logger_new().)
+		 * level passed to {@link Soup.Logger.new}.)
 		 * @param request_filter the callback for request debugging
 		 * @param filter_data data to pass to the callback
 		 * @param destroy a #GDestroyNotify to free #filter_data
@@ -1472,7 +1472,7 @@ declare namespace imports.gi.Soup {
 		 * For each HTTP response #logger will invoke #response_filter to
 		 * determine how much (if any) of that response to log. (If you do not
 		 * set a response filter, #logger will just always log responses at
-		 * the level passed to soup_logger_new().)
+		 * the level passed to {@link Soup.Logger.new}.)
 		 * @param response_filter the callback for response debugging
 		 * @param filter_data data to pass to the callback
 		 * @param destroy a #GDestroyNotify to free #filter_data
@@ -1505,7 +1505,7 @@ declare namespace imports.gi.Soup {
 		 * bytes of the body that will be logged. (-1 means "no limit".)
 		 * 
 		 * If you need finer control over what message parts are and aren't
-		 * logged, use soup_logger_set_request_filter() and
+		 * logged, use {@link Soup.Logger.set_request_filter} and
 		 * soup_logger_set_response_filter().
 		 * @param level the debug level
 		 * @param max_body_size the maximum body size to output, or -1
@@ -1586,7 +1586,7 @@ declare namespace imports.gi.Soup {
 		// readonly response_headers: MessageHeaders;
 		/**
 		 * Adds a signal handler to #msg for #signal, as with
-		 * g_signal_connect(), but the #callback will only be run if #msg's
+		 * {@link G.signal_connect}, but the #callback will only be run if #msg's
 		 * incoming messages headers (that is, the
 		 * <literal>request_headers</literal> for a client {@link Message}, or
 		 * the <literal>response_headers</literal> for a server #SoupMessage)
@@ -1594,12 +1594,12 @@ declare namespace imports.gi.Soup {
 		 * @param signal signal to connect the handler to.
 		 * @param header HTTP response header to match against
 		 * @param callback the header handler
-		 * @returns the handler ID from g_signal_connect()
+		 * @returns the handler ID from {@link G.signal_connect}
 		 */
 		add_header_handler(signal: string, header: string, callback: GObject.Callback): number;
 		/**
 		 * Adds a signal handler to #msg for #signal, as with
-		 * g_signal_connect(), but the #callback will only be run if #msg has
+		 * {@link G.signal_connect}, but the #callback will only be run if #msg has
 		 * the status #status_code.
 		 * 
 		 * #signal must be a signal that will be emitted after #msg's status
@@ -1609,7 +1609,7 @@ declare namespace imports.gi.Soup {
 		 * @param signal signal to connect the handler to.
 		 * @param status_code status code to match against
 		 * @param callback the header handler
-		 * @returns the handler ID from g_signal_connect()
+		 * @returns the handler ID from {@link G.signal_connect}
 		 */
 		add_status_code_handler(signal: string, status_code: number, callback: GObject.Callback): number;
 		content_sniffed(content_type: string, params: GLib.HashTable): void;
@@ -1697,7 +1697,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Get whether {@link SessionFeature}<!-- -->s of the given #feature_type
 		 * (or a subclass of that type) are disabled on #msg.
-		 * See soup_message_disable_feature().
+		 * See {@link Soup.Message.disable_feature}.
 		 * @param feature_type the #GType of a {@link SessionFeature}
 		 * @returns %TRUE if feature is disabled, or %FALSE otherwise.
 		 */
@@ -1726,7 +1726,7 @@ declare namespace imports.gi.Soup {
 		 * data it read.
 		 * 
 		 * Generally, a custom chunk allocator would be used in conjunction
-		 * with soup_message_body_set_accumulate() %FALSE and
+		 * with {@link Soup.MessageBody.set_accumulate} %FALSE and
 		 * #SoupMessage::got_chunk, as part of a strategy to avoid unnecessary
 		 * copying of data. However, you cannot assume that every call to the
 		 * allocator will be followed by a call to your
@@ -1849,7 +1849,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Sets #msg's URI to #uri. If #msg has already been sent and you want
 		 * to re-send it with the new URI, you need to call
-		 * soup_session_requeue_message().
+		 * {@link Soup.Session.requeue_message}.
 		 * @param uri the new {@link URI}
 		 */
 		set_uri(uri: URI): void;
@@ -1905,7 +1905,7 @@ declare namespace imports.gi.Soup {
 		 * body. For a client-side message, this means it has received
 		 * the response body and is nearly done with the message.)
 		 * 
-		 * See also soup_message_add_header_handler() and
+		 * See also {@link Soup.Message.add_header_handler} and
 		 * soup_message_add_status_code_handler(), which can be used
 		 * to connect to a subset of emissions of this signal.
 		 * @param signal 
@@ -1939,7 +1939,7 @@ declare namespace imports.gi.Soup {
 		 * message, it is after receiving the Request-Line and request
 		 * headers.)
 		 * 
-		 * See also soup_message_add_header_handler() and
+		 * See also {@link Soup.Message.add_header_handler} and
 		 * soup_message_add_status_code_handler(), which can be used
 		 * to connect to a subset of emissions of this signal.
 		 * 
@@ -2052,7 +2052,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * Note that this signal is not parallel to
 		 * {@link Message.got_chunk}; it is emitted only when a complete
-		 * chunk (added with soup_message_body_append() or
+		 * chunk (added with {@link Soup.MessageBody.append} or
 		 * soup_message_body_append_buffer()) has been written. To get
 		 * more useful continuous progress information, use
 		 * #SoupMessage::wrote_body_data.
@@ -2176,7 +2176,7 @@ declare namespace imports.gi.Soup {
 	 * For a client-side #SoupMessage, #request_body's
 	 * <literal>data</literal> is usually filled in right before libsoup
 	 * writes the request to the network, but you should not count on
-	 * this; use soup_message_body_flatten() if you want to ensure that
+	 * this; use {@link Soup.MessageBody.flatten} if you want to ensure that
 	 * <literal>data</literal> is filled in. If you are not using
 	 * #SoupRequest to read the response, then #response_body's
 	 * <literal>data</literal> will be filled in before
@@ -2223,7 +2223,7 @@ declare namespace imports.gi.Soup {
 		 * Obtains the headers for the part currently being processed. Note
 		 * that the {@link MessageHeaders} that are returned are owned by the
 		 * #SoupMultipartInputStream and will be replaced when a call is made
-		 * to soup_multipart_input_stream_next_part() or its async
+		 * to {@link Soup.MultipartInputStream.next_part} or its async
 		 * counterpart, so if keeping the headers is required, a copy must be
 		 * made.
 		 * 
@@ -2242,7 +2242,7 @@ declare namespace imports.gi.Soup {
 		 * reading.
 		 * 
 		 * After calling this function,
-		 * soup_multipart_input_stream_get_headers() can be used to obtain the
+		 * {@link Soup.MultipartInputStream.get_headers} can be used to obtain the
 		 * headers for the first part. A read of 0 bytes indicates the end of
 		 * the part; a new call to this function should be done at that point,
 		 * to obtain the next part.
@@ -2253,7 +2253,7 @@ declare namespace imports.gi.Soup {
 		next_part(cancellable: Gio.Cancellable | null): Gio.InputStream | null;
 		/**
 		 * Obtains a #GInputStream for the next request. See
-		 * soup_multipart_input_stream_next_part() for details on the
+		 * {@link Soup.MultipartInputStream.next_part} for details on the
 		 * workflow.
 		 * @param io_priority the I/O priority for the request.
 		 * @param cancellable a #GCancellable.
@@ -2292,7 +2292,7 @@ declare namespace imports.gi.Soup {
 		 * Creates a new {@link MultipartInputStream} that wraps the
 		 * #GInputStream obtained by sending the #SoupRequest. Reads should
 		 * not be done directly through this object, use the input streams
-		 * returned by soup_multipart_input_stream_next_part() or its async
+		 * returned by {@link Soup.MultipartInputStream.next_part} or its async
 		 * counterpart instead.
 		 * @param msg the {@link Message} the response is related to.
 		 * @param base_stream the #GInputStream returned by sending the request.
@@ -2337,7 +2337,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Gets the length of the data represented by #request. For most
 		 * request types, this will not be known until after you call
-		 * soup_request_send() or soup_request_send_finish().
+		 * {@link Soup.Request.send} or soup_request_send_finish().
 		 * @returns the length of the data represented by #request,
 		 *   or -1 if not known.
 		 */
@@ -2345,7 +2345,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Gets the type of the data represented by #request. For most request
 		 * types, this will not be known until after you call
-		 * soup_request_send() or soup_request_send_finish().
+		 * {@link Soup.Request.send} or soup_request_send_finish().
 		 * 
 		 * As in the HTTP Content-Type header, this may include parameters
 		 * after the MIME type.
@@ -2385,7 +2385,7 @@ declare namespace imports.gi.Soup {
 		 */
 		send_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Gets the result of a soup_request_send_async().
+		 * Gets the result of a {@link Soup.Request.send_async}.
 		 * @param result the #GAsyncResult
 		 * @returns a #GInputStream that can be used to
 		 *   read from the URI pointed to by #request.
@@ -2521,7 +2521,7 @@ declare namespace imports.gi.Soup {
 		 * rather than having an explicitly-specified one.
 		 * 
 		 * The server's #GMainContext, if you are using the old API.
-		 * Servers created using soup_server_listen() will listen on
+		 * Servers created using {@link Soup.Server.listen} will listen on
 		 * the #GMainContext that was the thread-default context at
 		 * the time soup_server_listen() was called.
 		 */
@@ -2556,26 +2556,26 @@ declare namespace imports.gi.Soup {
 		/**
 		 * @deprecated
 		 * {@link Servers} can listen on multiple interfaces
-		 * at once now. Use soup_server_listen(), etc, to listen on an
+		 * at once now. Use {@link Soup.Server.listen}, etc, to listen on an
 		 * interface, and soup_server_get_uris() to see what addresses
 		 * are being listened on.
 		 * 
 		 * The address of the network interface the server is
 		 * listening on, if you are using the old {@link Server} API.
-		 * (This will not be set if you use soup_server_listen(),
+		 * (This will not be set if you use {@link Soup.Server.listen},
 		 * etc.)
 		 */
 		interface: Address;
 		/**
 		 * @deprecated
 		 * {@link Servers} can listen on multiple interfaces
-		 * at once now. Use soup_server_listen(), etc, to listen on a
+		 * at once now. Use {@link Soup.Server.listen}, etc, to listen on a
 		 * port, and soup_server_get_uris() to see what ports are
 		 * being listened on.
 		 * 
 		 * The port the server is listening on, if you are using the
 		 * old {@link Server} API. (This will not be set if you use
-		 * soup_server_listen(), etc.)
+		 * {@link Soup.Server.listen}, etc.)
 		 */
 		port: number;
 		raw_paths: boolean;
@@ -2609,12 +2609,12 @@ declare namespace imports.gi.Soup {
 		/**
 		 * @deprecated
 		 * use {@link Server.tls_certificate} or
-		 * soup_server_set_ssl_certificate().
+		 * {@link Soup.Server.set_ssl_certificate}.
 		 * 
 		 * Path to a file containing a PEM-encoded certificate.
 		 * 
 		 * If you set this property and {@link Server.ssl_key_file} at
-		 * construct time, then soup_server_new() will try to read the
+		 * construct time, then {@link Soup.Server.new} will try to read the
 		 * files; if it cannot, it will return %NULL, with no explicit
 		 * indication of what went wrong (and logging a warning with
 		 * newer versions of glib, since returning %NULL from a
@@ -2624,7 +2624,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * @deprecated
 		 * use {@link Server.tls_certificate} or
-		 * soup_server_set_ssl_certificate().
+		 * {@link Soup.Server.set_ssl_certificate}.
 		 * 
 		 * Path to a file containing a PEM-encoded private key. See
 		 * {@link Server.ssl_cert_file} for more information about how this
@@ -2636,7 +2636,7 @@ declare namespace imports.gi.Soup {
 		 * set. If this is set, then the server will be able to speak
 		 * https in addition to (or instead of) plain http.
 		 * 
-		 * Alternatively, you can call soup_server_set_ssl_cert_file()
+		 * Alternatively, you can call {@link Soup.Server.set_ssl_cert_file}
 		 * to have {@link Server} read in a a certificate from a file.
 		 */
 		tls_certificate: Gio.TlsCertificate;
@@ -2682,7 +2682,7 @@ declare namespace imports.gi.Soup {
 		 * Early handlers are generally used for processing requests with
 		 * request bodies in a streaming fashion. If you determine that the
 		 * request will contain a message body, normally you would call
-		 * soup_message_body_set_accumulate() on the message's
+		 * {@link Soup.MessageBody.set_accumulate} on the message's
 		 * #SoupMessage:request-body to turn off request-body accumulation,
 		 * and connect to the message's #SoupMessage::got-chunk signal to
 		 * process each chunk as it comes in.
@@ -2714,7 +2714,7 @@ declare namespace imports.gi.Soup {
 		 * will be filled in.
 		 * 
 		 * After determining what to do with the request, the callback must at
-		 * a minimum call soup_message_set_status() (or
+		 * a minimum call {@link Soup.Message.set_status} (or
 		 * soup_message_set_status_full()) on the message to set the response
 		 * status code. Additionally, it may set response headers and/or fill
 		 * in the response body.
@@ -2749,7 +2749,7 @@ declare namespace imports.gi.Soup {
 		 * You can also add support for a WebSocket extension to the server at
 		 * construct time by using the %SOUP_SERVER_ADD_WEBSOCKET_EXTENSION property.
 		 * Note that #SoupWebsocketExtensionDeflate is supported by default, use
-		 * soup_server_remove_websocket_extension() if you want to disable it.
+		 * {@link Soup.Server.remove_websocket_extension} if you want to disable it.
 		 * @param extension_type a #GType
 		 */
 		add_websocket_extension(extension_type: GObject.Type): void;
@@ -2770,7 +2770,7 @@ declare namespace imports.gi.Soup {
 		 * header will be accepted. More complicated requirements can be
 		 * handled by adding a normal handler to #path, and having it perform
 		 * whatever checks are needed (possibly calling
-		 * soup_server_check_websocket_handshake() one or more times), and
+		 * {@link Soup.Server.check_websocket_handshake} one or more times), and
 		 * setting a failure status code if the handshake should be rejected.
 		 * @param path the toplevel path for the handler
 		 * @param origin the origin of the connection
@@ -2783,7 +2783,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Closes and frees #server's listening sockets. If you are using the
 		 * old {@link Server} APIs, this also includes the effect of
-		 * soup_server_quit().
+		 * {@link Soup.Server.quit}.
 		 * 
 		 * Note that if there are currently requests in progress on #server,
 		 * that they will continue to be processed if #server's #GMainContext
@@ -2795,7 +2795,7 @@ declare namespace imports.gi.Soup {
 		disconnect(): void;
 		/**
 		 * @deprecated
-		 * If you are using soup_server_listen(), etc, then
+		 * If you are using {@link Soup.Server.listen}, etc, then
 		 * the server listens on the thread-default #GMainContext, and this
 		 * property is ignored.
 		 * 
@@ -2811,7 +2811,7 @@ declare namespace imports.gi.Soup {
 		get_async_context(): GLib.MainContext | null;
 		/**
 		 * @deprecated
-		 * If you are using soup_server_listen(), etc, then use
+		 * If you are using {@link Soup.Server.listen}, etc, then use
 		 * soup_server_get_listeners() to get a list of all listening sockets,
 		 * but note that that function returns #GSockets, not {@link Sockets}.
 		 * 
@@ -2828,7 +2828,7 @@ declare namespace imports.gi.Soup {
 		 * You should treat these sockets as read-only; writing to or
 		 * modifiying any of these sockets may cause #server to malfunction.
 		 * 
-		 * (Beware that in contrast to the old soup_server_get_listener(), this
+		 * (Beware that in contrast to the old {@link Soup.Server.get_listener}, this
 		 * function returns #GSockets, not {@link Sockets}.)
 		 * @returns a
 		 * list of listening sockets.
@@ -2836,7 +2836,7 @@ declare namespace imports.gi.Soup {
 		get_listeners(): GLib.SList;
 		/**
 		 * @deprecated
-		 * If you are using soup_server_listen(), etc, then use
+		 * If you are using {@link Soup.Server.listen}, etc, then use
 		 * soup_server_get_uris() to get a list of all listening addresses.
 		 * 
 		 * Gets the TCP port that #server is listening on, if you are using
@@ -2849,7 +2849,7 @@ declare namespace imports.gi.Soup {
 		 * listening on. These will contain IP addresses, not hostnames, and
 		 * will also indicate whether the given listener is http or https.
 		 * 
-		 * Note that if you used soup_server_listen_all(), the returned URIs
+		 * Note that if you used {@link Soup.Server.listen_all}, the returned URIs
 		 * will use the addresses <literal>0.0.0.0</literal> and
 		 * <literal>::</literal>, rather than actually returning separate URIs
 		 * for each interface on the system.
@@ -2861,7 +2861,7 @@ declare namespace imports.gi.Soup {
 		 * Checks whether #server is capable of https.
 		 * 
 		 * In order for a server to run https, you must call
-		 * soup_server_set_ssl_cert_file(), or set the
+		 * {@link Soup.Server.set_ssl_cert_file}, or set the
 		 * {@link Server.tls_certificate} property, to provide it with a
 		 * certificate to use.
 		 * 
@@ -2909,7 +2909,7 @@ declare namespace imports.gi.Soup {
 		 * %SOUP_SERVER_LISTEN_IPV6_ONLY, or neither.) If #port is specified,
 		 * #server will listen on that port. If it is 0, #server will find an
 		 * unused port to listen on. (In that case, you can use
-		 * soup_server_get_uris() to find out what port it ended up choosing.)
+		 * {@link Soup.Server.get_uris} to find out what port it ended up choosing.)
 		 * 
 		 * See soup_server_listen() for more details.
 		 * @param port the port to listen on, or 0
@@ -2922,7 +2922,7 @@ declare namespace imports.gi.Soup {
 		 * This attempts to set up #server to listen for connections on
 		 * #fd.
 		 * 
-		 * See soup_server_listen() for more details.
+		 * See {@link Soup.Server.listen} for more details.
 		 * 
 		 * Note that #server will close #fd when you free it or call
 		 * soup_server_disconnect().
@@ -2939,7 +2939,7 @@ declare namespace imports.gi.Soup {
 		 * %SOUP_SERVER_LISTEN_IPV4_ONLY, %SOUP_SERVER_LISTEN_IPV6_ONLY, or
 		 * neither). If #port is specified, #server will listen on that port.
 		 * If it is 0, #server will find an unused port to listen on. (In that
-		 * case, you can use soup_server_get_uris() to find out what port it
+		 * case, you can use {@link Soup.Server.get_uris} to find out what port it
 		 * ended up choosing.)
 		 * 
 		 * See soup_server_listen() for more details.
@@ -2953,7 +2953,7 @@ declare namespace imports.gi.Soup {
 		 * This attempts to set up #server to listen for connections on
 		 * #socket.
 		 * 
-		 * See soup_server_listen() for more details.
+		 * See {@link Soup.Server.listen} for more details.
 		 * @param socket a listening #GSocket
 		 * @param options listening options for this server
 		 * @returns %TRUE on success, %FALSE if an error occurred (in
@@ -2963,7 +2963,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Pauses I/O on #msg. This can be used when you need to return from
 		 * the server handler without having the full response ready yet. Use
-		 * soup_server_unpause_message() to resume I/O.
+		 * {@link Soup.Server.unpause_message} to resume I/O.
 		 * 
 		 * This must only be called on {@link Messages} which were created by the
 		 * #SoupServer and are currently doing I/O, such as those passed into a
@@ -2973,12 +2973,12 @@ declare namespace imports.gi.Soup {
 		pause_message(msg: Message): void;
 		/**
 		 * @deprecated
-		 * When using soup_server_listen(), etc, the server will
+		 * When using {@link Soup.Server.listen}, etc, the server will
 		 * always listen for connections, and will process them whenever the
 		 * thread-default #GMainContext is running.
 		 * 
 		 * Stops processing for #server, if you are using the old API. Call
-		 * this to clean up after soup_server_run_async(), or to terminate a
+		 * this to clean up after {@link Soup.Server.run_async}, or to terminate a
 		 * call to soup_server_run().
 		 * 
 		 * Note that messages currently in progress will continue to be
@@ -3009,20 +3009,20 @@ declare namespace imports.gi.Soup {
 		remove_websocket_extension(extension_type: GObject.Type): void;
 		/**
 		 * @deprecated
-		 * When using soup_server_listen(), etc, the server will
+		 * When using {@link Soup.Server.listen}, etc, the server will
 		 * always listen for connections, and will process them whenever the
 		 * thread-default #GMainContext is running.
 		 * 
 		 * Starts #server, if you are using the old API, causing it to listen
 		 * for and process incoming connections. Unlike
-		 * soup_server_run_async(), this creates a #GMainLoop and runs it, and
+		 * {@link Soup.Server.run_async}, this creates a #GMainLoop and runs it, and
 		 * it will not return until someone calls soup_server_quit() to stop
 		 * the server.
 		 */
 		run(): void;
 		/**
 		 * @deprecated
-		 * When using soup_server_listen(), etc, the server will
+		 * When using {@link Soup.Server.listen}, etc, the server will
 		 * always listen for connections, and will process them whenever the
 		 * thread-default #GMainContext is running.
 		 * 
@@ -3051,7 +3051,7 @@ declare namespace imports.gi.Soup {
 		set_ssl_cert_file(ssl_cert_file: string, ssl_key_file: string): boolean;
 		/**
 		 * Resumes I/O on #msg. Use this to resume after calling
-		 * soup_server_pause_message(), or after adding a new chunk to a
+		 * {@link Soup.Server.pause_message}, or after adding a new chunk to a
 		 * chunked response.
 		 * 
 		 * I/O won't actually resume until you return to the main loop.
@@ -3173,7 +3173,7 @@ declare namespace imports.gi.Soup {
 		public constructor(options?: Partial<ServerInitOptions>);
 		/**
 		 * Creates a new {@link Server}. This is exactly equivalent to calling
-		 * g_object_new() and specifying %SOUP_TYPE_SERVER as the type.
+		 * {@link GObject.new} and specifying %SOUP_TYPE_SERVER as the type.
 		 * @param optname1 name of first property to set
 		 * @returns a new {@link Server}. If you are using
 		 * certain legacy properties, this may also return %NULL if an error
@@ -3197,7 +3197,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * If %TRUE, {@link Session} will automatically set the string
 		 * for the "Accept-Language" header on every #SoupMessage
-		 * sent, based on the return value of g_get_language_names().
+		 * sent, based on the return value of {@link G.get_language_names}.
 		 * 
 		 * Setting this will override any previous value of
 		 * #SoupSession:accept-language.
@@ -3205,12 +3205,12 @@ declare namespace imports.gi.Soup {
 		accept_language_auto: boolean;
 		/**
 		 * Add a feature object to the session. (Shortcut for calling
-		 * soup_session_add_feature().)
+		 * {@link Soup.Session.add_feature}.)
 		 */
 		// add_feature: SessionFeature;
 		/**
 		 * Add a feature object of the given type to the session.
-		 * (Shortcut for calling soup_session_add_feature_by_type().)
+		 * (Shortcut for calling {@link Soup.Session.add_feature_by_type}.)
 		 */
 		// add_feature_by_type: GObject.Type;
 		/**
@@ -3262,7 +3262,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * Although you can change this property at any time, it will
 		 * only affect newly-created connections, not currently-open
-		 * ones. You can call soup_session_abort() after setting this
+		 * ones. You can call {@link Soup.Session.abort} after setting this
 		 * if you want to ensure that all future connections will have
 		 * this timeout value.
 		 * 
@@ -3320,7 +3320,7 @@ declare namespace imports.gi.Soup {
 		proxy_uri: URI;
 		/**
 		 * Remove feature objects from the session. (Shortcut for
-		 * calling soup_session_remove_feature_by_type().)
+		 * calling {@link Soup.Session.remove_feature_by_type}.)
 		 */
 		// remove_feature_by_type: GObject.Type;
 		/**
@@ -3348,7 +3348,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * If you set #SoupSession:ssl-strict to %FALSE, then all
 		 * certificates will be accepted, and you will need to call
-		 * soup_message_get_https_status() to distinguish valid from
+		 * {@link Soup.Message.get_https_status} to distinguish valid from
 		 * invalid certificates. (This can be used, eg, if you want to
 		 * accept invalid certificates after giving some sort of
 		 * warning.)
@@ -3387,7 +3387,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * Although you can change this property at any time, it will
 		 * only affect newly-created connections, not currently-open
-		 * ones. You can call soup_session_abort() after setting this
+		 * ones. You can call {@link Soup.Session.abort} after setting this
 		 * if you want to ensure that all future connections will have
 		 * this timeout value.
 		 * 
@@ -3429,7 +3429,7 @@ declare namespace imports.gi.Soup {
 		tls_interaction: Gio.TlsInteraction;
 		/**
 		 * @deprecated
-		 * use soup_session_add_feature_by_type() with
+		 * use {@link Soup.Session.add_feature_by_type} with
 		 * #SOUP_TYPE_AUTH_NTLM.
 		 * 
 		 * Whether or not to use NTLM authentication.
@@ -3474,7 +3474,7 @@ declare namespace imports.gi.Soup {
 		 * persistent connections.
 		 * 
 		 * The message cancellation has the same semantics as with
-		 * soup_session_cancel_message(); asynchronous requests on a
+		 * {@link Soup.Session.cancel_message}; asynchronous requests on a
 		 * {@link SessionAsync} will have their callback called before
 		 * soup_session_abort() returns. Requests on a plain #SoupSession will
 		 * not.
@@ -3493,7 +3493,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * If #feature_type is the type of a class that implements
 		 * {@link SessionFeature}, this creates a new feature of that type and
-		 * adds it to #session as with soup_session_add_feature(). You can use
+		 * adds it to #session as with {@link Soup.Session.add_feature}. You can use
 		 * this when you don't need to customize the new feature in any way.
 		 * 
 		 * If #feature_type is not a #SoupSessionFeature type, this gives each
@@ -3527,7 +3527,7 @@ declare namespace imports.gi.Soup {
 		 * empty or complete.
 		 * 
 		 * Beware that with the deprecated {@link SessionAsync}, messages queued
-		 * with soup_session_queue_message() will have their callbacks invoked
+		 * with {@link Soup.Session.queue_message} will have their callbacks invoked
 		 * before soup_session_cancel_message() returns. The plain
 		 * #SoupSession does not have this behavior; cancelling an
 		 * asynchronous message will merely queue its callback to be run after
@@ -3541,7 +3541,7 @@ declare namespace imports.gi.Soup {
 		 * Start a connection to #uri. The operation can be monitored by providing a #progress_callback
 		 * and finishes when the connection is done or an error ocurred.
 		 * 
-		 * Call soup_session_connect_finish() to get the #GIOStream to communicate with the server.
+		 * Call {@link Soup.Session.connect_finish} to get the #GIOStream to communicate with the server.
 		 * @param uri a {@link URI} to connect to
 		 * @param cancellable a #GCancellable
 		 * @param progress_callback a {@link SessionConnectProgressCallback} which
@@ -3569,7 +3569,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Gets the first feature in #session of type #feature_type. For
 		 * features where there may be more than one feature of a given type,
-		 * use soup_session_get_features().
+		 * use {@link Soup.Session.get_features}.
 		 * @param feature_type the #GType of the feature to get
 		 * @returns a {@link SessionFeature}, or
 		 * %NULL. The feature is owned by #session.
@@ -3578,7 +3578,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Gets the first feature in #session of type #feature_type, provided
 		 * that it is not disabled for #msg. As with
-		 * soup_session_get_feature(), this should only be used for features
+		 * {@link Soup.Session.get_feature}, this should only be used for features
 		 * where #feature_type is only expected to match a single feature. In
 		 * particular, if there are two matching features, and the first is
 		 * disabled on #msg, and the second is not, then this will return
@@ -3608,7 +3608,7 @@ declare namespace imports.gi.Soup {
 		 */
 		has_feature(feature_type: GObject.Type): boolean;
 		/**
-		 * Pauses HTTP I/O on #msg. Call soup_session_unpause_message() to
+		 * Pauses HTTP I/O on #msg. Call {@link Soup.Session.unpause_message} to
 		 * resume I/O.
 		 * 
 		 * This may only be called for asynchronous messages (those sent on a
@@ -3633,7 +3633,7 @@ declare namespace imports.gi.Soup {
 		prefetch_dns(hostname: string, cancellable: Gio.Cancellable | null, callback: AddressCallback | null): void;
 		/**
 		 * @deprecated
-		 * use soup_session_prefetch_dns() instead
+		 * use {@link Soup.Session.prefetch_dns} instead
 		 * 
 		 * Tells #session that #uri may be requested shortly, and so the
 		 * session can try to prepare (resolving the domain name, obtaining
@@ -3659,7 +3659,7 @@ declare namespace imports.gi.Soup {
 		 * message will actually be sent and processed in another thread, with
 		 * only the final callback occurring in the indicated #GMainContext.)
 		 * 
-		 * Contrast this method with soup_session_send_async(), which also
+		 * Contrast this method with {@link Soup.Session.send_async}, which also
 		 * asynchronously sends a message, but returns before reading the
 		 * response body, and allows you to read the response via a
 		 * #GInputStream.
@@ -3748,7 +3748,7 @@ declare namespace imports.gi.Soup {
 		 * that a 2xx class status code was received.)
 		 * 
 		 * If non-%NULL, #cancellable can be used to cancel the request;
-		 * soup_session_send() will return a %G_IO_ERROR_CANCELLED error. Note
+		 * {@link Soup.Session.send} will return a %G_IO_ERROR_CANCELLED error. Note
 		 * that with requests that have side effects (eg,
 		 * <literal>POST</literal>, <literal>PUT</literal>,
 		 * <literal>DELETE</literal>) it is possible that you might cancel the
@@ -3776,7 +3776,7 @@ declare namespace imports.gi.Soup {
 		 * Asynchronously sends #msg and waits for the beginning of a
 		 * response. When #callback is called, then either #msg has been sent,
 		 * and its response headers received, or else an error has occurred.
-		 * Call soup_session_send_finish() to get a #GInputStream for reading
+		 * Call {@link Soup.Session.send_finish} to get a #GInputStream for reading
 		 * the response body.
 		 * 
 		 * See soup_session_send() for more details on the general semantics.
@@ -3795,7 +3795,7 @@ declare namespace imports.gi.Soup {
 		 */
 		send_async(msg: Message, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Gets the response to a soup_session_send_async() call and (if
+		 * Gets the response to a {@link Soup.Session.send_async} call and (if
 		 * successful), returns a #GInputStream that can be used to read the
 		 * response body.
 		 * @param result the #GAsyncResult passed to your callback
@@ -3808,7 +3808,7 @@ declare namespace imports.gi.Soup {
 		 * transfer is finished successfully or there is an unrecoverable
 		 * error.
 		 * 
-		 * Unlike with soup_session_queue_message(), #msg is not freed upon
+		 * Unlike with {@link Soup.Session.queue_message}, #msg is not freed upon
 		 * return.
 		 * 
 		 * (Note that if you call this method on a {@link SessionAsync}, it will
@@ -3842,7 +3842,7 @@ declare namespace imports.gi.Soup {
 		steal_connection(msg: Message): Gio.IOStream;
 		/**
 		 * Resumes HTTP I/O on #msg. Use this to resume after calling
-		 * soup_session_pause_message().
+		 * {@link Soup.Session.pause_message}.
 		 * 
 		 * If #msg is being sent via blocking I/O, this will resume reading or
 		 * writing immediately. If #msg is using non-blocking I/O, then
@@ -3864,7 +3864,7 @@ declare namespace imports.gi.Soup {
 		 * If the server returns "101 Switching Protocols", then #msg's status
 		 * code and response headers will be updated, and then the WebSocket
 		 * handshake will be completed. On success,
-		 * soup_session_websocket_connect_finish() will return a new
+		 * {@link Soup.Session.websocket_connect_finish} will return a new
 		 * #SoupWebsocketConnection. On failure it will return a #GError.
 		 * 
 		 * If the server returns a status other than "101 Switching
@@ -3882,7 +3882,7 @@ declare namespace imports.gi.Soup {
 		websocket_connect_async(msg: Message, origin: string | null, protocols: string[] | null, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Gets the {@link WebsocketConnection} response to a
-		 * soup_session_websocket_connect_async() call and (if successful),
+		 * {@link Soup.Session.websocket_connect_async} call and (if successful),
 		 * returns a #SoupWebsocketConnection that can be used to communicate
 		 * with the server.
 		 * @param result the #GAsyncResult passed to your callback
@@ -3900,7 +3900,7 @@ declare namespace imports.gi.Soup {
 		would_redirect(msg: Message): boolean;
 		/**
 		 * Emitted when the session requires authentication. If
-		 * credentials are available call soup_auth_authenticate() on
+		 * credentials are available call {@link Soup.Auth.authenticate} on
 		 * #auth. If these credentials fail, the signal will be
 		 * emitted again, with #retrying set to %TRUE, which will
 		 * continue until you return without calling
@@ -3938,7 +3938,7 @@ declare namespace imports.gi.Soup {
 		connect(signal: "connection-created", callback: (owner: this, connection: GObject.Object) => void): number;
 		/**
 		 * Emitted when a request is queued on #session. (Note that
-		 * "queued" doesn't just mean soup_session_queue_message();
+		 * "queued" doesn't just mean {@link Soup.Session.queue_message};
 		 * soup_session_send_message() implicitly queues the message
 		 * as well.)
 		 * 
@@ -4117,7 +4117,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * @deprecated
 		 * {@link SessionAsync} is deprecated; use a plain
-		 * #SoupSession, created with soup_session_new(). See the <link
+		 * #SoupSession, created with {@link Soup.Session.new}. See the <link
 		 * linkend="libsoup-session-porting">porting guide</link>.
 		 * 
 		 * Creates an asynchronous {@link Session} with the default options.
@@ -4127,7 +4127,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * @deprecated
 		 * {@link SessionAsync} is deprecated; use a plain
-		 * #SoupSession, created with soup_session_new_with_options(). See the
+		 * #SoupSession, created with {@link Soup.Session.new_with_options}. See the
 		 * <link linkend="libsoup-session-porting">porting guide</link>.
 		 * 
 		 * Creates an asynchronous {@link Session} with the specified options.
@@ -4159,7 +4159,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * @deprecated
 		 * {@link SessionSync} is deprecated; use a plain
-		 * #SoupSession, created with soup_session_new(). See the <link
+		 * #SoupSession, created with {@link Soup.Session.new}. See the <link
 		 * linkend="libsoup-session-porting">porting guide</link>.
 		 * 
 		 * Creates an synchronous {@link Session} with the default options.
@@ -4169,7 +4169,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * @deprecated
 		 * {@link SessionSync} is deprecated; use a plain
-		 * #SoupSession, created with soup_session_new_with_options(). See the
+		 * #SoupSession, created with {@link Soup.Session.new_with_options}. See the
 		 * <link linkend="libsoup-session-porting">porting guide</link>.
 		 * 
 		 * Creates an synchronous {@link Session} with the specified options.
@@ -4203,7 +4203,7 @@ declare namespace imports.gi.Soup {
 		 * {@link Socket}'s I/O methods are designed around the idea of
 		 * using a single codepath for both synchronous and
 		 * asynchronous I/O. If you want to read off a #SoupSocket,
-		 * the "correct" way to do it is to call soup_socket_read() or
+		 * the "correct" way to do it is to call {@link Soup.Socket.read} or
 		 * soup_socket_read_until() repeatedly until you have read
 		 * everything you want. If it returns %SOUP_SOCKET_WOULD_BLOCK
 		 * at any point, stop reading and wait for it to emit the
@@ -4229,7 +4229,7 @@ declare namespace imports.gi.Soup {
 		readonly tls_errors: Gio.TlsCertificateFlags;
 		readonly trusted_certificate: boolean;
 		/**
-		 * Use g_main_context_get_thread_default().
+		 * Use {@link G.main_context_get_thread_default}.
 		 */
 		use_thread_context: boolean;
 		/**
@@ -4248,7 +4248,7 @@ declare namespace imports.gi.Soup {
 		 * Attempt to synchronously connect #sock to its remote address.
 		 * 
 		 * If #cancellable is non-%NULL, it can be used to cancel the
-		 * connection, in which case soup_socket_connect_sync() will return
+		 * connection, in which case {@link Soup.Socket.connect_sync} will return
 		 * %SOUP_STATUS_CANCELLED.
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns a success or failure code.
@@ -4301,7 +4301,7 @@ declare namespace imports.gi.Soup {
 		listen(): boolean;
 		/**
 		 * Attempts to read up to #len bytes from #sock into #buffer. If some
-		 * data is successfully read, soup_socket_read() will return
+		 * data is successfully read, {@link Soup.Socket.read} will return
 		 * %SOUP_SOCKET_OK, and *#nread will contain the number of bytes
 		 * actually read (which may be less than #len).
 		 * 
@@ -4325,7 +4325,7 @@ declare namespace imports.gi.Soup {
 		 */
 		read(buffer: number[], len: number, cancellable: Gio.Cancellable | null): [ SocketIOStatus, number ];
 		/**
-		 * Like soup_socket_read(), but reads no further than the first
+		 * Like {@link Soup.Socket.read}, but reads no further than the first
 		 * occurrence of #boundary. (If the boundary is found, it will be
 		 * included in the returned data, and *#got_boundary will be set to
 		 * %TRUE.) Any data after the boundary will returned in future reads.
@@ -4345,7 +4345,7 @@ declare namespace imports.gi.Soup {
 		 * @param got_boundary on return, whether or not the data in #buffer
 		 * ends with the boundary string
 		 * @param cancellable a #GCancellable, or %NULL
-		 * @returns as for soup_socket_read()
+		 * @returns as for {@link Soup.Socket.read}
 		 * 
 		 * on return, the number of bytes read into #buffer
 		 */
@@ -4374,7 +4374,7 @@ declare namespace imports.gi.Soup {
 		 * the return value will be %SOUP_SOCKET_WOULD_BLOCK. In this case,
 		 * the caller can connect to the {@link Socket.writable} signal to know
 		 * when more data can be written. (NB: #SoupSocket::writable is only
-		 * emitted after soup_socket_write() returns %SOUP_SOCKET_WOULD_BLOCK,
+		 * emitted after {@link Soup.Socket.write} returns %SOUP_SOCKET_WOULD_BLOCK,
 		 * and it is only emitted once. See the documentation for
 		 * #SoupSocket:non-blocking.)
 		 * @param buffer data to write
@@ -4411,7 +4411,7 @@ declare namespace imports.gi.Soup {
 		connect(signal: "event", callback: (owner: this, event: Gio.SocketClientEvent, connection: Gio.IOStream) => void): number;
 		/**
 		 * Emitted when a listening socket (set up with
-		 * soup_socket_listen()) receives a new connection.
+		 * {@link Soup.Socket.listen}) receives a new connection.
 		 * 
 		 * You must ref the #new if you want to keep it; otherwise it
 		 * will be destroyed after the signal is emitted.
@@ -4425,7 +4425,7 @@ declare namespace imports.gi.Soup {
 		connect(signal: "new-connection", callback: (owner: this, _new: Socket) => void): number;
 		/**
 		 * Emitted when an async socket is readable. See
-		 * soup_socket_read(), soup_socket_read_until() and
+		 * {@link Soup.Socket.read}, soup_socket_read_until() and
 		 * {@link Socket.non_blocking}.
 		 * @param signal 
 		 * @param callback Callback function
@@ -4436,7 +4436,7 @@ declare namespace imports.gi.Soup {
 		connect(signal: "readable", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when an async socket is writable. See
-		 * soup_socket_write() and {@link Socket.non_blocking}.
+		 * {@link Soup.Socket.write} and {@link Socket.non_blocking}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -4654,7 +4654,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Send a %NULL-terminated text (UTF-8) message to the peer. If you need
 		 * to send text messages containing %NULL characters use
-		 * soup_websocket_connection_send_message() instead.
+		 * {@link Soup.WebsocketConnection.send_message} instead.
 		 * 
 		 * The message is queued to be sent and will be sent when the main loop
 		 * is run.
@@ -4676,7 +4676,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Emitted when the connection has completely closed, either
 		 * due to an orderly close from the peer, one initiated via
-		 * soup_websocket_connection_close() or a fatal error
+		 * {@link Soup.WebsocketConnection.close} or a fatal error
 		 * condition that caused a close.
 		 * 
 		 * This signal will be emitted once.
@@ -4829,7 +4829,7 @@ declare namespace imports.gi.Soup {
 		get_response_params(): string | null;
 		/**
 		 * Process a message after it's received. If the payload isn't changed the given
-		 * #payload is just returned, otherwise g_bytes_unref() is called on the given
+		 * #payload is just returned, otherwise {@link G.bytes_unref} is called on the given
 		 * #payload and a new #GBytes is returned with the new data.
 		 * 
 		 * Extensions using reserved bits of the header will reset them in #header.
@@ -4839,7 +4839,7 @@ declare namespace imports.gi.Soup {
 		process_incoming_message(payload: GLib.Bytes): GLib.Bytes;
 		/**
 		 * Process a message before it's sent. If the payload isn't changed the given
-		 * #payload is just returned, otherwise g_bytes_unref() is called on the given
+		 * #payload is just returned, otherwise {@link G.bytes_unref} is called on the given
 		 * #payload and a new #GBytes is returned with the new data.
 		 * 
 		 * Extensions using reserved bits of the header will change them in #header.
@@ -4927,7 +4927,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Creates a new {@link Buffer} containing #length bytes from #data.
 		 * 
-		 * This function is exactly equivalent to soup_buffer_new() with
+		 * This function is exactly equivalent to {@link Soup.Buffer.new} with
 		 * %SOUP_MEMORY_TAKE as first argument; it exists mainly for
 		 * convenience and simplifying language bindings.
 		 * @param data data
@@ -4971,7 +4971,7 @@ declare namespace imports.gi.Soup {
 		public length: number;
 		/**
 		 * Makes a copy of #buffer. In reality, {@link Buffer} is a refcounted
-		 * type, and calling soup_buffer_copy() will normally just increment
+		 * type, and calling {@link Soup.Buffer.copy} will normally just increment
 		 * the refcount on #buffer and return it. However, if #buffer was
 		 * created with #SOUP_MEMORY_TEMPORARY memory, then soup_buffer_copy()
 		 * will actually return a copy of it, so that the data in the copy
@@ -4981,7 +4981,7 @@ declare namespace imports.gi.Soup {
 		public copy(): Buffer;
 		/**
 		 * Frees #buffer. (In reality, as described in the documentation for
-		 * soup_buffer_copy(), this is actually an "unref" operation, and may
+		 * {@link Soup.Buffer.copy}, this is actually an "unref" operation, and may
 		 * or may not actually free #buffer.)
 		 */
 		public free(): void;
@@ -5005,7 +5005,7 @@ declare namespace imports.gi.Soup {
 		public get_data(): [ number[], number ];
 		/**
 		 * Gets the "owner" object for a buffer created with
-		 * soup_buffer_new_with_owner().
+		 * {@link Soup.Buffer.new_with_owner}.
 		 * @returns the owner pointer
 		 */
 		public get_owner(): any | null;
@@ -5025,7 +5025,7 @@ declare namespace imports.gi.Soup {
 	/**
 	 * A {@link ClientContext} provides additional information about the
 	 * client making a particular request. In particular, you can use
-	 * soup_client_context_get_auth_domain() and
+	 * {@link Soup.ClientContext.get_auth_domain} and
 	 * soup_client_context_get_auth_user() to determine if HTTP
 	 * authentication was used successfully.
 	 * 
@@ -5040,14 +5040,14 @@ declare namespace imports.gi.Soup {
 		public constructor(options?: Partial<ClientContextInitOptions>);
 		/**
 		 * @deprecated
-		 * Use soup_client_context_get_remote_address(), which returns
+		 * Use {@link Soup.ClientContext.get_remote_address}, which returns
 		 * a #GSocketAddress.
 		 * 
 		 * Retrieves the {@link Address} associated with the remote end
 		 * of a connection.
 		 * @returns the {@link Address}
 		 * associated with the remote end of a connection, it may be
-		 * %NULL if you used soup_server_accept_iostream().
+		 * %NULL if you used {@link Soup.Server.accept_iostream}.
 		 */
 		public get_address(): Address | null;
 		/**
@@ -5076,7 +5076,7 @@ declare namespace imports.gi.Soup {
 		 * not get fooled when the allocator reuses the memory address of a
 		 * previously-destroyed socket to represent a new socket.
 		 * @returns the #GSocket that #client is
-		 * associated with, %NULL if you used soup_server_accept_iostream().
+		 * associated with, %NULL if you used {@link Soup.Server.accept_iostream}.
 		 */
 		public get_gsocket(): Gio.Socket | null;
 		/**
@@ -5084,7 +5084,7 @@ declare namespace imports.gi.Soup {
 		 * connection.
 		 * @returns the IP address associated with the remote
 		 * end of a connection, it may be %NULL if you used
-		 * soup_server_accept_iostream().
+		 * {@link Soup.Server.accept_iostream}.
 		 */
 		public get_host(): string | null;
 		/**
@@ -5092,7 +5092,7 @@ declare namespace imports.gi.Soup {
 		 * of a connection.
 		 * @returns the #GSocketAddress
 		 * associated with the local end of a connection, it may be
-		 * %NULL if you used soup_server_accept_iostream().
+		 * %NULL if you used {@link Soup.Server.accept_iostream}.
 		 */
 		public get_local_address(): Gio.SocketAddress | null;
 		/**
@@ -5100,12 +5100,12 @@ declare namespace imports.gi.Soup {
 		 * of a connection.
 		 * @returns the #GSocketAddress
 		 * associated with the remote end of a connection, it may be
-		 * %NULL if you used soup_server_accept_iostream().
+		 * %NULL if you used {@link Soup.Server.accept_iostream}.
 		 */
 		public get_remote_address(): Gio.SocketAddress | null;
 		/**
 		 * @deprecated
-		 * use soup_client_context_get_gsocket(), which returns
+		 * use {@link Soup.ClientContext.get_gsocket}, which returns
 		 * a #GSocket.
 		 * 
 		 * Retrieves the {@link Socket} that #client is associated with.
@@ -5175,7 +5175,7 @@ declare namespace imports.gi.Soup {
 		public constructor(options?: Partial<CookieInitOptions>);
 		/**
 		 * Creates a new {@link Cookie} with the given attributes. (Use
-		 * soup_cookie_set_secure() and soup_cookie_set_http_only() if you
+		 * {@link Soup.Cookie.set_secure} and soup_cookie_set_http_only() if you
 		 * need to set those attributes on the returned cookie.)
 		 * 
 		 * If #domain starts with ".", that indicates a domain (which matches
@@ -5313,7 +5313,7 @@ declare namespace imports.gi.Soup {
 		 * #cookie will be a session cookie and will expire at the end of the
 		 * client's session.
 		 * 
-		 * (This sets the same property as soup_cookie_set_max_age().)
+		 * (This sets the same property as {@link Soup.Cookie.set_max_age}.)
 		 * @param expires the new expiration time, or %NULL
 		 */
 		public set_expires(expires: Date): void;
@@ -5334,7 +5334,7 @@ declare namespace imports.gi.Soup {
 		 * this value. (A value of 0 indicates that the cookie should be
 		 * considered already-expired.)
 		 * 
-		 * (This sets the same property as soup_cookie_set_expires().)
+		 * (This sets the same property as {@link Soup.Cookie.set_expires}.)
 		 * @param max_age the new max age
 		 */
 		public set_max_age(max_age: number): void;
@@ -5349,7 +5349,7 @@ declare namespace imports.gi.Soup {
 		 */
 		public set_path(path: string): void;
 		/**
-		 * When used in conjunction with soup_cookie_jar_get_cookie_list_with_same_site_info() this
+		 * When used in conjunction with {@link Soup.CookieJar.get_cookie_list_with_same_site_info} this
 		 * sets the policy of when this cookie should be exposed.
 		 * @param policy a {@link SameSitePolicy}
 		 */
@@ -5495,7 +5495,7 @@ declare namespace imports.gi.Soup {
 		public get_month(): number;
 		/**
 		 * Gets #date's offset from UTC.
-		 * @returns #date's offset from UTC. If soup_date_get_utc()
+		 * @returns #date's offset from UTC. If {@link Soup.Date.get_utc}
 		 * returns %FALSE but soup_date_get_offset() returns 0, that means the
 		 * date is a "floating" time with no associated offset information.
 		 */
@@ -5551,7 +5551,7 @@ declare namespace imports.gi.Soup {
 	 * An HTTP Strict Transport Security policy.
 	 * 
 	 * #domain represents the host that this policy applies to. The domain
-	 * must be IDNA-canonicalized. soup_hsts_policy_new() and related methods
+	 * must be IDNA-canonicalized. {@link Soup.hsts_policy_new} and related methods
 	 * will do this for you.
 	 * 
 	 * #max_age contains the 'max-age' value from the Strict Transport
@@ -5595,7 +5595,7 @@ declare namespace imports.gi.Soup {
 		 */
 		public static new_from_response(msg: Message): HSTSPolicy | null;
 		/**
-		 * Full version of #soup_hsts_policy_new(), to use with an existing
+		 * Full version of {@link #soup.hsts_policy_new}, to use with an existing
 		 * expiration date. See #soup_hsts_policy_new() for details.
 		 * @param domain policy domain or hostname
 		 * @param max_age max age of the policy
@@ -5671,7 +5671,7 @@ declare namespace imports.gi.Soup {
 		public is_expired(): boolean;
 		/**
 		 * Gets whether #policy is a non-permanent, non-expirable session policy.
-		 * see soup_hsts_policy_new_session_policy() for details.
+		 * see {@link Soup.hsts_policy_new_session_policy} for details.
 		 * @returns %TRUE if #policy is permanent, %FALSE otherwise
 		 */
 		public is_session_policy(): boolean;
@@ -5683,7 +5683,7 @@ declare namespace imports.gi.Soup {
 	 * 
 	 * Note that while #length always reflects the full length of the
 	 * message body, #data is normally %NULL, and will only be filled in
-	 * after soup_message_body_flatten() is called. For client-side
+	 * after {@link Soup.MessageBody.flatten} is called. For client-side
 	 * messages, this automatically happens for the response body after it
 	 * has been fully read, unless you set the
 	 * %SOUP_MESSAGE_OVERWRITE_CHUNKS flags. Likewise, for server-side
@@ -5728,7 +5728,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Appends #length bytes from #data to #body.
 		 * 
-		 * This function is exactly equivalent to soup_message_body_append()
+		 * This function is exactly equivalent to {@link Soup.MessageBody.append}
 		 * with %SOUP_MEMORY_TAKE as second argument; it exists mainly for
 		 * convenience and simplifying language bindings.
 		 * @param data data to append
@@ -5755,7 +5755,7 @@ declare namespace imports.gi.Soup {
 		public free(): void;
 		/**
 		 * Gets the accumulate flag on #body; see
-		 * soup_message_body_set_accumulate() for details.
+		 * {@link Soup.MessageBody.set_accumulate} for details.
 		 * @returns the accumulate flag for #body.
 		 */
 		public get_accumulate(): boolean;
@@ -5763,7 +5763,7 @@ declare namespace imports.gi.Soup {
 		 * Gets a {@link Buffer} containing data from #body starting at #offset.
 		 * The size of the returned chunk is unspecified. You can iterate
 		 * through the entire body by first calling
-		 * soup_message_body_get_chunk() with an offset of 0, and then on each
+		 * {@link Soup.MessageBody.get_chunk} with an offset of 0, and then on each
 		 * successive call, increment the offset by the length of the
 		 * previously-returned chunk.
 		 * 
@@ -5782,7 +5782,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Handles the {@link MessageBody} part of receiving a chunk of data from
 		 * the network. Normally this means appending #chunk to #body, exactly
-		 * as with soup_message_body_append_buffer(), but if you have set
+		 * as with {@link Soup.MessageBody.append_buffer}, but if you have set
 		 * #body's accumulate flag to %FALSE, then that will not happen.
 		 * 
 		 * This is a low-level method which you should not normally need to
@@ -5835,7 +5835,7 @@ declare namespace imports.gi.Soup {
 		 * This is a low-level method which you should not need to use, and
 		 * there are further restrictions on its proper use which are not
 		 * documented here.
-		 * @param chunk a {@link Buffer} returned from soup_message_body_get_chunk()
+		 * @param chunk a {@link Buffer} returned from {@link Soup.MessageBody.get_chunk}
 		 */
 		public wrote_chunk(chunk: Buffer): void;
 	}
@@ -5859,7 +5859,7 @@ declare namespace imports.gi.Soup {
 		 * Appends a new header with name #name and value #value to #hdrs. (If
 		 * there is an existing header with name #name, then this creates a
 		 * second one, which is only allowed for list-valued headers; see also
-		 * soup_message_headers_replace().)
+		 * {@link Soup.MessageHeaders.replace}.)
 		 * 
 		 * The caller is expected to make sure that #name and #value are
 		 * syntactically correct.
@@ -5878,7 +5878,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Calls #func once for each header value in #hdrs.
 		 * 
-		 * Beware that unlike soup_message_headers_get(), this processes the
+		 * Beware that unlike {@link Soup.MessageHeaders.get}, this processes the
 		 * headers in exactly the way they were added, rather than
 		 * concatenating multiple same-named headers into a single value.
 		 * (This is intentional; it ensures that if you call
@@ -5896,13 +5896,13 @@ declare namespace imports.gi.Soup {
 		 */
 		public free(): void;
 		/**
-		 * Frees the array of ranges returned from soup_message_headers_get_ranges().
+		 * Frees the array of ranges returned from {@link Soup.MessageHeaders.get_ranges}.
 		 * @param ranges an array of {@link Range}
 		 */
 		public free_ranges(ranges: Range): void;
 		/**
 		 * @deprecated
-		 * Use soup_message_headers_get_one() or
+		 * Use {@link Soup.MessageHeaders.get_one} or
 		 * soup_message_headers_get_list() instead.
 		 * 
 		 * Gets the value of header #name in #hdrs.
@@ -5911,11 +5911,11 @@ declare namespace imports.gi.Soup {
 		 * and list-valued headers, but because some HTTP clients/servers
 		 * mistakenly send multiple copies of headers that are supposed to be
 		 * single-valued, it sometimes returns incorrect results. To fix this,
-		 * the methods soup_message_headers_get_one() and
+		 * the methods {@link Soup.MessageHeaders.get_one} and
 		 * soup_message_headers_get_list() were introduced, so callers can
 		 * explicitly state which behavior they are expecting.
 		 * @param name header name
-		 * @returns as with soup_message_headers_get_list().
+		 * @returns as with {@link Soup.MessageHeaders.get_list}.
 		 */
 		public get(name: string): string | null;
 		/**
@@ -5948,7 +5948,7 @@ declare namespace imports.gi.Soup {
 		public get_content_disposition(): [ boolean, string, GLib.HashTable ];
 		/**
 		 * Gets the message body length that #hdrs declare. This will only
-		 * be non-0 if soup_message_headers_get_encoding() returns
+		 * be non-0 if {@link Soup.MessageHeaders.get_encoding} returns
 		 * %SOUP_ENCODING_CONTENT_LENGTH.
 		 * @returns the message body length declared by #hdrs.
 		 */
@@ -6006,7 +6006,7 @@ declare namespace imports.gi.Soup {
 		 * Gets the value of header #name in #hdrs. Use this for headers whose
 		 * values are comma-delimited lists, and which are therefore allowed
 		 * to appear multiple times in the headers. For non-list-valued
-		 * headers, use soup_message_headers_get_one().
+		 * headers, use {@link Soup.MessageHeaders.get_one}.
 		 * 
 		 * If #name appears multiple times in #hdrs,
 		 * soup_message_headers_get_list() will concatenate all of the values
@@ -6023,7 +6023,7 @@ declare namespace imports.gi.Soup {
 		 * Gets the value of header #name in #hdrs. Use this for headers whose
 		 * values are <emphasis>not</emphasis> comma-delimited lists, and
 		 * which therefore can only appear at most once in the headers. For
-		 * list-valued headers, use soup_message_headers_get_list().
+		 * list-valued headers, use {@link Soup.MessageHeaders.get_list}.
 		 * 
 		 * If #hdrs does erroneously contain multiple copies of the header, it
 		 * is not defined which one will be returned. (Ideally, it will return
@@ -6036,7 +6036,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Parses #hdrs's Range header and returns an array of the requested
 		 * byte ranges. The returned array must be freed with
-		 * soup_message_headers_free_ranges().
+		 * {@link Soup.MessageHeaders.free_ranges}.
 		 * 
 		 * If #total_length is non-0, its value will be used to adjust the
 		 * returned ranges to have explicit start and end values, and the
@@ -6079,7 +6079,7 @@ declare namespace imports.gi.Soup {
 		 * and contains a case-insensitive match for #token.
 		 * 
 		 * (If #name is present in #hdrs, then this is equivalent to calling
-		 * soup_header_contains() on its value.)
+		 * {@link Soup.header.contains} on its value.)
 		 * @param name header name
 		 * @param token token to look for
 		 * @returns %TRUE if the header is present and contains #token,
@@ -6103,7 +6103,7 @@ declare namespace imports.gi.Soup {
 		public remove(name: string): void;
 		/**
 		 * Replaces the value of the header #name in #hdrs with #value. (See
-		 * also soup_message_headers_append().)
+		 * also {@link Soup.MessageHeaders.append}.)
 		 * 
 		 * The caller is expected to make sure that #name and #value are
 		 * syntactically correct.
@@ -6115,7 +6115,7 @@ declare namespace imports.gi.Soup {
 		 * Sets the "Content-Disposition" header in #hdrs to #disposition,
 		 * optionally with additional parameters specified in #params.
 		 * 
-		 * See soup_message_headers_get_content_disposition() for a discussion
+		 * See {@link Soup.MessageHeaders.get_content_disposition} for a discussion
 		 * of how Content-Disposition is used in HTTP.
 		 * @param disposition the disposition-type
 		 * @param params additional
@@ -6131,7 +6131,7 @@ declare namespace imports.gi.Soup {
 		 * Content-Length header for you immediately before sending the
 		 * headers. One situation in which this method is useful is when
 		 * generating the response to a HEAD request; Calling
-		 * soup_message_headers_set_content_length() allows you to put the
+		 * {@link Soup.MessageHeaders.set_content_length} allows you to put the
 		 * correct content length into the response without needing to waste
 		 * memory by filling in a response body which won't actually be sent.
 		 * @param content_length the message body length
@@ -6145,7 +6145,7 @@ declare namespace imports.gi.Soup {
 		 * <note><para>
 		 * {@link Server} has built-in handling for range requests, and you do
 		 * not normally need to call this function youself. See
-		 * soup_message_headers_get_ranges() for more details.
+		 * {@link Soup.MessageHeaders.get_ranges} for more details.
 		 * </para></note>
 		 * @param start the start of the range
 		 * @param end the end of the range
@@ -6186,7 +6186,7 @@ declare namespace imports.gi.Soup {
 		 * #start and #end are interpreted as in a {@link Range}.
 		 * 
 		 * If you need to request multiple ranges, use
-		 * soup_message_headers_set_ranges().
+		 * {@link Soup.MessageHeaders.set_ranges}.
 		 * @param start the start of the range to request
 		 * @param end the end of the range to request
 		 */
@@ -6194,7 +6194,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Sets #hdrs's Range header to request the indicated ranges. (If you
 		 * only want to request a single range, you can use
-		 * soup_message_headers_set_range().)
+		 * {@link Soup.MessageHeaders.set_range}.)
 		 * @param ranges an array of {@link Range}
 		 * @param length the length of #range
 		 */
@@ -6207,7 +6207,7 @@ declare namespace imports.gi.Soup {
 	 * structure.
 	 * 
 	 * After intializing the iterator with
-	 * soup_message_headers_iter_init(), call
+	 * {@link Soup.message.headers_iter_init}, call
 	 * soup_message_headers_iter_next() to fetch data from it.
 	 * 
 	 * You may not modify the headers while iterating over them.
@@ -6219,7 +6219,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Yields the next name/value pair in the %SoupMessageHeaders being
 		 * iterated by #iter. If #iter has already yielded the last header,
-		 * then soup_message_headers_iter_next() will return %FALSE and #name
+		 * then {@link Soup.MessageHeadersIter.next} will return %FALSE and #name
 		 * and #value will be unchanged.
 		 * @returns %TRUE if another name and value were returned, %FALSE
 		 * if the end of the headers has been reached.
@@ -6281,7 +6281,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Adds a new MIME part containing #body to #multipart, using
 		 * "Content-Disposition: form-data", as per the HTML forms
-		 * specification. See soup_form_request_new_from_multipart() for more
+		 * specification. See {@link Soup.form.request_new_from_multipart} for more
 		 * details.
 		 * @param control_name the name of the control associated with this file
 		 * @param filename the name of the file, or %NULL if not known
@@ -6292,7 +6292,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Adds a new MIME part containing #data to #multipart, using
 		 * "Content-Disposition: form-data", as per the HTML forms
-		 * specification. See soup_form_request_new_from_multipart() for more
+		 * specification. See {@link Soup.form.request_new_from_multipart} for more
 		 * details.
 		 * @param control_name the name of the control associated with #data
 		 * @param data the body data
@@ -6420,7 +6420,7 @@ declare namespace imports.gi.Soup {
 	 * A {@link URI} represents a (parsed) URI. #SoupURI supports RFC 3986
 	 * (URI Generic Syntax), and can parse any valid URI. However, libsoup
 	 * only uses "http" and "https" URIs internally; You can use
-	 * SOUP_URI_VALID_FOR_HTTP() to test if a #SoupURI is a valid HTTP
+	 * {@link SOUP.URI_VALID_FOR_HTTP} to test if a #SoupURI is a valid HTTP
 	 * URI.
 	 * 
 	 * #scheme will always be set in any URI. It is an interned string and
@@ -6467,7 +6467,7 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * You can also pass %NULL for #uri_string if you want to get back an
 		 * "empty" {@link URI} that you can fill in by hand. (You will need to
-		 * call at least soup_uri_set_scheme() and soup_uri_set_path(), since
+		 * call at least {@link Soup.URI.set_scheme} and soup_uri_set_path(), since
 		 * those fields are required.)
 		 * @param uri_string a URI
 		 * @returns a {@link URI}, or %NULL if the given string
@@ -6515,7 +6515,7 @@ declare namespace imports.gi.Soup {
 		public fragment: string;
 		/**
 		 * Copies #uri
-		 * @returns a copy of #uri, which must be freed with soup_uri_free()
+		 * @returns a copy of #uri, which must be freed with {@link Soup.URI.free}
 		 */
 		public copy(): URI;
 		/**
@@ -6625,13 +6625,13 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Sets #uri's query to the result of encoding the given form fields
 		 * and values according to the * HTML form rules. See
-		 * soup_form_encode() for more information.
+		 * {@link Soup.form.encode} for more information.
 		 * @param first_field name of the first form field to encode into query
 		 */
 		public set_query_from_fields(first_field: string): void;
 		/**
 		 * Sets #uri's query to the result of encoding #form according to the
-		 * HTML form rules. See soup_form_encode_hash() for more information.
+		 * HTML form rules. See {@link Soup.form.encode_hash} for more information.
 		 * @param form a #GHashTable containing HTML form
 		 * information
 		 */
@@ -6672,18 +6672,18 @@ declare namespace imports.gi.Soup {
 	export interface XMLRPCParamsInitOptions {}
 	/**
 	 * Opaque structure containing XML-RPC methodCall parameter values.
-	 * Can be parsed using soup_xmlrpc_params_parse() and freed with
+	 * Can be parsed using {@link Soup.xmlrpc_params_parse} and freed with
 	 * soup_xmlrpc_params_free().
 	 */
 	interface XMLRPCParams {}
 	class XMLRPCParams {
 		public constructor(options?: Partial<XMLRPCParamsInitOptions>);
 		/**
-		 * Free a {@link XMLRPCParams} returned by soup_xmlrpc_parse_request().
+		 * Free a {@link XMLRPCParams} returned by {@link Soup.xmlrpc.parse_request}.
 		 */
 		public free(): void;
 		/**
-		 * Parse method parameters returned by soup_xmlrpc_parse_request().
+		 * Parse method parameters returned by {@link Soup.xmlrpc.parse_request}.
 		 * 
 		 * Deserialization details:
 		 *  - If #signature is provided, &lt;int&gt; and &lt;i4&gt; can be deserialized
@@ -6825,14 +6825,14 @@ declare namespace imports.gi.Soup {
 		detach(session: Session): void;
 		/**
 		 * Tests if #feature has a "sub-feature" of type #type. See
-		 * soup_session_feature_add_feature().
+		 * {@link Soup.SessionFeature.add_feature}.
 		 * @param type the #GType of a "sub-feature"
 		 * @returns %TRUE if #feature has a subfeature of type #type
 		 */
 		has_feature(type: GObject.Type): boolean;
 		/**
 		 * Removes the "sub-feature" of type #type from the base feature
-		 * #feature. See soup_session_feature_add_feature().
+		 * #feature. See {@link Soup.SessionFeature.add_feature}.
 		 * @param type the #GType of a "sub-feature"
 		 * @returns %TRUE if #type was removed from #feature
 		 */
@@ -6928,7 +6928,7 @@ declare namespace imports.gi.Soup {
 		 * by example.com, but if a resource from http://www.third-party.com
 		 * is loaded from that page reject any cookie that it could try to
 		 * set. For libsoup to be able to tell apart first party cookies from
-		 * the rest, the application must call soup_message_set_first_party()
+		 * the rest, the application must call {@link Soup.Message.set_first_party}
 		 * on each outgoing {@link Message}, setting the #SoupURI of the main
 		 * document. If no first party is set in a message when this policy is
 		 * in effect, cookies will be assumed to be third party by default.
@@ -6944,7 +6944,7 @@ declare namespace imports.gi.Soup {
 		 * is loaded from that page, reject any cookie that it could try to
 		 * set unless it already has a cookie in the cookie jar. For libsoup to
 		 * be able to tell apart first party cookies from the rest, the
-		 * application must call soup_message_set_first_party() on each outgoing
+		 * application must call {@link Soup.Message.set_first_party} on each outgoing
 		 * {@link Message}, setting the #SoupURI of the main document. If no first
 		 * party is set in a message when this policy is in effect, cookies will
 		 * be assumed to be third party by default. Since 2.72.
@@ -6953,7 +6953,7 @@ declare namespace imports.gi.Soup {
 	}
 
 	/**
-	 * Date formats that soup_date_to_string() can use.
+	 * Date formats that {@link Soup.Date.to_string} can use.
 	 * 
 	 * #SOUP_DATE_HTTP and #SOUP_DATE_COOKIE always coerce the time to
 	 * UTC. #SOUP_DATE_ISO8601_XMLRPC uses the time as given, ignoring the
@@ -7140,7 +7140,7 @@ declare namespace imports.gi.Soup {
 	 * Describes how {@link Buffer} should use the data passed in by the
 	 * caller.
 	 * 
-	 * See also soup_buffer_new_with_owner(), which allows to you create a
+	 * See also {@link Soup.Buffer.new_with_owner}, which allows to you create a
 	 * buffer containing data which is owned by another object.
 	 */
 	enum MemoryUse {
@@ -7153,7 +7153,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * The caller has allocated the memory for the
 		 * {@link Buffer}'s use; libsoup will assume ownership of it and free it
-		 * (with g_free()) when it is done with it.
+		 * (with {@link G.free}) when it is done with it.
 		 */
 		TAKE = 1,
 		/**
@@ -7173,7 +7173,7 @@ declare namespace imports.gi.Soup {
 	}
 
 	/**
-	 * Value passed to soup_message_headers_new() to set certain default
+	 * Value passed to {@link Soup.MessageHeaders.new} to set certain default
 	 * behaviors.
 	 */
 	enum MessageHeadersType {
@@ -7594,7 +7594,7 @@ declare namespace imports.gi.Soup {
 		/**
 		 * The passed-in hostname
 		 *   did not have enough components. Eg, calling
-		 *   soup_tld_get_base_domain() on <literal>"co.uk"</literal>.
+		 *   {@link Soup.tld.get_base_domain} on <literal>"co.uk"</literal>.
 		 */
 		NOT_ENOUGH_DOMAINS = 2,
 		/**
@@ -7607,7 +7607,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Pre-defined close codes that can be passed to
-	 * soup_websocket_connection_close() or received from
+	 * {@link Soup.WebsocketConnection.close} or received from
 	 * soup_websocket_connection_get_close_code(). (However, other codes
 	 * are also allowed.)
 	 */
@@ -7846,12 +7846,12 @@ declare namespace imports.gi.Soup {
 		/**
 		 * The caller will rebuild the request
 		 *   body if the message is restarted; see
-		 *   soup_message_body_set_accumulate() for more details.
+		 *   {@link Soup.MessageBody.set_accumulate} for more details.
 		 */
 		CAN_REBUILD = 4,
 		/**
 		 * Deprecated: equivalent to calling
-		 *   soup_message_body_set_accumulate() on the incoming message body
+		 *   {@link Soup.MessageBody.set_accumulate} on the incoming message body
 		 *   (ie, {@link Message.response_body} for a client-side request),
 		 *   passing %FALSE.
 		 */
@@ -7900,13 +7900,13 @@ declare namespace imports.gi.Soup {
 		 *   after the message is successfully authenticated. This applies to both server
 		 *   and proxy authentication. Note that #SoupSession::authenticate signal will
 		 *   be emitted, if you want to disable authentication for a message use
-		 *   soup_message_disable_feature() passing #SOUP_TYPE_AUTH_MANAGER instead. Since 2.58
+		 *   {@link Soup.Message.disable_feature} passing #SOUP_TYPE_AUTH_MANAGER instead. Since 2.58
 		 */
 		DO_NOT_USE_AUTH_CACHE = 512
 	}
 
 	/**
-	 * Options to pass to soup_server_listen(), etc.
+	 * Options to pass to {@link Soup.Server.listen}, etc.
 	 * 
 	 * %SOUP_SERVER_LISTEN_IPV4_ONLY and %SOUP_SERVER_LISTEN_IPV6_ONLY
 	 * only make sense with soup_server_listen_all() and
@@ -7931,11 +7931,11 @@ declare namespace imports.gi.Soup {
 	}
 
 	/**
-	 * The callback function passed to soup_address_resolve_async().
+	 * The callback function passed to {@link Soup.Address.resolve_async}.
 	 */
 	interface AddressCallback {
 		/**
-		 * The callback function passed to soup_address_resolve_async().
+		 * The callback function passed to {@link Soup.Address.resolve_async}.
 		 * @param addr the {@link Address} that was resolved
 		 * @param status %SOUP_STATUS_OK, %SOUP_STATUS_CANT_RESOLVE, or
 		 * %SOUP_STATUS_CANCELLED
@@ -7988,14 +7988,14 @@ declare namespace imports.gi.Soup {
 	 * Callback used by {@link AuthDomainDigest} for authentication purposes.
 	 * The application should look up #username in its password database,
 	 * and return the corresponding encoded password (see
-	 * soup_auth_domain_digest_encode_password()).
+	 * {@link Soup.AuthDomainDigest.encode_password}).
 	 */
 	interface AuthDomainDigestAuthCallback {
 		/**
 		 * Callback used by {@link AuthDomainDigest} for authentication purposes.
 		 * The application should look up #username in its password database,
 		 * and return the corresponding encoded password (see
-		 * soup_auth_domain_digest_encode_password()).
+		 * {@link Soup.AuthDomainDigest.encode_password}).
 		 * @param domain the domain
 		 * @param msg the message being authenticated
 		 * @param username the username provided by the client
@@ -8008,12 +8008,12 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * The prototype for a {@link AuthDomain} filter; see
-	 * soup_auth_domain_set_filter() for details.
+	 * {@link Soup.AuthDomain.set_filter} for details.
 	 */
 	interface AuthDomainFilter {
 		/**
 		 * The prototype for a {@link AuthDomain} filter; see
-		 * soup_auth_domain_set_filter() for details.
+		 * {@link Soup.AuthDomain.set_filter} for details.
 		 * @param domain a {@link AuthDomain}
 		 * @param msg a {@link Message}
 		 * @returns %TRUE if #msg requires authentication, %FALSE if not.
@@ -8025,7 +8025,7 @@ declare namespace imports.gi.Soup {
 	 * The prototype for a {@link AuthDomain} generic authentication callback.
 	 * 
 	 * The callback should look up the user's password, call
-	 * soup_auth_domain_check_password(), and use the return value from
+	 * {@link Soup.AuthDomain.check_password}, and use the return value from
 	 * that method as its own return value.
 	 * 
 	 * In general, for security reasons, it is preferable to use the
@@ -8044,7 +8044,7 @@ declare namespace imports.gi.Soup {
 		 * The prototype for a {@link AuthDomain} generic authentication callback.
 		 * 
 		 * The callback should look up the user's password, call
-		 * soup_auth_domain_check_password(), and use the return value from
+		 * {@link Soup.AuthDomain.check_password}, and use the return value from
 		 * that method as its own return value.
 		 * 
 		 * In general, for security reasons, it is preferable to use the
@@ -8171,11 +8171,11 @@ declare namespace imports.gi.Soup {
 	}
 
 	/**
-	 * The callback passed to soup_message_headers_foreach().
+	 * The callback passed to {@link Soup.MessageHeaders.foreach}.
 	 */
 	interface MessageHeadersForeachFunc {
 		/**
-		 * The callback passed to soup_message_headers_foreach().
+		 * The callback passed to {@link Soup.MessageHeaders.foreach}.
 		 * @param name the header name
 		 * @param value the header value
 		 */
@@ -8191,11 +8191,11 @@ declare namespace imports.gi.Soup {
 	}
 
 	/**
-	 * Callback for soup_proxy_uri_resolver_get_proxy_uri_async()
+	 * Callback for {@link Soup.proxy_uri_resolver_get_proxy_uri_async}
 	 */
 	interface ProxyURIResolverCallback {
 		/**
-		 * Callback for soup_proxy_uri_resolver_get_proxy_uri_async()
+		 * Callback for {@link Soup.proxy_uri_resolver_get_proxy_uri_async}
 		 * @param resolver the {@link ProxyURIResolver}
 		 * @param status a {@link Status}
 		 * @param proxy_uri the resolved proxy URI, or %NULL
@@ -8214,7 +8214,7 @@ declare namespace imports.gi.Soup {
 	 * you may want to distinguish those as two distinct paths. In that
 	 * case, you can set the %SOUP_SERVER_RAW_PATHS property when creating
 	 * the #SoupServer, and it will leave those characters undecoded. (You
-	 * may want to call soup_uri_normalize() to decode any percent-encoded
+	 * may want to call {@link Soup.uri.normalize} to decode any percent-encoded
 	 * characters that you aren't handling specially.)
 	 * 
 	 * #query contains the query component of the Request-URI parsed
@@ -8240,7 +8240,7 @@ declare namespace imports.gi.Soup {
 		 * you may want to distinguish those as two distinct paths. In that
 		 * case, you can set the %SOUP_SERVER_RAW_PATHS property when creating
 		 * the #SoupServer, and it will leave those characters undecoded. (You
-		 * may want to call soup_uri_normalize() to decode any percent-encoded
+		 * may want to call {@link Soup.uri.normalize} to decode any percent-encoded
 		 * characters that you aren't handling specially.)
 		 * 
 		 * #query contains the query component of the Request-URI parsed
@@ -8290,12 +8290,12 @@ declare namespace imports.gi.Soup {
 	}
 
 	/**
-	 * Prototype for the callback passed to soup_session_queue_message(),
+	 * Prototype for the callback passed to {@link Soup.Session.queue_message},
 	 * qv.
 	 */
 	interface SessionCallback {
 		/**
-		 * Prototype for the callback passed to soup_session_queue_message(),
+		 * Prototype for the callback passed to {@link Soup.Session.queue_message},
 		 * qv.
 		 * @param session the session
 		 * @param msg the message that has finished
@@ -8304,11 +8304,11 @@ declare namespace imports.gi.Soup {
 	}
 
 	/**
-	 * Prototype for the progress callback passed to soup_session_connect_async().
+	 * Prototype for the progress callback passed to {@link Soup.Session.connect_async}.
 	 */
 	interface SessionConnectProgressCallback {
 		/**
-		 * Prototype for the progress callback passed to soup_session_connect_async().
+		 * Prototype for the progress callback passed to {@link Soup.Session.connect_async}.
 		 * @param session the {@link Session}
 		 * @param event a #GSocketClientEvent
 		 * @param connection the current state of the network connection
@@ -8317,11 +8317,11 @@ declare namespace imports.gi.Soup {
 	}
 
 	/**
-	 * The callback function passed to soup_socket_connect_async().
+	 * The callback function passed to {@link Soup.Socket.connect_async}.
 	 */
 	interface SocketCallback {
 		/**
-		 * The callback function passed to soup_socket_connect_async().
+		 * The callback function passed to {@link Soup.Socket.connect_async}.
 		 * @param sock the {@link Socket}
 		 * @param status an HTTP status code indicating success or failure
 		 */
@@ -8337,12 +8337,12 @@ declare namespace imports.gi.Soup {
 	 * @param _function the callback to invoke
 	 * @param data user data to pass to #function
 	 * @returns a #GSource, which can be removed from #async_context
-	 * with g_source_destroy().
+	 * with {@link G.source_destroy}.
 	 */
 	function add_completion(async_context: GLib.MainContext | null, _function: GLib.SourceFunc, data: any | null): GLib.Source;
 
 	/**
-	 * Adds an idle event as with g_idle_add(), but using the given
+	 * Adds an idle event as with {@link G.idle_add}, but using the given
 	 * #async_context.
 	 * 
 	 * If you want #function to run "right away", use
@@ -8353,12 +8353,12 @@ declare namespace imports.gi.Soup {
 	 * @param _function the callback to invoke at idle time
 	 * @param data user data to pass to #function
 	 * @returns a #GSource, which can be removed from #async_context
-	 * with g_source_destroy().
+	 * with {@link G.source_destroy}.
 	 */
 	function add_idle(async_context: GLib.MainContext | null, _function: GLib.SourceFunc, data: any | null): GLib.Source;
 
 	/**
-	 * Adds an I/O watch as with g_io_add_watch(), but using the given
+	 * Adds an I/O watch as with {@link G.io_add_watch}, but using the given
 	 * #async_context.
 	 * @param async_context the #GMainContext to dispatch the I/O
 	 * watch in, or %NULL for the default context
@@ -8367,12 +8367,12 @@ declare namespace imports.gi.Soup {
 	 * @param _function the callback to invoke when #condition occurs
 	 * @param data user data to pass to #function
 	 * @returns a #GSource, which can be removed from #async_context
-	 * with g_source_destroy().
+	 * with {@link G.source_destroy}.
 	 */
 	function add_io_watch(async_context: GLib.MainContext | null, chan: GLib.IOChannel, condition: GLib.IOCondition, _function: GLib.IOFunc, data: any | null): GLib.Source;
 
 	/**
-	 * Adds a timeout as with g_timeout_add(), but using the given
+	 * Adds a timeout as with {@link G.timeout_add}, but using the given
 	 * #async_context.
 	 * @param async_context the #GMainContext to dispatch the I/O
 	 * watch in, or %NULL for the default context
@@ -8380,7 +8380,7 @@ declare namespace imports.gi.Soup {
 	 * @param _function the callback to invoke at timeout time
 	 * @param data user data to pass to #function
 	 * @returns a #GSource, which can be removed from #async_context
-	 * with g_source_destroy().
+	 * with {@link G.source_destroy}.
 	 */
 	function add_timeout(async_context: GLib.MainContext | null, interval: number, _function: GLib.SourceFunc, data: any | null): GLib.Source;
 
@@ -8427,11 +8427,11 @@ declare namespace imports.gi.Soup {
 	 * only contains cookie names and values, none of the other
 	 * #SoupCookie fields will be filled in. (Thus, you can't generally
 	 * pass a cookie returned from this method directly to
-	 * soup_cookies_to_response().)
+	 * {@link Soup.cookies.to_response}.)
 	 * @param msg a {@link Message} containing a "Cookie" request header
 	 * @returns a #GSList
 	 * of {@link Cookie}<!-- -->s, which can be freed with
-	 * soup_cookies_free().
+	 * {@link Soup.cookies.free}.
 	 */
 	function cookies_from_request(msg: Message): GLib.SList;
 
@@ -8442,7 +8442,7 @@ declare namespace imports.gi.Soup {
 	 * @param msg a {@link Message} containing a "Set-Cookie" response header
 	 * @returns a #GSList
 	 * of {@link Cookie}<!-- -->s, which can be freed with
-	 * soup_cookies_free().
+	 * {@link Soup.cookies.free}.
 	 */
 	function cookies_from_response(msg: Message): GLib.SList;
 
@@ -8480,7 +8480,7 @@ declare namespace imports.gi.Soup {
 	 * @param encoded_form data of type "application/x-www-form-urlencoded"
 	 * @returns a hash
 	 * table containing the name/value pairs from #encoded_form, which you
-	 * can free with g_hash_table_destroy().
+	 * can free with {@link G.hash_table_destroy}.
 	 */
 	function form_decode(encoded_form: string): GLib.HashTable;
 
@@ -8490,7 +8490,7 @@ declare namespace imports.gi.Soup {
 	 * control in a form. (Or when you don't have any file upload
 	 * controls, but are still using "multipart/form-data" anyway.) Pass
 	 * the name of the file upload control in #file_control_name, and
-	 * soup_form_decode_multipart() will extract the uploaded file data
+	 * {@link Soup.form.decode_multipart} will extract the uploaded file data
 	 * into #filename, #content_type, and #file. All of the other form
 	 * control data will be returned (as strings, as with
 	 * soup_form_decode()) in the returned #GHashTable.
@@ -8509,7 +8509,7 @@ declare namespace imports.gi.Soup {
 	 * @returns 
 	 * a hash table containing the name/value pairs (other than
 	 * #file_control_name) from #msg, which you can free with
-	 * g_hash_table_destroy(). On error, it will return %NULL.
+	 * {@link G.hash_table_destroy}. On error, it will return %NULL.
 	 * 
 	 * return location for the name of the uploaded file, or %NULL
 	 * 
@@ -8526,7 +8526,7 @@ declare namespace imports.gi.Soup {
 	 * 
 	 * This method requires you to know the names of the form fields (or
 	 * at the very least, the total number of fields) at compile time; for
-	 * working with dynamic forms, use soup_form_encode_hash() or
+	 * working with dynamic forms, use {@link Soup.form.encode_hash} or
 	 * soup_form_encode_datalist().
 	 * @param first_field name of the first form field
 	 * @returns the encoded form
@@ -8536,7 +8536,7 @@ declare namespace imports.gi.Soup {
 	/**
 	 * Encodes #form_data_set into a value of type
 	 * "application/x-www-form-urlencoded", as defined in the HTML 4.01
-	 * spec. Unlike soup_form_encode_hash(), this preserves the ordering
+	 * spec. Unlike {@link Soup.form.encode_hash}, this preserves the ordering
 	 * of the form elements, which may be required in some situations.
 	 * @param form_data_set a datalist containing name/value pairs
 	 * @returns the encoded form
@@ -8551,7 +8551,7 @@ declare namespace imports.gi.Soup {
 	 * Note that the HTML spec states that "The control names/values are
 	 * listed in the order they appear in the document." Since this method
 	 * takes a hash table, it cannot enforce that; if you care about the
-	 * ordering of the form fields, use soup_form_encode_datalist().
+	 * ordering of the form fields, use {@link Soup.form.encode_datalist}.
 	 * @param form_data_set a hash table containing
 	 * name/value pairs (as strings)
 	 * @returns the encoded form
@@ -8559,11 +8559,11 @@ declare namespace imports.gi.Soup {
 	function form_encode_hash(form_data_set: GLib.HashTable): string;
 
 	/**
-	 * See soup_form_encode(). This is mostly an internal method, used by
+	 * See {@link Soup.form.encode}. This is mostly an internal method, used by
 	 * various other methods such as soup_uri_set_query_from_fields() and
 	 * soup_form_request_new().
 	 * @param first_field name of the first form field
-	 * @param args pointer to additional values, as in soup_form_encode()
+	 * @param args pointer to additional values, as in {@link Soup.form.encode}
 	 * @returns the encoded form
 	 */
 	function form_encode_valist(first_field: string, args: any[]): string;
@@ -8582,7 +8582,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Creates a new %SoupMessage and sets it up to send #form_data_set to
-	 * #uri via #method, as with soup_form_request_new().
+	 * #uri via #method, as with {@link Soup.form.request_new}.
 	 * @param method the HTTP method, either "GET" or "POST"
 	 * @param uri the URI to send the form data to
 	 * @param form_data_set the data to send to #uri
@@ -8592,7 +8592,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Creates a new %SoupMessage and sets it up to send #form_data_set to
-	 * #uri via #method, as with soup_form_request_new().
+	 * #uri via #method, as with {@link Soup.form.request_new}.
 	 * @param method the HTTP method, either "GET" or "POST"
 	 * @param uri the URI to send the form data to
 	 * @param form_data_set the data to send to #uri
@@ -8606,7 +8606,7 @@ declare namespace imports.gi.Soup {
 	 * 
 	 * To send a <literal>"multipart/form-data"</literal> POST, first
 	 * create a {@link Multipart}, using %SOUP_FORM_MIME_TYPE_MULTIPART as
-	 * the MIME type. Then use soup_multipart_append_form_string() and
+	 * the MIME type. Then use {@link Soup.Multipart.append_form_string} and
 	 * soup_multipart_append_form_file() to add the value of each form
 	 * control to the multipart. (These are just convenience methods, and
 	 * you can use soup_multipart_append_part() if you need greater
@@ -8662,7 +8662,7 @@ declare namespace imports.gi.Soup {
 	 * case-insensitively). Note that this can't be used with lists
 	 * that have qvalues.
 	 * @param header An HTTP header suitable for parsing with
-	 * soup_header_parse_list()
+	 * {@link Soup.header.parse_list}
 	 * @param token a token
 	 * @returns whether or not #header contains #token
 	 */
@@ -8670,14 +8670,14 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Frees #list.
-	 * @param list a #GSList returned from soup_header_parse_list() or
+	 * @param list a #GSList returned from {@link Soup.header.parse_list} or
 	 * soup_header_parse_quality_list()
 	 */
 	function header_free_list(list: GLib.SList): void;
 
 	/**
 	 * Frees #param_list.
-	 * @param param_list a #GHashTable returned from soup_header_parse_param_list()
+	 * @param param_list a #GHashTable returned from {@link Soup.header.parse_param_list}
 	 * or soup_header_parse_semi_param_list()
 	 */
 	function header_free_param_list(param_list: GLib.HashTable): void;
@@ -8705,7 +8705,7 @@ declare namespace imports.gi.Soup {
 	 * #string, taking care to escape any quotes or backslashes in #value.
 	 * 
 	 * If #value is (non-ASCII) UTF-8, this will instead use RFC 5987
-	 * encoding, just like soup_header_g_string_append_param().
+	 * encoding, just like {@link Soup.header.g_string_append_param}.
 	 * @param string a #GString being used to construct an HTTP header value
 	 * @param name a parameter name
 	 * @param value a parameter value
@@ -8735,12 +8735,12 @@ declare namespace imports.gi.Soup {
 	 * @param header a header value
 	 * @returns a
 	 * #GHashTable of list elements, which can be freed with
-	 * soup_header_free_param_list().
+	 * {@link Soup.header.free_param_list}.
 	 */
 	function header_parse_param_list(header: string): GLib.HashTable;
 
 	/**
-	 * A strict version of soup_header_parse_param_list()
+	 * A strict version of {@link Soup.header.parse_param_list}
 	 * that bails out if there are duplicate parameters.
 	 * Note that this function will treat RFC5987-encoded
 	 * parameters as duplicated if an ASCII version is also
@@ -8750,7 +8750,7 @@ declare namespace imports.gi.Soup {
 	 * @param header a header value
 	 * @returns 
 	 * a #GHashTable of list elements, which can be freed with
-	 * soup_header_free_param_list() or %NULL if there are duplicate
+	 * {@link Soup.header.free_param_list} or %NULL if there are duplicate
 	 * elements.
 	 */
 	function header_parse_param_list_strict(header: string): GLib.HashTable | null;
@@ -8785,12 +8785,12 @@ declare namespace imports.gi.Soup {
 	 * @param header a header value
 	 * @returns a
 	 * #GHashTable of list elements, which can be freed with
-	 * soup_header_free_param_list().
+	 * {@link Soup.header.free_param_list}.
 	 */
 	function header_parse_semi_param_list(header: string): GLib.HashTable;
 
 	/**
-	 * A strict version of soup_header_parse_semi_param_list()
+	 * A strict version of {@link Soup.header.parse_semi_param_list}
 	 * that bails out if there are duplicate parameters.
 	 * Note that this function will treat RFC5987-encoded
 	 * parameters as duplicated if an ASCII version is also
@@ -8800,7 +8800,7 @@ declare namespace imports.gi.Soup {
 	 * @param header a header value
 	 * @returns 
 	 * a #GHashTable of list elements, which can be freed with
-	 * soup_header_free_param_list() or %NULL if there are duplicate
+	 * {@link Soup.header.free_param_list} or %NULL if there are duplicate
 	 * elements.
 	 */
 	function header_parse_semi_param_list_strict(header: string): GLib.HashTable | null;
@@ -8811,7 +8811,7 @@ declare namespace imports.gi.Soup {
 	 * on failure.
 	 * 
 	 * This is a low-level method; normally you would use
-	 * soup_headers_parse_request() or soup_headers_parse_response().
+	 * {@link Soup.headers.parse_request} or soup_headers_parse_response().
 	 * @param str the header string (including the Request-Line or Status-Line,
 	 *   but not the trailing blank line)
 	 * @param len length of #str
@@ -8897,7 +8897,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Looks up the stock HTTP description of #status_code. This is used
-	 * by soup_message_set_status() to get the correct text to go with a
+	 * by {@link Soup.Message.set_status} to get the correct text to go with a
 	 * given status code.
 	 * 
 	 * <emphasis>There is no reason for you to ever use this
@@ -8978,7 +8978,7 @@ declare namespace imports.gi.Soup {
 	 * 
 	 * In the past, this would return %NULL if #part contained invalid
 	 * percent-encoding, but now it just ignores the problem (as
-	 * soup_uri_new() already did).
+	 * {@link Soup.URI.new} already did).
 	 * @param part a URI part
 	 * @returns the decoded URI part.
 	 */
@@ -9002,7 +9002,7 @@ declare namespace imports.gi.Soup {
 	 * 
 	 * "Unreserved" characters are those that are not allowed to be used
 	 * for punctuation according to the URI spec. For example, letters are
-	 * unreserved, so soup_uri_normalize() will turn
+	 * unreserved, so {@link Soup.uri.normalize} will turn
 	 * <literal>http://example.com/foo/b%<!-- -->61r</literal> into
 	 * <literal>http://example.com/foo/bar</literal>, which is guaranteed
 	 * to mean the same thing. However, "/" is "reserved", so
@@ -9021,7 +9021,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Appends the provided value of type #type to #array as with
-	 * g_value_array_append(). (The provided data is copied rather than
+	 * {@link G.value_array_append}. (The provided data is copied rather than
 	 * being inserted directly.)
 	 * @param array a #GValueArray
 	 * @param type a #GType
@@ -9030,7 +9030,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Appends the provided values into #array as with
-	 * g_value_array_append(). (The provided data is copied rather than
+	 * {@link G.value_array_append}. (The provided data is copied rather than
 	 * being inserted directly.)
 	 * @param array a #GValueArray
 	 * @param first_type the type of the first value to add
@@ -9061,7 +9061,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Inserts the provided value of type #type into #array as with
-	 * g_value_array_insert(). (The provided data is copied rather than
+	 * {@link G.value_array_insert}. (The provided data is copied rather than
 	 * being inserted directly.)
 	 * @param array a #GValueArray
 	 * @param index_ the index to insert at
@@ -9071,7 +9071,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Creates a new %GValueArray. (This is just a wrapper around
-	 * g_value_array_new(), for naming consistency purposes.)
+	 * {@link G.value_array_new}, for naming consistency purposes.)
 	 * @returns a new %GValueArray
 	 */
 	function value_array_new(): GObject.ValueArray;
@@ -9097,7 +9097,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Inserts the provided value of type #type into #hash. (Unlike with
-	 * g_hash_table_insert(), both the key and the value are copied).
+	 * {@link G.hash_table_insert}, both the key and the value are copied).
 	 * @param hash a value hash
 	 * @param key the key
 	 * @param type a #GType
@@ -9106,7 +9106,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Inserts the given data into #hash. As with
-	 * soup_value_hash_insert(), the keys and values are copied rather
+	 * {@link Soup.value.hash_insert}, the keys and values are copied rather
 	 * than being inserted directly.
 	 * @param hash a value hash
 	 * @param first_key the key for the first value
@@ -9114,7 +9114,7 @@ declare namespace imports.gi.Soup {
 	function value_hash_insert_vals(hash: GLib.HashTable, first_key: string): void;
 
 	/**
-	 * Inserts #value into #hash. (Unlike with g_hash_table_insert(), both
+	 * Inserts #value into #hash. (Unlike with {@link G.hash_table_insert}, both
 	 * the key and the value are copied).
 	 * @param hash a value hash
 	 * @param key the key
@@ -9156,7 +9156,7 @@ declare namespace imports.gi.Soup {
 	/**
 	 * Creates a #GHashTable whose keys are strings and whose values
 	 * are #GValue, and initializes it with the provided data. As
-	 * with soup_value_hash_insert(), the keys and values are copied
+	 * with {@link Soup.value.hash_insert}, the keys and values are copied
 	 * rather than being inserted directly.
 	 * @param first_key the key for the first value
 	 * @returns a new
@@ -9169,7 +9169,7 @@ declare namespace imports.gi.Soup {
 	 * handshake. The message body and non-WebSocket-related headers are
 	 * not modified.
 	 * 
-	 * Use soup_websocket_client_prepare_handshake_with_extensions() if you
+	 * Use {@link Soup.websocket.client_prepare_handshake_with_extensions} if you
 	 * want to include "Sec-WebSocket-Extensions" header in the request.
 	 * 
 	 * This is a low-level function; if you use
@@ -9189,7 +9189,7 @@ declare namespace imports.gi.Soup {
 	 * not modified.
 	 * 
 	 * This is a low-level function; if you use
-	 * soup_session_websocket_connect_async() to create a WebSocket
+	 * {@link Soup.Session.websocket_connect_async} to create a WebSocket
 	 * connection, it will call this for you.
 	 * @param msg a {@link Message}
 	 * @param origin the "Origin" header to set
@@ -9207,7 +9207,7 @@ declare namespace imports.gi.Soup {
 	 * 
 	 * If the response contains the "Sec-WebSocket-Extensions" header,
 	 * the handshake will be considered invalid. You need to use
-	 * soup_websocket_client_verify_handshake_with_extensions() to handle
+	 * {@link Soup.websocket.client_verify_handshake_with_extensions} to handle
 	 * responses with extensions.
 	 * 
 	 * This is a low-level function; if you use
@@ -9230,7 +9230,7 @@ declare namespace imports.gi.Soup {
 	 * extensions are returned in #accepted_extensions parameter if non-%NULL.
 	 * 
 	 * This is a low-level function; if you use
-	 * soup_session_websocket_connect_async() to create a WebSocket
+	 * {@link Soup.Session.websocket_connect_async} to create a WebSocket
 	 * connection, it will call this for you.
 	 * @param msg {@link Message} containing both client and server sides of a
 	 *   WebSocket handshake
@@ -9258,7 +9258,7 @@ declare namespace imports.gi.Soup {
 	 * Requests containing "Sec-WebSocket-Extensions" header will be
 	 * accepted even if the header is not valid. To check a request
 	 * with extensions you need to use
-	 * soup_websocket_server_check_handshake_with_extensions() and provide
+	 * {@link Soup.websocket.server_check_handshake_with_extensions} and provide
 	 * the list of supported extension types.
 	 * 
 	 * Normally soup_websocket_server_process_handshake() will take care
@@ -9287,7 +9287,7 @@ declare namespace imports.gi.Soup {
 	 * only requests containing valid supported extensions in
 	 * "Sec-WebSocket-Extensions" header will be accepted.
 	 * 
-	 * Normally soup_websocket_server_process_handshake_with_extensioins()
+	 * Normally {@link Soup.websocket.server_process_handshake_with_extensioins}
 	 * will take care of this for you, and if you use
 	 * soup_server_add_websocket_handler() to handle accepting WebSocket
 	 * connections, it will call that for you. However, this function may
@@ -9318,7 +9318,7 @@ declare namespace imports.gi.Soup {
 	 * Requests containing "Sec-WebSocket-Extensions" header will be
 	 * accepted even if the header is not valid. To process a request
 	 * with extensions you need to use
-	 * soup_websocket_server_process_handshake_with_extensions() and provide
+	 * {@link Soup.websocket.server_process_handshake_with_extensions} and provide
 	 * the list of supported extension types.
 	 * 
 	 * This is a low-level function; if you use
@@ -9347,7 +9347,7 @@ declare namespace imports.gi.Soup {
 	 * will be returned in #accepted_extensions parameter if non-%NULL.
 	 * 
 	 * This is a low-level function; if you use
-	 * soup_server_add_websocket_handler() to handle accepting WebSocket
+	 * {@link Soup.Server.add_websocket_handler} to handle accepting WebSocket
 	 * connections, it will call this for you.
 	 * @param msg {@link Message} containing the client side of a WebSocket handshake
 	 * @param expected_origin expected Origin header
@@ -9366,7 +9366,7 @@ declare namespace imports.gi.Soup {
 	/**
 	 * This creates an XML-RPC fault response and returns it as a string.
 	 * (To create a successful response, use
-	 * soup_xmlrpc_build_method_response().)
+	 * {@link Soup.xmlrpc.build_method_response}.)
 	 * @param fault_code the fault code
 	 * @param fault_format a printf()-style format string
 	 * @returns the text of the fault
@@ -9375,7 +9375,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * This creates an XML-RPC methodCall and returns it as a string.
-	 * This is the low-level method that soup_xmlrpc_request_new() is
+	 * This is the low-level method that {@link Soup.xmlrpc.request_new} is
 	 * built on.
 	 * 
 	 * #params is an array of #GValue representing the parameters to
@@ -9407,7 +9407,7 @@ declare namespace imports.gi.Soup {
 	/**
 	 * This creates a (successful) XML-RPC methodResponse and returns it
 	 * as a string. To create a fault response, use
-	 * soup_xmlrpc_build_fault().
+	 * {@link Soup.xmlrpc.build_fault}.
 	 * 
 	 * The glib type to XML-RPC type mapping is as with
 	 * soup_xmlrpc_build_method_call(), qv.
@@ -9419,7 +9419,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * This creates an XML-RPC methodCall and returns it as a string.
-	 * This is the low-level method that soup_xmlrpc_message_new() is
+	 * This is the low-level method that {@link Soup.xmlrpc.message_new} is
 	 * built on.
 	 * 
 	 * #params is a #GVariant tuple representing the method parameters.
@@ -9449,7 +9449,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * This creates a (successful) XML-RPC methodResponse and returns it
-	 * as a string. To create a fault response, use soup_xmlrpc_build_fault(). This
+	 * as a string. To create a fault response, use {@link Soup.xmlrpc.build_fault}. This
 	 * is the low-level method that soup_xmlrpc_message_set_response() is built on.
 	 * 
 	 * See soup_xmlrpc_build_request() for serialization details, but note
@@ -9473,7 +9473,7 @@ declare namespace imports.gi.Soup {
 	 * terminated by %G_TYPE_INVALID, except that values are pointers to
 	 * variables of the indicated type, rather than values of the type.
 	 * 
-	 * See also soup_xmlrpc_parse_method_call(), which can be used if
+	 * See also {@link Soup.xmlrpc.parse_method_call}, which can be used if
 	 * you don't know the types of the parameters.
 	 * @param method_call the XML-RPC methodCall string
 	 * @param length the length of #method_call, or -1 if it is NUL-terminated
@@ -9491,7 +9491,7 @@ declare namespace imports.gi.Soup {
 	 * and #error will be set to an error of type %SOUP_XMLRPC_FAULT, with
 	 * the error #code containing the fault code, and the error #message
 	 * containing the fault string. (If #method_response cannot be parsed
-	 * at all, soup_xmlrpc_extract_method_response() will return %FALSE,
+	 * at all, {@link Soup.xmlrpc.extract_method_response} will return %FALSE,
 	 * but #error will be unset.)
 	 * @param method_response the XML-RPC methodResponse string
 	 * @param length the length of #method_response, or -1 if it is NUL-terminated
@@ -9508,7 +9508,7 @@ declare namespace imports.gi.Soup {
 	 * Creates an XML-RPC methodCall and returns a {@link Message}, ready
 	 * to send, for that method call.
 	 * 
-	 * See soup_xmlrpc_build_request() for serialization details.
+	 * See {@link Soup.xmlrpc.build_request} for serialization details.
 	 * 
 	 * If #params is floating, it is consumed.
 	 * @param uri URI of the XML-RPC service
@@ -9532,7 +9532,7 @@ declare namespace imports.gi.Soup {
 	/**
 	 * Sets the status code and response body of #msg to indicate a
 	 * successful XML-RPC call, with a return value given by #value. To set a
-	 * fault response, use soup_xmlrpc_message_set_fault().
+	 * fault response, use {@link Soup.xmlrpc.message_set_fault}.
 	 * 
 	 * See soup_xmlrpc_build_request() for serialization details.
 	 * 
@@ -9546,7 +9546,7 @@ declare namespace imports.gi.Soup {
 	/**
 	 * Parses #method_call to get the name and parameters, and returns the
 	 * parameter values in a #GValueArray; see also
-	 * soup_xmlrpc_extract_method_call(), which is more convenient if you
+	 * {@link Soup.xmlrpc.extract_method_call}, which is more convenient if you
 	 * know in advance what the types of the parameters will be.
 	 * @param method_call the XML-RPC methodCall string
 	 * @param length the length of #method_call, or -1 if it is NUL-terminated
@@ -9564,7 +9564,7 @@ declare namespace imports.gi.Soup {
 	 * will be set to an error of type %SOUP_XMLRPC_FAULT, with the error
 	 * #code containing the fault code, and the error #message containing
 	 * the fault string. (If #method_response cannot be parsed at all,
-	 * soup_xmlrpc_parse_method_response() will return %FALSE, but #error
+	 * {@link Soup.xmlrpc.parse_method_response} will return %FALSE, but #error
 	 * will be unset.)
 	 * @param method_response the XML-RPC methodResponse string
 	 * @param length the length of #method_response, or -1 if it is NUL-terminated
@@ -9577,7 +9577,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Parses #method_call and return the method name. Method parameters can be
-	 * parsed later using soup_xmlrpc_params_parse().
+	 * parsed later using {@link Soup.xmlrpc_params_parse}.
 	 * @param method_call the XML-RPC methodCall string
 	 * @param length the length of #method_call, or -1 if it is NUL-terminated
 	 * @returns method's name, or %NULL on error.
@@ -9594,7 +9594,7 @@ declare namespace imports.gi.Soup {
 	 * the fault string. If #method_response cannot be parsed, %NULL is returned,
 	 * and #error will be set to an error in the %SOUP_XMLRPC_ERROR domain.
 	 * 
-	 * See soup_xmlrpc_params_parse() for deserialization details.
+	 * See {@link Soup.xmlrpc_params_parse} for deserialization details.
 	 * @param method_response the XML-RPC methodResponse string
 	 * @param length the length of #method_response, or -1 if it is NUL-terminated
 	 * @param signature A valid #GVariant type string, or %NULL
@@ -9637,7 +9637,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Get the {@link Date} from special #GVariant created by
-	 * soup_xmlrpc_variant_new_datetime() or by parsing a &lt;dateTime.iso8601&gt;
+	 * {@link Soup.xmlrpc.variant_new_datetime} or by parsing a &lt;dateTime.iso8601&gt;
 	 * node. See soup_xmlrpc_params_parse().
 	 * 
 	 * If #variant does not contain a datetime it will return an error but it is not
@@ -9650,7 +9650,7 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Construct a special #GVariant used to serialize a &lt;dateTime.iso8601&gt;
-	 * node. See soup_xmlrpc_build_request().
+	 * node. See {@link Soup.xmlrpc.build_request}.
 	 * 
 	 * The actual type of the returned #GVariant is unspecified and "v" or "*"
 	 * should be used in variant format strings. For example:
@@ -9720,9 +9720,9 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Alias for the {@link AuthDomain.add_path} property. (Shortcut
-	 * for calling soup_auth_domain_add_path().)
+	 * for calling {@link Soup.AuthDomain.add_path}.)
 	 * @returns Alias for the {@link AuthDomain.add_path} property. (Shortcut
-	 * for calling soup_auth_domain_add_path().)
+	 * for calling {@link Soup.AuthDomain.add_path}.)
 	 */
 	const AUTH_DOMAIN_ADD_PATH: string;
 
@@ -9808,9 +9808,9 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Alias for the {@link AuthDomain.remove_path} property.
-	 * (Shortcut for calling soup_auth_domain_remove_path().)
+	 * (Shortcut for calling {@link Soup.AuthDomain.remove_path}.)
 	 * @returns Alias for the {@link AuthDomain.remove_path} property.
-	 * (Shortcut for calling soup_auth_domain_remove_path().)
+	 * (Shortcut for calling {@link Soup.AuthDomain.remove_path}.)
 	 */
 	const AUTH_DOMAIN_REMOVE_PATH: string;
 
@@ -9895,33 +9895,33 @@ declare namespace imports.gi.Soup {
 	const COOKIE_JAR_TEXT_FILENAME: string;
 
 	/**
-	 * A constant corresponding to 1 day, for use with soup_cookie_new()
+	 * A constant corresponding to 1 day, for use with {@link Soup.Cookie.new}
 	 * and soup_cookie_set_max_age().
-	 * @returns A constant corresponding to 1 day, for use with soup_cookie_new()
+	 * @returns A constant corresponding to 1 day, for use with {@link Soup.Cookie.new}
 	 * and soup_cookie_set_max_age().
 	 */
 	const COOKIE_MAX_AGE_ONE_DAY: number;
 
 	/**
-	 * A constant corresponding to 1 hour, for use with soup_cookie_new()
+	 * A constant corresponding to 1 hour, for use with {@link Soup.Cookie.new}
 	 * and soup_cookie_set_max_age().
-	 * @returns A constant corresponding to 1 hour, for use with soup_cookie_new()
+	 * @returns A constant corresponding to 1 hour, for use with {@link Soup.Cookie.new}
 	 * and soup_cookie_set_max_age().
 	 */
 	const COOKIE_MAX_AGE_ONE_HOUR: number;
 
 	/**
-	 * A constant corresponding to 1 week, for use with soup_cookie_new()
+	 * A constant corresponding to 1 week, for use with {@link Soup.Cookie.new}
 	 * and soup_cookie_set_max_age().
-	 * @returns A constant corresponding to 1 week, for use with soup_cookie_new()
+	 * @returns A constant corresponding to 1 week, for use with {@link Soup.Cookie.new}
 	 * and soup_cookie_set_max_age().
 	 */
 	const COOKIE_MAX_AGE_ONE_WEEK: number;
 
 	/**
-	 * A constant corresponding to 1 year, for use with soup_cookie_new()
+	 * A constant corresponding to 1 year, for use with {@link Soup.Cookie.new}
 	 * and soup_cookie_set_max_age().
-	 * @returns A constant corresponding to 1 year, for use with soup_cookie_new()
+	 * @returns A constant corresponding to 1 year, for use with {@link Soup.Cookie.new}
 	 * and soup_cookie_set_max_age().
 	 */
 	const COOKIE_MAX_AGE_ONE_YEAR: number;
@@ -9963,10 +9963,10 @@ declare namespace imports.gi.Soup {
 	const LOGGER_MAX_BODY_SIZE: string;
 
 	/**
-	 * Like soup_get_major_version(), but from the headers used at
+	 * Like {@link Soup.get.major_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like soup_get_major_version(), but from the headers used at
+	 * @returns Like {@link Soup.get.major_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */
@@ -10010,9 +10010,9 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Sets the priority of the {@link Message}. See
-	 * soup_message_set_priority() for further details.
+	 * {@link Soup.Message.set_priority} for further details.
 	 * @returns Sets the priority of the {@link Message}. See
-	 * soup_message_set_priority() for further details.
+	 * {@link Soup.Message.set_priority} for further details.
 	 */
 	const MESSAGE_PRIORITY: string;
 
@@ -10115,20 +10115,20 @@ declare namespace imports.gi.Soup {
 	const MESSAGE_URI: string;
 
 	/**
-	 * Like soup_get_micro_version(), but from the headers used at
+	 * Like {@link Soup.get.micro_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like soup_get_micro_version(), but from the headers used at
+	 * @returns Like {@link Soup.get.micro_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */
 	const MICRO_VERSION: number;
 
 	/**
-	 * Like soup_get_minor_version(), but from the headers used at
+	 * Like {@link Soup.get.minor_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like soup_get_minor_version(), but from the headers used at
+	 * @returns Like {@link Soup.get.minor_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */
@@ -10466,9 +10466,9 @@ declare namespace imports.gi.Soup {
 
 	/**
 	 * Alias for the {@link Socket.use_thread_context} property. (Use
-	 * g_main_context_get_thread_default())
+	 * {@link G.main_context_get_thread_default})
 	 * @returns Alias for the {@link Socket.use_thread_context} property. (Use
-	 * g_main_context_get_thread_default())
+	 * {@link G.main_context_get_thread_default})
 	 */
 	const SOCKET_USE_THREAD_CONTEXT: string;
 

@@ -303,7 +303,7 @@ declare namespace imports.gi.Atk {
 		accessible_table_caption_object: Object;
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_table_get_column_description()
+		 * Since 2.12. Use {@link Atk.Table.get_column_description}
 		 * and atk_table_set_column_description() instead.
 		 * 
 		 * Accessible table column description.
@@ -311,7 +311,7 @@ declare namespace imports.gi.Atk {
 		accessible_table_column_description: string;
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_table_get_column_header() and
+		 * Since 2.12. Use {@link Atk.Table.get_column_header} and
 		 * atk_table_set_column_header() instead.
 		 * 
 		 * Accessible table column header.
@@ -319,7 +319,7 @@ declare namespace imports.gi.Atk {
 		accessible_table_column_header: Object;
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_table_get_row_description() and
+		 * Since 2.12. Use {@link Atk.Table.get_row_description} and
 		 * atk_table_set_row_description() instead.
 		 * 
 		 * Accessible table row description.
@@ -327,7 +327,7 @@ declare namespace imports.gi.Atk {
 		accessible_table_row_description: string;
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_table_get_row_header() and
+		 * Since 2.12. Use {@link Atk.Table.get_row_header} and
 		 * atk_table_set_row_header() instead.
 		 * 
 		 * Accessible table row header.
@@ -336,7 +336,7 @@ declare namespace imports.gi.Atk {
 		accessible_table_summary: Object;
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_value_get_value_and_text() to get
+		 * Since 2.12. Use {@link Atk.Value.get_value_and_text} to get
 		 * the value, and value-changed signal to be notified on their value
 		 * changes.
 		 * 
@@ -364,7 +364,7 @@ declare namespace imports.gi.Atk {
 		 * Calls #handler on property changes.
 		 * @param handler a function to be called when a property changes its value
 		 * @returns a #guint which is the handler id used in
-		 *   atk_object_remove_property_change_handler()
+		 *   {@link Atk.Object.remove_property_change_handler}
 		 */
 		connect_property_change_handler(handler: PropertyChangeHandler): number;
 		/**
@@ -382,7 +382,7 @@ declare namespace imports.gi.Atk {
 		 * explicit properties/annotations applied to the object, or an empty
 		 * set if the object has no name-value pair attributes assigned to
 		 * it. This #atkattributeset should be freed by a call to
-		 * atk_attribute_set_free().
+		 * {@link Atk.attribute.set_free}.
 		 */
 		get_attributes(): AttributeSet;
 		/**
@@ -436,7 +436,7 @@ declare namespace imports.gi.Atk {
 		get_object_locale(): string;
 		/**
 		 * Gets the accessible parent of the accessible. By default this is
-		 * the one assigned with atk_object_set_parent(), but it is assumed
+		 * the one assigned with {@link Atk.Object.set_parent}, but it is assumed
 		 * that ATK implementors have ways to get the parent of the object
 		 * without the need of assigning it manually with
 		 * atk_object_set_parent(), and will return it with this method.
@@ -455,7 +455,7 @@ declare namespace imports.gi.Atk {
 		/**
 		 * This function is called when implementing subclasses of {@link Object}.
 		 * It does initialization required for the new object. It is intended
-		 * that this function should called only in the ..._new() functions used
+		 * that this function should called only in the {@link ....new} functions used
 		 * to create an instance of a subclass of #AtkObject
 		 * @param data a #gpointer which identifies the object for which the AtkObject was created.
 		 */
@@ -475,7 +475,7 @@ declare namespace imports.gi.Atk {
 		 * function returns %NULL.
 		 * 
 		 * This method is intended as an utility for ATK implementors, and not
-		 * to be exposed to accessible tools. See atk_object_get_parent() for
+		 * to be exposed to accessible tools. See {@link Atk.Object.get_parent} for
 		 * further reference.
 		 * @returns an {@link Object} representing the accessible
 		 * parent of the accessible if assigned
@@ -505,7 +505,7 @@ declare namespace imports.gi.Atk {
 		ref_state_set(): StateSet;
 		/**
 		 * @deprecated
-		 * See atk_object_connect_property_change_handler()
+		 * See {@link Atk.Object.connect_property_change_handler}
 		 * 
 		 * Removes a property change handler.
 		 * @param handler_id a guint which identifies the handler to be removed.
@@ -606,7 +606,7 @@ declare namespace imports.gi.Atk {
 		 * reinstate the previous value.
 		 * 
 		 * Toolkit implementor note: ATK implementors should use
-		 * g_object_notify() to emit property-changed
+		 * {@link GObject.Object.notify} to emit property-changed
 		 * notifications. #AtkObject::property-changed is needed by the
 		 * implementation of atk_add_global_event_listener() because GObject
 		 * notify doesn't support emission hooks.
@@ -765,7 +765,7 @@ declare namespace imports.gi.Atk {
 	/**
 	 * This class is the base object class for a factory used to create an
 	 * accessible object for a specific GType. The function
-	 * atk_registry_set_factory_type() is normally called to store in the
+	 * {@link Atk.Registry.set_factory_type} is normally called to store in the
 	 * registry the factory type to be used to create an accessible of a
 	 * particular GType.
 	 */
@@ -781,7 +781,7 @@ declare namespace imports.gi.Atk {
 	interface IPlug {
 		/**
 		 * Gets the unique ID of an {@link Plug} object, which can be used to
-		 * embed inside of an #AtkSocket using atk_socket_embed().
+		 * embed inside of an #AtkSocket using {@link Atk.Socket.embed}.
 		 * 
 		 * Internally, this calls a class function that should be registered
 		 * by the IPC layer (usually at-spi2-atk). The implementor of an
@@ -800,7 +800,7 @@ declare namespace imports.gi.Atk {
 		 * case, GtkPlugAccessible can not inherit both from GtkWindowAccessible and
 		 * from AtkPlug. In such a case, one can create, in addition to the standard
 		 * accessible object for the toplevel widget, an AtkPlug object, and make the
-		 * former the child of the latter by calling atk_plug_set_child().
+		 * former the child of the latter by calling {@link Atk.Plug.set_child}.
 		 * @param child an {@link Object} to be set as accessible child of #plug.
 		 */
 		set_child(child: Object): void;
@@ -901,7 +901,7 @@ declare namespace imports.gi.Atk {
 		readonly relationship: RelationType;
 		/**
 		 * Adds the specified AtkObject to the target for the relation, if it is
-		 * not already present.  See also atk_object_add_relationship().
+		 * not already present.  See also {@link Atk.Object.add_relationship}.
 		 * @param target an {@link Object}
 		 */
 		add_target(target: Object): void;
@@ -954,7 +954,7 @@ declare namespace imports.gi.Atk {
 		public constructor(options?: Partial<RelationInitOptions>);
 		/**
 		 * Create a new relation for the specified key and the specified list
-		 * of targets.  See also atk_object_add_relationship().
+		 * of targets.  See also {@link Atk.Object.add_relationship}.
 		 * @param targets an array of pointers to
 		 *  {@link Objects}
 		 * @param n_targets number of {@link Objects} pointed to by #targets
@@ -1080,7 +1080,7 @@ declare namespace imports.gi.Atk {
 		 * The class item used by this function should be filled in by the IPC
 		 * layer (usually at-spi2-atk). The implementor of the AtkSocket
 		 * should call this function and pass the id for the plug as returned
-		 * by atk_plug_get_id().  It is the responsibility of the application
+		 * by {@link Atk.Plug.get_id}.  It is the responsibility of the application
 		 * to pass the plug id on to the process implementing the #AtkSocket
 		 * as needed.
 		 * @param plug_id the ID of an {@link Plug}
@@ -1106,7 +1106,7 @@ declare namespace imports.gi.Atk {
 	 * accessibles from one process into another in a fashion that is
 	 * transparent to assistive technologies. #AtkSocket works as the
 	 * container of #AtkPlug, embedding it using the method
-	 * atk_socket_embed(). Any accessible contained in the #AtkPlug will
+	 * {@link Atk.Socket.embed}. Any accessible contained in the #AtkPlug will
 	 * appear to the assistive technologies as being inside the
 	 * application that created the #AtkSocket.
 	 * 
@@ -1234,7 +1234,7 @@ declare namespace imports.gi.Atk {
 	/**
 	 * An AtkStateSet is a read-only representation of the full set of {@link States}
 	 * that apply to an object at a given time. This set is not meant to be
-	 * modified, but rather created when #atk_object_ref_state_set() is called.
+	 * modified, but rather created when {@link #atk.object_ref_state_set} is called.
 	 */
 	interface StateSet extends StateSetMixin {}
 
@@ -1298,7 +1298,7 @@ declare namespace imports.gi.Atk {
 	/**
 	 * AtkAttribute is a string name/value pair representing a generic
 	 * attribute. This can be used to expose additional information from
-	 * an accessible object as a whole (see atk_object_get_attributes())
+	 * an accessible object as a whole (see {@link Atk.Object.get_attributes})
 	 * or an document (see atk_document_get_attributes()). In the case of
 	 * text attributes (see atk_text_get_default_attributes()),
 	 * {@link TextAttribute} enum defines all the possible text attribute
@@ -1821,7 +1821,7 @@ declare namespace imports.gi.Atk {
 		 * 
 		 * For technical reasons, some toolkits cannot guarantee that the
 		 * reported action is actually 'bound' to a nontrivial user event;
-		 * i.e. the result of some actions via atk_action_do_action() may be
+		 * i.e. the result of some actions via {@link Atk.Action.do_action} may be
 		 * NIL.
 		 * @param i the action index corresponding to the action to be performed
 		 * @returns a name string, or %NULL if #action does not
@@ -1885,7 +1885,7 @@ declare namespace imports.gi.Atk {
 		 * when this object receives focus events (in or out). If the handler is
 		 * already added it is not added again
 		 * @param handler The {@link FocusHandler} to be attached to #component
-		 * @returns a handler id which can be used in atk_component_remove_focus_handler()
+		 * @returns a handler id which can be used in {@link Atk.Component.remove_focus_handler}
 		 * or zero if the handler was already added.
 		 */
 		add_focus_handler(handler: FocusHandler): number;
@@ -1941,7 +1941,7 @@ declare namespace imports.gi.Atk {
 		get_mdi_zorder(): number;
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_component_get_extents() instead.
+		 * Since 2.12. Use {@link Atk.Component.get_extents} instead.
 		 * 
 		 * Gets the position of #component in the form of
 		 * a point specifying #component's top-left corner.
@@ -1957,7 +1957,7 @@ declare namespace imports.gi.Atk {
 		// get_position(coord_type: CoordType): [ x: number | null, y: number | null ];
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_component_get_extents() instead.
+		 * Since 2.12. Use {@link Atk.Component.get_extents} instead.
 		 * 
 		 * Gets the size of the #component in terms of width and height.
 		 * 
@@ -2129,7 +2129,7 @@ declare namespace imports.gi.Atk {
 		get_document(): any | null;
 		/**
 		 * @deprecated
-		 * Since 2.12. Please use atk_document_get_attributes() to
+		 * Since 2.12. Please use {@link Atk.Document.get_attributes} to
 		 * ask for the document type if it applies.
 		 * 
 		 * Gets a string indicating the document type.
@@ -2138,7 +2138,7 @@ declare namespace imports.gi.Atk {
 		get_document_type(): string;
 		/**
 		 * @deprecated
-		 * Please use atk_object_get_object_locale() instead.
+		 * Please use {@link Atk.Object.get_object_locale} instead.
 		 * 
 		 * Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
 		 *          of the content of this document instance.  Individual
@@ -2590,7 +2590,7 @@ declare namespace imports.gi.Atk {
 		 * Note: callers should not rely on %NULL or on a zero value for
 		 * indication of whether AtkSelectionIface is implemented, they should
 		 * use type checking/interface checking macros or the
-		 * atk_get_accessible_value() convenience method.
+		 * {@link Atk.get_accessible_value} convenience method.
 		 * @returns a gint representing the number of items selected, or 0
 		 * if #selection does not implement this interface.
 		 */
@@ -2600,7 +2600,7 @@ declare namespace imports.gi.Atk {
 		 * Note: callers should not rely on %NULL or on a zero value for
 		 * indication of whether AtkSelectionIface is implemented, they should
 		 * use type checking/interface checking macros or the
-		 * atk_get_accessible_value() convenience method.
+		 * {@link Atk.get_accessible_value} convenience method.
 		 * @param i a #gint specifying the child index.
 		 * @returns a gboolean representing the specified child is selected, or 0
 		 * if #selection does not implement this interface.
@@ -2612,7 +2612,7 @@ declare namespace imports.gi.Atk {
 		 * Note: callers should not rely on %NULL or on a zero value for
 		 * indication of whether AtkSelectionIface is implemented, they should
 		 * use type checking/interface checking macros or the
-		 * atk_get_accessible_value() convenience method.
+		 * {@link Atk.get_accessible_value} convenience method.
 		 * @param i a #gint specifying the index in the selection set.  (e.g. the
 		 * ith selection as opposed to the ith child).
 		 * @returns an {@link Object} representing the
@@ -2809,7 +2809,7 @@ declare namespace imports.gi.Atk {
 		get_column_header(column: number): Object | null;
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_table_ref_at() in order to get the
+		 * Since 2.12. Use {@link Atk.Table.ref_at} in order to get the
 		 * accessible that represents the cell at (#row, #column)
 		 * 
 		 * Gets a #gint representing the index at the specified #row and
@@ -3251,7 +3251,7 @@ declare namespace imports.gi.Atk {
 		 * returned.
 		 * @returns an {@link AttributeSet} which contains the default text
 		 *          attributes for this #AtkText. This #AtkAttributeSet should be freed by
-		 *          a call to atk_attribute_set_free().
+		 *          a call to {@link Atk.attribute.set_free}.
 		 */
 		get_default_attributes(): AttributeSet;
 		/**
@@ -3296,7 +3296,7 @@ declare namespace imports.gi.Atk {
 		 * the character to be inserted at the caret location.
 		 * @returns an {@link AttributeSet} which contains the attributes
 		 *         explicitly set at #offset. This #AtkAttributeSet should be freed by
-		 *         a call to atk_attribute_set_free().
+		 *         a call to {@link Atk.attribute.set_free}.
 		 * 
 		 * the address to put the start offset of the range
 		 * 
@@ -3310,7 +3310,7 @@ declare namespace imports.gi.Atk {
 		 * start of the text.  The selected region closest to the beginning
 		 * of the text region is assigned the number 0, etc.  Note that adding,
 		 * moving or deleting a selected region can change the numbering.
-		 * @returns a newly allocated string containing the selected text. Use g_free()
+		 * @returns a newly allocated string containing the selected text. Use {@link GObject.free}
 		 *          to free the returned string.
 		 * 
 		 * passes back the starting character offset of the selected region
@@ -3353,7 +3353,7 @@ declare namespace imports.gi.Atk {
 		 * @param offset position
 		 * @param granularity An {@link TextGranularity}
 		 * @returns a newly allocated string containing the text at
-		 *          the #offset bounded by the specified #granularity. Use g_free()
+		 *          the #offset bounded by the specified #granularity. Use {@link GObject.free}
 		 *          to free the returned string.  Returns %NULL if the offset is invalid
 		 *          or no implementation is available.
 		 * 
@@ -3369,19 +3369,19 @@ declare namespace imports.gi.Atk {
 		 * @param start_offset a starting character offset within #text
 		 * @param end_offset an ending character offset within #text, or -1 for the end of the string.
 		 * @returns a newly allocated string containing the text from #start_offset up
-		 *          to, but not including #end_offset. Use g_free() to free the returned
+		 *          to, but not including #end_offset. Use {@link GObject.free} to free the returned
 		 *          string.
 		 */
 		get_text(start_offset: number, end_offset: number): string;
 		/**
 		 * @deprecated
-		 * Please use atk_text_get_string_at_offset() instead.
+		 * Please use {@link Atk.Text.get_string_at_offset} instead.
 		 * 
 		 * Gets the specified text.
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
 		 * @returns a newly allocated string containing the text after #offset bounded
-		 *          by the specified #boundary_type. Use g_free() to free the returned
+		 *          by the specified #boundary_type. Use {@link GObject.free} to free the returned
 		 *          string.
 		 * 
 		 * the starting character offset of the returned string
@@ -3393,7 +3393,7 @@ declare namespace imports.gi.Atk {
 		/**
 		 * @deprecated
 		 * This method is deprecated since ATK version
-		 * 2.9.4. Please use atk_text_get_string_at_offset() instead.
+		 * 2.9.4. Please use {@link Atk.Text.get_string_at_offset} instead.
 		 * 
 		 * Gets the specified text.
 		 * 
@@ -3422,7 +3422,7 @@ declare namespace imports.gi.Atk {
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
 		 * @returns a newly allocated string containing the text at #offset bounded
-		 *          by the specified #boundary_type. Use g_free() to free the returned
+		 *          by the specified #boundary_type. Use {@link GObject.free} to free the returned
 		 *          string.
 		 * 
 		 * the starting character offset of the returned string
@@ -3433,13 +3433,13 @@ declare namespace imports.gi.Atk {
 		get_text_at_offset(offset: number, boundary_type: TextBoundary): [ string, number, number ];
 		/**
 		 * @deprecated
-		 * Please use atk_text_get_string_at_offset() instead.
+		 * Please use {@link Atk.Text.get_string_at_offset} instead.
 		 * 
 		 * Gets the specified text.
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
 		 * @returns a newly allocated string containing the text before #offset bounded
-		 *          by the specified #boundary_type. Use g_free() to free the returned
+		 *          by the specified #boundary_type. Use {@link GObject.free} to free the returned
 		 *          string.
 		 * 
 		 * the starting character offset of the returned string
@@ -3645,7 +3645,7 @@ declare namespace imports.gi.Atk {
 	interface IValue {
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_value_get_value_and_text()
+		 * Since 2.12. Use {@link Atk.Value.get_value_and_text}
 		 * instead.
 		 * 
 		 * Gets the value of this object.
@@ -3663,7 +3663,7 @@ declare namespace imports.gi.Atk {
 		get_increment(): number;
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_value_get_range() instead.
+		 * Since 2.12. Use {@link Atk.Value.get_range} instead.
 		 * 
 		 * Gets the maximum value of this object.
 		 * @returns a #GValue representing the maximum accessible value
@@ -3671,7 +3671,7 @@ declare namespace imports.gi.Atk {
 		get_maximum_value(): GObject.Value;
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_value_get_increment() instead.
+		 * Since 2.12. Use {@link Atk.Value.get_increment} instead.
 		 * 
 		 * Gets the minimum increment by which the value of this object may be changed.  If zero,
 		 * the minimum increment is undefined, which may mean that it is limited only by the
@@ -3681,7 +3681,7 @@ declare namespace imports.gi.Atk {
 		get_minimum_increment(): GObject.Value;
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_value_get_range() instead.
+		 * Since 2.12. Use {@link Atk.Value.get_range} instead.
 		 * 
 		 * Gets the minimum value of this object.
 		 * @returns a #GValue representing the minimum accessible value
@@ -3699,7 +3699,7 @@ declare namespace imports.gi.Atk {
 		 * introduction for examples of subranges and when to expose them.
 		 * @returns an #GSList of
 		 * {@link Range} which each of the subranges defined for this object. Free
-		 * the returns list with g_slist_free().
+		 * the returns list with {@link GObject.slist_free}.
 		 */
 		get_sub_ranges(): GLib.SList;
 		/**
@@ -3714,7 +3714,7 @@ declare namespace imports.gi.Atk {
 		get_value_and_text(): [ value: number, text: string | null ];
 		/**
 		 * @deprecated
-		 * Since 2.12. Use atk_value_set_value() instead.
+		 * Since 2.12. Use {@link Atk.Value.set_value} instead.
 		 * 
 		 * Sets the value of this object.
 		 * @param value a #GValue which is the desired new accessible value.
@@ -3730,7 +3730,7 @@ declare namespace imports.gi.Atk {
 		 * call, it is possible that the text could change, and will trigger
 		 * an {@link Value.value_changed} signal emission.
 		 * 
-		 * Note for implementors: the deprecated atk_value_set_current_value()
+		 * Note for implementors: the deprecated {@link Atk.Value.set_current_value}
 		 * method returned TRUE or FALSE depending if the value was assigned
 		 * or not. In the practice several implementors were not able to
 		 * decide it, and returned TRUE in any case. For that reason it is not
@@ -3876,7 +3876,7 @@ declare namespace imports.gi.Atk {
 	 * implementors are expected to provide localized strings which can be
 	 * directly presented to end users via their assistive technology. In
 	 * order to simplify this for implementors, implementors can use
-	 * atk_value_type_get_localized_name() with the following
+	 * {@link Atk.value.type_get_localized_name} with the following
 	 * already-localized constants for commonly-needed values can be used:
 	 * </para>
 	 * 
@@ -4044,7 +4044,7 @@ declare namespace imports.gi.Atk {
 
 	/**
 	 * Specifies how xy coordinates are to be interpreted. Used by functions such
-	 * as atk_component_get_position() and atk_text_get_character_extents()
+	 * as {@link Atk.Component.get_position} and atk_text_get_character_extents()
 	 */
 	enum CoordType {
 		/**
@@ -5363,7 +5363,7 @@ declare namespace imports.gi.Atk {
 	/**
 	 * Default types for a given value. Those are defined in order to
 	 * easily get localized strings to describe a given value or a given
-	 * subrange, using atk_value_type_get_localized_name().
+	 * subrange, using {@link Atk.value.type_get_localized_name}.
 	 */
 	enum ValueType {
 		VERY_WEAK = 0,
@@ -5438,18 +5438,18 @@ declare namespace imports.gi.Atk {
 
 	/**
 	 * The type of callback function used for
-	 * atk_component_add_focus_handler() and
+	 * {@link Atk.Component.add_focus_handler} and
 	 * atk_component_remove_focus_handler()
 	 */
 	interface FocusHandler {
 		/**
 		 * @deprecated
-		 * Deprecated with atk_component_add_focus_handler()
+		 * Deprecated with {@link Atk.Component.add_focus_handler}
 		 * and atk_component_remove_focus_handler(). See those
 		 * methods for more information.
 		 * 
 		 * The type of callback function used for
-		 * atk_component_add_focus_handler() and
+		 * {@link Atk.Component.add_focus_handler} and
 		 * atk_component_remove_focus_handler()
 		 * @param object the {@link Object} that receives/lose the focus
 		 * @param focus_in TRUE if the object receives the focus
@@ -5496,7 +5496,7 @@ declare namespace imports.gi.Atk {
 	/**
 	 * An AtkPropertyChangeHandler is a function which is executed when an
 	 * AtkObject's property changes value. It is specified in a call to
-	 * atk_object_connect_property_change_handler().
+	 * {@link Atk.Object.connect_property_change_handler}.
 	 */
 	interface PropertyChangeHandler {
 		/**
@@ -5505,7 +5505,7 @@ declare namespace imports.gi.Atk {
 		 * 
 		 * An AtkPropertyChangeHandler is a function which is executed when an
 		 * AtkObject's property changes value. It is specified in a call to
-		 * atk_object_connect_property_change_handler().
+		 * {@link Atk.Object.connect_property_change_handler}.
 		 * @param obj atkobject which property changes
 		 * @param vals values changed
 		 */
@@ -5514,7 +5514,7 @@ declare namespace imports.gi.Atk {
 
 	/**
 	 * This is a singly-linked list (a #GSList) of {@link Attribute}. It is
-	 * used by atk_text_get_run_attributes(),
+	 * used by {@link Atk.Text.get_run_attributes},
 	 * atk_text_get_default_attributes(),
 	 * atk_editable_text_set_run_attributes(),
 	 * atk_document_get_attributes() and atk_object_get_attributes()
@@ -5618,7 +5618,7 @@ declare namespace imports.gi.Atk {
 	 * registry.
 	 * Note: For most toolkit maintainers, this will be the correct
 	 * registry for registering new #AtkObject factories. Following
-	 * a call to this function, maintainers may call atk_registry_set_factory_type()
+	 * a call to this function, maintainers may call {@link Atk.Registry.set_factory_type}
 	 * to associate an #AtkObjectFactory subclass with the GType of objects
 	 * for whom accessibility information will be provided.
 	 * @returns a default implementation of the
@@ -5864,50 +5864,50 @@ declare namespace imports.gi.Atk {
 	function value_type_get_name(value_type: ValueType): string;
 
 	/**
-	 * Like atk_get_binary_age(), but from the headers used at
+	 * Like {@link Atk.get.binary_age}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like atk_get_binary_age(), but from the headers used at
+	 * @returns Like {@link Atk.get.binary_age}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */
 	const BINARY_AGE: number;
 
 	/**
-	 * Like atk_get_interface_age(), but from the headers used at
+	 * Like {@link Atk.get.interface_age}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like atk_get_interface_age(), but from the headers used at
+	 * @returns Like {@link Atk.get.interface_age}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */
 	const INTERFACE_AGE: number;
 
 	/**
-	 * Like atk_get_major_version(), but from the headers used at
+	 * Like {@link Atk.get.major_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like atk_get_major_version(), but from the headers used at
+	 * @returns Like {@link Atk.get.major_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */
 	const MAJOR_VERSION: number;
 
 	/**
-	 * Like atk_get_micro_version(), but from the headers used at
+	 * Like {@link Atk.get.micro_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like atk_get_micro_version(), but from the headers used at
+	 * @returns Like {@link Atk.get.micro_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */
 	const MICRO_VERSION: number;
 
 	/**
-	 * Like atk_get_minor_version(), but from the headers used at
+	 * Like {@link Atk.get.minor_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like atk_get_minor_version(), but from the headers used at
+	 * @returns Like {@link Atk.get.minor_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */

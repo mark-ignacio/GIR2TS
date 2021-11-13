@@ -80,7 +80,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * we won't leak the pixmap if somebody else it setting
 		 * it at the same time. (This assumes that they follow the
 		 * same conventions we do).  #surface should come from a call
-		 * to gnome_bg_create_surface().
+		 * to {@link Gnome.bg_create_surface}.
 		 * @param screen the #GdkScreen to change root background on
 		 * @param surface the #cairo_surface_t to set root background from.
 		 *   Must be an xlib surface backing a pixmap.
@@ -88,7 +88,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		public static set_surface_as_root(screen: Gdk.Screen, surface: cairo.Surface): void;
 		/**
 		 * Set the root pixmap, and properties pointing to it.
-		 * This function differs from gnome_bg_set_surface_as_root()
+		 * This function differs from {@link Gnome.bg_set_surface_as_root}
 		 * in that it adds a subtle crossfade animation from the
 		 * current root pixmap to the new one.
 		 * @param screen the #GdkScreen to change root background on
@@ -115,13 +115,13 @@ declare namespace imports.gi.CinnamonDesktop {
 		readonly parent_object: GObject.Object;
 		/**
 		 * This function reveals whether or not #fade is currently
-		 * running on a window.  See gnome_bg_crossfade_start() for
+		 * running on a window.  See {@link Gnome.bg_crossfade_start} for
 		 * information on how to initiate a crossfade.
 		 * @returns %TRUE if fading, or %FALSE if not fading
 		 */
 		is_started(): boolean;
 		/**
-		 * Before initiating a crossfade with gnome_bg_crossfade_start()
+		 * Before initiating a crossfade with {@link Gnome.bg_crossfade_start}
 		 * a start and end surface have to be set.  This function sets
 		 * the surface shown at the end of the crossfade effect.
 		 * @param surface The cairo surface to fade to
@@ -130,7 +130,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 */
 		set_end_surface(surface: cairo.Surface): boolean;
 		/**
-		 * Before initiating a crossfade with gnome_bg_crossfade_start()
+		 * Before initiating a crossfade with {@link Gnome.bg_crossfade_start}
 		 * a start and end surface have to be set.  This function sets
 		 * the surface shown at the beginning of the crossfade effect.
 		 * @param surface The cairo surface to fade from
@@ -141,7 +141,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		/**
 		 * This function initiates a quick crossfade between two surfaces on
 		 * the background of #window.  Before initiating the crossfade both
-		 * gnome_bg_crossfade_start() and gnome_bg_crossfade_end() need to
+		 * {@link Gnome.bg_crossfade_start} and gnome_bg_crossfade_end() need to
 		 * be called. If animations are disabled, the crossfade is skipped,
 		 * and the window background is set immediately to the end surface.
 		 * @param window The #GdkWindow to draw crossfade on
@@ -742,7 +742,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_layout_info(id: string): [ boolean, string | null, string | null, string | null, string | null ];
 		/**
 		 * Retrieves the layout that better fits #language. It also fetches
-		 * information about that layout like gnome_xkb_info_get_layout_info().
+		 * information about that layout like {@link Gnome.xkb_info_get_layout_info}.
 		 * 
 		 * If a layout can't be found the return value is %FALSE and all the
 		 * (out) parameters are set to %NULL.
@@ -797,7 +797,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		public static new(): XkbInfo;
 		/**
 		 * Frees an #XkbRF_VarDefsRec instance allocated by
-		 * gnome_xkb_info_get_var_defs().
+		 * {@link Gnome.xkb_info_get_var_defs}.
 		 * @param var_defs #XkbRF_VarDefsRec instance to free
 		 */
 		public static free_var_defs(var_defs: any): void;
@@ -805,7 +805,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * Gets both the XKB rules file path and the current XKB parameters in
 		 * use by the X server.
 		 * @returns location to store the rules file
-		 * path. Use g_free() when it's no longer needed
+		 * path. Use {@link GObject.free} when it's no longer needed
 		 * 
 		 * location to store a
 		 * #XkbRF_VarDefsRec pointer. Use gnome_xkb_info_free_var_defs() to

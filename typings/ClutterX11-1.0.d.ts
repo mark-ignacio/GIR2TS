@@ -30,7 +30,7 @@ declare namespace imports.gi.ClutterX11 {
 		/**
 		 * Sets up a suitable pixmap for the window, using the composite and damage
 		 * extensions if possible, and then calls
-		 * clutter_x11_texture_pixmap_set_pixmap().
+		 * {@link ClutterX11.TexturePixmap.set_pixmap}.
 		 * 
 		 * If you want to display a window in a #ClutterTexture, you probably want
 		 * this function, or its older sister, clutter_glx_texture_pixmap_set_window().
@@ -211,7 +211,7 @@ declare namespace imports.gi.ClutterX11 {
 	 * Libraries or applications calling this function will be responsible of
 	 * polling all X11 events.
 	 * 
-	 * You also must call clutter_x11_handle_event() to let Clutter process
+	 * You also must call {@link ClutterX11.handle.event} to let Clutter process
 	 * events and maintain its internal state.
 	 * 
 	 * This function can only be called before calling clutter_init().
@@ -256,7 +256,7 @@ declare namespace imports.gi.ClutterX11 {
 	/**
 	 * Retrieves the timestamp of the last X11 event processed by
 	 * Clutter. This might be different from the timestamp returned
-	 * by clutter_get_current_event_time(), as Clutter may synthesize
+	 * by {@link Clutter.get.current_event_time}, as Clutter may synthesize
 	 * or throttle events.
 	 * @returns a timestamp, in milliseconds
 	 */
@@ -342,7 +342,7 @@ declare namespace imports.gi.ClutterX11 {
 	 * into external X11 event processing (for example, a GDK filter
 	 * function).
 	 * 
-	 * If clutter_x11_disable_event_retrieval() has been called, you must
+	 * If {@link ClutterX11.disable.event_retrieval} has been called, you must
 	 * let this function process events to update Clutter's internal state.
 	 * @param xevent pointer to XEvent structure
 	 * @returns {@link FilterReturn}. %CLUTTER_X11_FILTER_REMOVE
@@ -441,7 +441,7 @@ declare namespace imports.gi.ClutterX11 {
 	function set_use_stereo_stage(use_stereo: boolean): void;
 
 	/**
-	 * Traps every X error until clutter_x11_untrap_x_errors() is called.
+	 * Traps every X error until {@link ClutterX11.untrap.x_errors} is called.
 	 */
 	function trap_x_errors(): void;
 

@@ -24,14 +24,14 @@ declare namespace imports.gi.Cally {
 		 */
 		add_action_full(action_name: string, action_description: string, action_keybinding: string, callback: ActionCallback, notify: GLib.DestroyNotify): number;
 		/**
-		 * Removes a action, using the #action_id returned by cally_actor_add_action()
+		 * Removes a action, using the #action_id returned by {@link Cally.Actor.add_action}
 		 * @param action_id the action id
 		 * @returns %TRUE if the operation was succesful, %FALSE otherwise
 		 */
 		remove_action(action_id: number): boolean;
 		/**
 		 * Removes an action, using the #action_name used when the action was added
-		 * with cally_actor_add_action()
+		 * with {@link Cally.Actor.add_action}
 		 * @param action_name the name of the action to remove
 		 * @returns %TRUE if the operation was succesful, %FALSE otherwise
 		 */
@@ -311,13 +311,13 @@ declare namespace imports.gi.Cally {
 	/**
 	 * Action function, to be used on #AtkAction implementations as
 	 * an individual action. Unlike {@link ActionFunc}, this function
-	 * uses the #user_data argument passed to cally_actor_add_action_full().
+	 * uses the #user_data argument passed to {@link Cally.Actor.add_action_full}.
 	 */
 	interface ActionCallback {
 		/**
 		 * Action function, to be used on #AtkAction implementations as
 		 * an individual action. Unlike {@link ActionFunc}, this function
-		 * uses the #user_data argument passed to cally_actor_add_action_full().
+		 * uses the #user_data argument passed to {@link Cally.Actor.add_action_full}.
 		 * @param cally_actor a {@link Actor}
 		 */
 		(cally_actor: Actor): void;
