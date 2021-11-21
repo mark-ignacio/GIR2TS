@@ -188,7 +188,7 @@ function renderIInterfacePart(
                 ],
                 return_type: {
                     docString: "",
-                    type: "number",
+                    type: "void",
                     name: null
                 },
                 deprecatedDoc: null
