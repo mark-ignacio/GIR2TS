@@ -174,7 +174,7 @@ function renderIInterfacePart(
     if (fields.length > 0) {
         body+= "\n";
         for (const signal of fields) {
-            const fieldName = signal.$.name.replace(/-/g, "_");
+            const fieldName = signal.$.name;
             body+= renderSignalFromInfo({
                 doc: null,
                 name: `notify::${fieldName}`,
