@@ -1,0 +1,27 @@
+{
+    "$schema": "./schema.json",
+    "amend": {
+        "class": {
+            "StatusIconInterface": {
+                "function": {
+                    "override_properties": {
+                        "param": {
+                            "klass": {
+                                "type": "any"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "function": {
+            "status_icon_interface_override_properties": {
+                "param": {
+                    "klass": {
+                        "type": "any"
+                    }
+                }
+            }
+        }
+    }
+}
