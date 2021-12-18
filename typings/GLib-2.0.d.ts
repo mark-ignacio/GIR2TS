@@ -3986,7 +3986,7 @@ declare namespace imports.gi.GLib {
 	export interface LogFieldInitOptions {}
 	/**
 	 * Structure representing a single field in a structured log entry. See
-	 * {@link G.log_structured} for details.
+	 * {@link GLog.structured} for details.
 	 * 
 	 * Log fields may contain arbitrary values, including binary with embedded nul
 	 * bytes. If the field contains a string, the string must be UTF-8 encoded and
@@ -15531,7 +15531,7 @@ declare namespace imports.gi.GLib {
 	 * Flags specifying the level of log messages.
 	 * 
 	 * It is possible to change how GLib treats messages of the various
-	 * levels using {@link G.log_set_handler} and g_log_set_fatal_mask().
+	 * levels using {@link GLog.set_handler} and g_log_set_fatal_mask().
 	 */
 	enum LogLevelFlags {
 		/**
@@ -16476,12 +16476,12 @@ declare namespace imports.gi.GLib {
 	}
 
 	/**
-	 * Specifies the type of functions passed to {@link G.list_foreach} and
+	 * Specifies the type of functions passed to {@link GList.foreach} and
 	 * g_slist_foreach().
 	 */
 	interface Func {
 		/**
-		 * Specifies the type of functions passed to {@link G.list_foreach} and
+		 * Specifies the type of functions passed to {@link GList.foreach} and
 		 * g_slist_foreach().
 		 * @param data the element's data
 		 */
@@ -16712,7 +16712,7 @@ declare namespace imports.gi.GLib {
 	/**
 	 * Specifies the prototype of log handler functions.
 	 * 
-	 * The default log handler, {@link G.log_default_handler}, automatically appends a
+	 * The default log handler, {@link GLog.default_handler}, automatically appends a
 	 * new-line character to #message when printing it. It is advised that any
 	 * custom log handler functions behave similarly, so that logging calls in user
 	 * code do not need modifying to add a new-line character to the message if the
@@ -16725,7 +16725,7 @@ declare namespace imports.gi.GLib {
 		/**
 		 * Specifies the prototype of log handler functions.
 		 * 
-		 * The default log handler, {@link G.log_default_handler}, automatically appends a
+		 * The default log handler, {@link GLog.default_handler}, automatically appends a
 		 * new-line character to #message when printing it. It is advised that any
 		 * custom log handler functions behave similarly, so that logging calls in user
 		 * code do not need modifying to add a new-line character to the message if the
@@ -16745,7 +16745,7 @@ declare namespace imports.gi.GLib {
 	 * Writer function for log entries. A log entry is a collection of one or more
 	 * #GLogFields, using the standard [field names from journal
 	 * specification](https://www.freedesktop.org/software/systemd/man/systemd.journal-fields.html).
-	 * See {@link G.log_structured} for more information.
+	 * See {@link GLog.structured} for more information.
 	 * 
 	 * Writer functions must ignore fields which they do not recognise, unless they
 	 * can write arbitrary binary output, as field values may be arbitrary binary.
@@ -16766,7 +16766,7 @@ declare namespace imports.gi.GLib {
 		 * Writer function for log entries. A log entry is a collection of one or more
 		 * #GLogFields, using the standard [field names from journal
 		 * specification](https://www.freedesktop.org/software/systemd/man/systemd.journal-fields.html).
-		 * See {@link G.log_structured} for more information.
+		 * See {@link GLog.structured} for more information.
 		 * 
 		 * Writer functions must ignore fields which they do not recognise, unless they
 		 * can write arbitrary binary output, as field values may be arbitrary binary.
@@ -18970,7 +18970,7 @@ declare namespace imports.gi.GLib {
 	 * 
 	 * #list_ptr must be a valid pointer. If #list_ptr points to a null #GList, this does nothing.
 	 * @param list_ptr a #GList return location
-	 * @param destroy the function to pass to {@link G.list_free_full} or %NULL to not free elements
+	 * @param destroy the function to pass to {@link GList.free_full} or %NULL to not free elements
 	 */
 	function clear_list(list_ptr: GLib.List, destroy: DestroyNotify | null): void;
 
@@ -21420,7 +21420,7 @@ declare namespace imports.gi.GLib {
 	function log(log_domain: string | null, log_level: LogLevelFlags, format: string): void;
 
 	/**
-	 * The default log handler set up by GLib; {@link G.log_set_default_handler}
+	 * The default log handler set up by GLib; {@link GLog.set_default_handler}
 	 * allows to install an alternate default log handler.
 	 * This is used if no log handler has been set for the particular log
 	 * domain and log level combination. It outputs the message to stderr
@@ -21450,7 +21450,7 @@ declare namespace imports.gi.GLib {
 	 * default "" application domain
 	 * @param log_level the level of the message
 	 * @param message the message
-	 * @param unused_data data passed from {@link G.log} which is unused
+	 * @param unused_data data passed from g_log() which is unused
 	 */
 	function log_default_handler(log_domain: string | null, log_level: LogLevelFlags, message: string | null, unused_data: any | null): void;
 
@@ -21461,7 +21461,7 @@ declare namespace imports.gi.GLib {
 	 * [Using Structured Logging][using-structured-logging].
 	 * @param log_domain the log domain
 	 * @param handler_id the id of the handler, which was returned
-	 *     in {@link G.log_set_handler}
+	 *     in {@link GLog.set_handler}
 	 */
 	function log_remove_handler(log_domain: string, handler_id: number): void;
 
@@ -21478,7 +21478,7 @@ declare namespace imports.gi.GLib {
 	 * Libraries should not call this function, as it affects all messages logged
 	 * by a process, including those from other libraries.
 	 * 
-	 * Structured log messages (using {@link G.log_structured} and
+	 * Structured log messages (using {@link GLog.structured} and
 	 * g_log_structured_array()) are fatal only if the default log writer is used;
 	 * otherwise it is up to the writer function to determine which log messages
 	 * are fatal. See [Using Structured Logging][using-structured-logging].
@@ -21492,7 +21492,7 @@ declare namespace imports.gi.GLib {
 	 * Installs a default log handler which is used if no
 	 * log handler has been set for the particular log domain
 	 * and log level combination. By default, GLib uses
-	 * {@link G.log_default_handler} as default log handler.
+	 * {@link GLog.default_handler} as default log handler.
 	 * 
 	 * This has no effect if structured logging is enabled; see
 	 * [Using Structured Logging][using-structured-logging].
@@ -21505,7 +21505,7 @@ declare namespace imports.gi.GLib {
 	 * Sets the log levels which are fatal in the given domain.
 	 * %G_LOG_LEVEL_ERROR is always fatal.
 	 * 
-	 * This has no effect on structured log messages (using {@link G.log_structured} or
+	 * This has no effect on structured log messages (using {@link GLog.structured} or
 	 * g_log_structured_array()). To change the fatal behaviour for specific log
 	 * messages, programs must install a custom log writer function using
 	 * g_log_set_writer_func(). See
@@ -21568,7 +21568,7 @@ declare namespace imports.gi.GLib {
 	function log_set_handler(log_domain: string | null, log_levels: LogLevelFlags, log_func: LogFunc): number;
 
 	/**
-	 * Like {@link G.log_set_handler}, but takes a destroy notify for the #user_data.
+	 * Like {@link GLog.set_handler}, but takes a destroy notify for the #user_data.
 	 * 
 	 * This has no effect if structured logging is enabled; see
 	 * [Using Structured Logging][using-structured-logging].
@@ -21604,7 +21604,7 @@ declare namespace imports.gi.GLib {
 	 * Log a message with structured data.
 	 * 
 	 * The message will be passed through to the log writer set by the application
-	 * using {@link G.log_set_writer_func}. If the message is fatal (i.e. its log level
+	 * using {@link GLog.set_writer_func}. If the message is fatal (i.e. its log level
 	 * is %G_LOG_LEVEL_ERROR), the program will be aborted by calling
 	 * G_BREAKPOINT() at the end of this function. If the log writer returns
 	 * %G_LOG_WRITER_UNHANDLED (failure), no other fallback writers will be tried.
@@ -21691,7 +21691,7 @@ declare namespace imports.gi.GLib {
 
 	/**
 	 * Log a message with structured data. The message will be passed through to the
-	 * log writer set by the application using {@link G.log_set_writer_func}. If the
+	 * log writer set by the application using {@link GLog.set_writer_func}. If the
 	 * message is fatal (i.e. its log level is %G_LOG_LEVEL_ERROR), the program will
 	 * be aborted at the end of this function.
 	 * 
@@ -21743,7 +21743,7 @@ declare namespace imports.gi.GLib {
 	 * (documented) platform-specific log writing policies.
 	 * 
 	 * This is suitable for use as a #GLogWriterFunc, and is the default writer used
-	 * if no other is set using {@link G.log_set_writer_func}.
+	 * if no other is set using {@link GLog.set_writer_func}.
 	 * 
 	 * As with g_log_default_handler(), this function drops debug and informational
 	 * messages unless their log domain (or `all`) is listed in the space-separated
@@ -21781,7 +21781,7 @@ declare namespace imports.gi.GLib {
 	function log_writer_default_set_use_stderr(use_stderr: boolean): void;
 
 	/**
-	 * Check whether {@link G.log_writer_default} and g_log_default_handler() would
+	 * Check whether {@link GLog.writer_default} and g_log_default_handler() would
 	 * ignore a message with the given domain and level.
 	 * 
 	 * As with g_log_default_handler(), this function drops debug and informational
@@ -21820,7 +21820,7 @@ declare namespace imports.gi.GLib {
 	 * Format a structured log message as a string suitable for outputting to the
 	 * terminal (or elsewhere). This will include the values of all fields it knows
 	 * how to interpret, which includes `MESSAGE` and `GLIB_DOMAIN` (see the
-	 * documentation for {@link G.log_structured}). It does not include values from
+	 * documentation for {@link GLog.structured}). It does not include values from
 	 * unknown fields.
 	 * 
 	 * The returned string does **not** have a trailing new-line character. It is
@@ -21876,7 +21876,7 @@ declare namespace imports.gi.GLib {
 	 * Format a structured log message and print it to either `stdout` or `stderr`,
 	 * depending on its log level. %G_LOG_LEVEL_INFO and %G_LOG_LEVEL_DEBUG messages
 	 * are sent to `stdout`, or to `stderr` if requested by
-	 * {@link G.log_writer_default_set_use_stderr};
+	 * {@link GLog.writer_default_set_use_stderr};
 	 * all other log levels are sent to `stderr`. Only fields
 	 * which are understood by this function are included in the formatted string
 	 * which is printed.
@@ -22374,7 +22374,7 @@ declare namespace imports.gi.GLib {
 	 * `[E]xit, [H]alt, show [S]tack trace or [P]roceed`.
 	 * This function is intended to be used for debugging use only.
 	 * The following example shows how it can be used together with
-	 * the {@link G.log} functions.
+	 * the g_log() functions.
 	 * 
 	 * |[<!-- language="C" -->
 	 * #include <glib.h>
@@ -25264,7 +25264,7 @@ declare namespace imports.gi.GLib {
 	 * This handler has no effect on g_error messages.
 	 * 
 	 * This handler also has no effect on structured log messages (using
-	 * {@link G.log_structured} or g_log_structured_array()). To change the fatal
+	 * {@link GLog.structured} or g_log_structured_array()). To change the fatal
 	 * behaviour for specific log messages, programs must install a custom log
 	 * writer function using g_log_set_writer_func().See
 	 * [Using Structured Logging][using-structured-logging].
@@ -26194,7 +26194,7 @@ declare namespace imports.gi.GLib {
 	 * valid Unicode character; if you pass in invalid character, the
 	 * result is undefined.
 	 * 
-	 * This function is equivalent to {@link Pango.script.for_unichar} and the
+	 * This function is equivalent to {@link Pango.script_for_unichar} and the
 	 * two are interchangeable.
 	 * @param ch a Unicode character
 	 * @returns the #GUnicodeScript for the character.

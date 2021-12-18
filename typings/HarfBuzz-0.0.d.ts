@@ -2953,70 +2953,9 @@ declare namespace imports.gi.HarfBuzz {
 		 */
 		YEZIDI = 1499822697,
 		/**
-		 * `Cpmn`, Since: 3.0.0
-		 */
-		CYPRO_MINOAN = 1131441518,
-		/**
-		 * `Ougr`, Since: 3.0.0
-		 */
-		OLD_UYGHUR = 1333094258,
-		/**
-		 * `Tnsa`, Since: 3.0.0
-		 */
-		TANGSA = 1416524641,
-		/**
-		 * `Toto`, Since: 3.0.0
-		 */
-		TOTO = 1416590447,
-		/**
-		 * `Vith`, Since: 3.0.0
-		 */
-		VITHKUQI = 1449751656,
-		/**
 		 * No script set
 		 */
 		INVALID = 0
-	}
-
-	/**
-	 * Defined by [OpenType Design-Variation Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
-	 */
-	enum style_tag_t {
-		/**
-		 * Used to vary between non-italic and italic.
-		 * A value of 0 can be interpreted as "Roman" (non-italic); a value of 1 can
-		 * be interpreted as (fully) italic.
-		 */
-		ITALIC = 1769234796,
-		/**
-		 * Used to vary design to suit different text sizes.
-		 * Non-zero. Values can be interpreted as text size, in points.
-		 */
-		OPTICAL_SIZE = 1869640570,
-		/**
-		 * Used to vary between upright and slanted text. Values
-		 * must be greater than -90 and less than +90. Values can be interpreted as
-		 * the angle, in counter-clockwise degrees, of oblique slant from whatever the
-		 * designer considers to be upright for that font design.
-		 */
-		SLANT_ANGLE = 1936486004,
-		/**
-		 * same as #HB_STYLE_TAG_SLANT_ANGLE expression as ratio.
-		 */
-		SLANT_RATIO = 1399615092,
-		/**
-		 * Used to vary width of text from narrower to wider.
-		 * Non-zero. Values can be interpreted as a percentage of whatever the font
-		 * designer considers “normal width” for that font design.
-		 */
-		WIDTH = 2003072104,
-		/**
-		 * Used to vary stroke thicknesses or other design details
-		 * to give variation from lighter to blacker. Values can be interpreted in direct
-		 * comparison to values for usWeightClass in the OS/2 table,
-		 * or the CSS font-weight property.
-		 */
-		WEIGHT = 2003265652
 	}
 
 	/**
@@ -7490,8 +7429,7 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Fetches a font name from the OpenType 'name' table.
 	 * If #language is #HB_LANGUAGE_INVALID, English ("en") is assumed.
-	 * Returns string in UTF-16 encoding. A NUL terminator is always written
-	 * for convenience, and isn't included in the output #text_size.
+	 * Returns string in UTF-16 encoding.
 	 * @param face font face.
 	 * @param name_id OpenType name identifier to fetch.
 	 * @param language language to fetch the name for.
@@ -7507,8 +7445,7 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Fetches a font name from the OpenType 'name' table.
 	 * If #language is #HB_LANGUAGE_INVALID, English ("en") is assumed.
-	 * Returns string in UTF-32 encoding. A NUL terminator is always written
-	 * for convenience, and isn't included in the output #text_size.
+	 * Returns string in UTF-32 encoding.
 	 * @param face font face.
 	 * @param name_id OpenType name identifier to fetch.
 	 * @param language language to fetch the name for.
@@ -7524,8 +7461,7 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Fetches a font name from the OpenType 'name' table.
 	 * If #language is #HB_LANGUAGE_INVALID, English ("en") is assumed.
-	 * Returns string in UTF-8 encoding. A NUL terminator is always written
-	 * for convenience, and isn't included in the output #text_size.
+	 * Returns string in UTF-8 encoding.
 	 * @param face font face.
 	 * @param name_id OpenType name identifier to fetch.
 	 * @param language language to fetch the name for.
@@ -7846,9 +7782,6 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Removes all of the elements from #first to #last
 	 * (inclusive) from #set.
-	 * 
-	 * If #last is #HB_SET_VALUE_INVALID, then all values
-	 * greater than or equal to #first are removed.
 	 * @param set A set
 	 * @param first The first element to remove from #set
 	 * @param last The final element to remove from #set
@@ -8185,16 +8118,6 @@ declare namespace imports.gi.HarfBuzz {
 	function shape_plan_set_user_data(shape_plan: shape_plan_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
-	 * Searches variation axes of a #hb_font_t object for a specific axis first,
-	 * if not set, then tries to get default style values from different
-	 * tables of the font.
-	 * @param font a #hb_font_t object.
-	 * @param style_tag a style tag.
-	 * @returns Corresponding axis or default value to a style tag.
-	 */
-	function style_get_value(font: font_t, style_tag: style_tag_t): number;
-
-	/**
 	 * Converts a string into an #hb_tag_t. Valid tags
 	 * are four characters. Shorter input strings will be
 	 * padded with spaces. Longer input strings will be
@@ -8469,6 +8392,33 @@ declare namespace imports.gi.HarfBuzz {
 	function variation_to_string(variation: variation_t): [ string[], number ];
 
 	/**
+	 * Returns library version as three integer components.
+	 * @returns Library major version component
+	 * 
+	 * Library minor version component
+	 * 
+	 * Library micro version component
+	 */
+	function version(): [ major: number, minor: number, micro: number ];
+
+	/**
+	 * Tests the library version against a minimum value,
+	 * as three integer components.
+	 * @param major Library major version component
+	 * @param minor Library minor version component
+	 * @param micro Library micro version component
+	 * @returns %true if the library is equal to or greater than
+	 * the test value, %false otherwise
+	 */
+	function version_atleast(major: number, minor: number, micro: number): bool_t;
+
+	/**
+	 * Returns library version as a string with three components.
+	 * @returns Library version string
+	 */
+	function version_string(): string;
+
+	/**
 	 * Used when getting or setting AAT feature selectors. Indicates that
 	 * there is no selector index corresponding to the selector of interest.
 	 * @returns Used when getting or setting AAT feature selectors. Indicates that
@@ -8564,12 +8514,28 @@ declare namespace imports.gi.HarfBuzz {
 	 */
 	const UNICODE_MAX_DECOMPOSITION_LEN: number;
 
+	/**
+	 * The major component of the library version available at compile-time.
+	 * @returns The major component of the library version available at compile-time.
+	 */
 	const VERSION_MAJOR: number;
 
+	/**
+	 * The micro component of the library version available at compile-time.
+	 * @returns The micro component of the library version available at compile-time.
+	 */
 	const VERSION_MICRO: number;
 
+	/**
+	 * The minor component of the library version available at compile-time.
+	 * @returns The minor component of the library version available at compile-time.
+	 */
 	const VERSION_MINOR: number;
 
+	/**
+	 * A string literal containing the library version available at compile-time.
+	 * @returns A string literal containing the library version available at compile-time.
+	 */
 	const VERSION_STRING: string;
 
 }

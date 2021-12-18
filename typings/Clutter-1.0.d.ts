@@ -923,7 +923,7 @@ declare namespace imports.gi.Clutter {
 		 * grow linearly between the current value and 100 pixels, in 250 milliseconds.
 		 * 
 		 * The animation #mode is a logical id, either from the #ClutterAnimationMode
-		 * enumeration of from {@link Clutter.Alpha.register_func}.
+		 * enumeration of from {@link Clutter.alpha_register_func}.
 		 * 
 		 * All the properties specified will be animated between the current value
 		 * and the final value. If a property should be set at the beginning of
@@ -4518,7 +4518,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The progress function logical id - either a value from the
 		 * {@link AnimationMode} enumeration or a value returned by
-		 * {@link Clutter.Alpha.register_func}.
+		 * {@link Clutter.alpha_register_func}.
 		 * 
 		 * If %CLUTTER_CUSTOM_MODE is used then the function set using
 		 * clutter_alpha_set_closure() or clutter_alpha_set_func()
@@ -4583,7 +4583,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * Sets the progress function of #alpha using the symbolic value
 		 * of #mode, as taken by the {@link AnimationMode} enumeration or
-		 * using the value returned by {@link Clutter.Alpha.register_func}.
+		 * using the value returned by {@link Clutter.alpha_register_func}.
 		 * @param mode a {@link AnimationMode}
 		 */
 		set_mode(mode: number): void;
@@ -4628,7 +4628,7 @@ declare namespace imports.gi.Clutter {
 		 * Use {@link Timeline} instead
 		 * 
 		 * Creates a new {@link Alpha} instance.  You must set a function
-		 * to compute the alpha value using {@link Clutter.Alpha.set_func} and
+		 * to compute the alpha value using {@link Clutter.alpha_set_func} and
 		 * bind a #ClutterTimeline object to the #ClutterAlpha instance
 		 * using clutter_alpha_set_timeline().
 		 * 
@@ -4644,7 +4644,7 @@ declare namespace imports.gi.Clutter {
 		 * Creates a new {@link Alpha} instance and sets the timeline
 		 * and animation mode.
 		 * 
-		 * See also {@link Clutter.Alpha.set_timeline} and clutter_alpha_set_mode().
+		 * See also {@link Clutter.alpha_set_timeline} and clutter_alpha_set_mode().
 		 * @param timeline {@link Timeline} timeline
 		 * @param mode animation mode
 		 * @returns the newly created {@link Alpha}
@@ -4659,7 +4659,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * This function will not register #func as a global alpha function.
 		 * 
-		 * See also {@link Clutter.Alpha.set_timeline} and clutter_alpha_set_func().
+		 * See also {@link Clutter.alpha_set_timeline} and clutter_alpha_set_func().
 		 * @param timeline a {@link Timeline}
 		 * @param func a {@link AlphaFunc}
 		 * @param data data to pass to the function, or %NULL
@@ -4673,7 +4673,7 @@ declare namespace imports.gi.Clutter {
 		 *   function. Use {@link Clutter.Timeline.set_progress_func} on each
 		 *   specific {@link Timeline} instance
 		 * 
-		 * #GClosure variant of {@link Clutter.Alpha.register_func}.
+		 * #GClosure variant of {@link Clutter.alpha_register_func}.
 		 * 
 		 * Registers a global alpha function and returns its logical id
 		 * to be used by clutter_alpha_set_mode() or by {@link Animation}.
@@ -4690,7 +4690,7 @@ declare namespace imports.gi.Clutter {
 		 *   specific {@link Timeline} instance
 		 * 
 		 * Registers a global alpha function and returns its logical id
-		 * to be used by {@link Clutter.Alpha.set_mode} or by {@link Animation}.
+		 * to be used by {@link Clutter.alpha_set_mode} or by {@link Animation}.
 		 * 
 		 * The logical id is always greater than %CLUTTER_ANIMATION_LAST.
 		 * @param func a {@link AlphaFunc}
@@ -4731,7 +4731,7 @@ declare namespace imports.gi.Clutter {
 		 * Use {@link PropertyTransition} instead
 		 * 
 		 * The animation mode, either a value from {@link AnimationMode}
-		 * or a value returned by {@link Clutter.Alpha.register_func}. The
+		 * or a value returned by {@link Clutter.alpha_register_func}. The
 		 * default value is %CLUTTER_LINEAR.
 		 */
 		mode: number;
@@ -4796,7 +4796,7 @@ declare namespace imports.gi.Clutter {
 		completed(): void;
 		/**
 		 * @deprecated
-		 * Use {@link Clutter.Animation.get_timeline} and
+		 * Use {@link Clutter.animation_get_timeline} and
 		 *   clutter_timeline_get_progress_mode() instead.
 		 * 
 		 * Retrieves the {@link Alpha} used by #animation.
@@ -4836,7 +4836,7 @@ declare namespace imports.gi.Clutter {
 		 * Use {@link PropertyTransition} instead
 		 * 
 		 * Retrieves the animation mode of #animation, as set by
-		 * {@link Clutter.Animation.set_mode}.
+		 * {@link Clutter.animation_set_mode}.
 		 * @returns the mode for the animation
 		 */
 		get_mode(): number;
@@ -4868,7 +4868,7 @@ declare namespace imports.gi.Clutter {
 		has_property(property_name: string): boolean;
 		/**
 		 * @deprecated
-		 * Use {@link Clutter.Animation.get_timeline} and
+		 * Use {@link Clutter.animation_get_timeline} and
 		 *   clutter_timeline_set_progress_mode() instead.
 		 * 
 		 * Sets #alpha as the {@link Alpha} used by #animation.
@@ -4909,7 +4909,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * Sets the animation #mode of #animation. The animation #mode is
 		 * a logical id, either coming from the {@link AnimationMode} enumeration
-		 * or the return value of {@link Clutter.Alpha.register_func}.
+		 * or the return value of {@link Clutter.alpha_register_func}.
 		 * 
 		 * This function will also set #ClutterAnimation:alpha if needed.
 		 * @param mode an animation mode logical id
@@ -5025,7 +5025,7 @@ declare namespace imports.gi.Clutter {
 		 * Use {@link PropertyTransition} instead
 		 * 
 		 * Creates a new {@link Animation} instance. You should set the
-		 * #GObject to be animated using {@link Clutter.Animation.set_object},
+		 * #GObject to be animated using {@link Clutter.animation_set_object},
 		 * set the duration with clutter_animation_set_duration() and the
 		 * easing mode using clutter_animation_set_mode().
 		 * 
@@ -5203,7 +5203,7 @@ declare namespace imports.gi.Clutter {
 		 * Sets a single key in the {@link Animator} for the #property_name of
 		 * #object at #progress.
 		 * 
-		 * See also: {@link Clutter.Animator.set}
+		 * See also: {@link Clutter.animator_set}
 		 * @param object a #GObject
 		 * @param property_name the property to specify a key for
 		 * @param mode the id of the alpha function to use
@@ -5608,7 +5608,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If #alpha is not %NULL, the #ClutterBehaviour will take ownership
 		 * of the #ClutterAlpha instance. In the case when #alpha is %NULL,
-		 * it can be set later with {@link Clutter.Behaviour.set_alpha}.
+		 * it can be set later with {@link Clutter.behaviour_set_alpha}.
 		 * @param alpha a {@link Alpha} instance, or %NULL
 		 * @param depth_start initial value of the depth
 		 * @param depth_end final value of the depth
@@ -5800,7 +5800,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If #alpha is not %NULL, the {@link Behaviour} will take ownership
 		 * of the #ClutterAlpha instance. In the case when #alpha is %NULL,
-		 * it can be set later with {@link Clutter.Behaviour.set_alpha}.
+		 * it can be set later with {@link Clutter.behaviour_set_alpha}.
 		 * @param alpha a {@link Alpha} instance, or %NULL
 		 * @param x x coordinace of the center
 		 * @param y y coordiance of the center
@@ -5873,7 +5873,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If #alpha is not %NULL, the #ClutterBehaviour will take ownership
 		 * of the #ClutterAlpha instance. In the case when #alpha is %NULL,
-		 * it can be set later with {@link Clutter.Behaviour.set_alpha}.
+		 * it can be set later with {@link Clutter.behaviour_set_alpha}.
 		 * @param alpha a {@link Alpha} instance, or %NULL
 		 * @param opacity_start minimum level of opacity
 		 * @param opacity_end maximum level of opacity
@@ -5943,7 +5943,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If #alpha is not %NULL, the #ClutterBehaviour will take ownership
 		 * of the #ClutterAlpha instance. In the case when #alpha is %NULL,
-		 * it can be set later with {@link Clutter.Behaviour.set_alpha}.
+		 * it can be set later with {@link Clutter.behaviour_set_alpha}.
 		 * @param alpha a {@link Alpha} instance, or %NULL
 		 * @param path a {@link Path} or %NULL for an empty path
 		 * @returns a {@link Behaviour}
@@ -5971,7 +5971,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If #alpha is not %NULL, the {@link Behaviour} will take ownership
 		 * of the #ClutterAlpha instance. In the case when #alpha is %NULL,
-		 * it can be set later with {@link Clutter.Behaviour.set_alpha}.
+		 * it can be set later with {@link Clutter.behaviour_set_alpha}.
 		 * @param alpha a {@link Alpha} instance, or %NULL
 		 * @param knots an array of {@link Knot}<!-- -->s
 		 * @param n_knots number of entries in #knots
@@ -6026,7 +6026,7 @@ declare namespace imports.gi.Clutter {
 		get_bounds(): [ angle_start: number, angle_end: number ];
 		/**
 		 * Retrieves the center of rotation set using
-		 * {@link Clutter.BehaviourRotate.set_center}.
+		 * {@link Clutter.behaviour_rotate_set_center}.
 		 * @returns return location for the X center of rotation
 		 * 
 		 * return location for the Y center of rotation
@@ -6053,7 +6053,7 @@ declare namespace imports.gi.Clutter {
 		set_bounds(angle_start: number, angle_end: number): void;
 		/**
 		 * Sets the center of rotation. The coordinates are relative to the plane
-		 * normal to the rotation axis set with {@link Clutter.BehaviourRotate.set_axis}.
+		 * normal to the rotation axis set with {@link Clutter.behaviour_rotate_set_axis}.
 		 * @param x X axis center of rotation
 		 * @param y Y axis center of rotation
 		 * @param z Z axis center of rotation
@@ -6108,7 +6108,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If #alpha is not %NULL, the #ClutterBehaviour will take ownership
 		 * of the #ClutterAlpha instance. In the case when #alpha is %NULL,
-		 * it can be set later with {@link Clutter.Behaviour.set_alpha}.
+		 * it can be set later with {@link Clutter.behaviour_set_alpha}.
 		 * @param alpha a {@link Alpha} instance, or %NULL
 		 * @param axis the rotation axis
 		 * @param direction the rotation direction
@@ -6196,7 +6196,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If #alpha is not %NULL, the #ClutterBehaviour will take ownership
 		 * of the #ClutterAlpha instance. In the case when #alpha is %NULL,
-		 * it can be set later with {@link Clutter.Behaviour.set_alpha}.
+		 * it can be set later with {@link Clutter.behaviour_set_alpha}.
 		 * @param alpha a {@link Alpha} instance, or %NULL
 		 * @param x_scale_start initial scale factor on the X axis
 		 * @param y_scale_start initial scale factor on the Y axis
@@ -6762,7 +6762,7 @@ declare namespace imports.gi.Clutter {
 		 * Use {@link Clutter.Actor.add_child} instead. To set
 		 *   specific layout properties, use clutter_layout_manager_child_set()
 		 * 
-		 * Vector-based variant of {@link Clutter.Box.pack}, intended for language
+		 * Vector-based variant of {@link Clutter.box_pack}, intended for language
 		 * bindings to use
 		 * @param actor a {@link Actor}
 		 * @param n_properties the number of properties to set
@@ -6854,7 +6854,7 @@ declare namespace imports.gi.Clutter {
 		 * The easing mode has the same semantics of #ClutterAnimation:mode: it can
 		 * either be a value from the #ClutterAnimationMode enumeration, like
 		 * %CLUTTER_EASE_OUT_CUBIC, or a logical id as returned by
-		 * {@link Clutter.Alpha.register_func}.
+		 * {@link Clutter.alpha_register_func}.
 		 * 
 		 * The default value is %CLUTTER_EASE_OUT_CUBIC.
 		 */
@@ -7026,7 +7026,7 @@ declare namespace imports.gi.Clutter {
 		 * Sets the easing mode to be used by #layout when animating changes in layout
 		 * properties.
 		 * @param mode an easing mode, either from {@link AnimationMode} or a logical id
-		 *   from {@link Clutter.Alpha.register_func}
+		 *   from {@link Clutter.alpha_register_func}
 		 */
 		set_easing_mode(mode: number): void;
 		/**
@@ -7295,11 +7295,11 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * @deprecated
 		 * Use the {@link CairoTexture.draw} signal and
-		 *   the {@link Clutter.CairoTexture.invalidate} function to obtain a
+		 *   the {@link Clutter.cairo_texture_invalidate} function to obtain a
 		 *   Cairo context for 2D drawing.
 		 * 
 		 * Creates a new Cairo context for the #cairo texture. It is
-		 * similar to using {@link Clutter.CairoTexture.create_region} with #x_offset
+		 * similar to using {@link Clutter.cairo_texture_create_region} with #x_offset
 		 * and #y_offset of 0, #width equal to the #cairo texture surface width
 		 * and #height equal to the #cairo texture surface height.
 		 * 
@@ -7313,7 +7313,7 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * @deprecated
 		 * Use the {@link CairoTexture.draw} signal and
-		 *   {@link Clutter.CairoTexture.invalidate_rectangle} to obtain a
+		 *   {@link Clutter.cairo_texture_invalidate_rectangle} to obtain a
 		 *   clipped Cairo context for 2D drawing.
 		 * 
 		 * Creates a new Cairo context that will updat the region defined
@@ -7334,7 +7334,7 @@ declare namespace imports.gi.Clutter {
 		 * @deprecated
 		 * Use {@link Canvas} instead
 		 * 
-		 * Retrieves the value set using {@link Clutter.CairoTexture.set_auto_resize}.
+		 * Retrieves the value set using {@link Clutter.cairo_texture_set_auto_resize}.
 		 * @returns %TRUE if the {@link CairoTexture} should track the
 		 *   allocation, and %FALSE otherwise
 		 */
@@ -7358,7 +7358,7 @@ declare namespace imports.gi.Clutter {
 		 * This function will cause the #ClutterCairoTexture::draw signal
 		 * to be emitted.
 		 * 
-		 * See also: {@link Clutter.CairoTexture.invalidate_rectangle}
+		 * See also: {@link Clutter.cairo_texture_invalidate_rectangle}
 		 */
 		invalidate(): void;
 		/**
@@ -7370,7 +7370,7 @@ declare namespace imports.gi.Clutter {
 		 * The invalidation will cause the #ClutterCairoTexture::draw signal
 		 * to be emitted.
 		 * 
-		 * See also: {@link Clutter.CairoTexture.invalidate}
+		 * See also: {@link Clutter.cairo_texture_invalidate}
 		 * @param rect a rectangle with the area to invalida,
 		 *   or %NULL to perform an unbounded invalidation
 		 */
@@ -7395,7 +7395,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * This function will not invalidate the contents of the Cairo
 		 * texture: you will have to explicitly call either
-		 * {@link Clutter.CairoTexture.invalidate_rectangle} or
+		 * {@link Clutter.cairo_texture_invalidate_rectangle} or
 		 * clutter_cairo_texture_invalidate().
 		 * @param width the new width of the surface
 		 * @param height the new height of the surface
@@ -7404,7 +7404,7 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * The ::create-surface signal is emitted when a {@link CairoTexture}
 		 * news its surface (re)created, which happens either when the Cairo
-		 * context is created with {@link Clutter.CairoTexture.create} or
+		 * context is created with {@link Clutter.cairo_texture_create} or
 		 * clutter_cairo_texture_create_region(), or when the surface is resized
 		 * through clutter_cairo_texture_set_surface_size().
 		 * 
@@ -8340,18 +8340,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		get_drag_area(): [ boolean, Rect ];
 		/**
-		 * Retrieves the axis constraint set by {@link Clutter.DragAction.set_drag_axis}
+		 * Retrieves the axis constraint set by {@link Clutter.drag_action_set_drag_axis}
 		 * @returns the axis constraint
 		 */
 		get_drag_axis(): DragAxis;
 		/**
-		 * Retrieves the drag handle set by {@link Clutter.DragAction.set_drag_handle}
+		 * Retrieves the drag handle set by {@link Clutter.drag_action_set_drag_handle}
 		 * @returns a {@link Actor}, used as the drag
 		 *   handle, or %NULL if none was set
 		 */
 		get_drag_handle(): Actor;
 		/**
-		 * Retrieves the values set by {@link Clutter.DragAction.set_drag_threshold}.
+		 * Retrieves the values set by {@link Clutter.drag_action_set_drag_threshold}.
 		 * 
 		 * If the {@link DragAction.x_drag_threshold} property or the
 		 * #ClutterDragAction:y-drag-threshold property have been set to -1 then
@@ -8456,7 +8456,7 @@ declare namespace imports.gi.Clutter {
 		 * latest motion event are computed in the actor's coordinate space,
 		 * to take into account eventual transformations. If you want the
 		 * stage coordinates of the latest motion event you can use
-		 * {@link Clutter.DragAction.get_motion_coords}.
+		 * {@link Clutter.drag_action_get_motion_coords}.
 		 * 
 		 * The default handler of the signal will call clutter_actor_move_by()
 		 * either on #actor or, if set, of #ClutterDragAction:drag-handle using
@@ -8486,7 +8486,7 @@ declare namespace imports.gi.Clutter {
 		 * latest motion event are computed in the actor's coordinate space,
 		 * to take into account eventual transformations. If you want the
 		 * stage coordinates of the latest motion event you can use
-		 * {@link Clutter.DragAction.get_motion_coords}.
+		 * {@link Clutter.drag_action_get_motion_coords}.
 		 * 
 		 * The default handler will emit #ClutterDragAction::drag-motion,
 		 * if #ClutterDragAction::drag-progress emission returns %TRUE.
@@ -10305,7 +10305,7 @@ declare namespace imports.gi.Clutter {
 		 * easing #mode
 		 * 
 		 * The easing mode can be specified either as a {@link AnimationMode}
-		 * or as a logical id returned by {@link Clutter.Alpha.register_func}
+		 * or as a logical id returned by {@link Clutter.alpha_register_func}
 		 * 
 		 * The result of this function depends on the #manager implementation
 		 * @param duration the duration of the animation, in milliseconds
@@ -10600,7 +10600,7 @@ declare namespace imports.gi.Clutter {
 		 * @deprecated
 		 * Use #GListStore instead
 		 * 
-		 * Non-vararg version of {@link Clutter.ListModel.new}. This function is
+		 * Non-vararg version of {@link Clutter.list_model_new}. This function is
 		 * useful for language bindings.
 		 * @param n_columns number of columns in the model
 		 * @param types an array of #GType types for the columns, from first to last
@@ -10621,7 +10621,7 @@ declare namespace imports.gi.Clutter {
 		 * Whether the {@link Model} has a filter set
 		 * 
 		 * This property is set to %TRUE if a filter function has been
-		 * set using {@link Clutter.Model.set_filter}
+		 * set using {@link Clutter.model_set_filter}
 		 */
 		readonly filter_set: boolean;
 		/**
@@ -10710,7 +10710,7 @@ declare namespace imports.gi.Clutter {
 		 * Use #GListModel instead
 		 * 
 		 * Returns whether the #model has a filter in place, set
-		 * using {@link Clutter.Model.set_filter}
+		 * using {@link Clutter.model_set_filter}
 		 * @returns %TRUE if a filter is set
 		 */
 		get_filter_set(): boolean;
@@ -10730,7 +10730,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * Retrieves a {@link ModelIter} representing the row at the given index.
 		 * 
-		 * If a filter function has been set using {@link Clutter.Model.set_filter}
+		 * If a filter function has been set using {@link Clutter.model_set_filter}
 		 * then the #model implementation will return the first non filtered
 		 * row.
 		 * @param row position of the row to retrieve
@@ -10762,7 +10762,7 @@ declare namespace imports.gi.Clutter {
 		 * Use #GListModel instead
 		 * 
 		 * Retrieves the number of rows inside #model, eventually taking
-		 * into account any filtering function set using {@link Clutter.Model.set_filter}.
+		 * into account any filtering function set using {@link Clutter.model_set_filter}.
 		 * @returns The length of the #model. If there is a filter set, then
 		 *   the length of the filtered #model is returned.
 		 */
@@ -11061,7 +11061,7 @@ declare namespace imports.gi.Clutter {
 		 * @deprecated
 		 * Use #GListModel instead
 		 * 
-		 * See {@link Clutter.ModelIter.get}. This version takes a va_list for language
+		 * See {@link Clutter.model_iter_get}. This version takes a va_list for language
 		 * bindings.
 		 * @param args a list of column/return location pairs, terminated by -1
 		 */
@@ -11135,7 +11135,7 @@ declare namespace imports.gi.Clutter {
 		 * @deprecated
 		 * Use #GListModel instead
 		 * 
-		 * See {@link Clutter.ModelIter.set}; this version takes a va_list for language
+		 * See {@link Clutter.model_iter_set}; this version takes a va_list for language
 		 * bindings.
 		 * @param args va_list of column/value pairs, terminiated by -1
 		 */
@@ -12310,13 +12310,13 @@ declare namespace imports.gi.Clutter {
 		 * appended timeline will be started when #parent is complete.
 		 * 
 		 * If #parent is %NULL, the new {@link Timeline} will be started when
-		 * {@link Clutter.Score.start} is called.
+		 * {@link Clutter.score_start} is called.
 		 * 
 		 * #ClutterScore will take a reference on #timeline.
 		 * @param parent a {@link Timeline} in the score, or %NULL
 		 * @param timeline a {@link Timeline}
 		 * @returns the id of the {@link Timeline} inside the score, or
-		 *   0 on failure. The returned id can be used with {@link Clutter.Score.remove}
+		 *   0 on failure. The returned id can be used with {@link Clutter.score_remove}
 		 *   or clutter_score_get_timeline().
 		 */
 		append(parent: Timeline | null, timeline: Timeline): number;
@@ -12325,14 +12325,14 @@ declare namespace imports.gi.Clutter {
 		 * {@link Timeline}.
 		 * 
 		 * If you want to append #timeline at the end of #parent, use
-		 * {@link Clutter.Score.append}.
+		 * {@link Clutter.score_append}.
 		 * 
 		 * The #ClutterScore will take a reference on #timeline.
 		 * @param parent the parent {@link Timeline}
 		 * @param marker_name the name of the marker to use
 		 * @param timeline the {@link Timeline} to append
 		 * @returns the id of the {@link Timeline} inside the score, or
-		 *   0 on failure. The returned id can be used with {@link Clutter.Score.remove}
+		 *   0 on failure. The returned id can be used with {@link Clutter.score_remove}
 		 *   or clutter_score_get_timeline().
 		 */
 		append_at_marker(parent: Timeline, marker_name: string, timeline: Timeline): number;
@@ -13697,7 +13697,7 @@ declare namespace imports.gi.Clutter {
 		 * Sets the fog (also known as "depth cueing") settings for the #stage.
 		 * 
 		 * A {@link Stage} will only use a linear fog progression, which
-		 * depends solely on the distance from the viewer. The {@link Cogl.set.fog}
+		 * depends solely on the distance from the viewer. The {@link Cogl.set_fog}
 		 * function in COGL exposes more of the underlying implementation,
 		 * and allows changing the for progression function. It can be directly
 		 * used by disabling the #ClutterStage:use-fog property and connecting
@@ -13916,7 +13916,7 @@ declare namespace imports.gi.Clutter {
 		 * The ::delete-event signal is emitted when the user closes a
 		 * {@link Stage} window using the window controls.
 		 * 
-		 * Clutter by default will call {@link Clutter.main.quit} if #stage is
+		 * Clutter by default will call {@link Clutter.main_quit} if #stage is
 		 * the default stage, and clutter_actor_destroy() for any other
 		 * stage.
 		 * 
@@ -14156,7 +14156,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The currently set target state, setting it causes the
 		 * state machine to transition to the new state, use
-		 * {@link Clutter.State.warp_to_state} to change state without
+		 * {@link Clutter.state_warp_to_state} to change state without
 		 * a transition.
 		 */
 		state: string;
@@ -14181,7 +14181,7 @@ declare namespace imports.gi.Clutter {
 		 * target state pair
 		 * 
 		 * The semantics for the query are the same as the semantics used for
-		 * setting the duration with {@link Clutter.State.set_duration}
+		 * setting the duration with {@link Clutter.state_set_duration}
 		 * @param source_state_name the name of the source state to
 		 *   get the duration of, or %NULL
 		 * @param target_state_name the name of the source state to
@@ -14295,7 +14295,7 @@ declare namespace imports.gi.Clutter {
 		 * mode, and the #ClutterActor:scale-x and #ClutterActor:scale-y properties
 		 * animated to a value of 1.2 using %CLUTTER_EASE_OUT_CUBIC as the animation
 		 * mode. To change the state (and start the transition) you can use the
-		 * {@link Clutter.State.set_state} function:
+		 * {@link Clutter.state_set_state} function:
 		 * 
 		 * |[
 		 *   clutter_state_set_state (state, "hover");
@@ -14414,7 +14414,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * Change to the specified target state immediately with no animation.
 		 * 
-		 * See {@link Clutter.State.set_state}.
+		 * See {@link Clutter.state_set_state}.
 		 * @param target_state_name the state to transition to
 		 * @returns the {@link Timeline} that drives the
 		 *   state transition. The returned timeline is owned by the #ClutterState
@@ -14423,7 +14423,7 @@ declare namespace imports.gi.Clutter {
 		warp_to_state(target_state_name: string): Timeline;
 		/**
 		 * The ::completed signal is emitted when a {@link State} reaches
-		 * the target state specified by {@link Clutter.State.set_state} or
+		 * the target state specified by {@link Clutter.state_set_state} or
 		 * clutter_state_warp_to_state().
 		 * @param signal 
 		 * @param callback Callback function
@@ -14559,7 +14559,7 @@ declare namespace imports.gi.Clutter {
 		 * The easing mode has the same semantics of #ClutterAnimation:mode: it can
 		 * either be a value from the #ClutterAnimationMode enumeration, like
 		 * %CLUTTER_EASE_OUT_CUBIC, or a logical id as returned by
-		 * {@link Clutter.Alpha.register_func}.
+		 * {@link Clutter.alpha_register_func}.
 		 * 
 		 * The default value is %CLUTTER_EASE_OUT_CUBIC.
 		 */
@@ -14592,7 +14592,7 @@ declare namespace imports.gi.Clutter {
 		 *   clutter_actor_get_y_align() instead.
 		 * 
 		 * Retrieves the horizontal and vertical alignment policies for #actor
-		 * as set using {@link Clutter.TableLayout.pack} or
+		 * as set using {@link Clutter.table_layout_pack} or
 		 * clutter_table_layout_set_alignment().
 		 * @param actor a {@link Actor} child of #layout
 		 * @returns return location for the horizontal alignment policy
@@ -14612,7 +14612,7 @@ declare namespace imports.gi.Clutter {
 		 * @deprecated
 		 * Use {@link GridLayout.column_spacing}
 		 * 
-		 * Retrieves the spacing set using {@link Clutter.TableLayout.set_column_spacing}
+		 * Retrieves the spacing set using {@link Clutter.table_layout_set_column_spacing}
 		 * @returns the spacing between columns of the {@link TableLayout}
 		 */
 		get_column_spacing(): number;
@@ -14622,7 +14622,7 @@ declare namespace imports.gi.Clutter {
 		 *   of the children when allocating them. See {@link Clutter.Actor.set_easing_mode}
 		 *   and clutter_actor_set_easing_duration().
 		 * 
-		 * Retrieves the duration set using {@link Clutter.TableLayout.set_easing_duration}
+		 * Retrieves the duration set using {@link Clutter.table_layout_set_easing_duration}
 		 * @returns the duration of the animations, in milliseconds
 		 */
 		get_easing_duration(): number;
@@ -14632,7 +14632,7 @@ declare namespace imports.gi.Clutter {
 		 *   of the children when allocating them. See {@link Clutter.Actor.set_easing_mode}
 		 *   and clutter_actor_set_easing_duration().
 		 * 
-		 * Retrieves the easing mode set using {@link Clutter.TableLayout.set_easing_mode}
+		 * Retrieves the easing mode set using {@link Clutter.table_layout_set_easing_mode}
 		 * @returns an easing mode
 		 */
 		get_easing_mode(): number;
@@ -14642,7 +14642,7 @@ declare namespace imports.gi.Clutter {
 		 *   clutter_actor_get_y_expand() instead.
 		 * 
 		 * Retrieves the horizontal and vertical expand policies for #actor
-		 * as set using {@link Clutter.TableLayout.pack} or clutter_table_layout_set_expand()
+		 * as set using {@link Clutter.table_layout_pack} or clutter_table_layout_set_expand()
 		 * @param actor a {@link Actor} child of #layout
 		 * @returns return location for the horizontal expand policy
 		 * 
@@ -14655,7 +14655,7 @@ declare namespace imports.gi.Clutter {
 		 *   clutter_actor_get_y_align() instead.
 		 * 
 		 * Retrieves the horizontal and vertical fill policies for #actor
-		 * as set using {@link Clutter.TableLayout.pack} or clutter_table_layout_set_fill()
+		 * as set using {@link Clutter.table_layout_pack} or clutter_table_layout_set_fill()
 		 * @param actor a {@link Actor} child of #layout
 		 * @returns return location for the horizontal fill policy
 		 * 
@@ -14674,7 +14674,7 @@ declare namespace imports.gi.Clutter {
 		 * @deprecated
 		 * Use {@link GridLayout.row_spacing} instead
 		 * 
-		 * Retrieves the spacing set using {@link Clutter.TableLayout.set_row_spacing}
+		 * Retrieves the spacing set using {@link Clutter.table_layout_set_row_spacing}
 		 * @returns the spacing between rows of the {@link TableLayout}
 		 */
 		get_row_spacing(): number;
@@ -14684,7 +14684,7 @@ declare namespace imports.gi.Clutter {
 		 *   of {@link GridLayout} instead
 		 * 
 		 * Retrieves the row and column span for #actor as set using
-		 * {@link Clutter.TableLayout.pack} or clutter_table_layout_set_span()
+		 * {@link Clutter.table_layout_pack} or clutter_table_layout_set_span()
 		 * @param actor a {@link Actor} child of #layout
 		 * @returns return location for the col span
 		 * 
@@ -14699,7 +14699,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * Retrieves whether #layout should animate changes in the layout properties
 		 * 
-		 * Since {@link Clutter.TableLayout.set_use_animations}
+		 * Since {@link Clutter.table_layout_set_use_animations}
 		 * @returns %TRUE if the animations should be used, %FALSE otherwise
 		 */
 		get_use_animations(): boolean;
@@ -14743,7 +14743,7 @@ declare namespace imports.gi.Clutter {
 		 * Sets the duration of the animations used by #layout when animating changes
 		 * in the layout properties
 		 * 
-		 * Use {@link Clutter.TableLayout.set_use_animations} to enable and disable the
+		 * Use {@link Clutter.table_layout_set_use_animations} to enable and disable the
 		 * animations
 		 * @param msecs the duration of the animations, in milliseconds
 		 */
@@ -14757,10 +14757,10 @@ declare namespace imports.gi.Clutter {
 		 * Sets the easing mode to be used by #layout when animating changes in layout
 		 * properties
 		 * 
-		 * Use {@link Clutter.TableLayout.set_use_animations} to enable and disable the
+		 * Use {@link Clutter.table_layout_set_use_animations} to enable and disable the
 		 * animations
 		 * @param mode an easing mode, either from {@link AnimationMode} or a logical id
-		 *   from {@link Clutter.Alpha.register_func}
+		 *   from {@link Clutter.alpha_register_func}
 		 */
 		set_easing_mode(mode: number): void;
 		/**
@@ -14816,7 +14816,7 @@ declare namespace imports.gi.Clutter {
 		 * Sets whether #layout should animate changes in the layout properties
 		 * 
 		 * The duration of the animations is controlled by
-		 * {@link Clutter.TableLayout.set_easing_duration}; the easing mode to be used
+		 * {@link Clutter.table_layout_set_easing_duration}; the easing mode to be used
 		 * by the animations is controlled by clutter_table_layout_set_easing_mode()
 		 * @param animate %TRUE if the #layout should use animations
 		 */
@@ -16083,7 +16083,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * Retrieves the handle to the underlying COGL texture used for drawing
 		 * the actor. No extra reference is taken so if you need to keep the
-		 * handle then you should call {@link Cogl.handle.ref} on it.
+		 * handle then you should call {@link Cogl.Handle.ref} on it.
 		 * 
 		 * The texture handle returned is the first layer of the material
 		 * handle used by the {@link Texture}. If you need to access the other
@@ -16582,7 +16582,7 @@ declare namespace imports.gi.Clutter {
 		 * Creates a new {@link PaintNode} that will paint the passed #texture.
 		 * 
 		 * This function will take a reference on #texture, so it is safe to
-		 * call {@link Cogl.object_unref} on #texture when it returns.
+		 * call {@link Cogl.Object.unref} on #texture when it returns.
 		 * 
 		 * The #color must not be pre-multiplied with its #ClutterColor.alpha
 		 * channel value; if #color is %NULL, a fully opaque white color will
@@ -17781,7 +17781,7 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the #GType of the property a key applies to
 		 * 
 		 * You can use this type to initialize the #GValue to pass to
-		 * {@link Clutter.AnimatorKey.get_value}
+		 * {@link Clutter.animator_key_get_value}
 		 * @returns the #GType of the property
 		 */
 		public get_property_type(): GObject.Type;
@@ -18199,7 +18199,7 @@ declare namespace imports.gi.Clutter {
 		public height: number;
 		/**
 		 * @deprecated
-		 * Use {@link Rect} and {@link Clutter.Rect.intersection}
+		 * Use {@link Rect} and {@link Clutter.rect_intersection}
 		 * 
 		 * Determines if #geometry0 and geometry1 intersect returning %TRUE if
 		 * they do else %FALSE.
@@ -18210,7 +18210,7 @@ declare namespace imports.gi.Clutter {
 		public intersects(geometry1: Geometry): boolean;
 		/**
 		 * @deprecated
-		 * Use {@link Rect} and {@link Clutter.Rect.union}
+		 * Use {@link Rect} and {@link Clutter.rect_union}
 		 * 
 		 * Find the union of two rectangles represented as {@link Geometry}.
 		 * @param geometry_b another {@link Geometry}
@@ -18354,7 +18354,7 @@ declare namespace imports.gi.Clutter {
 	class Matrix {
 		public constructor(options?: Partial<MatrixInitOptions>);
 		/**
-		 * Frees the memory allocated by {@link Clutter.matrix.alloc}.
+		 * Frees the memory allocated by {@link Clutter.matrix_alloc}.
 		 */
 		public free(): void;
 		/**
@@ -18728,7 +18728,7 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Allocates a new {@link Point}.
 		 * @returns the newly allocated {@link Point}.
-		 *   Use {@link Clutter.Point.free} to free its resources.
+		 *   Use {@link Clutter.point_free} to free its resources.
 		 */
 		public static alloc(): Point;
 		/**
@@ -18742,7 +18742,7 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Creates a new {@link Point} with the same coordinates of #point.
 		 * @returns a newly allocated {@link Point}.
-		 *   Use {@link Clutter.Point.free} to free its resources.
+		 *   Use {@link Clutter.point_free} to free its resources.
 		 */
 		public copy(): Point;
 		/**
@@ -18785,7 +18785,7 @@ declare namespace imports.gi.Clutter {
 	 * be equivalent to a rectangle with origin of [ 10.0, 10.0 ] and size of
 	 * [ -10.0, -10.0 ].
 	 * 
-	 * Application code can normalize rectangles using {@link Clutter.Rect.normalize}:
+	 * Application code can normalize rectangles using {@link Clutter.rect_normalize}:
 	 * this function will ensure that the width and height of a #ClutterRect are
 	 * positive values. All functions taking a #ClutterRect as an argument will
 	 * implicitly normalize it before computing eventual results. For this reason
@@ -18798,14 +18798,14 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Creates a new, empty {@link Rect}.
 		 * 
-		 * You can use {@link Clutter.Rect.init} to initialize the returned rectangle,
+		 * You can use {@link Clutter.rect_init} to initialize the returned rectangle,
 		 * for instance:
 		 * 
 		 * |[
 		 *   rect = clutter_rect_init (clutter_rect_alloc (), x, y, width, height);
 		 * ]|
 		 * @returns the newly allocated {@link Rect}.
-		 *   Use {@link Clutter.Rect.free} to free its resources
+		 *   Use {@link Clutter.rect_free} to free its resources
 		 */
 		public static alloc(): Rect;
 		/**
@@ -18842,7 +18842,7 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Copies #rect into a new {@link Rect} instance.
 		 * @returns the newly allocate copy of #rect.
-		 *   Use {@link Clutter.Rect.free} to free the associated resources
+		 *   Use {@link Clutter.rect_free} to free the associated resources
 		 */
 		public copy(): Rect;
 		/**
@@ -19043,7 +19043,7 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Allocates a new {@link Size}.
 		 * @returns the newly allocated {@link Size}.
-		 *   Use {@link Clutter.Size.free} to free its resources.
+		 *   Use {@link Clutter.size_free} to free its resources.
 		 */
 		public static alloc(): Size;
 		/**
@@ -19057,7 +19057,7 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Creates a new {@link Size} and duplicates #size.
 		 * @returns the newly allocated {@link Size}.
-		 *   Use {@link Clutter.Size.free} to free its resources.
+		 *   Use {@link Clutter.size_free} to free its resources.
 		 */
 		public copy(): Size;
 		/**
@@ -19180,7 +19180,7 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the #GType of the property a key applies to
 		 * 
 		 * You can use this type to initialize the #GValue to pass to
-		 * {@link Clutter.StateKey.get_value}
+		 * {@link Clutter.state_key_get_value}
 		 * @returns the #GType of the property
 		 */
 		public get_property_type(): GObject.Type;
@@ -19258,7 +19258,7 @@ declare namespace imports.gi.Clutter {
 		 * @param data data to pass to the function, or %NULL
 		 * @param notify function to call when the timeout is removed, or %NULL
 		 * @returns the ID (greater than 0) of the timeout inside the pool.
-		 *   Use {@link Clutter.TimeoutPool.remove} to stop the timeout.
+		 *   Use {@link Clutter.timeout_pool_remove} to stop the timeout.
 		 */
 		public add(fps: number, func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
 		/**
@@ -19267,7 +19267,7 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * Removes a timeout function with #id_ from the timeout pool. The id
 		 * is the same returned when adding a function to the timeout pool with
-		 * {@link Clutter.TimeoutPool.add}.
+		 * {@link Clutter.timeout_pool_add}.
 		 * @param id_ the id of the timeout to remove
 		 */
 		public remove(id_: number): void;
@@ -19527,7 +19527,7 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Allocates a new, empty {@link Vertex}.
 		 * @returns the newly allocated {@link Vertex}.
-		 *   Use {@link Clutter.Vertex.free} to free its resources
+		 *   Use {@link Clutter.vertex_free} to free its resources
 		 */
 		public static alloc(): Vertex;
 		/**
@@ -19543,7 +19543,7 @@ declare namespace imports.gi.Clutter {
 		 * @param y Y coordinate
 		 * @param z Z coordinate
 		 * @returns the newly allocated {@link Vertex}.
-		 *   Use {@link Clutter.Vertex.free} to free the resources
+		 *   Use {@link Clutter.vertex_free} to free the resources
 		 */
 		public static new(x: number, y: number, z: number): Vertex;
 		/**
@@ -19561,7 +19561,7 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Copies #vertex
 		 * @returns a newly allocated copy of {@link Vertex}.
-		 *   Use {@link Clutter.Vertex.free} to free the allocated resources
+		 *   Use {@link Clutter.vertex_free} to free the allocated resources
 		 */
 		public copy(): Vertex;
 		/**
@@ -19571,7 +19571,7 @@ declare namespace imports.gi.Clutter {
 		 */
 		public equal(vertex_b: Vertex): boolean;
 		/**
-		 * Frees a {@link Vertex} allocated using {@link Clutter.Vertex.alloc} or
+		 * Frees a {@link Vertex} allocated using {@link Clutter.vertex_alloc} or
 		 * clutter_vertex_copy().
 		 */
 		public free(): void;
@@ -20185,7 +20185,7 @@ declare namespace imports.gi.Clutter {
 		 * The implementation might be asynchronous, so the way to know whether
 		 * the actual playing state of the #media is to use the #GObject::notify
 		 * signal on the {@link Media.playing} property and then retrieve the
-		 * current state with {@link Clutter.Media.get_playing}. ClutterGstVideoTexture
+		 * current state with {@link Clutter.media_get_playing}. ClutterGstVideoTexture
 		 * in clutter-gst is an example of such an asynchronous implementation.
 		 * @param playing %TRUE to start playing
 		 */
@@ -20399,7 +20399,7 @@ declare namespace imports.gi.Clutter {
 	 *   <graphic fileref="easing-modes.png" format="PNG"/>
 	 * </figure>
 	 * 
-	 * Every global alpha function registered using {@link Clutter.Alpha.register_func}
+	 * Every global alpha function registered using {@link Clutter.alpha_register_func}
 	 * or clutter_alpha_register_closure() will have a logical id greater than
 	 * %CLUTTER_ANIMATION_LAST.
 	 */
@@ -21994,7 +21994,7 @@ declare namespace imports.gi.Clutter {
 
 	/**
 	 * Runtime flags to change the font quality. To be used with
-	 * {@link Clutter.set.font_flags}.
+	 * {@link Clutter.set_font_flags}.
 	 */
 	enum FontFlags {
 		/**
@@ -22286,12 +22286,12 @@ declare namespace imports.gi.Clutter {
 	}
 
 	/**
-	 * This function is passed to {@link Clutter.Behaviour.actors_foreach} and
+	 * This function is passed to {@link Clutter.behaviour_actors_foreach} and
 	 * will be called for each actor driven by #behaviour.
 	 */
 	interface BehaviourForeachFunc {
 		/**
-		 * This function is passed to {@link Clutter.Behaviour.actors_foreach} and
+		 * This function is passed to {@link Clutter.behaviour_actors_foreach} and
 		 * will be called for each actor driven by #behaviour.
 		 * @param behaviour the {@link Behaviour}
 		 * @param actor an actor driven by #behaviour
@@ -23118,7 +23118,7 @@ declare namespace imports.gi.Clutter {
 	function feature_get_all(): FeatureFlags;
 
 	/**
-	 * Simple wrapper around {@link Clutter.frame.source_add_full}.
+	 * Simple wrapper around {@link Clutter.Frame.source_add_full}.
 	 * @param fps the number of times per second to call the function
 	 * @param func function to call
 	 * @param data data to pass to the function
@@ -23202,7 +23202,7 @@ declare namespace imports.gi.Clutter {
 	function get_default_backend(): Backend;
 
 	/**
-	 * Retrieves the default frame rate. See {@link Clutter.set.default_frame_rate}.
+	 * Retrieves the default frame rate. See {@link Clutter.set_default_frame_rate}.
 	 * @returns the default frame rate
 	 */
 	function get_default_frame_rate(): number;
@@ -23220,7 +23220,7 @@ declare namespace imports.gi.Clutter {
 
 	/**
 	 * Gets the current font flags for rendering text. See
-	 * {@link Clutter.set.font_flags}.
+	 * {@link Clutter.set_font_flags}.
 	 * @returns The font flags
 	 */
 	function get_font_flags(): FontFlags;
@@ -23236,7 +23236,7 @@ declare namespace imports.gi.Clutter {
 
 	/**
 	 * Retrieves the {@link InputDevice} from its #id_. This is a convenience
-	 * wrapper for {@link Clutter.DeviceManager.get_device} and it is functionally
+	 * wrapper for {@link Clutter.device_manager_get_device} and it is functionally
 	 * equivalent to:
 	 * 
 	 * |[
@@ -23386,7 +23386,7 @@ declare namespace imports.gi.Clutter {
 	/**
 	 * Grabs all the pointer events coming from the device #id for #actor.
 	 * 
-	 * If #id is -1 then this function is equivalent to {@link Clutter.grab.pointer}.
+	 * If #id is -1 then this function is equivalent to {@link Clutter.grab_pointer}.
 	 * @param actor a {@link Actor}
 	 * @param id_ a device id, or -1
 	 */
@@ -23685,7 +23685,7 @@ declare namespace imports.gi.Clutter {
 
 	/**
 	 * Runs the test suite using the units added by calling
-	 * {@link Clutter.test.add}.
+	 * {@link Clutter.test_add}.
 	 * 
 	 * The typical test suite is composed of a list of functions
 	 * called by clutter_test_run(), for instance:
@@ -23716,7 +23716,7 @@ declare namespace imports.gi.Clutter {
 	function texture_error_quark(): GLib.Quark;
 
 	/**
-	 * Simple wrapper around {@link Clutter.threads.add_frame_source_full}.
+	 * Simple wrapper around {@link Clutter.threads_add_frame_source_full}.
 	 * @param fps the number of times per second to call the function
 	 * @param func function to call
 	 * @param data data to pass to the function
@@ -23859,7 +23859,7 @@ declare namespace imports.gi.Clutter {
 	 * list of repaint functions and will not be called again.
 	 * 
 	 * This function is guaranteed to be called from within the same thread
-	 * that called clutter_main(), and while the Clutter lock is being held;
+	 * that called {@link Clutter.main}, and while the Clutter lock is being held;
 	 * the function will be called within the main loop, so it is imperative
 	 * that it does not block, otherwise the frame time budget may be lost.
 	 * 
@@ -23895,7 +23895,7 @@ declare namespace imports.gi.Clutter {
 	 * list of repaint functions and will not be called again.
 	 * 
 	 * This function is guaranteed to be called from within the same thread
-	 * that called clutter_main(), and while the Clutter lock is being held;
+	 * that called {@link Clutter.main}, and while the Clutter lock is being held;
 	 * the function will be called within the main loop, so it is imperative
 	 * that it does not block, otherwise the frame time budget may be lost.
 	 * 
@@ -23962,7 +23962,7 @@ declare namespace imports.gi.Clutter {
 
 	/**
 	 * Initialises the Clutter threading mechanism, so that Clutter API can be
-	 * called by multiple threads, using {@link Clutter.threads.enter} and
+	 * called by multiple threads, using {@link Clutter.threads_enter} and
 	 * clutter_threads_leave() to mark the critical sections.
 	 * 
 	 * You must call g_thread_init() before this function.
@@ -23987,7 +23987,7 @@ declare namespace imports.gi.Clutter {
 	/**
 	 * Allows the application to replace the standard method that
 	 * Clutter uses to protect its data structures. Normally, Clutter
-	 * creates a single #GMutex that is locked by {@link Clutter.threads.enter},
+	 * creates a single #GMutex that is locked by {@link Clutter.threads_enter},
 	 * and released by clutter_threads_leave(); using this function an
 	 * application provides, instead, a function #enter_fn that is
 	 * called by clutter_threads_enter() and a function #leave_fn that is

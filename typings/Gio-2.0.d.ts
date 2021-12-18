@@ -1768,7 +1768,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a new icon for a bytes.
 		 * 
 		 * This cannot fail, but loading and interpreting the bytes may fail later on
-		 * (for example, if {@link G.loadable_icon_load} is called) if the image is invalid.
+		 * (for example, if {@link GLoadable.icon_load} is called) if the image is invalid.
 		 * @param bytes a #GBytes.
 		 * @returns a #GIcon for the given
 		 *   #bytes.
@@ -3701,7 +3701,7 @@ declare namespace imports.gi.Gio {
 		 * Gets a list of the connections that #interface_ is exported on.
 		 * @returns A list of
 		 *   all the connections that #interface_ is exported on. The returned
-		 *   list should be freed with {@link G.list_free} after each element has
+		 *   list should be freed with {@link GList.free} after each element has
 		 *   been freed with g_object_unref().
 		 */
 		get_connections(): GLib.List;
@@ -6928,7 +6928,7 @@ declare namespace imports.gi.Gio {
 		 * Finishes the asynchronous operation started with {@link G.file_enumerator_next_files_async}.
 		 * @param result a #GAsyncResult.
 		 * @returns a #GList of #GFileInfos. You must free the list with
-		 *     {@link G.list_free} and unref the infos with g_object_unref() when you're
+		 *     {@link GList.free} and unref the infos with g_object_unref() when you're
 		 *     done with them.
 		 */
 		next_files_finish(result: AsyncResult): GLib.List;
@@ -9157,7 +9157,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This function takes a ref on #item.
 		 * 
-		 * Use {@link G.list_store_splice} to append multiple items at the same time
+		 * Use {@link GList.store_splice} to append multiple items at the same time
 		 * efficiently.
 		 * @param item the new item
 		 */
@@ -9168,7 +9168,7 @@ declare namespace imports.gi.Gio {
 		 * not be set, and this method will return %FALSE.
 		 * 
 		 * If you need to compare the two items with a custom comparison function, use
-		 * {@link G.list_store_find_with_equal_func} with a custom #GEqualFunc instead.
+		 * {@link GList.store_find_with_equal_func} with a custom #GEqualFunc instead.
 		 * @param item an item
 		 * @returns Whether #store contains #item. If it was found, #position will be
 		 * set to the position where #item occurred for the first time.
@@ -9196,7 +9196,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This function takes a ref on #item.
 		 * 
-		 * Use {@link G.list_store_splice} to insert multiple items at the same time
+		 * Use {@link GList.store_splice} to insert multiple items at the same time
 		 * efficiently.
 		 * @param position the position at which to insert the new item
 		 * @param item the new item
@@ -9220,7 +9220,7 @@ declare namespace imports.gi.Gio {
 		 * Removes the item from #store that is at #position. #position must be
 		 * smaller than the current length of the list.
 		 * 
-		 * Use {@link G.list_store_splice} to remove multiple items at the same time
+		 * Use {@link GList.store_splice} to remove multiple items at the same time
 		 * efficiently.
 		 * @param position the position of the item that is to be removed
 		 */
@@ -9239,7 +9239,7 @@ declare namespace imports.gi.Gio {
 		 * items to it. #additions must contain #n_additions items of type
 		 * #GListStore:item-type.  %NULL is not permitted.
 		 * 
-		 * This function is more efficient than {@link G.list_store_insert} and
+		 * This function is more efficient than {@link GList.store_insert} and
 		 * g_list_store_remove(), because it only emits
 		 * #GListModel::items-changed once for the change.
 		 * 
@@ -12442,7 +12442,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns a non-empty #GList of
 		 * #GVariant, or %NULL on error. You must free each of the records and the list
-		 * when you are done with it. (You can use {@link G.list_free_full} with
+		 * when you are done with it. (You can use {@link GList.free_full} with
 		 * g_variant_unref() to do this.)
 		 */
 		lookup_records(rrname: string, record_type: ResolverRecordType, cancellable: Cancellable | null): GLib.List;
@@ -12469,7 +12469,7 @@ declare namespace imports.gi.Gio {
 		 * @param result the result passed to your #GAsyncReadyCallback
 		 * @returns a non-empty #GList of
 		 * #GVariant, or %NULL on error. You must free each of the records and the list
-		 * when you are done with it. (You can use {@link G.list_free_full} with
+		 * when you are done with it. (You can use {@link GList.free_full} with
 		 * g_variant_unref() to do this.)
 		 */
 		lookup_records_finish(result: AsyncResult): GLib.List;
@@ -17734,7 +17734,7 @@ declare namespace imports.gi.Gio {
 		 * Replace the entire environment of processes launched from this
 		 * launcher with the given 'environ' variable.
 		 * 
-		 * Typically you will build this variable by using {@link G.listenv} to copy
+		 * Typically you will build this variable by using g_listenv() to copy
 		 * the process 'environ' and using the functions g_environ_setenv(),
 		 * g_environ_unsetenv(), etc.
 		 * 
@@ -19250,7 +19250,7 @@ declare namespace imports.gi.Gio {
 	 * #GThemedIcon contains a list of all of the icons present in an icon
 	 * theme, so that icons can be looked up quickly. #GThemedIcon does
 	 * not provide actual pixmaps for icons, just the icon names.
-	 * Ideally something like {@link Gtk.IconTheme.choose_icon} should be used to
+	 * Ideally something like {@link Gtk.icon_theme_choose_icon} should be used to
 	 * resolve the list of names so that fallback icons work nicely with
 	 * themes that inherit other themes.
 	 */
@@ -21721,7 +21721,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets a list of drives connected to the system.
 		 * 
-		 * The returned list should be freed with {@link G.list_free}, after
+		 * The returned list should be freed with {@link GList.free}, after
 		 * its elements have been unreffed with g_object_unref().
 		 * @returns a #GList of connected #GDrive objects.
 		 */
@@ -21736,7 +21736,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets a list of the mounts on the system.
 		 * 
-		 * The returned list should be freed with {@link G.list_free}, after
+		 * The returned list should be freed with {@link GList.free}, after
 		 * its elements have been unreffed with g_object_unref().
 		 * @returns a #GList of #GMount objects.
 		 */
@@ -21751,7 +21751,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets a list of the volumes on the system.
 		 * 
-		 * The returned list should be freed with {@link G.list_free}, after
+		 * The returned list should be freed with {@link GList.free}, after
 		 * its elements have been unreffed with g_object_unref().
 		 * @returns a #GList of #GVolume objects.
 		 */
@@ -26392,7 +26392,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the D-Bus interfaces associated with #object.
 		 * @returns A list of #GDBusInterface instances.
-		 *   The returned list must be freed by {@link G.list_free} after each element has been freed
+		 *   The returned list must be freed by {@link GList.free} after each element has been freed
 		 *   with g_object_unref().
 		 */
 		get_interfaces(): GLib.List;
@@ -26475,7 +26475,7 @@ declare namespace imports.gi.Gio {
 		 * Gets all #GDBusObject objects known to #manager.
 		 * @returns A list of
 		 *   #GDBusObject objects. The returned list should be freed with
-		 *   {@link G.list_free} after each element has been freed with
+		 *   {@link GList.free} after each element has been freed with
 		 *   g_object_unref().
 		 */
 		get_objects(): GLib.List;
@@ -26985,7 +26985,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Get a list of mountable volumes for #drive.
 		 * 
-		 * The returned list should be freed with {@link G.list_free}, after
+		 * The returned list should be freed with {@link GList.free}, after
 		 * its elements have been unreffed with g_object_unref().
 		 * @returns #GList containing any #GVolume objects on the given #drive.
 		 */
@@ -30446,14 +30446,14 @@ declare namespace imports.gi.Gio {
 		 * items in #list, %NULL is returned.
 		 * 
 		 * %NULL is never returned for an index that is smaller than the length
-		 * of the list.  See {@link G.list_model_get_n_items}.
+		 * of the list.  See {@link GList.model_get_n_items}.
 		 * @param position the position of the item to fetch
 		 * @returns the item at #position.
 		 */
 		get_item(position: number): any | null;
 		/**
 		 * Gets the type of the items in #list. All items returned from
-		 * {@link G.list_model_get_type} are of that type or a subtype, or are an
+		 * {@link GList.model_get_type} are of that type or a subtype, or are an
 		 * implementation of that interface.
 		 * 
 		 * The item type of a #GListModel can not change during the life of the
@@ -30466,7 +30466,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Depending on the model implementation, calling this function may be
 		 * less efficient than iterating the list with increasing values for
-		 * #position until {@link G.list_model_get_item} returns %NULL.
+		 * #position until {@link GList.model_get_item} returns %NULL.
 		 * @returns the number of items in #list.
 		 */
 		get_n_items(): number;
@@ -30475,7 +30475,7 @@ declare namespace imports.gi.Gio {
 		 * items in #list, %NULL is returned.
 		 * 
 		 * %NULL is never returned for an index that is smaller than the length
-		 * of the list.  See {@link G.list_model_get_n_items}.
+		 * of the list.  See {@link GList.model_get_n_items}.
 		 * @param position the position of the item to fetch
 		 * @returns the object at #position.
 		 */
@@ -30558,7 +30558,7 @@ declare namespace imports.gi.Gio {
 	 * interested in.
 	 * 
 	 * All items in a #GListModel are of (or derived from) the same type.
-	 * {@link G.list_model_get_item_type} returns that type.  The type may be an
+	 * {@link GList.model_get_item_type} returns that type.  The type may be an
 	 * interface, in which case all objects in the list must implement it.
 	 * 
 	 * The semantics are close to that of an array:
@@ -30597,7 +30597,7 @@ declare namespace imports.gi.Gio {
 	interface ILoadableIcon {
 		/**
 		 * Loads a loadable icon. For the asynchronous version of this function,
-		 * see {@link G.loadable_icon_load_async}.
+		 * see {@link GLoadable.icon_load_async}.
 		 * @param size an integer.
 		 * @param cancellable optional #GCancellable object, %NULL to
 		 * ignore.
@@ -30609,7 +30609,7 @@ declare namespace imports.gi.Gio {
 		load(size: number, cancellable: Cancellable | null): [ InputStream, string | null ];
 		/**
 		 * Loads an icon asynchronously. To finish this function, see
-		 * {@link G.loadable_icon_load_finish}. For the synchronous, blocking
+		 * {@link GLoadable.icon_load_finish}. For the synchronous, blocking
 		 * version of this function, see g_loadable_icon_load().
 		 * @param size an integer.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
@@ -30618,7 +30618,7 @@ declare namespace imports.gi.Gio {
 		 */
 		load_async(size: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an asynchronous icon load started in {@link G.loadable_icon_load_async}.
+		 * Finishes an asynchronous icon load started in {@link GLoadable.icon_load_async}.
 		 * @param res a #GAsyncResult.
 		 * @returns a #GInputStream to read the icon from.
 		 * 

@@ -183,7 +183,7 @@ declare namespace imports.gi.Cogl {
 		 * GPU memory) then your application will simply abort with an error
 		 * message. If you need to be able to catch such exceptions at runtime
 		 * then you can explicitly allocate your framebuffer when you have
-		 * finished configuring it by calling {@link Cogl.framebuffer_allocate} and
+		 * finished configuring it by calling {@link Cogl.Framebuffer.allocate} and
 		 * passing in a #CoglError argument to catch any exceptions.
 		 * @param texture A {@link Texture} pointer
 		 * @returns a newly instantiated {@link Offscreen}
@@ -192,7 +192,7 @@ declare namespace imports.gi.Cogl {
 		public static new_with_texture(texture: Texture): Offscreen;
 		/**
 		 * @deprecated
-		 * {@link Cogl.object_ref} should be used in new code.
+		 * {@link Cogl.Object.ref} should be used in new code.
 		 * 
 		 * Increments the reference count on the #offscreen framebuffer.
 		 * @param offscreen A pointer to a {@link Offscreen} framebuffer
@@ -202,7 +202,7 @@ declare namespace imports.gi.Cogl {
 		public static ref(offscreen: any | null): any | null;
 		/**
 		 * @deprecated
-		 * {@link Cogl.object_unref} should be used in new code.
+		 * {@link Cogl.Object.unref} should be used in new code.
 		 * 
 		 * Decreases the reference count for the #offscreen buffer and frees it when
 		 * the count reaches 0.
@@ -456,7 +456,7 @@ declare namespace imports.gi.Cogl {
 		public constructor(options?: Partial<MaterialInitOptions>);
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_copy} instead
+		 * Use {@link Cogl.Pipeline.copy} instead
 		 * 
 		 * Creates a new material with the configuration copied from the
 		 * source material.
@@ -479,7 +479,7 @@ declare namespace imports.gi.Cogl {
 		public get_ambient(ambient: Color): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_get_color} instead
+		 * Use {@link Cogl.Pipeline.get_color} instead
 		 * 
 		 * Retrieves the current material color.
 		 * @returns The location to store the color
@@ -503,7 +503,7 @@ declare namespace imports.gi.Cogl {
 		public get_emission(emission: Color): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_get_layer_point_sprite_coords_enabled}
+		 * Use {@link Cogl.Pipeline.get_layer_point_sprite_coords_enabled}
 		 *                  instead
 		 * 
 		 * Gets whether point sprite coordinate generation is enabled for this
@@ -515,7 +515,7 @@ declare namespace imports.gi.Cogl {
 		public get_layer_point_sprite_coords_enabled(layer_index: number): Bool;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_get_layer_wrap_mode_p} instead
+		 * Use {@link Cogl.Pipeline.get_layer_wrap_mode_p} instead
 		 * 
 		 * Returns the wrap mode for the 'p' coordinate of texture lookups on this
 		 * layer.
@@ -526,7 +526,7 @@ declare namespace imports.gi.Cogl {
 		public get_layer_wrap_mode_p(layer_index: number): MaterialWrapMode;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_get_layer_wrap_mode_s} instead
+		 * Use {@link Cogl.Pipeline.get_layer_wrap_mode_s} instead
 		 * 
 		 * Returns the wrap mode for the 's' coordinate of texture lookups on this
 		 * layer.
@@ -537,7 +537,7 @@ declare namespace imports.gi.Cogl {
 		public get_layer_wrap_mode_s(layer_index: number): MaterialWrapMode;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_get_layer_wrap_mode_t} instead
+		 * Use {@link Cogl.Pipeline.get_layer_wrap_mode_t} instead
 		 * 
 		 * Returns the wrap mode for the 't' coordinate of texture lookups on this
 		 * layer.
@@ -562,12 +562,12 @@ declare namespace imports.gi.Cogl {
 		 *    list of {@link MaterialLayer}<!-- -->'s that can be passed to the
 		 *    cogl_material_layer_* functions. The list is owned by Cogl and it
 		 *    should not be modified or freed
-		 *    Deprecated: 1.16: Use {@link Cogl.pipeline_get_layers} instead
+		 *    Deprecated: 1.16: Use {@link Cogl.Pipeline.get_layers} instead
 		 */
 		public get_layers(): GLib.List;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_get_n_layers} instead
+		 * Use {@link Cogl.Pipeline.get_n_layers} instead
 		 * 
 		 * Retrieves the number of layers defined for the given #material
 		 * @returns the number of layers
@@ -575,7 +575,7 @@ declare namespace imports.gi.Cogl {
 		public get_n_layers(): number;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_get_point_size} instead
+		 * Use {@link Cogl.Pipeline.get_point_size} instead
 		 * 
 		 * Get the size of points drawn when %COGL_VERTICES_MODE_POINTS is
 		 * used with the vertex buffer API.
@@ -610,7 +610,7 @@ declare namespace imports.gi.Cogl {
 		public get_user_program(): Handle;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_remove_layer} instead
+		 * Use {@link Cogl.Pipeline.remove_layer} instead
 		 * 
 		 * This function removes a layer from your material
 		 * @param layer_index Specifies the layer you want to remove
@@ -618,7 +618,7 @@ declare namespace imports.gi.Cogl {
 		public remove_layer(layer_index: number): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_alpha_test_function} instead
+		 * Use {@link Cogl.Pipeline.set_alpha_test_function} instead
 		 * 
 		 * Before a primitive is blended with the framebuffer, it goes through an
 		 * alpha test stage which lets you discard fragments based on the current
@@ -662,7 +662,7 @@ declare namespace imports.gi.Cogl {
 		public set_ambient_and_diffuse(color: Color): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_blend} instead
+		 * Use {@link Cogl.Pipeline.set_blend} instead
 		 * 
 		 * If not already familiar; please refer <link linkend="cogl-Blend-Strings">here</link>
 		 * for an overview of what blend strings are, and their syntax.
@@ -738,7 +738,7 @@ declare namespace imports.gi.Cogl {
 		public set_blend(blend_string: string): Bool;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_blend_constant} instead
+		 * Use {@link Cogl.Pipeline.set_blend_constant} instead
 		 * 
 		 * When blending is setup to reference a CONSTANT blend factor then
 		 * blending will depend on the constant set with this function.
@@ -747,7 +747,7 @@ declare namespace imports.gi.Cogl {
 		public set_blend_constant(constant_color: Color): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_color} instead
+		 * Use {@link Cogl.Pipeline.set_color} instead
 		 * 
 		 * Sets the basic color of the material, used when no lighting is enabled.
 		 * 
@@ -762,7 +762,7 @@ declare namespace imports.gi.Cogl {
 		public set_color(color: Color): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_color4f} instead
+		 * Use {@link Cogl.Pipeline.set_color4f} instead
 		 * 
 		 * Sets the basic color of the material, used when no lighting is enabled.
 		 * 
@@ -775,7 +775,7 @@ declare namespace imports.gi.Cogl {
 		public set_color4f(red: number, green: number, blue: number, alpha: number): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_color4ub} instead
+		 * Use {@link Cogl.Pipeline.set_color4ub} instead
 		 * 
 		 * Sets the basic color of the material, used when no lighting is enabled.
 		 * 
@@ -812,7 +812,7 @@ declare namespace imports.gi.Cogl {
 		public set_emission(emission: Color): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_layer} instead
+		 * Use {@link Cogl.Pipeline.set_layer} instead
 		 * 
 		 * In addition to the standard OpenGL lighting model a Cogl material may have
 		 * one or more layers comprised of textures that can be blended together in
@@ -830,7 +830,7 @@ declare namespace imports.gi.Cogl {
 		public set_layer(layer_index: number, texture: Handle): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_layer_combine} instead
+		 * Use {@link Cogl.Pipeline.set_layer_combine} instead
 		 * 
 		 * If not already familiar; you can refer
 		 * <link linkend="cogl-Blend-Strings">here</link> for an overview of what blend
@@ -917,7 +917,7 @@ declare namespace imports.gi.Cogl {
 		public set_layer_combine(layer_index: number, blend_string: string): Bool;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_layer_combine_constant}
+		 * Use {@link Cogl.Pipeline.set_layer_combine_constant}
 		 * instead
 		 * 
 		 * When you are using the 'CONSTANT' color source in a layer combine
@@ -929,7 +929,7 @@ declare namespace imports.gi.Cogl {
 		public set_layer_combine_constant(layer_index: number, constant: Color): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_layer_filters} instead
+		 * Use {@link Cogl.Pipeline.set_layer_filters} instead
 		 * 
 		 * Changes the decimation and interpolation filters used when a texture is
 		 * drawn at other scales than 100%.
@@ -940,7 +940,7 @@ declare namespace imports.gi.Cogl {
 		public set_layer_filters(layer_index: number, min_filter: MaterialFilter, mag_filter: MaterialFilter): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_layer_matrix} instead
+		 * Use {@link Cogl.Pipeline.set_layer_matrix} instead
 		 * 
 		 * This function lets you set a matrix that can be used to e.g. translate
 		 * and rotate a single layer of a material used to fill your geometry.
@@ -950,7 +950,7 @@ declare namespace imports.gi.Cogl {
 		public set_layer_matrix(layer_index: number, matrix: Matrix): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_layer_point_sprite_coords_enabled}
+		 * Use {@link Cogl.Pipeline.set_layer_point_sprite_coords_enabled}
 		 *                  instead
 		 * 
 		 * When rendering points, if #enable is %TRUE then the texture
@@ -970,7 +970,7 @@ declare namespace imports.gi.Cogl {
 		public set_layer_point_sprite_coords_enabled(layer_index: number, enable: Bool): Bool;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_layer_wrap_mode} instead
+		 * Use {@link Cogl.Pipeline.set_layer_wrap_mode} instead
 		 * 
 		 * Sets the wrap mode for all three coordinates of texture lookups on
 		 * this layer. This is equivalent to calling
@@ -983,7 +983,7 @@ declare namespace imports.gi.Cogl {
 		public set_layer_wrap_mode(layer_index: number, mode: MaterialWrapMode): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_layer_wrap_mode_p} instead
+		 * Use {@link Cogl.Pipeline.set_layer_wrap_mode_p} instead
 		 * 
 		 * Sets the wrap mode for the 'p' coordinate of texture lookups on
 		 * this layer. 'p' is the third coordinate.
@@ -993,7 +993,7 @@ declare namespace imports.gi.Cogl {
 		public set_layer_wrap_mode_p(layer_index: number, mode: MaterialWrapMode): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_layer_wrap_mode_s} instead
+		 * Use {@link Cogl.Pipeline.set_layer_wrap_mode_s} instead
 		 * 
 		 * Sets the wrap mode for the 's' coordinate of texture lookups on this layer.
 		 * @param layer_index the layer number to change.
@@ -1002,7 +1002,7 @@ declare namespace imports.gi.Cogl {
 		public set_layer_wrap_mode_s(layer_index: number, mode: MaterialWrapMode): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_layer_wrap_mode_t} instead
+		 * Use {@link Cogl.Pipeline.set_layer_wrap_mode_t} instead
 		 * 
 		 * Sets the wrap mode for the 't' coordinate of texture lookups on this layer.
 		 * @param layer_index the layer number to change.
@@ -1011,7 +1011,7 @@ declare namespace imports.gi.Cogl {
 		public set_layer_wrap_mode_t(layer_index: number, mode: MaterialWrapMode): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_set_point_size} instead
+		 * Use {@link Cogl.Pipeline.set_point_size} instead
 		 * 
 		 * Changes the size of points drawn when %COGL_VERTICES_MODE_POINTS is
 		 * used with the vertex buffer API. Note that typically the GPU will
@@ -1144,7 +1144,7 @@ declare namespace imports.gi.Cogl {
 		public get_type(): MaterialLayerType;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_layer_get_wrap_mode_p} instead
+		 * Use {@link Cogl.Pipeline.layer_get_wrap_mode_p} instead
 		 * 
 		 * Gets the wrap mode for the 'p' coordinate of texture lookups on
 		 * this layer. 'p' is the third coordinate.
@@ -1153,7 +1153,7 @@ declare namespace imports.gi.Cogl {
 		public get_wrap_mode_p(): MaterialWrapMode;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_layer_get_wrap_mode_s} instead
+		 * Use {@link Cogl.Pipeline.layer_get_wrap_mode_s} instead
 		 * 
 		 * Gets the wrap mode for the 's' coordinate of texture lookups on this layer.
 		 * @returns the wrap mode value for the s coordinate.
@@ -1161,7 +1161,7 @@ declare namespace imports.gi.Cogl {
 		public get_wrap_mode_s(): MaterialWrapMode;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.pipeline_layer_get_wrap_mode_t} instead
+		 * Use {@link Cogl.Pipeline.layer_get_wrap_mode_t} instead
 		 * 
 		 * Gets the wrap mode for the 't' coordinate of texture lookups on this layer.
 		 * @returns the wrap mode value for the t coordinate.
@@ -1194,7 +1194,7 @@ declare namespace imports.gi.Cogl {
 	 * and all matrix modifications must be done via the cogl_matrix API. This
 	 * allows Cogl to annotate the matrices internally. Violation of this will give
 	 * undefined results. If you need to initialize a matrix with a constant other
-	 * than the identity matrix you can use {@link Cogl.Matrix.init_from_array}.</note>
+	 * than the identity matrix you can use {@link Cogl.matrix_init_from_array}.</note>
 	 */
 	interface Matrix {}
 	class Matrix {
@@ -1223,12 +1223,12 @@ declare namespace imports.gi.Cogl {
 		 * Allocates a new {@link Matrix} on the heap and initializes it with
 		 * the same values as #matrix.
 		 * @returns A newly allocated {@link Matrix} which
-		 * should be freed using {@link Cogl.Matrix.free}
+		 * should be freed using {@link Cogl.matrix_free}
 		 */
 		public copy(): Matrix;
 		/**
 		 * Frees a {@link Matrix} that was previously allocated via a call to
-		 * {@link Cogl.Matrix.copy}.
+		 * {@link Cogl.matrix_copy}.
 		 */
 		public free(): void;
 		/**
@@ -1351,7 +1351,7 @@ declare namespace imports.gi.Cogl {
 		public multiply(a: Matrix, b: Matrix): void;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.Matrix.orthographic}
+		 * Use {@link Cogl.matrix_orthographic}
 		 * 
 		 * Multiplies #matrix by a parallel projection matrix.
 		 * @param left The coordinate for the left clipping plane
@@ -1425,7 +1425,7 @@ declare namespace imports.gi.Cogl {
 
 	export interface TextureVertexInitOptions {}
 	/**
-	 * Used to specify vertex information when calling cogl_polygon()
+	 * Used to specify vertex information when calling {@link Cogl.polygon}
 	 */
 	interface TextureVertex {}
 	class TextureVertex {
@@ -1452,7 +1452,7 @@ declare namespace imports.gi.Cogl {
 		public ty: number;
 		/**
 		 * The color to use at this vertex. This is ignored if
-		 *   use_color is %FALSE when calling cogl_polygon()
+		 *   use_color is %FALSE when calling {@link Cogl.polygon}
 		 */
 		public color: Color;
 	}
@@ -1661,7 +1661,7 @@ declare namespace imports.gi.Cogl {
 		public constructor(options?: Partial<TextureInitOptions>);
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.object_ref} instead
+		 * Use {@link Cogl.Object.ref} instead
 		 * 
 		 * Increment the reference count for a cogl texture.
 		 * @param texture a {@link Texture}.
@@ -1670,7 +1670,7 @@ declare namespace imports.gi.Cogl {
 		public static ref(texture: any | null): any | null;
 		/**
 		 * @deprecated
-		 * Use {@link Cogl.object_unref} instead
+		 * Use {@link Cogl.Object.unref} instead
 		 * 
 		 * Decrement the reference count for a cogl texture.
 		 * @param texture a {@link Texture}.
@@ -2011,7 +2011,7 @@ declare namespace imports.gi.Cogl {
 		CLAMP_TO_EDGE = 33071,
 		/**
 		 * Cogl will try to automatically
-		 *   decide which of the above two to use. For cogl_rectangle(), it
+		 *   decide which of the above two to use. For {@link Cogl.rectangle}, it
 		 *   will use repeat mode if any of the texture coordinates are
 		 *   outside the range 0→1, otherwise it will use clamp to edge. For
 		 *   cogl_polygon() it will always use repeat mode. For
@@ -2183,7 +2183,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Represents how draw should affect the two buffers
-	 * of a stereo framebuffer. See {@link Cogl.framebuffer_set_stereo_mode}.
+	 * of a stereo framebuffer. See {@link Cogl.Framebuffer.set_stereo_mode}.
 	 */
 	enum StereoMode {
 		/**
@@ -2208,7 +2208,7 @@ declare namespace imports.gi.Cogl {
 	 * 
 	 * <itemizedlist>
 	 *  <listitem><para>You've tried to use a feature that is not
-	 *   advertised by {@link Cogl.has_feature}. This could happen if you create
+	 *   advertised by {@link Cogl.has.feature}. This could happen if you create
 	 *   a 2d texture with a non-power-of-two size when
 	 *   %COGL_FEATURE_ID_TEXTURE_NPOT is not advertised.</para></listitem>
 	 *  <listitem><para>The GPU can not handle the configuration you have
@@ -2343,7 +2343,7 @@ declare namespace imports.gi.Cogl {
 	/**
 	 * Enum used to represent the two directions of rotation. This can be
 	 * used to set the front face for culling by calling
-	 * {@link Cogl.pipeline_set_front_face_winding}.
+	 * {@link Cogl.Pipeline.set_front_face_winding}.
 	 */
 	enum Winding {
 		/**
@@ -2405,7 +2405,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Defines a bit mask of color channels. This can be used with
-	 * {@link Cogl.pipeline_set_color_mask} for example to define which color
+	 * {@link Cogl.Pipeline.set_color_mask} for example to define which color
 	 * channels should be written to the current framebuffer when
 	 * drawing something.
 	 */
@@ -2494,7 +2494,7 @@ declare namespace imports.gi.Cogl {
 		/**
 		 * Set if
 		 *     %COGL_INDICES_TYPE_UNSIGNED_INT is supported in
-		 *     {@link Cogl.vertex.buffer_indices_new}.
+		 *     {@link Cogl.vertex_buffer_indices_new}.
 		 */
 		UNSIGNED_INT_INDICES = 8192,
 		/**
@@ -2553,7 +2553,7 @@ declare namespace imports.gi.Cogl {
 	}
 
 	/**
-	 * Flags for {@link Cogl.framebuffer_read_pixels_into_bitmap}
+	 * Flags for {@link Cogl.Framebuffer.read_pixels_into_bitmap}
 	 */
 	enum ReadPixelsFlags {
 		/**
@@ -2649,7 +2649,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * We do not advise nor reliably support the interleaving of raw GL drawing and
-	 * Cogl drawing functions, but if you insist, {@link Cogl.begin.gl} and cogl_end_gl()
+	 * Cogl drawing functions, but if you insist, {@link Cogl.begin_gl} and cogl_end_gl()
 	 * provide a simple mechanism that may at least give you a fighting chance of
 	 * succeeding.
 	 * 
@@ -2749,7 +2749,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Reverts the clipping region to the state before the last call to
-	 * {@link Cogl.clip.push}.
+	 * {@link Cogl.clip_push}.
 	 */
 	function clip_pop(): void;
 
@@ -2761,7 +2761,7 @@ declare namespace imports.gi.Cogl {
 	 * current model-view matrix.
 	 * 
 	 * The rectangle is intersected with the current clip region. To undo
-	 * the effect of this function, call {@link Cogl.clip.pop}.
+	 * the effect of this function, call {@link Cogl.clip_pop}.
 	 * @param x_offset left edge of the clip rectangle
 	 * @param y_offset top edge of the clip rectangle
 	 * @param width width of the clip rectangle
@@ -2781,7 +2781,7 @@ declare namespace imports.gi.Cogl {
 	 * The primitive is transformed by the current model-view matrix and
 	 * the silhouette is intersected with the previous clipping area.  To
 	 * restore the previous clipping area, call
-	 * {@link Cogl.clip.pop}.
+	 * {@link Cogl.clip_pop}.
 	 * @param primitive A {@link Primitive} describing a flat 2D shape
 	 * @param bounds_x1 x coordinate for the top-left corner of the primitives
 	 *             bounds
@@ -2802,7 +2802,7 @@ declare namespace imports.gi.Cogl {
 	 * current model-view matrix.
 	 * 
 	 * The rectangle is intersected with the current clip region. To undo
-	 * the effect of this function, call {@link Cogl.clip.pop}.
+	 * the effect of this function, call {@link Cogl.clip_pop}.
 	 * @param x0 x coordinate for top left corner of the clip rectangle
 	 * @param y0 y coordinate for top left corner of the clip rectangle
 	 * @param x1 x coordinate for bottom right corner of the clip rectangle
@@ -2818,7 +2818,7 @@ declare namespace imports.gi.Cogl {
 	 * current model-view matrix.
 	 * 
 	 * The rectangle is intersected with the current clip region. To undo
-	 * the effect of this function, call {@link Cogl.clip.pop}.
+	 * the effect of this function, call {@link Cogl.clip_pop}.
 	 * @param x_offset left edge of the clip rectangle in window coordinates
 	 * @param y_offset top edge of the clip rectangle in window coordinates
 	 * @param width width of the clip rectangle
@@ -2834,7 +2834,7 @@ declare namespace imports.gi.Cogl {
 	 * current model-view matrix.
 	 * 
 	 * The rectangle is intersected with the current clip region. To undo
-	 * the effect of this function, call {@link Cogl.clip.pop}.
+	 * the effect of this function, call {@link Cogl.clip_pop}.
 	 * @param x_offset left edge of the clip rectangle in window coordinates
 	 * @param y_offset top edge of the clip rectangle in window coordinates
 	 * @param width width of the clip rectangle
@@ -2844,14 +2844,14 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Restore the state of the clipping stack that was previously saved
-	 * by {@link Cogl.clip.stack_save}.
+	 * by {@link Cogl.clip_stack_save}.
 	 */
 	function clip_stack_restore(): void;
 
 	/**
 	 * Save the entire state of the clipping stack and then clear all
 	 * clipping. The previous state can be returned to with
-	 * {@link Cogl.clip.stack_restore}. Each call to cogl_clip_push() after this
+	 * {@link Cogl.clip_stack_restore}. Each call to cogl_clip_push() after this
 	 * must be matched by a call to cogl_clip_pop() before calling
 	 * cogl_clip_stack_restore().
 	 */
@@ -2918,7 +2918,7 @@ declare namespace imports.gi.Cogl {
 	function double_to_uint(value: number): number;
 
 	/**
-	 * This is the counterpart to {@link Cogl.begin.gl} used to delimit blocks of drawing
+	 * This is the counterpart to {@link Cogl.begin_gl} used to delimit blocks of drawing
 	 * code using raw OpenGL. Please refer to cogl_begin_gl() for full details.
 	 */
 	function end_gl(): void;
@@ -3059,7 +3059,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Returns the current source material as previously set using
-	 * {@link Cogl.set.source}.
+	 * {@link Cogl.set_source}.
 	 * 
 	 * <note>You should typically consider the returned material immutable
 	 * and not try to change any of its properties unless you own a
@@ -3254,7 +3254,7 @@ declare namespace imports.gi.Cogl {
 	function polygon(vertices: TextureVertex, n_vertices: number, use_color: Bool): void;
 
 	/**
-	 * Restore {@link Cogl.set.draw_buffer} state.
+	 * Restore {@link Cogl.set_draw_buffer} state.
 	 */
 	function pop_draw_buffer(): void;
 
@@ -3272,7 +3272,7 @@ declare namespace imports.gi.Cogl {
 	/**
 	 * Removes the material at the top of the source stack. The material
 	 * at the top of this stack defines the GPU state used to process
-	 * later primitives as defined by {@link Cogl.set.source}.
+	 * later primitives as defined by {@link Cogl.set_source}.
 	 */
 	function pop_source(): void;
 
@@ -3293,7 +3293,7 @@ declare namespace imports.gi.Cogl {
 	 * @param handle a {@link Handle} for a shader program.
 	 * @param uniform_name the name of a uniform.
 	 * @returns the offset of a uniform in a specified program.
-	 *   This uniform can be set using {@link Cogl.program.uniform_1f} when the
+	 *   This uniform can be set using {@link Cogl.program_uniform_1f} when the
 	 *   program is in use.
 	 */
 	function program_get_uniform_location(handle: Handle, uniform_name: string): number;
@@ -3378,7 +3378,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Changes the value of a floating point uniform in the currently
-	 * used (see {@link Cogl.program.use}) shader program.
+	 * used (see {@link Cogl.program_use}) shader program.
 	 * @param uniform_no the uniform to set.
 	 * @param value the new value of the uniform.
 	 */
@@ -3386,7 +3386,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Changes the value of an integer uniform in the currently
-	 * used (see {@link Cogl.program.use}) shader program.
+	 * used (see {@link Cogl.program_use}) shader program.
 	 * @param uniform_no the uniform to set.
 	 * @param value the new value of the uniform.
 	 */
@@ -3394,7 +3394,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Changes the value of a float vector uniform, or uniform array in the
-	 * currently used (see {@link Cogl.program.use}) shader program.
+	 * currently used (see {@link Cogl.program_use}) shader program.
 	 * @param uniform_no the uniform to set.
 	 * @param size Size of float vector.
 	 * @param count Size of array of uniforms.
@@ -3404,7 +3404,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Changes the value of a int vector uniform, or uniform array in the
-	 * currently used (see {@link Cogl.program.use}) shader program.
+	 * currently used (see {@link Cogl.program_use}) shader program.
 	 * @param uniform_no the uniform to set.
 	 * @param size Size of int vector.
 	 * @param count Size of array of uniforms.
@@ -3414,7 +3414,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Changes the value of a matrix uniform, or uniform array in the
-	 * currently used (see {@link Cogl.program.use}) shader program. The #size
+	 * currently used (see {@link Cogl.program_use}) shader program. The #size
 	 * parameter is used to determine the square size of the matrix.
 	 * @param uniform_no the uniform to set.
 	 * @param size Size of matrix.
@@ -3445,7 +3445,7 @@ declare namespace imports.gi.Cogl {
 	function program_use(handle: Handle): void;
 
 	/**
-	 * Save {@link Cogl.set.draw_buffer} state.
+	 * Save {@link Cogl.set_draw_buffer} state.
 	 */
 	function push_draw_buffer(): void;
 
@@ -3520,21 +3520,21 @@ declare namespace imports.gi.Cogl {
 	 * }
 	 * ]|
 	 * 
-	 * The previous framebuffer can be restored by calling {@link Cogl.pop.framebuffer}
+	 * The previous framebuffer can be restored by calling {@link Cogl.pop_framebuffer}
 	 * @param buffer A {@link Framebuffer} object, either onscreen or offscreen.
 	 */
 	function push_framebuffer(buffer: any): void;
 
 	/**
 	 * Stores the current model-view matrix on the matrix stack. The matrix
-	 * can later be restored with {@link Cogl.pop.matrix}.
+	 * can later be restored with {@link Cogl.pop_matrix}.
 	 */
 	function push_matrix(): void;
 
 	/**
 	 * Pushes the given #material to the top of the source stack. The
 	 * material at the top of this stack defines the GPU state used to
-	 * process later primitives as defined by {@link Cogl.set.source}.
+	 * process later primitives as defined by {@link Cogl.set_source}.
 	 * @param material A {@link Material}
 	 */
 	function push_source(material: any | null): void;
@@ -3612,7 +3612,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Draws a series of rectangles in the same way that
-	 * cogl_rectangle() does. In some situations it can give a
+	 * {@link Cogl.rectangle} does. In some situations it can give a
 	 * significant performance boost to use this function rather than
 	 * calling cogl_rectangle() separately for each rectangle.
 	 * 
@@ -3627,7 +3627,7 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Draws a series of rectangles in the same way that
-	 * {@link Cogl.rectangle.with_texture_coords} does. In some situations it can give a
+	 * {@link Cogl.rectangle_with_texture_coords} does. In some situations it can give a
 	 * significant performance boost to use this function rather than
 	 * calling cogl_rectangle_with_texture_coords() separately for each rectangle.
 	 * 
@@ -3700,7 +3700,7 @@ declare namespace imports.gi.Cogl {
 	 * the chosen fog mode; at it's simplest the color is linearly interpolated so
 	 * that vertices at #z_near are drawn fully with their original color and
 	 * vertices at #z_far are drawn fully with #fog_color. Fogging will remain
-	 * enabled until you call {@link Cogl.disable.fog}.
+	 * enabled until you call {@link Cogl.disable_fog}.
 	 * 
 	 * <note>The fogging functions only work correctly when primitives use
 	 * unmultiplied alpha colors. By default Cogl will premultiply textures
@@ -3743,7 +3743,7 @@ declare namespace imports.gi.Cogl {
 	 * This function changes the material at the top of the source stack.
 	 * The material at the top of this stack defines the GPU state used to
 	 * process subsequent primitives, such as rectangles drawn with
-	 * cogl_rectangle() or vertices drawn using cogl_vertex_buffer_draw().
+	 * {@link Cogl.rectangle} or vertices drawn using cogl_vertex_buffer_draw().
 	 * @param material A {@link Material}
 	 */
 	function set_source(material: any | null): void;
@@ -3757,7 +3757,7 @@ declare namespace imports.gi.Cogl {
 	 * non-premultiplied. For example: use (1.0, 0.0, 0.0, 0.5) for
 	 * semi-transparent red.
 	 * 
-	 * See also {@link Cogl.set.source_color4ub} and cogl_set_source_color4f()
+	 * See also {@link Cogl.set_source_color4ub} and cogl_set_source_color4f()
 	 * if you already have the color components.
 	 * @param color a {@link Color}
 	 */
@@ -3931,7 +3931,7 @@ declare namespace imports.gi.Cogl {
 	 * "gl_MultiTexCoord0" to add standard attributes, like positions, colors
 	 * and normals, or you can add custom attributes for use in shaders.
 	 * 
-	 * The number of vertices declared when calling {@link Cogl.vertex.buffer_new}
+	 * The number of vertices declared when calling {@link Cogl.vertex_buffer_new}
 	 * determines how many attribute values will be read from the supplied
 	 * #pointer.
 	 * 
@@ -3981,14 +3981,14 @@ declare namespace imports.gi.Cogl {
 	 *   stride for both attributes is 6. The special value 0 means the
 	 *   values are stored sequentially in memory.
 	 * @param pointer This addresses the first attribute in the vertex array. This
-	 *   must remain valid until you either call {@link Cogl.vertex.buffer_submit} or
+	 *   must remain valid until you either call {@link Cogl.vertex_buffer_submit} or
 	 *   issue a draw call.
 	 */
 	function vertex_buffer_add(handle: Handle, attribute_name: string, n_components: number, type: AttributeType, normalized: Bool, stride: number, pointer: any | null): void;
 
 	/**
 	 * Deletes an attribute from a buffer. You will need to call
-	 * {@link Cogl.vertex.buffer_submit} or issue a draw call to commit this
+	 * {@link Cogl.vertex_buffer_submit} or issue a draw call to commit this
 	 * change to the GPU.
 	 * @param handle A vertex buffer handle
 	 * @param attribute_name The name of a previously added attribute
@@ -4002,7 +4002,7 @@ declare namespace imports.gi.Cogl {
 	 * individual buffers more reuseable it is possible to enable and disable
 	 * attributes before using a buffer for drawing.
 	 * 
-	 * You don't need to call {@link Cogl.vertex.buffer_submit} after using this
+	 * You don't need to call {@link Cogl.vertex_buffer_submit} after using this
 	 * function.
 	 * @param handle A vertex buffer handle
 	 * @param attribute_name The name of the attribute you want to disable
@@ -4050,7 +4050,7 @@ declare namespace imports.gi.Cogl {
 	 * individual buffers more reuseable it is possible to enable and disable
 	 * attributes before using a buffer for drawing.
 	 * 
-	 * You don't need to call {@link Cogl.vertex.buffer_submit} after using this function
+	 * You don't need to call {@link Cogl.vertex_buffer_submit} after using this function
 	 * @param handle A vertex buffer handle
 	 * @param attribute_name The name of the attribute you want to enable
 	 */
@@ -4111,7 +4111,7 @@ declare namespace imports.gi.Cogl {
 	 *   your array of indices
 	 * @param indices_len The number of indices in indices_array
 	 * @returns A CoglHandle for the indices which you can pass to
-	 *   {@link Cogl.vertex.buffer_draw_elements}.
+	 *   {@link Cogl.vertex_buffer_draw_elements}.
 	 */
 	function vertex_buffer_indices_new(indices_type: IndicesType, indices_array: any[], indices_len: number): Handle;
 
@@ -4267,24 +4267,24 @@ declare namespace imports.gi.Cogl {
 	const RADIANS_TO_DEGREES: number;
 
 	/**
-	 * Maximum argument that can be passed to cogl_sqrti() for which the
+	 * Maximum argument that can be passed to {@link Cogl.sqrti} for which the
 	 * resulting error is < 10%
-	 * @returns Maximum argument that can be passed to cogl_sqrti() for which the
+	 * @returns Maximum argument that can be passed to {@link Cogl.sqrti} for which the
 	 * resulting error is < 10%
 	 */
 	const SQRTI_ARG_10_PERCENT: number;
 
 	/**
-	 * Maximum argument that can be passed to cogl_sqrti() for which the
+	 * Maximum argument that can be passed to {@link Cogl.sqrti} for which the
 	 * resulting error is < 5%
-	 * @returns Maximum argument that can be passed to cogl_sqrti() for which the
+	 * @returns Maximum argument that can be passed to {@link Cogl.sqrti} for which the
 	 * resulting error is < 5%
 	 */
 	const SQRTI_ARG_5_PERCENT: number;
 
 	/**
-	 * Maximum argument that can be passed to cogl_sqrti() function.
-	 * @returns Maximum argument that can be passed to cogl_sqrti() function.
+	 * Maximum argument that can be passed to {@link Cogl.sqrti} function.
+	 * @returns Maximum argument that can be passed to {@link Cogl.sqrti} function.
 	 */
 	const SQRTI_ARG_MAX: number;
 

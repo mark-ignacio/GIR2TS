@@ -2157,7 +2157,7 @@ declare namespace imports.gi.Meta {
 
 	/**
 	 * Returns a #GOptionContext initialized with muffin-related options.
-	 * Parse the command-line args with this before calling meta_init().
+	 * Parse the command-line args with this before calling {@link Meta.init}.
 	 * @returns the #GOptionContext
 	 */
 	function get_option_context(): GLib.OptionContext;
@@ -2200,7 +2200,7 @@ declare namespace imports.gi.Meta {
 	function gravity_to_string(gravity: number): string;
 
 	/**
-	 * Initialize muffin. Call this after {@link Meta.get.option_context} and
+	 * Initialize muffin. Call this after {@link Meta.get_option_context} and
 	 * meta_plugin_manager_set_plugin_type(), and before meta_run().
 	 */
 	function init(): void;
